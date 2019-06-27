@@ -733,5 +733,9 @@
   "servicequotas": {
     "prefix": "service-quotas",
     "name": "ServiceQuotas"
+  },
+  "ec2instanceconnect": {
+    "prefix": "ec2-instance-connect",
+    "name": "EC2InstanceConnect"
   }
 }

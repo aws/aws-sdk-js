@@ -28,6 +28,14 @@ declare class WorkSpaces extends Service {
    */
   authorizeIpRules(callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
   /**
+   * Copies the specified image from the specified Region to the current Region.
+   */
+  copyWorkspaceImage(params: WorkSpaces.Types.CopyWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
+  /**
+   * Copies the specified image from the specified Region to the current Region.
+   */
+  copyWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
+  /**
    * Creates an IP access control group. An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using AuthorizeIpRules. There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.
    */
   createIpGroup(params: WorkSpaces.Types.CreateIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
@@ -68,11 +76,11 @@ declare class WorkSpaces extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
-   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. 
+   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. 
    */
   deleteWorkspaceImage(params: WorkSpaces.Types.DeleteWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
-   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. 
+   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. 
    */
   deleteWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
@@ -140,6 +148,14 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspaceImages(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagesResult, AWSError>;
   /**
+   * Describes the snapshots for the specified WorkSpace.
+   */
+  describeWorkspaceSnapshots(params: WorkSpaces.Types.DescribeWorkspaceSnapshotsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceSnapshotsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceSnapshotsResult, AWSError>;
+  /**
+   * Describes the snapshots for the specified WorkSpace.
+   */
+  describeWorkspaceSnapshots(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceSnapshotsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceSnapshotsResult, AWSError>;
+  /**
    * Describes the specified WorkSpaces. You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.
    */
   describeWorkspaces(params: WorkSpaces.Types.DescribeWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesResult, AWSError>;
@@ -204,11 +220,11 @@ declare class WorkSpaces extends Service {
    */
   modifyWorkspaceProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
-   * Sets the state of the specified WorkSpace. To maintain a WorkSpace without being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
+   * Sets the state of the specified WorkSpace. To maintain a WorkSpace without being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log into a WorkSpace in the ADMIN_MAINTENANCE state.
    */
   modifyWorkspaceState(params: WorkSpaces.Types.ModifyWorkspaceStateRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceStateResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceStateResult, AWSError>;
   /**
-   * Sets the state of the specified WorkSpace. To maintain a WorkSpace without being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
+   * Sets the state of the specified WorkSpace. To maintain a WorkSpace without being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log into a WorkSpace in the ADMIN_MAINTENANCE state.
    */
   modifyWorkspaceState(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceStateResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceStateResult, AWSError>;
   /**
@@ -227,6 +243,14 @@ declare class WorkSpaces extends Service {
    * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
   rebuildWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
+  /**
+   * Restores the specified WorkSpace to its last known healthy state. You cannot restore a WorkSpace unless its state is  AVAILABLE, ERROR, or UNHEALTHY. Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Restore a WorkSpace. This operation is asynchronous and returns before the WorkSpace is completely restored.
+   */
+  restoreWorkspace(params: WorkSpaces.Types.RestoreWorkspaceRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RestoreWorkspaceResult) => void): Request<WorkSpaces.Types.RestoreWorkspaceResult, AWSError>;
+  /**
+   * Restores the specified WorkSpace to its last known healthy state. You cannot restore a WorkSpace unless its state is  AVAILABLE, ERROR, or UNHEALTHY. Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Restore a WorkSpace. This operation is asynchronous and returns before the WorkSpace is completely restored.
+   */
+  restoreWorkspace(callback?: (err: AWSError, data: WorkSpaces.Types.RestoreWorkspaceResult) => void): Request<WorkSpaces.Types.RestoreWorkspaceResult, AWSError>;
   /**
    * Removes one or more rules from the specified IP access control group.
    */
@@ -354,6 +378,34 @@ declare namespace WorkSpaces {
   }
   export type ComputerName = string;
   export type ConnectionState = "CONNECTED"|"DISCONNECTED"|"UNKNOWN"|string;
+  export interface CopyWorkspaceImageRequest {
+    /**
+     * The name of the image.
+     */
+    Name: WorkspaceImageName;
+    /**
+     * A description of the image.
+     */
+    Description?: WorkspaceImageDescription;
+    /**
+     * The identifier of the source image.
+     */
+    SourceImageId: WorkspaceImageId;
+    /**
+     * The identifier of the source Region.
+     */
+    SourceRegion: Region;
+    /**
+     * The tags for the image.
+     */
+    Tags?: TagList;
+  }
+  export interface CopyWorkspaceImageResult {
+    /**
+     * The identifier of the image.
+     */
+    ImageId?: WorkspaceImageId;
+  }
   export interface CreateIpGroupRequest {
     /**
      * The name of the group.
@@ -605,6 +657,22 @@ declare namespace WorkSpaces {
      * The token to use to retrieve the next set of results, or null if no more results are available.
      */
     NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspaceSnapshotsRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+  }
+  export interface DescribeWorkspaceSnapshotsResult {
+    /**
+     * Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the root volume.
+     */
+    RebuildSnapshots?: SnapshotList;
+    /**
+     * Information about the snapshots that can be used to restore a WorkSpace. These snapshots include both the root volume and the user volume.
+     */
+    RestoreSnapshots?: SnapshotList;
   }
   export interface DescribeWorkspacesConnectionStatusRequest {
     /**
@@ -903,8 +971,21 @@ declare namespace WorkSpaces {
     FailedRequests?: FailedRebuildWorkspaceRequests;
   }
   export type ReconnectEnum = "ENABLED"|"DISABLED"|string;
+  export type Region = string;
   export type RegistrationCode = string;
   export type ResourceIdList = NonEmptyString[];
+  export interface RestoreWorkspaceRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * Indicates whether to create snapshots of the root volume and user volume before restoring the WorkSpace.
+     */
+    SnapshotCurrentVolumes?: BooleanObject;
+  }
+  export interface RestoreWorkspaceResult {
+  }
   export interface RevokeIpRulesRequest {
     /**
      * The identifier of the group.
@@ -927,6 +1008,13 @@ declare namespace WorkSpaces {
   export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|string;
   export type RunningModeAutoStopTimeoutInMinutes = number;
   export type SecurityGroupId = string;
+  export interface Snapshot {
+    /**
+     * The time when the snapshot was created.
+     */
+    SnapshotTime?: Timestamp;
+  }
+  export type SnapshotList = Snapshot[];
   export interface StartRequest {
     /**
      * The identifier of the WorkSpace.
@@ -1294,7 +1382,7 @@ declare namespace WorkSpaces {
     Tags?: TagList;
   }
   export type WorkspaceRequestList = WorkspaceRequest[];
-  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
+  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"RESTORING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
   export interface WorkspacesIpGroup {
     /**
      * The identifier of the group.

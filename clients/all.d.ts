@@ -182,3 +182,4 @@ export import PersonalizeEvents = require('./personalizeevents');
 export import PersonalizeRuntime = require('./personalizeruntime');
 export import ApplicationInsights = require('./applicationinsights');
 export import ServiceQuotas = require('./servicequotas');
+export import EC2InstanceConnect = require('./ec2instanceconnect');

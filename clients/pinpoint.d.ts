@@ -12,1697 +12,1660 @@ declare class Pinpoint extends Service {
   constructor(options?: Pinpoint.Types.ClientConfiguration)
   config: Config & Pinpoint.Types.ClientConfiguration;
   /**
-   * Creates or updates an app.
+   *  Creates an application.
    */
   createApp(params: Pinpoint.Types.CreateAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateAppResponse) => void): Request<Pinpoint.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates or updates an app.
+   *  Creates an application.
    */
   createApp(callback?: (err: AWSError, data: Pinpoint.Types.CreateAppResponse) => void): Request<Pinpoint.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates or updates a campaign.
+   * Creates a new campaign for an application or updates the settings of an existing campaign for an application.
    */
   createCampaign(params: Pinpoint.Types.CreateCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateCampaignResponse) => void): Request<Pinpoint.Types.CreateCampaignResponse, AWSError>;
   /**
-   * Creates or updates a campaign.
+   * Creates a new campaign for an application or updates the settings of an existing campaign for an application.
    */
   createCampaign(callback?: (err: AWSError, data: Pinpoint.Types.CreateCampaignResponse) => void): Request<Pinpoint.Types.CreateCampaignResponse, AWSError>;
   /**
-   * Creates an export job.
+   * Creates a new export job for an application.
    */
   createExportJob(params: Pinpoint.Types.CreateExportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateExportJobResponse) => void): Request<Pinpoint.Types.CreateExportJobResponse, AWSError>;
   /**
-   * Creates an export job.
+   * Creates a new export job for an application.
    */
   createExportJob(callback?: (err: AWSError, data: Pinpoint.Types.CreateExportJobResponse) => void): Request<Pinpoint.Types.CreateExportJobResponse, AWSError>;
   /**
-   * Creates or updates an import job.
+   * Creates a new import job for an application.
    */
   createImportJob(params: Pinpoint.Types.CreateImportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
   /**
-   * Creates or updates an import job.
+   * Creates a new import job for an application.
    */
   createImportJob(callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
   /**
-   * Used to create or update a segment.
+   * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
   createSegment(params: Pinpoint.Types.CreateSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateSegmentResponse) => void): Request<Pinpoint.Types.CreateSegmentResponse, AWSError>;
   /**
-   * Used to create or update a segment.
+   * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
   createSegment(callback?: (err: AWSError, data: Pinpoint.Types.CreateSegmentResponse) => void): Request<Pinpoint.Types.CreateSegmentResponse, AWSError>;
   /**
-   * Delete an ADM channel.
+   * Disables the ADM channel for an application and deletes any existing settings for the channel.
    */
   deleteAdmChannel(params: Pinpoint.Types.DeleteAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAdmChannelResponse) => void): Request<Pinpoint.Types.DeleteAdmChannelResponse, AWSError>;
   /**
-   * Delete an ADM channel.
+   * Disables the ADM channel for an application and deletes any existing settings for the channel.
    */
   deleteAdmChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteAdmChannelResponse) => void): Request<Pinpoint.Types.DeleteAdmChannelResponse, AWSError>;
   /**
-   * Deletes the APNs channel for an app.
+   * Disables the APNs channel for an application and deletes any existing settings for the channel.
    */
   deleteApnsChannel(params: Pinpoint.Types.DeleteApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsChannelResponse, AWSError>;
   /**
-   * Deletes the APNs channel for an app.
+   * Disables the APNs channel for an application and deletes any existing settings for the channel.
    */
   deleteApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsChannelResponse, AWSError>;
   /**
-   * Delete an APNS sandbox channel.
+   * Disables the APNs sandbox channel for an application and deletes any existing settings for the channel.
    */
   deleteApnsSandboxChannel(params: Pinpoint.Types.DeleteApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
   /**
-   * Delete an APNS sandbox channel.
+   * Disables the APNs sandbox channel for an application and deletes any existing settings for the channel.
    */
   deleteApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
   /**
-   * Delete an APNS VoIP channel
+   * Disables the APNs VoIP channel for an application and deletes any existing settings for the channel.
    */
   deleteApnsVoipChannel(params: Pinpoint.Types.DeleteApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipChannelResponse, AWSError>;
   /**
-   * Delete an APNS VoIP channel
+   * Disables the APNs VoIP channel for an application and deletes any existing settings for the channel.
    */
   deleteApnsVoipChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipChannelResponse, AWSError>;
   /**
-   * Delete an APNS VoIP sandbox channel
+   * Disables the APNs VoIP sandbox channel for an application and deletes any existing settings for the channel.
    */
   deleteApnsVoipSandboxChannel(params: Pinpoint.Types.DeleteApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse, AWSError>;
   /**
-   * Delete an APNS VoIP sandbox channel
+   * Disables the APNs VoIP sandbox channel for an application and deletes any existing settings for the channel.
    */
   deleteApnsVoipSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse, AWSError>;
   /**
-   * Deletes an app.
+   * Deletes an application.
    */
   deleteApp(params: Pinpoint.Types.DeleteAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAppResponse) => void): Request<Pinpoint.Types.DeleteAppResponse, AWSError>;
   /**
-   * Deletes an app.
+   * Deletes an application.
    */
   deleteApp(callback?: (err: AWSError, data: Pinpoint.Types.DeleteAppResponse) => void): Request<Pinpoint.Types.DeleteAppResponse, AWSError>;
   /**
-   * Delete a BAIDU GCM channel
+   * Disables the Baidu channel for an application and deletes any existing settings for the channel.
    */
   deleteBaiduChannel(params: Pinpoint.Types.DeleteBaiduChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteBaiduChannelResponse) => void): Request<Pinpoint.Types.DeleteBaiduChannelResponse, AWSError>;
   /**
-   * Delete a BAIDU GCM channel
+   * Disables the Baidu channel for an application and deletes any existing settings for the channel.
    */
   deleteBaiduChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteBaiduChannelResponse) => void): Request<Pinpoint.Types.DeleteBaiduChannelResponse, AWSError>;
   /**
-   * Deletes a campaign.
+   * Deletes a campaign from an application.
    */
   deleteCampaign(params: Pinpoint.Types.DeleteCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteCampaignResponse) => void): Request<Pinpoint.Types.DeleteCampaignResponse, AWSError>;
   /**
-   * Deletes a campaign.
+   * Deletes a campaign from an application.
    */
   deleteCampaign(callback?: (err: AWSError, data: Pinpoint.Types.DeleteCampaignResponse) => void): Request<Pinpoint.Types.DeleteCampaignResponse, AWSError>;
   /**
-   * Delete an email channel.
+   * Disables the email channel for an application and deletes any existing settings for the channel.
    */
   deleteEmailChannel(params: Pinpoint.Types.DeleteEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
-   * Delete an email channel.
+   * Disables the email channel for an application and deletes any existing settings for the channel.
    */
   deleteEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
-   * Deletes an endpoint.
+   * Deletes an endpoint from an application.
    */
   deleteEndpoint(params: Pinpoint.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEndpointResponse) => void): Request<Pinpoint.Types.DeleteEndpointResponse, AWSError>;
   /**
-   * Deletes an endpoint.
+   * Deletes an endpoint from an application.
    */
   deleteEndpoint(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEndpointResponse) => void): Request<Pinpoint.Types.DeleteEndpointResponse, AWSError>;
   /**
-   * Deletes the event stream for an app.
+   * Deletes the event stream for an application.
    */
   deleteEventStream(params: Pinpoint.Types.DeleteEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEventStreamResponse) => void): Request<Pinpoint.Types.DeleteEventStreamResponse, AWSError>;
   /**
-   * Deletes the event stream for an app.
+   * Deletes the event stream for an application.
    */
   deleteEventStream(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEventStreamResponse) => void): Request<Pinpoint.Types.DeleteEventStreamResponse, AWSError>;
   /**
-   * Deletes the GCM channel for an app.
+   * Disables the GCM channel for an application and deletes any existing settings for the channel.
    */
   deleteGcmChannel(params: Pinpoint.Types.DeleteGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteGcmChannelResponse) => void): Request<Pinpoint.Types.DeleteGcmChannelResponse, AWSError>;
   /**
-   * Deletes the GCM channel for an app.
+   * Disables the GCM channel for an application and deletes any existing settings for the channel.
    */
   deleteGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteGcmChannelResponse) => void): Request<Pinpoint.Types.DeleteGcmChannelResponse, AWSError>;
   /**
-   * Deletes a segment.
+   * Deletes a segment from an application.
    */
   deleteSegment(params: Pinpoint.Types.DeleteSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSegmentResponse) => void): Request<Pinpoint.Types.DeleteSegmentResponse, AWSError>;
   /**
-   * Deletes a segment.
+   * Deletes a segment from an application.
    */
   deleteSegment(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSegmentResponse) => void): Request<Pinpoint.Types.DeleteSegmentResponse, AWSError>;
   /**
-   * Delete an SMS channel.
+   * Disables the SMS channel for an application and deletes any existing settings for the channel.
    */
   deleteSmsChannel(params: Pinpoint.Types.DeleteSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
   /**
-   * Delete an SMS channel.
+   * Disables the SMS channel for an application and deletes any existing settings for the channel.
    */
   deleteSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
   /**
-   * Deletes endpoints that are associated with a User ID.
+   * Deletes all the endpoints that are associated with a specific user ID.
    */
   deleteUserEndpoints(params: Pinpoint.Types.DeleteUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
   /**
-   * Deletes endpoints that are associated with a User ID.
+   * Deletes all the endpoints that are associated with a specific user ID.
    */
   deleteUserEndpoints(callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
   /**
-   * Delete an Voice channel
+   * Disables the voice channel for an application and deletes any existing settings for the channel.
    */
   deleteVoiceChannel(params: Pinpoint.Types.DeleteVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceChannelResponse) => void): Request<Pinpoint.Types.DeleteVoiceChannelResponse, AWSError>;
   /**
-   * Delete an Voice channel
+   * Disables the voice channel for an application and deletes any existing settings for the channel.
    */
   deleteVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceChannelResponse) => void): Request<Pinpoint.Types.DeleteVoiceChannelResponse, AWSError>;
   /**
-   * Get an ADM channel.
+   * Retrieves information about the status and settings of the ADM channel for an application.
    */
   getAdmChannel(params: Pinpoint.Types.GetAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAdmChannelResponse) => void): Request<Pinpoint.Types.GetAdmChannelResponse, AWSError>;
   /**
-   * Get an ADM channel.
+   * Retrieves information about the status and settings of the ADM channel for an application.
    */
   getAdmChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetAdmChannelResponse) => void): Request<Pinpoint.Types.GetAdmChannelResponse, AWSError>;
   /**
-   * Returns information about the APNs channel for an app.
+   * Retrieves information about the status and settings of the APNs channel for an application.
    */
   getApnsChannel(params: Pinpoint.Types.GetApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsChannelResponse) => void): Request<Pinpoint.Types.GetApnsChannelResponse, AWSError>;
   /**
-   * Returns information about the APNs channel for an app.
+   * Retrieves information about the status and settings of the APNs channel for an application.
    */
   getApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsChannelResponse) => void): Request<Pinpoint.Types.GetApnsChannelResponse, AWSError>;
   /**
-   * Get an APNS sandbox channel.
+   * Retrieves information about the status and settings of the APNs sandbox channel for an application.
    */
   getApnsSandboxChannel(params: Pinpoint.Types.GetApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
   /**
-   * Get an APNS sandbox channel.
+   * Retrieves information about the status and settings of the APNs sandbox channel for an application.
    */
   getApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
   /**
-   * Get an APNS VoIP channel
+   * Retrieves information about the status and settings of the APNs VoIP channel for an application.
    */
   getApnsVoipChannel(params: Pinpoint.Types.GetApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipChannelResponse, AWSError>;
   /**
-   * Get an APNS VoIP channel
+   * Retrieves information about the status and settings of the APNs VoIP channel for an application.
    */
   getApnsVoipChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipChannelResponse, AWSError>;
   /**
-   * Get an APNS VoIPSandbox channel
+   * Retrieves information about the status and settings of the APNs VoIP sandbox channel for an application.
    */
   getApnsVoipSandboxChannel(params: Pinpoint.Types.GetApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipSandboxChannelResponse, AWSError>;
   /**
-   * Get an APNS VoIPSandbox channel
+   * Retrieves information about the status and settings of the APNs VoIP sandbox channel for an application.
    */
   getApnsVoipSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipSandboxChannelResponse, AWSError>;
   /**
-   * Returns information about an app.
+   * Retrieves information about an application.
    */
   getApp(params: Pinpoint.Types.GetAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAppResponse) => void): Request<Pinpoint.Types.GetAppResponse, AWSError>;
   /**
-   * Returns information about an app.
+   * Retrieves information about an application.
    */
   getApp(callback?: (err: AWSError, data: Pinpoint.Types.GetAppResponse) => void): Request<Pinpoint.Types.GetAppResponse, AWSError>;
   /**
-   * Used to request the settings for an app.
+   * Retrieves information about the settings for an application.
    */
   getApplicationSettings(params: Pinpoint.Types.GetApplicationSettingsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationSettingsResponse) => void): Request<Pinpoint.Types.GetApplicationSettingsResponse, AWSError>;
   /**
-   * Used to request the settings for an app.
+   * Retrieves information about the settings for an application.
    */
   getApplicationSettings(callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationSettingsResponse) => void): Request<Pinpoint.Types.GetApplicationSettingsResponse, AWSError>;
   /**
-   * Returns information about your apps.
+   * Retrieves information about all of your applications.
    */
   getApps(params: Pinpoint.Types.GetAppsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
   /**
-   * Returns information about your apps.
+   * Retrieves information about all of your applications.
    */
   getApps(callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
   /**
-   * Get a BAIDU GCM channel
+   * Retrieves information about the status and settings of the Baidu Cloud Push channel for an application.
    */
   getBaiduChannel(params: Pinpoint.Types.GetBaiduChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetBaiduChannelResponse) => void): Request<Pinpoint.Types.GetBaiduChannelResponse, AWSError>;
   /**
-   * Get a BAIDU GCM channel
+   * Retrieves information about the status and settings of the Baidu Cloud Push channel for an application.
    */
   getBaiduChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetBaiduChannelResponse) => void): Request<Pinpoint.Types.GetBaiduChannelResponse, AWSError>;
   /**
-   * Returns information about a campaign.
+   * Retrieves information about the status, configuration, and other settings for a campaign.
    */
   getCampaign(params: Pinpoint.Types.GetCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignResponse) => void): Request<Pinpoint.Types.GetCampaignResponse, AWSError>;
   /**
-   * Returns information about a campaign.
+   * Retrieves information about the status, configuration, and other settings for a campaign.
    */
   getCampaign(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignResponse) => void): Request<Pinpoint.Types.GetCampaignResponse, AWSError>;
   /**
-   * Returns information about the activity performed by a campaign.
+   * Retrieves information about the activity performed by a campaign.
    */
   getCampaignActivities(params: Pinpoint.Types.GetCampaignActivitiesRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignActivitiesResponse) => void): Request<Pinpoint.Types.GetCampaignActivitiesResponse, AWSError>;
   /**
-   * Returns information about the activity performed by a campaign.
+   * Retrieves information about the activity performed by a campaign.
    */
   getCampaignActivities(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignActivitiesResponse) => void): Request<Pinpoint.Types.GetCampaignActivitiesResponse, AWSError>;
   /**
-   * Returns information about a specific version of a campaign.
+   * Retrieves information about the status, configuration, and other settings for a specific version of a campaign.
    */
   getCampaignVersion(params: Pinpoint.Types.GetCampaignVersionRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionResponse) => void): Request<Pinpoint.Types.GetCampaignVersionResponse, AWSError>;
   /**
-   * Returns information about a specific version of a campaign.
+   * Retrieves information about the status, configuration, and other settings for a specific version of a campaign.
    */
   getCampaignVersion(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionResponse) => void): Request<Pinpoint.Types.GetCampaignVersionResponse, AWSError>;
   /**
-   * Returns information about your campaign versions.
+   * Retrieves information about the status, configuration, and other settings for all versions of a specific campaign.
    */
   getCampaignVersions(params: Pinpoint.Types.GetCampaignVersionsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionsResponse) => void): Request<Pinpoint.Types.GetCampaignVersionsResponse, AWSError>;
   /**
-   * Returns information about your campaign versions.
+   * Retrieves information about the status, configuration, and other settings for all versions of a specific campaign.
    */
   getCampaignVersions(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionsResponse) => void): Request<Pinpoint.Types.GetCampaignVersionsResponse, AWSError>;
   /**
-   * Returns information about your campaigns.
+   * Retrieves information about the status, configuration, and other settings for all the campaigns that are associated with an application.
    */
   getCampaigns(params: Pinpoint.Types.GetCampaignsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignsResponse) => void): Request<Pinpoint.Types.GetCampaignsResponse, AWSError>;
   /**
-   * Returns information about your campaigns.
+   * Retrieves information about the status, configuration, and other settings for all the campaigns that are associated with an application.
    */
   getCampaigns(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignsResponse) => void): Request<Pinpoint.Types.GetCampaignsResponse, AWSError>;
   /**
-   * Get all channels.
+   * Retrieves information about the history and status of each channel for an application.
    */
   getChannels(params: Pinpoint.Types.GetChannelsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetChannelsResponse) => void): Request<Pinpoint.Types.GetChannelsResponse, AWSError>;
   /**
-   * Get all channels.
+   * Retrieves information about the history and status of each channel for an application.
    */
   getChannels(callback?: (err: AWSError, data: Pinpoint.Types.GetChannelsResponse) => void): Request<Pinpoint.Types.GetChannelsResponse, AWSError>;
   /**
-   * Get an email channel.
+   * Retrieves information about the status and settings of the email channel for an application.
    */
   getEmailChannel(params: Pinpoint.Types.GetEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
   /**
-   * Get an email channel.
+   * Retrieves information about the status and settings of the email channel for an application.
    */
   getEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
   /**
-   * Returns information about an endpoint.
+   * Retrieves information about the settings and attributes of a specific endpoint for an application.
    */
   getEndpoint(params: Pinpoint.Types.GetEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEndpointResponse) => void): Request<Pinpoint.Types.GetEndpointResponse, AWSError>;
   /**
-   * Returns information about an endpoint.
+   * Retrieves information about the settings and attributes of a specific endpoint for an application.
    */
   getEndpoint(callback?: (err: AWSError, data: Pinpoint.Types.GetEndpointResponse) => void): Request<Pinpoint.Types.GetEndpointResponse, AWSError>;
   /**
-   * Returns the event stream for an app.
+   * Retrieves information about the event stream settings for an application.
    */
   getEventStream(params: Pinpoint.Types.GetEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEventStreamResponse) => void): Request<Pinpoint.Types.GetEventStreamResponse, AWSError>;
   /**
-   * Returns the event stream for an app.
+   * Retrieves information about the event stream settings for an application.
    */
   getEventStream(callback?: (err: AWSError, data: Pinpoint.Types.GetEventStreamResponse) => void): Request<Pinpoint.Types.GetEventStreamResponse, AWSError>;
   /**
-   * Returns information about an export job.
+   * Retrieves information about the status and settings of a specific export job for an application.
    */
   getExportJob(params: Pinpoint.Types.GetExportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobResponse) => void): Request<Pinpoint.Types.GetExportJobResponse, AWSError>;
   /**
-   * Returns information about an export job.
+   * Retrieves information about the status and settings of a specific export job for an application.
    */
   getExportJob(callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobResponse) => void): Request<Pinpoint.Types.GetExportJobResponse, AWSError>;
   /**
-   * Returns information about your export jobs.
+   * Retrieves information about the status and settings of all the export jobs for an application.
    */
   getExportJobs(params: Pinpoint.Types.GetExportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobsResponse) => void): Request<Pinpoint.Types.GetExportJobsResponse, AWSError>;
   /**
-   * Returns information about your export jobs.
+   * Retrieves information about the status and settings of all the export jobs for an application.
    */
   getExportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobsResponse) => void): Request<Pinpoint.Types.GetExportJobsResponse, AWSError>;
   /**
-   * Returns information about the GCM channel for an app.
+   * Retrieves information about the status and settings of the GCM channel for an application.
    */
   getGcmChannel(params: Pinpoint.Types.GetGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetGcmChannelResponse) => void): Request<Pinpoint.Types.GetGcmChannelResponse, AWSError>;
   /**
-   * Returns information about the GCM channel for an app.
+   * Retrieves information about the status and settings of the GCM channel for an application.
    */
   getGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetGcmChannelResponse) => void): Request<Pinpoint.Types.GetGcmChannelResponse, AWSError>;
   /**
-   * Returns information about an import job.
+   * Retrieves information about the status and settings of a specific import job for an application.
    */
   getImportJob(params: Pinpoint.Types.GetImportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobResponse) => void): Request<Pinpoint.Types.GetImportJobResponse, AWSError>;
   /**
-   * Returns information about an import job.
+   * Retrieves information about the status and settings of a specific import job for an application.
    */
   getImportJob(callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobResponse) => void): Request<Pinpoint.Types.GetImportJobResponse, AWSError>;
   /**
-   * Returns information about your import jobs.
+   * Retrieves information about the status and settings of all the import jobs for an application.
    */
   getImportJobs(params: Pinpoint.Types.GetImportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobsResponse) => void): Request<Pinpoint.Types.GetImportJobsResponse, AWSError>;
   /**
-   * Returns information about your import jobs.
+   * Retrieves information about the status and settings of all the import jobs for an application.
    */
   getImportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobsResponse) => void): Request<Pinpoint.Types.GetImportJobsResponse, AWSError>;
   /**
-   * Returns information about a segment.
+   * Retrieves information about the configuration, dimension, and other settings for a specific segment that's associated with an application.
    */
   getSegment(params: Pinpoint.Types.GetSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentResponse) => void): Request<Pinpoint.Types.GetSegmentResponse, AWSError>;
   /**
-   * Returns information about a segment.
+   * Retrieves information about the configuration, dimension, and other settings for a specific segment that's associated with an application.
    */
   getSegment(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentResponse) => void): Request<Pinpoint.Types.GetSegmentResponse, AWSError>;
   /**
-   * Returns a list of export jobs for a specific segment.
+   * Retrieves information about the status and settings of the export jobs for a segment.
    */
   getSegmentExportJobs(params: Pinpoint.Types.GetSegmentExportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentExportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentExportJobsResponse, AWSError>;
   /**
-   * Returns a list of export jobs for a specific segment.
+   * Retrieves information about the status and settings of the export jobs for a segment.
    */
   getSegmentExportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentExportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentExportJobsResponse, AWSError>;
   /**
-   * Returns a list of import jobs for a specific segment.
+   * Retrieves information about the status and settings of the import jobs for a segment.
    */
   getSegmentImportJobs(params: Pinpoint.Types.GetSegmentImportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentImportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentImportJobsResponse, AWSError>;
   /**
-   * Returns a list of import jobs for a specific segment.
+   * Retrieves information about the status and settings of the import jobs for a segment.
    */
   getSegmentImportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentImportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentImportJobsResponse, AWSError>;
   /**
-   * Returns information about a segment version.
+   * Retrieves information about the configuration, dimension, and other settings for a specific version of a segment that's associated with an application.
    */
   getSegmentVersion(params: Pinpoint.Types.GetSegmentVersionRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionResponse) => void): Request<Pinpoint.Types.GetSegmentVersionResponse, AWSError>;
   /**
-   * Returns information about a segment version.
+   * Retrieves information about the configuration, dimension, and other settings for a specific version of a segment that's associated with an application.
    */
   getSegmentVersion(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionResponse) => void): Request<Pinpoint.Types.GetSegmentVersionResponse, AWSError>;
   /**
-   * Returns information about your segment versions.
+   * Retrieves information about the configuration, dimension, and other settings for all versions of a specific segment that's associated with an application.
    */
   getSegmentVersions(params: Pinpoint.Types.GetSegmentVersionsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionsResponse) => void): Request<Pinpoint.Types.GetSegmentVersionsResponse, AWSError>;
   /**
-   * Returns information about your segment versions.
+   * Retrieves information about the configuration, dimension, and other settings for all versions of a specific segment that's associated with an application.
    */
   getSegmentVersions(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionsResponse) => void): Request<Pinpoint.Types.GetSegmentVersionsResponse, AWSError>;
   /**
-   * Used to get information about your segments.
+   * Retrieves information about the configuration, dimension, and other settings for all the segments that are associated with an application.
    */
   getSegments(params: Pinpoint.Types.GetSegmentsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentsResponse) => void): Request<Pinpoint.Types.GetSegmentsResponse, AWSError>;
   /**
-   * Used to get information about your segments.
+   * Retrieves information about the configuration, dimension, and other settings for all the segments that are associated with an application.
    */
   getSegments(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentsResponse) => void): Request<Pinpoint.Types.GetSegmentsResponse, AWSError>;
   /**
-   * Get an SMS channel.
+   * Retrieves information about the status and settings of the SMS channel for an application.
    */
   getSmsChannel(params: Pinpoint.Types.GetSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
   /**
-   * Get an SMS channel.
+   * Retrieves information about the status and settings of the SMS channel for an application.
    */
   getSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
   /**
-   * Returns information about the endpoints that are associated with a User ID.
+   * Retrieves information about all the endpoints that are associated with a specific user ID.
    */
   getUserEndpoints(params: Pinpoint.Types.GetUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
   /**
-   * Returns information about the endpoints that are associated with a User ID.
+   * Retrieves information about all the endpoints that are associated with a specific user ID.
    */
   getUserEndpoints(callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
   /**
-   * Get a Voice Channel
+   * Retrieves information about the status and settings of the voice channel for an application.
    */
   getVoiceChannel(params: Pinpoint.Types.GetVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
   /**
-   * Get a Voice Channel
+   * Retrieves information about the status and settings of the voice channel for an application.
    */
   getVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
   /**
-   * 
+   * Retrieves all the tags (keys and values) that are associated with an application, campaign, or segment.
    */
   listTagsForResource(params: Pinpoint.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * 
+   * Retrieves all the tags (keys and values) that are associated with an application, campaign, or segment.
    */
   listTagsForResource(callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns information about the specified phone number.
+   * Retrieves information about a phone number.
    */
   phoneNumberValidate(params: Pinpoint.Types.PhoneNumberValidateRequest, callback?: (err: AWSError, data: Pinpoint.Types.PhoneNumberValidateResponse) => void): Request<Pinpoint.Types.PhoneNumberValidateResponse, AWSError>;
   /**
-   * Returns information about the specified phone number.
+   * Retrieves information about a phone number.
    */
   phoneNumberValidate(callback?: (err: AWSError, data: Pinpoint.Types.PhoneNumberValidateResponse) => void): Request<Pinpoint.Types.PhoneNumberValidateResponse, AWSError>;
   /**
-   * Use to create or update the event stream for an app.
+   * Creates a new event stream for an application or updates the settings of an existing event stream for an application.
    */
   putEventStream(params: Pinpoint.Types.PutEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
   /**
-   * Use to create or update the event stream for an app.
+   * Creates a new event stream for an application or updates the settings of an existing event stream for an application.
    */
   putEventStream(callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
   /**
-   * Use to record events for endpoints. This method creates events and creates or updates the endpoints that those events are associated with.
+   * Creates a new event to record for endpoints, or creates or updates endpoint data that existing events are associated with.
    */
   putEvents(params: Pinpoint.Types.PutEventsRequest, callback?: (err: AWSError, data: Pinpoint.Types.PutEventsResponse) => void): Request<Pinpoint.Types.PutEventsResponse, AWSError>;
   /**
-   * Use to record events for endpoints. This method creates events and creates or updates the endpoints that those events are associated with.
+   * Creates a new event to record for endpoints, or creates or updates endpoint data that existing events are associated with.
    */
   putEvents(callback?: (err: AWSError, data: Pinpoint.Types.PutEventsResponse) => void): Request<Pinpoint.Types.PutEventsResponse, AWSError>;
   /**
-   * Used to remove the attributes for an app
+   * Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.
    */
   removeAttributes(params: Pinpoint.Types.RemoveAttributesRequest, callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
   /**
-   * Used to remove the attributes for an app
+   * Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.
    */
   removeAttributes(callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
   /**
-   * Used to send a direct message.
+   * Creates and sends a direct message.
    */
   sendMessages(params: Pinpoint.Types.SendMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
   /**
-   * Used to send a direct message.
+   * Creates and sends a direct message.
    */
   sendMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
   /**
-   * Used to send a message to a list of users.
+   * Creates and sends a message to a list of users.
    */
   sendUsersMessages(params: Pinpoint.Types.SendUsersMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
-   * Used to send a message to a list of users.
+   * Creates and sends a message to a list of users.
    */
   sendUsersMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
-   * 
+   * Adds one or more tags (keys and values) to an application, campaign, or segment.
    */
   tagResource(params: Pinpoint.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Adds one or more tags (keys and values) to an application, campaign, or segment.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Removes one or more tags (keys and values) from an application, campaign, or segment.
    */
   untagResource(params: Pinpoint.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Removes one or more tags (keys and values) from an application, campaign, or segment.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update an ADM channel.
+   * Updates the ADM channel settings for an application.
    */
   updateAdmChannel(params: Pinpoint.Types.UpdateAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateAdmChannelResponse) => void): Request<Pinpoint.Types.UpdateAdmChannelResponse, AWSError>;
   /**
-   * Update an ADM channel.
+   * Updates the ADM channel settings for an application.
    */
   updateAdmChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateAdmChannelResponse) => void): Request<Pinpoint.Types.UpdateAdmChannelResponse, AWSError>;
   /**
-   * Use to update the APNs channel for an app.
+   * Updates the APNs channel settings for an application.
    */
   updateApnsChannel(params: Pinpoint.Types.UpdateApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
   /**
-   * Use to update the APNs channel for an app.
+   * Updates the APNs channel settings for an application.
    */
   updateApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
   /**
-   * Update an APNS sandbox channel.
+   * Updates the APNs sandbox channel settings for an application.
    */
   updateApnsSandboxChannel(params: Pinpoint.Types.UpdateApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
-   * Update an APNS sandbox channel.
+   * Updates the APNs sandbox channel settings for an application.
    */
   updateApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
-   * Update an APNS VoIP channel
+   * Updates the APNs VoIP channel settings for an application.
    */
   updateApnsVoipChannel(params: Pinpoint.Types.UpdateApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipChannelResponse, AWSError>;
   /**
-   * Update an APNS VoIP channel
+   * Updates the APNs VoIP channel settings for an application.
    */
   updateApnsVoipChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipChannelResponse, AWSError>;
   /**
-   * Update an APNS VoIP sandbox channel
+   * Updates the settings for the APNs VoIP sandbox channel for an application.
    */
   updateApnsVoipSandboxChannel(params: Pinpoint.Types.UpdateApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse, AWSError>;
   /**
-   * Update an APNS VoIP sandbox channel
+   * Updates the settings for the APNs VoIP sandbox channel for an application.
    */
   updateApnsVoipSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse, AWSError>;
   /**
-   * Used to update the settings for an app.
+   * Updates the settings for an application.
    */
   updateApplicationSettings(params: Pinpoint.Types.UpdateApplicationSettingsRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApplicationSettingsResponse) => void): Request<Pinpoint.Types.UpdateApplicationSettingsResponse, AWSError>;
   /**
-   * Used to update the settings for an app.
+   * Updates the settings for an application.
    */
   updateApplicationSettings(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApplicationSettingsResponse) => void): Request<Pinpoint.Types.UpdateApplicationSettingsResponse, AWSError>;
   /**
-   * Update a BAIDU GCM channel
+   * Updates the settings of the Baidu channel for an application.
    */
   updateBaiduChannel(params: Pinpoint.Types.UpdateBaiduChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateBaiduChannelResponse) => void): Request<Pinpoint.Types.UpdateBaiduChannelResponse, AWSError>;
   /**
-   * Update a BAIDU GCM channel
+   * Updates the settings of the Baidu channel for an application.
    */
   updateBaiduChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateBaiduChannelResponse) => void): Request<Pinpoint.Types.UpdateBaiduChannelResponse, AWSError>;
   /**
-   * Use to update a campaign.
+   * Updates the settings for a campaign.
    */
   updateCampaign(params: Pinpoint.Types.UpdateCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateCampaignResponse) => void): Request<Pinpoint.Types.UpdateCampaignResponse, AWSError>;
   /**
-   * Use to update a campaign.
+   * Updates the settings for a campaign.
    */
   updateCampaign(callback?: (err: AWSError, data: Pinpoint.Types.UpdateCampaignResponse) => void): Request<Pinpoint.Types.UpdateCampaignResponse, AWSError>;
   /**
-   * Update an email channel.
+   * Updates the status and settings of the email channel for an application.
    */
   updateEmailChannel(params: Pinpoint.Types.UpdateEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
   /**
-   * Update an email channel.
+   * Updates the status and settings of the email channel for an application.
    */
   updateEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
   /**
-   * Creates or updates an endpoint.
+   * Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for an endpoint.
    */
   updateEndpoint(params: Pinpoint.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
   /**
-   * Creates or updates an endpoint.
+   * Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for an endpoint.
    */
   updateEndpoint(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
   /**
-   * Use to update a batch of endpoints.
+   *  Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for a batch of endpoints.
    */
   updateEndpointsBatch(params: Pinpoint.Types.UpdateEndpointsBatchRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
   /**
-   * Use to update a batch of endpoints.
+   *  Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for a batch of endpoints.
    */
   updateEndpointsBatch(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
   /**
-   * Use to update the GCM channel for an app.
+   * Updates the status and settings of the GCM channel for an application.
    */
   updateGcmChannel(params: Pinpoint.Types.UpdateGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
   /**
-   * Use to update the GCM channel for an app.
+   * Updates the status and settings of the GCM channel for an application.
    */
   updateGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
   /**
-   * Used to update a segment.
+   * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
   updateSegment(params: Pinpoint.Types.UpdateSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
   /**
-   * Used to update a segment.
+   * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
   updateSegment(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
   /**
-   * Update an SMS channel.
+   * Updates the status and settings of the SMS channel for an application.
    */
   updateSmsChannel(params: Pinpoint.Types.UpdateSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
   /**
-   * Update an SMS channel.
+   * Updates the status and settings of the SMS channel for an application.
    */
   updateSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
   /**
-   * Update an Voice channel
+   * Updates the status and settings of the voice channel for an application.
    */
   updateVoiceChannel(params: Pinpoint.Types.UpdateVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
   /**
-   * Update an Voice channel
+   * Updates the status and settings of the voice channel for an application.
    */
   updateVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
 }
 declare namespace Pinpoint {
   export interface ADMChannelRequest {
     /**
-     * The Client ID that you obtained from the Amazon App Distribution Portal.
+     * The Client ID that you received from Amazon to send messages by using ADM.
      */
-    ClientId?: __string;
+    ClientId: __string;
     /**
-     * The Client Secret that you obtained from the Amazon App Distribution Portal.
+     * The Client Secret that you received from Amazon to send messages by using ADM.
      */
-    ClientSecret?: __string;
+    ClientSecret: __string;
     /**
-     * Indicates whether or not the channel is enabled for sending messages.
+     * Specifies whether to enable the ADM channel for the application.
      */
     Enabled?: __boolean;
   }
   export interface ADMChannelResponse {
     /**
-     * The ID of the application to which the channel applies.
+     * The unique identifier for the application that the ADM channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * The date and time when this channel was created.
+     * The date and time when the ADM channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * Indicates whether or not the channel is enabled for sending messages.
+     * Specifies whether the ADM channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * (Deprecated) An identifier for the channel. Retained for backwards compatibility.
+     * (Deprecated) An identifier for the ADM channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Indicates whether or not the channel is archived.
+     * Specifies whether the ADM channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * The user who last updated this channel.
+     * The user who last modified the ADM channel.
      */
     LastModifiedBy?: __string;
     /**
-     * The date and time when this channel was last modified.
+     * The date and time when the ADM channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. For this channel, the value is always "ADM."
+     * The type of messaging or notification platform for the channel. For the ADM channel, this value is ADM.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * The channel version.
+     * The current version of the ADM channel.
      */
     Version?: __integer;
   }
   export interface ADMMessage {
     /**
-     * The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL
+     * The action to occur if the recipient taps the push notification. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
      */
     Action?: Action;
     /**
-     * The message body of the notification.
+     * The body of the notification message.
      */
     Body?: __string;
     /**
-     * Optional. Arbitrary string used to indicate multiple messages are logically the same and that ADM is allowed to drop previously enqueued messages in favor of this one.
+     * An arbitrary string that indicates that multiple messages are logically the same and that Amazon Device Messaging (ADM) can drop previously enqueued messages in favor of this message.
      */
     ConsolidationKey?: __string;
     /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     * The JSON data payload to use for the push notification, if the notification is a silent push notification. This payload is added to the data.pinpoint.jsonBody object of the notification.
      */
     Data?: MapOf__string;
     /**
-     * Optional. Number of seconds ADM should retain the message if the device is offline
+     * The amount of time, in seconds, that ADM should store the message if the recipient's device is offline. Amazon Pinpoint specifies this value in the expiresAfter parameter when it sends the notification message to ADM.
      */
     ExpiresAfter?: __string;
     /**
-     * The icon image name of the asset saved in your application.
+     * The icon image name of the asset saved in your app.
      */
     IconReference?: __string;
     /**
-     * The URL that points to an image used as the large icon to the notification content view.
+     * The URL of the large icon image to display in the content view of the push notification.
      */
     ImageIconUrl?: __string;
     /**
-     * The URL that points to an image used in the push notification.
+     * The URL of an image to display in the push notification.
      */
     ImageUrl?: __string;
     /**
-     * Optional. Base-64-encoded MD5 checksum of the data parameter. Used to verify data integrity
+     * The base64-encoded, MD5 checksum of the value specified by the Data property. ADM uses the MD5 value to verify the integrity of the data.
      */
     MD5?: __string;
     /**
-     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
      */
     RawContent?: __string;
     /**
-     * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+     * Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration or supporting phone home functionality.
      */
     SilentPush?: __boolean;
     /**
-     * The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
+     * The URL of the small icon image to display in the status bar and the content view of the push notification.
      */
     SmallImageIconUrl?: __string;
     /**
-     * Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/
+     * The sound to play when the recipient receives the push notification. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in /res/raw/.
      */
     Sound?: __string;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The default message variables to use in the notification message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * The message title that displays above the message on the user's device.
+     * The title to display above the notification message on the recipient's device.
      */
     Title?: __string;
     /**
-     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     * The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
      */
     Url?: __string;
   }
   export interface APNSChannelRequest {
     /**
-     * The bundle id used for APNs Tokens.
+     * The bundle identifier that's assigned to your iOS app. This identifier is used for APNs tokens.
      */
     BundleId?: __string;
     /**
-     * The distribution certificate from Apple.
+     * The APNs client certificate that you received from Apple, if you want Amazon Pinpoint to communicate with APNs by using an APNs certificate.
      */
     Certificate?: __string;
     /**
-     * The default authentication method used for APNs.
+     * The default authentication method that you want Amazon Pinpoint to use when authenticating with APNs, key or certificate.
      */
     DefaultAuthenticationMethod?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether to enable the APNs channel for the application.
      */
     Enabled?: __boolean;
     /**
-     * The certificate private key.
+     * The private key for the APNs client certificate that you want Amazon Pinpoint to use to communicate with APNs.
      */
     PrivateKey?: __string;
     /**
-     * The team id used for APNs Tokens.
+     * The identifier that's assigned to your Apple developer account team. This identifier is used for APNs tokens.
      */
     TeamId?: __string;
     /**
-     * The token key used for APNs Tokens.
+     * The authentication key to use for APNs tokens.
      */
     TokenKey?: __string;
     /**
-     * The token key used for APNs Tokens.
+     * The key identifier that's assigned to your APNs signing key, if you want Amazon Pinpoint to communicate with APNs by using APNs tokens.
      */
     TokenKeyId?: __string;
   }
   export interface APNSChannelResponse {
     /**
-     * The ID of the application that the channel applies to.
+     * The unique identifier for the application that the APNs channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * The date and time when this channel was created.
+     * The date and time when the APNs channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * The default authentication method used for APNs.
+     * The default authentication method that Amazon Pinpoint uses to authenticate with APNs for this channel, key or certificate.
      */
     DefaultAuthenticationMethod?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the APNs channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute.
+     * Specifies whether the APNs channel is configured to communicate with APNs by using APNs tokens. To provide an authentication key for APNs tokens, set the TokenKey property of the channel.
      */
     HasTokenKey?: __boolean;
     /**
-     * (Deprecated) An identifier for the channel. Retained for backwards compatibility.
+     * (Deprecated) An identifier for the APNs channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Indicates whether or not the channel is archived.
+     * Specifies whether the APNs channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * The user who last updated this channel.
+     * The user who last modified the APNs channel.
      */
     LastModifiedBy?: __string;
     /**
-     * The date and time when this channel was last modified.
+     * The date and time when the APNs channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. For this channel, the value is always "ADM."
+     *  The type of messaging or notification platform for the channel. For the APNs channel, this value is APNS.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * The channel version.
+     * The current version of the APNs channel.
      */
     Version?: __integer;
   }
   export interface APNSMessage {
     /**
-     * The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL
+     * The action to occur if the recipient taps the push notification. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of the iOS platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
      */
     Action?: Action;
     /**
-     * Include this key when you want the system to modify the badge of your app icon. If this key is not included in the dictionary, the badge is not changed. To remove the badge, set the value of this key to 0.
+     * The key that indicates whether and how to modify the badge of your app's icon when the recipient receives the push notification. If this key isn't included in the dictionary, the badge doesn't change. To remove the badge, set this value to 0.
      */
     Badge?: __integer;
     /**
-     * The message body of the notification.
+     * The body of the notification message.
      */
     Body?: __string;
     /**
-     * Provide this key with a string value that represents the notification's type. This value corresponds to the value in the identifier property of one of your app's registered categories.
+     * The key that indicates the notification type for the push notification. This key is a value that's defined by the identifier property of one of your app's registered categories.
      */
     Category?: __string;
     /**
-     * An ID that, if assigned to multiple messages, causes APNs to coalesce the messages into a single push notification instead of delivering each message individually. The value must not exceed 64 bytes. Amazon Pinpoint uses this value to set the apns-collapse-id request header when it sends the message to APNs.
+     * An arbitrary identifier that, if assigned to multiple messages, APNs uses to coalesce the messages into a single push notification instead of delivering each message individually. This value can't exceed 64 bytes. Amazon Pinpoint specifies this value in the apns-collapse-id request header when it sends the notification message to APNs.
      */
     CollapseId?: __string;
     /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     * The JSON payload to use for a silent push notification. This payload is added to the data.pinpoint.jsonBody object of the notification.
      */
     Data?: MapOf__string;
     /**
-     * A URL that refers to the location of an image or video that you want to display in the push notification.
+     * The URL of an image or video to display in the push notification.
      */
     MediaUrl?: __string;
     /**
-     * The preferred authentication method, either "CERTIFICATE" or "TOKEN"
+     * The authentication method that you want Amazon Pinpoint to use when authenticating with Apple Push Notification service (APNs), CERTIFICATE or TOKEN.
      */
     PreferredAuthenticationMethod?: __string;
     /**
-     * The message priority. Amazon Pinpoint uses this value to set the apns-priority request header when it sends the message to APNs. Accepts the following values:
-
-"5" - Low priority. Messages might be delayed, delivered in groups, and throttled.
-
-"10" - High priority. Messages are sent immediately. High priority messages must cause an alert, sound, or badge on the receiving device.
-
-The default value is "10".
-
-The equivalent values for FCM or GCM messages are "normal" and "high". Amazon Pinpoint accepts these values for APNs messages and converts them.
-
-For more information about the apns-priority parameter, see Communicating with APNs in the APNs Local and Remote Notification Programming Guide.
+     * para>5 - Low priority, the notification might be delayed, delivered as part of a group, or throttled./listitem> 10 - High priority, the notification is sent immediately. This is the default value. A high priority notification should trigger an alert, play a sound, or badge your app's icon on the recipient's device./para> Amazon Pinpoint specifies this value in the apns-priority request header when it sends the notification message to APNs. The equivalent values for Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), are normal, for 5, and high, for 10. If you specify an FCM value for this property, Amazon Pinpoint accepts and converts the value to the corresponding APNs value.
      */
     Priority?: __string;
     /**
-     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
      */
     RawContent?: __string;
     /**
-     * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+     * Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration, displaying messages in an in-app message center, or supporting phone home functionality.
      */
     SilentPush?: __boolean;
     /**
-     * Include this key when you want the system to play a sound. The value of this key is the name of a sound file in your app's main bundle or in the Library/Sounds folder of your app's data container. If the sound file cannot be found, or if you specify defaultfor the value, the system plays the default alert sound.
+     * The key for the sound to play when the recipient receives the push notification. The value of this key is the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.
      */
     Sound?: __string;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The default message variables to use in the notification message. You can override these default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * Provide this key with a string value that represents the app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together.
+     * The key that represents your app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together.
      */
     ThreadId?: __string;
     /**
-     * The length of time (in seconds) that APNs stores and attempts to deliver the message. If the value is 0, APNs does not store the message or attempt to deliver it more than once. Amazon Pinpoint uses this value to set the apns-expiration request header when it sends the message to APNs.
+     * The amount of time, in seconds, that APNs should store and attempt to deliver the push notification, if the service is unable to deliver the notification the first time. If this value is 0, APNs treats the notification as if it expires immediately and the service doesn't store or try to deliver the notification again. Amazon Pinpoint specifies this value in the apns-expiration request header when it sends the notification message to APNs.
      */
     TimeToLive?: __integer;
     /**
-     * The message title that displays above the message on the user's device.
+     * The title to display above the notification message on the recipient's device.
      */
     Title?: __string;
     /**
-     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     * The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
      */
     Url?: __string;
   }
   export interface APNSSandboxChannelRequest {
     /**
-     * The bundle id used for APNs Tokens.
+     * The bundle identifier that's assigned to your iOS app. This identifier is used for APNs tokens.
      */
     BundleId?: __string;
     /**
-     * The distribution certificate from Apple.
+     * The APNs client certificate that you received from Apple, if you want Amazon Pinpoint to communicate with the APNs sandbox environment by using an APNs certificate.
      */
     Certificate?: __string;
     /**
-     * The default authentication method used for APNs.
+     * The default authentication method that you want Amazon Pinpoint to use when authenticating with the APNs sandbox environment, key or certificate.
      */
     DefaultAuthenticationMethod?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether to enable the APNs sandbox channel for the application.
      */
     Enabled?: __boolean;
     /**
-     * The certificate private key.
+     * The private key for the APNs client certificate that you want Amazon Pinpoint to use to communicate with the APNs sandbox environment.
      */
     PrivateKey?: __string;
     /**
-     * The team id used for APNs Tokens.
+     * The identifier that's assigned to your Apple developer account team. This identifier is used for APNs tokens.
      */
     TeamId?: __string;
     /**
-     * The token key used for APNs Tokens.
+     * The authentication key to use for APNs tokens.
      */
     TokenKey?: __string;
     /**
-     * The token key used for APNs Tokens.
+     * The key identifier that's assigned to your APNs signing key, if you want Amazon Pinpoint to communicate with the APNs sandbox environment by using APNs tokens.
      */
     TokenKeyId?: __string;
   }
   export interface APNSSandboxChannelResponse {
     /**
-     * The ID of the application to which the channel applies.
+     * The unique identifier for the application that the APNs sandbox channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * When was this segment created
+     * The date and time when the APNs sandbox channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * The default authentication method used for APNs.
+     * The default authentication method that Amazon Pinpoint uses to authenticate with the APNs sandbox environment for this channel, key or certificate.
      */
     DefaultAuthenticationMethod?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the APNs sandbox channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute.
+     * Specifies whether the APNs sandbox channel is configured to communicate with APNs by using APNs tokens. To provide an authentication key for APNs tokens, set the TokenKey property of the channel.
      */
     HasTokenKey?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the APNs sandbox channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the APNs sandbox channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who last updated this entry
+     * The user who last modified the APNs sandbox channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time when the APNs sandbox channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. Will be APNS_SANDBOX.
+     * The type of messaging or notification platform for the channel. For the APNs sandbox channel, this value is APNS_SANDBOX.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * Version of channel
+     * The current version of the APNs sandbox channel.
      */
     Version?: __integer;
   }
   export interface APNSVoipChannelRequest {
     /**
-     * The bundle id used for APNs Tokens.
+     * The bundle identifier that's assigned to your iOS app. This identifier is used for APNs tokens.
      */
     BundleId?: __string;
     /**
-     * The distribution certificate from Apple.
+     * The APNs client certificate that you received from Apple, if you want Amazon Pinpoint to communicate with APNs by using an APNs certificate.
      */
     Certificate?: __string;
     /**
-     * The default authentication method used for APNs.
+     * The default authentication method that you want Amazon Pinpoint to use when authenticating with APNs, key or certificate.
      */
     DefaultAuthenticationMethod?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether to enable the APNs VoIP channel for the application.
      */
     Enabled?: __boolean;
     /**
-     * The certificate private key.
+     * The private key for the APNs client certificate that you want Amazon Pinpoint to use to communicate with APNs.
      */
     PrivateKey?: __string;
     /**
-     * The team id used for APNs Tokens.
+     * The identifier that's assigned to your Apple developer account team. This identifier is used for APNs tokens.
      */
     TeamId?: __string;
     /**
-     * The token key used for APNs Tokens.
+     * The authentication key to use for APNs tokens.
      */
     TokenKey?: __string;
     /**
-     * The token key used for APNs Tokens.
+     * The key identifier that's assigned to your APNs signing key, if you want Amazon Pinpoint to communicate with APNs by using APNs tokens.
      */
     TokenKeyId?: __string;
   }
   export interface APNSVoipChannelResponse {
     /**
-     * Application id
+     * The unique identifier for the application that the APNs VoIP channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * When was this segment created
+     * The date and time when the APNs VoIP channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * The default authentication method used for APNs.
+     * The default authentication method that Amazon Pinpoint uses to authenticate with APNs for this channel, key or certificate.
      */
     DefaultAuthenticationMethod?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the APNs VoIP channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * If the channel is registered with a token key for authentication.
+     * Specifies whether the APNs VoIP channel is configured to communicate with APNs by using APNs tokens. To provide an authentication key for APNs tokens, set the TokenKey property of the channel.
      */
     HasTokenKey?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the APNs VoIP channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the APNs VoIP channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who made the last change
+     * The user who last modified the APNs VoIP channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time when the APNs VoIP channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. Will be APNS.
+     * The type of messaging or notification platform for the channel. For the APNs VoIP channel, this value is APNS_VOIP.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * Version of channel
+     * The current version of the APNs VoIP channel.
      */
     Version?: __integer;
   }
   export interface APNSVoipSandboxChannelRequest {
     /**
-     * The bundle id used for APNs Tokens.
+     * The bundle identifier that's assigned to your iOS app. This identifier is used for APNs tokens.
      */
     BundleId?: __string;
     /**
-     * The distribution certificate from Apple.
+     * The APNs client certificate that you received from Apple, if you want Amazon Pinpoint to communicate with the APNs sandbox environment by using an APNs certificate.
      */
     Certificate?: __string;
     /**
-     * The default authentication method used for APNs.
+     * The default authentication method that you want Amazon Pinpoint to use when authenticating with the APNs sandbox environment for this channel, key or certificate.
      */
     DefaultAuthenticationMethod?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the APNs VoIP sandbox channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * The certificate private key.
+     * The private key for the APNs client certificate that you want Amazon Pinpoint to use to communicate with the APNs sandbox environment.
      */
     PrivateKey?: __string;
     /**
-     * The team id used for APNs Tokens.
+     * The identifier that's assigned to your Apple developer account team. This identifier is used for APNs tokens.
      */
     TeamId?: __string;
     /**
-     * The token key used for APNs Tokens.
+     * The authentication key to use for APNs tokens.
      */
     TokenKey?: __string;
     /**
-     * The token key used for APNs Tokens.
+     * The key identifier that's assigned to your APNs signing key, if you want Amazon Pinpoint to communicate with the APNs sandbox environment by using APNs tokens.
      */
     TokenKeyId?: __string;
   }
   export interface APNSVoipSandboxChannelResponse {
     /**
-     * Application id
+     * The unique identifier for the application that the APNs VoIP sandbox channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * When was this segment created
+     * The date and time when the APNs VoIP sandbox channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * The default authentication method used for APNs.
+     * The default authentication method that Amazon Pinpoint uses to authenticate with the APNs sandbox environment for this channel, key or certificate.
      */
     DefaultAuthenticationMethod?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the APNs VoIP sandbox channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * If the channel is registered with a token key for authentication.
+     * Specifies whether the APNs VoIP sandbox channel is configured to communicate with APNs by using APNs tokens. To provide an authentication key for APNs tokens, set the TokenKey property of the channel.
      */
     HasTokenKey?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the APNs VoIP sandbox channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the APNs VoIP sandbox channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who made the last change
+     * The user who last modified the APNs VoIP sandbox channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time when the APNs VoIP sandbox channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. Will be APNS.
+     * The type of messaging or notification platform for the channel. For the APNs VoIP sandbox channel, this value is APNS_VOIP_SANDBOX.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * Version of channel
+     * The current version of the APNs VoIP sandbox channel.
      */
     Version?: __integer;
   }
   export type Action = "OPEN_APP"|"DEEP_LINK"|"URL"|string;
   export interface ActivitiesResponse {
     /**
-     * List of campaign activities
+     * An array of responses, one for each activity that was performed by the campaign.
      */
-    Item?: ListOfActivityResponse;
+    Item: ListOfActivityResponse;
     /**
-     * The string that you use in a subsequent request to get the next page of results in a paginated response.
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     NextToken?: __string;
   }
   export interface ActivityResponse {
     /**
-     * The ID of the application to which the campaign applies.
+     * The unique identifier for the application that the campaign applies to.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * The ID of the campaign to which the activity applies.
+     * The unique identifier for the campaign that the activity applies to.
      */
-    CampaignId?: __string;
+    CampaignId: __string;
     /**
-     * The actual time the activity was marked CANCELLED or COMPLETED. Provided in ISO 8601 format.
+     * The actual time, in ISO 8601 format, when the activity was marked CANCELLED or COMPLETED.
      */
     End?: __string;
     /**
-     * The unique activity ID.
+     * The unique identifier for the activity.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * Indicates whether the activity succeeded.
-
-Valid values: SUCCESS, FAIL
+     * Specifies whether the activity succeeded. Possible values are SUCCESS and FAIL.
      */
     Result?: __string;
     /**
-     * The scheduled start time for the activity in ISO 8601 format.
+     * The scheduled start time, in ISO 8601 format, for the activity.
      */
     ScheduledStart?: __string;
     /**
-     * The actual start time of the activity in ISO 8601 format.
+     * The actual start time, in ISO 8601 format, of the activity.
      */
     Start?: __string;
     /**
-     * The state of the activity.
-
-Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
+     * The state of the activity. Possible values are: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, and COMPLETED.
      */
     State?: __string;
     /**
-     * The total number of endpoints to which the campaign successfully delivered messages.
+     * The total number of endpoints that the campaign successfully delivered messages to.
      */
     SuccessfulEndpointCount?: __integer;
     /**
-     * The total number of timezones completed.
+     * The total number of time zones that were completed.
      */
     TimezonesCompletedCount?: __integer;
     /**
-     * The total number of unique timezones present in the segment.
+     * The total number of unique time zones that are in the segment for the campaign.
      */
     TimezonesTotalCount?: __integer;
     /**
-     * The total number of endpoints to which the campaign attempts to deliver messages.
+     * The total number of endpoints that the campaign attempted to deliver messages to.
      */
     TotalEndpointCount?: __integer;
     /**
-     * The ID of a variation of the campaign used for A/B testing.
+     * The unique identifier for the campaign treatment that the activity applies to. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
      */
     TreatmentId?: __string;
   }
   export interface AddressConfiguration {
     /**
-     * Body override. If specified will override default body.
+     * The message body to use instead of the default message body. This value overrides the default message body.
      */
     BodyOverride?: __string;
     /**
-     * The channel type.
-
-Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
+     * The channel to use when sending the message.
      */
     ChannelType?: ChannelType;
     /**
-     * A map of custom attributes to attributes to be attached to the message for this address. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+     * An object that maps custom attributes to attributes for the address and is attached to the message. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.
      */
     Context?: MapOf__string;
     /**
-     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
      */
     RawContent?: __string;
     /**
-     * A map of substitution values for the message to be merged with the DefaultMessage's substitutions. Substitutions on this map take precedence over the all other substitutions.
+     * An object that maps variable values for the message. Amazon Pinpoint merges these values with the variable values specified by properties of the DefaultMessage object. The substitutions in this map take precedence over all other substitutions.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * Title override. If specified will override default title if applicable.
+     * The message title to use instead of the default message title. This value overrides the default message title.
      */
     TitleOverride?: __string;
   }
   export interface ApplicationResponse {
     /**
-     * The arn for the application.
+     * The Amazon Resource Name (ARN) of the application.
      */
-    Arn?: __string;
+    Arn: __string;
     /**
-     * The unique application ID.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * The display name of the application.
+     * The display name of the application. This name is displayed as the Project name on the Amazon Pinpoint console.
      */
-    Name?: __string;
+    Name: __string;
     /**
-     * The Tags for the application.
+     * A string-to-string map of key-value pairs that identifies the tags that are associated with the application. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
   }
   export interface ApplicationSettingsResource {
     /**
-     * The unique ID for the application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * Default campaign hook.
+     * The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application.
      */
     CampaignHook?: CampaignHook;
     /**
-     * The date that the settings were last updated in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the application's settings were last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.
+     * The default sending limits for campaigns in the application.
      */
     Limits?: CampaignLimits;
     /**
-     * The default quiet time for the app. Campaigns in the app don't send messages to endpoints during the quiet time.
-
-Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your app. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
-
-When you set up an app to use quiet time, campaigns in that app don't send messages during the time range you specified, as long as all of the following are true:
-- The endpoint includes a valid Demographic.Timezone attribute.
-- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the app (or campaign, if applicable).
-- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the app (or campaign, if applicable).
-
-Individual campaigns within the app can have their own quiet time settings, which override the quiet time settings at the app level.
+     * The default quiet time for campaigns in the application. Quiet time is a specific time range when campaigns don't send messages to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign, even if quiet time is enabled.
      */
     QuietTime?: QuietTime;
   }
   export interface ApplicationsResponse {
     /**
-     * List of applications returned in this page.
+     * An array of responses, one for each application that was returned.
      */
     Item?: ListOfApplicationResponse;
     /**
-     * The string that you use in a subsequent request to get the next page of results in a paginated response.
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     NextToken?: __string;
   }
   export interface AttributeDimension {
     /**
-     * The type of dimension:
-
-INCLUSIVE - Endpoints that match the criteria are included in the segment.
-
-EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
+     * The type of segment dimension to use. Valid values are: INCLUSIVE, endpoints that match the criteria are included in the segment; and, EXCLUSIVE, endpoints that match the criteria are excluded from the segment.
      */
     AttributeType?: AttributeType;
     /**
-     * The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.
+     * The criteria values to use for the segment dimension. Depending on the value of the AttributeType property, endpoints are included or excluded from the segment if their attribute values match the criteria values.
      */
-    Values?: ListOf__string;
+    Values: ListOf__string;
   }
   export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|string;
   export interface AttributesResource {
     /**
-     * The unique ID for the application.
+     * The unique identifier for the application.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * The attribute type for the application.
+     * The type of attribute or attributes that were removed from the endpoints. Valid values are: endpoint-custom-attributes - Custom attributes that describe endpoints endpoint-custom-metrics - Custom metrics that your app reports to Amazon Pinpoint for endpoints endpoint-user-attributes - Custom attributes that describe users
      */
-    AttributeType?: __string;
+    AttributeType: __string;
     /**
-     * The attributes for the application.
+     * An array that specifies the names of the attributes that were removed from the endpoints.
      */
     Attributes?: ListOf__string;
   }
   export interface BaiduChannelRequest {
     /**
-     * Platform credential API key from Baidu.
+     * The API key that you received from the Baidu Cloud Push service to communicate with the service.
      */
-    ApiKey?: __string;
+    ApiKey: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether to enable the Baidu channel for the application.
      */
     Enabled?: __boolean;
     /**
-     * Platform credential Secret key from Baidu.
+     * The secret key that you received from the Baidu Cloud Push service to communicate with the service.
      */
-    SecretKey?: __string;
+    SecretKey: __string;
   }
   export interface BaiduChannelResponse {
     /**
-     * Application id
+     * The unique identifier for the application that the Baidu channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * When was this segment created
+     * The date and time when the Baidu channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * The Baidu API key from Baidu.
+     * The API key that you received from the Baidu Cloud Push service to communicate with the service.
      */
-    Credential?: __string;
+    Credential: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the Baidu channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the Baidu channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the Baidu channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who made the last change
+     * The user who last modified the Baidu channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time when the Baidu channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. Will be BAIDU
+     * The type of messaging or notification platform for the channel. For the Baidu channel, this value is BAIDU.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * Version of channel
+     * The current version of the Baidu channel.
      */
     Version?: __integer;
   }
   export interface BaiduMessage {
     /**
-     * The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL
+     * The action to occur if the recipient taps the push notification. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
      */
     Action?: Action;
     /**
-     * The message body of the notification.
+     * The body of the notification message.
      */
     Body?: __string;
     /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     * The JSON data payload to use for the push notification, if the notification is a silent push notification. This payload is added to the data.pinpoint.jsonBody object of the notification.
      */
     Data?: MapOf__string;
     /**
-     * The icon image name of the asset saved in your application.
+     * The icon image name of the asset saved in your app.
      */
     IconReference?: __string;
     /**
-     * The URL that points to an image used as the large icon to the notification content view.
+     * The URL of the large icon image to display in the content view of the push notification.
      */
     ImageIconUrl?: __string;
     /**
-     * The URL that points to an image used in the push notification.
+     * The URL of an image to display in the push notification.
      */
     ImageUrl?: __string;
     /**
-     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
      */
     RawContent?: __string;
     /**
-     * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+     * Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration or supporting phone home functionality.
      */
     SilentPush?: __boolean;
     /**
-     * The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
+     * The URL of the small icon image to display in the status bar and the content view of the push notification.
      */
     SmallImageIconUrl?: __string;
     /**
-     * Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/
+     * The sound to play when the recipient receives the push notification. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in /res/raw/.
      */
     Sound?: __string;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The default message variables to use in the notification message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * This parameter specifies how long (in seconds) the message should be kept in Baidu storage if the device is offline. The and the default value and the maximum time to live supported is 7 days (604800 seconds)
+     * The amount of time, in seconds, that the Baidu Cloud Push service should store the message if the recipient's device is offline. The default value and maximum supported time is 604,800 seconds (7 days).
      */
     TimeToLive?: __integer;
     /**
-     * The message title that displays above the message on the user's device.
+     * The title to display above the notification message on the recipient's device.
      */
     Title?: __string;
     /**
-     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     * The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
      */
     Url?: __string;
   }
   export interface CampaignEmailMessage {
     /**
-     * The email text body.
+     * The body of the email for recipients whose email clients don't support HTML content.
      */
     Body?: __string;
     /**
-     * The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel.
+     * The verified email address to send the email from. The default address is the FromAddress specified for the email channel for the application.
      */
     FromAddress?: __string;
     /**
-     * The email html body.
+     * The body of the email, in HTML format, for recipients whose email clients support HTML content.
      */
     HtmlBody?: __string;
     /**
-     * The email title (Or subject).
+     * The subject line, or title, of the email.
      */
-    Title?: __string;
+    Title: __string;
   }
   export interface CampaignEventFilter {
     /**
-     * An object that defines the dimensions for the event filter.
+     * The dimension settings of the event filter for the campaign.
      */
-    Dimensions?: EventDimensions;
+    Dimensions: EventDimensions;
     /**
-     * The type of event that causes the campaign to be sent. Possible values:
-
-SYSTEM - Send the campaign when a system event occurs. See the System resource for more information.
-
-ENDPOINT - Send the campaign when an endpoint event occurs. See the Event resource for more information.
+     * The type of event that causes the campaign to be sent. Valid values are: SYSTEM, sends the campaign when a system event occurs; and, ENDPOINT, sends the campaign when an endpoint event (Events resource) occurs.
      */
-    FilterType?: FilterType;
+    FilterType: FilterType;
   }
   export interface CampaignHook {
     /**
-     * Lambda function name or arn to be called for delivery
+     * The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to send messages for a campaign.
      */
     LambdaFunctionName?: __string;
     /**
-     * What mode Lambda should be invoked in.
+     * Specifies which Lambda mode to use when invoking the AWS Lambda function.
      */
     Mode?: Mode;
     /**
-     * Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request
+     *  The web URL that Amazon Pinpoint calls to invoke the AWS Lambda function over HTTPS.
      */
     WebUrl?: __string;
   }
   export interface CampaignLimits {
     /**
-     * The maximum number of messages that each campaign can send to a single endpoint in a 24-hour period.
+     * The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. The maximum value is 100.
      */
     Daily?: __integer;
     /**
-     * The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
+     * The maximum amount of time, in seconds, that a campaign can attempt to deliver a message after the scheduled start time for the campaign. The minimum value is 60 seconds.
      */
     MaximumDuration?: __integer;
     /**
-     * The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.
+     * The maximum number of messages that a campaign can send each second. The minimum value is 50. The maximum value is 20,000.
      */
     MessagesPerSecond?: __integer;
     /**
-     * The maximum number of messages that an individual campaign can send to a single endpoint over the course of the campaign.
+     * The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. The maximum value is 100.
      */
     Total?: __integer;
   }
   export interface CampaignResponse {
     /**
-     * Treatments that are defined in addition to the default treatment.
+     * An array of responses, one for each treatment that you defined for the campaign, in addition to the default treatment.
      */
     AdditionalTreatments?: ListOfTreatmentResource;
     /**
-     * The ID of the application to which the campaign applies.
+     * The unique identifier for the application that the campaign applies to.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * The arn for the campaign.
+     * The Amazon Resource Name (ARN) of the campaign.
      */
-    Arn?: __string;
+    Arn: __string;
     /**
-     * The date the campaign was created in ISO 8601 format.
+     * The date, ISO 8601 format, when the campaign was created.
      */
-    CreationDate?: __string;
+    CreationDate: __string;
     /**
-     * The status of the campaign's default treatment. Only present for A/B test campaigns.
+     * The current status of the campaign's default treatment. This value exists only for campaigns that have more than one treatment, to support A/B testing.
      */
     DefaultState?: CampaignState;
     /**
-     * A description of the campaign.
+     * The custom description of the campaign.
      */
     Description?: __string;
     /**
-     * The allocated percentage of end users who will not receive messages from this campaign.
+     * The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
      */
     HoldoutPercent?: __integer;
     /**
-     * Campaign hook information.
+     * The settings for the AWS Lambda function to use as a code hook for the campaign.
      */
     Hook?: CampaignHook;
     /**
-     * The unique campaign ID.
+     * The unique identifier for the campaign.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
+     * Specifies whether the campaign is paused. A paused campaign doesn't run unless you resume it by changing this value to false.
      */
     IsPaused?: __boolean;
     /**
-     * The date the campaign was last updated in ISO 8601 format.	
+     * The date, in ISO 8601 format, when the campaign was last modified.
      */
-    LastModifiedDate?: __string;
+    LastModifiedDate: __string;
     /**
-     * The campaign limits settings.
+     * The messaging limits for the campaign.
      */
     Limits?: CampaignLimits;
     /**
-     * The message configuration settings.
+     * The message configuration settings for the campaign.
      */
     MessageConfiguration?: MessageConfiguration;
     /**
-     * The custom name of the campaign.
+     * The name of the campaign.
      */
     Name?: __string;
     /**
-     * The campaign schedule.
+     * The schedule settings for the campaign.
      */
     Schedule?: Schedule;
     /**
-     * The ID of the segment to which the campaign sends messages.
+     * The unique identifier for the segment that's associated with the campaign.
      */
-    SegmentId?: __string;
+    SegmentId: __string;
     /**
-     * The version of the segment to which the campaign sends messages.
+     * The version number of the segment that's associated with the campaign.
      */
-    SegmentVersion?: __integer;
+    SegmentVersion: __integer;
     /**
-     * The campaign status.
-
-An A/B test campaign will have a status of COMPLETED only when all treatments have a status of COMPLETED.
+     * The current status of the campaign.
      */
     State?: CampaignState;
     /**
-     * The Tags for the campaign.
+     * A string-to-string map of key-value pairs that identifies the tags that are associated with the campaign. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
-     * A custom description for the treatment.
+     * The custom description of a variation of the campaign that's used for A/B testing.
      */
     TreatmentDescription?: __string;
     /**
-     * The custom name of a variation of the campaign used for A/B testing.
+     * The custom name of a variation of the campaign that's used for A/B testing.
      */
     TreatmentName?: __string;
     /**
-     * The campaign version number.
+     * The version number of the campaign.
      */
     Version?: __integer;
   }
   export interface CampaignSmsMessage {
     /**
-     * The SMS text body.
+     * The body of the SMS message.
      */
     Body?: __string;
     /**
-     * Is this is a transactional SMS message, otherwise a promotional message.
+     * The type of SMS message. Valid values are: TRANSACTIONAL, the message is critical or time-sensitive, such as a one-time password that supports a customer transaction; and, PROMOTIONAL, the message isn't critical or time-sensitive, such as a marketing message.
      */
     MessageType?: MessageType;
     /**
-     * Sender ID of sent message.
+     * The sender ID to display on recipients' devices when they receive the SMS message.
      */
     SenderId?: __string;
   }
   export interface CampaignState {
     /**
-     * The status of the campaign, or the status of a treatment that belongs to an A/B test campaign.
-
-Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
+     * The status of the campaign, or the status of a treatment that belongs to an A/B test campaign. If a campaign uses A/B testing, the campaign has a status of COMPLETED only when all campaign treatments have a status of COMPLETED.
      */
     CampaignStatus?: CampaignStatus;
   }
   export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|"DELETED"|string;
   export interface CampaignsResponse {
     /**
-     * A list of campaigns.
+     * An array of responses, one for each campaign that's associated with the application.
      */
-    Item?: ListOfCampaignResponse;
+    Item: ListOfCampaignResponse;
     /**
-     * The string that you use in a subsequent request to get the next page of results in a paginated response.
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     NextToken?: __string;
   }
   export interface ChannelResponse {
     /**
-     * Application id
+     * The unique identifier for the application.
      */
     ApplicationId?: __string;
     /**
-     * When was this segment created
+     * The date and time, in ISO 8601 format, when the channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who made the last change
+     * The user who last modified the channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time, in ISO 8601 format, when the channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * Version of channel
+     * The current version of the channel.
      */
     Version?: __integer;
   }
   export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
   export interface ChannelsResponse {
     /**
-     * A map of channels, with the ChannelType as the key and the Channel as the value.
+     * A map that contains a multipart response for each channel. For each item in this object, the ChannelType is the key and the Channel is the value.
      */
-    Channels?: MapOfChannelResponse;
+    Channels: MapOfChannelResponse;
   }
   export interface CreateAppRequest {
     CreateApplicationRequest: CreateApplicationRequest;
@@ -1712,17 +1675,17 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface CreateApplicationRequest {
     /**
-     * The display name of the application. Used in the Amazon Pinpoint console.
+     * The display name of the application. This name is displayed as the Project name on the Amazon Pinpoint console.
      */
-    Name?: __string;
+    Name: __string;
     /**
-     * The Tags for the app.
+     * A string-to-string map of key-value pairs that defines the tags to associate with the application. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
   }
   export interface CreateCampaignRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     WriteCampaignRequest: WriteCampaignRequest;
@@ -1732,7 +1695,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface CreateExportJobRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     ExportJobRequest: ExportJobRequest;
@@ -1742,7 +1705,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface CreateImportJobRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     ImportJobRequest: ImportJobRequest;
@@ -1752,7 +1715,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface CreateSegmentRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     WriteSegmentRequest: WriteSegmentRequest;
@@ -1762,47 +1725,47 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DefaultMessage {
     /**
-     * The message body of the notification, the email body or the text message.
+     * The default message body of the push notification, email, or SMS message.
      */
     Body?: __string;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The default message variables to use in the push notification, email, or SMS message. You can override these default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
   }
   export interface DefaultPushNotificationMessage {
     /**
-     * The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL
+     * The default action to occur if a recipient taps the push notification. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of the iOS and Android platforms. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
      */
     Action?: Action;
     /**
-     * The message body of the notification.
+     * The default body of the notification message.
      */
     Body?: __string;
     /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     * The JSON data payload to use for the default push notification, if the notification is a silent push notification. This payload is added to the data.pinpoint.jsonBody object of the notification.
      */
     Data?: MapOf__string;
     /**
-     * Indicates if the message should display on the recipient's device. You can use silent pushes for remote configuration or to deliver messages to in-app notification centers.
+     * Specifies whether the default notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration or delivering messages to an in-app notification center.
      */
     SilentPush?: __boolean;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The default message variables to use in the notification message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * The message title that displays above the message on the user's device.
+     * The default title to display above the notification message on a recipient's device.
      */
     Title?: __string;
     /**
-     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     * The default URL to open in a recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
      */
     Url?: __string;
   }
   export interface DeleteAdmChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1811,7 +1774,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteApnsChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1820,7 +1783,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteApnsSandboxChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1829,7 +1792,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteApnsVoipChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1838,7 +1801,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteApnsVoipSandboxChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1847,7 +1810,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteAppRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1856,7 +1819,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteBaiduChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1865,11 +1828,11 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteCampaignRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the campaign.
+     * The unique identifier for the campaign.
      */
     CampaignId: __string;
   }
@@ -1878,7 +1841,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteEmailChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1887,11 +1850,11 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteEndpointRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the endpoint.
+     * The unique identifier for the endpoint.
      */
     EndpointId: __string;
   }
@@ -1900,7 +1863,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteEventStreamRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1909,7 +1872,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteGcmChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1918,11 +1881,11 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteSegmentRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the segment.
+     * The unique identifier for the segment.
      */
     SegmentId: __string;
   }
@@ -1931,7 +1894,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteSmsChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1940,11 +1903,11 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteUserEndpointsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the user.
+     * The unique identifier for the user.
      */
     UserId: __string;
   }
@@ -1953,7 +1916,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteVoiceChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -1964,19 +1927,19 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   export type DimensionType = "INCLUSIVE"|"EXCLUSIVE"|string;
   export interface DirectMessageConfiguration {
     /**
-     * The message to ADM channels. Overrides the default push notification message.
+     * The default push notification message for the ADM (Amazon Device Messaging) channel. This message overrides the default push notification message (DefaultPushNotificationMessage).
      */
     ADMMessage?: ADMMessage;
     /**
-     * The message to APNS channels. Overrides the default push notification message.
+     * The default push notification message for the APNs (Apple Push Notification service) channel. This message overrides the default push notification message (DefaultPushNotificationMessage).
      */
     APNSMessage?: APNSMessage;
     /**
-     * The message to Baidu GCM channels. Overrides the default push notification message.
+     * The default push notification message for the Baidu (Baidu Cloud Push) channel. This message overrides the default push notification message (DefaultPushNotificationMessage).
      */
     BaiduMessage?: BaiduMessage;
     /**
-     * The default message for all channels.
+     * The default message body for all channels.
      */
     DefaultMessage?: DefaultMessage;
     /**
@@ -1984,104 +1947,104 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     DefaultPushNotificationMessage?: DefaultPushNotificationMessage;
     /**
-     * The message to Email channels. Overrides the default message.
+     * The default message for the email channel. This message overrides the default message (DefaultMessage).
      */
     EmailMessage?: EmailMessage;
     /**
-     * The message to GCM channels. Overrides the default push notification message.
+     * The default push notification message for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message overrides the default push notification message (DefaultPushNotificationMessage).
      */
     GCMMessage?: GCMMessage;
     /**
-     * The message to SMS channels. Overrides the default message.
+     * The default message for the SMS channel. This message overrides the default message (DefaultMessage).
      */
     SMSMessage?: SMSMessage;
     /**
-     * The message to Voice channels. Overrides the default message.
+     * The default message for the voice channel. This message overrides the default message (DefaultMessage).
      */
     VoiceMessage?: VoiceMessage;
   }
   export type Duration = "HR_24"|"DAY_7"|"DAY_14"|"DAY_30"|string;
   export interface EmailChannelRequest {
     /**
-     * The configuration set that you want to use when you send email using the Pinpoint Email API.
+     * The configuration set that you want to apply to email that you send through the channel by using the Amazon Pinpoint Email API.
      */
     ConfigurationSet?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether to enable the email channel for the application.
      */
     Enabled?: __boolean;
     /**
-     * The email address used to send emails from.
+     *  The verified email address that you want to send email from when you send email through the channel.
      */
-    FromAddress?: __string;
+    FromAddress: __string;
     /**
-     * The ARN of an identity verified with SES.
+     *  The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple Email Service (Amazon SES), that you want to use when you send email through the channel.
      */
-    Identity?: __string;
+    Identity: __string;
     /**
-     * The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
+     *  The ARN of the AWS Identity and Access Management (IAM) role that you want Amazon Pinpoint to use when it submits email-related event data for the channel.
      */
     RoleArn?: __string;
   }
   export interface EmailChannelResponse {
     /**
-     * The unique ID of the application to which the email channel belongs.
+     * The unique identifier for the application that the email channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * The configuration set that you want to use when you send email using the Pinpoint Email API.
+     * The configuration set that's applied to email that's sent through the channel by using the Amazon Pinpoint Email API.
      */
     ConfigurationSet?: __string;
     /**
-     * The date that the settings were last updated in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the email channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the email channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * The email address used to send emails from.
+     * The verified email address that you send email from when you send email through the channel.
      */
     FromAddress?: __string;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the email channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * The ARN of an identity verified with SES.
+     *  The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple Email Service (Amazon SES), that you use when you send email through the channel.
      */
     Identity?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the email channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who last updated this entry
+     * The user who last modified the email channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time, in ISO 8601 format, when the email channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * Messages per second that can be sent
+     * The maximum number of emails that you can send through the channel each second.
      */
     MessagesPerSecond?: __integer;
     /**
-     * Platform type. Will be "EMAIL"
+     * The type of messaging or notification platform for the channel. For the email channel, this value is EMAIL.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
+     *  The ARN of the AWS Identity and Access Management (IAM) role that Amazon Pinpoint uses to submit email-related event data for the channel.
      */
     RoleArn?: __string;
     /**
-     * Version of channel
+     * The current version of the email channel.
      */
     Version?: __integer;
   }
@@ -2091,102 +2054,93 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     Body?: __string;
     /**
-     * The email address that bounces and complaints will be forwarded to when feedback forwarding is enabled.
+     * The email address to forward bounces and complaints to, if feedback forwarding is enabled.
      */
     FeedbackForwardingAddress?: __string;
     /**
-     * The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel.
+     * The verified email address to send the email message from. The default value is the FromAddress specified for the email channel.
      */
     FromAddress?: __string;
     /**
-     * An email represented as a raw MIME message.
+     * The email message, represented as a raw MIME message.
      */
     RawEmail?: RawEmail;
     /**
-     * The reply-to email address(es) for the email. If the recipient replies to the email, each reply-to address will receive the reply.
+     * The reply-to email address(es) for the email message. If a recipient replies to the email, each reply-to address receives the reply.
      */
     ReplyToAddresses?: ListOf__string;
     /**
-     * An email composed of a subject, a text part and a html part.
+     * The email message, composed of a subject, a text part, and an HTML part.
      */
     SimpleEmail?: SimpleEmail;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The default message variables to use in the email message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
   }
   export interface EndpointBatchItem {
     /**
-     * The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +12065550100. For the email channel, use an email address.
+     * The destination address for messages or push notifications that you send to the endpoint. The address varies by channel. For a push-notification channel, use the token provided by the push notification service, such as an Apple Push Notification service (APNs) device token or a Firebase Cloud Messaging (FCM) registration token. For the SMS channel, use a phone number in E.164 format, such as +12065550100. For the email channel, use an email address.
      */
     Address?: __string;
     /**
-     * Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
-
-The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
+     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["science", "music", "travel"]. You can use these attributes as filter criteria when you create segments. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This limitation doesn't apply to attribute values.
      */
     Attributes?: MapOfListOf__string;
     /**
-     * The channel type.
-
-Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
+     * The channel to use when sending messages or push notifications to the endpoint.
      */
     ChannelType?: ChannelType;
     /**
-     * The endpoint demographic attributes.
+     * The demographic information for the endpoint, such as the time zone and platform.
      */
     Demographic?: EndpointDemographic;
     /**
-     * The last time the endpoint was updated. Provided in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the endpoint was created or updated.
      */
     EffectiveDate?: __string;
     /**
-     * Unused.
+     * Not used.
      */
     EndpointStatus?: __string;
     /**
-     * The unique Id for the Endpoint in the batch.
+     * The unique identifier for the endpoint in the context of the batch.
      */
     Id?: __string;
     /**
-     * The endpoint location attributes.
+     * The geographic information for the endpoint.
      */
     Location?: EndpointLocation;
     /**
-     * Custom metrics that your app reports to Amazon Pinpoint.
+     * One or more custom metrics that your app reports to Amazon Pinpoint for the endpoint.
      */
     Metrics?: MapOf__double;
     /**
-     * Indicates whether a user has opted out of receiving messages with one of the following values:
-
-ALL - User has opted out of all messages.
-
-NONE - Users has not opted out and receives all messages.
+     * Specifies whether the user who's associated with the endpoint has opted out of receiving messages and push notifications from you. Possible values are: ALL, the user has opted out and doesn't want to receive any messages or push notifications; and, NONE, the user hasn't opted out and wants to receive all messages and push notifications.
      */
     OptOut?: __string;
     /**
-     * The unique ID for the most recent request to update the endpoint.
+     * The unique identifier for the request to create or update the endpoint.
      */
     RequestId?: __string;
     /**
-     * Custom user-specific attributes that your app reports to Amazon Pinpoint.
+     * One or more custom user attributes that your app reports to Amazon Pinpoint for the user who's associated with the endpoint.
      */
     User?: EndpointUser;
   }
   export interface EndpointBatchRequest {
     /**
-     * List of items to update. Maximum 100 items
+     * An array that defines the endpoints to create or update and, for each endpoint, the property values to set or change. An array can contain a maximum of 100 items.
      */
-    Item?: ListOfEndpointBatchItem;
+    Item: ListOfEndpointBatchItem;
   }
   export interface EndpointDemographic {
     /**
-     * The version of the application associated with the endpoint.
+     * The version of the app that's associated with the endpoint.
      */
     AppVersion?: __string;
     /**
-     * The endpoint locale in the following format: The ISO 639-1 alpha-2 code, followed by an underscore, followed by an ISO 3166-1 alpha-2 value.
-
+     * The locale of the endpoint, in the following format: the ISO 639-1 alpha-2 code, followed by an underscore (_), followed by an ISO 3166-1 alpha-2 value.
      */
     Locale?: __string;
     /**
@@ -2210,263 +2164,221 @@ NONE - Users has not opted out and receives all messages.
      */
     PlatformVersion?: __string;
     /**
-     * The timezone of the endpoint. Specified as a tz database value, such as Americas/Los_Angeles.
+     * The time zone of the endpoint, specified as a tz database name value, such as America/Los_Angeles.
      */
     Timezone?: __string;
   }
   export interface EndpointItemResponse {
     /**
-     * A custom message associated with the registration of an endpoint when issuing a response.
+     * The custom message that's returned in the response as a result of processing the endpoint data.
      */
     Message?: __string;
     /**
-     * The status code associated with the merging of an endpoint when issuing a response.
+     * The status code that's returned in the response as a result of processing the endpoint data.
      */
     StatusCode?: __integer;
   }
   export interface EndpointLocation {
     /**
-     * The city where the endpoint is located.
+     * The name of the city where the endpoint is located.
      */
     City?: __string;
     /**
-     * The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 alpha-2 code, such as "US" for the United States.
+     * The two-character code, in ISO 3166-1 alpha-2 format, for the country or region where the endpoint is located. For example, US for the United States.
      */
     Country?: __string;
     /**
-     * The latitude of the endpoint location, rounded to one decimal place.
+     * The latitude coordinate of the endpoint location, rounded to one decimal place.
      */
     Latitude?: __double;
     /**
-     * The longitude of the endpoint location, rounded to one decimal place.
+     * The longitude coordinate of the endpoint location, rounded to one decimal place.
      */
     Longitude?: __double;
     /**
-     * The postal code or zip code of the endpoint.
+     * The postal or ZIP code for the area where the endpoint is located.
      */
     PostalCode?: __string;
     /**
-     * The region of the endpoint location. For example, in the United States, this corresponds to a state.
+     * The name of the region where the endpoint is located. For locations in the United States, this value is the name of a state.
      */
     Region?: __string;
   }
   export interface EndpointMessageResult {
     /**
-     * Address that endpoint message was delivered to.
+     * The endpoint address that the message was delivered to.
      */
     Address?: __string;
     /**
-     * The delivery status of the message. Possible values:
-
-SUCCESS - The message was successfully delivered to the endpoint.
-
-TRANSIENT_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later.
-
-FAILURE_PERMANENT - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.
-
-TIMEOUT - The message couldn't be sent within the timeout period.
-
-QUIET_TIME - The local time for the endpoint was within the QuietTime for the campaign or app.
-
-DAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.
-
-HOLDOUT - The endpoint was in a hold out treatment for the campaign.
-
-THROTTLED - Amazon Pinpoint throttled sending to this endpoint.
-
-EXPIRED - The endpoint address is expired.
-
-CAMPAIGN_CAP - The endpoint received the maximum number of messages allowed by the campaign.
-
-SERVICE_FAILURE - A service-level failure prevented Amazon Pinpoint from delivering the message.
-
-UNKNOWN - An unknown error occurred.
+     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again. OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.    SUCCESSFUL - The message was successfully delivered to the endpoint. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint. TIMEOUT - The message couldn't be sent within the timeout period. UNKNOWN_FAILURE - An unknown error occurred.
      */
-    DeliveryStatus?: DeliveryStatus;
+    DeliveryStatus: DeliveryStatus;
     /**
-     * Unique message identifier associated with the message that was sent.
+     * The unique identifier for the message that was sent.
      */
     MessageId?: __string;
     /**
-     * Downstream service status code.
+     * The downstream service status code for delivering the message.
      */
-    StatusCode?: __integer;
+    StatusCode: __integer;
     /**
-     * Status message for message delivery.
+     * The status message for delivering the message.
      */
     StatusMessage?: __string;
     /**
-     * If token was updated as part of delivery. (This is GCM Specific)
+     * For push notifications that are sent through the GCM channel, specifies whether the token was updated as part of delivering the message.
      */
     UpdatedToken?: __string;
   }
   export interface EndpointRequest {
     /**
-     * The destination for messages that you send to this endpoint. The address varies by channel. For mobile push channels, use the token provided by the push notification service, such as the APNs device token or the FCM registration token. For the SMS channel, use a phone number in E.164 format, such as +12065550100. For the email channel, use an email address.
+     * The destination address for messages or push notifications that you send to the endpoint. The address varies by channel. For a push-notification channel, use the token provided by the push notification service, such as an Apple Push Notification service (APNs) device token or a Firebase Cloud Messaging (FCM) registration token. For the SMS channel, use a phone number in E.164 format, such as +12065550100. For the email channel, use an email address.
      */
     Address?: __string;
     /**
-     * Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
-
-The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
+     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["science", "music", "travel"]. You can use these attributes as filter criteria when you create segments. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This limitation doesn't apply to attribute values.
      */
     Attributes?: MapOfListOf__string;
     /**
-     * The channel type.
-
-Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
+     * The channel to use when sending messages or push notifications to the endpoint.
      */
     ChannelType?: ChannelType;
     /**
-     * Demographic attributes for the endpoint.
+     * The demographic information for the endpoint, such as the time zone and platform.
      */
     Demographic?: EndpointDemographic;
     /**
-     * The date and time when the endpoint was updated, shown in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the endpoint is updated.
      */
     EffectiveDate?: __string;
     /**
-     * Unused.
+     * Not used.
      */
     EndpointStatus?: __string;
     /**
-     * The endpoint location attributes.
+     * The geographic information for the endpoint.
      */
     Location?: EndpointLocation;
     /**
-     * Custom metrics that your app reports to Amazon Pinpoint.
+     * One or more custom metrics that your app reports to Amazon Pinpoint for the endpoint.
      */
     Metrics?: MapOf__double;
     /**
-     * Indicates whether a user has opted out of receiving messages with one of the following values:
-
-ALL - User has opted out of all messages.
-
-NONE - Users has not opted out and receives all messages.
+     * Specifies whether the user who's associated with the endpoint has opted out of receiving messages and push notifications from you. Possible values are: ALL, the user has opted out and doesn't want to receive any messages or push notifications; and, NONE, the user hasn't opted out and wants to receive all messages and push notifications.
      */
     OptOut?: __string;
     /**
-     * The unique ID for the most recent request to update the endpoint.
+     * The unique identifier for the most recent request to update the endpoint.
      */
     RequestId?: __string;
     /**
-     * Custom user-specific attributes that your app reports to Amazon Pinpoint.
+     * One or more custom user attributes that describe the user who's associated with the endpoint.
      */
     User?: EndpointUser;
   }
   export interface EndpointResponse {
     /**
-     * The address of the endpoint as provided by your push provider. For example, the DeviceToken or RegistrationId.
+     * The destination address for messages or push notifications that you send to the endpoint. The address varies by channel. For example, the address for a push-notification channel is typically the token provided by a push notification service, such as an Apple Push Notification service (APNs) device token or a Firebase Cloud Messaging (FCM) registration token. The address for the SMS channel is a phone number in E.164 format, such as +12065550100. The address for the email channel is an email address.
      */
     Address?: __string;
     /**
-     * The ID of the application that is associated with the endpoint.
+     * The unique identifier for the application that's associated with the endpoint.
      */
     ApplicationId?: __string;
     /**
-     * Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
-
-The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
+     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["science", "music", "travel"]. You can use these attributes as filter criteria when you create segments.
      */
     Attributes?: MapOfListOf__string;
     /**
-     * The channel type.
-
-Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
+     * The channel that's used when sending messages or push notifications to the endpoint.
      */
     ChannelType?: ChannelType;
     /**
-     * A number from 0-99 that represents the cohort the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an app. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for a campaign.
+     * A number from 0-99 that represents the cohort that the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an application. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for campaigns.
      */
     CohortId?: __string;
     /**
-     * The date and time when the endpoint was created, shown in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the endpoint was created.
      */
     CreationDate?: __string;
     /**
-     * The endpoint demographic attributes.
+     * The demographic information for the endpoint, such as the time zone and platform.
      */
     Demographic?: EndpointDemographic;
     /**
-     * The date and time when the endpoint was last updated, shown in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the endpoint was last updated.
      */
     EffectiveDate?: __string;
     /**
-     * Unused.
+     * Not used.
      */
     EndpointStatus?: __string;
     /**
-     * The unique ID that you assigned to the endpoint. The ID should be a globally unique identifier (GUID) to ensure that it doesn't conflict with other endpoint IDs associated with the application.
+     * The unique identifier that you assigned to the endpoint. The identifier should be a globally unique identifier (GUID) to ensure that it doesn't conflict with other endpoint identifiers that are associated with the application.
      */
     Id?: __string;
     /**
-     * The endpoint location attributes.
+     * The geographic information for the endpoint.
      */
     Location?: EndpointLocation;
     /**
-     * Custom metrics that your app reports to Amazon Pinpoint.
+     * One or more custom metrics that your app reports to Amazon Pinpoint for the endpoint.
      */
     Metrics?: MapOf__double;
     /**
-     * Indicates whether a user has opted out of receiving messages with one of the following values:
-
-ALL - User has opted out of all messages.
-
-NONE - Users has not opted out and receives all messages.
+     * Specifies whether the user who's associated with the endpoint has opted out of receiving messages and push notifications from you. Possible values are: ALL, the user has opted out and doesn't want to receive any messages or push notifications; and, NONE, the user hasn't opted out and wants to receive all messages and push notifications.
      */
     OptOut?: __string;
     /**
-     * The unique ID for the most recent request to update the endpoint.
+     * The unique identifier for the most recent request to update the endpoint.
      */
     RequestId?: __string;
     /**
-     * Custom user-specific attributes that your app reports to Amazon Pinpoint.
+     * One or more custom user attributes that your app reports to Amazon Pinpoint for the user who's associated with the endpoint.
      */
     User?: EndpointUser;
   }
   export interface EndpointSendConfiguration {
     /**
-     * Body override. If specified will override default body.
+     * The body of the message. If specified, this value overrides the default message body.
      */
     BodyOverride?: __string;
     /**
-     * A map of custom attributes to attributes to be attached to the message for this address. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+     * A map of custom attributes to attach to the message for the address. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.
      */
     Context?: MapOf__string;
     /**
-     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides the message.
      */
     RawContent?: __string;
     /**
-     * A map of substitution values for the message to be merged with the DefaultMessage's substitutions. Substitutions on this map take precedence over the all other substitutions.
+     * A map of the message variables to merge with the variables specified for the default message (DefaultMessage.Substitutions). The variables specified in this map take precedence over all other variables.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * Title override. If specified will override default title if applicable.
+     * The title or subject line of the message. If specified, this value overrides the default message title or subject line.
      */
     TitleOverride?: __string;
   }
   export interface EndpointUser {
     /**
-     * Custom attributes that describe the user by associating a name with an array of values. For example, an attribute named "interests" might have the following values: ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create segments.
-
-The Amazon Pinpoint console can't display attribute names that include the following characters: hash/pound sign (#), colon (:), question mark (?), backslash (\), and forward slash (/). For this reason, you should avoid using these characters in the names of custom attributes.
+     * One or more custom attributes that describe the user by associating a name with an array of values. For example, the value of an attribute named Interests might be: ["science", "music", "travel"]. You can use these attributes as filter criteria when you create segments. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This limitation doesn't apply to attribute values.
      */
     UserAttributes?: MapOfListOf__string;
     /**
-     * The unique ID of the user.
+     * The unique identifier for the user.
      */
     UserId?: __string;
   }
   export interface EndpointsResponse {
     /**
-     * The list of endpoints.
+     * An array of responses, one for each endpoint that's associated with the user ID.
      */
-    Item?: ListOfEndpointResponse;
+    Item: ListOfEndpointResponse;
   }
   export interface Event {
     /**
-     * The package name associated with the app that's recording the event.
+     * The package name of the app that's recording the event.
      */
     AppPackageName?: __string;
     /**
@@ -2478,7 +2390,7 @@ The Amazon Pinpoint console can't display attribute names that include the follo
      */
     AppVersionCode?: __string;
     /**
-     * Custom attributes that are associated with the event you're adding or updating.
+     * One or more custom attributes that are associated with the event.
      */
     Attributes?: MapOf__string;
     /**
@@ -2486,11 +2398,11 @@ The Amazon Pinpoint console can't display attribute names that include the follo
      */
     ClientSdkVersion?: __string;
     /**
-     * The name of the custom event that you're recording.
+     * The name of the event.
      */
-    EventType?: __string;
+    EventType: __string;
     /**
-     * Custom metrics related to the event.
+     * One or more custom metrics that are associated with the event.
      */
     Metrics?: MapOf__double;
     /**
@@ -2502,53 +2414,51 @@ The Amazon Pinpoint console can't display attribute names that include the follo
      */
     Session?: Session;
     /**
-     * The date and time when the event occurred, in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the event occurred.
      */
-    Timestamp?: __string;
+    Timestamp: __string;
   }
   export interface EventDimensions {
     /**
-     * Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create an event filter.
+     * One or more custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create an event filter.
      */
     Attributes?: MapOfAttributeDimension;
     /**
-     * The name of the event that causes the campaign to be sent. This can be a standard event type that Amazon Pinpoint generates, such as _session.start, or a custom event that's specific to your app.
+     * The name of the event that causes the campaign to be sent. This can be a standard type of event that Amazon Pinpoint generates, such as _session.start, or a custom event that's specific to your app.
      */
     EventType?: SetDimension;
     /**
-     * Custom metrics that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create an event filter.
+     * One or more custom metrics that your app reports to Amazon Pinpoint. You can use these metrics as selection criteria when you create an event filter.
      */
     Metrics?: MapOfMetricDimension;
   }
   export interface EventItemResponse {
     /**
-     * A custom message that is associated with the processing of an event.
+     * A custom message that's returned in the response as a result of processing the event.
      */
     Message?: __string;
     /**
-     * The status returned in the response as a result of processing the event.
-
-Possible values: 400 (for invalid events) and 202 (for events that were accepted).
+     * The status code that's returned in the response as a result of processing the event. Possible values are: 202, for events that were accepted; and, 400, for events that weren't valid.
      */
     StatusCode?: __integer;
   }
   export interface EventStream {
     /**
-     * The ID of the application from which events should be published.
+     * The unique identifier for the application to publish event data for.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
- Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
- Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+     * The Amazon Resource Name (ARN) of the Amazon Kinesis data stream or Amazon Kinesis Data Firehose delivery stream to publish event data to. For a Kinesis data stream, the ARN format is: arn:aws:kinesis:region:account-id:stream/stream_name
+                For a Kinesis Data Firehose delivery stream, the ARN format is: arn:aws:firehose:region:account-id:deliverystream/stream_name
+               
      */
-    DestinationStreamArn?: __string;
+    DestinationStreamArn: __string;
     /**
-     * (Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
+     * (Deprecated) Your AWS account ID, which you assigned to an external ID key in an IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM role when publishing event data, but we removed this requirement. We don't recommend use of external IDs for IAM roles that are assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
-     * The date the event stream was last updated in ISO 8601 format.
+     * The date, in ISO 8601 format, when the event stream was last modified.
      */
     LastModifiedDate?: __string;
     /**
@@ -2556,142 +2466,129 @@ Possible values: 400 (for invalid events) and 202 (for events that were accepted
      */
     LastUpdatedBy?: __string;
     /**
-     * The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
+     * The AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to publish event data to the stream in your AWS account.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
   }
   export interface EventsBatch {
     /**
-     * The PublicEndpoint attached to the EndpointId from the request.
+     * A set of properties and attributes that are associated with the endpoint.
      */
-    Endpoint?: PublicEndpoint;
+    Endpoint: PublicEndpoint;
     /**
-     * An object that contains a set of events associated with the endpoint.
+     * A set of properties that are associated with the event.
      */
-    Events?: MapOfEvent;
+    Events: MapOfEvent;
   }
   export interface EventsRequest {
     /**
-     * A batch of events to process. Each BatchItem consists of an endpoint ID as the key, and an EventsBatch object as the value.
+     * The batch of events to process. For each item in a batch, the endpoint ID acts as a key that has an EventsBatch object as its value.
      */
-    BatchItem?: MapOfEventsBatch;
+    BatchItem: MapOfEventsBatch;
   }
   export interface EventsResponse {
     /**
-     * A map that contains a multipart response for each endpoint. Each item in this object uses the endpoint ID as the key, and the item response as the value.
-
-If no item response exists, the value can also be one of the following: 202 (if the request was processed successfully) or 400 (if the payload was invalid, or required fields were missing).
+     * A map that contains a multipart response for each endpoint. For each item in this object, the endpoint ID is the key and the item response is the value. If no item response exists, the value can also be one of the following: 202, the request was processed successfully; or 400, the payload wasn't valid or required fields were missing.
      */
     Results?: MapOfItemResponse;
   }
   export interface ExportJobRequest {
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to access the Amazon S3 location where you want to export endpoint definitions to.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
     /**
-     * A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
-
-The URL should follow this format: s3://bucket-name/folder-name/
-
-Amazon Pinpoint will export endpoints to this location.
+     * The URL of the location in an Amazon Simple Storage Service (Amazon S3) bucket where you want to export endpoint definitions to. This location is typically a folder that contains multiple files. The URL should be in the following format: s3://bucket-name/folder-name/.
      */
-    S3UrlPrefix?: __string;
+    S3UrlPrefix: __string;
     /**
-     * The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.
+     * The identifier for the segment to export endpoint definitions from. If you don't specify this value, Amazon Pinpoint exports definitions for all the endpoints that are associated with the application.
      */
     SegmentId?: __string;
     /**
-     * The version of the segment to export if specified.
+     * The version of the segment to export endpoint definitions from, if specified.
      */
     SegmentVersion?: __integer;
   }
   export interface ExportJobResource {
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorized Amazon Pinpoint to access the Amazon S3 location where the endpoint definitions were exported to.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
     /**
-     * A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
-
-The URL should follow this format: s3://bucket-name/folder-name/
-
-Amazon Pinpoint will export endpoints to this location.
+     * The URL of the location in an Amazon Simple Storage Service (Amazon S3) bucket where the endpoint definitions were exported to. This location is typically a folder that contains multiple files. The URL should be in the following format: s3://bucket-name/folder-name/.
      */
-    S3UrlPrefix?: __string;
+    S3UrlPrefix: __string;
     /**
-     * The ID of the segment to export endpoints from. If not present, Amazon Pinpoint exports all of the endpoints that belong to the application.
+     * The identifier for the segment that the endpoint definitions were exported from. If this value isn't present, Amazon Pinpoint exported definitions for all the endpoints that are associated with the application.
      */
     SegmentId?: __string;
     /**
-     * The version of the segment to export if specified.
+     * The version of the segment that the endpoint definitions were exported from.
      */
     SegmentVersion?: __integer;
   }
   export interface ExportJobResponse {
     /**
-     * The unique ID of the application associated with the export job.
+     * The unique identifier for the application that's associated with the export job.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * The number of pieces that have successfully completed as of the time of the request.
+     * The number of pieces that were processed successfully (completed) by the export job, as of the time of the request.
      */
     CompletedPieces?: __integer;
     /**
-     * The date the job completed in ISO 8601 format.
+     * The date, in ISO 8601 format, when the export job was completed.
      */
     CompletionDate?: __string;
     /**
-     * The date the job was created in ISO 8601 format.
+     * The date, in ISO 8601 format, when the export job was created.
      */
-    CreationDate?: __string;
+    CreationDate: __string;
     /**
-     * The export job settings.
+     * The resource settings that apply to the export job.
      */
-    Definition?: ExportJobResource;
+    Definition: ExportJobResource;
     /**
-     * The number of pieces that failed to be processed as of the time of the request.
+     * The number of pieces that weren't processed successfully (failed) by the export job, as of the time of the request.
      */
     FailedPieces?: __integer;
     /**
-     * Provides up to 100 of the first failed entries for the job, if any exist.
+     * An array of entries, one for each of the first 100 entries that weren't processed successfully (failed) by the export job, if any.
      */
     Failures?: ListOf__string;
     /**
-     * The unique ID of the job.
+     * The unique identifier for the export job.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * The status of the job.
-Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
-
-The job status is FAILED if one or more pieces failed.
+     * The status of the export job. The job status is FAILED if Amazon Pinpoint wasn't able to process one or more pieces in the job.
      */
-    JobStatus?: JobStatus;
+    JobStatus: JobStatus;
     /**
-     * The number of endpoints that were not processed; for example, because of syntax errors.
+     * The total number of endpoint definitions that weren't processed successfully (failed) by the export job, typically because an error, such as a syntax error, occurred.
      */
     TotalFailures?: __integer;
     /**
-     * The total number of pieces that must be processed to finish the job. Each piece is an approximately equal portion of the endpoints.
+     * The total number of pieces that must be processed to complete the export job. Each piece consists of an approximately equal portion of the endpoint definitions that are part of the export job.
      */
     TotalPieces?: __integer;
     /**
-     * The number of endpoints that were processed by the job.
+     * The total number of endpoint definitions that were processed by the export job.
      */
     TotalProcessed?: __integer;
     /**
-     * The job type. Will be 'EXPORT'.
+     * The job type. This value is EXPORT for export jobs.
      */
-    Type?: __string;
+    Type: __string;
   }
   export interface ExportJobsResponse {
     /**
-     * A list of export jobs for the application.
+     * An array of responses, one for each export job that's associated with the application (Export Jobs resource) or segment (Segment Export Jobs resource).
      */
-    Item?: ListOfExportJobResponse;
+    Item: ListOfExportJobResponse;
     /**
-     * The string that you use in a subsequent request to get the next page of results in a paginated response.
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     NextToken?: __string;
   }
@@ -2700,161 +2597,153 @@ The job status is FAILED if one or more pieces failed.
   export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|string;
   export interface GCMChannelRequest {
     /**
-     * Platform credential API key from Google.
+     * The API key, also referred to as a server key, that you received from Google to communicate with Google services.
      */
-    ApiKey?: __string;
+    ApiKey: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether to enable the GCM channel for the application.
      */
     Enabled?: __boolean;
   }
   export interface GCMChannelResponse {
     /**
-     * The ID of the application to which the channel applies.
+     * The unique identifier for the application that the GCM channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * When was this segment created
+     * The date and time when the GCM channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * The GCM API key from Google.
+     * The API key, also referred to as a server key, that you received from Google to communicate with Google services.
      */
-    Credential?: __string;
+    Credential: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the GCM channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * Channel ID. Not used. Present only for backwards compatibility.
+     * (Deprecated) An identifier for the GCM channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the GCM channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who last updated this entry
+     * The user who last modified the GCM channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time when the GCM channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. Will be GCM
+     * The type of messaging or notification platform for the channel. For the GCM channel, this value is GCM.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * Version of channel
+     * The current version of the GCM channel.
      */
     Version?: __integer;
   }
   export interface GCMMessage {
     /**
-     * The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL
+     * The action to occur if the recipient taps the push notification. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
      */
     Action?: Action;
     /**
-     * The message body of the notification.
+     * The body of the notification message.
      */
     Body?: __string;
     /**
-     * This parameter identifies a group of messages (e.g., with collapse_key: "Updates Available") that can be collapsed, so that only the last message gets sent when delivery can be resumed. This is intended to avoid sending too many of the same messages when the device comes back online or becomes active.
+     * An arbitrary string that identifies a group of messages that can be collapsed to ensure that only the last message is sent when delivery can resume. This helps avoid sending too many instances of the same messages when the recipient's device comes online again or becomes active. Amazon Pinpoint specifies this value in the Firebase Cloud Messaging (FCM) collapse_key parameter when it sends the notification message to FCM.
      */
     CollapseKey?: __string;
     /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     * The JSON data payload to use for the push notification, if the notification is a silent push notification. This payload is added to the data.pinpoint.jsonBody object of the notification.
      */
     Data?: MapOf__string;
     /**
-     * The icon image name of the asset saved in your application.
+     * The icon image name of the asset saved in your app.
      */
     IconReference?: __string;
     /**
-     * The URL that points to an image used as the large icon to the notification content view.
+     * The URL of the large icon image to display in the content view of the push notification.
      */
     ImageIconUrl?: __string;
     /**
-     * The URL that points to an image used in the push notification.
+     * The URL of an image to display in the push notification.
      */
     ImageUrl?: __string;
     /**
-     * The message priority. Amazon Pinpoint uses this value to set the FCM or GCM priority parameter when it sends the message. Accepts the following values:
-
-"Normal" - Messages might be delayed. Delivery is optimized for battery usage on the receiving device. Use normal priority unless immediate delivery is required.
-
-"High" - Messages are sent immediately and might wake a sleeping device.
-
-The equivalent values for APNs messages are "5" and "10". Amazon Pinpoint accepts these values here and converts them.
-
-For more information, see About FCM Messages in the Firebase documentation.
+     * para>normal - The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required./listitem> high - The notification is sent immediately and might wake a sleeping device./para> Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM. The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.
      */
     Priority?: __string;
     /**
-     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
      */
     RawContent?: __string;
     /**
-     * This parameter specifies the package name of the application where the registration tokens must match in order to receive the message.
+     * The package name of the application where registration tokens must match in order for the recipient to receive the message.
      */
     RestrictedPackageName?: __string;
     /**
-     * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+     * Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration or supporting phone home functionality.
      */
     SilentPush?: __boolean;
     /**
-     * The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
+     * The URL of the small icon image to display in the status bar and the content view of the push notification.
      */
     SmallImageIconUrl?: __string;
     /**
-     * Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/
+     * The sound to play when the recipient receives the push notification. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in /res/raw/.
      */
     Sound?: __string;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The default message variables to use in the notification message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * The length of time (in seconds) that FCM or GCM stores and attempts to deliver the message. If unspecified, the value defaults to the maximum, which is 2,419,200 seconds (28 days). Amazon Pinpoint uses this value to set the FCM or GCM time_to_live parameter.
+     * The amount of time, in seconds, that FCM should store and attempt to deliver the push notification, if the service is unable to deliver the notification the first time. If you don't specify this value, FCM defaults to the maximum value, which is 2,419,200 seconds (28 days). Amazon Pinpoint specifies this value in the FCM time_to_live parameter when it sends the notification message to FCM.
      */
     TimeToLive?: __integer;
     /**
-     * The message title that displays above the message on the user's device.
+     * The title to display above the notification message on the recipient's device.
      */
     Title?: __string;
     /**
-     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     * The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
      */
     Url?: __string;
   }
   export interface GPSCoordinates {
     /**
-     * Latitude
+     * The latitude coordinate of the location.
      */
-    Latitude?: __double;
+    Latitude: __double;
     /**
-     * Longitude
+     * The longitude coordinate of the location.
      */
-    Longitude?: __double;
+    Longitude: __double;
   }
   export interface GPSPointDimension {
     /**
-     * Coordinate to measure distance from.
+     * The GPS coordinates to measure distance from.
      */
-    Coordinates?: GPSCoordinates;
+    Coordinates: GPSCoordinates;
     /**
-     * Range in kilometers from the coordinate.
+     * The range, in kilometers, from the GPS coordinates.
      */
     RangeInKilometers?: __double;
   }
   export interface GetAdmChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -2863,7 +2752,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetApnsChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -2872,7 +2761,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetApnsSandboxChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -2881,7 +2770,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetApnsVoipChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -2890,7 +2779,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetApnsVoipSandboxChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -2899,7 +2788,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetAppRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -2908,7 +2797,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetApplicationSettingsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -2917,11 +2806,11 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetAppsRequest {
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -2930,7 +2819,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetBaiduChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -2939,19 +2828,19 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetCampaignActivitiesRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the campaign.
+     * The unique identifier for the campaign.
      */
     CampaignId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -2960,11 +2849,11 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetCampaignRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the campaign.
+     * The unique identifier for the campaign.
      */
     CampaignId: __string;
   }
@@ -2973,15 +2862,15 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetCampaignVersionRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the campaign.
+     * The unique identifier for the campaign.
      */
     CampaignId: __string;
     /**
-     * The version of the campaign.
+     * The unique version number (Version property) for the campaign version.
      */
     Version: __string;
   }
@@ -2990,19 +2879,19 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetCampaignVersionsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the campaign.
+     * The unique identifier for the campaign.
      */
     CampaignId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -3011,15 +2900,15 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetCampaignsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -3028,7 +2917,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetChannelsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -3037,7 +2926,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetEmailChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -3046,11 +2935,11 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetEndpointRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the endpoint.
+     * The unique identifier for the endpoint.
      */
     EndpointId: __string;
   }
@@ -3059,7 +2948,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetEventStreamRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -3068,11 +2957,11 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetExportJobRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the job.
+     * The unique identifier for the job.
      */
     JobId: __string;
   }
@@ -3081,15 +2970,15 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetExportJobsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -3098,7 +2987,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetGcmChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -3107,11 +2996,11 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetImportJobRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the job.
+     * The unique identifier for the job.
      */
     JobId: __string;
   }
@@ -3120,15 +3009,15 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetImportJobsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -3137,19 +3026,19 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetSegmentExportJobsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The unique ID of the segment.
+     * The unique identifier for the segment.
      */
     SegmentId: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -3158,19 +3047,19 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetSegmentImportJobsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The unique ID of the segment.
+     * The unique identifier for the segment.
      */
     SegmentId: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -3179,11 +3068,11 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetSegmentRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the segment.
+     * The unique identifier for the segment.
      */
     SegmentId: __string;
   }
@@ -3192,15 +3081,15 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetSegmentVersionRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the segment.
+     * The unique identifier for the segment.
      */
     SegmentId: __string;
     /**
-     * The segment version.
+     * The unique version number (Version property) for the campaign version.
      */
     Version: __string;
   }
@@ -3209,19 +3098,19 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetSegmentVersionsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The unique ID of the segment.
+     * The unique identifier for the segment.
      */
     SegmentId: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -3230,15 +3119,15 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetSegmentsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The number of entries you want on each page in the response.
+     * The maximum number of items to include on each page in a paginated response.
      */
     PageSize?: __string;
     /**
-     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     * The NextToken string that specifies which page of results to return in a paginated response.
      */
     Token?: __string;
   }
@@ -3247,7 +3136,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetSmsChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -3256,11 +3145,11 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetUserEndpointsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the user.
+     * The unique identifier for the user.
      */
     UserId: __string;
   }
@@ -3269,7 +3158,7 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface GetVoiceChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -3278,158 +3167,152 @@ For more information, see About FCM Messages in the Firebase documentation.
   }
   export interface ImportJobRequest {
     /**
-     * Sets whether the endpoints create a segment when they are imported.
+     * Specifies whether to create a segment that contains the endpoints, when the endpoint definitions are imported.
      */
     DefineSegment?: __boolean;
     /**
-     * (Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
+     * (Deprecated) Your AWS account ID, which you assigned to an external ID key in an IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM role when importing endpoint definitions, but we removed this requirement. We don't recommend use of external IDs for IAM roles that are assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
-     * The format of the files that contain the endpoint definitions.
-Valid values: CSV, JSON
+     * The format of the files that contain the endpoint definitions to import. Valid values are: CSV, for comma-separated values format; and, JSON, for newline-delimited JSON format. If the Amazon S3 location stores multiple files that use different formats, Amazon Pinpoint imports data only from the files that use the specified format.
      */
-    Format?: Format;
+    Format: Format;
     /**
-     * Sets whether the endpoints are registered with Amazon Pinpoint when they are imported.
+     * Specifies whether to register the endpoints with Amazon Pinpoint, when the endpoint definitions are imported.
      */
     RegisterEndpoints?: __boolean;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that contains the endpoints to import.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to access the Amazon S3 location to import endpoint definitions from.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
     /**
-     * The URL of the S3 bucket that contains the segment information to import. The location can be a folder or a single file. The URL should use the following format: s3://bucket-name/folder-name/file-name
-
-Amazon Pinpoint imports endpoints from this location and any subfolders it contains.
+     * The URL of the Amazon Simple Storage Service (Amazon S3) bucket that contains the endpoint definitions to import. This location can be a folder or a single file. If the location is a folder, Amazon Pinpoint imports endpoint definitions from the files in this location, including any subfolders that the folder contains. The URL should be in the following format: s3://bucket-name/folder-name/file-name. The location can end with the key for an individual object or a prefix that qualifies multiple objects.
      */
-    S3Url?: __string;
+    S3Url: __string;
     /**
-     * The ID of the segment to update if the import job is meant to update an existing segment.
+     * The identifier for the segment to update or add the imported endpoint definitions to, if the import job is meant to update an existing segment.
      */
     SegmentId?: __string;
     /**
-     * A custom name for the segment created by the import job. Use if DefineSegment is true.
+     * The custom name for the segment that's created by the import job, if the value of the DefineSegment property is true.
      */
     SegmentName?: __string;
   }
   export interface ImportJobResource {
     /**
-     * Sets whether the endpoints create a segment when they are imported.
+     * Specifies whether the import job creates a segment that contains the endpoints, when the endpoint definitions are imported.
      */
     DefineSegment?: __boolean;
     /**
-     * (Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
+     * (Deprecated) Your AWS account ID, which you assigned to an external ID key in an IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM role when importing endpoint definitions, but we removed this requirement. We don't recommend use of external IDs for IAM roles that are assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
-     * The format of the files that contain the endpoint definitions.
-Valid values: CSV, JSON
+     * The format of the files that contain the endpoint definitions to import. Valid values are: CSV, for comma-separated values format; and, JSON, for newline-delimited JSON format. If the files are stored in an Amazon S3 location and that location contains multiple files that use different formats, Amazon Pinpoint imports data only from the files that use the specified format.
      */
-    Format?: Format;
+    Format: Format;
     /**
-     * Sets whether the endpoints are registered with Amazon Pinpoint when they are imported.
+     * Specifies whether the import job registers the endpoints with Amazon Pinpoint, when the endpoint definitions are imported.
      */
     RegisterEndpoints?: __boolean;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that contains the endpoints to import.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to access the Amazon S3 location to import endpoint definitions from.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
     /**
-     * The URL of the S3 bucket that contains the segment information to import. The location can be a folder or a single file. The URL should use the following format: s3://bucket-name/folder-name/file-name
-
-Amazon Pinpoint imports endpoints from this location and any subfolders it contains.
+     * The URL of the Amazon Simple Storage Service (Amazon S3) bucket that contains the endpoint definitions to import. This location can be a folder or a single file. If the location is a folder, Amazon Pinpoint imports endpoint definitions from the files in this location, including any subfolders that the folder contains. The URL should be in the following format: s3://bucket-name/folder-name/file-name. The location can end with the key for an individual object or a prefix that qualifies multiple objects.
      */
-    S3Url?: __string;
+    S3Url: __string;
     /**
-     * The ID of the segment to update if the import job is meant to update an existing segment.
+     * The identifier for the segment that the import job updates or adds endpoint definitions to, if the import job updates an existing segment.
      */
     SegmentId?: __string;
     /**
-     * A custom name for the segment created by the import job. Use if DefineSegment is true.
+     * The custom name for the segment that's created by the import job, if the value of the DefineSegment property is true.
      */
     SegmentName?: __string;
   }
   export interface ImportJobResponse {
     /**
-     * The unique ID of the application to which the import job applies.
+     * The unique identifier for the application that's associated with the import job.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * The number of pieces that have successfully imported as of the time of the request.
+     * The number of pieces that were processed successfully (completed) by the import job, as of the time of the request.
      */
     CompletedPieces?: __integer;
     /**
-     * The date the import job completed in ISO 8601 format.
+     * The date, in ISO 8601 format, when the import job was completed.
      */
     CompletionDate?: __string;
     /**
-     * The date the import job was created in ISO 8601 format.
+     * The date, in ISO 8601 format, when the import job was created.
      */
-    CreationDate?: __string;
+    CreationDate: __string;
     /**
-     * The import job settings.
+     * The resource settings that apply to the import job.
      */
-    Definition?: ImportJobResource;
+    Definition: ImportJobResource;
     /**
-     * The number of pieces that have failed to import as of the time of the request.
+     * The number of pieces that weren't processed successfully (failed) by the import job, as of the time of the request.
      */
     FailedPieces?: __integer;
     /**
-     * Provides up to 100 of the first failed entries for the job, if any exist.
+     * An array of entries, one for each of the first 100 entries that weren't processed successfully (failed) by the import job, if any.
      */
     Failures?: ListOf__string;
     /**
-     * The unique ID of the import job.
+     * The unique identifier for the import job.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * The status of the import job.
-Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
-
-The job status is FAILED if one or more pieces failed to import.
+     * The status of the import job. The job status is FAILED if Amazon Pinpoint wasn't able to process one or more pieces in the job.
      */
-    JobStatus?: JobStatus;
+    JobStatus: JobStatus;
     /**
-     * The number of endpoints that failed to import; for example, because of syntax errors.
+     * The total number of endpoint definitions that weren't processed successfully (failed) by the import job, typically because an error, such as a syntax error, occurred.
      */
     TotalFailures?: __integer;
     /**
-     * The total number of pieces that must be imported to finish the job. Each piece is an approximately equal portion of the endpoints to import.
+     * The total number of pieces that must be processed to complete the import job. Each piece consists of an approximately equal portion of the endpoint definitions that are part of the import job.
      */
     TotalPieces?: __integer;
     /**
-     * The number of endpoints that were processed by the import job.
+     * The total number of endpoint definitions that were processed by the import job.
      */
     TotalProcessed?: __integer;
     /**
-     * The job type. Will be Import.
+     * The job type. This value is IMPORT for import jobs.
      */
-    Type?: __string;
+    Type: __string;
   }
   export interface ImportJobsResponse {
     /**
-     * A list of import jobs for the application.
+     * An array of responses, one for each import job that's associated with the application (Import Jobs resource) or segment (Segment Import Jobs resource).
      */
-    Item?: ListOfImportJobResponse;
+    Item: ListOfImportJobResponse;
     /**
-     * The string that you use in a subsequent request to get the next page of results in a paginated response.
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     NextToken?: __string;
   }
   export type Include = "ALL"|"ANY"|"NONE"|string;
   export interface ItemResponse {
     /**
-     * The response received after the endpoint was accepted.
+     * The response that was received after the endpoint data was accepted.
      */
     EndpointItemResponse?: EndpointItemResponse;
     /**
-     * A multipart response object that contains a key and value for each event ID in the request. In each object, the event ID is the key, and an EventItemResponse object is the value.
+     * A multipart response object that contains a key and a value for each event in the request. In each object, the event ID is the key and an EventItemResponse object is the value.
      */
     EventsItemResponse?: MapOfEventItemResponse;
   }
   export type JobStatus = "CREATED"|"INITIALIZING"|"PROCESSING"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string;
   export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application, campaign, or segment.
+     */
     ResourceArn: __string;
   }
   export interface ListTagsForResourceResponse {
@@ -3437,232 +3320,201 @@ The job status is FAILED if one or more pieces failed to import.
   }
   export interface Message {
     /**
-     * The action that occurs if the user taps a push notification delivered by the campaign:
-OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action.
-
-DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app.
-
-URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify.
+     * The action to occur if a recipient taps the push notification. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of iOS and Android. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
      */
     Action?: Action;
     /**
-     * The message body. Can include up to 140 characters.
+     * The body of the notification message. The maximum number of characters is 200.
      */
     Body?: __string;
     /**
-     * The URL that points to the icon image for the push notification icon, for example, the app icon.
+     * The URL of the image to display as the push-notification icon, such as the icon for the app.
      */
     ImageIconUrl?: __string;
     /**
-     * The URL that points to the small icon image for the push notification icon, for example, the app icon.
+     * The URL of the image to display as the small, push-notification icon, such as a small version of the icon for the app.
      */
     ImageSmallIconUrl?: __string;
     /**
-     * The URL that points to an image used in the push notification.
+     * The URL of an image to display in the push notification.
      */
     ImageUrl?: __string;
     /**
-     * The JSON payload used for a silent push.
+     * The JSON payload to use for a silent push notification.
      */
     JsonBody?: __string;
     /**
-     * A URL that refers to the location of an image or video that you want to display in the push notification.
+     * The URL of the image or video to display in the push notification.
      */
     MediaUrl?: __string;
     /**
-     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides other values for the message.
      */
     RawContent?: __string;
     /**
-     * Indicates if the message should display on the users device.
-
-Silent pushes can be used for Remote Configuration and Phone Home use cases. 
+     * Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration, displaying messages in an in-app message center, or supporting phone home functionality.
      */
     SilentPush?: __boolean;
     /**
-     * This parameter specifies how long (in seconds) the message should be kept if the service is unable to deliver the notification the first time. If the value is 0, it treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to the service. It only applies to APNs and GCM
+     * The number of seconds that the push-notification service should keep the message, if the service is unable to deliver the notification the first time. This value is converted to an expiration value when it's sent to a push-notification service. If this value is 0, the service treats the notification as if it expires immediately and the service doesn't store or try to deliver the notification again. This value doesn't apply to messages that are sent through the Amazon Device Messaging (ADM) service.
      */
     TimeToLive?: __integer;
     /**
-     * The message title that displays above the message on the user's device.
+     * The title to display above the notification message on a recipient's device.
      */
     Title?: __string;
     /**
-     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     * The URL to open in a recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
      */
     Url?: __string;
   }
   export interface MessageBody {
     /**
-     * The error message that's returned from the API.
+     * The message that's returned from the API.
      */
     Message?: __string;
     /**
-     * The unique message body ID.
+     * The unique identifier for the request or response.
      */
     RequestID?: __string;
   }
   export interface MessageConfiguration {
     /**
-     * The message that the campaign delivers to ADM channels. Overrides the default message.
+     * The message that the campaign sends through the ADM (Amazon Device Messaging) channel. This message overrides the default message.
      */
     ADMMessage?: Message;
     /**
-     * The message that the campaign delivers to APNS channels. Overrides the default message.
+     * The message that the campaign sends through the APNs (Apple Push Notification service) channel. This message overrides the default message.
      */
     APNSMessage?: Message;
     /**
-     * The message that the campaign delivers to Baidu channels. Overrides the default message.
+     * The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. This message overrides the default message.
      */
     BaiduMessage?: Message;
     /**
-     * The default message for all channels.
+     * The default message that the campaign sends through all the channels that are configured for the campaign.
      */
     DefaultMessage?: Message;
     /**
-     * The email message configuration.
+     * The message that the campaign sends through the email channel.
      */
     EmailMessage?: CampaignEmailMessage;
     /**
-     * The message that the campaign delivers to GCM channels. Overrides the default message.
+     * The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message overrides the default message.
      */
     GCMMessage?: Message;
     /**
-     * The SMS message configuration.
+     * The message that the campaign sends through the SMS channel.
      */
     SMSMessage?: CampaignSmsMessage;
   }
   export interface MessageRequest {
     /**
-     * A map of key-value pairs, where each key is an address and each value is an AddressConfiguration object. An address can be a push notification token, a phone number, or an email address.
+     * A map of key-value pairs, where each key is an address and each value is an AddressConfiguration object. An address can be a push notification token, a phone number, or an email address. You can use an AddressConfiguration object to tailor the message for an address by specifying settings such as content overrides and message variables.
      */
     Addresses?: MapOfAddressConfiguration;
     /**
-     * A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+     * A map of custom attributes to attach to the message. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.
      */
     Context?: MapOf__string;
     /**
-     * A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. Within an EndpointSendConfiguration object, you can tailor the message for an endpoint by specifying message overrides or substitutions.
+     * A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. You can use an EndpointSendConfiguration object to tailor the message for an endpoint by specifying settings such as content overrides and message variables.
      */
     Endpoints?: MapOfEndpointSendConfiguration;
     /**
-     * Message configuration.
+     * The set of properties that defines the configuration settings for the message.
      */
-    MessageConfiguration?: DirectMessageConfiguration;
+    MessageConfiguration: DirectMessageConfiguration;
     /**
-     * A unique ID that you can use to trace a message. This ID is visible to recipients.
+     * The unique identifier for tracing the message. This identifier is visible to message recipients.
      */
     TraceId?: __string;
   }
   export interface MessageResponse {
     /**
-     * Application id of the message.
+     * The unique identifier for the application that was used to send the message.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * A map containing a multi part response for each address, with the endpointId as the key and the result as the value.
+     * A map that contains a multipart response for each address that the message was sent to. In the map, the endpoint ID is the key and the result is the value.
      */
     EndpointResult?: MapOfEndpointMessageResult;
     /**
-     * Original request Id for which this message was delivered.
+     * The identifier for the original request that the message was delivered for.
      */
     RequestId?: __string;
     /**
-     * A map containing a multi part response for each address, with the address as the key(Email address, phone number or push token) and the result as the value.
+     * A map that contains a multipart response for each address (email address, phone number, or push notification token) that the message was sent to. In the map, the address is the key and the result is the value.
      */
     Result?: MapOfMessageResult;
   }
   export interface MessageResult {
     /**
-     * The delivery status of the message. Possible values:
-
-SUCCESS - The message was successfully delivered to the endpoint.
-
-TRANSIENT_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later.
-
-FAILURE_PERMANENT - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.
-
-TIMEOUT - The message couldn't be sent within the timeout period.
-
-QUIET_TIME - The local time for the endpoint was within the QuietTime for the campaign or app.
-
-DAILY_CAP - The endpoint has received the maximum number of messages it can receive within a 24-hour period.
-
-HOLDOUT - The endpoint was in a hold out treatment for the campaign.
-
-THROTTLED - Amazon Pinpoint throttled sending to this endpoint.
-
-EXPIRED - The endpoint address is expired.
-
-CAMPAIGN_CAP - The endpoint received the maximum number of messages allowed by the campaign.
-
-SERVICE_FAILURE - A service-level failure prevented Amazon Pinpoint from delivering the message.
-
-UNKNOWN - An unknown error occurred.
+     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.   OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.   SUCCESSFUL - The message was successfully delivered to the endpoint address. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address. TIMEOUT - The message couldn't be sent within the timeout period. UNKNOWN_FAILURE - An unknown error occurred.
      */
-    DeliveryStatus?: DeliveryStatus;
+    DeliveryStatus: DeliveryStatus;
     /**
-     * Unique message identifier associated with the message that was sent.
+     * The unique identifier for the message that was sent.
      */
     MessageId?: __string;
     /**
-     * Downstream service status code.
+     * The downstream service status code for delivering the message.
      */
-    StatusCode?: __integer;
+    StatusCode: __integer;
     /**
-     * Status message for message delivery.
+     * The status message for delivering the message.
      */
     StatusMessage?: __string;
     /**
-     * If token was updated as part of delivery. (This is GCM Specific)
+     * For push notifications that are sent through the GCM channel, specifies whether the token was updated as part of delivering the message.
      */
     UpdatedToken?: __string;
   }
   export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string;
   export interface MetricDimension {
     /**
-     * The operator that you're using to compare metric values. Possible values: GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, or EQUAL
+     * The operator to use when comparing metric values. Valid values are: GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, and EQUAL.
      */
-    ComparisonOperator?: __string;
+    ComparisonOperator: __string;
     /**
-     * The value to be compared.
+     * The value to compare.
      */
-    Value?: __double;
+    Value: __double;
   }
   export type Mode = "DELIVERY"|"FILTER"|string;
   export interface NumberValidateRequest {
     /**
-     * (Optional) The two-character ISO country code for the country or region where the phone number was originally registered.
+     * The two-character code, in ISO 3166-1 alpha-2 format, for the country or region where the phone number was originally registered.
      */
     IsoCountryCode?: __string;
     /**
-     * The phone number to get information about. The phone number that you provide should include a country code. If the number doesn't include a valid country code, the operation might result in an error.
+     * The phone number to retrieve information about. The phone number that you provide should include a valid numeric country code. Otherwise, the operation might result in an error.
      */
     PhoneNumber?: __string;
   }
   export interface NumberValidateResponse {
     /**
-     * The carrier or servive provider that the phone number is currently registered with.
+     * The carrier or service provider that the phone number is currently registered with.
      */
     Carrier?: __string;
     /**
-     * The city where the phone number was originally registered.
+     * The name of the city where the phone number was originally registered.
      */
     City?: __string;
     /**
-     * The cleansed phone number, shown in E.164 format.
+     * The cleansed phone number, in E.164 format, for the location where the phone number was originally registered.
      */
     CleansedPhoneNumberE164?: __string;
     /**
-     * The cleansed phone number, shown in the local phone number format.
+     * The cleansed phone number, in the format for the location where the phone number was originally registered.
      */
     CleansedPhoneNumberNational?: __string;
     /**
-     * The country or region where the phone number was originally registered.
+     * The name of the country or region where the phone number was originally registered.
      */
     Country?: __string;
     /**
-     * The two-character ISO code for the country or region where the phone number was originally registered.
+     * The two-character code, in ISO 3166-1 alpha-2 format, for the country or region where the phone number was originally registered.
      */
     CountryCodeIso2?: __string;
     /**
@@ -3670,23 +3522,24 @@ UNKNOWN - An unknown error occurred.
      */
     CountryCodeNumeric?: __string;
     /**
-     * The county where the phone number was originally registered.
+     * The name of the county where the phone number was originally registered.
      */
     County?: __string;
     /**
-     * The two-character code (in ISO 3166-1 alpha-2 format) for the country or region in the request body.
+     * The two-character code, in ISO 3166-1 alpha-2 format, that was sent in the request body.
      */
     OriginalCountryCodeIso2?: __string;
     /**
-     * The phone number that you included in the request body.
+     * The phone number that was sent in the request body.
      */
     OriginalPhoneNumber?: __string;
     /**
-     * A description of the phone type. Possible values are MOBILE, LANDLINE, VOIP, INVALID, PREPAID, and OTHER.
+     * The description of the phone type. Valid values are: MOBILE, LANDLINE, VOIP,
+                  INVALID, PREPAID, and OTHER.
      */
     PhoneType?: __string;
     /**
-     * The phone type, represented by an integer. Possible values include 0 (MOBILE), 1 (LANDLINE), 2 (VOIP), 3 (INVALID), 4 (OTHER), and 5 (PREPAID).
+     * The phone type, represented by an integer. Valid values are: 0 (mobile), 1 (landline), 2 (VoIP), 3 (invalid), 4 (other), and 5 (prepaid).
      */
     PhoneTypeCode?: __integer;
     /**
@@ -3694,7 +3547,7 @@ UNKNOWN - An unknown error occurred.
      */
     Timezone?: __string;
     /**
-     * The postal code for the location where the phone number was originally registered.
+     * The postal or ZIP code for the location where the phone number was originally registered.
      */
     ZipCode?: __string;
   }
@@ -3706,59 +3559,53 @@ UNKNOWN - An unknown error occurred.
   }
   export interface PublicEndpoint {
     /**
-     * The unique identifier for the recipient. For example, an address could be a device token, email address, or mobile phone number.
+     * The unique identifier for the recipient, such as a device token, email address, or mobile phone number.
      */
     Address?: __string;
     /**
-     * Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+     * One or more custom attributes that describe the endpoint by associating a name with an array of values. You can use these attributes as filter criteria when you create segments.
      */
     Attributes?: MapOfListOf__string;
     /**
-     * The channel type.
-
-Valid values: APNS, GCM
+     * The channel that's used when sending messages or push notifications to the endpoint.
      */
     ChannelType?: ChannelType;
     /**
-     * The endpoint demographic attributes.
+     * The demographic information for the endpoint, such as the time zone and platform.
      */
     Demographic?: EndpointDemographic;
     /**
-     * The date and time when the endpoint was last updated, in  ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the endpoint was last updated.
      */
     EffectiveDate?: __string;
     /**
-     * The status of the endpoint. If the update fails, the value is INACTIVE. If the endpoint is updated successfully, the value is ACTIVE.
+     * The status of the update request for the endpoint. Possible values are: INACTIVE, the update failed; and, ACTIVE, the endpoint was updated successfully.
      */
     EndpointStatus?: __string;
     /**
-     * The endpoint location attributes.
+     * The geographic information for the endpoint.
      */
     Location?: EndpointLocation;
     /**
-     * Custom metrics that your app reports to Amazon Pinpoint.
+     * One or more custom metrics that your app reports to Amazon Pinpoint for the endpoint.
      */
     Metrics?: MapOf__double;
     /**
-     * Indicates whether a user has opted out of receiving messages with one of the following values:
-
-ALL - User has opted out of all messages.
-
-NONE - Users has not opted out and receives all messages.
+     * Specifies whether the user who's associated with the endpoint has opted out of receiving messages and push notifications from you. Possible values are: ALL, the user has opted out and doesn't want to receive any messages or push notifications; and, NONE, the user hasn't opted out and wants to receive all messages and push notifications.
      */
     OptOut?: __string;
     /**
-     * A unique identifier that is generated each time the endpoint is updated.
+     * A unique identifier that's generated each time the endpoint is updated.
      */
     RequestId?: __string;
     /**
-     * Custom user-specific attributes that your app reports to Amazon Pinpoint.
+     * One or more custom user attributes that your app reports to Amazon Pinpoint for the user who's associated with the endpoint.
      */
     User?: EndpointUser;
   }
   export interface PutEventStreamRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     WriteEventStream: WriteEventStream;
@@ -3768,7 +3615,7 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface PutEventsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     EventsRequest: EventsRequest;
@@ -3778,45 +3625,39 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface QuietTime {
     /**
-     * The time at which quiet time should end. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.
+     * The specific time when quiet time ends. This value has to use 24-hour notation and be in HH:MM format, where HH is the hour (with a leading zero, if applicable) and MM is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.
      */
     End?: __string;
     /**
-     * The time at which quiet time should begin. The value that you specify has to be in HH:mm format, where HH is the hour in 24-hour format (with a leading zero, if applicable), and mm is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.
+     * The specific time when quiet time begins. This value has to use 24-hour notation and be in HH:MM format, where HH is the hour (with a leading zero, if applicable) and MM is the minutes. For example, use 02:30 to represent 2:30 AM, or 14:30 to represent 2:30 PM.
      */
     Start?: __string;
   }
   export interface RawEmail {
     /**
-     * The raw email message itself. Then entire message must be base64-encoded.
+     * The email message, represented as a raw MIME message. The entire message must be base64 encoded.
      */
     Data?: __blob;
   }
   export type __blob = Buffer|Uint8Array|Blob|string;
   export interface RecencyDimension {
     /**
-     * The length of time during which users have been active or inactive with your app.
-
-Valid values: HR_24, DAY_7, DAY_14, DAY_30
+     * The duration to use when determining whether an endpoint is active or inactive.
      */
-    Duration?: Duration;
+    Duration: Duration;
     /**
-     * The recency dimension type:
-
-ACTIVE - Users who have used your app within the specified duration are included in the segment.
-
-INACTIVE - Users who have not used your app within the specified duration are included in the segment.
+     * The type of recency dimension to use for the segment. Valid values are: ACTIVE, endpoints that were active within the specified duration are included in the segment; and, INACTIVE, endpoints that weren't active within the specified duration are included in the segment.
      */
-    RecencyType?: RecencyType;
+    RecencyType: RecencyType;
   }
   export type RecencyType = "ACTIVE"|"INACTIVE"|string;
   export interface RemoveAttributesRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * Type of attribute. Can be endpoint-custom-attributes, endpoint-custom-metrics, endpoint-user-attributes.
+     *  The type of attribute or attributes to remove. Valid values are: endpoint-custom-attributes - Custom attributes that describe endpoints, such as the date when an associated user opted in or out of receiving communications from you through a specific type of channel. endpoint-custom-metrics - Custom metrics that your app reports to Amazon Pinpoint for endpoints, such as the number of app sessions or the number of items left in a cart. endpoint-user-attributes - Custom attributes that describe users, such as first name, last name, and age.
      */
     AttributeType: __string;
     UpdateAttributesRequest: UpdateAttributesRequest;
@@ -3826,73 +3667,73 @@ INACTIVE - Users who have not used your app within the specified duration are in
   }
   export interface SMSChannelRequest {
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether to enable the SMS channel for the application.
      */
     Enabled?: __boolean;
     /**
-     * Sender identifier of your messages.
+     * The identity that you want to display on recipients' devices when they receive messages from the SMS channel.
      */
     SenderId?: __string;
     /**
-     * ShortCode registered with phone provider.
+     * The registered short code that you want to use when you send messages through the SMS channel.
      */
     ShortCode?: __string;
   }
   export interface SMSChannelResponse {
     /**
-     * The unique ID of the application to which the SMS channel belongs.
+     * The unique identifier for the application that the SMS channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * The date that the settings were last updated in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the SMS channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the SMS channel is enabled for the application.
      */
     Enabled?: __boolean;
     /**
-     * Not used. Retained for backwards compatibility.
+     * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the SMS channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the SMS channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who last updated this entry
+     * The user who last modified the SMS channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time, in ISO 8601 format, when the SMS channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * Platform type. Will be "SMS"
+     * The type of messaging or notification platform for the channel. For the SMS channel, this value is SMS.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * Promotional messages per second that can be sent
+     * The maximum number of promotional messages that you can send through the SMS channel each second.
      */
     PromotionalMessagesPerSecond?: __integer;
     /**
-     * Sender identifier of your messages.
+     * The identity that displays on recipients' devices when they receive messages from the SMS channel.
      */
     SenderId?: __string;
     /**
-     * The short code registered with the phone provider.
+     * The registered short code to use when you send messages through the SMS channel.
      */
     ShortCode?: __string;
     /**
-     * Transactional messages per second that can be sent
+     * The maximum number of transactional messages that you can send through the SMS channel each second.
      */
     TransactionalMessagesPerSecond?: __integer;
     /**
-     * Version of channel
+     * The current version of the SMS channel.
      */
     Version?: __integer;
   }
@@ -3906,109 +3747,58 @@ INACTIVE - Users who have not used your app within the specified duration are in
      */
     Keyword?: __string;
     /**
-     * Is this a transaction priority message or lower priority.
+     * The SMS message type. Valid values are: TRANSACTIONAL, the message is critical or time-sensitive, such as a one-time password that supports a customer transaction; and, PROMOTIONAL, the message is not critical or time-sensitive, such as a marketing message.
      */
     MessageType?: MessageType;
     /**
-     * The phone number that the SMS message originates from. Specify one of the dedicated long codes or short codes that you requested from AWS Support and that is assigned to your account. If this attribute is not specified, Amazon Pinpoint randomly assigns a long code.
+     * The number that the SMS message originates from. This should be one of the dedicated long codes or short codes that you requested from AWS Support and is assigned to your AWS account. If you don't specify a long or short code, Amazon Pinpoint assigns a random long code to the SMS message.
      */
     OriginationNumber?: __string;
     /**
-     * The sender ID that is shown as the message sender on the recipient's device. Support for sender IDs varies by country or region.
+     * The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region.
      */
     SenderId?: __string;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The message variables to use in the SMS message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
   }
   export interface Schedule {
     /**
-     * The scheduled time that the campaign ends in ISO 8601 format.
+     * The scheduled time, in ISO 8601 format, for the campaign to end.
      */
     EndTime?: __string;
     /**
-     * Defines the type of events that can trigger the campaign. Used when the Frequency is set to EVENT.
+     * The type of event that causes the campaign to be sent, if the value of the Frequency property is EVENT.
      */
     EventFilter?: CampaignEventFilter;
     /**
-     * How often the campaign delivers messages.
-
-Valid values:
-
-ONCE
-
-HOURLY
-
-DAILY
-
-WEEKLY
-
-MONTHLY
-
-EVENT
+     * Specifies how often the campaign is sent or whether the campaign is sent in response to a specific event.
      */
     Frequency?: Frequency;
     /**
-     * Indicates whether the campaign schedule takes effect according to each user's local time.
+     * Specifies whether the start and end times for the campaign schedule use each recipient's local time. To base the schedule on each recipient's local time, set this value to true.
      */
     IsLocalTime?: __boolean;
     /**
-     * The default quiet time for the campaign. The campaign doesn't send messages to endpoints during the quiet time.
-
-Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your campaign. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
-
-When you set up a campaign to use quiet time, the campaign doesn't send messages during the time range you specified, as long as all of the following are true:
-- The endpoint includes a valid Demographic.Timezone attribute.
-- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the campaign.
-- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the campaign.
+     * The default quiet time for the campaign. Quiet time is a specific time range when a campaign doesn't send messages to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the campaign. The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the campaign. If any of the preceding conditions isn't met, the endpoint will receive messages from the campaign, even if quiet time is enabled.
      */
     QuietTime?: QuietTime;
     /**
-     * The scheduled time that the campaign begins in ISO 8601 format.
+     * The scheduled time, in ISO 8601 format, for the campaign to begin.
      */
-    StartTime?: __string;
+    StartTime: __string;
     /**
-     * The starting UTC offset for the schedule if the value for isLocalTime is true
-
-Valid values: 
-UTC
-UTC+01
-UTC+02
-UTC+03
-UTC+03:30
-UTC+04
-UTC+04:30
-UTC+05
-UTC+05:30
-UTC+05:45
-UTC+06
-UTC+06:30
-UTC+07
-UTC+08
-UTC+09
-UTC+09:30
-UTC+10
-UTC+10:30
-UTC+11
-UTC+12
-UTC+13
-UTC-02
-UTC-03
-UTC-04
-UTC-05
-UTC-06
-UTC-07
-UTC-08
-UTC-09
-UTC-10
-UTC-11
+     * The starting UTC offset for the campaign schedule, if the value of the IsLocalTime property is true. Valid values are: UTC, UTC+01, UTC+02, UTC+03, UTC+03:30, UTC+04, UTC+04:30, UTC+05,
+                  UTC+05:30, UTC+05:45, UTC+06, UTC+06:30, UTC+07, UTC+08, UTC+09, UTC+09:30,
+                  UTC+10, UTC+10:30, UTC+11, UTC+12, UTC+13, UTC-02, UTC-03, UTC-04, UTC-05, UTC-06,
+                  UTC-07, UTC-08, UTC-09, UTC-10, and UTC-11.
      */
     Timezone?: __string;
   }
   export interface SegmentBehaviors {
     /**
-     * The recency of use.
+     * The dimension settings that are based on how recently an endpoint was active.
      */
     Recency?: RecencyDimension;
   }
@@ -4040,130 +3830,127 @@ UTC-11
   }
   export interface SegmentDimensions {
     /**
-     * Custom segment attributes.
+     * One or more custom attributes to use as criteria for the segment.
      */
     Attributes?: MapOfAttributeDimension;
     /**
-     * The segment behaviors attributes.
+     * The behavior-based criteria, such as how recently users have used your app, for the segment.
      */
     Behavior?: SegmentBehaviors;
     /**
-     * The segment demographics attributes.
+     * The demographic-based criteria, such as device platform, for the segment.
      */
     Demographic?: SegmentDemographics;
     /**
-     * The segment location attributes.
+     * The location-based criteria, such as region or GPS coordinates, for the segment.
      */
     Location?: SegmentLocation;
     /**
-     * Custom segment metrics.
+     * One or more custom metrics to use as criteria for the segment.
      */
     Metrics?: MapOfMetricDimension;
     /**
-     * Custom segment user attributes.
+     * One or more custom user attributes to use as criteria for the segment.
      */
     UserAttributes?: MapOfAttributeDimension;
   }
   export interface SegmentGroup {
     /**
-     * List of dimensions to include or exclude.
+     * An array that defines the dimensions for the segment.
      */
     Dimensions?: ListOfSegmentDimensions;
     /**
-     * The base segment that you build your segment on. The source segment defines the starting "universe" of endpoints. When you add dimensions to the segment, it filters the source segment based on the dimensions that you specify. You can specify more than one dimensional segment. You can only specify one imported segment.
-
-NOTE: If you specify an imported segment for this attribute, the segment size estimate that appears in the Amazon Pinpoint console shows the size of the imported segment, without any filters applied to it.
+     * The base segment to build the segment on. A base segment, also referred to as a source segment, defines the initial population of endpoints for a segment. When you add dimensions to a segment, Amazon Pinpoint filters the base segment by using the dimensions that you specify. You can specify more than one dimensional segment or only one imported segment. If you specify an imported segment, the Amazon Pinpoint console displays a segment size estimate that indicates the size of the imported segment without any filters applied to it.
      */
     SourceSegments?: ListOfSegmentReference;
     /**
-     * Specify how to handle multiple source segments. For example, if you specify three source segments, should the resulting segment be based on any or all of the segments? Acceptable values: ANY or ALL.
+     * Specifies how to handle multiple base segments for the segment. For example, if you specify three base segments for the segment, whether the resulting segment is based on all, any, or none of the base segments.
      */
     SourceType?: SourceType;
     /**
-     * Specify how to handle multiple segment dimensions. For example, if you specify three dimensions, should the resulting segment include endpoints that are matched by all, any, or none of the dimensions? Acceptable values: ALL, ANY, or NONE.
+     * Specifies how to handle multiple dimensions for the segment. For example, if you specify three dimensions for the segment, whether the resulting segment includes endpoints that match all, any, or none of the dimensions.
      */
     Type?: Type;
   }
   export interface SegmentGroupList {
     /**
-     * A set of segment criteria to evaluate.
+     * An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.
      */
     Groups?: ListOfSegmentGroup;
     /**
-     * Specify how to handle multiple segment groups. For example, if the segment includes three segment groups, should the resulting segment include endpoints that are matched by all, any, or none of the segment groups you created. Acceptable values: ALL, ANY, or NONE.
+     * Specifies how to handle multiple segment groups for the segment. For example, if the segment includes three segment groups, whether the resulting segment includes endpoints that match all, any, or none of the segment groups.
      */
     Include?: Include;
   }
   export interface SegmentImportResource {
     /**
-     * The number of channel types in the imported segment.
+     * The number of channel types in the endpoint definitions that were imported to create the segment.
      */
     ChannelCounts?: MapOf__integer;
     /**
-     * (Deprecated) Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
+     * (Deprecated) Your AWS account ID, which you assigned to an external ID key in an IAM trust policy. Amazon Pinpoint previously used this value to assume an IAM role when importing endpoint definitions, but we removed this requirement. We don't recommend use of external IDs for IAM roles that are assumed by Amazon Pinpoint.
      */
-    ExternalId?: __string;
+    ExternalId: __string;
     /**
-     * The format of the endpoint files that were imported to create this segment.
-Valid values: CSV, JSON
+     * The format of the files that were imported to create the segment. Valid values are: CSV, for comma-separated values format; and, JSON, for newline-delimited JSON format.
      */
-    Format?: Format;
+    Format: Format;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the endpoints in Amazon S3.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorized Amazon Pinpoint to access the Amazon S3 location to import endpoint definitions from.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
     /**
-     * The URL of the S3 bucket that the segment was imported from.
+     * The URL of the Amazon Simple Storage Service (Amazon S3) bucket that the endpoint definitions were imported from to create the segment.
      */
-    S3Url?: __string;
+    S3Url: __string;
     /**
-     * The number of endpoints that were successfully imported to create this segment.
+     * The number of endpoint definitions that were imported successfully to create the segment.
      */
-    Size?: __integer;
+    Size: __integer;
   }
   export interface SegmentLocation {
     /**
-     * The country or region, in ISO 3166-1 alpha-2 format.
+     * The country or region code, in ISO 3166-1 alpha-2 format, for the segment.
      */
     Country?: SetDimension;
     /**
-     * The GPS Point dimension.
+     * The GPS location and range for the segment.
      */
     GPSPoint?: GPSPointDimension;
   }
   export interface SegmentReference {
     /**
-     * A unique identifier for the segment.
+     * The unique identifier for the segment.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * If specified contains a specific version of the segment included.
+     * The version number of the segment.
      */
     Version?: __integer;
   }
   export interface SegmentResponse {
     /**
-     * The ID of the application that the segment applies to.
+     * The unique identifier for the application that the segment is associated with.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * The arn for the segment.
+     * The Amazon Resource Name (ARN) of the segment.
      */
-    Arn?: __string;
+    Arn: __string;
     /**
      * The date and time when the segment was created.
      */
-    CreationDate?: __string;
+    CreationDate: __string;
     /**
-     * The segment dimensions attributes.
+     * The dimension settings for the segment.
      */
     Dimensions?: SegmentDimensions;
     /**
-     * The unique segment ID.
+     * The unique identifier for the segment.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * The import job settings.
+     * The settings for the import job that's associated with the segment.
      */
     ImportDefinition?: SegmentImportResource;
     /**
@@ -4175,38 +3962,36 @@ Valid values: CSV, JSON
      */
     Name?: __string;
     /**
-     * A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments.
+     * A list of one or more segment groups that apply to the segment. Each segment group consists of zero or more base segments and the dimensions that are applied to those base segments.
      */
     SegmentGroups?: SegmentGroupList;
     /**
-     * The segment type:
-DIMENSIONAL - A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
-IMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
+     * The segment type. Valid values are: DIMENSIONAL - A dynamic segment, which is a segment that uses selection criteria that you specify and is based on endpoint data that's reported by your app. Dynamic segments can change over time. IMPORT - A static segment, which is a segment that uses selection criteria that you specify and is based on endpoint definitions that you import from a file. Imported segments are static; they don't change over time.
      */
-    SegmentType?: SegmentType;
+    SegmentType: SegmentType;
     /**
-     * The Tags for the segment.
+     * A string-to-string map of key-value pairs that identifies the tags that are associated with the segment. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
-     * The segment version number.
+     * The version number of the segment.
      */
     Version?: __integer;
   }
   export type SegmentType = "DIMENSIONAL"|"IMPORT"|string;
   export interface SegmentsResponse {
     /**
-     * The list of segments.
+     * An array of responses, one for each segment that's associated with the application (Segments resource) or each version of a segment that's associated with the application (Segment Versions resource).
      */
-    Item?: ListOfSegmentResponse;
+    Item: ListOfSegmentResponse;
     /**
-     * An identifier used to retrieve the next page of results. The token is null if no additional pages exist.
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     NextToken?: __string;
   }
   export interface SendMessagesRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     MessageRequest: MessageRequest;
@@ -4216,39 +4001,39 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
   }
   export interface SendUsersMessageRequest {
     /**
-     * A map of custom attribute-value pairs. Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the push notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.
+     * A map of custom attribute-value pairs. For a push notification, Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.
      */
     Context?: MapOf__string;
     /**
-     * Message definitions for the default message and any messages that are tailored for specific channels.
+     * The message definitions for the default message and any default messages that you defined for specific channels.
      */
-    MessageConfiguration?: DirectMessageConfiguration;
+    MessageConfiguration: DirectMessageConfiguration;
     /**
-     * A unique ID that you can use to trace a message. This ID is visible to recipients.
+     * The unique identifier for tracing the message. This identifier is visible to message recipients.
      */
     TraceId?: __string;
     /**
-     * A map that associates user IDs with EndpointSendConfiguration objects. Within an EndpointSendConfiguration object, you can tailor the message for a user by specifying message overrides or substitutions.
+     * A map that associates user IDs with EndpointSendConfiguration objects. You can use an EndpointSendConfiguration object to tailor the message for a user by specifying settings such as content overrides and message variables.
      */
-    Users?: MapOfEndpointSendConfiguration;
+    Users: MapOfEndpointSendConfiguration;
   }
   export interface SendUsersMessageResponse {
     /**
-     * The unique ID of the Amazon Pinpoint project used to send the message.
+     * The unique identifier for the application that was used to send the message.
      */
-    ApplicationId?: __string;
+    ApplicationId: __string;
     /**
-     * The unique ID assigned to the users-messages request.
+     * The unique identifier that was assigned to the message request.
      */
     RequestId?: __string;
     /**
-     * An object that shows the endpoints that were messaged for each user. The object provides a list of user IDs. For each user ID, it provides the endpoint IDs that were messaged. For each endpoint ID, it provides an EndpointMessageResult object.
+     * An object that indicates which endpoints the message was sent to, for each user. The object lists user IDs and, for each user ID, provides the endpoint IDs that the message was sent to. For each endpoint ID, it provides an EndpointMessageResult object.
      */
     Result?: MapOfMapOfEndpointMessageResult;
   }
   export interface SendUsersMessagesRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     SendUsersMessageRequest: SendUsersMessageRequest;
@@ -4262,13 +4047,13 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
      */
     Duration?: __integer;
     /**
-     * A unique identifier for the session.
+     * The unique identifier for the session.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * The date and time when the session began.
      */
-    StartTimestamp?: __string;
+    StartTimestamp: __string;
     /**
      * The date and time when the session ended.
      */
@@ -4276,92 +4061,97 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
   }
   export interface SetDimension {
     /**
-     * The type of dimension:
-
-INCLUSIVE - Endpoints that match the criteria are included in the segment.
-
-EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
+     * The type of segment dimension to use. Valid values are: INCLUSIVE, endpoints that match the criteria are included in the segment; and, EXCLUSIVE, endpoints that match the criteria are excluded from the segment.
      */
     DimensionType?: DimensionType;
     /**
-     * The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.
+     * The criteria values to use for the segment dimension. Depending on the value of the DimensionType property, endpoints are included or excluded from the segment if their values match the criteria values.
      */
-    Values?: ListOf__string;
+    Values: ListOf__string;
   }
   export interface SimpleEmail {
     /**
-     * The content of the message, in HTML format. Use this for email clients that can process HTML. You can include clickable links, formatted text, and much more in an HTML message.
+     * The body of the email message, in HTML format. We recommend using an HTML part for email clients that support HTML. You can include links, formatted text, and more in an HTML message.
      */
     HtmlPart?: SimpleEmailPart;
     /**
-     * The subject of the message: A short summary of the content, which will appear in the recipient's inbox.
+     * The subject line, or title, of the email.
      */
     Subject?: SimpleEmailPart;
     /**
-     * The content of the message, in text format. Use this for text-based email clients, or clients on high-latency networks (such as mobile devices).
+     * The body of the email message, in text format. We recommend using a text part for email clients that don't support HTML and clients that are connected to high-latency networks, such as mobile devices.
      */
     TextPart?: SimpleEmailPart;
   }
   export interface SimpleEmailPart {
     /**
-     * The character set of the content.
+     * The applicable character set for the message content.
      */
     Charset?: __string;
     /**
-     * The textual data of the content.
+     * The textual data of the message content.
      */
     Data?: __string;
   }
   export type SourceType = "ALL"|"ANY"|"NONE"|string;
   export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application, campaign, or segment.
+     */
     ResourceArn: __string;
     TagsModel: TagsModel;
   }
   export interface TagsModel {
+    /**
+     * A string-to-string map of key-value pairs that defines the tags for an application, campaign, or segment. A project, campaign, or segment can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     */
     tags: MapOf__string;
   }
   export interface TreatmentResource {
     /**
-     * The unique treatment ID.
+     * The unique identifier for the treatment.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * The message configuration settings.
+     * The message configuration settings for the treatment.
      */
     MessageConfiguration?: MessageConfiguration;
     /**
-     * The campaign schedule.
+     * The schedule settings for the treatment.
      */
     Schedule?: Schedule;
     /**
-     * The allocated percentage of users for this treatment.
+     * The allocated percentage of users (segment members) that the treatment is sent to.
      */
-    SizePercent?: __integer;
+    SizePercent: __integer;
     /**
-     * The treatment status.
+     * The status of the treatment.
      */
     State?: CampaignState;
     /**
-     * A custom description for the treatment.
+     * The custom description of the treatment.
      */
     TreatmentDescription?: __string;
     /**
-     * The custom name of a variation of the campaign used for A/B testing.
+     * The custom name of the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
      */
     TreatmentName?: __string;
   }
   export type Type = "ALL"|"ANY"|"NONE"|string;
   export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application, campaign, or segment.
+     */
     ResourceArn: __string;
     /**
-     * The key(s) of tag to be deleted
+     * The key of the tag to remove from the application, campaign, or segment. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).
      */
     TagKeys: ListOf__string;
   }
   export interface UpdateAdmChannelRequest {
     ADMChannelRequest: ADMChannelRequest;
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -4371,7 +4161,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export interface UpdateApnsChannelRequest {
     APNSChannelRequest: APNSChannelRequest;
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -4381,7 +4171,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export interface UpdateApnsSandboxChannelRequest {
     APNSSandboxChannelRequest: APNSSandboxChannelRequest;
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -4391,7 +4181,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export interface UpdateApnsVoipChannelRequest {
     APNSVoipChannelRequest: APNSVoipChannelRequest;
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -4401,7 +4191,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   export interface UpdateApnsVoipSandboxChannelRequest {
     APNSVoipSandboxChannelRequest: APNSVoipSandboxChannelRequest;
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
   }
@@ -4410,7 +4200,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateApplicationSettingsRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     WriteApplicationSettingsRequest: WriteApplicationSettingsRequest;
@@ -4420,13 +4210,13 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateAttributesRequest {
     /**
-     * The GLOB wildcard for removing the attributes in the application
+     * An array of the attributes to remove from all the endpoints that are associated with the application. The array can specify the complete, exact name of each attribute to remove or it can specify a glob pattern that an attribute name must match in order for the attribute to be removed.
      */
     Blacklist?: ListOf__string;
   }
   export interface UpdateBaiduChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     BaiduChannelRequest: BaiduChannelRequest;
@@ -4436,11 +4226,11 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateCampaignRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the campaign.
+     * The unique identifier for the campaign.
      */
     CampaignId: __string;
     WriteCampaignRequest: WriteCampaignRequest;
@@ -4450,7 +4240,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateEmailChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     EmailChannelRequest: EmailChannelRequest;
@@ -4460,11 +4250,11 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateEndpointRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the endpoint.
+     * The unique identifier for the endpoint.
      */
     EndpointId: __string;
     EndpointRequest: EndpointRequest;
@@ -4474,7 +4264,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateEndpointsBatchRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     EndpointBatchRequest: EndpointBatchRequest;
@@ -4484,7 +4274,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateGcmChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     GCMChannelRequest: GCMChannelRequest;
@@ -4494,11 +4284,11 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateSegmentRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The unique ID of the segment.
+     * The unique identifier for the segment.
      */
     SegmentId: __string;
     WriteSegmentRequest: WriteSegmentRequest;
@@ -4508,7 +4298,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateSmsChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     SMSChannelRequest: SMSChannelRequest;
@@ -4518,7 +4308,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateVoiceChannelRequest {
     /**
-     * The unique ID of your Amazon Pinpoint application.
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     VoiceChannelRequest: VoiceChannelRequest;
@@ -4528,125 +4318,119 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface VoiceChannelRequest {
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether to enable the voice channel for the application.
      */
     Enabled?: __boolean;
   }
   export interface VoiceChannelResponse {
     /**
-     * Application id
+     * The unique identifier for the application that the voice channel applies to.
      */
     ApplicationId?: __string;
     /**
-     * The date that the settings were last updated in ISO 8601 format.
+     * The date and time, in ISO 8601 format, when the voice channel was enabled.
      */
     CreationDate?: __string;
     /**
-     * If the channel is enabled for sending messages.
+     * Specifies whether the voice channel is enabled for the application.
      */
     Enabled?: __boolean;
+    /**
+     * (Not used) This property is retained only for backward compatibility.
+     */
     HasCredential?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * (Deprecated) An identifier for the voice channel. This property is retained only for backward compatibility.
      */
     Id?: __string;
     /**
-     * Is this channel archived
+     * Specifies whether the voice channel is archived.
      */
     IsArchived?: __boolean;
     /**
-     * Who made the last change
+     * The user who last modified the voice channel.
      */
     LastModifiedBy?: __string;
     /**
-     * Last date this was updated
+     * The date and time, in ISO 8601 format, when the voice channel was last modified.
      */
     LastModifiedDate?: __string;
     /**
-     * Platform type. Will be "Voice"
+     * The type of messaging or notification platform for the channel. For the voice channel, this value is VOICE.
      */
-    Platform?: __string;
+    Platform: __string;
     /**
-     * Version of channel
+     * The current version of the voice channel.
      */
     Version?: __integer;
   }
   export interface VoiceMessage {
     /**
-     * The message body of the notification, the email body or the text message.
+     * The text script for the voice message.
      */
     Body?: __string;
     /**
-     * Language of sent message
+     * The language to use when delivering the message. For a list of supported languages, see the Amazon Polly Developer Guide.
      */
     LanguageCode?: __string;
     /**
-     * Is the number from the pool or messaging service to send from.
+     * The phone number from the pool or messaging service to send the message from. Although it isn't required, we recommend that you specify the phone number in E.164 format to ensure prompt and accurate delivery.
      */
     OriginationNumber?: __string;
     /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
+     * The default message variables to use in the voice message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * Voice ID of sent message.
+     * The name of the voice to use when delivering the message. For a list of supported voices, see the Amazon Polly Developer Guide.
      */
     VoiceId?: __string;
   }
   export interface WriteApplicationSettingsRequest {
     /**
-     * Default campaign hook information.
+     * The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application. To override these settings for a specific campaign, use the Campaign resource to define custom Lambda function settings for the campaign.
      */
     CampaignHook?: CampaignHook;
     /**
-     * The CloudWatchMetrics settings for the app.
+     * Specifies whether to enable application-related alarms in Amazon CloudWatch.
      */
     CloudWatchMetricsEnabled?: __boolean;
     /**
-     * The limits that apply to each campaign in the project by default. Campaigns can also have their own limits, which override the settings at the project level.
+     * The default sending limits for campaigns in the application. To override these limits for a specific campaign, use the Campaign resource to define custom limits for the campaign.
      */
     Limits?: CampaignLimits;
     /**
-     * The default quiet time for the app. Campaigns in the app don't send messages to endpoints during the quiet time.
-
-Note: Make sure that your endpoints include the Demographics.Timezone attribute if you plan to enable a quiet time for your app. If your endpoints don't include this attribute, they'll receive the messages that you send them, even if quiet time is enabled.
-
-When you set up an app to use quiet time, campaigns in that app don't send messages during the time range you specified, as long as all of the following are true:
-- The endpoint includes a valid Demographic.Timezone attribute.
-- The current time in the endpoint's time zone is later than or equal to the time specified in the QuietTime.Start attribute for the app (or campaign, if applicable).
-- The current time in the endpoint's time zone is earlier than or equal to the time specified in the QuietTime.End attribute for the app (or campaign, if applicable).
-
-Individual campaigns within the app can have their own quiet time settings, which override the quiet time settings at the app level.
+     * The default quiet time for campaigns in the application. Quiet time is a specific time range when campaigns don't send messages to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign, even if quiet time is enabled. To override the default quiet time settings for a specific campaign, use the Campaign resource to define a custom quiet time for the campaign.
      */
     QuietTime?: QuietTime;
   }
   export interface WriteCampaignRequest {
     /**
-     * Treatments that are defined in addition to the default treatment.
+     * An array of requests that defines additional treatments for the campaign, in addition to the default treatment for the campaign.
      */
     AdditionalTreatments?: ListOfWriteTreatmentResource;
     /**
-     * A description of the campaign.
+     * The custom description of the campaign.
      */
     Description?: __string;
     /**
-     * The allocated percentage of end users who will not receive messages from this campaign.
+     * The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
      */
     HoldoutPercent?: __integer;
     /**
-     * Campaign hook information.
+     * The settings for the AWS Lambda function to use as a code hook for the campaign.
      */
     Hook?: CampaignHook;
     /**
-     * Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
+     * Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by setting this value to false.
      */
     IsPaused?: __boolean;
     /**
-     * The campaign limits settings.
+     * The messaging limits for the campaign.
      */
     Limits?: CampaignLimits;
     /**
-     * The message configuration settings.
+     * The message configuration settings for the campaign.
      */
     MessageConfiguration?: MessageConfiguration;
     /**
@@ -4654,79 +4438,79 @@ Individual campaigns within the app can have their own quiet time settings, whic
      */
     Name?: __string;
     /**
-     * The campaign schedule.
+     * The schedule settings for the campaign.
      */
     Schedule?: Schedule;
     /**
-     * The ID of the segment to which the campaign sends messages.
+     * The unique identifier for the segment to associate with the campaign.
      */
     SegmentId?: __string;
     /**
-     * The version of the segment to which the campaign sends messages.
+     * The version of the segment to associate with the campaign.
      */
     SegmentVersion?: __integer;
     /**
-     * The Tags for the campaign.
+     * A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
-     * A custom description for the treatment.
+     * The custom description of a variation of the campaign to use for A/B testing.
      */
     TreatmentDescription?: __string;
     /**
-     * The custom name of a variation of the campaign used for A/B testing.
+     * The custom name of a variation of the campaign to use for A/B testing.
      */
     TreatmentName?: __string;
   }
   export interface WriteEventStream {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
- Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
- Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
+     * The Amazon Resource Name (ARN) of the Amazon Kinesis data stream or Amazon Kinesis Data Firehose delivery stream that you want to publish event data to. For a Kinesis data stream, the ARN format is: arn:aws:kinesis:region:account-id:stream/stream_name
+                For a Kinesis Data Firehose delivery stream, the ARN format is: arn:aws:firehose:region:account-id:deliverystream/stream_name
+               
      */
-    DestinationStreamArn?: __string;
+    DestinationStreamArn: __string;
     /**
-     * The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
+     * The AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to publish event data to the stream in your AWS account.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
   }
   export interface WriteSegmentRequest {
     /**
-     * The segment dimensions attributes.
+     * The criteria that define the dimensions for the segment.
      */
     Dimensions?: SegmentDimensions;
     /**
-     * The name of segment
+     * The name of the segment.
      */
     Name?: __string;
     /**
-     * A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments. Your request can only include one segment group. Your request can include either a SegmentGroups object or a Dimensions object, but not both.
+     * The segment group to use and the dimensions to apply to the group's base segments in order to build the segment. A segment group can consist of zero or more base segments. Your request can include only one segment group.
      */
     SegmentGroups?: SegmentGroupList;
     /**
-     * The Tags for the segments.
+     * A string-to-string map of key-value pairs that defines the tags to associate with the segment. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
   }
   export interface WriteTreatmentResource {
     /**
-     * The message configuration settings.
+     * The message configuration settings for the treatment.
      */
     MessageConfiguration?: MessageConfiguration;
     /**
-     * The campaign schedule.
+     * The schedule settings for the treatment.
      */
     Schedule?: Schedule;
     /**
-     * The allocated percentage of users for this treatment.
+     * The allocated percentage of users (segment members) to send the treatment to.
      */
-    SizePercent?: __integer;
+    SizePercent: __integer;
     /**
-     * A custom description for the treatment.
+     * The custom description of the treatment.
      */
     TreatmentDescription?: __string;
     /**
-     * The custom name of a variation of the campaign used for A/B testing.
+     * The custom name of the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
      */
     TreatmentName?: __string;
   }
