@@ -183,5 +183,6 @@ module.exports = {
   PersonalizeEvents: require('./personalizeevents'),
   PersonalizeRuntime: require('./personalizeruntime'),
   ApplicationInsights: require('./applicationinsights'),
-  ServiceQuotas: require('./servicequotas')
+  ServiceQuotas: require('./servicequotas'),
+  EC2InstanceConnect: require('./ec2instanceconnect')
 };

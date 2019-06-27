@@ -188,11 +188,11 @@ declare class DirectConnect extends Service {
    */
   createPublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Creates a transit virtual interface. A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.
+   * Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.  If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails. 
    */
   createTransitVirtualInterface(params: DirectConnect.Types.CreateTransitVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateTransitVirtualInterfaceResult) => void): Request<DirectConnect.Types.CreateTransitVirtualInterfaceResult, AWSError>;
   /**
-   * Creates a transit virtual interface. A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.
+   * Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.  If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails. 
    */
   createTransitVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.CreateTransitVirtualInterfaceResult) => void): Request<DirectConnect.Types.CreateTransitVirtualInterfaceResult, AWSError>;
   /**
@@ -444,7 +444,7 @@ declare namespace DirectConnect {
      */
     associatedGatewayOwnerAccount: OwnerAccount;
     /**
-     * Overrides the existing Amazon VPC prefixes advertised to the Direct Connect gateway.
+     * Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway. For information about how to set the prefixes, see Allowed Prefixes in the AWS Direct Connect User Guide.
      */
     overrideAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
   }
@@ -495,6 +495,10 @@ declare namespace DirectConnect {
      * The dedicated VLAN provisioned to the hosted connection.
      */
     vlan: VLAN;
+    /**
+     * The tags to assign to the hosted connection.
+     */
+    tags?: TagList;
   }
   export interface AllocatePrivateVirtualInterfaceRequest {
     /**
@@ -605,7 +609,7 @@ declare namespace DirectConnect {
      */
     asn?: ASN;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -761,6 +765,10 @@ declare namespace DirectConnect {
      * Indicates whether the connection supports a secondary BGP peer in the same address family (IPv4/IPv6).
      */
     hasLogicalRedundancy?: HasLogicalRedundancy;
+    /**
+     * Any tags assigned to the connection.
+     */
+    tags?: TagList;
   }
   export type ConnectionId = string;
   export type ConnectionList = Connection[];
@@ -806,6 +814,10 @@ declare namespace DirectConnect {
      * The ID of the LAG.
      */
     lagId?: LagId;
+    /**
+     * The tags to assign to the connection.
+     */
+    tags?: TagList;
   }
   export interface CreateDirectConnectGatewayAssociationProposalRequest {
     /**
@@ -845,7 +857,7 @@ declare namespace DirectConnect {
      */
     gatewayId?: GatewayIdToAssociate;
     /**
-     * The Amazon VPC prefixes to advertise to the Direct Connect gateway
+     * The Amazon VPC prefixes to advertise to the Direct Connect gateway For information about how to set the prefixes, see Allowed Prefixes in the AWS Direct Connect User Guide.
      */
     addAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
     /**
@@ -892,6 +904,10 @@ declare namespace DirectConnect {
      * The ID of the LAG.
      */
     lagId?: LagId;
+    /**
+     * The tags to assign to the interconnect,
+     */
+    tags?: TagList;
   }
   export interface CreateLagRequest {
     /**
@@ -914,6 +930,14 @@ declare namespace DirectConnect {
      * The ID of an existing connection to migrate to the LAG.
      */
     connectionId?: ConnectionId;
+    /**
+     * The tags to assign to the link aggregation group (LAG).
+     */
+    tags?: TagList;
+    /**
+     * The tags to assign to the child connections of the LAG. Only newly created child connections as the result of creating a LAG connection are assigned the provided tags. The tags are not assigned to an existing connection that is provided via the “connectionId” parameter that will be migrated to the LAG.
+     */
+    childConnectionTags?: TagList;
   }
   export interface CreatePrivateVirtualInterfaceRequest {
     /**
@@ -1405,7 +1429,7 @@ declare namespace DirectConnect {
      */
     attachmentState?: DirectConnectGatewayAttachmentState;
     /**
-     * The type of attachment.
+     * The interface type.
      */
     attachmentType?: DirectConnectGatewayAttachmentType;
     /**
@@ -1483,6 +1507,10 @@ declare namespace DirectConnect {
      * Indicates whether the interconnect supports a secondary BGP in the same address family (IPv4/IPv6).
      */
     hasLogicalRedundancy?: HasLogicalRedundancy;
+    /**
+     * Any tags assigned to the interconnect.
+     */
+    tags?: TagList;
   }
   export type InterconnectId = string;
   export type InterconnectList = Interconnect[];
@@ -1556,6 +1584,10 @@ declare namespace DirectConnect {
      * Indicates whether the LAG supports a secondary BGP peer in the same address family (IPv4/IPv6).
      */
     hasLogicalRedundancy?: HasLogicalRedundancy;
+    /**
+     * Any tags assigned to link aggregation group (LAG).
+     */
+    tags?: TagList;
   }
   export type LagId = string;
   export type LagList = Lag[];
@@ -1616,7 +1648,7 @@ declare namespace DirectConnect {
      */
     asn?: ASN;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -1650,7 +1682,7 @@ declare namespace DirectConnect {
      */
     mtu?: MTU;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -1673,6 +1705,10 @@ declare namespace DirectConnect {
      * The ID of the Direct Connect gateway.
      */
     directConnectGatewayId?: DirectConnectGatewayId;
+    /**
+     * Any tags assigned to the private virtual interface.
+     */
+    tags?: TagList;
   }
   export interface NewPrivateVirtualInterfaceAllocation {
     /**
@@ -1692,7 +1728,7 @@ declare namespace DirectConnect {
      */
     mtu?: MTU;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -1707,6 +1743,10 @@ declare namespace DirectConnect {
      * The IP address assigned to the customer interface.
      */
     customerAddress?: CustomerAddress;
+    /**
+     * Any tags assigned to the private virtual interface to be provisioned on a connection.
+     */
+    tags?: TagList;
   }
   export interface NewPublicVirtualInterface {
     /**
@@ -1722,7 +1762,7 @@ declare namespace DirectConnect {
      */
     asn: ASN;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -1741,6 +1781,10 @@ declare namespace DirectConnect {
      * The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
      */
     routeFilterPrefixes?: RouteFilterPrefixList;
+    /**
+     * Any tags assigned to the public virtual interface.
+     */
+    tags?: TagList;
   }
   export interface NewPublicVirtualInterfaceAllocation {
     /**
@@ -1756,7 +1800,7 @@ declare namespace DirectConnect {
      */
     asn: ASN;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -1775,6 +1819,10 @@ declare namespace DirectConnect {
      * The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
      */
     routeFilterPrefixes?: RouteFilterPrefixList;
+    /**
+     * Any tags assigned to the public virtual interface to be provisioned on a connection.
+     */
+    tags?: TagList;
   }
   export interface NewTransitVirtualInterface {
     /**
@@ -1790,7 +1838,7 @@ declare namespace DirectConnect {
      */
     asn?: ASN;
     /**
-     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.
+     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500. 
      */
     mtu?: MTU;
     /**
@@ -1813,6 +1861,10 @@ declare namespace DirectConnect {
      * The ID of the Direct Connect gateway.
      */
     directConnectGatewayId?: DirectConnectGatewayId;
+    /**
+     * Any tags assigned to the transit virtual interface.
+     */
+    tags?: TagList;
   }
   export interface NewTransitVirtualInterfaceAllocation {
     /**
@@ -1828,7 +1880,7 @@ declare namespace DirectConnect {
      */
     asn?: ASN;
     /**
-     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500. 
+     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500. 
      */
     mtu?: MTU;
     /**
@@ -1847,6 +1899,10 @@ declare namespace DirectConnect {
      * The address family for the BGP peer.
      */
     addressFamily?: AddressFamily;
+    /**
+     * Any tags assigned to the transit virtual interface.
+     */
+    tags?: TagList;
   }
   export type OwnerAccount = string;
   export type PaginationToken = string;
@@ -1895,7 +1951,7 @@ declare namespace DirectConnect {
      */
     resourceArn: ResourceArn;
     /**
-     * The tags to add.
+     * The tags to assign.
      */
     tags: TagList;
   }
@@ -2014,7 +2070,7 @@ declare namespace DirectConnect {
      */
     amazonSideAsn?: LongAsn;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -2069,6 +2125,10 @@ declare namespace DirectConnect {
      * The Direct Connect endpoint on which the virtual interface terminates.
      */
     awsDeviceV2?: AwsDeviceV2;
+    /**
+     * Any tags assigned to the virtual interface.
+     */
+    tags?: TagList;
   }
   export type VirtualInterfaceId = string;
   export type VirtualInterfaceList = VirtualInterface[];
