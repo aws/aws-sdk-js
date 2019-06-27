@@ -1391,8 +1391,14 @@
           AWS_IAM_ROLE_ARN: 'envRoleArn',
           ENV_ROLE_SESSION_NAME: 'envSessionName'
         };
-        helpers.spyOn(AWS.util, 'readFileSync').andReturn(
-          '[default]\nweb_identity_token_file = cfgTokenFile\nrole_arn = cfgRoleArn\nrole_session_name = cfgSessionName'
+        helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(
+          {
+            'default': {
+              'web_identity_token_file': 'cfgTokenFile',
+              'role_arn': 'cfgRoleArn',
+              'role_session_name': 'cfgSessionName'
+            }
+          }
         );
         helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
         helpers.spyOn(os, 'homedir').andReturn('/home/user');
