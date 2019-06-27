@@ -1396,6 +1396,7 @@
         helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
       });
       afterEach(function() {
+        iniLoader.clearCachedFiles();
         process.env = origEnv;
       });
 
