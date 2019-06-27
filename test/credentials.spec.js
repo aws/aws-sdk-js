@@ -1380,6 +1380,50 @@
         expect(AWS.ECSCredentials).to.equal(AWS.RemoteCredentials);
       });
     });
+    describe('AWS.AssumeRoleWithWebIdentityCredentials', function() {
+      var origEnv;
+      var fs = require('fs');
+      beforeEach(function() {
+        origEnv = process.env;
+        process.env = {
+          AWS_WEB_IDENTITY_TOKEN_FILE: 'envTokenFile',
+          AWS_IAM_ROLE_ARN: 'envRoleArn',
+          ENV_ROLE_SESSION_NAME: 'envSessionName'
+        };
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(
+          '[default]\nweb_identity_token_file = cfgTokenFile\nrole_arn = cfgRoleArn\nrole_session_name = cfgSessionName'
+        );
+        helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
+      });
+      afterEach(function() {
+        process.env = origEnv;
+      });
+
+      it('reads params from environment variables when available', function() {
+        new AWS.AssumeRoleWithWebIdentityCredentials();
+        return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('envTokenFile');
+      });
+
+      return describe('reads params from shared config when ones not available from environment variable', function() {
+        it('when AWS_WEB_IDENTITY_TOKEN_FILE is not available', function() {
+          delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
+          new AWS.AssumeRoleWithWebIdentityCredentials();
+          return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+        });
+
+        it('when AWS_IAM_ROLE_ARN is not available', function() {
+          delete process.env.AWS_IAM_ROLE_ARN;
+          new AWS.AssumeRoleWithWebIdentityCredentials();
+          return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+        });
+
+        return it('when process.env is empty', function() {
+          process.env = {};
+          new AWS.AssumeRoleWithWebIdentityCredentials();
+          return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+        });
+      });
+    });
   }
 
   describe('AWS.TemporaryCredentials', function() {
@@ -1895,51 +1939,6 @@
             });
           });
         });
-      });
-    });
-  });
-
-  describe('AWS.AssumeRoleWithWebIdentityCredentials', function() {
-    var origEnv;
-    var fs = require('fs');
-    beforeEach(function() {
-      origEnv = process.env;
-      process.env = {
-        AWS_WEB_IDENTITY_TOKEN_FILE: 'envTokenFile',
-        AWS_IAM_ROLE_ARN: 'envRoleArn',
-        ENV_ROLE_SESSION_NAME: 'envSessionName'
-      };
-      helpers.spyOn(AWS.util, 'readFileSync').andReturn(
-        '[default]\nweb_identity_token_file = cfgTokenFile\nrole_arn = cfgRoleArn\nrole_session_name = cfgSessionName'
-      );
-      helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
-    });
-    afterEach(function() {
-      process.env = origEnv;
-    });
-
-    it('reads params from environment variables when available', function() {
-      new AWS.AssumeRoleWithWebIdentityCredentials();
-      return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('envTokenFile');
-    });
-
-    return describe('reads params from shared config when ones not available from environment variable', function() {
-      it('when AWS_WEB_IDENTITY_TOKEN_FILE is not available', function() {
-        delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
-        new AWS.AssumeRoleWithWebIdentityCredentials();
-        return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
-      });
-
-      it('when AWS_IAM_ROLE_ARN is not available', function() {
-        delete process.env.AWS_IAM_ROLE_ARN;
-        new AWS.AssumeRoleWithWebIdentityCredentials();
-        return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
-      });
-
-      return it('when process.env is empty', function() {
-        process.env = {};
-        new AWS.AssumeRoleWithWebIdentityCredentials();
-        return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
       });
     });
   });
