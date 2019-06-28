@@ -1382,7 +1382,6 @@
     });
     describe('AWS.TokenFileWebIdentityCredentials', function() {
       var origEnv;
-      var os = require('os');
       var fs = require('fs');
       beforeEach(function() {
         origEnv = process.env;
@@ -1401,7 +1400,6 @@
           }
         );
         helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
-        helpers.spyOn(os, 'homedir').andReturn('/home/user');
       });
       afterEach(function() {
         iniLoader.clearCachedFiles();
