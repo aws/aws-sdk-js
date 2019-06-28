@@ -856,6 +856,10 @@ declare namespace Redshift {
      */
     ClusterStatus?: String;
     /**
+     * The availability status of the cluster for queries. Possible values are the following:   Available - The cluster is available for queries.    Unavailable - The cluster is not available for queries.   Maintenance - The cluster is intermittently available for queries due to maintenance activities.   Modifying - The cluster is intermittently available for queries due to changes that modify the cluster.   Failed - The cluster failed and is not available for queries.  
+     */
+    ClusterAvailabilityStatus?: String;
+    /**
      * The status of a modify operation, if any, initiated for the cluster.
      */
     ModifyStatus?: String;

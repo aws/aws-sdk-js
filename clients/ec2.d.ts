@@ -7302,6 +7302,7 @@ declare namespace EC2 {
      */
     BundleTasks?: BundleTaskList;
   }
+  export type DescribeByoipCidrsMaxResults = number;
   export interface DescribeByoipCidrsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -7310,7 +7311,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
-    MaxResults: MaxResults;
+    MaxResults: DescribeByoipCidrsMaxResults;
     /**
      * The token for the next page of results.
      */
@@ -7359,6 +7360,7 @@ declare namespace EC2 {
      */
     CapacityReservations?: CapacityReservationSet;
   }
+  export type DescribeClassicLinkInstancesMaxResults = number;
   export interface DescribeClassicLinkInstancesRequest {
     /**
      * One or more filters.    group-id - The ID of a VPC security group that's associated with the instance.    instance-id - The ID of the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC to which the instance is linked.  vpc-id - The ID of the VPC that the instance is linked to.  
@@ -7375,7 +7377,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. Constraint: If the value is greater than 1000, we return only 1000 items.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeClassicLinkInstancesMaxResults;
     /**
      * The token for the next page of results.
      */
@@ -7391,6 +7393,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeClientVpnAuthorizationRulesMaxResults = number;
   export interface DescribeClientVpnAuthorizationRulesRequest {
     /**
      * The ID of the Client VPN endpoint.
@@ -7411,7 +7414,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeClientVpnAuthorizationRulesMaxResults;
   }
   export interface DescribeClientVpnAuthorizationRulesResult {
     /**
@@ -7423,6 +7426,7 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
   }
+  export type DescribeClientVpnConnectionsMaxResults = number;
   export interface DescribeClientVpnConnectionsRequest {
     /**
      * The ID of the Client VPN endpoint.
@@ -7439,7 +7443,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeClientVpnConnectionsMaxResults;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7455,6 +7459,7 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
   }
+  export type DescribeClientVpnEndpointMaxResults = number;
   export interface DescribeClientVpnEndpointsRequest {
     /**
      * The ID of the Client VPN endpoint.
@@ -7463,7 +7468,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeClientVpnEndpointMaxResults;
     /**
      * The token to retrieve the next page of results.
      */
@@ -7487,6 +7492,7 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
   }
+  export type DescribeClientVpnRoutesMaxResults = number;
   export interface DescribeClientVpnRoutesRequest {
     /**
      * The ID of the Client VPN endpoint.
@@ -7499,7 +7505,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeClientVpnRoutesMaxResults;
     /**
      * The token to retrieve the next page of results.
      */
@@ -7519,6 +7525,7 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
   }
+  export type DescribeClientVpnTargetNetworksMaxResults = number;
   export interface DescribeClientVpnTargetNetworksRequest {
     /**
      * The ID of the Client VPN endpoint.
@@ -7531,7 +7538,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeClientVpnTargetNetworksMaxResults;
     /**
      * The token to retrieve the next page of results.
      */
@@ -7625,6 +7632,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeEgressOnlyInternetGatewaysMaxResults = number;
   export interface DescribeEgressOnlyInternetGatewaysRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -7637,7 +7645,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeEgressOnlyInternetGatewaysMaxResults;
     /**
      * The token for the next page of results.
      */
@@ -7912,6 +7920,7 @@ declare namespace EC2 {
      */
     FpgaImageAttribute?: FpgaImageAttribute;
   }
+  export type DescribeFpgaImagesMaxResults = number;
   export interface DescribeFpgaImagesRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -7936,7 +7945,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeFpgaImagesMaxResults;
   }
   export interface DescribeFpgaImagesResult {
     /**
@@ -8041,6 +8050,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeIamInstanceProfileAssociationsMaxResults = number;
   export interface DescribeIamInstanceProfileAssociationsRequest {
     /**
      * The IAM instance profile associations.
@@ -8053,7 +8063,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeIamInstanceProfileAssociationsMaxResults;
     /**
      * The token to request the next page of results.
      */
@@ -8456,6 +8466,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeMovingAddressesMaxResults = number;
   export interface DescribeMovingAddressesRequest {
     /**
      * One or more filters.    moving-status - The status of the Elastic IP address (MovingToVpc | RestoringToClassic).  
@@ -8468,7 +8479,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value outside of this range, an error is returned. Default: If no value is provided, the default is 1000.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeMovingAddressesMaxResults;
     /**
      * The token for the next page of results.
      */
@@ -8488,6 +8499,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeNatGatewaysMaxResults = number;
   export interface DescribeNatGatewaysRequest {
     /**
      * One or more filters.    nat-gateway-id - The ID of the NAT gateway.    state - The state of the NAT gateway (pending | failed | available | deleting | deleted).    subnet-id - The ID of the subnet in which the NAT gateway resides.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC in which the NAT gateway resides.  
@@ -8496,7 +8508,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeNatGatewaysMaxResults;
     /**
      * One or more NAT gateway IDs.
      */
@@ -8699,6 +8711,7 @@ declare namespace EC2 {
      */
     PrefixLists?: PrefixListSet;
   }
+  export type DescribePrincipalIdFormatMaxResults = number;
   export interface DescribePrincipalIdFormatRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -8711,7 +8724,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. 
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribePrincipalIdFormatMaxResults;
     /**
      * The token to request the next page of results.
      */
@@ -8948,6 +8961,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeScheduledInstanceAvailabilityMaxResults = number;
   export interface DescribeScheduledInstanceAvailabilityRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -8964,7 +8978,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. This value can be between 5 and 300. The default value is 300. To retrieve the remaining results, make another call with the returned NextToken value.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeScheduledInstanceAvailabilityMaxResults;
     /**
      * The maximum available duration, in hours. This value must be greater than MinSlotDurationInHours and less than 1,720.
      */
@@ -9161,6 +9175,7 @@ declare namespace EC2 {
      */
     SpotDatafeedSubscription?: SpotDatafeedSubscription;
   }
+  export type DescribeSpotFleetInstancesMaxResults = number;
   export interface DescribeSpotFleetInstancesRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -9169,7 +9184,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeSpotFleetInstancesMaxResults;
     /**
      * The token for the next set of results.
      */
@@ -9193,6 +9208,7 @@ declare namespace EC2 {
      */
     SpotFleetRequestId?: String;
   }
+  export type DescribeSpotFleetRequestHistoryMaxResults = number;
   export interface DescribeSpotFleetRequestHistoryRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -9205,7 +9221,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeSpotFleetRequestHistoryMaxResults;
     /**
      * The token for the next set of results.
      */
@@ -9816,15 +9832,17 @@ declare namespace EC2 {
      */
     EnableDnsSupport?: AttributeBooleanValue;
   }
+  export type DescribeVpcClassicLinkDnsSupportMaxResults = number;
+  export type DescribeVpcClassicLinkDnsSupportNextToken = string;
   export interface DescribeVpcClassicLinkDnsSupportRequest {
     /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeVpcClassicLinkDnsSupportMaxResults;
     /**
      * The token for the next page of results.
      */
-    NextToken?: NextToken;
+    NextToken?: DescribeVpcClassicLinkDnsSupportNextToken;
     /**
      * One or more VPC IDs.
      */
@@ -9834,7 +9852,7 @@ declare namespace EC2 {
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
-    NextToken?: NextToken;
+    NextToken?: DescribeVpcClassicLinkDnsSupportNextToken;
     /**
      * Information about the ClassicLink DNS support status of the VPCs.
      */
@@ -10819,7 +10837,7 @@ declare namespace EC2 {
      */
     InstanceId?: String;
   }
-  export type EventType = "instanceChange"|"fleetRequestChange"|"error"|string;
+  export type EventType = "instanceChange"|"fleetRequestChange"|"error"|"information"|string;
   export type ExcessCapacityTerminationPolicy = "noTermination"|"default"|string;
   export type ExecutableByStringList = String[];
   export interface ExportClientVpnClientCertificateRevocationListRequest {
@@ -13180,7 +13198,7 @@ declare namespace EC2 {
      */
     Status?: SummaryStatus;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.12xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.12xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.12xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.18xlarge"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.12xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.12xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.12xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|string;
+  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.18xlarge"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|string;
   export type InstanceTypeList = InstanceType[];
   export type Integer = number;
   export type InterfacePermissionType = "INSTANCE-ATTACH"|"EIP-ASSOCIATE"|string;
@@ -14035,7 +14053,6 @@ declare namespace EC2 {
   export type LogDestinationType = "cloud-watch-logs"|"s3"|string;
   export type Long = number;
   export type MarketType = "spot"|string;
-  export type MaxResults = number;
   export type MillisecondDateTime = Date;
   export interface ModifyCapacityReservationRequest {
     /**

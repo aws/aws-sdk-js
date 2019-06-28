@@ -11555,6 +11555,11 @@
         }
       }
     },
+    "DescribeByoipCidrsMaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
     "DescribeByoipCidrsRequest": {
       "type": "structure",
       "required": [
@@ -11566,7 +11571,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeByoipCidrsMaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         },
         "NextToken": {
@@ -11637,6 +11642,11 @@
         }
       }
     },
+    "DescribeClassicLinkInstancesMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeClassicLinkInstancesRequest": {
       "type": "structure",
       "members": {
@@ -11656,7 +11666,7 @@
           "locationName": "InstanceId"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeClassicLinkInstancesMaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>",
           "locationName": "maxResults"
         },
@@ -11682,6 +11692,11 @@
         }
       }
     },
+    "DescribeClientVpnAuthorizationRulesMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeClientVpnAuthorizationRulesRequest": {
       "type": "structure",
       "required": [
@@ -11706,7 +11721,7 @@
           "locationName": "Filter"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeClientVpnAuthorizationRulesMaxResults",
           "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
         }
       }
@@ -11725,6 +11740,11 @@
           "locationName": "nextToken"
         }
       }
+    },
+    "DescribeClientVpnConnectionsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
     },
     "DescribeClientVpnConnectionsRequest": {
       "type": "structure",
@@ -11746,7 +11766,7 @@
           "documentation": "<p>The token to retrieve the next page of results.</p>"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeClientVpnConnectionsMaxResults",
           "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
         },
         "DryRun": {
@@ -11770,6 +11790,11 @@
         }
       }
     },
+    "DescribeClientVpnEndpointMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeClientVpnEndpointsRequest": {
       "type": "structure",
       "members": {
@@ -11779,7 +11804,7 @@
           "locationName": "ClientVpnEndpointId"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeClientVpnEndpointMaxResults",
           "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
         },
         "NextToken": {
@@ -11812,6 +11837,11 @@
         }
       }
     },
+    "DescribeClientVpnRoutesMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeClientVpnRoutesRequest": {
       "type": "structure",
       "required": [
@@ -11828,7 +11858,7 @@
           "locationName": "Filter"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeClientVpnRoutesMaxResults",
           "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
         },
         "NextToken": {
@@ -11856,6 +11886,11 @@
         }
       }
     },
+    "DescribeClientVpnTargetNetworksMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeClientVpnTargetNetworksRequest": {
       "type": "structure",
       "required": [
@@ -11871,7 +11906,7 @@
           "documentation": "<p>The IDs of the target network associations.</p>"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeClientVpnTargetNetworksMaxResults",
           "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.</p>"
         },
         "NextToken": {
@@ -12016,6 +12051,11 @@
         }
       }
     },
+    "DescribeEgressOnlyInternetGatewaysMaxResults": {
+      "type": "integer",
+      "max": 255,
+      "min": 5
+    },
     "DescribeEgressOnlyInternetGatewaysRequest": {
       "type": "structure",
       "members": {
@@ -12029,7 +12069,7 @@
           "locationName": "EgressOnlyInternetGatewayId"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeEgressOnlyInternetGatewaysMaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         },
         "NextToken": {
@@ -12422,6 +12462,11 @@
         }
       }
     },
+    "DescribeFpgaImagesMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeFpgaImagesRequest": {
       "type": "structure",
       "members": {
@@ -12449,7 +12494,7 @@
           "documentation": "<p>The token to retrieve the next page of results.</p>"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeFpgaImagesMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call.</p>"
         }
       }
@@ -12594,6 +12639,11 @@
         }
       }
     },
+    "DescribeIamInstanceProfileAssociationsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeIamInstanceProfileAssociationsRequest": {
       "type": "structure",
       "members": {
@@ -12608,7 +12658,7 @@
           "locationName": "Filter"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeIamInstanceProfileAssociationsMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
         },
         "NextToken": {
@@ -13176,6 +13226,11 @@
         }
       }
     },
+    "DescribeMovingAddressesMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeMovingAddressesRequest": {
       "type": "structure",
       "members": {
@@ -13190,7 +13245,7 @@
           "locationName": "dryRun"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeMovingAddressesMaxResults",
           "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value outside of this range, an error is returned.</p> <p>Default: If no value is provided, the default is 1000.</p>",
           "locationName": "maxResults"
         },
@@ -13221,6 +13276,11 @@
         }
       }
     },
+    "DescribeNatGatewaysMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeNatGatewaysRequest": {
       "type": "structure",
       "members": {
@@ -13229,7 +13289,7 @@
           "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>nat-gateway-id</code> - The ID of the NAT gateway.</p> </li> <li> <p> <code>state</code> - The state of the NAT gateway (<code>pending</code> | <code>failed</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet in which the NAT gateway resides.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC in which the NAT gateway resides.</p> </li> </ul>"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeNatGatewaysMaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         },
         "NatGatewayIds": {
@@ -13528,6 +13588,11 @@
         }
       }
     },
+    "DescribePrincipalIdFormatMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "DescribePrincipalIdFormatRequest": {
       "type": "structure",
       "members": {
@@ -13541,7 +13606,7 @@
           "locationName": "Resource"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribePrincipalIdFormatMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. </p>"
         },
         "NextToken": {
@@ -13876,6 +13941,11 @@
       },
       "documentation": "<p>Contains the output of DescribeRouteTables.</p>"
     },
+    "DescribeScheduledInstanceAvailabilityMaxResults": {
+      "type": "integer",
+      "max": 300,
+      "min": 5
+    },
     "DescribeScheduledInstanceAvailabilityRequest": {
       "type": "structure",
       "required": [
@@ -13897,7 +13967,7 @@
           "documentation": "<p>The time period for the first schedule to start.</p>"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeScheduledInstanceAvailabilityMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. This value can be between 5 and 300. The default value is 300. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
         },
         "MaxSlotDurationInHours": {
@@ -14181,6 +14251,11 @@
       },
       "documentation": "<p>Contains the output of DescribeSpotDatafeedSubscription.</p>"
     },
+    "DescribeSpotFleetInstancesMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "DescribeSpotFleetInstancesRequest": {
       "type": "structure",
       "required": [
@@ -14193,7 +14268,7 @@
           "locationName": "dryRun"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeSpotFleetInstancesMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>",
           "locationName": "maxResults"
         },
@@ -14231,6 +14306,11 @@
       },
       "documentation": "<p>Contains the output of DescribeSpotFleetInstances.</p>"
     },
+    "DescribeSpotFleetRequestHistoryMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "DescribeSpotFleetRequestHistoryRequest": {
       "type": "structure",
       "required": [
@@ -14249,7 +14329,7 @@
           "locationName": "eventType"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeSpotFleetRequestHistoryMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>",
           "locationName": "maxResults"
         },
@@ -15099,16 +15179,26 @@
         }
       }
     },
+    "DescribeVpcClassicLinkDnsSupportMaxResults": {
+      "type": "integer",
+      "max": 255,
+      "min": 5
+    },
+    "DescribeVpcClassicLinkDnsSupportNextToken": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
     "DescribeVpcClassicLinkDnsSupportRequest": {
       "type": "structure",
       "members": {
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeVpcClassicLinkDnsSupportMaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>",
           "locationName": "maxResults"
         },
         "NextToken": {
-          "shape": "NextToken",
+          "shape": "DescribeVpcClassicLinkDnsSupportNextToken",
           "documentation": "<p>The token for the next page of results.</p>",
           "locationName": "nextToken"
         },
@@ -15122,7 +15212,7 @@
       "type": "structure",
       "members": {
         "NextToken": {
-          "shape": "NextToken",
+          "shape": "DescribeVpcClassicLinkDnsSupportNextToken",
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         },
@@ -16772,7 +16862,8 @@
       "enum": [
         "instanceChange",
         "fleetRequestChange",
-        "error"
+        "error",
+        "information"
       ]
     },
     "ExcessCapacityTerminationPolicy": {
@@ -20597,20 +20688,26 @@
         "r5.xlarge",
         "r5.2xlarge",
         "r5.4xlarge",
+        "r5.8xlarge",
         "r5.12xlarge",
+        "r5.16xlarge",
         "r5.24xlarge",
         "r5.metal",
         "r5a.large",
         "r5a.xlarge",
         "r5a.2xlarge",
         "r5a.4xlarge",
+        "r5a.8xlarge",
         "r5a.12xlarge",
+        "r5a.16xlarge",
         "r5a.24xlarge",
         "r5d.large",
         "r5d.xlarge",
         "r5d.2xlarge",
         "r5d.4xlarge",
+        "r5d.8xlarge",
         "r5d.12xlarge",
+        "r5d.16xlarge",
         "r5d.24xlarge",
         "r5d.metal",
         "r5ad.large",
@@ -20669,6 +20766,7 @@
         "c5.12xlarge",
         "c5.18xlarge",
         "c5.24xlarge",
+        "c5.metal",
         "c5d.large",
         "c5d.xlarge",
         "c5d.2xlarge",
@@ -20708,20 +20806,26 @@
         "m5.xlarge",
         "m5.2xlarge",
         "m5.4xlarge",
+        "m5.8xlarge",
         "m5.12xlarge",
+        "m5.16xlarge",
         "m5.24xlarge",
         "m5.metal",
         "m5a.large",
         "m5a.xlarge",
         "m5a.2xlarge",
         "m5a.4xlarge",
+        "m5a.8xlarge",
         "m5a.12xlarge",
+        "m5a.16xlarge",
         "m5a.24xlarge",
         "m5d.large",
         "m5d.xlarge",
         "m5d.2xlarge",
         "m5d.4xlarge",
+        "m5d.8xlarge",
         "m5d.12xlarge",
+        "m5d.16xlarge",
         "m5d.24xlarge",
         "m5d.metal",
         "m5ad.large",
@@ -22187,11 +22291,6 @@
       "enum": [
         "spot"
       ]
-    },
-    "MaxResults": {
-      "type": "integer",
-      "max": 255,
-      "min": 5
     },
     "MillisecondDateTime": {
       "type": "timestamp"
@@ -24281,9 +24380,7 @@
       }
     },
     "NextToken": {
-      "type": "string",
-      "max": 1024,
-      "min": 1
+      "type": "string"
     },
     "OccurrenceDayRequestSet": {
       "type": "list",

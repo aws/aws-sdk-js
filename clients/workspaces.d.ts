@@ -148,14 +148,6 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspaceImages(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagesResult, AWSError>;
   /**
-   * Describes the snapshots for the specified WorkSpace.
-   */
-  describeWorkspaceSnapshots(params: WorkSpaces.Types.DescribeWorkspaceSnapshotsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceSnapshotsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceSnapshotsResult, AWSError>;
-  /**
-   * Describes the snapshots for the specified WorkSpace.
-   */
-  describeWorkspaceSnapshots(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceSnapshotsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceSnapshotsResult, AWSError>;
-  /**
    * Describes the specified WorkSpaces. You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.
    */
   describeWorkspaces(params: WorkSpaces.Types.DescribeWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesResult, AWSError>;
@@ -244,14 +236,6 @@ declare class WorkSpaces extends Service {
    */
   rebuildWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
   /**
-   * Restores the specified WorkSpace to its last known healthy state. You cannot restore a WorkSpace unless its state is  AVAILABLE, ERROR, or UNHEALTHY. Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Restore a WorkSpace. This operation is asynchronous and returns before the WorkSpace is completely restored.
-   */
-  restoreWorkspace(params: WorkSpaces.Types.RestoreWorkspaceRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RestoreWorkspaceResult) => void): Request<WorkSpaces.Types.RestoreWorkspaceResult, AWSError>;
-  /**
-   * Restores the specified WorkSpace to its last known healthy state. You cannot restore a WorkSpace unless its state is  AVAILABLE, ERROR, or UNHEALTHY. Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Restore a WorkSpace. This operation is asynchronous and returns before the WorkSpace is completely restored.
-   */
-  restoreWorkspace(callback?: (err: AWSError, data: WorkSpaces.Types.RestoreWorkspaceResult) => void): Request<WorkSpaces.Types.RestoreWorkspaceResult, AWSError>;
-  /**
    * Removes one or more rules from the specified IP access control group.
    */
   revokeIpRules(params: WorkSpaces.Types.RevokeIpRulesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RevokeIpRulesResult) => void): Request<WorkSpaces.Types.RevokeIpRulesResult, AWSError>;
@@ -321,7 +305,6 @@ declare namespace WorkSpaces {
     ErrorMessage?: Description;
   }
   export type AccountModificationList = AccountModification[];
-  export type AdditionalInfo = string;
   export type Alias = string;
   export interface AssociateIpGroupsRequest {
     /**
@@ -658,22 +641,6 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
-  export interface DescribeWorkspaceSnapshotsRequest {
-    /**
-     * The identifier of the WorkSpace.
-     */
-    WorkspaceId: WorkspaceId;
-  }
-  export interface DescribeWorkspaceSnapshotsResult {
-    /**
-     * Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the root volume.
-     */
-    RebuildSnapshots?: SnapshotList;
-    /**
-     * Information about the snapshots that can be used to restore a WorkSpace. These snapshots include both the root volume and the user volume.
-     */
-    RestoreSnapshots?: SnapshotList;
-  }
   export interface DescribeWorkspacesConnectionStatusRequest {
     /**
      * The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
@@ -959,10 +926,6 @@ declare namespace WorkSpaces {
      * The WorkSpace to rebuild. You can specify a single WorkSpace.
      */
     RebuildWorkspaceRequests: RebuildWorkspaceRequests;
-    /**
-     * Reserved.
-     */
-    AdditionalInfo?: AdditionalInfo;
   }
   export interface RebuildWorkspacesResult {
     /**
@@ -974,18 +937,6 @@ declare namespace WorkSpaces {
   export type Region = string;
   export type RegistrationCode = string;
   export type ResourceIdList = NonEmptyString[];
-  export interface RestoreWorkspaceRequest {
-    /**
-     * The identifier of the WorkSpace.
-     */
-    WorkspaceId: WorkspaceId;
-    /**
-     * Indicates whether to create snapshots of the root volume and user volume before restoring the WorkSpace.
-     */
-    SnapshotCurrentVolumes?: BooleanObject;
-  }
-  export interface RestoreWorkspaceResult {
-  }
   export interface RevokeIpRulesRequest {
     /**
      * The identifier of the group.
@@ -1008,13 +959,6 @@ declare namespace WorkSpaces {
   export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|string;
   export type RunningModeAutoStopTimeoutInMinutes = number;
   export type SecurityGroupId = string;
-  export interface Snapshot {
-    /**
-     * The time when the snapshot was created.
-     */
-    SnapshotTime?: Timestamp;
-  }
-  export type SnapshotList = Snapshot[];
   export interface StartRequest {
     /**
      * The identifier of the WorkSpace.
@@ -1382,7 +1326,7 @@ declare namespace WorkSpaces {
     Tags?: TagList;
   }
   export type WorkspaceRequestList = WorkspaceRequest[];
-  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"RESTORING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
+  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
   export interface WorkspacesIpGroup {
     /**
      * The identifier of the group.
