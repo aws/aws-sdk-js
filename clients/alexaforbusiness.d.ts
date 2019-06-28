@@ -188,11 +188,11 @@ declare class AlexaForBusiness extends Service {
    */
   deleteDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
   /**
-   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. 
+   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device. When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. 
    */
   deleteDeviceUsageData(params: AlexaForBusiness.Types.DeleteDeviceUsageDataRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceUsageDataResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceUsageDataResponse, AWSError>;
   /**
-   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. 
+   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device. When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. 
    */
   deleteDeviceUsageData(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceUsageDataResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceUsageDataResponse, AWSError>;
   /**
@@ -628,11 +628,11 @@ declare class AlexaForBusiness extends Service {
    */
   sendAnnouncement(callback?: (err: AWSError, data: AlexaForBusiness.Types.SendAnnouncementResponse) => void): Request<AlexaForBusiness.Types.SendAnnouncementResponse, AWSError>;
   /**
-   * Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. 
+   * Sends an enrollment invitation email with a URL to a user. The URL is valid for 30 days or until you call this operation again, whichever comes first. 
    */
   sendInvitation(params: AlexaForBusiness.Types.SendInvitationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SendInvitationResponse) => void): Request<AlexaForBusiness.Types.SendInvitationResponse, AWSError>;
   /**
-   * Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. 
+   * Sends an enrollment invitation email with a URL to a user. The URL is valid for 30 days or until you call this operation again, whichever comes first. 
    */
   sendInvitation(callback?: (err: AWSError, data: AlexaForBusiness.Types.SendInvitationResponse) => void): Request<AlexaForBusiness.Types.SendInvitationResponse, AWSError>;
   /**
@@ -1044,9 +1044,17 @@ declare namespace AlexaForBusiness {
      */
     LastName?: ContactName;
     /**
-     * The phone number of the contact.
+     * The phone number of the contact. The phone number type defaults to WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.
      */
-    PhoneNumber?: E164PhoneNumber;
+    PhoneNumber?: RawPhoneNumber;
+    /**
+     * The list of phone numbers for the contact.
+     */
+    PhoneNumbers?: PhoneNumberList;
+    /**
+     * The list of SIP addresses for the contact.
+     */
+    SipAddresses?: SipAddressList;
   }
   export interface ContactData {
     /**
@@ -1066,9 +1074,17 @@ declare namespace AlexaForBusiness {
      */
     LastName?: ContactName;
     /**
-     * The phone number of the contact.
+     * The phone number of the contact. The phone number type defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.
      */
-    PhoneNumber?: E164PhoneNumber;
+    PhoneNumber?: RawPhoneNumber;
+    /**
+     * The list of phone numbers for the contact.
+     */
+    PhoneNumbers?: PhoneNumberList;
+    /**
+     * The list of SIP addresses for the contact.
+     */
+    SipAddresses?: SipAddressList;
   }
   export type ContactDataList = ContactData[];
   export type ContactName = string;
@@ -1189,9 +1205,17 @@ declare namespace AlexaForBusiness {
      */
     LastName?: ContactName;
     /**
-     * The phone number of the contact in E.164 format.
+     * The phone number of the contact in E.164 format. The phone number type defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.
      */
-    PhoneNumber?: E164PhoneNumber;
+    PhoneNumber?: RawPhoneNumber;
+    /**
+     * The list of phone numbers for the contact.
+     */
+    PhoneNumbers?: PhoneNumberList;
+    /**
+     * The list of SIP addresses for the contact.
+     */
+    SipAddresses?: SipAddressList;
     /**
      * A unique, user-specified identifier for this request that ensures idempotency.
      */
@@ -1760,7 +1784,6 @@ declare namespace AlexaForBusiness {
   export interface DisassociateSkillGroupFromRoomResponse {
   }
   export type DistanceUnit = "METRIC"|"IMPERIAL"|string;
-  export type E164PhoneNumber = string;
   export type Email = string;
   export type EnablementType = "ENABLED"|"PENDING"|string;
   export type EnablementTypeFilter = "ENABLED"|"PENDING"|string;
@@ -2396,6 +2419,18 @@ declare namespace AlexaForBusiness {
      */
     OneClickPinDelay: OneClickPinDelay;
   }
+  export interface PhoneNumber {
+    /**
+     * The raw value of the phone number.
+     */
+    Number: RawPhoneNumber;
+    /**
+     * The type of the phone number.
+     */
+    Type: PhoneNumberType;
+  }
+  export type PhoneNumberList = PhoneNumber[];
+  export type PhoneNumberType = "MOBILE"|"WORK"|"HOME"|string;
   export type PrivacyPolicy = string;
   export type ProductDescription = string;
   export type ProductId = string;
@@ -2542,6 +2577,7 @@ declare namespace AlexaForBusiness {
   }
   export interface PutSkillAuthorizationResponse {
   }
+  export type RawPhoneNumber = string;
   export interface RegisterAVSDeviceRequest {
     /**
      * The client ID of the OEM used for code-based linking authorization on an AVS device.
@@ -2975,6 +3011,19 @@ declare namespace AlexaForBusiness {
   }
   export type ShortDescription = string;
   export type ShortSkillIdList = SkillId[];
+  export interface SipAddress {
+    /**
+     * The URI for the SIP address.
+     */
+    Uri: SipUri;
+    /**
+     * The type of the SIP address.
+     */
+    Type: SipType;
+  }
+  export type SipAddressList = SipAddress[];
+  export type SipType = "WORK"|string;
+  export type SipUri = string;
   export interface SkillDetails {
     /**
      * The description of the product.
@@ -3316,9 +3365,17 @@ declare namespace AlexaForBusiness {
      */
     LastName?: ContactName;
     /**
-     * The updated phone number of the contact.
+     * The updated phone number of the contact. The phone number type defaults to WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.
      */
-    PhoneNumber?: E164PhoneNumber;
+    PhoneNumber?: RawPhoneNumber;
+    /**
+     * The list of phone numbers for the contact.
+     */
+    PhoneNumbers?: PhoneNumberList;
+    /**
+     * The list of SIP addresses for the contact.
+     */
+    SipAddresses?: SipAddressList;
   }
   export interface UpdateContactResponse {
   }

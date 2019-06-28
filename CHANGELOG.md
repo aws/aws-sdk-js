@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.484.0-->
+<!--LATEST=2.485.0-->
 <!--ENTRYINSERT-->
+
+## 2.485.0
+* feature: AlexaForBusiness: This release allows developers and customers to add SIP addresses and international phone numbers to contacts.
+* feature: EC2: You can now launch 8xlarge and 16xlarge instance sizes on the general purpose M5 and memory optimized R5 instance types.
+* feature: Redshift: ClusterAvailabilityStatus: The availability status of the cluster for queries. Possible values are the following: Available, Unavailable, Maintenance, Modifying, Failed.
+* feature: WorkSpaces: Minor API fixes for WorkSpaces.
 
 ## 2.484.0
 * feature: DirectConnect: Tags will now be included in the API responses of all supported resources (Virtual interfaces, Connections, Interconnects and LAGs). You can also add tags while creating these resources.

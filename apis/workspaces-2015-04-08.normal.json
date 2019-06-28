@@ -428,31 +428,6 @@
       ],
       "documentation": "<p>Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. </p>"
     },
-    "DescribeWorkspaceSnapshots": {
-      "name": "DescribeWorkspaceSnapshots",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "DescribeWorkspaceSnapshotsRequest"
-      },
-      "output": {
-        "shape": "DescribeWorkspaceSnapshotsResult"
-      },
-      "errors": [
-        {
-          "shape": "InvalidParameterValuesException"
-        },
-        {
-          "shape": "ResourceNotFoundException"
-        },
-        {
-          "shape": "AccessDeniedException"
-        }
-      ],
-      "documentation": "<p>Describes the snapshots for the specified WorkSpace.</p>"
-    },
     "DescribeWorkspaces": {
       "name": "DescribeWorkspaces",
       "http": {
@@ -724,31 +699,6 @@
       },
       "documentation": "<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>"
     },
-    "RestoreWorkspace": {
-      "name": "RestoreWorkspace",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "RestoreWorkspaceRequest"
-      },
-      "output": {
-        "shape": "RestoreWorkspaceResult"
-      },
-      "errors": [
-        {
-          "shape": "InvalidParameterValuesException"
-        },
-        {
-          "shape": "ResourceNotFoundException"
-        },
-        {
-          "shape": "AccessDeniedException"
-        }
-      ],
-      "documentation": "<p>Restores the specified WorkSpace to its last known healthy state.</p> <p>You cannot restore a WorkSpace unless its state is <code> AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html\">Restore a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpace is completely restored.</p>"
-    },
     "RevokeIpRules": {
       "name": "RevokeIpRules",
       "http": {
@@ -891,9 +841,6 @@
       "member": {
         "shape": "AccountModification"
       }
-    },
-    "AdditionalInfo": {
-      "type": "string"
     },
     "Alias": {
       "type": "string"
@@ -1455,31 +1402,6 @@
         }
       }
     },
-    "DescribeWorkspaceSnapshotsRequest": {
-      "type": "structure",
-      "required": [
-        "WorkspaceId"
-      ],
-      "members": {
-        "WorkspaceId": {
-          "shape": "WorkspaceId",
-          "documentation": "<p>The identifier of the WorkSpace.</p>"
-        }
-      }
-    },
-    "DescribeWorkspaceSnapshotsResult": {
-      "type": "structure",
-      "members": {
-        "RebuildSnapshots": {
-          "shape": "SnapshotList",
-          "documentation": "<p>Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the root volume.</p>"
-        },
-        "RestoreSnapshots": {
-          "shape": "SnapshotList",
-          "documentation": "<p>Information about the snapshots that can be used to restore a WorkSpace. These snapshots include both the root volume and the user volume.</p>"
-        }
-      }
-    },
     "DescribeWorkspacesConnectionStatusRequest": {
       "type": "structure",
       "members": {
@@ -2029,10 +1951,6 @@
         "RebuildWorkspaceRequests": {
           "shape": "RebuildWorkspaceRequests",
           "documentation": "<p>The WorkSpace to rebuild. You can specify a single WorkSpace.</p>"
-        },
-        "AdditionalInfo": {
-          "shape": "AdditionalInfo",
-          "documentation": "<p>Reserved.</p>"
         }
       }
     },
@@ -2070,26 +1988,6 @@
       },
       "max": 25,
       "min": 1
-    },
-    "RestoreWorkspaceRequest": {
-      "type": "structure",
-      "required": [
-        "WorkspaceId"
-      ],
-      "members": {
-        "WorkspaceId": {
-          "shape": "WorkspaceId",
-          "documentation": "<p>The identifier of the WorkSpace.</p>"
-        },
-        "SnapshotCurrentVolumes": {
-          "shape": "BooleanObject",
-          "documentation": "<p>Indicates whether to create snapshots of the root volume and user volume before restoring the WorkSpace.</p>"
-        }
-      }
-    },
-    "RestoreWorkspaceResult": {
-      "type": "structure",
-      "members": {}
     },
     "RevokeIpRulesRequest": {
       "type": "structure",
@@ -2138,22 +2036,6 @@
     "SecurityGroupId": {
       "type": "string",
       "pattern": "^(sg-[0-9a-f]{8})$"
-    },
-    "Snapshot": {
-      "type": "structure",
-      "members": {
-        "SnapshotTime": {
-          "shape": "Timestamp",
-          "documentation": "<p>The time when the snapshot was created.</p>"
-        }
-      },
-      "documentation": "<p>Describes a snapshot.</p>"
-    },
-    "SnapshotList": {
-      "type": "list",
-      "member": {
-        "shape": "Snapshot"
-      }
     },
     "StartRequest": {
       "type": "structure",
@@ -2780,7 +2662,6 @@
         "REBOOTING",
         "STARTING",
         "REBUILDING",
-        "RESTORING",
         "MAINTENANCE",
         "ADMIN_MAINTENANCE",
         "TERMINATING",

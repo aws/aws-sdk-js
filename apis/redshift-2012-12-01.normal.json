@@ -2135,6 +2135,12 @@
         },
         {
           "shape": "SnapshotScheduleNotFoundFault"
+        },
+        {
+          "shape": "TagLimitExceededFault"
+        },
+        {
+          "shape": "InvalidTagFault"
         }
       ],
       "documentation": "<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore.</p> <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.</p> <p> For more information about working with snapshots, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -2554,6 +2560,10 @@
         "ClusterStatus": {
           "shape": "String",
           "documentation": "<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>available, prep-for-resize</code> </p> </li> <li> <p> <code>available, resize-cleanup</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>"
+        },
+        "ClusterAvailabilityStatus": {
+          "shape": "String",
+          "documentation": "<p>The availability status of the cluster for queries. Possible values are the following:</p> <ul> <li> <p>Available - The cluster is available for queries. </p> </li> <li> <p>Unavailable - The cluster is not available for queries.</p> </li> <li> <p>Maintenance - The cluster is intermittently available for queries due to maintenance activities.</p> </li> <li> <p>Modifying - The cluster is intermittently available for queries due to changes that modify the cluster.</p> </li> <li> <p>Failed - The cluster failed and is not available for queries.</p> </li> </ul>"
         },
         "ModifyStatus": {
           "shape": "String",

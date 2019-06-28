@@ -537,7 +537,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. </p>"
+      "documentation": "<p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.</p> <p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. </p>"
     },
     "DeleteGatewayGroup": {
       "name": "DeleteGatewayGroup",
@@ -1562,7 +1562,7 @@
           "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. </p>"
+      "documentation": "<p>Sends an enrollment invitation email with a URL to a user. The URL is valid for 30 days or until you call this operation again, whichever comes first. </p>"
     },
     "StartDeviceSync": {
       "name": "StartDeviceSync",
@@ -2451,8 +2451,16 @@
           "documentation": "<p>The last name of the contact, used to call the contact on the device.</p>"
         },
         "PhoneNumber": {
-          "shape": "E164PhoneNumber",
-          "documentation": "<p>The phone number of the contact.</p>"
+          "shape": "RawPhoneNumber",
+          "documentation": "<p>The phone number of the contact. The phone number type defaults to WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.</p>"
+        },
+        "PhoneNumbers": {
+          "shape": "PhoneNumberList",
+          "documentation": "<p>The list of phone numbers for the contact.</p>"
+        },
+        "SipAddresses": {
+          "shape": "SipAddressList",
+          "documentation": "<p>The list of SIP addresses for the contact.</p>"
         }
       },
       "documentation": "<p>A contact with attributes.</p>"
@@ -2477,8 +2485,16 @@
           "documentation": "<p>The last name of the contact, used to call the contact on the device.</p>"
         },
         "PhoneNumber": {
-          "shape": "E164PhoneNumber",
-          "documentation": "<p>The phone number of the contact.</p>"
+          "shape": "RawPhoneNumber",
+          "documentation": "<p>The phone number of the contact. The phone number type defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.</p>"
+        },
+        "PhoneNumbers": {
+          "shape": "PhoneNumberList",
+          "documentation": "<p>The list of phone numbers for the contact.</p>"
+        },
+        "SipAddresses": {
+          "shape": "SipAddressList",
+          "documentation": "<p>The list of SIP addresses for the contact.</p>"
         }
       },
       "documentation": "<p>Information related to a contact.</p>"
@@ -2657,8 +2673,16 @@
           "documentation": "<p>The last name of the contact that is used to call the contact on the device.</p>"
         },
         "PhoneNumber": {
-          "shape": "E164PhoneNumber",
-          "documentation": "<p>The phone number of the contact in E.164 format.</p>"
+          "shape": "RawPhoneNumber",
+          "documentation": "<p>The phone number of the contact in E.164 format. The phone number type defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.</p>"
+        },
+        "PhoneNumbers": {
+          "shape": "PhoneNumberList",
+          "documentation": "<p>The list of phone numbers for the contact.</p>"
+        },
+        "SipAddresses": {
+          "shape": "SipAddressList",
+          "documentation": "<p>The list of SIP addresses for the contact.</p>"
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
@@ -3563,11 +3587,6 @@
         "METRIC",
         "IMPERIAL"
       ]
-    },
-    "E164PhoneNumber": {
-      "type": "string",
-      "pattern": "^\\+\\d{8,}$",
-      "sensitive": true
     },
     "Email": {
       "type": "string",
@@ -4639,6 +4658,41 @@
       },
       "documentation": "<p>The information for public switched telephone network (PSTN) conferencing.</p>"
     },
+    "PhoneNumber": {
+      "type": "structure",
+      "required": [
+        "Number",
+        "Type"
+      ],
+      "members": {
+        "Number": {
+          "shape": "RawPhoneNumber",
+          "documentation": "<p>The raw value of the phone number.</p>"
+        },
+        "Type": {
+          "shape": "PhoneNumberType",
+          "documentation": "<p>The type of the phone number.</p>"
+        }
+      },
+      "documentation": "<p>The phone number for the contact containing the raw number and phone number type.</p>"
+    },
+    "PhoneNumberList": {
+      "type": "list",
+      "member": {
+        "shape": "PhoneNumber"
+      },
+      "max": 3,
+      "min": 0
+    },
+    "PhoneNumberType": {
+      "type": "string",
+      "enum": [
+        "MOBILE",
+        "WORK",
+        "HOME"
+      ],
+      "sensitive": true
+    },
     "PrivacyPolicy": {
       "type": "string"
     },
@@ -4847,6 +4901,13 @@
     "PutSkillAuthorizationResponse": {
       "type": "structure",
       "members": {}
+    },
+    "RawPhoneNumber": {
+      "type": "string",
+      "max": 50,
+      "min": 0,
+      "pattern": "^[\\+0-9\\#\\,\\(][\\+0-9\\-\\.\\/\\(\\)\\,\\#\\s]+$",
+      "sensitive": true
     },
     "RegisterAVSDeviceRequest": {
       "type": "structure",
@@ -5466,6 +5527,46 @@
       "max": 3,
       "min": 0
     },
+    "SipAddress": {
+      "type": "structure",
+      "required": [
+        "Uri",
+        "Type"
+      ],
+      "members": {
+        "Uri": {
+          "shape": "SipUri",
+          "documentation": "<p>The URI for the SIP address.</p>"
+        },
+        "Type": {
+          "shape": "SipType",
+          "documentation": "<p>The type of the SIP address.</p>"
+        }
+      },
+      "documentation": "<p>The SIP address for the contact containing the URI and SIP address type.</p>"
+    },
+    "SipAddressList": {
+      "type": "list",
+      "member": {
+        "shape": "SipAddress"
+      },
+      "max": 1,
+      "min": 0
+    },
+    "SipType": {
+      "type": "string",
+      "enum": [
+        "WORK"
+      ],
+      "sensitive": true
+    },
+    "SipUri": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^sip[s]?:([^@:]+)\\@([^@]+)$",
+      "sensitive": true
+    },
     "SkillDetails": {
       "type": "structure",
       "members": {
@@ -6079,8 +6180,16 @@
           "documentation": "<p>The updated last name of the contact.</p>"
         },
         "PhoneNumber": {
-          "shape": "E164PhoneNumber",
-          "documentation": "<p>The updated phone number of the contact.</p>"
+          "shape": "RawPhoneNumber",
+          "documentation": "<p>The updated phone number of the contact. The phone number type defaults to WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which lets you specify the phone number type and multiple numbers.</p>"
+        },
+        "PhoneNumbers": {
+          "shape": "PhoneNumberList",
+          "documentation": "<p>The list of phone numbers for the contact.</p>"
+        },
+        "SipAddresses": {
+          "shape": "SipAddressList",
+          "documentation": "<p>The list of SIP addresses for the contact.</p>"
         }
       }
     },
