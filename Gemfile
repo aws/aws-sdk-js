@@ -7,7 +7,7 @@ group :documentation do
   gem 'yard', github: 'lsegal/yard'
   gem 'yard-sitemap', '~> 1.0'
   gem 'yard-js', github: 'lsegal/yard-js'
-  gem 'parsejs', github: 'lsegal/parsejs'
+	gem 'parsejs', path: './doc-src/parsejs'
 end
 
 group :release do
