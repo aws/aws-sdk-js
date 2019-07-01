@@ -716,15 +716,18 @@
     "name": "IoTEventsData"
   },
   "personalize": {
-    "name": "Personalize"
+    "name": "Personalize",
+    "cors": true
   },
   "personalizeevents": {
     "prefix": "personalize-events",
-    "name": "PersonalizeEvents"
+    "name": "PersonalizeEvents",
+    "cors": true
   },
   "personalizeruntime": {
     "prefix": "personalize-runtime",
-    "name": "PersonalizeRuntime"
+    "name": "PersonalizeRuntime",
+    "cors": true
   },
   "applicationinsights": {
     "prefix": "application-insights",
