@@ -51,6 +51,12 @@
       "errors": [
         {
           "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
         }
       ],
       "documentation": "<p>Applies a pending maintenance action to a resource (for example, to a DB instance).</p>"
@@ -1123,6 +1129,58 @@
         }
       ],
       "documentation": "<p>Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. </p>"
+    },
+    "StartDBCluster": {
+      "name": "StartDBCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartDBClusterMessage"
+      },
+      "output": {
+        "shape": "StartDBClusterResult",
+        "resultWrapper": "StartDBClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Restarts the stopped cluster that is specified by <code>DBClusterIdentifier</code>. For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html\">Stopping and Starting an Amazon DocumentDB Cluster</a>.</p>"
+    },
+    "StopDBCluster": {
+      "name": "StopDBCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopDBClusterMessage"
+      },
+      "output": {
+        "shape": "StopDBClusterResult",
+        "resultWrapper": "StopDBClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Stops the running cluster that is specified by <code>DBClusterIdentifier</code>. The cluster must be in the <i>available</i> state. For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html\">Stopping and Starting an Amazon DocumentDB Cluster</a>.</p>"
     }
   },
   "shapes": {
@@ -1315,7 +1373,9 @@
       "type": "structure",
       "required": [
         "DBClusterIdentifier",
-        "Engine"
+        "Engine",
+        "MasterUsername",
+        "MasterUserPassword"
       ],
       "members": {
         "AvailabilityZones": {
@@ -1360,7 +1420,7 @@
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except \"/\", \"\"\", or \"@\".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>"
+          "documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote (\"), or the \"at\" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>"
         },
         "PreferredBackupWindow": {
           "shape": "String",
@@ -1385,6 +1445,10 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>A list of log types that need to be enabled for exporting to Amazon CloudWatch Logs.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
         }
       },
       "documentation": "<p>Represents the input to <a>CreateDBCluster</a>.</p>"
@@ -1477,7 +1541,7 @@
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. </p>"
+          "documentation": "<p>The compute and memory capacity of the DB instance; for example, <code>db.r5.large</code>. </p>"
         },
         "Engine": {
           "shape": "String",
@@ -1667,6 +1731,10 @@
         "EnabledCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>A list of log types that this DB cluster is configured to export to Amazon CloudWatch Logs.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
         }
       },
       "documentation": "<p>Detailed information about a DB cluster. </p>",
@@ -2931,7 +2999,7 @@
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The new password for the master database user. This password can contain any printable ASCII character except \"<code>/</code>\", \"<code>\"</code>\", or \"<code>@</code>\".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>"
+          "documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote (\"), or the \"at\" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>"
         },
         "PreferredBackupWindow": {
           "shape": "String",
@@ -2948,6 +3016,10 @@
         "EngineVersion": {
           "shape": "String",
           "documentation": "<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
         }
       },
       "documentation": "<p>Represents the input to <a>ModifyDBCluster</a>.</p>"
@@ -3024,7 +3096,7 @@
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The new compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>"
+          "documentation": "<p>The new compute and memory capacity of the DB instance; for example, <code>db.r5.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>"
         },
         "ApplyImmediately": {
           "shape": "Boolean",
@@ -3456,6 +3528,10 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
         }
       },
       "documentation": "<p>Represents the input to <a>RestoreDBClusterFromSnapshot</a>.</p>"
@@ -3514,6 +3590,10 @@
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
           "documentation": "<p>A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
         }
       },
       "documentation": "<p>Represents the input to <a>RestoreDBClusterToPointInTime</a>.</p>"
@@ -3536,6 +3616,46 @@
         "db-cluster",
         "db-cluster-snapshot"
       ]
+    },
+    "StartDBClusterMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterIdentifier"
+      ],
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the cluster to restart. Example: <code>docdb-2019-05-28-15-24-52</code> </p>"
+        }
+      }
+    },
+    "StartDBClusterResult": {
+      "type": "structure",
+      "members": {
+        "DBCluster": {
+          "shape": "DBCluster"
+        }
+      }
+    },
+    "StopDBClusterMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterIdentifier"
+      ],
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the cluster to stop. Example: <code>docdb-2019-05-28-15-24-52</code> </p>"
+        }
+      }
+    },
+    "StopDBClusterResult": {
+      "type": "structure",
+      "members": {
+        "DBCluster": {
+          "shape": "DBCluster"
+        }
+      }
     },
     "String": {
       "type": "string"

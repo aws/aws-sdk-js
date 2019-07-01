@@ -1373,11 +1373,11 @@ declare class EC2 extends Service {
    */
   describeInstanceStatus(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
-   * Describes the specified instances or all of your instances. If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
+   * Describes the specified instances or all of AWS account's instances. If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
    */
   describeInstances(params: EC2.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
-   * Describes the specified instances or all of your instances. If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
+   * Describes the specified instances or all of AWS account's instances. If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
    */
   describeInstances(callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
@@ -5180,7 +5180,7 @@ declare namespace EC2 {
      */
     SpotOptions?: SpotOptionsRequest;
     /**
-     * The allocation strategy of On-Demand Instances in an EC2 Fleet.
+     * Describes the configuration of On-Demand Instances in an EC2 Fleet.
      */
     OnDemandOptions?: OnDemandOptionsRequest;
     /**
@@ -5192,7 +5192,7 @@ declare namespace EC2 {
      */
     LaunchTemplateConfigs: FleetLaunchTemplateConfigListRequest;
     /**
-     * The TotalTargetCapacity, OnDemandTargetCapacity, SpotTargetCapacity, and DefaultCapacityType structure.
+     * The number of units to request.
      */
     TargetCapacitySpecification: TargetCapacitySpecificationRequest;
     /**
@@ -14572,6 +14572,10 @@ declare namespace EC2 {
      * The size of the fleet.
      */
     TargetCapacity?: Integer;
+    /**
+     * The number of On-Demand Instances in the fleet.
+     */
+    OnDemandTargetCapacity?: Integer;
   }
   export interface ModifySpotFleetRequestResponse {
     /**
@@ -15454,6 +15458,10 @@ declare namespace EC2 {
      * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
      */
     MinTargetCapacity?: Integer;
+    /**
+     * The maximum amount per hour for On-Demand Instances that you're willing to pay.
+     */
+    MaxTotalPrice?: String;
   }
   export interface OnDemandOptionsRequest {
     /**
@@ -15472,6 +15480,10 @@ declare namespace EC2 {
      * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
      */
     MinTargetCapacity?: Integer;
+    /**
+     * The maximum amount per hour for On-Demand Instances that you're willing to pay.
+     */
+    MaxTotalPrice?: String;
   }
   export type OperationType = "add"|"remove"|string;
   export type OwnerStringList = String[];
@@ -18488,6 +18500,14 @@ declare namespace EC2 {
      */
     OnDemandTargetCapacity?: Integer;
     /**
+     * The maximum amount per hour for On-Demand Instances that you're willing to pay. You can use the onDemandMaxTotalPrice parameter, the spotMaxTotalPrice parameter, or both parameters to ensure that your fleet cost does not exceed your budget. If you set a maximum price per hour for the On-Demand Instances and Spot Instances in your request, Spot Fleet will launch instances until it reaches the maximum amount you're willing to pay. When the maximum amount you're willing to pay is reached, the fleet stops launching instances even if it hasn’t met the target capacity.
+     */
+    OnDemandMaxTotalPrice?: String;
+    /**
+     * The maximum amount per hour for Spot Instances that you're willing to pay. You can use the spotdMaxTotalPrice parameter, the onDemandMaxTotalPrice parameter, or both parameters to ensure that your fleet cost does not exceed your budget. If you set a maximum price per hour for the On-Demand Instances and Spot Instances in your request, Spot Fleet will launch instances until it reaches the maximum amount you're willing to pay. When the maximum amount you're willing to pay is reached, the fleet stops launching instances even if it hasn’t met the target capacity.
+     */
+    SpotMaxTotalPrice?: String;
+    /**
      * Indicates whether running Spot Instances are terminated when the Spot Fleet request expires.
      */
     TerminateInstancesWithExpiration?: Boolean;
@@ -18686,6 +18706,10 @@ declare namespace EC2 {
      * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
      */
     MinTargetCapacity?: Integer;
+    /**
+     * The maximum amount per hour for Spot Instances that you're willing to pay.
+     */
+    MaxTotalPrice?: String;
   }
   export interface SpotOptionsRequest {
     /**
@@ -18712,6 +18736,10 @@ declare namespace EC2 {
      * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
      */
     MinTargetCapacity?: Integer;
+    /**
+     * The maximum amount per hour for Spot Instances that you're willing to pay.
+     */
+    MaxTotalPrice?: String;
   }
   export interface SpotPlacement {
     /**
@@ -19021,11 +19049,11 @@ declare namespace EC2 {
      */
     TotalTargetCapacity?: Integer;
     /**
-     * The number of On-Demand units to request.
+     * The number of On-Demand units to request. If you specify a target capacity for Spot units, you cannot specify a target capacity for On-Demand units.
      */
     OnDemandTargetCapacity?: Integer;
     /**
-     * The maximum number of Spot units to launch.
+     * The maximum number of Spot units to launch. If you specify a target capacity for On-Demand units, you cannot specify a target capacity for Spot units.
      */
     SpotTargetCapacity?: Integer;
     /**

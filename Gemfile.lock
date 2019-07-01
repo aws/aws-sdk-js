@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/lsegal/parsejs.git
-  revision: 7ba09b48fefc2db2970406938c34fb3d97ad4148
-  specs:
-    parsejs (0.0.1)
-      kpeg
-      yard
-
-GIT
   remote: git://github.com/lsegal/yard-js.git
   revision: c76decbd26c9fe82889d72e10ce50c12cdbe51ff
   specs:
@@ -18,10 +10,17 @@ GIT
   specs:
     yard (0.8.7.6)
 
+PATH
+  remote: doc-src/parsejs
+  specs:
+    parsejs (0.0.1)
+      kpeg
+      yard
+
 GEM
   remote: https://rubygems.org/
   specs:
-    kpeg (1.0.0)
+    kpeg (1.1.0)
     rake (10.1.1)
     rdiscount (2.1.7)
     redcarpet (3.2.0)
@@ -42,4 +41,4 @@ DEPENDENCIES
   yard-sitemap (~> 1.0)
 
 BUNDLED WITH
-   1.10.5
+   1.14.6

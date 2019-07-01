@@ -3407,6 +3407,10 @@
     },
     "Tag": {
       "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
       "members": {
         "Key": {
           "shape": "TagKey",
@@ -3414,7 +3418,7 @@
         },
         "Value": {
           "shape": "TagValue",
-          "documentation": "<p>The string value that's associated with the key of the tag.</p>"
+          "documentation": "<p>The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.</p>"
         }
       },
       "documentation": "<p>A custom key-value pair associated with a resource such as an account within your organization. </p>"
@@ -3444,7 +3448,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tag to add to the specified resource.</p>"
+          "documentation": "<p>The tag to add to the specified resource. Specifying the tag key is required. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.</p>"
         }
       }
     },
