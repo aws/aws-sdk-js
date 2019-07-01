@@ -1368,11 +1368,11 @@ declare namespace Organizations {
     /**
      * The key identifier, or name, of the tag.
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
-     * The string value that's associated with the key of the tag.
+     * The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.
      */
-    Value?: TagValue;
+    Value: TagValue;
   }
   export type TagKey = string;
   export type TagKeys = TagKey[];
@@ -1382,7 +1382,7 @@ declare namespace Organizations {
      */
     ResourceId: TaggableResourceId;
     /**
-     * The tag to add to the specified resource.
+     * The tag to add to the specified resource. Specifying the tag key is required. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.
      */
     Tags: Tags;
   }

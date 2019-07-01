@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.485.0-->
+<!--LATEST=2.486.0-->
 <!--ENTRYINSERT-->
+
+## 2.486.0
+* feature: DocDB: This release provides support for cluster delete protection and the ability to stop and start clusters.
+* feature: EC2: This release adds support for specifying a maximum hourly price for all On-Demand and Spot instances in both Spot Fleet and EC2 Fleet.
+* feature: Organizations: Specifying the tag key and tag value is required for tagging requests.
+* feature: RDS: This release adds support for RDS DB Cluster major version upgrade 
 
 ## 2.485.0
 * feature: AlexaForBusiness: This release allows developers and customers to add SIP addresses and international phone numbers to contacts.

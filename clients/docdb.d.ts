@@ -325,6 +325,22 @@ declare class DocDB extends Service {
    */
   restoreDBClusterToPointInTime(callback?: (err: AWSError, data: DocDB.Types.RestoreDBClusterToPointInTimeResult) => void): Request<DocDB.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
   /**
+   * Restarts the stopped cluster that is specified by DBClusterIdentifier. For more information, see Stopping and Starting an Amazon DocumentDB Cluster.
+   */
+  startDBCluster(params: DocDB.Types.StartDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.StartDBClusterResult) => void): Request<DocDB.Types.StartDBClusterResult, AWSError>;
+  /**
+   * Restarts the stopped cluster that is specified by DBClusterIdentifier. For more information, see Stopping and Starting an Amazon DocumentDB Cluster.
+   */
+  startDBCluster(callback?: (err: AWSError, data: DocDB.Types.StartDBClusterResult) => void): Request<DocDB.Types.StartDBClusterResult, AWSError>;
+  /**
+   * Stops the running cluster that is specified by DBClusterIdentifier. The cluster must be in the available state. For more information, see Stopping and Starting an Amazon DocumentDB Cluster.
+   */
+  stopDBCluster(params: DocDB.Types.StopDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.StopDBClusterResult) => void): Request<DocDB.Types.StopDBClusterResult, AWSError>;
+  /**
+   * Stops the running cluster that is specified by DBClusterIdentifier. The cluster must be in the available state. For more information, see Stopping and Starting an Amazon DocumentDB Cluster.
+   */
+  stopDBCluster(callback?: (err: AWSError, data: DocDB.Types.StopDBClusterResult) => void): Request<DocDB.Types.StopDBClusterResult, AWSError>;
+  /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying DocDB.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */
   waitFor(state: "dBInstanceAvailable", params: DocDB.Types.DescribeDBInstancesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DocDB.Types.DBInstanceMessage) => void): Request<DocDB.Types.DBInstanceMessage, AWSError>;
@@ -481,11 +497,11 @@ declare namespace DocDB {
     /**
      * The name of the master user for the DB cluster. Constraints:   Must be from 1 to 16 letters or numbers.   The first character must be a letter.   Cannot be a reserved word for the chosen database engine.  
      */
-    MasterUsername?: String;
+    MasterUsername: String;
     /**
-     * The password for the master database user. This password can contain any printable ASCII character except "/", """, or "@". Constraints: Must contain from 8 to 41 characters.
+     * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 41 characters.
      */
-    MasterUserPassword?: String;
+    MasterUserPassword: String;
     /**
      * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
@@ -510,6 +526,10 @@ declare namespace DocDB {
      * A list of log types that need to be enabled for exporting to Amazon CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -558,7 +578,7 @@ declare namespace DocDB {
      */
     DBInstanceIdentifier: String;
     /**
-     * The compute and memory capacity of the DB instance; for example, db.m4.large. 
+     * The compute and memory capacity of the DB instance; for example, db.r5.large. 
      */
     DBInstanceClass: String;
     /**
@@ -727,6 +747,10 @@ declare namespace DocDB {
      * A list of log types that this DB cluster is configured to export to Amazon CloudWatch Logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
+     */
+    DeletionProtection?: Boolean;
   }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
@@ -1625,7 +1649,7 @@ declare namespace DocDB {
      */
     Port?: IntegerOptional;
     /**
-     * The new password for the master database user. This password can contain any printable ASCII character except "/", """, or "@". Constraints: Must contain from 8 to 41 characters.
+     * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 41 characters.
      */
     MasterUserPassword?: String;
     /**
@@ -1644,6 +1668,10 @@ declare namespace DocDB {
      * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true.
      */
     EngineVersion?: String;
+    /**
+     * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -1685,7 +1713,7 @@ declare namespace DocDB {
      */
     DBInstanceIdentifier: String;
     /**
-     * The new compute and memory capacity of the DB instance; for example, db.m4.large. Not all DB instance classes are available in all AWS Regions.  If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is specified as true for this request.  Default: Uses existing setting.
+     * The new compute and memory capacity of the DB instance; for example, db.r5.large. Not all DB instance classes are available in all AWS Regions.  If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is specified as true for this request.  Default: Uses existing setting.
      */
     DBInstanceClass?: String;
     /**
@@ -2007,6 +2035,10 @@ declare namespace DocDB {
      * A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -2052,11 +2084,33 @@ declare namespace DocDB {
      * A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
   }
   export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;
+  export interface StartDBClusterMessage {
+    /**
+     * The identifier of the cluster to restart. Example: docdb-2019-05-28-15-24-52 
+     */
+    DBClusterIdentifier: String;
+  }
+  export interface StartDBClusterResult {
+    DBCluster?: DBCluster;
+  }
+  export interface StopDBClusterMessage {
+    /**
+     * The identifier of the cluster to stop. Example: docdb-2019-05-28-15-24-52 
+     */
+    DBClusterIdentifier: String;
+  }
+  export interface StopDBClusterResult {
+    DBCluster?: DBCluster;
+  }
   export type String = string;
   export interface Subnet {
     /**
