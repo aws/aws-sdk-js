@@ -273,6 +273,31 @@
       ],
       "documentation": "<p>Lists the properties of all containers in AWS Elemental MediaStore. </p> <p>You can query to receive all the containers in one response. Or you can include the <code>MaxResults</code> parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the <code>NextToken</code> parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive. </p> <p>See also <a>DescribeContainer</a>, which gets the properties of one container. </p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceInput"
+      },
+      "output": {
+        "shape": "ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ContainerInUseException"
+        },
+        {
+          "shape": "ContainerNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Returns a list of the tags assigned to the specified container. </p>"
+    },
     "PutContainerPolicy": {
       "name": "PutContainerPolicy",
       "http": {
@@ -397,6 +422,56 @@
         }
       ],
       "documentation": "<p>Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceInput"
+      },
+      "output": {
+        "shape": "TagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ContainerInUseException"
+        },
+        {
+          "shape": "ContainerNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Adds tags to the specified AWS Elemental MediaStore container. Tags are key:value pairs that you can associate with AWS resources. For example, the tag key might be \"customer\" and the tag value might be \"companyA.\" You can specify one or more tags to add to each container. You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see <a href=\"https://aws.amazon.com/documentation/mediastore/tagging\">Tagging Resources in MediaStore</a>.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceInput"
+      },
+      "output": {
+        "shape": "UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ContainerInUseException"
+        },
+        {
+          "shape": "ContainerNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Removes tags from the specified container. You can specify one or more tags to remove. </p>"
     }
   },
   "shapes": {
@@ -458,7 +533,7 @@
       "type": "string",
       "max": 1024,
       "min": 1,
-      "pattern": "arn:aws:mediastore:[a-z]+-[a-z]+-\\d:\\d{12}:container/\\w{1,255}"
+      "pattern": "arn:aws:mediastore:[a-z]+-[a-z]+-\\d:\\d{12}:container/[\\w-]{1,255}"
     },
     "ContainerAccessLoggingEnabled": {
       "type": "boolean"
@@ -484,7 +559,7 @@
       "type": "string",
       "max": 8192,
       "min": 1,
-      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+      "pattern": "[\\x00-\\x7F]+"
     },
     "ContainerStatus": {
       "type": "string",
@@ -544,6 +619,10 @@
         "ContainerName": {
           "shape": "ContainerName",
           "documentation": "<p>The name for the container. The name must be from 1 to 255 characters. Container names must be unique to your AWS account within a specific region. As an example, you could create a container named <code>movies</code> in every region, as long as you don’t have an existing container with that name.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of key:value pairs that you define. These values can be anything that you want. Typically, the tag key represents a category (such as \"environment\") and the tag value represents a specific value within that category (such as \"test,\" \"development,\" or \"production\"). You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see <a href=\"https://aws.amazon.com/documentation/mediastore/tagging\">Tagging Resources in MediaStore</a>.</p>"
         }
       }
     },
@@ -767,6 +846,27 @@
         }
       }
     },
+    "ListTagsForResourceInput": {
+      "type": "structure",
+      "required": [
+        "Resource"
+      ],
+      "members": {
+        "Resource": {
+          "shape": "ContainerARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the container.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceOutput": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of key:value pairs that are assigned to the container.</p>"
+        }
+      }
+    },
     "MaxAgeSeconds": {
       "type": "integer",
       "max": 2147483647,
@@ -888,8 +988,86 @@
       "type": "structure",
       "members": {}
     },
+    "Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as \"customer.\" Tag keys are case-sensitive.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as \"companyA\" or \"companyB.\" Tag values are case-sensitive.</p>"
+        }
+      },
+      "documentation": "<p>A collection of tags associated with a container. Each tag consists of a key:value pair, which can be anything you define. Typically, the tag key represents a category (such as \"environment\") and the tag value represents a specific value within that category (such as \"test,\" \"development,\" or \"production\"). You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see <a href=\"https://aws.amazon.com/documentation/mediastore/tagging\">Tagging Resources in MediaStore</a>.</p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      }
+    },
+    "TagResourceInput": {
+      "type": "structure",
+      "required": [
+        "Resource",
+        "Tags"
+      ],
+      "members": {
+        "Resource": {
+          "shape": "ContainerARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the container. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of key:value pairs that you want to add to the container. You need to specify only the tags that you want to add or update. For example, suppose a container already has two tags (customer:CompanyA and priority:High). You want to change the priority tag and also add a third tag (type:Contract). For TagResource, you specify the following tags: priority:Medium, type:Contract. The result is that your container has three tags: customer:CompanyA, priority:Medium, and type:Contract.</p>"
+        }
+      }
+    },
+    "TagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "TimeStamp": {
       "type": "timestamp"
+    },
+    "UntagResourceInput": {
+      "type": "structure",
+      "required": [
+        "Resource",
+        "TagKeys"
+      ],
+      "members": {
+        "Resource": {
+          "shape": "ContainerARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the container.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>A comma-separated list of keys for tags that you want to remove from the container. For example, if your container has two tags (customer:CompanyA and priority:High) and you want to remove one of the tags (priority:High), you specify the key for the tag that you want to remove (priority).</p>"
+        }
+      }
+    },
+    "UntagResourceOutput": {
+      "type": "structure",
+      "members": {}
     }
   },
   "documentation": "<p>An AWS Elemental MediaStore container is a namespace that holds folders and objects. You use a container endpoint to create, read, and delete objects. </p>"

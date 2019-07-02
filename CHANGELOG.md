@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.486.0-->
+<!--LATEST=2.487.0-->
 <!--ENTRYINSERT-->
+
+## 2.487.0
+* feature: MediaStore: This release adds support for tagging, untagging, and listing tags for AWS Elemental MediaStore containers.
 
 ## 2.486.0
 * feature: DocDB: This release provides support for cluster delete protection and the ability to stop and start clusters.

@@ -75,3 +75,6 @@ export import Translate = require('./translate');
 export import ResourceGroups = require('./resourcegroups');
 export import SecretsManager = require('./secretsmanager');
 export import ComprehendMedical = require('./comprehendmedical');
+export import Personalize = require('./personalize');
+export import PersonalizeEvents = require('./personalizeevents');
+export import PersonalizeRuntime = require('./personalizeruntime');
