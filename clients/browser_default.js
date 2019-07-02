@@ -76,5 +76,8 @@ module.exports = {
   Translate: require('./translate'),
   ResourceGroups: require('./resourcegroups'),
   SecretsManager: require('./secretsmanager'),
-  ComprehendMedical: require('./comprehendmedical')
+  ComprehendMedical: require('./comprehendmedical'),
+  Personalize: require('./personalize'),
+  PersonalizeEvents: require('./personalizeevents'),
+  PersonalizeRuntime: require('./personalizeruntime')
 };

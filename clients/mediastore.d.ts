@@ -92,6 +92,14 @@ declare class MediaStore extends Service {
    */
   listContainers(callback?: (err: AWSError, data: MediaStore.Types.ListContainersOutput) => void): Request<MediaStore.Types.ListContainersOutput, AWSError>;
   /**
+   * Returns a list of the tags assigned to the specified container. 
+   */
+  listTagsForResource(params: MediaStore.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: MediaStore.Types.ListTagsForResourceOutput) => void): Request<MediaStore.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Returns a list of the tags assigned to the specified container. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: MediaStore.Types.ListTagsForResourceOutput) => void): Request<MediaStore.Types.ListTagsForResourceOutput, AWSError>;
+  /**
    * Creates an access policy for the specified container to restrict the users and clients that can access it. For information about the data that is included in an access policy, see the AWS Identity and Access Management User Guide. For this release of the REST API, you can create only one policy for a container. If you enter PutContainerPolicy twice, the second command modifies the existing policy. 
    */
   putContainerPolicy(params: MediaStore.Types.PutContainerPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutContainerPolicyOutput) => void): Request<MediaStore.Types.PutContainerPolicyOutput, AWSError>;
@@ -131,6 +139,22 @@ declare class MediaStore extends Service {
    * Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.
    */
   stopAccessLogging(callback?: (err: AWSError, data: MediaStore.Types.StopAccessLoggingOutput) => void): Request<MediaStore.Types.StopAccessLoggingOutput, AWSError>;
+  /**
+   * Adds tags to the specified AWS Elemental MediaStore container. Tags are key:value pairs that you can associate with AWS resources. For example, the tag key might be "customer" and the tag value might be "companyA." You can specify one or more tags to add to each container. You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see Tagging Resources in MediaStore.
+   */
+  tagResource(params: MediaStore.Types.TagResourceInput, callback?: (err: AWSError, data: MediaStore.Types.TagResourceOutput) => void): Request<MediaStore.Types.TagResourceOutput, AWSError>;
+  /**
+   * Adds tags to the specified AWS Elemental MediaStore container. Tags are key:value pairs that you can associate with AWS resources. For example, the tag key might be "customer" and the tag value might be "companyA." You can specify one or more tags to add to each container. You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see Tagging Resources in MediaStore.
+   */
+  tagResource(callback?: (err: AWSError, data: MediaStore.Types.TagResourceOutput) => void): Request<MediaStore.Types.TagResourceOutput, AWSError>;
+  /**
+   * Removes tags from the specified container. You can specify one or more tags to remove. 
+   */
+  untagResource(params: MediaStore.Types.UntagResourceInput, callback?: (err: AWSError, data: MediaStore.Types.UntagResourceOutput) => void): Request<MediaStore.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Removes tags from the specified container. You can specify one or more tags to remove. 
+   */
+  untagResource(callback?: (err: AWSError, data: MediaStore.Types.UntagResourceOutput) => void): Request<MediaStore.Types.UntagResourceOutput, AWSError>;
 }
 declare namespace MediaStore {
   export type AllowedHeaders = Header[];
@@ -197,6 +221,10 @@ declare namespace MediaStore {
      * The name for the container. The name must be from 1 to 255 characters. Container names must be unique to your AWS account within a specific region. As an example, you could create a container named movies in every region, as long as you don’t have an existing container with that name.
      */
     ContainerName: ContainerName;
+    /**
+     * An array of key:value pairs that you define. These values can be anything that you want. Typically, the tag key represents a category (such as "environment") and the tag value represents a specific value within that category (such as "test," "development," or "production"). You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see Tagging Resources in MediaStore.
+     */
+    Tags?: TagList;
   }
   export interface CreateContainerOutput {
     /**
@@ -308,6 +336,18 @@ declare namespace MediaStore {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the container.
+     */
+    Resource: ContainerARN;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * An array of key:value pairs that are assigned to the container.
+     */
+    Tags?: TagList;
+  }
   export type MaxAgeSeconds = number;
   export type MethodName = "PUT"|"GET"|"DELETE"|"HEAD"|string;
   export type Origin = string;
@@ -364,7 +404,45 @@ declare namespace MediaStore {
   }
   export interface StopAccessLoggingOutput {
   }
+  export interface Tag {
+    /**
+     * Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.
+     */
+    Key?: TagKey;
+    /**
+     * Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive.
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the container. 
+     */
+    Resource: ContainerARN;
+    /**
+     * An array of key:value pairs that you want to add to the container. You need to specify only the tags that you want to add or update. For example, suppose a container already has two tags (customer:CompanyA and priority:High). You want to change the priority tag and also add a third tag (type:Contract). For TagResource, you specify the following tags: priority:Medium, type:Contract. The result is that your container has three tags: customer:CompanyA, priority:Medium, and type:Contract.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
   export type TimeStamp = Date;
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the container.
+     */
+    Resource: ContainerARN;
+    /**
+     * A comma-separated list of keys for tags that you want to remove from the container. For example, if your container has two tags (customer:CompanyA and priority:High) and you want to remove one of the tags (priority:High), you specify the key for the tag that you want to remove (priority).
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceOutput {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
