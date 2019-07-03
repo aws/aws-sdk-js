@@ -220,7 +220,7 @@
       "input": {
         "shape": "DeleteBucketReplicationRequest"
       },
-      "documentation": "<p> Deletes the replication configuration from the bucket. For information about replication configuration, see <a href=\" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html\">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>. </p>"
+      "documentation": "<p> Deletes the replication configuration from the bucket. For information about replication configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html\">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>. </p>"
     },
     "DeleteBucketTagging": {
       "name": "DeleteBucketTagging",
@@ -2041,6 +2041,12 @@
           "location": "header",
           "locationName": "x-amz-server-side-encryption-aws-kms-key-id"
         },
+        "SSEKMSEncryptionContext": {
+          "shape": "SSEKMSEncryptionContext",
+          "documentation": "<p>If present, specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.</p>",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-context"
+        },
         "RequestCharged": {
           "shape": "RequestCharged",
           "location": "header",
@@ -2224,6 +2230,12 @@
           "documentation": "<p>Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</p>",
           "location": "header",
           "locationName": "x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "SSEKMSEncryptionContext": {
+          "shape": "SSEKMSEncryptionContext",
+          "documentation": "<p>Specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.</p>",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-context"
         },
         "CopySourceSSECustomerAlgorithm": {
           "shape": "CopySourceSSECustomerAlgorithm",
@@ -2472,6 +2484,12 @@
           "location": "header",
           "locationName": "x-amz-server-side-encryption-aws-kms-key-id"
         },
+        "SSEKMSEncryptionContext": {
+          "shape": "SSEKMSEncryptionContext",
+          "documentation": "<p>If present, specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.</p>",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-context"
+        },
         "RequestCharged": {
           "shape": "RequestCharged",
           "location": "header",
@@ -2611,6 +2629,12 @@
           "documentation": "<p>Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</p>",
           "location": "header",
           "locationName": "x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "SSEKMSEncryptionContext": {
+          "shape": "SSEKMSEncryptionContext",
+          "documentation": "<p>Specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.</p>",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-context"
         },
         "RequestPayer": {
           "shape": "RequestPayer",
@@ -7466,6 +7490,12 @@
           "location": "header",
           "locationName": "x-amz-server-side-encryption-aws-kms-key-id"
         },
+        "SSEKMSEncryptionContext": {
+          "shape": "SSEKMSEncryptionContext",
+          "documentation": "<p>If present, specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.</p>",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-context"
+        },
         "RequestCharged": {
           "shape": "RequestCharged",
           "location": "header",
@@ -7622,6 +7652,12 @@
           "documentation": "<p>Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</p>",
           "location": "header",
           "locationName": "x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "SSEKMSEncryptionContext": {
+          "shape": "SSEKMSEncryptionContext",
+          "documentation": "<p>Specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.</p>",
+          "location": "header",
+          "locationName": "x-amz-server-side-encryption-context"
         },
         "RequestPayer": {
           "shape": "RequestPayer",
@@ -7979,7 +8015,7 @@
         },
         "Priority": {
           "shape": "Priority",
-          "documentation": "<p>The priority associated with the rule. If you specify multiple rules in a replication configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering. If two or more rules identify the same object based on a specified filter, the rule with higher priority takes precedence. For example:</p> <ul> <li> <p>Same object quality prefix based filter criteria If prefixes you specified in multiple rules overlap </p> </li> <li> <p>Same object qualify tag based filter criteria specified in multiple rules</p> </li> </ul> <p>For more information, see <a href=\" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html\">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>.</p>"
+          "documentation": "<p>The priority associated with the rule. If you specify multiple rules in a replication configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering. If two or more rules identify the same object based on a specified filter, the rule with higher priority takes precedence. For example:</p> <ul> <li> <p>Same object quality prefix based filter criteria If prefixes you specified in multiple rules overlap </p> </li> <li> <p>Same object qualify tag based filter criteria specified in multiple rules</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html\">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>.</p>"
         },
         "Prefix": {
           "shape": "Prefix",
@@ -8376,6 +8412,10 @@
       },
       "documentation": "<p>Specifies the use of SSE-KMS to encrypt delivered Inventory reports.</p>",
       "locationName": "SSE-KMS"
+    },
+    "SSEKMSEncryptionContext": {
+      "type": "string",
+      "sensitive": true
     },
     "SSEKMSKeyId": {
       "type": "string",

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "AssignPrivateIpAddresses response includes two new fields: AssignedPrivateIpAddresses, NetworkInterfaceId"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release supports Cross-Account Cloning for Amazon Aurora clusters."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Add S3 x-amz-server-side-encryption-context support."
+    },
+    {
+        "type": "feature",
+        "category": "SWF",
+        "description": "This release adds APIs that allow adding and removing tags to a SWF domain, and viewing tags for a domain. It also enables adding tags when creating a domain."
+    }
+]
