@@ -1145,6 +1145,10 @@ declare namespace S3 {
      * If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * If present, specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+     */
+    SSEKMSEncryptionContext?: SSEKMSEncryptionContext;
     RequestCharged?: RequestCharged;
   }
   export interface CopyObjectRequest {
@@ -1260,6 +1264,10 @@ declare namespace S3 {
      * Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * Specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+     */
+    SSEKMSEncryptionContext?: SSEKMSEncryptionContext;
     /**
      * Specifies the algorithm to use when decrypting the source object (e.g., AES256).
      */
@@ -1407,6 +1415,10 @@ declare namespace S3 {
      * If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * If present, specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+     */
+    SSEKMSEncryptionContext?: SSEKMSEncryptionContext;
     RequestCharged?: RequestCharged;
   }
   export interface CreateMultipartUploadRequest {
@@ -1494,6 +1506,10 @@ declare namespace S3 {
      * Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * Specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+     */
+    SSEKMSEncryptionContext?: SSEKMSEncryptionContext;
     RequestPayer?: RequestPayer;
     /**
      * The tag-set for the object. The tag-set must be encoded as URL Query parameters
@@ -4181,6 +4197,10 @@ declare namespace S3 {
      * If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * If present, specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+     */
+    SSEKMSEncryptionContext?: SSEKMSEncryptionContext;
     RequestCharged?: RequestCharged;
   }
   export interface PutObjectRequest {
@@ -4280,6 +4300,10 @@ declare namespace S3 {
      * Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * Specifies the AWS KMS Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+     */
+    SSEKMSEncryptionContext?: SSEKMSEncryptionContext;
     RequestPayer?: RequestPayer;
     /**
      * The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")
@@ -4692,6 +4716,7 @@ declare namespace S3 {
      */
     KeyId: SSEKMSKeyId;
   }
+  export type SSEKMSEncryptionContext = string;
   export type SSEKMSKeyId = string;
   export interface SSES3 {
   }

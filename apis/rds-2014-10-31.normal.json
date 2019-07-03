@@ -4607,7 +4607,7 @@
           "documentation": "<p>Identifies all custom endpoints associated with the cluster.</p>"
         },
         "MultiAZ": {
-          "shape": "Boolean",
+          "shape": "BooleanOptional",
           "documentation": "<p>Specifies whether the DB cluster has instances in multiple Availability Zones.</p>"
         },
         "Engine": {
@@ -4683,7 +4683,7 @@
           "documentation": "<p>Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.</p>"
         },
         "IAMDatabaseAuthenticationEnabled": {
-          "shape": "Boolean",
+          "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether the mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.</p>"
         },
         "CloneGroupId": {
@@ -4722,11 +4722,11 @@
           "shape": "ScalingConfigurationInfo"
         },
         "DeletionProtection": {
-          "shape": "Boolean",
+          "shape": "BooleanOptional",
           "documentation": "<p>Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. </p>"
         },
         "HttpEndpointEnabled": {
-          "shape": "Boolean",
+          "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.</p> <p>When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
         },
         "ActivityStreamMode": {
@@ -4746,8 +4746,12 @@
           "documentation": "<p>The name of the Amazon Kinesis data stream used for the database activity stream.</p>"
         },
         "CopyTagsToSnapshot": {
-          "shape": "Boolean",
+          "shape": "BooleanOptional",
           "documentation": "<p>Specifies whether tags are copied from the DB cluster to snapshots of the DB cluster.</p>"
+        },
+        "CrossAccountClone": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specifies whether the DB cluster is a clone of a DB cluster owned by a different AWS account.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <code>DescribeDBClusters</code>, <code>StopDBCluster</code>, and <code>StartDBCluster</code> actions. </p>",
@@ -6579,6 +6583,10 @@
         "Marker": {
           "shape": "String",
           "documentation": "<p>An optional pagination token provided by a previous <code>DescribeDBClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "IncludeShared": {
+          "shape": "Boolean",
+          "documentation": "<p>Optional Boolean parameter that specifies whether the output includes information about clusters shared from other AWS accounts.</p>"
         }
       },
       "documentation": "<p/>"

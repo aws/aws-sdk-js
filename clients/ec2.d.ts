@@ -87,11 +87,11 @@ declare class EC2 extends Service {
   /**
    * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved. Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that the remapping is complete.
    */
-  assignPrivateIpAddresses(params: EC2.Types.AssignPrivateIpAddressesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  assignPrivateIpAddresses(params: EC2.Types.AssignPrivateIpAddressesRequest, callback?: (err: AWSError, data: EC2.Types.AssignPrivateIpAddressesResult) => void): Request<EC2.Types.AssignPrivateIpAddressesResult, AWSError>;
   /**
    * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved. Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that the remapping is complete.
    */
-  assignPrivateIpAddresses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  assignPrivateIpAddresses(callback?: (err: AWSError, data: EC2.Types.AssignPrivateIpAddressesResult) => void): Request<EC2.Types.AssignPrivateIpAddressesResult, AWSError>;
   /**
    * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
@@ -3403,6 +3403,23 @@ declare namespace EC2 {
      */
     SecondaryPrivateIpAddressCount?: Integer;
   }
+  export interface AssignPrivateIpAddressesResult {
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The private IP addresses assigned to the network interface.
+     */
+    AssignedPrivateIpAddresses?: AssignedPrivateIpAddressList;
+  }
+  export interface AssignedPrivateIpAddress {
+    /**
+     * The private IP address assigned to the network interface.
+     */
+    PrivateIpAddress?: String;
+  }
+  export type AssignedPrivateIpAddressList = AssignedPrivateIpAddress[];
   export interface AssociateAddressRequest {
     /**
      * [EC2-VPC] The allocation ID. This is required for EC2-VPC.
@@ -4833,7 +4850,7 @@ declare namespace EC2 {
      */
     DestinationRegion?: String;
     /**
-     * Specifies whether the destination snapshot should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot use it to create an unencrypted copy of an encrypted snapshot. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+     * To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Otherwise, omit this parameter. Encrypted snapshots are encrypted, even if you omit this parameter and encryption by default is not enabled. You cannot set this parameter to false. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
      */
     Encrypted?: Boolean;
     /**
@@ -5608,7 +5625,7 @@ declare namespace EC2 {
      */
     SecondaryPrivateIpAddressCount?: Integer;
     /**
-     * Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see  Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. If you are not creating an EFA, specify interface or omit this parameter.
+     * Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see  Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide.
      */
     InterfaceType?: NetworkInterfaceCreationType;
     /**

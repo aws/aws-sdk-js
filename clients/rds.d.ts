@@ -1983,7 +1983,7 @@ declare namespace RDS {
     /**
      * Specifies whether the DB cluster has instances in multiple Availability Zones.
      */
-    MultiAZ?: Boolean;
+    MultiAZ?: BooleanOptional;
     /**
      * Provides the name of the database engine to be used for this DB cluster.
      */
@@ -2059,7 +2059,7 @@ declare namespace RDS {
     /**
      * A value that indicates whether the mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
      */
-    IAMDatabaseAuthenticationEnabled?: Boolean;
+    IAMDatabaseAuthenticationEnabled?: BooleanOptional;
     /**
      * Identifies the clone group to which the DB cluster is associated.
      */
@@ -2096,11 +2096,11 @@ declare namespace RDS {
     /**
      * Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. 
      */
-    DeletionProtection?: Boolean;
+    DeletionProtection?: BooleanOptional;
     /**
      * A value that indicates whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled. When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor. For more information, see Using the Data API for Aurora Serverless in the Amazon Aurora User Guide.
      */
-    HttpEndpointEnabled?: Boolean;
+    HttpEndpointEnabled?: BooleanOptional;
     /**
      * The mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. 
      */
@@ -2120,7 +2120,11 @@ declare namespace RDS {
     /**
      * Specifies whether tags are copied from the DB cluster to snapshots of the DB cluster.
      */
-    CopyTagsToSnapshot?: Boolean;
+    CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * Specifies whether the DB cluster is a clone of a DB cluster owned by a different AWS account.
+     */
+    CrossAccountClone?: BooleanOptional;
   }
   export interface DBClusterBacktrack {
     /**
@@ -3481,6 +3485,10 @@ declare namespace RDS {
      * An optional pagination token provided by a previous DescribeDBClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
      */
     Marker?: String;
+    /**
+     * Optional Boolean parameter that specifies whether the output includes information about clusters shared from other AWS accounts.
+     */
+    IncludeShared?: Boolean;
   }
   export interface DescribeDBEngineVersionsMessage {
     /**

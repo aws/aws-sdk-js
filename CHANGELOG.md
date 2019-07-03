@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.487.0-->
+<!--LATEST=2.488.0-->
 <!--ENTRYINSERT-->
+
+## 2.488.0
+* feature: EC2: AssignPrivateIpAddresses response includes two new fields: AssignedPrivateIpAddresses, NetworkInterfaceId
+* feature: RDS: This release supports Cross-Account Cloning for Amazon Aurora clusters.
+* feature: S3: Add S3 x-amz-server-side-encryption-context support.
+* feature: SWF: This release adds APIs that allow adding and removing tags to a SWF domain, and viewing tags for a domain. It also enables adding tags when creating a domain.
 
 ## 2.487.0
 * feature: MediaStore: This release adds support for tagging, untagging, and listing tags for AWS Elemental MediaStore containers.

@@ -147,6 +147,9 @@
       "input": {
         "shape": "AssignPrivateIpAddressesRequest"
       },
+      "output": {
+        "shape": "AssignPrivateIpAddressesResult"
+      },
       "documentation": "<p>Assigns one or more secondary private IP addresses to the specified network interface.</p> <p>You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved.</p> <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance metadata to confirm that the remapping is complete.</p>"
     },
     "AssociateAddress": {
@@ -5331,6 +5334,39 @@
       },
       "documentation": "<p>Contains the parameters for AssignPrivateIpAddresses.</p>"
     },
+    "AssignPrivateIpAddressesResult": {
+      "type": "structure",
+      "members": {
+        "NetworkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the network interface.</p>",
+          "locationName": "networkInterfaceId"
+        },
+        "AssignedPrivateIpAddresses": {
+          "shape": "AssignedPrivateIpAddressList",
+          "documentation": "<p>The private IP addresses assigned to the network interface.</p>",
+          "locationName": "assignedPrivateIpAddressesSet"
+        }
+      }
+    },
+    "AssignedPrivateIpAddress": {
+      "type": "structure",
+      "members": {
+        "PrivateIpAddress": {
+          "shape": "String",
+          "documentation": "<p>The private IP address assigned to the network interface.</p>",
+          "locationName": "privateIpAddress"
+        }
+      },
+      "documentation": "<p>Describes the private IP addresses assigned to a network interface.</p>"
+    },
+    "AssignedPrivateIpAddressList": {
+      "type": "list",
+      "member": {
+        "shape": "AssignedPrivateIpAddress",
+        "locationName": "item"
+      }
+    },
     "AssociateAddressRequest": {
       "type": "structure",
       "members": {
@@ -7806,7 +7842,7 @@
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies whether the destination snapshot should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot use it to create an unencrypted copy of an encrypted snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "documentation": "<p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Otherwise, omit this parameter. Encrypted snapshots are encrypted, even if you omit this parameter and encryption by default is not enabled. You cannot set this parameter to false. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName": "encrypted"
         },
         "KmsKeyId": {
@@ -8913,7 +8949,7 @@
         },
         "InterfaceType": {
           "shape": "NetworkInterfaceCreationType",
-          "documentation": "<p>Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\"> Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p>"
+          "documentation": "<p>Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\"> Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "SubnetId": {
           "shape": "String",
