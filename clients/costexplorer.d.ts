@@ -67,6 +67,14 @@ declare class CostExplorer extends Service {
    * Queries for available tag keys and tag values for a specified period. You can search the tag values for an arbitrary string. 
    */
   getTags(callback?: (err: AWSError, data: CostExplorer.Types.GetTagsResponse) => void): Request<CostExplorer.Types.GetTagsResponse, AWSError>;
+  /**
+   * Retrieves a forecast for how much Amazon Web Services predicts that you will use over the forecast time period that you select, based on your past usage. 
+   */
+  getUsageForecast(params: CostExplorer.Types.GetUsageForecastRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetUsageForecastResponse) => void): Request<CostExplorer.Types.GetUsageForecastResponse, AWSError>;
+  /**
+   * Retrieves a forecast for how much Amazon Web Services predicts that you will use over the forecast time period that you select, based on your past usage. 
+   */
+  getUsageForecast(callback?: (err: AWSError, data: CostExplorer.Types.GetUsageForecastResponse) => void): Request<CostExplorer.Types.GetUsageForecastResponse, AWSError>;
 }
 declare namespace CostExplorer {
   export type AccountScope = "PAYER"|"LINKED"|string;
@@ -361,7 +369,7 @@ declare namespace CostExplorer {
      */
     TimePeriod: DateInterval;
     /**
-     * Which metric Cost Explorer uses to create your forecast. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values for a GetCostForecast call are the following:   AmortizedCost   BlendedCost   NetAmortizedCost   NetUnblendedCost   UnblendedCost  
+     * Which metric Cost Explorer uses to create your forecast. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values for a GetCostForecast call are the following:   AMORTIZED_COST   BLENDED_COST   NET_AMORTIZED_COST   NET_UNBLENDED_COST   UNBLENDED_COST  
      */
     Metric: Metric;
     /**
@@ -590,6 +598,38 @@ declare namespace CostExplorer {
      * The total number of query results.
      */
     TotalSize: PageSize;
+  }
+  export interface GetUsageForecastRequest {
+    /**
+     * The start and end dates of the period that you want to retrieve usage forecast for. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01.
+     */
+    TimePeriod: DateInterval;
+    /**
+     * Which metric Cost Explorer uses to create your forecast. Valid values for a GetUsageForecast call are the following:   USAGE_QUANTITY   NORMALIZED_USAGE_AMOUNT  
+     */
+    Metric: Metric;
+    /**
+     * How granular you want the forecast to be. You can get 3 months of DAILY forecasts or 12 months of MONTHLY forecasts. The GetUsageForecast operation supports only DAILY and MONTHLY granularities.
+     */
+    Granularity: Granularity;
+    /**
+     * The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.
+     */
+    Filter?: Expression;
+    /**
+     * Cost Explorer always returns the mean forecast as a single point. You can request a prediction interval around the mean by specifying a confidence level. The higher the confidence level, the more confident Cost Explorer is about the actual value falling in the prediction interval. Higher confidence levels result in wider prediction intervals.
+     */
+    PredictionIntervalLevel?: PredictionIntervalLevel;
+  }
+  export interface GetUsageForecastResponse {
+    /**
+     * How much you're forecasted to use over the forecast period.
+     */
+    Total?: MetricValue;
+    /**
+     * The forecasts for your query, in order. For DAILY forecasts, this is a list of days. For MONTHLY forecasts, this is a list of months.
+     */
+    ForecastResultsByTime?: ForecastResultsByTime;
   }
   export type Granularity = "DAILY"|"MONTHLY"|"HOURLY"|string;
   export interface Group {
