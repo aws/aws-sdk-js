@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.488.0-->
+<!--LATEST=2.489.0-->
 <!--ENTRYINSERT-->
+
+## 2.489.0
+* feature: CostExplorer: This release introduces a new operation called GetUsageForecast, which allows you to programmatically access AWS Cost Explorer's forecasting engine on usage data (running hours, data transfer, etc).
 
 ## 2.488.0
 * feature: EC2: AssignPrivateIpAddresses response includes two new fields: AssignedPrivateIpAddresses, NetworkInterfaceId
