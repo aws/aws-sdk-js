@@ -1,5 +1,5 @@
 ---
-name: "\U0001F6E0 Know issues"
+name: "\U0001F6E0 'Unexpected key' or 'is not a function' error"
 about: Read me before opening an issue!
 title: ''
 assignees: ''
