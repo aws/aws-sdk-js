@@ -1,6 +1,6 @@
 ---
 name: "\U0001F6E0 'Unexpected key' or 'is not a function' error"
-about: Read me before opening an issue!
+about: API call returns 'Unexpected key' or 'is not a function' error
 title: ''
 assignees: ''
 
