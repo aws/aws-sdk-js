@@ -21,6 +21,14 @@ declare class CloudWatch extends Service {
    */
   deleteAlarms(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified anomaly detection model from your account.
+   */
+  deleteAnomalyDetector(params: CloudWatch.Types.DeleteAnomalyDetectorInput, callback?: (err: AWSError, data: CloudWatch.Types.DeleteAnomalyDetectorOutput) => void): Request<CloudWatch.Types.DeleteAnomalyDetectorOutput, AWSError>;
+  /**
+   * Deletes the specified anomaly detection model from your account.
+   */
+  deleteAnomalyDetector(callback?: (err: AWSError, data: CloudWatch.Types.DeleteAnomalyDetectorOutput) => void): Request<CloudWatch.Types.DeleteAnomalyDetectorOutput, AWSError>;
+  /**
    * Deletes all dashboards that you specify. You may specify up to 100 dashboards to delete. If there is an error during this call, no dashboards are deleted.
    */
   deleteDashboards(params: CloudWatch.Types.DeleteDashboardsInput, callback?: (err: AWSError, data: CloudWatch.Types.DeleteDashboardsOutput) => void): Request<CloudWatch.Types.DeleteDashboardsOutput, AWSError>;
@@ -52,6 +60,14 @@ declare class CloudWatch extends Service {
    * Retrieves the alarms for the specified metric. To filter the results, specify a statistic, period, or unit.
    */
   describeAlarmsForMetric(callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmsForMetricOutput) => void): Request<CloudWatch.Types.DescribeAlarmsForMetricOutput, AWSError>;
+  /**
+   * Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.
+   */
+  describeAnomalyDetectors(params: CloudWatch.Types.DescribeAnomalyDetectorsInput, callback?: (err: AWSError, data: CloudWatch.Types.DescribeAnomalyDetectorsOutput) => void): Request<CloudWatch.Types.DescribeAnomalyDetectorsOutput, AWSError>;
+  /**
+   * Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.
+   */
+  describeAnomalyDetectors(callback?: (err: AWSError, data: CloudWatch.Types.DescribeAnomalyDetectorsOutput) => void): Request<CloudWatch.Types.DescribeAnomalyDetectorsOutput, AWSError>;
   /**
    * Disables the actions for the specified alarms. When an alarm's actions are disabled, the alarm actions do not execute when the alarm state changes.
    */
@@ -125,19 +141,27 @@ declare class CloudWatch extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CloudWatch.Types.ListTagsForResourceOutput) => void): Request<CloudWatch.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here. There is no limit to the number of dashboards in your account. All dashboards in your account are global, not region-specific. A simple way to create a dashboard using PutDashboard is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use GetDashboard, and then use the data returned within DashboardBody as the template for the new dashboard when you call PutDashboard. When you create a dashboard with PutDashboard, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the DashboardBody script or the CloudFormation template used to create the dashboard.
+   * Creates an anomaly detection model for a CloudWatch metric. You can use the model to display a band of expected normal values when the metric is graphed. For more information, see CloudWatch Anomaly Detection.
+   */
+  putAnomalyDetector(params: CloudWatch.Types.PutAnomalyDetectorInput, callback?: (err: AWSError, data: CloudWatch.Types.PutAnomalyDetectorOutput) => void): Request<CloudWatch.Types.PutAnomalyDetectorOutput, AWSError>;
+  /**
+   * Creates an anomaly detection model for a CloudWatch metric. You can use the model to display a band of expected normal values when the metric is graphed. For more information, see CloudWatch Anomaly Detection.
+   */
+  putAnomalyDetector(callback?: (err: AWSError, data: CloudWatch.Types.PutAnomalyDetectorOutput) => void): Request<CloudWatch.Types.PutAnomalyDetectorOutput, AWSError>;
+  /**
+   * Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here. All dashboards in your account are global, not region-specific. A simple way to create a dashboard using PutDashboard is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use GetDashboard, and then use the data returned within DashboardBody as the template for the new dashboard when you call PutDashboard. When you create a dashboard with PutDashboard, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the DashboardBody script or the CloudFormation template used to create the dashboard.
    */
   putDashboard(params: CloudWatch.Types.PutDashboardInput, callback?: (err: AWSError, data: CloudWatch.Types.PutDashboardOutput) => void): Request<CloudWatch.Types.PutDashboardOutput, AWSError>;
   /**
-   * Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here. There is no limit to the number of dashboards in your account. All dashboards in your account are global, not region-specific. A simple way to create a dashboard using PutDashboard is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use GetDashboard, and then use the data returned within DashboardBody as the template for the new dashboard when you call PutDashboard. When you create a dashboard with PutDashboard, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the DashboardBody script or the CloudFormation template used to create the dashboard.
+   * Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here. All dashboards in your account are global, not region-specific. A simple way to create a dashboard using PutDashboard is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use GetDashboard, and then use the data returned within DashboardBody as the template for the new dashboard when you call PutDashboard. When you create a dashboard with PutDashboard, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the DashboardBody script or the CloudFormation template used to create the dashboard.
    */
   putDashboard(callback?: (err: AWSError, data: CloudWatch.Types.PutDashboardOutput) => void): Request<CloudWatch.Types.PutDashboardOutput, AWSError>;
   /**
-   * Creates or updates an alarm and associates it with the specified metric or metric math expression. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:    iam:CreateServiceLinkedRole for all alarms with EC2 actions    ec2:DescribeInstanceStatus and ec2:DescribeInstances for all alarms on EC2 instance status metrics    ec2:StopInstances for alarms with stop actions    ec2:TerminateInstances for alarms with terminate actions   No specific permissions are needed for alarms with recover actions   If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed. If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies. If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions. The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called AWSServiceRoleForCloudWatchEvents. For more information, see AWS service-linked role.
+   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:    iam:CreateServiceLinkedRole for all alarms with EC2 actions    ec2:DescribeInstanceStatus and ec2:DescribeInstances for all alarms on EC2 instance status metrics    ec2:StopInstances for alarms with stop actions    ec2:TerminateInstances for alarms with terminate actions   No specific permissions are needed for alarms with recover actions   If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed. If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies. If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions. The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called AWSServiceRoleForCloudWatchEvents. For more information, see AWS service-linked role.
    */
   putMetricAlarm(params: CloudWatch.Types.PutMetricAlarmInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates an alarm and associates it with the specified metric or metric math expression. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:    iam:CreateServiceLinkedRole for all alarms with EC2 actions    ec2:DescribeInstanceStatus and ec2:DescribeInstances for all alarms on EC2 instance status metrics    ec2:StopInstances for alarms with stop actions    ec2:TerminateInstances for alarms with terminate actions   No specific permissions are needed for alarms with recover actions   If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed. If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies. If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions. The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called AWSServiceRoleForCloudWatchEvents. For more information, see AWS service-linked role.
+   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:    iam:CreateServiceLinkedRole for all alarms with EC2 actions    ec2:DescribeInstanceStatus and ec2:DescribeInstances for all alarms on EC2 instance status metrics    ec2:StopInstances for alarms with stop actions    ec2:TerminateInstances for alarms with terminate actions   No specific permissions are needed for alarms with recover actions   If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed. If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies. If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions. The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called AWSServiceRoleForCloudWatchEvents. For more information, see AWS service-linked role.
    */
   putMetricAlarm(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -213,7 +237,42 @@ declare namespace CloudWatch {
   export type AlarmNamePrefix = string;
   export type AlarmNames = AlarmName[];
   export type AmazonResourceName = string;
-  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export interface AnomalyDetector {
+    /**
+     * The namespace of the metric associated with the anomaly detection model.
+     */
+    Namespace?: Namespace;
+    /**
+     * The name of the metric associated with the anomaly detection model.
+     */
+    MetricName?: MetricName;
+    /**
+     * The metric dimensions associated with the anomaly detection model.
+     */
+    Dimensions?: Dimensions;
+    /**
+     * The statistic associated with the anomaly detection model.
+     */
+    Stat?: Stat;
+    /**
+     * The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model, and the time zone to use for the metric.
+     */
+    Configuration?: AnomalyDetectorConfiguration;
+  }
+  export interface AnomalyDetectorConfiguration {
+    /**
+     * An array of time ranges to exclude from use when the anomaly detection model is trained. Use this to make sure that events that could cause unusual values for the metric, such as deployments, aren't used when CloudWatch creates the model.
+     */
+    ExcludedTimeRanges?: AnomalyDetectorExcludedTimeRanges;
+    /**
+     * The time zone to use for the metric. This is useful to enable the model to automatically account for daylight savings time changes if the metric is sensitive to such time changes. To specify a time zone, use the name of the time zone as specified in the standard tz database. For more information, see tz database.
+     */
+    MetricTimezone?: AnomalyDetectorMetricTimezone;
+  }
+  export type AnomalyDetectorExcludedTimeRanges = Range[];
+  export type AnomalyDetectorMetricTimezone = string;
+  export type AnomalyDetectors = AnomalyDetector[];
+  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|"LessThanLowerOrGreaterThanUpperThreshold"|"LessThanLowerThreshold"|"GreaterThanUpperThreshold"|string;
   export type Counts = DatapointValue[];
   export type DashboardArn = string;
   export type DashboardBody = string;
@@ -295,6 +354,26 @@ declare namespace CloudWatch {
      * The alarms to be deleted.
      */
     AlarmNames: AlarmNames;
+  }
+  export interface DeleteAnomalyDetectorInput {
+    /**
+     * The namespace associated with the anomaly detection model to delete.
+     */
+    Namespace: Namespace;
+    /**
+     * The metric name associated with the anomaly detection model to delete.
+     */
+    MetricName: MetricName;
+    /**
+     * The metric dimensions associated with the anomaly detection model to delete.
+     */
+    Dimensions?: Dimensions;
+    /**
+     * The statistic associated with the anomaly detection model to delete.
+     */
+    Stat: Stat;
+  }
+  export interface DeleteAnomalyDetectorOutput {
   }
   export interface DeleteDashboardsInput {
     /**
@@ -409,6 +488,38 @@ declare namespace CloudWatch {
     MetricAlarms?: MetricAlarms;
     /**
      * The token that marks the start of the next batch of returned results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeAnomalyDetectorsInput {
+    /**
+     * Use the token returned by the previous operation to request the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in one operation. The maximum value you can specify is 10. To retrieve the remaining results, make another call with the returned NextToken value. 
+     */
+    MaxResults?: MaxReturnedResultsCount;
+    /**
+     * Limits the results to only the anomaly detection models that are associated with the specified namespace.
+     */
+    Namespace?: Namespace;
+    /**
+     * Limits the results to only the anomaly detection models that are associated with the specified metric name. If there are multiple metrics with this name in different namespaces that have anomaly detection models, they're all returned.
+     */
+    MetricName?: MetricName;
+    /**
+     * Limits the results to only the anomaly detection models that are associated with the specified metric dimensions. If there are multiple metrics that have these dimensions and have anomaly detection models associated, they're all returned.
+     */
+    Dimensions?: Dimensions;
+  }
+  export interface DescribeAnomalyDetectorsOutput {
+    /**
+     * The list of anomaly detection models returned by the operation.
+     */
+    AnomalyDetectors?: AnomalyDetectors;
+    /**
+     * A token that you can use in a subsequent operation to retrieve the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -642,6 +753,7 @@ declare namespace CloudWatch {
     Tags?: TagList;
   }
   export type MaxRecords = number;
+  export type MaxReturnedResultsCount = number;
   export type Message = string;
   export interface MessageData {
     /**
@@ -719,7 +831,7 @@ declare namespace CloudWatch {
      */
     StateUpdatedTimestamp?: Timestamp;
     /**
-     * The name of the metric associated with the alarm.
+     * The name of the metric associated with the alarm, if this is an alarm based on a single metric.
      */
     MetricName?: MetricName;
     /**
@@ -771,9 +883,13 @@ declare namespace CloudWatch {
      */
     EvaluateLowSampleCountPercentile?: EvaluateLowSampleCountPercentile;
     /**
-     * 
+     * An array of MetricDataQuery structures, used in an alarm based on a metric math expression. Each structure either retrieves a metric or performs a math expression. One item in the Metrics array is the math expression that the alarm watches. This expression by designated by having ReturnValue set to true.
      */
     Metrics?: MetricDataQueries;
+    /**
+     * In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm.
+     */
+    ThresholdMetricId?: MetricId;
   }
   export type MetricAlarms = MetricAlarm[];
   export type MetricData = MetricDatum[];
@@ -858,7 +974,7 @@ declare namespace CloudWatch {
      */
     Counts?: Counts;
     /**
-     * The unit of the metric.
+     * When you are using a Put operation, this defines what unit you want to use when storing the metric. In a Get operation, this displays the unit that is used for the metric.
      */
     Unit?: StandardUnit;
     /**
@@ -884,7 +1000,7 @@ declare namespace CloudWatch {
      */
     Stat: Stat;
     /**
-     * The unit to use for the returned data points.
+     * When you are using a Put operation, this defines what unit you want to use when storing the metric. In a Get operation, this displays the unit that is used for the metric.
      */
     Unit?: StandardUnit;
   }
@@ -895,6 +1011,30 @@ declare namespace CloudWatch {
   export type NextToken = string;
   export type OutputFormat = string;
   export type Period = number;
+  export interface PutAnomalyDetectorInput {
+    /**
+     * The namespace of the metric to create the anomaly detection model for.
+     */
+    Namespace: Namespace;
+    /**
+     * The name of the metric to create the anomaly detection model for.
+     */
+    MetricName: MetricName;
+    /**
+     * The metric dimensions to create the anomaly detection model for.
+     */
+    Dimensions?: Dimensions;
+    /**
+     * The statistic to use for the metric and the anomaly detection model.
+     */
+    Stat: Stat;
+    /**
+     * The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude when training and updating the model. You can specify as many as 10 time ranges. The configuration can also include the time zone to use for the metric. You can in
+     */
+    Configuration?: AnomalyDetectorConfiguration;
+  }
+  export interface PutAnomalyDetectorOutput {
+  }
   export interface PutDashboardInput {
     /**
      * The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and "_". This parameter is required.
@@ -975,9 +1115,9 @@ declare namespace CloudWatch {
     /**
      * The value against which the specified statistic is compared.
      */
-    Threshold: Threshold;
+    Threshold?: Threshold;
     /**
-     *  The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.
+     *  The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand. The values LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, and GreaterThanUpperThreshold are used only for alarms based on anomaly detection models.
      */
     ComparisonOperator: ComparisonOperator;
     /**
@@ -996,6 +1136,10 @@ declare namespace CloudWatch {
      * A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.
      */
     Tags?: TagList;
+    /**
+     * If this is an alarm based on an anomaly detection model, make this value match the ID of the ANOMALY_DETECTION_BAND function. For an example of how to use this parameter, see the Anomaly Detection Model Alarm example on this page. If your alarm uses this parameter, it cannot have Auto Scaling actions.
+     */
+    ThresholdMetricId?: MetricId;
   }
   export interface PutMetricDataInput {
     /**
@@ -1006,6 +1150,16 @@ declare namespace CloudWatch {
      * The data for the metric. The array can include no more than 20 metrics per call.
      */
     MetricData: MetricData;
+  }
+  export interface Range {
+    /**
+     * The start time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss. For example, 2019-07-01T23:59:59.
+     */
+    StartTime: Timestamp;
+    /**
+     * The end time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss. For example, 2019-07-01T23:59:59.
+     */
+    EndTime: Timestamp;
   }
   export type ResourceList = ResourceName[];
   export type ResourceName = string;

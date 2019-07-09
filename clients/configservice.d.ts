@@ -76,6 +76,14 @@ declare class ConfigService extends Service {
    */
   deleteEvaluationResults(callback?: (err: AWSError, data: ConfigService.Types.DeleteEvaluationResultsResponse) => void): Request<ConfigService.Types.DeleteEvaluationResultsResponse, AWSError>;
   /**
+   * 
+   */
+  deleteOrganizationConfigRule(params: ConfigService.Types.DeleteOrganizationConfigRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteOrganizationConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes pending authorization requests for a specified aggregator account in a specified region.
    */
   deletePendingAggregationRequest(params: ConfigService.Types.DeletePendingAggregationRequestRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -204,6 +212,22 @@ declare class ConfigService extends Service {
    */
   describeDeliveryChannels(callback?: (err: AWSError, data: ConfigService.Types.DescribeDeliveryChannelsResponse) => void): Request<ConfigService.Types.DescribeDeliveryChannelsResponse, AWSError>;
   /**
+   * 
+   */
+  describeOrganizationConfigRuleStatuses(params: ConfigService.Types.DescribeOrganizationConfigRuleStatusesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse, AWSError>;
+  /**
+   * 
+   */
+  describeOrganizationConfigRuleStatuses(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse, AWSError>;
+  /**
+   * 
+   */
+  describeOrganizationConfigRules(params: ConfigService.Types.DescribeOrganizationConfigRulesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
+  /**
+   * 
+   */
+  describeOrganizationConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
+  /**
    * Returns a list of all pending aggregation requests.
    */
   describePendingAggregationRequests(params: ConfigService.Types.DescribePendingAggregationRequestsRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribePendingAggregationRequestsResponse) => void): Request<ConfigService.Types.DescribePendingAggregationRequestsResponse, AWSError>;
@@ -304,6 +328,14 @@ declare class ConfigService extends Service {
    */
   getDiscoveredResourceCounts(callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
   /**
+   * 
+   */
+  getOrganizationConfigRuleDetailedStatus(params: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
+  /**
+   * 
+   */
+  getOrganizationConfigRuleDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
+  /**
    * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
    */
   getResourceConfigHistory(params: ConfigService.Types.GetResourceConfigHistoryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetResourceConfigHistoryResponse) => void): Request<ConfigService.Types.GetResourceConfigHistoryResponse, AWSError>;
@@ -383,6 +415,14 @@ declare class ConfigService extends Service {
    * Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.
    */
   putEvaluations(callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
+  /**
+   * 
+   */
+  putOrganizationConfigRule(params: ConfigService.Types.PutOrganizationConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
+  /**
+   * 
+   */
+  putOrganizationConfigRule(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
   /**
    * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. 
    */
@@ -1122,6 +1162,7 @@ declare namespace ConfigService {
   }
   export type ConfigurationRecorderStatusList = ConfigurationRecorderStatus[];
   export type ConfigurationStateId = string;
+  export type CosmosPageLimit = number;
   export type _Date = Date;
   export interface DeleteAggregationAuthorizationRequest {
     /**
@@ -1164,6 +1205,9 @@ declare namespace ConfigService {
     ConfigRuleName: StringWithCharLimit64;
   }
   export interface DeleteEvaluationResultsResponse {
+  }
+  export interface DeleteOrganizationConfigRuleRequest {
+    OrganizationConfigRuleName: StringWithCharLimit64;
   }
   export interface DeletePendingAggregationRequestRequest {
     /**
@@ -1497,6 +1541,24 @@ declare namespace ConfigService {
      */
     DeliveryChannels?: DeliveryChannelList;
   }
+  export interface DescribeOrganizationConfigRuleStatusesRequest {
+    OrganizationConfigRuleNames?: OrganizationConfigRuleNames;
+    Limit?: CosmosPageLimit;
+    NextToken?: String;
+  }
+  export interface DescribeOrganizationConfigRuleStatusesResponse {
+    OrganizationConfigRuleStatuses?: OrganizationConfigRuleStatuses;
+    NextToken?: String;
+  }
+  export interface DescribeOrganizationConfigRulesRequest {
+    OrganizationConfigRuleNames?: OrganizationConfigRuleNames;
+    Limit?: CosmosPageLimit;
+    NextToken?: String;
+  }
+  export interface DescribeOrganizationConfigRulesResponse {
+    OrganizationConfigRules?: OrganizationConfigRules;
+    NextToken?: String;
+  }
   export type DescribePendingAggregationRequestsLimit = number;
   export interface DescribePendingAggregationRequestsRequest {
     /**
@@ -1656,6 +1718,7 @@ declare namespace ConfigService {
   export type EvaluationResults = EvaluationResult[];
   export type Evaluations = Evaluation[];
   export type EventSource = "aws.config"|string;
+  export type ExcludedAccounts = AccountId[];
   export type Expression = string;
   export interface FailedRemediationBatch {
     /**
@@ -1910,6 +1973,16 @@ declare namespace ConfigService {
      */
     nextToken?: NextToken;
   }
+  export interface GetOrganizationConfigRuleDetailedStatusRequest {
+    OrganizationConfigRuleName: StringWithCharLimit64;
+    Filters?: StatusDetailFilters;
+    Limit?: CosmosPageLimit;
+    NextToken?: String;
+  }
+  export interface GetOrganizationConfigRuleDetailedStatusResponse {
+    OrganizationConfigRuleDetailedStatus?: OrganizationConfigRuleDetailedStatus;
+    NextToken?: String;
+  }
   export interface GetResourceConfigHistoryRequest {
     /**
      * The resource type.
@@ -2060,6 +2133,15 @@ declare namespace ConfigService {
   }
   export type Long = number;
   export type MaximumExecutionFrequency = "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"|string;
+  export type MemberAccountRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export interface MemberAccountStatus {
+    AccountId: AccountId;
+    ConfigRuleName: StringWithCharLimit64;
+    MemberAccountRuleStatus: MemberAccountRuleStatus;
+    ErrorCode?: String;
+    ErrorMessage?: String;
+    LastUpdateTime?: _Date;
+  }
   export type MessageType = "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"|"ScheduledNotification"|"OversizedConfigurationItemChangeNotification"|string;
   export type Name = string;
   export type NextToken = string;
@@ -2078,6 +2160,49 @@ declare namespace ConfigService {
      */
     AllAwsRegions?: Boolean;
   }
+  export interface OrganizationConfigRule {
+    OrganizationConfigRuleName: StringWithCharLimit64;
+    OrganizationConfigRuleArn: StringWithCharLimit256;
+    OrganizationManagedRuleMetadata?: OrganizationManagedRuleMetadata;
+    OrganizationCustomRuleMetadata?: OrganizationCustomRuleMetadata;
+    ExcludedAccounts?: ExcludedAccounts;
+    LastUpdateTime?: _Date;
+  }
+  export type OrganizationConfigRuleDetailedStatus = MemberAccountStatus[];
+  export type OrganizationConfigRuleNames = StringWithCharLimit64[];
+  export interface OrganizationConfigRuleStatus {
+    OrganizationConfigRuleName: StringWithCharLimit64;
+    OrganizationRuleStatus: OrganizationRuleStatus;
+    ErrorCode?: String;
+    ErrorMessage?: String;
+    LastUpdateTime?: _Date;
+  }
+  export type OrganizationConfigRuleStatuses = OrganizationConfigRuleStatus[];
+  export type OrganizationConfigRuleTriggerType = "ConfigurationItemChangeNotification"|"OversizedConfigurationItemChangeNotification"|"ScheduledNotification"|string;
+  export type OrganizationConfigRuleTriggerTypes = OrganizationConfigRuleTriggerType[];
+  export type OrganizationConfigRules = OrganizationConfigRule[];
+  export interface OrganizationCustomRuleMetadata {
+    Description?: StringWithCharLimit256Min0;
+    LambdaFunctionArn: StringWithCharLimit256;
+    OrganizationConfigRuleTriggerTypes: OrganizationConfigRuleTriggerTypes;
+    InputParameters?: StringWithCharLimit2048;
+    MaximumExecutionFrequency?: MaximumExecutionFrequency;
+    ResourceTypesScope?: ResourceTypesScope;
+    ResourceIdScope?: StringWithCharLimit768;
+    TagKeyScope?: StringWithCharLimit128;
+    TagValueScope?: StringWithCharLimit256;
+  }
+  export interface OrganizationManagedRuleMetadata {
+    Description?: StringWithCharLimit256Min0;
+    RuleIdentifier: StringWithCharLimit256;
+    InputParameters?: StringWithCharLimit2048;
+    MaximumExecutionFrequency?: MaximumExecutionFrequency;
+    ResourceTypesScope?: ResourceTypesScope;
+    ResourceIdScope?: StringWithCharLimit768;
+    TagKeyScope?: StringWithCharLimit128;
+    TagValueScope?: StringWithCharLimit256;
+  }
+  export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
   export type Owner = "CUSTOM_LAMBDA"|"AWS"|string;
   export interface PendingAggregationRequest {
     /**
@@ -2166,6 +2291,15 @@ declare namespace ConfigService {
      * Requests that failed because of a client or server error.
      */
     FailedEvaluations?: Evaluations;
+  }
+  export interface PutOrganizationConfigRuleRequest {
+    OrganizationConfigRuleName: StringWithCharLimit64;
+    OrganizationManagedRuleMetadata?: OrganizationManagedRuleMetadata;
+    OrganizationCustomRuleMetadata?: OrganizationCustomRuleMetadata;
+    ExcludedAccounts?: ExcludedAccounts;
+  }
+  export interface PutOrganizationConfigRuleResponse {
+    OrganizationConfigRuleArn?: StringWithCharLimit256;
   }
   export interface PutRemediationConfigurationsRequest {
     /**
@@ -2403,6 +2537,7 @@ declare namespace ConfigService {
   export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::EventSubscription"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::S3::Bucket"|"AWS::SSM::ManagedInstanceInventory"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::DynamoDB::Table"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::WAF::RuleGroup"|"AWS::WAFRegional::RuleGroup"|"AWS::Lambda::Function"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ResourceCompliance"|"AWS::CodePipeline::Pipeline"|string;
   export type ResourceTypeList = ResourceType[];
   export type ResourceTypes = StringWithCharLimit256[];
+  export type ResourceTypesScope = StringWithCharLimit256[];
   export interface ResourceValue {
     /**
      * The value is a resource ID.
@@ -2542,6 +2677,10 @@ declare namespace ConfigService {
      */
     Values?: StaticParameterValues;
   }
+  export interface StatusDetailFilters {
+    AccountId?: AccountId;
+    MemberAccountRuleStatus?: MemberAccountRuleStatus;
+  }
   export interface StopConfigurationRecorderRequest {
     /**
      * The name of the recorder object that records each configuration change made to the resources.
@@ -2551,8 +2690,11 @@ declare namespace ConfigService {
   export type String = string;
   export type StringWithCharLimit1024 = string;
   export type StringWithCharLimit128 = string;
+  export type StringWithCharLimit2048 = string;
   export type StringWithCharLimit256 = string;
+  export type StringWithCharLimit256Min0 = string;
   export type StringWithCharLimit64 = string;
+  export type StringWithCharLimit768 = string;
   export type SupplementaryConfiguration = {[key: string]: SupplementaryConfigurationValue};
   export type SupplementaryConfigurationName = string;
   export type SupplementaryConfigurationValue = string;
