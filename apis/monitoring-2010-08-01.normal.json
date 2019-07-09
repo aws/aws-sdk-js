@@ -28,6 +28,35 @@
       ],
       "documentation": "<p>Deletes the specified alarms. In the event of an error, no alarms are deleted.</p>"
     },
+    "DeleteAnomalyDetector": {
+      "name": "DeleteAnomalyDetector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteAnomalyDetectorInput"
+      },
+      "output": {
+        "shape": "DeleteAnomalyDetectorOutput",
+        "resultWrapper": "DeleteAnomalyDetectorResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified anomaly detection model from your account.</p>"
+    },
     "DeleteDashboards": {
       "name": "DeleteDashboards",
       "http": {
@@ -108,6 +137,32 @@
         "resultWrapper": "DescribeAlarmsForMetricResult"
       },
       "documentation": "<p>Retrieves the alarms for the specified metric. To filter the results, specify a statistic, period, or unit.</p>"
+    },
+    "DescribeAnomalyDetectors": {
+      "name": "DescribeAnomalyDetectors",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAnomalyDetectorsInput"
+      },
+      "output": {
+        "shape": "DescribeAnomalyDetectorsOutput",
+        "resultWrapper": "DescribeAnomalyDetectorsResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidNextToken"
+        },
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ],
+      "documentation": "<p>Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.</p>"
     },
     "DisableAlarmActions": {
       "name": "DisableAlarmActions",
@@ -293,6 +348,35 @@
       ],
       "documentation": "<p>Displays the tags associated with a CloudWatch resource. Alarms support tagging.</p>"
     },
+    "PutAnomalyDetector": {
+      "name": "PutAnomalyDetector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutAnomalyDetectorInput"
+      },
+      "output": {
+        "shape": "PutAnomalyDetectorOutput",
+        "resultWrapper": "PutAnomalyDetectorResult"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p>Creates an anomaly detection model for a CloudWatch metric. You can use the model to display a band of expected normal values when the metric is graphed.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html\">CloudWatch Anomaly Detection</a>.</p>"
+    },
     "PutDashboard": {
       "name": "PutDashboard",
       "http": {
@@ -314,7 +398,7 @@
           "shape": "InternalServiceFault"
         }
       ],
-      "documentation": "<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>There is no limit to the number of dashboards in your account. All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>"
+      "documentation": "<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>"
     },
     "PutMetricAlarm": {
       "name": "PutMetricAlarm",
@@ -330,7 +414,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Creates or updates an alarm and associates it with the specified metric or metric math expression.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p>No specific permissions are needed for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">AWS service-linked role</a>.</p>"
+      "documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p> <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p>No specific permissions are needed for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">AWS service-linked role</a>.</p>"
     },
     "PutMetricData": {
       "name": "PutMetricData",
@@ -508,13 +592,71 @@
       "max": 1024,
       "min": 1
     },
+    "AnomalyDetector": {
+      "type": "structure",
+      "members": {
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace of the metric associated with the anomaly detection model.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the metric associated with the anomaly detection model.</p>"
+        },
+        "Dimensions": {
+          "shape": "Dimensions",
+          "documentation": "<p>The metric dimensions associated with the anomaly detection model.</p>"
+        },
+        "Stat": {
+          "shape": "Stat",
+          "documentation": "<p>The statistic associated with the anomaly detection model.</p>"
+        },
+        "Configuration": {
+          "shape": "AnomalyDetectorConfiguration",
+          "documentation": "<p>The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model, and the time zone to use for the metric.</p>"
+        }
+      },
+      "documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric athresnd statistic. You can use the model to display a band of expected normal values when the metric is graphed.</p>"
+    },
+    "AnomalyDetectorConfiguration": {
+      "type": "structure",
+      "members": {
+        "ExcludedTimeRanges": {
+          "shape": "AnomalyDetectorExcludedTimeRanges",
+          "documentation": "<p>An array of time ranges to exclude from use when the anomaly detection model is trained. Use this to make sure that events that could cause unusual values for the metric, such as deployments, aren't used when CloudWatch creates the model.</p>"
+        },
+        "MetricTimezone": {
+          "shape": "AnomalyDetectorMetricTimezone",
+          "documentation": "<p>The time zone to use for the metric. This is useful to enable the model to automatically account for daylight savings time changes if the metric is sensitive to such time changes.</p> <p>To specify a time zone, use the name of the time zone as specified in the standard tz database. For more information, see <a href=\"https://en.wikipedia.org/wiki/Tz_database\">tz database</a>.</p>"
+        }
+      },
+      "documentation": "<p>The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model and the time zone to use for the metric.</p>"
+    },
+    "AnomalyDetectorExcludedTimeRanges": {
+      "type": "list",
+      "member": {
+        "shape": "Range"
+      }
+    },
+    "AnomalyDetectorMetricTimezone": {
+      "type": "string"
+    },
+    "AnomalyDetectors": {
+      "type": "list",
+      "member": {
+        "shape": "AnomalyDetector"
+      }
+    },
     "ComparisonOperator": {
       "type": "string",
       "enum": [
         "GreaterThanOrEqualToThreshold",
         "GreaterThanThreshold",
         "LessThanThreshold",
-        "LessThanOrEqualToThreshold"
+        "LessThanOrEqualToThreshold",
+        "LessThanLowerOrGreaterThanUpperThreshold",
+        "LessThanLowerThreshold",
+        "GreaterThanUpperThreshold"
       ]
     },
     "Counts": {
@@ -680,6 +822,36 @@
         }
       }
     },
+    "DeleteAnomalyDetectorInput": {
+      "type": "structure",
+      "required": [
+        "Namespace",
+        "MetricName",
+        "Stat"
+      ],
+      "members": {
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the anomaly detection model to delete.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The metric name associated with the anomaly detection model to delete.</p>"
+        },
+        "Dimensions": {
+          "shape": "Dimensions",
+          "documentation": "<p>The metric dimensions associated with the anomaly detection model to delete.</p>"
+        },
+        "Stat": {
+          "shape": "Stat",
+          "documentation": "<p>The statistic associated with the anomaly detection model to delete.</p>"
+        }
+      }
+    },
+    "DeleteAnomalyDetectorOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteDashboardsInput": {
       "type": "structure",
       "required": [
@@ -823,6 +995,44 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token that marks the start of the next batch of returned results.</p>"
+        }
+      }
+    },
+    "DescribeAnomalyDetectorsInput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Use the token returned by the previous operation to request the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxReturnedResultsCount",
+          "documentation": "<p>The maximum number of results to return in one operation. The maximum value you can specify is 10.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>Limits the results to only the anomaly detection models that are associated with the specified namespace.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>Limits the results to only the anomaly detection models that are associated with the specified metric name. If there are multiple metrics with this name in different namespaces that have anomaly detection models, they're all returned.</p>"
+        },
+        "Dimensions": {
+          "shape": "Dimensions",
+          "documentation": "<p>Limits the results to only the anomaly detection models that are associated with the specified metric dimensions. If there are multiple metrics that have these dimensions and have anomaly detection models associated, they're all returned.</p>"
+        }
+      }
+    },
+    "DescribeAnomalyDetectorsOutput": {
+      "type": "structure",
+      "members": {
+        "AnomalyDetectors": {
+          "shape": "AnomalyDetectors",
+          "documentation": "<p>The list of anomaly detection models returned by the operation.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token that you can use in a subsequent operation to retrieve the next set of results.</p>"
         }
       }
     },
@@ -1214,6 +1424,10 @@
       "max": 100,
       "min": 1
     },
+    "MaxReturnedResultsCount": {
+      "type": "integer",
+      "min": 1
+    },
     "Message": {
       "type": "string"
     },
@@ -1313,7 +1527,7 @@
         },
         "MetricName": {
           "shape": "MetricName",
-          "documentation": "<p>The name of the metric associated with the alarm.</p>"
+          "documentation": "<p>The name of the metric associated with the alarm, if this is an alarm based on a single metric.</p>"
         },
         "Namespace": {
           "shape": "Namespace",
@@ -1365,7 +1579,11 @@
         },
         "Metrics": {
           "shape": "MetricDataQueries",
-          "documentation": "<p/>"
+          "documentation": "<p>An array of MetricDataQuery structures, used in an alarm based on a metric math expression. Each structure either retrieves a metric or performs a math expression. One item in the Metrics array is the math expression that the alarm watches. This expression by designated by having <code>ReturnValue</code> set to true.</p>"
+        },
+        "ThresholdMetricId": {
+          "shape": "MetricId",
+          "documentation": "<p>In an alarm based on an anomaly detection model, this is the ID of the <code>ANOMALY_DETECTION_BAND</code> function used as the threshold for the alarm.</p>"
         }
       },
       "documentation": "<p>Represents an alarm.</p>",
@@ -1395,7 +1613,8 @@
         "TreatMissingData",
         "EvaluateLowSampleCountPercentile",
         "DatapointsToAlarm",
-        "Metrics"
+        "Metrics",
+        "ThresholdMetricId"
       ]
     },
     "MetricAlarms": {
@@ -1523,7 +1742,7 @@
         },
         "Unit": {
           "shape": "StandardUnit",
-          "documentation": "<p>The unit of the metric.</p>"
+          "documentation": "<p>When you are using a <code>Put</code> operation, this defines what unit you want to use when storing the metric. In a <code>Get</code> operation, this displays the unit that is used for the metric.</p>"
         },
         "StorageResolution": {
           "shape": "StorageResolution",
@@ -1572,7 +1791,7 @@
         },
         "Unit": {
           "shape": "StandardUnit",
-          "documentation": "<p>The unit to use for the returned data points.</p>"
+          "documentation": "<p>When you are using a <code>Put</code> operation, this defines what unit you want to use when storing the metric. In a <code>Get</code> operation, this displays the unit that is used for the metric.</p>"
         }
       },
       "documentation": "<p>This structure defines the metric to be returned, along with the statistics, period, and units.</p>"
@@ -1605,6 +1824,40 @@
       "type": "integer",
       "min": 1
     },
+    "PutAnomalyDetectorInput": {
+      "type": "structure",
+      "required": [
+        "Namespace",
+        "MetricName",
+        "Stat"
+      ],
+      "members": {
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the metric to create the anomaly detection model for.</p>"
+        },
+        "Dimensions": {
+          "shape": "Dimensions",
+          "documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>"
+        },
+        "Stat": {
+          "shape": "Stat",
+          "documentation": "<p>The statistic to use for the metric and the anomaly detection model.</p>"
+        },
+        "Configuration": {
+          "shape": "AnomalyDetectorConfiguration",
+          "documentation": "<p>The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude when training and updating the model. You can specify as many as 10 time ranges.</p> <p>The configuration can also include the time zone to use for the metric.</p> <p>You can in</p>"
+        }
+      }
+    },
+    "PutAnomalyDetectorOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "PutDashboardInput": {
       "type": "structure",
       "required": [
@@ -1636,7 +1889,6 @@
       "required": [
         "AlarmName",
         "EvaluationPeriods",
-        "Threshold",
         "ComparisonOperator"
       ],
       "members": {
@@ -1706,7 +1958,7 @@
         },
         "ComparisonOperator": {
           "shape": "ComparisonOperator",
-          "documentation": "<p> The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.</p>"
+          "documentation": "<p> The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.</p> <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>, <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are used only for alarms based on anomaly detection models.</p>"
         },
         "TreatMissingData": {
           "shape": "TreatMissingData",
@@ -1723,6 +1975,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p>"
+        },
+        "ThresholdMetricId": {
+          "shape": "MetricId",
+          "documentation": "<p>If this is an alarm based on an anomaly detection model, make this value match the ID of the <code>ANOMALY_DETECTION_BAND</code> function.</p> <p>For an example of how to use this parameter, see the <b>Anomaly Detection Model Alarm</b> example on this page.</p> <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>"
         }
       }
     },
@@ -1742,6 +1998,28 @@
           "documentation": "<p>The data for the metric. The array can include no more than 20 metrics per call.</p>"
         }
       }
+    },
+    "Range": {
+      "type": "structure",
+      "required": [
+        "StartTime",
+        "EndTime"
+      ],
+      "members": {
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The start time of the range to exclude. The format is <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example, <code>2019-07-01T23:59:59</code>.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The end time of the range to exclude. The format is <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example, <code>2019-07-01T23:59:59</code>.</p>"
+        }
+      },
+      "documentation": "<p>Specifies one range of days or times to exclude from use for training an anomaly detection model.</p>",
+      "xmlOrder": [
+        "StartTime",
+        "EndTime"
+      ]
     },
     "ResourceList": {
       "type": "list",

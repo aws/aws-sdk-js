@@ -165,6 +165,24 @@
       ],
       "documentation": "<p>Deletes the evaluation results for the specified AWS Config rule. You can specify one AWS Config rule per request. After you delete the evaluation results, you can call the <a>StartConfigRulesEvaluation</a> API to start evaluating your AWS resources against the rule.</p>"
     },
+    "DeleteOrganizationConfigRule": {
+      "name": "DeleteOrganizationConfigRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteOrganizationConfigRuleRequest"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchOrganizationConfigRuleException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        }
+      ]
+    },
     "DeletePendingAggregationRequest": {
       "name": "DeletePendingAggregationRequest",
       "http": {
@@ -196,6 +214,9 @@
       "errors": [
         {
           "shape": "NoSuchRemediationConfigurationException"
+        },
+        {
+          "shape": "RemediationInProgressException"
         }
       ],
       "documentation": "<p>Deletes the remediation configuration.</p>"
@@ -523,6 +544,54 @@
       ],
       "documentation": "<p>Returns details about the specified delivery channel. If a delivery channel is not specified, this action returns the details of all delivery channels associated with the account.</p> <note> <p>Currently, you can specify only one delivery channel per region in your account.</p> </note>"
     },
+    "DescribeOrganizationConfigRuleStatuses": {
+      "name": "DescribeOrganizationConfigRuleStatuses",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeOrganizationConfigRuleStatusesRequest"
+      },
+      "output": {
+        "shape": "DescribeOrganizationConfigRuleStatusesResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchOrganizationConfigRuleException"
+        },
+        {
+          "shape": "InvalidLimitException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ]
+    },
+    "DescribeOrganizationConfigRules": {
+      "name": "DescribeOrganizationConfigRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeOrganizationConfigRulesRequest"
+      },
+      "output": {
+        "shape": "DescribeOrganizationConfigRulesResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchOrganizationConfigRuleException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "InvalidLimitException"
+        }
+      ]
+    },
     "DescribePendingAggregationRequests": {
       "name": "DescribePendingAggregationRequests",
       "http": {
@@ -817,6 +886,30 @@
       ],
       "documentation": "<p>Returns the resource types, the number of each resource type, and the total number of resources that AWS Config is recording in this region for your AWS account. </p> <p class=\"title\"> <b>Example</b> </p> <ol> <li> <p>AWS Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets.</p> </li> <li> <p>You make a call to the <code>GetDiscoveredResourceCounts</code> action and specify that you want all resource types. </p> </li> <li> <p>AWS Config returns the following:</p> <ul> <li> <p>The resource types (EC2 instances, IAM users, and S3 buckets).</p> </li> <li> <p>The number of each resource type (25, 20, and 15).</p> </li> <li> <p>The total number of all resources (60).</p> </li> </ul> </li> </ol> <p>The response is paginated. By default, AWS Config lists 100 <a>ResourceCount</a> objects on each page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string. To get the next page of results, run the request again and specify the string for the <code>nextToken</code> parameter.</p> <note> <p>If you make a call to the <a>GetDiscoveredResourceCounts</a> action, you might not immediately receive resource counts in the following situations:</p> <ul> <li> <p>You are a new AWS Config customer.</p> </li> <li> <p>You just enabled resource recording.</p> </li> </ul> <p>It might take a few minutes for AWS Config to record and count your resources. Wait a few minutes and then retry the <a>GetDiscoveredResourceCounts</a> action. </p> </note>"
     },
+    "GetOrganizationConfigRuleDetailedStatus": {
+      "name": "GetOrganizationConfigRuleDetailedStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetOrganizationConfigRuleDetailedStatusRequest"
+      },
+      "output": {
+        "shape": "GetOrganizationConfigRuleDetailedStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchOrganizationConfigRuleException"
+        },
+        {
+          "shape": "InvalidLimitException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ]
+    },
     "GetResourceConfigHistory": {
       "name": "GetResourceConfigHistory",
       "http": {
@@ -1099,6 +1192,45 @@
         }
       ],
       "documentation": "<p>Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.</p>"
+    },
+    "PutOrganizationConfigRule": {
+      "name": "PutOrganizationConfigRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutOrganizationConfigRuleRequest"
+      },
+      "output": {
+        "shape": "PutOrganizationConfigRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "MaxNumberOfOrganizationConfigRulesExceededException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "OrganizationAccessDeniedException"
+        },
+        {
+          "shape": "NoAvailableOrganizationException"
+        },
+        {
+          "shape": "OrganizationAllFeaturesNotEnabledException"
+        },
+        {
+          "shape": "InsufficientPermissionsException"
+        }
+      ]
     },
     "PutRemediationConfigurations": {
       "name": "PutRemediationConfigurations",
@@ -2323,6 +2455,11 @@
     "ConfigurationStateId": {
       "type": "string"
     },
+    "CosmosPageLimit": {
+      "type": "integer",
+      "max": 100,
+      "min": 0
+    },
     "Date": {
       "type": "timestamp"
     },
@@ -2411,6 +2548,17 @@
       "type": "structure",
       "members": {},
       "documentation": "<p>The output when you delete the evaluation results for the specified AWS Config rule.</p>"
+    },
+    "DeleteOrganizationConfigRuleRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationConfigRuleName"
+      ],
+      "members": {
+        "OrganizationConfigRuleName": {
+          "shape": "StringWithCharLimit64"
+        }
+      }
     },
     "DeletePendingAggregationRequestRequest": {
       "type": "structure",
@@ -2900,6 +3048,56 @@
       },
       "documentation": "<p>The output for the <a>DescribeDeliveryChannels</a> action.</p>"
     },
+    "DescribeOrganizationConfigRuleStatusesRequest": {
+      "type": "structure",
+      "members": {
+        "OrganizationConfigRuleNames": {
+          "shape": "OrganizationConfigRuleNames"
+        },
+        "Limit": {
+          "shape": "CosmosPageLimit"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      }
+    },
+    "DescribeOrganizationConfigRuleStatusesResponse": {
+      "type": "structure",
+      "members": {
+        "OrganizationConfigRuleStatuses": {
+          "shape": "OrganizationConfigRuleStatuses"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      }
+    },
+    "DescribeOrganizationConfigRulesRequest": {
+      "type": "structure",
+      "members": {
+        "OrganizationConfigRuleNames": {
+          "shape": "OrganizationConfigRuleNames"
+        },
+        "Limit": {
+          "shape": "CosmosPageLimit"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      }
+    },
+    "DescribeOrganizationConfigRulesResponse": {
+      "type": "structure",
+      "members": {
+        "OrganizationConfigRules": {
+          "shape": "OrganizationConfigRules"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      }
+    },
     "DescribePendingAggregationRequestsLimit": {
       "type": "integer",
       "max": 20,
@@ -3142,6 +3340,14 @@
       "enum": [
         "aws.config"
       ]
+    },
+    "ExcludedAccounts": {
+      "type": "list",
+      "member": {
+        "shape": "AccountId"
+      },
+      "max": 1000,
+      "min": 0
     },
     "Expression": {
       "type": "string",
@@ -3505,6 +3711,37 @@
         }
       }
     },
+    "GetOrganizationConfigRuleDetailedStatusRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationConfigRuleName"
+      ],
+      "members": {
+        "OrganizationConfigRuleName": {
+          "shape": "StringWithCharLimit64"
+        },
+        "Filters": {
+          "shape": "StatusDetailFilters"
+        },
+        "Limit": {
+          "shape": "CosmosPageLimit"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      }
+    },
+    "GetOrganizationConfigRuleDetailedStatusResponse": {
+      "type": "structure",
+      "members": {
+        "OrganizationConfigRuleDetailedStatus": {
+          "shape": "OrganizationConfigRuleDetailedStatus"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      }
+    },
     "GetResourceConfigHistoryRequest": {
       "type": "structure",
       "required": [
@@ -3735,6 +3972,45 @@
         "TwentyFour_Hours"
       ]
     },
+    "MemberAccountRuleStatus": {
+      "type": "string",
+      "enum": [
+        "CREATE_SUCCESSFUL",
+        "CREATE_IN_PROGRESS",
+        "CREATE_FAILED",
+        "DELETE_SUCCESSFUL",
+        "DELETE_FAILED",
+        "DELETE_IN_PROGRESS"
+      ]
+    },
+    "MemberAccountStatus": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "ConfigRuleName",
+        "MemberAccountRuleStatus"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "ConfigRuleName": {
+          "shape": "StringWithCharLimit64"
+        },
+        "MemberAccountRuleStatus": {
+          "shape": "MemberAccountRuleStatus"
+        },
+        "ErrorCode": {
+          "shape": "String"
+        },
+        "ErrorMessage": {
+          "shape": "String"
+        },
+        "LastUpdateTime": {
+          "shape": "Date"
+        }
+      }
+    },
     "MessageType": {
       "type": "string",
       "enum": [
@@ -3773,6 +4049,176 @@
         }
       },
       "documentation": "<p>This object contains regions to set up the aggregator and an IAM role to retrieve organization details.</p>"
+    },
+    "OrganizationConfigRule": {
+      "type": "structure",
+      "required": [
+        "OrganizationConfigRuleName",
+        "OrganizationConfigRuleArn"
+      ],
+      "members": {
+        "OrganizationConfigRuleName": {
+          "shape": "StringWithCharLimit64"
+        },
+        "OrganizationConfigRuleArn": {
+          "shape": "StringWithCharLimit256"
+        },
+        "OrganizationManagedRuleMetadata": {
+          "shape": "OrganizationManagedRuleMetadata"
+        },
+        "OrganizationCustomRuleMetadata": {
+          "shape": "OrganizationCustomRuleMetadata"
+        },
+        "ExcludedAccounts": {
+          "shape": "ExcludedAccounts"
+        },
+        "LastUpdateTime": {
+          "shape": "Date"
+        }
+      }
+    },
+    "OrganizationConfigRuleDetailedStatus": {
+      "type": "list",
+      "member": {
+        "shape": "MemberAccountStatus"
+      }
+    },
+    "OrganizationConfigRuleNames": {
+      "type": "list",
+      "member": {
+        "shape": "StringWithCharLimit64"
+      },
+      "max": 25,
+      "min": 0
+    },
+    "OrganizationConfigRuleStatus": {
+      "type": "structure",
+      "required": [
+        "OrganizationConfigRuleName",
+        "OrganizationRuleStatus"
+      ],
+      "members": {
+        "OrganizationConfigRuleName": {
+          "shape": "StringWithCharLimit64"
+        },
+        "OrganizationRuleStatus": {
+          "shape": "OrganizationRuleStatus"
+        },
+        "ErrorCode": {
+          "shape": "String"
+        },
+        "ErrorMessage": {
+          "shape": "String"
+        },
+        "LastUpdateTime": {
+          "shape": "Date"
+        }
+      }
+    },
+    "OrganizationConfigRuleStatuses": {
+      "type": "list",
+      "member": {
+        "shape": "OrganizationConfigRuleStatus"
+      }
+    },
+    "OrganizationConfigRuleTriggerType": {
+      "type": "string",
+      "enum": [
+        "ConfigurationItemChangeNotification",
+        "OversizedConfigurationItemChangeNotification",
+        "ScheduledNotification"
+      ]
+    },
+    "OrganizationConfigRuleTriggerTypes": {
+      "type": "list",
+      "member": {
+        "shape": "OrganizationConfigRuleTriggerType"
+      }
+    },
+    "OrganizationConfigRules": {
+      "type": "list",
+      "member": {
+        "shape": "OrganizationConfigRule"
+      }
+    },
+    "OrganizationCustomRuleMetadata": {
+      "type": "structure",
+      "required": [
+        "LambdaFunctionArn",
+        "OrganizationConfigRuleTriggerTypes"
+      ],
+      "members": {
+        "Description": {
+          "shape": "StringWithCharLimit256Min0"
+        },
+        "LambdaFunctionArn": {
+          "shape": "StringWithCharLimit256"
+        },
+        "OrganizationConfigRuleTriggerTypes": {
+          "shape": "OrganizationConfigRuleTriggerTypes"
+        },
+        "InputParameters": {
+          "shape": "StringWithCharLimit2048"
+        },
+        "MaximumExecutionFrequency": {
+          "shape": "MaximumExecutionFrequency"
+        },
+        "ResourceTypesScope": {
+          "shape": "ResourceTypesScope"
+        },
+        "ResourceIdScope": {
+          "shape": "StringWithCharLimit768"
+        },
+        "TagKeyScope": {
+          "shape": "StringWithCharLimit128"
+        },
+        "TagValueScope": {
+          "shape": "StringWithCharLimit256"
+        }
+      }
+    },
+    "OrganizationManagedRuleMetadata": {
+      "type": "structure",
+      "required": [
+        "RuleIdentifier"
+      ],
+      "members": {
+        "Description": {
+          "shape": "StringWithCharLimit256Min0"
+        },
+        "RuleIdentifier": {
+          "shape": "StringWithCharLimit256"
+        },
+        "InputParameters": {
+          "shape": "StringWithCharLimit2048"
+        },
+        "MaximumExecutionFrequency": {
+          "shape": "MaximumExecutionFrequency"
+        },
+        "ResourceTypesScope": {
+          "shape": "ResourceTypesScope"
+        },
+        "ResourceIdScope": {
+          "shape": "StringWithCharLimit768"
+        },
+        "TagKeyScope": {
+          "shape": "StringWithCharLimit128"
+        },
+        "TagValueScope": {
+          "shape": "StringWithCharLimit256"
+        }
+      }
+    },
+    "OrganizationRuleStatus": {
+      "type": "string",
+      "enum": [
+        "CREATE_SUCCESSFUL",
+        "CREATE_IN_PROGRESS",
+        "CREATE_FAILED",
+        "DELETE_SUCCESSFUL",
+        "DELETE_FAILED",
+        "DELETE_IN_PROGRESS"
+      ]
     },
     "Owner": {
       "type": "string",
@@ -3933,6 +4379,34 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "PutOrganizationConfigRuleRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationConfigRuleName"
+      ],
+      "members": {
+        "OrganizationConfigRuleName": {
+          "shape": "StringWithCharLimit64"
+        },
+        "OrganizationManagedRuleMetadata": {
+          "shape": "OrganizationManagedRuleMetadata"
+        },
+        "OrganizationCustomRuleMetadata": {
+          "shape": "OrganizationCustomRuleMetadata"
+        },
+        "ExcludedAccounts": {
+          "shape": "ExcludedAccounts"
+        }
+      }
+    },
+    "PutOrganizationConfigRuleResponse": {
+      "type": "structure",
+      "members": {
+        "OrganizationConfigRuleArn": {
+          "shape": "StringWithCharLimit256"
+        }
+      }
     },
     "PutRemediationConfigurationsRequest": {
       "type": "structure",
@@ -4452,6 +4926,14 @@
       "max": 20,
       "min": 0
     },
+    "ResourceTypesScope": {
+      "type": "list",
+      "member": {
+        "shape": "StringWithCharLimit256"
+      },
+      "max": 100,
+      "min": 0
+    },
     "ResourceValue": {
       "type": "structure",
       "members": {
@@ -4705,6 +5187,17 @@
       },
       "documentation": "<p>The static value of the resource.</p>"
     },
+    "StatusDetailFilters": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "MemberAccountRuleStatus": {
+          "shape": "MemberAccountRuleStatus"
+        }
+      }
+    },
     "StopConfigurationRecorderRequest": {
       "type": "structure",
       "required": [
@@ -4731,14 +5224,29 @@
       "max": 128,
       "min": 1
     },
+    "StringWithCharLimit2048": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
     "StringWithCharLimit256": {
       "type": "string",
       "max": 256,
       "min": 1
     },
+    "StringWithCharLimit256Min0": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "StringWithCharLimit64": {
       "type": "string",
       "max": 64,
+      "min": 1
+    },
+    "StringWithCharLimit768": {
+      "type": "string",
+      "max": 768,
       "min": 1
     },
     "SupplementaryConfiguration": {

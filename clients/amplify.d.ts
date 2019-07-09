@@ -28,6 +28,14 @@ declare class Amplify extends Service {
    */
   createBranch(callback?: (err: AWSError, data: Amplify.Types.CreateBranchResult) => void): Request<Amplify.Types.CreateBranchResult, AWSError>;
   /**
+   *  Create a deployment for manual deploy apps. (Apps are not connected to repository) 
+   */
+  createDeployment(params: Amplify.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: Amplify.Types.CreateDeploymentResult) => void): Request<Amplify.Types.CreateDeploymentResult, AWSError>;
+  /**
+   *  Create a deployment for manual deploy apps. (Apps are not connected to repository) 
+   */
+  createDeployment(callback?: (err: AWSError, data: Amplify.Types.CreateDeploymentResult) => void): Request<Amplify.Types.CreateDeploymentResult, AWSError>;
+  /**
    *  Create a new DomainAssociation on an App 
    */
   createDomainAssociation(params: Amplify.Types.CreateDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.CreateDomainAssociationResult) => void): Request<Amplify.Types.CreateDomainAssociationResult, AWSError>;
@@ -35,6 +43,14 @@ declare class Amplify extends Service {
    *  Create a new DomainAssociation on an App 
    */
   createDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.CreateDomainAssociationResult) => void): Request<Amplify.Types.CreateDomainAssociationResult, AWSError>;
+  /**
+   *  Create a new webhook on an App. 
+   */
+  createWebhook(params: Amplify.Types.CreateWebhookRequest, callback?: (err: AWSError, data: Amplify.Types.CreateWebhookResult) => void): Request<Amplify.Types.CreateWebhookResult, AWSError>;
+  /**
+   *  Create a new webhook on an App. 
+   */
+  createWebhook(callback?: (err: AWSError, data: Amplify.Types.CreateWebhookResult) => void): Request<Amplify.Types.CreateWebhookResult, AWSError>;
   /**
    *  Delete an existing Amplify App by appId. 
    */
@@ -68,6 +84,14 @@ declare class Amplify extends Service {
    */
   deleteJob(callback?: (err: AWSError, data: Amplify.Types.DeleteJobResult) => void): Request<Amplify.Types.DeleteJobResult, AWSError>;
   /**
+   *  Deletes a webhook. 
+   */
+  deleteWebhook(params: Amplify.Types.DeleteWebhookRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteWebhookResult) => void): Request<Amplify.Types.DeleteWebhookResult, AWSError>;
+  /**
+   *  Deletes a webhook. 
+   */
+  deleteWebhook(callback?: (err: AWSError, data: Amplify.Types.DeleteWebhookResult) => void): Request<Amplify.Types.DeleteWebhookResult, AWSError>;
+  /**
    *  Retrieves an existing Amplify App by appId. 
    */
   getApp(params: Amplify.Types.GetAppRequest, callback?: (err: AWSError, data: Amplify.Types.GetAppResult) => void): Request<Amplify.Types.GetAppResult, AWSError>;
@@ -99,6 +123,14 @@ declare class Amplify extends Service {
    *  Get a job for a branch, part of an Amplify App. 
    */
   getJob(callback?: (err: AWSError, data: Amplify.Types.GetJobResult) => void): Request<Amplify.Types.GetJobResult, AWSError>;
+  /**
+   *  Retrieves webhook info that corresponds to a webhookId. 
+   */
+  getWebhook(params: Amplify.Types.GetWebhookRequest, callback?: (err: AWSError, data: Amplify.Types.GetWebhookResult) => void): Request<Amplify.Types.GetWebhookResult, AWSError>;
+  /**
+   *  Retrieves webhook info that corresponds to a webhookId. 
+   */
+  getWebhook(callback?: (err: AWSError, data: Amplify.Types.GetWebhookResult) => void): Request<Amplify.Types.GetWebhookResult, AWSError>;
   /**
    *  Lists existing Amplify Apps. 
    */
@@ -132,6 +164,30 @@ declare class Amplify extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Amplify.Types.ListJobsResult) => void): Request<Amplify.Types.ListJobsResult, AWSError>;
   /**
+   *  List tags for resource. 
+   */
+  listTagsForResource(params: Amplify.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Amplify.Types.ListTagsForResourceResponse) => void): Request<Amplify.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *  List tags for resource. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Amplify.Types.ListTagsForResourceResponse) => void): Request<Amplify.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *  List webhooks with an app. 
+   */
+  listWebhooks(params: Amplify.Types.ListWebhooksRequest, callback?: (err: AWSError, data: Amplify.Types.ListWebhooksResult) => void): Request<Amplify.Types.ListWebhooksResult, AWSError>;
+  /**
+   *  List webhooks with an app. 
+   */
+  listWebhooks(callback?: (err: AWSError, data: Amplify.Types.ListWebhooksResult) => void): Request<Amplify.Types.ListWebhooksResult, AWSError>;
+  /**
+   *  Start a deployment for manual deploy apps. (Apps are not connected to repository) 
+   */
+  startDeployment(params: Amplify.Types.StartDeploymentRequest, callback?: (err: AWSError, data: Amplify.Types.StartDeploymentResult) => void): Request<Amplify.Types.StartDeploymentResult, AWSError>;
+  /**
+   *  Start a deployment for manual deploy apps. (Apps are not connected to repository) 
+   */
+  startDeployment(callback?: (err: AWSError, data: Amplify.Types.StartDeploymentResult) => void): Request<Amplify.Types.StartDeploymentResult, AWSError>;
+  /**
    *  Starts a new job for a branch, part of an Amplify App. 
    */
   startJob(params: Amplify.Types.StartJobRequest, callback?: (err: AWSError, data: Amplify.Types.StartJobResult) => void): Request<Amplify.Types.StartJobResult, AWSError>;
@@ -147,6 +203,22 @@ declare class Amplify extends Service {
    *  Stop a job that is in progress, for an Amplify branch, part of Amplify App. 
    */
   stopJob(callback?: (err: AWSError, data: Amplify.Types.StopJobResult) => void): Request<Amplify.Types.StopJobResult, AWSError>;
+  /**
+   *  Tag resource with tag key and value. 
+   */
+  tagResource(params: Amplify.Types.TagResourceRequest, callback?: (err: AWSError, data: Amplify.Types.TagResourceResponse) => void): Request<Amplify.Types.TagResourceResponse, AWSError>;
+  /**
+   *  Tag resource with tag key and value. 
+   */
+  tagResource(callback?: (err: AWSError, data: Amplify.Types.TagResourceResponse) => void): Request<Amplify.Types.TagResourceResponse, AWSError>;
+  /**
+   *  Untag resource with resourceArn. 
+   */
+  untagResource(params: Amplify.Types.UntagResourceRequest, callback?: (err: AWSError, data: Amplify.Types.UntagResourceResponse) => void): Request<Amplify.Types.UntagResourceResponse, AWSError>;
+  /**
+   *  Untag resource with resourceArn. 
+   */
+  untagResource(callback?: (err: AWSError, data: Amplify.Types.UntagResourceResponse) => void): Request<Amplify.Types.UntagResourceResponse, AWSError>;
   /**
    *  Updates an existing Amplify App. 
    */
@@ -171,8 +243,17 @@ declare class Amplify extends Service {
    *  Create a new DomainAssociation on an App 
    */
   updateDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.UpdateDomainAssociationResult) => void): Request<Amplify.Types.UpdateDomainAssociationResult, AWSError>;
+  /**
+   *  Update a webhook. 
+   */
+  updateWebhook(params: Amplify.Types.UpdateWebhookRequest, callback?: (err: AWSError, data: Amplify.Types.UpdateWebhookResult) => void): Request<Amplify.Types.UpdateWebhookResult, AWSError>;
+  /**
+   *  Update a webhook. 
+   */
+  updateWebhook(callback?: (err: AWSError, data: Amplify.Types.UpdateWebhookResult) => void): Request<Amplify.Types.UpdateWebhookResult, AWSError>;
 }
 declare namespace Amplify {
+  export type AccessToken = string;
   export type ActiveJobId = string;
   export interface App {
     /**
@@ -190,7 +271,7 @@ declare namespace Amplify {
     /**
      *  Tag for Amplify App. 
      */
-    tags?: Tags;
+    tags?: TagMap;
     /**
      *  Description for the Amplify App. 
      */
@@ -247,11 +328,57 @@ declare namespace Amplify {
      *  BuildSpec content for Amplify App. 
      */
     buildSpec?: BuildSpec;
+    /**
+     *  Enables automated branch creation for the Amplify App. 
+     */
+    enableAutoBranchCreation?: EnableAutoBranchCreation;
+    /**
+     *  Automated branch creation glob patterns for the Amplify App. 
+     */
+    autoBranchCreationPatterns?: AutoBranchCreationPatterns;
+    /**
+     *  Automated branch creation config for the Amplify App. 
+     */
+    autoBranchCreationConfig?: AutoBranchCreationConfig;
   }
   export type AppArn = string;
   export type AppId = string;
   export type Apps = App[];
   export type ArtifactsUrl = string;
+  export type AssociatedResource = string;
+  export type AssociatedResources = AssociatedResource[];
+  export interface AutoBranchCreationConfig {
+    /**
+     *  Stage for the auto created branch. 
+     */
+    stage?: Stage;
+    /**
+     *  Framework for the auto created branch. 
+     */
+    framework?: Framework;
+    /**
+     *  Enables auto building for the auto created branch. 
+     */
+    enableAutoBuild?: EnableAutoBuild;
+    /**
+     *  Environment Variables for the auto created branch. 
+     */
+    environmentVariables?: EnvironmentVariables;
+    /**
+     *  Basic Authorization credentials for the auto created branch. 
+     */
+    basicAuthCredentials?: BasicAuthCredentials;
+    /**
+     *  Enables Basic Auth for the auto created branch. 
+     */
+    enableBasicAuth?: EnableBasicAuth;
+    /**
+     *  BuildSpec for the auto created branch. 
+     */
+    buildSpec?: BuildSpec;
+  }
+  export type AutoBranchCreationPattern = string;
+  export type AutoBranchCreationPatterns = AutoBranchCreationPattern[];
   export type BasicAuthCredentials = string;
   export interface Branch {
     /**
@@ -269,15 +396,15 @@ declare namespace Amplify {
     /**
      *  Tag for branch for Amplify App. 
      */
-    tags?: Tags;
+    tags?: TagMap;
     /**
      *  Stage for a branch, part of an Amplify App. 
      */
     stage: Stage;
     /**
-     *  Display name for a branch, part of an Amplify App. 
+     *  Display name for a branch, will use as the default domain prefix. 
      */
-    displayName?: DisplayName;
+    displayName: DisplayName;
     /**
      *  Enables notifications for a branch, part of an Amplify App. 
      */
@@ -319,7 +446,7 @@ declare namespace Amplify {
      */
     enableBasicAuth: EnableBasicAuth;
     /**
-     *  Thumbnail Url for the branch. 
+     *  Thumbnail URL for the branch. 
      */
     thumbnailUrl?: ThumbnailUrl;
     /**
@@ -334,6 +461,10 @@ declare namespace Amplify {
      *  The content TTL for the website in seconds. 
      */
     ttl: TTL;
+    /**
+     *  List of custom resources that are linked to this branch. 
+     */
+    associatedResources?: AssociatedResources;
   }
   export type BranchArn = string;
   export type BranchName = string;
@@ -344,6 +475,7 @@ declare namespace Amplify {
   export type CommitMessage = string;
   export type CommitTime = Date;
   export type Condition = string;
+  export type Context = string;
   export interface CreateAppRequest {
     /**
      *  Name for the Amplify App 
@@ -356,11 +488,11 @@ declare namespace Amplify {
     /**
      *  Repository for an Amplify App 
      */
-    repository: Repository;
+    repository?: Repository;
     /**
      *  Platform / framework for an Amplify App 
      */
-    platform: Platform;
+    platform?: Platform;
     /**
      *  AWS IAM service role for an Amplify App 
      */
@@ -368,7 +500,11 @@ declare namespace Amplify {
     /**
      *  OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. 
      */
-    oauthToken: OauthToken;
+    oauthToken?: OauthToken;
+    /**
+     *  Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. 
+     */
+    accessToken?: AccessToken;
     /**
      *  Environment variables map for an Amplify App. 
      */
@@ -392,11 +528,23 @@ declare namespace Amplify {
     /**
      *  Tag for an Amplify App 
      */
-    tags?: Tags;
+    tags?: TagMap;
     /**
      *  BuildSpec for an Amplify App 
      */
     buildSpec?: BuildSpec;
+    /**
+     *  Enables automated branch creation for the Amplify App. 
+     */
+    enableAutoBranchCreation?: EnableAutoBranchCreation;
+    /**
+     *  Automated branch creation glob patterns for the Amplify App. 
+     */
+    autoBranchCreationPatterns?: AutoBranchCreationPatterns;
+    /**
+     *  Automated branch creation config for the Amplify App. 
+     */
+    autoBranchCreationConfig?: AutoBranchCreationConfig;
   }
   export interface CreateAppResult {
     app: App;
@@ -445,7 +593,7 @@ declare namespace Amplify {
     /**
      *  Tag for the branch. 
      */
-    tags?: Tags;
+    tags?: TagMap;
     /**
      *  BuildSpec for the branch. 
      */
@@ -454,12 +602,44 @@ declare namespace Amplify {
      *  The content TTL for the website in seconds. 
      */
     ttl?: TTL;
+    /**
+     *  Display name for a branch, will use as the default domain prefix. 
+     */
+    displayName?: DisplayName;
   }
   export interface CreateBranchResult {
     /**
      *  Branch structure for an Amplify App. 
      */
     branch: Branch;
+  }
+  export interface CreateDeploymentRequest {
+    /**
+     *  Unique Id for an Amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Name for the branch, for the Job. 
+     */
+    branchName: BranchName;
+    /**
+     *  Optional file map that contains file name as the key and file content md5 hash as the value. If this argument is provided, the service will generate different upload url per file. Otherwise, the service will only generate a single upload url for the zipped files. 
+     */
+    fileMap?: FileMap;
+  }
+  export interface CreateDeploymentResult {
+    /**
+     *  The jobId for this deployment, will supply to start deployment api. 
+     */
+    jobId?: JobId;
+    /**
+     *  When the fileMap argument is provided in the request, the fileUploadUrls will contain a map of file names to upload url. 
+     */
+    fileUploadUrls: FileUploadUrls;
+    /**
+     *  When the fileMap argument is NOT provided. This zipUploadUrl will be returned. 
+     */
+    zipUploadUrl: UploadUrl;
   }
   export interface CreateDomainAssociationRequest {
     /**
@@ -486,6 +666,26 @@ declare namespace Amplify {
     domainAssociation: DomainAssociation;
   }
   export type CreateTime = Date;
+  export interface CreateWebhookRequest {
+    /**
+     *  Unique Id for an Amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Name for a branch, part of an Amplify App. 
+     */
+    branchName: BranchName;
+    /**
+     *  Description for a webhook. 
+     */
+    description?: Description;
+  }
+  export interface CreateWebhookResult {
+    /**
+     *  Webhook structure. 
+     */
+    webhook: Webhook;
+  }
   export type CustomDomain = string;
   export type CustomDomains = CustomDomain[];
   export interface CustomRule {
@@ -564,6 +764,18 @@ declare namespace Amplify {
   export interface DeleteJobResult {
     jobSummary: JobSummary;
   }
+  export interface DeleteWebhookRequest {
+    /**
+     *  Unique Id for a webhook. 
+     */
+    webhookId: WebhookId;
+  }
+  export interface DeleteWebhookResult {
+    /**
+     *  Webhook structure. 
+     */
+    webhook: Webhook;
+  }
   export type Description = string;
   export type DisplayName = string;
   export interface DomainAssociation {
@@ -590,7 +802,7 @@ declare namespace Amplify {
     /**
      *  DNS Record for certificate verification. 
      */
-    certificateVerificationDNSRecord: CertificateVerificationDNSRecord;
+    certificateVerificationDNSRecord?: CertificateVerificationDNSRecord;
     /**
      *  Subdomains for the Domain Association. 
      */
@@ -600,7 +812,8 @@ declare namespace Amplify {
   export type DomainAssociations = DomainAssociation[];
   export type DomainName = string;
   export type DomainPrefix = string;
-  export type DomainStatus = "PENDING_VERIFICATION"|"IN_PROGRESS"|"AVAILABLE"|"PENDING_DEPLOYMENT"|"FAILED"|string;
+  export type DomainStatus = "PENDING_VERIFICATION"|"IN_PROGRESS"|"AVAILABLE"|"PENDING_DEPLOYMENT"|"FAILED"|"CREATING"|"REQUESTING_CERTIFICATE"|"UPDATING"|string;
+  export type EnableAutoBranchCreation = boolean;
   export type EnableAutoBuild = boolean;
   export type EnableAutoSubDomain = boolean;
   export type EnableBasicAuth = boolean;
@@ -610,6 +823,9 @@ declare namespace Amplify {
   export type EnvKey = string;
   export type EnvValue = string;
   export type EnvironmentVariables = {[key: string]: EnvValue};
+  export type FileMap = {[key: string]: MD5Hash};
+  export type FileName = string;
+  export type FileUploadUrls = {[key: string]: UploadUrl};
   export type Framework = string;
   export interface GetAppRequest {
     /**
@@ -666,6 +882,18 @@ declare namespace Amplify {
   export interface GetJobResult {
     job: Job;
   }
+  export interface GetWebhookRequest {
+    /**
+     *  Unique Id for a webhook. 
+     */
+    webhookId: WebhookId;
+  }
+  export interface GetWebhookResult {
+    /**
+     *  Webhook structure. 
+     */
+    webhook: Webhook;
+  }
   export interface Job {
     /**
      *  Summary for an execution job for an Amplify App. 
@@ -715,11 +943,11 @@ declare namespace Amplify {
      */
     endTime?: EndTime;
     /**
-     *  Type for the Job. 
+     *  Type for the Job. \n "RELEASE": Manually released from source by using StartJob API. "RETRY": Manually retried by using StartJob API. "WEB_HOOK": Automatically triggered by WebHooks. 
      */
     jobType: JobType;
   }
-  export type JobType = "RELEASE"|"RETRY"|"WEB_HOOK"|string;
+  export type JobType = "RELEASE"|"RETRY"|"MANUAL"|"WEB_HOOK"|string;
   export type LastDeployTime = Date;
   export interface ListAppsRequest {
     /**
@@ -817,12 +1045,49 @@ declare namespace Amplify {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     *  Resource arn used to list tags. 
+     */
+    resourceArn: ResourceArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     *  Tags result for response. 
+     */
+    tags?: TagMap;
+  }
+  export interface ListWebhooksRequest {
+    /**
+     *  Unique Id for an Amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Pagination token. Set to null to start listing webhooks from start. If non-null pagination token is returned in a result, then pass its value in here to list more webhooks. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  Maximum number of records to list in a single response. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListWebhooksResult {
+    /**
+     *  List of webhooks. 
+     */
+    webhooks: Webhooks;
+    /**
+     *  Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. 
+     */
+    nextToken?: NextToken;
+  }
   export type LogUrl = string;
+  export type MD5Hash = string;
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
   export type OauthToken = string;
-  export type Platform = "IOS"|"ANDROID"|"WEB"|"REACT_NATIVE"|string;
+  export type Platform = "WEB"|string;
   export interface ProductionBranch {
     /**
      *  Last Deploy Time of Production Branch. 
@@ -833,7 +1098,7 @@ declare namespace Amplify {
      */
     status?: Status;
     /**
-     *  Thumbnail Url for Production Branch. 
+     *  Thumbnail URL for Production Branch. 
      */
     thumbnailUrl?: ThumbnailUrl;
     /**
@@ -842,10 +1107,36 @@ declare namespace Amplify {
     branchName?: BranchName;
   }
   export type Repository = string;
+  export type ResourceArn = string;
   export type Screenshots = {[key: string]: ThumbnailUrl};
   export type ServiceRoleArn = string;
   export type Source = string;
+  export type SourceUrl = string;
   export type Stage = "PRODUCTION"|"BETA"|"DEVELOPMENT"|"EXPERIMENTAL"|string;
+  export interface StartDeploymentRequest {
+    /**
+     *  Unique Id for an Amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Name for the branch, for the Job. 
+     */
+    branchName: BranchName;
+    /**
+     *  The job id for this deployment, generated by create deployment request. 
+     */
+    jobId?: JobId;
+    /**
+     *  The sourceUrl for this deployment, used when calling start deployment without create deployment. SourceUrl can be any HTTP GET url that is public accessible and downloads a single zip. 
+     */
+    sourceUrl?: SourceUrl;
+  }
+  export interface StartDeploymentResult {
+    /**
+     *  Summary for the Job. 
+     */
+    jobSummary: JobSummary;
+  }
   export interface StartJobRequest {
     /**
      *  Unique Id for an Amplify App. 
@@ -856,15 +1147,15 @@ declare namespace Amplify {
      */
     branchName: BranchName;
     /**
-     *  Unique Id for the Job. 
+     *  Unique Id for an existing job. Required for "RETRY" JobType. 
      */
     jobId?: JobId;
     /**
-     *  Type for the Job. 
+     *  Type for the Job. Available JobTypes are: \n "RELEASE": Start a new job with the latest change from the specified branch. Only available for apps that have connected to a repository. "RETRY": Retry an existing job. JobId is required for this type of job. 
      */
     jobType: JobType;
     /**
-     *  Reason for the Job. 
+     *  Descriptive reason for starting this job. 
      */
     jobReason?: JobReason;
     /**
@@ -907,17 +1198,25 @@ declare namespace Amplify {
      */
     endTime: EndTime;
     /**
-     *  Url to the logs for the execution step. 
+     *  URL to the logs for the execution step. 
      */
     logUrl?: LogUrl;
     /**
-     *  Url to teh artifact for the execution step. 
+     *  URL to the artifact for the execution step. 
      */
     artifactsUrl?: ArtifactsUrl;
     /**
-     *  List of screenshot Urls for the execution step, if relevant. 
+     *  List of screenshot URLs for the execution step, if relevant. 
      */
     screenshots?: Screenshots;
+    /**
+     *  The reason for current step status. 
+     */
+    statusReason?: StatusReason;
+    /**
+     *  The context for current step, will include build image if step is build. 
+     */
+    context?: Context;
   }
   export type StepName = string;
   export type Steps = Step[];
@@ -969,12 +1268,37 @@ declare namespace Amplify {
   export type SubDomains = SubDomain[];
   export type TTL = string;
   export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     *  Resource arn used to tag resource. 
+     */
+    resourceArn: ResourceArn;
+    /**
+     *  Tags used to tag resource. 
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
   export type TagValue = string;
-  export type Tags = {[key: string]: TagValue};
   export type Target = string;
   export type ThumbnailName = string;
   export type ThumbnailUrl = string;
   export type TotalNumberOfJobs = string;
+  export interface UntagResourceRequest {
+    /**
+     *  Resource arn used to untag resource. 
+     */
+    resourceArn: ResourceArn;
+    /**
+     *  Tag keys used to untag resource. 
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateAppRequest {
     /**
      *  Unique Id for an Amplify App. 
@@ -1020,6 +1344,18 @@ declare namespace Amplify {
      *  BuildSpec for an Amplify App. 
      */
     buildSpec?: BuildSpec;
+    /**
+     *  Enables automated branch creation for the Amplify App. 
+     */
+    enableAutoBranchCreation?: EnableAutoBranchCreation;
+    /**
+     *  Automated branch creation glob patterns for the Amplify App. 
+     */
+    autoBranchCreationPatterns?: AutoBranchCreationPatterns;
+    /**
+     *  Automated branch creation config for the Amplify App. 
+     */
+    autoBranchCreationConfig?: AutoBranchCreationConfig;
   }
   export interface UpdateAppResult {
     /**
@@ -1076,6 +1412,10 @@ declare namespace Amplify {
      *  The content TTL for the website in seconds. 
      */
     ttl?: TTL;
+    /**
+     *  Display name for a branch, will use as the default domain prefix. 
+     */
+    displayName?: DisplayName;
   }
   export interface UpdateBranchResult {
     /**
@@ -1108,7 +1448,62 @@ declare namespace Amplify {
     domainAssociation: DomainAssociation;
   }
   export type UpdateTime = Date;
+  export interface UpdateWebhookRequest {
+    /**
+     *  Unique Id for a webhook. 
+     */
+    webhookId: WebhookId;
+    /**
+     *  Name for a branch, part of an Amplify App. 
+     */
+    branchName?: BranchName;
+    /**
+     *  Description for a webhook. 
+     */
+    description?: Description;
+  }
+  export interface UpdateWebhookResult {
+    /**
+     *  Webhook structure. 
+     */
+    webhook: Webhook;
+  }
+  export type UploadUrl = string;
   export type Verified = boolean;
+  export interface Webhook {
+    /**
+     *  ARN for the webhook. 
+     */
+    webhookArn: WebhookArn;
+    /**
+     *  Id of the webhook. 
+     */
+    webhookId: WebhookId;
+    /**
+     *  Url of the webhook. 
+     */
+    webhookUrl: WebhookUrl;
+    /**
+     *  Name for a branch, part of an Amplify App. 
+     */
+    branchName: BranchName;
+    /**
+     *  Description for a webhook. 
+     */
+    description: Description;
+    /**
+     *  Create date / time for a webhook. 
+     */
+    createTime: CreateTime;
+    /**
+     *  Update date / time for a webhook. 
+     */
+    updateTime: UpdateTime;
+  }
+  export type WebhookArn = string;
+  export type WebhookId = string;
+  export type WebhookUrl = string;
+  export type Webhooks = Webhook[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
