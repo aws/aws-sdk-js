@@ -6,12 +6,10 @@ assignees: ''
 
 ---
 
-This is a list of know issues and how can you work around them:
 
-1. **Exceptions contains `Unexpected key...` or `... is not a function`**
 
     AWS APIs are updating constantly, you might be calling a new API with an older version is SDK. In
-    this case you should try installing the newest `aws-sdk`like: 
+    this case you should try installing the newest `aws-sdk` like: 
 
     `npm install aws-sdk@latest`
 
@@ -20,4 +18,5 @@ This is a list of know issues and how can you work around them:
     You can import the latest version of SDK by following 
     [these guidelines](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-create-deployment-pkg.html#nodejs-package-dependencies).
 
-    Go ahead and open an issue is you are still seeing this exception.
+If you still like to open an issue, change [ ] to [x] below:
+- [ ] I've confirmed that I'm using latest version of SDK, and issue is still reproducible
