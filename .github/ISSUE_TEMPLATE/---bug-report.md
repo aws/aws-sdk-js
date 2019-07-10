@@ -7,6 +7,10 @@ assignees: ''
 
 ---
 
+Confirm by changing [ ] to [x] below to ensure that it's a bug:
+- [ ] I've gone though [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html) and [API reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/)
+- [ ] I've checked [AWS Forums](https://forums.aws.amazon.com) and [StackOverflow](https://stackoverflow.com/questions/tagged/aws-sdk-js) for answers
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
