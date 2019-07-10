@@ -316,6 +316,14 @@ declare class ServiceCatalog extends Service {
    */
   describeServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionOutput, AWSError>;
   /**
+   * 
+   */
+  describeServiceActionExecutionParameters(params: ServiceCatalog.Types.DescribeServiceActionExecutionParametersInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionExecutionParametersOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionExecutionParametersOutput, AWSError>;
+  /**
+   * 
+   */
+  describeServiceActionExecutionParameters(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionExecutionParametersOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionExecutionParametersOutput, AWSError>;
+  /**
    * Gets information about the specified TagOption.
    */
   describeTagOption(params: ServiceCatalog.Types.DescribeTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
@@ -1679,6 +1687,14 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export interface DescribeServiceActionExecutionParametersInput {
+    ProvisionedProductId: Id;
+    ServiceActionId: Id;
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface DescribeServiceActionExecutionParametersOutput {
+    ServiceActionParameters?: ExecutionParameters;
+  }
   export interface DescribeServiceActionInput {
     /**
      * The self-service action identifier.
@@ -1834,6 +1850,7 @@ declare namespace ServiceCatalog {
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
+    Parameters?: ExecutionParameterMap;
   }
   export interface ExecuteProvisionedProductServiceActionOutput {
     /**
@@ -1841,6 +1858,17 @@ declare namespace ServiceCatalog {
      */
     RecordDetail?: RecordDetail;
   }
+  export interface ExecutionParameter {
+    Name?: ExecutionParameterKey;
+    Type?: ExecutionParameterType;
+    DefaultValues?: ExecutionParameterValueList;
+  }
+  export type ExecutionParameterKey = string;
+  export type ExecutionParameterMap = {[key: string]: ExecutionParameterValueList};
+  export type ExecutionParameterType = string;
+  export type ExecutionParameterValue = string;
+  export type ExecutionParameterValueList = ExecutionParameterValue[];
+  export type ExecutionParameters = ExecutionParameter[];
   export interface FailedServiceActionAssociation {
     /**
      * The self-service action identifier. For example, act-fs7abcd89wxyz.
