@@ -2,12 +2,13 @@
 name: "\U0001F6E0 'Unexpected key' or 'is not a function' error"
 about: API call returns 'Unexpected key' or 'is not a function' error
 title: ''
-labels: ''
 assignees: ''
 
 ---
 
-AWS APIs are updating constantly, you might be calling a new API with an older version is SDK. In
+
+
+    AWS APIs are updating constantly, you might be calling a new API with an older version is SDK. In
     this case you should try installing the newest `aws-sdk` like: 
 
     `npm install aws-sdk@latest`
