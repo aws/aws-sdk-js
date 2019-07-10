@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.490.0-->
+<!--LATEST=2.491.0-->
 <!--ENTRYINSERT-->
+
+## 2.491.0
+* feature: QuickSight: Amazon QuickSight now supports embedding dashboards for all non-federated QuickSight users. This includes IAM users, AD users and users from the QuickSight user pool. The get-dashboard-embed-url API accepts QUICKSIGHT as identity type with a user ARN to authenticate the embeddable dashboard viewer as a non-federated user.
+* feature: ServiceCatalog: This release adds support for Parameters in ExecuteProvisionedProductServiceAction and adds functionality to get the default parameter values for a Self-Service Action execution against a Provisioned Product via DescribeServiceActionExecutionParameters
 
 ## 2.490.0
 * feature: Amplify: This release adds webhook APIs and manual deployment APIs for AWS Amplify Console.

@@ -905,6 +905,27 @@
       ],
       "documentation": "<p>Describes a self-service action.</p>"
     },
+    "DescribeServiceActionExecutionParameters": {
+      "name": "DescribeServiceActionExecutionParameters",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeServiceActionExecutionParametersInput"
+      },
+      "output": {
+        "shape": "DescribeServiceActionExecutionParametersOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParametersException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ]
+    },
     "DescribeTagOption": {
       "name": "DescribeTagOption",
       "http": {
@@ -3384,6 +3405,32 @@
         }
       }
     },
+    "DescribeServiceActionExecutionParametersInput": {
+      "type": "structure",
+      "required": [
+        "ProvisionedProductId",
+        "ServiceActionId"
+      ],
+      "members": {
+        "ProvisionedProductId": {
+          "shape": "Id"
+        },
+        "ServiceActionId": {
+          "shape": "Id"
+        },
+        "AcceptLanguage": {
+          "shape": "AcceptLanguage"
+        }
+      }
+    },
+    "DescribeServiceActionExecutionParametersOutput": {
+      "type": "structure",
+      "members": {
+        "ServiceActionParameters": {
+          "shape": "ExecutionParameters"
+        }
+      }
+    },
     "DescribeServiceActionInput": {
       "type": "structure",
       "required": [
@@ -3645,6 +3692,9 @@
         "AcceptLanguage": {
           "shape": "AcceptLanguage",
           "documentation": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "Parameters": {
+          "shape": "ExecutionParameterMap"
         }
       }
     },
@@ -3655,6 +3705,60 @@
           "shape": "RecordDetail",
           "documentation": "<p>An object containing detailed information about the result of provisioning the product.</p>"
         }
+      }
+    },
+    "ExecutionParameter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ExecutionParameterKey"
+        },
+        "Type": {
+          "shape": "ExecutionParameterType"
+        },
+        "DefaultValues": {
+          "shape": "ExecutionParameterValueList"
+        }
+      }
+    },
+    "ExecutionParameterKey": {
+      "type": "string",
+      "max": 50,
+      "min": 1
+    },
+    "ExecutionParameterMap": {
+      "type": "map",
+      "key": {
+        "shape": "ExecutionParameterKey"
+      },
+      "value": {
+        "shape": "ExecutionParameterValueList"
+      },
+      "max": 200,
+      "min": 1
+    },
+    "ExecutionParameterType": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "ExecutionParameterValue": {
+      "type": "string",
+      "max": 512,
+      "min": 0
+    },
+    "ExecutionParameterValueList": {
+      "type": "list",
+      "member": {
+        "shape": "ExecutionParameterValue"
+      },
+      "max": 25,
+      "min": 0
+    },
+    "ExecutionParameters": {
+      "type": "list",
+      "member": {
+        "shape": "ExecutionParameter"
       }
     },
     "FailedServiceActionAssociation": {

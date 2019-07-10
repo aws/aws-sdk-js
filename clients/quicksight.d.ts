@@ -52,11 +52,11 @@ declare class QuickSight extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserResponse) => void): Request<QuickSight.Types.DeleteUserResponse, AWSError>;
   /**
-   * Deletes a user after locating the user by its principal ID.
+   * Deletes a user identified by its principal ID.  The permission resource is arn:aws:quicksight:us-east-1:&lt;aws-account-id&gt;:user/default/&lt;user-name&gt;  .  CLI Sample:   aws quicksight delete-user-by-principal-id --aws-account-id=111122223333 --namespace=default --principal-id=ABCDEFJA26JLI7EUUOEHS  
    */
   deleteUserByPrincipalId(params: QuickSight.Types.DeleteUserByPrincipalIdRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteUserByPrincipalIdResponse) => void): Request<QuickSight.Types.DeleteUserByPrincipalIdResponse, AWSError>;
   /**
-   * Deletes a user after locating the user by its principal ID.
+   * Deletes a user identified by its principal ID.  The permission resource is arn:aws:quicksight:us-east-1:&lt;aws-account-id&gt;:user/default/&lt;user-name&gt;  .  CLI Sample:   aws quicksight delete-user-by-principal-id --aws-account-id=111122223333 --namespace=default --principal-id=ABCDEFJA26JLI7EUUOEHS  
    */
   deleteUserByPrincipalId(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserByPrincipalIdResponse) => void): Request<QuickSight.Types.DeleteUserByPrincipalIdResponse, AWSError>;
   /**
@@ -390,6 +390,10 @@ declare namespace QuickSight {
      * Remove the reset button on embedded dashboard. The default is FALSE, which allows the reset button.
      */
     ResetDisabled?: boolean;
+    /**
+     * The Amazon QuickSight user's ARN, for use with QUICKSIGHT identity type. You can use this for any of the following:   Amazon QuickSight users in your account (readers, authors, or admins)   AD users   Invited non-federated users   Federated IAM users   Federated IAM role-based sessions  
+     */
+    UserArn?: Arn;
   }
   export interface GetDashboardEmbedUrlResponse {
     /**
@@ -611,7 +615,7 @@ declare namespace QuickSight {
      */
     IamArn?: String;
     /**
-     * The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see  assume-role  in the AWS CLI Reference. 
+     * You need to use this parameter only when you register one or more users using an assumed IAM role. You don't need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see  assume-role  in the AWS CLI Reference. 
      */
     SessionName?: RoleSessionName;
     /**
