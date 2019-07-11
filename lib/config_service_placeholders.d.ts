@@ -185,6 +185,7 @@ export abstract class ConfigurationServicePlaceholders {
   applicationinsights?: AWS.ApplicationInsights.Types.ClientConfiguration;
   servicequotas?: AWS.ServiceQuotas.Types.ClientConfiguration;
   ec2instanceconnect?: AWS.EC2InstanceConnect.Types.ClientConfiguration;
+  eventbridge?: AWS.EventBridge.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -372,4 +373,5 @@ export interface ConfigurationServiceApiVersions {
   applicationinsights?: AWS.ApplicationInsights.Types.apiVersion;
   servicequotas?: AWS.ServiceQuotas.Types.apiVersion;
   ec2instanceconnect?: AWS.EC2InstanceConnect.Types.apiVersion;
+  eventbridge?: AWS.EventBridge.Types.apiVersion;
 }
