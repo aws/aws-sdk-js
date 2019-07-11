@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.491.0-->
+<!--LATEST=2.492.0-->
 <!--ENTRYINSERT-->
+
+## 2.492.0
+* feature: CloudWatchEvents: Adds APIs for partner event sources, partner event buses, and custom event buses. These new features are managed in the EventBridge service.
+* feature: EventBridge: Amazon EventBridge is a serverless event bus service that makes it easy to connect your applications with data from a variety of sources, including AWS services, partner applications, and your own applications.
 
 ## 2.491.0
 * feature: QuickSight: Amazon QuickSight now supports embedding dashboards for all non-federated QuickSight users. This includes IAM users, AD users and users from the QuickSight user pool. The get-dashboard-embed-url API accepts QUICKSIGHT as identity type with a user ARN to authenticate the embeddable dashboard viewer as a non-federated user.
