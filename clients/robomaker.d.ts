@@ -1463,6 +1463,7 @@ declare namespace RoboMaker {
   }
   export type MaxResults = number;
   export type Name = string;
+  export type NonEmptyString = string;
   export interface OutputLocation {
     /**
      * The S3 bucket for output.
@@ -1656,13 +1657,13 @@ declare namespace RoboMaker {
     version?: RobotSoftwareSuiteVersionType;
   }
   export type RobotSoftwareSuiteType = "ROS"|string;
-  export type RobotSoftwareSuiteVersionType = "Kinetic"|string;
+  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|string;
   export type RobotStatus = "Available"|"Registered"|"PendingNewDeployment"|"Deploying"|"Failed"|"InSync"|"NoResponse"|string;
   export type Robots = Robot[];
   export type S3Bucket = string;
   export type S3Etag = string;
   export type S3Key = string;
-  export type SecurityGroups = GenericString[];
+  export type SecurityGroups = NonEmptyString[];
   export interface SimulationApplicationConfig {
     /**
      * The application information for the simulation application.
@@ -1853,7 +1854,7 @@ declare namespace RoboMaker {
   }
   export type SourceConfigs = SourceConfig[];
   export type Sources = Source[];
-  export type Subnets = GenericString[];
+  export type Subnets = NonEmptyString[];
   export interface SyncDeploymentJobRequest {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.

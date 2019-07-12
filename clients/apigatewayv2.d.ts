@@ -3246,6 +3246,10 @@ declare namespace ApiGatewayV2 {
  API import.
      */
     Warnings?: __listOf__string;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..
+     */
+    Tags?: Tags;
   }
   export interface UpdateAuthorizerRequest {
     /**
@@ -3452,6 +3456,10 @@ declare namespace ApiGatewayV2 {
      * The domain name configurations.
      */
     DomainNameConfigurations?: DomainNameConfigurations;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..
+     */
+    Tags?: Tags;
   }
   export interface UpdateIntegrationRequest {
     /**
@@ -4103,6 +4111,10 @@ declare namespace ApiGatewayV2 {
  [A-Za-z0-9-._~:/?#&=,]+.
      */
     StageVariables?: StageVariablesMap;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..
+     */
+    Tags?: Tags;
   }
   export type UriWithLengthBetween1And2048 = string;
   export type __boolean = boolean;

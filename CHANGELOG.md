@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.492.0-->
+<!--LATEST=2.493.0-->
 <!--ENTRYINSERT-->
+
+## 2.493.0
+* feature: ApiGatewayV2: Bug fix (Add tags field to Update Stage , Api and DomainName Responses )
+* feature: ES: Amazon Elasticsearch Service now supports M5, C5, and R5 instance types.
+* feature: IAM: Removed exception that was indicated but never thrown for IAM GetAccessKeyLastUsed API
+* feature: RoboMaker: Added Melodic as a supported Robot Software Suite Version
 
 ## 2.492.0
 * feature: CloudWatchEvents: Adds APIs for partner event sources, partner event buses, and custom event buses. These new features are managed in the EventBridge service.
