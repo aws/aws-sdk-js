@@ -2415,7 +2415,7 @@
       "type": "string",
       "max": 255,
       "min": 1,
-      "pattern": "arn:.*"
+      "pattern": "arn:aws:iam::\\w+:role/.*"
     },
     "Id": {
       "type": "string",
@@ -2675,6 +2675,10 @@
       "max": 255,
       "min": 1,
       "pattern": "[a-zA-Z0-9_\\-]*"
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "min": 1
     },
     "OutputLocation": {
       "type": "structure",
@@ -2997,7 +3001,8 @@
     "RobotSoftwareSuiteVersionType": {
       "type": "string",
       "enum": [
-        "Kinetic"
+        "Kinetic",
+        "Melodic"
       ]
     },
     "RobotStatus": {
@@ -3024,7 +3029,7 @@
       "type": "string",
       "max": 63,
       "min": 3,
-      "pattern": "[a-z0-9][a-z0-9\\-]*[a-z0-9]"
+      "pattern": "[a-z0-9][a-z0-9.\\-]*[a-z0-9]"
     },
     "S3Etag": {
       "type": "string"
@@ -3038,7 +3043,7 @@
     "SecurityGroups": {
       "type": "list",
       "member": {
-        "shape": "GenericString"
+        "shape": "NonEmptyString"
       },
       "max": 5,
       "min": 1
@@ -3356,7 +3361,7 @@
     "Subnets": {
       "type": "list",
       "member": {
-        "shape": "GenericString"
+        "shape": "NonEmptyString"
       },
       "max": 16,
       "min": 1
