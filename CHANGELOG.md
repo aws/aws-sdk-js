@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.493.0-->
+<!--LATEST=2.494.0-->
 <!--ENTRYINSERT-->
+
+## 2.494.0
+* feature: ConfigService: This release adds more granularity to the status of an OrganizationConfigRule by adding a new status. It also adds an exception when organization access is denied.
+* feature: DMS: S3 endpoint settings update: 1) Option to append operation column to full-load files. 2) Option to add a commit timestamp column to full-load and cdc files. Updated DescribeAccountAttributes to include UniqueAccountIdentifier.
 
 ## 2.493.0
 * feature: ApiGatewayV2: Bug fix (Add tags field to Update Stage , Api and DomainName Responses )

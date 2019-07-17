@@ -2133,7 +2133,7 @@ declare namespace ConfigService {
   }
   export type Long = number;
   export type MaximumExecutionFrequency = "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"|string;
-  export type MemberAccountRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export type MemberAccountRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"UPDATE_IN_PROGRESS"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
   export interface MemberAccountStatus {
     AccountId: AccountId;
     ConfigRuleName: StringWithCharLimit64;
@@ -2202,7 +2202,7 @@ declare namespace ConfigService {
     TagKeyScope?: StringWithCharLimit128;
     TagValueScope?: StringWithCharLimit256;
   }
-  export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"UPDATE_IN_PROGRESS"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
   export type Owner = "CUSTOM_LAMBDA"|"AWS"|string;
   export interface PendingAggregationRequest {
     /**
