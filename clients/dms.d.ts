@@ -117,11 +117,11 @@ declare class DMS extends Service {
    */
   deleteReplicationTask(callback?: (err: AWSError, data: DMS.Types.DeleteReplicationTaskResponse) => void): Request<DMS.Types.DeleteReplicationTaskResponse, AWSError>;
   /**
-   * Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This command does not take any parameters.
+   * Lists all of the AWS DMS attributes for a customer account. These attributes include AWS DMS quotas for the account and a unique account identifier in a particular DMS region. DMS quotas include a list of resource quotas supported by the account, such as the number of replication instances allowed. The description for each resource quota, includes the quota name, current usage toward that quota, and the quota's maximum value. DMS uses the unique account identifier to name each artifact used by DMS in the given region. This command does not take any parameters.
    */
   describeAccountAttributes(params: DMS.Types.DescribeAccountAttributesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeAccountAttributesResponse) => void): Request<DMS.Types.DescribeAccountAttributesResponse, AWSError>;
   /**
-   * Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This command does not take any parameters.
+   * Lists all of the AWS DMS attributes for a customer account. These attributes include AWS DMS quotas for the account and a unique account identifier in a particular DMS region. DMS quotas include a list of resource quotas supported by the account, such as the number of replication instances allowed. The description for each resource quota, includes the quota name, current usage toward that quota, and the quota's maximum value. DMS uses the unique account identifier to name each artifact used by DMS in the given region. This command does not take any parameters.
    */
   describeAccountAttributes(callback?: (err: AWSError, data: DMS.Types.DescribeAccountAttributesResponse) => void): Request<DMS.Types.DescribeAccountAttributesResponse, AWSError>;
   /**
@@ -463,11 +463,11 @@ declare namespace DMS {
   export type AccountQuotaList = AccountQuota[];
   export interface AddTagsToResourceMessage {
     /**
-     * The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be added to. AWS DMS resources include a replication instance, endpoint, and a replication task.
+     * Identifies the AWS DMS resource to which tags should be added. The value for this parameter is an Amazon Resource Name (ARN). For AWS DMS, you can tag a replication instance, an endpoint, or a replication task.
      */
     ResourceArn: String;
     /**
-     * The tag to be assigned to the DMS resource.
+     * One or more tags to be assigned to the resource.
      */
     Tags: TagList;
   }
@@ -483,7 +483,7 @@ declare namespace DMS {
      */
     ApplyAction: String;
     /**
-     * A value that specifies the type of opt-in request, or undoes an opt-in request. An opt-in request of type immediate cannot be undone. Valid values:    immediate - Apply the maintenance action immediately.    next-maintenance - Apply the maintenance action during the next maintenance window for the resource.    undo-opt-in - Cancel any existing next-maintenance opt-in requests.  
+     * A value that specifies the type of opt-in request, or undoes an opt-in request. You can't undo an opt-in request of type immediate. Valid values:    immediate - Apply the maintenance action immediately.    next-maintenance - Apply the maintenance action during the next maintenance window for the resource.    undo-opt-in - Cancel any existing next-maintenance opt-in requests.  
      */
     OptInType: String;
   }
@@ -506,7 +506,7 @@ declare namespace DMS {
   export type BooleanOptional = boolean;
   export interface Certificate {
     /**
-     * The customer-assigned name of the certificate. Valid characters are A-z and 0-9.
+     * A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
      */
     CertificateIdentifier?: String;
     /**
@@ -514,11 +514,11 @@ declare namespace DMS {
      */
     CertificateCreationDate?: TStamp;
     /**
-     * The contents of the .pem X.509 certificate file for the certificate.
+     * The contents of a .pem file, which contains an X.509 certificate.
      */
     CertificatePem?: String;
     /**
-     * The location of the imported Oracle Wallet certificate for use with SSL.
+     * The location of an imported Oracle Wallet certificate for use with SSL.
      */
     CertificateWallet?: CertificateWallet;
     /**
@@ -582,11 +582,11 @@ declare namespace DMS {
      */
     EndpointIdentifier: String;
     /**
-     * The type of endpoint.
+     * The type of endpoint. Valid values are source and target.
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndPointType value, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
+     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName: String;
     /**
@@ -610,15 +610,15 @@ declare namespace DMS {
      */
     DatabaseName?: String;
     /**
-     * Additional attributes associated with the connection.
+     * Additional attributes associated with the connection. Each attribute is specified as a name-value pair associated by an equal sign (=). Multiple attributes are separated by a semicolon (;) with no additional white space. For information on the attributes available for connecting your source or target endpoint, see Working with AWS DMS Endpoints in the AWS Database Migration Service User Guide. 
      */
     ExtraConnectionAttributes?: String;
     /**
-     * The AWS KMS key identifier to use to encrypt the connection parameters. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
+     * An AWS KMS key identifier that is used to encrypt the connection parameters for the endpoint. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
     /**
-     * Tags to be added to the endpoint.
+     * One or more tags to be assigned to the endpoint.
      */
     Tags?: TagList;
     /**
@@ -626,7 +626,7 @@ declare namespace DMS {
      */
     CertificateArn?: String;
     /**
-     * The Secure Sockets Layer (SSL) mode to use for the SSL connection. The SSL mode can be one of four values: none, require, verify-ca, verify-full. The default value is none.
+     * The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is none 
      */
     SslMode?: DmsSslModeValue;
     /**
@@ -646,7 +646,7 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible attributes include the following:    serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.    bucketName - The name of the S3 bucket to use.    compressionType - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to NONE (the default). To keep the files uncompressed, don't use this value.    Shorthand syntax for these attributes is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string  JSON syntax for these attributes is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" }  
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible attributes include the following:    serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.    bucketName - The name of the S3 bucket to use.    compressionType - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to NONE (the default). To keep the files uncompressed, don't use this value.   Shorthand syntax for these attributes is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string  JSON syntax for these attributes is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" }  
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
@@ -671,7 +671,7 @@ declare namespace DMS {
   }
   export interface CreateEventSubscriptionMessage {
     /**
-     * The name of the AWS DMS event notification subscription.  Constraints: The name must be less than 255 characters. 
+     * The name of the AWS DMS event notification subscription. This name must be less than 255 characters.
      */
     SubscriptionName: String;
     /**
@@ -679,15 +679,15 @@ declare namespace DMS {
      */
     SnsTopicArn: String;
     /**
-     *  The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to replication-instance. If this value is not specified, all events are returned.  Valid values: replication-instance | migration-task
+     *  The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to replication-instance. If this value is not specified, all events are returned.  Valid values: replication-instance | replication-task 
      */
     SourceType?: String;
     /**
-     *  A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the DescribeEventCategories action or in the topic Working with Events and Notifications in the AWS Database Migration Service User Guide. 
+     * A list of event categories for a source type that you want to subscribe to. For more information, see Working with Events and Notifications in the AWS Database Migration Service User Guide. 
      */
     EventCategories?: EventCategoriesList;
     /**
-     *  The list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. 
+     * A list of identifiers for which AWS DMS provides notification events. If you don't specify a value, notifications are provided for all sources. If you specify multiple values, they must be of the same type. For example, if you specify a database instance ID, then all of the other values must be database instance IDs.
      */
     SourceIds?: SourceIdsList;
     /**
@@ -695,7 +695,7 @@ declare namespace DMS {
      */
     Enabled?: BooleanOptional;
     /**
-     * A tag to be attached to the event subscription.
+     * One or more tags to be assigned to the event subscription.
      */
     Tags?: TagList;
   }
@@ -723,7 +723,7 @@ declare namespace DMS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The EC2 Availability Zone that the replication instance will be created in. Default: A random, system-chosen Availability Zone in the endpoint's region.  Example: us-east-1d 
+     * The AWS Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's AWS Region, for example: us-east-1d 
      */
     AvailabilityZone?: String;
     /**
@@ -731,11 +731,11 @@ declare namespace DMS {
      */
     ReplicationSubnetGroupIdentifier?: String;
     /**
-     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  Default: A 30-minute window selected at random from an 8-hour block of time per AWS Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
-     *  Specifies if the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
+     *  Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
      */
     MultiAZ?: BooleanOptional;
     /**
@@ -743,15 +743,15 @@ declare namespace DMS {
      */
     EngineVersion?: String;
     /**
-     * Indicates that minor engine upgrades will be applied automatically to the replication instance during the maintenance window. Default: true 
+     * Indicates whether minor engine upgrades will be applied automatically to the replication instance during the maintenance window. This parameter defaults to true. Default: true 
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
-     * Tags to be associated with the replication instance.
+     * One or more tags to be assigned to the replication instance.
      */
     Tags?: TagList;
     /**
-     * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
+     * An AWS KMS key identifier that is used to encrypt the data on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
     /**
@@ -779,11 +779,11 @@ declare namespace DMS {
      */
     ReplicationSubnetGroupDescription: String;
     /**
-     * The EC2 subnet IDs for the subnet group.
+     * One or more subnet IDs to be assigned to the subnet group.
      */
     SubnetIds: SubnetIdentifierList;
     /**
-     * The tag to be assigned to the subnet group.
+     * One or more tags to be assigned to the subnet group.
      */
     Tags?: TagList;
   }
@@ -795,31 +795,31 @@ declare namespace DMS {
   }
   export interface CreateReplicationTaskMessage {
     /**
-     * The replication task identifier. Constraints:   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
+     * An identifier for the replication task. Constraints:   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
      */
     ReplicationTaskIdentifier: String;
     /**
-     * The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+     * An Amazon Resource Name (ARN) that uniquely identifies the source endpoint.
      */
     SourceEndpointArn: String;
     /**
-     * The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+     * An Amazon Resource Name (ARN) that uniquely identifies the target endpoint.
      */
     TargetEndpointArn: String;
     /**
-     * The Amazon Resource Name (ARN) of the replication instance.
+     * The Amazon Resource Name (ARN) of a replication instance.
      */
     ReplicationInstanceArn: String;
     /**
-     * The migration type.
+     * The migration type. Valid values: full-load | cdc | full-load-and-cdc 
      */
     MigrationType: MigrationTypeValue;
     /**
-     * When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with "file://". When working with the DMS API, provide the JSON as the parameter value. For example, --table-mappings file://mappingfile.json
+     * The table mappings for the task, in JSON format. For more information, see Table Mapping in the AWS Database Migration User Guide. 
      */
     TableMappings: String;
     /**
-     * Settings for the task, such as target metadata settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks in the AWS Database Migration User Guide. 
+     * Overall settings for the task, in JSON format. For more information, see Task Settings in the AWS Database Migration User Guide. 
      */
     ReplicationTaskSettings?: String;
     /**
@@ -835,7 +835,7 @@ declare namespace DMS {
      */
     CdcStopPosition?: String;
     /**
-     * Tags to be added to the replication instance.
+     * One or more tags to be assigned to the replication task.
      */
     Tags?: TagList;
   }
@@ -921,6 +921,10 @@ declare namespace DMS {
      * Account quota information.
      */
     AccountQuotas?: AccountQuotaList;
+    /**
+     * A unique AWS DMS identifier for an account in a particular AWS Region. The value of this identifier has the following format: c99999999999. DMS uses this identifier to name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket for storing task assessment reports in a given AWS Region. The format of this S3 bucket name is the following: dms-AccountNumber-UniqueAccountIdentifier. Here is an example name for this default S3 bucket: dms-111122223333-c44445555666.  AWS DMS supports UniqueAccountIdentifier in versions 3.1.4 and later. 
+     */
+    UniqueAccountIdentifier?: String;
   }
   export interface DescribeCertificatesMessage {
     /**
@@ -932,7 +936,7 @@ declare namespace DMS {
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the vlue specified by MaxRecords. 
      */
     Marker?: String;
   }
@@ -990,7 +994,7 @@ declare namespace DMS {
      */
     Marker?: String;
     /**
-     * The type of endpoints that are supported.
+     * The types of endpoints that are supported.
      */
     SupportedEndpointTypes?: SupportedEndpointTypeList;
   }
@@ -1020,7 +1024,7 @@ declare namespace DMS {
   }
   export interface DescribeEventCategoriesMessage {
     /**
-     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | migration-task
+     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | replication-task
      */
     SourceType?: String;
     /**
@@ -1064,11 +1068,11 @@ declare namespace DMS {
   }
   export interface DescribeEventsMessage {
     /**
-     *  The identifier of the event source. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens. It cannot end with a hyphen or contain two consecutive hyphens. 
+     *  The identifier of an event source.
      */
     SourceIdentifier?: String;
     /**
-     * The type of AWS DMS resource that generates events. Valid values: replication-instance | migration-task
+     * The type of AWS DMS resource that generates events. Valid values: replication-instance | replication-task
      */
     SourceType?: SourceType;
     /**
@@ -1084,7 +1088,7 @@ declare namespace DMS {
      */
     Duration?: IntegerOptional;
     /**
-     * A list of event categories for a source type that you want to subscribe to.
+     * A list of event categories for the source type that you've chosen.
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -1132,7 +1136,7 @@ declare namespace DMS {
   }
   export interface DescribePendingMaintenanceActionsMessage {
     /**
-     * The ARN of the replication instance.
+     * The Amazon Resource Name (ARN) of the replication instance.
      */
     ReplicationInstanceArn?: String;
     /**
@@ -1288,7 +1292,7 @@ declare namespace DMS {
      */
     Marker?: String;
     /**
-     * Set this flag to avoid returning setting information. Use this to reduce overhead when settings are too large. Choose TRUE to use this flag, otherwise choose FALSE (default).
+     * An option to set to avoid returning information about settings. Use this to reduce overhead when setting information is too large. To use this option, choose true; otherwise, choose false (the default).
      */
     WithoutSettings?: BooleanOptional;
   }
@@ -1381,7 +1385,7 @@ declare namespace DMS {
      */
     ServiceAccessRoleArn: String;
     /**
-     * The endpoint for the ElasticSearch cluster.
+     * The endpoint for the Elasticsearch cluster.
      */
     EndpointUri: String;
     /**
@@ -1401,11 +1405,11 @@ declare namespace DMS {
      */
     EndpointIdentifier?: String;
     /**
-     * The type of endpoint.
+     * The type of endpoint. Valid values are source and target.
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
+     * The database engine name. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
     /**
@@ -1437,7 +1441,7 @@ declare namespace DMS {
      */
     Status?: String;
     /**
-     * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
+     * An AWS KMS key identifier that is used to encrypt the connection parameters for the endpoint. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
     /**
@@ -1449,7 +1453,7 @@ declare namespace DMS {
      */
     CertificateArn?: String;
     /**
-     * The SSL mode used to connect to the endpoint. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
+     * The SSL mode used to connect to the endpoint. The default value is none.
      */
     SslMode?: DmsSslModeValue;
     /**
@@ -1489,18 +1493,18 @@ declare namespace DMS {
      */
     ElasticsearchSettings?: ElasticsearchSettings;
     /**
-     * Settings for the Amazon Redshift endpoint
+     * Settings for the Amazon Redshift endpoint.
      */
     RedshiftSettings?: RedshiftSettings;
   }
   export type EndpointList = Endpoint[];
   export interface Event {
     /**
-     *  The identifier of the event source. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens.  Constraints:replication instance, endpoint, migration task
+     *  The identifier of an event source.
      */
     SourceIdentifier?: String;
     /**
-     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | endpoint | migration-task
+     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | endpoint | replication-task
      */
     SourceType?: SourceType;
     /**
@@ -1519,11 +1523,11 @@ declare namespace DMS {
   export type EventCategoriesList = String[];
   export interface EventCategoryGroup {
     /**
-     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | replication-server | security-group | migration-task
+     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | replication-server | security-group | replication-task
      */
     SourceType?: String;
     /**
-     *  A list of event categories for a SourceType that you want to subscribe to. 
+     *  A list of event categories from a source type that you've chosen.
      */
     EventCategories?: EventCategoriesList;
   }
@@ -1551,7 +1555,7 @@ declare namespace DMS {
      */
     SubscriptionCreationTime?: String;
     /**
-     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | replication-server | security-group | migration-task
+     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | replication-server | security-group | replication-task
      */
     SourceType?: String;
     /**
@@ -1582,15 +1586,15 @@ declare namespace DMS {
   export type FilterValueList = String[];
   export interface ImportCertificateMessage {
     /**
-     * The customer-assigned name of the certificate. Valid characters are A-z and 0-9.
+     * A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
      */
     CertificateIdentifier: String;
     /**
-     * The contents of the .pem X.509 certificate file for the certificate.
+     * The contents of a .pem file, which contains an X.509 certificate.
      */
     CertificatePem?: String;
     /**
-     * The location of the imported Oracle Wallet certificate for use with SSL.
+     * The location of an imported Oracle Wallet certificate for use with SSL.
      */
     CertificateWallet?: CertificateWallet;
     /**
@@ -1646,11 +1650,11 @@ declare namespace DMS {
      */
     EndpointIdentifier?: String;
     /**
-     * The type of endpoint.
+     * The type of endpoint. Valid values are source and target.
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
+     * The type of engine for the endpoint. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
     /**
@@ -1682,7 +1686,7 @@ declare namespace DMS {
      */
     CertificateArn?: String;
     /**
-     * The SSL mode to be used. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
+     * The SSL mode used to connect to the endpoint. The default value is none.
      */
     SslMode?: DmsSslModeValue;
     /**
@@ -1735,7 +1739,7 @@ declare namespace DMS {
      */
     SnsTopicArn?: String;
     /**
-     *  The type of AWS DMS resource that generates the events you want to subscribe to.  Valid values: replication-instance | migration-task
+     *  The type of AWS DMS resource that generates the events you want to subscribe to.  Valid values: replication-instance | replication-task
      */
     SourceType?: String;
     /**
@@ -1779,7 +1783,7 @@ declare namespace DMS {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     *  Specifies if the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
+     *  Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
      */
     MultiAZ?: BooleanOptional;
     /**
@@ -1787,7 +1791,7 @@ declare namespace DMS {
      */
     EngineVersion?: String;
     /**
-     * Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible. Constraints: This parameter must be set to true when specifying a value for the EngineVersion parameter that is a different major version than the replication instance's current version.
+     * Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage, and the change is asynchronously applied as soon as possible. This parameter must be set to true when specifying a value for the EngineVersion parameter that is a different major version than the replication instance's current version.
      */
     AllowMajorVersionUpgrade?: Boolean;
     /**
@@ -1811,7 +1815,7 @@ declare namespace DMS {
      */
     ReplicationSubnetGroupIdentifier: String;
     /**
-     * The description of the replication instance subnet group.
+     * A description for the replication instance subnet group.
      */
     ReplicationSubnetGroupDescription?: String;
     /**
@@ -1835,11 +1839,11 @@ declare namespace DMS {
      */
     ReplicationTaskIdentifier?: String;
     /**
-     * The migration type. Valid values: full-load | cdc | full-load-and-cdc
+     * The migration type. Valid values: full-load | cdc | full-load-and-cdc 
      */
     MigrationType?: MigrationTypeValue;
     /**
-     * When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with "file://". When working with the DMS API, provide the JSON as the parameter value. For example, --table-mappings file://mappingfile.json
+     * When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with file://. When working with the DMS API, provide the JSON as the parameter value, for example: --table-mappings file://mappingfile.json 
      */
     TableMappings?: String;
     /**
@@ -1946,9 +1950,13 @@ declare namespace DMS {
      */
     IncludedAllocatedStorage?: Integer;
     /**
-     * List of availability zones for this replication instance.
+     * List of Availability Zones for this replication instance.
      */
     AvailabilityZones?: AvailabilityZonesList;
+    /**
+     * The value returned when the specified EngineVersion of the replication instance is in Beta or test mode. This indicates some features might not work as expected.  AWS DMS supports ReleaseStatus in versions 3.1.4 and later. 
+     */
+    ReleaseStatus?: ReleaseStatusValues;
   }
   export type OrderableReplicationInstanceList = OrderableReplicationInstance[];
   export type ParquetVersionValue = "parquet-1-0"|"parquet-2-0"|string;
@@ -1998,15 +2006,15 @@ declare namespace DMS {
   }
   export interface RedshiftSettings {
     /**
-     * Allows any date format, including invalid formats such as 00/00/00 00:00:00, to be loaded without generating an error. You can choose TRUE or FALSE (default). This parameter applies only to TIMESTAMP and DATE columns. Always use ACCEPTANYDATE with the DATEFORMAT parameter. If the date format for the data does not match the DATEFORMAT specification, Amazon Redshift inserts a NULL value into that field. 
+     * A value that indicates to allow any date format, including invalid formats such as 00/00/00 00:00:00, to be loaded without generating an error. You can choose true or false (the default). This parameter applies only to TIMESTAMP and DATE columns. Always use ACCEPTANYDATE with the DATEFORMAT parameter. If the date format for the data doesn't match the DATEFORMAT specification, Amazon Redshift inserts a NULL value into that field. 
      */
     AcceptAnyDate?: BooleanOptional;
     /**
-     * Code to run after connecting. This should be the code, not a filename.
+     * Code to run after connecting. This parameter should contain the code itself, not the name of a file containing the code.
      */
     AfterConnectScript?: String;
     /**
-     * The location where the CSV files are stored before being uploaded to the S3 bucket. 
+     * The location where the comma-separated value (.csv) files are stored before being uploaded to the S3 bucket. 
      */
     BucketFolder?: String;
     /**
@@ -2014,35 +2022,35 @@ declare namespace DMS {
      */
     BucketName?: String;
     /**
-     * Sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.
+     * A value that sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.
      */
     ConnectionTimeout?: IntegerOptional;
     /**
-     * The name of the Amazon Redshift data warehouse (service) you are working with.
+     * The name of the Amazon Redshift data warehouse (service) that you are working with.
      */
     DatabaseName?: String;
     /**
-     * The date format you are using. Valid values are auto (case-sensitive), your date format string enclosed in quotes, or NULL. If this is left unset (NULL), it defaults to a format of 'YYYY-MM-DD'. Using auto recognizes most strings, even some that are not supported when you use a date format string.  If your date and time values use formats different from each other, set this to auto. 
+     * The date format that you are using. Valid values are auto (case-sensitive), your date format string enclosed in quotes, or NULL. If this parameter is left unset (NULL), it defaults to a format of 'YYYY-MM-DD'. Using auto recognizes most strings, even some that aren't supported when you use a date format string.  If your date and time values use formats different from each other, set this to auto. 
      */
     DateFormat?: String;
     /**
-     * Specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as NULL. A value of TRUE sets empty CHAR and VARCHAR fields to null. The default is FALSE.
+     * A value that specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as NULL. A value of true sets empty CHAR and VARCHAR fields to null. The default is false.
      */
     EmptyAsNull?: BooleanOptional;
     /**
-     * The type of server side encryption you want to use for your data. This is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (default) or SSE_KMS. To use SSE_S3, create an IAM role with a policy that allows "arn:aws:s3:::*" to use the following actions: "s3:PutObject", "s3:ListBucket".
+     * The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS. To use SSE_S3, create an AWS Identity and Access Management (IAM) role with a policy that allows "arn:aws:s3:::*" to use the following actions: "s3:PutObject", "s3:ListBucket" 
      */
     EncryptionMode?: EncryptionModeValue;
     /**
-     * Specifies the number of threads used to upload a single file. This accepts a value between 1 and 64. It defaults to 10.
+     * The number of threads used to upload a single file. This parameter accepts a value from 1 through 64. It defaults to 10.
      */
     FileTransferUploadStreams?: IntegerOptional;
     /**
-     * Sets the amount of time to wait (in milliseconds) before timing out, beginning from when you begin loading.
+     * The amount of time to wait (in milliseconds) before timing out, beginning from when you begin loading.
      */
     LoadTimeout?: IntegerOptional;
     /**
-     * Specifies the maximum size (in KB) of any CSV file used to transfer data to Amazon Redshift. This accepts a value between 1 and 1048576. It defaults to 32768 KB (32 MB).
+     * The maximum size (in KB) of any .csv file used to transfer data to Amazon Redshift. This accepts a value from 1 through 1,048,576. It defaults to 32,768 KB (32 MB).
      */
     MaxFileSize?: IntegerOptional;
     /**
@@ -2054,15 +2062,15 @@ declare namespace DMS {
      */
     Port?: IntegerOptional;
     /**
-     * Removes surrounding quotation marks from strings in the incoming data. All characters within the quotation marks, including delimiters, are retained. Choose TRUE to remove quotation marks. The default is FALSE.
+     * A value that specifies to remove surrounding quotation marks from strings in the incoming data. All characters within the quotation marks, including delimiters, are retained. Choose true to remove quotation marks. The default is false.
      */
     RemoveQuotes?: BooleanOptional;
     /**
-     * A list of chars you want to replace. Use with ReplaceChars.
+     * A list of characters that you want to replace. Use with ReplaceChars.
      */
     ReplaceInvalidChars?: String;
     /**
-     * Replaces invalid characters specified in ReplaceInvalidChars, substituting the specified value instead. The default is "?".
+     * A value that specifies to replaces the invalid characters specified in ReplaceInvalidChars, substituting the specified characters instead. The default is "?".
      */
     ReplaceChars?: String;
     /**
@@ -2070,23 +2078,23 @@ declare namespace DMS {
      */
     ServerName?: String;
     /**
-     * The ARN of the role that has access to the Redshift service.
+     * The Amazon Resource Name (ARN) of the IAM role that has access to the Amazon Redshift service.
      */
     ServiceAccessRoleArn?: String;
     /**
-     * If you are using SSE_KMS for the EncryptionMode, provide the KMS Key ID. The key you use needs an attached policy that enables IAM user permissions and allows use of the key.
+     * The AWS KMS key ID. If you are using SSE_KMS for the EncryptionMode, provide this key ID. The key that you use needs an attached policy that enables IAM user permissions and allows use of the key.
      */
     ServerSideEncryptionKmsKeyId?: String;
     /**
-     * The time format you want to use. Valid values are auto (case-sensitive), 'timeformat_string', 'epochsecs', or 'epochmillisecs'. It defaults to 10. Using auto recognizes most strings, even some that are not supported when you use a time format string.  If your date and time values use formats different from each other, set this to auto. 
+     * The time format that you want to use. Valid values are auto (case-sensitive), 'timeformat_string', 'epochsecs', or 'epochmillisecs'. It defaults to 10. Using auto recognizes most strings, even some that aren't supported when you use a time format string.  If your date and time values use formats different from each other, set this parameter to auto. 
      */
     TimeFormat?: String;
     /**
-     * Removes the trailing white space characters from a VARCHAR string. This parameter applies only to columns with a VARCHAR data type. Choose TRUE to remove unneeded white space. The default is FALSE.
+     * A value that specifies to remove the trailing white space characters from a VARCHAR string. This parameter applies only to columns with a VARCHAR data type. Choose true to remove unneeded white space. The default is false.
      */
     TrimBlanks?: BooleanOptional;
     /**
-     * Truncates data in columns to the appropriate number of characters, so that it fits in the column. Applies only to columns with a VARCHAR or CHAR data type, and rows with a size of 4 MB or less. Choose TRUE to truncate data. The default is FALSE.
+     * A value that specifies to truncate data in columns to the appropriate number of characters, so that the data fits in the column. This parameter applies only to columns with a VARCHAR or CHAR data type, and rows with a size of 4 MB or less. Choose true to truncate data. The default is false.
      */
     TruncateColumns?: BooleanOptional;
     /**
@@ -2094,7 +2102,7 @@ declare namespace DMS {
      */
     Username?: String;
     /**
-     * The size of the write buffer to use in rows. Valid values range from 1 to 2048. Defaults to 1024. Use this setting to tune performance. 
+     * The size of the write buffer to use in rows. Valid values range from 1 through 2,048. The default is 1,024. Use this setting to tune performance. 
      */
     WriteBufferSize?: IntegerOptional;
   }
@@ -2137,6 +2145,7 @@ declare namespace DMS {
     LastFailureMessage?: String;
   }
   export type RefreshSchemasStatusTypeValue = "successful"|"failed"|"refreshing"|string;
+  export type ReleaseStatusValues = "beta"|string;
   export type ReloadOptionValue = "data-reload"|"validate-only"|string;
   export interface ReloadTablesMessage {
     /**
@@ -2160,7 +2169,7 @@ declare namespace DMS {
   }
   export interface RemoveTagsFromResourceMessage {
     /**
-     * &gt;The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be removed from.
+     * An AWS DMS resource from which you want to remove tag(s). The value for this parameter is an Amazon Resource Name (ARN).
      */
     ResourceArn: String;
     /**
@@ -2213,7 +2222,7 @@ declare namespace DMS {
      */
     PendingModifiedValues?: ReplicationPendingModifiedValues;
     /**
-     *  Specifies if the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
+     *  Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
      */
     MultiAZ?: Boolean;
     /**
@@ -2225,7 +2234,7 @@ declare namespace DMS {
      */
     AutoMinorVersionUpgrade?: Boolean;
     /**
-     * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
+     * An AWS KMS key identifier that is used to encrypt the data on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
     /**
@@ -2241,11 +2250,11 @@ declare namespace DMS {
      */
     ReplicationInstancePrivateIpAddress?: String;
     /**
-     * The public IP address of the replication instance.
+     * One or more public IP addresses for the replication instance.
      */
     ReplicationInstancePublicIpAddresses?: ReplicationInstancePublicIpAddressList;
     /**
-     * The private IP address of the replication instance.
+     * One or more private IP addresses for the replication instance.
      */
     ReplicationInstancePrivateIpAddresses?: ReplicationInstancePrivateIpAddressList;
     /**
@@ -2293,7 +2302,7 @@ declare namespace DMS {
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     *  Specifies if the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
+     *  Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
      */
     MultiAZ?: BooleanOptional;
     /**
@@ -2307,7 +2316,7 @@ declare namespace DMS {
      */
     ReplicationSubnetGroupIdentifier?: String;
     /**
-     * The description of the replication subnet group.
+     * A description for the replication subnet group.
      */
     ReplicationSubnetGroupDescription?: String;
     /**
@@ -2374,7 +2383,7 @@ declare namespace DMS {
      */
     ReplicationTaskStartDate?: TStamp;
     /**
-     * Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.  The value can be in date, checkpoint, or LSN/SCN format. Date Example: --cdc-start-position “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93" LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+     * Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want the CDC operation to start. Specifying both values results in an error. The value can be in date, checkpoint, or LSN/SCN format. Date Example: --cdc-start-position “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93" LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
      */
     CdcStartPosition?: String;
     /**
@@ -2454,7 +2463,7 @@ declare namespace DMS {
   }
   export interface ResourcePendingMaintenanceActions {
     /**
-     * The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action applies to. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN) in the DMS documentation.
+     * The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action applies to. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN) for AWS DMS in the DMS documentation.
      */
     ResourceIdentifier?: String;
     /**
@@ -2480,7 +2489,7 @@ declare namespace DMS {
      */
     CsvDelimiter?: String;
     /**
-     *  An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path &lt;bucketFolder&gt;/&lt;schema_name&gt;/&lt;table_name&gt;/. If this parameter is not specified, then the path used is &lt;schema_name&gt;/&lt;table_name&gt;/. 
+     *  An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path  bucketFolder/schema_name/table_name/. If this parameter is not specified, then the path used is  schema_name/table_name/. 
      */
     BucketFolder?: String;
     /**
@@ -2488,49 +2497,57 @@ declare namespace DMS {
      */
     BucketName?: String;
     /**
-     *  An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. Applies to both CSV and PARQUET data formats. 
+     *  An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. Applies to both .csv and .parquet file formats. 
      */
     CompressionType?: CompressionTypeValue;
     /**
-     * The type of server side encryption you want to use for your data. This is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (default) or SSE_KMS. To use SSE_S3, you need an IAM role with permission to allow "arn:aws:s3:::dms-*" to use the following actions:   s3:CreateBucket   s3:ListBucket   s3:DeleteBucket   s3:GetBucketLocation   s3:GetObject   s3:PutObject   s3:DeleteObject   s3:GetObjectVersion   s3:GetBucketPolicy   s3:PutBucketPolicy   s3:DeleteBucketPolicy  
+     * The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS. To use SSE_S3, you need an AWS Identity and Access Management (IAM) role with permission to allow "arn:aws:s3:::dms-*" to use the following actions:    s3:CreateBucket     s3:ListBucket     s3:DeleteBucket     s3:GetBucketLocation     s3:GetObject     s3:PutObject     s3:DeleteObject     s3:GetObjectVersion     s3:GetBucketPolicy     s3:PutBucketPolicy     s3:DeleteBucketPolicy   
      */
     EncryptionMode?: EncryptionModeValue;
     /**
-     * If you are using SSE_KMS for the EncryptionMode, provide the KMS Key ID. The key you use needs an attached policy that enables IAM user permissions and allows use of the key. Here is a CLI example: aws dms create-endpoint --endpoint-identifier &lt;value&gt; --endpoint-type target --engine-name s3 --s3-settings ServiceAccessRoleArn=&lt;value&gt;,BucketFolder=&lt;value&gt;,BucketName=&lt;value&gt;,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=&lt;value&gt;  
+     * If you are using SSE_KMS for the EncryptionMode, provide the AWS KMS key ID. The key that you use needs an attached policy that enables AWS Identity and Access Management (IAM) user permissions and allows use of the key. Here is a CLI example: aws dms create-endpoint --endpoint-identifier value --endpoint-type target --engine-name s3 --s3-settings ServiceAccessRoleArn=value,BucketFolder=value,BucketName=value,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=value  
      */
     ServerSideEncryptionKmsKeyId?: String;
     /**
-     * The format of the data which you want to use for output. You can choose one of the following:     CSV : This is a row-based format with comma-separated values.     PARQUET : Apache Parquet is a columnar storage format that features efficient compression and provides faster query response.   
+     * The format of the data that you want to use for output. You can choose one of the following:     csv : This is a row-based file format with comma-separated values (.csv).     parquet : Apache Parquet (.parquet) is a columnar storage file format that features efficient compression and provides faster query response.   
      */
     DataFormat?: DataFormatValue;
     /**
-     * The type of encoding you are using: RLE_DICTIONARY (default), PLAIN, or PLAIN_DICTIONARY.    RLE_DICTIONARY uses a combination of bit-packing and run-length encoding to store repeated values more efficiently.    PLAIN does not use encoding at all. Values are stored as they are.    PLAIN_DICTIONARY builds a dictionary of the values encountered in a given column. The dictionary is stored in a dictionary page for each column chunk.  
+     * The type of encoding you are using:     RLE_DICTIONARY uses a combination of bit-packing and run-length encoding to store repeated values more efficiently. This is the default.    PLAIN doesn't use encoding at all. Values are stored as they are.    PLAIN_DICTIONARY builds a dictionary of the values encountered in a given column. The dictionary is stored in a dictionary page for each column chunk.  
      */
     EncodingType?: EncodingTypeValue;
     /**
-     * The maximum size of an encoded dictionary page of a column. If the dictionary page exceeds this, this column is stored using an encoding type of PLAIN. Defaults to 1024 * 1024 bytes (1MiB), the maximum size of a dictionary page before it reverts to PLAIN encoding. For PARQUET format only. 
+     * The maximum size of an encoded dictionary page of a column. If the dictionary page exceeds this, this column is stored using an encoding type of PLAIN. This parameter defaults to 1024 * 1024 bytes (1 MiB), the maximum size of a dictionary page before it reverts to PLAIN encoding. This size is used for .parquet file format only. 
      */
     DictPageSizeLimit?: IntegerOptional;
     /**
-     * The number of rows in a row group. A smaller row group size provides faster reads. But as the number of row groups grows, the slower writes become. Defaults to 10,000 (ten thousand) rows. For PARQUET format only.  If you choose a value larger than the maximum, RowGroupLength is set to the max row group length in bytes (64 * 1024 * 1024). 
+     * The number of rows in a row group. A smaller row group size provides faster reads. But as the number of row groups grows, the slower writes become. This parameter defaults to 10,000 rows. This number is used for .parquet file format only.  If you choose a value larger than the maximum, RowGroupLength is set to the max row group length in bytes (64 * 1024 * 1024). 
      */
     RowGroupLength?: IntegerOptional;
     /**
-     * The size of one data page in bytes. Defaults to 1024 * 1024 bytes (1MiB). For PARQUET format only. 
+     * The size of one data page in bytes. This parameter defaults to 1024 * 1024 bytes (1 MiB). This number is used for .parquet file format only. 
      */
     DataPageSize?: IntegerOptional;
     /**
-     * The version of Apache Parquet format you want to use: PARQUET_1_0 (default) or PARQUET_2_0.
+     * The version of the Apache Parquet format that you want to use: parquet_1_0 (the default) or parquet_2_0.
      */
     ParquetVersion?: ParquetVersionValue;
     /**
-     * Enables statistics for Parquet pages and rowGroups. Choose TRUE to enable statistics, choose FALSE to disable. Statistics include NULL, DISTINCT, MAX, and MIN values. Defaults to TRUE. For PARQUET format only.
+     * A value that enables statistics for Parquet pages and row groups. Choose true to enable statistics, false to disable. Statistics include NULL, DISTINCT, MAX, and MIN values. This parameter defaults to true. This value is used for .parquet file format only.
      */
     EnableStatistics?: BooleanOptional;
     /**
-     * Option to write only INSERT operations to the comma-separated value (CSV) output files. By default, the first field in a CSV record contains the letter I (insert), U (update) or D (delete) to indicate whether the row was inserted, updated, or deleted at the source database. If cdcInsertsOnly is set to true, then only INSERTs are recorded in the CSV file, without the I annotation on each line. Valid values are TRUE and FALSE.
+     * A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.  AWS DMS supports IncludeOpForFullLoad in versions 3.1.4 and later.  For full load, records can only be inserted. By default (the false setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If IncludeOpForFullLoad is set to true or y, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.  This setting works together with CdcInsertsOnly for output to .csv files only. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide.. 
+     */
+    IncludeOpForFullLoad?: BooleanOptional;
+    /**
+     * A value that enables a change data capture (CDC) load to write only INSERT operations to .csv or columnar storage (.parquet) output files. By default (the false setting), the first field in a .csv or .parquet record contains the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was inserted, updated, or deleted at the source database for a CDC load to the target. If cdcInsertsOnly is set to true or y, only INSERTs from the source database are migrated to the .csv or .parquet file. For .csv format only, how these INSERTs are recorded depends on the value of IncludeOpForFullLoad. If IncludeOpForFullLoad is set to true, the first field of every CDC record is set to I to indicate the INSERT operation at the source. If IncludeOpForFullLoad is set to false, every CDC record is written without a first field to indicate the INSERT operation at the source. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide..  AWS DMS supports this interaction between CdcInsertsOnly and IncludeOpForFullLoad in versions 3.1.4 and later.  
      */
     CdcInsertsOnly?: BooleanOptional;
+    /**
+     * A value that includes a timestamp column in the Amazon S3 target endpoint data. AWS DMS includes an additional column in the migrated data when you set timestampColumnName to a non-blank value.   AWS DMS supports TimestampColumnName in versions 3.1.4 and later.  For a full load, each row of the timestamp column contains a timestamp for when the data was transferred from the source to the target by DMS. For a CDC load, each row of the timestamp column contains the timestamp for the commit of that row in the source database. The format for the timestamp column value is yyyy-MM-dd HH:mm:ss.SSSSSS. For CDC, the microsecond precision depends on the commit timestamp supported by DMS for the source database. When the AddColumnName setting is set to true, DMS also includes the name for the timestamp column that you set as the nonblank value of timestampColumnName.
+     */
+    TimestampColumnName?: String;
   }
   export type SchemaList = String[];
   export type SecretString = string;
@@ -2608,7 +2625,7 @@ declare namespace DMS {
   export type SubnetList = Subnet[];
   export interface SupportedEndpointType {
     /**
-     * The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
+     * The database engine name. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
     /**
@@ -2616,7 +2633,7 @@ declare namespace DMS {
      */
     SupportsCDC?: Boolean;
     /**
-     * The type of endpoint.
+     * The type of endpoint. Valid values are source and target.
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
