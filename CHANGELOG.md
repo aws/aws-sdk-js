@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.494.0-->
+<!--LATEST=2.495.0-->
 <!--ENTRYINSERT-->
+
+## 2.495.0
+* feature: Comprehend: Amazon Comprehend now supports multiple entities for custom entity recognition
+* feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) introduces support for cluster settings. Cluster settings specify whether CloudWatch Container Insights is enabled or disabled for the cluster.
 
 ## 2.494.0
 * feature: ConfigService: This release adds more granularity to the status of an OrganizationConfigRule by adding a new status. It also adds an exception when organization access is denied.

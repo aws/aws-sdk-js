@@ -627,7 +627,7 @@ declare namespace CodeDeploy {
      */
     action?: InstanceAction;
     /**
-     * The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. The maximum setting is 2880 minutes (2 days).
+     * For an Amazon EC2 deployment, the number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.  For an Amazon ECS deployment, the number of minutes before deleting the original (blue) task set. During an Amazon ECS deployment, CodeDeploy shifts traffic from the original (blue) task set to a replacement (green) task set.   The maximum setting is 2880 minutes (2 days). 
      */
     terminationWaitTimeInMinutes?: Duration;
   }
@@ -1810,7 +1810,7 @@ declare namespace CodeDeploy {
      */
     nextToken?: NextToken;
     /**
-     *  A key used to filter the returned targets. 
+     *  A key used to filter the returned targets. The two valid values are:    TargetStatus - A TargetStatus filter string can be Failed, InProgress, Pending, Ready, Skipped, Succeeded, or Unknown.     ServerInstanceLabel - A ServerInstanceLabel filter string can be Blue or Green.   
      */
     targetFilters?: TargetFilters;
   }

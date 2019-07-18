@@ -794,7 +794,7 @@
           "shape": "InvalidParameterException"
         }
       ],
-      "documentation": "<p>Modifies an account setting. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html\">Account Settings</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>When <code>serviceLongArnFormat</code>, <code>taskLongArnFormat</code>, or <code>containerInstanceLongArnFormat</code> are specified, the ARN and resource ID format of the resource type for a specified IAM user, IAM role, or the root user for an account is changed. If you change the account setting for the root user, the default settings for all of the IAM users and roles for which no individual account setting has been specified are reset. The opt-in and opt-out account setting can be specified for each Amazon ECS resource separately. The ARN and resource ID format of a resource will be defined by the opt-in status of the IAM user or role that created the resource. You must enable this setting to use Amazon ECS features such as resource tagging.</p> <p>When <code>awsvpcTrunking</code> is specified, the elastic network interface (ENI) limit for any new container instances that support the feature is changed. If <code>awsvpcTrunking</code> is enabled, any new container instances that support the feature are launched have the increased ENI limits available to them. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html\">Elastic Network Interface Trunking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+      "documentation": "<p>Modifies an account setting. If you change the account setting for the root user, the default settings for all of the IAM users and roles for which no individual account setting has been specified are reset. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html\">Account Settings</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>When <code>serviceLongArnFormat</code>, <code>taskLongArnFormat</code>, or <code>containerInstanceLongArnFormat</code> are specified, the Amazon Resource Name (ARN) and resource ID format of the resource type for a specified IAM user, IAM role, or the root user for an account is affected. The opt-in and opt-out account setting must be set for each Amazon ECS resource separately. The ARN and resource ID format of a resource will be defined by the opt-in status of the IAM user or role that created the resource. You must enable this setting to use Amazon ECS features such as resource tagging.</p> <p>When <code>awsvpcTrunking</code> is specified, the elastic network interface (ENI) limit for any new container instances that support the feature is changed. If <code>awsvpcTrunking</code> is enabled, any new container instances that support the feature are launched have the increased ENI limits available to them. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html\">Elastic Network Interface Trunking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>When <code>containerInsights</code> is specified, the default setting indicating whether CloudWatch Container Insights is enabled for your clusters is changed. If <code>containerInsights</code> is enabled, any new clusters that are created will have Container Insights enabled unless you disable it during cluster creation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html\">CloudWatch Container Insights</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
     },
     "PutAccountSettingDefault": {
       "name": "PutAccountSettingDefault",
@@ -1514,6 +1514,10 @@
         "tags": {
           "shape": "Tags",
           "documentation": "<p>The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+        },
+        "settings": {
+          "shape": "ClusterSettings",
+          "documentation": "<p>The settings for the cluster. This parameter indicates whether CloudWatch Container Insights is enabled or disabled for a cluster.</p>"
         }
       },
       "documentation": "<p>A regional grouping of one or more container instances on which you can run task requests. Each account receives a default cluster the first time you use the Amazon ECS service, but you may also create other clusters. Clusters may contain more than one instance type simultaneously.</p>"
@@ -1529,6 +1533,32 @@
       "type": "list",
       "member": {
         "shape": "ClusterField"
+      }
+    },
+    "ClusterSetting": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "ClusterSettingName",
+          "documentation": "<p>The name of the cluster setting. The only supported value is <code>containerInsights</code>.</p>"
+        },
+        "value": {
+          "shape": "String",
+          "documentation": "<p>The value to set for the cluster setting. The supported values are <code>enabled</code> and <code>disabled</code>. If <code>enabled</code> is specified, CloudWatch Container Insights will be enabled for the cluster, otherwise it will be disabled unless the <code>containerInsights</code> account setting is enabled. If a cluster value is specified, it will override the <code>containerInsights</code> value set with <a>PutAccountSetting</a> or <a>PutAccountSettingDefault</a>.</p>"
+        }
+      },
+      "documentation": "<p>The settings to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster.</p>"
+    },
+    "ClusterSettingName": {
+      "type": "string",
+      "enum": [
+        "containerInsights"
+      ]
+    },
+    "ClusterSettings": {
+      "type": "list",
+      "member": {
+        "shape": "ClusterSetting"
       }
     },
     "Clusters": {
@@ -1994,6 +2024,10 @@
         "tags": {
           "shape": "Tags",
           "documentation": "<p>The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+        },
+        "settings": {
+          "shape": "ClusterSettings",
+          "documentation": "<p>The setting to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the <code>containerInsights</code> value set with <a>PutAccountSetting</a> or <a>PutAccountSettingDefault</a>.</p>"
         }
       }
     },
@@ -3583,7 +3617,7 @@
       "members": {
         "name": {
           "shape": "SettingName",
-          "documentation": "<p>The resource name for which to modify the account setting. If <code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is affected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If <code>awsvpcTrunking</code> is specified, the ENI limit for your Amazon ECS container instances is affected.</p>"
+          "documentation": "<p>The resource name for which to modify the account setting. If <code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is affected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If <code>awsvpcTrunking</code> is specified, the ENI limit for your Amazon ECS container instances is affected. If <code>containerInsights</code> is specified, the default setting for CloudWatch Container Insights for your clusters is affected.</p>"
         },
         "value": {
           "shape": "String",
@@ -3608,7 +3642,7 @@
       "members": {
         "name": {
           "shape": "SettingName",
-          "documentation": "<p>The resource name for which to modify the account setting. If <code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is affected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If <code>awsvpcTrunking</code> is specified, the ENI limit for your Amazon ECS container instances is affected.</p>"
+          "documentation": "<p>The Amazon ECS resource name for which to modify the account setting. If <code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is affected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If <code>awsvpcTrunking</code> is specified, the elastic network interface (ENI) limit for your Amazon ECS container instances is affected. If <code>containerInsights</code> is specified, the default setting for CloudWatch Container Insights for your clusters is affected.</p>"
         },
         "value": {
           "shape": "String",
@@ -4194,11 +4228,11 @@
       "members": {
         "name": {
           "shape": "SettingName",
-          "documentation": "<p>The account resource name.</p>"
+          "documentation": "<p>The Amazon ECS resource name.</p>"
         },
         "value": {
           "shape": "String",
-          "documentation": "<p>The current account setting for the resource name. If <code>enabled</code>, the resource receives the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>disabled</code>, the resource receives the old Amazon Resource Name (ARN) and resource identifier (ID) format.</p>"
+          "documentation": "<p>Whether the account setting is enabled or disabled for the specified resource.</p>"
         },
         "principalArn": {
           "shape": "String",
@@ -4213,7 +4247,8 @@
         "serviceLongArnFormat",
         "taskLongArnFormat",
         "containerInstanceLongArnFormat",
-        "awsvpcTrunking"
+        "awsvpcTrunking",
+        "containerInsights"
       ]
     },
     "Settings": {

@@ -416,7 +416,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -446,7 +446,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -480,7 +480,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -510,7 +510,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: SyntaxLanguageCode;
   }
@@ -604,7 +604,7 @@ declare namespace Comprehend {
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -792,7 +792,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -808,7 +808,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -824,7 +824,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -844,7 +844,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language code of the input documents. You can specify English ("en") or Spanish ("es").
+     * The language code of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").
      */
     LanguageCode: SyntaxLanguageCode;
   }
@@ -1233,7 +1233,7 @@ declare namespace Comprehend {
   }
   export interface EntityRecognizerInputDataConfig {
     /**
-     * The entity types in the input data for an entity recognizer.
+     * The entity types in the input data for an entity recognizer. A maximum of 12 entity types can be used at one time to train an entity recognizer.
      */
     EntityTypes: EntityTypesList;
     /**
@@ -1259,7 +1259,7 @@ declare namespace Comprehend {
      */
     NumberOfTestDocuments?: Integer;
     /**
-     *  Detailed information about the accuracy of an entity recognizer.
+     * Detailed information about the accuracy of an entity recognizer.
      */
     EvaluationMetrics?: EntityRecognizerEvaluationMetrics;
     /**
@@ -1273,6 +1273,14 @@ declare namespace Comprehend {
      * Type of entity from the list of entity types in the metadata of an entity recognizer. 
      */
     Type?: AnyLengthString;
+    /**
+     * Detailed information about the accuracy of the entity recognizer for a specific item on the list of entity types. 
+     */
+    EvaluationMetrics?: EntityTypesEvaluationMetrics;
+    /**
+     * indicates the number of times the given entity name was seen in the training data. 
+     */
+    NumberOfTrainMentions?: Integer;
   }
   export interface EntityRecognizerProperties {
     /**
@@ -1331,6 +1339,20 @@ declare namespace Comprehend {
   export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
   export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
   export type EntityTypeName = string;
+  export interface EntityTypesEvaluationMetrics {
+    /**
+     * A measure of the usefulness of the recognizer results for a specific entity type in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. 
+     */
+    Precision?: Double;
+    /**
+     * A measure of how complete the recognizer results are for a specific entity type in the test data. High recall means that the recognizer returned most of the relevant results.
+     */
+    Recall?: Double;
+    /**
+     * A measure of how accurate the recognizer results are for for a specific entity type in the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     */
+    F1Score?: Double;
+  }
   export type EntityTypesList = EntityTypesListItem[];
   export interface EntityTypesListItem {
     /**
@@ -1926,7 +1948,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -1970,7 +1992,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
