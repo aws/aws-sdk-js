@@ -44,11 +44,11 @@ declare class IoTEvents extends Service {
    */
   deleteInput(callback?: (err: AWSError, data: IoTEvents.Types.DeleteInputResponse) => void): Request<IoTEvents.Types.DeleteInputResponse, AWSError>;
   /**
-   * Describes a detector model. If the version parameter is not specified, information about the latest version is returned.
+   * Describes a detector model. If the "version" parameter is not specified, information about the latest version is returned.
    */
   describeDetectorModel(params: IoTEvents.Types.DescribeDetectorModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelResponse, AWSError>;
   /**
-   * Describes a detector model. If the version parameter is not specified, information about the latest version is returned.
+   * Describes a detector model. If the "version" parameter is not specified, information about the latest version is returned.
    */
   describeDetectorModel(callback?: (err: AWSError, data: IoTEvents.Types.DescribeDetectorModelResponse) => void): Request<IoTEvents.Types.DescribeDetectorModelResponse, AWSError>;
   /**
@@ -100,19 +100,19 @@ declare class IoTEvents extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: IoTEvents.Types.ListTagsForResourceResponse) => void): Request<IoTEvents.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Sets or updates the AWS IoT Events logging options. Note that if you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to five minutes for that change to take effect.
+   * Sets or updates the AWS IoT Events logging options. If you update the value of any "loggingOptions" field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the "roleArn" field (for example, to correct an invalid policy) it takes up to five minutes for that change to take effect.
    */
   putLoggingOptions(params: IoTEvents.Types.PutLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets or updates the AWS IoT Events logging options. Note that if you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to five minutes for that change to take effect.
+   * Sets or updates the AWS IoT Events logging options. If you update the value of any "loggingOptions" field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the "roleArn" field (for example, to correct an invalid policy) it takes up to five minutes for that change to take effect.
    */
   putLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Add to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
    */
   tagResource(params: IoTEvents.Types.TagResourceRequest, callback?: (err: AWSError, data: IoTEvents.Types.TagResourceResponse) => void): Request<IoTEvents.Types.TagResourceResponse, AWSError>;
   /**
-   * Add to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
    */
   tagResource(callback?: (err: AWSError, data: IoTEvents.Types.TagResourceResponse) => void): Request<IoTEvents.Types.TagResourceResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class IoTEvents extends Service {
    */
   untagResource(callback?: (err: AWSError, data: IoTEvents.Types.UntagResourceResponse) => void): Request<IoTEvents.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates a detector model. Detectors (instances) spawned by the previous version will be deleted and re-created as new inputs arrive.
+   * Updates a detector model. Detectors (instances) spawned by the previous version are deleted and then re-created as new inputs arrive.
    */
   updateDetectorModel(params: IoTEvents.Types.UpdateDetectorModelRequest, callback?: (err: AWSError, data: IoTEvents.Types.UpdateDetectorModelResponse) => void): Request<IoTEvents.Types.UpdateDetectorModelResponse, AWSError>;
   /**
-   * Updates a detector model. Detectors (instances) spawned by the previous version will be deleted and re-created as new inputs arrive.
+   * Updates a detector model. Detectors (instances) spawned by the previous version are deleted and then re-created as new inputs arrive.
    */
   updateDetectorModel(callback?: (err: AWSError, data: IoTEvents.Types.UpdateDetectorModelResponse) => void): Request<IoTEvents.Types.UpdateDetectorModelResponse, AWSError>;
   /**
@@ -151,7 +151,7 @@ declare namespace IoTEvents {
      */
     sns?: SNSTopicPublishAction;
     /**
-     * Publishes an MQTT message with the given topic to the AWS IoT Message Broker.
+     * Publishes an MQTT message with the given topic to the AWS IoT message broker.
      */
     iotTopicPublish?: IotTopicPublishAction;
     /**
@@ -166,12 +166,28 @@ declare namespace IoTEvents {
      * Information needed to reset the timer.
      */
     resetTimer?: ResetTimerAction;
+    /**
+     * Calls a Lambda function, passing in information about the detector model instance and the event which triggered the action.
+     */
+    lambda?: LambdaAction;
+    /**
+     * Sends an IoT Events input, passing in information about the detector model instance and the event which triggered the action.
+     */
+    iotEvents?: IotEventsAction;
+    /**
+     * Sends information about the detector model instance and the event which triggered the action to an AWS SQS queue.
+     */
+    sqs?: SqsAction;
+    /**
+     * Sends information about the detector model instance and the event which triggered the action to a Kinesis Data Firehose stream.
+     */
+    firehose?: FirehoseAction;
   }
   export type Actions = Action[];
   export type AmazonResourceName = string;
   export interface Attribute {
     /**
-     * An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to the AWS IoT Events system (BatchPutMessage). Each such message contains a JSON payload, and the attribute (and its paired value) specified here are available for use in the condition expressions used by detectors.  Syntax: &lt;field-name&gt;.&lt;field-name&gt;... 
+     * An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to the AWS IoT Events system (BatchPutMessage). Each such message contains a JSON payload, and the attribute (and its paired value) specified here are available for use in the "condition" expressions used by detectors.  Syntax: &lt;field-name&gt;.&lt;field-name&gt;... 
      */
     jsonPath: AttributeJsonPath;
   }
@@ -206,7 +222,7 @@ declare namespace IoTEvents {
      */
     roleArn: AmazonResourceName;
     /**
-     * Metadata which can be used to manage the detector model.
+     * Metadata that can be used to manage the detector model.
      */
     tags?: Tags;
   }
@@ -230,7 +246,7 @@ declare namespace IoTEvents {
      */
     inputDefinition: InputDefinition;
     /**
-     * Metadata which can be used to manage the input.
+     * Metadata that can be used to manage the input.
      */
     tags?: Tags;
   }
@@ -250,12 +266,13 @@ declare namespace IoTEvents {
   }
   export interface DeleteInputRequest {
     /**
-     * The name of the input to be deleted.
+     * The name of the input to delete.
      */
     inputName: InputName;
   }
   export interface DeleteInputResponse {
   }
+  export type DeliveryStreamName = string;
   export interface DescribeDetectorModelRequest {
     /**
      * The name of the detector model.
@@ -418,7 +435,7 @@ declare namespace IoTEvents {
      */
     eventName: EventName;
     /**
-     * [Optional] The Boolean expression that when TRUE causes the actions to be performed. If not present, the actions are performed (=TRUE); if the expression result is not a Boolean value the actions are NOT performed (=FALSE).
+     * [Optional] The Boolean expression that when TRUE causes the "actions" to be performed. If not present, the actions are performed (=TRUE); if the expression result is not a Boolean value, the actions are NOT performed (=FALSE).
      */
     condition?: Condition;
     /**
@@ -428,6 +445,17 @@ declare namespace IoTEvents {
   }
   export type EventName = string;
   export type Events = Event[];
+  export interface FirehoseAction {
+    /**
+     * The name of the Kinesis Data Firehose stream where the data is written.
+     */
+    deliveryStreamName: DeliveryStreamName;
+    /**
+     * A character separator that is used to separate records written to the Kinesis Data Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
+     */
+    separator?: FirehoseSeparator;
+  }
+  export type FirehoseSeparator = string;
   export interface Input {
     /**
      * Information about the configuration of an input.
@@ -467,7 +495,7 @@ declare namespace IoTEvents {
   }
   export interface InputDefinition {
     /**
-     * The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using BatchPutMessage. Each such message contains a JSON payload, and those attributes (and their paired values) specified here is available for use in the condition expressions used by detectors that monitor this input. 
+     * The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using BatchPutMessage. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the "condition" expressions used by detectors that monitor this input. 
      */
     attributes: Attributes;
   }
@@ -501,6 +529,12 @@ declare namespace IoTEvents {
      */
     status?: InputStatus;
   }
+  export interface IotEventsAction {
+    /**
+     * The name of the AWS IoT Events input where the data is sent.
+     */
+    inputName: InputName;
+  }
   export interface IotTopicPublishAction {
     /**
      * The MQTT topic of the message.
@@ -508,6 +542,12 @@ declare namespace IoTEvents {
     mqttTopic: MQTTTopic;
   }
   export type KeyValue = string;
+  export interface LambdaAction {
+    /**
+     * The ARN of the Lambda function which is executed.
+     */
+    functionArn: AmazonResourceName;
+  }
   export interface ListDetectorModelVersionsRequest {
     /**
      * The name of the detector model whose versions are returned.
@@ -592,7 +632,7 @@ declare namespace IoTEvents {
      */
     roleArn: AmazonResourceName;
     /**
-     * The logging level. Currently, only "ERROR" is supported.
+     * The logging level.
      */
     level: LoggingLevel;
     /**
@@ -609,23 +649,23 @@ declare namespace IoTEvents {
   export type NextToken = string;
   export interface OnEnterLifecycle {
     /**
-     * Specifies the actions that are performed when the state is entered and the condition is TRUE.
+     * Specifies the actions that are performed when the state is entered and the "condition" is TRUE.
      */
     events?: Events;
   }
   export interface OnExitLifecycle {
     /**
-     * Specifies the actions that are performed when the state is exited and the condition is TRUE.
+     * Specifies the "actions" that are performed when the state is exited and the "condition" is TRUE.
      */
     events?: Events;
   }
   export interface OnInputLifecycle {
     /**
-     * Specifies the actions performed when the condition evaluates to TRUE.
+     * Specifies the actions performed when the "condition" evaluates to TRUE.
      */
     events?: Events;
     /**
-     * Specifies the actions performed and the next state entered when a condition evaluates to TRUE.
+     * Specifies the actions performed, and the next state entered, when a "condition" evaluates to TRUE.
      */
     transitionEvents?: TransitionEvents;
   }
@@ -635,6 +675,7 @@ declare namespace IoTEvents {
      */
     loggingOptions: LoggingOptions;
   }
+  export type QueueUrl = string;
   export interface ResetTimerAction {
     /**
      * The name of the timer to reset.
@@ -643,7 +684,7 @@ declare namespace IoTEvents {
   }
   export interface SNSTopicPublishAction {
     /**
-     * The ARN of the Amazon SNS target to which the message is sent.
+     * The ARN of the Amazon SNS target where the message is sent.
      */
     targetArn: AmazonResourceName;
   }
@@ -668,21 +709,31 @@ declare namespace IoTEvents {
      */
     value: VariableValue;
   }
+  export interface SqsAction {
+    /**
+     * The URL of the SQS queue where the data is written.
+     */
+    queueUrl: QueueUrl;
+    /**
+     * Set this to TRUE if you want the data to be Base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.
+     */
+    useBase64?: UseBase64;
+  }
   export interface State {
     /**
      * The name of the state.
      */
     stateName: StateName;
     /**
-     * When an input is received and the condition is TRUE, perform the specified actions.
+     * When an input is received and the "condition" is TRUE, perform the specified "actions".
      */
     onInput?: OnInputLifecycle;
     /**
-     * When entering this state, perform these actions if the condition is TRUE.
+     * When entering this state, perform these "actions" if the "condition" is TRUE.
      */
     onEnter?: OnEnterLifecycle;
     /**
-     * When exiting this state, perform these actions if the specified condition is TRUE.
+     * When exiting this state, perform these "actions" if the specified "condition" is TRUE.
      */
     onExit?: OnExitLifecycle;
   }
@@ -722,7 +773,7 @@ declare namespace IoTEvents {
      */
     eventName: EventName;
     /**
-     * [Required] A Boolean expression that when TRUE causes the actions to be performed and the nextState to be entered.
+     * [Required] A Boolean expression that when TRUE causes the actions to be performed and the "nextState" to be entered.
      */
     condition: Condition;
     /**
@@ -749,7 +800,7 @@ declare namespace IoTEvents {
   }
   export interface UpdateDetectorModelRequest {
     /**
-     * The name of the detector model to be updated.
+     * The name of the detector model that is updated.
      */
     detectorModelName: DetectorModelName;
     /**
@@ -791,6 +842,7 @@ declare namespace IoTEvents {
      */
     inputConfiguration?: InputConfiguration;
   }
+  export type UseBase64 = boolean;
   export type VariableName = string;
   export type VariableValue = string;
   /**

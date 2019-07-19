@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.495.0-->
+<!--LATEST=2.496.0-->
 <!--ENTRYINSERT-->
+
+## 2.496.0
+* feature: IoTEvents: Adds support for IoT Events, Lambda, SQS and Kinesis Firehose actions.
 
 ## 2.495.0
 * feature: Comprehend: Amazon Comprehend now supports multiple entities for custom entity recognition

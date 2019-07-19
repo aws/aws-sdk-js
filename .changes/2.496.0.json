@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "IoTEvents",
+        "description": "Adds support for IoT Events, Lambda, SQS and Kinesis Firehose actions."
+    }
+]
