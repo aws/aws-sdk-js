@@ -367,6 +367,10 @@ declare namespace MQ {
      */
     DeploymentMode?: DeploymentMode;
     /**
+     * Encryption options for the broker.
+     */
+    EncryptionOptions?: EncryptionOptions;
+    /**
      * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
      */
     EngineType?: EngineType;
@@ -631,6 +635,10 @@ declare namespace MQ {
      */
     DeploymentMode?: DeploymentMode;
     /**
+     * Encryption options for the broker.
+     */
+    EncryptionOptions?: EncryptionOptions;
+    /**
      * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
      */
     EngineType?: EngineType;
@@ -778,6 +786,16 @@ declare namespace MQ {
      * Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
     Username?: __string;
+  }
+  export interface EncryptionOptions {
+    /**
+     * The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
+     */
+    KmsKeyId?: __string;
+    /**
+     * Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+     */
+    UseAwsOwnedKey: __boolean;
   }
   export type EngineType = "ACTIVEMQ"|string;
   export interface EngineVersion {

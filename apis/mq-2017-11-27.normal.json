@@ -1030,6 +1030,11 @@
           "locationName": "deploymentMode",
           "documentation": "Required. The deployment mode of the broker."
         },
+        "EncryptionOptions": {
+          "shape": "EncryptionOptions",
+          "locationName": "encryptionOptions",
+          "documentation": "Encryption options for the broker."
+        },
         "EngineType": {
           "shape": "EngineType",
           "locationName": "engineType",
@@ -1459,6 +1464,11 @@
           "locationName": "deploymentMode",
           "documentation": "Required. The deployment mode of the broker."
         },
+        "EncryptionOptions": {
+          "shape": "EncryptionOptions",
+          "locationName": "encryptionOptions",
+          "documentation": "Encryption options for the broker."
+        },
         "EngineType": {
           "shape": "EngineType",
           "locationName": "engineType",
@@ -1676,6 +1686,25 @@
           "documentation": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
         }
       }
+    },
+    "EncryptionOptions": {
+      "type": "structure",
+      "members": {
+        "KmsKeyId": {
+          "shape": "__string",
+          "locationName": "kmsKeyId",
+          "documentation": "The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data."
+        },
+        "UseAwsOwnedKey": {
+          "shape": "__boolean",
+          "locationName": "useAwsOwnedKey",
+          "documentation": "Enables the use of an AWS owned CMK using AWS Key Management Service (KMS)."
+        }
+      },
+      "documentation": "Encryption options for the broker.",
+      "required": [
+        "UseAwsOwnedKey"
+      ]
     },
     "EngineType": {
       "type": "string",
@@ -2360,6 +2389,16 @@
     "__timestampIso8601": {
       "type": "timestamp",
       "timestampFormat": "iso8601"
+    }
+  },
+  "authorizers": {
+    "authorization_strategy": {
+      "name": "authorization_strategy",
+      "type": "provided",
+      "placement": {
+        "location": "header",
+        "name": "Authorization"
+      }
     }
   },
   "documentation": "Amazon MQ is a managed message broker service for Apache ActiveMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols."

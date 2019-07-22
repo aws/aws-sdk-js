@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.496.0-->
+<!--LATEST=2.497.0-->
 <!--ENTRYINSERT-->
+
+## 2.497.0
+* feature: MQ: Adds support for AWS Key Management Service (KMS) to offer server-side encryption. You can now select your own customer managed CMK, or use an AWS managed CMK in your KMS  account.
+* feature: Shield: Adding new VectorType (HTTP_Reflection) and related top contributor types to describe WordPress Pingback DDoS attacks.
 
 ## 2.496.0
 * feature: IoTEvents: Adds support for IoT Events, Lambda, SQS and Kinesis Firehose actions.
