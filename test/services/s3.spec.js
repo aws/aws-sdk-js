@@ -758,9 +758,13 @@ describe('AWS.S3', function() {
       });
     });
 
-    describe('adding Expect: 100-continue', function() {
+    describe('with s3AddExpect100ContinueHeaders set to true', function() {
       if (AWS.util.isNode()) {
         it('does not add expect header to payloads less than 1MB', function() {
+          s3 = new AWS.S3({
+            s3AddExpect100ContinueHeaders: true,
+            signatureVersion: 'v4'
+          });
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
@@ -770,6 +774,10 @@ describe('AWS.S3', function() {
         });
 
         it('adds expect header to payloads greater than 1MB', function() {
+          s3 = new AWS.S3({
+            s3AddExpect100ContinueHeaders: true,
+            signatureVersion: 'v4'
+          });
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
@@ -785,6 +793,10 @@ describe('AWS.S3', function() {
         });
 
         it('does not add expect header in the browser', function() {
+          s3 = new AWS.S3({
+            s3AddExpect100ContinueHeaders: true,
+            signatureVersion: 'v4'
+          });
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
@@ -794,7 +806,54 @@ describe('AWS.S3', function() {
         });
       }
     });
+    describe('with s3AddExpect100ContinueHeaders set to false', function() {
+      if (AWS.util.isNode()) {
+        it('does not add expect header to payloads less than 1MB', function() {
+          s3 = new AWS.S3({
+            s3AddExpect100ContinueHeaders: false,
+            signatureVersion: 'v4'
+          });
+          var req = build('putObject', {
+            Bucket: 'bucket',
+            Key: 'key',
+            Body: new Buffer(1024 * 1024 - 1)
+          });
+          expect(req.headers['Expect']).not.to.exist;
+        });
 
+        it('does not add expect header to payloads greater than 1MB', function() {
+          s3 = new AWS.S3({
+            s3AddExpect100ContinueHeaders: false,
+            signatureVersion: 'v4'
+          });
+          var req = build('putObject', {
+            Bucket: 'bucket',
+            Key: 'key',
+            Body: new Buffer(1024 * 1024 + 1)
+          });
+          expect(req.headers['Expect']).not.to.exist;
+        });
+      }
+
+      if (AWS.util.isBrowser()) {
+        beforeEach(function() {
+          helpers.spyOn(AWS.util, 'isBrowser').andReturn(true);
+        });
+
+        it('does not add expect header in the browser', function() {
+          s3 = new AWS.S3({
+            s3AddExpect100ContinueHeaders: false,
+            signatureVersion: 'v4'
+          });
+          var req = build('putObject', {
+              Bucket: 'bucket',
+              Key: 'key',
+              Body: new Buffer(1024 * 1024 + 1)
+          });
+          expect(req.headers['Expect']).not.to.exist;
+        });
+      }
+    });
     describe('with s3DisableBodySigning set to true', function() {
       it('will disable body signing when using signature version 4 and the endpoint uses https', function() {
         s3 = new AWS.S3({
