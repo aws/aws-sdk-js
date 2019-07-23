@@ -71,6 +71,7 @@ AWS.config.update({
     },
     s3BucketEndpoint: false,
     s3DisableBodySigning: false,
+    s3AddExpect100ContinueHeaders: true,
     s3ForcePathStyle: true,
     signatureCache: false,
     signatureVersion: 'v4',
