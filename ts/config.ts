@@ -93,7 +93,7 @@ var config = AWS.config.loadFromPath('/to/path');
 
 // test update allowing unknown keys
 AWS.config.update({
-   fake: 'fake' 
+   fake: 'fake'
 }, true);
 
 //Test httpOption interface
