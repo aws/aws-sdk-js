@@ -527,7 +527,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Delete a list of parameters. This API is used to delete parameters by using the Amazon EC2 console.</p>"
+      "documentation": "<p>Delete a list of parameters.</p>"
     },
     "DeletePatchBaseline": {
       "name": "DeletePatchBaseline",
@@ -687,7 +687,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Details about the activation, including: the date and time the activation was created, the expiration date, the IAM role assigned to the instances in the activation, and the number of instances activated by this registration.</p>"
+      "documentation": "<p>Describes details about the activation, such as the date and time the activation was created, its expiration date, the IAM role assigned to the instances in the activation, and the number of instances registered by using this activation.</p>"
     },
     "DescribeAssociation": {
       "name": "DescribeAssociation",
@@ -849,7 +849,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Lists all patches that could possibly be included in a patch baseline.</p>"
+      "documentation": "<p>Lists all patches eligible to be included in a patch baseline.</p>"
     },
     "DescribeDocument": {
       "name": "DescribeDocument",
@@ -1676,7 +1676,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Retrieves details about a specific task run as part of a maintenance window execution.</p>"
+      "documentation": "<p>Retrieves details about a specific a maintenance window execution.</p>"
     },
     "GetMaintenanceWindowExecutionTask": {
       "name": "GetMaintenanceWindowExecutionTask",
@@ -1720,7 +1720,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Retrieves a task invocation. A task invocation is a specific task running on a specific target. maintenance windows report status for all invocations. </p>"
+      "documentation": "<p>Retrieves information about a specific task running on a specific target.</p>"
     },
     "GetMaintenanceWindowTask": {
       "name": "GetMaintenanceWindowTask",
@@ -2528,7 +2528,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Defines the default patch baseline.</p>"
+      "documentation": "<p>Defines the default patch baseline for the relevant operating system.</p> <p>To reset the AWS predefined patch baseline as the default, specify the full patch baseline ARN as the baseline ID value. For example, for CentOS, specify <code>arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed</code> instead of <code>pb-0574b43a65ea646ed</code>.</p>"
     },
     "RegisterPatchBaselineForPatchGroup": {
       "name": "RegisterPatchBaselineForPatchGroup",
@@ -2646,7 +2646,7 @@
           "shape": "TooManyUpdates"
         }
       ],
-      "documentation": "<p>Removes all tags from the specified resource.</p>"
+      "documentation": "<p>Removes tag keys from the specified resource.</p>"
     },
     "ResetServiceSetting": {
       "name": "ResetServiceSetting",
@@ -3033,7 +3033,7 @@
           "shape": "InvalidDocumentOperation"
         }
       ],
-      "documentation": "<p>The document you want to update.</p>"
+      "documentation": "<p>Updates one or more values for an SSM document.</p>"
     },
     "UpdateDocumentDefaultVersion": {
       "name": "UpdateDocumentDefaultVersion",
@@ -3105,7 +3105,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Modifies the target of an existing maintenance window. You can't change the target type, but you can change the following:</p> <p>The target from being an ID target to a Tag target, or a Tag target to an ID target.</p> <p>IDs for an ID target.</p> <p>Tags for a Tag target.</p> <p>Owner.</p> <p>Name.</p> <p>Description.</p> <p>If a parameter is null, then the corresponding field is not modified.</p>"
+      "documentation": "<p>Modifies the target of an existing maintenance window. You can change the following:</p> <ul> <li> <p>Name</p> </li> <li> <p>Description</p> </li> <li> <p>Owner</p> </li> <li> <p>IDs for an ID target</p> </li> <li> <p>Tags for a Tag target</p> </li> <li> <p>From any supported tag type to another. The three supported tag types are ID target, Tag target, and resource group. For more information, see <a>Target</a>.</p> </li> </ul> <note> <p>If a parameter is null, then the corresponding field is not modified.</p> </note>"
     },
     "UpdateMaintenanceWindowTask": {
       "name": "UpdateMaintenanceWindowTask",
@@ -3149,7 +3149,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Assigns or changes an Amazon Identity and Access Management (IAM) role to the managed instance.</p>"
+      "documentation": "<p>Assigns or changes an Amazon Identity and Access Management (IAM) role for the managed instance.</p>"
     },
     "UpdateOpsItem": {
       "name": "UpdateOpsItem",
@@ -5584,11 +5584,11 @@
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
-          "documentation": "<p>(Optional) The version of the document that you want to delete. If not provided, all versions of the document are deleted.</p>"
+          "documentation": "<p>The version of the document that you want to delete. If not provided, all versions of the document are deleted.</p>"
         },
         "VersionName": {
           "shape": "DocumentVersionName",
-          "documentation": "<p>(Optional) The version name of the document that you want to delete. If not provided, all versions of the document are deleted.</p>"
+          "documentation": "<p>The version name of the document that you want to delete. If not provided, all versions of the document are deleted.</p>"
         }
       }
     },
@@ -7965,7 +7965,7 @@
         },
         "TaskType": {
           "shape": "MaintenanceWindowTaskType",
-          "documentation": "<p>Retrieves the task type for a maintenance window. Task types include the following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.</p>"
+          "documentation": "<p>Retrieves the task type for a maintenance window. Task types include the following: LAMBDA, STEP_FUNCTIONS, AUTOMATION, RUN_COMMAND.</p>"
         },
         "Parameters": {
           "shape": "MaintenanceWindowExecutionTaskInvocationParameters",
@@ -8178,7 +8178,7 @@
         },
         "TaskArn": {
           "shape": "MaintenanceWindowTaskArn",
-          "documentation": "<p>The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value is the state machine ARN.</p>"
+          "documentation": "<p>The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTIONS tasks, the value is the state machine ARN.</p>"
         },
         "ServiceRoleArn": {
           "shape": "ServiceRole",
@@ -9273,7 +9273,7 @@
       "member": {
         "shape": "InventoryGroup"
       },
-      "max": 10,
+      "max": 15,
       "min": 1
     },
     "InventoryGroupName": {
@@ -10426,7 +10426,8 @@
     "MaintenanceWindowResourceType": {
       "type": "string",
       "enum": [
-        "INSTANCE"
+        "INSTANCE",
+        "RESOURCE_GROUP"
       ]
     },
     "MaintenanceWindowRunCommandParameters": {
@@ -10496,14 +10497,14 @@
       "members": {
         "Input": {
           "shape": "MaintenanceWindowStepFunctionsInput",
-          "documentation": "<p>The inputs for the STEP_FUNCTION task.</p>"
+          "documentation": "<p>The inputs for the STEP_FUNCTIONS task.</p>"
         },
         "Name": {
           "shape": "MaintenanceWindowStepFunctionsName",
-          "documentation": "<p>The name of the STEP_FUNCTION task.</p>"
+          "documentation": "<p>The name of the STEP_FUNCTIONS task.</p>"
         }
       },
-      "documentation": "<p>The parameters for a STEP_FUNCTION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Step Functions tasks, Systems Manager ignores any values specified for <code>TaskParameters</code> and <code>LoggingInfo</code>.</p> </note>"
+      "documentation": "<p>The parameters for a STEP_FUNCTIONS task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Step Functions tasks, Systems Manager ignores any values specified for <code>TaskParameters</code> and <code>LoggingInfo</code>.</p> </note>"
     },
     "MaintenanceWindowStringDateTime": {
       "type": "string"
@@ -10567,11 +10568,11 @@
         },
         "TaskArn": {
           "shape": "MaintenanceWindowTaskArn",
-          "documentation": "<p>The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, <code>TaskArn</code> is the Systems Manager document name or ARN. For LAMBDA tasks, it's the function name or ARN. For STEP_FUNCTION tasks, it's the state machine ARN.</p>"
+          "documentation": "<p>The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, <code>TaskArn</code> is the Systems Manager document name or ARN. For LAMBDA tasks, it's the function name or ARN. For STEP_FUNCTIONS tasks, it's the state machine ARN.</p>"
         },
         "Type": {
           "shape": "MaintenanceWindowTaskType",
-          "documentation": "<p>The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or STEP_FUNCTION.</p>"
+          "documentation": "<p>The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or STEP_FUNCTIONS.</p>"
         },
         "Targets": {
           "shape": "Targets",
@@ -10636,7 +10637,7 @@
         },
         "StepFunctions": {
           "shape": "MaintenanceWindowStepFunctionsParameters",
-          "documentation": "<p>The parameters for a STEP_FUNCTION task type.</p>"
+          "documentation": "<p>The parameters for a STEP_FUNCTIONS task type.</p>"
         },
         "Lambda": {
           "shape": "MaintenanceWindowLambdaParameters",
@@ -12539,7 +12540,7 @@
         },
         "Targets": {
           "shape": "Targets",
-          "documentation": "<p>The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs.</p> <p>You can specify targets using either instance IDs or tags that have been applied to instances.</p> <p> <b>Example 1</b>: Specify instance IDs</p> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> <p> <b>Example 2</b>: Use tag key-pairs applied to instances</p> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> <p> <b>Example 3</b>: Use tag-keys applied to instances</p> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> <p>For more information about these examples formats, including the best use case for each one, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html\">Examples: Register Targets with a Maintenance Window</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs.</p> <p>You can specify targets using instance IDs, resource group names, or tags that have been applied to instances.</p> <p> <b>Example 1</b>: Specify instance IDs</p> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> <p> <b>Example 2</b>: Use tag key-pairs applied to instances</p> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> <p> <b>Example 3</b>: Use tag-keys applied to instances</p> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> <p> <b>Example 4</b>: Use resource group names</p> <p> <code>Key=resource-groups:Name,Values=<i>resource-group-name</i> </code> </p> <p> <b>Example 5</b>: Use filters for resource group types</p> <p> <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i> </code> </p> <note> <p>For <code>Key=resource-groups:ResourceTypeFilters</code>, specify resource types in the following format</p> <p> <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i> </code> </p> </note> <p>For more information about these examples formats, including the best use case for each one, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html\">Examples: Register Targets with a Maintenance Window</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "OwnerInformation": {
           "shape": "OwnerInformation",
@@ -12586,7 +12587,7 @@
         },
         "Targets": {
           "shape": "Targets",
-          "documentation": "<p>The targets (either instances or maintenance window targets).</p> <p>Specify instances using the following format: </p> <p> <code>Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;</code> </p> <p>Specify maintenance window targets using the following format:</p> <p> <code>Key=&lt;WindowTargetIds&gt;,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt;</code> </p>"
+          "documentation": "<p>The targets (either instances or maintenance window targets).</p> <p>Specify instances using the following format: </p> <p> <code>Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;</code> </p> <p>Specify maintenance window targets using the following format:</p> <p> <code>Key=WindowTargetIds;,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt;</code> </p>"
         },
         "TaskArn": {
           "shape": "MaintenanceWindowTaskArn",
@@ -12691,11 +12692,11 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceTypeForTagging",
-          "documentation": "<p>The type of resource of which you want to remove a tag.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>"
+          "documentation": "<p>The type of resource from which you want to remove a tag.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. Specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>"
         },
         "ResourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The resource ID for which you want to remove tags. Use the ID of the resource. Here are some examples:</p> <p>ManagedInstance: mi-012345abcde</p> <p>MaintenanceWindow: mw-012345abcde</p> <p>PatchBaseline: pb-012345abcde</p> <p>For the Document and Parameter values, use the name of the resource.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>"
+          "documentation": "<p>The ID of the resource from which you want to remove tags. For example:</p> <p>ManagedInstance: mi-012345abcde</p> <p>MaintenanceWindow: mw-012345abcde</p> <p>PatchBaseline: pb-012345abcde</p> <p>For the Document and Parameter values, use the name of the resource.</p> <note> <p>The ManagedInstance type for this API action is only for on-premises managed instances. Specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f.</p> </note>"
         },
         "TagKeys": {
           "shape": "KeyList",
@@ -12971,7 +12972,7 @@
         },
         "StreamUrl": {
           "shape": "StreamUrl",
-          "documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssm-messages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> <p> <b>region</b> represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in the <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region\">AWS Systems Manager table of regions and endpoints</a> in the <i>AWS General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>"
+          "documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> <p> <b>region</b> represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in the <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region\">AWS Systems Manager table of regions and endpoints</a> in the <i>AWS General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>"
         }
       }
     },
@@ -13550,7 +13551,7 @@
         },
         "StreamUrl": {
           "shape": "StreamUrl",
-          "documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssm-messages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code> </p> <p> <b>region</b> represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in the <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region\">AWS Systems Manager table of regions and endpoints</a> in the <i>AWS General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>"
+          "documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code> </p> <p> <b>region</b> represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in the <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region\">AWS Systems Manager table of regions and endpoints</a> in the <i>AWS General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>"
         }
       }
     },
@@ -13813,23 +13814,23 @@
       "members": {
         "Key": {
           "shape": "TargetKey",
-          "documentation": "<p>User-defined criteria for sending commands that target instances that meet the criteria. <code>Key</code> can be <code>tag:&lt;Amazon EC2 tag&gt;</code> or <code>InstanceIds</code>. For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Using Targets and Rate Controls to Send Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>User-defined criteria for sending commands that target instances that meet the criteria.</p>"
         },
         "Values": {
           "shape": "TargetValues",
-          "documentation": "<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on instances that include Amazon EC2 tags of <code>ServerRole,WebServer</code>. For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Using Targets and Rate Controls to Send Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on instances that include Amazon EC2 tags of <code>ServerRole,WebServer</code>. </p>"
         }
       },
-      "documentation": "<p>An array of search criteria that targets instances using a Key,Value combination that you specify. <code>Targets</code> is required if you don't provide one or more instance IDs in the call.</p> <p/>"
+      "documentation": "<p>An array of search criteria that targets instances using a Key,Value combination that you specify. </p> <p>Supported formats include the following.</p> <ul> <li> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> </li> <li> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> </li> <li> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> </li> <li> <p>(Maintenance window targets only) <code>Key=resource-groups:Name,Values=<i>resource-group-name</i> </code> </p> </li> <li> <p>(Maintenance window targets only) <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i> </code> </p> </li> </ul> <p>For example:</p> <ul> <li> <p> <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code> </p> </li> <li> <p> <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code> </p> </li> <li> <p> <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code> </p> </li> <li> <p>(Maintenance window targets only) <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code> </p> </li> <li> <p>(Maintenance window targets only) <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i> </code> </p> </li> </ul> <p>For information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Using Targets and Rate Controls to Send Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
     },
     "TargetCount": {
       "type": "integer"
     },
     "TargetKey": {
       "type": "string",
-      "max": 128,
+      "max": 163,
       "min": 1,
-      "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$"
+      "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$|resource-groups:ResourceTypeFilters|resource-groups:Name"
     },
     "TargetLocation": {
       "type": "structure",

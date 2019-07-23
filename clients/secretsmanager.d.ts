@@ -330,6 +330,7 @@ declare namespace SecretsManager {
      * A list of all of the currently assigned VersionStage staging labels and the VersionId that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.  A version that does not have any staging labels attached is considered deprecated and subject to deletion. Such versions are not included in this list. 
      */
     VersionIdsToStages?: SecretVersionsToStagesMapType;
+    OwningService?: OwningServiceType;
   }
   export type DescriptionType = string;
   export type ExcludeCharactersType = string;
@@ -506,6 +507,7 @@ declare namespace SecretsManager {
   export type NameType = string;
   export type NextTokenType = string;
   export type NonEmptyResourcePolicyType = string;
+  export type OwningServiceType = string;
   export type PasswordLengthType = number;
   export interface PutResourcePolicyRequest {
     /**
@@ -682,6 +684,7 @@ declare namespace SecretsManager {
      * A list of all of the currently assigned SecretVersionStage staging labels and the SecretVersionId that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.  A version that does not have any SecretVersionStage is considered deprecated and subject to deletion. Such versions are not included in this list. 
      */
     SecretVersionsToStages?: SecretVersionsToStagesMapType;
+    OwningService?: OwningServiceType;
   }
   export type SecretListType = SecretListEntry[];
   export type SecretNameType = string;
