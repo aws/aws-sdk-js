@@ -287,6 +287,12 @@ describe('AWS.Config', function() {
     });
   });
 
+  describe('s3AddExpect100ContinueHeaders', function() {
+    it('defaults to true', function() {
+      expect(configure().s3AddExpect100ContinueHeaders).to.equal(true);
+    });
+  });
+
   describe('set', function() {
     it('should set a default value for a key', function() {
       var config = new AWS.Config();
