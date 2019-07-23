@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "S3",
+  "description": "Add an option to enable/disable \"Expect: 100-continue\" headers for large payloads."
+}
