@@ -44,6 +44,14 @@ declare class STS extends Service {
    */
   decodeAuthorizationMessage(callback?: (err: AWSError, data: STS.Types.DecodeAuthorizationMessageResponse) => void): Request<STS.Types.DecodeAuthorizationMessageResponse, AWSError>;
   /**
+   * Returns the account identifier for the specified access key ID. Access keys consist of two parts: an access key ID (for example, AKIAIOSFODNN7EXAMPLE) and a secret access key (for example, wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY). For more information about access keys, see Managing Access Keys for IAM Users in the IAM User Guide. When you pass an access key ID to this operation, it returns the ID of the AWS account to which the keys belong. Access key IDs beginning with AKIA are long-term credentials for an IAM user or the AWS account root user. Access key IDs beginning with ASIA are temporary credentials that are created using STS operations. If the account in the response belongs to you, you can sign in as the root user and review your root user access keys. Then, you can pull a credentials report to learn which IAM user owns the keys. To learn who requested the temporary credentials for an ASIA access key, view the STS events in your CloudTrail logs. This operation does not indicate the state of the access key. The key might be active, inactive, or deleted. Active keys might not have permissions to perform an operation. Providing a deleted keys might return an error that the key doesn't exist.
+   */
+  getAccessKeyInfo(params: STS.Types.GetAccessKeyInfoRequest, callback?: (err: AWSError, data: STS.Types.GetAccessKeyInfoResponse) => void): Request<STS.Types.GetAccessKeyInfoResponse, AWSError>;
+  /**
+   * Returns the account identifier for the specified access key ID. Access keys consist of two parts: an access key ID (for example, AKIAIOSFODNN7EXAMPLE) and a secret access key (for example, wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY). For more information about access keys, see Managing Access Keys for IAM Users in the IAM User Guide. When you pass an access key ID to this operation, it returns the ID of the AWS account to which the keys belong. Access key IDs beginning with AKIA are long-term credentials for an IAM user or the AWS account root user. Access key IDs beginning with ASIA are temporary credentials that are created using STS operations. If the account in the response belongs to you, you can sign in as the root user and review your root user access keys. Then, you can pull a credentials report to learn which IAM user owns the keys. To learn who requested the temporary credentials for an ASIA access key, view the STS events in your CloudTrail logs. This operation does not indicate the state of the access key. The key might be active, inactive, or deleted. Active keys might not have permissions to perform an operation. Providing a deleted keys might return an error that the key doesn't exist.
+   */
+  getAccessKeyInfo(callback?: (err: AWSError, data: STS.Types.GetAccessKeyInfoResponse) => void): Request<STS.Types.GetAccessKeyInfoResponse, AWSError>;
+  /**
    * Returns details about the IAM identity whose credentials are used to call the API.
    */
   getCallerIdentity(params: STS.Types.GetCallerIdentityRequest, callback?: (err: AWSError, data: STS.Types.GetCallerIdentityResponse) => void): Request<STS.Types.GetCallerIdentityResponse, AWSError>;
@@ -283,6 +291,18 @@ declare namespace STS {
      * The ARN that specifies the federated user that is associated with the credentials. For more information about ARNs and how to use them in policies, see IAM Identifiers in Using IAM. 
      */
     Arn: arnType;
+  }
+  export interface GetAccessKeyInfoRequest {
+    /**
+     * The identifier of an access key. This parameter allows (through its regex pattern) a string of characters that can consist of any upper- or lowercased letter or digit.
+     */
+    AccessKeyId: accessKeyIdType;
+  }
+  export interface GetAccessKeyInfoResponse {
+    /**
+     * The number used to identify the AWS account.
+     */
+    Account?: accountType;
   }
   export interface GetCallerIdentityRequest {
   }

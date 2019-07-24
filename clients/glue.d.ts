@@ -60,11 +60,11 @@ declare class Glue extends Service {
    */
   batchGetCrawlers(callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
   /**
-   * Returns a list of resource metadata for a given list of DevEndpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   * Returns a list of resource metadata for a given list of development endpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetDevEndpoints(params: Glue.Types.BatchGetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
   /**
-   * Returns a list of resource metadata for a given list of DevEndpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   * Returns a list of resource metadata for a given list of development endpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetDevEndpoints(callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class Glue extends Service {
    */
   createDatabase(callback?: (err: AWSError, data: Glue.Types.CreateDatabaseResponse) => void): Request<Glue.Types.CreateDatabaseResponse, AWSError>;
   /**
-   * Creates a new DevEndpoint.
+   * Creates a new development endpoint.
    */
   createDevEndpoint(params: Glue.Types.CreateDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.CreateDevEndpointResponse) => void): Request<Glue.Types.CreateDevEndpointResponse, AWSError>;
   /**
-   * Creates a new DevEndpoint.
+   * Creates a new development endpoint.
    */
   createDevEndpoint(callback?: (err: AWSError, data: Glue.Types.CreateDevEndpointResponse) => void): Request<Glue.Types.CreateDevEndpointResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class Glue extends Service {
    */
   createScript(callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
   /**
-   * Creates a new security configuration.
+   * Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see Encrypting Data Written by Crawlers, Jobs, and Development Endpoints.
    */
   createSecurityConfiguration(params: Glue.Types.CreateSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
-   * Creates a new security configuration.
+   * Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see Encrypting Data Written by Crawlers, Jobs, and Development Endpoints.
    */
   createSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class Glue extends Service {
    */
   deleteDatabase(callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
-   * Deletes a specified DevEndpoint.
+   * Deletes a specified development endpoint.
    */
   deleteDevEndpoint(params: Glue.Types.DeleteDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
-   * Deletes a specified DevEndpoint.
+   * Deletes a specified development endpoint.
    */
   deleteDevEndpoint(callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
@@ -420,19 +420,19 @@ declare class Glue extends Service {
    */
   getDataflowGraph(callback?: (err: AWSError, data: Glue.Types.GetDataflowGraphResponse) => void): Request<Glue.Types.GetDataflowGraphResponse, AWSError>;
   /**
-   * Retrieves information about a specified DevEndpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
+   * Retrieves information about a specified development endpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoint(params: Glue.Types.GetDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
-   * Retrieves information about a specified DevEndpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
+   * Retrieves information about a specified development endpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoint(callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
-   * Retrieves all the DevEndpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
+   * Retrieves all the development endpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoints(params: Glue.Types.GetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
-   * Retrieves all the DevEndpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
+   * Retrieves all the development endpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoints(callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
@@ -828,11 +828,11 @@ declare class Glue extends Service {
    */
   updateDatabase(callback?: (err: AWSError, data: Glue.Types.UpdateDatabaseResponse) => void): Request<Glue.Types.UpdateDatabaseResponse, AWSError>;
   /**
-   * Updates a specified DevEndpoint.
+   * Updates a specified development endpoint.
    */
   updateDevEndpoint(params: Glue.Types.UpdateDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.UpdateDevEndpointResponse) => void): Request<Glue.Types.UpdateDevEndpointResponse, AWSError>;
   /**
-   * Updates a specified DevEndpoint.
+   * Updates a specified development endpoint.
    */
   updateDevEndpoint(callback?: (err: AWSError, data: Glue.Types.UpdateDevEndpointResponse) => void): Request<Glue.Types.UpdateDevEndpointResponse, AWSError>;
   /**
@@ -1046,7 +1046,7 @@ declare namespace Glue {
   }
   export interface BatchGetDevEndpointsRequest {
     /**
-     * The list of DevEndpoint names, which may be the names returned from the ListDevEndpoint operation.
+     * The list of DevEndpoint names, which might be the names returned from the ListDevEndpoint operation.
      */
     DevEndpointNames: DevEndpointNames;
   }
@@ -1258,7 +1258,7 @@ declare namespace Glue {
      */
     CloudWatchEncryptionMode?: CloudWatchEncryptionMode;
     /**
-     * The AWS ARN of the KMS key to be used to encrypt the data.
+     * The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
      */
     KmsKeyArn?: KmsKeyArn;
   }
@@ -1747,11 +1747,11 @@ declare namespace Glue {
      */
     SubnetId?: GenericString;
     /**
-     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
+     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility because the recommended attribute to use is public keys.
      */
     PublicKey?: GenericString;
     /**
-     * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
+     * A list of public keys to be used by the development endpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys. Call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
      */
     PublicKeys?: PublicKeysList;
     /**
@@ -1759,11 +1759,19 @@ declare namespace Glue {
      */
     NumberOfNodes?: IntegerValue;
     /**
-     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
+     * The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated to the development endpoint. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The paths to one or more Python libraries in an Amazon S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.  You can only use pure Python libraries with a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported. 
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
+     * The path to one or more Java .jar files in an S3 bucket that should be loaded in your DevEndpoint.
      */
     ExtraJarsS3Path?: GenericString;
     /**
@@ -1797,7 +1805,7 @@ declare namespace Glue {
      */
     SubnetId?: GenericString;
     /**
-     * The AWS ARN of the role assigned to the new DevEndpoint.
+     * The Amazon Resource Name (ARN) of the role assigned to the new DevEndpoint.
      */
     RoleArn?: RoleArn;
     /**
@@ -1813,19 +1821,27 @@ declare namespace Glue {
      */
     NumberOfNodes?: IntegerValue;
     /**
-     * The AWS availability zone where this DevEndpoint is located.
+     * The type of predefined worker that is allocated to the development endpoint. May be a value of Standard, G.1X, or G.2X.
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated to the development endpoint.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The AWS Availability Zone where this DevEndpoint is located.
      */
     AvailabilityZone?: GenericString;
     /**
-     * The ID of the VPC used by this DevEndpoint.
+     * The ID of the virtual private cloud (VPC) used by this DevEndpoint.
      */
     VpcId?: GenericString;
     /**
-     * Path(s) to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.
+     * The paths to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that will be loaded in your DevEndpoint.
+     * Path to one or more Java .jar files in an S3 bucket that will be loaded in your DevEndpoint.
      */
     ExtraJarsS3Path?: GenericString;
     /**
@@ -1925,13 +1941,17 @@ declare namespace Glue {
      */
     NotificationProperty?: NotificationProperty;
     /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
      * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
      */
     NumberOfWorkers?: NullableInteger;
     /**
      * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
      */
-    WorkerType?: NameString;
+    WorkerType?: WorkerType;
   }
   export interface CreateJobResponse {
     /**
@@ -2411,7 +2431,7 @@ declare namespace Glue {
      */
     EndpointName?: GenericString;
     /**
-     * The AWS ARN of the IAM role used in this DevEndpoint.
+     * The Amazon Resource Name (ARN) of the IAM role used in this DevEndpoint.
      */
     RoleArn?: RoleArn;
     /**
@@ -2427,7 +2447,7 @@ declare namespace Glue {
      */
     YarnEndpointAddress?: GenericString;
     /**
-     * A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint is created within one. The PrivateAddress field is present only when you create the DevEndpoint within your virtual private cloud (VPC).
+     * A private IP address to access the DevEndpoint within a VPC if the DevEndpoint is created within one. The PrivateAddress field is present only when you create the DevEndpoint within your VPC.
      */
     PrivateAddress?: GenericString;
     /**
@@ -2435,7 +2455,7 @@ declare namespace Glue {
      */
     ZeppelinRemoteSparkInterpreterPort?: IntegerValue;
     /**
-     * The public IP address used by this DevEndpoint. The PublicAddress field is present only when you create a non-VPC (virtual private cloud) DevEndpoint.
+     * The public IP address used by this DevEndpoint. The PublicAddress field is present only when you create a non-virtual private cloud (VPC) DevEndpoint.
      */
     PublicAddress?: GenericString;
     /**
@@ -2443,11 +2463,19 @@ declare namespace Glue {
      */
     Status?: GenericString;
     /**
+     * The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated to the development endpoint. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
      * The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
      */
     NumberOfNodes?: IntegerValue;
     /**
-     * The AWS availability zone where this DevEndpoint is located.
+     * The AWS Availability Zone where this DevEndpoint is located.
      */
     AvailabilityZone?: GenericString;
     /**
@@ -2455,11 +2483,11 @@ declare namespace Glue {
      */
     VpcId?: GenericString;
     /**
-     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
+     * The paths to one or more Python libraries in an Amazon S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.  You can only use pure Python libraries with a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not currently supported. 
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint. Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.
+     * The path to one or more Java .jar files in an S3 bucket that should be loaded in your DevEndpoint.  You can only use pure Java/Scala libraries with a DevEndpoint. 
      */
     ExtraJarsS3Path?: GenericString;
     /**
@@ -2479,11 +2507,11 @@ declare namespace Glue {
      */
     LastModifiedTimestamp?: TimestampValue;
     /**
-     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
+     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility because the recommended attribute to use is public keys.
      */
     PublicKey?: GenericString;
     /**
-     * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
+     * A list of public keys to be used by the DevEndpoints for authentication. Using this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys. Call the UpdateDevEndpoint API operation with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
      */
     PublicKeys?: PublicKeysList;
     /**
@@ -2491,17 +2519,17 @@ declare namespace Glue {
      */
     SecurityConfiguration?: NameString;
     /**
-     * A map of arguments used to configure the DevEndpoint. Note that currently, we only support "--enable-glue-datacatalog": "" as a valid argument.
+     * A map of arguments used to configure the DevEndpoint. Currently, only "--enable-glue-datacatalog": "" is supported as a valid argument.
      */
     Arguments?: MapValue;
   }
   export interface DevEndpointCustomLibraries {
     /**
-     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
+     * The paths to one or more Python libraries in an Amazon Simple Storage Service (Amazon S3) bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.  You can only use pure Python libraries with a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not currently supported. 
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint. Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.
+     * The path to one or more Java .jar files in an S3 bucket that should be loaded in your DevEndpoint.  You can only use pure Java/Scala libraries with a DevEndpoint. 
      */
     ExtraJarsS3Path?: GenericString;
   }
@@ -2538,15 +2566,15 @@ declare namespace Glue {
   }
   export interface EncryptionConfiguration {
     /**
-     * The encryption configuration for S3 data.
+     * The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.
      */
     S3Encryption?: S3EncryptionList;
     /**
-     * The encryption configuration for CloudWatch.
+     * The encryption configuration for Amazon CloudWatch.
      */
     CloudWatchEncryption?: CloudWatchEncryption;
     /**
-     * The encryption configuration for Job Bookmarks.
+     * The encryption configuration for job bookmarks.
      */
     JobBookmarksEncryption?: JobBookmarksEncryption;
   }
@@ -2807,7 +2835,7 @@ declare namespace Glue {
   }
   export interface GetDevEndpointRequest {
     /**
-     * Name of the DevEndpoint for which to retrieve information.
+     * Name of the DevEndpoint to retrieve information for.
      */
     EndpointName: GenericString;
   }
@@ -3057,7 +3085,7 @@ declare namespace Glue {
   }
   export interface GetSecurityConfigurationResponse {
     /**
-     * The requested security configuration
+     * The requested security configuration.
      */
     SecurityConfiguration?: SecurityConfiguration;
   }
@@ -3371,6 +3399,7 @@ declare namespace Glue {
     NextToken?: GenericString;
   }
   export type GlueResourceArn = string;
+  export type GlueVersionString = string;
   export interface GrokClassifier {
     /**
      * The name of the classifier.
@@ -3503,14 +3532,18 @@ declare namespace Glue {
      * Specifies configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+    GlueVersion?: GlueVersionString;
   }
   export interface JobBookmarkEntry {
     /**
-     * Name of the job in question.
+     * The name of the job in question.
      */
     JobName?: JobName;
     /**
-     * Version of the job.
+     * The version of the job.
      */
     Version?: IntegerValue;
     /**
@@ -3528,11 +3561,11 @@ declare namespace Glue {
   }
   export interface JobBookmarksEncryption {
     /**
-     * The encryption mode to use for Job bookmarks data.
+     * The encryption mode to use for job bookmarks data.
      */
     JobBookmarksEncryptionMode?: JobBookmarksEncryptionMode;
     /**
-     * The AWS ARN of the KMS key to be used to encrypt the data.
+     * The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
      */
     KmsKeyArn?: KmsKeyArn;
   }
@@ -3645,6 +3678,10 @@ declare namespace Glue {
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+    GlueVersion?: GlueVersionString;
   }
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
@@ -3709,6 +3746,10 @@ declare namespace Glue {
      * Specifies the configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide.
+     */
+    GlueVersion?: GlueVersionString;
   }
   export interface JsonClassifier {
     /**
@@ -4190,11 +4231,11 @@ declare namespace Glue {
   export type RowTag = string;
   export interface S3Encryption {
     /**
-     * The encryption mode to use for S3 data.
+     * The encryption mode to use for Amazon S3 data.
      */
     S3EncryptionMode?: S3EncryptionMode;
     /**
-     * The AWS ARN of the KMS key to be used to encrypt the data.
+     * The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
      */
     KmsKeyArn?: KmsKeyArn;
   }
@@ -4341,7 +4382,7 @@ declare namespace Glue {
     /**
      * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
      */
-    WorkerType?: NameString;
+    WorkerType?: WorkerType;
     /**
      * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
      */
@@ -4881,7 +4922,7 @@ declare namespace Glue {
      */
     CustomLibraries?: DevEndpointCustomLibraries;
     /**
-     * True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.
+     *  True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False if otherwise.
      */
     UpdateEtlLibraries?: BooleanValue;
     /**

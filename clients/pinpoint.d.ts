@@ -228,6 +228,14 @@ declare class Pinpoint extends Service {
    */
   getApp(callback?: (err: AWSError, data: Pinpoint.Types.GetAppResponse) => void): Request<Pinpoint.Types.GetAppResponse, AWSError>;
   /**
+   *  Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
+   */
+  getApplicationDateRangeKpi(params: Pinpoint.Types.GetApplicationDateRangeKpiRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationDateRangeKpiResponse) => void): Request<Pinpoint.Types.GetApplicationDateRangeKpiResponse, AWSError>;
+  /**
+   *  Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
+   */
+  getApplicationDateRangeKpi(callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationDateRangeKpiResponse) => void): Request<Pinpoint.Types.GetApplicationDateRangeKpiResponse, AWSError>;
+  /**
    * Retrieves information about the settings for an application.
    */
   getApplicationSettings(params: Pinpoint.Types.GetApplicationSettingsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationSettingsResponse) => void): Request<Pinpoint.Types.GetApplicationSettingsResponse, AWSError>;
@@ -267,6 +275,14 @@ declare class Pinpoint extends Service {
    * Retrieves information about the activity performed by a campaign.
    */
   getCampaignActivities(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignActivitiesResponse) => void): Request<Pinpoint.Types.GetCampaignActivitiesResponse, AWSError>;
+  /**
+   *  Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
+   */
+  getCampaignDateRangeKpi(params: Pinpoint.Types.GetCampaignDateRangeKpiRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignDateRangeKpiResponse) => void): Request<Pinpoint.Types.GetCampaignDateRangeKpiResponse, AWSError>;
+  /**
+   *  Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
+   */
+  getCampaignDateRangeKpi(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignDateRangeKpiResponse) => void): Request<Pinpoint.Types.GetCampaignDateRangeKpiResponse, AWSError>;
   /**
    * Retrieves information about the status, configuration, and other settings for a specific version of a campaign.
    */
@@ -1248,6 +1264,32 @@ declare namespace Pinpoint {
      */
     TitleOverride?: __string;
   }
+  export interface ApplicationDateRangeKpiResponse {
+    /**
+     * The unique identifier for the application that the metric applies to.
+     */
+    ApplicationId: __string;
+    /**
+     * The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.
+     */
+    EndTime: __timestampIso8601;
+    /**
+     * The name of the metric, also referred to as a key performance indicator (KPI), that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the Amazon Pinpoint Developer Guide.
+     */
+    KpiName: __string;
+    /**
+     * An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
+     */
+    KpiResult: BaseKpiResult;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the App Metrics resource. The App Metrics resource returns all results in a single page.
+     */
+    NextToken?: __string;
+    /**
+     * The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.
+     */
+    StartTime: __timestampIso8601;
+  }
   export interface ApplicationResponse {
     /**
      * The Amazon Resource Name (ARN) of the application.
@@ -1440,6 +1482,42 @@ declare namespace Pinpoint {
      * The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
      */
     Url?: __string;
+  }
+  export interface BaseKpiResult {
+    /**
+     * An array of objects that provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.
+     */
+    Rows: ListOfResultRow;
+  }
+  export interface CampaignDateRangeKpiResponse {
+    /**
+     * The unique identifier for the application that the metric applies to.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the campaign that the metric applies to.
+     */
+    CampaignId: __string;
+    /**
+     * The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.
+     */
+    EndTime: __timestampIso8601;
+    /**
+     * The name of the metric, also referred to as a key performance indicator (KPI), that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the Amazon Pinpoint Developer Guide.
+     */
+    KpiName: __string;
+    /**
+     * An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
+     */
+    KpiResult: BaseKpiResult;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the Campaign Metrics resource. The Campaign Metrics resource returns all results in a single page.
+     */
+    NextToken?: __string;
+    /**
+     * The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.
+     */
+    StartTime: __timestampIso8601;
   }
   export interface CampaignEmailMessage {
     /**
@@ -2795,6 +2873,35 @@ declare namespace Pinpoint {
   export interface GetAppResponse {
     ApplicationResponse: ApplicationResponse;
   }
+  export interface GetApplicationDateRangeKpiRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.
+     */
+    EndTime?: __timestampIso8601;
+    /**
+     * The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the Amazon Pinpoint Developer Guide.
+     */
+    KpiName: __string;
+    /**
+     * The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     */
+    NextToken?: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     */
+    PageSize?: __string;
+    /**
+     * The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.
+     */
+    StartTime?: __timestampIso8601;
+  }
+  export interface GetApplicationDateRangeKpiResponse {
+    ApplicationDateRangeKpiResponse: ApplicationDateRangeKpiResponse;
+  }
   export interface GetApplicationSettingsRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -2806,7 +2913,7 @@ declare namespace Pinpoint {
   }
   export interface GetAppsRequest {
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -2836,7 +2943,7 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -2846,6 +2953,39 @@ declare namespace Pinpoint {
   }
   export interface GetCampaignActivitiesResponse {
     ActivitiesResponse: ActivitiesResponse;
+  }
+  export interface GetCampaignDateRangeKpiRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the campaign.
+     */
+    CampaignId: __string;
+    /**
+     * The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.
+     */
+    EndTime?: __timestampIso8601;
+    /**
+     * The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the Amazon Pinpoint Developer Guide.
+     */
+    KpiName: __string;
+    /**
+     * The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     */
+    NextToken?: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     */
+    PageSize?: __string;
+    /**
+     * The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.
+     */
+    StartTime?: __timestampIso8601;
+  }
+  export interface GetCampaignDateRangeKpiResponse {
+    CampaignDateRangeKpiResponse: CampaignDateRangeKpiResponse;
   }
   export interface GetCampaignRequest {
     /**
@@ -2887,7 +3027,7 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -2904,7 +3044,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -2974,7 +3114,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3013,7 +3153,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3030,7 +3170,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3051,7 +3191,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3102,7 +3242,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3123,7 +3263,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include on each page in a paginated response.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3494,7 +3634,7 @@ declare namespace Pinpoint {
   }
   export interface NumberValidateResponse {
     /**
-     * The carrier or service provider that the phone number is currently registered with.
+     * The carrier or service provider that the phone number is currently registered with. In some countries and regions, this value may be the carrier or service provider that the phone number was originally registered with.
      */
     Carrier?: __string;
     /**
@@ -3664,6 +3804,30 @@ declare namespace Pinpoint {
   }
   export interface RemoveAttributesResponse {
     AttributesResource: AttributesResource;
+  }
+  export interface ResultRow {
+    /**
+     *  An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.
+     */
+    GroupedBys: ListOfResultRowValue;
+    /**
+     *  An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.
+     */
+    Values: ListOfResultRowValue;
+  }
+  export interface ResultRowValue {
+    /**
+     *  The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.
+     */
+    Key: __string;
+    /**
+     *  The data type of the value specified by the Value property.
+     */
+    Type: __string;
+    /**
+     *  In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).
+     */
+    Value: __string;
   }
   export interface SMSChannelRequest {
     /**
@@ -4524,6 +4688,8 @@ declare namespace Pinpoint {
   export type ListOfEndpointResponse = EndpointResponse[];
   export type ListOfExportJobResponse = ExportJobResponse[];
   export type ListOfImportJobResponse = ImportJobResponse[];
+  export type ListOfResultRow = ResultRow[];
+  export type ListOfResultRowValue = ResultRowValue[];
   export type ListOfSegmentDimensions = SegmentDimensions[];
   export type ListOfSegmentGroup = SegmentGroup[];
   export type ListOfSegmentReference = SegmentReference[];
@@ -4548,6 +4714,7 @@ declare namespace Pinpoint {
   export type MapOfMapOfEndpointMessageResult = {[key: string]: MapOfEndpointMessageResult};
   export type MapOf__string = {[key: string]: __string};
   export type __string = string;
+  export type __timestampIso8601 = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

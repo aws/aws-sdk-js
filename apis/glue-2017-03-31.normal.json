@@ -203,7 +203,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p>Returns a list of resource metadata for a given list of DevEndpoint names. After calling the <code>ListDevEndpoints</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>"
+      "documentation": "<p>Returns a list of resource metadata for a given list of development endpoint names. After calling the <code>ListDevEndpoints</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>"
     },
     "BatchGetJobs": {
       "name": "BatchGetJobs",
@@ -492,7 +492,7 @@
           "shape": "ResourceNumberLimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a new DevEndpoint.</p>"
+      "documentation": "<p>Creates a new development endpoint.</p>"
     },
     "CreateJob": {
       "name": "CreateJob",
@@ -622,7 +622,7 @@
           "shape": "ResourceNumberLimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a new security configuration.</p>"
+      "documentation": "<p>Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html\">Encrypting Data Written by Crawlers, Jobs, and Development Endpoints</a>.</p>"
     },
     "CreateTable": {
       "name": "CreateTable",
@@ -898,7 +898,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p>Deletes a specified DevEndpoint.</p>"
+      "documentation": "<p>Deletes a specified development endpoint.</p>"
     },
     "DeleteJob": {
       "name": "DeleteJob",
@@ -1466,7 +1466,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p>Retrieves information about a specified DevEndpoint.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>"
+      "documentation": "<p>Retrieves information about a specified development endpoint.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>"
     },
     "GetDevEndpoints": {
       "name": "GetDevEndpoints",
@@ -1494,7 +1494,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p>Retrieves all the DevEndpoints in this AWS account.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>"
+      "documentation": "<p>Retrieves all the development endpoints in this AWS account.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>"
     },
     "GetJob": {
       "name": "GetJob",
@@ -2942,7 +2942,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Updates a specified DevEndpoint.</p>"
+      "documentation": "<p>Updates a specified development endpoint.</p>"
     },
     "UpdateJob": {
       "name": "UpdateJob",
@@ -3398,7 +3398,7 @@
       "members": {
         "DevEndpointNames": {
           "shape": "DevEndpointNames",
-          "documentation": "<p>The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code> operation.</p>"
+          "documentation": "<p>The list of <code>DevEndpoint</code> names, which might be the names returned from the <code>ListDevEndpoint</code> operation.</p>"
         }
       }
     },
@@ -3407,11 +3407,11 @@
       "members": {
         "DevEndpoints": {
           "shape": "DevEndpointList",
-          "documentation": "<p>A list of DevEndpoint definitions.</p>"
+          "documentation": "<p>A list of <code>DevEndpoint</code> definitions.</p>"
         },
         "DevEndpointsNotFound": {
           "shape": "DevEndpointNames",
-          "documentation": "<p>A list of DevEndpoints not found.</p>"
+          "documentation": "<p>A list of <code>DevEndpoints</code> not found.</p>"
         }
       }
     },
@@ -3772,10 +3772,10 @@
         },
         "KmsKeyArn": {
           "shape": "KmsKeyArn",
-          "documentation": "<p>The AWS ARN of the KMS key to be used to encrypt the data.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>"
         }
       },
-      "documentation": "<p>Specifies how CloudWatch data should be encrypted.</p>"
+      "documentation": "<p>Specifies how Amazon CloudWatch data should be encrypted.</p>"
     },
     "CloudWatchEncryptionMode": {
       "type": "string",
@@ -4505,51 +4505,59 @@
       "members": {
         "EndpointName": {
           "shape": "GenericString",
-          "documentation": "<p>The name to be assigned to the new DevEndpoint.</p>"
+          "documentation": "<p>The name to be assigned to the new <code>DevEndpoint</code>.</p>"
         },
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The IAM role for the DevEndpoint.</p>"
+          "documentation": "<p>The IAM role for the <code>DevEndpoint</code>.</p>"
         },
         "SecurityGroupIds": {
           "shape": "StringList",
-          "documentation": "<p>Security group IDs for the security groups to be used by the new DevEndpoint.</p>"
+          "documentation": "<p>Security group IDs for the security groups to be used by the new <code>DevEndpoint</code>.</p>"
         },
         "SubnetId": {
           "shape": "GenericString",
-          "documentation": "<p>The subnet ID for the new DevEndpoint to use.</p>"
+          "documentation": "<p>The subnet ID for the new <code>DevEndpoint</code> to use.</p>"
         },
         "PublicKey": {
           "shape": "GenericString",
-          "documentation": "<p>The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.</p>"
+          "documentation": "<p>The public key to be used by this <code>DevEndpoint</code> for authentication. This attribute is provided for backward compatibility because the recommended attribute to use is public keys.</p>"
         },
         "PublicKeys": {
           "shape": "PublicKeysList",
-          "documentation": "<p>A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.</p> <note> <p>If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the <code>UpdateDevEndpoint</code> API with the public key content in the <code>deletePublicKeys</code> attribute, and the list of new keys in the <code>addPublicKeys</code> attribute.</p> </note>"
+          "documentation": "<p>A list of public keys to be used by the development endpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.</p> <note> <p>If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys. Call the <code>UpdateDevEndpoint</code> API with the public key content in the <code>deletePublicKeys</code> attribute, and the list of new keys in the <code>addPublicKeys</code> attribute.</p> </note>"
         },
         "NumberOfNodes": {
           "shape": "IntegerValue",
-          "documentation": "<p>The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.</p>"
+          "documentation": "<p>The number of AWS Glue Data Processing Units (DPUs) to allocate to this <code>DevEndpoint</code>.</p>"
+        },
+        "WorkerType": {
+          "shape": "WorkerType",
+          "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated to the development endpoint.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
         },
         "ExtraPythonLibsS3Path": {
           "shape": "GenericString",
-          "documentation": "<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>"
+          "documentation": "<p>The paths to one or more Python libraries in an Amazon S3 bucket that should be loaded in your <code>DevEndpoint</code>. Multiple values must be complete paths separated by a comma.</p> <note> <p>You can only use pure Python libraries with a <code>DevEndpoint</code>. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p> </note>"
         },
         "ExtraJarsS3Path": {
           "shape": "GenericString",
-          "documentation": "<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+          "documentation": "<p>The path to one or more Java <code>.jar</code> files in an S3 bucket that should be loaded in your <code>DevEndpoint</code>.</p>"
         },
         "SecurityConfiguration": {
           "shape": "NameString",
-          "documentation": "<p>The name of the SecurityConfiguration structure to be used with this DevEndpoint.</p>"
+          "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used with this <code>DevEndpoint</code>.</p>"
         },
         "Tags": {
           "shape": "TagsMap",
-          "documentation": "<p>The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
+          "documentation": "<p>The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
         },
         "Arguments": {
           "shape": "MapValue",
-          "documentation": "<p>A map of arguments used to configure the DevEndpoint.</p>"
+          "documentation": "<p>A map of arguments used to configure the <code>DevEndpoint</code>.</p>"
         }
       }
     },
@@ -4558,27 +4566,27 @@
       "members": {
         "EndpointName": {
           "shape": "GenericString",
-          "documentation": "<p>The name assigned to the new DevEndpoint.</p>"
+          "documentation": "<p>The name assigned to the new <code>DevEndpoint</code>.</p>"
         },
         "Status": {
           "shape": "GenericString",
-          "documentation": "<p>The current status of the new DevEndpoint.</p>"
+          "documentation": "<p>The current status of the new <code>DevEndpoint</code>.</p>"
         },
         "SecurityGroupIds": {
           "shape": "StringList",
-          "documentation": "<p>The security groups assigned to the new DevEndpoint.</p>"
+          "documentation": "<p>The security groups assigned to the new <code>DevEndpoint</code>.</p>"
         },
         "SubnetId": {
           "shape": "GenericString",
-          "documentation": "<p>The subnet ID assigned to the new DevEndpoint.</p>"
+          "documentation": "<p>The subnet ID assigned to the new <code>DevEndpoint</code>.</p>"
         },
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The AWS ARN of the role assigned to the new DevEndpoint.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the role assigned to the new <code>DevEndpoint</code>.</p>"
         },
         "YarnEndpointAddress": {
           "shape": "GenericString",
-          "documentation": "<p>The address of the YARN endpoint used by this DevEndpoint.</p>"
+          "documentation": "<p>The address of the YARN endpoint used by this <code>DevEndpoint</code>.</p>"
         },
         "ZeppelinRemoteSparkInterpreterPort": {
           "shape": "IntegerValue",
@@ -4588,37 +4596,45 @@
           "shape": "IntegerValue",
           "documentation": "<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.</p>"
         },
+        "WorkerType": {
+          "shape": "WorkerType",
+          "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. May be a value of Standard, G.1X, or G.2X.</p>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated to the development endpoint.</p>"
+        },
         "AvailabilityZone": {
           "shape": "GenericString",
-          "documentation": "<p>The AWS availability zone where this DevEndpoint is located.</p>"
+          "documentation": "<p>The AWS Availability Zone where this <code>DevEndpoint</code> is located.</p>"
         },
         "VpcId": {
           "shape": "GenericString",
-          "documentation": "<p>The ID of the VPC used by this DevEndpoint.</p>"
+          "documentation": "<p>The ID of the virtual private cloud (VPC) used by this <code>DevEndpoint</code>.</p>"
         },
         "ExtraPythonLibsS3Path": {
           "shape": "GenericString",
-          "documentation": "<p>Path(s) to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.</p>"
+          "documentation": "<p>The paths to one or more Python libraries in an S3 bucket that will be loaded in your <code>DevEndpoint</code>.</p>"
         },
         "ExtraJarsS3Path": {
           "shape": "GenericString",
-          "documentation": "<p>Path to one or more Java Jars in an S3 bucket that will be loaded in your DevEndpoint.</p>"
+          "documentation": "<p>Path to one or more Java <code>.jar</code> files in an S3 bucket that will be loaded in your <code>DevEndpoint</code>.</p>"
         },
         "FailureReason": {
           "shape": "GenericString",
-          "documentation": "<p>The reason for a current failure in this DevEndpoint.</p>"
+          "documentation": "<p>The reason for a current failure in this <code>DevEndpoint</code>.</p>"
         },
         "SecurityConfiguration": {
           "shape": "NameString",
-          "documentation": "<p>The name of the SecurityConfiguration structure being used with this DevEndpoint.</p>"
+          "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure being used with this <code>DevEndpoint</code>.</p>"
         },
         "CreatedTimestamp": {
           "shape": "TimestampValue",
-          "documentation": "<p>The point in time at which this DevEndpoint was created.</p>"
+          "documentation": "<p>The point in time at which this <code>DevEndpoint</code> was created.</p>"
         },
         "Arguments": {
           "shape": "MapValue",
-          "documentation": "<p>The map of arguments used to configure this DevEndpoint.</p>"
+          "documentation": "<p>The map of arguments used to configure this <code>DevEndpoint</code>.</p>"
         }
       }
     },
@@ -4719,12 +4735,16 @@
           "shape": "NotificationProperty",
           "documentation": "<p>Specifies configuration properties of a job notification.</p>"
         },
+        "GlueVersion": {
+          "shape": "GlueVersionString",
+          "documentation": "<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>"
+        },
         "NumberOfWorkers": {
           "shape": "NullableInteger",
           "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
         },
         "WorkerType": {
-          "shape": "NameString",
+          "shape": "WorkerType",
           "documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>"
         }
       }
@@ -5275,7 +5295,7 @@
       "members": {
         "EndpointName": {
           "shape": "GenericString",
-          "documentation": "<p>The name of the DevEndpoint.</p>"
+          "documentation": "<p>The name of the <code>DevEndpoint</code>.</p>"
         }
       }
     },
@@ -5502,27 +5522,27 @@
       "members": {
         "EndpointName": {
           "shape": "GenericString",
-          "documentation": "<p>The name of the DevEndpoint.</p>"
+          "documentation": "<p>The name of the <code>DevEndpoint</code>.</p>"
         },
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The AWS ARN of the IAM role used in this DevEndpoint.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used in this <code>DevEndpoint</code>.</p>"
         },
         "SecurityGroupIds": {
           "shape": "StringList",
-          "documentation": "<p>A list of security group identifiers used in this DevEndpoint.</p>"
+          "documentation": "<p>A list of security group identifiers used in this <code>DevEndpoint</code>.</p>"
         },
         "SubnetId": {
           "shape": "GenericString",
-          "documentation": "<p>The subnet ID for this DevEndpoint.</p>"
+          "documentation": "<p>The subnet ID for this <code>DevEndpoint</code>.</p>"
         },
         "YarnEndpointAddress": {
           "shape": "GenericString",
-          "documentation": "<p>The YARN endpoint address used by this DevEndpoint.</p>"
+          "documentation": "<p>The YARN endpoint address used by this <code>DevEndpoint</code>.</p>"
         },
         "PrivateAddress": {
           "shape": "GenericString",
-          "documentation": "<p>A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint is created within one. The PrivateAddress field is present only when you create the DevEndpoint within your virtual private cloud (VPC).</p>"
+          "documentation": "<p>A private IP address to access the <code>DevEndpoint</code> within a VPC if the <code>DevEndpoint</code> is created within one. The <code>PrivateAddress</code> field is present only when you create the <code>DevEndpoint</code> within your VPC.</p>"
         },
         "ZeppelinRemoteSparkInterpreterPort": {
           "shape": "IntegerValue",
@@ -5530,35 +5550,43 @@
         },
         "PublicAddress": {
           "shape": "GenericString",
-          "documentation": "<p>The public IP address used by this DevEndpoint. The PublicAddress field is present only when you create a non-VPC (virtual private cloud) DevEndpoint.</p>"
+          "documentation": "<p>The public IP address used by this <code>DevEndpoint</code>. The <code>PublicAddress</code> field is present only when you create a non-virtual private cloud (VPC) <code>DevEndpoint</code>.</p>"
         },
         "Status": {
           "shape": "GenericString",
-          "documentation": "<p>The current status of this DevEndpoint.</p>"
+          "documentation": "<p>The current status of this <code>DevEndpoint</code>.</p>"
+        },
+        "WorkerType": {
+          "shape": "WorkerType",
+          "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated to the development endpoint.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
         },
         "NumberOfNodes": {
           "shape": "IntegerValue",
-          "documentation": "<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.</p>"
+          "documentation": "<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this <code>DevEndpoint</code>.</p>"
         },
         "AvailabilityZone": {
           "shape": "GenericString",
-          "documentation": "<p>The AWS availability zone where this DevEndpoint is located.</p>"
+          "documentation": "<p>The AWS Availability Zone where this <code>DevEndpoint</code> is located.</p>"
         },
         "VpcId": {
           "shape": "GenericString",
-          "documentation": "<p>The ID of the virtual private cloud (VPC) used by this DevEndpoint.</p>"
+          "documentation": "<p>The ID of the virtual private cloud (VPC) used by this <code>DevEndpoint</code>.</p>"
         },
         "ExtraPythonLibsS3Path": {
           "shape": "GenericString",
-          "documentation": "<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>"
+          "documentation": "<p>The paths to one or more Python libraries in an Amazon S3 bucket that should be loaded in your <code>DevEndpoint</code>. Multiple values must be complete paths separated by a comma.</p> <note> <p>You can only use pure Python libraries with a <code>DevEndpoint</code>. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not currently supported.</p> </note>"
         },
         "ExtraJarsS3Path": {
           "shape": "GenericString",
-          "documentation": "<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p> <p>Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.</p>"
+          "documentation": "<p>The path to one or more Java <code>.jar</code> files in an S3 bucket that should be loaded in your <code>DevEndpoint</code>.</p> <note> <p>You can only use pure Java/Scala libraries with a <code>DevEndpoint</code>.</p> </note>"
         },
         "FailureReason": {
           "shape": "GenericString",
-          "documentation": "<p>The reason for a current failure in this DevEndpoint.</p>"
+          "documentation": "<p>The reason for a current failure in this <code>DevEndpoint</code>.</p>"
         },
         "LastUpdateStatus": {
           "shape": "GenericString",
@@ -5570,40 +5598,40 @@
         },
         "LastModifiedTimestamp": {
           "shape": "TimestampValue",
-          "documentation": "<p>The point in time at which this DevEndpoint was last modified.</p>"
+          "documentation": "<p>The point in time at which this <code>DevEndpoint</code> was last modified.</p>"
         },
         "PublicKey": {
           "shape": "GenericString",
-          "documentation": "<p>The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.</p>"
+          "documentation": "<p>The public key to be used by this <code>DevEndpoint</code> for authentication. This attribute is provided for backward compatibility because the recommended attribute to use is public keys.</p>"
         },
         "PublicKeys": {
           "shape": "PublicKeysList",
-          "documentation": "<p>A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.</p> <note> <p>If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the <code>UpdateDevEndpoint</code> API with the public key content in the <code>deletePublicKeys</code> attribute, and the list of new keys in the <code>addPublicKeys</code> attribute.</p> </note>"
+          "documentation": "<p>A list of public keys to be used by the <code>DevEndpoints</code> for authentication. Using this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.</p> <note> <p>If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys. Call the <code>UpdateDevEndpoint</code> API operation with the public key content in the <code>deletePublicKeys</code> attribute, and the list of new keys in the <code>addPublicKeys</code> attribute.</p> </note>"
         },
         "SecurityConfiguration": {
           "shape": "NameString",
-          "documentation": "<p>The name of the SecurityConfiguration structure to be used with this DevEndpoint.</p>"
+          "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used with this <code>DevEndpoint</code>.</p>"
         },
         "Arguments": {
           "shape": "MapValue",
-          "documentation": "<p>A map of arguments used to configure the DevEndpoint.</p> <p>Note that currently, we only support \"--enable-glue-datacatalog\": \"\" as a valid argument.</p>"
+          "documentation": "<p>A map of arguments used to configure the <code>DevEndpoint</code>.</p> <p>Currently, only <code>\"--enable-glue-datacatalog\": \"\"</code> is supported as a valid argument.</p>"
         }
       },
-      "documentation": "<p>A development endpoint where a developer can remotely debug ETL scripts.</p>"
+      "documentation": "<p>A development endpoint where a developer can remotely debug extract, transform, and load (ETL) scripts.</p>"
     },
     "DevEndpointCustomLibraries": {
       "type": "structure",
       "members": {
         "ExtraPythonLibsS3Path": {
           "shape": "GenericString",
-          "documentation": "<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>"
+          "documentation": "<p>The paths to one or more Python libraries in an Amazon Simple Storage Service (Amazon S3) bucket that should be loaded in your <code>DevEndpoint</code>. Multiple values must be complete paths separated by a comma.</p> <note> <p>You can only use pure Python libraries with a <code>DevEndpoint</code>. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not currently supported.</p> </note>"
         },
         "ExtraJarsS3Path": {
           "shape": "GenericString",
-          "documentation": "<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p> <p>Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.</p>"
+          "documentation": "<p>The path to one or more Java <code>.jar</code> files in an S3 bucket that should be loaded in your <code>DevEndpoint</code>.</p> <note> <p>You can only use pure Java/Scala libraries with a <code>DevEndpoint</code>.</p> </note>"
         }
       },
-      "documentation": "<p>Custom libraries to be loaded into a DevEndpoint.</p>"
+      "documentation": "<p>Custom libraries to be loaded into a development endpoint.</p>"
     },
     "DevEndpointList": {
       "type": "list",
@@ -5683,15 +5711,15 @@
       "members": {
         "S3Encryption": {
           "shape": "S3EncryptionList",
-          "documentation": "<p>The encryption configuration for S3 data.</p>"
+          "documentation": "<p>The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.</p>"
         },
         "CloudWatchEncryption": {
           "shape": "CloudWatchEncryption",
-          "documentation": "<p>The encryption configuration for CloudWatch.</p>"
+          "documentation": "<p>The encryption configuration for Amazon CloudWatch.</p>"
         },
         "JobBookmarksEncryption": {
           "shape": "JobBookmarksEncryption",
-          "documentation": "<p>The encryption configuration for Job Bookmarks.</p>"
+          "documentation": "<p>The encryption configuration for job bookmarks.</p>"
         }
       },
       "documentation": "<p>Specifies an encryption configuration.</p>"
@@ -6098,7 +6126,7 @@
       "members": {
         "EndpointName": {
           "shape": "GenericString",
-          "documentation": "<p>Name of the DevEndpoint for which to retrieve information.</p>"
+          "documentation": "<p>Name of the <code>DevEndpoint</code> to retrieve information for.</p>"
         }
       }
     },
@@ -6107,7 +6135,7 @@
       "members": {
         "DevEndpoint": {
           "shape": "DevEndpoint",
-          "documentation": "<p>A DevEndpoint definition.</p>"
+          "documentation": "<p>A <code>DevEndpoint</code> definition.</p>"
         }
       }
     },
@@ -6129,11 +6157,11 @@
       "members": {
         "DevEndpoints": {
           "shape": "DevEndpointList",
-          "documentation": "<p>A list of DevEndpoint definitions.</p>"
+          "documentation": "<p>A list of <code>DevEndpoint</code> definitions.</p>"
         },
         "NextToken": {
           "shape": "GenericString",
-          "documentation": "<p>A continuation token, if not all DevEndpoint definitions have yet been returned.</p>"
+          "documentation": "<p>A continuation token, if not all <code>DevEndpoint</code> definitions have yet been returned.</p>"
         }
       }
     },
@@ -6448,7 +6476,7 @@
       "members": {
         "SecurityConfiguration": {
           "shape": "SecurityConfiguration",
-          "documentation": "<p>The requested security configuration</p>"
+          "documentation": "<p>The requested security configuration.</p>"
         }
       }
     },
@@ -6899,6 +6927,12 @@
       "min": 1,
       "pattern": "arn:aws:glue:.*"
     },
+    "GlueVersionString": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^\\w+\\.\\w+$"
+    },
     "GrokClassifier": {
       "type": "structure",
       "required": [
@@ -7080,6 +7114,10 @@
         "NotificationProperty": {
           "shape": "NotificationProperty",
           "documentation": "<p>Specifies configuration properties of a job notification.</p>"
+        },
+        "GlueVersion": {
+          "shape": "GlueVersionString",
+          "documentation": "<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>"
         }
       },
       "documentation": "<p>Specifies a job definition.</p>"
@@ -7089,11 +7127,11 @@
       "members": {
         "JobName": {
           "shape": "JobName",
-          "documentation": "<p>Name of the job in question.</p>"
+          "documentation": "<p>The name of the job in question.</p>"
         },
         "Version": {
           "shape": "IntegerValue",
-          "documentation": "<p>Version of the job.</p>"
+          "documentation": "<p>The version of the job.</p>"
         },
         "Run": {
           "shape": "IntegerValue",
@@ -7108,21 +7146,21 @@
           "documentation": "<p>The bookmark itself.</p>"
         }
       },
-      "documentation": "<p>Defines a point which a job can resume processing.</p>"
+      "documentation": "<p>Defines a point that a job can resume processing.</p>"
     },
     "JobBookmarksEncryption": {
       "type": "structure",
       "members": {
         "JobBookmarksEncryptionMode": {
           "shape": "JobBookmarksEncryptionMode",
-          "documentation": "<p>The encryption mode to use for Job bookmarks data.</p>"
+          "documentation": "<p>The encryption mode to use for job bookmarks data.</p>"
         },
         "KmsKeyArn": {
           "shape": "KmsKeyArn",
-          "documentation": "<p>The AWS ARN of the KMS key to be used to encrypt the data.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>"
         }
       },
-      "documentation": "<p>Specifies how Job bookmark data should be encrypted.</p>"
+      "documentation": "<p>Specifies how job bookmark data should be encrypted.</p>"
     },
     "JobBookmarksEncryptionMode": {
       "type": "string",
@@ -7262,6 +7300,10 @@
         "NotificationProperty": {
           "shape": "NotificationProperty",
           "documentation": "<p>Specifies configuration properties of a job run notification.</p>"
+        },
+        "GlueVersion": {
+          "shape": "GlueVersionString",
+          "documentation": "<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>"
         }
       },
       "documentation": "<p>Contains information about a job run.</p>"
@@ -7348,6 +7390,10 @@
         "NotificationProperty": {
           "shape": "NotificationProperty",
           "documentation": "<p>Specifies the configuration properties of a job notification.</p>"
+        },
+        "GlueVersion": {
+          "shape": "GlueVersionString",
+          "documentation": "<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>"
         }
       },
       "documentation": "<p>Specifies information used to update an existing job definition. The previous job definition is completely overwritten by this information.</p>"
@@ -8209,14 +8255,14 @@
       "members": {
         "S3EncryptionMode": {
           "shape": "S3EncryptionMode",
-          "documentation": "<p>The encryption mode to use for S3 data.</p>"
+          "documentation": "<p>The encryption mode to use for Amazon S3 data.</p>"
         },
         "KmsKeyArn": {
           "shape": "KmsKeyArn",
-          "documentation": "<p>The AWS ARN of the KMS key to be used to encrypt the data.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>"
         }
       },
-      "documentation": "<p>Specifies how S3 data should be encrypted.</p>"
+      "documentation": "<p>Specifies how Amazon Simple Storage Service (Amazon S3) data should be encrypted.</p>"
     },
     "S3EncryptionList": {
       "type": "list",
@@ -8456,7 +8502,7 @@
           "documentation": "<p>Specifies configuration properties of a job run notification.</p>"
         },
         "WorkerType": {
-          "shape": "NameString",
+          "shape": "WorkerType",
           "documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>"
         },
         "NumberOfWorkers": {
@@ -9245,35 +9291,35 @@
       "members": {
         "EndpointName": {
           "shape": "GenericString",
-          "documentation": "<p>The name of the DevEndpoint to be updated.</p>"
+          "documentation": "<p>The name of the <code>DevEndpoint</code> to be updated.</p>"
         },
         "PublicKey": {
           "shape": "GenericString",
-          "documentation": "<p>The public key for the DevEndpoint to use.</p>"
+          "documentation": "<p>The public key for the <code>DevEndpoint</code> to use.</p>"
         },
         "AddPublicKeys": {
           "shape": "PublicKeysList",
-          "documentation": "<p>The list of public keys for the DevEndpoint to use.</p>"
+          "documentation": "<p>The list of public keys for the <code>DevEndpoint</code> to use.</p>"
         },
         "DeletePublicKeys": {
           "shape": "PublicKeysList",
-          "documentation": "<p>The list of public keys to be deleted from the DevEndpoint.</p>"
+          "documentation": "<p>The list of public keys to be deleted from the <code>DevEndpoint</code>.</p>"
         },
         "CustomLibraries": {
           "shape": "DevEndpointCustomLibraries",
-          "documentation": "<p>Custom Python or Java libraries to be loaded in the DevEndpoint.</p>"
+          "documentation": "<p>Custom Python or Java libraries to be loaded in the <code>DevEndpoint</code>.</p>"
         },
         "UpdateEtlLibraries": {
           "shape": "BooleanValue",
-          "documentation": "<p>True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.</p>"
+          "documentation": "<p> <code>True</code> if the list of custom libraries to be loaded in the development endpoint needs to be updated, or <code>False</code> if otherwise.</p>"
         },
         "DeleteArguments": {
           "shape": "StringList",
-          "documentation": "<p>The list of argument keys to be deleted from the map of arguments used to configure the DevEndpoint.</p>"
+          "documentation": "<p>The list of argument keys to be deleted from the map of arguments used to configure the <code>DevEndpoint</code>.</p>"
         },
         "AddArguments": {
           "shape": "MapValue",
-          "documentation": "<p>The map of arguments to add the map of arguments used to configure the DevEndpoint.</p>"
+          "documentation": "<p>The map of arguments to add the map of arguments used to configure the <code>DevEndpoint</code>.</p>"
         }
       }
     },

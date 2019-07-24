@@ -1146,6 +1146,48 @@
       ],
       "documentation": "<p>Retrieves information about an application.</p>"
     },
+    "GetApplicationDateRangeKpi": {
+      "name": "GetApplicationDateRangeKpi",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apps/{application-id}/kpis/daterange/{kpi-name}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetApplicationDateRangeKpiRequest"
+      },
+      "output": {
+        "shape": "GetApplicationDateRangeKpiResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": " <p>Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.</p>"
+    },
     "GetApplicationSettings": {
       "name": "GetApplicationSettings",
       "http": {
@@ -1355,6 +1397,48 @@
         }
       ],
       "documentation": "<p>Retrieves information about the activity performed by a campaign.</p>"
+    },
+    "GetCampaignDateRangeKpi": {
+      "name": "GetCampaignDateRangeKpi",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apps/{application-id}/campaigns/{campaign-id}/kpis/daterange/{kpi-name}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetCampaignDateRangeKpiRequest"
+      },
+      "output": {
+        "shape": "GetCampaignDateRangeKpiResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": " <p>Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.</p>"
     },
     "GetCampaignVersion": {
       "name": "GetCampaignVersion",
@@ -3878,6 +3962,43 @@
       },
       "documentation": "<p>Specifies address-based configuration settings for a message that's sent directly to an endpoint.</p>"
     },
+    "ApplicationDateRangeKpiResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the application that the metric applies to.</p>"
+        },
+        "EndTime": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.</p>"
+        },
+        "KpiName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+        },
+        "KpiResult": {
+          "shape": "BaseKpiResult",
+          "documentation": "<p>An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the App Metrics resource. The App Metrics resource returns all results in a single page.</p>"
+        },
+        "StartTime": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.</p>"
+        }
+      },
+      "documentation": "<p>Provides the results of a query that retrieved the data for a standard metric that applies to an application, and provides information about that query.</p>",
+      "required": [
+        "KpiResult",
+        "KpiName",
+        "EndTime",
+        "StartTime",
+        "ApplicationId"
+      ]
+    },
     "ApplicationResponse": {
       "type": "structure",
       "members": {
@@ -4132,6 +4253,61 @@
         }
       },
       "documentation": "<p>Specifies the settings for a one-time message that's sent directly to an endpoint through the Baidu (Baidu Cloud Push) channel.</p>"
+    },
+    "BaseKpiResult": {
+      "type": "structure",
+      "members": {
+        "Rows": {
+          "shape": "ListOfResultRow",
+          "documentation": "<p>An array of objects that provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.</p>"
+        }
+      },
+      "documentation": "<p>Provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.</p>",
+      "required": [
+        "Rows"
+      ]
+    },
+    "CampaignDateRangeKpiResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the application that the metric applies to.</p>"
+        },
+        "CampaignId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the campaign that the metric applies to.</p>"
+        },
+        "EndTime": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.</p>"
+        },
+        "KpiName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+        },
+        "KpiResult": {
+          "shape": "BaseKpiResult",
+          "documentation": "<p>An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the Campaign Metrics resource. The Campaign Metrics resource returns all results in a single page.</p>"
+        },
+        "StartTime": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.</p>"
+        }
+      },
+      "documentation": "<p>Provides the results of a query that retrieved the data for a standard metric that applies to a campaign, and provides information about that query.</p>",
+      "required": [
+        "KpiResult",
+        "KpiName",
+        "EndTime",
+        "CampaignId",
+        "StartTime",
+        "ApplicationId"
+      ]
     },
     "CampaignEmailMessage": {
       "type": "structure",
@@ -6314,6 +6490,63 @@
       ],
       "payload": "ApplicationResponse"
     },
+    "GetApplicationDateRangeKpiRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>"
+        },
+        "EndTime": {
+          "shape": "__timestampIso8601",
+          "location": "querystring",
+          "locationName": "end-time",
+          "documentation": "<p>The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.</p>"
+        },
+        "KpiName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "kpi-name",
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "next-token",
+          "documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+        },
+        "PageSize": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "page-size",
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+        },
+        "StartTime": {
+          "shape": "__timestampIso8601",
+          "location": "querystring",
+          "locationName": "start-time",
+          "documentation": "<p>The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.</p>"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "KpiName"
+      ]
+    },
+    "GetApplicationDateRangeKpiResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationDateRangeKpiResponse": {
+          "shape": "ApplicationDateRangeKpiResponse"
+        }
+      },
+      "required": [
+        "ApplicationDateRangeKpiResponse"
+      ],
+      "payload": "ApplicationDateRangeKpiResponse"
+    },
     "GetApplicationSettingsRequest": {
       "type": "structure",
       "members": {
@@ -6347,7 +6580,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6414,7 +6647,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6439,6 +6672,70 @@
         "ActivitiesResponse"
       ],
       "payload": "ActivitiesResponse"
+    },
+    "GetCampaignDateRangeKpiRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>"
+        },
+        "CampaignId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "campaign-id",
+          "documentation": "<p>The unique identifier for the campaign.</p>"
+        },
+        "EndTime": {
+          "shape": "__timestampIso8601",
+          "location": "querystring",
+          "locationName": "end-time",
+          "documentation": "<p>The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.</p>"
+        },
+        "KpiName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "kpi-name",
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "next-token",
+          "documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+        },
+        "PageSize": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "page-size",
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+        },
+        "StartTime": {
+          "shape": "__timestampIso8601",
+          "location": "querystring",
+          "locationName": "start-time",
+          "documentation": "<p>The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.</p>"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "KpiName",
+        "CampaignId"
+      ]
+    },
+    "GetCampaignDateRangeKpiResponse": {
+      "type": "structure",
+      "members": {
+        "CampaignDateRangeKpiResponse": {
+          "shape": "CampaignDateRangeKpiResponse"
+        }
+      },
+      "required": [
+        "CampaignDateRangeKpiResponse"
+      ],
+      "payload": "CampaignDateRangeKpiResponse"
     },
     "GetCampaignRequest": {
       "type": "structure",
@@ -6532,7 +6829,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6571,7 +6868,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6753,7 +7050,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6850,7 +7147,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6888,7 +7185,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -6933,7 +7230,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -7051,7 +7348,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -7096,7 +7393,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include on each page in a paginated response.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -7672,7 +7969,7 @@
       "members": {
         "Carrier": {
           "shape": "__string",
-          "documentation": "<p>The carrier or service provider that the phone number is currently registered with.</p>"
+          "documentation": "<p>The carrier or service provider that the phone number is currently registered with. In some countries and regions, this value may be the carrier or service provider that the phone number was originally registered with.</p>"
         },
         "City": {
           "shape": "__string",
@@ -7954,6 +8251,47 @@
         "AttributesResource"
       ],
       "payload": "AttributesResource"
+    },
+    "ResultRow": {
+      "type": "structure",
+      "members": {
+        "GroupedBys": {
+          "shape": "ListOfResultRowValue",
+          "documentation": " <p>An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.</p>"
+        },
+        "Values": {
+          "shape": "ListOfResultRowValue",
+          "documentation": " <p>An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.</p>"
+        }
+      },
+      "documentation": "<p>Provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.</p>",
+      "required": [
+        "GroupedBys",
+        "Values"
+      ]
+    },
+    "ResultRowValue": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "__string",
+          "documentation": " <p>The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.</p>"
+        },
+        "Type": {
+          "shape": "__string",
+          "documentation": " <p>The data type of the value specified by the Value property.</p>"
+        },
+        "Value": {
+          "shape": "__string",
+          "documentation": " <p>In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).</p>"
+        }
+      },
+      "documentation": " <p>Provides a single value and metadata about that value as part of an array of query results for a standard metric that applies to an application or campaign.</p>",
+      "required": [
+        "Type",
+        "Value",
+        "Key"
+      ]
     },
     "SMSChannelRequest": {
       "type": "structure",
@@ -9444,6 +9782,18 @@
         "shape": "ImportJobResponse"
       }
     },
+    "ListOfResultRow": {
+      "type": "list",
+      "member": {
+        "shape": "ResultRow"
+      }
+    },
+    "ListOfResultRowValue": {
+      "type": "list",
+      "member": {
+        "shape": "ResultRowValue"
+      }
+    },
     "ListOfSegmentDimensions": {
       "type": "list",
       "member": {
@@ -9632,6 +9982,10 @@
     },
     "__string": {
       "type": "string"
+    },
+    "__timestampIso8601": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
     }
   }
 }
