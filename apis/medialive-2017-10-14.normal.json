@@ -2530,6 +2530,11 @@
           "locationName": "name",
           "documentation": "The name of the channel. (user-mutable)"
         },
+        "PipelineDetails": {
+          "shape": "__listOfPipelineDetail",
+          "locationName": "pipelineDetails",
+          "documentation": "Runtime details for the pipelines of a running channel."
+        },
         "PipelinesRunningCount": {
           "shape": "__integer",
           "locationName": "pipelinesRunningCount",
@@ -2903,6 +2908,11 @@
           "locationName": "name",
           "documentation": "The name of the channel. (user-mutable)"
         },
+        "PipelineDetails": {
+          "shape": "__listOfPipelineDetail",
+          "locationName": "pipelineDetails",
+          "documentation": "Runtime details for the pipelines of a running channel."
+        },
         "PipelinesRunningCount": {
           "shape": "__integer",
           "locationName": "pipelinesRunningCount",
@@ -3183,6 +3193,11 @@
           "locationName": "name",
           "documentation": "The name of the channel. (user-mutable)"
         },
+        "PipelineDetails": {
+          "shape": "__listOfPipelineDetail",
+          "locationName": "pipelineDetails",
+          "documentation": "Runtime details for the pipelines of a running channel."
+        },
         "PipelinesRunningCount": {
           "shape": "__integer",
           "locationName": "pipelinesRunningCount",
@@ -3247,6 +3262,11 @@
           "shape": "InputClass",
           "locationName": "inputClass",
           "documentation": "STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.\nSINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.\n"
+        },
+        "InputSourceType": {
+          "shape": "InputSourceType",
+          "locationName": "inputSourceType",
+          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE inputs.\n"
         },
         "MediaConnectFlows": {
           "shape": "__listOfMediaConnectFlow",
@@ -5305,6 +5325,11 @@
         "STANDARD"
       ]
     },
+    "ImmediateModeScheduleActionStartSettings": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Settings to configure an action so that it occurs immediately. This is only supported for input switch actions currently."
+    },
     "Input": {
       "type": "structure",
       "members": {
@@ -5332,6 +5357,11 @@
           "shape": "InputClass",
           "locationName": "inputClass",
           "documentation": "STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.\nSINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.\n"
+        },
+        "InputSourceType": {
+          "shape": "InputSourceType",
+          "locationName": "inputSourceType",
+          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE inputs.\n"
         },
         "MediaConnectFlows": {
           "shape": "__listOfMediaConnectFlow",
@@ -5421,6 +5451,30 @@
       "enum": [
         "STANDARD",
         "SINGLE_PIPELINE"
+      ]
+    },
+    "InputClippingSettings": {
+      "type": "structure",
+      "members": {
+        "InputTimecodeSource": {
+          "shape": "InputTimecodeSource",
+          "locationName": "inputTimecodeSource",
+          "documentation": "The source of the timecodes in the source being clipped."
+        },
+        "StartTimecode": {
+          "shape": "StartTimecode",
+          "locationName": "startTimecode",
+          "documentation": "Settings to identify the start of the clip."
+        },
+        "StopTimecode": {
+          "shape": "StopTimecode",
+          "locationName": "stopTimecode",
+          "documentation": "Settings to identify the end of the clip."
+        }
+      },
+      "documentation": "Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.",
+      "required": [
+        "InputTimecodeSource"
       ]
     },
     "InputCodec": {
@@ -5770,6 +5824,14 @@
       },
       "documentation": "Settings for for a PULL type input."
     },
+    "InputSourceType": {
+      "type": "string",
+      "documentation": "There are two types of input sources, static and dynamic. If an input source is dynamic you can\nchange the source url of the input dynamically using an input switch action. However, the only input type\nto support a dynamic url at this time is MP4_FILE. By default all input sources are static.\n",
+      "enum": [
+        "STATIC",
+        "DYNAMIC"
+      ]
+    },
     "InputSpecification": {
       "type": "structure",
       "members": {
@@ -5808,12 +5870,30 @@
         "InputAttachmentNameReference": {
           "shape": "__string",
           "locationName": "inputAttachmentNameReference",
-          "documentation": "The name of the input attachment that should be switched to by this action."
+          "documentation": "The name of the input attachment (not the name of the input!) to switch to. The name is specified in the channel configuration."
+        },
+        "InputClippingSettings": {
+          "shape": "InputClippingSettings",
+          "locationName": "inputClippingSettings",
+          "documentation": "Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file."
+        },
+        "UrlPath": {
+          "shape": "__listOf__string",
+          "locationName": "urlPath",
+          "documentation": "The value for the variable portion of the URL for the dynamic input, for this instance of the input. Each time you use the same dynamic input in an input switch action, you can provide a different value, in order to connect the input to a different content source."
         }
       },
-      "documentation": "Settings for the action to switch an input.",
+      "documentation": "Settings for the \"switch input\" action: to switch from ingesting one input to ingesting another input.",
       "required": [
         "InputAttachmentNameReference"
+      ]
+    },
+    "InputTimecodeSource": {
+      "type": "string",
+      "documentation": "Documentation update needed",
+      "enum": [
+        "ZEROBASED",
+        "EMBEDDED"
       ]
     },
     "InputType": {
@@ -5879,6 +5959,14 @@
         }
       },
       "documentation": "Key Provider Settings"
+    },
+    "LastFrameClippingBehavior": {
+      "type": "string",
+      "documentation": "If you specify a StopTimecode in an input (in order to clip the file), you can specify if you want the clip to exclude (the default) or include the frame specified by the timecode.",
+      "enum": [
+        "EXCLUDE_LAST_FRAME",
+        "INCLUDE_LAST_FRAME"
+      ]
     },
     "ListChannelsRequest": {
       "type": "structure",
@@ -6717,7 +6805,7 @@
           "documentation": "ID of the channel in MediaPackage that is the destination for this output group. You do not need to specify the individual inputs in MediaPackage; MediaLive will handle the connection of the two MediaLive pipelines to the two MediaPackage inputs. The MediaPackage channel and MediaLive channel must be in the same region."
         }
       },
-      "documentation": "Media Package Output Destination Settings"
+      "documentation": "MediaPackage Output Destination Settings"
     },
     "MediaPackageOutputSettings": {
       "type": "structure",
@@ -7164,6 +7252,27 @@
         }
       },
       "documentation": "Settings for the action to set pause state of a channel."
+    },
+    "PipelineDetail": {
+      "type": "structure",
+      "members": {
+        "ActiveInputAttachmentName": {
+          "shape": "__string",
+          "locationName": "activeInputAttachmentName",
+          "documentation": "The name of the active input attachment currently being ingested by this pipeline."
+        },
+        "ActiveInputSwitchActionName": {
+          "shape": "__string",
+          "locationName": "activeInputSwitchActionName",
+          "documentation": "The name of the input switch schedule action that occurred most recently and that resulted in the switch to the current input attachment for this pipeline."
+        },
+        "PipelineId": {
+          "shape": "__string",
+          "locationName": "pipelineId",
+          "documentation": "Pipeline ID"
+        }
+      },
+      "documentation": "Runtime details of a pipeline when a channel is running."
     },
     "PipelineId": {
       "type": "string",
@@ -7650,15 +7759,20 @@
         "FixedModeScheduleActionStartSettings": {
           "shape": "FixedModeScheduleActionStartSettings",
           "locationName": "fixedModeScheduleActionStartSettings",
-          "documentation": "Holds the start time for the action."
+          "documentation": "Option for specifying the start time for an action."
         },
         "FollowModeScheduleActionStartSettings": {
           "shape": "FollowModeScheduleActionStartSettings",
           "locationName": "followModeScheduleActionStartSettings",
-          "documentation": "Specifies an action to follow for scheduling this action."
+          "documentation": "Option for specifying an action as relative to another action."
+        },
+        "ImmediateModeScheduleActionStartSettings": {
+          "shape": "ImmediateModeScheduleActionStartSettings",
+          "locationName": "immediateModeScheduleActionStartSettings",
+          "documentation": "Option for specifying an action that should be applied immediately."
         }
       },
-      "documentation": "Settings to specify the start time for an action."
+      "documentation": "Settings to specify when an action should occur. Only one of the options must be selected."
     },
     "Scte20Convert608To708": {
       "type": "string",
@@ -7811,7 +7925,7 @@
       "type": "structure",
       "members": {
         "SpliceEventId": {
-          "shape": "__integerMin0Max4294967295",
+          "shape": "__longMin0Max4294967295",
           "locationName": "spliceEventId",
           "documentation": "The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35."
         }
@@ -7848,12 +7962,12 @@
           "documentation": "Corresponds to SCTE-35 segmentation_event_cancel_indicator."
         },
         "SegmentationDuration": {
-          "shape": "__integerMin0Max1099511627775",
+          "shape": "__longMin0Max1099511627775",
           "locationName": "segmentationDuration",
           "documentation": "Corresponds to SCTE-35 segmentation_duration. Optional. The duration for the time_signal, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock ticks. If you do not enter a duration, the time_signal will continue until you insert a cancellation message."
         },
         "SegmentationEventId": {
-          "shape": "__integerMin0Max4294967295",
+          "shape": "__longMin0Max4294967295",
           "locationName": "segmentationEventId",
           "documentation": "Corresponds to SCTE-35 segmentation_event_id. "
         },
@@ -7927,12 +8041,12 @@
       "type": "structure",
       "members": {
         "Duration": {
-          "shape": "__integerMin0Max8589934591",
+          "shape": "__longMin0Max8589934591",
           "locationName": "duration",
           "documentation": "Optional, the duration for the splice_insert, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there is an expectation that the downstream system can read the duration and cue in at that time. If you do not enter a duration, the splice_insert will continue indefinitely and there is an expectation that you will enter a return_to_network to end the splice_insert at the appropriate time."
         },
         "SpliceEventId": {
-          "shape": "__integerMin0Max4294967295",
+          "shape": "__longMin0Max4294967295",
           "locationName": "spliceEventId",
           "documentation": "The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35."
         }
@@ -8147,6 +8261,11 @@
           "locationName": "name",
           "documentation": "The name of the channel. (user-mutable)"
         },
+        "PipelineDetails": {
+          "shape": "__listOfPipelineDetail",
+          "locationName": "pipelineDetails",
+          "documentation": "Runtime details for the pipelines of a running channel."
+        },
         "PipelinesRunningCount": {
           "shape": "__integer",
           "locationName": "pipelinesRunningCount",
@@ -8168,6 +8287,17 @@
         }
       },
       "documentation": "Placeholder documentation for StartChannelResponse"
+    },
+    "StartTimecode": {
+      "type": "structure",
+      "members": {
+        "Timecode": {
+          "shape": "__string",
+          "locationName": "timecode",
+          "documentation": "The timecode for the frame where you want to start the clip. Optional; if not specified, the clip starts at first frame in the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF."
+        }
+      },
+      "documentation": "Settings to identify the start of the clip."
     },
     "StaticImageActivateScheduleActionSettings": {
       "type": "structure",
@@ -8329,6 +8459,11 @@
           "locationName": "name",
           "documentation": "The name of the channel. (user-mutable)"
         },
+        "PipelineDetails": {
+          "shape": "__listOfPipelineDetail",
+          "locationName": "pipelineDetails",
+          "documentation": "Runtime details for the pipelines of a running channel."
+        },
         "PipelinesRunningCount": {
           "shape": "__integer",
           "locationName": "pipelinesRunningCount",
@@ -8350,6 +8485,22 @@
         }
       },
       "documentation": "Placeholder documentation for StopChannelResponse"
+    },
+    "StopTimecode": {
+      "type": "structure",
+      "members": {
+        "LastFrameClippingBehavior": {
+          "shape": "LastFrameClippingBehavior",
+          "locationName": "lastFrameClippingBehavior",
+          "documentation": "If you specify a StopTimecode in an input (in order to clip the file), you can specify if you want the clip to exclude (the default) or include the frame specified by the timecode."
+        },
+        "Timecode": {
+          "shape": "__string",
+          "locationName": "timecode",
+          "documentation": "The timecode for the frame where you want to stop the clip. Optional; if not specified, the clip continues to the end of the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF."
+        }
+      },
+      "documentation": "Settings to identify the end of the clip."
     },
     "Tags": {
       "type": "map",
@@ -8917,12 +9068,6 @@
       "max": 1000000,
       "documentation": "Placeholder documentation for __integerMin0Max1000000"
     },
-    "__integerMin0Max1099511627775": {
-      "type": "long",
-      "min": 0,
-      "max": 1099511627775,
-      "documentation": "Placeholder documentation for __integerMin0Max1099511627775"
-    },
     "__integerMin0Max128": {
       "type": "integer",
       "min": 0,
@@ -8952,12 +9097,6 @@
       "min": 0,
       "max": 3600,
       "documentation": "Placeholder documentation for __integerMin0Max3600"
-    },
-    "__integerMin0Max4294967295": {
-      "type": "long",
-      "min": 0,
-      "max": 4294967295,
-      "documentation": "Placeholder documentation for __integerMin0Max4294967295"
     },
     "__integerMin0Max500": {
       "type": "integer",
@@ -8994,12 +9133,6 @@
       "min": 0,
       "max": 8191,
       "documentation": "Placeholder documentation for __integerMin0Max8191"
-    },
-    "__integerMin0Max8589934591": {
-      "type": "long",
-      "min": 0,
-      "max": 8589934591,
-      "documentation": "Placeholder documentation for __integerMin0Max8589934591"
     },
     "__integerMin1": {
       "type": "integer",
@@ -9324,6 +9457,13 @@
       },
       "documentation": "Placeholder documentation for __listOfOutputGroup"
     },
+    "__listOfPipelineDetail": {
+      "type": "list",
+      "member": {
+        "shape": "PipelineDetail"
+      },
+      "documentation": "Placeholder documentation for __listOfPipelineDetail"
+    },
     "__listOfPipelinePauseStateSettings": {
       "type": "list",
       "member": {
@@ -9365,6 +9505,24 @@
         "shape": "__string"
       },
       "documentation": "Placeholder documentation for __listOf__string"
+    },
+    "__longMin0Max1099511627775": {
+      "type": "long",
+      "min": 0,
+      "max": 1099511627775,
+      "documentation": "Placeholder documentation for __longMin0Max1099511627775"
+    },
+    "__longMin0Max4294967295": {
+      "type": "long",
+      "min": 0,
+      "max": 4294967295,
+      "documentation": "Placeholder documentation for __longMin0Max4294967295"
+    },
+    "__longMin0Max8589934591": {
+      "type": "long",
+      "min": 0,
+      "max": 8589934591,
+      "documentation": "Placeholder documentation for __longMin0Max8589934591"
     },
     "__string": {
       "type": "string",

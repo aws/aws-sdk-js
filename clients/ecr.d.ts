@@ -164,6 +164,14 @@ declare class ECR extends Service {
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
+   * Updates the image tag mutability settings for a repository.
+   */
+  putImageTagMutability(params: ECR.Types.PutImageTagMutabilityRequest, callback?: (err: AWSError, data: ECR.Types.PutImageTagMutabilityResponse) => void): Request<ECR.Types.PutImageTagMutabilityResponse, AWSError>;
+  /**
+   * Updates the image tag mutability settings for a repository.
+   */
+  putImageTagMutability(callback?: (err: AWSError, data: ECR.Types.PutImageTagMutabilityResponse) => void): Request<ECR.Types.PutImageTagMutabilityResponse, AWSError>;
+  /**
    * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
    */
   putLifecyclePolicy(params: ECR.Types.PutLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
@@ -172,11 +180,11 @@ declare class ECR extends Service {
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
-   * Applies a repository policy on a specified repository to control access permissions.
+   * Applies a repository policy on a specified repository to control access permissions. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
    */
   setRepositoryPolicy(params: ECR.Types.SetRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
   /**
-   * Applies a repository policy on a specified repository to control access permissions.
+   * Applies a repository policy on a specified repository to control access permissions. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
    */
   setRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
   /**
@@ -350,9 +358,13 @@ declare namespace ECR {
      */
     repositoryName: RepositoryName;
     /**
-     * 
+     * The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
      */
     tags?: TagList;
+    /**
+     * The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+     */
+    imageTagMutability?: ImageTagMutability;
   }
   export interface CreateRepositoryResponse {
     /**
@@ -445,7 +457,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * A list of repositories to describe.
+     * The repository that contains the images to describe.
      */
     repositoryName: RepositoryName;
     /**
@@ -732,6 +744,7 @@ declare namespace ECR {
   export type ImageSizeInBytes = number;
   export type ImageTag = string;
   export type ImageTagList = ImageTag[];
+  export type ImageTagMutability = "MUTABLE"|"IMMUTABLE"|string;
   export interface InitiateLayerUploadRequest {
     /**
      * The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.
@@ -919,6 +932,34 @@ declare namespace ECR {
      */
     image?: Image;
   }
+  export interface PutImageTagMutabilityRequest {
+    /**
+     * The AWS account ID associated with the registry that contains the repository in which to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The name of the repository in which to update the image tag mutability settings.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The tag mutability setting for the repository. If MUTABLE is specified, image tags can be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+     */
+    imageTagMutability: ImageTagMutability;
+  }
+  export interface PutImageTagMutabilityResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The image tag mutability setting for the repository.
+     */
+    imageTagMutability?: ImageTagMutability;
+  }
   export interface PutLifecyclePolicyRequest {
     /**
      * The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.
@@ -969,6 +1010,10 @@ declare namespace ECR {
      * The date and time, in JavaScript date format, when the repository was created.
      */
     createdAt?: CreationTimestamp;
+    /**
+     * The tag mutability setting for the repository.
+     */
+    imageTagMutability?: ImageTagMutability;
   }
   export type RepositoryList = Repository[];
   export type RepositoryName = string;
@@ -984,7 +1029,7 @@ declare namespace ECR {
      */
     repositoryName: RepositoryName;
     /**
-     * The JSON repository policy text to apply to the repository.
+     * The JSON repository policy text to apply to the repository. For more information, see Amazon ECR Repository Policy Examples in the Amazon Elastic Container Registry User Guide.
      */
     policyText: RepositoryPolicyText;
     /**

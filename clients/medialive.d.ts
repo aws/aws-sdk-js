@@ -828,6 +828,10 @@ one destination per packager.
      */
     Name?: __string;
     /**
+     * Runtime details for the pipelines of a running channel.
+     */
+    PipelineDetails?: __listOfPipelineDetail;
+    /**
      * The number of currently healthy pipelines.
      */
     PipelinesRunningCount?: __integer;
@@ -1054,6 +1058,10 @@ one destination per packager.
      */
     Name?: __string;
     /**
+     * Runtime details for the pipelines of a running channel.
+     */
+    PipelineDetails?: __listOfPipelineDetail;
+    /**
      * The number of currently healthy pipelines.
      */
     PipelinesRunningCount?: __integer;
@@ -1223,6 +1231,10 @@ one destination per packager.
      */
     Name?: __string;
     /**
+     * Runtime details for the pipelines of a running channel.
+     */
+    PipelineDetails?: __listOfPipelineDetail;
+    /**
      * The number of currently healthy pipelines.
      */
     PipelinesRunningCount?: __integer;
@@ -1265,6 +1277,12 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
 
      */
     InputClass?: InputClass;
+    /**
+     * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
+during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
+
+     */
+    InputSourceType?: InputSourceType;
     /**
      * A list of MediaConnect Flows for this input.
      */
@@ -2344,6 +2362,8 @@ SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts 
     RestartDelay?: __integerMin0Max15;
   }
   export type IFrameOnlyPlaylistType = "DISABLED"|"STANDARD"|string;
+  export interface ImmediateModeScheduleActionStartSettings {
+  }
   export interface Input {
     /**
      * The Unique ARN of the input (generated, immutable).
@@ -2367,6 +2387,12 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
 
      */
     InputClass?: InputClass;
+    /**
+     * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
+during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
+
+     */
+    InputSourceType?: InputSourceType;
     /**
      * A list of MediaConnect Flows for this input.
      */
@@ -2419,6 +2445,20 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
     InputChannel: __integerMin0Max15;
   }
   export type InputClass = "STANDARD"|"SINGLE_PIPELINE"|string;
+  export interface InputClippingSettings {
+    /**
+     * The source of the timecodes in the source being clipped.
+     */
+    InputTimecodeSource: InputTimecodeSource;
+    /**
+     * Settings to identify the start of the clip.
+     */
+    StartTimecode?: StartTimecode;
+    /**
+     * Settings to identify the end of the clip.
+     */
+    StopTimecode?: StopTimecode;
+  }
   export type InputCodec = "MPEG2"|"AVC"|"HEVC"|string;
   export type InputDeblockFilter = "DISABLED"|"ENABLED"|string;
   export type InputDenoiseFilter = "DISABLED"|"ENABLED"|string;
@@ -2606,6 +2646,7 @@ pulled from.
      */
     Username?: __string;
   }
+  export type InputSourceType = "STATIC"|"DYNAMIC"|string;
   export interface InputSpecification {
     /**
      * Input codec
@@ -2623,10 +2664,19 @@ pulled from.
   export type InputState = "CREATING"|"DETACHED"|"ATTACHED"|"DELETING"|"DELETED"|string;
   export interface InputSwitchScheduleActionSettings {
     /**
-     * The name of the input attachment that should be switched to by this action.
+     * The name of the input attachment (not the name of the input!) to switch to. The name is specified in the channel configuration.
      */
     InputAttachmentNameReference: __string;
+    /**
+     * Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.
+     */
+    InputClippingSettings?: InputClippingSettings;
+    /**
+     * The value for the variable portion of the URL for the dynamic input, for this instance of the input. Each time you use the same dynamic input in an input switch action, you can provide a different value, in order to connect the input to a different content source.
+     */
+    UrlPath?: __listOf__string;
   }
+  export type InputTimecodeSource = "ZEROBASED"|"EMBEDDED"|string;
   export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|string;
   export interface InputVpcRequest {
     /**
@@ -2657,6 +2707,7 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   export interface KeyProviderSettings {
     StaticKeySettings?: StaticKeySettings;
   }
+  export type LastFrameClippingBehavior = "EXCLUDE_LAST_FRAME"|"INCLUDE_LAST_FRAME"|string;
   export interface ListChannelsRequest {
     MaxResults?: MaxResults;
     NextToken?: __string;
@@ -3358,6 +3409,20 @@ Options:
   export interface PauseStateScheduleActionSettings {
     Pipelines?: __listOfPipelinePauseStateSettings;
   }
+  export interface PipelineDetail {
+    /**
+     * The name of the active input attachment currently being ingested by this pipeline.
+     */
+    ActiveInputAttachmentName?: __string;
+    /**
+     * The name of the input switch schedule action that occurred most recently and that resulted in the switch to the current input attachment for this pipeline.
+     */
+    ActiveInputSwitchActionName?: __string;
+    /**
+     * Pipeline ID
+     */
+    PipelineId?: __string;
+  }
   export type PipelineId = "PIPELINE_0"|"PIPELINE_1"|string;
   export interface PipelinePauseStateSettings {
     /**
@@ -3627,13 +3692,17 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface ScheduleActionStartSettings {
     /**
-     * Holds the start time for the action.
+     * Option for specifying the start time for an action.
      */
     FixedModeScheduleActionStartSettings?: FixedModeScheduleActionStartSettings;
     /**
-     * Specifies an action to follow for scheduling this action.
+     * Option for specifying an action as relative to another action.
      */
     FollowModeScheduleActionStartSettings?: FollowModeScheduleActionStartSettings;
+    /**
+     * Option for specifying an action that should be applied immediately.
+     */
+    ImmediateModeScheduleActionStartSettings?: ImmediateModeScheduleActionStartSettings;
   }
   export type Scte20Convert608To708 = "DISABLED"|"UPCONVERT"|string;
   export interface Scte20PlusEmbeddedDestinationSettings {
@@ -3699,7 +3768,7 @@ Valid values: 1, 2, 4, 6, 8
     /**
      * The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
      */
-    SpliceEventId: __integerMin0Max4294967295;
+    SpliceEventId: __longMin0Max4294967295;
   }
   export type Scte35SegmentationCancelIndicator = "SEGMENTATION_EVENT_NOT_CANCELED"|"SEGMENTATION_EVENT_CANCELED"|string;
   export interface Scte35SegmentationDescriptor {
@@ -3718,11 +3787,11 @@ Valid values: 1, 2, 4, 6, 8
     /**
      * Corresponds to SCTE-35 segmentation_duration. Optional. The duration for the time_signal, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock ticks. If you do not enter a duration, the time_signal will continue until you insert a cancellation message.
      */
-    SegmentationDuration?: __integerMin0Max1099511627775;
+    SegmentationDuration?: __longMin0Max1099511627775;
     /**
      * Corresponds to SCTE-35 segmentation_event_id. 
      */
-    SegmentationEventId: __integerMin0Max4294967295;
+    SegmentationEventId: __longMin0Max4294967295;
     /**
      * Corresponds to SCTE-35 segmentation_type_id. One of the segmentation_type_id values listed in the SCTE-35 specification. On the console, enter the ID in decimal (for example, "52"). In the CLI, API, or an SDK, enter the ID in hex (for example, "0x34") or decimal (for example, "52").
      */
@@ -3767,11 +3836,11 @@ Valid values: 1, 2, 4, 6, 8
     /**
      * Optional, the duration for the splice_insert, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there is an expectation that the downstream system can read the duration and cue in at that time. If you do not enter a duration, the splice_insert will continue indefinitely and there is an expectation that you will enter a return_to_network to end the splice_insert at the appropriate time.
      */
-    Duration?: __integerMin0Max8589934591;
+    Duration?: __longMin0Max8589934591;
     /**
      * The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
      */
-    SpliceEventId: __integerMin0Max4294967295;
+    SpliceEventId: __longMin0Max4294967295;
   }
   export type Scte35SpliceInsertWebDeliveryAllowedBehavior = "FOLLOW"|"IGNORE"|string;
   export interface Scte35TimeSignalApos {
@@ -3857,6 +3926,10 @@ one destination per packager.
      */
     Name?: __string;
     /**
+     * Runtime details for the pipelines of a running channel.
+     */
+    PipelineDetails?: __listOfPipelineDetail;
+    /**
      * The number of currently healthy pipelines.
      */
     PipelinesRunningCount?: __integer;
@@ -3869,6 +3942,12 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+  }
+  export interface StartTimecode {
+    /**
+     * The timecode for the frame where you want to start the clip. Optional; if not specified, the clip starts at first frame in the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.
+     */
+    Timecode?: __string;
   }
   export interface StaticImageActivateScheduleActionSettings {
     /**
@@ -3977,6 +4056,10 @@ one destination per packager.
      */
     Name?: __string;
     /**
+     * Runtime details for the pipelines of a running channel.
+     */
+    PipelineDetails?: __listOfPipelineDetail;
+    /**
      * The number of currently healthy pipelines.
      */
     PipelinesRunningCount?: __integer;
@@ -3989,6 +4072,16 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+  }
+  export interface StopTimecode {
+    /**
+     * If you specify a StopTimecode in an input (in order to clip the file), you can specify if you want the clip to exclude (the default) or include the frame specified by the timecode.
+     */
+    LastFrameClippingBehavior?: LastFrameClippingBehavior;
+    /**
+     * The timecode for the frame where you want to stop the clip. Optional; if not specified, the clip continues to the end of the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.
+     */
+    Timecode?: __string;
   }
   export type Tags = {[key: string]: __string};
   export interface TeletextDestinationSettings {
@@ -4254,20 +4347,17 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin0Max1000 = number;
   export type __integerMin0Max10000 = number;
   export type __integerMin0Max1000000 = number;
-  export type __integerMin0Max1099511627775 = number;
   export type __integerMin0Max128 = number;
   export type __integerMin0Max15 = number;
   export type __integerMin0Max255 = number;
   export type __integerMin0Max30 = number;
   export type __integerMin0Max3600 = number;
-  export type __integerMin0Max4294967295 = number;
   export type __integerMin0Max500 = number;
   export type __integerMin0Max600 = number;
   export type __integerMin0Max65535 = number;
   export type __integerMin0Max65536 = number;
   export type __integerMin0Max7 = number;
   export type __integerMin0Max8191 = number;
-  export type __integerMin0Max8589934591 = number;
   export type __integerMin1 = number;
   export type __integerMin1000 = number;
   export type __integerMin1000Max30000 = number;
@@ -4318,12 +4408,16 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfOutputDestination = OutputDestination[];
   export type __listOfOutputDestinationSettings = OutputDestinationSettings[];
   export type __listOfOutputGroup = OutputGroup[];
+  export type __listOfPipelineDetail = PipelineDetail[];
   export type __listOfPipelinePauseStateSettings = PipelinePauseStateSettings[];
   export type __listOfReservation = Reservation[];
   export type __listOfScheduleAction = ScheduleAction[];
   export type __listOfScte35Descriptor = Scte35Descriptor[];
   export type __listOfVideoDescription = VideoDescription[];
   export type __listOf__string = __string[];
+  export type __longMin0Max1099511627775 = number;
+  export type __longMin0Max4294967295 = number;
+  export type __longMin0Max8589934591 = number;
   export type __string = string;
   export type __stringMax32 = string;
   export type __stringMin1 = string;

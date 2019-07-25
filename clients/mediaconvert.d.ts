@@ -224,7 +224,7 @@ declare namespace MediaConvert {
      */
     AudioDescriptionBroadcasterMix?: AacAudioDescriptionBroadcasterMix;
     /**
-     * Average bitrate in bits/second. The set of valid values for this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000, 896000, 1024000. The value you set is also constrained by the values you choose for Profile (codecProfile), Bitrate control mode (codingMode), and Sample rate (sampleRate). Default values depend on Bitrate control mode and Profile.
+     * Specify the average bitrate in bits per second. The set of valid values for this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000, 896000, 1024000. The value you set is also constrained by the values that you choose for Profile (codecProfile), Bitrate control mode (codingMode), and Sample rate (sampleRate). Default values depend on Bitrate control mode and Profile.
      */
     Bitrate?: __integerMin6000Max1024000;
     /**
@@ -265,11 +265,11 @@ declare namespace MediaConvert {
   export type Ac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
   export interface Ac3Settings {
     /**
-     * Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+     * Specify the average bitrate in bits per second. Valid bitrates depend on the coding mode.
      */
     Bitrate?: __integerMin64000Max640000;
     /**
-     * Specifies the "Bitstream Mode" (bsmod) for the emitted AC-3 stream. See ATSC A/52-2012 for background on these values.
+     * Specify the bitstream mode for the AC-3 stream that the encoder emits. For more information about the AC3 bitstream mode, see ATSC A/52-2012 (Annex E).
      */
     BitstreamMode?: Ac3BitstreamMode;
     /**
@@ -293,7 +293,7 @@ declare namespace MediaConvert {
      */
     MetadataControl?: Ac3MetadataControl;
     /**
-     * Sample rate in hz. Sample rate is always 48000.
+     * This value is always 48000. It represents the sample rate in Hz.
      */
     SampleRate?: __integerMin48000Max48000;
   }
@@ -334,7 +334,7 @@ declare namespace MediaConvert {
   }
   export interface AssociateCertificateResponse {
   }
-  export type AudioCodec = "AAC"|"MP2"|"WAV"|"AIFF"|"AC3"|"EAC3"|"PASSTHROUGH"|string;
+  export type AudioCodec = "AAC"|"MP2"|"WAV"|"AIFF"|"AC3"|"EAC3"|"EAC3_ATMOS"|"PASSTHROUGH"|string;
   export interface AudioCodecSettings {
     /**
      * Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AAC. The service accepts one of two mutually exclusive groups of AAC settings--VBR and CBR. To select one of these modes, set the value of Bitrate control mode (rateControlMode) to "VBR" or "CBR".  In VBR mode, you control the audio quality with the setting VBR quality (vbrQuality). In CBR mode, you use the setting Bitrate (bitrate). Defaults and valid values depend on the rate control mode.
@@ -353,6 +353,10 @@ declare namespace MediaConvert {
      */
     Codec?: AudioCodec;
     /**
+     * Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value EAC3_ATMOS.
+     */
+    Eac3AtmosSettings?: Eac3AtmosSettings;
+    /**
      * Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value EAC3.
      */
     Eac3Settings?: Eac3Settings;
@@ -368,7 +372,7 @@ declare namespace MediaConvert {
   export type AudioDefaultSelection = "DEFAULT"|"NOT_DEFAULT"|string;
   export interface AudioDescription {
     /**
-     * Advanced audio normalization settings.
+     * Advanced audio normalization settings. Ignore these settings unless you need to comply with a loudness standard.
      */
     AudioNormalizationSettings?: AudioNormalizationSettings;
     /**
@@ -384,7 +388,7 @@ declare namespace MediaConvert {
      */
     AudioTypeControl?: AudioTypeControl;
     /**
-     * Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value you choose for Audio codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings
+     * Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
      */
     CodecSettings?: AudioCodecSettings;
     /**
@@ -409,13 +413,13 @@ declare namespace MediaConvert {
     StreamName?: __stringPatternWS;
   }
   export type AudioLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
-  export type AudioNormalizationAlgorithm = "ITU_BS_1770_1"|"ITU_BS_1770_2"|string;
+  export type AudioNormalizationAlgorithm = "ITU_BS_1770_1"|"ITU_BS_1770_2"|"ITU_BS_1770_3"|"ITU_BS_1770_4"|string;
   export type AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"|"MEASURE_ONLY"|string;
   export type AudioNormalizationLoudnessLogging = "LOG"|"DONT_LOG"|string;
   export type AudioNormalizationPeakCalculation = "TRUE_PEAK"|"NONE"|string;
   export interface AudioNormalizationSettings {
     /**
-     * Audio normalization algorithm to use. 1770-1 conforms to the CALM Act specification, 1770-2 conforms to the EBU R-128 specification.
+     * Choose one of the following audio normalization algorithms: ITU-R BS.1770-1: Ungated loudness. A measurement of ungated average loudness for an entire piece of content, suitable for measurement of short-form content under ATSC recommendation A/85. Supports up to 5.1 audio channels. ITU-R BS.1770-2: Gated loudness. A measurement of gated average loudness compliant with the requirements of EBU-R128. Supports up to 5.1 audio channels. ITU-R BS.1770-3: Modified peak. The same loudness measurement algorithm as 1770-2, with an updated true peak measurement. ITU-R BS.1770-4: Higher channel count. Allows for more audio channels than the other algorithms, including configurations such as 7.1.
      */
     Algorithm?: AudioNormalizationAlgorithm;
     /**
@@ -435,7 +439,7 @@ declare namespace MediaConvert {
      */
     PeakCalculation?: AudioNormalizationPeakCalculation;
     /**
-     * Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm. The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.
+     * When you use Audio normalization (AudioNormalizationSettings), optionally use this setting to specify a target loudness. If you don't specify a value here, the encoder chooses a value for you, based on the algorithm that you choose for Algorithm (algorithm). If you choose algorithm 1770-1, the encoder will choose -24 LKFS; otherwise, the encoder will choose -23 LKFS.
      */
     TargetLkfs?: __doubleMinNegative59Max0;
   }
@@ -858,7 +862,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     MovSettings?: MovSettings;
     /**
-     * Settings for MP4 Container
+     * Settings for MP4 container. You can create audio-only AAC outputs with this container.
      */
     Mp4Settings?: Mp4Settings;
   }
@@ -1265,6 +1269,80 @@ All burn-in and DVB-Sub font settings must match.
      */
     TdtInterval?: __integerMin1000Max30000;
   }
+  export type Eac3AtmosBitstreamMode = "COMPLETE_MAIN"|string;
+  export type Eac3AtmosCodingMode = "CODING_MODE_9_1_6"|string;
+  export type Eac3AtmosDialogueIntelligence = "ENABLED"|"DISABLED"|string;
+  export type Eac3AtmosDynamicRangeCompressionLine = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|string;
+  export type Eac3AtmosDynamicRangeCompressionRf = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|string;
+  export type Eac3AtmosMeteringMode = "LEQ_A"|"ITU_BS_1770_1"|"ITU_BS_1770_2"|"ITU_BS_1770_3"|"ITU_BS_1770_4"|string;
+  export interface Eac3AtmosSettings {
+    /**
+     * Specify the average bitrate in bits per second.
+Valid values: 384k, 448k, 640k, 768k
+     */
+    Bitrate?: __integerMin384000Max768000;
+    /**
+     * Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).
+     */
+    BitstreamMode?: Eac3AtmosBitstreamMode;
+    /**
+     * The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6 (CODING_MODE_9_1_6).
+     */
+    CodingMode?: Eac3AtmosCodingMode;
+    /**
+     * Enable Dolby Dialogue Intelligence to adjust loudness based on dialogue analysis.
+     */
+    DialogueIntelligence?: Eac3AtmosDialogueIntelligence;
+    /**
+     * Specify the absolute peak level for a signal with dynamic range compression.
+     */
+    DynamicRangeCompressionLine?: Eac3AtmosDynamicRangeCompressionLine;
+    /**
+     * Specify how the service limits the audio dynamic range when compressing the audio.
+     */
+    DynamicRangeCompressionRf?: Eac3AtmosDynamicRangeCompressionRf;
+    /**
+     * Specify a value for the following Dolby Atmos setting: Left only/Right only center mix
+(Lo/Ro center). MediaConvert uses this value for downmixing. How the service uses this
+value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix).
+Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
+     */
+    LoRoCenterMixLevel?: __doubleMinNegative6Max3;
+    /**
+     * Specify a value for the following Dolby Atmos setting: Left only/Right only (Lo/Ro surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel.
+     */
+    LoRoSurroundMixLevel?: __doubleMinNegative60MaxNegative1;
+    /**
+     * Specify a value for the following Dolby Atmos setting: Left total/Right total center mix (Lt/Rt center). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
+     */
+    LtRtCenterMixLevel?: __doubleMinNegative6Max3;
+    /**
+     * Specify a value for the following Dolby Atmos setting: Left total/Right total surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel.
+     */
+    LtRtSurroundMixLevel?: __doubleMinNegative60MaxNegative1;
+    /**
+     * Choose how the service meters the loudness of your audio.
+     */
+    MeteringMode?: Eac3AtmosMeteringMode;
+    /**
+     * This value is always 48000. It represents the sample rate in Hz.
+     */
+    SampleRate?: __integerMin48000Max48000;
+    /**
+     * Specify the percentage of audio content that must be speech before the encoder uses the measured speech loudness as the overall program loudness.
+     */
+    SpeechThreshold?: __integerMin1Max100;
+    /**
+     * Choose how the service does stereo downmixing.
+     */
+    StereoDownmix?: Eac3AtmosStereoDownmix;
+    /**
+     * Specify whether your input audio has an additional center rear surround channel matrix encoded into your left and right surround channels.
+     */
+    SurroundExMode?: Eac3AtmosSurroundExMode;
+  }
+  export type Eac3AtmosStereoDownmix = "NOT_INDICATED"|"STEREO"|"SURROUND"|"DPL2"|string;
+  export type Eac3AtmosSurroundExMode = "NOT_INDICATED"|"ENABLED"|"DISABLED"|string;
   export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
   export type Eac3BitstreamMode = "COMPLETE_MAIN"|"COMMENTARY"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string;
   export type Eac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_3_2"|string;
@@ -1282,11 +1360,11 @@ All burn-in and DVB-Sub font settings must match.
      */
     AttenuationControl?: Eac3AttenuationControl;
     /**
-     * Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+     * Specify the average bitrate in bits per second. Valid bitrates depend on the coding mode.
      */
     Bitrate?: __integerMin64000Max640000;
     /**
-     * Specifies the "Bitstream Mode" (bsmod) for the emitted E-AC-3 stream. See ATSC A/52-2012 (Annex E) for background on these values.
+     * Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).
      */
     BitstreamMode?: Eac3BitstreamMode;
     /**
@@ -1302,11 +1380,11 @@ All burn-in and DVB-Sub font settings must match.
      */
     Dialnorm?: __integerMin1Max31;
     /**
-     * Enables Dynamic Range Compression that restricts the absolute peak level for a signal.
+     * Specify the absolute peak level for a signal with dynamic range compression.
      */
     DynamicRangeCompressionLine?: Eac3DynamicRangeCompressionLine;
     /**
-     * Enables Heavy Dynamic Range Compression, ensures that the instantaneous signal peaks do not exceed specified levels.
+     * Specify how the service limits the audio dynamic range when compressing the audio.
      */
     DynamicRangeCompressionRf?: Eac3DynamicRangeCompressionRf;
     /**
@@ -1318,23 +1396,19 @@ All burn-in and DVB-Sub font settings must match.
      */
     LfeFilter?: Eac3LfeFilter;
     /**
-     * Left only/Right only center mix level. Only used for 3/2 coding mode.
-Valid values: 3.0, 1.5, 0.0, -1.5 -3.0 -4.5 -6.0 -60
+     * Specify a value for the following Dolby Digital Plus setting: Left only/Right only center mix (Lo/Ro center). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3StereoDownmix). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Left only/Right only center (loRoCenterMixLevel).
      */
     LoRoCenterMixLevel?: __doubleMinNegative60Max3;
     /**
-     * Left only/Right only surround mix level. Only used for 3/2 coding mode.
-Valid values: -1.5 -3.0 -4.5 -6.0 -60
+     * Specify a value for the following Dolby Digital Plus setting: Left only/Right only (Lo/Ro surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3StereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Left only/Right only surround (loRoSurroundMixLevel).
      */
     LoRoSurroundMixLevel?: __doubleMinNegative60MaxNegative1;
     /**
-     * Left total/Right total center mix level. Only used for 3/2 coding mode.
-Valid values: 3.0, 1.5, 0.0, -1.5 -3.0 -4.5 -6.0 -60
+     * Specify a value for the following Dolby Digital Plus setting: Left total/Right total center mix (Lt/Rt center). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3StereoDownmix). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Left total/Right total center (ltRtCenterMixLevel).
      */
     LtRtCenterMixLevel?: __doubleMinNegative60Max3;
     /**
-     * Left total/Right total surround mix level. Only used for 3/2 coding mode.
-Valid values: -1.5 -3.0 -4.5 -6.0 -60
+     * Specify a value for the following Dolby Digital Plus setting: Left total/Right total surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3StereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Left total/Right total surround (ltRtSurroundMixLevel).
      */
     LtRtSurroundMixLevel?: __doubleMinNegative60MaxNegative1;
     /**
@@ -1350,11 +1424,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     PhaseControl?: Eac3PhaseControl;
     /**
-     * Sample rate in hz. Sample rate is always 48000.
+     * This value is always 48000. It represents the sample rate in Hz.
      */
     SampleRate?: __integerMin48000Max48000;
     /**
-     * Stereo downmix preference. Only used for 3/2 coding mode.
+     * Choose how the service does stereo downmixing. This setting only applies if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2) for the setting Coding mode (Eac3CodingMode). If you choose a different value for Coding mode, the service ignores Stereo downmix (Eac3StereoDownmix).
      */
     StereoDownmix?: Eac3StereoDownmix;
     /**
@@ -1372,9 +1446,13 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type EmbeddedConvert608To708 = "UPCONVERT"|"DISABLED"|string;
   export interface EmbeddedDestinationSettings {
     /**
-     * Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. Specify a different number for each output captions track. If you don't specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3.
+     * Ignore this setting unless your input captions are SCC format. With SCC inputs, you can optionally use this setting to replace the input channel number with the channel number that you specify. Specify a different number for each output captions track for a particular output. If you don't specify an output channel number, the system uses the input channel number for the output channel number. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3.
      */
     Destination608ChannelNumber?: __integerMin1Max4;
+    /**
+     * Ignore this setting unless your input captions are SCC format and you are performing SCC upconvert. With SCC inputs, you can optionally use this setting to specify the 708 service number that is in the output. Specify a different service number for each output captions track for a particular output. If you don't specify an output track number, the system uses the 608 channel number for the output 708 service number. You can combine two captions channels in your output. Service numbers must be distinct.
+     */
+    Destination708ServiceNumber?: __integerMin1Max6;
   }
   export interface EmbeddedSourceSettings {
     /**
@@ -1418,7 +1496,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface EsamSignalProcessingNotification {
     /**
-     * Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. If you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can't do both.
+     * Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. For your MPEG2-TS file outputs, if you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can't do both.
      */
     SccXml?: __stringPatternSNSignalProcessingNotificationNS;
   }
@@ -1537,7 +1615,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H264QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
   export interface H264QvbrSettings {
     /**
-     * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
+     * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value that you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
      */
     MaxAverageBitrate?: __integerMin1000Max1152000000;
     /**
@@ -1554,7 +1632,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AdaptiveQuantization?: H264AdaptiveQuantization;
     /**
-     * Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.
+     * Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.
      */
     Bitrate?: __integerMin1000Max1152000000;
     /**
@@ -1729,7 +1807,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type H265QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
   export interface H265QvbrSettings {
     /**
-     * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
+     * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value that you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
      */
     MaxAverageBitrate?: __integerMin1000Max1466400000;
     /**
@@ -1750,7 +1828,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AlternateTransferFunctionSei?: H265AlternateTransferFunctionSei;
     /**
-     * Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.
+     * Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.
      */
     Bitrate?: __integerMin1000Max1466400000;
     /**
@@ -1959,6 +2037,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     WhitePointY?: __integerMin0Max50000;
   }
   export type HlsAdMarkers = "ELEMENTAL"|"ELEMENTAL_SCTE35"|string;
+  export type HlsAudioOnlyContainer = "AUTOMATIC"|"M2TS"|string;
   export type HlsAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|"AUDIO_ONLY_VARIANT_STREAM"|string;
   export interface HlsCaptionLanguageMapping {
     /**
@@ -2015,7 +2094,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type HlsEncryptionType = "AES128"|"SAMPLE_AES"|string;
   export interface HlsGroupSettings {
     /**
-     * Choose one or more ad marker types to pass SCTE35 signals through to this group of Apple HLS outputs.
+     * Choose one or more ad marker types to decorate your Apple HLS manifest. This setting does not determine whether SCTE-35 markers appear in the outputs themselves.
      */
     AdMarkers?: __listOfHlsAdMarkers;
     /**
@@ -2126,6 +2205,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AudioGroupId?: __string;
     /**
+     * Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create an audio-only file in a raw container. Regardless of the value that you specify here, if this output has video, the service will place the output into an MPEG2-TS container.
+     */
+    AudioOnlyContainer?: HlsAudioOnlyContainer;
+    /**
      * List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by ','.
      */
     AudioRenditionSets?: __string;
@@ -2174,6 +2257,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     CaptionSelectors?: __mapOfCaptionSelector;
     /**
+     * Use Cropping selection (crop) to specify the video area that the service will include in the output video frame. If you specify a value here, it will override any value that you specify in the output setting Cropping selection (crop).
+     */
+    Crop?: Rectangle;
+    /**
      * Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs.
      */
     DeblockFilter?: InputDeblockFilter;
@@ -2188,7 +2275,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* (SupplementalImps) to specify any supplemental IMPs that contain assets referenced by the CPL.
      */
-    FileInput?: __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL;
+    FileInput?: __stringPatternHttpHttpsS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL;
     /**
      * Use Filter enable (InputFilterEnable) to specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The in put is filtered regardless of input type.
      */
@@ -2205,6 +2292,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * (InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.
      */
     InputClippings?: __listOfInputClipping;
+    /**
+     * Use Selection placement (position) to define the video area in your output frame. The area outside of the rectangle that you specify here is black. If you specify a value here, it will override any value that you specify in the output setting Selection placement (position). If you specify a value here, this will override any AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND). If you specify a value here, this will ignore anything that you specify for the setting Scaling Behavior (scalingBehavior).
+     */
+    Position?: Rectangle;
     /**
      * Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you specify doesn't exist, the transcoding service will use this default.
      */
@@ -2273,6 +2364,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     CaptionSelectors?: __mapOfCaptionSelector;
     /**
+     * Use Cropping selection (crop) to specify the video area that the service will include in the output video frame. If you specify a value here, it will override any value that you specify in the output setting Cropping selection (crop).
+     */
+    Crop?: Rectangle;
+    /**
      * Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs.
      */
     DeblockFilter?: InputDeblockFilter;
@@ -2296,6 +2391,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * (InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.
      */
     InputClippings?: __listOfInputClipping;
+    /**
+     * Use Selection placement (position) to define the video area in your output frame. The area outside of the rectangle that you specify here is black. If you specify a value here, it will override any value that you specify in the output setting Selection placement (position). If you specify a value here, this will override any AFD values in your input, even if you set Respond to AFD (RespondToAfd) to Respond (RESPOND). If you specify a value here, this will ignore anything that you specify for the setting Scaling Behavior (scalingBehavior).
+     */
+    Position?: Rectangle;
     /**
      * Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you specify doesn't exist, the transcoding service will use this default.
      */
@@ -2394,7 +2493,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Id?: __string;
     /**
-     * An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs that use input clipping, the service can't provide information about job progress. In those cases, jobPercentComplete returns a null value.
+     * An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, the service can't provide information about job progress. In those cases, jobPercentComplete returns a null value.
      */
     JobPercentComplete?: __integer;
     /**
@@ -2461,7 +2560,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     MotionImageInserter?: MotionImageInserter;
     /**
-     * Settings for Nielsen Configuration
+     * Settings for your Nielsen configuration. If you don't do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don't include any children of nielsenConfiguration, you still enable the setting.
      */
     NielsenConfiguration?: NielsenConfiguration;
     /**
@@ -2480,7 +2579,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type JobStatus = "SUBMITTED"|"PROGRESSING"|"COMPLETE"|"CANCELED"|"ERROR"|string;
   export interface JobTemplate {
     /**
-     * Accelerated transcoding is currently in private preview. Contact AWS for more information.
+     * Accelerated transcoding can significantly speed up jobs with long, visually complex content.
      */
     AccelerationSettings?: AccelerationSettings;
     /**
@@ -2547,7 +2646,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     MotionImageInserter?: MotionImageInserter;
     /**
-     * Settings for Nielsen Configuration
+     * Settings for your Nielsen configuration. If you don't do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don't include any children of nielsenConfiguration, you still enable the setting.
      */
     NielsenConfiguration?: NielsenConfiguration;
     /**
@@ -2836,7 +2935,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Scte35Pid?: __integerMin32Max8182;
     /**
-     * Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output.
+     * For SCTE-35 markers from your input-- Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None (NONE). Also provide the ESAM XML as a string in the setting Signal processing notification XML (sccXml). Also enable ESAM SCTE-35 (include the property scte35Esam).
      */
     Scte35Source?: M2tsScte35Source;
     /**
@@ -2913,7 +3012,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Scte35Pid?: __integerMin32Max8182;
     /**
-     * Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output.
+     * For SCTE-35 markers from your input-- Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None (NONE) if you don't want manifest conditioning. Choose Passthrough (PASSTHROUGH) and choose Ad markers (adMarkers) if you do want manifest conditioning. In both cases, also provide the ESAM XML as a string in the setting Signal processing notification XML (sccXml).
      */
     Scte35Source?: M3u8Scte35Source;
     /**
@@ -3010,7 +3109,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface Mp2Settings {
     /**
-     * Average bitrate in bits/second.
+     * Specify the average bitrate in bits per second.
      */
     Bitrate?: __integerMin32000Max384000;
     /**
@@ -3062,7 +3161,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AdaptiveQuantization?: Mpeg2AdaptiveQuantization;
     /**
-     * Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.
+     * Specify the average bitrate in bits per second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.
      */
     Bitrate?: __integerMin1000Max288000000;
     /**
@@ -3225,9 +3324,9 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type MsSmoothManifestEncoding = "UTF8"|"UTF16"|string;
   export interface NielsenConfiguration {
     /**
-     * Use Nielsen Configuration (NielsenConfiguration) to set the Nielsen measurement system breakout code. Supported values are 0, 3, 7, and 9.
+     * Nielsen has discontinued the use of breakout code functionality. If you must include this property, set the value to zero.
      */
-    BreakoutCode?: __integerMin0Max9;
+    BreakoutCode?: __integerMin0Max0;
     /**
      * Use Distributor ID (DistributorID) to specify the distributor ID that is assigned to your organization by Neilsen.
      */
@@ -3299,7 +3398,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Preset?: __stringMin0;
     /**
-     * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+     * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
      */
     VideoDescription?: VideoDescription;
   }
@@ -3426,7 +3525,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ContainerSettings?: ContainerSettings;
     /**
-     * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
+     * (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
      */
     VideoDescription?: VideoDescription;
   }
@@ -3633,7 +3732,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Optionally, specify the customer master key (CMK) that you want to use to encrypt the data key that AWS uses to encrypt your output content. Enter the Amazon Resource Name (ARN) of the CMK. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). If you set Server-side encryption to AWS KMS but don't specify a CMK here, AWS uses the AWS managed CMK associated with Amazon S3.
      */
-    KmsKeyArn?: __stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912;
+    KmsKeyArn?: __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912;
   }
   export type S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_S3"|"SERVER_SIDE_ENCRYPTION_KMS"|string;
   export type ScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string;
@@ -3903,11 +4002,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AfdSignaling?: AfdSignaling;
     /**
-     * The service automatically applies the anti-alias filter to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.
+     * The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.
      */
     AntiAlias?: AntiAlias;
     /**
-     * Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value you choose for Video codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings
+     * Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings
      */
     CodecSettings?: VideoCodecSettings;
     /**
@@ -3915,7 +4014,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ColorMetadata?: ColorMetadata;
     /**
-     * Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. If you crop your input frame size to smaller than your output frame size, make sure to specify the behavior you want in your output setting "Scaling behavior".
+     * Use Cropping selection (crop) to specify the video area that the service will include in the output video frame.
      */
     Crop?: Rectangle;
     /**
@@ -3931,7 +4030,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Height?: __integerMin32Max2160;
     /**
-     * Use Position (Position) to point to a rectangle object to define your position. This setting overrides any other aspect ratio.
+     * Use Selection placement (position) to define the video area in your output frame. The area outside of the rectangle that you specify here is black.
      */
     Position?: Rectangle;
     /**
@@ -3939,7 +4038,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     RespondToAfd?: RespondToAfd;
     /**
-     * Applies only if your input aspect ratio is different from your output aspect ratio. Choose "Stretch to output" to have the service stretch your video image to fit. Keep the setting "Default" to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job.
+     * Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output (STRETCH_TO_OUTPUT) to have the service stretch your video image to fit. Keep the setting Default (DEFAULT) to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement (position) in this output.
      */
     ScalingBehavior?: ScalingBehavior;
     /**
@@ -4042,7 +4141,9 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __doubleMinNegative59Max0 = number;
   export type __doubleMinNegative60Max3 = number;
   export type __doubleMinNegative60MaxNegative1 = number;
+  export type __doubleMinNegative6Max3 = number;
   export type __integer = number;
+  export type __integerMin0Max0 = number;
   export type __integerMin0Max10 = number;
   export type __integerMin0Max100 = number;
   export type __integerMin0Max1000 = number;
@@ -4064,7 +4165,6 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin0Max65535 = number;
   export type __integerMin0Max7 = number;
   export type __integerMin0Max8 = number;
-  export type __integerMin0Max9 = number;
   export type __integerMin0Max96 = number;
   export type __integerMin0Max99 = number;
   export type __integerMin1000Max1152000000 = number;
@@ -4099,6 +4199,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin32Max2160 = number;
   export type __integerMin32Max4096 = number;
   export type __integerMin32Max8182 = number;
+  export type __integerMin384000Max768000 = number;
   export type __integerMin48000Max48000 = number;
   export type __integerMin6000Max1024000 = number;
   export type __integerMin64000Max640000 = number;
@@ -4166,14 +4267,14 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __stringPatternAZaZ0902 = string;
   export type __stringPatternAZaZ0932 = string;
   export type __stringPatternArnAwsUsGovAcm = string;
-  export type __stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 = string;
+  export type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 = string;
   export type __stringPatternDD = string;
+  export type __stringPatternHttpHttpsS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL = string;
   export type __stringPatternHttps = string;
   export type __stringPatternIdentityAZaZ26AZaZ09163 = string;
   export type __stringPatternS3 = string;
   export type __stringPatternS3ASSETMAPXml = string;
   export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = string;
-  export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL = string;
   export type __stringPatternSNManifestConfirmConditionNotificationNS = string;
   export type __stringPatternSNSignalProcessingNotificationNS = string;
   export type __stringPatternWS = string;
