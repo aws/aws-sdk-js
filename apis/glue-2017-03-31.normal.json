@@ -1524,6 +1524,65 @@
       ],
       "documentation": "<p>Retrieves an existing job definition.</p>"
     },
+    "GetJobBookmark": {
+      "name": "GetJobBookmark",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetJobBookmarkRequest"
+      },
+      "output": {
+        "shape": "GetJobBookmarkResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns information on a job bookmark entry.</p>"
+    },
+    "GetJobBookmarks": {
+      "name": "GetJobBookmarks",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetJobBookmarksRequest"
+      },
+      "output": {
+        "shape": "GetJobBookmarksResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Returns information on the job bookmark entries. The list is ordered on decreasing version numbers.</p>"
+    },
     "GetJobRun": {
       "name": "GetJobRun",
       "http": {
@@ -6165,6 +6224,64 @@
         }
       }
     },
+    "GetJobBookmarkRequest": {
+      "type": "structure",
+      "required": [
+        "JobName"
+      ],
+      "members": {
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The name of the job in question.</p>"
+        },
+        "RunId": {
+          "shape": "RunId",
+          "documentation": "<p>The unique run identifier associated with this job run.</p>"
+        }
+      }
+    },
+    "GetJobBookmarkResponse": {
+      "type": "structure",
+      "members": {
+        "JobBookmarkEntry": {
+          "shape": "JobBookmarkEntry",
+          "documentation": "<p>A structure that defines a point that a job can resume processing.</p>"
+        }
+      }
+    },
+    "GetJobBookmarksRequest": {
+      "type": "structure",
+      "required": [
+        "JobName"
+      ],
+      "members": {
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The name of the job in question.</p>"
+        },
+        "MaxResults": {
+          "shape": "IntegerValue",
+          "documentation": "<p>The maximum size of the response.</p>"
+        },
+        "NextToken": {
+          "shape": "IntegerValue",
+          "documentation": "<p>A continuation token, if this is a continuation call.</p>"
+        }
+      }
+    },
+    "GetJobBookmarksResponse": {
+      "type": "structure",
+      "members": {
+        "JobBookmarkEntries": {
+          "shape": "JobBookmarkEntryList",
+          "documentation": "<p>A list of job bookmark entries that defines a point that a job can resume processing.</p>"
+        },
+        "NextToken": {
+          "shape": "IntegerValue",
+          "documentation": "<p>A continuation token, which has a value of 1 if all the entries are returned, or &gt; 1 if not all requested job runs have been returned.</p>"
+        }
+      }
+    },
     "GetJobRequest": {
       "type": "structure",
       "required": [
@@ -7141,12 +7258,26 @@
           "shape": "IntegerValue",
           "documentation": "<p>The attempt ID number.</p>"
         },
+        "PreviousRunId": {
+          "shape": "RunId",
+          "documentation": "<p>The unique run identifier associated with the previous job run..</p>"
+        },
+        "RunId": {
+          "shape": "RunId",
+          "documentation": "<p>The unique run identifier associated with this job run.</p>"
+        },
         "JobBookmark": {
           "shape": "JsonValue",
           "documentation": "<p>The bookmark itself.</p>"
         }
       },
       "documentation": "<p>Defines a point that a job can resume processing.</p>"
+    },
+    "JobBookmarkEntryList": {
+      "type": "list",
+      "member": {
+        "shape": "JobBookmarkEntry"
+      }
     },
     "JobBookmarksEncryption": {
       "type": "structure",
@@ -8195,6 +8326,10 @@
         "JobName": {
           "shape": "JobName",
           "documentation": "<p>The name of the job in question.</p>"
+        },
+        "RunId": {
+          "shape": "RunId",
+          "documentation": "<p>The unique run identifier associated with this job run.</p>"
         }
       }
     },
@@ -8248,6 +8383,9 @@
       "type": "string"
     },
     "RowTag": {
+      "type": "string"
+    },
+    "RunId": {
       "type": "string"
     },
     "S3Encryption": {

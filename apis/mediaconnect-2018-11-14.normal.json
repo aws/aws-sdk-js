@@ -714,6 +714,11 @@
     "AddOutputRequest": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList",
+          "documentation": "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description",
@@ -749,6 +754,11 @@
           "locationName": "protocol",
           "documentation": "The protocol to use for the output."
         },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId",
+          "documentation": "The remote ID for the Zixi-pull output stream."
+        },
         "SmoothingLatency": {
           "shape": "__integer",
           "locationName": "smoothingLatency",
@@ -762,8 +772,6 @@
       },
       "documentation": "The output that you want to add to this flow.",
       "required": [
-        "Destination",
-        "Port",
         "Protocol"
       ]
     },
@@ -1327,7 +1335,8 @@
       "enum": [
         "zixi-push",
         "rtp-fec",
-        "rtp"
+        "rtp",
+        "zixi-pull"
       ]
     },
     "RemoveFlowOutputRequest": {
@@ -1453,7 +1462,7 @@
         "WhitelistCidr": {
           "shape": "__string",
           "locationName": "whitelistCidr",
-          "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+          "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
         }
       },
       "documentation": "The settings for the source of the flow."
@@ -1504,7 +1513,7 @@
         "WhitelistCidr": {
           "shape": "__string",
           "locationName": "whitelistCidr",
-          "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+          "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
         }
       },
       "documentation": "The settings for the source of the flow.",
@@ -1614,6 +1623,11 @@
     "Transport": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList",
+          "documentation": "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
         "MaxBitrate": {
           "shape": "__integer",
           "locationName": "maxBitrate",
@@ -1628,6 +1642,11 @@
           "shape": "Protocol",
           "locationName": "protocol",
           "documentation": "The protocol that is used by the source or output."
+        },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId",
+          "documentation": "The remote ID for the Zixi-pull stream."
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -1771,6 +1790,11 @@
     "UpdateFlowOutputRequest": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList",
+          "documentation": "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description",
@@ -1812,6 +1836,11 @@
           "shape": "Protocol",
           "locationName": "protocol",
           "documentation": "The protocol to use for the output."
+        },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId",
+          "documentation": "The remote ID for the Zixi-pull stream."
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -1902,7 +1931,7 @@
         "WhitelistCidr": {
           "shape": "__string",
           "locationName": "whitelistCidr",
-          "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+          "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
         }
       },
       "documentation": "A request to update the source of a flow.",

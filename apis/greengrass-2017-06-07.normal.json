@@ -475,24 +475,6 @@
       ],
       "documentation": "Creates a version of a subscription definition which has already been defined."
     },
-    "TagResource": {
-      "name": "TagResource",
-      "http": {
-        "method": "POST",
-        "requestUri": "/tags/{resource-arn}",
-        "responseCode": 204
-      },
-      "input": {
-        "shape": "TagResourceRequest"
-      },
-      "errors": [
-        {
-          "shape": "BadRequestException",
-          "documentation": "invalid request"
-        }
-      ],
-      "documentation": "Add tags to a resource."
-    },
     "DeleteConnectorDefinition": {
       "name": "DeleteConnectorDefinition",
       "http": {
@@ -668,24 +650,6 @@
         }
       ],
       "documentation": "Deletes a subscription definition."
-    },
-    "UntagResource": {
-      "name": "UntagResource",
-      "http": {
-        "method": "DELETE",
-        "requestUri": "/tags/{resource-arn}",
-        "responseCode": 204
-      },
-      "input": {
-        "shape": "UntagResourceRequest"
-      },
-      "errors": [
-        {
-          "shape": "BadRequestException",
-          "documentation": "invalid request"
-        }
-      ],
-      "documentation": "Remove tags with specified keys from a resource."
     },
     "DisassociateRoleFromGroup": {
       "name": "DisassociateRoleFromGroup",
@@ -1653,7 +1617,8 @@
         "shape": "ListTagsForResourceRequest"
       },
       "output": {
-        "shape": "ListTagsForResourceResponse"
+        "shape": "ListTagsForResourceResponse",
+        "documentation": "HTTP Status Code 200: OK."
       },
       "errors": [
         {
@@ -1661,7 +1626,7 @@
           "documentation": "invalid request"
         }
       ],
-      "documentation": "Retrieves the tags for a resource."
+      "documentation": "Retrieves a list of resource tags for a resource arn."
     },
     "ResetDeployments": {
       "name": "ResetDeployments",
@@ -1728,6 +1693,42 @@
         }
       ],
       "documentation": "Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments."
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "invalid request"
+        }
+      ],
+      "documentation": "Add resource tags to a Greengrass Resource. Valid resources are Group, Connector, Core, Device, Function, Logger, Subscription, and Resource Defintions, and also BulkDeploymentIds."
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "invalid request"
+        }
+      ],
+      "documentation": "Remove resource tags from a Greengrass Resource."
     },
     "UpdateConnectivityInfo": {
       "name": "UpdateConnectivityInfo",
@@ -1970,11 +1971,12 @@
         },
         "RoleArn": {
           "shape": "__string",
-          "documentation": "The ARN of the role you wish to associate with this group."
+          "documentation": "The ARN of the role you wish to associate with this group. The existence of the role is not validated."
         }
       },
       "required": [
-        "GroupId"
+        "GroupId",
+        "RoleArn"
       ]
     },
     "AssociateRoleToGroupResponse": {
@@ -1993,7 +1995,10 @@
           "shape": "__string",
           "documentation": "The ARN of the service role you wish to associate with your account."
         }
-      }
+      },
+      "required": [
+        "RoleArn"
+      ]
     },
     "AssociateServiceRoleToAccountResponse": {
       "type": "structure",
@@ -2141,7 +2146,10 @@
         }
       },
       "documentation": "Information about a connector. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.",
-      "required": []
+      "required": [
+        "ConnectorArn",
+        "Id"
+      ]
     },
     "ConnectorDefinitionVersion": {
       "type": "structure",
@@ -2174,7 +2182,11 @@
         }
       },
       "documentation": "Information about a core.",
-      "required": []
+      "required": [
+        "ThingArn",
+        "Id",
+        "CertificateArn"
+      ]
     },
     "CoreDefinitionVersion": {
       "type": "structure",
@@ -2205,7 +2217,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
       }
     },
@@ -2230,11 +2242,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -2306,7 +2318,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
       },
       "documentation": "Information needed to create a core definition."
@@ -2332,11 +2344,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -2418,7 +2430,8 @@
         }
       },
       "required": [
-        "GroupId"
+        "GroupId",
+        "DeploymentType"
       ]
     },
     "CreateDeploymentResponse": {
@@ -2453,7 +2466,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
       }
     },
@@ -2478,11 +2491,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -2554,7 +2567,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
       }
     },
@@ -2579,11 +2592,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -2689,7 +2702,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
       }
     },
@@ -2714,11 +2727,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -2814,7 +2827,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
       }
     },
@@ -2839,11 +2852,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -2915,7 +2928,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
       }
     },
@@ -2940,11 +2953,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -3024,7 +3037,14 @@
         "UpdateTargetsOperatingSystem": {
           "shape": "UpdateTargetsOperatingSystem"
         }
-      }
+      },
+      "required": [
+        "S3UrlSignerRole",
+        "UpdateTargetsArchitecture",
+        "SoftwareToUpdate",
+        "UpdateTargets",
+        "UpdateTargetsOperatingSystem"
+      ]
     },
     "CreateSoftwareUpdateJobResponse": {
       "type": "structure",
@@ -3058,7 +3078,7 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
       }
     },
@@ -3083,11 +3103,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -3140,25 +3160,6 @@
         }
       }
     },
-    "TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "shape": "__string",
-          "location": "uri",
-          "locationName": "resource-arn",
-          "documentation": "The Amazon Resource Name (ARN) of the resource."
-        },
-        "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "A map of the key-value pairs for the resource tag."
-        }
-      },
-      "required": [
-        "ResourceArn",
-        "tags"
-      ]
-    },
     "DefinitionInformation": {
       "type": "structure",
       "members": {
@@ -3180,11 +3181,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
@@ -3193,7 +3194,7 @@
         "Tags": {
           "shape": "Tags",
           "locationName": "tags",
-          "documentation": "The tags for the definition."
+          "documentation": "Tag(s) attached to the resource arn."
         }
       },
       "documentation": "Information about a definition."
@@ -3342,27 +3343,6 @@
       "type": "structure",
       "members": {}
     },
-    "UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "shape": "__string",
-          "location": "uri",
-          "locationName": "resource-arn",
-          "documentation": "The Amazon Resource Name (ARN) of the resource."
-        },
-        "TagKeys": {
-          "shape": "__listOf__string",
-          "location": "querystring",
-          "locationName": "tagKeys",
-          "documentation": "A list of the keys to remove from the resource tags."
-        }
-      },
-      "required": [
-        "TagKeys",
-        "ResourceArn"
-      ]
-    },
     "Deployment": {
       "type": "structure",
       "members": {
@@ -3426,7 +3406,11 @@
         }
       },
       "documentation": "Information about a device.",
-      "required": []
+      "required": [
+        "ThingArn",
+        "Id",
+        "CertificateArn"
+      ]
     },
     "DeviceDefinitionVersion": {
       "type": "structure",
@@ -3519,7 +3503,9 @@
         }
       },
       "documentation": "Information about a Lambda function.",
-      "required": []
+      "required": [
+        "Id"
+      ]
     },
     "FunctionConfiguration": {
       "type": "structure",
@@ -3711,8 +3697,8 @@
           "documentation": "Error message"
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -3779,19 +3765,19 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -3808,7 +3794,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "ConnectorDefinitionVersionId",
-          "documentation": "The ID of the connector definition version."
+          "documentation": "The ID of the connector definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListConnectorDefinitionVersions'' requests. If the version is the last one that was associated with a connector definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
         },
         "NextToken": {
           "shape": "__string",
@@ -3886,19 +3872,19 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -3915,7 +3901,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "CoreDefinitionVersionId",
-          "documentation": "The ID of the core definition version."
+          "documentation": "The ID of the core definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListCoreDefinitionVersions'' requests. If the version is the last one that was associated with a core definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
         }
       },
       "required": [
@@ -4033,19 +4019,19 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -4062,7 +4048,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "DeviceDefinitionVersionId",
-          "documentation": "The ID of the device definition version."
+          "documentation": "The ID of the device definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListDeviceDefinitionVersions'' requests. If the version is the last one that was associated with a device definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
         },
         "NextToken": {
           "shape": "__string",
@@ -4140,19 +4126,19 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -4169,7 +4155,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "FunctionDefinitionVersionId",
-          "documentation": "The ID of the function definition version."
+          "documentation": "The ID of the function definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListFunctionDefinitionVersions'' requests. If the version is the last one that was associated with a function definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
         },
         "NextToken": {
           "shape": "__string",
@@ -4316,19 +4302,19 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -4345,7 +4331,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "GroupVersionId",
-          "documentation": "The ID of the group version."
+          "documentation": "The ID of the group version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListGroupVersions'' requests. If the version is the last one that was associated with a group, the value also maps to the ''LatestVersion'' property of the corresponding ''GroupInformation'' object."
         }
       },
       "required": [
@@ -4413,19 +4399,19 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -4442,7 +4428,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "LoggerDefinitionVersionId",
-          "documentation": "The ID of the logger definition version."
+          "documentation": "The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
         },
         "NextToken": {
           "shape": "__string",
@@ -4516,19 +4502,19 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -4545,7 +4531,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "ResourceDefinitionVersionId",
-          "documentation": "The ID of the resource definition version."
+          "documentation": "The ID of the resource definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListResourceDefinitionVersions'' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
         }
       },
       "required": [
@@ -4630,19 +4616,19 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the definition."
+          "documentation": "The ID of the latest version associated with the definition."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the definition."
+          "documentation": "The ARN of the latest version associated with the definition."
         },
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
         },
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "The tags for the definition."
+          "shape": "Tags",
+          "documentation": "Tag(s) attached to the resource arn."
         }
       }
     },
@@ -4665,7 +4651,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "SubscriptionDefinitionVersionId",
-          "documentation": "The ID of the subscription definition version."
+          "documentation": "The ID of the subscription definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListSubscriptionDefinitionVersions'' requests. If the version is the last one that was associated with a subscription definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
         }
       },
       "required": [
@@ -4737,11 +4723,11 @@
         },
         "LatestVersion": {
           "shape": "__string",
-          "documentation": "The latest version of the group."
+          "documentation": "The ID of the latest version associated with the group."
         },
         "LatestVersionArn": {
           "shape": "__string",
-          "documentation": "The ARN of the latest version of the group."
+          "documentation": "The ARN of the latest version associated with the group."
         },
         "Name": {
           "shape": "__string",
@@ -5499,8 +5485,7 @@
       "type": "structure",
       "members": {
         "tags": {
-          "shape": "__mapOf__string",
-          "documentation": "A map of the key-value pairs for the resource tag."
+          "shape": "Tags"
         }
       }
     },
@@ -5561,7 +5546,12 @@
         }
       },
       "documentation": "Information about a logger",
-      "required": []
+      "required": [
+        "Type",
+        "Level",
+        "Id",
+        "Component"
+      ]
     },
     "LoggerComponent": {
       "type": "string",
@@ -5660,7 +5650,11 @@
         }
       },
       "documentation": "Information about a resource.",
-      "required": []
+      "required": [
+        "ResourceDataContainer",
+        "Id",
+        "Name"
+      ]
     },
     "ResourceAccessPolicy": {
       "type": "structure",
@@ -5675,7 +5669,9 @@
         }
       },
       "documentation": "A policy used by the function to access a resource.",
-      "required": []
+      "required": [
+        "ResourceId"
+      ]
     },
     "ResourceDataContainer": {
       "type": "structure",
@@ -5786,9 +5782,13 @@
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "Tag(s) to add to the new resource"
+          "documentation": "Tag(s) to add to the new resource."
         }
-      }
+      },
+      "required": [
+        "ExecutionRoleArn",
+        "InputFileUri"
+      ]
     },
     "StartBulkDeploymentResponse": {
       "type": "structure",
@@ -5842,7 +5842,12 @@
         }
       },
       "documentation": "Information about a subscription.",
-      "required": []
+      "required": [
+        "Target",
+        "Id",
+        "Subject",
+        "Source"
+      ]
     },
     "SubscriptionDefinitionVersion": {
       "type": "structure",
@@ -5854,14 +5859,54 @@
       },
       "documentation": "Information about a subscription definition version."
     },
+    "TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "The Amazon Resource Name (ARN) of the resource."
+        },
+        "tags": {
+          "shape": "Tags"
+        }
+      },
+      "documentation": "A map of the key-value pairs for the resource tag.",
+      "required": [
+        "ResourceArn"
+      ]
+    },
     "Tags": {
       "type": "map",
+      "documentation": "The key-value pair for the resource tag.",
       "key": {
         "shape": "__string"
       },
       "value": {
         "shape": "__string"
       }
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "The Amazon Resource Name (ARN) of the resource."
+        },
+        "TagKeys": {
+          "shape": "__listOf__string",
+          "location": "querystring",
+          "locationName": "tagKeys",
+          "documentation": "An array of tag keys to delete"
+        }
+      },
+      "required": [
+        "TagKeys",
+        "ResourceArn"
+      ]
     },
     "UpdateAgentLogLevel": {
       "type": "string",
@@ -6134,7 +6179,8 @@
       "enum": [
         "armv7l",
         "x86_64",
-        "aarch64"
+        "aarch64",
+        "openwrt"
       ]
     },
     "UpdateTargetsOperatingSystem": {

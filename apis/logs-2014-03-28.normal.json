@@ -94,7 +94,7 @@
           "shape": "ResourceAlreadyExistsException"
         }
       ],
-      "documentation": "<p>Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket.</p> <p>This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use <a>DescribeExportTasks</a> to get the status of the export task. Each account can only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time. To cancel an export task, use <a>CancelExportTask</a>.</p> <p>You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.</p>"
+      "documentation": "<p>Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket.</p> <p>This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use <a>DescribeExportTasks</a> to get the status of the export task. Each account can only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time. To cancel an export task, use <a>CancelExportTask</a>.</p> <p>You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.</p> <p>Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting to S3 buckets encrypted with SSE-KMS is not supported. </p>"
     },
     "CreateLogGroup": {
       "name": "CreateLogGroup",
@@ -663,7 +663,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Returns the results from the specified query. If the query is in progress, partial results of that current execution are returned.</p> <p>Only the fields requested in the query are returned, along with a <code>@ptr</code> field which is the identifier for the log record. You can use the value of <code>@ptr</code> in a operation to get the full log record.</p> <p> <code>GetQueryResults</code> does not start a query execution. To run a query, use .</p>"
+      "documentation": "<p>Returns the results from the specified query.</p> <p>Only the fields requested in the query are returned, along with a <code>@ptr</code> field which is the identifier for the log record. You can use the value of <code>@ptr</code> in a operation to get the full log record.</p> <p> <code>GetQueryResults</code> does not start a query execution. To run a query, use .</p> <p>If the value of the <code>Status</code> field in the output is <code>Running</code>, this operation returns only partial results. If you see a value of <code>Scheduled</code> or <code>Running</code> for the status, you can retry the operation later to see the final results. </p>"
     },
     "ListTagsLogGroup": {
       "name": "ListTagsLogGroup",
@@ -710,7 +710,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Creates or updates a destination. A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using <a>PutLogEvents</a>. Currently, the only supported physical resource is a Kinesis stream belonging to the same account as the destination.</p> <p>Through an access policy, a destination controls what is written to its Kinesis stream. By default, <code>PutDestination</code> does not set any access policy with the destination, which means a cross-account user cannot call <a>PutSubscriptionFilter</a> against this destination. To enable this, the destination owner must call <a>PutDestinationPolicy</a> after <code>PutDestination</code>.</p>"
+      "documentation": "<p>Creates or updates a destination. A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using <a>PutLogEvents</a>. A destination can be an Amazon Kinesis stream, Amazon Kinesis Data Firehose strea, or an AWS Lambda function.</p> <p>Through an access policy, a destination controls what is written to it. By default, <code>PutDestination</code> does not set any access policy with the destination, which means a cross-account user cannot call <a>PutSubscriptionFilter</a> against this destination. To enable this, the destination owner must call <a>PutDestinationPolicy</a> after <code>PutDestination</code>.</p>"
     },
     "PutDestinationPolicy": {
       "name": "PutDestinationPolicy",
@@ -1738,7 +1738,9 @@
         },
         "interleaved": {
           "shape": "Interleaved",
-          "documentation": "<p>If the value is true, the operation makes a best effort to provide responses that contain events from multiple log streams within the log group, interleaved in a single response. If the value is false, all the matched log events in the first log stream are searched first, then those in the next log stream, and so on. The default is false.</p> <p> <b>IMPORTANT:</b> Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group.</p>"
+          "documentation": "<p>If the value is true, the operation makes a best effort to provide responses that contain events from multiple log streams within the log group, interleaved in a single response. If the value is false, all the matched log events in the first log stream are searched first, then those in the next log stream, and so on. The default is false.</p> <p> <b>IMPORTANT:</b> Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group."
         }
       }
     },
@@ -1836,7 +1838,7 @@
         },
         "startFromHead": {
           "shape": "StartFromHead",
-          "documentation": "<p>If the value is true, the earliest log events are returned first. If the value is false, the latest log events are returned first. The default value is false.</p>"
+          "documentation": "<p>If the value is true, the earliest log events are returned first. If the value is false, the latest log events are returned first. The default value is false.</p> <p>If you are using <code>nextToken</code> in this operation, you must specify <code>true</code> for <code>startFromHead</code>.</p>"
         }
       }
     },
@@ -2056,6 +2058,12 @@
       "min": 1,
       "pattern": "[\\.\\-_/#A-Za-z0-9]+"
     },
+    "LogGroupNames": {
+      "type": "list",
+      "member": {
+        "shape": "LogGroupName"
+      }
+    },
     "LogGroups": {
       "type": "list",
       "member": {
@@ -2107,7 +2115,9 @@
         },
         "storedBytes": {
           "shape": "StoredBytes",
-          "documentation": "<p>The number of bytes stored.</p> <p> <b>IMPORTANT:</b> Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The <code>storedBytes</code> parameter for log groups is not affected.</p>"
+          "documentation": "<p>The number of bytes stored.</p> <p> <b>IMPORTANT:</b> Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The <code>storedBytes</code> parameter for log groups is not affected.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected."
         }
       },
       "documentation": "<p>Represents a log stream, which is a sequence of log events from a single emitter of logs.</p>"
@@ -2641,7 +2651,6 @@
     "StartQueryRequest": {
       "type": "structure",
       "required": [
-        "logGroupName",
         "startTime",
         "endTime",
         "queryString"
@@ -2649,7 +2658,11 @@
       "members": {
         "logGroupName": {
           "shape": "LogGroupName",
-          "documentation": "<p>The log group on which to perform the query.</p>"
+          "documentation": "<p>The log group on which to perform the query.</p> <p>A <code>StartQuery</code> operation must include a <code>logGroupNames</code> or a <code>logGroupName</code> parameter, but not both.</p>"
+        },
+        "logGroupNames": {
+          "shape": "LogGroupNames",
+          "documentation": "<p>The list of log groups to be queried. You can include up to 20 log groups.</p> <p>A <code>StartQuery</code> operation must include a <code>logGroupNames</code> or a <code>logGroupName</code> parameter, but not both.</p>"
         },
         "startTime": {
           "shape": "Timestamp",

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.500.0-->
+<!--LATEST=2.501.0-->
 <!--ENTRYINSERT-->
+
+## 2.501.0
+* feature: Batch: AWS Batch now supports SDK auto-pagination and Job-level docker devices.
+* feature: CloudWatchLogs: Allow for specifying multiple log groups in an Insights query, and deprecate storedByte field for LogStreams and interleaved field for FilterLogEventsRequest.
+* feature: CostExplorer: Adds support for resource optimization recommendations.
+* feature: EC2: You can now create EC2 Capacity Reservations using Availability Zone ID or Availability Zone name. You can view usage of Amazon EC2 Capacity Reservations per AWS account.
+* feature: Glue: This release provides GetJobBookmark and GetJobBookmarks APIs. These APIs enable users to look at specific versions or all versions of the JobBookmark for a specific job. This release also enables resetting the job bookmark to a specific run via an enhancement of the ResetJobBookmark API.
+* feature: Greengrass: Greengrass OTA service supports openwrt/aarch64 and openwrt/armv7l platforms.
+* feature: MediaConnect: This release adds support for the Zixi pull protocol on outputs.
 
 ## 2.500.0
 * feature: ECR: This release adds support for immutable image tags.

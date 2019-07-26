@@ -180,14 +180,6 @@ declare class Greengrass extends Service {
    */
   createSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionVersionResponse, AWSError>;
   /**
-   * Add tags to a resource.
-   */
-  tagResource(params: Greengrass.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Add tags to a resource.
-   */
-  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
    * Deletes a connector definition.
    */
   deleteConnectorDefinition(params: Greengrass.Types.DeleteConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
@@ -251,14 +243,6 @@ declare class Greengrass extends Service {
    * Deletes a subscription definition.
    */
   deleteSubscriptionDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.DeleteSubscriptionDefinitionResponse, AWSError>;
-  /**
-   * Remove tags with specified keys from a resource.
-   */
-  untagResource(params: Greengrass.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Remove tags with specified keys from a resource.
-   */
-  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Disassociates the role from a group.
    */
@@ -620,11 +604,11 @@ declare class Greengrass extends Service {
    */
   listSubscriptionDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionsResponse, AWSError>;
   /**
-   * Retrieves the tags for a resource.
+   * Retrieves a list of resource tags for a resource arn.
    */
   listTagsForResource(params: Greengrass.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Greengrass.Types.ListTagsForResourceResponse) => void): Request<Greengrass.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves the tags for a resource.
+   * Retrieves a list of resource tags for a resource arn.
    */
   listTagsForResource(callback?: (err: AWSError, data: Greengrass.Types.ListTagsForResourceResponse) => void): Request<Greengrass.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -651,6 +635,22 @@ declare class Greengrass extends Service {
    * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
    */
   stopBulkDeployment(callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
+  /**
+   * Add resource tags to a Greengrass Resource. Valid resources are Group, Connector, Core, Device, Function, Logger, Subscription, and Resource Defintions, and also BulkDeploymentIds.
+   */
+  tagResource(params: Greengrass.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Add resource tags to a Greengrass Resource. Valid resources are Group, Connector, Core, Device, Function, Logger, Subscription, and Resource Defintions, and also BulkDeploymentIds.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove resource tags from a Greengrass Resource.
+   */
+  untagResource(params: Greengrass.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove resource tags from a Greengrass Resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
@@ -739,9 +739,9 @@ declare namespace Greengrass {
      */
     GroupId: __string;
     /**
-     * The ARN of the role you wish to associate with this group.
+     * The ARN of the role you wish to associate with this group. The existence of the role is not validated.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
   }
   export interface AssociateRoleToGroupResponse {
     /**
@@ -753,7 +753,7 @@ declare namespace Greengrass {
     /**
      * The ARN of the service role you wish to associate with your account.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
   }
   export interface AssociateServiceRoleToAccountResponse {
     /**
@@ -848,11 +848,11 @@ declare namespace Greengrass {
     /**
      * The ARN of the connector.
      */
-    ConnectorArn?: __string;
+    ConnectorArn: __string;
     /**
      * A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * The parameters or configuration that the connector uses.
      */
@@ -868,11 +868,11 @@ declare namespace Greengrass {
     /**
      * The ARN of the certificate associated with the core.
      */
-    CertificateArn?: __string;
+    CertificateArn: __string;
     /**
      * A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * If true, the core's local shadow is automatically synced with the cloud.
      */
@@ -880,7 +880,7 @@ declare namespace Greengrass {
     /**
      * The ARN of the thing which is the core.
      */
-    ThingArn?: __string;
+    ThingArn: __string;
   }
   export interface CoreDefinitionVersion {
     /**
@@ -902,7 +902,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -924,11 +924,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -982,7 +982,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -1004,11 +1004,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1060,7 +1060,7 @@ declare namespace Greengrass {
     /**
      * The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.
      */
-    DeploymentType?: DeploymentType;
+    DeploymentType: DeploymentType;
     /**
      * The ID of the Greengrass group.
      */
@@ -1094,7 +1094,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -1116,11 +1116,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1174,7 +1174,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -1196,11 +1196,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1274,7 +1274,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -1296,11 +1296,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1378,7 +1378,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -1400,11 +1400,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1458,7 +1458,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -1480,11 +1480,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1529,12 +1529,12 @@ declare namespace Greengrass {
      * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
-    S3UrlSignerRole?: S3UrlSignerRole;
-    SoftwareToUpdate?: SoftwareToUpdate;
+    S3UrlSignerRole: S3UrlSignerRole;
+    SoftwareToUpdate: SoftwareToUpdate;
     UpdateAgentLogLevel?: UpdateAgentLogLevel;
-    UpdateTargets?: UpdateTargets;
-    UpdateTargetsArchitecture?: UpdateTargetsArchitecture;
-    UpdateTargetsOperatingSystem?: UpdateTargetsOperatingSystem;
+    UpdateTargets: UpdateTargets;
+    UpdateTargetsArchitecture: UpdateTargetsArchitecture;
+    UpdateTargetsOperatingSystem: UpdateTargetsOperatingSystem;
   }
   export interface CreateSoftwareUpdateJobResponse {
     /**
@@ -1560,7 +1560,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -1582,11 +1582,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1626,16 +1626,6 @@ declare namespace Greengrass {
      */
     Version?: __string;
   }
-  export interface TagResourceRequest {
-    /**
-     * The Amazon Resource Name (ARN) of the resource.
-     */
-    ResourceArn: __string;
-    /**
-     * A map of the key-value pairs for the resource tag.
-     */
-    tags: __mapOf__string;
-  }
   export interface DefinitionInformation {
     /**
      * The ARN of the definition.
@@ -1654,11 +1644,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1666,7 +1656,7 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
     Tags?: Tags;
   }
@@ -1734,16 +1724,6 @@ declare namespace Greengrass {
   }
   export interface DeleteSubscriptionDefinitionResponse {
   }
-  export interface UntagResourceRequest {
-    /**
-     * The Amazon Resource Name (ARN) of the resource.
-     */
-    ResourceArn: __string;
-    /**
-     * A list of the keys to remove from the resource tags.
-     */
-    TagKeys: __listOf__string;
-  }
   export interface Deployment {
     /**
      * The time, in milliseconds since the epoch, when the deployment was created.
@@ -1772,11 +1752,11 @@ declare namespace Greengrass {
     /**
      * The ARN of the certificate associated with the device.
      */
-    CertificateArn?: __string;
+    CertificateArn: __string;
     /**
      * A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * If true, the device's local shadow will be automatically synced with the cloud.
      */
@@ -1784,7 +1764,7 @@ declare namespace Greengrass {
     /**
      * The thing ARN of the device.
      */
-    ThingArn?: __string;
+    ThingArn: __string;
   }
   export interface DeviceDefinitionVersion {
     /**
@@ -1836,7 +1816,7 @@ declare namespace Greengrass {
     /**
      * A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
   }
   export interface FunctionConfiguration {
     /**
@@ -1962,9 +1942,9 @@ declare namespace Greengrass {
      */
     ErrorMessage?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetConnectivityInfoRequest {
     /**
@@ -2006,11 +1986,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -2018,9 +1998,9 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetConnectorDefinitionVersionRequest {
     /**
@@ -2028,7 +2008,7 @@ declare namespace Greengrass {
      */
     ConnectorDefinitionId: __string;
     /**
-     * The ID of the connector definition version.
+     * The ID of the connector definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListConnectorDefinitionVersions'' requests. If the version is the last one that was associated with a connector definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     ConnectorDefinitionVersionId: __string;
     /**
@@ -2086,11 +2066,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -2098,9 +2078,9 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetCoreDefinitionVersionRequest {
     /**
@@ -2108,7 +2088,7 @@ declare namespace Greengrass {
      */
     CoreDefinitionId: __string;
     /**
-     * The ID of the core definition version.
+     * The ID of the core definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListCoreDefinitionVersions'' requests. If the version is the last one that was associated with a core definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     CoreDefinitionVersionId: __string;
   }
@@ -2194,11 +2174,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -2206,9 +2186,9 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetDeviceDefinitionVersionRequest {
     /**
@@ -2216,7 +2196,7 @@ declare namespace Greengrass {
      */
     DeviceDefinitionId: __string;
     /**
-     * The ID of the device definition version.
+     * The ID of the device definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListDeviceDefinitionVersions'' requests. If the version is the last one that was associated with a device definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     DeviceDefinitionVersionId: __string;
     /**
@@ -2274,11 +2254,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -2286,9 +2266,9 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetFunctionDefinitionVersionRequest {
     /**
@@ -2296,7 +2276,7 @@ declare namespace Greengrass {
      */
     FunctionDefinitionId: __string;
     /**
-     * The ID of the function definition version.
+     * The ID of the function definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListFunctionDefinitionVersions'' requests. If the version is the last one that was associated with a function definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     FunctionDefinitionVersionId: __string;
     /**
@@ -2398,11 +2378,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -2410,9 +2390,9 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetGroupVersionRequest {
     /**
@@ -2420,7 +2400,7 @@ declare namespace Greengrass {
      */
     GroupId: __string;
     /**
-     * The ID of the group version.
+     * The ID of the group version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListGroupVersions'' requests. If the version is the last one that was associated with a group, the value also maps to the ''LatestVersion'' property of the corresponding ''GroupInformation'' object.
      */
     GroupVersionId: __string;
   }
@@ -2470,11 +2450,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -2482,9 +2462,9 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetLoggerDefinitionVersionRequest {
     /**
@@ -2492,7 +2472,7 @@ declare namespace Greengrass {
      */
     LoggerDefinitionId: __string;
     /**
-     * The ID of the logger definition version.
+     * The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     LoggerDefinitionVersionId: __string;
     /**
@@ -2546,11 +2526,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -2558,9 +2538,9 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetResourceDefinitionVersionRequest {
     /**
@@ -2568,7 +2548,7 @@ declare namespace Greengrass {
      */
     ResourceDefinitionId: __string;
     /**
-     * The ID of the resource definition version.
+     * The ID of the resource definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListResourceDefinitionVersions'' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     ResourceDefinitionVersionId: __string;
   }
@@ -2630,11 +2610,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -2642,9 +2622,9 @@ declare namespace Greengrass {
      */
     Name?: __string;
     /**
-     * The tags for the definition.
+     * Tag(s) attached to the resource arn.
      */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface GetSubscriptionDefinitionVersionRequest {
     /**
@@ -2656,7 +2636,7 @@ declare namespace Greengrass {
      */
     SubscriptionDefinitionId: __string;
     /**
-     * The ID of the subscription definition version.
+     * The ID of the subscription definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListSubscriptionDefinitionVersions'' requests. If the version is the last one that was associated with a subscription definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     SubscriptionDefinitionVersionId: __string;
   }
@@ -2714,11 +2694,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the group.
+     * The ID of the latest version associated with the group.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the group.
+     * The ARN of the latest version associated with the group.
      */
     LatestVersionArn?: __string;
     /**
@@ -3205,10 +3185,7 @@ declare namespace Greengrass {
     ResourceArn: __string;
   }
   export interface ListTagsForResourceResponse {
-    /**
-     * A map of the key-value pairs for the resource tag.
-     */
-    tags?: __mapOf__string;
+    tags?: Tags;
   }
   export interface LocalDeviceResourceData {
     /**
@@ -3238,15 +3215,15 @@ declare namespace Greengrass {
     /**
      * The component that will be subject to logging.
      */
-    Component?: LoggerComponent;
+    Component: LoggerComponent;
     /**
      * A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * The level of the logs.
      */
-    Level?: LoggerLevel;
+    Level: LoggerLevel;
     /**
      * The amount of file space, in KB, to use if the local file system is used for logging purposes.
      */
@@ -3254,7 +3231,7 @@ declare namespace Greengrass {
     /**
      * The type of log output which will be used.
      */
-    Type?: LoggerType;
+    Type: LoggerType;
   }
   export type LoggerComponent = "GreengrassSystem"|"Lambda"|string;
   export interface LoggerDefinitionVersion {
@@ -3294,15 +3271,15 @@ declare namespace Greengrass {
     /**
      * The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * A container of data for all resource types.
      */
-    ResourceDataContainer?: ResourceDataContainer;
+    ResourceDataContainer: ResourceDataContainer;
   }
   export interface ResourceAccessPolicy {
     /**
@@ -3312,7 +3289,7 @@ declare namespace Greengrass {
     /**
      * The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
      */
-    ResourceId?: __string;
+    ResourceId: __string;
   }
   export interface ResourceDataContainer {
     /**
@@ -3382,13 +3359,13 @@ declare namespace Greengrass {
     /**
      * The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''greengrass:CreateDeployment'' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.
      */
-    ExecutionRoleArn?: __string;
+    ExecutionRoleArn: __string;
     /**
      * The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types.
      */
-    InputFileUri?: __string;
+    InputFileUri: __string;
     /**
-     * Tag(s) to add to the new resource
+     * Tag(s) to add to the new resource.
      */
     tags?: Tags;
   }
@@ -3414,19 +3391,19 @@ declare namespace Greengrass {
     /**
      * A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
      */
-    Source?: __string;
+    Source: __string;
     /**
      * The MQTT topic used to route the message.
      */
-    Subject?: __string;
+    Subject: __string;
     /**
      * Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
      */
-    Target?: __string;
+    Target: __string;
   }
   export interface SubscriptionDefinitionVersion {
     /**
@@ -3434,7 +3411,24 @@ declare namespace Greengrass {
      */
     Subscriptions?: __listOfSubscription;
   }
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+    tags?: Tags;
+  }
   export type Tags = {[key: string]: __string};
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+    /**
+     * An array of tag keys to delete
+     */
+    TagKeys: __listOf__string;
+  }
   export type UpdateAgentLogLevel = "NONE"|"TRACE"|"DEBUG"|"VERBOSE"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export interface UpdateConnectivityInfoRequest {
     /**
@@ -3577,7 +3571,7 @@ declare namespace Greengrass {
   export interface UpdateSubscriptionDefinitionResponse {
   }
   export type UpdateTargets = __string[];
-  export type UpdateTargetsArchitecture = "armv7l"|"x86_64"|"aarch64"|string;
+  export type UpdateTargetsArchitecture = "armv7l"|"x86_64"|"aarch64"|"openwrt"|string;
   export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|string;
   export interface VersionInformation {
     /**

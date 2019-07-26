@@ -3479,6 +3479,19 @@
       },
       "documentation": "<p>Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range.</p>"
     },
+    "GetCapacityReservationUsage": {
+      "name": "GetCapacityReservationUsage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetCapacityReservationUsageRequest"
+      },
+      "output": {
+        "shape": "GetCapacityReservationUsageResult"
+      }
+    },
     "GetConsoleOutput": {
       "name": "GetConsoleOutput",
       "http": {
@@ -6780,6 +6793,18 @@
           "documentation": "<p>The ID of the Capacity Reservation.</p>",
           "locationName": "capacityReservationId"
         },
+        "OwnerId": {
+          "shape": "String",
+          "locationName": "ownerId"
+        },
+        "CapacityReservationArn": {
+          "shape": "String",
+          "locationName": "capacityReservationArn"
+        },
+        "AvailabilityZoneId": {
+          "shape": "String",
+          "locationName": "availabilityZoneId"
+        },
         "InstanceType": {
           "shape": "String",
           "documentation": "<p>The type of instance for which the Capacity Reservation reserves capacity.</p>",
@@ -7923,7 +7948,6 @@
       "required": [
         "InstanceType",
         "InstancePlatform",
-        "AvailabilityZone",
         "InstanceCount"
       ],
       "members": {
@@ -7942,6 +7966,9 @@
         "AvailabilityZone": {
           "shape": "String",
           "documentation": "<p>The Availability Zone in which to create the Capacity Reservation.</p>"
+        },
+        "AvailabilityZoneId": {
+          "shape": "String"
         },
         "Tenancy": {
           "shape": "CapacityReservationTenancy",
@@ -17755,6 +17782,64 @@
         "ipsec.1"
       ]
     },
+    "GetCapacityReservationUsageRequest": {
+      "type": "structure",
+      "required": [
+        "CapacityReservationId"
+      ],
+      "members": {
+        "CapacityReservationId": {
+          "shape": "String"
+        },
+        "NextToken": {
+          "shape": "String"
+        },
+        "MaxResults": {
+          "shape": "GetCapacityReservationUsageRequestMaxResults"
+        },
+        "DryRun": {
+          "shape": "Boolean"
+        }
+      }
+    },
+    "GetCapacityReservationUsageRequestMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
+    "GetCapacityReservationUsageResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "String",
+          "locationName": "nextToken"
+        },
+        "CapacityReservationId": {
+          "shape": "String",
+          "locationName": "capacityReservationId"
+        },
+        "InstanceType": {
+          "shape": "String",
+          "locationName": "instanceType"
+        },
+        "TotalInstanceCount": {
+          "shape": "Integer",
+          "locationName": "totalInstanceCount"
+        },
+        "AvailableInstanceCount": {
+          "shape": "Integer",
+          "locationName": "availableInstanceCount"
+        },
+        "State": {
+          "shape": "CapacityReservationState",
+          "locationName": "state"
+        },
+        "InstanceUsages": {
+          "shape": "InstanceUsageSet",
+          "locationName": "instanceUsageSet"
+        }
+      }
+    },
     "GetConsoleOutputRequest": {
       "type": "structure",
       "required": [
@@ -20910,6 +20995,26 @@
       "type": "list",
       "member": {
         "shape": "InstanceType"
+      }
+    },
+    "InstanceUsage": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "shape": "String",
+          "locationName": "accountId"
+        },
+        "UsedInstanceCount": {
+          "shape": "Integer",
+          "locationName": "usedInstanceCount"
+        }
+      }
+    },
+    "InstanceUsageSet": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceUsage",
+        "locationName": "item"
       }
     },
     "Integer": {

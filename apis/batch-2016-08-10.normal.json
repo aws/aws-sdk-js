@@ -652,7 +652,7 @@
         },
         "subnets": {
           "shape": "StringList",
-          "documentation": "<p>The VPC subnets into which the compute resources are launched. </p>"
+          "documentation": "<p>The VPC subnets into which the compute resources are launched. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">VPCs and Subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
         },
         "securityGroupIds": {
           "shape": "StringList",
@@ -789,6 +789,10 @@
         "resourceRequirements": {
           "shape": "ResourceRequirements",
           "documentation": "<p>The type and amount of a resource to assign to a container. Currently, the only supported resource is <code>GPU</code>.</p>"
+        },
+        "linuxParameters": {
+          "shape": "LinuxParameters",
+          "documentation": "<p>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
         }
       },
       "documentation": "<p>An object representing the details of a container that is part of a job.</p>"
@@ -881,6 +885,10 @@
         "resourceRequirements": {
           "shape": "ResourceRequirements",
           "documentation": "<p>The type and amount of a resource to assign to a container. Currently, the only supported resource is <code>GPU</code>.</p>"
+        },
+        "linuxParameters": {
+          "shape": "LinuxParameters",
+          "documentation": "<p>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
         }
       },
       "documentation": "<p>Container properties are used in job definitions to describe the container that is launched as part of a job.</p>"
@@ -1152,6 +1160,47 @@
         }
       }
     },
+    "Device": {
+      "type": "structure",
+      "required": [
+        "hostPath"
+      ],
+      "members": {
+        "hostPath": {
+          "shape": "String",
+          "documentation": "<p>The path for the device on the host container instance.</p>"
+        },
+        "containerPath": {
+          "shape": "String",
+          "documentation": "<p>The path inside the container at which to expose the host device.</p>"
+        },
+        "permissions": {
+          "shape": "DeviceCgroupPermissions",
+          "documentation": "<p>The explicit permissions to provide to the container for the device. By default, the container has permissions for <code>read</code>, <code>write</code>, and <code>mknod</code> for the device.</p>"
+        }
+      },
+      "documentation": "<p>An object representing a container instance host device.</p>"
+    },
+    "DeviceCgroupPermission": {
+      "type": "string",
+      "enum": [
+        "READ",
+        "WRITE",
+        "MKNOD"
+      ]
+    },
+    "DeviceCgroupPermissions": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceCgroupPermission"
+      }
+    },
+    "DevicesList": {
+      "type": "list",
+      "member": {
+        "shape": "Device"
+      }
+    },
     "EnvironmentVariables": {
       "type": "list",
       "member": {
@@ -1299,7 +1348,7 @@
         },
         "status": {
           "shape": "JobStatus",
-          "documentation": "<p>The current status for the job. </p> <note> <p>If your jobs do not progress to <code>STARTING</code>, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable\">Jobs Stuck in <code>RUNNABLE</code> Status</a> in the troubleshooting section of the <i>AWS Batch User Guide</i>.</p> </note>"
+          "documentation": "<p>The current status for the job. </p> <note> <p>If your jobs do not progress to <code>STARTING</code>, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable\">Jobs Stuck in RUNNABLE Status</a> in the troubleshooting section of the <i>AWS Batch User Guide</i>.</p> </note>"
         },
         "attempts": {
           "shape": "AttemptDetails",
@@ -1522,6 +1571,16 @@
         }
       },
       "documentation": "<p>An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both. </p>"
+    },
+    "LinuxParameters": {
+      "type": "structure",
+      "members": {
+        "devices": {
+          "shape": "DevicesList",
+          "documentation": "<p>Any host devices to expose to the container. This parameter maps to <code>Devices</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--device</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>"
+        }
+      },
+      "documentation": "<p>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
     },
     "ListJobsRequest": {
       "type": "structure",

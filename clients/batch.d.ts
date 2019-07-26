@@ -311,7 +311,7 @@ declare namespace Batch {
      */
     imageId?: String;
     /**
-     * The VPC subnets into which the compute resources are launched. 
+     * The VPC subnets into which the compute resources are launched. For more information, see VPCs and Subnets in the Amazon VPC User Guide.
      */
     subnets: StringList;
     /**
@@ -442,6 +442,10 @@ declare namespace Batch {
      * The type and amount of a resource to assign to a container. Currently, the only supported resource is GPU.
      */
     resourceRequirements?: ResourceRequirements;
+    /**
+     * Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.
+     */
+    linuxParameters?: LinuxParameters;
   }
   export interface ContainerOverrides {
     /**
@@ -526,6 +530,10 @@ declare namespace Batch {
      * The type and amount of a resource to assign to a container. Currently, the only supported resource is GPU.
      */
     resourceRequirements?: ResourceRequirements;
+    /**
+     * Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.
+     */
+    linuxParameters?: LinuxParameters;
   }
   export interface ContainerSummary {
     /**
@@ -713,6 +721,23 @@ declare namespace Batch {
      */
     jobs?: JobDetailList;
   }
+  export interface Device {
+    /**
+     * The path for the device on the host container instance.
+     */
+    hostPath: String;
+    /**
+     * The path inside the container at which to expose the host device.
+     */
+    containerPath?: String;
+    /**
+     * The explicit permissions to provide to the container for the device. By default, the container has permissions for read, write, and mknod for the device.
+     */
+    permissions?: DeviceCgroupPermissions;
+  }
+  export type DeviceCgroupPermission = "READ"|"WRITE"|"MKNOD"|string;
+  export type DeviceCgroupPermissions = DeviceCgroupPermission[];
+  export type DevicesList = Device[];
   export type EnvironmentVariables = KeyValuePair[];
   export interface Host {
     /**
@@ -957,6 +982,12 @@ declare namespace Batch {
      * The version number of the launch template. Default: The default version of the launch template.
      */
     version?: String;
+  }
+  export interface LinuxParameters {
+    /**
+     * Any host devices to expose to the container. This parameter maps to Devices in the Create a container section of the Docker Remote API and the --device option to docker run.
+     */
+    devices?: DevicesList;
   }
   export interface ListJobsRequest {
     /**

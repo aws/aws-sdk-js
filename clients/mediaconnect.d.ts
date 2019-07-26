@@ -171,13 +171,17 @@ declare namespace MediaConnect {
   }
   export interface AddOutputRequest {
     /**
+     * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     */
+    CidrAllowList?: __listOf__string;
+    /**
      * A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
      */
     Description?: __string;
     /**
      * The IP address from which video will be sent to output destinations.
      */
-    Destination: __string;
+    Destination?: __string;
     /**
      * The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
      */
@@ -193,11 +197,15 @@ declare namespace MediaConnect {
     /**
      * The port to use when content is distributed to this output.
      */
-    Port: __integer;
+    Port?: __integer;
     /**
      * The protocol to use for the output.
      */
     Protocol: Protocol;
+    /**
+     * The remote ID for the Zixi-pull output stream.
+     */
+    RemoteId?: __string;
     /**
      * The smoothing latency in milliseconds for RTP and RTP-FEC streams.
      */
@@ -523,7 +531,7 @@ declare namespace MediaConnect {
      */
     Transport?: Transport;
   }
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|string;
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|string;
   export interface RemoveFlowOutputRequest {
     /**
      * The flow that you want to remove an output from.
@@ -602,7 +610,7 @@ declare namespace MediaConnect {
      */
     StreamId?: __string;
     /**
-     * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
   }
@@ -640,7 +648,7 @@ declare namespace MediaConnect {
      */
     Transport?: Transport;
     /**
-     * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
   }
@@ -690,6 +698,10 @@ declare namespace MediaConnect {
   }
   export interface Transport {
     /**
+     * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     */
+    CidrAllowList?: __listOf__string;
+    /**
      * The smoothing max bitrate for RTP and RTP-FEC streams.
      */
     MaxBitrate?: __integer;
@@ -701,6 +713,10 @@ declare namespace MediaConnect {
      * The protocol that is used by the source or output.
      */
     Protocol: Protocol;
+    /**
+     * The remote ID for the Zixi-pull stream.
+     */
+    RemoteId?: __string;
     /**
      * The smoothing latency in milliseconds for RTP and RTP-FEC streams.
      */
@@ -789,6 +805,10 @@ declare namespace MediaConnect {
   }
   export interface UpdateFlowOutputRequest {
     /**
+     * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     */
+    CidrAllowList?: __listOf__string;
+    /**
      * A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
      */
     Description?: __string;
@@ -820,6 +840,10 @@ declare namespace MediaConnect {
      * The protocol to use for the output.
      */
     Protocol?: Protocol;
+    /**
+     * The remote ID for the Zixi-pull stream.
+     */
+    RemoteId?: __string;
     /**
      * The smoothing latency in milliseconds for RTP and RTP-FEC streams.
      */
@@ -878,7 +902,7 @@ declare namespace MediaConnect {
      */
     StreamId?: __string;
     /**
-     * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
   }

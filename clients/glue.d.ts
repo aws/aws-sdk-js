@@ -444,6 +444,22 @@ declare class Glue extends Service {
    */
   getJob(callback?: (err: AWSError, data: Glue.Types.GetJobResponse) => void): Request<Glue.Types.GetJobResponse, AWSError>;
   /**
+   * Returns information on a job bookmark entry.
+   */
+  getJobBookmark(params: Glue.Types.GetJobBookmarkRequest, callback?: (err: AWSError, data: Glue.Types.GetJobBookmarkResponse) => void): Request<Glue.Types.GetJobBookmarkResponse, AWSError>;
+  /**
+   * Returns information on a job bookmark entry.
+   */
+  getJobBookmark(callback?: (err: AWSError, data: Glue.Types.GetJobBookmarkResponse) => void): Request<Glue.Types.GetJobBookmarkResponse, AWSError>;
+  /**
+   * Returns information on the job bookmark entries. The list is ordered on decreasing version numbers.
+   */
+  getJobBookmarks(params: Glue.Types.GetJobBookmarksRequest, callback?: (err: AWSError, data: Glue.Types.GetJobBookmarksResponse) => void): Request<Glue.Types.GetJobBookmarksResponse, AWSError>;
+  /**
+   * Returns information on the job bookmark entries. The list is ordered on decreasing version numbers.
+   */
+  getJobBookmarks(callback?: (err: AWSError, data: Glue.Types.GetJobBookmarksResponse) => void): Request<Glue.Types.GetJobBookmarksResponse, AWSError>;
+  /**
    * Retrieves the metadata for a given job run.
    */
   getJobRun(params: Glue.Types.GetJobRunRequest, callback?: (err: AWSError, data: Glue.Types.GetJobRunResponse) => void): Request<Glue.Types.GetJobRunResponse, AWSError>;
@@ -2865,6 +2881,46 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
   }
+  export interface GetJobBookmarkRequest {
+    /**
+     * The name of the job in question.
+     */
+    JobName: JobName;
+    /**
+     * The unique run identifier associated with this job run.
+     */
+    RunId?: RunId;
+  }
+  export interface GetJobBookmarkResponse {
+    /**
+     * A structure that defines a point that a job can resume processing.
+     */
+    JobBookmarkEntry?: JobBookmarkEntry;
+  }
+  export interface GetJobBookmarksRequest {
+    /**
+     * The name of the job in question.
+     */
+    JobName: JobName;
+    /**
+     * The maximum size of the response.
+     */
+    MaxResults?: IntegerValue;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: IntegerValue;
+  }
+  export interface GetJobBookmarksResponse {
+    /**
+     * A list of job bookmark entries that defines a point that a job can resume processing.
+     */
+    JobBookmarkEntries?: JobBookmarkEntryList;
+    /**
+     * A continuation token, which has a value of 1 if all the entries are returned, or &gt; 1 if not all requested job runs have been returned.
+     */
+    NextToken?: IntegerValue;
+  }
   export interface GetJobRequest {
     /**
      * The name of the job definition to retrieve.
@@ -3555,10 +3611,19 @@ declare namespace Glue {
      */
     Attempt?: IntegerValue;
     /**
+     * The unique run identifier associated with the previous job run..
+     */
+    PreviousRunId?: RunId;
+    /**
+     * The unique run identifier associated with this job run.
+     */
+    RunId?: RunId;
+    /**
      * The bookmark itself.
      */
     JobBookmark?: JsonValue;
   }
+  export type JobBookmarkEntryList = JobBookmarkEntry[];
   export interface JobBookmarksEncryption {
     /**
      * The encryption mode to use for job bookmarks data.
@@ -4206,6 +4271,10 @@ declare namespace Glue {
      * The name of the job in question.
      */
     JobName: JobName;
+    /**
+     * The unique run identifier associated with this job run.
+     */
+    RunId?: RunId;
   }
   export interface ResetJobBookmarkResponse {
     /**
@@ -4229,6 +4298,7 @@ declare namespace Glue {
   export type RoleArn = string;
   export type RoleString = string;
   export type RowTag = string;
+  export type RunId = string;
   export interface S3Encryption {
     /**
      * The encryption mode to use for Amazon S3 data.

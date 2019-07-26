@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "AWS Batch now supports SDK auto-pagination and Job-level docker devices."
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchLogs",
+        "description": "Allow for specifying multiple log groups in an Insights query, and deprecate storedByte field for LogStreams and interleaved field for FilterLogEventsRequest."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Adds support for resource optimization recommendations."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "You can now create EC2 Capacity Reservations using Availability Zone ID or Availability Zone name. You can view usage of Amazon EC2 Capacity Reservations per AWS account."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This release provides GetJobBookmark and GetJobBookmarks APIs. These APIs enable users to look at specific versions or all versions of the JobBookmark for a specific job. This release also enables resetting the job bookmark to a specific run via an enhancement of the ResetJobBookmark API."
+    },
+    {
+        "type": "feature",
+        "category": "Greengrass",
+        "description": "Greengrass OTA service supports openwrt/aarch64 and openwrt/armv7l platforms."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "This release adds support for the Zixi pull protocol on outputs."
+    }
+]
