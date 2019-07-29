@@ -2637,7 +2637,7 @@ declare namespace CodeCommit {
      */
     name: RepositoryTriggerName;
     /**
-     * The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).
+     * The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon SNS.
      */
     destinationArn: Arn;
     /**
@@ -2645,11 +2645,11 @@ declare namespace CodeCommit {
      */
     customData?: RepositoryTriggerCustomData;
     /**
-     * The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.  While no content is required in the array, you must include the array itself. 
+     * The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.  Although no content is required in the array, you must include the array itself. 
      */
     branches?: BranchNameList;
     /**
-     * The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS).   The valid value "all" cannot be used with any other values. 
+     * The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon SNS.   The valid value "all" cannot be used with any other values. 
      */
     events: RepositoryTriggerEventList;
   }

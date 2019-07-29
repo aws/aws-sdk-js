@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.501.0-->
+<!--LATEST=2.502.0-->
 <!--ENTRYINSERT-->
+
+## 2.502.0
+* feature: CodeCommit: This release supports better exception handling for merges.
 
 ## 2.501.0
 * feature: Batch: AWS Batch now supports SDK auto-pagination and Job-level docker devices.

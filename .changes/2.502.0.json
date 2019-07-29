@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release supports better exception handling for merges."
+    }
+]

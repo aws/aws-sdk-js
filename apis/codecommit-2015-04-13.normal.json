@@ -555,6 +555,9 @@
           "shape": "MaximumItemsToCompareExceededException"
         },
         {
+          "shape": "ConcurrentReferenceUpdateException"
+        },
+        {
           "shape": "FileModeRequiredException"
         },
         {
@@ -1925,6 +1928,9 @@
           "shape": "ManualMergeRequiredException"
         },
         {
+          "shape": "ConcurrentReferenceUpdateException"
+        },
+        {
           "shape": "EncryptionIntegrityChecksFailedException"
         },
         {
@@ -2055,6 +2061,9 @@
           "shape": "CommitMessageLengthExceededException"
         },
         {
+          "shape": "ConcurrentReferenceUpdateException"
+        },
+        {
           "shape": "EncryptionIntegrityChecksFailedException"
         },
         {
@@ -2123,6 +2132,9 @@
         },
         {
           "shape": "ManualMergeRequiredException"
+        },
+        {
+          "shape": "ConcurrentReferenceUpdateException"
         },
         {
           "shape": "InvalidConflictDetailLevelException"
@@ -2252,6 +2264,9 @@
           "shape": "RepositoryDoesNotExistException"
         },
         {
+          "shape": "ConcurrentReferenceUpdateException"
+        },
+        {
           "shape": "EncryptionIntegrityChecksFailedException"
         },
         {
@@ -2338,6 +2353,9 @@
         },
         {
           "shape": "MaximumConflictResolutionEntriesExceededException"
+        },
+        {
+          "shape": "ConcurrentReferenceUpdateException"
         },
         {
           "shape": "PathRequiredException"
@@ -2498,6 +2516,9 @@
         },
         {
           "shape": "RepositoryNotAssociatedWithPullRequestException"
+        },
+        {
+          "shape": "ConcurrentReferenceUpdateException"
         },
         {
           "shape": "EncryptionIntegrityChecksFailedException"
@@ -6549,7 +6570,7 @@
         },
         "destinationArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).</p>"
+          "documentation": "<p>The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon SNS.</p>"
         },
         "customData": {
           "shape": "RepositoryTriggerCustomData",
@@ -6557,11 +6578,11 @@
         },
         "branches": {
           "shape": "BranchNameList",
-          "documentation": "<p>The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.</p> <note> <p>While no content is required in the array, you must include the array itself.</p> </note>"
+          "documentation": "<p>The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.</p> <note> <p>Although no content is required in the array, you must include the array itself.</p> </note>"
         },
         "events": {
           "shape": "RepositoryTriggerEventList",
-          "documentation": "<p>The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). </p> <note> <p>The valid value \"all\" cannot be used with any other values.</p> </note>"
+          "documentation": "<p>The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon SNS. </p> <note> <p>The valid value \"all\" cannot be used with any other values.</p> </note>"
         }
       },
       "documentation": "<p>Information about a trigger for a repository.</p>"
