@@ -104,6 +104,10 @@ declare namespace Polly {
   }
   export interface DescribeVoicesInput {
     /**
+     * Specifies the engine (standard or neural) used by Amazon Polly when processing input text for speech synthesis. 
+     */
+    Engine?: Engine;
+    /**
      *  The language identification tag (ISO 639 code for the language name-ISO 3166 country code) for filtering the list of voices returned. If you don't specify this optional parameter, all available voices are returned. 
      */
     LanguageCode?: LanguageCode;
@@ -126,6 +130,8 @@ declare namespace Polly {
      */
     NextToken?: NextToken;
   }
+  export type Engine = "standard"|"neural"|string;
+  export type EngineList = Engine[];
   export type Gender = "Female"|"Male"|string;
   export interface GetLexiconInput {
     /**
@@ -278,6 +284,14 @@ declare namespace Polly {
   export type SpeechMarkTypeList = SpeechMarkType[];
   export interface StartSpeechSynthesisTaskInput {
     /**
+     * Specifies the engine (standard or neural) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine selected will result in an error.
+     */
+    Engine?: Engine;
+    /**
+     * Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     */
+    LanguageCode?: LanguageCode;
+    /**
      * List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. 
      */
     LexiconNames?: LexiconNameList;
@@ -294,7 +308,7 @@ declare namespace Polly {
      */
     OutputS3KeyPrefix?: OutputS3KeyPrefix;
     /**
-     * The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050". Valid values for pcm are "8000" and "16000" The default value is "16000". 
+     * The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and "24000". The default value for standard voices is "22050". The default value for neural voices is "24000". Valid values for pcm are "8000" and "16000" The default value is "16000". 
      */
     SampleRate?: SampleRate;
     /**
@@ -317,10 +331,6 @@ declare namespace Polly {
      * Voice ID to use for the synthesis. 
      */
     VoiceId: VoiceId;
-    /**
-     * Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
-     */
-    LanguageCode?: LanguageCode;
   }
   export interface StartSpeechSynthesisTaskOutput {
     /**
@@ -329,6 +339,10 @@ declare namespace Polly {
     SynthesisTask?: SynthesisTask;
   }
   export interface SynthesisTask {
+    /**
+     * Specifies the engine (standard or neural) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine selected will result in an error.
+     */
+    Engine?: Engine;
     /**
      * The Amazon Polly generated identifier for a speech synthesis task.
      */
@@ -366,7 +380,7 @@ declare namespace Polly {
      */
     OutputFormat?: OutputFormat;
     /**
-     * The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050". Valid values for pcm are "8000" and "16000" The default value is "16000". 
+     * The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and "24000". The default value for standard voices is "22050". The default value for neural voices is "24000". Valid values for pcm are "8000" and "16000" The default value is "16000". 
      */
     SampleRate?: SampleRate;
     /**
@@ -389,6 +403,14 @@ declare namespace Polly {
   export type SynthesisTasks = SynthesisTask[];
   export interface SynthesizeSpeechInput {
     /**
+     * Specifies the engine (standard or neural) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine selected will result in an error.
+     */
+    Engine?: Engine;
+    /**
+     * Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     */
+    LanguageCode?: LanguageCode;
+    /**
      * List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see PutLexicon.
      */
     LexiconNames?: LexiconNameList;
@@ -397,7 +419,7 @@ declare namespace Polly {
      */
     OutputFormat: OutputFormat;
     /**
-     *  The audio frequency specified in Hz.  The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050".   Valid values for pcm are "8000" and "16000" The default value is "16000". 
+     * The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and "24000". The default value for standard voices is "22050". The default value for neural voices is "24000". Valid values for pcm are "8000" and "16000" The default value is "16000". 
      */
     SampleRate?: SampleRate;
     /**
@@ -416,10 +438,6 @@ declare namespace Polly {
      *  Voice ID to use for the synthesis. You can get a list of available voice IDs by calling the DescribeVoices operation. 
      */
     VoiceId: VoiceId;
-    /**
-     * Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
-     */
-    LanguageCode?: LanguageCode;
   }
   export interface SynthesizeSpeechOutput {
     /**
@@ -465,6 +483,10 @@ declare namespace Polly {
      * Additional codes for languages available for the specified voice in addition to its default language.  For example, the default language for Aditi is Indian English (en-IN) because it was first used for that language. Since Aditi is bilingual and fluent in both Indian English and Hindi, this parameter would show the code hi-IN.
      */
     AdditionalLanguageCodes?: LanguageCodeList;
+    /**
+     * Specifies which engines (standard or neural) that are supported by a given voice.
+     */
+    SupportedEngines?: EngineList;
   }
   export type VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"|string;
   export type VoiceList = Voice[];

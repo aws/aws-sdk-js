@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "MediaConvert adds support for specifying priority (-50 to 50) on jobs submitted to on demand or reserved queues"
+    },
+    {
+        "type": "feature",
+        "category": "Polly",
+        "description": "Amazon Polly adds support for Neural text-to-speech engine."
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "Amazon Route 53 now supports the Middle East (Bahrain) Region (me-south-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region."
+    }
+]

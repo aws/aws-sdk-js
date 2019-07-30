@@ -885,6 +885,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     JobTemplate?: __string;
     /**
+     * Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don't specify a priority, the service uses the default value 0.
+     */
+    Priority?: __integerMinNegative50Max50;
+    /**
      * Optional. When you create a job, you can specify a queue to send it to. If you don't specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.
      */
     Queue?: __string;
@@ -928,6 +932,10 @@ All burn-in and DVB-Sub font settings must match.
      * The name of the job template you are creating.
      */
     Name: __string;
+    /**
+     * Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don't specify a priority, the service uses the default value 0.
+     */
+    Priority?: __integerMinNegative50Max50;
     /**
      * Optional. The queue that jobs created from this template are assigned to. If you don't specify this, jobs will go to the default queue.
      */
@@ -2505,6 +2513,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     OutputGroupDetails?: __listOfOutputGroupDetail;
     /**
+     * Relative priority on the job.
+     */
+    Priority?: __integerMinNegative50Max50;
+    /**
      * Optional. When you create a job, you can specify a queue to send it to. If you don't specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
      */
     Queue?: __string;
@@ -2606,6 +2618,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * A name you create for each job template. Each name must be unique within your account.
      */
     Name: __string;
+    /**
+     * Relative priority on the job.
+     */
+    Priority?: __integerMinNegative50Max50;
     /**
      * Optional. The queue that jobs created from this template are assigned to. If you don't specify this, jobs will go to the default queue.
      */
@@ -3903,6 +3919,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Name: __string;
     /**
+     * Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don't specify a priority, the service uses the default value 0.
+     */
+    Priority?: __integerMinNegative50Max50;
+    /**
      * The new queue for the job template, if you are changing it.
      */
     Queue?: __string;
@@ -4210,6 +4230,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMinNegative180Max180 = number;
   export type __integerMinNegative2147483648Max2147483647 = number;
   export type __integerMinNegative2Max3 = number;
+  export type __integerMinNegative50Max50 = number;
   export type __integerMinNegative5Max5 = number;
   export type __integerMinNegative60Max6 = number;
   export type __integerMinNegative70Max0 = number;

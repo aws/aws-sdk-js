@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.502.0-->
+<!--LATEST=2.503.0-->
 <!--ENTRYINSERT-->
+
+## 2.503.0
+* feature: MediaConvert: MediaConvert adds support for specifying priority (-50 to 50) on jobs submitted to on demand or reserved queues
+* feature: Polly: Amazon Polly adds support for Neural text-to-speech engine.
+* feature: Route53: Amazon Route 53 now supports the Middle East (Bahrain) Region (me-south-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
 
 ## 2.502.0
 * feature: CodeCommit: This release supports better exception handling for merges.
