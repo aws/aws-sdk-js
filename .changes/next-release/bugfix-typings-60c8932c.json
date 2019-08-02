@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "typings",
+  "description": "Fix to define AWSError as interface, not class"
+}
