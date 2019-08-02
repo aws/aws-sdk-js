@@ -1,7 +1,7 @@
 /**
  * A structure containing information about a service or networking error.
  */
-export class AWSError extends Error {
+export interface AWSError extends Error {
     /**
      * A unique short code representing the error that was emitted.
      */
