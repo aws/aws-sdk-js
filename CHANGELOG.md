@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.503.0-->
+<!--LATEST=2.504.0-->
 <!--ENTRYINSERT-->
+
+## 2.504.0
+* feature: DataSync: Support VPC endpoints.
+* feature: EC2: Amazon EC2 now supports a new Spot allocation strategy "Capacity-optimized" that fulfills your request using Spot Instance pools that are optimally chosen based on the available Spot capacity.
+* feature: Iot: In this release, AWS IoT Device Defender introduces audit mitigation actions that can be applied to audit findings to help mitigate security issues.
 
 ## 2.503.0
 * feature: MediaConvert: MediaConvert adds support for specifying priority (-50 to 50) on jobs submitted to on demand or reserved queues

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "Support VPC endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon EC2 now supports a new Spot allocation strategy \"Capacity-optimized\" that fulfills your request using Spot Instance pools that are optimally chosen based on the available Spot capacity."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "In this release, AWS IoT Device Defender introduces audit mitigation actions that can be applied to audit findings to help mitigate security issues."
+    }
+]

@@ -20,11 +20,11 @@ declare class DataSync extends Service {
    */
   cancelTaskExecution(callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.  You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  For more information, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-agents.html#activating-agent" (Activating an Agent) in the AWS DataSync User Guide.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (Virtual private Cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
    */
   createAgent(params: DataSync.Types.CreateAgentRequest, callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
-   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.  You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  For more information, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-agents.html#activating-agent" (Activating an Agent) in the AWS DataSync User Guide.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (Virtual private Cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
    */
   createAgent(callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class DataSync extends Service {
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location" (Configuring Amazon S3 Location Settings) in the AWS DataSync User Guide.
+   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see Configuring Amazon S3 Location Settings in the AWS DataSync User Guide. 
    */
   createLocationS3(params: DataSync.Types.CreateLocationS3Request, callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location" (Configuring Amazon S3 Location Settings) in the AWS DataSync User Guide.
+   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see Configuring Amazon S3 Location Settings in the AWS DataSync User Guide. 
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class DataSync extends Service {
    */
   listTasks(callback?: (err: AWSError, data: DataSync.Types.ListTasksResponse) => void): Request<DataSync.Types.ListTasksResponse, AWSError>;
   /**
-   * Starts a specific invocation of a task. A TaskExecution value represents an individual run of a task. Each task can have at most one TaskExecution at a time.  TaskExecution has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  For detailed information, see Task Execution in "https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-works.html#terminology" (Components and Terminology) in the AWS DataSync User Guide.
+   * Starts a specific invocation of a task. A TaskExecution value represents an individual run of a task. Each task can have at most one TaskExecution at a time.  TaskExecution has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  For detailed information, see the Task Execution section in the Components and Terminology topic in the AWS DataSync User Guide.
    */
   startTaskExecution(params: DataSync.Types.StartTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
-   * Starts a specific invocation of a task. A TaskExecution value represents an individual run of a task. Each task can have at most one TaskExecution at a time.  TaskExecution has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  For detailed information, see Task Execution in "https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-works.html#terminology" (Components and Terminology) in the AWS DataSync User Guide.
+   * Starts a specific invocation of a task. A TaskExecution value represents an individual run of a task. Each task can have at most one TaskExecution at a time.  TaskExecution has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  For detailed information, see the Task Execution section in the Components and Terminology topic in the AWS DataSync User Guide.
    */
   startTaskExecution(callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
@@ -244,7 +244,7 @@ declare namespace DataSync {
   }
   export interface CreateAgentRequest {
     /**
-     * Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the AWS DataSync console.  The redirect URL returned in the response provides you the activation key for your agent in the query string parameter activationKey. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent. For more information, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-agents.html#activating-agent" (Activating a Agent) in the AWS DataSync User Guide. 
+     * Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the AWS DataSync console. The redirect URL returned in the response provides you the activation key for your agent in the query string parameter activationKey. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent. For more information, see Activating an Agent in the AWS DataSync User Guide. 
      */
     ActivationKey: ActivationKey;
     /**
@@ -255,6 +255,18 @@ declare namespace DataSync {
      * The key-value pair that represents the tag that you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @.  
      */
     Tags?: TagList;
+    /**
+     * The ID of the VPC (Virtual Private Cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don't have a PrivateLink VPC endpoint, see Creating a VPC Endpoint Service Configuration in the AWS VPC User Guide. VPC endpoint ID looks like this: vpce-01234d5aff67890e1.
+     */
+    VpcEndpointId?: VpcEndpointId;
+    /**
+     * The Amazon Resource Names (ARNs) of the subnets in which DataSync will create Elastic Network Interfaces (ENIs) for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four ENIs for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four ENIs.
+     */
+    SubnetArns?: PLSubnetArnList;
+    /**
+     * The ARNs of the security groups used to protect your data transfer task subnets. See CreateAgentRequest$SubnetArns.
+     */
+    SecurityGroupArns?: PLSecurityGroupArnList;
   }
   export interface CreateAgentResponse {
     /**
@@ -272,7 +284,7 @@ declare namespace DataSync {
      */
     EfsFilesystemArn: EfsFilesystemArn;
     /**
-     * The subnet and security group that the Amazon EFS file system uses. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows:     Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group.    Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group. For information about security groups and mount targets, see "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access" (Security Groups for Amazon EC2 Instances and Mount Targets) in the Amazon EFS User Guide.  
+     * The subnet and security group that the Amazon EFS file system uses. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows:     Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group.    Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group. For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount Targets in the Amazon EFS User Guide.   
      */
     Ec2Config: Ec2Config;
     /**
@@ -288,7 +300,7 @@ declare namespace DataSync {
   }
   export interface CreateLocationNfsRequest {
     /**
-     * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server. run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. For information about NFS export configuration, see "http://web.mit.edu/rhel-doc/5/RHEL-5-manual/Deployment_Guide-en-US/s1-nfs-server-config-exports.html" (18.7. The /etc/exports Configuration File).
+     * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server. run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.
      */
     Subdirectory: NonEmptySubdirectory;
     /**
@@ -345,7 +357,7 @@ declare namespace DataSync {
      */
     DestinationLocationArn: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task.  For more information on these groups, see "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html" (Working with Log Groups and Log Streams) in the Amazon CloudWatch User Guide. For more information about how to useCloudWatchLogs with DataSync, see "https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html" (Monitoring Your Task)
+     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task.  For more information on these groups, see Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.  For more information about how to use CloudWatch Logs with DataSync, see Monitoring Your Task in the AWS DataSync User Guide. 
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
@@ -357,7 +369,7 @@ declare namespace DataSync {
      */
     Options?: Options;
     /**
-     *  A filter that determines which files to exclude from a task based on the specified pattern. Transfers all files in the task’s subdirectory, except files that match the filter that is set. 
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2"   
      */
     Excludes?: FilterList;
     /**
@@ -422,7 +434,13 @@ declare namespace DataSync {
      * The time that the agent was activated (that is, created in your account).
      */
     CreationTime?: Time;
-    EndpointOptions?: EndpointOptions;
+    /**
+     * The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. 
+     */
+    EndpointType?: EndpointType;
+    /**
+     * The subnet and the security group that DataSync used to access a VPC endpoint.
+     */
     PrivateLinkConfig?: PrivateLinkConfig;
   }
   export interface DescribeLocationEfsRequest {
@@ -504,16 +522,16 @@ declare namespace DataSync {
      */
     TaskExecutionArn?: TaskExecutionArn;
     /**
-     * The status of the task execution.  For detailed information about task execution statuses, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-tasks.html#understand-task-creation-statuses" (Understanding Task Statuses).
+     * The status of the task execution.  For detailed information about task execution statuses, see Understanding Task Statuses in the AWS DataSync User Guide. 
      */
     Status?: TaskExecutionStatus;
     Options?: Options;
     /**
-     *  Specifies that the task execution excludes files from the transfer based on the specified pattern in the filter. Transfers all files in the task’s subdirectory, except files that match the filter that is set. 
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
      */
     Excludes?: FilterList;
     /**
-     *  Specifies that the task execution excludes files in the transfer based on the specified pattern in the filter. When multiple include filters are set, they are interpreted as an OR. 
+     * A list of filter rules that determines which files to include when running a task. The list should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
      */
     Includes?: FilterList;
     /**
@@ -557,7 +575,7 @@ declare namespace DataSync {
      */
     TaskArn?: TaskArn;
     /**
-     * The status of the task that was described. For detailed information about task execution statuses, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-tasks.html#understand-task-creation-statuses" (Understanding Task Statuses).
+     * The status of the task that was described. For detailed information about task execution statuses, see Understanding Task Statuses in the AWS DataSync User Guide. 
      */
     Status?: TaskStatus;
     /**
@@ -577,15 +595,23 @@ declare namespace DataSync {
      */
     DestinationLocationArn?: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the task. For more information on these groups, see "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html" (Working with Log Groups and Log Streams) in the Amazon CloudWatch UserGuide.
+     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the task. For more information on these groups, see Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.
      */
     CloudWatchLogGroupArn?: LogGroupArn;
+    /**
+     * The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface) that was created for your subnet.
+     */
+    SourceNetworkInterfaceArns?: SourceNetworkInterfaceArns;
+    /**
+     * The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface) that was created for your subnet.
+     */
+    DestinationNetworkInterfaceArns?: DestinationNetworkInterfaceArns;
     /**
      * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the overriding OverrideOptions value to operation. 
      */
     Options?: Options;
     /**
-     *  Specifies that the task excludes files in the transfer based on the specified pattern in the filter. Transfers all files in the task’s subdirectory, except files that match the filter that is set. 
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
      */
     Excludes?: FilterList;
     /**
@@ -601,6 +627,7 @@ declare namespace DataSync {
      */
     CreationTime?: Time;
   }
+  export type DestinationNetworkInterfaceArns = NetworkInterfaceArn[];
   export type Duration = number;
   export interface Ec2Config {
     /**
@@ -616,18 +643,16 @@ declare namespace DataSync {
   export type Ec2SecurityGroupArnList = Ec2SecurityGroupArn[];
   export type Ec2SubnetArn = string;
   export type EfsFilesystemArn = string;
-  export interface EndpointOptions {
-    Fips?: boolean;
-    PrivateLink?: boolean;
-  }
+  export type Endpoint = string;
+  export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|string;
   export type FilterList = FilterRule[];
   export interface FilterRule {
     /**
-     *  Specifies the type of filter rule pattern to apply. DataSync only supports the SIMPLE_PATTERN rule type.
+     * The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
      */
     FilterType?: FilterType;
     /**
-     *  A pattern that defines the filter. The filter might include or exclude files is a transfer.
+     * A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2   
      */
     Value?: FilterValue;
   }
@@ -759,6 +784,7 @@ declare namespace DataSync {
   export type LogGroupArn = string;
   export type MaxResults = number;
   export type Mtime = "NONE"|"PRESERVE"|string;
+  export type NetworkInterfaceArn = string;
   export type NextToken = string;
   export interface NfsMountOptions {
     /**
@@ -819,8 +845,21 @@ declare namespace DataSync {
   export type PreserveDeletedFiles = "PRESERVE"|"REMOVE"|string;
   export type PreserveDevices = "NONE"|"PRESERVE"|string;
   export interface PrivateLinkConfig {
-    PrivateLinkEndpoint?: string;
+    /**
+     * The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public Internet.
+     */
+    VpcEndpointId?: VpcEndpointId;
+    /**
+     * The private endpoint that is configured for an agent that has access to IP addresses in a PrivateLink. An agent that is configured with this endpoint will not be accessible over the public Internet.
+     */
+    PrivateLinkEndpoint?: Endpoint;
+    /**
+     * The Amazon Resource Names (ARNs) of the subnets that are configured for an agent activated in a VPC or an agent that has access to a VPC endpoint.
+     */
     SubnetArns?: PLSubnetArnList;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are configured for the EC2 resource that hosts an agent activated in a VPC or an agent that has access to a VPC endpoint.
+     */
     SecurityGroupArns?: PLSecurityGroupArnList;
   }
   export type S3BucketArn = string;
@@ -831,6 +870,7 @@ declare namespace DataSync {
     BucketAccessRoleArn: IamRoleArn;
   }
   export type ServerHostname = string;
+  export type SourceNetworkInterfaceArns = NetworkInterfaceArn[];
   export interface StartTaskExecutionRequest {
     /**
      * The Amazon Resource Name (ARN) of the task to start.
@@ -838,7 +878,7 @@ declare namespace DataSync {
     TaskArn: TaskArn;
     OverrideOptions?: Options;
     /**
-     *  A filter that determines which files to include in the transfer during a task execution based on the specified pattern in the filter. When multiple include filters are set, they are interpreted as an OR.
+     * A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe). For example: "/folder1|/folder2"   
      */
     Includes?: FilterList;
   }
@@ -973,7 +1013,7 @@ declare namespace DataSync {
     TaskArn: TaskArn;
     Options?: Options;
     /**
-     *  A filter that determines which files to exclude from a task based on the specified pattern in the filter. Transfers all files in the task’s subdirectory, except files that match the filter that is set. 
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
      */
     Excludes?: FilterList;
     /**
@@ -988,6 +1028,7 @@ declare namespace DataSync {
   export interface UpdateTaskResponse {
   }
   export type VerifyMode = "POINT_IN_TIME_CONSISTENT"|"NONE"|string;
+  export type VpcEndpointId = string;
   export type long = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -60,11 +60,11 @@ declare class Iot extends Service {
    */
   attachPrincipalPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
+   * Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it.
    */
   attachSecurityProfile(params: Iot.Types.AttachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
   /**
-   * Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
+   * Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it.
    */
   attachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
   /**
@@ -75,6 +75,14 @@ declare class Iot extends Service {
    * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   attachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
+  /**
+   * Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs.
+   */
+  cancelAuditMitigationActionsTask(params: Iot.Types.CancelAuditMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelAuditMitigationActionsTaskResponse, AWSError>;
+  /**
+   * Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs.
+   */
+  cancelAuditMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.CancelAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelAuditMitigationActionsTaskResponse, AWSError>;
   /**
    * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
    */
@@ -163,6 +171,14 @@ declare class Iot extends Service {
    * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
    */
   createKeysAndCertificate(callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
+  /**
+   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Each mitigation action can apply only one type of change.
+   */
+  createMitigationAction(params: Iot.Types.CreateMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.CreateMitigationActionResponse) => void): Request<Iot.Types.CreateMitigationActionResponse, AWSError>;
+  /**
+   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Each mitigation action can apply only one type of change.
+   */
+  createMitigationAction(callback?: (err: AWSError, data: Iot.Types.CreateMitigationActionResponse) => void): Request<Iot.Types.CreateMitigationActionResponse, AWSError>;
   /**
    * Creates an AWS IoT OTAUpdate on a target group of things or groups.
    */
@@ -284,11 +300,11 @@ declare class Iot extends Service {
    */
   deleteCACertificate(callback?: (err: AWSError, data: Iot.Types.DeleteCACertificateResponse) => void): Request<Iot.Types.DeleteCACertificateResponse, AWSError>;
   /**
-   * Deletes the specified certificate. A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
+   * Deletes the specified certificate. A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
    */
   deleteCertificate(params: Iot.Types.DeleteCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified certificate. A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
+   * Deletes the specified certificate. A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -315,6 +331,14 @@ declare class Iot extends Service {
    * Deletes a job execution.
    */
   deleteJobExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a defined mitigation action from your AWS account.
+   */
+  deleteMitigationAction(params: Iot.Types.DeleteMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteMitigationActionResponse) => void): Request<Iot.Types.DeleteMitigationActionResponse, AWSError>;
+  /**
+   * Deletes a defined mitigation action from your AWS account.
+   */
+  deleteMitigationAction(callback?: (err: AWSError, data: Iot.Types.DeleteMitigationActionResponse) => void): Request<Iot.Types.DeleteMitigationActionResponse, AWSError>;
   /**
    * Delete an OTA update.
    */
@@ -436,6 +460,22 @@ declare class Iot extends Service {
    */
   describeAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
   /**
+   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and when the audit that returned the finding was started.
+   */
+  describeAuditFinding(params: Iot.Types.DescribeAuditFindingRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditFindingResponse) => void): Request<Iot.Types.DescribeAuditFindingResponse, AWSError>;
+  /**
+   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and when the audit that returned the finding was started.
+   */
+  describeAuditFinding(callback?: (err: AWSError, data: Iot.Types.DescribeAuditFindingResponse) => void): Request<Iot.Types.DescribeAuditFindingResponse, AWSError>;
+  /**
+   * Gets information about an audit mitigation task that is used to apply mitigation actions to a set of audit findings. Properties include the actions being applied, the audit checks to which they're being applied, the task status, and aggregated task statistics.
+   */
+  describeAuditMitigationActionsTask(params: Iot.Types.DescribeAuditMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.DescribeAuditMitigationActionsTaskResponse, AWSError>;
+  /**
+   * Gets information about an audit mitigation task that is used to apply mitigation actions to a set of audit findings. Properties include the actions being applied, the audit checks to which they're being applied, the task status, and aggregated task statistics.
+   */
+  describeAuditMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.DescribeAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.DescribeAuditMitigationActionsTaskResponse, AWSError>;
+  /**
    * Gets information about a Device Defender audit.
    */
   describeAuditTask(params: Iot.Types.DescribeAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
@@ -523,6 +563,14 @@ declare class Iot extends Service {
    * Describes a job execution.
    */
   describeJobExecution(callback?: (err: AWSError, data: Iot.Types.DescribeJobExecutionResponse) => void): Request<Iot.Types.DescribeJobExecutionResponse, AWSError>;
+  /**
+   * Gets information about a mitigation action.
+   */
+  describeMitigationAction(params: Iot.Types.DescribeMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeMitigationActionResponse) => void): Request<Iot.Types.DescribeMitigationActionResponse, AWSError>;
+  /**
+   * Gets information about a mitigation action.
+   */
+  describeMitigationAction(callback?: (err: AWSError, data: Iot.Types.DescribeMitigationActionResponse) => void): Request<Iot.Types.DescribeMitigationActionResponse, AWSError>;
   /**
    * Describes a role alias.
    */
@@ -748,6 +796,22 @@ declare class Iot extends Service {
    */
   listAuditFindings(callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
   /**
+   * Gets the status of audit mitigation action tasks that were executed.
+   */
+  listAuditMitigationActionsExecutions(params: Iot.Types.ListAuditMitigationActionsExecutionsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsExecutionsResponse) => void): Request<Iot.Types.ListAuditMitigationActionsExecutionsResponse, AWSError>;
+  /**
+   * Gets the status of audit mitigation action tasks that were executed.
+   */
+  listAuditMitigationActionsExecutions(callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsExecutionsResponse) => void): Request<Iot.Types.ListAuditMitigationActionsExecutionsResponse, AWSError>;
+  /**
+   * Gets a list of audit mitigation action tasks that match the specified filters.
+   */
+  listAuditMitigationActionsTasks(params: Iot.Types.ListAuditMitigationActionsTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsTasksResponse) => void): Request<Iot.Types.ListAuditMitigationActionsTasksResponse, AWSError>;
+  /**
+   * Gets a list of audit mitigation action tasks that match the specified filters.
+   */
+  listAuditMitigationActionsTasks(callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsTasksResponse) => void): Request<Iot.Types.ListAuditMitigationActionsTasksResponse, AWSError>;
+  /**
    * Lists the Device Defender audits that have been performed during a given time period.
    */
   listAuditTasks(params: Iot.Types.ListAuditTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
@@ -827,6 +891,14 @@ declare class Iot extends Service {
    * Lists jobs.
    */
   listJobs(callback?: (err: AWSError, data: Iot.Types.ListJobsResponse) => void): Request<Iot.Types.ListJobsResponse, AWSError>;
+  /**
+   * Gets a list of all mitigation actions that match the specified filter criteria.
+   */
+  listMitigationActions(params: Iot.Types.ListMitigationActionsRequest, callback?: (err: AWSError, data: Iot.Types.ListMitigationActionsResponse) => void): Request<Iot.Types.ListMitigationActionsResponse, AWSError>;
+  /**
+   * Gets a list of all mitigation actions that match the specified filter criteria.
+   */
+  listMitigationActions(callback?: (err: AWSError, data: Iot.Types.ListMitigationActionsResponse) => void): Request<Iot.Types.ListMitigationActionsResponse, AWSError>;
   /**
    * Lists OTA updates.
    */
@@ -1036,11 +1108,11 @@ declare class Iot extends Service {
    */
   listV2LoggingLevels(callback?: (err: AWSError, data: Iot.Types.ListV2LoggingLevelsResponse) => void): Request<Iot.Types.ListV2LoggingLevelsResponse, AWSError>;
   /**
-   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).
+   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).
    */
   listViolationEvents(params: Iot.Types.ListViolationEventsRequest, callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
   /**
-   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).
+   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).
    */
   listViolationEvents(callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
   /**
@@ -1147,6 +1219,14 @@ declare class Iot extends Service {
    * Sets the logging options for the V2 logging service.
    */
   setV2LoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts a task that applies a set of mitigation actions to the specified target.
+   */
+  startAuditMitigationActionsTask(params: Iot.Types.StartAuditMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.StartAuditMitigationActionsTaskResponse, AWSError>;
+  /**
+   * Starts a task that applies a set of mitigation actions to the specified target.
+   */
+  startAuditMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.StartAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.StartAuditMitigationActionsTaskResponse, AWSError>;
   /**
    * Starts an on-demand Device Defender audit.
    */
@@ -1284,6 +1364,14 @@ declare class Iot extends Service {
    */
   updateJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates the definition for the specified mitigation action.
+   */
+  updateMitigationAction(params: Iot.Types.UpdateMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.UpdateMitigationActionResponse) => void): Request<Iot.Types.UpdateMitigationActionResponse, AWSError>;
+  /**
+   * Updates the definition for the specified mitigation action.
+   */
+  updateMitigationAction(callback?: (err: AWSError, data: Iot.Types.UpdateMitigationActionResponse) => void): Request<Iot.Types.UpdateMitigationActionResponse, AWSError>;
+  /**
    * Updates a role alias.
    */
   updateRoleAlias(params: Iot.Types.UpdateRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
@@ -1292,11 +1380,11 @@ declare class Iot extends Service {
    */
   updateRoleAlias(callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
   /**
-   * Updates a scheduled audit, including what checks are performed and how often the audit takes place.
+   * Updates a scheduled audit, including which checks are performed and how often the audit takes place.
    */
   updateScheduledAudit(params: Iot.Types.UpdateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
   /**
-   * Updates a scheduled audit, including what checks are performed and how often the audit takes place.
+   * Updates a scheduled audit, including which checks are performed and how often the audit takes place.
    */
   updateScheduledAudit(callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
   /**
@@ -1462,7 +1550,7 @@ declare namespace Iot {
     /**
      * The name of the thing responsible for the active violation.
      */
-    thingName?: ThingName;
+    thingName?: DeviceDefenderThingName;
     /**
      * The security profile whose behavior is in violation.
      */
@@ -1528,6 +1616,16 @@ declare namespace Iot {
     overrideDynamicGroups?: OverrideDynamicGroups;
   }
   export interface AddThingToThingGroupResponse {
+  }
+  export interface AddThingsToThingGroupParams {
+    /**
+     * The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you cannot add a thing to more than one group in the same hierarchy.
+     */
+    thingGroupNames: ThingGroupNames;
+    /**
+     * Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic things groups.
+     */
+    overrideDynamicGroups?: OverrideDynamicGroups;
   }
   export type AdditionalMetricsToRetainList = BehaviorMetric[];
   export type AdditionalParameterMap = {[key: string]: Value};
@@ -1651,11 +1749,11 @@ declare namespace Iot {
   export type AuditCheckConfigurations = {[key: string]: AuditCheckConfiguration};
   export interface AuditCheckDetails {
     /**
-     * The completion status of this check, one of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".
+     * The completion status of this check. One of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".
      */
     checkRunStatus?: AuditCheckRunStatus;
     /**
-     * True if the check completed and found all resources compliant.
+     * True if the check is complete and found all resources compliant.
      */
     checkCompliant?: CheckCompliant;
     /**
@@ -1663,24 +1761,30 @@ declare namespace Iot {
      */
     totalResourcesCount?: TotalResourcesCount;
     /**
-     * The number of resources that the check found non-compliant.
+     * The number of resources that were found noncompliant during the check.
      */
     nonCompliantResourcesCount?: NonCompliantResourcesCount;
     /**
-     * The code of any error encountered when performing this check during this audit. One of "INSUFFICIENT_PERMISSIONS", or "AUDIT_CHECK_DISABLED".
+     * The code of any error encountered when this check is performed during this audit. One of "INSUFFICIENT_PERMISSIONS" or "AUDIT_CHECK_DISABLED".
      */
     errorCode?: ErrorCode;
     /**
-     * The message associated with any error encountered when performing this check during this audit.
+     * The message associated with any error encountered when this check is performed during this audit.
      */
     message?: ErrorMessage;
   }
   export type AuditCheckName = string;
   export type AuditCheckRunStatus = "IN_PROGRESS"|"WAITING_FOR_DATA_COLLECTION"|"CANCELED"|"COMPLETED_COMPLIANT"|"COMPLETED_NON_COMPLIANT"|"FAILED"|string;
+  export type AuditCheckToActionsMapping = {[key: string]: MitigationActionNameList};
+  export type AuditCheckToReasonCodeFilter = {[key: string]: ReasonForNonComplianceCodes};
   export type AuditDetails = {[key: string]: AuditCheckDetails};
   export interface AuditFinding {
     /**
-     * The ID of the audit that generated this result (finding)
+     * A unique identifier for this set of audit findings. This identifier is used to apply mitigation tasks to one or more sets of findings.
+     */
+    findingId?: FindingId;
+    /**
+     * The ID of the audit that generated this result (finding).
      */
     taskId?: AuditTaskId;
     /**
@@ -1700,7 +1804,7 @@ declare namespace Iot {
      */
     severity?: AuditFindingSeverity;
     /**
-     * The resource that was found to be non-compliant with the audit check.
+     * The resource that was found to be noncompliant with the audit check.
      */
     nonCompliantResource?: NonCompliantResource;
     /**
@@ -1708,17 +1812,89 @@ declare namespace Iot {
      */
     relatedResources?: RelatedResources;
     /**
-     * The reason the resource was non-compliant.
+     * The reason the resource was noncompliant.
      */
     reasonForNonCompliance?: ReasonForNonCompliance;
     /**
-     * A code which indicates the reason that the resource was non-compliant.
+     * A code that indicates the reason that the resource was noncompliant.
      */
     reasonForNonComplianceCode?: ReasonForNonComplianceCode;
   }
   export type AuditFindingSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|string;
   export type AuditFindings = AuditFinding[];
   export type AuditFrequency = "DAILY"|"WEEKLY"|"BIWEEKLY"|"MONTHLY"|string;
+  export interface AuditMitigationActionExecutionMetadata {
+    /**
+     * The unique identifier for the task that applies the mitigation action.
+     */
+    taskId?: AuditMitigationActionsTaskId;
+    /**
+     * The unique identifier for the findings to which the task and associated mitigation action are applied.
+     */
+    findingId?: FindingId;
+    /**
+     * The friendly name of the mitigation action being applied by the task.
+     */
+    actionName?: MitigationActionName;
+    /**
+     * The unique identifier for the mitigation action being applied by the task.
+     */
+    actionId?: MitigationActionId;
+    /**
+     * The current status of the task being executed.
+     */
+    status?: AuditMitigationActionsExecutionStatus;
+    /**
+     * The date and time when the task was started.
+     */
+    startTime?: Timestamp;
+    /**
+     * The date and time when the task was completed or canceled. Blank if the task is still running.
+     */
+    endTime?: Timestamp;
+    /**
+     * If an error occurred, the code that indicates which type of error occurred.
+     */
+    errorCode?: ErrorCode;
+    /**
+     * If an error occurred, a message that describes the error.
+     */
+    message?: ErrorMessage;
+  }
+  export type AuditMitigationActionExecutionMetadataList = AuditMitigationActionExecutionMetadata[];
+  export type AuditMitigationActionsExecutionStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"CANCELED"|"SKIPPED"|"PENDING"|string;
+  export type AuditMitigationActionsTaskId = string;
+  export interface AuditMitigationActionsTaskMetadata {
+    /**
+     * The unique identifier for the task.
+     */
+    taskId?: AuditMitigationActionsTaskId;
+    /**
+     * The time at which the audit mitigation actions task was started.
+     */
+    startTime?: Timestamp;
+    /**
+     * The current state of the audit mitigation actions task.
+     */
+    taskStatus?: AuditMitigationActionsTaskStatus;
+  }
+  export type AuditMitigationActionsTaskMetadataList = AuditMitigationActionsTaskMetadata[];
+  export type AuditMitigationActionsTaskStatistics = {[key: string]: TaskStatisticsForAuditCheck};
+  export type AuditMitigationActionsTaskStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"CANCELED"|string;
+  export interface AuditMitigationActionsTaskTarget {
+    /**
+     * If the task will apply a mitigation action to findings from a specific audit, this value uniquely identifies the audit.
+     */
+    auditTaskId?: AuditTaskId;
+    /**
+     * If the task will apply a mitigation action to one or more listed findings, this value uniquely identifies those findings.
+     */
+    findingIds?: FindingIds;
+    /**
+     * Specifies a filter in the form of an audit check and set of reason codes that identify the findings from the audit to which the audit mitigation actions task apply.
+     */
+    auditCheckToReasonCodeFilter?: AuditCheckToReasonCodeFilter;
+  }
   export interface AuditNotificationTarget {
     /**
      * The ARN of the target (SNS topic) to which audit notifications are sent.
@@ -1742,11 +1918,11 @@ declare namespace Iot {
      */
     taskId?: AuditTaskId;
     /**
-     * The status of this audit: one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".
+     * The status of this audit. One of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
      */
     taskStatus?: AuditTaskStatus;
     /**
-     * The type of this audit: one of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
+     * The type of this audit. One of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
      */
     taskType?: AuditTaskType;
   }
@@ -1976,7 +2152,16 @@ declare namespace Iot {
     validity?: CertificateValidity;
   }
   export type CACertificateStatus = "ACTIVE"|"INACTIVE"|string;
+  export type CACertificateUpdateAction = "DEACTIVATE"|string;
   export type CACertificates = CACertificate[];
+  export interface CancelAuditMitigationActionsTaskRequest {
+    /**
+     * The unique identifier for the task that you want to cancel. 
+     */
+    taskId: AuditMitigationActionsTaskId;
+  }
+  export interface CancelAuditMitigationActionsTaskResponse {
+  }
   export interface CancelAuditTaskRequest {
     /**
      * The ID of the audit you want to cancel. You can only cancel an audit that is "IN_PROGRESS".
@@ -2046,6 +2231,7 @@ declare namespace Iot {
     description?: JobDescription;
   }
   export type CanceledChecksCount = number;
+  export type CanceledFindingsCount = number;
   export type CanceledThings = number;
   export type CannedAccessControlList = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|"log-delivery-write"|string;
   export interface Certificate {
@@ -2147,6 +2333,7 @@ declare namespace Iot {
   export interface ClearDefaultAuthorizerResponse {
   }
   export type ClientId = string;
+  export type ClientRequestToken = string;
   export interface CloudwatchAlarmAction {
     /**
      * The IAM role that allows access to the CloudWatch alarm.
@@ -2456,6 +2643,34 @@ declare namespace Iot {
      */
     keyPair?: KeyPair;
   }
+  export interface CreateMitigationActionRequest {
+    /**
+     * A friendly name for the action. Choose a friendly name that accurately describes the action (for example, EnableLoggingAction).
+     */
+    actionName: MitigationActionName;
+    /**
+     * The ARN of the IAM role that is used to apply the mitigation action.
+     */
+    roleArn: RoleArn;
+    /**
+     * Defines the type of action and the parameters for that action.
+     */
+    actionParams: MitigationActionParams;
+    /**
+     * Metadata that can be used to manage the mitigation action.
+     */
+    tags?: TagList;
+  }
+  export interface CreateMitigationActionResponse {
+    /**
+     * The ARN for the new mitigation action.
+     */
+    actionArn?: MitigationActionArn;
+    /**
+     * A unique identifier for the new mitigation action.
+     */
+    actionId?: MitigationActionId;
+  }
   export interface CreateOTAUpdateRequest {
     /**
      * The ID of the OTA update to be created.
@@ -2602,7 +2817,7 @@ declare namespace Iot {
   }
   export interface CreateScheduledAuditRequest {
     /**
-     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the system.
      */
     frequency: AuditFrequency;
     /**
@@ -2610,21 +2825,21 @@ declare namespace Iot {
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
      */
     dayOfWeek?: DayOfWeek;
     /**
-     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are enabled or use UpdateAccountAuditConfiguration to select which checks are enabled.)
      */
     targetCheckNames: TargetAuditCheckNames;
-    /**
-     * Metadata which can be used to manage the scheduled audit.
-     */
-    tags?: TagList;
     /**
      * The name you want to give to the scheduled audit. (Max. 128 chars)
      */
     scheduledAuditName: ScheduledAuditName;
+    /**
+     * Metadata that can be used to manage the scheduled audit.
+     */
+    tags?: TagList;
   }
   export interface CreateScheduledAuditResponse {
     /**
@@ -2650,11 +2865,11 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
-     * Metadata which can be used to manage the security profile.
+     * Metadata that can be used to manage the security profile.
      */
     tags?: TagList;
   }
@@ -2884,7 +3099,7 @@ declare namespace Iot {
      */
     certificateId: CertificateId;
     /**
-     * Forces a certificate request to be deleted.
+     * Forces the deletion of a certificate if it is inactive and is not attached to an IoT thing.
      */
     forceDelete?: ForceDelete;
   }
@@ -2927,6 +3142,14 @@ declare namespace Iot {
      * (Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise, you can only delete a job which is in a terminal state ("COMPLETED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to access job information or update the job execution status. Use caution and ensure that each device executing a job which is deleted is able to recover to a valid state. 
      */
     force?: ForceFlag;
+  }
+  export interface DeleteMitigationActionRequest {
+    /**
+     * The name of the mitigation action that you want to delete.
+     */
+    actionName: MitigationActionName;
+  }
+  export interface DeleteMitigationActionResponse {
   }
   export interface DeleteOTAUpdateRequest {
     /**
@@ -2987,7 +3210,7 @@ declare namespace Iot {
      */
     securityProfileName: SecurityProfileName;
     /**
-     * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a VersionConflictException is thrown.
+     * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different from the actual version, a VersionConflictException is thrown.
      */
     expectedVersion?: OptionalVersion;
   }
@@ -3078,7 +3301,7 @@ declare namespace Iot {
   }
   export interface DescribeAccountAuditConfigurationResponse {
     /**
-     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit. On the first call to UpdateAccountAuditConfiguration this parameter is required.
+     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates, and other items as required when performing an audit. On the first call to UpdateAccountAuditConfiguration, this parameter is required.
      */
     roleArn?: RoleArn;
     /**
@@ -3089,6 +3312,51 @@ declare namespace Iot {
      * Which audit checks are enabled and disabled for this account.
      */
     auditCheckConfigurations?: AuditCheckConfigurations;
+  }
+  export interface DescribeAuditFindingRequest {
+    /**
+     * A unique identifier for a single audit finding. You can use this identifier to apply mitigation actions to the finding.
+     */
+    findingId: FindingId;
+  }
+  export interface DescribeAuditFindingResponse {
+    finding?: AuditFinding;
+  }
+  export interface DescribeAuditMitigationActionsTaskRequest {
+    /**
+     * The unique identifier for the audit mitigation task.
+     */
+    taskId: AuditMitigationActionsTaskId;
+  }
+  export interface DescribeAuditMitigationActionsTaskResponse {
+    /**
+     * The current status of the task.
+     */
+    taskStatus?: AuditMitigationActionsTaskStatus;
+    /**
+     * The date and time when the task was started.
+     */
+    startTime?: Timestamp;
+    /**
+     * The date and time when the task was completed or canceled.
+     */
+    endTime?: Timestamp;
+    /**
+     * Aggregate counts of the results when the mitigation tasks were applied to the findings for this audit mitigation actions task.
+     */
+    taskStatistics?: AuditMitigationActionsTaskStatistics;
+    /**
+     * Identifies the findings to which the mitigation actions are applied. This can be by audit checks, by audit task, or a set of findings.
+     */
+    target?: AuditMitigationActionsTaskTarget;
+    /**
+     * Specifies the mitigation actions that should be applied to specific audit checks.
+     */
+    auditCheckToActionsMapping?: AuditCheckToActionsMapping;
+    /**
+     * Specifies the mitigation actions and their parameters that are applied as part of this task.
+     */
+    actionsDefinition?: MitigationActionList;
   }
   export interface DescribeAuditTaskRequest {
     /**
@@ -3286,6 +3554,46 @@ declare namespace Iot {
      */
     job?: Job;
   }
+  export interface DescribeMitigationActionRequest {
+    /**
+     * The friendly name that uniquely identifies the mitigation action.
+     */
+    actionName: MitigationActionName;
+  }
+  export interface DescribeMitigationActionResponse {
+    /**
+     * The friendly name that uniquely identifies the mitigation action.
+     */
+    actionName?: MitigationActionName;
+    /**
+     * The type of mitigation action.
+     */
+    actionType?: MitigationActionType;
+    /**
+     * The ARN that identifies this migration action.
+     */
+    actionArn?: MitigationActionArn;
+    /**
+     * A unique identifier for this action.
+     */
+    actionId?: MitigationActionId;
+    /**
+     * The ARN of the IAM role used to apply this action.
+     */
+    roleArn?: RoleArn;
+    /**
+     * Parameters that control how the mitigation action is applied, specific to the type of mitigation action.
+     */
+    actionParams?: MitigationActionParams;
+    /**
+     * The date and time when the mitigation action was added to your AWS account.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The date and time when the mitigation action was last changed.
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface DescribeRoleAliasRequest {
     /**
      * The role alias to describe.
@@ -3306,7 +3614,7 @@ declare namespace Iot {
   }
   export interface DescribeScheduledAuditResponse {
     /**
-     * How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     * How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.
      */
     frequency?: AuditFrequency;
     /**
@@ -3314,11 +3622,11 @@ declare namespace Iot {
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT".
+     * The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT".
      */
     dayOfWeek?: DayOfWeek;
     /**
-     * Which checks are performed during the scheduled audit. (Note that checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are enabled or use UpdateAccountAuditConfiguration to select which checks are enabled.)
      */
     targetCheckNames?: TargetAuditCheckNames;
     /**
@@ -3358,7 +3666,7 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
@@ -3612,6 +3920,8 @@ declare namespace Iot {
   export type DetailsKey = string;
   export type DetailsMap = {[key: string]: DetailsValue};
   export type DetailsValue = string;
+  export type DeviceCertificateUpdateAction = "DEACTIVATE"|string;
+  export type DeviceDefenderThingName = string;
   export type DisableAllLogs = boolean;
   export interface DisableTopicRuleRequest {
     /**
@@ -3716,6 +4026,16 @@ declare namespace Iot {
   export type ElasticsearchId = string;
   export type ElasticsearchIndex = string;
   export type ElasticsearchType = string;
+  export interface EnableIoTLoggingParams {
+    /**
+     * The ARN of the IAM role used for logging.
+     */
+    roleArnForLogging: RoleArn;
+    /**
+     * Specifies the types of information to be logged.
+     */
+    logLevel: LogLevel;
+  }
   export interface EnableTopicRuleRequest {
     /**
      * The name of the topic rule to enable.
@@ -3765,6 +4085,7 @@ declare namespace Iot {
     rateIncreaseCriteria: RateIncreaseCriteria;
   }
   export type FailedChecksCount = number;
+  export type FailedFindingsCount = number;
   export type FailedThings = number;
   export type FileId = number;
   export interface FileLocation {
@@ -3778,6 +4099,8 @@ declare namespace Iot {
     s3Location?: S3Location;
   }
   export type FileName = string;
+  export type FindingId = string;
+  export type FindingIds = FindingId[];
   export interface FirehoseAction {
     /**
      * The IAM role that grants access to the Amazon Kinesis Firehose stream.
@@ -4371,7 +4694,7 @@ declare namespace Iot {
     /**
      * The name of the thing whose active violations are listed.
      */
-    thingName?: ThingName;
+    thingName?: DeviceDefenderThingName;
     /**
      * The name of the Device Defender security profile for which violations are listed.
      */
@@ -4433,7 +4756,7 @@ declare namespace Iot {
      */
     checkName?: AuditCheckName;
     /**
-     * Information identifying the non-compliant resource.
+     * Information identifying the noncompliant resource.
      */
     resourceIdentifier?: ResourceIdentifier;
     /**
@@ -4463,9 +4786,81 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListAuditMitigationActionsExecutionsRequest {
+    /**
+     * Specify this filter to limit results to actions for a specific audit mitigation actions task.
+     */
+    taskId: AuditMitigationActionsTaskId;
+    /**
+     * Specify this filter to limit results to those with a specific status.
+     */
+    actionStatus?: AuditMitigationActionsExecutionStatus;
+    /**
+     * Specify this filter to limit results to those that were applied to a specific audit finding.
+     */
+    findingId: FindingId;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAuditMitigationActionsExecutionsResponse {
+    /**
+     * A set of task execution results based on the input parameters. Details include the mitigation action applied, start time, and task status.
+     */
+    actionsExecutions?: AuditMitigationActionExecutionMetadataList;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAuditMitigationActionsTasksRequest {
+    /**
+     * Specify this filter to limit results to tasks that were applied to results for a specific audit.
+     */
+    auditTaskId?: AuditTaskId;
+    /**
+     * Specify this filter to limit results to tasks that were applied to a specific audit finding.
+     */
+    findingId?: FindingId;
+    /**
+     * Specify this filter to limit results to tasks that are in a specific state.
+     */
+    taskStatus?: AuditMitigationActionsTaskStatus;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * Specify this filter to limit results to tasks that began on or after a specific date and time.
+     */
+    startTime: Timestamp;
+    /**
+     * Specify this filter to limit results to tasks that were completed or canceled on or before a specific date and time.
+     */
+    endTime: Timestamp;
+  }
+  export interface ListAuditMitigationActionsTasksResponse {
+    /**
+     * The collection of audit mitigation tasks that matched the filter criteria.
+     */
+    tasks?: AuditMitigationActionsTaskMetadataList;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListAuditTasksRequest {
     /**
-     * The beginning of the time period. Note that audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
+     * The beginning of the time period. Audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
      */
     startTime: Timestamp;
     /**
@@ -4477,7 +4872,7 @@ declare namespace Iot {
      */
     taskType?: AuditTaskType;
     /**
-     * A filter to limit the output to audits with the specified completion status: can be one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".
+     * A filter to limit the output to audits with the specified completion status: can be one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
      */
     taskStatus?: AuditTaskStatus;
     /**
@@ -4739,6 +5134,30 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListMitigationActionsRequest {
+    /**
+     * Specify a value to limit the result to mitigation actions with a specific action type.
+     */
+    actionType?: MitigationActionType;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListMitigationActionsResponse {
+    /**
+     * A set of actions that matched the specified filter criteria.
+     */
+    actionIdentifiers?: MitigationActionIdentifierList;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListOTAUpdatesRequest {
     /**
      * The maximum number of results to return at one time.
@@ -4957,7 +5376,7 @@ declare namespace Iot {
      */
     maxResults?: MaxResults;
     /**
-     * If true, return child groups as well.
+     * If true, return child groups too.
      */
     recursive?: Recursive;
     /**
@@ -5383,7 +5802,7 @@ declare namespace Iot {
     /**
      * A filter to limit results to those alerts caused by the specified thing.
      */
-    thingName?: ThingName;
+    thingName?: DeviceDefenderThingName;
     /**
      * A filter to limit results to those alerts generated by the specified security profile.
      */
@@ -5399,7 +5818,7 @@ declare namespace Iot {
   }
   export interface ListViolationEventsResponse {
     /**
-     * The security profile violation alerts issued for this account during the given time frame, potentially filtered by security profile, behavior violated, or thing (device) violating.
+     * The security profile violation alerts issued for this account during the given time period, potentially filtered by security profile, behavior violated, or thing (device) violating.
      */
     violationEvents?: ViolationEvents;
     /**
@@ -5465,19 +5884,84 @@ declare namespace Iot {
   export type MinimumNumberOfExecutedThings = number;
   export type MissingContextValue = string;
   export type MissingContextValues = MissingContextValue[];
+  export interface MitigationAction {
+    /**
+     * A user-friendly name for the mitigation action.
+     */
+    name?: MitigationActionName;
+    /**
+     * A unique identifier for the mitigation action.
+     */
+    id?: MitigationActionId;
+    /**
+     * The IAM role ARN used to apply this mitigation action.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The set of parameters for this mitigation action. The parameters vary, depending on the kind of action you apply.
+     */
+    actionParams?: MitigationActionParams;
+  }
+  export type MitigationActionArn = string;
+  export type MitigationActionId = string;
+  export interface MitigationActionIdentifier {
+    /**
+     * The friendly name of the mitigation action.
+     */
+    actionName?: MitigationActionName;
+    /**
+     * The IAM role ARN used to apply this mitigation action.
+     */
+    actionArn?: MitigationActionArn;
+    /**
+     * The date when this mitigation action was created.
+     */
+    creationDate?: Timestamp;
+  }
+  export type MitigationActionIdentifierList = MitigationActionIdentifier[];
+  export type MitigationActionList = MitigationAction[];
+  export type MitigationActionName = string;
+  export type MitigationActionNameList = MitigationActionName[];
+  export interface MitigationActionParams {
+    /**
+     * Parameters to define a mitigation action that changes the state of the device certificate to inactive.
+     */
+    updateDeviceCertificateParams?: UpdateDeviceCertificateParams;
+    /**
+     * Parameters to define a mitigation action that changes the state of the CA certificate to inactive.
+     */
+    updateCACertificateParams?: UpdateCACertificateParams;
+    /**
+     * Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.
+     */
+    addThingsToThingGroupParams?: AddThingsToThingGroupParams;
+    /**
+     * Parameters to define a mitigation action that adds a blank policy to restrict permissions.
+     */
+    replaceDefaultPolicyVersionParams?: ReplaceDefaultPolicyVersionParams;
+    /**
+     * Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.
+     */
+    enableIoTLoggingParams?: EnableIoTLoggingParams;
+    /**
+     * Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
+     */
+    publishFindingToSnsParams?: PublishFindingToSnsParams;
+  }
+  export type MitigationActionType = "UPDATE_DEVICE_CERTIFICATE"|"UPDATE_CA_CERTIFICATE"|"ADD_THINGS_TO_THING_GROUP"|"REPLACE_DEFAULT_POLICY_VERSION"|"ENABLE_IOT_LOGGING"|"PUBLISH_FINDING_TO_SNS"|string;
   export type NextToken = string;
   export type NonCompliantChecksCount = number;
   export interface NonCompliantResource {
     /**
-     * The type of the non-compliant resource.
+     * The type of the noncompliant resource.
      */
     resourceType?: ResourceType;
     /**
-     * Information identifying the non-compliant resource.
+     * Information that identifies the noncompliant resource.
      */
     resourceIdentifier?: ResourceIdentifier;
     /**
-     * Additional information about the non-compliant resource.
+     * Other information about the noncompliant resource.
      */
     additionalInfo?: StringMap;
   }
@@ -5639,6 +6123,7 @@ declare namespace Iot {
   export type PolicyNames = PolicyName[];
   export type PolicyTarget = string;
   export type PolicyTargets = PolicyTarget[];
+  export type PolicyTemplateName = "BLANK_POLICY"|string;
   export interface PolicyVersion {
     /**
      * The policy version ID.
@@ -5687,9 +6172,15 @@ declare namespace Iot {
   export type ProcessingTargetNameList = ProcessingTargetName[];
   export type PublicKey = string;
   export type PublicKeyMap = {[key: string]: KeyValue};
+  export interface PublishFindingToSnsParams {
+    /**
+     * The ARN of the topic to which you want to publish the findings.
+     */
+    topicArn: SnsTopicArn;
+  }
   export interface PutItemInput {
     /**
-     * The table where the message data will be written
+     * The table where the message data will be written.
      */
     tableName: TableName;
   }
@@ -5713,6 +6204,7 @@ declare namespace Iot {
   export type ReasonCode = string;
   export type ReasonForNonCompliance = string;
   export type ReasonForNonComplianceCode = string;
+  export type ReasonForNonComplianceCodes = ReasonForNonComplianceCode[];
   export type Recursive = boolean;
   export type RecursiveWithoutDefault = boolean;
   export interface RegisterCACertificateRequest {
@@ -5826,11 +6318,11 @@ declare namespace Iot {
      */
     resourceType?: ResourceType;
     /**
-     * Information identifying the resource.
+     * Information that identifies the resource.
      */
     resourceIdentifier?: ResourceIdentifier;
     /**
-     * Additional information about the resource.
+     * Other information about the resource.
      */
     additionalInfo?: StringMap;
   }
@@ -5878,6 +6370,12 @@ declare namespace Iot {
   }
   export type RemoveThingType = boolean;
   export type RemovedThings = number;
+  export interface ReplaceDefaultPolicyVersionParams {
+    /**
+     * The name of the template to be applied. The only supported value is BLANK_POLICY.
+     */
+    templateName: PolicyTemplateName;
+  }
   export interface ReplaceTopicRuleRequest {
     /**
      * The name of the rule.
@@ -5912,7 +6410,7 @@ declare namespace Iot {
      */
     caCertificateId?: CertificateId;
     /**
-     * The ID of the Cognito Identity Pool.
+     * The ID of the Amazon Cognito identity pool.
      */
     cognitoIdentityPoolId?: CognitoIdentityPoolId;
     /**
@@ -6039,7 +6537,7 @@ declare namespace Iot {
      */
     scheduledAuditArn?: ScheduledAuditArn;
     /**
-     * How often the scheduled audit takes place.
+     * How often the scheduled audit occurs.
      */
     frequency?: AuditFrequency;
     /**
@@ -6201,6 +6699,7 @@ declare namespace Iot {
      */
     certificatePathOnDevice?: CertificatePathOnDevice;
   }
+  export type SkippedFindingsCount = number;
   export type SkyfallMaxResults = number;
   export interface SnsAction {
     /**
@@ -6216,6 +6715,7 @@ declare namespace Iot {
      */
     messageFormat?: MessageFormat;
   }
+  export type SnsTopicArn = string;
   export interface SqsAction {
     /**
      * The ARN of the IAM role that grants access.
@@ -6230,9 +6730,33 @@ declare namespace Iot {
      */
     useBase64?: UseBase64;
   }
+  export interface StartAuditMitigationActionsTaskRequest {
+    /**
+     * A unique identifier for the task. You can use this identifier to check the status of the task or to cancel it.
+     */
+    taskId: AuditMitigationActionsTaskId;
+    /**
+     * Specifies the audit findings to which the mitigation actions are applied. You can apply them to a type of audit check, to all findings from an audit, or to a speecific set of findings.
+     */
+    target: AuditMitigationActionsTaskTarget;
+    /**
+     * For an audit check, specifies which mitigation actions to apply. Those actions must be defined in your AWS account.
+     */
+    auditCheckToActionsMapping: AuditCheckToActionsMapping;
+    /**
+     * Each audit mitigation task must have a unique client request token. If you try to start a new task with the same token as a task that already exists, an exception occurs. If you omit this value, a unique client request token is generated automatically.
+     */
+    clientRequestToken: ClientRequestToken;
+  }
+  export interface StartAuditMitigationActionsTaskResponse {
+    /**
+     * The unique identifier for the audit mitigation task. This matches the taskId that you specified in the request.
+     */
+    taskId?: AuditMitigationActionsTaskId;
+  }
   export interface StartOnDemandAuditTaskRequest {
     /**
-     * Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.
+     * Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.
      */
     targetCheckNames: TargetAuditCheckNames;
   }
@@ -6399,6 +6923,7 @@ declare namespace Iot {
   export type StreamsSummary = StreamSummary[];
   export type String = string;
   export type StringMap = {[key: string]: String};
+  export type SucceededFindingsCount = number;
   export type SucceededThings = number;
   export type TableName = string;
   export interface Tag {
@@ -6452,17 +6977,39 @@ declare namespace Iot {
      */
     compliantChecks?: CompliantChecksCount;
     /**
-     * The number of checks that found non-compliant resources.
+     * The number of checks that found noncompliant resources.
      */
     nonCompliantChecks?: NonCompliantChecksCount;
     /**
-     * The number of checks 
+     * The number of checks.
      */
     failedChecks?: FailedChecksCount;
     /**
      * The number of checks that did not run because the audit was canceled.
      */
     canceledChecks?: CanceledChecksCount;
+  }
+  export interface TaskStatisticsForAuditCheck {
+    /**
+     * The total number of findings to which a task is being applied.
+     */
+    totalFindingsCount?: TotalFindingsCount;
+    /**
+     * The number of findings for which at least one of the actions failed when applied.
+     */
+    failedFindingsCount?: FailedFindingsCount;
+    /**
+     * The number of findings for which all mitigation actions succeeded when applied.
+     */
+    succeededFindingsCount?: SucceededFindingsCount;
+    /**
+     * The number of findings skipped because of filter conditions provided in the parameters to the command.
+     */
+    skippedFindingsCount?: SkippedFindingsCount;
+    /**
+     * The number of findings to which the mitigation action task was canceled when applied.
+     */
+    canceledFindingsCount?: CanceledFindingsCount;
   }
   export type TemplateBody = string;
   export interface TestAuthorizationRequest {
@@ -6650,6 +7197,7 @@ declare namespace Iot {
   export type ThingGroupName = string;
   export type ThingGroupNameAndArnList = GroupNameAndArn[];
   export type ThingGroupNameList = ThingGroupName[];
+  export type ThingGroupNames = ThingGroupName[];
   export interface ThingGroupProperties {
     /**
      * The thing group description.
@@ -6818,6 +7366,7 @@ declare namespace Iot {
     errorAction?: Action;
   }
   export type TotalChecksCount = number;
+  export type TotalFindingsCount = number;
   export type TotalResourcesCount = number;
   export interface TransferCertificateRequest {
     /**
@@ -6877,7 +7426,7 @@ declare namespace Iot {
   }
   export interface UpdateAccountAuditConfigurationRequest {
     /**
-     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.
+     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.
      */
     roleArn?: RoleArn;
     /**
@@ -6885,7 +7434,7 @@ declare namespace Iot {
      */
     auditNotificationTargetConfigurations?: AuditNotificationTargetConfigurations;
     /**
-     * Specifies which audit checks are enabled and disabled for this account. Use DescribeAccountAuditConfiguration to see the list of all checks including those that are currently enabled. Note that some data collection may begin immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted. You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself. On the first call to UpdateAccountAuditConfiguration this parameter is required and must specify at least one enabled check.
+     * Specifies which audit checks are enabled and disabled for this account. Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are currently enabled. Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted. You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself. On the first call to UpdateAccountAuditConfiguration, this parameter is required and must specify at least one enabled check.
      */
     auditCheckConfigurations?: AuditCheckConfigurations;
   }
@@ -6943,6 +7492,12 @@ declare namespace Iot {
      */
     version?: Version;
   }
+  export interface UpdateCACertificateParams {
+    /**
+     * The action that you want to apply to the CA cerrtificate. The only supported value is DEACTIVATE.
+     */
+    action: CACertificateUpdateAction;
+  }
   export interface UpdateCACertificateRequest {
     /**
      * The CA certificate identifier.
@@ -6961,7 +7516,7 @@ declare namespace Iot {
      */
     registrationConfig?: RegistrationConfig;
     /**
-     * If true, remove auto registration.
+     * If true, removes auto registration.
      */
     removeAutoRegistration?: RemoveAutoRegistration;
   }
@@ -6974,6 +7529,12 @@ declare namespace Iot {
      * The new status.  Note: Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.  Note: The status value REGISTER_INACTIVE is deprecated and should not be used.
      */
     newStatus: CertificateStatus;
+  }
+  export interface UpdateDeviceCertificateParams {
+    /**
+     * The action that you want to apply to the device cerrtificate. The only supported value is DEACTIVATE.
+     */
+    action: DeviceCertificateUpdateAction;
   }
   export interface UpdateDynamicThingGroupRequest {
     /**
@@ -7053,6 +7614,30 @@ declare namespace Iot {
      */
     timeoutConfig?: TimeoutConfig;
   }
+  export interface UpdateMitigationActionRequest {
+    /**
+     * The friendly name for the mitigation action. You can't change the name by using UpdateMitigationAction. Instead, you must delete and re-create the mitigation action with the new name.
+     */
+    actionName: MitigationActionName;
+    /**
+     * The ARN of the IAM role that is used to apply the mitigation action.
+     */
+    roleArn?: RoleArn;
+    /**
+     * Defines the type of action and the parameters for that action.
+     */
+    actionParams?: MitigationActionParams;
+  }
+  export interface UpdateMitigationActionResponse {
+    /**
+     * The ARN for the new mitigation action.
+     */
+    actionArn?: MitigationActionArn;
+    /**
+     * A unique identifier for the mitigation action.
+     */
+    actionId?: MitigationActionId;
+  }
   export interface UpdateRoleAliasRequest {
     /**
      * The role alias to update.
@@ -7079,7 +7664,7 @@ declare namespace Iot {
   }
   export interface UpdateScheduledAuditRequest {
     /**
-     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.
      */
     frequency?: AuditFrequency;
     /**
@@ -7087,11 +7672,11 @@ declare namespace Iot {
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
      */
     dayOfWeek?: DayOfWeek;
     /**
-     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are enabled or use UpdateAccountAuditConfiguration to select which checks are enabled.)
      */
     targetCheckNames?: TargetAuditCheckNames;
     /**
@@ -7123,23 +7708,23 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
-     * If true, delete all behaviors defined for this security profile. If any behaviors are defined in the current invocation an exception occurs.
+     * If true, delete all behaviors defined for this security profile. If any behaviors are defined in the current invocation, an exception occurs.
      */
     deleteBehaviors?: DeleteBehaviors;
     /**
-     * If true, delete all alertTargets defined for this security profile. If any alertTargets are defined in the current invocation an exception occurs.
+     * If true, delete all alertTargets defined for this security profile. If any alertTargets are defined in the current invocation, an exception occurs.
      */
     deleteAlertTargets?: DeleteAlertTargets;
     /**
-     * If true, delete all additionalMetricsToRetain defined for this security profile. If any additionalMetricsToRetain are defined in the current invocation an exception occurs.
+     * If true, delete all additionalMetricsToRetain defined for this security profile. If any additionalMetricsToRetain are defined in the current invocation, an exception occurs.
      */
     deleteAdditionalMetricsToRetain?: DeleteAdditionalMetricsToRetain;
     /**
-     * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a VersionConflictException is thrown.
+     * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different from the actual version, a VersionConflictException is thrown.
      */
     expectedVersion?: OptionalVersion;
   }
@@ -7165,7 +7750,7 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
@@ -7317,7 +7902,7 @@ declare namespace Iot {
     /**
      * The name of the thing responsible for the violation event.
      */
-    thingName?: ThingName;
+    thingName?: DeviceDefenderThingName;
     /**
      * The name of the security profile whose behavior was violated.
      */

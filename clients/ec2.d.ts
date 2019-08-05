@@ -3332,7 +3332,7 @@ declare namespace EC2 {
   }
   export type AllocationIdList = String[];
   export type AllocationState = "available"|"under-assessment"|"permanent-failure"|"released"|"released-permanent-failure"|"pending"|string;
-  export type AllocationStrategy = "lowestPrice"|"diversified"|string;
+  export type AllocationStrategy = "lowestPrice"|"diversified"|"capacityOptimized"|string;
   export interface AllowedPrincipal {
     /**
      * The type of principal.
@@ -18395,7 +18395,7 @@ declare namespace EC2 {
      */
     UserBucket?: UserBucketDetails;
   }
-  export type SpotAllocationStrategy = "lowest-price"|"diversified"|string;
+  export type SpotAllocationStrategy = "lowest-price"|"diversified"|"capacity-optimized"|string;
   export interface SpotDatafeedSubscription {
     /**
      * The Amazon S3 bucket where the Spot Instance data feed is located.
