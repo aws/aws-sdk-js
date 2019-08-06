@@ -792,7 +792,7 @@
         },
         "linuxParameters": {
           "shape": "LinuxParameters",
-          "documentation": "<p>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
+          "documentation": "<p>Linux-specific modifications that are applied to the container, such as details for device mappings.</p>"
         }
       },
       "documentation": "<p>An object representing the details of a container that is part of a job.</p>"
@@ -888,7 +888,7 @@
         },
         "linuxParameters": {
           "shape": "LinuxParameters",
-          "documentation": "<p>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
+          "documentation": "<p>Linux-specific modifications that are applied to the container, such as details for device mappings.</p>"
         }
       },
       "documentation": "<p>Container properties are used in job definitions to describe the container that is launched as part of a job.</p>"
@@ -1172,7 +1172,7 @@
         },
         "containerPath": {
           "shape": "String",
-          "documentation": "<p>The path inside the container at which to expose the host device.</p>"
+          "documentation": "<p>The path inside the container at which to expose the host device. By default the <code>hostPath</code> value is used.</p>"
         },
         "permissions": {
           "shape": "DeviceCgroupPermissions",
@@ -1580,7 +1580,7 @@
           "documentation": "<p>Any host devices to expose to the container. This parameter maps to <code>Devices</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--device</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>"
         }
       },
-      "documentation": "<p>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
+      "documentation": "<p>Linux-specific modifications that are applied to the container, such as details for device mappings.</p>"
     },
     "ListJobsRequest": {
       "type": "structure",
