@@ -124,6 +124,14 @@ declare class ApplicationInsights extends Service {
    */
   listProblems(callback?: (err: AWSError, data: ApplicationInsights.Types.ListProblemsResponse) => void): Request<ApplicationInsights.Types.ListProblemsResponse, AWSError>;
   /**
+   * Updates the application.
+   */
+  updateApplication(params: ApplicationInsights.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.UpdateApplicationResponse) => void): Request<ApplicationInsights.Types.UpdateApplicationResponse, AWSError>;
+  /**
+   * Updates the application.
+   */
+  updateApplication(callback?: (err: AWSError, data: ApplicationInsights.Types.UpdateApplicationResponse) => void): Request<ApplicationInsights.Types.UpdateApplicationResponse, AWSError>;
+  /**
    * Updates the custom component name and/or the list of resources that make up the component.
    */
   updateComponent(params: ApplicationInsights.Types.UpdateComponentRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.UpdateComponentResponse) => void): Request<ApplicationInsights.Types.UpdateComponentResponse, AWSError>;
@@ -171,7 +179,15 @@ declare namespace ApplicationInsights {
      */
     LifeCycle?: LifeCycle;
     /**
-     * The issues on the user side that are blocking Application Insights from fully monitoring the application.
+     *  The SNS topic provided to Application Insights that is associated to the created opsItems to receive SNS notifications for opsItem updates. 
+     */
+    OpsItemSNSTopicArn?: OpsItemSNSTopicArn;
+    /**
+     *  Indicates whether Application Insights will create opsItems for any problem detected by Application Insights for an application. 
+     */
+    OpsCenterEnabled?: OpsCenterEnabled;
+    /**
+     * The issues on the user side that block Application Insights from successfully monitoring an application.
      */
     Remarks?: Remarks;
   }
@@ -183,6 +199,14 @@ declare namespace ApplicationInsights {
      * The name of the resource group.
      */
     ResourceGroupName: ResourceGroupName;
+    /**
+     *  When set to true, creates opsItems for any problems detected on an application. 
+     */
+    OpsCenterEnabled?: OpsCenterEnabled;
+    /**
+     *  The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. 
+     */
+    OpsItemSNSTopicArn?: OpsItemSNSTopicArn;
   }
   export interface CreateApplicationResponse {
     /**
@@ -248,7 +272,7 @@ declare namespace ApplicationInsights {
      */
     ComponentName: ComponentName;
     /**
-     * The tier of the application component. Supported tiers include DOT_NET_WORKER, DOT_NET_WEB_TIER, SQL_SERVER, and DEFAULT.
+     * The tier of the application component. Supported tiers include DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT.
      */
     Tier: Tier;
   }
@@ -274,7 +298,7 @@ declare namespace ApplicationInsights {
      */
     Monitor?: Monitor;
     /**
-     * The tier of the application component. Supported tiers include DOT_NET_WORKER, DOT_NET_WEB_TIER, SQL_SERVER, and DEFAULT 
+     * The tier of the application component. Supported tiers include DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT 
      */
     Tier?: Tier;
     /**
@@ -482,6 +506,8 @@ declare namespace ApplicationInsights {
   }
   export type ObservationId = string;
   export type ObservationList = Observation[];
+  export type OpsCenterEnabled = boolean;
+  export type OpsItemSNSTopicArn = string;
   export type PaginationToken = string;
   export interface Problem {
     /**
@@ -534,6 +560,7 @@ declare namespace ApplicationInsights {
     ObservationList?: ObservationList;
   }
   export type Remarks = string;
+  export type RemoveSNSTopic = boolean;
   export type ResourceARN = string;
   export type ResourceGroupName = string;
   export type ResourceList = ResourceARN[];
@@ -546,6 +573,30 @@ declare namespace ApplicationInsights {
   export type Tier = string;
   export type Title = string;
   export type Unit = string;
+  export interface UpdateApplicationRequest {
+    /**
+     * The name of the resource group.
+     */
+    ResourceGroupName: ResourceGroupName;
+    /**
+     *  When set to true, creates opsItems for any problems detected on an application. 
+     */
+    OpsCenterEnabled?: OpsCenterEnabled;
+    /**
+     *  The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem.
+     */
+    OpsItemSNSTopicArn?: OpsItemSNSTopicArn;
+    /**
+     *  Disassociates the SNS topic from the opsItem created for detected problems.
+     */
+    RemoveSNSTopic?: RemoveSNSTopic;
+  }
+  export interface UpdateApplicationResponse {
+    /**
+     * Information about the application. 
+     */
+    ApplicationInfo?: ApplicationInfo;
+  }
   export interface UpdateComponentConfigurationRequest {
     /**
      * The name of the resource group.
@@ -560,7 +611,7 @@ declare namespace ApplicationInsights {
      */
     Monitor?: Monitor;
     /**
-     * The tier of the application component. Supported tiers include DOT_NET_WORKER, DOT_NET_WEB_TIER, SQL_SERVER, and DEFAULT.
+     * The tier of the application component. Supported tiers include DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT.
      */
     Tier?: Tier;
     /**

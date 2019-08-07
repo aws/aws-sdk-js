@@ -370,6 +370,31 @@
       ],
       "documentation": "<p>Lists the problems with your application.</p>"
     },
+    "UpdateApplication": {
+      "name": "UpdateApplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateApplicationRequest"
+      },
+      "output": {
+        "shape": "UpdateApplicationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Updates the application.</p>"
+    },
     "UpdateComponent": {
       "name": "UpdateComponent",
       "http": {
@@ -467,9 +492,17 @@
           "shape": "LifeCycle",
           "documentation": "<p>The lifecycle of the application. </p>"
         },
+        "OpsItemSNSTopicArn": {
+          "shape": "OpsItemSNSTopicArn",
+          "documentation": "<p> The SNS topic provided to Application Insights that is associated to the created opsItems to receive SNS notifications for opsItem updates. </p>"
+        },
+        "OpsCenterEnabled": {
+          "shape": "OpsCenterEnabled",
+          "documentation": "<p> Indicates whether Application Insights will create opsItems for any problem detected by Application Insights for an application. </p>"
+        },
         "Remarks": {
           "shape": "Remarks",
-          "documentation": "<p>The issues on the user side that are blocking Application Insights from fully monitoring the application.</p>"
+          "documentation": "<p>The issues on the user side that block Application Insights from successfully monitoring an application.</p>"
         }
       },
       "documentation": "<p>Describes the status of the application.</p>"
@@ -495,6 +528,14 @@
         "ResourceGroupName": {
           "shape": "ResourceGroupName",
           "documentation": "<p>The name of the resource group.</p>"
+        },
+        "OpsCenterEnabled": {
+          "shape": "OpsCenterEnabled",
+          "documentation": "<p> When set to <code>true</code>, creates opsItems for any problems detected on an application. </p>"
+        },
+        "OpsItemSNSTopicArn": {
+          "shape": "OpsItemSNSTopicArn",
+          "documentation": "<p> The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. </p>"
         }
       }
     },
@@ -609,7 +650,7 @@
         },
         "Tier": {
           "shape": "Tier",
-          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.</p>"
+          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.</p>"
         }
       }
     },
@@ -648,7 +689,7 @@
         },
         "Tier": {
           "shape": "Tier",
-          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> </p>"
+          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> </p>"
         },
         "ComponentConfiguration": {
           "shape": "ComponentConfiguration",
@@ -979,6 +1020,12 @@
         "shape": "Observation"
       }
     },
+    "OpsCenterEnabled": {
+      "type": "boolean"
+    },
+    "OpsItemSNSTopicArn": {
+      "type": "string"
+    },
     "PaginationToken": {
       "type": "string"
     },
@@ -1050,6 +1097,9 @@
     "Remarks": {
       "type": "string"
     },
+    "RemoveSNSTopic": {
+      "type": "boolean"
+    },
     "ResourceARN": {
       "type": "string"
     },
@@ -1099,6 +1149,39 @@
     "Unit": {
       "type": "string"
     },
+    "UpdateApplicationRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceGroupName"
+      ],
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "OpsCenterEnabled": {
+          "shape": "OpsCenterEnabled",
+          "documentation": "<p> When set to <code>true</code>, creates opsItems for any problems detected on an application. </p>"
+        },
+        "OpsItemSNSTopicArn": {
+          "shape": "OpsItemSNSTopicArn",
+          "documentation": "<p> The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem.</p>"
+        },
+        "RemoveSNSTopic": {
+          "shape": "RemoveSNSTopic",
+          "documentation": "<p> Disassociates the SNS topic from the opsItem created for detected problems.</p>"
+        }
+      }
+    },
+    "UpdateApplicationResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationInfo": {
+          "shape": "ApplicationInfo",
+          "documentation": "<p>Information about the application. </p>"
+        }
+      }
+    },
     "UpdateComponentConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -1120,7 +1203,7 @@
         },
         "Tier": {
           "shape": "Tier",
-          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB_TIER</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.</p>"
+          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.</p>"
         },
         "ComponentConfiguration": {
           "shape": "ComponentConfiguration",

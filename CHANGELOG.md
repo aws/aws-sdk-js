@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.504.0-->
+<!--LATEST=2.505.0-->
 <!--ENTRYINSERT-->
+
+## 2.505.0
+* feature: ApplicationInsights: CloudWatch Application Insights for .NET and SQL Server now provides integration with AWS Systems Manager OpsCenter. This integration allows you to view and resolve problems and operational issues detected for selected applications.
 
 ## 2.504.0
 * feature: DataSync: Support VPC endpoints.

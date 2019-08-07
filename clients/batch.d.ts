@@ -443,7 +443,7 @@ declare namespace Batch {
      */
     resourceRequirements?: ResourceRequirements;
     /**
-     * Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.
+     * Linux-specific modifications that are applied to the container, such as details for device mappings.
      */
     linuxParameters?: LinuxParameters;
   }
@@ -531,7 +531,7 @@ declare namespace Batch {
      */
     resourceRequirements?: ResourceRequirements;
     /**
-     * Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.
+     * Linux-specific modifications that are applied to the container, such as details for device mappings.
      */
     linuxParameters?: LinuxParameters;
   }
@@ -727,7 +727,7 @@ declare namespace Batch {
      */
     hostPath: String;
     /**
-     * The path inside the container at which to expose the host device.
+     * The path inside the container at which to expose the host device. By default the hostPath value is used.
      */
     containerPath?: String;
     /**
