@@ -184,3 +184,4 @@ export import ApplicationInsights = require('./applicationinsights');
 export import ServiceQuotas = require('./servicequotas');
 export import EC2InstanceConnect = require('./ec2instanceconnect');
 export import EventBridge = require('./eventbridge');
+export import LakeFormation = require('./lakeformation');

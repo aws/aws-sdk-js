@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "CodeBuild adds CloudFormation support for SourceCredential"
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "You can now use AWS Glue to find matching records across dataset even without identifiers to join on by using the new FindMatches ML Transform. Find related products, places, suppliers, customers, and more by teaching a custom machine learning transformation that you can use to identify matching matching records as part of your analysis, data cleaning, or master data management project by adding the FindMatches transformation to your Glue ETL Jobs. If your problem is more along the lines of deduplication, you can use the FindMatches in much the same way to identify customers who have signed up more than ones, products that have accidentally been added to your product catalog more than once, and so forth. Using the FindMatches MLTransform, you can teach a Transform your definition of a duplicate through examples, and it will use machine learning to identify other potential duplicates in your dataset. As with data integration, you can then use your new Transform in your deduplication projects by adding the FindMatches transformation to your Glue ETL Jobs. This release also contains additional APIs that support AWS Lake Formation."
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "Lake Formation: (New Service) AWS Lake Formation is a fully managed service that makes it easier for customers to build, secure and manage data lakes.  AWS Lake Formation simplifies and automates many of the complex manual steps usually required to create data lakes including collecting, cleaning and cataloging data and securely making that data available for analytics and machine learning."
+    },
+    {
+        "type": "feature",
+        "category": "OpsWorksCM",
+        "description": "This release adds support for Chef Automate 2 specific engine attributes."
+    }
+]

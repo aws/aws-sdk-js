@@ -125,7 +125,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Deletes multiple tables at once.</p> <note> <p>After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these \"orphaned\" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>BatchDeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>"
+      "documentation": "<p>Deletes multiple tables at once.</p> <note> <p>After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these \"orphaned\" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>BatchDeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>"
     },
     "BatchDeleteTableVersion": {
       "name": "BatchDeleteTableVersion",
@@ -336,6 +336,34 @@
       ],
       "documentation": "<p>Stops one or more job runs for a specified job definition.</p>"
     },
+    "CancelMLTaskRun": {
+      "name": "CancelMLTaskRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelMLTaskRunRequest"
+      },
+      "output": {
+        "shape": "CancelMLTaskRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling <code>CancelMLTaskRun</code> with a task run's parent transform's <code>TransformID</code> and the task run's <code>TaskRunId</code>. </p>"
+    },
     "CreateClassifier": {
       "name": "CreateClassifier",
       "http": {
@@ -530,6 +558,43 @@
         }
       ],
       "documentation": "<p>Creates a new job definition.</p>"
+    },
+    "CreateMLTransform": {
+      "name": "CreateMLTransform",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateMLTransformRequest"
+      },
+      "output": {
+        "shape": "CreateMLTransformResponse"
+      },
+      "errors": [
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "IdempotentParameterMismatchException"
+        }
+      ],
+      "documentation": "<p>Creates an AWS Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it.</p> <p>Call this operation as the first step in the process of using a machine learning transform (such as the <code>FindMatches</code> transform) for deduplicating data. You can provide an optional <code>Description</code>, in addition to the parameters that you want to use for your algorithm.</p> <p>You must also specify certain parameters for the tasks that AWS Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include <code>Role</code>, and optionally, <code>AllocatedCapacity</code>, <code>Timeout</code>, and <code>MaxRetries</code>. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html\">Jobs</a>.</p>"
     },
     "CreatePartition": {
       "name": "CreatePartition",
@@ -870,7 +935,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Removes a specified Database from a Data Catalog.</p> <note> <p>After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these \"orphaned\" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>DeleteDatabase</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, <code>DeletePartition</code> or <code>BatchDeletePartition</code>, <code>DeleteUserDefinedFunction</code>, and <code>DeleteTable</code> or <code>BatchDeleteTable</code>, to delete any resources that belong to the database.</p> </note>"
+      "documentation": "<p>Removes a specified database from a Data Catalog.</p> <note> <p>After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these \"orphaned\" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>DeleteDatabase</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, <code>DeletePartition</code> or <code>BatchDeletePartition</code>, <code>DeleteUserDefinedFunction</code>, and <code>DeleteTable</code> or <code>BatchDeleteTable</code>, to delete any resources that belong to the database.</p> </note>"
     },
     "DeleteDevEndpoint": {
       "name": "DeleteDevEndpoint",
@@ -924,6 +989,34 @@
         }
       ],
       "documentation": "<p>Deletes a specified job definition. If the job definition is not found, no exception is thrown.</p>"
+    },
+    "DeleteMLTransform": {
+      "name": "DeleteMLTransform",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteMLTransformRequest"
+      },
+      "output": {
+        "shape": "DeleteMLTransformResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Deletes an AWS Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. If you no longer need a transform, you can delete it by calling <code>DeleteMLTransforms</code>. However, any AWS Glue jobs that still reference the deleted transform will no longer succeed.</p>"
     },
     "DeletePartition": {
       "name": "DeletePartition",
@@ -1038,7 +1131,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Removes a table definition from the Data Catalog.</p> <note> <p>After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these \"orphaned\" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure immediate deletion of all related resources, before calling <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>"
+      "documentation": "<p>Removes a table definition from the Data Catalog.</p> <note> <p>After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these \"orphaned\" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>"
     },
     "DeleteTableVersion": {
       "name": "DeleteTableVersion",
@@ -1413,7 +1506,7 @@
           "shape": "GlueEncryptionException"
         }
       ],
-      "documentation": "<p>Retrieves all Databases defined in a given Data Catalog.</p>"
+      "documentation": "<p>Retrieves all databases defined in a given Data Catalog.</p>"
     },
     "GetDataflowGraph": {
       "name": "GetDataflowGraph",
@@ -1666,6 +1759,118 @@
         }
       ],
       "documentation": "<p>Retrieves all current job definitions.</p>"
+    },
+    "GetMLTaskRun": {
+      "name": "GetMLTaskRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMLTaskRunRequest"
+      },
+      "output": {
+        "shape": "GetMLTaskRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling <code>GetMLTaskRun</code> with the <code>TaskRunID</code> and its parent transform's <code>TransformID</code>.</p>"
+    },
+    "GetMLTaskRuns": {
+      "name": "GetMLTaskRuns",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMLTaskRunsRequest"
+      },
+      "output": {
+        "shape": "GetMLTaskRunsResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling <code>GetMLTaskRuns</code> with their parent transform's <code>TransformID</code> and other optional parameters as documented in this section.</p> <p>This operation returns a list of historic runs and must be paginated.</p>"
+    },
+    "GetMLTransform": {
+      "name": "GetMLTransform",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMLTransformRequest"
+      },
+      "output": {
+        "shape": "GetMLTransformResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Gets an AWS Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. You can retrieve their metadata by calling <code>GetMLTransform</code>.</p>"
+    },
+    "GetMLTransforms": {
+      "name": "GetMLTransforms",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMLTransformsRequest"
+      },
+      "output": {
+        "shape": "GetMLTransformsResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Gets a sortable, filterable list of existing AWS Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue, and you can retrieve their metadata by calling <code>GetMLTransforms</code>.</p>"
     },
     "GetMapping": {
       "name": "GetMapping",
@@ -2134,7 +2339,7 @@
           "shape": "GlueEncryptionException"
         }
       ],
-      "documentation": "<p>Retrieves a multiple function definitions from the Data Catalog.</p>"
+      "documentation": "<p>Retrieves multiple function definitions from the Data Catalog.</p>"
     },
     "GetWorkflow": {
       "name": "GetWorkflow",
@@ -2268,7 +2473,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Imports an existing Athena Data Catalog to AWS Glue</p>"
+      "documentation": "<p>Imports an existing Amazon Athena Data Catalog to AWS Glue</p>"
     },
     "ListCrawlers": {
       "name": "ListCrawlers",
@@ -2519,6 +2724,31 @@
       ],
       "documentation": "<p>Resets a bookmark entry.</p>"
     },
+    "SearchTables": {
+      "name": "SearchTables",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SearchTablesRequest"
+      },
+      "output": {
+        "shape": "SearchTablesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions. </p> <p>You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. </p>"
+    },
     "StartCrawler": {
       "name": "StartCrawler",
       "http": {
@@ -2575,6 +2805,65 @@
       ],
       "documentation": "<p>Changes the schedule state of the specified crawler to <code>SCHEDULED</code>, unless the crawler is already running or the schedule state is already <code>SCHEDULED</code>.</p>"
     },
+    "StartExportLabelsTaskRun": {
+      "name": "StartExportLabelsTaskRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartExportLabelsTaskRunRequest"
+      },
+      "output": {
+        "shape": "StartExportLabelsTaskRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Begins an asynchronous task to export all labeled data for a particular transform. This task is the only label-related API call that is not part of the typical active learning workflow. You typically use <code>StartExportLabelsTaskRun</code> when you want to work with all of your existing labels at the same time, such as when you want to remove or change labels that were previously submitted as truth. This API operation accepts the <code>TransformId</code> whose labels you want to export and an Amazon Simple Storage Service (Amazon S3) path to export the labels to. The operation returns a <code>TaskRunId</code>. You can check on the status of your task run by calling the <code>GetMLTaskRun</code> API.</p>"
+    },
+    "StartImportLabelsTaskRun": {
+      "name": "StartImportLabelsTaskRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartImportLabelsTaskRunRequest"
+      },
+      "output": {
+        "shape": "StartImportLabelsTaskRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the <code>StartMLLabelingSetGenerationTaskRun</code> call and that ultimately results in improving the quality of your machine learning transform. </p> <p>After the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, AWS Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called 'labeling' in the machine learning workflows). In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation.</p> <p>By default, <code>StartMLLabelingSetGenerationTaskRun</code> continually learns from and combines all labels that you upload unless you set <code>Replace</code> to true. If you set <code>Replace</code> to true, <code>StartImportLabelsTaskRun</code> deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality.</p> <p>You can check on the status of your task run by calling the <code>GetMLTaskRun</code> operation. </p>"
+    },
     "StartJobRun": {
       "name": "StartJobRun",
       "http": {
@@ -2608,6 +2897,71 @@
         }
       ],
       "documentation": "<p>Starts a job run using a job definition.</p>"
+    },
+    "StartMLEvaluationTaskRun": {
+      "name": "StartMLEvaluationTaskRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartMLEvaluationTaskRunRequest"
+      },
+      "output": {
+        "shape": "StartMLEvaluationTaskRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ConcurrentRunsExceededException"
+        },
+        {
+          "shape": "MLTransformNotReadyException"
+        }
+      ],
+      "documentation": "<p>Starts a task to estimate the quality of the transform. </p> <p>When you provide label sets as examples of truth, AWS Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality.</p> <p>Returns a unique identifier for the run. You can call <code>GetMLTaskRun</code> to get more information about the stats of the <code>EvaluationTaskRun</code>.</p>"
+    },
+    "StartMLLabelingSetGenerationTaskRun": {
+      "name": "StartMLLabelingSetGenerationTaskRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartMLLabelingSetGenerationTaskRunRequest"
+      },
+      "output": {
+        "shape": "StartMLLabelingSetGenerationTaskRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ConcurrentRunsExceededException"
+        }
+      ],
+      "documentation": "<p>Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels.</p> <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, AWS Glue will have generated a \"labeling set\" or a set of questions for humans to answer.</p> <p>In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” </p> <p>After the labeling process is finished, you can upload your labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.</p>"
     },
     "StartTrigger": {
       "name": "StartTrigger",
@@ -3034,6 +3388,37 @@
       ],
       "documentation": "<p>Updates an existing job definition.</p>"
     },
+    "UpdateMLTransform": {
+      "name": "UpdateMLTransform",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateMLTransformRequest"
+      },
+      "output": {
+        "shape": "UpdateMLTransformResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Updates an existing machine learning transform. Call this operation to tune the algorithm parameters to achieve better results.</p> <p>After calling this operation, you can call the <code>StartMLEvaluationTaskRun</code> operation to assess how well your new parameters achieved your goals (such as improving the quality of your machine learning transform, or making it more cost-effective).</p>"
+    },
     "UpdatePartition": {
       "name": "UpdatePartition",
       "http": {
@@ -3246,7 +3631,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the catalog in which the partion is to be created. Currently, this should be the AWS account ID.</p>"
+          "documentation": "<p>The ID of the catalog in which the partition is to be created. Currently, this should be the AWS account ID.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -3267,7 +3652,7 @@
       "members": {
         "Errors": {
           "shape": "PartitionErrors",
-          "documentation": "<p>Errors encountered when trying to create the requested partitions.</p>"
+          "documentation": "<p>The errors encountered when trying to create the requested partitions.</p>"
         }
       }
     },
@@ -3310,7 +3695,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -3318,7 +3703,7 @@
         },
         "TableName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the table where the partitions to be deleted is located.</p>"
+          "documentation": "<p>The name of the table that contains the partitions to be deleted.</p>"
         },
         "PartitionsToDelete": {
           "shape": "BatchDeletePartitionValueList",
@@ -3331,7 +3716,7 @@
       "members": {
         "Errors": {
           "shape": "PartitionErrors",
-          "documentation": "<p>Errors encountered when trying to delete the requested partitions.</p>"
+          "documentation": "<p>The errors encountered when trying to delete the requested partitions.</p>"
         }
       }
     },
@@ -3360,11 +3745,11 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the catalog database where the tables to delete reside. For Hive compatibility, this name is entirely lowercase.</p>"
+          "documentation": "<p>The name of the catalog database in which the tables to delete reside. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "TablesToDelete": {
           "shape": "BatchDeleteTableNameList",
@@ -3399,7 +3784,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -3534,7 +3919,7 @@
         },
         "UnprocessedKeys": {
           "shape": "BatchGetPartitionValueList",
-          "documentation": "<p>A list of the partition values in the request for which partions were not returned.</p>"
+          "documentation": "<p>A list of the partition values in the request for which partitions were not returned.</p>"
         }
       }
     },
@@ -3699,6 +4084,40 @@
       "max": 100,
       "min": 0
     },
+    "CancelMLTaskRunRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId",
+        "TaskRunId"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the machine learning transform.</p>"
+        },
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>A unique identifier for the task run.</p>"
+        }
+      }
+    },
+    "CancelMLTaskRunResponse": {
+      "type": "structure",
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the machine learning transform.</p>"
+        },
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier for the task run.</p>"
+        },
+        "Status": {
+          "shape": "TaskStatusType",
+          "documentation": "<p>The status for this run.</p>"
+        }
+      }
+    },
     "CatalogEncryptionMode": {
       "type": "string",
       "enum": [
@@ -3741,7 +4160,7 @@
       "members": {
         "ImportCompleted": {
           "shape": "Boolean",
-          "documentation": "<p>True if the migration has completed, or False otherwise.</p>"
+          "documentation": "<p> <code>True</code> if the migration has completed, or <code>False</code> otherwise.</p>"
         },
         "ImportTime": {
           "shape": "Timestamp",
@@ -3949,11 +4368,15 @@
         },
         "Type": {
           "shape": "ColumnTypeString",
-          "documentation": "<p>The datatype of data in the <code>Column</code>.</p>"
+          "documentation": "<p>The data type of the <code>Column</code>.</p>"
         },
         "Comment": {
           "shape": "CommentString",
-          "documentation": "<p>Free-form text comment.</p>"
+          "documentation": "<p>A free-form text comment.</p>"
+        },
+        "Parameters": {
+          "shape": "ParametersMap",
+          "documentation": "<p>These key-value pairs define properties associated with the column.</p>"
         }
       },
       "documentation": "<p>A column in a <code>Table</code>.</p>"
@@ -3963,6 +4386,12 @@
       "member": {
         "shape": "Column"
       }
+    },
+    "ColumnNameString": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
     "ColumnTypeString": {
       "type": "string",
@@ -3984,6 +4413,16 @@
       "max": 255,
       "min": 0,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "Comparator": {
+      "type": "string",
+      "enum": [
+        "EQUALS",
+        "GREATER_THAN",
+        "LESS_THAN",
+        "GREATER_THAN_EQUALS",
+        "LESS_THAN_EQUALS"
+      ]
     },
     "Condition": {
       "type": "structure",
@@ -4017,6 +4456,28 @@
         "shape": "Condition"
       }
     },
+    "ConfusionMatrix": {
+      "type": "structure",
+      "members": {
+        "NumTruePositives": {
+          "shape": "RecordsCount",
+          "documentation": "<p>The number of matches in the data that the transform correctly found, in the confusion matrix for your transform.</p>"
+        },
+        "NumFalsePositives": {
+          "shape": "RecordsCount",
+          "documentation": "<p>The number of nonmatches in the data that the transform incorrectly classified as a match, in the confusion matrix for your transform.</p>"
+        },
+        "NumTrueNegatives": {
+          "shape": "RecordsCount",
+          "documentation": "<p>The number of nonmatches in the data that the transform correctly rejected, in the confusion matrix for your transform.</p>"
+        },
+        "NumFalseNegatives": {
+          "shape": "RecordsCount",
+          "documentation": "<p>The number of matches in the data that the transform didn't find, in the confusion matrix for your transform.</p>"
+        }
+      },
+      "documentation": "<p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p> <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/Confusion_matrix\">Confusion matrix</a> in Wikipedia.</p>"
+    },
     "Connection": {
       "type": "structure",
       "members": {
@@ -4038,7 +4499,7 @@
         },
         "ConnectionProperties": {
           "shape": "ConnectionProperties",
-          "documentation": "<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is \"<code>USERNAME</code>\".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use).</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching will be enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>"
+          "documentation": "<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is \"<code>USERNAME</code>\".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use.)</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>"
         },
         "PhysicalConnectionRequirements": {
           "shape": "PhysicalConnectionRequirements",
@@ -4118,7 +4579,7 @@
           "documentation": "<p>An AWS KMS key that is used to encrypt the connection password. </p> <p>If connection password protection is enabled, the caller of <code>CreateConnection</code> and <code>UpdateConnection</code> needs at least <code>kms:Encrypt</code> permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog. </p> <p>You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.</p>"
         }
       },
-      "documentation": "<p>The data structure used by the Data Catalog to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p> <p>When a <code>CreationConnection</code> request arrives containing a password, the Data Catalog first encrypts the password using your AWS KMS key. It then encrypts the whole connection object again if catalog encryption is also enabled.</p> <p>This encryption requires that you set AWS KMS key permissions to enable or restrict access on the password key according to your security requirements. For example, you might want only admin users to have decrypt permission on the password key.</p>"
+      "documentation": "<p>The data structure used by the Data Catalog to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p> <p>When a <code>CreationConnection</code> request arrives containing a password, the Data Catalog first encrypts the password using your AWS KMS key. It then encrypts the whole connection object again if catalog encryption is also enabled.</p> <p>This encryption requires that you set AWS KMS key permissions to enable or restrict access on the password key according to your security requirements. For example, you might want only administrators to have decrypt permission on the password key.</p>"
     },
     "ConnectionProperties": {
       "type": "map",
@@ -4543,11 +5004,11 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which to create the database. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which to create the database. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseInput": {
           "shape": "DatabaseInput",
-          "documentation": "<p>A <code>DatabaseInput</code> object defining the metadata database to create in the catalog.</p>"
+          "documentation": "<p>The metadata for the database.</p>"
         }
       }
     },
@@ -4592,7 +5053,7 @@
         },
         "WorkerType": {
           "shape": "WorkerType",
-          "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>"
+          "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul> <p>Known issue: when a development endpoint is created with the <code>G.2X</code> <code>WorkerType</code> configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk. </p>"
         },
         "NumberOfWorkers": {
           "shape": "NullableInteger",
@@ -4835,6 +5296,66 @@
       },
       "documentation": "<p>Specifies a JSON classifier for <code>CreateClassifier</code> to create.</p>"
     },
+    "CreateMLTransformRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "InputRecordTables",
+        "Parameters",
+        "Role"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The unique name that you give the transform when you create it.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>A description of the machine learning transform that is being defined. The default is an empty string.</p>"
+        },
+        "InputRecordTables": {
+          "shape": "GlueTables",
+          "documentation": "<p>A list of AWS Glue table definitions used by the transform.</p>"
+        },
+        "Parameters": {
+          "shape": "TransformParameters",
+          "documentation": "<p>The algorithmic parameters that are specific to the transform type used. Conditionally dependent on the transform type.</p>"
+        },
+        "Role": {
+          "shape": "RoleString",
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. Ensure that this role has permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries that are used by the task run for this transform.</p>"
+        },
+        "MaxCapacity": {
+          "shape": "NullableDouble",
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>. </p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
+        },
+        "WorkerType": {
+          "shape": "WorkerType",
+          "documentation": "<p>The type of predefined worker that is allocated when this task runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when this task runs.</p>"
+        },
+        "Timeout": {
+          "shape": "Timeout",
+          "documentation": "<p>The timeout of the task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>"
+        },
+        "MaxRetries": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The maximum number of times to retry a task for this transform after a task run fails.</p>"
+        }
+      }
+    },
+    "CreateMLTransformResponse": {
+      "type": "structure",
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>A unique identifier that is generated for the transform.</p>"
+        }
+      }
+    },
     "CreatePartitionRequest": {
       "type": "structure",
       "required": [
@@ -4845,7 +5366,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the catalog in which the partion is to be created. Currently, this should be the AWS account ID.</p>"
+          "documentation": "<p>The AWS account ID of the catalog in which the partition is to be created.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -5014,7 +5535,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which to create the function. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which to create the function. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -5195,6 +5716,21 @@
       },
       "documentation": "<p>Contains configuration information for maintaining Data Catalog security.</p>"
     },
+    "DataLakePrincipal": {
+      "type": "structure",
+      "members": {
+        "DataLakePrincipalIdentifier": {
+          "shape": "DataLakePrincipalString",
+          "documentation": "<p>An identifier for the AWS Lake Formation principal.</p>"
+        }
+      },
+      "documentation": "<p>The AWS Lake Formation principal.</p>"
+    },
+    "DataLakePrincipalString": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
     "Database": {
       "type": "structure",
       "required": [
@@ -5203,11 +5739,11 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
+          "documentation": "<p>The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
         },
         "Description": {
           "shape": "DescriptionString",
-          "documentation": "<p>Description of the database.</p>"
+          "documentation": "<p>A description of the database.</p>"
         },
         "LocationUri": {
           "shape": "URI",
@@ -5220,9 +5756,13 @@
         "CreateTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time at which the metadata database was created in the catalog.</p>"
+        },
+        "CreateTableDefaultPermissions": {
+          "shape": "PrincipalPermissionsList",
+          "documentation": "<p>Creates a set of default permissions on the table for principals. </p>"
         }
       },
-      "documentation": "<p>The <code>Database</code> object represents a logical grouping of tables that may reside in a Hive metastore or an RDBMS.</p>"
+      "documentation": "<p>The <code>Database</code> object represents a logical grouping of tables that might reside in a Hive metastore or an RDBMS.</p>"
     },
     "DatabaseInput": {
       "type": "structure",
@@ -5232,19 +5772,23 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
+          "documentation": "<p>The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
         },
         "Description": {
           "shape": "DescriptionString",
-          "documentation": "<p>Description of the database</p>"
+          "documentation": "<p>A description of the database.</p>"
         },
         "LocationUri": {
           "shape": "URI",
-          "documentation": "<p>The location of the database (for example, an HDFS path).</p>"
+          "documentation": "<p>The location of the database (for example, an HDFS path). </p>"
         },
         "Parameters": {
           "shape": "ParametersMap",
-          "documentation": "<p>Thes key-value pairs define parameters and properties of the database.</p>"
+          "documentation": "<p>These key-value pairs define parameters and properties of the database.</p> <p>These key-value pairs define parameters and properties of the database.</p>"
+        },
+        "CreateTableDefaultPermissions": {
+          "shape": "PrincipalPermissionsList",
+          "documentation": "<p>Creates a set of default permissions on the table for principals. </p>"
         }
       },
       "documentation": "<p>The structure used to create or update a database.</p>"
@@ -5334,11 +5878,11 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which the database resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>The name of the Database to delete. For Hive compatibility, this must be all lowercase.</p>"
+          "documentation": "<p>The name of the database to delete. For Hive compatibility, this must be all lowercase.</p>"
         }
       }
     },
@@ -5383,6 +5927,27 @@
         }
       }
     },
+    "DeleteMLTransformRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the transform to delete.</p>"
+        }
+      }
+    },
+    "DeleteMLTransformResponse": {
+      "type": "structure",
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the transform that was deleted.</p>"
+        }
+      }
+    },
     "DeletePartitionRequest": {
       "type": "structure",
       "required": [
@@ -5393,7 +5958,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -5401,7 +5966,7 @@
         },
         "TableName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the table where the partition to be deleted is located.</p>"
+          "documentation": "<p>The name of the table that contains the partition to be deleted.</p>"
         },
         "PartitionValues": {
           "shape": "ValueStringList",
@@ -5451,7 +6016,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -5477,7 +6042,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -5617,7 +6182,7 @@
         },
         "WorkerType": {
           "shape": "WorkerType",
-          "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>"
+          "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul> <p>Known issue: when a development endpoint is created with the <code>G.2X</code> <code>WorkerType</code> configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk. </p>"
         },
         "NumberOfWorkers": {
           "shape": "NullableInteger",
@@ -5809,6 +6374,23 @@
     "ErrorString": {
       "type": "string"
     },
+    "EvaluationMetrics": {
+      "type": "structure",
+      "required": [
+        "TransformType"
+      ],
+      "members": {
+        "TransformType": {
+          "shape": "TransformType",
+          "documentation": "<p>The type of machine learning transform.</p>"
+        },
+        "FindMatchesMetrics": {
+          "shape": "FindMatchesMetrics",
+          "documentation": "<p>The evaluation metrics for the find matches algorithm.</p>"
+        }
+      },
+      "documentation": "<p>Evaluation metrics provide an estimate of the quality of your machine learning transform.</p>"
+    },
     "ExecutionProperty": {
       "type": "structure",
       "members": {
@@ -5830,6 +6412,16 @@
         "NONE"
       ]
     },
+    "ExportLabelsTaskRunProperties": {
+      "type": "structure",
+      "members": {
+        "OutputS3Path": {
+          "shape": "UriString",
+          "documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where you will export the labels.</p>"
+        }
+      },
+      "documentation": "<p>Specifies configuration properties for an exporting labels task run.</p>"
+    },
     "FieldType": {
       "type": "string"
     },
@@ -5839,10 +6431,82 @@
       "min": 0,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
+    "FindMatchesMetrics": {
+      "type": "structure",
+      "members": {
+        "AreaUnderPRCurve": {
+          "shape": "GenericBoundedDouble",
+          "documentation": "<p>The area under the precision/recall curve (AUPRC) is a single number measuring the overall quality of the transform, that is independent of the choice made for precision vs. recall. Higher values indicate that you have a more attractive precision vs. recall tradeoff.</p> <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/Precision_and_recall\">Precision and recall</a> in Wikipedia.</p>"
+        },
+        "Precision": {
+          "shape": "GenericBoundedDouble",
+          "documentation": "<p>The precision metric indicates when often your transform is correct when it predicts a match. Specifically, it measures how well the transform finds true positives from the total true positives possible.</p> <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/Precision_and_recall\">Precision and recall</a> in Wikipedia.</p>"
+        },
+        "Recall": {
+          "shape": "GenericBoundedDouble",
+          "documentation": "<p>The recall metric indicates that for an actual match, how often your transform predicts the match. Specifically, it measures how well the transform finds true positives from the total records in the source data.</p> <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/Precision_and_recall\">Precision and recall</a> in Wikipedia.</p>"
+        },
+        "F1": {
+          "shape": "GenericBoundedDouble",
+          "documentation": "<p>The maximum F1 metric indicates the transform's accuracy between 0 and 1, where 1 is the best accuracy.</p> <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/F1_score\">F1 score</a> in Wikipedia.</p>"
+        },
+        "ConfusionMatrix": {
+          "shape": "ConfusionMatrix",
+          "documentation": "<p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p> <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/Confusion_matrix\">Confusion matrix</a> in Wikipedia.</p>"
+        }
+      },
+      "documentation": "<p>The evaluation metrics for the find matches algorithm. The quality of your machine learning transform is measured by getting your transform to predict some matches and comparing the results to known matches from the same dataset. The quality metrics are based on a subset of your data, so they are not precise.</p>"
+    },
+    "FindMatchesParameters": {
+      "type": "structure",
+      "members": {
+        "PrimaryKeyColumnName": {
+          "shape": "ColumnNameString",
+          "documentation": "<p>The name of a column that uniquely identifies rows in the source table. Used to help identify matching records.</p>"
+        },
+        "PrecisionRecallTradeoff": {
+          "shape": "GenericBoundedDouble",
+          "documentation": "<p>The value selected when tuning your transform for a balance between precision and recall. A value of 0.5 means no preference; a value of 1.0 means a bias purely for precision, and a value of 0.0 means a bias for recall. Because this is a tradeoff, choosing values close to 1.0 means very low recall, and choosing values close to 0.0 results in very low precision.</p> <p>The precision metric indicates how often your model is correct when it predicts a match. </p> <p>The recall metric indicates that for an actual match, how often your model predicts the match.</p>"
+        },
+        "AccuracyCostTradeoff": {
+          "shape": "GenericBoundedDouble",
+          "documentation": "<p>The value that is selected when tuning your transform for a balance between accuracy and cost. A value of 0.5 means that the system balances accuracy and cost concerns. A value of 1.0 means a bias purely for accuracy, which typically results in a higher cost, sometimes substantially higher. A value of 0.0 means a bias purely for cost, which results in a less accurate <code>FindMatches</code> transform, sometimes with unacceptable accuracy.</p> <p>Accuracy measures how well the transform finds true positives and true negatives. Increasing accuracy requires more machine resources and cost. But it also results in increased recall. </p> <p>Cost measures how many compute resources, and thus money, are consumed to run the transform.</p>"
+        },
+        "EnforceProvidedLabels": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>The value to switch on or off to force the output to match the provided labels from users. If the value is <code>True</code>, the <code>find matches</code> transform forces the output to match the provided labels. The results override the normal conflation results. If the value is <code>False</code>, the <code>find matches</code> transform does not ensure all the labels provided are respected, and the results rely on the trained model.</p> <p>Note that setting this value to true may increase the conflation execution time.</p>"
+        }
+      },
+      "documentation": "<p>The parameters to configure the find matches transform.</p>"
+    },
+    "FindMatchesTaskRunProperties": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "HashString",
+          "documentation": "<p>The job ID for the Find Matches task run.</p>"
+        },
+        "JobName": {
+          "shape": "NameString",
+          "documentation": "<p>The name assigned to the job for the Find Matches task run.</p>"
+        },
+        "JobRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The job run ID for the Find Matches task run.</p>"
+        }
+      },
+      "documentation": "<p>Specifies configuration properties for a Find Matches task run.</p>"
+    },
     "FormatString": {
       "type": "string",
       "max": 128,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "GenericBoundedDouble": {
+      "type": "double",
+      "box": true,
+      "max": 1,
+      "min": 0
     },
     "GenericMap": {
       "type": "map",
@@ -5937,7 +6601,7 @@
         },
         "HidePassword": {
           "shape": "Boolean",
-          "documentation": "<p>Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties.</p>"
+          "documentation": "<p>Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.</p>"
         }
       }
     },
@@ -5973,11 +6637,11 @@
         },
         "Filter": {
           "shape": "GetConnectionsFilter",
-          "documentation": "<p>A filter that controls which connections will be returned.</p>"
+          "documentation": "<p>A filter that controls which connections are returned.</p>"
         },
         "HidePassword": {
           "shape": "Boolean",
-          "documentation": "<p>Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties.</p>"
+          "documentation": "<p>Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -6084,7 +6748,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog for which to retrieve the security configuration. If none is provided, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog to retrieve the security configuration for. If none is provided, the AWS account ID is used by default.</p>"
         }
       }
     },
@@ -6105,7 +6769,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which the database resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "Name": {
           "shape": "NameString",
@@ -6118,7 +6782,7 @@
       "members": {
         "Database": {
           "shape": "Database",
-          "documentation": "<p>The definition of the specified database in the catalog.</p>"
+          "documentation": "<p>The definition of the specified database in the Data Catalog.</p>"
         }
       }
     },
@@ -6127,7 +6791,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog from which to retrieve <code>Databases</code>. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog from which to retrieve <code>Databases</code>. If none is provided, the AWS account ID is used by default.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -6392,6 +7056,231 @@
         }
       }
     },
+    "GetMLTaskRunRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId",
+        "TaskRunId"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the machine learning transform.</p>"
+        },
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the task run.</p>"
+        }
+      }
+    },
+    "GetMLTaskRunResponse": {
+      "type": "structure",
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the task run.</p>"
+        },
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique run identifier associated with this run.</p>"
+        },
+        "Status": {
+          "shape": "TaskStatusType",
+          "documentation": "<p>The status for this task run.</p>"
+        },
+        "LogGroupName": {
+          "shape": "GenericString",
+          "documentation": "<p>The names of the log groups that are associated with the task run.</p>"
+        },
+        "Properties": {
+          "shape": "TaskRunProperties",
+          "documentation": "<p>The list of properties that are associated with the task run.</p>"
+        },
+        "ErrorString": {
+          "shape": "GenericString",
+          "documentation": "<p>The error strings that are associated with the task run.</p>"
+        },
+        "StartedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time when this task run started.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time when this task run was last modified.</p>"
+        },
+        "CompletedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time when this task run was completed.</p>"
+        },
+        "ExecutionTime": {
+          "shape": "ExecutionTime",
+          "documentation": "<p>The amount of time (in seconds) that the task run consumed resources.</p>"
+        }
+      }
+    },
+    "GetMLTaskRunsRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the machine learning transform.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>A token for pagination of the results. The default is empty.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum number of results to return. </p>"
+        },
+        "Filter": {
+          "shape": "TaskRunFilterCriteria",
+          "documentation": "<p>The filter criteria, in the <code>TaskRunFilterCriteria</code> structure, for the task run.</p>"
+        },
+        "Sort": {
+          "shape": "TaskRunSortCriteria",
+          "documentation": "<p>The sorting criteria, in the <code>TaskRunSortCriteria</code> structure, for the task run.</p>"
+        }
+      }
+    },
+    "GetMLTaskRunsResponse": {
+      "type": "structure",
+      "members": {
+        "TaskRuns": {
+          "shape": "TaskRunList",
+          "documentation": "<p>A list of task runs that are associated with the transform.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>A pagination token, if more results are available.</p>"
+        }
+      }
+    },
+    "GetMLTransformRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the transform, generated at the time that the transform was created.</p>"
+        }
+      }
+    },
+    "GetMLTransformResponse": {
+      "type": "structure",
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the transform, generated at the time that the transform was created.</p>"
+        },
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The unique name given to the transform when it was created.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>A description of the transform.</p>"
+        },
+        "Status": {
+          "shape": "TransformStatusType",
+          "documentation": "<p>The last known status of the transform (to indicate whether it can be used or not). One of \"NOT_READY\", \"READY\", or \"DELETING\".</p>"
+        },
+        "CreatedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time when the transform was created.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time when the transform was last modified.</p>"
+        },
+        "InputRecordTables": {
+          "shape": "GlueTables",
+          "documentation": "<p>A list of AWS Glue table definitions used by the transform.</p>"
+        },
+        "Parameters": {
+          "shape": "TransformParameters",
+          "documentation": "<p>The configuration parameters that are specific to the algorithm used.</p>"
+        },
+        "EvaluationMetrics": {
+          "shape": "EvaluationMetrics",
+          "documentation": "<p>The latest evaluation metrics.</p>"
+        },
+        "LabelCount": {
+          "shape": "LabelCount",
+          "documentation": "<p>The number of labels available for this transform.</p>"
+        },
+        "Schema": {
+          "shape": "TransformSchema",
+          "documentation": "<p>The <code>Map&lt;Column, Type&gt;</code> object that represents the schema that this transform accepts. Has an upper bound of 100 columns.</p>"
+        },
+        "Role": {
+          "shape": "RoleString",
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions.</p>"
+        },
+        "MaxCapacity": {
+          "shape": "NullableDouble",
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>. </p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
+        },
+        "WorkerType": {
+          "shape": "WorkerType",
+          "documentation": "<p>The type of predefined worker that is allocated when this task runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when this task runs.</p>"
+        },
+        "Timeout": {
+          "shape": "Timeout",
+          "documentation": "<p>The timeout for a task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>"
+        },
+        "MaxRetries": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The maximum number of times to retry a task for this transform after a task run fails.</p>"
+        }
+      }
+    },
+    "GetMLTransformsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>A paginated token to offset the results.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum number of results to return.</p>"
+        },
+        "Filter": {
+          "shape": "TransformFilterCriteria",
+          "documentation": "<p>The filter transformation criteria.</p>"
+        },
+        "Sort": {
+          "shape": "TransformSortCriteria",
+          "documentation": "<p>The sorting criteria.</p>"
+        }
+      }
+    },
+    "GetMLTransformsResponse": {
+      "type": "structure",
+      "required": [
+        "Transforms"
+      ],
+      "members": {
+        "Transforms": {
+          "shape": "TransformList",
+          "documentation": "<p>A list of machine learning transforms.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>A pagination token, if more results are available.</p>"
+        }
+      }
+    },
     "GetMappingRequest": {
       "type": "structure",
       "required": [
@@ -6434,7 +7323,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the partition in question resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the partition in question resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -6468,7 +7357,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the partitions in question reside. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -6480,7 +7369,7 @@
         },
         "Expression": {
           "shape": "PredicateString",
-          "documentation": "<p>An expression filtering the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href=\"http://jsqlparser.sourceforge.net/home.php\">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks if the values of the two operands are equal or not; if yes, then the condition becomes true.</p> <p>Example: Assume 'variable a' holds 10 and 'variable b' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks if the values of two operands are equal or not; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks if the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks if the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks if the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks if the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an invalid type is encountered, an exception is thrown. </p> <p>The following list shows the valid operators on each type. When you define a crawler, the <code>partitionKey</code> type is created as a <code>STRING</code>, to be compatible with the catalog partitions. </p> <p> <i>Sample API Call</i>: </p>"
+          "documentation": "<p>An expression that filters the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href=\"http://jsqlparser.sourceforge.net/home.php\">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks whether the values of the two operands are equal; if yes, then the condition becomes true.</p> <p>Example: Assume 'variable a' holds 10 and 'variable b' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an invalid type is encountered, an exception is thrown. </p> <p>The following list shows the valid operators on each type. When you define a crawler, the <code>partitionKey</code> type is created as a <code>STRING</code>, to be compatible with the catalog partitions. </p> <p> <i>Sample API Call</i>: </p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -6505,7 +7394,7 @@
         },
         "NextToken": {
           "shape": "Token",
-          "documentation": "<p>A continuation token, if the returned list of partitions does not does not include the last one.</p>"
+          "documentation": "<p>A continuation token, if the returned list of partitions does not include the last one.</p>"
         }
       }
     },
@@ -6632,7 +7521,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -6662,7 +7551,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -6702,7 +7591,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -6743,7 +7632,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -6857,7 +7746,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the function to be retrieved is located. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -6887,7 +7776,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the functions to be retrieved are located. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the functions to be retrieved are located. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -7044,6 +7933,40 @@
       "min": 1,
       "pattern": "arn:aws:glue:.*"
     },
+    "GlueTable": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName"
+      ],
+      "members": {
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>A database name in the AWS Glue Data Catalog.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>A table name in the AWS Glue Data Catalog.</p>"
+        },
+        "CatalogId": {
+          "shape": "NameString",
+          "documentation": "<p>A unique identifier for the AWS Glue Data Catalog.</p>"
+        },
+        "ConnectionName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the connection to the AWS Glue Data Catalog.</p>"
+        }
+      },
+      "documentation": "<p>The database and table in the AWS Glue Data Catalog that is used for input or output data.</p>"
+    },
+    "GlueTables": {
+      "type": "list",
+      "member": {
+        "shape": "GlueTable"
+      },
+      "max": 10,
+      "min": 0
+    },
     "GlueVersionString": {
       "type": "string",
       "max": 255,
@@ -7119,6 +8042,20 @@
     "ImportCatalogToGlueResponse": {
       "type": "structure",
       "members": {}
+    },
+    "ImportLabelsTaskRunProperties": {
+      "type": "structure",
+      "members": {
+        "InputS3Path": {
+          "shape": "UriString",
+          "documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path from where you will import the labels.</p>"
+        },
+        "Replace": {
+          "shape": "ReplaceBoolean",
+          "documentation": "<p>Indicates whether to overwrite your existing labels.</p>"
+        }
+      },
+      "documentation": "<p>Specifies configuration properties for an importing labels task run.</p>"
     },
     "Integer": {
       "type": "integer"
@@ -7260,11 +8197,11 @@
         },
         "PreviousRunId": {
           "shape": "RunId",
-          "documentation": "<p>The unique run identifier associated with the previous job run..</p>"
+          "documentation": "<p>The unique run identifier associated with the previous job run.</p>"
         },
         "RunId": {
           "shape": "RunId",
-          "documentation": "<p>The unique run identifier associated with this job run.</p>"
+          "documentation": "<p>The run ID number.</p>"
         },
         "JobBookmark": {
           "shape": "JsonValue",
@@ -7575,6 +8512,19 @@
       "type": "string",
       "pattern": "arn:aws:kms:.*"
     },
+    "LabelCount": {
+      "type": "integer"
+    },
+    "LabelingSetGenerationTaskRunProperties": {
+      "type": "structure",
+      "members": {
+        "OutputS3Path": {
+          "shape": "UriString",
+          "documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where you will generate the labeling set.</p>"
+        }
+      },
+      "documentation": "<p>Specifies configuration properties for a labeling set generation task run.</p>"
+    },
     "Language": {
       "type": "string",
       "enum": [
@@ -7827,6 +8777,80 @@
         "EQUALS"
       ]
     },
+    "MLTransform": {
+      "type": "structure",
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique transform ID that is generated for the machine learning transform. The ID is guaranteed to be unique and does not change.</p>"
+        },
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>A user-defined name for the machine learning transform. Names are not guaranteed unique and can be changed at any time.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>A user-defined, long-form description text for the machine learning transform. Descriptions are not guaranteed to be unique and can be changed at any time.</p>"
+        },
+        "Status": {
+          "shape": "TransformStatusType",
+          "documentation": "<p>The current status of the machine learning transform.</p>"
+        },
+        "CreatedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>A timestamp. The time and date that this machine learning transform was created.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>A timestamp. The last point in time when this machine learning transform was modified.</p>"
+        },
+        "InputRecordTables": {
+          "shape": "GlueTables",
+          "documentation": "<p>A list of AWS Glue table definitions used by the transform.</p>"
+        },
+        "Parameters": {
+          "shape": "TransformParameters",
+          "documentation": "<p>A <code>TransformParameters</code> object. You can use parameters to tune (customize) the behavior of the machine learning transform by specifying what data it learns from and your preference on various tradeoffs (such as precious vs. recall, or accuracy vs. cost).</p>"
+        },
+        "EvaluationMetrics": {
+          "shape": "EvaluationMetrics",
+          "documentation": "<p>An <code>EvaluationMetrics</code> object. Evaluation metrics provide an estimate of the quality of your machine learning transform.</p>"
+        },
+        "LabelCount": {
+          "shape": "LabelCount",
+          "documentation": "<p>A count identifier for the labeling files generated by AWS Glue for this transform. As you create a better transform, you can iteratively download, label, and upload the labeling file.</p>"
+        },
+        "Schema": {
+          "shape": "TransformSchema",
+          "documentation": "<p>A map of key-value pairs representing the columns and data types that this transform can run against. Has an upper bound of 100 columns.</p>"
+        },
+        "Role": {
+          "shape": "RoleString",
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p>"
+        },
+        "MaxCapacity": {
+          "shape": "NullableDouble",
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>. </p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
+        },
+        "WorkerType": {
+          "shape": "WorkerType",
+          "documentation": "<p>The type of predefined worker that is allocated when a task of this transform runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when a task of the transform runs.</p>"
+        },
+        "Timeout": {
+          "shape": "Timeout",
+          "documentation": "<p>The timeout in minutes of the machine learning transform.</p>"
+        },
+        "MaxRetries": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The maximum number of times to retry after an <code>MLTaskRun</code> of the machine learning transform fails.</p>"
+        }
+      },
+      "documentation": "<p>A structure for a machine learning transform.</p>"
+    },
     "MapValue": {
       "type": "map",
       "key": {
@@ -8024,6 +9048,9 @@
       "max": 1000,
       "min": 1
     },
+    "PaginationToken": {
+      "type": "string"
+    },
     "ParametersMap": {
       "type": "map",
       "key": {
@@ -8046,11 +9073,11 @@
         },
         "DatabaseName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the catalog database where the table in question is located.</p>"
+          "documentation": "<p>The name of the catalog database in which to create the partition.</p>"
         },
         "TableName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the table in question.</p>"
+          "documentation": "<p>The name of the database table in which to create the partition.</p>"
         },
         "CreationTime": {
           "shape": "Timestamp",
@@ -8084,7 +9111,7 @@
         },
         "ErrorDetail": {
           "shape": "ErrorDetail",
-          "documentation": "<p>Details about the partition error.</p>"
+          "documentation": "<p>The details about the partition error.</p>"
         }
       },
       "documentation": "<p>Contains information about a partition error.</p>"
@@ -8119,7 +9146,7 @@
           "documentation": "<p>The last time at which column statistics were computed for this partition.</p>"
         }
       },
-      "documentation": "<p>The structure used to create and update a partion.</p>"
+      "documentation": "<p>The structure used to create and update a partition.</p>"
     },
     "PartitionInputList": {
       "type": "list",
@@ -8155,6 +9182,26 @@
       "type": "list",
       "member": {
         "shape": "Path"
+      }
+    },
+    "Permission": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "SELECT",
+        "ALTER",
+        "DROP",
+        "DELETE",
+        "INSERT",
+        "CREATE_DATABASE",
+        "CREATE_TABLE",
+        "DATA_LOCATION_ACCESS"
+      ]
+    },
+    "PermissionList": {
+      "type": "list",
+      "member": {
+        "shape": "Permission"
       }
     },
     "PhysicalConnectionRequirements": {
@@ -8220,6 +9267,26 @@
       "min": 0,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
+    "PrincipalPermissions": {
+      "type": "structure",
+      "members": {
+        "Principal": {
+          "shape": "DataLakePrincipal",
+          "documentation": "<p>The principal who is granted permissions.</p>"
+        },
+        "Permissions": {
+          "shape": "PermissionList",
+          "documentation": "<p>The permissions that are granted to the principal.</p>"
+        }
+      },
+      "documentation": "<p>Permissions granted to a principal.</p>"
+    },
+    "PrincipalPermissionsList": {
+      "type": "list",
+      "member": {
+        "shape": "PrincipalPermissions"
+      }
+    },
     "PrincipalType": {
       "type": "string",
       "enum": [
@@ -8227,6 +9294,24 @@
         "ROLE",
         "GROUP"
       ]
+    },
+    "PropertyPredicate": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "ValueString",
+          "documentation": "<p>The key of the property.</p>"
+        },
+        "Value": {
+          "shape": "ValueString",
+          "documentation": "<p>The value of the property.</p>"
+        },
+        "Comparator": {
+          "shape": "Comparator",
+          "documentation": "<p>The comparator used to compare this property to others.</p>"
+        }
+      },
+      "documentation": "<p>Defines a property predicate.</p>"
     },
     "PublicKeysList": {
       "type": "list",
@@ -8243,7 +9328,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog for which to set the security configuration. If none is provided, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DataCatalogEncryptionSettings": {
           "shape": "DataCatalogEncryptionSettings",
@@ -8317,6 +9402,13 @@
       "type": "string",
       "pattern": "^[2-3]$"
     },
+    "RecordsCount": {
+      "type": "long",
+      "box": true
+    },
+    "ReplaceBoolean": {
+      "type": "boolean"
+    },
     "ResetJobBookmarkRequest": {
       "type": "structure",
       "required": [
@@ -8362,7 +9454,7 @@
           "documentation": "<p>The URI for accessing the resource.</p>"
         }
       },
-      "documentation": "<p>URIs for function resources.</p>"
+      "documentation": "<p>The URIs for function resources.</p>"
     },
     "ResourceUriList": {
       "type": "list",
@@ -8475,11 +9567,73 @@
       },
       "documentation": "<p>A policy that specifies update and deletion behaviors for the crawler.</p>"
     },
+    "SchemaColumn": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ColumnNameString",
+          "documentation": "<p>The name of the column.</p>"
+        },
+        "DataType": {
+          "shape": "ColumnTypeString",
+          "documentation": "<p>The type of data in the column.</p>"
+        }
+      },
+      "documentation": "<p>A key-value pair representing a column and data type that this transform can run against. The <code>Schema</code> parameter of the <code>MLTransform</code> may contain up to 100 of these structures.</p>"
+    },
     "SchemaPathString": {
       "type": "string"
     },
     "ScriptLocationString": {
       "type": "string"
+    },
+    "SearchPropertyPredicates": {
+      "type": "list",
+      "member": {
+        "shape": "PropertyPredicate"
+      }
+    },
+    "SearchTablesRequest": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>A unique identifier, consisting of <code> <i>account_id</i>/datalake</code>.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, included if this is a continuation call.</p>"
+        },
+        "Filters": {
+          "shape": "SearchPropertyPredicates",
+          "documentation": "<p>A list of key-value pairs, and a comparator used to filter the search results. Returns all entities matching the predicate.</p>"
+        },
+        "SearchText": {
+          "shape": "ValueString",
+          "documentation": "<p>A string used for a text search.</p> <p>Specifying a value in quotes filters based on an exact match to the value.</p>"
+        },
+        "SortCriteria": {
+          "shape": "SortCriteria",
+          "documentation": "<p>A list of criteria for sorting the results by a field name, in an ascending or descending order.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum number of tables to return in a single response.</p>"
+        }
+      }
+    },
+    "SearchTablesResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, present if the current list segment is not the last.</p>"
+        },
+        "TableList": {
+          "shape": "TableList",
+          "documentation": "<p>A list of the requested <code>Table</code> objects. The <code>SearchTables</code> response returns only the tables that you have access to.</p>"
+        }
+      }
     },
     "SecurityConfiguration": {
       "type": "structure",
@@ -8522,11 +9676,11 @@
       "members": {
         "SegmentNumber": {
           "shape": "NonNegativeInteger",
-          "documentation": "<p>The zero-based index number of the this segment. For example, if the total number of segments is 4, SegmentNumber values will range from zero through three.</p>"
+          "documentation": "<p>The zero-based index number of the segment. For example, if the total number of segments is 4, <code>SegmentNumber</code> values range from 0 through 3.</p>"
         },
         "TotalSegments": {
           "shape": "TotalSegmentsInteger",
-          "documentation": "<p>The total numer of segments.</p>"
+          "documentation": "<p>The total number of segments.</p>"
         }
       },
       "documentation": "<p>Defines a non-overlapping region of a table's partitions, allowing multiple requests to be executed in parallel.</p>"
@@ -8540,14 +9694,14 @@
         },
         "SerializationLibrary": {
           "shape": "NameString",
-          "documentation": "<p>Usually the class that implements the SerDe. An example is: <code>org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe</code>.</p>"
+          "documentation": "<p>Usually the class that implements the SerDe. An example is <code>org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe</code>.</p>"
         },
         "Parameters": {
           "shape": "ParametersMap",
           "documentation": "<p>These key-value pairs define initialization parameters for the SerDe.</p>"
         }
       },
-      "documentation": "<p>Information about a serialization/deserialization program (SerDe) which serves as an extractor and loader.</p>"
+      "documentation": "<p>Information about a serialization/deserialization program (SerDe) that serves as an extractor and loader.</p>"
     },
     "SkewedInfo": {
       "type": "structure",
@@ -8565,7 +9719,40 @@
           "documentation": "<p>A mapping of skewed values to the columns that contain them.</p>"
         }
       },
-      "documentation": "<p>Specifies skewed values in a table. Skewed are ones that occur with very high frequency.</p>"
+      "documentation": "<p>Specifies skewed values in a table. Skewed values are those that occur with very high frequency.</p>"
+    },
+    "Sort": {
+      "type": "string",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
+    },
+    "SortCriteria": {
+      "type": "list",
+      "member": {
+        "shape": "SortCriterion"
+      },
+      "max": 1,
+      "min": 0
+    },
+    "SortCriterion": {
+      "type": "structure",
+      "members": {
+        "FieldName": {
+          "shape": "ValueString"
+        },
+        "Sort": {
+          "shape": "Sort"
+        }
+      }
+    },
+    "SortDirectionType": {
+      "type": "string",
+      "enum": [
+        "DESCENDING",
+        "ASCENDING"
+      ]
     },
     "StartCrawlerRequest": {
       "type": "structure",
@@ -8598,6 +9785,62 @@
     "StartCrawlerScheduleResponse": {
       "type": "structure",
       "members": {}
+    },
+    "StartExportLabelsTaskRunRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId",
+        "OutputS3Path"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the machine learning transform.</p>"
+        },
+        "OutputS3Path": {
+          "shape": "UriString",
+          "documentation": "<p>The Amazon S3 path where you export the labels.</p>"
+        }
+      }
+    },
+    "StartExportLabelsTaskRunResponse": {
+      "type": "structure",
+      "members": {
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier for the task run.</p>"
+        }
+      }
+    },
+    "StartImportLabelsTaskRunRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId",
+        "InputS3Path"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the machine learning transform.</p>"
+        },
+        "InputS3Path": {
+          "shape": "UriString",
+          "documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path from where you import the labels.</p>"
+        },
+        "ReplaceAllLabels": {
+          "shape": "ReplaceBoolean",
+          "documentation": "<p>Indicates whether to overwrite your existing labels.</p>"
+        }
+      }
+    },
+    "StartImportLabelsTaskRunResponse": {
+      "type": "structure",
+      "members": {
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier for the task run.</p>"
+        }
+      }
     },
     "StartJobRunRequest": {
       "type": "structure",
@@ -8655,6 +9898,53 @@
         "JobRunId": {
           "shape": "IdString",
           "documentation": "<p>The ID assigned to this job run.</p>"
+        }
+      }
+    },
+    "StartMLEvaluationTaskRunRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the machine learning transform.</p>"
+        }
+      }
+    },
+    "StartMLEvaluationTaskRunResponse": {
+      "type": "structure",
+      "members": {
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier associated with this run.</p>"
+        }
+      }
+    },
+    "StartMLLabelingSetGenerationTaskRunRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId",
+        "OutputS3Path"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier of the machine learning transform.</p>"
+        },
+        "OutputS3Path": {
+          "shape": "UriString",
+          "documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where you generate the labeling set.</p>"
+        }
+      }
+    },
+    "StartMLLabelingSetGenerationTaskRunResponse": {
+      "type": "structure",
+      "members": {
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique run identifier that is associated with this task run.</p>"
         }
       }
     },
@@ -8762,7 +10052,7 @@
         },
         "Location": {
           "shape": "LocationString",
-          "documentation": "<p>The physical location of the table. By default this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.</p>"
+          "documentation": "<p>The physical location of the table. By default, this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.</p>"
         },
         "InputFormat": {
           "shape": "FormatString",
@@ -8774,7 +10064,7 @@
         },
         "Compressed": {
           "shape": "Boolean",
-          "documentation": "<p>True if the data in the table is compressed, or False if not.</p>"
+          "documentation": "<p> <code>True</code> if the data in the table is compressed, or <code>False</code> if not.</p>"
         },
         "NumberOfBuckets": {
           "shape": "Integer",
@@ -8782,7 +10072,7 @@
         },
         "SerdeInfo": {
           "shape": "SerDeInfo",
-          "documentation": "<p>Serialization/deserialization (SerDe) information.</p>"
+          "documentation": "<p>The serialization/deserialization (SerDe) information.</p>"
         },
         "BucketColumns": {
           "shape": "NameStringList",
@@ -8794,15 +10084,15 @@
         },
         "Parameters": {
           "shape": "ParametersMap",
-          "documentation": "<p>User-supplied properties in key-value form.</p>"
+          "documentation": "<p>The user-supplied properties in key-value form.</p>"
         },
         "SkewedInfo": {
           "shape": "SkewedInfo",
-          "documentation": "<p>Information about values that appear very frequently in a column (skewed values).</p>"
+          "documentation": "<p>The information about values that appear frequently in a column (skewed values).</p>"
         },
         "StoredAsSubDirectories": {
           "shape": "Boolean",
-          "documentation": "<p>True if the table data is stored in subdirectories, or False if not.</p>"
+          "documentation": "<p> <code>True</code> if the table data is stored in subdirectories, or <code>False</code> if not.</p>"
         }
       },
       "documentation": "<p>Describes the physical storage of table data.</p>"
@@ -8821,39 +10111,39 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>Name of the table. For Hive compatibility, this must be entirely lowercase.</p>"
+          "documentation": "<p>The table name. For Hive compatibility, this must be entirely lowercase.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
-          "documentation": "<p>Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.</p>"
+          "documentation": "<p>The name of the database where the table metadata resides. For Hive compatibility, this must be all lowercase.</p>"
         },
         "Description": {
           "shape": "DescriptionString",
-          "documentation": "<p>Description of the table.</p>"
+          "documentation": "<p>A description of the table.</p>"
         },
         "Owner": {
           "shape": "NameString",
-          "documentation": "<p>Owner of the table.</p>"
+          "documentation": "<p>The owner of the table.</p>"
         },
         "CreateTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Time when the table definition was created in the Data Catalog.</p>"
+          "documentation": "<p>The time when the table definition was created in the Data Catalog.</p>"
         },
         "UpdateTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Last time the table was updated.</p>"
+          "documentation": "<p>The last time that the table was updated.</p>"
         },
         "LastAccessTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Last time the table was accessed. This is usually taken from HDFS, and may not be reliable.</p>"
+          "documentation": "<p>The last time that the table was accessed. This is usually taken from HDFS, and might not be reliable.</p>"
         },
         "LastAnalyzedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Last time column statistics were computed for this table.</p>"
+          "documentation": "<p>The last time that column statistics were computed for this table.</p>"
         },
         "Retention": {
           "shape": "NonNegativeInteger",
-          "documentation": "<p>Retention time for this table.</p>"
+          "documentation": "<p>The retention time for this table.</p>"
         },
         "StorageDescriptor": {
           "shape": "StorageDescriptor",
@@ -8861,7 +10151,7 @@
         },
         "PartitionKeys": {
           "shape": "ColumnList",
-          "documentation": "<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p> <p>When creating a table used by Athena, and you do not specify any <code>partitionKeys</code>, you must at least set the value of <code>partitionKeys</code> to an empty list. For example:</p> <p> <code>\"PartitionKeys\": []</code> </p>"
+          "documentation": "<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p> <p>When you create a table used by Amazon Athena, and you do not specify any <code>partitionKeys</code>, you must at least set the value of <code>partitionKeys</code> to an empty list. For example:</p> <p> <code>\"PartitionKeys\": []</code> </p>"
         },
         "ViewOriginalText": {
           "shape": "ViewTextString",
@@ -8881,7 +10171,11 @@
         },
         "CreatedBy": {
           "shape": "NameString",
-          "documentation": "<p>Person or entity who created the table.</p>"
+          "documentation": "<p>The person or entity who created the table.</p>"
+        },
+        "IsRegisteredWithLakeFormation": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the table has been registered with AWS Lake Formation.</p>"
         }
       },
       "documentation": "<p>Represents a collection of related data organized in columns and rows.</p>"
@@ -8891,11 +10185,11 @@
       "members": {
         "TableName": {
           "shape": "NameString",
-          "documentation": "<p>Name of the table. For Hive compatibility, this must be entirely lowercase.</p>"
+          "documentation": "<p>The name of the table. For Hive compatibility, this must be entirely lowercase.</p>"
         },
         "ErrorDetail": {
           "shape": "ErrorDetail",
-          "documentation": "<p>Detail about the error.</p>"
+          "documentation": "<p>The details about the error.</p>"
         }
       },
       "documentation": "<p>An error record for table operations.</p>"
@@ -8914,27 +10208,27 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
+          "documentation": "<p>The table name. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
         },
         "Description": {
           "shape": "DescriptionString",
-          "documentation": "<p>Description of the table.</p>"
+          "documentation": "<p>A description of the table.</p>"
         },
         "Owner": {
           "shape": "NameString",
-          "documentation": "<p>Owner of the table.</p>"
+          "documentation": "<p>The table owner.</p>"
         },
         "LastAccessTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Last time the table was accessed.</p>"
+          "documentation": "<p>The last time that the table was accessed.</p>"
         },
         "LastAnalyzedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Last time column statistics were computed for this table.</p>"
+          "documentation": "<p>The last time that column statistics were computed for this table.</p>"
         },
         "Retention": {
           "shape": "NonNegativeInteger",
-          "documentation": "<p>Retention time for this table.</p>"
+          "documentation": "<p>The retention time for this table.</p>"
         },
         "StorageDescriptor": {
           "shape": "StorageDescriptor",
@@ -8942,7 +10236,7 @@
         },
         "PartitionKeys": {
           "shape": "ColumnList",
-          "documentation": "<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p> <p>When creating a table used by Athena, and you do not specify any <code>partitionKeys</code>, you must at least set the value of <code>partitionKeys</code> to an empty list. For example:</p> <p> <code>\"PartitionKeys\": []</code> </p>"
+          "documentation": "<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p> <p>When you create a table used by Amazon Athena, and you do not specify any <code>partitionKeys</code>, you must at least set the value of <code>partitionKeys</code> to an empty list. For example:</p> <p> <code>\"PartitionKeys\": []</code> </p>"
         },
         "ViewOriginalText": {
           "shape": "ViewTextString",
@@ -8961,7 +10255,7 @@
           "documentation": "<p>These key-value pairs define properties associated with the table.</p>"
         }
       },
-      "documentation": "<p>Structure used to create or update the table.</p>"
+      "documentation": "<p>A structure used to define a table.</p>"
     },
     "TableList": {
       "type": "list",
@@ -8986,7 +10280,7 @@
       "members": {
         "Table": {
           "shape": "Table",
-          "documentation": "<p>The table in question</p>"
+          "documentation": "<p>The table in question.</p>"
         },
         "VersionId": {
           "shape": "VersionString",
@@ -9008,7 +10302,7 @@
         },
         "ErrorDetail": {
           "shape": "ErrorDetail",
-          "documentation": "<p>Detail about the error.</p>"
+          "documentation": "<p>The details about the error.</p>"
         }
       },
       "documentation": "<p>An error record for table-version operations.</p>"
@@ -9069,6 +10363,154 @@
       "max": 50,
       "min": 0
     },
+    "TaskRun": {
+      "type": "structure",
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier for the transform.</p>"
+        },
+        "TaskRunId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier for this task run.</p>"
+        },
+        "Status": {
+          "shape": "TaskStatusType",
+          "documentation": "<p>The current status of the requested task run.</p>"
+        },
+        "LogGroupName": {
+          "shape": "GenericString",
+          "documentation": "<p>The names of the log group for secure logging, associated with this task run.</p>"
+        },
+        "Properties": {
+          "shape": "TaskRunProperties",
+          "documentation": "<p>Specifies configuration properties associated with this task run.</p>"
+        },
+        "ErrorString": {
+          "shape": "GenericString",
+          "documentation": "<p>The list of error strings associated with this task run.</p>"
+        },
+        "StartedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that this task run started.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last point in time that the requested task run was updated.</p>"
+        },
+        "CompletedOn": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last point in time that the requested task run was completed.</p>"
+        },
+        "ExecutionTime": {
+          "shape": "ExecutionTime",
+          "documentation": "<p>The amount of time (in seconds) that the task run consumed resources.</p>"
+        }
+      },
+      "documentation": "<p>The sampling parameters that are associated with the machine learning transform.</p>"
+    },
+    "TaskRunFilterCriteria": {
+      "type": "structure",
+      "members": {
+        "TaskRunType": {
+          "shape": "TaskType",
+          "documentation": "<p>The type of task run.</p>"
+        },
+        "Status": {
+          "shape": "TaskStatusType",
+          "documentation": "<p>The current status of the task run.</p>"
+        },
+        "StartedBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>Filter on task runs started before this date.</p>"
+        },
+        "StartedAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>Filter on task runs started after this date.</p>"
+        }
+      },
+      "documentation": "<p>The criteria that are used to filter the task runs for the machine learning transform.</p>"
+    },
+    "TaskRunList": {
+      "type": "list",
+      "member": {
+        "shape": "TaskRun"
+      }
+    },
+    "TaskRunProperties": {
+      "type": "structure",
+      "members": {
+        "TaskType": {
+          "shape": "TaskType",
+          "documentation": "<p>The type of task run.</p>"
+        },
+        "ImportLabelsTaskRunProperties": {
+          "shape": "ImportLabelsTaskRunProperties",
+          "documentation": "<p>The configuration properties for an importing labels task run.</p>"
+        },
+        "ExportLabelsTaskRunProperties": {
+          "shape": "ExportLabelsTaskRunProperties",
+          "documentation": "<p>The configuration properties for an exporting labels task run.</p>"
+        },
+        "LabelingSetGenerationTaskRunProperties": {
+          "shape": "LabelingSetGenerationTaskRunProperties",
+          "documentation": "<p>The configuration properties for a labeling set generation task run.</p>"
+        },
+        "FindMatchesTaskRunProperties": {
+          "shape": "FindMatchesTaskRunProperties",
+          "documentation": "<p>The configuration properties for a find matches task run.</p>"
+        }
+      },
+      "documentation": "<p>The configuration properties for the task run.</p>"
+    },
+    "TaskRunSortColumnType": {
+      "type": "string",
+      "enum": [
+        "TASK_RUN_TYPE",
+        "STATUS",
+        "STARTED"
+      ]
+    },
+    "TaskRunSortCriteria": {
+      "type": "structure",
+      "required": [
+        "Column",
+        "SortDirection"
+      ],
+      "members": {
+        "Column": {
+          "shape": "TaskRunSortColumnType",
+          "documentation": "<p>The column to be used to sort the list of task runs for the machine learning transform.</p>"
+        },
+        "SortDirection": {
+          "shape": "SortDirectionType",
+          "documentation": "<p>The sort direction to be used to sort the list of task runs for the machine learning transform.</p>"
+        }
+      },
+      "documentation": "<p>The sorting criteria that are used to sort the list of task runs for the machine learning transform.</p>"
+    },
+    "TaskStatusType": {
+      "type": "string",
+      "enum": [
+        "STARTING",
+        "RUNNING",
+        "STOPPING",
+        "STOPPED",
+        "SUCCEEDED",
+        "FAILED",
+        "TIMEOUT"
+      ]
+    },
+    "TaskType": {
+      "type": "string",
+      "enum": [
+        "EVALUATION",
+        "LABELING_SET_GENERATION",
+        "IMPORT_LABELS",
+        "EXPORT_LABELS",
+        "FIND_MATCHES"
+      ]
+    },
     "Timeout": {
       "type": "integer",
       "box": true,
@@ -9087,6 +10529,116 @@
       "type": "integer",
       "max": 10,
       "min": 1
+    },
+    "TransformFilterCriteria": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>A unique transform name that is used to filter the machine learning transforms.</p>"
+        },
+        "TransformType": {
+          "shape": "TransformType",
+          "documentation": "<p>The type of machine learning transform that is used to filter the machine learning transforms.</p>"
+        },
+        "Status": {
+          "shape": "TransformStatusType",
+          "documentation": "<p>Filters the list of machine learning transforms by the last known status of the transforms (to indicate whether a transform can be used or not). One of \"NOT_READY\", \"READY\", or \"DELETING\".</p>"
+        },
+        "CreatedBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time and date before which the transforms were created.</p>"
+        },
+        "CreatedAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time and date after which the transforms were created.</p>"
+        },
+        "LastModifiedBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>Filter on transforms last modified before this date.</p>"
+        },
+        "LastModifiedAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>Filter on transforms last modified after this date.</p>"
+        },
+        "Schema": {
+          "shape": "TransformSchema",
+          "documentation": "<p>Filters on datasets with a specific schema. The <code>Map&lt;Column, Type&gt;</code> object is an array of key-value pairs representing the schema this transform accepts, where <code>Column</code> is the name of a column, and <code>Type</code> is the type of the data such as an integer or string. Has an upper bound of 100 columns.</p>"
+        }
+      },
+      "documentation": "<p>The criteria used to filter the machine learning transforms.</p>"
+    },
+    "TransformList": {
+      "type": "list",
+      "member": {
+        "shape": "MLTransform"
+      }
+    },
+    "TransformParameters": {
+      "type": "structure",
+      "required": [
+        "TransformType"
+      ],
+      "members": {
+        "TransformType": {
+          "shape": "TransformType",
+          "documentation": "<p>The type of machine learning transform.</p> <p>For information about the types of machine learning transforms, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html\">Creating Machine Learning Transforms</a>.</p>"
+        },
+        "FindMatchesParameters": {
+          "shape": "FindMatchesParameters",
+          "documentation": "<p>The parameters for the find matches algorithm.</p>"
+        }
+      },
+      "documentation": "<p>The algorithm-specific parameters that are associated with the machine learning transform.</p>"
+    },
+    "TransformSchema": {
+      "type": "list",
+      "member": {
+        "shape": "SchemaColumn"
+      },
+      "max": 100
+    },
+    "TransformSortColumnType": {
+      "type": "string",
+      "enum": [
+        "NAME",
+        "TRANSFORM_TYPE",
+        "STATUS",
+        "CREATED",
+        "LAST_MODIFIED"
+      ]
+    },
+    "TransformSortCriteria": {
+      "type": "structure",
+      "required": [
+        "Column",
+        "SortDirection"
+      ],
+      "members": {
+        "Column": {
+          "shape": "TransformSortColumnType",
+          "documentation": "<p>The column to be used in the sorting criteria that are associated with the machine learning transform.</p>"
+        },
+        "SortDirection": {
+          "shape": "SortDirectionType",
+          "documentation": "<p>The sort direction to be used in the sorting criteria that are associated with the machine learning transform.</p>"
+        }
+      },
+      "documentation": "<p>The sorting criteria that are associated with the machine learning transform.</p>"
+    },
+    "TransformStatusType": {
+      "type": "string",
+      "enum": [
+        "NOT_READY",
+        "READY",
+        "DELETING"
+      ]
+    },
+    "TransformType": {
+      "type": "string",
+      "enum": [
+        "FIND_MATCHES"
+      ]
     },
     "Trigger": {
       "type": "structure",
@@ -9405,7 +10957,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which the metadata database resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which the metadata database resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "Name": {
           "shape": "NameString",
@@ -9533,6 +11085,63 @@
       },
       "documentation": "<p>Specifies a JSON classifier to be updated.</p>"
     },
+    "UpdateMLTransformRequest": {
+      "type": "structure",
+      "required": [
+        "TransformId"
+      ],
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>A unique identifier that was generated when the transform was created.</p>"
+        },
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The unique name that you gave the transform when you created it.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>A description of the transform. The default is an empty string.</p>"
+        },
+        "Parameters": {
+          "shape": "TransformParameters",
+          "documentation": "<p>The configuration parameters that are specific to the transform type (algorithm) used. Conditionally dependent on the transform type.</p>"
+        },
+        "Role": {
+          "shape": "RoleString",
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions.</p>"
+        },
+        "MaxCapacity": {
+          "shape": "NullableDouble",
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>. </p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
+        },
+        "WorkerType": {
+          "shape": "WorkerType",
+          "documentation": "<p>The type of predefined worker that is allocated when this task runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when this task runs.</p>"
+        },
+        "Timeout": {
+          "shape": "Timeout",
+          "documentation": "<p>The timeout for a task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>"
+        },
+        "MaxRetries": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The maximum number of times to retry a task for this transform after a task run fails.</p>"
+        }
+      }
+    },
+    "UpdateMLTransformResponse": {
+      "type": "structure",
+      "members": {
+        "TransformId": {
+          "shape": "HashString",
+          "documentation": "<p>The unique identifier for the transform that was updated.</p>"
+        }
+      }
+    },
     "UpdatePartitionRequest": {
       "type": "structure",
       "required": [
@@ -9544,7 +11153,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the partition to be updated resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the partition to be updated resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -9552,7 +11161,7 @@
         },
         "TableName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the table where the partition to be updated is located.</p>"
+          "documentation": "<p>The name of the table in which the partition to be updated is located.</p>"
         },
         "PartitionValueList": {
           "shape": "BoundedPartitionValueList",
@@ -9560,7 +11169,7 @@
         },
         "PartitionInput": {
           "shape": "PartitionInput",
-          "documentation": "<p>The new partition object to which to update the partition.</p>"
+          "documentation": "<p>The new partition object to update the partition to.</p>"
         }
       }
     },
@@ -9577,7 +11186,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -9589,7 +11198,7 @@
         },
         "SkipArchive": {
           "shape": "BooleanNullable",
-          "documentation": "<p>By default, <code>UpdateTable</code> always creates an archived version of the table before updating it. If <code>skipArchive</code> is set to true, however, <code>UpdateTable</code> does not create the archived version.</p>"
+          "documentation": "<p>By default, <code>UpdateTable</code> always creates an archived version of the table before updating it. However, if <code>skipArchive</code> is set to true, <code>UpdateTable</code> does not create the archived version.</p>"
         }
       }
     },
@@ -9633,7 +11242,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog where the function to be updated is located. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog where the function to be updated is located. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DatabaseName": {
           "shape": "NameString",
@@ -9645,7 +11254,7 @@
         },
         "FunctionInput": {
           "shape": "UserDefinedFunctionInput",
-          "documentation": "<p>A <code>FunctionInput</code> object that re-defines the function in the Data Catalog.</p>"
+          "documentation": "<p>A <code>FunctionInput</code> object that redefines the function in the Data Catalog.</p>"
         }
       }
     },
@@ -9760,7 +11369,7 @@
           "documentation": "<p>The resource URIs for the function.</p>"
         }
       },
-      "documentation": "<p>A structure used to create or updata a user-defined function.</p>"
+      "documentation": "<p>A structure used to create or update a user-defined function.</p>"
     },
     "UserDefinedFunctionList": {
       "type": "list",

@@ -185,5 +185,6 @@ module.exports = {
   ApplicationInsights: require('./applicationinsights'),
   ServiceQuotas: require('./servicequotas'),
   EC2InstanceConnect: require('./ec2instanceconnect'),
-  EventBridge: require('./eventbridge')
+  EventBridge: require('./eventbridge'),
+  LakeFormation: require('./lakeformation')
 };

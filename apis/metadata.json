@@ -743,5 +743,8 @@
   },
   "eventbridge": {
     "name": "EventBridge"
+  },
+  "lakeformation": {
+    "name": "LakeFormation"
   }
 }
