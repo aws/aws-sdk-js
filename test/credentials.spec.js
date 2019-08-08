@@ -1609,6 +1609,12 @@
         });
         expect(creds).to.have.property('tokenCodeFn', null);
       });
+      it('should forward enpoint param to sts client', function() {
+        var creds = new AWS.ChainableTemporaryCredentials({
+          stsConfig: { endpoint: 'https://testendpoint' }
+        });
+        expect(creds.service.endpoint.hostname).to.equal('testendpoint');
+      });
     });
     describe('masterCredentials', function() {
       var origCreds, origProvider;
