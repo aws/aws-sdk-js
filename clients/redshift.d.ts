@@ -429,7 +429,7 @@ declare class Redshift extends Service {
    */
   describeSnapshotSchedules(callback?: (err: AWSError, data: Redshift.Types.DescribeSnapshotSchedulesOutputMessage) => void): Request<Redshift.Types.DescribeSnapshotSchedulesOutputMessage, AWSError>;
   /**
-   * Returns the total amount of snapshot usage and provisioned storage for a user in megabytes.
+   * Returns the total amount of snapshot usage and provisioned storage in megabytes.
    */
   describeStorage(callback?: (err: AWSError, data: Redshift.Types.CustomerStorageMessage) => void): Request<Redshift.Types.CustomerStorageMessage, AWSError>;
   /**
@@ -1011,6 +1011,14 @@ declare namespace Redshift {
      * The current state of the cluster snapshot schedule.
      */
     SnapshotScheduleState?: ScheduleState;
+    /**
+     * The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot schedule and backups enabled. 
+     */
+    ExpectedNextSnapshotScheduleTime?: TStamp;
+    /**
+     *  The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible values are the following:   OnTrack - The next snapshot is expected to be taken on time.    Pending - The next snapshot is pending to be taken.   
+     */
+    ExpectedNextSnapshotScheduleTimeStatus?: String;
     /**
      * Returns the following:   AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.   ResizeType: Returns ClassicResize  
      */
@@ -3292,7 +3300,7 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The new node type for the nodes you are adding.
+     * The new node type for the nodes you are adding. If not specified, the cluster's current node type is used.
      */
     NodeType?: String;
     /**

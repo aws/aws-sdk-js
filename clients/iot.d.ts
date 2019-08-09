@@ -1733,7 +1733,7 @@ declare namespace Iot {
      */
     attributes?: Attributes;
     /**
-     * Specifies whether the list of attributes provided in the AttributePayload is merged with the attributes stored in the registry, instead of overwriting them. To remove an attribute, call UpdateThing with an empty attribute value.  The merge attribute is only valid when calling UpdateThing. 
+     * Specifies whether the list of attributes provided in the AttributePayload is merged with the attributes stored in the registry, instead of overwriting them. To remove an attribute, call UpdateThing with an empty attribute value.  The merge attribute is only valid when calling UpdateThing or UpdateThingGroup. 
      */
     merge?: Flag;
   }
@@ -4720,7 +4720,7 @@ declare namespace Iot {
   }
   export interface ListAttachedPoliciesRequest {
     /**
-     * The group for which the policies will be listed.
+     * The group or principal for which the policies will be listed.
      */
     target: PolicyTarget;
     /**
@@ -6184,6 +6184,7 @@ declare namespace Iot {
      */
     tableName: TableName;
   }
+  export type Qos = number;
   export type QueryMaxResults = number;
   export type QueryString = string;
   export type QueryVersion = string;
@@ -6396,6 +6397,10 @@ declare namespace Iot {
      * The name of the MQTT topic.
      */
     topic: TopicPattern;
+    /**
+     * The Quality of Service (QoS) level to use when republishing messages.
+     */
+    qos?: Qos;
   }
   export type Resource = string;
   export type ResourceArn = string;

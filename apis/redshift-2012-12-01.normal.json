@@ -1346,7 +1346,7 @@
         "shape": "CustomerStorageMessage",
         "resultWrapper": "DescribeStorageResult"
       },
-      "documentation": "<p>Returns the total amount of snapshot usage and provisioned storage for a user in megabytes.</p>"
+      "documentation": "<p>Returns the total amount of snapshot usage and provisioned storage in megabytes.</p>"
     },
     "DescribeTableRestoreStatus": {
       "name": "DescribeTableRestoreStatus",
@@ -2716,6 +2716,14 @@
         "SnapshotScheduleState": {
           "shape": "ScheduleState",
           "documentation": "<p>The current state of the cluster snapshot schedule.</p>"
+        },
+        "ExpectedNextSnapshotScheduleTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot schedule and backups enabled. </p>"
+        },
+        "ExpectedNextSnapshotScheduleTimeStatus": {
+          "shape": "String",
+          "documentation": "<p> The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible values are the following:</p> <ul> <li> <p>OnTrack - The next snapshot is expected to be taken on time. </p> </li> <li> <p>Pending - The next snapshot is pending to be taken. </p> </li> </ul>"
         },
         "ResizeInfo": {
           "shape": "ResizeInfo",
@@ -6011,7 +6019,7 @@
         },
         "NodeType": {
           "shape": "String",
-          "documentation": "<p>The new node type for the nodes you are adding.</p>"
+          "documentation": "<p>The new node type for the nodes you are adding. If not specified, the cluster's current node type is used.</p>"
         },
         "NumberOfNodes": {
           "shape": "Integer",

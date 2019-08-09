@@ -1453,7 +1453,7 @@
         "StreamName": {
           "shape": "__stringPatternWS",
           "locationName": "streamName",
-          "documentation": "Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary). Alphanumeric characters, spaces, and underscore are legal."
+          "documentation": "Specify a label for this output audio stream. For example, \"English\", \"Director commentary\", or \"track_2\". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting."
         }
       },
       "documentation": "Description of audio output"
@@ -1550,7 +1550,7 @@
           "documentation": "Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can't find the specified input audio. If you don't set a default, those outputs have no audio."
         },
         "ExternalAudioFileInput": {
-          "shape": "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+          "shape": "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
           "locationName": "externalAudioFileInput",
           "documentation": "Specifies audio data from an external file source."
         },
@@ -1833,7 +1833,7 @@
         "LanguageDescription": {
           "shape": "__string",
           "locationName": "languageDescription",
-          "documentation": "Human readable information to indicate captions available for players (eg. English, or Spanish). Alphanumeric characters, spaces, and underscore are legal."
+          "documentation": "Specify a label for this set of output captions. For example, \"English\", \"Director commentary\", or \"track_2\". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting."
         }
       },
       "documentation": "Description of Caption output"
@@ -1859,7 +1859,7 @@
         "LanguageDescription": {
           "shape": "__string",
           "locationName": "languageDescription",
-          "documentation": "Human readable information to indicate captions available for players (eg. English, or Spanish). Alphanumeric characters, spaces, and underscore are legal."
+          "documentation": "Specify a label for this set of output captions. For example, \"English\", \"Director commentary\", or \"track_2\". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting."
         }
       },
       "documentation": "Caption Description for preset"
@@ -2040,12 +2040,17 @@
         "EncryptionMethod": {
           "shape": "CmafEncryptionType",
           "locationName": "encryptionMethod",
-          "documentation": "Encrypts the segments with the given encryption scheme. Leave blank to disable. Selecting 'Disabled' in the web interface also disables encryption."
+          "documentation": "For DRM with CMAF, the encryption type is always sample AES."
         },
         "InitializationVectorInManifest": {
           "shape": "CmafInitializationVectorInManifest",
           "locationName": "initializationVectorInManifest",
-          "documentation": "The Initialization Vector is a 128-bit number used in conjunction with the key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed in the manifest. Otherwise Initialization Vector is not in the manifest."
+          "documentation": "When you use DRM with CMAF outputs, choose whether the service writes the 128-bit encryption initialization vector in the HLS and DASH manifests."
+        },
+        "SpekeKeyProvider": {
+          "shape": "SpekeKeyProviderCmaf",
+          "locationName": "spekeKeyProvider",
+          "documentation": "Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is CMAF. If your output group type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider settings instead."
         },
         "StaticKeyProvider": {
           "shape": "StaticKeyProvider",
@@ -2055,14 +2060,14 @@
         "Type": {
           "shape": "CmafKeyProviderType",
           "locationName": "type",
-          "documentation": "Indicates which type of key provider is used for encryption."
+          "documentation": "Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html."
         }
       },
       "documentation": "Settings for CMAF encryption"
     },
     "CmafEncryptionType": {
       "type": "string",
-      "documentation": "Encrypts the segments with the given encryption scheme. Leave blank to disable. Selecting 'Disabled' in the web interface also disables encryption.",
+      "documentation": "For DRM with CMAF, the encryption type is always sample AES.",
       "enum": [
         "SAMPLE_AES"
       ]
@@ -2155,7 +2160,7 @@
     },
     "CmafInitializationVectorInManifest": {
       "type": "string",
-      "documentation": "The Initialization Vector is a 128-bit number used in conjunction with the key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed in the manifest. Otherwise Initialization Vector is not in the manifest.",
+      "documentation": "When you use DRM with CMAF outputs, choose whether the service writes the 128-bit encryption initialization vector in the HLS and DASH manifests.",
       "enum": [
         "INCLUDE",
         "EXCLUDE"
@@ -2163,8 +2168,9 @@
     },
     "CmafKeyProviderType": {
       "type": "string",
-      "documentation": "Indicates which type of key provider is used for encryption.",
+      "documentation": "Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.",
       "enum": [
+        "SPEKE",
         "STATIC_KEY"
       ]
     },
@@ -2227,7 +2233,7 @@
         "ColorSpaceConversion": {
           "shape": "ColorSpaceConversion",
           "locationName": "colorSpaceConversion",
-          "documentation": "Determines if colorspace conversion will be performed. If set to _None_, no conversion will be performed. If _Force 601_ or _Force 709_ are selected, conversion will be performed for inputs with differing colorspaces. An input's colorspace can be specified explicitly in the \"Video Selector\":#inputs-video_selector if necessary."
+          "documentation": "Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, and from SDR to HDR. The service doesn't support conversion from HDR to SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output."
         },
         "Contrast": {
           "shape": "__integerMin1Max100",
@@ -2237,7 +2243,7 @@
         "Hdr10Metadata": {
           "shape": "Hdr10Metadata",
           "locationName": "hdr10Metadata",
-          "documentation": "Use the HDR master display (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. Note that these settings are not color correction."
+          "documentation": "Use these settings when you convert to the HDR 10 color space. Specify the SMPTE ST 2086 Mastering Display Color Volume static metadata that you want signaled in the output. These values don't affect the pixel values that are encoded in the video stream. They are intended to help the downstream video player display content in a way that reflects the intentions of the the content creator. When you set Color space conversion (ColorSpaceConversion) to HDR 10 (FORCE_HDR10), these settings are required. You must set values for Max frame average light level (maxFrameAverageLightLevel) and Max content light level (maxContentLightLevel); these settings don't have a default value. The default values for the other HDR 10 metadata settings are defined by the P3D65 color space. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr."
         },
         "Hue": {
           "shape": "__integerMinNegative180Max180",
@@ -2254,7 +2260,7 @@
     },
     "ColorMetadata": {
       "type": "string",
-      "documentation": "Enable Insert color metadata (ColorMetadata) to include color metadata in this output. This setting is enabled by default.",
+      "documentation": "Choose Insert (INSERT) for this setting to include color metadata in this output. Choose Ignore (IGNORE) to exclude color metadata from this output. If you don't specify a value, the service sets this to Insert by default.",
       "enum": [
         "IGNORE",
         "INSERT"
@@ -2262,7 +2268,7 @@
     },
     "ColorSpace": {
       "type": "string",
-      "documentation": "If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value FOLLOW. The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, or if your input video is missing color space metadata that should be there, specify the accurate color space here. If you choose HDR10, you can also correct inaccurate color space coefficients, using the HDR master display information controls. You must also set Color space usage (ColorSpaceUsage) to FORCE for the service to use these values.",
+      "documentation": "If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value Follow (FOLLOW). The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 (FORCE_HDR10) here and specify correct values in the input HDR 10 metadata (Hdr10Metadata) settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.",
       "enum": [
         "FOLLOW",
         "REC_601",
@@ -2273,7 +2279,7 @@
     },
     "ColorSpaceConversion": {
       "type": "string",
-      "documentation": "Determines if colorspace conversion will be performed. If set to _None_, no conversion will be performed. If _Force 601_ or _Force 709_ are selected, conversion will be performed for inputs with differing colorspaces. An input's colorspace can be specified explicitly in the \"Video Selector\":#inputs-video_selector if necessary.",
+      "documentation": "Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, and from SDR to HDR. The service doesn't support conversion from HDR to SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output.",
       "enum": [
         "NONE",
         "FORCE_601",
@@ -2284,7 +2290,7 @@
     },
     "ColorSpaceUsage": {
       "type": "string",
-      "documentation": "There are two sources for color metadata, the input file and the job configuration (in the Color space and HDR master display informaiton settings). The Color space usage setting controls which takes precedence. FORCE: The system will use color metadata supplied by user, if any. If the user does not supply color metadata, the system will use data from the source. FALLBACK: The system will use color metadata from the source. If source has no color metadata, the system will use user-supplied color metadata values if available.",
+      "documentation": "There are two sources for color metadata, the input file and the job input settings Color space (ColorSpace) and HDR master display information settings(Hdr10Metadata). The Color space usage setting determines which takes precedence. Choose Force (FORCE) to use color metadata from the input job settings. If you don't specify values for those settings, the service defaults to using metadata from your input. FALLBACK - Choose Fallback (FALLBACK) to use color metadata from the source when it is present. If there's no color metadata in your input file, the service defaults to using values you specify in the input settings.",
       "enum": [
         "FORCE",
         "FALLBACK"
@@ -2550,6 +2556,11 @@
           "locationName": "reservationPlanSettings",
           "documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues."
         },
+        "Status": {
+          "shape": "QueueStatus",
+          "locationName": "status",
+          "documentation": "Initial state of the queue. If you create a paused queue, then jobs in that queue won't begin."
+        },
         "Tags": {
           "shape": "__mapOf__string",
           "locationName": "tags",
@@ -2581,7 +2592,7 @@
         "SpekeKeyProvider": {
           "shape": "SpekeKeyProvider",
           "locationName": "spekeKeyProvider",
-          "documentation": "Settings for use with a SPEKE key provider"
+          "documentation": "Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead."
         }
       },
       "documentation": "Specifies DRM settings for DASH outputs."
@@ -3494,12 +3505,12 @@
         "Destination608ChannelNumber": {
           "shape": "__integerMin1Max4",
           "locationName": "destination608ChannelNumber",
-          "documentation": "Ignore this setting unless your input captions are SCC format. With SCC inputs, you can optionally use this setting to replace the input channel number with the channel number that you specify. Specify a different number for each output captions track for a particular output. If you don't specify an output channel number, the system uses the input channel number for the output channel number. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3."
+          "documentation": "Ignore this setting unless your input captions are SCC format and your output captions are embedded in the video stream. Specify a CC number for each captions channel in this output. If you have two channels, pick CC numbers that aren't in the same field. For example, choose 1 and 3. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded."
         },
         "Destination708ServiceNumber": {
           "shape": "__integerMin1Max6",
           "locationName": "destination708ServiceNumber",
-          "documentation": "Ignore this setting unless your input captions are SCC format and you are performing SCC upconvert. With SCC inputs, you can optionally use this setting to specify the 708 service number that is in the output. Specify a different service number for each output captions track for a particular output. If you don't specify an output track number, the system uses the 608 channel number for the output 708 service number. You can combine two captions channels in your output. Service numbers must be distinct."
+          "documentation": "Ignore this setting unless your input captions are SCC format and you want both 608 and 708 captions embedded in your output stream. Optionally, specify the 708 service number for each output captions channel. Choose a different number for each channel. To use this setting, also set Force 608 to 708 upconvert (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector settings. If you choose to upconvert but don't specify a 708 service number, MediaConvert uses the number you specify for CC channel number (destination608ChannelNumber) for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded."
         }
       },
       "documentation": "Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number."
@@ -3948,10 +3959,11 @@
     },
     "H264SceneChangeDetect": {
       "type": "string",
-      "documentation": "Scene change detection (inserts I-frames on scene changes).",
+      "documentation": "Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.",
       "enum": [
         "DISABLED",
-        "ENABLED"
+        "ENABLED",
+        "TRANSITION_DETECTION"
       ]
     },
     "H264Settings": {
@@ -4110,7 +4122,7 @@
         "SceneChangeDetect": {
           "shape": "H264SceneChangeDetect",
           "locationName": "sceneChangeDetect",
-          "documentation": "Scene change detection (inserts I-frames on scene changes)."
+          "documentation": "Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr."
         },
         "Slices": {
           "shape": "__integerMin1Max32",
@@ -4308,7 +4320,7 @@
     },
     "H265InterlaceMode": {
       "type": "string",
-      "documentation": "Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.\n  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of \"top field first\" and \"bottom field first\".\n  - If the source is progressive, the output will be interlaced with \"top field first\" or \"bottom field first\" polarity, depending on which of the Follow options you chose.",
+      "documentation": "Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of \"top field first\" and \"bottom field first\". If the source is progressive, your output will be interlaced with \"top field first\" or \"bottom field first\" polarity, depending on which of the Follow options you chose. If you don't choose a value, the service will default to Progressive (PROGRESSIVE).",
       "enum": [
         "PROGRESSIVE",
         "TOP_FIELD",
@@ -4370,10 +4382,11 @@
     },
     "H265SceneChangeDetect": {
       "type": "string",
-      "documentation": "Scene change detection (inserts I-frames on scene changes).",
+      "documentation": "Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.",
       "enum": [
         "DISABLED",
-        "ENABLED"
+        "ENABLED",
+        "TRANSITION_DETECTION"
       ]
     },
     "H265Settings": {
@@ -4467,7 +4480,7 @@
         "InterlaceMode": {
           "shape": "H265InterlaceMode",
           "locationName": "interlaceMode",
-          "documentation": "Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.\n  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of \"top field first\" and \"bottom field first\".\n  - If the source is progressive, the output will be interlaced with \"top field first\" or \"bottom field first\" polarity, depending on which of the Follow options you chose."
+          "documentation": "Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Choose Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of \"top field first\" and \"bottom field first\". If the source is progressive, your output will be interlaced with \"top field first\" or \"bottom field first\" polarity, depending on which of the Follow options you chose. If you don't choose a value, the service will default to Progressive (PROGRESSIVE)."
         },
         "MaxBitrate": {
           "shape": "__integerMin1000Max1466400000",
@@ -4527,7 +4540,7 @@
         "SceneChangeDetect": {
           "shape": "H265SceneChangeDetect",
           "locationName": "sceneChangeDetect",
-          "documentation": "Scene change detection (inserts I-frames on scene changes)."
+          "documentation": "Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr."
         },
         "Slices": {
           "shape": "__integerMin1Max32",
@@ -4668,12 +4681,12 @@
         "MaxContentLightLevel": {
           "shape": "__integerMin0Max65535",
           "locationName": "maxContentLightLevel",
-          "documentation": "Maximum light level among all samples in the coded video sequence, in units of candelas per square meter."
+          "documentation": "Maximum light level among all samples in the coded video sequence, in units of candelas per square meter.  This setting doesn't have a default value; you must specify a value that is suitable for the content."
         },
         "MaxFrameAverageLightLevel": {
           "shape": "__integerMin0Max65535",
           "locationName": "maxFrameAverageLightLevel",
-          "documentation": "Maximum average light level of any frame in the coded video sequence, in units of candelas per square meter."
+          "documentation": "Maximum average light level of any frame in the coded video sequence, in units of candelas per square meter. This setting doesn't have a default value; you must specify a value that is suitable for the content."
         },
         "MaxLuminance": {
           "shape": "__integerMin0Max2147483647",
@@ -4706,7 +4719,7 @@
           "documentation": "HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction."
         }
       },
-      "documentation": "Use the \"HDR master display information\" (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. These values vary depending on the input video and must be provided by a color grader. Range is 0 to 50,000; each increment represents 0.00002 in CIE1931 color coordinate. Note that these settings are not color correction. Note that if you are creating HDR outputs inside of an HLS CMAF package, to comply with the Apple specification, you must use the following settings. Set \"MP4 packaging type\" (writeMp4PackagingType) to HVC1 (HVC1). Set \"Profile\" (H265Settings > codecProfile) to Main10/High (MAIN10_HIGH). Set \"Level\" (H265Settings > codecLevel) to 5 (LEVEL_5)."
+      "documentation": "Use these settings to specify static color calibration metadata, as defined by SMPTE ST 2086. These values don't affect the pixel values that are encoded in the video stream. They are intended to help the downstream video player display content in a way that reflects the intentions of the the content creator."
     },
     "HlsAdMarkers": {
       "type": "string",
@@ -4818,7 +4831,7 @@
         "SpekeKeyProvider": {
           "shape": "SpekeKeyProvider",
           "locationName": "spekeKeyProvider",
-          "documentation": "Settings for use with a SPEKE key provider"
+          "documentation": "Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead."
         },
         "StaticKeyProvider": {
           "shape": "StaticKeyProvider",
@@ -4828,7 +4841,7 @@
         "Type": {
           "shape": "HlsKeyProviderType",
           "locationName": "type",
-          "documentation": "Indicates which type of key provider is used for encryption."
+          "documentation": "Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html."
         }
       },
       "documentation": "Settings for HLS encryption"
@@ -4985,7 +4998,7 @@
     },
     "HlsKeyProviderType": {
       "type": "string",
-      "documentation": "Indicates which type of key provider is used for encryption.",
+      "documentation": "Specify whether your DRM encryption key is static or from a key provider that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.",
       "enum": [
         "SPEKE",
         "STATIC_KEY"
@@ -5158,7 +5171,7 @@
           "documentation": "Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs."
         },
         "FileInput": {
-          "shape": "__stringPatternHttpHttpsS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+          "shape": "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
           "locationName": "fileInput",
           "documentation": "Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, \"s3://bucket/vf/cpl.xml\". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* (SupplementalImps) to specify any supplemental IMPs that contain assets referenced by the CPL."
         },
@@ -6920,7 +6933,7 @@
     },
     "Mpeg2SceneChangeDetect": {
       "type": "string",
-      "documentation": "Scene change detection (inserts I-frames on scene changes).",
+      "documentation": "Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default.",
       "enum": [
         "DISABLED",
         "ENABLED"
@@ -7052,7 +7065,7 @@
         "SceneChangeDetect": {
           "shape": "Mpeg2SceneChangeDetect",
           "locationName": "sceneChangeDetect",
-          "documentation": "Scene change detection (inserts I-frames on scene changes)."
+          "documentation": "Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default."
         },
         "SlowPal": {
           "shape": "Mpeg2SlowPal",
@@ -7142,7 +7155,7 @@
         "SpekeKeyProvider": {
           "shape": "SpekeKeyProvider",
           "locationName": "spekeKeyProvider",
-          "documentation": "Settings for use with a SPEKE key provider"
+          "documentation": "Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead."
         }
       },
       "documentation": "If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the value SpekeKeyProvider."
@@ -7213,7 +7226,7 @@
         "Filter": {
           "shape": "NoiseReducerFilter",
           "locationName": "filter",
-          "documentation": "Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral is an edge preserving noise reduction filter. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) are convolution filters. * Conserve is a min/max noise reduction filter. * Spatial is a frequency-domain filter based on JND principles."
+          "documentation": "Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion."
         },
         "FilterSettings": {
           "shape": "NoiseReducerFilterSettings",
@@ -7224,13 +7237,18 @@
           "shape": "NoiseReducerSpatialFilterSettings",
           "locationName": "spatialFilterSettings",
           "documentation": "Noise reducer filter settings for spatial filter."
+        },
+        "TemporalFilterSettings": {
+          "shape": "NoiseReducerTemporalFilterSettings",
+          "locationName": "temporalFilterSettings",
+          "documentation": "Noise reducer filter settings for temporal filter."
         }
       },
       "documentation": "Enable the Noise reducer (NoiseReducer) feature to remove noise from your video output if necessary. Enable or disable this feature for each output individually. This setting is disabled by default. When you enable Noise reducer (NoiseReducer), you must also select a value for Noise reducer filter (NoiseReducerFilter)."
     },
     "NoiseReducerFilter": {
       "type": "string",
-      "documentation": "Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral is an edge preserving noise reduction filter. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) are convolution filters. * Conserve is a min/max noise reduction filter. * Spatial is a frequency-domain filter based on JND principles.",
+      "documentation": "Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion.",
       "enum": [
         "BILATERAL",
         "MEAN",
@@ -7238,7 +7256,8 @@
         "LANCZOS",
         "SHARPEN",
         "CONSERVE",
-        "SPATIAL"
+        "SPATIAL",
+        "TEMPORAL"
       ]
     },
     "NoiseReducerFilterSettings": {
@@ -7272,6 +7291,27 @@
         }
       },
       "documentation": "Noise reducer filter settings for spatial filter."
+    },
+    "NoiseReducerTemporalFilterSettings": {
+      "type": "structure",
+      "members": {
+        "AggressiveMode": {
+          "shape": "__integerMin0Max4",
+          "locationName": "aggressiveMode",
+          "documentation": "Use Aggressive mode for content that has complex motion. Higher values produce stronger temporal filtering. This filters highly complex scenes more aggressively and creates better VQ for low bitrate outputs."
+        },
+        "Speed": {
+          "shape": "__integerMinNegative1Max3",
+          "locationName": "speed",
+          "documentation": "The speed of the filter (higher number is faster). Low setting reduces bit rate at the cost of transcode time, high setting improves transcode time at the cost of bit rate."
+        },
+        "Strength": {
+          "shape": "__integerMin0Max16",
+          "locationName": "strength",
+          "documentation": "Relative strength of noise reducing filter. Higher values produce stronger filtering. Recommended Range: * [0 .. 2] for complexity reduction with minimal sharpness loss * [2 .. 8] for complexity reduction with image preservation * [8 .. 16] for noise reduction. Reduce noise combined high complexity reduction"
+        }
+      },
+      "documentation": "Noise reducer filter settings for temporal filter."
     },
     "Order": {
       "type": "string",
@@ -7974,25 +8014,56 @@
         "CertificateArn": {
           "shape": "__stringPatternArnAwsUsGovAcm",
           "locationName": "certificateArn",
-          "documentation": "Optional AWS Certificate Manager ARN for a certificate to send to the keyprovider. The certificate holds a key used by the keyprovider to encrypt the keys in its response."
+          "documentation": "If you want your key provider to encrypt the content keys that it provides to MediaConvert, set up a certificate with a master key using AWS Certificate Manager. Specify the certificate's Amazon Resource Name (ARN) here."
         },
         "ResourceId": {
           "shape": "__string",
           "locationName": "resourceId",
-          "documentation": "The SPEKE-compliant server uses Resource ID (ResourceId) to identify content."
+          "documentation": "Specify the resource ID that your SPEKE-compliant key provider uses to identify this content."
         },
         "SystemIds": {
           "shape": "__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12",
           "locationName": "systemIds",
-          "documentation": "Relates to SPEKE implementation. DRM system identifiers. DASH output groups support a max of two system ids. Other group types support one system id."
+          "documentation": "Relates to SPEKE implementation. DRM system identifiers. DASH output groups support a max of two system ids. Other group types support one system id. See\n https://dashif.org/identifiers/content_protection/ for more details."
         },
         "Url": {
           "shape": "__stringPatternHttps",
           "locationName": "url",
-          "documentation": "Use URL (Url) to specify the SPEKE-compliant server that will provide keys for content."
+          "documentation": "Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content."
         }
       },
-      "documentation": "Settings for use with a SPEKE key provider"
+      "documentation": "Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead."
+    },
+    "SpekeKeyProviderCmaf": {
+      "type": "structure",
+      "members": {
+        "CertificateArn": {
+          "shape": "__stringPatternArnAwsUsGovAcm",
+          "locationName": "certificateArn",
+          "documentation": "If you want your key provider to encrypt the content keys that it provides to MediaConvert, set up a certificate with a master key using AWS Certificate Manager. Specify the certificate's Amazon Resource Name (ARN) here."
+        },
+        "DashSignaledSystemIds": {
+          "shape": "__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12",
+          "locationName": "dashSignaledSystemIds",
+          "documentation": "Specify the DRM system IDs that you want signaled in the DASH manifest that MediaConvert creates as part of this CMAF package. The DASH manifest can currently signal up to three system IDs. For more information, see https://dashif.org/identifiers/content_protection/."
+        },
+        "HlsSignaledSystemIds": {
+          "shape": "__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12",
+          "locationName": "hlsSignaledSystemIds",
+          "documentation": "Specify the DRM system ID that you want signaled in the HLS manifest that MediaConvert creates as part of this CMAF package. The HLS manifest can currently signal only one system ID. For more information, see https://dashif.org/identifiers/content_protection/."
+        },
+        "ResourceId": {
+          "shape": "__stringPatternW",
+          "locationName": "resourceId",
+          "documentation": "Specify the resource ID that your SPEKE-compliant key provider uses to identify this content."
+        },
+        "Url": {
+          "shape": "__stringPatternHttps",
+          "locationName": "url",
+          "documentation": "Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content."
+        }
+      },
+      "documentation": "Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is CMAF. If your output group type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider settings instead."
     },
     "StaticKeyProvider": {
       "type": "structure",
@@ -8071,9 +8142,25 @@
           "shape": "__stringMin3Max3Pattern1809aFAF09aEAE",
           "locationName": "pageNumber",
           "documentation": "Set pageNumber to the Teletext page number for the destination captions for this output. This value must be a three-digit hexadecimal string; strings ending in -FF are invalid. If you are passing through the entire set of Teletext data, do not use this field."
+        },
+        "PageTypes": {
+          "shape": "__listOfTeletextPageType",
+          "locationName": "pageTypes",
+          "documentation": "Specify the page types for this Teletext page. If you don't specify a value here, the service sets the page type to the default value Subtitle (PAGE_TYPE_SUBTITLE). If you pass through the entire set of Teletext data, don't use this field. When you pass through a set of Teletext pages, your output has the same page types as your input."
         }
       },
       "documentation": "Settings for Teletext caption output"
+    },
+    "TeletextPageType": {
+      "type": "string",
+      "documentation": "A page type as defined in the standard ETSI EN 300 468, Table 94",
+      "enum": [
+        "PAGE_TYPE_INITIAL",
+        "PAGE_TYPE_SUBTITLE",
+        "PAGE_TYPE_ADDL_INFO",
+        "PAGE_TYPE_PROGRAM_SCHEDULE",
+        "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
+      ]
     },
     "TeletextSourceSettings": {
       "type": "structure",
@@ -8462,7 +8549,7 @@
         "ColorMetadata": {
           "shape": "ColorMetadata",
           "locationName": "colorMetadata",
-          "documentation": "Enable Insert color metadata (ColorMetadata) to include color metadata in this output. This setting is enabled by default."
+          "documentation": "Choose Insert (INSERT) for this setting to include color metadata in this output. Choose Ignore (IGNORE) to exclude color metadata from this output. If you don't specify a value, the service sets this to Insert by default."
         },
         "Crop": {
           "shape": "Rectangle",
@@ -8575,17 +8662,17 @@
         "ColorSpace": {
           "shape": "ColorSpace",
           "locationName": "colorSpace",
-          "documentation": "If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value FOLLOW. The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, or if your input video is missing color space metadata that should be there, specify the accurate color space here. If you choose HDR10, you can also correct inaccurate color space coefficients, using the HDR master display information controls. You must also set Color space usage (ColorSpaceUsage) to FORCE for the service to use these values."
+          "documentation": "If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value Follow (FOLLOW). The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 (FORCE_HDR10) here and specify correct values in the input HDR 10 metadata (Hdr10Metadata) settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr."
         },
         "ColorSpaceUsage": {
           "shape": "ColorSpaceUsage",
           "locationName": "colorSpaceUsage",
-          "documentation": "There are two sources for color metadata, the input file and the job configuration (in the Color space and HDR master display informaiton settings). The Color space usage setting controls which takes precedence. FORCE: The system will use color metadata supplied by user, if any. If the user does not supply color metadata, the system will use data from the source. FALLBACK: The system will use color metadata from the source. If source has no color metadata, the system will use user-supplied color metadata values if available."
+          "documentation": "There are two sources for color metadata, the input file and the job input settings Color space (ColorSpace) and HDR master display information settings(Hdr10Metadata). The Color space usage setting determines which takes precedence. Choose Force (FORCE) to use color metadata from the input job settings. If you don't specify values for those settings, the service defaults to using metadata from your input. FALLBACK - Choose Fallback (FALLBACK) to use color metadata from the source when it is present. If there's no color metadata in your input file, the service defaults to using values you specify in the input settings."
         },
         "Hdr10Metadata": {
           "shape": "Hdr10Metadata",
           "locationName": "hdr10Metadata",
-          "documentation": "Use the \"HDR master display information\" (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. These values vary depending on the input video and must be provided by a color grader. Range is 0 to 50,000; each increment represents 0.00002 in CIE1931 color coordinate. Note that these settings are not color correction. Note that if you are creating HDR outputs inside of an HLS CMAF package, to comply with the Apple specification, you must use the following settings. Set \"MP4 packaging type\" (writeMp4PackagingType) to HVC1 (HVC1). Set \"Profile\" (H265Settings > codecProfile) to Main10/High (MAIN10_HIGH). Set \"Level\" (H265Settings > codecLevel) to 5 (LEVEL_5)."
+          "documentation": "Use these settings to provide HDR 10 metadata that is missing or inaccurate in your input video. Appropriate values vary depending on the input video and must be provided by a color grader. The color grader generates these values during the HDR 10 mastering process. The valid range for each of these settings is 0 to 50,000. Each increment represents 0.00002 in CIE1931 color coordinate. Related settings - When you specify these values, you must also set Color space (ColorSpace) to HDR 10 (HDR10). To specify whether the the values you specify here take precedence over the values in the metadata of your input file, set Color space usage (ColorSpaceUsage). To specify whether color metadata is included in an output, set Color metadata (ColorMetadata). For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr."
         },
         "Pid": {
           "shape": "__integerMin1Max2147483647",
@@ -8747,6 +8834,11 @@
       "type": "integer",
       "min": 0,
       "max": 3600
+    },
+    "__integerMin0Max4": {
+      "type": "integer",
+      "min": 0,
+      "max": 4
     },
     "__integerMin0Max47185920": {
       "type": "integer",
@@ -8993,6 +9085,11 @@
       "min": -180,
       "max": 180
     },
+    "__integerMinNegative1Max3": {
+      "type": "integer",
+      "min": -1,
+      "max": 3
+    },
     "__integerMinNegative2147483648Max2147483647": {
       "type": "integer",
       "min": -2147483648,
@@ -9143,6 +9240,12 @@
         "shape": "Queue"
       }
     },
+    "__listOfTeletextPageType": {
+      "type": "list",
+      "member": {
+        "shape": "TeletextPageType"
+      }
+    },
     "__listOf__integerMin1Max2147483647": {
       "type": "list",
       "member": {
@@ -9171,6 +9274,12 @@
       "type": "list",
       "member": {
         "shape": "__stringMin1"
+      }
+    },
+    "__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12": {
+      "type": "list",
+      "member": {
+        "shape": "__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"
       }
     },
     "__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12": {
@@ -9282,6 +9391,12 @@
       "max": 32,
       "pattern": "^[0-9a-fA-F]{32}$"
     },
+    "__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12": {
+      "type": "string",
+      "min": 36,
+      "max": 36,
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
     "__stringMin3Max3Pattern1809aFAF09aEAE": {
       "type": "string",
       "min": 3,
@@ -9340,9 +9455,9 @@
       "type": "string",
       "pattern": "^(\\d+(\\/\\d+)*)$"
     },
-    "__stringPatternHttpHttpsS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL": {
+    "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL": {
       "type": "string",
-      "pattern": "^(http|https|s3)://([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$"
+      "pattern": "^(http|https|s3)://([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$"
     },
     "__stringPatternHttps": {
       "type": "string",
@@ -9360,9 +9475,9 @@
       "type": "string",
       "pattern": "^s3:\\/\\/.*\\/(ASSETMAP.xml)?$"
     },
-    "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE": {
+    "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE": {
       "type": "string",
-      "pattern": "^(s3:\\/\\/)([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))$"
+      "pattern": "^(s3:\\/\\/)([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))$"
     },
     "__stringPatternSNManifestConfirmConditionNotificationNS": {
       "type": "string",
@@ -9371,6 +9486,10 @@
     "__stringPatternSNSignalProcessingNotificationNS": {
       "type": "string",
       "pattern": "^\\s*<(.|\\n)*SignalProcessingNotification(.|\\n)*>\\s*$"
+    },
+    "__stringPatternW": {
+      "type": "string",
+      "pattern": "^[\\w-]+$"
     },
     "__stringPatternWS": {
       "type": "string",

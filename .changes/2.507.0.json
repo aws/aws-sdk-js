@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "New \"evidence\" field in the finding model to provide evidence information explaining why the finding has been triggered. Currently only threat-intelligence findings have this field. Some documentation updates."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release adds Quality of Service (QoS) support for AWS IoT rules engine republish action."
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntime",
+        "description": "Manage Amazon Lex session state using APIs on the client"
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert has added support for multi-DRM SPEKE with CMAF outputs, MP3 ingest, and options for improved video quality. "
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Add expectedNextSnapshotScheduleTime and expectedNextSnapshotScheduleTimeStatus to redshift cluster object."
+    }
+]

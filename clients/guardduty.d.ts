@@ -20,19 +20,19 @@ declare class GuardDuty extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: GuardDuty.Types.AcceptInvitationResponse) => void): Request<GuardDuty.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Archives Amazon GuardDuty findings specified by the list of finding IDs.
+   * Archives GuardDuty findings specified by the list of finding IDs.  Only the master account can archive findings. Member accounts do not have permission to archive findings from their accounts. 
    */
   archiveFindings(params: GuardDuty.Types.ArchiveFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ArchiveFindingsResponse) => void): Request<GuardDuty.Types.ArchiveFindingsResponse, AWSError>;
   /**
-   * Archives Amazon GuardDuty findings specified by the list of finding IDs.
+   * Archives GuardDuty findings specified by the list of finding IDs.  Only the master account can archive findings. Member accounts do not have permission to archive findings from their accounts. 
    */
   archiveFindings(callback?: (err: AWSError, data: GuardDuty.Types.ArchiveFindingsResponse) => void): Request<GuardDuty.Types.ArchiveFindingsResponse, AWSError>;
   /**
-   * Creates a single Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector must be created in order for GuardDuty to become operational.
+   * Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each region that you enable the service. You can have only one detector per account per region.
    */
   createDetector(params: GuardDuty.Types.CreateDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
-   * Creates a single Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector must be created in order for GuardDuty to become operational.
+   * Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each region that you enable the service. You can have only one detector per account per region.
    */
   createDetector(callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class GuardDuty extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: GuardDuty.Types.GetInvitationsCountResponse) => void): Request<GuardDuty.Types.GetInvitationsCountResponse, AWSError>;
   /**
-   * Provides the details for the GuardDuty master account to the current GuardDuty member account.
+   * Provides the details for the GuardDuty master account associated with the current GuardDuty member account.
    */
   getMasterAccount(params: GuardDuty.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMasterAccountResponse) => void): Request<GuardDuty.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * Provides the details for the GuardDuty master account to the current GuardDuty member account.
+   * Provides the details for the GuardDuty master account associated with the current GuardDuty member account.
    */
   getMasterAccount(callback?: (err: AWSError, data: GuardDuty.Types.GetMasterAccountResponse) => void): Request<GuardDuty.Types.GetMasterAccountResponse, AWSError>;
   /**
@@ -486,30 +486,36 @@ declare namespace GuardDuty {
   export type ClientToken = string;
   export interface Condition {
     /**
-     * Represents the equal condition to be applied to a single field when querying for findings.
+     * Deprecated. Represents the equal condition to be applied to a single field when querying for findings.
      */
     Eq?: Eq;
     /**
-     * Represents the not equal condition to be applied to a single field when querying for findings.
+     * Deprecated. Represents the not equal condition to be applied to a single field when querying for findings.
      */
     Neq?: Neq;
     /**
-     * Represents a greater than condition to be applied to a single field when querying for findings.
+     * Deprecated. Represents a greater than condition to be applied to a single field when querying for findings.
      */
     Gt?: Integer;
     /**
-     * Represents a greater than equal condition to be applied to a single field when querying for findings.
+     * Deprecated. Represents a greater than equal condition to be applied to a single field when querying for findings.
      */
     Gte?: Integer;
     /**
-     * Represents a less than condition to be applied to a single field when querying for findings.
+     * Deprecated. Represents a less than condition to be applied to a single field when querying for findings.
      */
     Lt?: Integer;
     /**
-     * Represents a less than equal condition to be applied to a single field when querying for findings.
+     * Deprecated. Represents a less than equal condition to be applied to a single field when querying for findings.
      */
     Lte?: Integer;
+    /**
+     * Represents an equal condition to be applied to a single field when querying for findings.
+     */
     Equals?: Equals;
+    /**
+     * Represents an not equal condition to be applied to a single field when querying for findings.
+     */
     NotEquals?: NotEquals;
     /**
      * Represents a greater than condition to be applied to a single field when querying for findings.
@@ -772,7 +778,7 @@ declare namespace GuardDuty {
   }
   export interface DeleteMembersResponse {
     /**
-     * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+     * The accounts that could not be processed.
      */
     UnprocessedAccounts: UnprocessedAccounts;
   }
@@ -831,6 +837,12 @@ declare namespace GuardDuty {
   export type Email = string;
   export type Eq = String[];
   export type Equals = String[];
+  export interface Evidence {
+    /**
+     * A list of threat intelligence details related to the evidence.
+     */
+    ThreatIntelligenceDetails?: ThreatIntelligenceDetails;
+  }
   export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
   export type FilterAction = "NOOP"|"ARCHIVE"|string;
   export type FilterDescription = string;
@@ -839,63 +851,57 @@ declare namespace GuardDuty {
   export type FilterRank = number;
   export interface Finding {
     /**
-     * AWS account ID where the activity occurred that prompted GuardDuty to generate a finding.
+     * The ID of the account in which the finding was generated.
      */
     AccountId: String;
     /**
-     * The ARN of a finding described by the action.
+     * The ARN for the finding.
      */
     Arn: String;
     /**
-     * The confidence level of a finding.
+     * The confidence score for the finding.
      */
     Confidence?: Double;
     /**
-     * The time stamp at which a finding was generated.
+     * The time and date at which the finding was created.
      */
     CreatedAt: String;
     /**
-     * The description of a finding.
+     * The description of the finding.
      */
     Description?: String;
     /**
-     * The identifier that corresponds to a finding described by the action.
+     * The ID of the finding.
      */
     Id: String;
     /**
-     * The AWS resource partition.
+     * The partition associated with the finding.
      */
     Partition?: String;
     /**
-     * The AWS region where the activity occurred that prompted GuardDuty to generate a finding.
+     * The Region in which the finding was generated.
      */
     Region: String;
-    /**
-     * The AWS resource associated with the activity that prompted GuardDuty to generate a finding.
-     */
     Resource: Resource;
     /**
-     * Findings' schema version.
+     * The version of the schema used for the finding.
      */
     SchemaVersion: String;
-    /**
-     * Additional information assigned to the generated finding by GuardDuty.
-     */
     Service?: Service;
     /**
-     * The severity of a finding.
+     * The severity of the finding.
      */
     Severity: Double;
     /**
-     * The title of a finding.
+     * The title for the finding.
      */
     Title?: String;
     /**
-     * The type of a finding described by the action.
+     * The type of the finding.
      */
     Type: FindingType;
     /**
-     * The time stamp at which a finding was last updated.
+     * The time and date at which the finding was laste updated.
      */
     UpdatedAt: String;
   }
@@ -1405,6 +1411,9 @@ declare namespace GuardDuty {
     ResourceArn: GuardDutyArn;
   }
   export interface ListTagsForResourceResponse {
+    /**
+     * The tags associated with the resource.
+     */
     Tags?: TagMap;
   }
   export interface ListThreatIntelSetsRequest {
@@ -1445,7 +1454,7 @@ declare namespace GuardDuty {
   export type Long = number;
   export interface Master {
     /**
-     * Master account ID
+     * The ID of the account used as the Master account.
      */
     AccountId?: AccountId;
     /**
@@ -1457,7 +1466,7 @@ declare namespace GuardDuty {
      */
     RelationshipStatus?: String;
     /**
-     * Timestamp at which the invitation was sent
+     * Timestamp at which the invitation was sent.
      */
     InvitedAt?: String;
   }
@@ -1690,6 +1699,10 @@ declare namespace GuardDuty {
      */
     Action?: Action;
     /**
+     * An evidence object associated with the service.
+     */
+    Evidence?: Evidence;
+    /**
      * Indicates whether this finding is archived.
      */
     Archived?: Boolean;
@@ -1795,6 +1808,18 @@ declare namespace GuardDuty {
   export type ThreatIntelSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE"|string;
   export type ThreatIntelSetIds = String[];
   export type ThreatIntelSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
+  export interface ThreatIntelligenceDetail {
+    /**
+     * The name of the threat intelligence list that triggered the finding.
+     */
+    ThreatListName?: String;
+    /**
+     * A list of names of the threats in the threat intelligence list that triggered the finding.
+     */
+    ThreatNames?: ThreatNames;
+  }
+  export type ThreatIntelligenceDetails = ThreatIntelligenceDetail[];
+  export type ThreatNames = String[];
   export interface UnarchiveFindingsRequest {
     /**
      * The ID of the detector that specifies the GuardDuty service whose findings you want to unarchive.

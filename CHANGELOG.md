@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.506.0-->
+<!--LATEST=2.507.0-->
 <!--ENTRYINSERT-->
+
+## 2.507.0
+* feature: GuardDuty: New "evidence" field in the finding model to provide evidence information explaining why the finding has been triggered. Currently only threat-intelligence findings have this field. Some documentation updates.
+* feature: Iot: This release adds Quality of Service (QoS) support for AWS IoT rules engine republish action.
+* feature: LexRuntime: Manage Amazon Lex session state using APIs on the client
+* feature: MediaConvert: AWS Elemental MediaConvert has added support for multi-DRM SPEKE with CMAF outputs, MP3 ingest, and options for improved video quality. 
+* feature: Redshift: Add expectedNextSnapshotScheduleTime and expectedNextSnapshotScheduleTimeStatus to redshift cluster object.
 
 ## 2.506.0
 * feature: CodeBuild: CodeBuild adds CloudFormation support for SourceCredential
