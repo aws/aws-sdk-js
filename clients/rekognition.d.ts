@@ -731,7 +731,7 @@ declare namespace Rekognition {
      */
     Confidence?: Percent;
   }
-  export type EmotionName = "HAPPY"|"SAD"|"ANGRY"|"CONFUSED"|"DISGUSTED"|"SURPRISED"|"CALM"|"UNKNOWN"|string;
+  export type EmotionName = "HAPPY"|"SAD"|"ANGRY"|"CONFUSED"|"DISGUSTED"|"SURPRISED"|"CALM"|"UNKNOWN"|"FEAR"|string;
   export type Emotions = Emotion[];
   export type ExternalImageId = string;
   export interface EyeOpen {

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.507.0-->
+<!--LATEST=2.508.0-->
 <!--ENTRYINSERT-->
+
+## 2.508.0
+* feature: Rekognition: Adding new Emotion, Fear
 
 ## 2.507.0
 * feature: GuardDuty: New "evidence" field in the finding model to provide evidence information explaining why the finding has been triggered. Currently only threat-intelligence findings have this field. Some documentation updates.
