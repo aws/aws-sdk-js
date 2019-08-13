@@ -2444,6 +2444,10 @@
         "cloudWatchLogsRoleArn": {
           "shape": "String",
           "documentation": "<p>The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. </p>"
+        },
+        "excludeVerboseContent": {
+          "shape": "Boolean",
+          "documentation": "<p>Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.</p>"
         }
       },
       "documentation": "<p>The CloudWatch Logs configuration.</p>"

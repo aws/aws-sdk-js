@@ -1124,6 +1124,10 @@ declare namespace AppSync {
      * The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. 
      */
     cloudWatchLogsRoleArn: String;
+    /**
+     * Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.
+     */
+    excludeVerboseContent?: Boolean;
   }
   export type Long = number;
   export type MapOfStringToString = {[key: string]: String};

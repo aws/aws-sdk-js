@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.508.0-->
+<!--LATEST=2.509.0-->
 <!--ENTRYINSERT-->
+
+## 2.509.0
+* feature: AppSync: Adds a configuration option for AppSync GraphQL APIs
 
 ## 2.508.0
 * feature: Rekognition: Adding new Emotion, Fear
