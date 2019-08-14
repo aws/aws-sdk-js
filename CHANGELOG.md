@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.509.0-->
+<!--LATEST=2.510.0-->
 <!--ENTRYINSERT-->
+
+## 2.510.0
+* feature: EC2: This release adds a new API called SendDiagnosticInterrupt, which allows you to send diagnostic interrupts to your EC2 instance.
 
 ## 2.509.0
 * feature: AppSync: Adds a configuration option for AppSync GraphQL APIs
