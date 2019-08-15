@@ -2477,6 +2477,14 @@ declare class EC2 extends Service {
    */
   modifyVpnConnection(callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
   /**
+   * Modifies the VPN tunnel endpoint certificate.
+   */
+  modifyVpnTunnelCertificate(params: EC2.Types.ModifyVpnTunnelCertificateRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelCertificateResult) => void): Request<EC2.Types.ModifyVpnTunnelCertificateResult, AWSError>;
+  /**
+   * Modifies the VPN tunnel endpoint certificate.
+   */
+  modifyVpnTunnelCertificate(callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelCertificateResult) => void): Request<EC2.Types.ModifyVpnTunnelCertificateResult, AWSError>;
+  /**
    * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide. To disable detailed monitoring, see .
    */
   monitorInstances(params: EC2.Types.MonitorInstancesRequest, callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
@@ -5093,7 +5101,11 @@ declare namespace EC2 {
     /**
      * The Internet-routable IP address for the customer gateway's outside interface. The address must be static.
      */
-    PublicIp: String;
+    PublicIp?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     */
+    CertificateArn?: String;
     /**
      * The type of VPN connection that this customer gateway supports (ipsec.1).
      */
@@ -6534,6 +6546,10 @@ declare namespace EC2 {
      * The Internet-routable IP address of the customer gateway's outside interface.
      */
     IpAddress?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the customer gateway certificate.
+     */
+    CertificateArn?: String;
     /**
      * The current state of the customer gateway (pending | available | deleting | deleted).
      */
@@ -14978,7 +14994,7 @@ declare namespace EC2 {
      */
     ResetPolicy?: Boolean;
     /**
-     * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
+     * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
      */
     PolicyDocument?: String;
     /**
@@ -15126,6 +15142,10 @@ declare namespace EC2 {
      */
     TransitGatewayId?: String;
     /**
+     * The ID of the customer gateway at your end of the VPN connection.
+     */
+    CustomerGatewayId?: String;
+    /**
      * The ID of the virtual private gateway at the AWS side of the VPN connection.
      */
     VpnGatewayId?: String;
@@ -15135,6 +15155,23 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface ModifyVpnConnectionResult {
+    VpnConnection?: VpnConnection;
+  }
+  export interface ModifyVpnTunnelCertificateRequest {
+    /**
+     * The ID of the AWS Site-to-Site VPN connection.
+     */
+    VpnConnectionId: String;
+    /**
+     * The external IP address of the VPN tunnel.
+     */
+    VpnTunnelOutsideIpAddress: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyVpnTunnelCertificateResult {
     VpnConnection?: VpnConnection;
   }
   export interface MonitorInstancesRequest {
@@ -20125,6 +20162,10 @@ declare namespace EC2 {
      * If an error occurs, a description of the error.
      */
     StatusMessage?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.
+     */
+    CertificateArn?: String;
   }
   export type VgwTelemetryList = VgwTelemetry[];
   export type VirtualizationType = "hvm"|"paravirtual"|string;

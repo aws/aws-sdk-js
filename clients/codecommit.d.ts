@@ -20,6 +20,14 @@ declare class CodeCommit extends Service {
    */
   batchDescribeMergeConflicts(callback?: (err: AWSError, data: CodeCommit.Types.BatchDescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.BatchDescribeMergeConflictsOutput, AWSError>;
   /**
+   * Returns information about the contents of one or more commits in a repository.
+   */
+  batchGetCommits(params: CodeCommit.Types.BatchGetCommitsInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchGetCommitsOutput) => void): Request<CodeCommit.Types.BatchGetCommitsOutput, AWSError>;
+  /**
+   * Returns information about the contents of one or more commits in a repository.
+   */
+  batchGetCommits(callback?: (err: AWSError, data: CodeCommit.Types.BatchGetCommitsOutput) => void): Request<CodeCommit.Types.BatchGetCommitsOutput, AWSError>;
+  /**
    * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
   batchGetRepositories(params: CodeCommit.Types.BatchGetRepositoriesInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
@@ -523,6 +531,41 @@ declare namespace CodeCommit {
      */
     baseCommitId?: ObjectId;
   }
+  export interface BatchGetCommitsError {
+    /**
+     * A commit ID that either could not be found or was not in a valid format.
+     */
+    commitId?: ObjectId;
+    /**
+     * An error code that specifies whether the commit ID was not valid or not found.
+     */
+    errorCode?: ErrorCode;
+    /**
+     * An error message that provides detail about why the commit ID either was not found or was not valid.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export type BatchGetCommitsErrorsList = BatchGetCommitsError[];
+  export interface BatchGetCommitsInput {
+    /**
+     * The full commit IDs of the commits to get information about.  You must supply the full SHAs of each commit. You cannot use shortened SHAs. 
+     */
+    commitIds: CommitIdsInputList;
+    /**
+     * The name of the repository that contains the commits.
+     */
+    repositoryName: RepositoryName;
+  }
+  export interface BatchGetCommitsOutput {
+    /**
+     * An array of commit data type objects, each of which contains information about a specified commit.
+     */
+    commits?: CommitObjectsList;
+    /**
+     * Returns any commit IDs for which information could not be found. For example, if one of the commit IDs was a shortened SHA or that commit was not found in the specified repository, the ID will return an error object with additional information.
+     */
+    errors?: BatchGetCommitsErrorsList;
+  }
   export interface BatchGetRepositoriesInput {
     /**
      * The names of the repositories to get information about.
@@ -703,7 +746,9 @@ declare namespace CodeCommit {
     additionalData?: AdditionalData;
   }
   export type CommitId = string;
+  export type CommitIdsInputList = ObjectId[];
   export type CommitName = string;
+  export type CommitObjectsList = Commit[];
   export interface Conflict {
     /**
      * Metadata about a conflict in a merge operation.
@@ -1167,6 +1212,8 @@ declare namespace CodeCommit {
   }
   export type DifferenceList = Difference[];
   export type Email = string;
+  export type ErrorCode = string;
+  export type ErrorMessage = string;
   export type EventDate = Date;
   export type ExceptionName = string;
   export interface File {

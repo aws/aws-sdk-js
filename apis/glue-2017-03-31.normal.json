@@ -1648,34 +1648,6 @@
       ],
       "documentation": "<p>Returns information on a job bookmark entry.</p>"
     },
-    "GetJobBookmarks": {
-      "name": "GetJobBookmarks",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "GetJobBookmarksRequest"
-      },
-      "output": {
-        "shape": "GetJobBookmarksResponse"
-      },
-      "errors": [
-        {
-          "shape": "InvalidInputException"
-        },
-        {
-          "shape": "EntityNotFoundException"
-        },
-        {
-          "shape": "InternalServiceException"
-        },
-        {
-          "shape": "OperationTimeoutException"
-        }
-      ],
-      "documentation": "<p>Returns information on the job bookmark entries. The list is ordered on decreasing version numbers.</p>"
-    },
     "GetJobRun": {
       "name": "GetJobRun",
       "http": {
@@ -6913,39 +6885,6 @@
         }
       }
     },
-    "GetJobBookmarksRequest": {
-      "type": "structure",
-      "required": [
-        "JobName"
-      ],
-      "members": {
-        "JobName": {
-          "shape": "JobName",
-          "documentation": "<p>The name of the job in question.</p>"
-        },
-        "MaxResults": {
-          "shape": "IntegerValue",
-          "documentation": "<p>The maximum size of the response.</p>"
-        },
-        "NextToken": {
-          "shape": "IntegerValue",
-          "documentation": "<p>A continuation token, if this is a continuation call.</p>"
-        }
-      }
-    },
-    "GetJobBookmarksResponse": {
-      "type": "structure",
-      "members": {
-        "JobBookmarkEntries": {
-          "shape": "JobBookmarkEntryList",
-          "documentation": "<p>A list of job bookmark entries that defines a point that a job can resume processing.</p>"
-        },
-        "NextToken": {
-          "shape": "IntegerValue",
-          "documentation": "<p>A continuation token, which has a value of 1 if all the entries are returned, or &gt; 1 if not all requested job runs have been returned.</p>"
-        }
-      }
-    },
     "GetJobRequest": {
       "type": "structure",
       "required": [
@@ -8209,12 +8148,6 @@
         }
       },
       "documentation": "<p>Defines a point that a job can resume processing.</p>"
-    },
-    "JobBookmarkEntryList": {
-      "type": "list",
-      "member": {
-        "shape": "JobBookmarkEntry"
-      }
     },
     "JobBookmarksEncryption": {
       "type": "structure",

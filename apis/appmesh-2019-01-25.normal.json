@@ -678,6 +678,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -685,6 +688,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>List the tags for an App Mesh resource.</p>"
@@ -812,6 +818,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -819,6 +828,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         },
         {
           "shape": "TooManyTagsException"
@@ -845,6 +857,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -852,6 +867,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Deletes specified tags from a resource.</p>",
@@ -1742,6 +1760,31 @@
       },
       "documentation": "<p>An object representing a virtual service returned by a describe operation.</p>"
     },
+    "Boolean": {
+      "type": "boolean",
+      "box": true
+    },
+    "HttpRouteHeader": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "invert": {
+          "shape": "Boolean",
+          "documentation": "<p>Specify <code>True</code> to match the opposite of the <code>HeaderMatchMethod</code>\n         method and value. The default value is <code>False</code>.</p>"
+        },
+        "match": {
+          "shape": "HeaderMatchMethod",
+          "documentation": "<p>The <code>HeaderMatchMethod</code> object.</p>"
+        },
+        "name": {
+          "shape": "HeaderName",
+          "documentation": "<p>A name for the HTTP header in the client request that will be matched on.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the HTTP header in the request.</p>"
+    },
     "DescribeVirtualServiceOutput": {
       "type": "structure",
       "required": [
@@ -1980,14 +2023,14 @@
       "members": {
         "key": {
           "shape": "AwsCloudMapInstanceAttributeKey",
-          "documentation": "<p>The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance\n         that contains the specified key and value is returned.</p>"
+          "documentation": "<p>The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service\n         instance that contains the specified key and value is returned.</p>"
         },
         "value": {
           "shape": "AwsCloudMapInstanceAttributeValue",
           "documentation": "<p>The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service\n         instance that contains the specified key and value is returned.</p>"
         }
       },
-      "documentation": "<p>An object representing the AWS Cloud Map attribute information for your virtual node.</p>"
+      "documentation": "<p>An object representing the AWS Cloud Map attribute information for your virtual\n         node.</p>"
     },
     "VirtualServiceSpec": {
       "type": "structure",
@@ -2008,6 +2051,24 @@
         }
       },
       "documentation": "<p>An object representing the backends that a virtual node is expected to send outbound\n         traffic to. </p>"
+    },
+    "MatchRange": {
+      "type": "structure",
+      "required": [
+        "end",
+        "start"
+      ],
+      "members": {
+        "end": {
+          "shape": "Long",
+          "documentation": "<p>End of the range value.</p>"
+        },
+        "start": {
+          "shape": "Long",
+          "documentation": "<p>Start of the range value.</p>"
+        }
+      },
+      "documentation": "<p>The range of values to match on. The first character of the range is included in the\n         range, though the last character is not. For example, if the range specified were 1-100,\n         only values 1-99 would be matched.</p>"
     },
     "ListVirtualRoutersLimit": {
       "type": "integer",
@@ -2150,6 +2211,12 @@
         }
       },
       "documentation": ""
+    },
+    "RoutePriority": {
+      "type": "integer",
+      "box": true,
+      "min": 0,
+      "max": 1000
     },
     "ListVirtualServicesInput": {
       "type": "structure",
@@ -2346,6 +2413,11 @@
     "Timestamp": {
       "type": "timestamp"
     },
+    "HeaderMatch": {
+      "type": "string",
+      "min": 1,
+      "max": 255
+    },
     "VirtualNodeSpec": {
       "type": "structure",
       "members": {
@@ -2393,6 +2465,20 @@
       "min": 1,
       "max": 1
     },
+    "HttpMethod": {
+      "type": "string",
+      "enum": [
+        "connect",
+        "delete",
+        "get",
+        "head",
+        "options",
+        "patch",
+        "post",
+        "put",
+        "trace"
+      ]
+    },
     "DescribeRouteOutput": {
       "type": "structure",
       "required": [
@@ -2413,9 +2499,21 @@
         "prefix"
       ],
       "members": {
+        "headers": {
+          "shape": "HttpRouteHeaders",
+          "documentation": "<p>The client request headers to match on.</p>"
+        },
+        "method": {
+          "shape": "HttpMethod",
+          "documentation": "<p>The client request header method to match on.</p>"
+        },
         "prefix": {
           "shape": "String",
           "documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
+        },
+        "scheme": {
+          "shape": "HttpScheme",
+          "documentation": "<p>The client request scheme to match on.</p>"
         }
       },
       "documentation": "<p>An object representing the requirements for a route to match HTTP requests for a virtual\n         router.</p>"
@@ -2763,6 +2861,11 @@
       },
       "documentation": "<p>An object representing a virtual node service provider.</p>"
     },
+    "HeaderName": {
+      "type": "string",
+      "min": 1,
+      "max": 50
+    },
     "TagList": {
       "type": "list",
       "member": {
@@ -2803,6 +2906,32 @@
       "member": {
         "shape": "RouteRef"
       }
+    },
+    "HeaderMatchMethod": {
+      "type": "structure",
+      "members": {
+        "exact": {
+          "shape": "HeaderMatch",
+          "documentation": "<p>The header value sent by the client must match the specified value exactly.</p>"
+        },
+        "prefix": {
+          "shape": "HeaderMatch",
+          "documentation": "<p>The header value sent by the client must begin with the specified characters.</p>"
+        },
+        "range": {
+          "shape": "MatchRange",
+          "documentation": "<p>The object that specifies the range of numbers within which the header value sent by the client\n         must be included.</p>"
+        },
+        "regex": {
+          "shape": "HeaderMatch",
+          "documentation": "<p>The header value sent by the client must include the specified characters.</p>"
+        },
+        "suffix": {
+          "shape": "HeaderMatch",
+          "documentation": "<p>The header value sent by the client must end with the specified characters.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the method and value to match the header value sent with a\n         request. Specify one match method.</p>"
     },
     "DeleteMeshOutput": {
       "type": "structure",
@@ -2902,6 +3031,14 @@
       "min": 1,
       "max": 10
     },
+    "HttpRouteHeaders": {
+      "type": "list",
+      "member": {
+        "shape": "HttpRouteHeader"
+      },
+      "min": 1,
+      "max": 10
+    },
     "VirtualServiceProvider": {
       "type": "structure",
       "members": {
@@ -2940,6 +3077,13 @@
         }
       },
       "documentation": "<p>An object representing the AWS Cloud Map service discovery information for your virtual\n         node.</p>"
+    },
+    "HttpScheme": {
+      "type": "string",
+      "enum": [
+        "http",
+        "https"
+      ]
     },
     "UpdateVirtualServiceOutput": {
       "type": "structure",
@@ -3044,6 +3188,10 @@
         "httpRoute": {
           "shape": "HttpRoute",
           "documentation": "<p>The HTTP routing information for the route.</p>"
+        },
+        "priority": {
+          "shape": "RoutePriority",
+          "documentation": "<p>The priority for the route. Routes are matched based on the specified value, where 0 is\n         the highest priority.</p>"
         },
         "tcpRoute": {
           "shape": "TcpRoute",

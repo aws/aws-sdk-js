@@ -476,14 +476,6 @@ declare class Glue extends Service {
    */
   getJobBookmark(callback?: (err: AWSError, data: Glue.Types.GetJobBookmarkResponse) => void): Request<Glue.Types.GetJobBookmarkResponse, AWSError>;
   /**
-   * Returns information on the job bookmark entries. The list is ordered on decreasing version numbers.
-   */
-  getJobBookmarks(params: Glue.Types.GetJobBookmarksRequest, callback?: (err: AWSError, data: Glue.Types.GetJobBookmarksResponse) => void): Request<Glue.Types.GetJobBookmarksResponse, AWSError>;
-  /**
-   * Returns information on the job bookmark entries. The list is ordered on decreasing version numbers.
-   */
-  getJobBookmarks(callback?: (err: AWSError, data: Glue.Types.GetJobBookmarksResponse) => void): Request<Glue.Types.GetJobBookmarksResponse, AWSError>;
-  /**
    * Retrieves the metadata for a given job run.
    */
   getJobRun(params: Glue.Types.GetJobRunRequest, callback?: (err: AWSError, data: Glue.Types.GetJobRunResponse) => void): Request<Glue.Types.GetJobRunResponse, AWSError>;
@@ -3195,30 +3187,6 @@ declare namespace Glue {
      */
     JobBookmarkEntry?: JobBookmarkEntry;
   }
-  export interface GetJobBookmarksRequest {
-    /**
-     * The name of the job in question.
-     */
-    JobName: JobName;
-    /**
-     * The maximum size of the response.
-     */
-    MaxResults?: IntegerValue;
-    /**
-     * A continuation token, if this is a continuation call.
-     */
-    NextToken?: IntegerValue;
-  }
-  export interface GetJobBookmarksResponse {
-    /**
-     * A list of job bookmark entries that defines a point that a job can resume processing.
-     */
-    JobBookmarkEntries?: JobBookmarkEntryList;
-    /**
-     * A continuation token, which has a value of 1 if all the entries are returned, or &gt; 1 if not all requested job runs have been returned.
-     */
-    NextToken?: IntegerValue;
-  }
   export interface GetJobRequest {
     /**
      * The name of the job definition to retrieve.
@@ -4138,7 +4106,6 @@ declare namespace Glue {
      */
     JobBookmark?: JsonValue;
   }
-  export type JobBookmarkEntryList = JobBookmarkEntry[];
   export interface JobBookmarksEncryption {
     /**
      * The encryption mode to use for job bookmarks data.

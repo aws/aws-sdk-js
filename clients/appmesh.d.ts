@@ -716,6 +716,22 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualServiceName: ServiceName;
   }
+  export type Boolean = boolean;
+  export interface HttpRouteHeader {
+    /**
+     * Specify True to match the opposite of the HeaderMatchMethod
+         method and value. The default value is False.
+     */
+    invert?: Boolean;
+    /**
+     * The HeaderMatchMethod object.
+     */
+    match?: HeaderMatchMethod;
+    /**
+     * A name for the HTTP header in the client request that will be matched on.
+     */
+    name: HeaderName;
+  }
   export interface DescribeVirtualServiceOutput {
     /**
      * The full description of your virtual service.
@@ -833,8 +849,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export interface AwsCloudMapInstanceAttribute {
     /**
-     * The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance
-         that contains the specified key and value is returned.
+     * The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
+         instance that contains the specified key and value is returned.
      */
     key: AwsCloudMapInstanceAttributeKey;
     /**
@@ -855,6 +871,16 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * Specifies a virtual service to use as a backend for a virtual node. 
      */
     virtualService?: VirtualServiceBackend;
+  }
+  export interface MatchRange {
+    /**
+     * End of the range value.
+     */
+    end: Long;
+    /**
+     * Start of the range value.
+     */
+    start: Long;
   }
   export type ListVirtualRoutersLimit = number;
   export type HealthCheckIntervalMillis = number;
@@ -952,6 +978,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     spec?: MeshSpec;
   }
+  export type RoutePriority = number;
   export interface ListVirtualServicesInput {
     /**
      * The maximum number of results returned by ListVirtualServices in paginated
@@ -1069,6 +1096,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     listeners?: VirtualRouterListeners;
   }
   export type Timestamp = Date;
+  export type HeaderMatch = string;
   export interface VirtualNodeSpec {
     /**
      * The backends that the virtual node is expected to send outbound traffic to.
@@ -1103,6 +1131,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     nextToken?: String;
   }
   export type VirtualRouterListeners = VirtualRouterListener[];
+  export type HttpMethod = "connect"|"delete"|"get"|"head"|"options"|"patch"|"post"|"put"|"trace"|string;
   export interface DescribeRouteOutput {
     /**
      * The full description of your route.
@@ -1110,6 +1139,14 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     route: RouteData;
   }
   export interface HttpRouteMatch {
+    /**
+     * The client request headers to match on.
+     */
+    headers?: HttpRouteHeaders;
+    /**
+     * The client request header method to match on.
+     */
+    method?: HttpMethod;
     /**
      * Specifies the path to match requests with. This parameter must always start with
             /, which by itself matches all requests to the virtual service name. You
@@ -1119,6 +1156,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
          /metrics.
      */
     prefix: String;
+    /**
+     * The client request scheme to match on.
+     */
+    scheme?: HttpScheme;
   }
   export type MeshList = MeshRef[];
   export interface TagRef {
@@ -1303,6 +1344,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualNodeName: ResourceName;
   }
+  export type HeaderName = string;
   export type TagList = TagRef[];
   export interface DescribeVirtualRouterInput {
     /**
@@ -1317,6 +1359,29 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export interface TagResourceOutput {
   }
   export type RouteList = RouteRef[];
+  export interface HeaderMatchMethod {
+    /**
+     * The header value sent by the client must match the specified value exactly.
+     */
+    exact?: HeaderMatch;
+    /**
+     * The header value sent by the client must begin with the specified characters.
+     */
+    prefix?: HeaderMatch;
+    /**
+     * The object that specifies the range of numbers within which the header value sent by the client
+         must be included.
+     */
+    range?: MatchRange;
+    /**
+     * The header value sent by the client must include the specified characters.
+     */
+    regex?: HeaderMatch;
+    /**
+     * The header value sent by the client must end with the specified characters.
+     */
+    suffix?: HeaderMatch;
+  }
   export interface DeleteMeshOutput {
     /**
      * The service mesh that was deleted.
@@ -1369,6 +1434,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     virtualRouterName: ResourceName;
   }
   export type WeightedTargets = WeightedTarget[];
+  export type HttpRouteHeaders = HttpRouteHeader[];
   export interface VirtualServiceProvider {
     /**
      * The virtual node associated with a virtual service.
@@ -1396,6 +1462,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     serviceName: AwsCloudMapName;
   }
+  export type HttpScheme = "http"|"https"|string;
   export interface UpdateVirtualServiceOutput {
     /**
      * A full description of the virtual service that was updated.
@@ -1462,6 +1529,11 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The HTTP routing information for the route.
      */
     httpRoute?: HttpRoute;
+    /**
+     * The priority for the route. Routes are matched based on the specified value, where 0 is
+         the highest priority.
+     */
+    priority?: RoutePriority;
     /**
      * The TCP routing information for the route.
      */

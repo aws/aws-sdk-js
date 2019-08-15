@@ -436,11 +436,11 @@ declare class StorageGateway extends Service {
    */
   listVolumes(callback?: (err: AWSError, data: StorageGateway.Types.ListVolumesOutput) => void): Request<StorageGateway.Types.ListVolumesOutput, AWSError>;
   /**
-   * Sends you notification through CloudWatch Events when all files written to your NFS file share have been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported for file gateways. For more information, see Getting File Upload Notification in the Storage Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification). 
+   * Sends you notification through CloudWatch Events when all files written to your file share have been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported for file gateways. For more information, see Getting File Upload Notification in the Storage Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification). 
    */
   notifyWhenUploaded(params: StorageGateway.Types.NotifyWhenUploadedInput, callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Sends you notification through CloudWatch Events when all files written to your NFS file share have been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported for file gateways. For more information, see Getting File Upload Notification in the Storage Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification). 
+   * Sends you notification through CloudWatch Events when all files written to your file share have been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported for file gateways. For more information, see Getting File Upload Notification in the Storage Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification). 
    */
   notifyWhenUploaded(callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
@@ -572,11 +572,11 @@ declare class StorageGateway extends Service {
    */
   updateSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareOutput, AWSError>;
   /**
-   * Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.
+   * Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.  This API is called Security level in the User Guide. A higher security level can affect performance of the gateway. 
    */
   updateSMBSecurityStrategy(params: StorageGateway.Types.UpdateSMBSecurityStrategyInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBSecurityStrategyOutput) => void): Request<StorageGateway.Types.UpdateSMBSecurityStrategyOutput, AWSError>;
   /**
-   * Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.
+   * Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.  This API is called Security level in the User Guide. A higher security level can affect performance of the gateway. 
    */
   updateSMBSecurityStrategy(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBSecurityStrategyOutput) => void): Request<StorageGateway.Types.UpdateSMBSecurityStrategyOutput, AWSError>;
   /**
@@ -1000,7 +1000,7 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
-     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user.   Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions. 
      */
     AdminUserList?: FileShareUserList;
     /**
@@ -1035,6 +1035,10 @@ declare namespace StorageGateway {
      * Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the Description field, and in the AWS Storage Gateway snapshot Details pane, Description field
      */
     SnapshotDescription: SnapshotDescription;
+    /**
+     * A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     */
+    Tags?: Tags;
   }
   export interface CreateSnapshotFromVolumeRecoveryPointOutput {
     /**
@@ -1496,7 +1500,7 @@ declare namespace StorageGateway {
      */
     SMBGuestPasswordSet?: Boolean;
     /**
-     * The type of security strategy that was specified for file gateway. ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required, SMB encryption is offered but not required. MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption is offered but not required. MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required, SMB encryption is required.
+     * The type of security strategy that was specified for file gateway. ClientSpecified: if you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment.  MandatorySigning: if you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.  MandatoryEncryption: if you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer. 
      */
     SMBSecurityStrategy?: SMBSecurityStrategy;
   }
@@ -1527,6 +1531,10 @@ declare namespace StorageGateway {
      * A value that indicates the time zone of the gateway.
      */
     Timezone?: GatewayTimezone;
+    /**
+     * A list of up to 50 tags assigned to the snapshot schedule, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
+     */
+    Tags?: Tags;
   }
   export interface DescribeStorediSCSIVolumesInput {
     /**
@@ -1832,7 +1840,7 @@ declare namespace StorageGateway {
      */
     DomainName: DomainName;
     /**
-     * The organizational unit (OU) is a container with an Active Directory that can hold users, groups, computers, and other OUs and this parameter specifies the OU that the gateway will join within the AD domain.
+     * The organizational unit (OU) is a container in an Active Directory that can hold users, groups, computers, and other OUs and this parameter specifies the OU that the gateway will join within the AD domain.
      */
     OrganizationalUnit?: OrganizationalUnit;
     /**
@@ -2656,7 +2664,7 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
-     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     AdminUserList?: FileShareUserList;
     /**
@@ -2677,7 +2685,7 @@ declare namespace StorageGateway {
   export interface UpdateSMBSecurityStrategyInput {
     GatewayARN: GatewayARN;
     /**
-     * Specifies the type of security strategy. ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required, SMB encryption is offered but not required. MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption is offered but not required. MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required, SMB encryption is required.
+     * Specifies the type of security strategy. ClientSpecified: if you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment.  MandatorySigning: if you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.  MandatoryEncryption: if you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer. 
      */
     SMBSecurityStrategy: SMBSecurityStrategy;
   }
