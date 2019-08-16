@@ -188,11 +188,11 @@ declare class RoboMaker extends Service {
    */
   describeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.     
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
    */
   listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.     
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
    */
   listDeploymentJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
@@ -321,6 +321,7 @@ declare namespace RoboMaker {
     unprocessedJobs?: Arns;
   }
   export type Boolean = boolean;
+  export type BoxedBoolean = boolean;
   export interface CancelDeploymentJobRequest {
     /**
      * The deployment job ARN to cancel.
@@ -583,7 +584,7 @@ declare namespace RoboMaker {
     /**
      * The rendering engine for the simulation application.
      */
-    renderingEngine: RenderingEngine;
+    renderingEngine?: RenderingEngine;
     /**
      * A map that contains tag keys and tag values that are attached to the simulation application.
      */
@@ -689,6 +690,10 @@ declare namespace RoboMaker {
      */
     outputLocation?: OutputLocation;
     /**
+     * The logging configuration.
+     */
+    loggingConfig?: LoggingConfig;
+    /**
      * The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When maxJobDurationInSeconds is reached, the simulation job will status will transition to Completed.
      */
     maxJobDurationInSeconds: JobDuration;
@@ -708,6 +713,10 @@ declare namespace RoboMaker {
      * The simulation application to use in the simulation job.
      */
     simulationApplications?: SimulationApplicationConfigs;
+    /**
+     * The data sources for the simulation job.  There is a limit of 100 files and a combined size of 25GB for all DataSourceConfig objects.  
+     */
+    dataSources?: DataSourceConfigs;
     /**
      * A map that contains tag keys and tag values that are attached to the simulation job.
      */
@@ -739,7 +748,7 @@ declare namespace RoboMaker {
      */
     failureBehavior?: FailureBehavior;
     /**
-     * The failure code of the simulation job if it failed:  InternalServiceError  Internal service error.  RobotApplicationCrash  Robot application exited abnormally.  SimulationApplicationCrash   Simulation application exited abnormally.  BadPermissionsRobotApplication  Robot application bundle could not be downloaded.  BadPermissionsSimulationApplication  Simulation application bundle could not be downloaded.  BadPermissionsS3Output  Unable to publish outputs to customer-provided S3 bucket.  BadPermissionsCloudwatchLogs  Unable to publish logs to customer-provided CloudWatch Logs resource.  SubnetIpLimitExceeded  Subnet IP limit exceeded.  ENILimitExceeded  ENI limit exceeded.  BadPermissionsUserCredentials  Unable to use the Role provided.  InvalidBundleRobotApplication  Robot bundle cannot be extracted (invalid format, bundling error, or other issue).  InvalidBundleSimulationApplication  Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).  RobotApplicationVersionMismatchedEtag  Etag for RobotApplication does not match value during version creation.  SimulationApplicationVersionMismatchedEtag  Etag for SimulationApplication does not match value during version creation.  
+     * The failure code of the simulation job if it failed:  InternalServiceError  Internal service error.  RobotApplicationCrash  Robot application exited abnormally.  SimulationApplicationCrash   Simulation application exited abnormally.  BadPermissionsRobotApplication  Robot application bundle could not be downloaded.  BadPermissionsSimulationApplication  Simulation application bundle could not be downloaded.  BadPermissionsS3Output  Unable to publish outputs to customer-provided S3 bucket.  BadPermissionsCloudwatchLogs  Unable to publish logs to customer-provided CloudWatch Logs resource.  SubnetIpLimitExceeded  Subnet IP limit exceeded.  ENILimitExceeded  ENI limit exceeded.  BadPermissionsUserCredentials  Unable to use the Role provided.  InvalidBundleRobotApplication  Robot bundle cannot be extracted (invalid format, bundling error, or other issue).  InvalidBundleSimulationApplication  Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).  RobotApplicationVersionMismatchedEtag  Etag for RobotApplication does not match value during version creation.  SimulationApplicationVersionMismatchedEtag  Etag for SimulationApplication does not match value during version creation.  WrongRegionS3Output  S3 output bucket is in a different region than AWS RoboMaker.  WrongRegionRobotApplication  RobotApplication bucket is in a different region than AWS RoboMaker.  WrongRegionSimulationApplication  SimulationApplication bucket is in a different region than AWS RoboMaker.  
      */
     failureCode?: SimulationJobErrorCode;
     /**
@@ -750,6 +759,10 @@ declare namespace RoboMaker {
      * Simulation job output files location.
      */
     outputLocation?: OutputLocation;
+    /**
+     * The logging configuration.
+     */
+    loggingConfig?: LoggingConfig;
     /**
      * The maximum simulation job duration in seconds. 
      */
@@ -771,6 +784,10 @@ declare namespace RoboMaker {
      */
     simulationApplications?: SimulationApplicationConfigs;
     /**
+     * The data sources for the simulation job.
+     */
+    dataSources?: DataSources;
+    /**
      * The list of all tags added to the simulation job.
      */
     tags?: TagMap;
@@ -780,6 +797,37 @@ declare namespace RoboMaker {
     vpcConfig?: VPCConfigResponse;
   }
   export type CreatedAt = Date;
+  export interface DataSource {
+    /**
+     * The name of the data source.
+     */
+    name?: Name;
+    /**
+     * The S3 bucket where the data files are located.
+     */
+    s3Bucket?: S3Bucket;
+    /**
+     * The list of S3 keys identifying the data source files.
+     */
+    s3Keys?: S3KeyOutputs;
+  }
+  export interface DataSourceConfig {
+    /**
+     * The name of the data source.
+     */
+    name: Name;
+    /**
+     * The S3 bucket where the data files are located.
+     */
+    s3Bucket: S3Bucket;
+    /**
+     * The list of S3 keys identifying the data source files.
+     */
+    s3Keys: S3Keys;
+  }
+  export type DataSourceConfigs = DataSourceConfig[];
+  export type DataSourceNames = Name[];
+  export type DataSources = DataSource[];
   export interface DeleteFleetRequest {
     /**
      * The Amazon Resource Name (ARN) of the fleet.
@@ -844,6 +892,10 @@ declare namespace RoboMaker {
      * The percentage of deployments that need to fail before stopping deployment.
      */
     failureThresholdPercentage?: Percentage;
+    /**
+     * The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.
+     */
+    robotDeploymentTimeoutInSeconds?: DeploymentTimeout;
   }
   export interface DeploymentJob {
     /**
@@ -904,6 +956,7 @@ declare namespace RoboMaker {
     environmentVariables?: EnvironmentVariableMap;
   }
   export type DeploymentStatus = "Pending"|"Preparing"|"InProgress"|"Failed"|"Succeeded"|"Canceled"|string;
+  export type DeploymentTimeout = number;
   export type DeploymentVersion = string;
   export interface DeregisterRobotRequest {
     /**
@@ -1205,6 +1258,10 @@ declare namespace RoboMaker {
      */
     outputLocation?: OutputLocation;
     /**
+     * The logging configuration.
+     */
+    loggingConfig?: LoggingConfig;
+    /**
      * The maximum job duration in seconds. The value must be 8 days (691,200 seconds) or less.
      */
     maxJobDurationInSeconds?: JobDuration;
@@ -1224,6 +1281,10 @@ declare namespace RoboMaker {
      * A list of simulation applications.
      */
     simulationApplications?: SimulationApplicationConfigs;
+    /**
+     * The data sources for the simulation job.
+     */
+    dataSources?: DataSources;
     /**
      * The list of all tags added to the specified simulation job.
      */
@@ -1461,6 +1522,12 @@ declare namespace RoboMaker {
      */
     tags?: TagMap;
   }
+  export interface LoggingConfig {
+    /**
+     * A boolean indicating whether to record all ROS topics.
+     */
+    recordAllRosTopics: BoxedBoolean;
+  }
   export type MaxResults = number;
   export type Name = string;
   export type NonEmptyString = string;
@@ -1663,6 +1730,18 @@ declare namespace RoboMaker {
   export type S3Bucket = string;
   export type S3Etag = string;
   export type S3Key = string;
+  export interface S3KeyOutput {
+    /**
+     * The S3 key.
+     */
+    s3Key?: S3Key;
+    /**
+     * The etag for the object.
+     */
+    etag?: S3Etag;
+  }
+  export type S3KeyOutputs = S3KeyOutput[];
+  export type S3Keys = S3Key[];
   export type SecurityGroups = NonEmptyString[];
   export interface SimulationApplicationConfig {
     /**
@@ -1749,6 +1828,10 @@ declare namespace RoboMaker {
      */
     outputLocation?: OutputLocation;
     /**
+     * The logging configuration.
+     */
+    loggingConfig?: LoggingConfig;
+    /**
      * The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.
      */
     maxJobDurationInSeconds?: JobDuration;
@@ -1769,6 +1852,10 @@ declare namespace RoboMaker {
      */
     simulationApplications?: SimulationApplicationConfigs;
     /**
+     * The data sources for the simulation job.
+     */
+    dataSources?: DataSources;
+    /**
      * A map that contains tag keys and tag values that are attached to the simulation job.
      */
     tags?: TagMap;
@@ -1777,7 +1864,7 @@ declare namespace RoboMaker {
      */
     vpcConfig?: VPCConfigResponse;
   }
-  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|string;
+  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|string;
   export type SimulationJobStatus = "Pending"|"Preparing"|"Running"|"Restarting"|"Completed"|"Failed"|"RunningFailed"|"Terminating"|"Terminated"|"Canceled"|string;
   export type SimulationJobSummaries = SimulationJobSummary[];
   export interface SimulationJobSummary {
@@ -1805,6 +1892,10 @@ declare namespace RoboMaker {
      * A list of simulation job robot application names.
      */
     robotApplicationNames?: RobotApplicationNames;
+    /**
+     * The names of the data sources.
+     */
+    dataSourceNames?: DataSourceNames;
   }
   export type SimulationJobs = SimulationJob[];
   export interface SimulationSoftwareSuite {
@@ -1817,7 +1908,7 @@ declare namespace RoboMaker {
      */
     version?: SimulationSoftwareSuiteVersionType;
   }
-  export type SimulationSoftwareSuiteType = "Gazebo"|string;
+  export type SimulationSoftwareSuiteType = "Gazebo"|"RosbagPlay"|string;
   export type SimulationSoftwareSuiteVersionType = string;
   export type SimulationTimeMillis = number;
   export interface Source {
@@ -1995,7 +2086,7 @@ declare namespace RoboMaker {
     /**
      * The rendering engine for the simulation application.
      */
-    renderingEngine: RenderingEngine;
+    renderingEngine?: RenderingEngine;
     /**
      * The revision id for the robot application.
      */
