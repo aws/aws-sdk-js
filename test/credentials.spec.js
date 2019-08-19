@@ -1411,7 +1411,7 @@
         return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('envTokenFile');
       });
 
-      return describe('reads params from shared config when ones not available from environment variable', function() {
+      describe('reads params from shared config when ones not available from environment variable', function() {
         it('when AWS_WEB_IDENTITY_TOKEN_FILE is not available', function() {
           delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
           new AWS.TokenFileWebIdentityCredentials();
@@ -1428,6 +1428,15 @@
           process.env = {};
           new AWS.TokenFileWebIdentityCredentials();
           return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+        });
+      });
+
+      return it('fails if params are not available in both environment variables or shared config', function() {
+        delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
+        helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(undefined);
+        new AWS.TokenFileWebIdentityCredentials().refresh(function(err) {
+          expect(err.message).to.match(/^Profile default not found/);
+          done();
         });
       });
     });
