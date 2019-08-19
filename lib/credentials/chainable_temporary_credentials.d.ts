@@ -3,7 +3,7 @@ import {AWSError} from '../error';
 import STS = require('../../clients/sts');
 
 export class ChainableTemporaryCredentials extends Credentials {
-    constructor(options: ChainableTemporaryCredentials.ChainableTemporaryCredentialsOptions, masterCredentials?: Credentials);
+    constructor(options: ChainableTemporaryCredentials.ChainableTemporaryCredentialsOptions);
     /**
      * Creates a new temporary credentials object.
      */
@@ -24,6 +24,7 @@ declare namespace ChainableTemporaryCredentials {
     export type ChainableTemporaryCredentialsOptions = {
         params?: STS.Types.AssumeRoleRequest|STS.Types.GetSessionTokenRequest,
         masterCredentials?: Credentials,
+        stsConfig: STS.Types.ClientConfiguration,
         tokenCodeFn?: (serialNumber: string, callback: (err?: Error, token?: string) => void) => void
     }
 }
