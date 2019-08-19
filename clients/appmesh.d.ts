@@ -719,8 +719,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type Boolean = boolean;
   export interface HttpRouteHeader {
     /**
-     * Specify True to match the opposite of the HeaderMatchMethod
-         method and value. The default value is False.
+     * Specify True to match the opposite of the HeaderMatchMethod method and value. The default value is False.
      */
     invert?: Boolean;
     /**
@@ -849,8 +848,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export interface AwsCloudMapInstanceAttribute {
     /**
-     * The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
-         instance that contains the specified key and value is returned.
+     * The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance
+         that contains the specified key and value is returned.
      */
     key: AwsCloudMapInstanceAttributeKey;
     /**
@@ -874,11 +873,11 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export interface MatchRange {
     /**
-     * End of the range value.
+     * The end of the range.
      */
     end: Long;
     /**
-     * Start of the range value.
+     * The start of the range.
      */
     start: Long;
   }
@@ -1131,7 +1130,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     nextToken?: String;
   }
   export type VirtualRouterListeners = VirtualRouterListener[];
-  export type HttpMethod = "connect"|"delete"|"get"|"head"|"options"|"patch"|"post"|"put"|"trace"|string;
+  export type HttpMethod = "CONNECT"|"DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT"|"TRACE"|string;
   export interface DescribeRouteOutput {
     /**
      * The full description of your route.
@@ -1157,7 +1156,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     prefix: String;
     /**
-     * The client request scheme to match on.
+     * The client request header scheme to match on.
      */
     scheme?: HttpScheme;
   }
@@ -1369,8 +1368,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     prefix?: HeaderMatch;
     /**
-     * The object that specifies the range of numbers within which the header value sent by the client
-         must be included.
+     * The object that specifies the range of numbers that the header value sent by the client must be included in.
      */
     range?: MatchRange;
     /**
@@ -1530,8 +1528,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     httpRoute?: HttpRoute;
     /**
-     * The priority for the route. Routes are matched based on the specified value, where 0 is
-         the highest priority.
+     * The priority for the route. Routes are matched based on the specified value, where 0 is the highest priority.
      */
     priority?: RoutePriority;
     /**

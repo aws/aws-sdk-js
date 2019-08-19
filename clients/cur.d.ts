@@ -28,6 +28,14 @@ declare class CUR extends Service {
    */
   describeReportDefinitions(callback?: (err: AWSError, data: CUR.Types.DescribeReportDefinitionsResponse) => void): Request<CUR.Types.DescribeReportDefinitionsResponse, AWSError>;
   /**
+   * Allows you to programatically update your report preferences.
+   */
+  modifyReportDefinition(params: CUR.Types.ModifyReportDefinitionRequest, callback?: (err: AWSError, data: CUR.Types.ModifyReportDefinitionResponse) => void): Request<CUR.Types.ModifyReportDefinitionResponse, AWSError>;
+  /**
+   * Allows you to programatically update your report preferences.
+   */
+  modifyReportDefinition(callback?: (err: AWSError, data: CUR.Types.ModifyReportDefinitionResponse) => void): Request<CUR.Types.ModifyReportDefinitionResponse, AWSError>;
+  /**
    * Creates a new report using the description that you provide.
    */
   putReportDefinition(params: CUR.Types.PutReportDefinitionRequest, callback?: (err: AWSError, data: CUR.Types.PutReportDefinitionResponse) => void): Request<CUR.Types.PutReportDefinitionResponse, AWSError>;
@@ -37,7 +45,7 @@ declare class CUR extends Service {
   putReportDefinition(callback?: (err: AWSError, data: CUR.Types.PutReportDefinitionResponse) => void): Request<CUR.Types.PutReportDefinitionResponse, AWSError>;
 }
 declare namespace CUR {
-  export type AWSRegion = "us-east-1"|"us-west-1"|"us-west-2"|"eu-central-1"|"eu-west-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"eu-north-1"|"ap-northeast-3"|string;
+  export type AWSRegion = "us-east-1"|"us-west-1"|"us-west-2"|"eu-central-1"|"eu-west-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"eu-north-1"|"ap-northeast-3"|"ap-east-1"|string;
   export type AdditionalArtifact = "REDSHIFT"|"QUICKSIGHT"|"ATHENA"|string;
   export type AdditionalArtifactList = AdditionalArtifact[];
   export type CompressionFormat = "ZIP"|"GZIP"|"Parquet"|string;
@@ -61,6 +69,12 @@ declare namespace CUR {
   }
   export type GenericString = string;
   export type MaxResults = number;
+  export interface ModifyReportDefinitionRequest {
+    ReportName: ReportName;
+    ReportDefinition: ReportDefinition;
+  }
+  export interface ModifyReportDefinitionResponse {
+  }
   export interface PutReportDefinitionRequest {
     /**
      * Represents the output of the PutReportDefinition operation. The content consists of the detailed metadata and data file information. 
