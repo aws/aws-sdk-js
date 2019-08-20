@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.513.0-->
+<!--LATEST=2.514.0-->
 <!--ENTRYINSERT-->
+
+## 2.514.0
+* feature: AlexaForBusiness: Adding support for optional locale input in CreateProfile and UpdateProfile APIs
+* feature: AppStream: Includes API updates to support streaming through VPC endpoints for image builders and stacks.
+* feature: ChainableTemporaryCredentials: Support for specifying STS client config when creating ChainableTemporaryCredentials to override endpoint or region.
+* feature: SageMaker: Amazon SageMaker introduces Managed Spot Training. Increases the maximum number of metric definitions to 40 for SageMaker Training and Hyperparameter Tuning Jobs. SageMaker Neo adds support for Acer aiSage and Qualcomm QCS605 and QCS603. 
+* feature: Transfer: New field in response of TestIdentityProvider
 
 ## 2.513.0
 * feature: AppMesh: Fix for HttpMethod enum

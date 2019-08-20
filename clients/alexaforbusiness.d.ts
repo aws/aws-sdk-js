@@ -188,11 +188,11 @@ declare class AlexaForBusiness extends Service {
    */
   deleteDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
   /**
-   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device. When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. 
+   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.
    */
   deleteDeviceUsageData(params: AlexaForBusiness.Types.DeleteDeviceUsageDataRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceUsageDataResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceUsageDataResponse, AWSError>;
   /**
-   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device. When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. 
+   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.
    */
   deleteDeviceUsageData(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceUsageDataResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceUsageDataResponse, AWSError>;
   /**
@@ -1318,6 +1318,10 @@ declare namespace AlexaForBusiness {
      */
     WakeWord: WakeWord;
     /**
+     * The locale of the room profile.
+     */
+    Locale?: DeviceLocale;
+    /**
      * The user-specified token that is used during the creation of a profile.
      */
     ClientRequestToken?: ClientRequestToken;
@@ -1689,6 +1693,7 @@ declare namespace AlexaForBusiness {
   export type DeviceEventTime = Date;
   export type DeviceEventType = "CONNECTION_STATUS"|"DEVICE_STATUS"|string;
   export type DeviceEventValue = string;
+  export type DeviceLocale = string;
   export type DeviceName = string;
   export interface DeviceNetworkProfileInfo {
     /**
@@ -2468,6 +2473,10 @@ declare namespace AlexaForBusiness {
      */
     WakeWord?: WakeWord;
     /**
+     * The locale of a room profile.
+     */
+    Locale?: DeviceLocale;
+    /**
      * The setup mode of a room profile.
      */
     SetupModeDisabled?: Boolean;
@@ -2517,6 +2526,10 @@ declare namespace AlexaForBusiness {
      * The wake word of a room profile.
      */
     WakeWord?: WakeWord;
+    /**
+     * The locale of a room profile.
+     */
+    Locale?: DeviceLocale;
   }
   export type ProfileDataList = ProfileData[];
   export type ProfileName = string;
@@ -3492,6 +3505,10 @@ declare namespace AlexaForBusiness {
      * The updated wake word for the room profile.
      */
     WakeWord?: WakeWord;
+    /**
+     * The updated locale for the room profile.
+     */
+    Locale?: DeviceLocale;
     /**
      * Whether the setup mode of the profile is enabled.
      */

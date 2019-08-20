@@ -537,7 +537,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.</p> <p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. </p>"
+      "documentation": "<p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.</p>"
     },
     "DeleteGatewayGroup": {
       "name": "DeleteGatewayGroup",
@@ -2826,6 +2826,10 @@
           "shape": "WakeWord",
           "documentation": "<p>A wake word for Alexa, Echo, Amazon, or a computer.</p>"
         },
+        "Locale": {
+          "shape": "DeviceLocale",
+          "documentation": "<p>The locale of the room profile.</p>"
+        },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
           "documentation": "<p>The user-specified token that is used during the creation of a profile.</p>",
@@ -3388,6 +3392,11 @@
     "DeviceEventValue": {
       "type": "string"
     },
+    "DeviceLocale": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
     "DeviceName": {
       "type": "string",
       "max": 100,
@@ -3592,7 +3601,7 @@
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "([0-9a-zA-Z]([+-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})"
+      "pattern": "([0-9a-zA-Z]([+-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z]([-\\w]*[0-9a-zA-Z]+)*\\.)+[a-zA-Z]{2,9})"
     },
     "EnablementType": {
       "type": "string",
@@ -4738,6 +4747,10 @@
           "shape": "WakeWord",
           "documentation": "<p>The wake word of a room profile.</p>"
         },
+        "Locale": {
+          "shape": "DeviceLocale",
+          "documentation": "<p>The locale of a room profile.</p>"
+        },
         "SetupModeDisabled": {
           "shape": "Boolean",
           "documentation": "<p>The setup mode of a room profile.</p>"
@@ -4791,6 +4804,10 @@
         "WakeWord": {
           "shape": "WakeWord",
           "documentation": "<p>The wake word of a room profile.</p>"
+        },
+        "Locale": {
+          "shape": "DeviceLocale",
+          "documentation": "<p>The locale of a room profile.</p>"
         }
       },
       "documentation": "<p>The data of a room profile.</p>"
@@ -6340,6 +6357,10 @@
         "WakeWord": {
           "shape": "WakeWord",
           "documentation": "<p>The updated wake word for the room profile.</p>"
+        },
+        "Locale": {
+          "shape": "DeviceLocale",
+          "documentation": "<p>The updated locale for the room profile.</p>"
         },
         "SetupModeDisabled": {
           "shape": "Boolean",

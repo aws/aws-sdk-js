@@ -883,7 +883,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+      "documentation": "<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
     },
     "StartFleet": {
       "name": "StartFleet",
@@ -912,6 +912,9 @@
         },
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotAvailableException"
         }
       ],
       "documentation": "<p>Starts the specified fleet.</p>"
@@ -1017,7 +1020,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+      "documentation": "<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -1036,7 +1039,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+      "documentation": "<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
     },
     "UpdateDirectoryConfig": {
       "name": "UpdateDirectoryConfig",
@@ -1179,6 +1182,37 @@
     }
   },
   "shapes": {
+    "AccessEndpoint": {
+      "type": "structure",
+      "required": [
+        "EndpointType"
+      ],
+      "members": {
+        "EndpointType": {
+          "shape": "AccessEndpointType",
+          "documentation": "<p>The type of VPC interface endpoint.</p>"
+        },
+        "VpceId": {
+          "shape": "String",
+          "documentation": "<p>The identifier (ID) of the VPC in which the endpoint is used.</p>"
+        }
+      },
+      "documentation": "<p>Describes a virtual private cloud (VPC) interface endpoint that lets you create a private connection between the VPC that you specify and AppStream 2.0. When you specify a VPC interface endpoint for a stack, users of the stack can connect to AppStream 2.0 only through that endpoint. When you specify a VPC interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.</p>"
+    },
+    "AccessEndpointList": {
+      "type": "list",
+      "member": {
+        "shape": "AccessEndpoint"
+      },
+      "max": 4,
+      "min": 1
+    },
+    "AccessEndpointType": {
+      "type": "string",
+      "enum": [
+        "STREAMING"
+      ]
+    },
     "AccountName": {
       "type": "string",
       "min": 1,
@@ -1545,7 +1579,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
         },
         "IdleDisconnectTimeoutInSeconds": {
           "shape": "Integer",
@@ -1611,7 +1645,11 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+        },
+        "AccessEndpoints": {
+          "shape": "AccessEndpointList",
+          "documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
         }
       }
     },
@@ -1693,7 +1731,11 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+        },
+        "AccessEndpoints": {
+          "shape": "AccessEndpointList",
+          "documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
         }
       }
     },
@@ -1736,7 +1778,7 @@
         },
         "SessionContext": {
           "shape": "String",
-          "documentation": "<p>The session context. For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The session context. For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
         }
       }
     },
@@ -2564,6 +2606,7 @@
         "NETWORK_INTERFACE_LIMIT_EXCEEDED",
         "INTERNAL_SERVICE_ERROR",
         "IAM_SERVICE_ROLE_IS_MISSING",
+        "STS_DISABLED_IN_REGION",
         "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES",
         "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION",
         "SUBNET_NOT_FOUND",
@@ -2756,6 +2799,10 @@
         "AppstreamAgentVersion": {
           "shape": "AppstreamAgentVersion",
           "documentation": "<p>The version of the AppStream 2.0 agent that is currently being used by the image builder. </p>"
+        },
+        "AccessEndpoints": {
+          "shape": "AccessEndpointList",
+          "documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
         }
       },
       "documentation": "<p>Describes a virtual machine that is used to create an image. </p>"
@@ -3240,6 +3287,10 @@
         "ApplicationSettings": {
           "shape": "ApplicationSettingsResponse",
           "documentation": "<p>The persistent application settings for users of the stack.</p>"
+        },
+        "AccessEndpoints": {
+          "shape": "AccessEndpointList",
+          "documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. </p>"
         }
       },
       "documentation": "<p>Describes a stack.</p>"
@@ -3254,7 +3305,8 @@
         "REDIRECT_URL",
         "FEEDBACK_URL",
         "THEME_NAME",
-        "USER_SETTINGS"
+        "USER_SETTINGS",
+        "ACCESS_ENDPOINTS"
       ]
     },
     "StackAttributes": {
@@ -3688,6 +3740,10 @@
         "ApplicationSettings": {
           "shape": "ApplicationSettings",
           "documentation": "<p>The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.</p>"
+        },
+        "AccessEndpoints": {
+          "shape": "AccessEndpointList",
+          "documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
         }
       }
     },

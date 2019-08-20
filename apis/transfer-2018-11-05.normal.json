@@ -40,7 +40,7 @@
           "shape": "ResourceExistsException"
         }
       ],
-      "documentation": "<p>Instantiates an autoscaling virtual server based on Secure File Transfer Protocol (SFTP) in AWS. The call returns the <code>ServerId</code> property assigned by the service to the newly created server. Reference this <code>ServerId</code> property when you make updates to your server, or work with users.</p> <p>The response returns the <code>ServerId</code> value for the newly created server.</p>"
+      "documentation": "<p>Instantiates an autoscaling virtual server based on Secure File Transfer Protocol (SFTP) in AWS. When you make updates to your server or when you work with users, use the service-generated <code>ServerId</code> property that is assigned to the newly created server.</p>"
     },
     "CreateUser": {
       "name": "CreateUser",
@@ -71,7 +71,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Adds a user and associate them with an existing Secure File Transfer Protocol (SFTP) server. Using parameters for <code>CreateUser</code>, you can specify the user name, set the home directory, store the user's public key, and assign the user's AWS Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.</p> <p>The response returns the <code>UserName</code> and <code>ServerId</code> values of the new user for that server.</p>"
+      "documentation": "<p>Creates a user and associates them with an existing Secure File Transfer Protocol (SFTP) server. You can only create and associate users with SFTP servers that have the <code>IdentityProviderType</code> set to <code>SERVICE_MANAGED</code>. Using parameters for <code>CreateUser</code>, you can specify the user name, set the home directory, store the user's public key, and assign the user's AWS Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.</p>"
     },
     "DeleteServer": {
       "name": "DeleteServer",
@@ -96,7 +96,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Deletes the Secure File Transfer Protocol (SFTP) server that you specify. If you used <code>SERVICE_MANAGED</code> as your <code>IdentityProviderType</code>, you need to delete all users associated with this server before deleting the server itself</p> <p>No response returns from this call.</p>"
+      "documentation": "<p>Deletes the Secure File Transfer Protocol (SFTP) server that you specify.</p> <p>No response returns from this operation.</p>"
     },
     "DeleteSshPublicKey": {
       "name": "DeleteSshPublicKey",
@@ -121,7 +121,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Deletes a user's Secure Shell (SSH) public key.</p> <p>No response is returned from this call.</p>"
+      "documentation": "<p>Deletes a user's Secure Shell (SSH) public key.</p> <p>No response is returned from this operation.</p>"
     },
     "DeleteUser": {
       "name": "DeleteUser",
@@ -146,7 +146,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Deletes the user belonging to the server you specify.</p> <p>No response returns from this call.</p> <note> <p>When you delete a user from a server, the user's information is lost.</p> </note>"
+      "documentation": "<p>Deletes the user belonging to the server you specify.</p> <p>No response returns from this operation.</p> <note> <p>When you delete a user from a server, the user's information is lost.</p> </note>"
     },
     "DescribeServer": {
       "name": "DescribeServer",
@@ -370,7 +370,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Changes the state of an SFTP server from <code>ONLINE</code> to <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and process file transfer jobs. Information tied to your server such as server and user properties are not affected by stopping your server. Stopping a server will not reduce or impact your Secure File Transfer Protocol (SFTP) endpoint billing.</p> <p>The states of <code>STOPPING</code> indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>STOP_FAILED</code> can indicate an error condition.</p> <p>No response is returned from this call.</p>"
+      "documentation": "<p>Changes the state of an SFTP server from <code>ONLINE</code> to <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and process file transfer jobs. Information tied to your server such as server and user properties are not affected by stopping your server. Stopping a server will not reduce or impact your Secure File Transfer Protocol (SFTP) endpoint billing.</p> <p>The state of <code>STOPPING</code> indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>STOP_FAILED</code> can indicate an error condition.</p> <p>No response is returned from this call.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -420,7 +420,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>If the <code>IdentityProviderType</code> of the server is <code>API_Gateway</code>, tests whether your API Gateway is set up successfully. We highly recommend that you call this method to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway integration to ensure that your users can successfully use the service.</p>"
+      "documentation": "<p>If the <code>IdentityProviderType</code> of the server is <code>API_Gateway</code>, tests whether your API Gateway is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway integration to ensure that your users can successfully use the service.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -512,23 +512,23 @@
       "members": {
         "EndpointDetails": {
           "shape": "EndpointDetails",
-          "documentation": "<p>The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server.</p>"
+          "documentation": "<p>The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. This parameter is required when you specify a value for the <code>EndpointType</code> parameter.</p>"
         },
         "EndpointType": {
           "shape": "EndpointType",
-          "documentation": "<p>The type of VPC endpoint that you want your SFTP server connect to. If you connect to a VPC endpoint, your SFTP server isn't accessible over the public internet.</p>"
+          "documentation": "<p>The type of VPC endpoint that you want your SFTP server to connect to. If you connect to a VPC endpoint, your SFTP server isn't accessible over the public internet.</p>"
         },
         "HostKey": {
           "shape": "HostKey",
-          "documentation": "<p>The RSA private key as generated by <code>ssh-keygen -N \"\" -f my-new-server-key</code> command.</p> <important> <p>If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't update the host key. Accidentally changing a server's host key can be disruptive. For more information, see <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i> </p> </important>"
+          "documentation": "<p>The RSA private key as generated by the <code>ssh-keygen -N \"\" -f my-new-server-key</code> command.</p> <important> <p>If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't update the host key. Accidentally changing a server's host key can be disruptive.</p> </important> <p> For more information, see \"https://docs.aws.amazon.com/transfer/latest/userguide/change-host-key\" in the <i>AWS SFTP User Guide.</i> </p>"
         },
         "IdentityProviderDetails": {
           "shape": "IdentityProviderDetails",
-          "documentation": "<p>An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the <code>IdentityProviderType</code> value of server that is created uses the <code>SERVICE_MANAGED</code> authentication method.</p>"
+          "documentation": "<p>This parameter is required when the <code>IdentityProviderType</code> is set to <code>API_GATEWAY</code>. Accepts an array containing all of the information required to call a customer-supplied authentication API, including the API Gateway URL. This property is not required when the <code>IdentityProviderType</code> is set to <code>SERVICE_MANAGED</code>.</p>"
         },
         "IdentityProviderType": {
           "shape": "IdentityProviderType",
-          "documentation": "<p>The mode of authentication enabled for this service. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access SFTP user credentials within the service. An <code>IdentityProviderType</code> value of <code>API_GATEWAY</code> indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice.</p>"
+          "documentation": "<p>Specifies the mode of authentication for the SFTP server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access SFTP user credentials within the AWS Transfer for SFTP service. Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call for authentication using the <code>IdentityProviderDetails</code> parameter.</p>"
         },
         "LoggingRole": {
           "shape": "Role",
@@ -566,7 +566,7 @@
         },
         "Policy": {
           "shape": "Policy",
-          "documentation": "<p>A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>"
+          "documentation": "<p>A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p> <note> <p>For scope-down policies, AWS Transfer for SFTP stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p> <p>For an example of a scope-down policy, see \"https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down\"&gt;Creating a Scope-Down Policy.</p> <p>For more information, see \"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\" in the <i>AWS Security Token Service API Reference</i>.</p> </note>"
         },
         "Role": {
           "shape": "Role",
@@ -578,7 +578,7 @@
         },
         "SshPublicKeyBody": {
           "shape": "SshPublicKeyBody",
-          "documentation": "<p>The public portion of the Secure Shall (SSH) key used to authenticate the user to the SFTP server.</p>"
+          "documentation": "<p>The public portion of the Secure Shell (SSH) key used to authenticate the user to the SFTP server.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -698,7 +698,7 @@
         },
         "UserName": {
           "shape": "UserName",
-          "documentation": "<p>The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the AWS Transfer service and perform file transfer tasks.</p>"
+          "documentation": "<p>The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the AWS Transfer for SFTP service and perform file transfer tasks.</p>"
         }
       }
     },
@@ -739,7 +739,7 @@
         },
         "HostKeyFingerprint": {
           "shape": "HostKeyFingerprint",
-          "documentation": "<p>This value contains the Message-Digest Algorithm (MD5) hash of the server's host key. This value is equivalent to the output of <code>ssh-keygen -l -E md5 -f my-new-server-key</code> command.</p>"
+          "documentation": "<p>This value contains the message-digest algorithm (MD5) hash of the server's host key. This value is equivalent to the output of the <code>ssh-keygen -l -E md5 -f my-new-server-key</code> command.</p>"
         },
         "IdentityProviderDetails": {
           "shape": "IdentityProviderDetails",
@@ -747,19 +747,19 @@
         },
         "IdentityProviderType": {
           "shape": "IdentityProviderType",
-          "documentation": "<p>This property defines the mode of authentication method enabled for this service. A value of <code>SERVICE_MANAGED</code>, means that you are using this Server to store and access SFTP user credentials within the service. A value of <code>API_GATEWAY</code> indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.</p>"
+          "documentation": "<p>This property defines the mode of authentication method enabled for this service. A value of <code>SERVICE_MANAGED</code> means that you are using this server to store and access SFTP user credentials within the service. A value of <code>API_GATEWAY</code> indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.</p>"
         },
         "LoggingRole": {
           "shape": "Role",
-          "documentation": "<p>This property is an AWS Identity and Access Management (IAM) entity that allows the server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be view in your CloudWatch logs.</p>"
+          "documentation": "<p>This property is an AWS Identity and Access Management (IAM) entity that allows the server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be viewed in your CloudWatch logs.</p>"
         },
         "ServerId": {
           "shape": "ServerId",
-          "documentation": "<p>This property is a unique system assigned identifier for the SFTP server that you instantiate.</p>"
+          "documentation": "<p>This property is a unique system-assigned identifier for the SFTP server that you instantiate.</p>"
         },
         "State": {
           "shape": "State",
-          "documentation": "<p>The condition of the SFTP server for the server that was described. A value of <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicated that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>"
+          "documentation": "<p>The condition of the SFTP server for the server that was described. A value of <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -770,7 +770,7 @@
           "documentation": "<p>The number of users that are assigned to the SFTP server you specified with the <code>ServerId</code>.</p>"
         }
       },
-      "documentation": "<p>Describe the properties of the server that was specified. Information returned includes: the server Amazon Resource Name (ARN), the authentication configuration and type, the logging role, server Id and state, and assigned tags or metadata. </p>"
+      "documentation": "<p>Describes the properties of the server that was specified. Information returned includes the following: the server Amazon Resource Name (ARN), the authentication configuration and type, the logging role, the server ID and state, and assigned tags or metadata. </p>"
     },
     "DescribedUser": {
       "type": "structure",
@@ -784,7 +784,7 @@
         },
         "HomeDirectory": {
           "shape": "HomeDirectory",
-          "documentation": "<p>This property specifies the landing directory (or folder) which is the location that files are written to or read from in an Amazon S3 bucket for the described user. An example would be: <code>/<i>bucket_name</i>/home/<i>username</i> </code>.</p>"
+          "documentation": "<p>This property specifies the landing directory (or folder), which is the location that files are written to or read from in an Amazon S3 bucket for the described user. An example is <code>/<i>bucket_name</i>/home/<i>username</i> </code>.</p>"
         },
         "Policy": {
           "shape": "Policy",
@@ -807,7 +807,7 @@
           "documentation": "<p>This property is the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your SFTP server.</p>"
         }
       },
-      "documentation": "<p>Returns properties of the user that you wish to describe.</p>"
+      "documentation": "<p>Returns properties of the user that you want to describe.</p>"
     },
     "EndpointDetails": {
       "type": "structure",
@@ -833,7 +833,8 @@
     },
     "HostKey": {
       "type": "string",
-      "max": 4096
+      "max": 4096,
+      "sensitive": true
     },
     "HostKeyFingerprint": {
       "type": "string"
@@ -843,18 +844,18 @@
       "members": {
         "Url": {
           "shape": "Url",
-          "documentation": "<p>The <code>IdentityProviderDetail</code> parameter contains the location of the service endpoint used to authenticate users.</p>"
+          "documentation": "<p>The <code>Url</code> parameter provides contains the location of the service endpoint used to authenticate users.</p>"
         },
         "InvocationRole": {
           "shape": "Role",
-          "documentation": "<p>The <code>Role</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.</p>"
+          "documentation": "<p>The <code>InvocationRole</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.</p>"
         }
       },
-      "documentation": "<p>Returns information related to the type of user authentication that is in use for a server's users. A server can only have one method of authentication.</p>"
+      "documentation": "<p>Returns information related to the type of user authentication that is in use for a server's users. A server can have only one method of authentication.</p>"
     },
     "IdentityProviderType": {
       "type": "string",
-      "documentation": "<p>Returns information related to the type of user authentication that is in use for a server's users. For <code>SERVICE_MANAGED</code> authentication, the Secure Shell (SSH) public keys are stored with a user on an SFTP server instance. For <code>API_GATEWAY</code> authentication, your custom authentication method is implemented by using an API call. A server can only have one method of authentication.</p>",
+      "documentation": "<p>Returns information related to the type of user authentication that is in use for a server's users. For <code>SERVICE_MANAGED</code> authentication, the Secure Shell (SSH) public keys are stored with a user on an SFTP server instance. For <code>API_GATEWAY</code> authentication, your custom authentication method is implemented by using an API call. A server can have only one method of authentication.</p>",
       "enum": [
         "SERVICE_MANAGED",
         "API_GATEWAY"
@@ -903,7 +904,7 @@
           "documentation": "<p>A user name assigned to the <code>ServerID</code> value that you specified.</p>"
         }
       },
-      "documentation": "<p>This response identifies the user, server they belong to, and the identifier of the SSH public key associated with that user. A user can have more than one key on each server that they are associate with.</p>"
+      "documentation": "<p>This response identifies the user, the server they belong to, and the identifier of the SSH public key associated with that user. A user can have more than one key on each server that they are associated with.</p>"
     },
     "ListServersRequest": {
       "type": "structure",
@@ -914,7 +915,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>When additional results are obtained from the ListServers command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional servers.</p>"
+          "documentation": "<p>When additional results are obtained from the <code>ListServers</code> command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional servers.</p>"
         }
       }
     },
@@ -950,7 +951,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>When you request additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional tags.</p>"
+          "documentation": "<p>When you request additional results from the <code>ListTagsForResource</code> operation, a <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional tags.</p>"
         }
       }
     },
@@ -963,11 +964,11 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>When you can get additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional tags.</p>"
+          "documentation": "<p>When you can get additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional tags.</p>"
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>Key-value pairs that are assigned to a resource, usually for the purpose of grouping and searching for items. Tags are metadata that you define that you can use for any purpose.</p>"
+          "documentation": "<p>Key-value pairs that are assigned to a resource, usually for the purpose of grouping and searching for items. Tags are metadata that you define.</p>"
         }
       }
     },
@@ -983,11 +984,11 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>When you can get additional results from the <code>ListUsers</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional users.</p>"
+          "documentation": "<p>When you can get additional results from the <code>ListUsers</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional users.</p>"
         },
         "ServerId": {
           "shape": "ServerId",
-          "documentation": "<p>A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP) server that has users are assigned to it.</p>"
+          "documentation": "<p>A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP) server that has users assigned to it.</p>"
         }
       }
     },
@@ -1000,7 +1001,7 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>When you can get additional results from the <code>ListUsers</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional users.</p>"
+          "documentation": "<p>When you can get additional results from the <code>ListUsers</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional users.</p>"
         },
         "ServerId": {
           "shape": "ServerId",
@@ -1024,7 +1025,7 @@
         },
         "IdentityProviderType": {
           "shape": "IdentityProviderType",
-          "documentation": "<p>The authentication method used to validate a user for the server that was specified. listed. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include <code>SERVICE_MANAGED</code> or <code>API_GATEWAY</code>.</p>"
+          "documentation": "<p>The authentication method used to validate a user for the server that was specified. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include <code>SERVICE_MANAGED</code> or <code>API_GATEWAY</code>.</p>"
         },
         "EndpointType": {
           "shape": "EndpointType",
@@ -1040,7 +1041,7 @@
         },
         "State": {
           "shape": "State",
-          "documentation": "<p>This property describes the condition of the SFTP server for the server that was described. A value of <code>ONLINE</code>&gt; indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicated that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>"
+          "documentation": "<p>This property describes the condition of the SFTP server for the server that was described. A value of <code>ONLINE</code>&gt; indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>"
         },
         "UserCount": {
           "shape": "UserCount",
@@ -1063,7 +1064,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>This property is the unique Amazon Resource Name (ARN) for the user that you wish to learn about.</p>"
+          "documentation": "<p>This property is the unique Amazon Resource Name (ARN) for the user that you want to learn about.</p>"
         },
         "HomeDirectory": {
           "shape": "HomeDirectory",
@@ -1071,7 +1072,7 @@
         },
         "Role": {
           "shape": "Role",
-          "documentation": "<p>The role in use by this user. A <i>role</i> is an AWS Identity and Access Management (IAM) entity that in this case allows the SFTP server to act on a user's behalf. It allows the server to inherit the trust relationship that enables that user to perform file operations to their Amazon S3 bucket.</p>"
+          "documentation": "<p>The role in use by this user. A <i>role</i> is an AWS Identity and Access Management (IAM) entity that, in this case, allows the SFTP server to act on a user's behalf. It allows the server to inherit the trust relationship that enables that user to perform file operations to their Amazon S3 bucket.</p>"
         },
         "SshPublicKeyCount": {
           "shape": "SshPublicKeyCount",
@@ -1108,6 +1109,9 @@
       "pattern": "^$|arn:.*role/.*"
     },
     "Policy": {
+      "type": "string"
+    },
+    "Response": {
       "type": "string"
     },
     "Role": {
@@ -1265,11 +1269,11 @@
       "members": {
         "ServerId": {
           "shape": "ServerId",
-          "documentation": "<p>A system assigned identifier for a specific server. That server's user authentication method is tested with a user name and password.</p>"
+          "documentation": "<p>A system-assigned identifier for a specific server. That server's user authentication method is tested with a user name and password.</p>"
         },
         "UserName": {
           "shape": "UserName",
-          "documentation": "<p>This request parameter is name of the user account to be tested.</p>"
+          "documentation": "<p>This request parameter is the name of the user account to be tested.</p>"
         },
         "UserPassword": {
           "shape": "UserPassword",
@@ -1284,13 +1288,17 @@
         "Url"
       ],
       "members": {
-        "Message": {
-          "shape": "Message",
-          "documentation": "<p>The result of the authorization test as a message. </p>"
+        "Response": {
+          "shape": "Response",
+          "documentation": "<p>The response that is returned from your API Gateway.</p>"
         },
         "StatusCode": {
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status code that is the response from your API Gateway.</p>"
+        },
+        "Message": {
+          "shape": "Message",
+          "documentation": "<p>A message that indicates whether the test was successful or not. </p>"
         },
         "Url": {
           "shape": "Url",
@@ -1331,7 +1339,7 @@
         },
         "HostKey": {
           "shape": "HostKey",
-          "documentation": "<p>The RSA private key as generated by <code>ssh-keygen -N \"\" -f my-new-server-key</code>.</p> <important> <p>If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't update the host key. Accidentally changing a server's host key can be disruptive. For more information, see <a>change-host-key</a> in the <i>AWS SFTP User Guide.</i> </p> </important>"
+          "documentation": "<p>The RSA private key as generated by <code>ssh-keygen -N \"\" -f my-new-server-key</code>.</p> <important> <p>If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't update the host key. Accidentally changing a server's host key can be disruptive.</p> </important> <p> For more information, see \"https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key\" in the <i>AWS SFTP User Guide.</i> </p>"
         },
         "IdentityProviderDetails": {
           "shape": "IdentityProviderDetails",
@@ -1368,11 +1376,11 @@
       "members": {
         "HomeDirectory": {
           "shape": "HomeDirectory",
-          "documentation": "<p>The HomeDirectory parameter specifies the landing directory (folder) for a user when they log in to the server using their client. An example would be: <code>/home/<i>username</i> </code>.</p>"
+          "documentation": "<p>A parameter that specifies the landing directory (folder) for a user when they log in to the server using their client. An example is <code>/home/<i>username</i> </code>.</p>"
         },
         "Policy": {
           "shape": "Policy",
-          "documentation": "<p>Allows you to supply a scope-down policy for your user so you can use the same AWS Identity and Access Management (IAM) role across multiple users. The policy scopes down users access to portions of your Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>"
+          "documentation": "<p>Allows you to supply a scope-down policy for your user so you can use the same AWS Identity and Access Management (IAM) role across multiple users. The policy scopes down user access to portions of your Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p> <note> <p>For scope-down policies, AWS Transfer for SFTP stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p> <p>For an example of a scope-down policy, see \"https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down\"&gt;Creating a Scope-Down Policy.</p> <p>For more information, see \"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\" in the <i>AWS Security Token Service API Reference</i>.</p> </note>"
         },
         "Role": {
           "shape": "Role",
@@ -1384,7 +1392,7 @@
         },
         "UserName": {
           "shape": "UserName",
-          "documentation": "<p>A unique string that identifies a user and is associated with a server as specified by the ServerId. This is the string that will be used by your user when they log in to your SFTP server. This user name is a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.</p>"
+          "documentation": "<p>A unique string that identifies a user and is associated with a server as specified by the <code>ServerId</code>. This is the string that will be used by your user when they log in to your SFTP server. This user name is a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.</p>"
         }
       }
     },
@@ -1417,12 +1425,13 @@
       "pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$"
     },
     "UserPassword": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
     },
     "VpcEndpointId": {
       "type": "string",
       "pattern": "^vpce-[0-9a-f]{17}$"
     }
   },
-  "documentation": "<p>AWS Transfer for SFTP is a fully managed service that enables the transfer of files directly into and out of Amazon S3 using the Secure File Transfer Protocol (SFTP)—also known as Secure Shell (SSH) File Transfer Protocol. AWS helps you seamlessly migrate your file transfer workflows to AWS Transfer for SFTP—by integrating with existing authentication systems, and providing DNS routing with Amazon Route 53—so nothing changes for your customers and partners, or their applications. With your data in S3, you can use it with AWS services for processing, analytics, machine learning, and archiving. Getting started with AWS Transfer for SFTP (AWS SFTP) is easy; there is no infrastructure to buy and setup. </p>"
+  "documentation": "<p>AWS Transfer for SFTP is a fully managed service that enables the transfer of files directly into and out of Amazon S3 using the Secure File Transfer Protocol (SFTP)—also known as Secure Shell (SSH) File Transfer Protocol. AWS helps you seamlessly migrate your file transfer workflows to AWS Transfer for SFTP—by integrating with existing authentication systems, and providing DNS routing with Amazon Route 53—so nothing changes for your customers and partners, or their applications. With your data in S3, you can use it with AWS services for processing, analytics, machine learning, and archiving. Getting started with AWS Transfer for SFTP (AWS SFTP) is easy; there is no infrastructure to buy and set up. </p>"
 }
