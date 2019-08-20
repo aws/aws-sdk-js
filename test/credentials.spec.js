@@ -1431,6 +1431,17 @@
         });
       });
 
+      it('updates OIDCToken in webIdentityCredentials when new one is returned by token file', function() {
+        const credentials = new AWS.TokenFileWebIdentityCredentials();
+        expect(credentials.webIdentityCredentials.service.config.params.WebIdentityToken).to.equal('oidcToken');
+        const updatedOidcToken = 'updatedOidcToken';
+        helpers.spyOn(fs, 'readFileSync').andReturn(updatedOidcToken);
+        credentials.refresh(function() {
+          expect(credentials.webIdentityCredentials.service.config.params.WebIdentityToken).to.equal(updatedOidcToken);
+          done();
+        });
+      });
+
       return it('fails if params are not available in both environment variables or shared config', function() {
         delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
         helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(undefined);
@@ -1679,6 +1690,7 @@
       afterEach(function() {
         AWS.config.credentials = origCreds;
         AWS.config.credentialProvider = origProvider;
+        iniLoader.clearCachedFiles();
       });
       it('uses initialized global credentials', function(done) {
         var masterCredentials = new AWS.Credentials('AKID', 'SECRET');
