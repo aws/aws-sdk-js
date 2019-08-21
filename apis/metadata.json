@@ -746,5 +746,13 @@
   },
   "lakeformation": {
     "name": "LakeFormation"
+  },
+  "forecastservice": {
+    "prefix": "forecast",
+    "name": "ForecastService"
+  },
+  "forecastqueryservice": {
+    "prefix": "forecastquery",
+    "name": "ForecastQueryService"
   }
 }

@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.514.0-->
+<!--LATEST=2.515.0-->
 <!--ENTRYINSERT-->
+
+## 2.515.0
+* feature: ElastiCache: ElastiCache extends support for Scale down for Redis Cluster-mode enabled and disabled replication groups 
+* feature: ForecastQueryService: Amazon Forecast is a fully managed machine learning service that makes it easy for customers to generate accurate forecasts using their historical time-series data
+* feature: ForecastService: Amazon Forecast is a fully managed machine learning service that makes it easy for customers to generate accurate forecasts using their historical time-series data
+* feature: PersonalizeRuntime: Increased limits on number of items recommended and reranked: The maximum number of results returned from getRecommendations API has been increased to 200. The maximum number of items which can be reranked via getPersonalizedRanking API has been increased to 200.
+* feature: SQS: This release provides a way to add metadata tags to a queue when it is created. You can use tags to organize and identify your Amazon SQS queues for cost allocation.
+* feature: SageMaker: Amazon SageMaker now supports Amazon EFS and Amazon FSx for Lustre file systems as data sources for training machine learning models. Amazon SageMaker now supports running training jobs on ml.p3dn.24xlarge instance type. This instance type is offered as a limited private preview for certain SageMaker customers. If you are interested in joining the private preview, please reach out to the SageMaker Product Management team via AWS Support."
 
 ## 2.514.0
 * feature: AlexaForBusiness: Adding support for optional locale input in CreateProfile and UpdateProfile APIs

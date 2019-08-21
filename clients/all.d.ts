@@ -185,3 +185,5 @@ export import ServiceQuotas = require('./servicequotas');
 export import EC2InstanceConnect = require('./ec2instanceconnect');
 export import EventBridge = require('./eventbridge');
 export import LakeFormation = require('./lakeformation');
+export import ForecastService = require('./forecastservice');
+export import ForecastQueryService = require('./forecastqueryservice');

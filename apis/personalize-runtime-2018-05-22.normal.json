@@ -133,8 +133,7 @@
       "type": "list",
       "member": {
         "shape": "ItemID"
-      },
-      "max": 100
+      }
     },
     "ItemID": {
       "type": "string",
@@ -144,12 +143,10 @@
       "type": "list",
       "member": {
         "shape": "PredictedItem"
-      },
-      "max": 100
+      }
     },
     "NumResults": {
       "type": "integer",
-      "max": 100,
       "min": 0
     },
     "PredictedItem": {

@@ -186,5 +186,7 @@ module.exports = {
   ServiceQuotas: require('./servicequotas'),
   EC2InstanceConnect: require('./ec2instanceconnect'),
   EventBridge: require('./eventbridge'),
-  LakeFormation: require('./lakeformation')
+  LakeFormation: require('./lakeformation'),
+  ForecastService: require('./forecastservice'),
+  ForecastQueryService: require('./forecastqueryservice')
 };

@@ -187,6 +187,8 @@ export abstract class ConfigurationServicePlaceholders {
   ec2instanceconnect?: AWS.EC2InstanceConnect.Types.ClientConfiguration;
   eventbridge?: AWS.EventBridge.Types.ClientConfiguration;
   lakeformation?: AWS.LakeFormation.Types.ClientConfiguration;
+  forecastservice?: AWS.ForecastService.Types.ClientConfiguration;
+  forecastqueryservice?: AWS.ForecastQueryService.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -376,4 +378,6 @@ export interface ConfigurationServiceApiVersions {
   ec2instanceconnect?: AWS.EC2InstanceConnect.Types.apiVersion;
   eventbridge?: AWS.EventBridge.Types.apiVersion;
   lakeformation?: AWS.LakeFormation.Types.apiVersion;
+  forecastservice?: AWS.ForecastService.Types.apiVersion;
+  forecastqueryservice?: AWS.ForecastQueryService.Types.apiVersion;
 }
