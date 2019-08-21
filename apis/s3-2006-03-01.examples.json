@@ -1582,7 +1582,7 @@
           "output": {
           }
         },
-        "description": "The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.",
+        "description": "The following example uploads an object. The request specifies optional canned ACL (access control list) to all READ access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.",
         "id": "to-upload-an-object-and-specify-canned-acl-1483397779571",
         "title": "To upload an object and specify canned ACL."
       },
@@ -1650,7 +1650,7 @@
           "output": {
           }
         },
-        "description": "The following example uploads and object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
+        "description": "The following example uploads an object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
         "id": "to-upload-an-object-and-specify-server-side-encryption-and-object-tags-1483398331831",
         "title": "To upload an object and specify server-side encryption and object tags"
       },
