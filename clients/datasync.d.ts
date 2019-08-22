@@ -52,6 +52,14 @@ declare class DataSync extends Service {
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
+   * Creates an endpoint for a Server Message Block (SMB) file system.
+   */
+  createLocationSmb(params: DataSync.Types.CreateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
+  /**
+   * Creates an endpoint for a Server Message Block (SMB) file system.
+   */
+  createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
+  /**
    * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
@@ -115,6 +123,14 @@ declare class DataSync extends Service {
    * Returns metadata, such as bucket name, about an Amazon S3 bucket location.
    */
   describeLocationS3(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationS3Response) => void): Request<DataSync.Types.DescribeLocationS3Response, AWSError>;
+  /**
+   * Returns metadata, such as the path and user information about a SMB location.
+   */
+  describeLocationSmb(params: DataSync.Types.DescribeLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationSmbResponse) => void): Request<DataSync.Types.DescribeLocationSmbResponse, AWSError>;
+  /**
+   * Returns metadata, such as the path and user information about a SMB location.
+   */
+  describeLocationSmb(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationSmbResponse) => void): Request<DataSync.Types.DescribeLocationSmbResponse, AWSError>;
   /**
    * Returns metadata about a task.
    */
@@ -347,6 +363,46 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
   }
+  export interface CreateLocationSmbRequest {
+    /**
+     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network. To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.
+     */
+    Subdirectory: NonEmptySubdirectory;
+    /**
+     * The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this host name to mount the SMB server in a network.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     */
+    ServerHostname: ServerHostname;
+    /**
+     * The user who can mount the share, has the permissions to access files and directories in the SMB share.
+     */
+    User: SmbUser;
+    /**
+     * The name of the domain that the SMB server belongs to.
+     */
+    Domain?: SmbDomain;
+    /**
+     * The password of the user who has permission to access the SMB server.
+     */
+    Password: SmbPassword;
+    /**
+     * The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location. 
+     */
+    AgentArns: AgentArnList;
+    /**
+     * The mount options that are available for DataSync to use to access an SMB location.
+     */
+    MountOptions?: SmbMountOptions;
+    /**
+     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateLocationSmbResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+     */
+    LocationArn?: LocationArn;
+  }
   export interface CreateTaskRequest {
     /**
      * The Amazon Resource Name (ARN) of the source location for the task.
@@ -438,9 +494,6 @@ declare namespace DataSync {
      * The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. 
      */
     EndpointType?: EndpointType;
-    /**
-     * The subnet and the security group that DataSync used to access a VPC endpoint.
-     */
     PrivateLinkConfig?: PrivateLinkConfig;
   }
   export interface DescribeLocationEfsRequest {
@@ -507,6 +560,42 @@ declare namespace DataSync {
     S3Config?: S3Config;
     /**
      * The time that the Amazon S3 bucket location was created.
+     */
+    CreationTime?: Time;
+  }
+  export interface DescribeLocationSmbRequest {
+    /**
+     * The Amazon resource Name (ARN) of the SMB location to describe.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationSmbResponse {
+    /**
+     * The Amazon resource Name (ARN) of the SMB location that was described.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URL of the source SBM location that was described.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+     */
+    AgentArns?: AgentArnList;
+    /**
+     * The user who is logged on the SMB server.
+     */
+    User?: SmbUser;
+    /**
+     * The name of the domain that the SMB server belongs to.
+     */
+    Domain?: SmbDomain;
+    /**
+     * The mount options that are available for DataSync to use to access an SMB location.
+     */
+    MountOptions?: SmbMountOptions;
+    /**
+     * The time that the SMB location was created.
      */
     CreationTime?: Time;
   }
@@ -870,6 +959,16 @@ declare namespace DataSync {
     BucketAccessRoleArn: IamRoleArn;
   }
   export type ServerHostname = string;
+  export type SmbDomain = string;
+  export interface SmbMountOptions {
+    /**
+     * The specific SMB version that you want DataSync to use to mount your SMB share. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the SMB Server server.
+     */
+    Version?: SmbVersion;
+  }
+  export type SmbPassword = string;
+  export type SmbUser = string;
+  export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|string;
   export type SourceNetworkInterfaceArns = NetworkInterfaceArn[];
   export interface StartTaskExecutionRequest {
     /**

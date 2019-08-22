@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.515.0-->
+<!--LATEST=2.516.0-->
 <!--ENTRYINSERT-->
+
+## 2.516.0
+* feature: DataSync: This release adds support for SMB location type.
+* feature: RDS: This release allows users to enable RDS Data API while creating Aurora Serverless databases. 
 
 ## 2.515.0
 * feature: ElastiCache: ElastiCache extends support for Scale down for Redis Cluster-mode enabled and disabled replication groups 

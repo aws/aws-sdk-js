@@ -124,6 +124,28 @@
       ],
       "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see Configuring Amazon S3 Location Settings in the <i>AWS DataSync User Guide.</i> </p>"
     },
+    "CreateLocationSmb": {
+      "name": "CreateLocationSmb",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateLocationSmbRequest"
+      },
+      "output": {
+        "shape": "CreateLocationSmbResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Creates an endpoint for a Server Message Block (SMB) file system.</p>"
+    },
     "CreateTask": {
       "name": "CreateTask",
       "http": {
@@ -299,6 +321,28 @@
         }
       ],
       "documentation": "<p>Returns metadata, such as bucket name, about an Amazon S3 bucket location.</p>"
+    },
+    "DescribeLocationSmb": {
+      "name": "DescribeLocationSmb",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeLocationSmbRequest"
+      },
+      "output": {
+        "shape": "DescribeLocationSmbResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Returns metadata, such as the path and user information about a SMB location.</p>"
     },
     "DescribeTask": {
       "name": "DescribeTask",
@@ -798,6 +842,61 @@
       },
       "documentation": "<p>CreateLocationS3Response</p>"
     },
+    "CreateLocationSmbRequest": {
+      "type": "structure",
+      "required": [
+        "Subdirectory",
+        "ServerHostname",
+        "User",
+        "Password",
+        "AgentArns"
+      ],
+      "members": {
+        "Subdirectory": {
+          "shape": "NonEmptySubdirectory",
+          "documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>"
+        },
+        "ServerHostname": {
+          "shape": "ServerHostname",
+          "documentation": "<p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this host name to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>"
+        },
+        "User": {
+          "shape": "SmbUser",
+          "documentation": "<p>The user who can mount the share, has the permissions to access files and directories in the SMB share.</p>"
+        },
+        "Domain": {
+          "shape": "SmbDomain",
+          "documentation": "<p>The name of the domain that the SMB server belongs to.</p>"
+        },
+        "Password": {
+          "shape": "SmbPassword",
+          "documentation": "<p>The password of the user who has permission to access the SMB server.</p>"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location. </p>"
+        },
+        "MountOptions": {
+          "shape": "SmbMountOptions",
+          "documentation": "<p>The mount options that are available for DataSync to use to access an SMB location.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.</p>"
+        }
+      },
+      "documentation": "<p>CreateLocationSmbRequest</p>"
+    },
+    "CreateLocationSmbResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the source SMB file system location that is created.</p>"
+        }
+      },
+      "documentation": "<p>CreateLocationSmbResponse</p>"
+    },
     "CreateTaskRequest": {
       "type": "structure",
       "required": [
@@ -938,8 +1037,7 @@
           "documentation": "<p>The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. </p>"
         },
         "PrivateLinkConfig": {
-          "shape": "PrivateLinkConfig",
-          "documentation": "<p>The subnet and the security group that DataSync used to access a VPC endpoint.</p>"
+          "shape": "PrivateLinkConfig"
         }
       },
       "documentation": "<p>DescribeAgentResponse</p>"
@@ -1049,6 +1147,53 @@
         }
       },
       "documentation": "<p>DescribeLocationS3Response</p>"
+    },
+    "DescribeLocationSmbRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon resource Name (ARN) of the SMB location to describe.</p>"
+        }
+      },
+      "documentation": "<p>DescribeLocationSmbRequest</p>"
+    },
+    "DescribeLocationSmbResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon resource Name (ARN) of the SMB location that was described.</p>"
+        },
+        "LocationUri": {
+          "shape": "LocationUri",
+          "documentation": "<p>The URL of the source SBM location that was described.</p>"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the source SMB file system location that is created.</p>"
+        },
+        "User": {
+          "shape": "SmbUser",
+          "documentation": "<p>The user who is logged on the SMB server.</p>"
+        },
+        "Domain": {
+          "shape": "SmbDomain",
+          "documentation": "<p>The name of the domain that the SMB server belongs to.</p>"
+        },
+        "MountOptions": {
+          "shape": "SmbMountOptions",
+          "documentation": "<p>The mount options that are available for DataSync to use to access an SMB location.</p>"
+        },
+        "CreationTime": {
+          "shape": "Time",
+          "documentation": "<p>The time that the SMB location was created.</p>"
+        }
+      },
+      "documentation": "<p>DescribeLocationSmbResponse</p>"
     },
     "DescribeTaskExecutionRequest": {
       "type": "structure",
@@ -1482,7 +1627,8 @@
     },
     "LocationUri": {
       "type": "string",
-      "pattern": "(efs|nfs|s3)://[a-zA-Z0-9.\\-]+"
+      "max": 4355,
+      "pattern": "^(efs|nfs|s3|smb)://[a-zA-Z0-9.\\-]+$"
     },
     "LogGroupArn": {
       "type": "string",
@@ -1680,6 +1826,39 @@
       "type": "string",
       "max": 255,
       "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"
+    },
+    "SmbDomain": {
+      "type": "string",
+      "max": 253,
+      "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"
+    },
+    "SmbMountOptions": {
+      "type": "structure",
+      "members": {
+        "Version": {
+          "shape": "SmbVersion",
+          "documentation": "<p>The specific SMB version that you want DataSync to use to mount your SMB share. If you don't specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the SMB Server server.</p>"
+        }
+      },
+      "documentation": "<p>Represents the mount options that are available for DataSync to access an SMB location.</p>"
+    },
+    "SmbPassword": {
+      "type": "string",
+      "max": 104,
+      "pattern": "^.{0,104}$"
+    },
+    "SmbUser": {
+      "type": "string",
+      "max": 104,
+      "pattern": "^[^\\\\x5B\\\\x5D\\\\/:;|=,+*?]{1,104}$"
+    },
+    "SmbVersion": {
+      "type": "string",
+      "enum": [
+        "AUTOMATIC",
+        "SMB2",
+        "SMB3"
+      ]
     },
     "SourceNetworkInterfaceArns": {
       "type": "list",
