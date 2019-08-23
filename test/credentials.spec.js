@@ -1431,7 +1431,7 @@
         });
       });
 
-      it('updates OIDCToken in webIdentityCredentials when new one is returned by token file', function() {
+      it('updates OIDCToken in webIdentityCredentials when new one is returned by token file', function(done) {
         const credentials = new AWS.TokenFileWebIdentityCredentials();
         expect(credentials.webIdentityCredentials.service.config.params.WebIdentityToken).to.equal('oidcToken');
         const updatedOidcToken = 'updatedOidcToken';
@@ -1442,11 +1442,11 @@
         });
       });
 
-      return it('fails if params are not available in both environment variables or shared config', function() {
+      return it('fails if params are not available in both environment variables or shared config', function(done) {
         delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
         helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(undefined);
         new AWS.TokenFileWebIdentityCredentials().refresh(function(err) {
-          expect(err.message).to.match(/^Profile default not found/);
+          expect(err.message).to.match(/^Cannot read property 'default' of undefined/);
           done();
         });
       });
@@ -1690,7 +1690,6 @@
       afterEach(function() {
         AWS.config.credentials = origCreds;
         AWS.config.credentialProvider = origProvider;
-        iniLoader.clearCachedFiles();
       });
       it('uses initialized global credentials', function(done) {
         var masterCredentials = new AWS.Credentials('AKID', 'SECRET');
