@@ -1406,50 +1406,72 @@
         process.env = origEnv;
       });
 
-      it('reads params from environment variables when available', function() {
-        new AWS.TokenFileWebIdentityCredentials();
-        return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('envTokenFile');
+      it('creates client only when refresh is called', function(done) {
+        var credentials = new AWS.TokenFileWebIdentityCredentials();
+        expect(credentials.service).not.to.exist;
+        credentials.refresh(function() {
+          expect(credentials.service).to.exist;
+          done();
+        });
+      });
+
+      it('reads params from environment variables when available', function(done) {
+        new AWS.TokenFileWebIdentityCredentials().refresh(function() {
+          expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('envTokenFile');
+          done();
+        });
       });
 
       describe('reads params from shared config when ones not available from environment variable', function() {
-        it('when AWS_WEB_IDENTITY_TOKEN_FILE is not available', function() {
+        it('when AWS_WEB_IDENTITY_TOKEN_FILE is not available', function(done) {
           delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
-          new AWS.TokenFileWebIdentityCredentials();
-          return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+          new AWS.TokenFileWebIdentityCredentials().refresh(function() {
+            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            done();
+          });
         });
 
-        it('when AWS_IAM_ROLE_ARN is not available', function() {
+        it('when AWS_IAM_ROLE_ARN is not available', function(done) {
           delete process.env.AWS_IAM_ROLE_ARN;
-          new AWS.TokenFileWebIdentityCredentials();
-          return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+          new AWS.TokenFileWebIdentityCredentials().refresh(function() {
+            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            done();
+          });
         });
 
-        return it('when process.env is empty', function() {
+        return it('when process.env is empty', function(done) {
           process.env = {};
-          new AWS.TokenFileWebIdentityCredentials();
-          return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+          new AWS.TokenFileWebIdentityCredentials().refresh(function() {
+            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            done();
+          });
         });
       });
 
       it('updates OIDCToken in webIdentityCredentials when new one is returned by token file', function(done) {
         var credentials = new AWS.TokenFileWebIdentityCredentials();
-        expect(credentials.service.config.params.WebIdentityToken).to.equal('oidcToken');
-        var updatedOidcToken = 'updatedOidcToken';
-        helpers.spyOn(fs, 'readFileSync').andReturn(updatedOidcToken);
         credentials.refresh(function() {
-          expect(credentials.service.config.params.WebIdentityToken).to.equal(updatedOidcToken);
-          done();
+          expect(credentials.service.config.params.WebIdentityToken).to.equal('oidcToken');
+          var updatedOidcToken = 'updatedOidcToken';
+          helpers.spyOn(fs, 'readFileSync').andReturn(updatedOidcToken);
+          credentials.refresh(function() {
+            expect(credentials.service.config.params.WebIdentityToken).to.equal(updatedOidcToken);
+            done();
+          });
         });
       });
 
-      it ('retries in case of IDPCommunicationErrorException or InvalidIdentityToken', function() {
+      it ('retries in case of IDPCommunicationErrorException or InvalidIdentityToken', function(done) {
         var credentials = new AWS.TokenFileWebIdentityCredentials();
-        var error = {
-          code: 'IDPCommunicationErrorException'
-        };
-        expect(credentials.service.retryableError(error)).to.equal(true);
-        error.code = 'InvalidIdentityToken';
-        expect(credentials.service.retryableError(error)).to.equal(true);
+        credentials.refresh(function() {
+          var error = {
+            code: 'IDPCommunicationErrorException'
+          };
+          expect(credentials.service.retryableError(error)).to.equal(true);
+          error.code = 'InvalidIdentityToken';
+          expect(credentials.service.retryableError(error)).to.equal(true);
+          done();
+        });
       });
 
       return it('fails if params are not available in both environment variables or shared config', function(done) {
