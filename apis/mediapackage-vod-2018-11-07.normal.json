@@ -979,6 +979,11 @@
     "HlsEncryption": {
       "documentation": "An HTTP Live Streaming (HLS) encryption configuration.",
       "members": {
+        "ConstantInitializationVector": {
+          "documentation": "A constant initialization vector for encryption (optional).\nWhen not specified the initialization vector will be periodically rotated.\n",
+          "locationName": "constantInitializationVector",
+          "shape": "__string"
+        },
         "EncryptionMethod": {
           "documentation": "The encryption method to use.",
           "locationName": "encryptionMethod",

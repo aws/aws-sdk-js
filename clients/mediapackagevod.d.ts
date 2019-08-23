@@ -396,6 +396,12 @@ rounded to the nearest multiple of the source segment duration.
   export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
   export interface HlsEncryption {
     /**
+     * A constant initialization vector for encryption (optional).
+When not specified the initialization vector will be periodically rotated.
+
+     */
+    ConstantInitializationVector?: __string;
+    /**
      * The encryption method to use.
      */
     EncryptionMethod?: EncryptionMethod;

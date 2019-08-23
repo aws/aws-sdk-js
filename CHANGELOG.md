@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.516.0-->
+<!--LATEST=2.517.0-->
 <!--ENTRYINSERT-->
+
+## 2.517.0
+* feature: Credentials: Added TokenFileWebIdentityCredentials
+* feature: EC2: This release of EC2 VM Import Export adds support for exporting Amazon Machine Image(AMI)s to a VM file
+* feature: MediaPackageVod: Adds optional Constant Initialization Vector (IV) to HLS Encryption for MediaPackage VOD.
+* feature: TranscribeService: Amazon Transcribe - support transcriptions from audio sources in Russian (ru-RU) and Chinese (zh-CN).
 
 ## 2.516.0
 * feature: DataSync: This release adds support for SMB location type.

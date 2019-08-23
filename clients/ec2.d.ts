@@ -1213,11 +1213,19 @@ declare class EC2 extends Service {
    */
   describeElasticGpus(callback?: (err: AWSError, data: EC2.Types.DescribeElasticGpusResult) => void): Request<EC2.Types.DescribeElasticGpusResult, AWSError>;
   /**
-   * Describes the specified export tasks or all your export tasks.
+   * Describes the specified export image tasks or all your export image tasks.
+   */
+  describeExportImageTasks(params: EC2.Types.DescribeExportImageTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeExportImageTasksResult) => void): Request<EC2.Types.DescribeExportImageTasksResult, AWSError>;
+  /**
+   * Describes the specified export image tasks or all your export image tasks.
+   */
+  describeExportImageTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportImageTasksResult) => void): Request<EC2.Types.DescribeExportImageTasksResult, AWSError>;
+  /**
+   * Describes the specified export instance tasks or all your export instance tasks.
    */
   describeExportTasks(params: EC2.Types.DescribeExportTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
-   * Describes the specified export tasks or all your export tasks.
+   * Describes the specified export instance tasks or all your export instance tasks.
    */
   describeExportTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
@@ -2053,6 +2061,14 @@ declare class EC2 extends Service {
    */
   exportClientVpnClientConfiguration(callback?: (err: AWSError, data: EC2.Types.ExportClientVpnClientConfigurationResult) => void): Request<EC2.Types.ExportClientVpnClientConfigurationResult, AWSError>;
   /**
+   * Exports an Amazon Machine Image (AMI) to a VM file. For more information, see Exporting a VM Directory from an Amazon Machine Image (AMI) in the VM Import/Export User Guide.
+   */
+  exportImage(params: EC2.Types.ExportImageRequest, callback?: (err: AWSError, data: EC2.Types.ExportImageResult) => void): Request<EC2.Types.ExportImageResult, AWSError>;
+  /**
+   * Exports an Amazon Machine Image (AMI) to a VM file. For more information, see Exporting a VM Directory from an Amazon Machine Image (AMI) in the VM Import/Export User Guide.
+   */
+  exportImage(callback?: (err: AWSError, data: EC2.Types.ExportImageResult) => void): Request<EC2.Types.ExportImageResult, AWSError>;
+  /**
    * Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range.
    */
   exportTransitGatewayRoutes(params: EC2.Types.ExportTransitGatewayRoutesRequest, callback?: (err: AWSError, data: EC2.Types.ExportTransitGatewayRoutesResult) => void): Request<EC2.Types.ExportTransitGatewayRoutesResult, AWSError>;
@@ -2229,11 +2245,11 @@ declare class EC2 extends Service {
    */
   modifyEbsDefaultKmsKeyId(callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
   /**
-   * Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of type maintain. While the EC2 Fleet is being modified, it is in the modifying state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is lowestPrice, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools that are optimally chosen based on the available Spot Instance capacity. To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.
+   * Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of type maintain. While the EC2 Fleet is being modified, it is in the modifying state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is lowestPrice, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifyFleet(params: EC2.Types.ModifyFleetRequest, callback?: (err: AWSError, data: EC2.Types.ModifyFleetResult) => void): Request<EC2.Types.ModifyFleetResult, AWSError>;
   /**
-   * Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of type maintain. While the EC2 Fleet is being modified, it is in the modifying state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is lowestPrice, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools that are optimally chosen based on the available Spot Instance capacity. To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.
+   * Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of type maintain. While the EC2 Fleet is being modified, it is in the modifying state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is lowestPrice, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifyFleet(callback?: (err: AWSError, data: EC2.Types.ModifyFleetResult) => void): Request<EC2.Types.ModifyFleetResult, AWSError>;
   /**
@@ -2349,11 +2365,11 @@ declare class EC2 extends Service {
    */
   modifySnapshotAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified Spot Fleet request. You can only modify a Spot Fleet request of type maintain. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, Spot Fleet launches instances from Spot Instance pools that are optimally chosen based on the available Spot Instance capacity. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the Spot Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
+   * Modifies the specified Spot Fleet request. You can only modify a Spot Fleet request of type maintain. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the Spot Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifySpotFleetRequest(params: EC2.Types.ModifySpotFleetRequestRequest, callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
   /**
-   * Modifies the specified Spot Fleet request. You can only modify a Spot Fleet request of type maintain. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, Spot Fleet launches instances from Spot Instance pools that are optimally chosen based on the available Spot Instance capacity. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the Spot Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
+   * Modifies the specified Spot Fleet request. You can only modify a Spot Fleet request of type maintain. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the Spot Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifySpotFleetRequest(callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
   /**
@@ -4933,7 +4949,7 @@ declare namespace EC2 {
      */
     CoreCount?: Integer;
     /**
-     * The number of threads per CPU core. To disable Intel Hyper-Threading Technology for the instance, specify a value of 1. Otherwise, specify the default value of 2.
+     * The number of threads per CPU core. To disable multithreading for the instance, specify a value of 1. Otherwise, specify the default value of 2.
      */
     ThreadsPerCore?: Integer;
   }
@@ -7771,6 +7787,39 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeExportImageTasksMaxResults = number;
+  export interface DescribeExportImageTasksRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Filter tasks using the task-state filter and one of the following values: active, completed, deleting, or deleted.
+     */
+    Filters?: FilterList;
+    /**
+     * The IDs of the export image tasks.
+     */
+    ExportImageTaskIds?: ExportImageTaskIdList;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: DescribeExportImageTasksMaxResults;
+    /**
+     * A token that indicates the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeExportImageTasksResult {
+    /**
+     * Information about the export image tasks.
+     */
+    ExportImageTasks?: ExportImageTaskList;
+    /**
+     * The token to use to get the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeExportTasksRequest {
     /**
      * The export task IDs.
@@ -8228,15 +8277,15 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Filter tasks using the task-state filter and one of the following values: active, completed, deleting, deleted.
+     * Filter tasks using the task-state filter and one of the following values: active, completed, deleting, or deleted.
      */
     Filters?: FilterList;
     /**
-     * A list of import image task IDs.
+     * The IDs of the import image tasks.
      */
     ImportTaskIds?: ImportTaskIdList;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of results to return in a single call.
      */
     MaxResults?: Integer;
     /**
@@ -10954,6 +11003,106 @@ declare namespace EC2 {
     ClientConfiguration?: String;
   }
   export type ExportEnvironment = "citrix"|"vmware"|"microsoft"|string;
+  export interface ExportImageRequest {
+    /**
+     * Token to enable idempotency for export image requests.
+     */
+    ClientToken?: String;
+    /**
+     * A description of the image being exported. The maximum length is 255 bytes.
+     */
+    Description?: String;
+    /**
+     * The disk image format.
+     */
+    DiskImageFormat: DiskImageFormat;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the image.
+     */
+    ImageId: String;
+    /**
+     * Information about the destination S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+     */
+    S3ExportLocation: ExportTaskS3LocationRequest;
+    /**
+     * The name of the role that grants VM Import/Export permission to export images to your S3 bucket. If this parameter is not specified, the default role is named 'vmimport'.
+     */
+    RoleName?: String;
+  }
+  export interface ExportImageResult {
+    /**
+     * A description of the image being exported.
+     */
+    Description?: String;
+    /**
+     * The disk image format for the exported image.
+     */
+    DiskImageFormat?: DiskImageFormat;
+    /**
+     * The ID of the export image task.
+     */
+    ExportImageTaskId?: String;
+    /**
+     * The ID of the image.
+     */
+    ImageId?: String;
+    /**
+     * The name of the role that grants VM Import/Export permission to export images to your S3 bucket.
+     */
+    RoleName?: String;
+    /**
+     * The percent complete of the export image task.
+     */
+    Progress?: String;
+    /**
+     * Information about the destination S3 bucket.
+     */
+    S3ExportLocation?: ExportTaskS3Location;
+    /**
+     * The status of the export image task. The possible values are active, completed, deleting, and deleted.
+     */
+    Status?: String;
+    /**
+     * The status message for the export image task.
+     */
+    StatusMessage?: String;
+  }
+  export interface ExportImageTask {
+    /**
+     * A description of the image being exported.
+     */
+    Description?: String;
+    /**
+     * The ID of the export image task.
+     */
+    ExportImageTaskId?: String;
+    /**
+     * The ID of the image.
+     */
+    ImageId?: String;
+    /**
+     * The percent complete of the export image task.
+     */
+    Progress?: String;
+    /**
+     * Information about the destination S3 bucket.
+     */
+    S3ExportLocation?: ExportTaskS3Location;
+    /**
+     * The status of the export image task. The possible values are active, completed, deleting, and deleted.
+     */
+    Status?: String;
+    /**
+     * The status message for the export image task.
+     */
+    StatusMessage?: String;
+  }
+  export type ExportImageTaskIdList = String[];
+  export type ExportImageTaskList = ExportImageTask[];
   export interface ExportTask {
     /**
      * A description of the resource being exported.
@@ -10982,6 +11131,26 @@ declare namespace EC2 {
   }
   export type ExportTaskIdStringList = String[];
   export type ExportTaskList = ExportTask[];
+  export interface ExportTaskS3Location {
+    /**
+     * The destination S3 bucket.
+     */
+    S3Bucket?: String;
+    /**
+     * The prefix (logical hierarchy) in the bucket.
+     */
+    S3Prefix?: String;
+  }
+  export interface ExportTaskS3LocationRequest {
+    /**
+     * The destination S3 bucket.
+     */
+    S3Bucket: String;
+    /**
+     * The prefix (logical hierarchy) in the bucket.
+     */
+    S3Prefix?: String;
+  }
   export type ExportTaskState = "active"|"cancelling"|"cancelled"|"completed"|string;
   export interface ExportToS3Task {
     /**
@@ -13665,7 +13834,7 @@ declare namespace EC2 {
      */
     CoreCount?: Integer;
     /**
-     * The number of threads per CPU core. To disable Intel Hyper-Threading Technology for the instance, specify a value of 1. Otherwise, specify the default value of 2.
+     * The number of threads per CPU core. To disable multithreading for the instance, specify a value of 1. Otherwise, specify the default value of 2.
      */
     ThreadsPerCore?: Integer;
   }
@@ -18628,7 +18797,7 @@ declare namespace EC2 {
   }
   export interface SpotFleetRequestConfigData {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet request. If the allocation strategy is lowestPrice, Spot Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, Spot Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, Spot Fleet launches instances from Spot Instance pools that are optimally chosen based on the available Spot Instance capacity.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet request. If the allocation strategy is lowestPrice, Spot Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, Spot Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: AllocationStrategy;
     /**
@@ -18859,7 +19028,7 @@ declare namespace EC2 {
   }
   export interface SpotOptions {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowestPrice, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools that are optimally chosen based on the available Spot Instance capacity.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowestPrice, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -18889,7 +19058,7 @@ declare namespace EC2 {
   }
   export interface SpotOptionsRequest {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowestPrice, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools that are optimally chosen based on the available Spot Instance capacity.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowestPrice, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**

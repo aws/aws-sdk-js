@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.516.0',
+	  VERSION: '2.517.0',
 
 	  /**
 	   * @api private
@@ -1119,6 +1119,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var operation = (operations || {})[req.operation];
 	    if (!operation || !operation.input || !operation.input.payload) return undefined;
 	    return operation.input.members[operation.input.payload];
+	  },
+
+	  getProfilesFromSharedConfig: function getProfilesFromSharedConfig(iniLoader, filename) {
+	    var profiles = {};
+	    var profilesFromConfig = {};
+	    if (process.env[util.configOptInEnv]) {
+	      var profilesFromConfig = iniLoader.loadFrom({
+	        isConfig: true,
+	        filename: process.env[util.sharedConfigFileEnv]
+	      });
+	    }
+	    var profilesFromCreds = iniLoader.loadFrom({
+	      filename: filename ||
+	        (process.env[util.configOptInEnv] && process.env[util.sharedCredentialsFileEnv])
+	    });
+	    for (var i = 0, profileNames = Object.keys(profilesFromConfig); i < profileNames.length; i++) {
+	      profiles[profileNames[i]] = profilesFromConfig[profileNames[i]];
+	    }
+	    for (var i = 0, profileNames = Object.keys(profilesFromCreds); i < profileNames.length; i++) {
+	      profiles[profileNames[i]] = profilesFromCreds[profileNames[i]];
+	    }
+	    return profiles;
 	  },
 
 	  /**

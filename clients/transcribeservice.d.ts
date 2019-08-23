@@ -184,7 +184,7 @@ declare namespace TranscribeService {
      */
     DownloadUri?: Uri;
   }
-  export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|"es-ES"|"en-IN"|"hi-IN"|"ar-SA"|string;
+  export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|"es-ES"|"en-IN"|"hi-IN"|"ar-SA"|"ru-RU"|"zh-CN"|string;
   export interface ListTranscriptionJobsRequest {
     /**
      * When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date. 
@@ -292,7 +292,7 @@ declare namespace TranscribeService {
      */
     LanguageCode: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio track in the input media file. 
+     * The sample rate, in Hertz, of the audio track in the input media file.  If you do not specify the media sample rate, Amazon Transcribe determines the sample rate. If you specify the sample rate, it must match the sample rate detected by Amazon Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank and let Amazon Transcribe determine the sample rate.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
