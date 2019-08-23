@@ -1380,6 +1380,109 @@
         expect(AWS.ECSCredentials).to.equal(AWS.RemoteCredentials);
       });
     });
+    describe('AWS.TokenFileWebIdentityCredentials', function() {
+      var origEnv;
+      var fs = require('fs');
+      beforeEach(function() {
+        origEnv = process.env;
+        process.env = {
+          AWS_WEB_IDENTITY_TOKEN_FILE: 'envTokenFile',
+          AWS_IAM_ROLE_ARN: 'envRoleArn',
+          ENV_ROLE_SESSION_NAME: 'envSessionName'
+        };
+        helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(
+          {
+            'default': {
+              'web_identity_token_file': 'cfgTokenFile',
+              'role_arn': 'cfgRoleArn',
+              'role_session_name': 'cfgSessionName'
+            }
+          }
+        );
+        helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
+      });
+      afterEach(function() {
+        iniLoader.clearCachedFiles();
+        process.env = origEnv;
+      });
+
+      it('creates client only when refresh is called', function(done) {
+        var credentials = new AWS.TokenFileWebIdentityCredentials();
+        expect(credentials.service).not.to.exist;
+        credentials.refresh(function() {
+          expect(credentials.service).to.exist;
+          done();
+        });
+      });
+
+      it('reads params from environment variables when available', function(done) {
+        new AWS.TokenFileWebIdentityCredentials().refresh(function() {
+          expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('envTokenFile');
+          done();
+        });
+      });
+
+      describe('reads params from shared config when ones not available from environment variable', function() {
+        it('when AWS_WEB_IDENTITY_TOKEN_FILE is not available', function(done) {
+          delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
+          new AWS.TokenFileWebIdentityCredentials().refresh(function() {
+            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            done();
+          });
+        });
+
+        it('when AWS_IAM_ROLE_ARN is not available', function(done) {
+          delete process.env.AWS_IAM_ROLE_ARN;
+          new AWS.TokenFileWebIdentityCredentials().refresh(function() {
+            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            done();
+          });
+        });
+
+        return it('when process.env is empty', function(done) {
+          process.env = {};
+          new AWS.TokenFileWebIdentityCredentials().refresh(function() {
+            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            done();
+          });
+        });
+      });
+
+      it('updates OIDCToken in webIdentityCredentials when new one is returned by token file', function(done) {
+        var credentials = new AWS.TokenFileWebIdentityCredentials();
+        credentials.refresh(function() {
+          expect(credentials.service.config.params.WebIdentityToken).to.equal('oidcToken');
+          var updatedOidcToken = 'updatedOidcToken';
+          helpers.spyOn(fs, 'readFileSync').andReturn(updatedOidcToken);
+          credentials.refresh(function() {
+            expect(credentials.service.config.params.WebIdentityToken).to.equal(updatedOidcToken);
+            done();
+          });
+        });
+      });
+
+      it ('retries in case of IDPCommunicationErrorException or InvalidIdentityToken', function(done) {
+        var credentials = new AWS.TokenFileWebIdentityCredentials();
+        credentials.refresh(function() {
+          var error = {
+            code: 'IDPCommunicationErrorException'
+          };
+          expect(credentials.service.retryableError(error)).to.equal(true);
+          error.code = 'InvalidIdentityToken';
+          expect(credentials.service.retryableError(error)).to.equal(true);
+          done();
+        });
+      });
+
+      return it('fails if params are not available in both environment variables or shared config', function(done) {
+        delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
+        helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({});
+        new AWS.TokenFileWebIdentityCredentials().refresh(function(err) {
+          expect(err.message).to.match(/^Profile default not found/);
+          done();
+        });
+      });
+    });
   }
 
   describe('AWS.TemporaryCredentials', function() {
