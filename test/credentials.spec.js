@@ -1387,8 +1387,8 @@
         origEnv = process.env;
         process.env = {
           AWS_WEB_IDENTITY_TOKEN_FILE: 'envTokenFile',
-          AWS_IAM_ROLE_ARN: 'envRoleArn',
-          ENV_ROLE_SESSION_NAME: 'envSessionName'
+          AWS_ROLE_ARN: 'envRoleArn',
+          AWS_ROLE_SESSION_NAME: 'envSessionName'
         };
         helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(
           {
@@ -1432,7 +1432,7 @@
         });
 
         it('when AWS_IAM_ROLE_ARN is not available', function(done) {
-          delete process.env.AWS_IAM_ROLE_ARN;
+          delete process.env.AWS_ROLE_ARN;
           new AWS.TokenFileWebIdentityCredentials().refresh(function() {
             expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
             done();
