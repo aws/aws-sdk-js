@@ -1432,14 +1432,24 @@
       });
 
       it('updates OIDCToken in webIdentityCredentials when new one is returned by token file', function(done) {
-        const credentials = new AWS.TokenFileWebIdentityCredentials();
+        var credentials = new AWS.TokenFileWebIdentityCredentials();
         expect(credentials.webIdentityCredentials.service.config.params.WebIdentityToken).to.equal('oidcToken');
-        const updatedOidcToken = 'updatedOidcToken';
+        var updatedOidcToken = 'updatedOidcToken';
         helpers.spyOn(fs, 'readFileSync').andReturn(updatedOidcToken);
         credentials.refresh(function() {
           expect(credentials.webIdentityCredentials.service.config.params.WebIdentityToken).to.equal(updatedOidcToken);
           done();
         });
+      });
+
+      it ('retries in case of IDPCommunicationErrorException or InvalidIdentityToken', function() {
+        var credentials = new AWS.TokenFileWebIdentityCredentials();
+        var error = {
+          code: 'IDPCommunicationErrorException'
+        };
+        expect(credentials.webIdentityCredentials.service.retryableError(error)).to.equal(true);
+        error.code = 'InvalidIdentityToken';
+        expect(credentials.webIdentityCredentials.service.retryableError(error)).to.equal(true);
       });
 
       return it('fails if params are not available in both environment variables or shared config', function(done) {
