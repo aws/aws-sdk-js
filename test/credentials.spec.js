@@ -1444,9 +1444,9 @@
 
       return it('fails if params are not available in both environment variables or shared config', function(done) {
         delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
-        helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(undefined);
+        helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({});
         new AWS.TokenFileWebIdentityCredentials().refresh(function(err) {
-          expect(err.message).to.match(/^Cannot read property 'default' of undefined/);
+          expect(err.message).to.match(/^Profile default not found/);
           done();
         });
       });
