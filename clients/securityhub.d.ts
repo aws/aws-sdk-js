@@ -321,11 +321,11 @@ declare namespace SecurityHub {
     /**
      * The account ID of the Security Hub master account that sent the invitation.
      */
-    MasterId?: NonEmptyString;
+    MasterId: NonEmptyString;
     /**
      * The ID of the invitation sent from the Security Hub master account.
      */
-    InvitationId?: NonEmptyString;
+    InvitationId: NonEmptyString;
   }
   export interface AcceptInvitationResponse {
   }
@@ -1031,7 +1031,7 @@ declare namespace SecurityHub {
     /**
      * A list of account IDs that specify the accounts that invitations to Security Hub are declined from.
      */
-    AccountIds?: AccountIdList;
+    AccountIds: AccountIdList;
   }
   export interface DeclineInvitationsResponse {
     /**
@@ -1067,7 +1067,7 @@ declare namespace SecurityHub {
     /**
      * A list of the account IDs that sent the invitations to delete.
      */
-    AccountIds?: AccountIdList;
+    AccountIds: AccountIdList;
   }
   export interface DeleteInvitationsResponse {
     /**
