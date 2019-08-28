@@ -12,11 +12,11 @@ declare class GlobalAccelerator extends Service {
   constructor(options?: GlobalAccelerator.Types.ClientConfiguration)
   config: Config & GlobalAccelerator.Types.ClientConfiguration;
   /**
-   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.
+   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.  You must specify the US-West-2 (Oregon) Region to create or update accelerators. 
    */
   createAccelerator(params: GlobalAccelerator.Types.CreateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
-   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.
+   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.  You must specify the US-West-2 (Oregon) Region to create or update accelerators. 
    */
   createAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class GlobalAccelerator extends Service {
    */
   listListeners(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
   /**
-   * Update an accelerator.
+   * Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to Example.  You must specify the US-West-2 (Oregon) Region to create or update accelerators. 
    */
   updateAccelerator(params: GlobalAccelerator.Types.UpdateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
-   * Update an accelerator.
+   * Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to Example.  You must specify the US-West-2 (Oregon) Region to create or update accelerators. 
    */
   updateAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
@@ -155,7 +155,7 @@ declare namespace GlobalAccelerator {
      */
     AcceleratorArn?: GenericString;
     /**
-     * The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
+     * The name of the accelerator. The name must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
      */
     Name?: GenericString;
     /**
@@ -163,11 +163,11 @@ declare namespace GlobalAccelerator {
      */
     IpAddressType?: IpAddressType;
     /**
-     * Indicates whether theaccelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.
+     * Indicates whether the accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.
      */
     Enabled?: GenericBoolean;
     /**
-     * IP address set associated with the accelerator.
+     * The static IP addresses that Global Accelerator associates with the accelerator.
      */
     IpSets?: IpSets;
     /**
@@ -320,9 +320,9 @@ declare namespace GlobalAccelerator {
   }
   export interface DescribeAcceleratorAttributesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe. Value is required.
+     * The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.
      */
-    AcceleratorArn?: GenericString;
+    AcceleratorArn: GenericString;
   }
   export interface DescribeAcceleratorAttributesResponse {
     /**
@@ -375,11 +375,15 @@ declare namespace GlobalAccelerator {
      * The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see Endpoint Weights in the AWS Global Accelerator Developer Guide.
      */
     Weight?: EndpointWeight;
+    /**
+     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator. For more information, see  Viewing Client IP Addresses in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     */
+    ClientIPPreservationEnabled?: GenericBoolean;
   }
   export type EndpointConfigurations = EndpointConfiguration[];
   export interface EndpointDescription {
     /**
-     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
+     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. An Application Load Balancer can be either internal or internet-facing.
      */
     EndpointId?: GenericString;
     /**
@@ -394,6 +398,10 @@ declare namespace GlobalAccelerator {
      * The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided. If the endpoint state is unhealthy, the reason code can be one of the following values:    Timeout: The health check requests to the endpoint are timing out before returning a status.    Failed: The health check failed, for example because the endpoint response was invalid (malformed).   If the endpoint state is initial, the reason code can be one of the following values:    ProvisioningInProgress: The endpoint is in the process of being provisioned.    InitialHealthChecking: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.  
      */
     HealthReason?: GenericString;
+    /**
+     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator. For more information, see  Viewing Client IP Addresses in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     */
+    ClientIPPreservationEnabled?: GenericBoolean;
   }
   export type EndpointDescriptions = EndpointDescription[];
   export interface EndpointGroup {
@@ -563,9 +571,9 @@ declare namespace GlobalAccelerator {
   export type TrafficDialPercentage = number;
   export interface UpdateAcceleratorAttributesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the accelerator that you want to update. Attribute is required.
+     * The Amazon Resource Name (ARN) of the accelerator that you want to update.
      */
-    AcceleratorArn?: GenericString;
+    AcceleratorArn: GenericString;
     /**
      * Update whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow Logs in the AWS Global Accelerator Developer Guide.
      */

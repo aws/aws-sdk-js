@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.518.0-->
+<!--LATEST=2.519.0-->
 <!--ENTRYINSERT-->
+
+## 2.519.0
+* feature: GlobalAccelerator: API Update for AWS Global Accelerator Client IP Preservation
+* feature: MediaConvert: This release adds the ability to send a job to an on-demand queue while simulating the performance of a job sent to a reserved queue. Use this setting to estimate the number of reserved transcoding slots (RTS) you need for a reserved queue.
+* feature: SQS: Added support for message system attributes, which currently lets you send AWS X-Ray trace IDs through Amazon SQS.
 
 ## 2.518.0
 * bugfix: Credentials: Update environment variable names in TokenFileWebIdentityCredentials

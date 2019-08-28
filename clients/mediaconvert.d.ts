@@ -905,6 +905,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     Settings: JobSettings;
     /**
+     * Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.
+     */
+    SimulateReservedQueue?: SimulateReservedQueue;
+    /**
      * Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
      */
     StatusUpdateInterval?: StatusUpdateInterval;
@@ -2539,6 +2543,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Settings: JobSettings;
     /**
+     * Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.
+     */
+    SimulateReservedQueue?: SimulateReservedQueue;
+    /**
      * A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
      */
     Status?: JobStatus;
@@ -3783,6 +3791,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Framerate?: SccDestinationFramerate;
   }
+  export type SimulateReservedQueue = "DISABLED"|"ENABLED"|string;
   export interface SpekeKeyProvider {
     /**
      * If you want your key provider to encrypt the content keys that it provides to MediaConvert, set up a certificate with a master key using AWS Certificate Manager. Specify the certificate's Amazon Resource Name (ARN) here.

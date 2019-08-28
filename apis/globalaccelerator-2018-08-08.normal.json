@@ -36,7 +36,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to <b>Example</b>.</p>"
+      "documentation": "<p>Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to <b>Example</b>.</p> <important> <p>You must specify the US-West-2 (Oregon) Region to create or update accelerators.</p> </important>"
     },
     "CreateEndpointGroup": {
       "name": "CreateEndpointGroup",
@@ -68,6 +68,9 @@
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. To see an AWS CLI example of creating an endpoint group, scroll down to <b>Example</b>.</p>"
@@ -142,6 +145,9 @@
       },
       "errors": [
         {
+          "shape": "InvalidArgumentException"
+        },
+        {
           "shape": "EndpointGroupNotFoundException"
         },
         {
@@ -160,6 +166,9 @@
         "shape": "DeleteListenerRequest"
       },
       "errors": [
+        {
+          "shape": "InvalidArgumentException"
+        },
         {
           "shape": "ListenerNotFoundException"
         },
@@ -236,6 +245,9 @@
       },
       "errors": [
         {
+          "shape": "InvalidArgumentException"
+        },
+        {
           "shape": "EndpointGroupNotFoundException"
         },
         {
@@ -282,6 +294,9 @@
         "shape": "ListAcceleratorsResponse"
       },
       "errors": [
+        {
+          "shape": "InvalidArgumentException"
+        },
         {
           "shape": "InvalidNextTokenException"
         },
@@ -333,6 +348,9 @@
       },
       "errors": [
         {
+          "shape": "InvalidArgumentException"
+        },
+        {
           "shape": "AcceleratorNotFoundException"
         },
         {
@@ -367,7 +385,7 @@
           "shape": "InvalidArgumentException"
         }
       ],
-      "documentation": "<p>Update an accelerator.</p>"
+      "documentation": "<p>Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to <b>Example</b>.</p> <important> <p>You must specify the US-West-2 (Oregon) Region to create or update accelerators.</p> </important>"
     },
     "UpdateAcceleratorAttributes": {
       "name": "UpdateAcceleratorAttributes",
@@ -390,6 +408,9 @@
         },
         {
           "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Update the attributes for an accelerator. To see an AWS CLI example of updating an accelerator to enable flow logs, scroll down to <b>Example</b>.</p>"
@@ -418,6 +439,9 @@
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Update an endpoint group. To see an AWS CLI example of updating an endpoint group, scroll down to <b>Example</b>.</p>"
@@ -464,7 +488,7 @@
         },
         "Name": {
           "shape": "GenericString",
-          "documentation": "<p>The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.</p>"
+          "documentation": "<p>The name of the accelerator. The name must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.</p>"
         },
         "IpAddressType": {
           "shape": "IpAddressType",
@@ -472,11 +496,11 @@
         },
         "Enabled": {
           "shape": "GenericBoolean",
-          "documentation": "<p>Indicates whether theaccelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.</p>"
+          "documentation": "<p>Indicates whether the accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.</p>"
         },
         "IpSets": {
           "shape": "IpSets",
-          "documentation": "<p>IP address set associated with the accelerator.</p>"
+          "documentation": "<p>The static IP addresses that Global Accelerator associates with the accelerator.</p>"
         },
         "Status": {
           "shape": "AcceleratorStatus",
@@ -702,10 +726,13 @@
     },
     "DescribeAcceleratorAttributesRequest": {
       "type": "structure",
+      "required": [
+        "AcceleratorArn"
+      ],
       "members": {
         "AcceleratorArn": {
           "shape": "GenericString",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe. Value is required.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.</p>"
         }
       }
     },
@@ -791,6 +818,10 @@
         "Weight": {
           "shape": "EndpointWeight",
           "documentation": "<p>The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html\">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+        },
+        "ClientIPPreservationEnabled": {
+          "shape": "GenericBoolean",
+          "documentation": "<p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators. </p> <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html\"> Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>A complex type for endpoints.</p>"
@@ -808,7 +839,7 @@
       "members": {
         "EndpointId": {
           "shape": "GenericString",
-          "documentation": "<p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.</p>"
+          "documentation": "<p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. An Application Load Balancer can be either internal or internet-facing.</p>"
         },
         "Weight": {
           "shape": "EndpointWeight",
@@ -821,6 +852,10 @@
         "HealthReason": {
           "shape": "GenericString",
           "documentation": "<p>The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided.</p> <p>If the endpoint state is <b>unhealthy</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>Timeout</b>: The health check requests to the endpoint are timing out before returning a status.</p> </li> <li> <p> <b>Failed</b>: The health check failed, for example because the endpoint response was invalid (malformed).</p> </li> </ul> <p>If the endpoint state is <b>initial</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>ProvisioningInProgress</b>: The endpoint is in the process of being provisioned.</p> </li> <li> <p> <b>InitialHealthChecking</b>: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.</p> </li> </ul>"
+        },
+        "ClientIPPreservationEnabled": {
+          "shape": "GenericBoolean",
+          "documentation": "<p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators. </p> <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html\"> Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>A complex type for an endpoint. Each endpoint group can include one or more endpoints, such as load balancers.</p>"
@@ -1132,10 +1167,13 @@
     },
     "UpdateAcceleratorAttributesRequest": {
       "type": "structure",
+      "required": [
+        "AcceleratorArn"
+      ],
       "members": {
         "AcceleratorArn": {
           "shape": "GenericString",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the accelerator that you want to update. Attribute is required.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the accelerator that you want to update.</p>"
         },
         "FlowLogsEnabled": {
           "shape": "GenericBoolean",
@@ -1276,5 +1314,5 @@
       }
     }
   },
-  "documentation": "<fullname>AWS Global Accelerator</fullname> <p>This is the <i>AWS Global Accelerator API Reference</i>. This guide is for developers who need detailed information about AWS Global Accelerator API actions, data types, and errors. For more information about Global Accelerator features, see the <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/Welcome.html\">AWS Global Accelerator Developer Guide</a>. </p> <p>AWS Global Accelerator is a network layer service in which you create accelerators to improve availability and performance for internet applications used by a global audience. </p> <p>Global Accelerator provides you with static IP addresses that you associate with your accelerator. These IP addresses are anycast from the AWS edge network and distribute incoming application traffic across multiple endpoint resources in multiple AWS Regions, which increases the availability of your applications. Endpoints can be Elastic IP addresses, Network Load Balancers, and Application Load Balancers that are located in one AWS Region or multiple Regions.</p> <p>Global Accelerator uses the AWS global network to route traffic to the optimal regional endpoint based on health, client location, and policies that you configure. The service reacts instantly to changes in health or configuration to ensure that internet traffic from clients is directed to only healthy endpoints.</p> <p>Global Accelerator includes components that work together to help you improve performance and availability for your applications:</p> <dl> <dt>Static IP address</dt> <dd> <p>AWS Global Accelerator provides you with a set of static IP addresses which are anycast from the AWS edge network and serve as the single fixed entry points for your clients. If you already have Elastic Load Balancing or Elastic IP address resources set up for your applications, you can easily add those to Global Accelerator to allow the resources to be accessed by a Global Accelerator static IP address.</p> </dd> <dt>Accelerator</dt> <dd> <p>An accelerator directs traffic to optimal endpoints over the AWS global network to improve availability and performance for your internet applications that have a global audience. Each accelerator includes one or more listeners.</p> </dd> <dt>Network zone</dt> <dd> <p>A network zone services the static IP addresses for your accelerator from a unique IP subnet. Similar to an AWS Availability Zone, a network zone is an isolated unit with its own set of physical infrastructure. When you configure an accelerator, Global Accelerator allocates two IPv4 addresses for it. If one IP address from a network zone becomes unavailable due to IP address blocking by certain client networks, or network disruptions, then client applications can retry on the healthy static IP address from the other isolated network zone.</p> </dd> <dt>Listener</dt> <dd> <p>A listener processes inbound connections from clients to Global Accelerator, based on the protocol and port that you configure. Each listener has one or more endpoint groups associated with it, and traffic is forwarded to endpoints in one of the groups. You associate endpoint groups with listeners by specifying the Regions that you want to distribute traffic to. Traffic is distributed to optimal endpoints within the endpoint groups associated with a listener.</p> </dd> <dt>Endpoint group</dt> <dd> <p>Each endpoint group is associated with a specific AWS Region. Endpoint groups include one or more endpoints in the Region. You can increase or reduce the percentage of traffic that would be otherwise directed to an endpoint group by adjusting a setting called a <i>traffic dial</i>. The traffic dial lets you easily do performance testing or blue/green deployment testing for new releases across different AWS Regions, for example. </p> </dd> <dt>Endpoint</dt> <dd> <p>An endpoint is an Elastic IP address, Network Load Balancer, or Application Load Balancer. Traffic is routed to endpoints based on several factors, including the geo-proximity to the user, the health of the endpoint, and the configuration options that you choose, such as endpoint weights. For each endpoint, you can configure weights, which are numbers that you can use to specify the proportion of traffic to route to each one. This can be useful, for example, to do performance testing within a Region.</p> </dd> </dl>"
+  "documentation": "<fullname>AWS Global Accelerator</fullname> <p>This is the <i>AWS Global Accelerator API Reference</i>. This guide is for developers who need detailed information about AWS Global Accelerator API actions, data types, and errors. For more information about Global Accelerator features, see the <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/Welcome.html\">AWS Global Accelerator Developer Guide</a>. </p> <p>AWS Global Accelerator is a network layer service in which you create accelerators to improve availability and performance for internet applications used by a global audience. </p> <important> <p>You must specify the US-West-2 (Oregon) Region to create or update accelerators.</p> </important> <p>Global Accelerator provides you with static IP addresses that you associate with your accelerator. These IP addresses are anycast from the AWS edge network and distribute incoming application traffic across multiple endpoint resources in multiple AWS Regions, which increases the availability of your applications. Endpoints can be Elastic IP addresses, Network Load Balancers, and Application Load Balancers that are located in one AWS Region or multiple Regions.</p> <p>Global Accelerator uses the AWS global network to route traffic to the optimal regional endpoint based on health, client location, and policies that you configure. The service reacts instantly to changes in health or configuration to ensure that internet traffic from clients is directed to only healthy endpoints.</p> <p>Global Accelerator includes components that work together to help you improve performance and availability for your applications:</p> <dl> <dt>Static IP address</dt> <dd> <p>AWS Global Accelerator provides you with a set of static IP addresses which are anycast from the AWS edge network and serve as the single fixed entry points for your clients. If you already have Elastic Load Balancing or Elastic IP address resources set up for your applications, you can easily add those to Global Accelerator to allow the resources to be accessed by a Global Accelerator static IP address.</p> </dd> <dt>Accelerator</dt> <dd> <p>An accelerator directs traffic to optimal endpoints over the AWS global network to improve availability and performance for your internet applications that have a global audience. Each accelerator includes one or more listeners.</p> </dd> <dt>Network zone</dt> <dd> <p>A network zone services the static IP addresses for your accelerator from a unique IP subnet. Similar to an AWS Availability Zone, a network zone is an isolated unit with its own set of physical infrastructure. When you configure an accelerator, Global Accelerator allocates two IPv4 addresses for it. If one IP address from a network zone becomes unavailable due to IP address blocking by certain client networks, or network disruptions, then client applications can retry on the healthy static IP address from the other isolated network zone.</p> </dd> <dt>Listener</dt> <dd> <p>A listener processes inbound connections from clients to Global Accelerator, based on the protocol and port that you configure. Each listener has one or more endpoint groups associated with it, and traffic is forwarded to endpoints in one of the groups. You associate endpoint groups with listeners by specifying the Regions that you want to distribute traffic to. Traffic is distributed to optimal endpoints within the endpoint groups associated with a listener.</p> </dd> <dt>Endpoint group</dt> <dd> <p>Each endpoint group is associated with a specific AWS Region. Endpoint groups include one or more endpoints in the Region. You can increase or reduce the percentage of traffic that would be otherwise directed to an endpoint group by adjusting a setting called a <i>traffic dial</i>. The traffic dial lets you easily do performance testing or blue/green deployment testing for new releases across different AWS Regions, for example. </p> </dd> <dt>Endpoint</dt> <dd> <p>An endpoint is an Elastic IP address, Network Load Balancer, or Application Load Balancer. Traffic is routed to endpoints based on several factors, including the geo-proximity to the user, the health of the endpoint, and the configuration options that you choose, such as endpoint weights. For each endpoint, you can configure weights, which are numbers that you can use to specify the proportion of traffic to route to each one. This can be useful, for example, to do performance testing within a Region.</p> </dd> </dl>"
 }

@@ -2399,6 +2399,11 @@
           "locationName": "settings",
           "documentation": "JobSettings contains all the transcode settings for a job."
         },
+        "SimulateReservedQueue": {
+          "shape": "SimulateReservedQueue",
+          "locationName": "simulateReservedQueue",
+          "documentation": "Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default."
+        },
         "StatusUpdateInterval": {
           "shape": "StatusUpdateInterval",
           "locationName": "statusUpdateInterval",
@@ -5548,6 +5553,11 @@
           "locationName": "settings",
           "documentation": "JobSettings contains all the transcode settings for a job."
         },
+        "SimulateReservedQueue": {
+          "shape": "SimulateReservedQueue",
+          "locationName": "simulateReservedQueue",
+          "documentation": "Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default."
+        },
         "Status": {
           "shape": "JobStatus",
           "locationName": "status",
@@ -8007,6 +8017,14 @@
         }
       },
       "documentation": "Settings for SCC caption output."
+    },
+    "SimulateReservedQueue": {
+      "type": "string",
+      "documentation": "Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
     },
     "SpekeKeyProvider": {
       "type": "structure",
