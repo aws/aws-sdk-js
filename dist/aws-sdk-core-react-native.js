@@ -995,16 +995,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  promisifyMethod: function promisifyMethod(methodName, PromiseDependency) {
 	    return function promise() {
 	      var self = this;
-	      var args = Array.prototype.slice.call(arguments);
 	      return new PromiseDependency(function(resolve, reject) {
-	        args.push(function(err, data) {
-	            if (err) {
-	                reject(err);
-	            } else {
-	                resolve(data);
-	            }
+	        self[methodName](function(err, data) {
+	          if (err) {
+	            reject(err);
+	          } else {
+	            resolve(data);
+	          }
 	        });
-	        self[methodName].apply(self, args);
 	      });
 	    };
 	  },
