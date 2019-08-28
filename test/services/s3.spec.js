@@ -2945,7 +2945,7 @@ describe('AWS.S3', function() {
 
     beforeEach(function(done) {
       err = null;
-      url = null
+      url = null;
       originalDate = s3.getSkewCorrectedDate;
       s3.getSkewCorrectedDate = function() {
         return new Date(0);
@@ -2975,7 +2975,7 @@ describe('AWS.S3', function() {
       var urlPromise = s3.getSignedUrlPromise('getObject', {
         Bucket: 'bucket',
         Key: 'key'
-      })
+      });
       expect(urlPromise instanceof P).to.equal(true);
     });
 
@@ -2986,7 +2986,7 @@ describe('AWS.S3', function() {
           Key: 'key'
         }).then(resolveFunction).catch(catchFunction).then(function() {
           expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=4mlYnRmz%2BBFEPrgYz5tXcl9Wc4w%3D&x-amz-security-token=session');
-          expect(err).to.be["null"];
+          expect(err).to.be['null'];
         });
       });
 
@@ -2995,8 +2995,8 @@ describe('AWS.S3', function() {
           Bucket: 'bucket',
           Key: 'key',
         }).then(resolveFunction).catch(catchFunction).then(function() {
-          expect(url).to.be["null"]
-          expect(err).to.not.be["null"];
+          expect(url).to.be['null'];
+          expect(err).to.not.be['null'];
         });
       });
     }
