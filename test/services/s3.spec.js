@@ -2929,39 +2929,59 @@ describe('AWS.S3', function() {
       invocationDeferred = true;
     });
   });
-  if (typeof Promise === 'function') {
-    return describe('getSignedUrlPromise', function() {
-      var catchFunction, resolveFunction, err, url, date;
+  describe('getSignedUrlPromise', function() {
+    var catchFunction, resolveFunction, err, url, date;
+    err = null;
+    url = null;
+    date = null;
+
+    catchFunction = function(e) {
+      err = e;
+    };
+
+    resolveFunction = function(u) {
+      url = u;
+    };
+
+    beforeEach(function(done) {
       err = null;
-      url = null;
-      date = null;
-
-      catchFunction = function(e) {
-        err = e;
+      url = null
+      originalDate = s3.getSkewCorrectedDate;
+      s3.getSkewCorrectedDate = function() {
+        return new Date(0);
       };
+      AWS.config.setPromisesDependency();
+      return done();
+    });
 
-      resolveFunction = function(u) {
-        url = u;
-      };
+    afterEach(function(done) {
+      s3.getSkewCorrectedDate = originalDate;
+      done();
+    });
 
-      beforeEach(function(done) {
-        err = null;
-        url = null
-        date = AWS.util.date.getDate;
-        AWS.util.addPromises(AWS.S3, Promise);
-        AWS.util.date.getDate = function() {
-          return new Date(0);
-        };
-        return done();
-      });
+    it('exists if Promises are available', function() {
+      if (typeof Promise === 'undefined') {
+        expect(typeof s3.getSignedUrlPromise).to.equal('undefined');
+      } else {
+        expect(typeof s3.getSignedUrlPromise).to.equal('function');
+      }
+    });
 
-      afterEach(function(done) {
-        AWS.util.date.getDate = date;
-        done();
-      });
+    it('returns a promise when called', function() {
+      var P = function() {};
+      AWS.config.setPromisesDependency(P);
+      var operation = s3.getSignedUrlPromise;
+      expect(typeof operation).to.equal('function');
+      var urlPromise = s3.getSignedUrlPromise('getObject', {
+        Bucket: 'bucket',
+        Key: 'key'
+      })
+      expect(urlPromise instanceof P).to.equal(true);
+    });
 
+    if (typeof Promise === 'function') {
       it('resolves when getSignedUrl is successful', function() {
-        return s3.getSignedUrlPromise('getObject', {
+        s3.getSignedUrlPromise('getObject', {
           Bucket: 'bucket',
           Key: 'key'
         }).then(resolveFunction).catch(catchFunction).then(function() {
@@ -2971,7 +2991,7 @@ describe('AWS.S3', function() {
       });
 
       it('rejects when getSignedUrl is unsuccessful', function() {
-        return s3.getSignedUrlPromise('invalidOperation', {
+        s3.getSignedUrlPromise('invalidOperation', {
           Bucket: 'bucket',
           Key: 'key',
         }).then(resolveFunction).catch(catchFunction).then(function() {
@@ -2979,8 +2999,9 @@ describe('AWS.S3', function() {
           expect(err).to.not.be["null"];
         });
       });
-    });
-  }
+    }
+  });
+
   describe('createPresignedPost', function() {
     it('should include a url and a hash of form fields', function(done) {
       s3 = new AWS.S3();
