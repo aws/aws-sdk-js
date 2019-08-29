@@ -136,6 +136,24 @@ describe('AWS.RDS.Signer', function() {
                 });
             });
 
+            it('handle erroring credential provider', function(done) {
+                var signer = new AWS.RDS.Signer({
+                    hostname: 'db.us-east-1.amazonaws.com',
+                    port: 8000,
+                    region: 'us-east-1',
+                    username: 'test',
+                    credentials: new AWS.CognitoIdentityCredentials({
+                        IdentityPoolId: 'eu-central-1:0',
+                        Logins: []
+                    })
+                });
+                signer.getAuthToken({}, function(err, token) {
+                    expect(err).not.to.equal(null);
+                    expect(typeof token).not.to.equal('string');
+                    done();
+                });
+            });
+
             it('generate a token', function(done) {
                 var signer = new AWS.RDS.Signer({
                     hostname: 'db.us-east-1.amazonaws.com',
