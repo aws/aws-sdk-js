@@ -456,6 +456,10 @@ declare namespace ApplicationAutoScaling {
      * Application Auto Scaling creates a service-linked role that grants it permissions to modify the scalable target on your behalf. For more information, see Service-Linked Roles for Application Auto Scaling. For resources that are not supported using a service-linked role, this parameter is required, and it must specify the ARN of an IAM role that allows Application Auto Scaling to modify the scalable target on your behalf.
      */
     RoleARN?: ResourceIdMaxLen1600;
+    /**
+     * An embedded object that contains attributes and attribute values that are used to suspend and resume automatic scaling. Setting the value of an attribute to true suspends the specified scaling activities. Setting it to false (default) resumes the specified scaling activities.   Suspension Outcomes    For DynamicScalingInSuspended, while a suspension is in effect, all scale-in activities that are triggered by a scaling policy are suspended.   For DynamicScalingOutSuspended, while a suspension is in effect, all scale-out activities that are triggered by a scaling policy are suspended.   For ScheduledScalingSuspended, while a suspension is in effect, all scaling activities that involve scheduled actions are suspended.    For more information, see Suspend and Resume Application Auto Scaling in the Application Auto Scaling User Guide.
+     */
+    SuspendedState?: SuspendedState;
   }
   export interface RegisterScalableTargetResponse {
   }
@@ -494,6 +498,7 @@ declare namespace ApplicationAutoScaling {
      * The Unix timestamp for when the scalable target was created.
      */
     CreationTime: TimestampType;
+    SuspendedState?: SuspendedState;
   }
   export interface ScalableTargetAction {
     /**
@@ -598,6 +603,7 @@ declare namespace ApplicationAutoScaling {
      */
     CreationTime: TimestampType;
   }
+  export type ScalingSuspended = boolean;
   export interface ScheduledAction {
     /**
      * The name of the scheduled action.
@@ -679,6 +685,20 @@ declare namespace ApplicationAutoScaling {
      * The aggregation type for the CloudWatch metrics. Valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average.
      */
     MetricAggregationType?: MetricAggregationType;
+  }
+  export interface SuspendedState {
+    /**
+     * Whether scale in by a target tracking scaling policy or a step scaling policy is suspended. Set the value to true if you don't want Application Auto Scaling to remove capacity when a scaling policy is triggered. The default is false. 
+     */
+    DynamicScalingInSuspended?: ScalingSuspended;
+    /**
+     * Whether scale out by a target tracking scaling policy or a step scaling policy is suspended. Set the value to true if you don't want Application Auto Scaling to add capacity when a scaling policy is triggered. The default is false. 
+     */
+    DynamicScalingOutSuspended?: ScalingSuspended;
+    /**
+     * Whether scheduled scaling is suspended. Set the value to true if you don't want Application Auto Scaling to add or remove capacity by initiating scheduled actions. The default is false. 
+     */
+    ScheduledScalingSuspended?: ScalingSuspended;
   }
   export interface TargetTrackingScalingPolicyConfiguration {
     /**

@@ -141,7 +141,7 @@
           "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Creates a pipeline.</p>"
+      "documentation": "<p>Creates a pipeline.</p> <note> <p>In the pipeline structure, you must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>"
     },
     "DeleteCustomActionType": {
       "name": "DeleteCustomActionType",
@@ -1179,7 +1179,7 @@
         },
         "actionTypeId": {
           "shape": "ActionTypeId",
-          "documentation": "<p>The configuration information for the action type.</p>"
+          "documentation": "<p>Specifies the action type and the provider of the action.</p>"
         },
         "runOrder": {
           "shape": "ActionRunOrder",
@@ -1187,7 +1187,7 @@
         },
         "configuration": {
           "shape": "ActionConfigurationMap",
-          "documentation": "<p>The action declaration's configuration.</p>"
+          "documentation": "<p>The action's configuration. These are key-value pairs that specify input values for an action. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements\">Action Structure Requirements in CodePipeline</a>. For the list of configuration properties for the AWS CloudFormation action type in CodePipeline, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html\">Configuration Properties Reference</a> in the <i>AWS CloudFormation User Guide</i>. For template snippets with examples, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html\">Using Parameter Override Functions with CodePipeline Pipelines</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p>The values can be represented in either JSON or YAML format. For example, the JSON configuration item format is as follows: </p> <p> <i>JSON:</i> </p> <p> <code>\"Configuration\" : { Key : Value },</code> </p>"
         },
         "outputArtifacts": {
           "shape": "OutputArtifactList",
@@ -1728,7 +1728,7 @@
           "documentation": "<p>The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.</p>"
         }
       },
-      "documentation": "<p>The Amazon S3 bucket where artifacts are stored for the pipeline.</p>"
+      "documentation": "<p>The Amazon S3 bucket where artifacts are stored for the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>"
     },
     "ArtifactStoreLocation": {
       "type": "string",
@@ -2064,7 +2064,7 @@
       "members": {
         "id": {
           "shape": "EncryptionKeyId",
-          "documentation": "<p>The ID used to identify the key. For an AWS KMS key, this is the key ID or key ARN.</p>"
+          "documentation": "<p>The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.</p> <note> <p>Aliases are recognized only in the account that created the customer master key (CMK). For cross-account actions, you can only use the key ID or key ARN to identify the key.</p> </note>"
         },
         "type": {
           "shape": "EncryptionKeyType",
@@ -2125,6 +2125,20 @@
       "type": "string",
       "max": 2048,
       "min": 1
+    },
+    "ExecutionTrigger": {
+      "type": "structure",
+      "members": {
+        "triggerType": {
+          "shape": "TriggerType",
+          "documentation": "<p>The type of change-detection method, command, or user interaction that started a pipeline execution.</p>"
+        },
+        "triggerDetail": {
+          "shape": "TriggerDetail",
+          "documentation": "<p>Detail related to the event that started a pipeline execution, such as the webhook ARN of the webhook that triggered the pipeline execution or the user ARN for a user-initiated <code>start-pipeline-execution</code> CLI command.</p>"
+        }
+      },
+      "documentation": "<p>The interaction or event that started a pipeline execution.</p>"
     },
     "ExternalExecutionId": {
       "type": "string"
@@ -2782,11 +2796,11 @@
         },
         "artifactStore": {
           "shape": "ArtifactStore",
-          "documentation": "<p>Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline. </p>"
+          "documentation": "<p>Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>"
         },
         "artifactStores": {
           "shape": "ArtifactStoreMap",
-          "documentation": "<p>A mapping of <code>artifactStore</code> objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either <code>artifactStore</code> or <code>artifactStores</code>, not both.</p> <p>If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p>"
+          "documentation": "<p>A mapping of <code>artifactStore</code> objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>"
         },
         "stages": {
           "shape": "PipelineStageDeclarationList",
@@ -2860,6 +2874,10 @@
         "sourceRevisions": {
           "shape": "SourceRevisionList",
           "documentation": "<p>A list of the source artifact revisions that initiated a pipeline execution.</p>"
+        },
+        "trigger": {
+          "shape": "ExecutionTrigger",
+          "documentation": "<p>The interaction or event that started a pipeline execution, such as automated change detection or a <code>StartPipelineExecution</code> API call.</p>"
         }
       },
       "documentation": "<p>Summary information about a pipeline execution.</p>"
@@ -3681,6 +3699,22 @@
         }
       },
       "documentation": "<p>Represents information about the state of transitions between one stage and another stage.</p>"
+    },
+    "TriggerDetail": {
+      "type": "string",
+      "max": 1024,
+      "min": 0
+    },
+    "TriggerType": {
+      "type": "string",
+      "enum": [
+        "CreatePipeline",
+        "StartPipelineExecution",
+        "PollForSourceChanges",
+        "Webhook",
+        "CloudWatchEvent",
+        "PutActionRevision"
+      ]
     },
     "UntagResourceInput": {
       "type": "structure",

@@ -36,11 +36,11 @@ declare class CodePipeline extends Service {
    */
   createCustomActionType(callback?: (err: AWSError, data: CodePipeline.Types.CreateCustomActionTypeOutput) => void): Request<CodePipeline.Types.CreateCustomActionTypeOutput, AWSError>;
   /**
-   * Creates a pipeline.
+   * Creates a pipeline.  In the pipeline structure, you must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores. 
    */
   createPipeline(params: CodePipeline.Types.CreatePipelineInput, callback?: (err: AWSError, data: CodePipeline.Types.CreatePipelineOutput) => void): Request<CodePipeline.Types.CreatePipelineOutput, AWSError>;
   /**
-   * Creates a pipeline.
+   * Creates a pipeline.  In the pipeline structure, you must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores. 
    */
   createPipeline(callback?: (err: AWSError, data: CodePipeline.Types.CreatePipelineOutput) => void): Request<CodePipeline.Types.CreatePipelineOutput, AWSError>;
   /**
@@ -413,7 +413,7 @@ declare namespace CodePipeline {
      */
     name: ActionName;
     /**
-     * The configuration information for the action type.
+     * Specifies the action type and the provider of the action.
      */
     actionTypeId: ActionTypeId;
     /**
@@ -421,7 +421,7 @@ declare namespace CodePipeline {
      */
     runOrder?: ActionRunOrder;
     /**
-     * The action declaration's configuration.
+     * The action's configuration. These are key-value pairs that specify input values for an action. For more information, see Action Structure Requirements in CodePipeline. For the list of configuration properties for the AWS CloudFormation action type in CodePipeline, see Configuration Properties Reference in the AWS CloudFormation User Guide. For template snippets with examples, see Using Parameter Override Functions with CodePipeline Pipelines in the AWS CloudFormation User Guide. The values can be represented in either JSON or YAML format. For example, the JSON configuration item format is as follows:   JSON:   "Configuration" : { Key : Value }, 
      */
     configuration?: ActionConfigurationMap;
     /**
@@ -952,7 +952,7 @@ declare namespace CodePipeline {
   export type Enabled = boolean;
   export interface EncryptionKey {
     /**
-     * The ID used to identify the key. For an AWS KMS key, this is the key ID or key ARN.
+     * The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.  Aliases are recognized only in the account that created the customer master key (CMK). For cross-account actions, you can only use the key ID or key ARN to identify the key. 
      */
     id: EncryptionKeyId;
     /**
@@ -988,6 +988,16 @@ declare namespace CodePipeline {
   }
   export type ExecutionId = string;
   export type ExecutionSummary = string;
+  export interface ExecutionTrigger {
+    /**
+     * The type of change-detection method, command, or user interaction that started a pipeline execution.
+     */
+    triggerType?: TriggerType;
+    /**
+     * Detail related to the event that started a pipeline execution, such as the webhook ARN of the webhook that triggered the pipeline execution or the user ARN for a user-initiated start-pipeline-execution CLI command.
+     */
+    triggerDetail?: TriggerDetail;
+  }
   export type ExternalExecutionId = string;
   export type ExternalExecutionSummary = string;
   export interface FailureDetails {
@@ -1388,11 +1398,11 @@ declare namespace CodePipeline {
      */
     roleArn: RoleArn;
     /**
-     * Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline. 
+     * Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.  You must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores. 
      */
     artifactStore?: ArtifactStore;
     /**
-     * A mapping of artifactStore objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either artifactStore or artifactStores, not both. If you create a cross-region action in your pipeline, you must use artifactStores.
+     * A mapping of artifactStore objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline.  You must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores. 
      */
     artifactStores?: ArtifactStoreMap;
     /**
@@ -1449,6 +1459,10 @@ declare namespace CodePipeline {
      * A list of the source artifact revisions that initiated a pipeline execution.
      */
     sourceRevisions?: SourceRevisionList;
+    /**
+     * The interaction or event that started a pipeline execution, such as automated change detection or a StartPipelineExecution API call.
+     */
+    trigger?: ExecutionTrigger;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export type PipelineList = PipelineSummary[];
@@ -1919,6 +1933,8 @@ declare namespace CodePipeline {
      */
     disabledReason?: DisabledReason;
   }
+  export type TriggerDetail = string;
+  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|string;
   export interface UntagResourceInput {
     /**
      *  The Amazon Resource Name (ARN) of the resource to remove tags from.

@@ -277,11 +277,11 @@ declare class ElastiCache extends Service {
    */
   increaseReplicaCount(callback?: (err: AWSError, data: ElastiCache.Types.IncreaseReplicaCountResult) => void): Request<ElastiCache.Types.IncreaseReplicaCountResult, AWSError>;
   /**
-   * Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to. When you use the ModifyCacheCluster or ModifyReplicationGroup operations to scale up your cluster or replication group, the value of the CacheNodeType parameter must be one of the node types returned by this operation.
+   * Lists all available node types that you can scale your Redis cluster's or replication group's current node type. When you use the ModifyCacheCluster or ModifyReplicationGroup operations to scale your cluster or replication group, the value of the CacheNodeType parameter must be one of the node types returned by this operation.
    */
   listAllowedNodeTypeModifications(params: ElastiCache.Types.ListAllowedNodeTypeModificationsMessage, callback?: (err: AWSError, data: ElastiCache.Types.AllowedNodeTypeModificationsMessage) => void): Request<ElastiCache.Types.AllowedNodeTypeModificationsMessage, AWSError>;
   /**
-   * Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to. When you use the ModifyCacheCluster or ModifyReplicationGroup operations to scale up your cluster or replication group, the value of the CacheNodeType parameter must be one of the node types returned by this operation.
+   * Lists all available node types that you can scale your Redis cluster's or replication group's current node type. When you use the ModifyCacheCluster or ModifyReplicationGroup operations to scale your cluster or replication group, the value of the CacheNodeType parameter must be one of the node types returned by this operation.
    */
   listAllowedNodeTypeModifications(callback?: (err: AWSError, data: ElastiCache.Types.AllowedNodeTypeModificationsMessage) => void): Request<ElastiCache.Types.AllowedNodeTypeModificationsMessage, AWSError>;
   /**
@@ -866,13 +866,17 @@ declare namespace ElastiCache {
      * The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access. When using this parameter to export a snapshot, be sure Amazon ElastiCache has the needed permissions to this S3 bucket. For more information, see Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket in the Amazon ElastiCache User Guide. For more information, see Exporting a Snapshot in the Amazon ElastiCache User Guide.
      */
     TargetBucket?: String;
+    /**
+     * The ID of the KMS key used to encrypt the target snapshot.
+     */
+    KmsKeyId?: String;
   }
   export interface CopySnapshotResult {
     Snapshot?: Snapshot;
   }
   export interface CreateCacheClusterMessage {
     /**
-     * The node group (shard) identifier. This parameter is stored as a lowercase string.  Constraints:    A name must contain from 1 to 20 alphanumeric characters or hyphens.   The first character must be a letter.   A name cannot end with a hyphen or contain two consecutive hyphens.  
+     * The node group (shard) identifier. This parameter is stored as a lowercase string.  Constraints:    A name must contain from 1 to 50 alphanumeric characters or hyphens.   The first character must be a letter.   A name cannot end with a hyphen or contain two consecutive hyphens.  
      */
     CacheClusterId: String;
     /**
@@ -1016,7 +1020,7 @@ declare namespace ElastiCache {
   }
   export interface CreateReplicationGroupMessage {
     /**
-     * The replication group identifier. This parameter is stored as a lowercase string. Constraints:   A name must contain from 1 to 20 alphanumeric characters or hyphens.   The first character must be a letter.   A name cannot end with a hyphen or contain two consecutive hyphens.  
+     * The replication group identifier. This parameter is stored as a lowercase string. Constraints:   A name must contain from 1 to 40 alphanumeric characters or hyphens.   The first character must be a letter.   A name cannot end with a hyphen or contain two consecutive hyphens.  
      */
     ReplicationGroupId: String;
     /**
@@ -1120,13 +1124,17 @@ declare namespace ElastiCache {
      */
     AuthToken?: String;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster. This parameter is valid only if the Engine parameter is redis, the EngineVersion parameter is 3.2.6 or 4.x, and the cluster is being created in an Amazon VPC. If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false   For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup. 
+     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster. This parameter is valid only if the Engine parameter is redis, the EngineVersion parameter is 3.2.6, 4.x or later, and the cluster is being created in an Amazon VPC. If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false   For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup. 
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
      * A flag that enables encryption at rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group.   Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
      */
     AtRestEncryptionEnabled?: BooleanOptional;
+    /**
+     * The ID of the KMS key used to encrypt the disk on the cluster.
+     */
+    KmsKeyId?: String;
   }
   export interface CreateReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -1144,6 +1152,10 @@ declare namespace ElastiCache {
      * A name for the snapshot being created.
      */
     SnapshotName: String;
+    /**
+     * The ID of the KMS key used to encrypt the snapshot.
+     */
+    KmsKeyId?: String;
   }
   export interface CreateSnapshotResult {
     Snapshot?: Snapshot;
@@ -2246,6 +2258,10 @@ declare namespace ElastiCache {
      * A flag that enables encryption at-rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the cluster is created. To enable encryption at-rest on a cluster you must set AtRestEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
      */
     AtRestEncryptionEnabled?: BooleanOptional;
+    /**
+     * The ID of the KMS key used to encrypt the disk in the cluster.
+     */
+    KmsKeyId?: String;
   }
   export type ReplicationGroupIdList = String[];
   export type ReplicationGroupList = ReplicationGroup[];
@@ -2612,6 +2628,10 @@ declare namespace ElastiCache {
      * A list of the cache nodes in the source cluster.
      */
     NodeSnapshots?: NodeSnapshotList;
+    /**
+     * The ID of the KMS key used to encrypt the snapshot.
+     */
+    KmsKeyId?: String;
   }
   export type SnapshotArnsList = String[];
   export type SnapshotList = Snapshot[];

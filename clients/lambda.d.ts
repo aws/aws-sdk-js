@@ -539,6 +539,7 @@ declare namespace Lambda {
      * The maximum number of items to retrieve in a single batch.    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. Max 10.  
      */
     BatchSize?: BatchSize;
+    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
      * The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. AT_TIMESTAMP is only supported for Amazon Kinesis streams.
      */
@@ -703,6 +704,7 @@ declare namespace Lambda {
      * The maximum number of items to retrieve in a single batch.
      */
     BatchSize?: BatchSize;
+    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
      * The Amazon Resource Name (ARN) of the event source.
      */
@@ -1340,6 +1342,7 @@ declare namespace Lambda {
   export type MasterRegion = string;
   export type MaxLayerListItems = number;
   export type MaxListItems = number;
+  export type MaximumBatchingWindowInSeconds = number;
   export type MemorySize = number;
   export type NameSpacedFunctionArn = string;
   export type NamespacedFunctionName = string;
@@ -1565,6 +1568,7 @@ declare namespace Lambda {
      * The maximum number of items to retrieve in a single batch.    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. Max 10.  
      */
     BatchSize?: BatchSize;
+    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
   }
   export interface UpdateFunctionCodeRequest {
     /**

@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.519.0',
+	  VERSION: '2.520.0',
 
 	  /**
 	   * @api private
@@ -991,18 +991,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  /**
 	   * @api private
+	   * Return a function that will return a promise whose fate is decided by the
+	   * callback behavior of the given method with `methodName`. The method to be
+	   * promisified should conform to node.js convention of accepting a callback as
+	   * last argument and calling that callback with error as the first argument
+	   * and success value on the second argument.
 	   */
 	  promisifyMethod: function promisifyMethod(methodName, PromiseDependency) {
 	    return function promise() {
 	      var self = this;
+	      var args = Array.prototype.slice.call(arguments);
 	      return new PromiseDependency(function(resolve, reject) {
-	        self[methodName](function(err, data) {
+	        args.push(function(err, data) {
 	          if (err) {
 	            reject(err);
 	          } else {
 	            resolve(data);
 	          }
 	        });
+	        self[methodName].apply(self, args);
 	      });
 	    };
 	  },
@@ -5610,7 +5617,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      PromisesDependency = Promise;
 	    }
 	    var constructors = [AWS.Request, AWS.Credentials, AWS.CredentialProviderChain];
-	    if (AWS.S3 && AWS.S3.ManagedUpload) constructors.push(AWS.S3.ManagedUpload);
+	    if (AWS.S3) {
+	      constructors.push(AWS.S3);
+	      if (AWS.S3.ManagedUpload) {
+	        constructors.push(AWS.S3.ManagedUpload);
+	      }
+	    }
 	    AWS.util.addPromises(constructors, PromisesDependency);
 	  },
 

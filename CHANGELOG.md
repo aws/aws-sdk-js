@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.519.0-->
+<!--LATEST=2.520.0-->
 <!--ENTRYINSERT-->
+
+## 2.520.0
+* feature: ApplicationAutoScaling: With the current release, you can suspend and later resume any of the following scaling actions in Application Auto Scaling: scheduled scaling actions, dynamic scaling in actions, dynamic scaling out actions.
+* feature: CodePipeline: Introducing pipeline execution trigger details in ListPipelineExecutions API.
+* feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) introduces support for including Docker container IDs in the API response when describing and stopping tasks. This enables customers to easily map containers to the tasks they are associated with.
+* feature: ElastiCache: Amazon ElastiCache for Redis now supports encryption at rest using customer managed customer master keys (CMKs) in AWS Key Management Service (KMS). Amazon ElastiCache now supports cluster names upto 40 characters for replicationGoups and upto 50 characters for cacheClusters.
+* feature: Lambda: Adds a "MaximumBatchingWindowInSeconds" parameter to event source mapping api's. Usable by Dynamodb and Kinesis event sources.
+* feature: S3: add support for AWS.S3.getSignedUrlPromise which returns a promise for S3 presigned url
 
 ## 2.519.0
 * feature: GlobalAccelerator: API Update for AWS Global Accelerator Client IP Preservation

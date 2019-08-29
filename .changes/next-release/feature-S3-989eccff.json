@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "S3",
-  "description": "add support for AWS.S3.getSignedUrlPromise which returns a promise for S3 presigned url"
-}
