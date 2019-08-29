@@ -540,7 +540,7 @@ describe('AWS.config', function() {
       AWS.config.setPromisesDependency(function() {});
       expect(utilSpy.calls.length).to.equal(1);
       expect(Array.isArray(utilSpy.calls[0]['arguments'][0])).to.be['true'];
-      expect(utilSpy.calls[0]['arguments'][0].length).to.equal(4);
+      expect(utilSpy.calls[0]['arguments'][0].length).to.equal(5);
     });
 
     if (typeof Promise !== 'undefined') {
