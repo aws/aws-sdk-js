@@ -24,7 +24,7 @@ declare namespace ChainableTemporaryCredentials {
     export type ChainableTemporaryCredentialsOptions = {
         params?: STS.Types.AssumeRoleRequest|STS.Types.GetSessionTokenRequest,
         masterCredentials?: Credentials,
-        stsConfig: STS.Types.ClientConfiguration,
+        stsConfig?: STS.Types.ClientConfiguration,
         tokenCodeFn?: (serialNumber: string, callback: (err?: Error, token?: string) => void) => void
     }
 }
