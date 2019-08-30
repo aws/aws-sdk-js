@@ -325,6 +325,14 @@ declare class ECS extends Service {
    */
   untagResource(callback?: (err: AWSError, data: ECS.Types.UntagResourceResponse) => void): Request<ECS.Types.UntagResourceResponse, AWSError>;
   /**
+   * Modifies the settings to use for a cluster.
+   */
+  updateClusterSettings(params: ECS.Types.UpdateClusterSettingsRequest, callback?: (err: AWSError, data: ECS.Types.UpdateClusterSettingsResponse) => void): Request<ECS.Types.UpdateClusterSettingsResponse, AWSError>;
+  /**
+   * Modifies the settings to use for a cluster.
+   */
+  updateClusterSettings(callback?: (err: AWSError, data: ECS.Types.UpdateClusterSettingsResponse) => void): Request<ECS.Types.UpdateClusterSettingsResponse, AWSError>;
+  /**
    * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  UpdateContainerAgent requires the Amazon ECS-optimized AMI or Amazon Linux with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide.
    */
   updateContainerAgent(params: ECS.Types.UpdateContainerAgentRequest, callback?: (err: AWSError, data: ECS.Types.UpdateContainerAgentResponse) => void): Request<ECS.Types.UpdateContainerAgentResponse, AWSError>;
@@ -584,6 +592,10 @@ declare namespace ECS {
      * The IDs of each GPU assigned to the container.
      */
     gpuIds?: GpuIds;
+    /**
+     * The FireLens configuration for the container.
+     */
+    firelensConfiguration?: FirelensConfiguration;
   }
   export type ContainerCondition = "START"|"COMPLETE"|"SUCCESS"|"HEALTHY"|string;
   export interface ContainerDefinition {
@@ -735,6 +747,10 @@ declare namespace ECS {
      * The type and amount of a resource to assign to a container. The only supported resource is a GPU.
      */
     resourceRequirements?: ResourceRequirements;
+    /**
+     * The FireLens configuration for the container. This is used to specify and configure a log router for container logs.
+     */
+    firelensConfiguration?: FirelensConfiguration;
   }
   export type ContainerDefinitions = ContainerDefinition[];
   export type ContainerDependencies = ContainerDependency[];
@@ -1419,6 +1435,18 @@ declare namespace ECS {
     reason?: String;
   }
   export type Failures = Failure[];
+  export interface FirelensConfiguration {
+    /**
+     * The log router to use. The valid values are fluentd or fluentbit.
+     */
+    type: FirelensConfigurationType;
+    /**
+     * The options to use when configuring the log router. This field is optional and can be used to add additional metadata, such as the task, task definition, cluster, and container instance details to the log event. If specified, the syntax to use is "options":{"enable-ecs-log-metadata":"true|false"}.
+     */
+    options?: FirelensConfigurationOptionsMap;
+  }
+  export type FirelensConfigurationOptionsMap = {[key: string]: String};
+  export type FirelensConfigurationType = "fluentd"|"fluentbit"|string;
   export type GpuIds = String[];
   export interface HealthCheck {
     /**
@@ -1823,7 +1851,7 @@ declare namespace ECS {
     secretOptions?: SecretList;
   }
   export type LogConfigurationOptionsMap = {[key: string]: String};
-  export type LogDriver = "json-file"|"syslog"|"journald"|"gelf"|"fluentd"|"awslogs"|"splunk"|string;
+  export type LogDriver = "json-file"|"syslog"|"journald"|"gelf"|"fluentd"|"awslogs"|"splunk"|"awsfirelens"|string;
   export type Long = number;
   export interface MountPoint {
     /**
@@ -2986,6 +3014,19 @@ declare namespace ECS {
     tagKeys: TagKeys;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateClusterSettingsRequest {
+    /**
+     * The name of the cluster to modify the settings for.
+     */
+    cluster: String;
+    /**
+     * The setting to use by default for a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.
+     */
+    settings: ClusterSettings;
+  }
+  export interface UpdateClusterSettingsResponse {
+    cluster?: Cluster;
   }
   export interface UpdateContainerAgentRequest {
     /**

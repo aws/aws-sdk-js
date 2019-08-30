@@ -1138,6 +1138,34 @@
       ],
       "documentation": "<p>Deletes specified tags from a resource.</p>"
     },
+    "UpdateClusterSettings": {
+      "name": "UpdateClusterSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateClusterSettingsRequest"
+      },
+      "output": {
+        "shape": "UpdateClusterSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ClusterNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Modifies the settings to use for a cluster.</p>"
+    },
     "UpdateContainerAgent": {
       "name": "UpdateContainerAgent",
       "http": {
@@ -1645,6 +1673,10 @@
         "gpuIds": {
           "shape": "GpuIds",
           "documentation": "<p>The IDs of each GPU assigned to the container.</p>"
+        },
+        "firelensConfiguration": {
+          "shape": "FirelensConfiguration",
+          "documentation": "<p>The FireLens configuration for the container.</p>"
         }
       },
       "documentation": "<p>A Docker container that is part of a task.</p>"
@@ -1808,6 +1840,10 @@
         "resourceRequirements": {
           "shape": "ResourceRequirements",
           "documentation": "<p>The type and amount of a resource to assign to a container. The only supported resource is a GPU.</p>"
+        },
+        "firelensConfiguration": {
+          "shape": "FirelensConfiguration",
+          "documentation": "<p>The FireLens configuration for the container. This is used to specify and configure a log router for container logs.</p>"
         }
       },
       "documentation": "<p>Container definitions are used in task definitions to describe the different containers that are launched as part of a task.</p>"
@@ -2807,6 +2843,39 @@
         "shape": "Failure"
       }
     },
+    "FirelensConfiguration": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "type": {
+          "shape": "FirelensConfigurationType",
+          "documentation": "<p>The log router to use. The valid values are <code>fluentd</code> or <code>fluentbit</code>.</p>"
+        },
+        "options": {
+          "shape": "FirelensConfigurationOptionsMap",
+          "documentation": "<p>The options to use when configuring the log router. This field is optional and can be used to add additional metadata, such as the task, task definition, cluster, and container instance details to the log event. If specified, the syntax to use is <code>\"options\":{\"enable-ecs-log-metadata\":\"true|false\"}</code>.</p>"
+        }
+      },
+      "documentation": "<p>The FireLens configuration for the container. This is used to specify and configure a log router for container logs.</p>"
+    },
+    "FirelensConfigurationOptionsMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      }
+    },
+    "FirelensConfigurationType": {
+      "type": "string",
+      "enum": [
+        "fluentd",
+        "fluentbit"
+      ]
+    },
     "GpuIds": {
       "type": "list",
       "member": {
@@ -3367,7 +3436,8 @@
         "gelf",
         "fluentd",
         "awslogs",
-        "splunk"
+        "splunk",
+        "awsfirelens"
       ]
     },
     "Long": {
@@ -5110,6 +5180,31 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateClusterSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "cluster",
+        "settings"
+      ],
+      "members": {
+        "cluster": {
+          "shape": "String",
+          "documentation": "<p>The name of the cluster to modify the settings for.</p>"
+        },
+        "settings": {
+          "shape": "ClusterSettings",
+          "documentation": "<p>The setting to use by default for a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the <code>containerInsights</code> value set with <a>PutAccountSetting</a> or <a>PutAccountSettingDefault</a>.</p>"
+        }
+      }
+    },
+    "UpdateClusterSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "cluster": {
+          "shape": "Cluster"
+        }
+      }
     },
     "UpdateContainerAgentRequest": {
       "type": "structure",

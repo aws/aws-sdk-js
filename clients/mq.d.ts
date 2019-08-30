@@ -395,7 +395,7 @@ declare namespace MQ {
      */
     PubliclyAccessible?: __boolean;
     /**
-     * The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
+     * The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.
      */
     SecurityGroups?: __listOf__string;
     /**
@@ -663,11 +663,15 @@ declare namespace MQ {
      */
     PendingEngineVersion?: __string;
     /**
+     * The list of pending security groups to authorize connections to brokers.
+     */
+    PendingSecurityGroups?: __listOf__string;
+    /**
      * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
      */
     PubliclyAccessible?: __boolean;
     /**
-     * Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
+     * The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.
      */
     SecurityGroups?: __listOf__string;
     /**
@@ -1011,6 +1015,10 @@ declare namespace MQ {
      * Enables Amazon CloudWatch logging for brokers.
      */
     Logs?: Logs;
+    /**
+     * The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.
+     */
+    SecurityGroups?: __listOf__string;
   }
   export interface UpdateBrokerResponse {
     /**
@@ -1033,6 +1041,10 @@ declare namespace MQ {
      * The list of information about logs to be enabled for the specified broker.
      */
     Logs?: Logs;
+    /**
+     * The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.
+     */
+    SecurityGroups?: __listOf__string;
   }
   export interface UpdateConfigurationRequest {
     /**
