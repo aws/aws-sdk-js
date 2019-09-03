@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.521.0-->
+<!--LATEST=2.522.0-->
 <!--ENTRYINSERT-->
+
+## 2.522.0
+* feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) introduces support for attaching Amazon Elastic Inference accelerators to your containers. This enables you to run deep learning inference workloads with hardware acceleration in a more efficient way.
+* feature: GameLift: You can now make use of PKI resources to provide more secure connections between your game clients and servers.  To learn more, please refer to the public Amazon GameLift documentation.
 
 ## 2.521.0
 * bugfix: Credentials: fix stsConfig typing on chainable_temporary_credentials

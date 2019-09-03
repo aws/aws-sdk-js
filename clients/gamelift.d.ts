@@ -714,6 +714,10 @@ declare namespace GameLift {
   export type BuildId = string;
   export type BuildList = Build[];
   export type BuildStatus = "INITIALIZED"|"READY"|"FAILED"|string;
+  export interface CertificateConfiguration {
+    CertificateType: CertificateType;
+  }
+  export type CertificateType = "DISABLED"|"GENERATED"|string;
   export type ComparisonOperatorType = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
   export interface CreateAliasInput {
     /**
@@ -836,6 +840,7 @@ declare namespace GameLift {
      * Unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, daemons (background processes). Create a role or look up a role's ARN using the IAM dashboard in the AWS Management Console. Learn more about using on-box credentials for your game servers at  Access external resources from a game server.
      */
     InstanceRoleArn?: NonEmptyString;
+    CertificateConfiguration?: CertificateConfiguration;
   }
   export interface CreateFleetOutput {
     /**
@@ -1637,6 +1642,7 @@ declare namespace GameLift {
     PlayerData?: PlayerData;
   }
   export type DesiredPlayerSessionList = DesiredPlayerSession[];
+  export type DnsName = string;
   export type Double = number;
   export type DoubleObject = number;
   export interface EC2InstanceCounts {
@@ -1796,6 +1802,7 @@ declare namespace GameLift {
      * Unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, daemons (background processes). Create a role or look up a role's ARN using the IAM dashboard in the AWS Management Console. Learn more about using on-box credentials for your game servers at  Access external resources from a game server.
      */
     InstanceRoleArn?: NonEmptyString;
+    CertificateConfiguration?: CertificateConfiguration;
   }
   export type FleetAttributesList = FleetAttributes[];
   export interface FleetCapacity {
@@ -1900,6 +1907,7 @@ declare namespace GameLift {
      * IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
      */
     IpAddress?: IpAddress;
+    DnsName?: DnsName;
     /**
      * Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
      */
@@ -1931,6 +1939,7 @@ declare namespace GameLift {
      * IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
      */
     IpAddress?: StringModel;
+    DnsName?: DnsName;
     /**
      * Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
      */
@@ -2006,6 +2015,7 @@ declare namespace GameLift {
      * IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is FULFILLED). 
      */
     IpAddress?: IpAddress;
+    DnsName?: DnsName;
     /**
      * Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is FULFILLED).
      */
@@ -2023,7 +2033,7 @@ declare namespace GameLift {
      */
     MatchmakerData?: MatchmakerData;
   }
-  export type GameSessionPlacementState = "PENDING"|"FULFILLED"|"CANCELLED"|"TIMED_OUT"|string;
+  export type GameSessionPlacementState = "PENDING"|"FULFILLED"|"CANCELLED"|"TIMED_OUT"|"FAILED"|string;
   export interface GameSessionQueue {
     /**
      * Descriptive label that is associated with game session queue. Queue names must be unique within each region.
@@ -2100,6 +2110,7 @@ declare namespace GameLift {
      * IP address assigned to the instance.
      */
     IpAddress?: IpAddress;
+    DnsName?: DnsName;
     /**
      * Operating system that is running on this instance. 
      */
@@ -2512,6 +2523,7 @@ declare namespace GameLift {
      * IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
      */
     IpAddress?: IpAddress;
+    DnsName?: DnsName;
     /**
      * Port number for the game session. To connect to a Amazon GameLift server process, an app needs both the IP address and port number.
      */

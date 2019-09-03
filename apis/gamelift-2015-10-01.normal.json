@@ -2302,6 +2302,24 @@
         "FAILED"
       ]
     },
+    "CertificateConfiguration": {
+      "type": "structure",
+      "required": [
+        "CertificateType"
+      ],
+      "members": {
+        "CertificateType": {
+          "shape": "CertificateType"
+        }
+      }
+    },
+    "CertificateType": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "GENERATED"
+      ]
+    },
     "ComparisonOperatorType": {
       "type": "string",
       "enum": [
@@ -2457,6 +2475,9 @@
         "InstanceRoleArn": {
           "shape": "NonEmptyString",
           "documentation": "<p>Unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, daemons (background processes). Create a role or look up a role's ARN using the <a href=\"https://console.aws.amazon.com/iam/\">IAM dashboard</a> in the AWS Management Console. Learn more about using on-box credentials for your game servers at <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\"> Access external resources from a game server</a>.</p>"
+        },
+        "CertificateConfiguration": {
+          "shape": "CertificateConfiguration"
         }
       },
       "documentation": "<p>Represents the input for a request action.</p>"
@@ -3670,6 +3691,9 @@
         "shape": "DesiredPlayerSession"
       }
     },
+    "DnsName": {
+      "type": "string"
+    },
     "Double": {
       "type": "double"
     },
@@ -3943,6 +3967,9 @@
         "InstanceRoleArn": {
           "shape": "NonEmptyString",
           "documentation": "<p>Unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, daemons (background processes). Create a role or look up a role's ARN using the <a href=\"https://console.aws.amazon.com/iam/\">IAM dashboard</a> in the AWS Management Console. Learn more about using on-box credentials for your game servers at <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\"> Access external resources from a game server</a>.</p>"
+        },
+        "CertificateConfiguration": {
+          "shape": "CertificateConfiguration"
         }
       },
       "documentation": "<p>General properties describing a fleet.</p> <ul> <li> <p> <a>CreateFleet</a> </p> </li> <li> <p> <a>ListFleets</a> </p> </li> <li> <p> <a>DeleteFleet</a> </p> </li> <li> <p>Describe fleets:</p> <ul> <li> <p> <a>DescribeFleetAttributes</a> </p> </li> <li> <p> <a>DescribeFleetCapacity</a> </p> </li> <li> <p> <a>DescribeFleetPortSettings</a> </p> </li> <li> <p> <a>DescribeFleetUtilization</a> </p> </li> <li> <p> <a>DescribeRuntimeConfiguration</a> </p> </li> <li> <p> <a>DescribeEC2InstanceLimits</a> </p> </li> <li> <p> <a>DescribeFleetEvents</a> </p> </li> </ul> </li> <li> <p>Update fleets:</p> <ul> <li> <p> <a>UpdateFleetAttributes</a> </p> </li> <li> <p> <a>UpdateFleetCapacity</a> </p> </li> <li> <p> <a>UpdateFleetPortSettings</a> </p> </li> <li> <p> <a>UpdateRuntimeConfiguration</a> </p> </li> </ul> </li> <li> <p>Manage fleet actions:</p> <ul> <li> <p> <a>StartFleetActions</a> </p> </li> <li> <p> <a>StopFleetActions</a> </p> </li> </ul> </li> </ul>"
@@ -4127,6 +4154,9 @@
           "shape": "IpAddress",
           "documentation": "<p>IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.</p>"
         },
+        "DnsName": {
+          "shape": "DnsName"
+        },
         "Port": {
           "shape": "PortNumber",
           "documentation": "<p>Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.</p>"
@@ -4165,6 +4195,9 @@
         "IpAddress": {
           "shape": "StringModel",
           "documentation": "<p>IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.</p>"
+        },
+        "DnsName": {
+          "shape": "DnsName"
         },
         "Port": {
           "shape": "PositiveInteger",
@@ -4263,6 +4296,9 @@
           "shape": "IpAddress",
           "documentation": "<p>IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is <code>FULFILLED</code>). </p>"
         },
+        "DnsName": {
+          "shape": "DnsName"
+        },
         "Port": {
           "shape": "PortNumber",
           "documentation": "<p>Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is <code>FULFILLED</code>).</p>"
@@ -4288,7 +4324,8 @@
         "PENDING",
         "FULFILLED",
         "CANCELLED",
-        "TIMED_OUT"
+        "TIMED_OUT",
+        "FAILED"
       ]
     },
     "GameSessionQueue": {
@@ -4438,6 +4475,9 @@
         "IpAddress": {
           "shape": "IpAddress",
           "documentation": "<p>IP address assigned to the instance.</p>"
+        },
+        "DnsName": {
+          "shape": "DnsName"
         },
         "OperatingSystem": {
           "shape": "OperatingSystem",
@@ -5134,6 +5174,9 @@
         "IpAddress": {
           "shape": "IpAddress",
           "documentation": "<p>IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.</p>"
+        },
+        "DnsName": {
+          "shape": "DnsName"
         },
         "Port": {
           "shape": "PortNumber",
