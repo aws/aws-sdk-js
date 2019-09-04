@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.522.0-->
+<!--LATEST=2.523.0-->
 <!--ENTRYINSERT-->
+
+## 2.523.0
+* feature: EKS: Amazon EKS DescribeCluster API returns a new OIDC issuer field that can be used to create OIDC identity provider for IAM for Service Accounts feature.
+* feature: StepFunctions: Added support for new history events
+* feature: TranscribeService: MediaFormat is now optional for StartTranscriptionJob API.
 
 ## 2.522.0
 * feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) introduces support for attaching Amazon Elastic Inference accelerators to your containers. This enables you to run deep learning inference workloads with hardware acceleration in a more efficient way.

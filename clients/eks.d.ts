@@ -136,6 +136,10 @@ declare namespace EKS {
      */
     logging?: Logging;
     /**
+     * The identity provider information for the cluster.
+     */
+    identity?: Identity;
+    /**
      * The current status of the cluster.
      */
     status?: ClusterStatus;
@@ -242,6 +246,12 @@ declare namespace EKS {
     resourceIds?: StringList;
   }
   export type ErrorDetails = ErrorDetail[];
+  export interface Identity {
+    /**
+     * The OpenID Connect identity provider information for the cluster.
+     */
+    oidc?: OIDC;
+  }
   export interface ListClustersRequest {
     /**
      * The maximum number of cluster results returned by ListClusters in paginated output. When you use this parameter, ListClusters returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListClusters request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListClusters returns up to 100 results and a nextToken value if applicable.
@@ -306,6 +316,12 @@ declare namespace EKS {
      * The cluster control plane logging configuration for your cluster.
      */
     clusterLogging?: LogSetups;
+  }
+  export interface OIDC {
+    /**
+     * The issuer URL for the OpenID Connect identity provider.
+     */
+    issuer?: String;
   }
   export type String = string;
   export type StringList = String[];

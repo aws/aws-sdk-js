@@ -292,13 +292,13 @@ declare namespace TranscribeService {
      */
     LanguageCode: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio track in the input media file.  If you do not specify the media sample rate, Amazon Transcribe determines the sample rate. If you specify the sample rate, it must match the sample rate detected by Amazon Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank and let Amazon Transcribe determine the sample rate.
+     * The sample rate of the audio track in the input media file in Hertz.  If you do not specify the media sample rate, Amazon Transcribe determines the sample rate. If you specify the sample rate, it must match the sample rate detected by Amazon Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank and let Amazon Transcribe determine the sample rate.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
-     * The format of the input media file.
+     * The format of the input media file.  If you do not specify the format of the media file, Amazon Transcribe determines the format. If the format is not recognized, Amazon Transcribe returns an InternalFailureException exception. If you specify the format, it must match the format detected by Amazon Transcribe, otherwise you get an InternalFailureException exception.
      */
-    MediaFormat: MediaFormat;
+    MediaFormat?: MediaFormat;
     /**
      * An object that describes the input media for a transcription job.
      */

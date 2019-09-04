@@ -36,7 +36,7 @@
           "shape": "TooManyTags"
         }
       ],
-      "documentation": "<p>Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>",
+      "documentation": "<p>Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateActivity</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateActivity</code>'s idempotency check is based on the activity <code>name</code>. If a following request has different <code>tags</code> values, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p> </note>",
       "idempotent": true
     },
     "CreateStateMachine": {
@@ -74,7 +74,7 @@
           "shape": "TooManyTags"
         }
       ],
-      "documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>",
+      "documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency check is based on the state machine <code>name</code> and <code>definition</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>",
       "idempotent": true
     },
     "DeleteActivity": {
@@ -336,7 +336,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>List tags for a given resource.</p>"
+      "documentation": "<p>List tags for a given resource.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
     },
     "SendTaskFailure": {
       "name": "SendTaskFailure",
@@ -361,7 +361,7 @@
           "shape": "TaskTimedOut"
         }
       ],
-      "documentation": "<p>Used by workers to report that the task identified by the <code>taskToken</code> failed.</p>"
+      "documentation": "<p>Used by activity workers and task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a> pattern to report that the task identified by the <code>taskToken</code> failed.</p>"
     },
     "SendTaskHeartbeat": {
       "name": "SendTaskHeartbeat",
@@ -386,7 +386,7 @@
           "shape": "TaskTimedOut"
         }
       ],
-      "documentation": "<p>Used by workers to report to the service that the task represented by the specified <code>taskToken</code> is still making progress. This action resets the <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state machine's Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history contains an <code>ActivityTimedOut</code> event.</p> <note> <p>The <code>Timeout</code> of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of <a>SendTaskHeartbeat</a> requests received.</p> </note> <note> <p>This operation is only useful for long-lived tasks to report the liveliness of the task.</p> </note>"
+      "documentation": "<p>Used by activity workers and task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a> pattern to report to Step Functions that the task represented by the specified <code>taskToken</code> is still making progress. This action resets the <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state machine's Amazon States Language definition (<code>HeartbeatSeconds</code>). This action does not in itself create an event in the execution history. However, if the task times out, the execution history contains an <code>ActivityTimedOut</code> entry for activities, or a <code>TaskTimedOut</code> entry for for tasks using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync\">job run</a> or <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a> pattern.</p> <note> <p>The <code>Timeout</code> of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of <a>SendTaskHeartbeat</a> requests received. Use <code>HeartbeatSeconds</code> to configure the timeout interval for heartbeats.</p> </note>"
     },
     "SendTaskSuccess": {
       "name": "SendTaskSuccess",
@@ -414,7 +414,7 @@
           "shape": "TaskTimedOut"
         }
       ],
-      "documentation": "<p>Used by workers to report that the task identified by the <code>taskToken</code> completed successfully.</p>"
+      "documentation": "<p>Used by activity workers and task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a> pattern to report that the task identified by the <code>taskToken</code> completed successfully.</p>"
     },
     "StartExecution": {
       "name": "StartExecution",
@@ -499,7 +499,7 @@
           "shape": "TooManyTags"
         }
       ],
-      "documentation": "<p>Add a tag to a Step Functions resource.</p>"
+      "documentation": "<p>Add a tag to a Step Functions resource.</p> <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -591,7 +591,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "creationDate": {
           "shape": "Timestamp",
@@ -694,11 +694,11 @@
       "members": {
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The list of tags to add to a resource.</p>"
+          "documentation": "<p>The list of tags to add to a resource.</p> <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
         }
       }
     },
@@ -729,7 +729,7 @@
       "members": {
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the state machine. </p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the state machine. </p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "definition": {
           "shape": "Definition",
@@ -741,7 +741,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>Tags to be added when creating a state machine.</p>"
+          "documentation": "<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
         }
       }
     },
@@ -826,7 +826,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "creationDate": {
           "shape": "Timestamp",
@@ -866,7 +866,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "status": {
           "shape": "ExecutionStatus",
@@ -962,7 +962,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "status": {
           "shape": "StateMachineStatus",
@@ -1039,7 +1039,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "status": {
           "shape": "ExecutionStatus",
@@ -1263,6 +1263,26 @@
         "executionTimedOutEventDetails": {
           "shape": "ExecutionTimedOutEventDetails"
         },
+        "mapStateStartedEventDetails": {
+          "shape": "MapStateStartedEventDetails",
+          "documentation": "<p>Contains details about Map state that was started.</p>"
+        },
+        "mapIterationStartedEventDetails": {
+          "shape": "MapIterationEventDetails",
+          "documentation": "<p>Contains details about an iteration of a Map state that was started.</p>"
+        },
+        "mapIterationSucceededEventDetails": {
+          "shape": "MapIterationEventDetails",
+          "documentation": "<p>Contains details about an iteration of a Map state that succeeded.</p>"
+        },
+        "mapIterationFailedEventDetails": {
+          "shape": "MapIterationEventDetails",
+          "documentation": "<p>Contains details about an iteration of a Map state that failed.</p>"
+        },
+        "mapIterationAbortedEventDetails": {
+          "shape": "MapIterationEventDetails",
+          "documentation": "<p>Contains details about an iteration of a Map state that was aborted.</p>"
+        },
         "lambdaFunctionFailedEventDetails": {
           "shape": "LambdaFunctionFailedEventDetails"
         },
@@ -1303,47 +1323,57 @@
       "type": "string",
       "enum": [
         "ActivityFailed",
-        "ActivityScheduleFailed",
         "ActivityScheduled",
+        "ActivityScheduleFailed",
         "ActivityStarted",
         "ActivitySucceeded",
         "ActivityTimedOut",
         "ChoiceStateEntered",
         "ChoiceStateExited",
-        "TaskFailed",
-        "TaskScheduled",
-        "TaskStartFailed",
-        "TaskStarted",
-        "TaskSubmitFailed",
-        "TaskSubmitted",
-        "TaskSucceeded",
-        "TaskTimedOut",
+        "ExecutionAborted",
         "ExecutionFailed",
         "ExecutionStarted",
         "ExecutionSucceeded",
-        "ExecutionAborted",
         "ExecutionTimedOut",
         "FailStateEntered",
         "LambdaFunctionFailed",
-        "LambdaFunctionScheduleFailed",
         "LambdaFunctionScheduled",
-        "LambdaFunctionStartFailed",
+        "LambdaFunctionScheduleFailed",
         "LambdaFunctionStarted",
+        "LambdaFunctionStartFailed",
         "LambdaFunctionSucceeded",
         "LambdaFunctionTimedOut",
-        "SucceedStateEntered",
-        "SucceedStateExited",
-        "TaskStateAborted",
-        "TaskStateEntered",
-        "TaskStateExited",
-        "PassStateEntered",
-        "PassStateExited",
+        "MapIterationAborted",
+        "MapIterationFailed",
+        "MapIterationStarted",
+        "MapIterationSucceeded",
+        "MapStateAborted",
+        "MapStateEntered",
+        "MapStateExited",
+        "MapStateFailed",
+        "MapStateStarted",
+        "MapStateSucceeded",
         "ParallelStateAborted",
         "ParallelStateEntered",
         "ParallelStateExited",
         "ParallelStateFailed",
         "ParallelStateStarted",
         "ParallelStateSucceeded",
+        "PassStateEntered",
+        "PassStateExited",
+        "SucceedStateEntered",
+        "SucceedStateExited",
+        "TaskFailed",
+        "TaskScheduled",
+        "TaskStarted",
+        "TaskStartFailed",
+        "TaskStateAborted",
+        "TaskStateEntered",
+        "TaskStateExited",
+        "TaskSubmitFailed",
+        "TaskSubmitted",
+        "TaskSucceeded",
+        "TaskTimedOut",
         "WaitStateAborted",
         "WaitStateEntered",
         "WaitStateExited"
@@ -1489,7 +1519,7 @@
           "documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
         },
         "nextToken": {
-          "shape": "PageToken",
+          "shape": "ListExecutionsPageToken",
           "documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
         }
       }
@@ -1505,10 +1535,15 @@
           "documentation": "<p>The list of matching executions.</p>"
         },
         "nextToken": {
-          "shape": "PageToken",
+          "shape": "ListExecutionsPageToken",
           "documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
         }
       }
+    },
+    "ListExecutionsPageToken": {
+      "type": "string",
+      "max": 3096,
+      "min": 1
     },
     "ListStateMachinesInput": {
       "type": "structure",
@@ -1559,6 +1594,30 @@
         }
       }
     },
+    "MapIterationEventDetails": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the iteration’s parent Map state.</p>"
+        },
+        "Index": {
+          "shape": "UnsignedInteger",
+          "documentation": "<p>The index of the array belonging to the Map state iteration.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about an iteration of a Map state.</p>"
+    },
+    "MapStateStartedEventDetails": {
+      "type": "structure",
+      "members": {
+        "Length": {
+          "shape": "UnsignedInteger",
+          "documentation": "<p>The size of the array for Map state iterations.</p>"
+        }
+      },
+      "documentation": "<p>Details about a Map state that was started.</p>"
+    },
     "Name": {
       "type": "string",
       "max": 80,
@@ -1585,7 +1644,7 @@
       "members": {
         "taskToken": {
           "shape": "TaskToken",
-          "documentation": "<p>The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).</p>"
+          "documentation": "<p>The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html\">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>"
         },
         "error": {
           "shape": "SensitiveError",
@@ -1609,7 +1668,7 @@
       "members": {
         "taskToken": {
           "shape": "TaskToken",
-          "documentation": "<p>The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).</p>"
+          "documentation": "<p>The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html\">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>"
         }
       }
     },
@@ -1626,7 +1685,7 @@
       "members": {
         "taskToken": {
           "shape": "TaskToken",
-          "documentation": "<p>The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).</p>"
+          "documentation": "<p>The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html\">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>"
         },
         "output": {
           "shape": "SensitiveData",
@@ -1672,7 +1731,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "input": {
           "shape": "SensitiveData",
@@ -1722,7 +1781,7 @@
       "members": {
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "output": {
           "shape": "SensitiveData",
@@ -1751,7 +1810,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation": "<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "creationDate": {
           "shape": "Timestamp",
@@ -1811,7 +1870,7 @@
           "documentation": "<p>The value of a tag.</p>"
         }
       },
-      "documentation": "<p>Tags are key-value pairs that can be associated with Step Functions state machines and activities.</p>"
+      "documentation": "<p>Tags are key-value pairs that can be associated with Step Functions state machines and activities.</p> <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -1843,7 +1902,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The list of tags to add to a resource.</p> <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>"
+          "documentation": "<p>The list of tags to add to a resource.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
         }
       }
     },
@@ -2065,6 +2124,10 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "UnsignedInteger": {
+      "type": "integer",
+      "min": 0
     },
     "UntagResourceInput": {
       "type": "structure",
