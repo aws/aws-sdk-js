@@ -291,4 +291,9 @@ export abstract class ConfigurationOptions {
      *  whether to marshal request parameters to the prefix of hostname.
      */
     hostPrefixEnabled?: boolean;
+    /**
+     * whether to send sts request to global endpoints or
+     * regional endpoints. 
+     */
+    stsRegionalEndpoints?: "legacy"|"regional";
 }
