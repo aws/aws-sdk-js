@@ -1517,6 +1517,7 @@
             });
           });
           var assumeRoleSpy2 = helpers.spyOn(credentials.service, 'assumeRole').andCallFake(function(params, cb) {
+            expect(credentials.service.config.credentials, sourceCredentials);
             return cb(null, {
               Credentials: defaultCredentials
             });
@@ -1524,6 +1525,8 @@
           credentials.refresh(function() {
             expect(assumeRoleSpy1.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnSource');
             expect(assumeRoleSpy2.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnDefault');
+            expect(credentials.accessKeyId).to.equal(defaultCredentials.AccessKeyId);
+            expect(credentials.secretAccessKey).to.equal(defaultCredentials.SecretAccessKey);
             done();
           });
         });
