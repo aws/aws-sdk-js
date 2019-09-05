@@ -1451,12 +1451,15 @@
       it('updates OIDCToken in webIdentityCredentials when new one is returned by token file', function(done) {
         var credentials = new AWS.TokenFileWebIdentityCredentials();
         credentials.refresh(function() {
-          expect(credentials.service.config.params.WebIdentityToken).to.equal('oidcToken');
-          var updatedOidcToken = 'updatedOidcToken';
-          helpers.spyOn(fs, 'readFileSync').andReturn(updatedOidcToken);
+          var assumeRoleWithWebIdentitySpy = helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallThrough();
           credentials.refresh(function() {
-            expect(credentials.service.config.params.WebIdentityToken).to.equal(updatedOidcToken);
-            done();
+            expect(assumeRoleWithWebIdentitySpy.calls[0]['arguments'][0].WebIdentityToken).to.equal('oidcToken');
+            var updatedOidcToken = 'updatedOidcToken';
+            helpers.spyOn(fs, 'readFileSync').andReturn(updatedOidcToken);
+            credentials.refresh(function() {
+              expect(assumeRoleWithWebIdentitySpy.calls[1]['arguments'][0].WebIdentityToken).to.equal(updatedOidcToken);
+              done();
+            });
           });
         });
       });
