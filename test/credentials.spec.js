@@ -1511,22 +1511,19 @@
             AccessKeyId: 'AccessKeyIdSource',
             SecretAccessKey: 'SecretAccessKeySource'
           };
-          helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallFake(function(params, cb) {
-            expect(params.RoleArn).to.equal('cfgRoleArnSource');
+          var assumeRoleSpy1 = helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallFake(function(params, cb) {
             return cb(null, {
               Credentials: sourceCredentials
             });
           });
-          helpers.spyOn(credentials.service, 'assumeRole').andCallFake(function(params, cb) {
-            expect(params.RoleArn).to.equal('cfgRoleArnDefault');
-            expect(credentials.service.config.credentials).to.equal(sourceCredentials);
-            expect(credentials.accessKeyId).to.be.undefined;
-            expect(credentials.secretAccessKey).to.be.undefined;
+          var assumeRoleSpy2 = helpers.spyOn(credentials.service, 'assumeRole').andCallFake(function(params, cb) {
             return cb(null, {
               Credentials: defaultCredentials
             });
           });
           credentials.refresh(function() {
+            expect(assumeRoleSpy1.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnSource');
+            expect(assumeRoleSpy2.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnDefault');
             done();
           });
         });
