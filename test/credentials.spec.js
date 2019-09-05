@@ -1490,7 +1490,7 @@
         });
       });
 
-      it('supports chaining in absense of web_identity_token_file and has source_profile ', function(done) {
+      it('supports chaining in absense of web_identity_token_file and has source_profile', function(done) {
         delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
         helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(
           {
@@ -1511,20 +1511,54 @@
             AccessKeyId: 'AccessKeyIdSource',
             SecretAccessKey: 'SecretAccessKeySource'
           };
-          var assumeRoleSpy1 = helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallFake(function(params, cb) {
+          var assumeRoleWithWebIdentitySpy = helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallFake(function(params, cb) {
             return cb(null, {
               Credentials: sourceCredentials
             });
           });
-          var assumeRoleSpy2 = helpers.spyOn(credentials.service, 'assumeRole').andCallFake(function(params, cb) {
+          var assumeRoleSpy = helpers.spyOn(credentials.service, 'assumeRole').andCallFake(function(params, cb) {
             expect(credentials.service.config.credentials, sourceCredentials);
             return cb(null, {
               Credentials: defaultCredentials
             });
           });
           credentials.refresh(function() {
-            expect(assumeRoleSpy1.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnSource');
-            expect(assumeRoleSpy2.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnDefault');
+            expect(assumeRoleWithWebIdentitySpy.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnSource');
+            expect(assumeRoleSpy.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnDefault');
+            expect(credentials.accessKeyId).to.equal(defaultCredentials.AccessKeyId);
+            expect(credentials.secretAccessKey).to.equal(defaultCredentials.SecretAccessKey);
+            done();
+          });
+        });
+      });
+
+      it('ignores chaining in presence of web_identity_token_file', function(done) {
+        delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
+        helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(
+          {
+            'source': {
+              'web_identity_token_file': 'cfgTokenFileSource',
+              'role_arn': 'cfgRoleArnSource'
+            },
+            'default': {
+              'source_profile': 'source',
+              'web_identity_token_file': 'cfgTokenFileDefault',
+              'role_arn': 'cfgRoleArnDefault'
+            }
+          }
+        );
+        var credentials = new AWS.TokenFileWebIdentityCredentials();
+        credentials.refresh(function() {
+          expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFileDefault');
+          var assumeRoleWithWebIdentitySpy = helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallFake(function(params, cb) {
+            return cb(null, {
+              Credentials: defaultCredentials
+            });
+          });
+          var assumeRoleSpy = helpers.spyOn(credentials.service, 'assumeRole').andCallThrough();
+          credentials.refresh(function() {
+            expect(assumeRoleWithWebIdentitySpy.calls[0]['arguments'][0].RoleArn).to.equal('cfgRoleArnDefault');
+            expect(assumeRoleSpy.calls.length).to.equal(0);
             expect(credentials.accessKeyId).to.equal(defaultCredentials.AccessKeyId);
             expect(credentials.secretAccessKey).to.equal(defaultCredentials.SecretAccessKey);
             done();
