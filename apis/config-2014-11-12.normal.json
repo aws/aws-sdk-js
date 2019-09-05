@@ -184,7 +184,8 @@
         {
           "shape": "OrganizationAccessDeniedException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization. Only a master account can delete an organization config rule.</p> <p>AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.</p>"
     },
     "DeletePendingAggregationRequest": {
       "name": "DeletePendingAggregationRequest",
@@ -223,6 +224,25 @@
         }
       ],
       "documentation": "<p>Deletes the remediation configuration.</p>"
+    },
+    "DeleteRemediationExceptions": {
+      "name": "DeleteRemediationExceptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteRemediationExceptionsRequest"
+      },
+      "output": {
+        "shape": "DeleteRemediationExceptionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchRemediationExceptionException"
+        }
+      ],
+      "documentation": "<p>Deletes one or more remediation exceptions mentioned in the resource keys.</p>"
     },
     "DeleteRetentionConfiguration": {
       "name": "DeleteRetentionConfiguration",
@@ -294,7 +314,7 @@
           "shape": "NoSuchConfigurationAggregatorException"
         }
       ],
-      "documentation": "<p>Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules. </p> <note> <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p> </note>"
+      "documentation": "<p>Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules. </p> <note> <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>"
     },
     "DescribeAggregationAuthorizations": {
       "name": "DescribeAggregationAuthorizations",
@@ -572,7 +592,8 @@
         {
           "shape": "OrganizationAccessDeniedException"
         }
-      ]
+      ],
+      "documentation": "<p>Provides organization config rule deployment status for an organization.</p> <note> <p>The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> <p>Only a master account can call this API.</p> </note>"
     },
     "DescribeOrganizationConfigRules": {
       "name": "DescribeOrganizationConfigRules",
@@ -599,7 +620,8 @@
         {
           "shape": "OrganizationAccessDeniedException"
         }
-      ]
+      ],
+      "documentation": "<p>Returns a list of organization config rules.</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> <p>Only a master account can call this API.</p> </note>"
     },
     "DescribePendingAggregationRequests": {
       "name": "DescribePendingAggregationRequests",
@@ -640,6 +662,28 @@
       },
       "documentation": "<p>Returns the details of one or more remediation configurations.</p>"
     },
+    "DescribeRemediationExceptions": {
+      "name": "DescribeRemediationExceptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeRemediationExceptionsRequest"
+      },
+      "output": {
+        "shape": "DescribeRemediationExceptionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ],
+      "documentation": "<p>Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response. </p> <note> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources.</p> </note>"
+    },
     "DescribeRemediationExecutionStatus": {
       "name": "DescribeRemediationExecutionStatus",
       "http": {
@@ -655,6 +699,9 @@
       "errors": [
         {
           "shape": "NoSuchRemediationConfigurationException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
         }
       ],
       "documentation": "<p>Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.</p>"
@@ -710,7 +757,7 @@
           "shape": "NoSuchConfigurationAggregatorException"
         }
       ],
-      "documentation": "<p>Returns the evaluation results for the specified AWS Config rule for a specific resource in a rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule. </p> <note> <p>The results can return an empty result page. But if you have a nextToken, the results are displayed on the next page.</p> </note>"
+      "documentation": "<p>Returns the evaluation results for the specified AWS Config rule for a specific resource in a rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule. </p> <note> <p>The results can return an empty result page. But if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>"
     },
     "GetAggregateConfigRuleComplianceSummary": {
       "name": "GetAggregateConfigRuleComplianceSummary",
@@ -920,7 +967,8 @@
         {
           "shape": "OrganizationAccessDeniedException"
         }
-      ]
+      ],
+      "documentation": "<p>Returns detailed status for each member account within an organization for a given organization config rule.</p> <note> <p>Only a master account can call this API.</p> </note>"
     },
     "GetResourceConfigHistory": {
       "name": "GetResourceConfigHistory",
@@ -1242,7 +1290,8 @@
         {
           "shape": "InsufficientPermissionsException"
         }
-      ]
+      ],
+      "documentation": "<p>Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations. Only a master account can create or update an organization config rule.</p> <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with <code>GetRole</code> action.</p> <p>You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account that the rule invokes to evaluate your resources. When you use the <code>PutOrganizationConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule's identifier for the <code>RuleIdentifier</code> key.</p> <p>The maximum number of organization config rules that AWS Config supports is 150.</p> <note> <p>Specify either <code>OrganizationCustomRuleMetadata</code> or <code>OrganizationManagedRuleMetadata</code>.</p> </note>"
     },
     "PutRemediationConfigurations": {
       "name": "PutRemediationConfigurations",
@@ -1265,6 +1314,25 @@
         }
       ],
       "documentation": "<p>Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. </p>"
+    },
+    "PutRemediationExceptions": {
+      "name": "PutRemediationExceptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutRemediationExceptionsRequest"
+      },
+      "output": {
+        "shape": "PutRemediationExceptionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ],
+      "documentation": "<p>A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. </p>"
     },
     "PutRetentionConfiguration": {
       "name": "PutRetentionConfiguration",
@@ -1373,6 +1441,9 @@
         "shape": "StartRemediationExecutionResponse"
       },
       "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
         {
           "shape": "InsufficientPermissionsException"
         },
@@ -1707,6 +1778,18 @@
     "AmazonResourceName": {
       "type": "string",
       "max": 256,
+      "min": 1
+    },
+    "AutoRemediationAttemptSeconds": {
+      "type": "long",
+      "box": true,
+      "max": 2678000,
+      "min": 1
+    },
+    "AutoRemediationAttempts": {
+      "type": "integer",
+      "box": true,
+      "max": 25,
       "min": 1
     },
     "AvailabilityZone": {
@@ -2175,13 +2258,14 @@
     },
     "ConfigRuleName": {
       "type": "string",
-      "max": 64,
-      "min": 1
+      "max": 128,
+      "min": 1,
+      "pattern": ".*\\S.*"
     },
     "ConfigRuleNames": {
       "type": "list",
       "member": {
-        "shape": "StringWithCharLimit64"
+        "shape": "ConfigRuleName"
       },
       "max": 25,
       "min": 0
@@ -2568,7 +2652,8 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64"
+          "shape": "StringWithCharLimit64",
+          "documentation": "<p>The name of organization config rule that you want to delete.</p>"
         }
       }
     },
@@ -2596,7 +2681,7 @@
       ],
       "members": {
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "ConfigRuleName",
           "documentation": "<p>The name of the AWS Config rule for which you want to delete remediation configuration.</p>"
         },
         "ResourceType": {
@@ -2608,6 +2693,32 @@
     "DeleteRemediationConfigurationResponse": {
       "type": "structure",
       "members": {}
+    },
+    "DeleteRemediationExceptionsRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigRuleName",
+        "ResourceKeys"
+      ],
+      "members": {
+        "ConfigRuleName": {
+          "shape": "ConfigRuleName",
+          "documentation": "<p>The name of the AWS Config rule for which you want to delete remediation exception configuration.</p>"
+        },
+        "ResourceKeys": {
+          "shape": "RemediationExceptionResourceKeys",
+          "documentation": "<p>An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. </p>"
+        }
+      }
+    },
+    "DeleteRemediationExceptionsResponse": {
+      "type": "structure",
+      "members": {
+        "FailedBatches": {
+          "shape": "FailedDeleteRemediationExceptionsBatches",
+          "documentation": "<p>Returns a list of failed delete remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.</p>"
+        }
+      }
     },
     "DeleteRetentionConfigurationRequest": {
       "type": "structure",
@@ -2738,7 +2849,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -2751,7 +2862,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -2764,7 +2875,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -2777,7 +2888,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -2929,7 +3040,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         },
         "Limit": {
           "shape": "Limit",
@@ -2946,7 +3057,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -2959,7 +3070,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         },
         "Limit": {
           "shape": "Limit",
@@ -2976,7 +3087,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -3064,13 +3175,16 @@
       "type": "structure",
       "members": {
         "OrganizationConfigRuleNames": {
-          "shape": "OrganizationConfigRuleNames"
+          "shape": "OrganizationConfigRuleNames",
+          "documentation": "<p>The names of organization config rules for which you want status details. If you do not specify any names, AWS Config returns details for all your organization AWS Confg rules.</p>"
         },
         "Limit": {
-          "shape": "CosmosPageLimit"
+          "shape": "CosmosPageLimit",
+          "documentation": "<p>The maximum number of <code>OrganizationConfigRuleStatuses</code> returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -3078,10 +3192,12 @@
       "type": "structure",
       "members": {
         "OrganizationConfigRuleStatuses": {
-          "shape": "OrganizationConfigRuleStatuses"
+          "shape": "OrganizationConfigRuleStatuses",
+          "documentation": "<p>A list of <code>OrganizationConfigRuleStatus</code> objects.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -3089,13 +3205,16 @@
       "type": "structure",
       "members": {
         "OrganizationConfigRuleNames": {
-          "shape": "OrganizationConfigRuleNames"
+          "shape": "OrganizationConfigRuleNames",
+          "documentation": "<p>The names of organization config rules for which you want details. If you do not specify any names, AWS Config returns details for all your organization config rules.</p>"
         },
         "Limit": {
-          "shape": "CosmosPageLimit"
+          "shape": "CosmosPageLimit",
+          "documentation": "<p>The maximum number of organization config rules returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -3103,10 +3222,12 @@
       "type": "structure",
       "members": {
         "OrganizationConfigRules": {
-          "shape": "OrganizationConfigRules"
+          "shape": "OrganizationConfigRules",
+          "documentation": "<p>Retuns a list <code>OrganizationConfigRule</code> objects.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -3124,7 +3245,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -3137,7 +3258,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -3162,6 +3283,43 @@
         }
       }
     },
+    "DescribeRemediationExceptionsRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigRuleName"
+      ],
+      "members": {
+        "ConfigRuleName": {
+          "shape": "ConfigRuleName",
+          "documentation": "<p>The name of the AWS Config rule.</p>"
+        },
+        "ResourceKeys": {
+          "shape": "RemediationExceptionResourceKeys",
+          "documentation": "<p>An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. </p>"
+        },
+        "Limit": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of RemediationExceptionResourceKey returned on each page. The default is 25. If you specify 0, AWS Config uses the default.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>"
+        }
+      }
+    },
+    "DescribeRemediationExceptionsResponse": {
+      "type": "structure",
+      "members": {
+        "RemediationExceptions": {
+          "shape": "RemediationExceptions",
+          "documentation": "<p>Returns a list of remediation exception objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response.</p>"
+        }
+      }
+    },
     "DescribeRemediationExecutionStatusRequest": {
       "type": "structure",
       "required": [
@@ -3169,7 +3327,7 @@
       ],
       "members": {
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "ConfigRuleName",
           "documentation": "<p>A list of AWS Config rule names.</p>"
         },
         "ResourceKeys": {
@@ -3181,7 +3339,7 @@
           "documentation": "<p>The maximum number of RemediationExecutionStatuses returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. </p>"
         },
         "NextToken": {
-          "shape": "StringWithCharLimit256",
+          "shape": "String",
           "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
@@ -3194,7 +3352,7 @@
           "documentation": "<p>Returns a list of remediation execution statuses objects.</p>"
         },
         "NextToken": {
-          "shape": "StringWithCharLimit256",
+          "shape": "String",
           "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
@@ -3361,10 +3519,40 @@
       "max": 1000,
       "min": 0
     },
+    "ExecutionControls": {
+      "type": "structure",
+      "members": {
+        "SsmControls": {
+          "shape": "SsmControls",
+          "documentation": "<p>A SsmControls object.</p>"
+        }
+      },
+      "documentation": "<p>The controls that AWS Config uses for executing remediations.</p>"
+    },
     "Expression": {
       "type": "string",
       "max": 4096,
       "min": 1
+    },
+    "FailedDeleteRemediationExceptionsBatch": {
+      "type": "structure",
+      "members": {
+        "FailureMessage": {
+          "shape": "String",
+          "documentation": "<p>Returns a failure message for delete remediation exception. For example, AWS Config creates an exception due to an internal error.</p>"
+        },
+        "FailedItems": {
+          "shape": "RemediationExceptionResourceKeys",
+          "documentation": "<p>Returns remediation exception resource key object of the failed items.</p>"
+        }
+      },
+      "documentation": "<p>List of each of the failed delete remediation exceptions with specific reasons.</p>"
+    },
+    "FailedDeleteRemediationExceptionsBatches": {
+      "type": "list",
+      "member": {
+        "shape": "FailedDeleteRemediationExceptionsBatch"
+      }
     },
     "FailedRemediationBatch": {
       "type": "structure",
@@ -3384,6 +3572,26 @@
       "type": "list",
       "member": {
         "shape": "FailedRemediationBatch"
+      }
+    },
+    "FailedRemediationExceptionBatch": {
+      "type": "structure",
+      "members": {
+        "FailureMessage": {
+          "shape": "String",
+          "documentation": "<p>Returns a failure message. For example, the auto-remediation has failed.</p>"
+        },
+        "FailedItems": {
+          "shape": "RemediationExceptions",
+          "documentation": "<p>Returns remediation exception resource key object of the failed items.</p>"
+        }
+      },
+      "documentation": "<p>List of each of the failed remediation exceptions with specific reasons.</p>"
+    },
+    "FailedRemediationExceptionBatches": {
+      "type": "list",
+      "member": {
+        "shape": "FailedRemediationExceptionBatch"
       }
     },
     "FieldInfo": {
@@ -3440,7 +3648,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -3453,7 +3661,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -3481,7 +3689,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -3498,7 +3706,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -3730,16 +3938,20 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64"
+          "shape": "StringWithCharLimit64",
+          "documentation": "<p>The name of organization config rule for which you want status details for member accounts.</p>"
         },
         "Filters": {
-          "shape": "StatusDetailFilters"
+          "shape": "StatusDetailFilters",
+          "documentation": "<p>A <code>StatusDetailFilters</code> object.</p>"
         },
         "Limit": {
-          "shape": "CosmosPageLimit"
+          "shape": "CosmosPageLimit",
+          "documentation": "<p>The maximum number of <code>OrganizationConfigRuleDetailedStatus</code> returned on each page. If you do not specify a number, AWS Config uses the default. The default is 100.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -3747,10 +3959,12 @@
       "type": "structure",
       "members": {
         "OrganizationConfigRuleDetailedStatus": {
-          "shape": "OrganizationConfigRuleDetailedStatus"
+          "shape": "OrganizationConfigRuleDetailedStatus",
+          "documentation": "<p>A list of <code>MemberAccountStatus</code> objects.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -3954,7 +4168,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -3967,7 +4181,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
+          "documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
         }
       }
     },
@@ -4007,24 +4221,31 @@
       ],
       "members": {
         "AccountId": {
-          "shape": "AccountId"
+          "shape": "AccountId",
+          "documentation": "<p>The 12-digit account ID of a member account.</p>"
         },
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64"
+          "shape": "StringWithCharLimit64",
+          "documentation": "<p>The name of config rule deployed in the member account.</p>"
         },
         "MemberAccountRuleStatus": {
-          "shape": "MemberAccountRuleStatus"
+          "shape": "MemberAccountRuleStatus",
+          "documentation": "<p>Indicates deployment status for config rule in the member account. When master account calls <code>PutOrganizationConfigRule</code> action for the first time, config rule status is created in the member account. When master account calls <code>PutOrganizationConfigRule</code> action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. </p> <p> AWS Config sets the state of the rule to:</p> <ul> <li> <p> <code>CREATE_SUCCESSFUL</code> when config rule has been created in the member account. </p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> when config rule is being created in the member account.</p> </li> <li> <p> <code>CREATE_FAILED</code> when config rule creation has failed in the member account.</p> </li> <li> <p> <code>DELETE_FAILED</code> when config rule deletion has failed in the member account.</p> </li> <li> <p> <code>DELETE_IN_PROGRESS</code> when config rule is being deleted in the member account.</p> </li> <li> <p> <code>DELETE_SUCCESSFUL</code> when config rule has been deleted in the member account. </p> </li> <li> <p> <code>UPDATE_SUCCESSFUL</code> when config rule has been updated in the member account.</p> </li> <li> <p> <code>UPDATE_IN_PROGRESS</code> when config rule is being updated in the member account.</p> </li> <li> <p> <code>UPDATE_FAILED</code> when config rule deletion has failed in the member account.</p> </li> </ul>"
         },
         "ErrorCode": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>An error code that is returned when config rule creation or deletion failed in the member account.</p>"
         },
         "ErrorMessage": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>An error message indicating that config rule account creation or deletion has failed due to an error in the member account.</p>"
         },
         "LastUpdateTime": {
-          "shape": "Date"
+          "shape": "Date",
+          "documentation": "<p>The timestamp of the last status update.</p>"
         }
-      }
+      },
+      "documentation": "<p>Organization config rule creation or deletion status in each member account. This includes the name of the rule, the status, error code and error message when the rule creation or deletion failed.</p>"
     },
     "MessageType": {
       "type": "string",
@@ -4073,24 +4294,31 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64"
+          "shape": "StringWithCharLimit64",
+          "documentation": "<p>The name that you assign to organization config rule.</p>"
         },
         "OrganizationConfigRuleArn": {
-          "shape": "StringWithCharLimit256"
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>The Amazon Resource Name (ARN) of organization config rule.</p>"
         },
         "OrganizationManagedRuleMetadata": {
-          "shape": "OrganizationManagedRuleMetadata"
+          "shape": "OrganizationManagedRuleMetadata",
+          "documentation": "<p>An <code>OrganizationManagedRuleMetadata</code> object.</p>"
         },
         "OrganizationCustomRuleMetadata": {
-          "shape": "OrganizationCustomRuleMetadata"
+          "shape": "OrganizationCustomRuleMetadata",
+          "documentation": "<p>An <code>OrganizationCustomRuleMetadata</code> object.</p>"
         },
         "ExcludedAccounts": {
-          "shape": "ExcludedAccounts"
+          "shape": "ExcludedAccounts",
+          "documentation": "<p>A comma-separated list of accounts excluded from organization config rule.</p>"
         },
         "LastUpdateTime": {
-          "shape": "Date"
+          "shape": "Date",
+          "documentation": "<p>The timestamp of the last update.</p>"
         }
-      }
+      },
+      "documentation": "<p>An organization config rule that has information about config rules that AWS Config creates in member accounts.</p>"
     },
     "OrganizationConfigRuleDetailedStatus": {
       "type": "list",
@@ -4114,21 +4342,27 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64"
+          "shape": "StringWithCharLimit64",
+          "documentation": "<p>The name that you assign to organization config rule.</p>"
         },
         "OrganizationRuleStatus": {
-          "shape": "OrganizationRuleStatus"
+          "shape": "OrganizationRuleStatus",
+          "documentation": "<p>Indicates deployment status of an organization config rule. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in all the member accounts. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in all the member accounts. Additionally, config rule status is updated when one or more member accounts join or leave an organization. Config rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.</p> <p>AWS Config sets the state of the rule to:</p> <ul> <li> <p> <code>CREATE_SUCCESSFUL</code> when an organization config rule has been successfully created in all the member accounts. </p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> when an organization config rule creation is in progress.</p> </li> <li> <p> <code>CREATE_FAILED</code> when an organization config rule creation failed in one or more member accounts within that organization.</p> </li> <li> <p> <code>DELETE_FAILED</code> when an organization config rule deletion failed in one or more member accounts within that organization.</p> </li> <li> <p> <code>DELETE_IN_PROGRESS</code> when an organization config rule deletion is in progress.</p> </li> <li> <p> <code>DELETE_SUCCESSFUL</code> when an organization config rule has been successfully deleted from all the member accounts.</p> </li> <li> <p> <code>UPDATE_SUCCESSFUL</code> when an organization config rule has been successfully updated in all the member accounts.</p> </li> <li> <p> <code>UPDATE_IN_PROGRESS</code> when an organization config rule update is in progress.</p> </li> <li> <p> <code>UPDATE_FAILED</code> when an organization config rule update failed in one or more member accounts within that organization.</p> </li> </ul>"
         },
         "ErrorCode": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>An error code that is returned when organization config rule creation or deletion has failed.</p>"
         },
         "ErrorMessage": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>An error message indicating that organization config rule creation or deletion failed due to an error.</p>"
         },
         "LastUpdateTime": {
-          "shape": "Date"
+          "shape": "Date",
+          "documentation": "<p>The timestamp of the last update.</p>"
         }
-      }
+      },
+      "documentation": "<p>Returns the status for an organization config rule in an organization.</p>"
     },
     "OrganizationConfigRuleStatuses": {
       "type": "list",
@@ -4164,33 +4398,43 @@
       ],
       "members": {
         "Description": {
-          "shape": "StringWithCharLimit256Min0"
+          "shape": "StringWithCharLimit256Min0",
+          "documentation": "<p>The description that you provide for organization config rule.</p>"
         },
         "LambdaFunctionArn": {
-          "shape": "StringWithCharLimit256"
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>The lambda function ARN.</p>"
         },
         "OrganizationConfigRuleTriggerTypes": {
-          "shape": "OrganizationConfigRuleTriggerTypes"
+          "shape": "OrganizationConfigRuleTriggerTypes",
+          "documentation": "<p>The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:</p> <ul> <li> <p> <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.</p> </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p> <code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> </ul>"
         },
         "InputParameters": {
-          "shape": "StringWithCharLimit2048"
+          "shape": "StringWithCharLimit2048",
+          "documentation": "<p>A string, in JSON format, that is passed to organization config rule Lambda function.</p>"
         },
         "MaximumExecutionFrequency": {
-          "shape": "MaximumExecutionFrequency"
+          "shape": "MaximumExecutionFrequency",
+          "documentation": "<p>The maximum frequency with which AWS Config runs evaluations for a rule. Your custom rule is triggered when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> </note>"
         },
         "ResourceTypesScope": {
-          "shape": "ResourceTypesScope"
+          "shape": "ResourceTypesScope",
+          "documentation": "<p>The type of the AWS resource that was evaluated.</p>"
         },
         "ResourceIdScope": {
-          "shape": "StringWithCharLimit768"
+          "shape": "StringWithCharLimit768",
+          "documentation": "<p>The ID of the AWS resource that was evaluated.</p>"
         },
         "TagKeyScope": {
-          "shape": "StringWithCharLimit128"
+          "shape": "StringWithCharLimit128",
+          "documentation": "<p>One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values. </p>"
         },
         "TagValueScope": {
-          "shape": "StringWithCharLimit256"
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). </p>"
         }
-      }
+      },
+      "documentation": "<p>An object that specifies organization custom rule metadata such as resource type, resource ID of AWS resource, Lamdba function ARN, and organization trigger types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic.</p>"
     },
     "OrganizationManagedRuleMetadata": {
       "type": "structure",
@@ -4199,30 +4443,39 @@
       ],
       "members": {
         "Description": {
-          "shape": "StringWithCharLimit256Min0"
+          "shape": "StringWithCharLimit256Min0",
+          "documentation": "<p>The description that you provide for organization config rule.</p>"
         },
         "RuleIdentifier": {
-          "shape": "StringWithCharLimit256"
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>For organization config managed rules, a predefined identifier from a list. For example, <code>IAM_PASSWORD_POLICY</code> is a managed rule. To reference a managed rule, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">Using AWS Managed Config Rules</a>.</p>"
         },
         "InputParameters": {
-          "shape": "StringWithCharLimit2048"
+          "shape": "StringWithCharLimit2048",
+          "documentation": "<p>A string, in JSON format, that is passed to organization config rule Lambda function.</p>"
         },
         "MaximumExecutionFrequency": {
-          "shape": "MaximumExecutionFrequency"
+          "shape": "MaximumExecutionFrequency",
+          "documentation": "<p>The maximum frequency with which AWS Config runs evaluations for a rule. You are using an AWS managed rule that is triggered at a periodic frequency.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> </note>"
         },
         "ResourceTypesScope": {
-          "shape": "ResourceTypesScope"
+          "shape": "ResourceTypesScope",
+          "documentation": "<p>The type of the AWS resource that was evaluated.</p>"
         },
         "ResourceIdScope": {
-          "shape": "StringWithCharLimit768"
+          "shape": "StringWithCharLimit768",
+          "documentation": "<p>The ID of the AWS resource that was evaluated.</p>"
         },
         "TagKeyScope": {
-          "shape": "StringWithCharLimit128"
+          "shape": "StringWithCharLimit128",
+          "documentation": "<p>One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values. </p>"
         },
         "TagValueScope": {
-          "shape": "StringWithCharLimit256"
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).</p>"
         }
-      }
+      },
+      "documentation": "<p>An object that specifies organization managed rule metadata such as resource type and ID of AWS resource along with the rule identifier. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic.</p>"
     },
     "OrganizationRuleStatus": {
       "type": "string",
@@ -4265,6 +4518,12 @@
         "shape": "PendingAggregationRequest"
       }
     },
+    "Percentage": {
+      "type": "integer",
+      "box": true,
+      "max": 100,
+      "min": 1
+    },
     "PutAggregationAuthorizationRequest": {
       "type": "structure",
       "required": [
@@ -4281,7 +4540,8 @@
           "documentation": "<p>The region authorized to collect aggregated data.</p>"
         },
         "Tags": {
-          "shape": "TagsList"
+          "shape": "TagsList",
+          "documentation": "<p>An array of tag object.</p>"
         }
       }
     },
@@ -4305,7 +4565,8 @@
           "documentation": "<p>The rule that you want to add to your account.</p>"
         },
         "Tags": {
-          "shape": "TagsList"
+          "shape": "TagsList",
+          "documentation": "<p>An array of tag object.</p>"
         }
       }
     },
@@ -4328,7 +4589,8 @@
           "documentation": "<p>An OrganizationAggregationSource object.</p>"
         },
         "Tags": {
-          "shape": "TagsList"
+          "shape": "TagsList",
+          "documentation": "<p>An array of tag object.</p>"
         }
       }
     },
@@ -4405,16 +4667,20 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64"
+          "shape": "StringWithCharLimit64",
+          "documentation": "<p>The name that you assign to an organization config rule.</p>"
         },
         "OrganizationManagedRuleMetadata": {
-          "shape": "OrganizationManagedRuleMetadata"
+          "shape": "OrganizationManagedRuleMetadata",
+          "documentation": "<p>An <code>OrganizationManagedRuleMetadata</code> object. </p>"
         },
         "OrganizationCustomRuleMetadata": {
-          "shape": "OrganizationCustomRuleMetadata"
+          "shape": "OrganizationCustomRuleMetadata",
+          "documentation": "<p>An <code>OrganizationCustomRuleMetadata</code> object.</p>"
         },
         "ExcludedAccounts": {
-          "shape": "ExcludedAccounts"
+          "shape": "ExcludedAccounts",
+          "documentation": "<p>A comma-separated list of accounts that you want to exclude from an organization config rule.</p>"
         }
       }
     },
@@ -4422,7 +4688,8 @@
       "type": "structure",
       "members": {
         "OrganizationConfigRuleArn": {
-          "shape": "StringWithCharLimit256"
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an organization config rule.</p>"
         }
       }
     },
@@ -4444,6 +4711,40 @@
         "FailedBatches": {
           "shape": "FailedRemediationBatches",
           "documentation": "<p>Returns a list of failed remediation batch objects.</p>"
+        }
+      }
+    },
+    "PutRemediationExceptionsRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigRuleName",
+        "ResourceKeys"
+      ],
+      "members": {
+        "ConfigRuleName": {
+          "shape": "ConfigRuleName",
+          "documentation": "<p>The name of the AWS Config rule for which you want to create remediation exception.</p>"
+        },
+        "ResourceKeys": {
+          "shape": "RemediationExceptionResourceKeys",
+          "documentation": "<p>An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. </p>"
+        },
+        "Message": {
+          "shape": "StringWithCharLimit1024",
+          "documentation": "<p>The message contains an explanation of the exception.</p>"
+        },
+        "ExpirationTime": {
+          "shape": "Date",
+          "documentation": "<p>The exception is automatically deleted after the expiration date.</p>"
+        }
+      }
+    },
+    "PutRemediationExceptionsResponse": {
+      "type": "structure",
+      "members": {
+        "FailedBatches": {
+          "shape": "FailedRemediationExceptionBatches",
+          "documentation": "<p>Returns a list of failed remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.</p>"
         }
       }
     },
@@ -4566,7 +4867,7 @@
       ],
       "members": {
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "ConfigRuleName",
           "documentation": "<p>The name of the AWS Config rule.</p>"
         },
         "TargetType": {
@@ -4588,6 +4889,30 @@
         "ResourceType": {
           "shape": "String",
           "documentation": "<p>The type of a resource. </p>"
+        },
+        "Automatic": {
+          "shape": "Boolean",
+          "documentation": "<p>The remediation is triggered automatically.</p>"
+        },
+        "ExecutionControls": {
+          "shape": "ExecutionControls",
+          "documentation": "<p>An ExecutionControls object.</p>"
+        },
+        "MaximumAutomaticAttempts": {
+          "shape": "AutoRemediationAttempts",
+          "documentation": "<p>The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.</p> <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config throws an exception after the 5th failed attempt within 50 seconds.</p>"
+        },
+        "RetryAttemptSeconds": {
+          "shape": "AutoRemediationAttemptSeconds",
+          "documentation": "<p>Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds. </p> <p>For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception. </p>"
+        },
+        "Arn": {
+          "shape": "StringWithCharLimit1024",
+          "documentation": "<p>Amazon Resource Name (ARN) of remediation configuration.</p>"
+        },
+        "CreatedByService": {
+          "shape": "StringWithCharLimit1024",
+          "documentation": "<p>Name of the service that owns the service linked rule, if applicable.</p>"
         }
       },
       "documentation": "<p>An object that represents the details about the remediation configuration that includes the remediation action, parameters, and data to execute the action.</p>"
@@ -4596,6 +4921,67 @@
       "type": "list",
       "member": {
         "shape": "RemediationConfiguration"
+      },
+      "max": 25,
+      "min": 0
+    },
+    "RemediationException": {
+      "type": "structure",
+      "required": [
+        "ConfigRuleName",
+        "ResourceType",
+        "ResourceId"
+      ],
+      "members": {
+        "ConfigRuleName": {
+          "shape": "ConfigRuleName",
+          "documentation": "<p>The name of the AWS Config rule.</p>"
+        },
+        "ResourceType": {
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>The type of a resource.</p>"
+        },
+        "ResourceId": {
+          "shape": "StringWithCharLimit1024",
+          "documentation": "<p>The ID of the resource (for example., sg-xxxxxx).</p>"
+        },
+        "Message": {
+          "shape": "StringWithCharLimit1024",
+          "documentation": "<p>An explanation of an remediation exception.</p>"
+        },
+        "ExpirationTime": {
+          "shape": "Date",
+          "documentation": "<p>The time when the remediation exception will be deleted.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the details about the remediation exception. The details include the rule name, an explanation of an exception, the time when the exception will be deleted, the resource ID, and resource type. </p>"
+    },
+    "RemediationExceptionResourceKey": {
+      "type": "structure",
+      "members": {
+        "ResourceType": {
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>The type of a resource.</p>"
+        },
+        "ResourceId": {
+          "shape": "StringWithCharLimit1024",
+          "documentation": "<p>The ID of the resource (for example., sg-xxxxxx).</p>"
+        }
+      },
+      "documentation": "<p>The details that identify a resource within AWS Config, including the resource type and resource ID. </p>"
+    },
+    "RemediationExceptionResourceKeys": {
+      "type": "list",
+      "member": {
+        "shape": "RemediationExceptionResourceKey"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "RemediationExceptions": {
+      "type": "list",
+      "member": {
+        "shape": "RemediationException"
       },
       "max": 25,
       "min": 0
@@ -4879,55 +5265,81 @@
         "AWS::EC2::VPC",
         "AWS::EC2::VPNConnection",
         "AWS::EC2::VPNGateway",
+        "AWS::EC2::RegisteredHAInstance",
+        "AWS::EC2::NatGateway",
+        "AWS::EC2::EgressOnlyInternetGateway",
+        "AWS::EC2::VPCEndpoint",
+        "AWS::EC2::VPCEndpointService",
+        "AWS::EC2::FlowLog",
+        "AWS::EC2::VPCPeeringConnection",
         "AWS::IAM::Group",
         "AWS::IAM::Policy",
         "AWS::IAM::Role",
         "AWS::IAM::User",
+        "AWS::ElasticLoadBalancingV2::LoadBalancer",
         "AWS::ACM::Certificate",
         "AWS::RDS::DBInstance",
+        "AWS::RDS::DBParameterGroup",
+        "AWS::RDS::DBOptionGroup",
         "AWS::RDS::DBSubnetGroup",
         "AWS::RDS::DBSecurityGroup",
         "AWS::RDS::DBSnapshot",
+        "AWS::RDS::DBCluster",
+        "AWS::RDS::DBClusterParameterGroup",
+        "AWS::RDS::DBClusterSnapshot",
         "AWS::RDS::EventSubscription",
-        "AWS::ElasticLoadBalancingV2::LoadBalancer",
         "AWS::S3::Bucket",
-        "AWS::SSM::ManagedInstanceInventory",
+        "AWS::S3::AccountPublicAccessBlock",
         "AWS::Redshift::Cluster",
         "AWS::Redshift::ClusterSnapshot",
         "AWS::Redshift::ClusterParameterGroup",
         "AWS::Redshift::ClusterSecurityGroup",
         "AWS::Redshift::ClusterSubnetGroup",
         "AWS::Redshift::EventSubscription",
+        "AWS::SSM::ManagedInstanceInventory",
         "AWS::CloudWatch::Alarm",
         "AWS::CloudFormation::Stack",
-        "AWS::DynamoDB::Table",
+        "AWS::ElasticLoadBalancing::LoadBalancer",
         "AWS::AutoScaling::AutoScalingGroup",
         "AWS::AutoScaling::LaunchConfiguration",
         "AWS::AutoScaling::ScalingPolicy",
         "AWS::AutoScaling::ScheduledAction",
+        "AWS::DynamoDB::Table",
         "AWS::CodeBuild::Project",
         "AWS::WAF::RateBasedRule",
         "AWS::WAF::Rule",
+        "AWS::WAF::RuleGroup",
         "AWS::WAF::WebACL",
         "AWS::WAFRegional::RateBasedRule",
         "AWS::WAFRegional::Rule",
+        "AWS::WAFRegional::RuleGroup",
         "AWS::WAFRegional::WebACL",
         "AWS::CloudFront::Distribution",
         "AWS::CloudFront::StreamingDistribution",
-        "AWS::WAF::RuleGroup",
-        "AWS::WAFRegional::RuleGroup",
+        "AWS::Lambda::Alias",
         "AWS::Lambda::Function",
         "AWS::ElasticBeanstalk::Application",
         "AWS::ElasticBeanstalk::ApplicationVersion",
         "AWS::ElasticBeanstalk::Environment",
-        "AWS::ElasticLoadBalancing::LoadBalancer",
+        "AWS::MobileHub::Project",
         "AWS::XRay::EncryptionConfig",
         "AWS::SSM::AssociationCompliance",
         "AWS::SSM::PatchCompliance",
         "AWS::Shield::Protection",
         "AWS::ShieldRegional::Protection",
         "AWS::Config::ResourceCompliance",
-        "AWS::CodePipeline::Pipeline"
+        "AWS::LicenseManager::LicenseConfiguration",
+        "AWS::ApiGateway::DomainName",
+        "AWS::ApiGateway::Method",
+        "AWS::ApiGateway::Stage",
+        "AWS::ApiGateway::RestApi",
+        "AWS::ApiGatewayV2::DomainName",
+        "AWS::ApiGatewayV2::Stage",
+        "AWS::ApiGatewayV2::Api",
+        "AWS::CodePipeline::Pipeline",
+        "AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+        "AWS::ServiceCatalog::CloudFormationProduct",
+        "AWS::ServiceCatalog::Portfolio"
       ]
     },
     "ResourceTypeList": {
@@ -4954,6 +5366,9 @@
     },
     "ResourceValue": {
       "type": "structure",
+      "required": [
+        "Value"
+      ],
       "members": {
         "Value": {
           "shape": "ResourceValueType",
@@ -5129,6 +5544,20 @@
       "max": 25,
       "min": 0
     },
+    "SsmControls": {
+      "type": "structure",
+      "members": {
+        "ConcurrentExecutionRatePercentage": {
+          "shape": "Percentage",
+          "documentation": "<p>The maximum percentage of remediation actions allowed to run in parallel on the non-compliant resources for that specific rule. You can specify a percentage, such as 10%. The default value is 10. </p>"
+        },
+        "ErrorPercentage": {
+          "shape": "Percentage",
+          "documentation": "<p>The percentage of errors that are allowed before SSM stops running automations on non-compliant resources for that specific rule. You can specify a percentage of errors, for example 10%. If you do not specifiy a percentage, the default is 50%. For example, if you set the ErrorPercentage to 40% for 10 non-compliant resources, then SSM stops running the automations when the fifth error is received. </p>"
+        }
+      },
+      "documentation": "<p>AWS Systems Manager (SSM) specific remediation controls.</p>"
+    },
     "StartConfigRulesEvaluationRequest": {
       "type": "structure",
       "members": {
@@ -5165,7 +5594,7 @@
       ],
       "members": {
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "ConfigRuleName",
           "documentation": "<p>The list of names of AWS Config rules that you want to run remediation execution for.</p>"
         },
         "ResourceKeys": {
@@ -5197,6 +5626,9 @@
     },
     "StaticValue": {
       "type": "structure",
+      "required": [
+        "Values"
+      ],
       "members": {
         "Values": {
           "shape": "StaticParameterValues",
@@ -5209,12 +5641,15 @@
       "type": "structure",
       "members": {
         "AccountId": {
-          "shape": "AccountId"
+          "shape": "AccountId",
+          "documentation": "<p>The 12-digit account ID of the member account within an organization.</p>"
         },
         "MemberAccountRuleStatus": {
-          "shape": "MemberAccountRuleStatus"
+          "shape": "MemberAccountRuleStatus",
+          "documentation": "<p>Indicates deployment status for config rule in the member account. When master account calls <code>PutOrganizationConfigRule</code> action for the first time, config rule status is created in the member account. When master account calls <code>PutOrganizationConfigRule</code> action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. </p> <p>AWS Config sets the state of the rule to:</p> <ul> <li> <p> <code>CREATE_SUCCESSFUL</code> when config rule has been created in the member account.</p> </li> <li> <p> <code>CREATE_IN_PROGRESS</code> when config rule is being created in the member account.</p> </li> <li> <p> <code>CREATE_FAILED</code> when config rule creation has failed in the member account.</p> </li> <li> <p> <code>DELETE_FAILED</code> when config rule deletion has failed in the member account.</p> </li> <li> <p> <code>DELETE_IN_PROGRESS</code> when config rule is being deleted in the member account.</p> </li> <li> <p> <code>DELETE_SUCCESSFUL</code> when config rule has been deleted in the member account.</p> </li> <li> <p> <code>UPDATE_SUCCESSFUL</code> when config rule has been updated in the member account.</p> </li> <li> <p> <code>UPDATE_IN_PROGRESS</code> when config rule is being updated in the member account.</p> </li> <li> <p> <code>UPDATE_FAILED</code> when config rule deletion has failed in the member account.</p> </li> </ul>"
         }
-      }
+      },
+      "documentation": "<p>Status filter object to filter results based on specific member account ID or status type for an organization config rule. </p>"
     },
     "StopConfigurationRecorderRequest": {
       "type": "structure",

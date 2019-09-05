@@ -76,11 +76,11 @@ declare class ConfigService extends Service {
    */
   deleteEvaluationResults(callback?: (err: AWSError, data: ConfigService.Types.DeleteEvaluationResultsResponse) => void): Request<ConfigService.Types.DeleteEvaluationResultsResponse, AWSError>;
   /**
-   * 
+   * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization. Only a master account can delete an organization config rule. AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
    */
   deleteOrganizationConfigRule(params: ConfigService.Types.DeleteOrganizationConfigRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization. Only a master account can delete an organization config rule. AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
    */
   deleteOrganizationConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -99,6 +99,14 @@ declare class ConfigService extends Service {
    * Deletes the remediation configuration.
    */
   deleteRemediationConfiguration(callback?: (err: AWSError, data: ConfigService.Types.DeleteRemediationConfigurationResponse) => void): Request<ConfigService.Types.DeleteRemediationConfigurationResponse, AWSError>;
+  /**
+   * Deletes one or more remediation exceptions mentioned in the resource keys.
+   */
+  deleteRemediationExceptions(params: ConfigService.Types.DeleteRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.DeleteRemediationExceptionsResponse) => void): Request<ConfigService.Types.DeleteRemediationExceptionsResponse, AWSError>;
+  /**
+   * Deletes one or more remediation exceptions mentioned in the resource keys.
+   */
+  deleteRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.DeleteRemediationExceptionsResponse) => void): Request<ConfigService.Types.DeleteRemediationExceptionsResponse, AWSError>;
   /**
    * Deletes the retention configuration.
    */
@@ -212,19 +220,19 @@ declare class ConfigService extends Service {
    */
   describeDeliveryChannels(callback?: (err: AWSError, data: ConfigService.Types.DescribeDeliveryChannelsResponse) => void): Request<ConfigService.Types.DescribeDeliveryChannelsResponse, AWSError>;
   /**
-   * 
+   * Provides organization config rule deployment status for an organization.  The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. Only a master account can call this API. 
    */
   describeOrganizationConfigRuleStatuses(params: ConfigService.Types.DescribeOrganizationConfigRuleStatusesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse, AWSError>;
   /**
-   * 
+   * Provides organization config rule deployment status for an organization.  The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. Only a master account can call this API. 
    */
   describeOrganizationConfigRuleStatuses(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse, AWSError>;
   /**
-   * 
+   * Returns a list of organization config rules.  When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. Only a master account can call this API. 
    */
   describeOrganizationConfigRules(params: ConfigService.Types.DescribeOrganizationConfigRulesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
   /**
-   * 
+   * Returns a list of organization config rules.  When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. Only a master account can call this API. 
    */
   describeOrganizationConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
   /**
@@ -243,6 +251,14 @@ declare class ConfigService extends Service {
    * Returns the details of one or more remediation configurations.
    */
   describeRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRemediationConfigurationsResponse, AWSError>;
+  /**
+   * Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response.   When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources. 
+   */
+  describeRemediationExceptions(params: ConfigService.Types.DescribeRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExceptionsResponse) => void): Request<ConfigService.Types.DescribeRemediationExceptionsResponse, AWSError>;
+  /**
+   * Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response.   When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources. 
+   */
+  describeRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExceptionsResponse) => void): Request<ConfigService.Types.DescribeRemediationExceptionsResponse, AWSError>;
   /**
    * Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.
    */
@@ -328,11 +344,11 @@ declare class ConfigService extends Service {
    */
   getDiscoveredResourceCounts(callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
   /**
-   * 
+   * Returns detailed status for each member account within an organization for a given organization config rule.  Only a master account can call this API. 
    */
   getOrganizationConfigRuleDetailedStatus(params: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
   /**
-   * 
+   * Returns detailed status for each member account within an organization for a given organization config rule.  Only a master account can call this API. 
    */
   getOrganizationConfigRuleDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
   /**
@@ -416,11 +432,11 @@ declare class ConfigService extends Service {
    */
   putEvaluations(callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
   /**
-   * 
+   * Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations. Only a master account can create or update an organization config rule. This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with GetRole action. You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account that the rule invokes to evaluate your resources. When you use the PutOrganizationConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that AWS Config supports is 150.  Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
    */
   putOrganizationConfigRule(params: ConfigService.Types.PutOrganizationConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
   /**
-   * 
+   * Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations. Only a master account can create or update an organization config rule. This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with GetRole action. You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account that the rule invokes to evaluate your resources. When you use the PutOrganizationConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that AWS Config supports is 150.  Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
    */
   putOrganizationConfigRule(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
   /**
@@ -431,6 +447,14 @@ declare class ConfigService extends Service {
    * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. 
    */
   putRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
+  /**
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. 
+   */
+  putRemediationExceptions(params: ConfigService.Types.PutRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
+  /**
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. 
+   */
+  putRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
    * Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, AWS Config supports only one retention configuration per region in your account. 
    */
@@ -654,6 +678,8 @@ declare namespace ConfigService {
   export type AggregatorRegionList = String[];
   export type AllSupported = boolean;
   export type AmazonResourceName = string;
+  export type AutoRemediationAttemptSeconds = number;
+  export type AutoRemediationAttempts = number;
   export type AvailabilityZone = string;
   export type AwsRegion = string;
   export interface BaseConfigurationItem {
@@ -974,7 +1000,7 @@ declare namespace ConfigService {
   }
   export type ConfigRuleEvaluationStatusList = ConfigRuleEvaluationStatus[];
   export type ConfigRuleName = string;
-  export type ConfigRuleNames = StringWithCharLimit64[];
+  export type ConfigRuleNames = ConfigRuleName[];
   export type ConfigRuleState = "ACTIVE"|"DELETING"|"DELETING_RESULTS"|"EVALUATING"|string;
   export type ConfigRules = ConfigRule[];
   export interface ConfigSnapshotDeliveryProperties {
@@ -1207,6 +1233,9 @@ declare namespace ConfigService {
   export interface DeleteEvaluationResultsResponse {
   }
   export interface DeleteOrganizationConfigRuleRequest {
+    /**
+     * The name of organization config rule that you want to delete.
+     */
     OrganizationConfigRuleName: StringWithCharLimit64;
   }
   export interface DeletePendingAggregationRequestRequest {
@@ -1223,13 +1252,29 @@ declare namespace ConfigService {
     /**
      * The name of the AWS Config rule for which you want to delete remediation configuration.
      */
-    ConfigRuleName: StringWithCharLimit64;
+    ConfigRuleName: ConfigRuleName;
     /**
      * The type of a resource.
      */
     ResourceType?: String;
   }
   export interface DeleteRemediationConfigurationResponse {
+  }
+  export interface DeleteRemediationExceptionsRequest {
+    /**
+     * The name of the AWS Config rule for which you want to delete remediation exception configuration.
+     */
+    ConfigRuleName: ConfigRuleName;
+    /**
+     * An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. 
+     */
+    ResourceKeys: RemediationExceptionResourceKeys;
+  }
+  export interface DeleteRemediationExceptionsResponse {
+    /**
+     * Returns a list of failed delete remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.
+     */
+    FailedBatches?: FailedDeleteRemediationExceptionsBatches;
   }
   export interface DeleteRetentionConfigurationRequest {
     /**
@@ -1542,21 +1587,51 @@ declare namespace ConfigService {
     DeliveryChannels?: DeliveryChannelList;
   }
   export interface DescribeOrganizationConfigRuleStatusesRequest {
+    /**
+     * The names of organization config rules for which you want status details. If you do not specify any names, AWS Config returns details for all your organization AWS Confg rules.
+     */
     OrganizationConfigRuleNames?: OrganizationConfigRuleNames;
+    /**
+     * The maximum number of OrganizationConfigRuleStatuses returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.
+     */
     Limit?: CosmosPageLimit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
     NextToken?: String;
   }
   export interface DescribeOrganizationConfigRuleStatusesResponse {
+    /**
+     * A list of OrganizationConfigRuleStatus objects.
+     */
     OrganizationConfigRuleStatuses?: OrganizationConfigRuleStatuses;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
     NextToken?: String;
   }
   export interface DescribeOrganizationConfigRulesRequest {
+    /**
+     * The names of organization config rules for which you want details. If you do not specify any names, AWS Config returns details for all your organization config rules.
+     */
     OrganizationConfigRuleNames?: OrganizationConfigRuleNames;
+    /**
+     * The maximum number of organization config rules returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.
+     */
     Limit?: CosmosPageLimit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
     NextToken?: String;
   }
   export interface DescribeOrganizationConfigRulesResponse {
+    /**
+     * Retuns a list OrganizationConfigRule objects.
+     */
     OrganizationConfigRules?: OrganizationConfigRules;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
     NextToken?: String;
   }
   export type DescribePendingAggregationRequestsLimit = number;
@@ -1592,11 +1667,39 @@ declare namespace ConfigService {
      */
     RemediationConfigurations?: RemediationConfigurations;
   }
+  export interface DescribeRemediationExceptionsRequest {
+    /**
+     * The name of the AWS Config rule.
+     */
+    ConfigRuleName: ConfigRuleName;
+    /**
+     * An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. 
+     */
+    ResourceKeys?: RemediationExceptionResourceKeys;
+    /**
+     * The maximum number of RemediationExceptionResourceKey returned on each page. The default is 25. If you specify 0, AWS Config uses the default.
+     */
+    Limit?: Limit;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeRemediationExceptionsResponse {
+    /**
+     * Returns a list of remediation exception objects.
+     */
+    RemediationExceptions?: RemediationExceptions;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: String;
+  }
   export interface DescribeRemediationExecutionStatusRequest {
     /**
      * A list of AWS Config rule names.
      */
-    ConfigRuleName: StringWithCharLimit64;
+    ConfigRuleName: ConfigRuleName;
     /**
      * A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID. 
      */
@@ -1608,7 +1711,7 @@ declare namespace ConfigService {
     /**
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
-    NextToken?: StringWithCharLimit256;
+    NextToken?: String;
   }
   export interface DescribeRemediationExecutionStatusResponse {
     /**
@@ -1618,7 +1721,7 @@ declare namespace ConfigService {
     /**
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
-    NextToken?: StringWithCharLimit256;
+    NextToken?: String;
   }
   export interface DescribeRetentionConfigurationsRequest {
     /**
@@ -1719,7 +1822,24 @@ declare namespace ConfigService {
   export type Evaluations = Evaluation[];
   export type EventSource = "aws.config"|string;
   export type ExcludedAccounts = AccountId[];
+  export interface ExecutionControls {
+    /**
+     * A SsmControls object.
+     */
+    SsmControls?: SsmControls;
+  }
   export type Expression = string;
+  export interface FailedDeleteRemediationExceptionsBatch {
+    /**
+     * Returns a failure message for delete remediation exception. For example, AWS Config creates an exception due to an internal error.
+     */
+    FailureMessage?: String;
+    /**
+     * Returns remediation exception resource key object of the failed items.
+     */
+    FailedItems?: RemediationExceptionResourceKeys;
+  }
+  export type FailedDeleteRemediationExceptionsBatches = FailedDeleteRemediationExceptionsBatch[];
   export interface FailedRemediationBatch {
     /**
      * Returns a failure message. For example, the resource is already compliant.
@@ -1731,6 +1851,17 @@ declare namespace ConfigService {
     FailedItems?: RemediationConfigurations;
   }
   export type FailedRemediationBatches = FailedRemediationBatch[];
+  export interface FailedRemediationExceptionBatch {
+    /**
+     * Returns a failure message. For example, the auto-remediation has failed.
+     */
+    FailureMessage?: String;
+    /**
+     * Returns remediation exception resource key object of the failed items.
+     */
+    FailedItems?: RemediationExceptions;
+  }
+  export type FailedRemediationExceptionBatches = FailedRemediationExceptionBatch[];
   export interface FieldInfo {
     /**
      * Name of the field.
@@ -1974,13 +2105,31 @@ declare namespace ConfigService {
     nextToken?: NextToken;
   }
   export interface GetOrganizationConfigRuleDetailedStatusRequest {
+    /**
+     * The name of organization config rule for which you want status details for member accounts.
+     */
     OrganizationConfigRuleName: StringWithCharLimit64;
+    /**
+     * A StatusDetailFilters object.
+     */
     Filters?: StatusDetailFilters;
+    /**
+     * The maximum number of OrganizationConfigRuleDetailedStatus returned on each page. If you do not specify a number, AWS Config uses the default. The default is 100.
+     */
     Limit?: CosmosPageLimit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
     NextToken?: String;
   }
   export interface GetOrganizationConfigRuleDetailedStatusResponse {
+    /**
+     * A list of MemberAccountStatus objects.
+     */
     OrganizationConfigRuleDetailedStatus?: OrganizationConfigRuleDetailedStatus;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
     NextToken?: String;
   }
   export interface GetResourceConfigHistoryRequest {
@@ -2135,11 +2284,29 @@ declare namespace ConfigService {
   export type MaximumExecutionFrequency = "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"|string;
   export type MemberAccountRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"UPDATE_IN_PROGRESS"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
   export interface MemberAccountStatus {
+    /**
+     * The 12-digit account ID of a member account.
+     */
     AccountId: AccountId;
+    /**
+     * The name of config rule deployed in the member account.
+     */
     ConfigRuleName: StringWithCharLimit64;
+    /**
+     * Indicates deployment status for config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.   AWS Config sets the state of the rule to:    CREATE_SUCCESSFUL when config rule has been created in the member account.     CREATE_IN_PROGRESS when config rule is being created in the member account.    CREATE_FAILED when config rule creation has failed in the member account.    DELETE_FAILED when config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when config rule is being deleted in the member account.    DELETE_SUCCESSFUL when config rule has been deleted in the member account.     UPDATE_SUCCESSFUL when config rule has been updated in the member account.    UPDATE_IN_PROGRESS when config rule is being updated in the member account.    UPDATE_FAILED when config rule deletion has failed in the member account.  
+     */
     MemberAccountRuleStatus: MemberAccountRuleStatus;
+    /**
+     * An error code that is returned when config rule creation or deletion failed in the member account.
+     */
     ErrorCode?: String;
+    /**
+     * An error message indicating that config rule account creation or deletion has failed due to an error in the member account.
+     */
     ErrorMessage?: String;
+    /**
+     * The timestamp of the last status update.
+     */
     LastUpdateTime?: _Date;
   }
   export type MessageType = "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"|"ScheduledNotification"|"OversizedConfigurationItemChangeNotification"|string;
@@ -2161,20 +2328,53 @@ declare namespace ConfigService {
     AllAwsRegions?: Boolean;
   }
   export interface OrganizationConfigRule {
+    /**
+     * The name that you assign to organization config rule.
+     */
     OrganizationConfigRuleName: StringWithCharLimit64;
+    /**
+     * The Amazon Resource Name (ARN) of organization config rule.
+     */
     OrganizationConfigRuleArn: StringWithCharLimit256;
+    /**
+     * An OrganizationManagedRuleMetadata object.
+     */
     OrganizationManagedRuleMetadata?: OrganizationManagedRuleMetadata;
+    /**
+     * An OrganizationCustomRuleMetadata object.
+     */
     OrganizationCustomRuleMetadata?: OrganizationCustomRuleMetadata;
+    /**
+     * A comma-separated list of accounts excluded from organization config rule.
+     */
     ExcludedAccounts?: ExcludedAccounts;
+    /**
+     * The timestamp of the last update.
+     */
     LastUpdateTime?: _Date;
   }
   export type OrganizationConfigRuleDetailedStatus = MemberAccountStatus[];
   export type OrganizationConfigRuleNames = StringWithCharLimit64[];
   export interface OrganizationConfigRuleStatus {
+    /**
+     * The name that you assign to organization config rule.
+     */
     OrganizationConfigRuleName: StringWithCharLimit64;
+    /**
+     * Indicates deployment status of an organization config rule. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in all the member accounts. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in all the member accounts. Additionally, config rule status is updated when one or more member accounts join or leave an organization. Config rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com. AWS Config sets the state of the rule to:    CREATE_SUCCESSFUL when an organization config rule has been successfully created in all the member accounts.     CREATE_IN_PROGRESS when an organization config rule creation is in progress.    CREATE_FAILED when an organization config rule creation failed in one or more member accounts within that organization.    DELETE_FAILED when an organization config rule deletion failed in one or more member accounts within that organization.    DELETE_IN_PROGRESS when an organization config rule deletion is in progress.    DELETE_SUCCESSFUL when an organization config rule has been successfully deleted from all the member accounts.    UPDATE_SUCCESSFUL when an organization config rule has been successfully updated in all the member accounts.    UPDATE_IN_PROGRESS when an organization config rule update is in progress.    UPDATE_FAILED when an organization config rule update failed in one or more member accounts within that organization.  
+     */
     OrganizationRuleStatus: OrganizationRuleStatus;
+    /**
+     * An error code that is returned when organization config rule creation or deletion has failed.
+     */
     ErrorCode?: String;
+    /**
+     * An error message indicating that organization config rule creation or deletion failed due to an error.
+     */
     ErrorMessage?: String;
+    /**
+     * The timestamp of the last update.
+     */
     LastUpdateTime?: _Date;
   }
   export type OrganizationConfigRuleStatuses = OrganizationConfigRuleStatus[];
@@ -2182,24 +2382,75 @@ declare namespace ConfigService {
   export type OrganizationConfigRuleTriggerTypes = OrganizationConfigRuleTriggerType[];
   export type OrganizationConfigRules = OrganizationConfigRule[];
   export interface OrganizationCustomRuleMetadata {
+    /**
+     * The description that you provide for organization config rule.
+     */
     Description?: StringWithCharLimit256Min0;
+    /**
+     * The lambda function ARN.
+     */
     LambdaFunctionArn: StringWithCharLimit256;
+    /**
+     * The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.    ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.  
+     */
     OrganizationConfigRuleTriggerTypes: OrganizationConfigRuleTriggerTypes;
+    /**
+     * A string, in JSON format, that is passed to organization config rule Lambda function.
+     */
     InputParameters?: StringWithCharLimit2048;
+    /**
+     * The maximum frequency with which AWS Config runs evaluations for a rule. Your custom rule is triggered when AWS Config delivers the configuration snapshot. For more information, see ConfigSnapshotDeliveryProperties.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
+     */
     MaximumExecutionFrequency?: MaximumExecutionFrequency;
+    /**
+     * The type of the AWS resource that was evaluated.
+     */
     ResourceTypesScope?: ResourceTypesScope;
+    /**
+     * The ID of the AWS resource that was evaluated.
+     */
     ResourceIdScope?: StringWithCharLimit768;
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values. 
+     */
     TagKeyScope?: StringWithCharLimit128;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). 
+     */
     TagValueScope?: StringWithCharLimit256;
   }
   export interface OrganizationManagedRuleMetadata {
+    /**
+     * The description that you provide for organization config rule.
+     */
     Description?: StringWithCharLimit256Min0;
+    /**
+     * For organization config managed rules, a predefined identifier from a list. For example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using AWS Managed Config Rules.
+     */
     RuleIdentifier: StringWithCharLimit256;
+    /**
+     * A string, in JSON format, that is passed to organization config rule Lambda function.
+     */
     InputParameters?: StringWithCharLimit2048;
+    /**
+     * The maximum frequency with which AWS Config runs evaluations for a rule. You are using an AWS managed rule that is triggered at a periodic frequency.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
+     */
     MaximumExecutionFrequency?: MaximumExecutionFrequency;
+    /**
+     * The type of the AWS resource that was evaluated.
+     */
     ResourceTypesScope?: ResourceTypesScope;
+    /**
+     * The ID of the AWS resource that was evaluated.
+     */
     ResourceIdScope?: StringWithCharLimit768;
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values. 
+     */
     TagKeyScope?: StringWithCharLimit128;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     */
     TagValueScope?: StringWithCharLimit256;
   }
   export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"UPDATE_IN_PROGRESS"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
@@ -2215,6 +2466,7 @@ declare namespace ConfigService {
     RequesterAwsRegion?: AwsRegion;
   }
   export type PendingAggregationRequestList = PendingAggregationRequest[];
+  export type Percentage = number;
   export interface PutAggregationAuthorizationRequest {
     /**
      * The 12-digit account ID of the account authorized to aggregate data.
@@ -2224,6 +2476,9 @@ declare namespace ConfigService {
      * The region authorized to collect aggregated data.
      */
     AuthorizedAwsRegion: AwsRegion;
+    /**
+     * An array of tag object.
+     */
     Tags?: TagsList;
   }
   export interface PutAggregationAuthorizationResponse {
@@ -2237,6 +2492,9 @@ declare namespace ConfigService {
      * The rule that you want to add to your account.
      */
     ConfigRule: ConfigRule;
+    /**
+     * An array of tag object.
+     */
     Tags?: TagsList;
   }
   export interface PutConfigurationAggregatorRequest {
@@ -2252,6 +2510,9 @@ declare namespace ConfigService {
      * An OrganizationAggregationSource object.
      */
     OrganizationAggregationSource?: OrganizationAggregationSource;
+    /**
+     * An array of tag object.
+     */
     Tags?: TagsList;
   }
   export interface PutConfigurationAggregatorResponse {
@@ -2293,12 +2554,27 @@ declare namespace ConfigService {
     FailedEvaluations?: Evaluations;
   }
   export interface PutOrganizationConfigRuleRequest {
+    /**
+     * The name that you assign to an organization config rule.
+     */
     OrganizationConfigRuleName: StringWithCharLimit64;
+    /**
+     * An OrganizationManagedRuleMetadata object. 
+     */
     OrganizationManagedRuleMetadata?: OrganizationManagedRuleMetadata;
+    /**
+     * An OrganizationCustomRuleMetadata object.
+     */
     OrganizationCustomRuleMetadata?: OrganizationCustomRuleMetadata;
+    /**
+     * A comma-separated list of accounts that you want to exclude from an organization config rule.
+     */
     ExcludedAccounts?: ExcludedAccounts;
   }
   export interface PutOrganizationConfigRuleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of an organization config rule.
+     */
     OrganizationConfigRuleArn?: StringWithCharLimit256;
   }
   export interface PutRemediationConfigurationsRequest {
@@ -2312,6 +2588,30 @@ declare namespace ConfigService {
      * Returns a list of failed remediation batch objects.
      */
     FailedBatches?: FailedRemediationBatches;
+  }
+  export interface PutRemediationExceptionsRequest {
+    /**
+     * The name of the AWS Config rule for which you want to create remediation exception.
+     */
+    ConfigRuleName: ConfigRuleName;
+    /**
+     * An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. 
+     */
+    ResourceKeys: RemediationExceptionResourceKeys;
+    /**
+     * The message contains an explanation of the exception.
+     */
+    Message?: StringWithCharLimit1024;
+    /**
+     * The exception is automatically deleted after the expiration date.
+     */
+    ExpirationTime?: _Date;
+  }
+  export interface PutRemediationExceptionsResponse {
+    /**
+     * Returns a list of failed remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.
+     */
+    FailedBatches?: FailedRemediationExceptionBatches;
   }
   export interface PutRetentionConfigurationRequest {
     /**
@@ -2374,7 +2674,7 @@ declare namespace ConfigService {
     /**
      * The name of the AWS Config rule.
      */
-    ConfigRuleName: StringWithCharLimit64;
+    ConfigRuleName: ConfigRuleName;
     /**
      * The type of the target. Target executes remediation. For example, SSM document.
      */
@@ -2395,8 +2695,66 @@ declare namespace ConfigService {
      * The type of a resource. 
      */
     ResourceType?: String;
+    /**
+     * The remediation is triggered automatically.
+     */
+    Automatic?: Boolean;
+    /**
+     * An ExecutionControls object.
+     */
+    ExecutionControls?: ExecutionControls;
+    /**
+     * The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5. For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config throws an exception after the 5th failed attempt within 50 seconds.
+     */
+    MaximumAutomaticAttempts?: AutoRemediationAttempts;
+    /**
+     * Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds.  For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception. 
+     */
+    RetryAttemptSeconds?: AutoRemediationAttemptSeconds;
+    /**
+     * Amazon Resource Name (ARN) of remediation configuration.
+     */
+    Arn?: StringWithCharLimit1024;
+    /**
+     * Name of the service that owns the service linked rule, if applicable.
+     */
+    CreatedByService?: StringWithCharLimit1024;
   }
   export type RemediationConfigurations = RemediationConfiguration[];
+  export interface RemediationException {
+    /**
+     * The name of the AWS Config rule.
+     */
+    ConfigRuleName: ConfigRuleName;
+    /**
+     * The type of a resource.
+     */
+    ResourceType: StringWithCharLimit256;
+    /**
+     * The ID of the resource (for example., sg-xxxxxx).
+     */
+    ResourceId: StringWithCharLimit1024;
+    /**
+     * An explanation of an remediation exception.
+     */
+    Message?: StringWithCharLimit1024;
+    /**
+     * The time when the remediation exception will be deleted.
+     */
+    ExpirationTime?: _Date;
+  }
+  export interface RemediationExceptionResourceKey {
+    /**
+     * The type of a resource.
+     */
+    ResourceType?: StringWithCharLimit256;
+    /**
+     * The ID of the resource (for example., sg-xxxxxx).
+     */
+    ResourceId?: StringWithCharLimit1024;
+  }
+  export type RemediationExceptionResourceKeys = RemediationExceptionResourceKey[];
+  export type RemediationExceptions = RemediationException[];
   export type RemediationExecutionState = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
   export interface RemediationExecutionStatus {
     ResourceKey?: ResourceKey;
@@ -2534,7 +2892,7 @@ declare namespace ConfigService {
   }
   export type ResourceKeys = ResourceKey[];
   export type ResourceName = string;
-  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::EventSubscription"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::S3::Bucket"|"AWS::SSM::ManagedInstanceInventory"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::DynamoDB::Table"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::WAF::RuleGroup"|"AWS::WAFRegional::RuleGroup"|"AWS::Lambda::Function"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ResourceCompliance"|"AWS::CodePipeline::Pipeline"|string;
+  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::NatGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::FlowLog"|"AWS::EC2::VPCPeeringConnection"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBParameterGroup"|"AWS::RDS::DBOptionGroup"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterParameterGroup"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::EventSubscription"|"AWS::S3::Bucket"|"AWS::S3::AccountPublicAccessBlock"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::SSM::ManagedInstanceInventory"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::DynamoDB::Table"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::Lambda::Alias"|"AWS::Lambda::Function"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::MobileHub::Project"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ResourceCompliance"|"AWS::LicenseManager::LicenseConfiguration"|"AWS::ApiGateway::DomainName"|"AWS::ApiGateway::Method"|"AWS::ApiGateway::Stage"|"AWS::ApiGateway::RestApi"|"AWS::ApiGatewayV2::DomainName"|"AWS::ApiGatewayV2::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::CodePipeline::Pipeline"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::Portfolio"|string;
   export type ResourceTypeList = ResourceType[];
   export type ResourceTypes = StringWithCharLimit256[];
   export type ResourceTypesScope = StringWithCharLimit256[];
@@ -2542,7 +2900,7 @@ declare namespace ConfigService {
     /**
      * The value is a resource ID.
      */
-    Value?: ResourceValueType;
+    Value: ResourceValueType;
   }
   export type ResourceValueType = "RESOURCE_ID"|string;
   export type Results = String[];
@@ -2636,6 +2994,16 @@ declare namespace ConfigService {
     MaximumExecutionFrequency?: MaximumExecutionFrequency;
   }
   export type SourceDetails = SourceDetail[];
+  export interface SsmControls {
+    /**
+     * The maximum percentage of remediation actions allowed to run in parallel on the non-compliant resources for that specific rule. You can specify a percentage, such as 10%. The default value is 10. 
+     */
+    ConcurrentExecutionRatePercentage?: Percentage;
+    /**
+     * The percentage of errors that are allowed before SSM stops running automations on non-compliant resources for that specific rule. You can specify a percentage of errors, for example 10%. If you do not specifiy a percentage, the default is 50%. For example, if you set the ErrorPercentage to 40% for 10 non-compliant resources, then SSM stops running the automations when the fifth error is received. 
+     */
+    ErrorPercentage?: Percentage;
+  }
   export interface StartConfigRulesEvaluationRequest {
     /**
      * The list of names of AWS Config rules that you want to run evaluations for.
@@ -2654,7 +3022,7 @@ declare namespace ConfigService {
     /**
      * The list of names of AWS Config rules that you want to run remediation execution for.
      */
-    ConfigRuleName: StringWithCharLimit64;
+    ConfigRuleName: ConfigRuleName;
     /**
      * A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID. 
      */
@@ -2675,10 +3043,16 @@ declare namespace ConfigService {
     /**
      * A list of values. For example, the ARN of the assumed role. 
      */
-    Values?: StaticParameterValues;
+    Values: StaticParameterValues;
   }
   export interface StatusDetailFilters {
+    /**
+     * The 12-digit account ID of the member account within an organization.
+     */
     AccountId?: AccountId;
+    /**
+     * Indicates deployment status for config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.  AWS Config sets the state of the rule to:    CREATE_SUCCESSFUL when config rule has been created in the member account.    CREATE_IN_PROGRESS when config rule is being created in the member account.    CREATE_FAILED when config rule creation has failed in the member account.    DELETE_FAILED when config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when config rule is being deleted in the member account.    DELETE_SUCCESSFUL when config rule has been deleted in the member account.    UPDATE_SUCCESSFUL when config rule has been updated in the member account.    UPDATE_IN_PROGRESS when config rule is being updated in the member account.    UPDATE_FAILED when config rule deletion has failed in the member account.  
+     */
     MemberAccountRuleStatus?: MemberAccountRuleStatus;
   }
   export interface StopConfigurationRecorderRequest {
