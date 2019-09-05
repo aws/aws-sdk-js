@@ -125,7 +125,7 @@
     describe('regional endpoints', function() {
       describe('stsRegionalConfig client config', function() {
         it ('should set the service client stsRegionalConfig config', function() {
-          var values = ['regional', 'RegionaL', 'legacy', 'LegacY', undefined, void 0];
+          var values = ['regional', 'RegionaL', 'legacy', 'LegacY'];
           for (var i = 0; i < values.length; i++) {
             var sts = new AWS.STS({stsRegionalEndpoints: values[i]});
             expect(['regional', 'legacy'].indexOf(sts.config.stsRegionalEndpoints) >= 0).to.equal(true);
@@ -226,6 +226,14 @@
         });
       }
       describe('service client stsRegionalConfig config', function() {
+        var originalRegion;
+        beforeEach(function() {
+          originalRegion = AWS.config.region;
+          AWS.config.region = undefined;
+        });
+        afterEach(function() {
+          AWS.config.region = originalRegion;
+        });
         it('should use global endpoints for when config is undefined', function() {
           var regions = ['us-west-2', 'ap-east-1'];
           for (var i = 0; i < regions.length; i++) {
@@ -252,6 +260,16 @@
           }
           var sts = new AWS.STS({region: 'cn-north-1', stsRegionalEndpoints: 'regional'});
           expect(sts.config.endpoint).to.contain('sts.cn-north-1.amazonaws.com.cn');
+        });
+        it('should ask for region if stsRegionalEndpoints is set', function() {
+          var error;
+          try {
+            var sts = new AWS.STS({stsRegionalEndpoints: 'regional'});
+          } catch (e) {
+            error = e;
+          }
+          expect(error.code).to.equal('ConfigError');
+          expect(error.message).to.equal('Missing region in config');
         });
       });
     });
