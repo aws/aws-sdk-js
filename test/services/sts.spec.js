@@ -125,7 +125,7 @@
     describe('regional endpoints', function() {
       describe('stsRegionalConfig client config', function() {
         it ('should set the service client stsRegionalConfig config', function() {
-          var values = ['regional', 'RegionaL', 'legacy', 'LegacY'];
+          var values = ['regional', 'RegionaL', 'legacy', 'LegacY', undefined, void 0];
           for (var i = 0; i < values.length; i++) {
             var sts = new AWS.STS({stsRegionalEndpoints: values[i]});
             expect(['regional', 'legacy'].indexOf(sts.config.stsRegionalEndpoints) >= 0).to.equal(true);
