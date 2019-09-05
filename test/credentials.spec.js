@@ -1383,6 +1383,10 @@
     describe('AWS.TokenFileWebIdentityCredentials', function() {
       var origEnv;
       var fs = require('fs');
+      const defaultCredentials = {
+        AccessKeyId: 'AccessKeyIdDefault',
+        SecretAccessKey: 'SecretAccessKeyDefault'
+      };
       beforeEach(function() {
         origEnv = process.env;
         process.env = {
@@ -1411,7 +1415,16 @@
         expect(credentials.service).not.to.exist;
         credentials.refresh(function() {
           expect(credentials.service).to.exist;
-          done();
+          helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallFake(function(params, cb) {
+            return cb(null, {
+              Credentials: defaultCredentials
+            });
+          });
+          credentials.refresh(function() {
+            expect(credentials.accessKeyId).to.equal(defaultCredentials.AccessKeyId);
+            expect(credentials.secretAccessKey).to.equal(defaultCredentials.SecretAccessKey);
+            done();
+          });
         });
       });
 
@@ -1474,6 +1487,48 @@
           error.code = 'InvalidIdentityToken';
           expect(credentials.service.retryableError(error)).to.equal(true);
           done();
+        });
+      });
+
+      it('supports chaining in absense of web_identity_token_file and has source_profile ', function(done) {
+        delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
+        helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(
+          {
+            'source': {
+              'web_identity_token_file': 'cfgTokenFileSource',
+              'role_arn': 'cfgRoleArnSource'
+            },
+            'default': {
+              'source_profile': 'source',
+              'role_arn': 'cfgRoleArnDefault'
+            }
+          }
+        );
+        var credentials = new AWS.TokenFileWebIdentityCredentials();
+        credentials.refresh(function() {
+          expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFileSource');
+          const sourceCredentials = {
+            AccessKeyId: 'AccessKeyIdSource',
+            SecretAccessKey: 'SecretAccessKeySource'
+          };
+          helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallFake(function(params, cb) {
+            expect(params.RoleArn).to.equal('cfgRoleArnSource');
+            return cb(null, {
+              Credentials: sourceCredentials
+            });
+          });
+          helpers.spyOn(credentials.service, 'assumeRole').andCallFake(function(params, cb) {
+            expect(params.RoleArn).to.equal('cfgRoleArnDefault');
+            expect(credentials.service.config.credentials).to.equal(sourceCredentials);
+            expect(credentials.accessKeyId).to.be.undefined;
+            expect(credentials.secretAccessKey).to.be.undefined;
+            return cb(null, {
+              Credentials: defaultCredentials
+            });
+          });
+          credentials.refresh(function() {
+            done();
+          });
         });
       });
 
