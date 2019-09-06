@@ -227,12 +227,21 @@
       }
       describe('service client stsRegionalConfig config', function() {
         var originalRegion;
+        var originalEnv;
         beforeEach(function() {
           originalRegion = AWS.config.region;
           AWS.config.region = undefined;
+          //fix CodeBuild test because it comes with AWS_REGION in environment
+          if (AWS.util.isNode()) {
+            originalEnv = process.env;
+            process.env = originalEnv;
+          }
         });
         afterEach(function() {
           AWS.config.region = originalRegion;
+          if (AWS.util.isNode()) {
+            process.env = {};
+          }
         });
         it('should use global endpoints for when config is undefined', function() {
           var regions = ['us-west-2', 'ap-east-1'];
@@ -264,7 +273,7 @@
         it('should ask for region if stsRegionalEndpoints is set', function() {
           var error;
           try {
-            var sts = new AWS.STS({stsRegionalEndpoints: 'regional'});
+            new AWS.STS({stsRegionalEndpoints: 'regional'});
           } catch (e) {
             error = e;
           }
