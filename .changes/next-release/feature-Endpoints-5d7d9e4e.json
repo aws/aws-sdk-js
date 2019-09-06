@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Endpoints",
+  "description": "Sts client now supports sending requests to regional endpoints. You can opt in by setting stsRegionalEndpoints client config or AWS_STS_REGIONAL_ENDPOINTS environment or sts_regional_endpoints config file entry to 'regional'"
+}
