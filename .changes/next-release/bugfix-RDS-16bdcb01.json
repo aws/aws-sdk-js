@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "RDS",
+  "description": "Make async RDS.Signer.getAuthToken call pass underlying credential errors to callback"
+}
