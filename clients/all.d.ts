@@ -187,3 +187,5 @@ export import EventBridge = require('./eventbridge');
 export import LakeFormation = require('./lakeformation');
 export import ForecastService = require('./forecastservice');
 export import ForecastQueryService = require('./forecastqueryservice');
+export import QLDB = require('./qldb');
+export import QLDBSession = require('./qldbsession');

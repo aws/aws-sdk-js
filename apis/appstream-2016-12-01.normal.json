@@ -336,6 +336,9 @@
         },
         {
           "shape": "InvalidAccountStatusException"
+        },
+        {
+          "shape": "LimitExceededException"
         }
       ],
       "documentation": "<p>Creates a usage report subscription. Usage reports are generated daily.</p>"
@@ -915,6 +918,9 @@
         },
         {
           "shape": "ResourceNotAvailableException"
+        },
+        {
+          "shape": "InvalidRoleException"
         }
       ],
       "documentation": "<p>Starts the specified fleet.</p>"
@@ -1110,7 +1116,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.</p>"
+      "documentation": "<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.</p>"
     },
     "UpdateImagePermissions": {
       "name": "UpdateImagePermissions",
@@ -1190,14 +1196,14 @@
       "members": {
         "EndpointType": {
           "shape": "AccessEndpointType",
-          "documentation": "<p>The type of VPC interface endpoint.</p>"
+          "documentation": "<p>The type of interface endpoint.</p>"
         },
         "VpceId": {
           "shape": "String",
-          "documentation": "<p>The identifier (ID) of the VPC in which the endpoint is used.</p>"
+          "documentation": "<p>The identifier (ID) of the VPC in which the interface endpoint is used.</p>"
         }
       },
-      "documentation": "<p>Describes a virtual private cloud (VPC) interface endpoint that lets you create a private connection between the VPC that you specify and AppStream 2.0. When you specify a VPC interface endpoint for a stack, users of the stack can connect to AppStream 2.0 only through that endpoint. When you specify a VPC interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.</p>"
+      "documentation": "<p>Describes an interface VPC endpoint (interface endpoint) that lets you create a private connection between the virtual private cloud (VPC) that you specify and AppStream 2.0. When you specify an interface endpoint for a stack, users of the stack can connect to AppStream 2.0 only through that endpoint. When you specify an interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.</p>"
     },
     "AccessEndpointList": {
       "type": "list",
@@ -1584,6 +1590,10 @@
         "IdleDisconnectTimeoutInSeconds": {
           "shape": "Integer",
           "documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time interval begins. Users are notified before they are disconnected due to inactivity. If they try to reconnect to the streaming session before the time interval specified in <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are disconnected.</p> <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p> <note> <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p> </note>"
+        },
+        "IamRoleArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials.</p>"
         }
       }
     },
@@ -1631,6 +1641,10 @@
           "shape": "VpcConfig",
           "documentation": "<p>The VPC configuration for the image builder. You can specify only one subnet.</p>"
         },
+        "IamRoleArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials.</p>"
+        },
         "EnableDefaultInternetAccess": {
           "shape": "BooleanObject",
           "documentation": "<p>Enables or disables default internet access for the image builder.</p>"
@@ -1649,7 +1663,7 @@
         },
         "AccessEndpoints": {
           "shape": "AccessEndpointList",
-          "documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
+          "documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
         }
       }
     },
@@ -1735,7 +1749,7 @@
         },
         "AccessEndpoints": {
           "shape": "AccessEndpointList",
-          "documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
+          "documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
         }
       }
     },
@@ -2494,7 +2508,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN for the fleet.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the fleet.</p>"
         },
         "Name": {
           "shape": "String",
@@ -2563,6 +2577,10 @@
         "IdleDisconnectTimeoutInSeconds": {
           "shape": "Integer",
           "documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are disconnected.</p> <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p> <note> <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p> </note>"
+        },
+        "IamRoleArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials.</p>"
         }
       },
       "documentation": "<p>Describes a fleet.</p>"
@@ -2573,7 +2591,8 @@
       "enum": [
         "VPC_CONFIGURATION",
         "VPC_CONFIGURATION_SECURITY_GROUP_IDS",
-        "DOMAIN_JOIN_INFO"
+        "DOMAIN_JOIN_INFO",
+        "IAM_ROLE_ARN"
       ]
     },
     "FleetAttributes": {
@@ -2606,6 +2625,7 @@
         "NETWORK_INTERFACE_LIMIT_EXCEEDED",
         "INTERNAL_SERVICE_ERROR",
         "IAM_SERVICE_ROLE_IS_MISSING",
+        "MACHINE_ROLE_IS_MISSING",
         "STS_DISABLED_IN_REGION",
         "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES",
         "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION",
@@ -2768,6 +2788,10 @@
         "Platform": {
           "shape": "PlatformType",
           "documentation": "<p>The operating system platform of the image builder.</p>"
+        },
+        "IamRoleArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. </p>"
         },
         "State": {
           "shape": "ImageBuilderState",
@@ -3306,6 +3330,7 @@
         "FEEDBACK_URL",
         "THEME_NAME",
         "USER_SETTINGS",
+        "IAM_ROLE_ARN",
         "ACCESS_ENDPOINTS"
       ]
     },
@@ -3656,6 +3681,10 @@
         "AttributesToDelete": {
           "shape": "FleetAttributes",
           "documentation": "<p>The fleet attributes to delete.</p>"
+        },
+        "IamRoleArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials.</p>"
         }
       }
     },
@@ -3743,7 +3772,7 @@
         },
         "AccessEndpoints": {
           "shape": "AccessEndpointList",
-          "documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
+          "documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
         }
       }
     },
@@ -3978,5 +4007,5 @@
       "documentation": "<p>Describes VPC configuration information for fleets and image builders.</p>"
     }
   },
-  "documentation": "<fullname>Amazon AppStream 2.0</fullname> <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without rewriting applications. AppStream 2.0 manages the AWS resources that are required to host and run your applications, scales automatically, and provides access to your users on demand.</p> <p>To learn more about AppStream 2.0, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a> </p> </li> </ul>"
+  "documentation": "<fullname>Amazon AppStream 2.0</fullname> <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without rewriting applications. AppStream 2.0 manages the AWS resources that are required to host and run your applications, scales automatically, and provides access to your users on demand. </p> <note> <p>You can call the AppStream 2.0 API operations by using an interface VPC endpoint (interface endpoint). For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html\">Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p> </note> <p>To learn more about AppStream 2.0, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a> </p> </li> </ul>"
 }

@@ -124,11 +124,11 @@ declare class KinesisAnalytics extends Service {
    */
   listApplications(callback?: (err: AWSError, data: KinesisAnalytics.Types.ListApplicationsResponse) => void): Request<KinesisAnalytics.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Retrieves the list of key-value tags assigned to the application.
+   * Retrieves the list of key-value tags assigned to the application. For more information, see Using Tagging.
    */
   listTagsForResource(params: KinesisAnalytics.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: KinesisAnalytics.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalytics.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves the list of key-value tags assigned to the application.
+   * Retrieves the list of key-value tags assigned to the application. For more information, see Using Tagging.
    */
   listTagsForResource(callback?: (err: AWSError, data: KinesisAnalytics.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalytics.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -148,19 +148,19 @@ declare class KinesisAnalytics extends Service {
    */
   stopApplication(callback?: (err: AWSError, data: KinesisAnalytics.Types.StopApplicationResponse) => void): Request<KinesisAnalytics.Types.StopApplicationResponse, AWSError>;
   /**
-   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.
+   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
    */
   tagResource(params: KinesisAnalytics.Types.TagResourceRequest, callback?: (err: AWSError, data: KinesisAnalytics.Types.TagResourceResponse) => void): Request<KinesisAnalytics.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.
+   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
    */
   tagResource(callback?: (err: AWSError, data: KinesisAnalytics.Types.TagResourceResponse) => void): Request<KinesisAnalytics.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from a Kinesis Analytics application.
+   * Removes one or more tags from a Kinesis Analytics application. For more information, see Using Tagging.
    */
   untagResource(params: KinesisAnalytics.Types.UntagResourceRequest, callback?: (err: AWSError, data: KinesisAnalytics.Types.UntagResourceResponse) => void): Request<KinesisAnalytics.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from a Kinesis Analytics application.
+   * Removes one or more tags from a Kinesis Analytics application. For more information, see Using Tagging.
    */
   untagResource(callback?: (err: AWSError, data: KinesisAnalytics.Types.UntagResourceResponse) => void): Request<KinesisAnalytics.Types.UntagResourceResponse, AWSError>;
   /**
@@ -428,7 +428,7 @@ declare namespace KinesisAnalytics {
      */
     ApplicationCode?: ApplicationCode;
     /**
-     * A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management Guide.
+     * A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
      */
     Tags?: Tags;
   }

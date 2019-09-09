@@ -189,6 +189,8 @@ export abstract class ConfigurationServicePlaceholders {
   lakeformation?: AWS.LakeFormation.Types.ClientConfiguration;
   forecastservice?: AWS.ForecastService.Types.ClientConfiguration;
   forecastqueryservice?: AWS.ForecastQueryService.Types.ClientConfiguration;
+  qldb?: AWS.QLDB.Types.ClientConfiguration;
+  qldbsession?: AWS.QLDBSession.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -380,4 +382,6 @@ export interface ConfigurationServiceApiVersions {
   lakeformation?: AWS.LakeFormation.Types.apiVersion;
   forecastservice?: AWS.ForecastService.Types.apiVersion;
   forecastqueryservice?: AWS.ForecastQueryService.Types.apiVersion;
+  qldb?: AWS.QLDB.Types.apiVersion;
+  qldbsession?: AWS.QLDBSession.Types.apiVersion;
 }

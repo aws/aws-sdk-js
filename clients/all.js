@@ -188,5 +188,7 @@ module.exports = {
   EventBridge: require('./eventbridge'),
   LakeFormation: require('./lakeformation'),
   ForecastService: require('./forecastservice'),
-  ForecastQueryService: require('./forecastqueryservice')
+  ForecastQueryService: require('./forecastqueryservice'),
+  QLDB: require('./qldb'),
+  QLDBSession: require('./qldbsession')
 };

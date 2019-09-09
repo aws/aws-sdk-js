@@ -1143,6 +1143,14 @@
       },
       "documentation": ""
     },
+    "TcpRetryPolicyEvents": {
+      "type": "list",
+      "member": {
+        "shape": "TcpRetryPolicyEvent"
+      },
+      "min": 1,
+      "max": 1
+    },
     "CreateVirtualServiceInput": {
       "type": "structure",
       "required": [
@@ -1785,6 +1793,11 @@
       },
       "documentation": "<p>An object representing the HTTP header in the request.</p>"
     },
+    "HttpRetryPolicyEvent": {
+      "type": "string",
+      "min": 1,
+      "max": 25
+    },
     "DescribeVirtualServiceOutput": {
       "type": "structure",
       "required": [
@@ -2032,6 +2045,12 @@
       },
       "documentation": "<p>An object representing the AWS Cloud Map attribute information for your virtual node.</p>"
     },
+    "TcpRetryPolicyEvent": {
+      "type": "string",
+      "enum": [
+        "connection-error"
+      ]
+    },
     "VirtualServiceSpec": {
       "type": "structure",
       "members": {
@@ -2212,6 +2231,13 @@
       },
       "documentation": ""
     },
+    "DurationUnit": {
+      "type": "string",
+      "enum": [
+        "ms",
+        "s"
+      ]
+    },
     "RoutePriority": {
       "type": "integer",
       "box": true,
@@ -2371,6 +2397,14 @@
       },
       "documentation": "<p>An object representing the status of a virtual service.</p>"
     },
+    "HttpRetryPolicyEvents": {
+      "type": "list",
+      "member": {
+        "shape": "HttpRetryPolicyEvent"
+      },
+      "min": 1,
+      "max": 25
+    },
     "ListVirtualNodesLimit": {
       "type": "integer",
       "box": true,
@@ -2479,6 +2513,20 @@
         "TRACE"
       ]
     },
+    "Duration": {
+      "type": "structure",
+      "members": {
+        "unit": {
+          "shape": "DurationUnit",
+          "documentation": "<p>The unit of time between retry attempts.</p>"
+        },
+        "value": {
+          "shape": "DurationValue",
+          "documentation": "<p>The duration of time between retry attempts.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the duration between retry attempts.</p>"
+    },
     "DescribeRouteOutput": {
       "type": "structure",
       "required": [
@@ -2558,6 +2606,11 @@
         }
       },
       "documentation": "<p>An object representing a service mesh returned by a list operation.</p>"
+    },
+    "MaxRetries": {
+      "type": "long",
+      "box": true,
+      "min": 0
     },
     "MeshStatusCode": {
       "type": "string",
@@ -2874,6 +2927,32 @@
       "min": 0,
       "max": 50
     },
+    "HttpRetryPolicy": {
+      "type": "structure",
+      "required": [
+        "maxRetries",
+        "perRetryTimeout"
+      ],
+      "members": {
+        "httpRetryEvents": {
+          "shape": "HttpRetryPolicyEvents",
+          "documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n               502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n               503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n               stream</p>\n            </li>\n         </ul>"
+        },
+        "maxRetries": {
+          "shape": "MaxRetries",
+          "documentation": "<p>The maximum number of retry attempts. If no value is specified, the default is 1.</p>"
+        },
+        "perRetryTimeout": {
+          "shape": "Duration",
+          "documentation": "<p>An object that represents the retry duration.</p>"
+        },
+        "tcpRetryEvents": {
+          "shape": "TcpRetryPolicyEvents",
+          "documentation": "<p>Specify a valid value.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a retry policy.</p>"
+    },
     "DescribeVirtualRouterInput": {
       "type": "structure",
       "required": [
@@ -2953,6 +3032,11 @@
         "ALLOW_ALL",
         "DROP_ALL"
       ]
+    },
+    "DurationValue": {
+      "type": "long",
+      "box": true,
+      "min": 0
     },
     "Hostname": {
       "type": "string"
@@ -3214,6 +3298,10 @@
         "match": {
           "shape": "HttpRouteMatch",
           "documentation": "<p>The criteria for determining an HTTP request match.</p>"
+        },
+        "retryPolicy": {
+          "shape": "HttpRetryPolicy",
+          "documentation": "<p>An object that represents a retry policy.</p>"
         }
       },
       "documentation": "<p>An object representing the HTTP routing specification for a route.</p>"

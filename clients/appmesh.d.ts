@@ -361,6 +361,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     meshName: ResourceName;
   }
+  export type TcpRetryPolicyEvents = TcpRetryPolicyEvent[];
   export interface CreateVirtualServiceInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -731,6 +732,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     name: HeaderName;
   }
+  export type HttpRetryPolicyEvent = string;
   export interface DescribeVirtualServiceOutput {
     /**
      * The full description of your virtual service.
@@ -858,6 +860,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     value: AwsCloudMapInstanceAttributeValue;
   }
+  export type TcpRetryPolicyEvent = "connection-error"|string;
   export interface VirtualServiceSpec {
     /**
      * The App Mesh object that is acting as the provider for a virtual service. You can specify
@@ -977,6 +980,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     spec?: MeshSpec;
   }
+  export type DurationUnit = "ms"|"s"|string;
   export type RoutePriority = number;
   export interface ListVirtualServicesInput {
     /**
@@ -1082,6 +1086,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     status: VirtualServiceStatusCode;
   }
+  export type HttpRetryPolicyEvents = HttpRetryPolicyEvent[];
   export type ListVirtualNodesLimit = number;
   export type HealthCheckTimeoutMillis = number;
   export type ListMeshesLimit = number;
@@ -1131,6 +1136,16 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export type VirtualRouterListeners = VirtualRouterListener[];
   export type HttpMethod = "CONNECT"|"DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT"|"TRACE"|string;
+  export interface Duration {
+    /**
+     * The unit of time between retry attempts.
+     */
+    unit?: DurationUnit;
+    /**
+     * The duration of time between retry attempts.
+     */
+    value?: DurationValue;
+  }
   export interface DescribeRouteOutput {
     /**
      * The full description of your route.
@@ -1183,6 +1198,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     meshName: ResourceName;
   }
+  export type MaxRetries = number;
   export type MeshStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export interface PortMapping {
     /**
@@ -1345,6 +1361,45 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export type HeaderName = string;
   export type TagList = TagRef[];
+  export interface HttpRetryPolicy {
+    /**
+     * Specify at least one of the following values.
+         
+            
+               
+                  server-error – HTTP status codes 500, 501,
+               502, 503, 504, 505, 506, 507, 508, 510, and 511
+            
+            
+               
+                  gateway-error – HTTP status codes 502,
+               503, and 504
+            
+            
+               
+                  client-error – HTTP status code 409
+            
+            
+               
+                  stream-error – Retry on refused
+               stream
+            
+         
+     */
+    httpRetryEvents?: HttpRetryPolicyEvents;
+    /**
+     * The maximum number of retry attempts. If no value is specified, the default is 1.
+     */
+    maxRetries: MaxRetries;
+    /**
+     * An object that represents the retry duration.
+     */
+    perRetryTimeout: Duration;
+    /**
+     * Specify a valid value.
+     */
+    tcpRetryEvents?: TcpRetryPolicyEvents;
+  }
   export interface DescribeVirtualRouterInput {
     /**
      * The name of the service mesh that the virtual router resides in.
@@ -1387,6 +1442,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     mesh: MeshData;
   }
   export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string;
+  export type DurationValue = number;
   export type Hostname = string;
   export type PortNumber = number;
   export interface TagResourceInput {
@@ -1545,6 +1601,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The criteria for determining an HTTP request match.
      */
     match: HttpRouteMatch;
+    /**
+     * An object that represents a retry policy.
+     */
+    retryPolicy?: HttpRetryPolicy;
   }
   export interface DescribeMeshInput {
     /**

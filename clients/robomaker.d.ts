@@ -188,11 +188,11 @@ declare class RoboMaker extends Service {
    */
   describeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.     
    */
   listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.     
    */
   listDeploymentJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
@@ -748,7 +748,7 @@ declare namespace RoboMaker {
      */
     failureBehavior?: FailureBehavior;
     /**
-     * The failure code of the simulation job if it failed:  InternalServiceError  Internal service error.  RobotApplicationCrash  Robot application exited abnormally.  SimulationApplicationCrash   Simulation application exited abnormally.  BadPermissionsRobotApplication  Robot application bundle could not be downloaded.  BadPermissionsSimulationApplication  Simulation application bundle could not be downloaded.  BadPermissionsS3Output  Unable to publish outputs to customer-provided S3 bucket.  BadPermissionsCloudwatchLogs  Unable to publish logs to customer-provided CloudWatch Logs resource.  SubnetIpLimitExceeded  Subnet IP limit exceeded.  ENILimitExceeded  ENI limit exceeded.  BadPermissionsUserCredentials  Unable to use the Role provided.  InvalidBundleRobotApplication  Robot bundle cannot be extracted (invalid format, bundling error, or other issue).  InvalidBundleSimulationApplication  Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).  RobotApplicationVersionMismatchedEtag  Etag for RobotApplication does not match value during version creation.  SimulationApplicationVersionMismatchedEtag  Etag for SimulationApplication does not match value during version creation.  WrongRegionS3Output  S3 output bucket is in a different region than AWS RoboMaker.  WrongRegionRobotApplication  RobotApplication bucket is in a different region than AWS RoboMaker.  WrongRegionSimulationApplication  SimulationApplication bucket is in a different region than AWS RoboMaker.  
+     * The failure code of the simulation job if it failed:  InternalServiceError  Internal service error.  RobotApplicationCrash  Robot application exited abnormally.  SimulationApplicationCrash   Simulation application exited abnormally.  BadPermissionsRobotApplication  Robot application bundle could not be downloaded.  BadPermissionsSimulationApplication  Simulation application bundle could not be downloaded.  BadPermissionsS3Output  Unable to publish outputs to customer-provided S3 bucket.  BadPermissionsCloudwatchLogs  Unable to publish logs to customer-provided CloudWatch Logs resource.  SubnetIpLimitExceeded  Subnet IP limit exceeded.  ENILimitExceeded  ENI limit exceeded.  BadPermissionsUserCredentials  Unable to use the Role provided.  InvalidBundleRobotApplication  Robot bundle cannot be extracted (invalid format, bundling error, or other issue).  InvalidBundleSimulationApplication  Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).  RobotApplicationVersionMismatchedEtag  Etag for RobotApplication does not match value during version creation.  SimulationApplicationVersionMismatchedEtag  Etag for SimulationApplication does not match value during version creation.  
      */
     failureCode?: SimulationJobErrorCode;
     /**
@@ -1293,6 +1293,10 @@ declare namespace RoboMaker {
      * The VPC configuration.
      */
     vpcConfig?: VPCConfigResponse;
+    /**
+     * The network interface information for the simulation job.
+     */
+    networkInterface?: NetworkInterface;
   }
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
@@ -1357,6 +1361,10 @@ declare namespace RoboMaker {
      * The environment variables for the application launch.
      */
     environmentVariables?: EnvironmentVariableMap;
+    /**
+     * The port forwarding configuration.
+     */
+    portForwardingConfig?: PortForwardingConfig;
   }
   export interface ListDeploymentJobsRequest {
     /**
@@ -1530,7 +1538,22 @@ declare namespace RoboMaker {
   }
   export type MaxResults = number;
   export type Name = string;
+  export interface NetworkInterface {
+    /**
+     * The ID of the network interface.
+     */
+    networkInterfaceId?: GenericString;
+    /**
+     * The IPv4 address of the network interface within the subnet.
+     */
+    privateIpAddress?: GenericString;
+    /**
+     * The IPv4 public address of the network interface.
+     */
+    publicIpAddress?: GenericString;
+  }
   export type NonEmptyString = string;
+  export type NonSystemPort = number;
   export interface OutputLocation {
     /**
      * The S3 bucket for output.
@@ -1545,6 +1568,28 @@ declare namespace RoboMaker {
   export type Path = string;
   export type PercentDone = number;
   export type Percentage = number;
+  export type Port = number;
+  export interface PortForwardingConfig {
+    /**
+     * The port mappings for the configuration.
+     */
+    portMappings?: PortMappingList;
+  }
+  export interface PortMapping {
+    /**
+     * The port number on the simulation job instance to use as a remote connection point. 
+     */
+    jobPort: Port;
+    /**
+     * The port number on the application.
+     */
+    applicationPort: NonSystemPort;
+    /**
+     * A Boolean indicating whether to enable this port mapping on public IP.
+     */
+    enableOnPublicIp?: Boolean;
+  }
+  export type PortMappingList = PortMapping[];
   export interface ProgressDetail {
     /**
      * The current progress status.  Validating  Validating the deployment.  DownloadingExtracting  Downloading and extracting the bundle on the robot.  ExecutingPreLaunch  Executing pre-launch script(s) if provided.  Launching  Launching the robot application.  ExecutingPostLaunch  Executing post-launch script(s) if provided.  Finished  Deployment is complete.  
@@ -1863,6 +1908,10 @@ declare namespace RoboMaker {
      * VPC configuration information.
      */
     vpcConfig?: VPCConfigResponse;
+    /**
+     * 
+     */
+    networkInterface?: NetworkInterface;
   }
   export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|string;
   export type SimulationJobStatus = "Pending"|"Preparing"|"Running"|"Restarting"|"Completed"|"Failed"|"RunningFailed"|"Terminating"|"Terminated"|"Canceled"|string;

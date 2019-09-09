@@ -594,7 +594,7 @@
       "output": {
         "shape": "CreateCustomerGatewayResult"
       },
-      "documentation": "<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> Region, and 9059, which is reserved in the <code>eu-west-1</code> Region.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources.</p> </important>"
+      "documentation": "<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> Region, and 9059, which is reserved in the <code>eu-west-1</code> Region.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources.</p> </important>"
     },
     "CreateDefaultSubnet": {
       "name": "CreateDefaultSubnet",
@@ -1187,7 +1187,7 @@
       "output": {
         "shape": "CreateVpnConnectionResult"
       },
-      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection type is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "CreateVpnConnectionRoute": {
       "name": "CreateVpnConnectionRoute",
@@ -4206,7 +4206,7 @@
       "output": {
         "shape": "ModifyVpnConnectionResult"
       },
-      "documentation": "<p>Modifies the target gateway of a AWS Site-to-Site VPN connection. The following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing\">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints </p>"
+      "documentation": "<p>Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing\">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints </p>"
     },
     "ModifyVpnTunnelCertificate": {
       "name": "ModifyVpnTunnelCertificate",
@@ -4221,6 +4221,20 @@
         "shape": "ModifyVpnTunnelCertificateResult"
       },
       "documentation": "<p>Modifies the VPN tunnel endpoint certificate.</p>"
+    },
+    "ModifyVpnTunnelOptions": {
+      "name": "ModifyVpnTunnelOptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyVpnTunnelOptionsRequest"
+      },
+      "output": {
+        "shape": "ModifyVpnTunnelOptionsResult"
+      },
+      "documentation": "<p>Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html\">Site-to-Site VPN Tunnel Options for Your Site-to-Site VPN Connection</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "MonitorInstances": {
       "name": "MonitorInstances",
@@ -18981,6 +18995,41 @@
         "xen"
       ]
     },
+    "IKEVersionsList": {
+      "type": "list",
+      "member": {
+        "shape": "IKEVersionsListValue",
+        "locationName": "item"
+      }
+    },
+    "IKEVersionsListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The IKE version.</p>",
+          "locationName": "value"
+        }
+      },
+      "documentation": "<p>The internet key exchange (IKE) version permitted for the VPN tunnel.</p>"
+    },
+    "IKEVersionsRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "IKEVersionsRequestListValue",
+        "locationName": "item"
+      }
+    },
+    "IKEVersionsRequestListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The IKE version.</p>"
+        }
+      },
+      "documentation": "<p>The IKE version that is permitted for the VPN tunnel.</p>"
+    },
     "IamInstanceProfile": {
       "type": "structure",
       "members": {
@@ -24144,6 +24193,114 @@
         }
       }
     },
+    "ModifyVpnTunnelOptionsRequest": {
+      "type": "structure",
+      "required": [
+        "VpnConnectionId",
+        "VpnTunnelOutsideIpAddress",
+        "TunnelOptions"
+      ],
+      "members": {
+        "VpnConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the AWS Site-to-Site VPN connection.</p>"
+        },
+        "VpnTunnelOutsideIpAddress": {
+          "shape": "String",
+          "documentation": "<p>The external IP address of the VPN tunnel.</p>"
+        },
+        "TunnelOptions": {
+          "shape": "ModifyVpnTunnelOptionsSpecification",
+          "documentation": "<p>The tunnel options to modify.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyVpnTunnelOptionsResult": {
+      "type": "structure",
+      "members": {
+        "VpnConnection": {
+          "shape": "VpnConnection",
+          "locationName": "vpnConnection"
+        }
+      }
+    },
+    "ModifyVpnTunnelOptionsSpecification": {
+      "type": "structure",
+      "members": {
+        "TunnelInsideCidr": {
+          "shape": "String",
+          "documentation": "<p>The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. </p> <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The following CIDR blocks are reserved and cannot be used:</p> <ul> <li> <p> <code>169.254.0.0/30</code> </p> </li> <li> <p> <code>169.254.1.0/30</code> </p> </li> <li> <p> <code>169.254.2.0/30</code> </p> </li> <li> <p> <code>169.254.3.0/30</code> </p> </li> <li> <p> <code>169.254.4.0/30</code> </p> </li> <li> <p> <code>169.254.5.0/30</code> </p> </li> <li> <p> <code>169.254.169.252/30</code> </p> </li> </ul>"
+        },
+        "PreSharedKey": {
+          "shape": "String",
+          "documentation": "<p>The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and the customer gateway.</p> <p>Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).</p>"
+        },
+        "Phase1LifetimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The lifetime for phase 1 of the IKE negotiation, in seconds.</p> <p>Constraints: A value between 900 and 28,800.</p> <p>Default: <code>28800</code> </p>"
+        },
+        "Phase2LifetimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p> <p>Constraints: A value between 900 and 3,600. The value must be less than the value for <code>Phase1LifetimeSeconds</code>.</p> <p>Default: <code>3600</code> </p>"
+        },
+        "RekeyMarginTimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for <code>RekeyFuzzPercentage</code>.</p> <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p> <p>Default: <code>540</code> </p>"
+        },
+        "RekeyFuzzPercentage": {
+          "shape": "Integer",
+          "documentation": "<p>The percentage of the rekey window (determined by <code>RekeyMarginTimeSeconds</code>) during which the rekey time is randomly selected.</p> <p>Constraints: A value between 0 and 100.</p> <p>Default: <code>100</code> </p>"
+        },
+        "ReplayWindowSize": {
+          "shape": "Integer",
+          "documentation": "<p>The number of packets in an IKE replay window.</p> <p>Constraints: A value between 64 and 2048.</p> <p>Default: <code>1024</code> </p>"
+        },
+        "DPDTimeoutSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The number of seconds after which a DPD timeout occurs.</p> <p>Constraints: A value between 0 and 30.</p> <p>Default: <code>30</code> </p>"
+        },
+        "Phase1EncryptionAlgorithms": {
+          "shape": "Phase1EncryptionAlgorithmsRequestList",
+          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> </p>",
+          "locationName": "Phase1EncryptionAlgorithm"
+        },
+        "Phase2EncryptionAlgorithms": {
+          "shape": "Phase2EncryptionAlgorithmsRequestList",
+          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> </p>",
+          "locationName": "Phase2EncryptionAlgorithm"
+        },
+        "Phase1IntegrityAlgorithms": {
+          "shape": "Phase1IntegrityAlgorithmsRequestList",
+          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> </p>",
+          "locationName": "Phase1IntegrityAlgorithm"
+        },
+        "Phase2IntegrityAlgorithms": {
+          "shape": "Phase2IntegrityAlgorithmsRequestList",
+          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> </p>",
+          "locationName": "Phase2IntegrityAlgorithm"
+        },
+        "Phase1DHGroupNumbers": {
+          "shape": "Phase1DHGroupNumbersRequestList",
+          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
+          "locationName": "Phase1DHGroupNumber"
+        },
+        "Phase2DHGroupNumbers": {
+          "shape": "Phase2DHGroupNumbersRequestList",
+          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
+          "locationName": "Phase2DHGroupNumber"
+        },
+        "IKEVersions": {
+          "shape": "IKEVersionsRequestList",
+          "documentation": "<p>The IKE versions that are permitted for the VPN tunnel.</p> <p>Valid values: <code>ikev1</code> | <code>ikev2</code> </p>",
+          "locationName": "IKEVersion"
+        }
+      },
+      "documentation": "<p>The AWS Site-to-Site VPN tunnel options to modify.</p>"
+    },
     "MonitorInstancesRequest": {
       "type": "structure",
       "required": [
@@ -25068,6 +25225,216 @@
       "enum": [
         "all"
       ]
+    },
+    "Phase1DHGroupNumbersList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase1DHGroupNumbersListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase1DHGroupNumbersListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "Integer",
+          "documentation": "<p>The Diffie-Hellmann group number.</p>",
+          "locationName": "value"
+        }
+      },
+      "documentation": "<p>The Diffie-Hellmann group number for phase 1 IKE negotiations.</p>"
+    },
+    "Phase1DHGroupNumbersRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase1DHGroupNumbersRequestListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase1DHGroupNumbersRequestListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "Integer",
+          "documentation": "<p>The Diffie-Hellmann group number.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a Diffie-Hellman group number for the VPN tunnel for phase 1 IKE negotiations.</p>"
+    },
+    "Phase1EncryptionAlgorithmsList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase1EncryptionAlgorithmsListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase1EncryptionAlgorithmsListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value for the encryption algorithm.</p>",
+          "locationName": "value"
+        }
+      },
+      "documentation": "<p>The encryption algorithm for phase 1 IKE negotiations.</p>"
+    },
+    "Phase1EncryptionAlgorithmsRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase1EncryptionAlgorithmsRequestListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase1EncryptionAlgorithmsRequestListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value for the encryption algorithm.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE negotiations.</p>"
+    },
+    "Phase1IntegrityAlgorithmsList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase1IntegrityAlgorithmsListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase1IntegrityAlgorithmsListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value for the integrity algorithm.</p>",
+          "locationName": "value"
+        }
+      },
+      "documentation": "<p>The integrity algorithm for phase 1 IKE negotiations.</p>"
+    },
+    "Phase1IntegrityAlgorithmsRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase1IntegrityAlgorithmsRequestListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase1IntegrityAlgorithmsRequestListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value for the integrity algorithm.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the integrity algorithm for the VPN tunnel for phase 1 IKE negotiations.</p>"
+    },
+    "Phase2DHGroupNumbersList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase2DHGroupNumbersListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase2DHGroupNumbersListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "Integer",
+          "documentation": "<p>The Diffie-Hellmann group number.</p>",
+          "locationName": "value"
+        }
+      },
+      "documentation": "<p>The Diffie-Hellmann group number for phase 2 IKE negotiations.</p>"
+    },
+    "Phase2DHGroupNumbersRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase2DHGroupNumbersRequestListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase2DHGroupNumbersRequestListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "Integer",
+          "documentation": "<p>The Diffie-Hellmann group number.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a Diffie-Hellman group number for the VPN tunnel for phase 2 IKE negotiations.</p>"
+    },
+    "Phase2EncryptionAlgorithmsList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase2EncryptionAlgorithmsListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase2EncryptionAlgorithmsListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The encryption algorithm.</p>",
+          "locationName": "value"
+        }
+      },
+      "documentation": "<p>The encryption algorithm for phase 2 IKE negotiations.</p>"
+    },
+    "Phase2EncryptionAlgorithmsRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase2EncryptionAlgorithmsRequestListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase2EncryptionAlgorithmsRequestListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The encryption algorithm.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the encryption algorithm for the VPN tunnel for phase 2 IKE negotiations.</p>"
+    },
+    "Phase2IntegrityAlgorithmsList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase2IntegrityAlgorithmsListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase2IntegrityAlgorithmsListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The integrity algorithm.</p>",
+          "locationName": "value"
+        }
+      },
+      "documentation": "<p>The integrity algorithm for phase 2 IKE negotiations.</p>"
+    },
+    "Phase2IntegrityAlgorithmsRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "Phase2IntegrityAlgorithmsRequestListValue",
+        "locationName": "item"
+      }
+    },
+    "Phase2IntegrityAlgorithmsRequestListValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The integrity algorithm.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the integrity algorithm for the VPN tunnel for phase 2 IKE negotiations.</p>"
     },
     "Placement": {
       "type": "structure",
@@ -31936,10 +32303,96 @@
         "udp"
       ]
     },
+    "TunnelOption": {
+      "type": "structure",
+      "members": {
+        "OutsideIpAddress": {
+          "shape": "String",
+          "documentation": "<p>The external IP address of the VPN tunnel.</p>",
+          "locationName": "outsideIpAddress"
+        },
+        "TunnelInsideCidr": {
+          "shape": "String",
+          "documentation": "<p>The range of inside IP addresses for the tunnel.</p>",
+          "locationName": "tunnelInsideCidr"
+        },
+        "PreSharedKey": {
+          "shape": "String",
+          "documentation": "<p>The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and the customer gateway.</p>",
+          "locationName": "preSharedKey"
+        },
+        "Phase1LifetimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The lifetime for phase 1 of the IKE negotiation, in seconds.</p>",
+          "locationName": "phase1LifetimeSeconds"
+        },
+        "Phase2LifetimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p>",
+          "locationName": "phase2LifetimeSeconds"
+        },
+        "RekeyMarginTimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey.</p>",
+          "locationName": "rekeyMarginTimeSeconds"
+        },
+        "RekeyFuzzPercentage": {
+          "shape": "Integer",
+          "documentation": "<p>The percentage of the rekey window determined by <code>RekeyMarginTimeSeconds</code> during which the rekey time is randomly selected.</p>",
+          "locationName": "rekeyFuzzPercentage"
+        },
+        "ReplayWindowSize": {
+          "shape": "Integer",
+          "documentation": "<p>The number of packets in an IKE replay window.</p>",
+          "locationName": "replayWindowSize"
+        },
+        "DpdTimeoutSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The number of seconds after which a DPD timeout occurs.</p>",
+          "locationName": "dpdTimeoutSeconds"
+        },
+        "Phase1EncryptionAlgorithms": {
+          "shape": "Phase1EncryptionAlgorithmsList",
+          "documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 1 IKE negotiations.</p>",
+          "locationName": "phase1EncryptionAlgorithmSet"
+        },
+        "Phase2EncryptionAlgorithms": {
+          "shape": "Phase2EncryptionAlgorithmsList",
+          "documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 2 IKE negotiations.</p>",
+          "locationName": "phase2EncryptionAlgorithmSet"
+        },
+        "Phase1IntegrityAlgorithms": {
+          "shape": "Phase1IntegrityAlgorithmsList",
+          "documentation": "<p>The permitted integrity algorithms for the VPN tunnel for phase 1 IKE negotiations.</p>",
+          "locationName": "phase1IntegrityAlgorithmSet"
+        },
+        "Phase2IntegrityAlgorithms": {
+          "shape": "Phase2IntegrityAlgorithmsList",
+          "documentation": "<p>The permitted integrity algorithms for the VPN tunnel for phase 2 IKE negotiations.</p>",
+          "locationName": "phase2IntegrityAlgorithmSet"
+        },
+        "Phase1DHGroupNumbers": {
+          "shape": "Phase1DHGroupNumbersList",
+          "documentation": "<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE negotiations.</p>",
+          "locationName": "phase1DHGroupNumberSet"
+        },
+        "Phase2DHGroupNumbers": {
+          "shape": "Phase2DHGroupNumbersList",
+          "documentation": "<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE negotiations.</p>",
+          "locationName": "phase2DHGroupNumberSet"
+        },
+        "IkeVersions": {
+          "shape": "IKEVersionsList",
+          "documentation": "<p>The IKE versions that are permitted for the VPN tunnel.</p>",
+          "locationName": "ikeVersionSet"
+        }
+      },
+      "documentation": "<p>The VPN tunnel options.</p>"
+    },
     "TunnelOptionsList": {
       "type": "list",
       "member": {
-        "shape": "VpnTunnelOptionsSpecification",
+        "shape": "TunnelOption",
         "locationName": "item"
       }
     },
@@ -33386,6 +33839,11 @@
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.</p>",
           "locationName": "staticRoutesOnly"
+        },
+        "TunnelOptions": {
+          "shape": "TunnelOptionsList",
+          "documentation": "<p>Indicates the VPN tunnel options.</p>",
+          "locationName": "tunnelOptionSet"
         }
       },
       "documentation": "<p>Describes VPN connection options.</p>"
@@ -33399,7 +33857,7 @@
           "locationName": "staticRoutesOnly"
         },
         "TunnelOptions": {
-          "shape": "TunnelOptionsList",
+          "shape": "VpnTunnelOptionsSpecificationsList",
           "documentation": "<p>The tunnel options for the VPN connection.</p>"
         }
       },
@@ -33525,10 +33983,75 @@
         },
         "PreSharedKey": {
           "shape": "String",
-          "documentation": "<p>The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.</p> <p>Constraints: Allowed characters are alphanumeric characters and ._. Must be between 8 and 64 characters in length and cannot start with zero (0).</p>"
+          "documentation": "<p>The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.</p> <p>Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).</p>"
+        },
+        "Phase1LifetimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The lifetime for phase 1 of the IKE negotiation, in seconds.</p> <p>Constraints: A value between 900 and 28,800.</p> <p>Default: <code>28800</code> </p>"
+        },
+        "Phase2LifetimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p> <p>Constraints: A value between 900 and 3,600. The value must be less than the value for <code>Phase1LifetimeSeconds</code>.</p> <p>Default: <code>3600</code> </p>"
+        },
+        "RekeyMarginTimeSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for <code>RekeyFuzzPercentage</code>.</p> <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p> <p>Default: <code>540</code> </p>"
+        },
+        "RekeyFuzzPercentage": {
+          "shape": "Integer",
+          "documentation": "<p>The percentage of the rekey window (determined by <code>RekeyMarginTimeSeconds</code>) during which the rekey time is randomly selected.</p> <p>Constraints: A value between 0 and 100.</p> <p>Default: <code>100</code> </p>"
+        },
+        "ReplayWindowSize": {
+          "shape": "Integer",
+          "documentation": "<p>The number of packets in an IKE replay window.</p> <p>Constraints: A value between 64 and 2048.</p> <p>Default: <code>1024</code> </p>"
+        },
+        "DPDTimeoutSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The number of seconds after which a DPD timeout occurs.</p> <p>Constraints: A value between 0 and 30.</p> <p>Default: <code>30</code> </p>"
+        },
+        "Phase1EncryptionAlgorithms": {
+          "shape": "Phase1EncryptionAlgorithmsRequestList",
+          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> </p>",
+          "locationName": "Phase1EncryptionAlgorithm"
+        },
+        "Phase2EncryptionAlgorithms": {
+          "shape": "Phase2EncryptionAlgorithmsRequestList",
+          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> </p>",
+          "locationName": "Phase2EncryptionAlgorithm"
+        },
+        "Phase1IntegrityAlgorithms": {
+          "shape": "Phase1IntegrityAlgorithmsRequestList",
+          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> </p>",
+          "locationName": "Phase1IntegrityAlgorithm"
+        },
+        "Phase2IntegrityAlgorithms": {
+          "shape": "Phase2IntegrityAlgorithmsRequestList",
+          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> </p>",
+          "locationName": "Phase2IntegrityAlgorithm"
+        },
+        "Phase1DHGroupNumbers": {
+          "shape": "Phase1DHGroupNumbersRequestList",
+          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
+          "locationName": "Phase1DHGroupNumber"
+        },
+        "Phase2DHGroupNumbers": {
+          "shape": "Phase2DHGroupNumbersRequestList",
+          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
+          "locationName": "Phase2DHGroupNumber"
+        },
+        "IKEVersions": {
+          "shape": "IKEVersionsRequestList",
+          "documentation": "<p>The IKE versions that are permitted for the VPN tunnel.</p> <p>Valid values: <code>ikev1</code> | <code>ikev2</code> </p>",
+          "locationName": "IKEVersion"
         }
       },
       "documentation": "<p>The tunnel options for a VPN connection.</p>"
+    },
+    "VpnTunnelOptionsSpecificationsList": {
+      "type": "list",
+      "member": {
+        "shape": "VpnTunnelOptionsSpecification"
+      }
     },
     "WithdrawByoipCidrRequest": {
       "type": "structure",

@@ -349,11 +349,11 @@ declare class EC2 extends Service {
    */
   createClientVpnRoute(callback?: (err: AWSError, data: EC2.Types.CreateClientVpnRouteResult) => void): Request<EC2.Types.CreateClientVpnRouteResult, AWSError>;
   /**
-   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 Region, and 9059, which is reserved in the eu-west-1 Region.  For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
+   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 Region, and 9059, which is reserved in the eu-west-1 Region.  For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
    */
   createCustomerGateway(params: EC2.Types.CreateCustomerGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
-   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 Region, and 9059, which is reserved in the eu-west-1 Region.  For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
+   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 Region, and 9059, which is reserved in the eu-west-1 Region.  For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
    */
   createCustomerGateway(callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
@@ -693,11 +693,11 @@ declare class EC2 extends Service {
    */
   createVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
-   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection type is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
    */
   createVpnConnection(params: EC2.Types.CreateVpnConnectionRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
-   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection type is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
    */
   createVpnConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
@@ -2485,11 +2485,11 @@ declare class EC2 extends Service {
    */
   modifyVpcTenancy(callback?: (err: AWSError, data: EC2.Types.ModifyVpcTenancyResult) => void): Request<EC2.Types.ModifyVpcTenancyResult, AWSError>;
   /**
-   * Modifies the target gateway of a AWS Site-to-Site VPN connection. The following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints 
+   * Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints 
    */
   modifyVpnConnection(params: EC2.Types.ModifyVpnConnectionRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
   /**
-   * Modifies the target gateway of a AWS Site-to-Site VPN connection. The following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints 
+   * Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints 
    */
   modifyVpnConnection(callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
   /**
@@ -2500,6 +2500,14 @@ declare class EC2 extends Service {
    * Modifies the VPN tunnel endpoint certificate.
    */
   modifyVpnTunnelCertificate(callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelCertificateResult) => void): Request<EC2.Types.ModifyVpnTunnelCertificateResult, AWSError>;
+  /**
+   * Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see Site-to-Site VPN Tunnel Options for Your Site-to-Site VPN Connection in the AWS Site-to-Site VPN User Guide.
+   */
+  modifyVpnTunnelOptions(params: EC2.Types.ModifyVpnTunnelOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelOptionsResult) => void): Request<EC2.Types.ModifyVpnTunnelOptionsResult, AWSError>;
+  /**
+   * Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see Site-to-Site VPN Tunnel Options for Your Site-to-Site VPN Connection in the AWS Site-to-Site VPN User Guide.
+   */
+  modifyVpnTunnelOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelOptionsResult) => void): Request<EC2.Types.ModifyVpnTunnelOptionsResult, AWSError>;
   /**
    * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide. To disable detailed monitoring, see .
    */
@@ -12150,6 +12158,20 @@ declare namespace EC2 {
   export type HostReservationSet = HostReservation[];
   export type HostTenancy = "dedicated"|"host"|string;
   export type HypervisorType = "ovm"|"xen"|string;
+  export type IKEVersionsList = IKEVersionsListValue[];
+  export interface IKEVersionsListValue {
+    /**
+     * The IKE version.
+     */
+    Value?: String;
+  }
+  export type IKEVersionsRequestList = IKEVersionsRequestListValue[];
+  export interface IKEVersionsRequestListValue {
+    /**
+     * The IKE version.
+     */
+    Value?: String;
+  }
   export interface IamInstanceProfile {
     /**
      * The Amazon Resource Name (ARN) of the instance profile.
@@ -15343,6 +15365,89 @@ declare namespace EC2 {
   export interface ModifyVpnTunnelCertificateResult {
     VpnConnection?: VpnConnection;
   }
+  export interface ModifyVpnTunnelOptionsRequest {
+    /**
+     * The ID of the AWS Site-to-Site VPN connection.
+     */
+    VpnConnectionId: String;
+    /**
+     * The external IP address of the VPN tunnel.
+     */
+    VpnTunnelOutsideIpAddress: String;
+    /**
+     * The tunnel options to modify.
+     */
+    TunnelOptions: ModifyVpnTunnelOptionsSpecification;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyVpnTunnelOptionsResult {
+    VpnConnection?: VpnConnection;
+  }
+  export interface ModifyVpnTunnelOptionsSpecification {
+    /**
+     * The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway.  Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The following CIDR blocks are reserved and cannot be used:    169.254.0.0/30     169.254.1.0/30     169.254.2.0/30     169.254.3.0/30     169.254.4.0/30     169.254.5.0/30     169.254.169.252/30   
+     */
+    TunnelInsideCidr?: String;
+    /**
+     * The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and the customer gateway. Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).
+     */
+    PreSharedKey?: String;
+    /**
+     * The lifetime for phase 1 of the IKE negotiation, in seconds. Constraints: A value between 900 and 28,800. Default: 28800 
+     */
+    Phase1LifetimeSeconds?: Integer;
+    /**
+     * The lifetime for phase 2 of the IKE negotiation, in seconds. Constraints: A value between 900 and 3,600. The value must be less than the value for Phase1LifetimeSeconds. Default: 3600 
+     */
+    Phase2LifetimeSeconds?: Integer;
+    /**
+     * The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for RekeyFuzzPercentage. Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540 
+     */
+    RekeyMarginTimeSeconds?: Integer;
+    /**
+     * The percentage of the rekey window (determined by RekeyMarginTimeSeconds) during which the rekey time is randomly selected. Constraints: A value between 0 and 100. Default: 100 
+     */
+    RekeyFuzzPercentage?: Integer;
+    /**
+     * The number of packets in an IKE replay window. Constraints: A value between 64 and 2048. Default: 1024 
+     */
+    ReplayWindowSize?: Integer;
+    /**
+     * The number of seconds after which a DPD timeout occurs. Constraints: A value between 0 and 30. Default: 30 
+     */
+    DPDTimeoutSeconds?: Integer;
+    /**
+     * One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations. Valid values: AES128 | AES256 
+     */
+    Phase1EncryptionAlgorithms?: Phase1EncryptionAlgorithmsRequestList;
+    /**
+     * One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations. Valid values: AES128 | AES256 
+     */
+    Phase2EncryptionAlgorithms?: Phase2EncryptionAlgorithmsRequestList;
+    /**
+     * One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations. Valid values: SHA1 | SHA2-256 
+     */
+    Phase1IntegrityAlgorithms?: Phase1IntegrityAlgorithmsRequestList;
+    /**
+     * One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations. Valid values: SHA1 | SHA2-256 
+     */
+    Phase2IntegrityAlgorithms?: Phase2IntegrityAlgorithmsRequestList;
+    /**
+     * One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 22 | 23 | 24 
+     */
+    Phase1DHGroupNumbers?: Phase1DHGroupNumbersRequestList;
+    /**
+     * One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations. Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 22 | 23 | 24 
+     */
+    Phase2DHGroupNumbers?: Phase2DHGroupNumbersRequestList;
+    /**
+     * The IKE versions that are permitted for the VPN tunnel. Valid values: ikev1 | ikev2 
+     */
+    IKEVersions?: IKEVersionsRequestList;
+  }
   export interface MonitorInstancesRequest {
     /**
      * The IDs of the instances.
@@ -15866,6 +15971,90 @@ declare namespace EC2 {
     AllowEgressFromLocalVpcToRemoteClassicLink?: Boolean;
   }
   export type PermissionGroup = "all"|string;
+  export type Phase1DHGroupNumbersList = Phase1DHGroupNumbersListValue[];
+  export interface Phase1DHGroupNumbersListValue {
+    /**
+     * The Diffie-Hellmann group number.
+     */
+    Value?: Integer;
+  }
+  export type Phase1DHGroupNumbersRequestList = Phase1DHGroupNumbersRequestListValue[];
+  export interface Phase1DHGroupNumbersRequestListValue {
+    /**
+     * The Diffie-Hellmann group number.
+     */
+    Value?: Integer;
+  }
+  export type Phase1EncryptionAlgorithmsList = Phase1EncryptionAlgorithmsListValue[];
+  export interface Phase1EncryptionAlgorithmsListValue {
+    /**
+     * The value for the encryption algorithm.
+     */
+    Value?: String;
+  }
+  export type Phase1EncryptionAlgorithmsRequestList = Phase1EncryptionAlgorithmsRequestListValue[];
+  export interface Phase1EncryptionAlgorithmsRequestListValue {
+    /**
+     * The value for the encryption algorithm.
+     */
+    Value?: String;
+  }
+  export type Phase1IntegrityAlgorithmsList = Phase1IntegrityAlgorithmsListValue[];
+  export interface Phase1IntegrityAlgorithmsListValue {
+    /**
+     * The value for the integrity algorithm.
+     */
+    Value?: String;
+  }
+  export type Phase1IntegrityAlgorithmsRequestList = Phase1IntegrityAlgorithmsRequestListValue[];
+  export interface Phase1IntegrityAlgorithmsRequestListValue {
+    /**
+     * The value for the integrity algorithm.
+     */
+    Value?: String;
+  }
+  export type Phase2DHGroupNumbersList = Phase2DHGroupNumbersListValue[];
+  export interface Phase2DHGroupNumbersListValue {
+    /**
+     * The Diffie-Hellmann group number.
+     */
+    Value?: Integer;
+  }
+  export type Phase2DHGroupNumbersRequestList = Phase2DHGroupNumbersRequestListValue[];
+  export interface Phase2DHGroupNumbersRequestListValue {
+    /**
+     * The Diffie-Hellmann group number.
+     */
+    Value?: Integer;
+  }
+  export type Phase2EncryptionAlgorithmsList = Phase2EncryptionAlgorithmsListValue[];
+  export interface Phase2EncryptionAlgorithmsListValue {
+    /**
+     * The encryption algorithm.
+     */
+    Value?: String;
+  }
+  export type Phase2EncryptionAlgorithmsRequestList = Phase2EncryptionAlgorithmsRequestListValue[];
+  export interface Phase2EncryptionAlgorithmsRequestListValue {
+    /**
+     * The encryption algorithm.
+     */
+    Value?: String;
+  }
+  export type Phase2IntegrityAlgorithmsList = Phase2IntegrityAlgorithmsListValue[];
+  export interface Phase2IntegrityAlgorithmsListValue {
+    /**
+     * The integrity algorithm.
+     */
+    Value?: String;
+  }
+  export type Phase2IntegrityAlgorithmsRequestList = Phase2IntegrityAlgorithmsRequestListValue[];
+  export interface Phase2IntegrityAlgorithmsRequestListValue {
+    /**
+     * The integrity algorithm.
+     */
+    Value?: String;
+  }
   export interface Placement {
     /**
      * The Availability Zone of the instance. If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region.
@@ -20108,7 +20297,73 @@ declare namespace EC2 {
     Ipv6Support?: Ipv6SupportValue;
   }
   export type TransportProtocol = "tcp"|"udp"|string;
-  export type TunnelOptionsList = VpnTunnelOptionsSpecification[];
+  export interface TunnelOption {
+    /**
+     * The external IP address of the VPN tunnel.
+     */
+    OutsideIpAddress?: String;
+    /**
+     * The range of inside IP addresses for the tunnel.
+     */
+    TunnelInsideCidr?: String;
+    /**
+     * The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and the customer gateway.
+     */
+    PreSharedKey?: String;
+    /**
+     * The lifetime for phase 1 of the IKE negotiation, in seconds.
+     */
+    Phase1LifetimeSeconds?: Integer;
+    /**
+     * The lifetime for phase 2 of the IKE negotiation, in seconds.
+     */
+    Phase2LifetimeSeconds?: Integer;
+    /**
+     * The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey.
+     */
+    RekeyMarginTimeSeconds?: Integer;
+    /**
+     * The percentage of the rekey window determined by RekeyMarginTimeSeconds during which the rekey time is randomly selected.
+     */
+    RekeyFuzzPercentage?: Integer;
+    /**
+     * The number of packets in an IKE replay window.
+     */
+    ReplayWindowSize?: Integer;
+    /**
+     * The number of seconds after which a DPD timeout occurs.
+     */
+    DpdTimeoutSeconds?: Integer;
+    /**
+     * The permitted encryption algorithms for the VPN tunnel for phase 1 IKE negotiations.
+     */
+    Phase1EncryptionAlgorithms?: Phase1EncryptionAlgorithmsList;
+    /**
+     * The permitted encryption algorithms for the VPN tunnel for phase 2 IKE negotiations.
+     */
+    Phase2EncryptionAlgorithms?: Phase2EncryptionAlgorithmsList;
+    /**
+     * The permitted integrity algorithms for the VPN tunnel for phase 1 IKE negotiations.
+     */
+    Phase1IntegrityAlgorithms?: Phase1IntegrityAlgorithmsList;
+    /**
+     * The permitted integrity algorithms for the VPN tunnel for phase 2 IKE negotiations.
+     */
+    Phase2IntegrityAlgorithms?: Phase2IntegrityAlgorithmsList;
+    /**
+     * The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE negotiations.
+     */
+    Phase1DHGroupNumbers?: Phase1DHGroupNumbersList;
+    /**
+     * The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE negotiations.
+     */
+    Phase2DHGroupNumbers?: Phase2DHGroupNumbersList;
+    /**
+     * The IKE versions that are permitted for the VPN tunnel.
+     */
+    IkeVersions?: IKEVersionsList;
+  }
+  export type TunnelOptionsList = TunnelOption[];
   export interface UnassignIpv6AddressesRequest {
     /**
      * The IPv6 addresses to unassign from the network interface.
@@ -20920,6 +21175,10 @@ declare namespace EC2 {
      * Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.
      */
     StaticRoutesOnly?: Boolean;
+    /**
+     * Indicates the VPN tunnel options.
+     */
+    TunnelOptions?: TunnelOptionsList;
   }
   export interface VpnConnectionOptionsSpecification {
     /**
@@ -20929,7 +21188,7 @@ declare namespace EC2 {
     /**
      * The tunnel options for the VPN connection.
      */
-    TunnelOptions?: TunnelOptionsList;
+    TunnelOptions?: VpnTunnelOptionsSpecificationsList;
   }
   export type VpnEcmpSupportValue = "enable"|"disable"|string;
   export interface VpnGateway {
@@ -20988,10 +21247,63 @@ declare namespace EC2 {
      */
     TunnelInsideCidr?: String;
     /**
-     * The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway. Constraints: Allowed characters are alphanumeric characters and ._. Must be between 8 and 64 characters in length and cannot start with zero (0).
+     * The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway. Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).
      */
     PreSharedKey?: String;
+    /**
+     * The lifetime for phase 1 of the IKE negotiation, in seconds. Constraints: A value between 900 and 28,800. Default: 28800 
+     */
+    Phase1LifetimeSeconds?: Integer;
+    /**
+     * The lifetime for phase 2 of the IKE negotiation, in seconds. Constraints: A value between 900 and 3,600. The value must be less than the value for Phase1LifetimeSeconds. Default: 3600 
+     */
+    Phase2LifetimeSeconds?: Integer;
+    /**
+     * The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for RekeyFuzzPercentage. Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540 
+     */
+    RekeyMarginTimeSeconds?: Integer;
+    /**
+     * The percentage of the rekey window (determined by RekeyMarginTimeSeconds) during which the rekey time is randomly selected. Constraints: A value between 0 and 100. Default: 100 
+     */
+    RekeyFuzzPercentage?: Integer;
+    /**
+     * The number of packets in an IKE replay window. Constraints: A value between 64 and 2048. Default: 1024 
+     */
+    ReplayWindowSize?: Integer;
+    /**
+     * The number of seconds after which a DPD timeout occurs. Constraints: A value between 0 and 30. Default: 30 
+     */
+    DPDTimeoutSeconds?: Integer;
+    /**
+     * One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations. Valid values: AES128 | AES256 
+     */
+    Phase1EncryptionAlgorithms?: Phase1EncryptionAlgorithmsRequestList;
+    /**
+     * One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations. Valid values: AES128 | AES256 
+     */
+    Phase2EncryptionAlgorithms?: Phase2EncryptionAlgorithmsRequestList;
+    /**
+     * One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations. Valid values: SHA1 | SHA2-256 
+     */
+    Phase1IntegrityAlgorithms?: Phase1IntegrityAlgorithmsRequestList;
+    /**
+     * One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations. Valid values: SHA1 | SHA2-256 
+     */
+    Phase2IntegrityAlgorithms?: Phase2IntegrityAlgorithmsRequestList;
+    /**
+     * One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 22 | 23 | 24 
+     */
+    Phase1DHGroupNumbers?: Phase1DHGroupNumbersRequestList;
+    /**
+     * One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations. Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 22 | 23 | 24 
+     */
+    Phase2DHGroupNumbers?: Phase2DHGroupNumbersRequestList;
+    /**
+     * The IKE versions that are permitted for the VPN tunnel. Valid values: ikev1 | ikev2 
+     */
+    IKEVersions?: IKEVersionsRequestList;
   }
+  export type VpnTunnelOptionsSpecificationsList = VpnTunnelOptionsSpecification[];
   export interface WithdrawByoipCidrRequest {
     /**
      * The public IPv4 address range, in CIDR notation.
