@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.525.0-->
+<!--LATEST=2.526.0-->
 <!--ENTRYINSERT-->
+
+## 2.526.0
+* feature: StorageGateway: The CloudWatchLogGroupARN parameter of the UpdateGatewayInformation API allows for configuring the gateway to use a CloudWatch log-group where Storage Gateway health events will be logged. 
 
 ## 2.525.0
 * bugfix: RDS: Make async RDS.Signer.getAuthToken call pass underlying credential errors to callback
