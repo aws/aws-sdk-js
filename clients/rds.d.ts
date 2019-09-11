@@ -1284,7 +1284,7 @@ declare namespace RDS {
      */
     DBClusterEndpointIdentifier: String;
     /**
-     * The type of the endpoint. One of: READER, ANY. 
+     * The type of the endpoint. One of: READER, WRITER, ANY.
      */
     EndpointType: String;
     /**
@@ -1394,7 +1394,7 @@ declare namespace RDS {
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
-     * The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, or global.
+     * The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster.
      */
     EngineMode?: String;
     /**
@@ -1513,7 +1513,7 @@ declare namespace RDS {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used. Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens  
+     * The name of the DB parameter group to associate with this DB instance. If you do not specify a value for DBParameterGroupName, then the default DBParameterGroup for the specified DB engine is used. Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens  
      */
     DBParameterGroupName?: String;
     /**
@@ -1686,6 +1686,10 @@ declare namespace RDS {
      * The option group the DB instance is associated with. If omitted, the option group associated with the source instance is used.
      */
     OptionGroupName?: String;
+    /**
+     * The name of the DB parameter group to associate with this DB instance. If you do not specify a value for DBParameterGroupName, then Amazon RDS uses the DBParameterGroup of source DB instance for a same region Read Replica, or the default DBParameterGroup for the specified DB engine for a cross region Read Replica. Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens  
+     */
+    DBParameterGroupName?: String;
     /**
      * A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance is not publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see CreateDBInstance.
      */
@@ -2093,7 +2097,7 @@ declare namespace RDS {
      */
     Capacity?: IntegerOptional;
     /**
-     * The DB engine mode of the DB cluster, either provisioned, serverless, or parallelquery.
+     * The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster.
      */
     EngineMode?: String;
     ScalingConfigurationInfo?: ScalingConfigurationInfo;
@@ -2215,7 +2219,7 @@ declare namespace RDS {
      */
     EndpointType?: String;
     /**
-     * The type associated with a custom endpoint. One of: READER, ANY.
+     * The type associated with a custom endpoint. One of: READER, WRITER, ANY.
      */
     CustomEndpointType?: String;
     /**
@@ -2249,7 +2253,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier?: String;
     /**
-     * A value that indicates whehter the cluster member is the primary instance for the DB cluster.
+     * Value that is true if the cluster member is the primary instance for the DB cluster and false otherwise.
      */
     IsClusterWriter?: Boolean;
     /**
@@ -2951,7 +2955,7 @@ declare namespace RDS {
   }
   export interface DBParameterGroupStatus {
     /**
-     * The name of the DP parameter group.
+     * The name of the DB parameter group.
      */
     DBParameterGroupName?: String;
     /**
@@ -4463,7 +4467,7 @@ declare namespace RDS {
      */
     DBClusterEndpointIdentifier: String;
     /**
-     * The type of the endpoint. One of: READER, ANY. 
+     * The type of the endpoint. One of: READER, WRITER, ANY.
      */
     EndpointType?: String;
     /**
@@ -5462,7 +5466,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier: String;
     /**
-     * The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. Default: 1 Constraints:   Must be a value from 0 to 8  
+     * The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. Default: 1 Constraints:   Must be a value from 0 to 35.   Can't be set to 0 if the DB instance is a source to Read Replicas.  
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
@@ -5942,7 +5946,7 @@ declare namespace RDS {
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
-     * The DB engine mode of the DB cluster, either provisioned, serverless, or parallelquery.
+     * The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster.
      */
     EngineMode?: String;
     /**
@@ -6138,7 +6142,7 @@ declare namespace RDS {
      */
     UseDefaultProcessorFeatures?: BooleanOptional;
     /**
-     * The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used. Constraints:   If supplied, must match the name of an existing DBParameterGroup.   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.  
+     * The name of the DB parameter group to associate with this DB instance. If you do not specify a value for DBParameterGroupName, then the default DBParameterGroup for the specified DB engine is used. Constraints:   If supplied, must match the name of an existing DBParameterGroup.   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.  
      */
     DBParameterGroupName?: String;
     /**
@@ -6199,7 +6203,7 @@ declare namespace RDS {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default parameter group for the specified engine is used. 
+     * The name of the DB parameter group to associate with this DB instance. If you do not specify a value for DBParameterGroupName, then the default DBParameterGroup for the specified DB engine is used.
      */
     DBParameterGroupName?: String;
     /**
@@ -6437,7 +6441,7 @@ declare namespace RDS {
      */
     UseDefaultProcessorFeatures?: BooleanOptional;
     /**
-     * The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used. Constraints:   If supplied, must match the name of an existing DBParameterGroup.   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.  
+     * The name of the DB parameter group to associate with this DB instance. If you do not specify a value for DBParameterGroupName, then the default DBParameterGroup for the specified DB engine is used. Constraints:   If supplied, must match the name of an existing DBParameterGroup.   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.  
      */
     DBParameterGroupName?: String;
     /**

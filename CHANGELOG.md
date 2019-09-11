@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.526.0-->
+<!--LATEST=2.527.0-->
 <!--ENTRYINSERT-->
+
+## 2.527.0
+* feature: ConfigService: Adding input validation for the OrganizationConfigRuleName string.
+* feature: EC2: This release adds support for new data fields and log format in VPC flow logs.
+* feature: MediaConnect: This release adds support for the RIST protocol on sources and outputs.
+* feature: RDS: This release allows customers to specify a custom parameter group when creating a Read Replica, for DB engines which support this feature.
+* feature: StepFunctions: Fixing letter case in Map history event details to be small case
 
 ## 2.526.0
 * feature: StorageGateway: The CloudWatchLogGroupARN parameter of the UpdateGatewayInformation API allows for configuring the gateway to use a CloudWatch log-group where Storage Gateway health events will be logged. 

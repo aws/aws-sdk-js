@@ -817,17 +817,17 @@ declare namespace StepFunctions {
     /**
      * The name of the iteration’s parent Map state.
      */
-    Name?: Name;
+    name?: Name;
     /**
      * The index of the array belonging to the Map state iteration.
      */
-    Index?: UnsignedInteger;
+    index?: UnsignedInteger;
   }
   export interface MapStateStartedEventDetails {
     /**
      * The size of the array for Map state iterations.
      */
-    Length?: UnsignedInteger;
+    length?: UnsignedInteger;
   }
   export type Name = string;
   export type PageSize = number;

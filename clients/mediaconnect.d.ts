@@ -207,7 +207,7 @@ declare namespace MediaConnect {
      */
     RemoteId?: __string;
     /**
-     * The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+     * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
     SmoothingLatency?: __integer;
     /**
@@ -531,7 +531,7 @@ declare namespace MediaConnect {
      */
     Transport?: Transport;
   }
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|string;
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|string;
   export interface RemoveFlowOutputRequest {
     /**
      * The flow that you want to remove an output from.
@@ -590,11 +590,11 @@ declare namespace MediaConnect {
      */
     IngestPort?: __integer;
     /**
-     * The smoothing max bitrate for RTP and RTP-FEC streams.
+     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
     MaxLatency?: __integer;
     /**
@@ -702,11 +702,11 @@ declare namespace MediaConnect {
      */
     CidrAllowList?: __listOf__string;
     /**
-     * The smoothing max bitrate for RTP and RTP-FEC streams.
+     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
     MaxLatency?: __integer;
     /**
@@ -718,7 +718,7 @@ declare namespace MediaConnect {
      */
     RemoteId?: __string;
     /**
-     * The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+     * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
     SmoothingLatency?: __integer;
     /**
@@ -845,7 +845,7 @@ declare namespace MediaConnect {
      */
     RemoteId?: __string;
     /**
-     * The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+     * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
     SmoothingLatency?: __integer;
     /**
@@ -882,11 +882,11 @@ declare namespace MediaConnect {
      */
     IngestPort?: __integer;
     /**
-     * The smoothing max bitrate for RTP and RTP-FEC streams.
+     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
     MaxLatency?: __integer;
     /**

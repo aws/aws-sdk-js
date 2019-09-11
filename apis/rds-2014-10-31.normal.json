@@ -3746,7 +3746,7 @@
         },
         "EndpointType": {
           "shape": "String",
-          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. </p>"
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
         },
         "StaticMembers": {
           "shape": "StringList",
@@ -3863,7 +3863,7 @@
         },
         "EngineMode": {
           "shape": "String",
-          "documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, or <code>global</code>.</p>"
+          "documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p>"
         },
         "ScalingConfiguration": {
           "shape": "ScalingConfiguration",
@@ -4023,7 +4023,7 @@
         },
         "DBParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens</p> </li> </ul>"
+          "documentation": "<p>The name of the DB parameter group to associate with this DB instance. If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens</p> </li> </ul>"
         },
         "BackupRetentionPeriod": {
           "shape": "IntegerOptional",
@@ -4202,6 +4202,10 @@
         "OptionGroupName": {
           "shape": "String",
           "documentation": "<p>The option group the DB instance is associated with. If omitted, the option group associated with the source instance is used.</p>"
+        },
+        "DBParameterGroupName": {
+          "shape": "String",
+          "documentation": "<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then Amazon RDS uses the <code>DBParameterGroup</code> of source DB instance for a same region Read Replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a cross region Read Replica.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens</p> </li> </ul>"
         },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
@@ -4720,7 +4724,7 @@
         },
         "EngineMode": {
           "shape": "String",
-          "documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.</p>"
+          "documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p>"
         },
         "ScalingConfigurationInfo": {
           "shape": "ScalingConfigurationInfo"
@@ -4866,7 +4870,7 @@
         },
         "CustomEndpointType": {
           "shape": "String",
-          "documentation": "<p>The type associated with a custom endpoint. One of: <code>READER</code>, <code>ANY</code>.</p>"
+          "documentation": "<p>The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
         },
         "StaticMembers": {
           "shape": "StringList",
@@ -4919,7 +4923,7 @@
         },
         "IsClusterWriter": {
           "shape": "Boolean",
-          "documentation": "<p>A value that indicates whehter the cluster member is the primary instance for the DB cluster.</p>"
+          "documentation": "<p>Value that is <code>true</code> if the cluster member is the primary instance for the DB cluster and <code>false</code> otherwise.</p>"
         },
         "DBClusterParameterGroupStatus": {
           "shape": "String",
@@ -5792,7 +5796,7 @@
       "members": {
         "DBParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DP parameter group.</p>"
+          "documentation": "<p>The name of the DB parameter group.</p>"
         },
         "ParameterApplyStatus": {
           "shape": "String",
@@ -7945,7 +7949,7 @@
         },
         "EndpointType": {
           "shape": "String",
-          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>ANY</code>. </p>"
+          "documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>"
         },
         "StaticMembers": {
           "shape": "StringList",
@@ -8300,7 +8304,7 @@
       "members": {
         "DBParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> </ul>"
+          "documentation": "<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing <code>DBParameterGroup</code>.</p> </li> </ul>"
         },
         "Parameters": {
           "shape": "ParametersList",
@@ -9267,7 +9271,7 @@
         },
         "BackupRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 8</p> </li> </ul>"
+          "documentation": "<p>The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 0 to 35.</p> </li> <li> <p>Can't be set to 0 if the DB instance is a source to Read Replicas.</p> </li> </ul>"
         },
         "PreferredBackupWindow": {
           "shape": "String",
@@ -9708,7 +9712,7 @@
       "members": {
         "DBParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing DBParameterGroup.</p> </li> </ul>"
+          "documentation": "<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBParameterGroup</code>.</p> </li> </ul>"
         },
         "ResetAllParameters": {
           "shape": "Boolean",
@@ -9944,7 +9948,7 @@
         },
         "EngineMode": {
           "shape": "String",
-          "documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.</p>"
+          "documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p>"
         },
         "ScalingConfiguration": {
           "shape": "ScalingConfiguration",
@@ -10170,7 +10174,7 @@
         },
         "DBParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
+          "documentation": "<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
@@ -10249,7 +10253,7 @@
         },
         "DBParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default parameter group for the specified engine is used. </p>"
+          "documentation": "<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p>"
         },
         "BackupRetentionPeriod": {
           "shape": "IntegerOptional",
@@ -10500,7 +10504,7 @@
         },
         "DBParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
+          "documentation": "<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then the default <code>DBParameterGroup</code> for the specified DB engine is used.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBParameterGroup.</p> </li> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",

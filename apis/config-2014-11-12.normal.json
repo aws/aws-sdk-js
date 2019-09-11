@@ -2652,7 +2652,7 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "OrganizationConfigRuleName",
           "documentation": "<p>The name of organization config rule that you want to delete.</p>"
         }
       }
@@ -3938,7 +3938,7 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "OrganizationConfigRuleName",
           "documentation": "<p>The name of organization config rule for which you want status details for member accounts.</p>"
         },
         "Filters": {
@@ -4294,7 +4294,7 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "OrganizationConfigRuleName",
           "documentation": "<p>The name that you assign to organization config rule.</p>"
         },
         "OrganizationConfigRuleArn": {
@@ -4326,6 +4326,12 @@
         "shape": "MemberAccountStatus"
       }
     },
+    "OrganizationConfigRuleName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": ".*\\S.*"
+    },
     "OrganizationConfigRuleNames": {
       "type": "list",
       "member": {
@@ -4342,7 +4348,7 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "OrganizationConfigRuleName",
           "documentation": "<p>The name that you assign to organization config rule.</p>"
         },
         "OrganizationRuleStatus": {
@@ -4667,7 +4673,7 @@
       ],
       "members": {
         "OrganizationConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "OrganizationConfigRuleName",
           "documentation": "<p>The name that you assign to an organization config rule.</p>"
         },
         "OrganizationManagedRuleMetadata": {
