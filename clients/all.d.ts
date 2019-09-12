@@ -189,3 +189,4 @@ export import ForecastService = require('./forecastservice');
 export import ForecastQueryService = require('./forecastqueryservice');
 export import QLDB = require('./qldb');
 export import QLDBSession = require('./qldbsession');
+export import WorkMailMessageFlow = require('./workmailmessageflow');

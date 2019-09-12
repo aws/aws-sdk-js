@@ -1882,7 +1882,7 @@
         "AudioOnlyImage": {
           "shape": "InputLocation",
           "locationName": "audioOnlyImage",
-          "documentation": "For use with an audio only Stream. Must be a .jpg or .png file. If given, this image will be used as the cover-art for the audio only output. Ideally, it should be formatted for an iPhone screen for two reasons. The iPhone does not resize the image, it crops a centered image on the top/bottom and left/right. Additionally, this image file gets saved bit-for-bit into every 10-second segment file, so will increase bandwidth by {image file size} * {segment count} * {user count.}."
+          "documentation": "Optional. Specifies the .jpg or .png image to use as the cover art for an audio-only output. We recommend a low bit-size file because the image increases the output audio bandwidth.\n\nThe image is attached to the audio as an ID3 tag, frame type APIC, picture type 0x10, as per the \"ID3 tag version 2.4.0 - Native Frames\" standard."
         },
         "AudioTrackType": {
           "shape": "AudioOnlyHlsTrackType",
@@ -2661,6 +2661,11 @@
         }
       },
       "documentation": "Placeholder documentation for ChannelSummary"
+    },
+    "ColorSpacePassthroughSettings": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Passthrough applies no color space conversion to the output"
     },
     "CreateChannelRequest": {
       "type": "structure",
@@ -4376,6 +4381,24 @@
         "INSERT"
       ]
     },
+    "H264ColorSpaceSettings": {
+      "type": "structure",
+      "members": {
+        "ColorSpacePassthroughSettings": {
+          "shape": "ColorSpacePassthroughSettings",
+          "locationName": "colorSpacePassthroughSettings"
+        },
+        "Rec601Settings": {
+          "shape": "Rec601Settings",
+          "locationName": "rec601Settings"
+        },
+        "Rec709Settings": {
+          "shape": "Rec709Settings",
+          "locationName": "rec709Settings"
+        }
+      },
+      "documentation": "H264 Color Space Settings"
+    },
     "H264EntropyEncoding": {
       "type": "string",
       "documentation": "H264 Entropy Encoding",
@@ -4473,6 +4496,7 @@
       "documentation": "H264 Rate Control Mode",
       "enum": [
         "CBR",
+        "MULTIPLEX",
         "QVBR",
         "VBR"
       ]
@@ -4519,12 +4543,17 @@
         "BufSize": {
           "shape": "__integerMin0",
           "locationName": "bufSize",
-          "documentation": "Size of buffer (HRD buffer model) in bits/second."
+          "documentation": "Size of buffer (HRD buffer model) in bits."
         },
         "ColorMetadata": {
           "shape": "H264ColorMetadata",
           "locationName": "colorMetadata",
           "documentation": "Includes colorspace metadata in the output."
+        },
+        "ColorSpaceSettings": {
+          "shape": "H264ColorSpaceSettings",
+          "locationName": "colorSpaceSettings",
+          "documentation": "Color Space settings"
         },
         "EntropyEncoding": {
           "shape": "H264EntropyEncoding",
@@ -4594,7 +4623,7 @@
         "MaxBitrate": {
           "shape": "__integerMin1000",
           "locationName": "maxBitrate",
-          "documentation": "For QVBR: See the tooltip for Quality level \n\nFor VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video."
+          "documentation": "For QVBR: See the tooltip for Quality level\n\nFor VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video."
         },
         "MinIInterval": {
           "shape": "__integerMin0Max30",
@@ -4634,7 +4663,7 @@
         "RateControlMode": {
           "shape": "H264RateControlMode",
           "locationName": "rateControlMode",
-          "documentation": "Rate control mode. \n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nVBR: Quality and bitrate vary, depending on the video complexity. Recommended instead of QVBR\nif you want to maintain a specific average bitrate over the duration of the channel.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates."
+          "documentation": "Rate control mode.\n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nVBR: Quality and bitrate vary, depending on the video complexity. Recommended instead of QVBR\nif you want to maintain a specific average bitrate over the duration of the channel.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates."
         },
         "ScanType": {
           "shape": "H264ScanType",
@@ -4723,6 +4752,314 @@
         "DISABLED",
         "PIC_TIMING_SEI"
       ]
+    },
+    "H265AdaptiveQuantization": {
+      "type": "string",
+      "documentation": "H265 Adaptive Quantization",
+      "enum": [
+        "HIGH",
+        "HIGHER",
+        "LOW",
+        "MAX",
+        "MEDIUM",
+        "OFF"
+      ]
+    },
+    "H265AlternativeTransferFunction": {
+      "type": "string",
+      "documentation": "H265 Alternative Transfer Function",
+      "enum": [
+        "INSERT",
+        "OMIT"
+      ]
+    },
+    "H265ColorMetadata": {
+      "type": "string",
+      "documentation": "H265 Color Metadata",
+      "enum": [
+        "IGNORE",
+        "INSERT"
+      ]
+    },
+    "H265ColorSpaceSettings": {
+      "type": "structure",
+      "members": {
+        "ColorSpacePassthroughSettings": {
+          "shape": "ColorSpacePassthroughSettings",
+          "locationName": "colorSpacePassthroughSettings"
+        },
+        "Hdr10Settings": {
+          "shape": "Hdr10Settings",
+          "locationName": "hdr10Settings"
+        },
+        "Rec601Settings": {
+          "shape": "Rec601Settings",
+          "locationName": "rec601Settings"
+        },
+        "Rec709Settings": {
+          "shape": "Rec709Settings",
+          "locationName": "rec709Settings"
+        }
+      },
+      "documentation": "H265 Color Space Settings"
+    },
+    "H265FlickerAq": {
+      "type": "string",
+      "documentation": "H265 Flicker Aq",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
+    "H265GopSizeUnits": {
+      "type": "string",
+      "documentation": "H265 Gop Size Units",
+      "enum": [
+        "FRAMES",
+        "SECONDS"
+      ]
+    },
+    "H265Level": {
+      "type": "string",
+      "documentation": "H265 Level",
+      "enum": [
+        "H265_LEVEL_1",
+        "H265_LEVEL_2",
+        "H265_LEVEL_2_1",
+        "H265_LEVEL_3",
+        "H265_LEVEL_3_1",
+        "H265_LEVEL_4",
+        "H265_LEVEL_4_1",
+        "H265_LEVEL_5",
+        "H265_LEVEL_5_1",
+        "H265_LEVEL_5_2",
+        "H265_LEVEL_6",
+        "H265_LEVEL_6_1",
+        "H265_LEVEL_6_2",
+        "H265_LEVEL_AUTO"
+      ]
+    },
+    "H265LookAheadRateControl": {
+      "type": "string",
+      "documentation": "H265 Look Ahead Rate Control",
+      "enum": [
+        "HIGH",
+        "LOW",
+        "MEDIUM"
+      ]
+    },
+    "H265Profile": {
+      "type": "string",
+      "documentation": "H265 Profile",
+      "enum": [
+        "MAIN",
+        "MAIN_10BIT"
+      ]
+    },
+    "H265RateControlMode": {
+      "type": "string",
+      "documentation": "H265 Rate Control Mode",
+      "enum": [
+        "CBR",
+        "QVBR"
+      ]
+    },
+    "H265ScanType": {
+      "type": "string",
+      "documentation": "H265 Scan Type",
+      "enum": [
+        "PROGRESSIVE"
+      ]
+    },
+    "H265SceneChangeDetect": {
+      "type": "string",
+      "documentation": "H265 Scene Change Detect",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
+    "H265Settings": {
+      "type": "structure",
+      "members": {
+        "AdaptiveQuantization": {
+          "shape": "H265AdaptiveQuantization",
+          "locationName": "adaptiveQuantization",
+          "documentation": "Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality."
+        },
+        "AfdSignaling": {
+          "shape": "AfdSignaling",
+          "locationName": "afdSignaling",
+          "documentation": "Indicates that AFD values will be written into the output stream.  If afdSignaling is \"auto\", the system will try to preserve the input AFD value (in cases where multiple AFD values are valid). If set to \"fixed\", the AFD value will be the value configured in the fixedAfd parameter."
+        },
+        "AlternativeTransferFunction": {
+          "shape": "H265AlternativeTransferFunction",
+          "locationName": "alternativeTransferFunction",
+          "documentation": "Whether or not EML should insert an Alternative Transfer Function SEI message to support backwards compatibility with non-HDR decoders and displays."
+        },
+        "Bitrate": {
+          "shape": "__integerMin100000Max40000000",
+          "locationName": "bitrate",
+          "documentation": "Average bitrate in bits/second. Required when the rate control mode is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each output must have a unique value when its bitrate is rounded down to the nearest multiple of 1000."
+        },
+        "BufSize": {
+          "shape": "__integerMin100000Max80000000",
+          "locationName": "bufSize",
+          "documentation": "Size of buffer (HRD buffer model) in bits."
+        },
+        "ColorMetadata": {
+          "shape": "H265ColorMetadata",
+          "locationName": "colorMetadata",
+          "documentation": "Includes colorspace metadata in the output."
+        },
+        "ColorSpaceSettings": {
+          "shape": "H265ColorSpaceSettings",
+          "locationName": "colorSpaceSettings",
+          "documentation": "Color Space settings"
+        },
+        "FixedAfd": {
+          "shape": "FixedAfd",
+          "locationName": "fixedAfd",
+          "documentation": "Four bit AFD value to write on all frames of video in the output stream. Only valid when afdSignaling is set to 'Fixed'."
+        },
+        "FlickerAq": {
+          "shape": "H265FlickerAq",
+          "locationName": "flickerAq",
+          "documentation": "If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames."
+        },
+        "FramerateDenominator": {
+          "shape": "__integerMin1Max3003",
+          "locationName": "framerateDenominator",
+          "documentation": "Framerate denominator."
+        },
+        "FramerateNumerator": {
+          "shape": "__integerMin1",
+          "locationName": "framerateNumerator",
+          "documentation": "Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps."
+        },
+        "GopClosedCadence": {
+          "shape": "__integerMin0",
+          "locationName": "gopClosedCadence",
+          "documentation": "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting."
+        },
+        "GopSize": {
+          "shape": "__doubleMin1",
+          "locationName": "gopSize",
+          "documentation": "GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero."
+        },
+        "GopSizeUnits": {
+          "shape": "H265GopSizeUnits",
+          "locationName": "gopSizeUnits",
+          "documentation": "Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time."
+        },
+        "Level": {
+          "shape": "H265Level",
+          "locationName": "level",
+          "documentation": "H.265 Level."
+        },
+        "LookAheadRateControl": {
+          "shape": "H265LookAheadRateControl",
+          "locationName": "lookAheadRateControl",
+          "documentation": "Amount of lookahead. A value of low can decrease latency and memory usage, while high can produce better quality for certain content."
+        },
+        "MaxBitrate": {
+          "shape": "__integerMin100000Max40000000",
+          "locationName": "maxBitrate",
+          "documentation": "For QVBR: See the tooltip for Quality level"
+        },
+        "MinIInterval": {
+          "shape": "__integerMin0Max30",
+          "locationName": "minIInterval",
+          "documentation": "Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1"
+        },
+        "ParDenominator": {
+          "shape": "__integerMin1",
+          "locationName": "parDenominator",
+          "documentation": "Pixel Aspect Ratio denominator."
+        },
+        "ParNumerator": {
+          "shape": "__integerMin1",
+          "locationName": "parNumerator",
+          "documentation": "Pixel Aspect Ratio numerator."
+        },
+        "Profile": {
+          "shape": "H265Profile",
+          "locationName": "profile",
+          "documentation": "H.265 Profile."
+        },
+        "QvbrQualityLevel": {
+          "shape": "__integerMin1Max10",
+          "locationName": "qvbrQualityLevel",
+          "documentation": "Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:\n- Primary screen: Quality level: 8 to 10. Max bitrate: 4M\n- PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M\n- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M"
+        },
+        "RateControlMode": {
+          "shape": "H265RateControlMode",
+          "locationName": "rateControlMode",
+          "documentation": "Rate control mode.\n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates."
+        },
+        "ScanType": {
+          "shape": "H265ScanType",
+          "locationName": "scanType",
+          "documentation": "Sets the scan type of the output to progressive or top-field-first interlaced."
+        },
+        "SceneChangeDetect": {
+          "shape": "H265SceneChangeDetect",
+          "locationName": "sceneChangeDetect",
+          "documentation": "Scene change detection."
+        },
+        "Slices": {
+          "shape": "__integerMin1Max16",
+          "locationName": "slices",
+          "documentation": "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.\nThis field is optional; when no value is specified the encoder will choose the number of slices based on encode resolution."
+        },
+        "Tier": {
+          "shape": "H265Tier",
+          "locationName": "tier",
+          "documentation": "H.265 Tier."
+        },
+        "TimecodeInsertion": {
+          "shape": "H265TimecodeInsertionBehavior",
+          "locationName": "timecodeInsertion",
+          "documentation": "Determines how timecodes should be inserted into the video elementary stream.\n- 'disabled': Do not include timecodes\n- 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config"
+        }
+      },
+      "documentation": "H265 Settings",
+      "required": [
+        "FramerateNumerator",
+        "FramerateDenominator"
+      ]
+    },
+    "H265Tier": {
+      "type": "string",
+      "documentation": "H265 Tier",
+      "enum": [
+        "HIGH",
+        "MAIN"
+      ]
+    },
+    "H265TimecodeInsertionBehavior": {
+      "type": "string",
+      "documentation": "H265 Timecode Insertion Behavior",
+      "enum": [
+        "DISABLED",
+        "PIC_TIMING_SEI"
+      ]
+    },
+    "Hdr10Settings": {
+      "type": "structure",
+      "members": {
+        "MaxCll": {
+          "shape": "__integerMin0Max32768",
+          "locationName": "maxCll",
+          "documentation": "Maximum Content Light Level\nAn integer metadata value defining the maximum light level, in nits,\nof any single pixel within an encoded HDR video stream or file."
+        },
+        "MaxFall": {
+          "shape": "__integerMin0Max32768",
+          "locationName": "maxFall",
+          "documentation": "Maximum Frame Average Light Level\nAn integer metadata value defining the maximum average light level, in nits,\nfor any single frame within an encoded HDR video stream or file."
+        }
+      },
+      "documentation": "Hdr10 Settings"
     },
     "HlsAdMarkers": {
       "type": "string",
@@ -6945,9 +7282,22 @@
         "Destination"
       ]
     },
+    "MsSmoothH265PackagingType": {
+      "type": "string",
+      "documentation": "Ms Smooth H265 Packaging Type",
+      "enum": [
+        "HEV1",
+        "HVC1"
+      ]
+    },
     "MsSmoothOutputSettings": {
       "type": "structure",
       "members": {
+        "H265PackagingType": {
+          "shape": "MsSmoothH265PackagingType",
+          "locationName": "h265PackagingType",
+          "documentation": "Only applicable when this output is referencing an H.265 video description.\nSpecifies whether MP4 segments should be packaged as HEV1 or HVC1."
+        },
         "NameModifier": {
           "shape": "__string",
           "locationName": "nameModifier",
@@ -7347,6 +7697,16 @@
         }
       },
       "documentation": "Placeholder documentation for PurchaseOfferingResponse"
+    },
+    "Rec601Settings": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Rec601 Settings"
+    },
+    "Rec709Settings": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Rec709 Settings"
     },
     "RemixSettings": {
       "type": "structure",
@@ -8869,6 +9229,10 @@
         "H264Settings": {
           "shape": "H264Settings",
           "locationName": "h264Settings"
+        },
+        "H265Settings": {
+          "shape": "H265Settings",
+          "locationName": "h265Settings"
         }
       },
       "documentation": "Video Codec Settings"
@@ -8940,7 +9304,7 @@
         "ColorSpace": {
           "shape": "VideoSelectorColorSpace",
           "locationName": "colorSpace",
-          "documentation": "Specifies the colorspace of an input. This setting works in tandem with colorSpaceConversion to determine if any conversion will be performed."
+          "documentation": "Specifies the color space of an input. This setting works in tandem with colorSpaceUsage and a video description's colorSpaceSettingsChoice to determine if any conversion will be performed."
         },
         "ColorSpaceUsage": {
           "shape": "VideoSelectorColorSpaceUsage",
@@ -9092,6 +9456,12 @@
       "max": 30,
       "documentation": "Placeholder documentation for __integerMin0Max30"
     },
+    "__integerMin0Max32768": {
+      "type": "integer",
+      "min": 0,
+      "max": 32768,
+      "documentation": "Placeholder documentation for __integerMin0Max32768"
+    },
     "__integerMin0Max3600": {
       "type": "integer",
       "min": 0,
@@ -9144,6 +9514,18 @@
       "min": 1000,
       "documentation": "Placeholder documentation for __integerMin1000"
     },
+    "__integerMin100000Max40000000": {
+      "type": "integer",
+      "min": 100000,
+      "max": 40000000,
+      "documentation": "Placeholder documentation for __integerMin100000Max40000000"
+    },
+    "__integerMin100000Max80000000": {
+      "type": "integer",
+      "min": 100000,
+      "max": 80000000,
+      "documentation": "Placeholder documentation for __integerMin100000Max80000000"
+    },
     "__integerMin1000Max30000": {
       "type": "integer",
       "min": 1000,
@@ -9173,6 +9555,12 @@
       "min": 1,
       "max": 20,
       "documentation": "Placeholder documentation for __integerMin1Max20"
+    },
+    "__integerMin1Max3003": {
+      "type": "integer",
+      "min": 1,
+      "max": 3003,
+      "documentation": "Placeholder documentation for __integerMin1Max3003"
     },
     "__integerMin1Max31": {
       "type": "integer",

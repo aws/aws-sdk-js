@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.527.0-->
+<!--LATEST=2.528.0-->
 <!--ENTRYINSERT-->
+
+## 2.528.0
+* feature: EC2: Fix for FleetActivityStatus and FleetStateCode enum
+* feature: MediaLive: AWS Elemental MediaLive now supports High Efficiency Video Coding (HEVC) for standard-definition (SD), high-definition (HD), and ultra-high-definition (UHD) encoding with HDR support.Encoding with HEVC offers a number of advantages. While UHD video requires an advanced codec beyond H.264 (AVC), high frame rate (HFR) or High Dynamic Range (HDR) content in HD also benefit from HEVC's advancements. In addition, benefits can be achieved with HD and SD content even if HDR and HFR are not needed.
+* feature: WorkMailMessageFlow: This release allows customers to access email messages as they flow to and from Amazon WorkMail.
 
 ## 2.527.0
 * feature: ConfigService: Adding input validation for the OrganizationConfigRuleName string.

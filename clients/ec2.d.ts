@@ -11235,7 +11235,7 @@ declare namespace EC2 {
     Values?: ValueStringList;
   }
   export type FilterList = Filter[];
-  export type FleetActivityStatus = "error"|"pending-fulfillment"|"pending-termination"|"fulfilled"|string;
+  export type FleetActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
   export interface FleetData {
     /**
      * The progress of the EC2 Fleet. If there is an error, the status is error. After all requests are placed, the status is pending_fulfillment. If the size of the EC2 Fleet is equal to or greater than its target capacity, the status is fulfilled. If the size of the EC2 Fleet is decreased, the status is pending_termination while instances are terminating.
@@ -11436,7 +11436,7 @@ declare namespace EC2 {
   }
   export type FleetOnDemandAllocationStrategy = "lowest-price"|"prioritized"|string;
   export type FleetSet = FleetData[];
-  export type FleetStateCode = "submitted"|"active"|"deleted"|"failed"|"deleted-running"|"deleted-terminating"|"modifying"|string;
+  export type FleetStateCode = "submitted"|"active"|"deleted"|"failed"|"deleted_running"|"deleted_terminating"|"modifying"|string;
   export type FleetType = "request"|"maintain"|"instant"|string;
   export type Float = number;
   export interface FlowLog {

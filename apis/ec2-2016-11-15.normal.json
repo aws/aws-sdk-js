@@ -17503,8 +17503,8 @@
       "type": "string",
       "enum": [
         "error",
-        "pending-fulfillment",
-        "pending-termination",
+        "pending_fulfillment",
+        "pending_termination",
         "fulfilled"
       ]
     },
@@ -17833,8 +17833,8 @@
         "active",
         "deleted",
         "failed",
-        "deleted-running",
-        "deleted-terminating",
+        "deleted_running",
+        "deleted_terminating",
         "modifying"
       ]
     },

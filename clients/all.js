@@ -190,5 +190,6 @@ module.exports = {
   ForecastService: require('./forecastservice'),
   ForecastQueryService: require('./forecastqueryservice'),
   QLDB: require('./qldb'),
-  QLDBSession: require('./qldbsession')
+  QLDBSession: require('./qldbsession'),
+  WorkMailMessageFlow: require('./workmailmessageflow')
 };

@@ -505,7 +505,9 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     AudioGroupId?: __string;
     /**
-     * For use with an audio only Stream. Must be a .jpg or .png file. If given, this image will be used as the cover-art for the audio only output. Ideally, it should be formatted for an iPhone screen for two reasons. The iPhone does not resize the image, it crops a centered image on the top/bottom and left/right. Additionally, this image file gets saved bit-for-bit into every 10-second segment file, so will increase bandwidth by {image file size} * {segment count} * {user count.}.
+     * Optional. Specifies the .jpg or .png image to use as the cover art for an audio-only output. We recommend a low bit-size file because the image increases the output audio bandwidth.
+
+The image is attached to the audio as an ID3 tag, frame type APIC, picture type 0x10, as per the "ID3 tag version 2.4.0 - Native Frames" standard.
      */
     AudioOnlyImage?: InputLocation;
     /**
@@ -903,6 +905,8 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+  }
+  export interface ColorSpacePassthroughSettings {
   }
   export interface CreateChannelRequest {
     /**
@@ -1848,6 +1852,11 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
   export type GlobalConfigurationOutputTimingSource = "INPUT_CLOCK"|"SYSTEM_CLOCK"|string;
   export type H264AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
   export type H264ColorMetadata = "IGNORE"|"INSERT"|string;
+  export interface H264ColorSpaceSettings {
+    ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
+    Rec601Settings?: Rec601Settings;
+    Rec709Settings?: Rec709Settings;
+  }
   export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
   export type H264FlickerAq = "DISABLED"|"ENABLED"|string;
   export type H264FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
@@ -1857,7 +1866,7 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
   export type H264LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string;
   export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H264Profile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
-  export type H264RateControlMode = "CBR"|"QVBR"|"VBR"|string;
+  export type H264RateControlMode = "CBR"|"MULTIPLEX"|"QVBR"|"VBR"|string;
   export type H264ScanType = "INTERLACED"|"PROGRESSIVE"|string;
   export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H264Settings {
@@ -1878,13 +1887,17 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
      */
     BufFillPct?: __integerMin0Max100;
     /**
-     * Size of buffer (HRD buffer model) in bits/second.
+     * Size of buffer (HRD buffer model) in bits.
      */
     BufSize?: __integerMin0;
     /**
      * Includes colorspace metadata in the output.
      */
     ColorMetadata?: H264ColorMetadata;
+    /**
+     * Color Space settings
+     */
+    ColorSpaceSettings?: H264ColorSpaceSettings;
     /**
      * Entropy encoding mode.  Use cabac (must be in Main or High profile) or cavlc.
      */
@@ -1938,7 +1951,7 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
      */
     LookAheadRateControl?: H264LookAheadRateControl;
     /**
-     * For QVBR: See the tooltip for Quality level 
+     * For QVBR: See the tooltip for Quality level
 
 For VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
      */
@@ -1975,7 +1988,7 @@ For VBR: Set the maximum bitrate in order to accommodate expected spikes in the 
      */
     QvbrQualityLevel?: __integerMin1Max10;
     /**
-     * Rate control mode. 
+     * Rate control mode.
 
 QVBR: Quality will match the specified quality level except when it is constrained by the
 maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
@@ -2035,6 +2048,165 @@ This field is optional; when no value is specified the encoder will choose the n
   export type H264Syntax = "DEFAULT"|"RP2027"|string;
   export type H264TemporalAq = "DISABLED"|"ENABLED"|string;
   export type H264TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
+  export type H265AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
+  export type H265AlternativeTransferFunction = "INSERT"|"OMIT"|string;
+  export type H265ColorMetadata = "IGNORE"|"INSERT"|string;
+  export interface H265ColorSpaceSettings {
+    ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
+    Hdr10Settings?: Hdr10Settings;
+    Rec601Settings?: Rec601Settings;
+    Rec709Settings?: Rec709Settings;
+  }
+  export type H265FlickerAq = "DISABLED"|"ENABLED"|string;
+  export type H265GopSizeUnits = "FRAMES"|"SECONDS"|string;
+  export type H265Level = "H265_LEVEL_1"|"H265_LEVEL_2"|"H265_LEVEL_2_1"|"H265_LEVEL_3"|"H265_LEVEL_3_1"|"H265_LEVEL_4"|"H265_LEVEL_4_1"|"H265_LEVEL_5"|"H265_LEVEL_5_1"|"H265_LEVEL_5_2"|"H265_LEVEL_6"|"H265_LEVEL_6_1"|"H265_LEVEL_6_2"|"H265_LEVEL_AUTO"|string;
+  export type H265LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string;
+  export type H265Profile = "MAIN"|"MAIN_10BIT"|string;
+  export type H265RateControlMode = "CBR"|"QVBR"|string;
+  export type H265ScanType = "PROGRESSIVE"|string;
+  export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|string;
+  export interface H265Settings {
+    /**
+     * Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+     */
+    AdaptiveQuantization?: H265AdaptiveQuantization;
+    /**
+     * Indicates that AFD values will be written into the output stream.  If afdSignaling is "auto", the system will try to preserve the input AFD value (in cases where multiple AFD values are valid). If set to "fixed", the AFD value will be the value configured in the fixedAfd parameter.
+     */
+    AfdSignaling?: AfdSignaling;
+    /**
+     * Whether or not EML should insert an Alternative Transfer Function SEI message to support backwards compatibility with non-HDR decoders and displays.
+     */
+    AlternativeTransferFunction?: H265AlternativeTransferFunction;
+    /**
+     * Average bitrate in bits/second. Required when the rate control mode is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each output must have a unique value when its bitrate is rounded down to the nearest multiple of 1000.
+     */
+    Bitrate?: __integerMin100000Max40000000;
+    /**
+     * Size of buffer (HRD buffer model) in bits.
+     */
+    BufSize?: __integerMin100000Max80000000;
+    /**
+     * Includes colorspace metadata in the output.
+     */
+    ColorMetadata?: H265ColorMetadata;
+    /**
+     * Color Space settings
+     */
+    ColorSpaceSettings?: H265ColorSpaceSettings;
+    /**
+     * Four bit AFD value to write on all frames of video in the output stream. Only valid when afdSignaling is set to 'Fixed'.
+     */
+    FixedAfd?: FixedAfd;
+    /**
+     * If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
+     */
+    FlickerAq?: H265FlickerAq;
+    /**
+     * Framerate denominator.
+     */
+    FramerateDenominator: __integerMin1Max3003;
+    /**
+     * Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
+     */
+    FramerateNumerator: __integerMin1;
+    /**
+     * Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.
+     */
+    GopClosedCadence?: __integerMin0;
+    /**
+     * GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero.
+     */
+    GopSize?: __doubleMin1;
+    /**
+     * Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time.
+     */
+    GopSizeUnits?: H265GopSizeUnits;
+    /**
+     * H.265 Level.
+     */
+    Level?: H265Level;
+    /**
+     * Amount of lookahead. A value of low can decrease latency and memory usage, while high can produce better quality for certain content.
+     */
+    LookAheadRateControl?: H265LookAheadRateControl;
+    /**
+     * For QVBR: See the tooltip for Quality level
+     */
+    MaxBitrate?: __integerMin100000Max40000000;
+    /**
+     * Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
+     */
+    MinIInterval?: __integerMin0Max30;
+    /**
+     * Pixel Aspect Ratio denominator.
+     */
+    ParDenominator?: __integerMin1;
+    /**
+     * Pixel Aspect Ratio numerator.
+     */
+    ParNumerator?: __integerMin1;
+    /**
+     * H.265 Profile.
+     */
+    Profile?: H265Profile;
+    /**
+     * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:
+- Primary screen: Quality level: 8 to 10. Max bitrate: 4M
+- PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
+- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
+     */
+    QvbrQualityLevel?: __integerMin1Max10;
+    /**
+     * Rate control mode.
+
+QVBR: Quality will match the specified quality level except when it is constrained by the
+maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
+
+CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
+your assets to devices that cannot handle variable bitrates.
+     */
+    RateControlMode?: H265RateControlMode;
+    /**
+     * Sets the scan type of the output to progressive or top-field-first interlaced.
+     */
+    ScanType?: H265ScanType;
+    /**
+     * Scene change detection.
+     */
+    SceneChangeDetect?: H265SceneChangeDetect;
+    /**
+     * Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.
+This field is optional; when no value is specified the encoder will choose the number of slices based on encode resolution.
+     */
+    Slices?: __integerMin1Max16;
+    /**
+     * H.265 Tier.
+     */
+    Tier?: H265Tier;
+    /**
+     * Determines how timecodes should be inserted into the video elementary stream.
+- 'disabled': Do not include timecodes
+- 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
+     */
+    TimecodeInsertion?: H265TimecodeInsertionBehavior;
+  }
+  export type H265Tier = "HIGH"|"MAIN"|string;
+  export type H265TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
+  export interface Hdr10Settings {
+    /**
+     * Maximum Content Light Level
+An integer metadata value defining the maximum light level, in nits,
+of any single pixel within an encoded HDR video stream or file.
+     */
+    MaxCll?: __integerMin0Max32768;
+    /**
+     * Maximum Frame Average Light Level
+An integer metadata value defining the maximum average light level, in nits,
+for any single frame within an encoded HDR video stream or file.
+     */
+    MaxFall?: __integerMin0Max32768;
+  }
   export type HlsAdMarkers = "ADOBE"|"ELEMENTAL"|"ELEMENTAL_SCTE35"|string;
   export type HlsAkamaiHttpTransferMode = "CHUNKED"|"NON_CHUNKED"|string;
   export interface HlsAkamaiSettings {
@@ -3253,7 +3425,13 @@ Options:
      */
     TimestampOffsetMode?: SmoothGroupTimestampOffsetMode;
   }
+  export type MsSmoothH265PackagingType = "HEV1"|"HVC1"|string;
   export interface MsSmoothOutputSettings {
+    /**
+     * Only applicable when this output is referencing an H.265 video description.
+Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
+     */
+    H265PackagingType?: MsSmoothH265PackagingType;
     /**
      * String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
      */
@@ -3458,6 +3636,10 @@ Options:
   }
   export interface PurchaseOfferingResponse {
     Reservation?: Reservation;
+  }
+  export interface Rec601Settings {
+  }
+  export interface Rec709Settings {
   }
   export interface RemixSettings {
     /**
@@ -4269,6 +4451,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export interface VideoCodecSettings {
     FrameCaptureSettings?: FrameCaptureSettings;
     H264Settings?: H264Settings;
+    H265Settings?: H265Settings;
   }
   export interface VideoDescription {
     /**
@@ -4304,7 +4487,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type VideoDescriptionScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string;
   export interface VideoSelector {
     /**
-     * Specifies the colorspace of an input. This setting works in tandem with colorSpaceConversion to determine if any conversion will be performed.
+     * Specifies the color space of an input. This setting works in tandem with colorSpaceUsage and a video description's colorSpaceSettingsChoice to determine if any conversion will be performed.
      */
     ColorSpace?: VideoSelectorColorSpace;
     /**
@@ -4351,6 +4534,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin0Max15 = number;
   export type __integerMin0Max255 = number;
   export type __integerMin0Max30 = number;
+  export type __integerMin0Max32768 = number;
   export type __integerMin0Max3600 = number;
   export type __integerMin0Max500 = number;
   export type __integerMin0Max600 = number;
@@ -4360,11 +4544,14 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin0Max8191 = number;
   export type __integerMin1 = number;
   export type __integerMin1000 = number;
+  export type __integerMin100000Max40000000 = number;
+  export type __integerMin100000Max80000000 = number;
   export type __integerMin1000Max30000 = number;
   export type __integerMin1Max10 = number;
   export type __integerMin1Max1000000 = number;
   export type __integerMin1Max16 = number;
   export type __integerMin1Max20 = number;
+  export type __integerMin1Max3003 = number;
   export type __integerMin1Max31 = number;
   export type __integerMin1Max32 = number;
   export type __integerMin1Max3600 = number;

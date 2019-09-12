@@ -191,6 +191,7 @@ export abstract class ConfigurationServicePlaceholders {
   forecastqueryservice?: AWS.ForecastQueryService.Types.ClientConfiguration;
   qldb?: AWS.QLDB.Types.ClientConfiguration;
   qldbsession?: AWS.QLDBSession.Types.ClientConfiguration;
+  workmailmessageflow?: AWS.WorkMailMessageFlow.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -384,4 +385,5 @@ export interface ConfigurationServiceApiVersions {
   forecastqueryservice?: AWS.ForecastQueryService.Types.apiVersion;
   qldb?: AWS.QLDB.Types.apiVersion;
   qldbsession?: AWS.QLDBSession.Types.apiVersion;
+  workmailmessageflow?: AWS.WorkMailMessageFlow.Types.apiVersion;
 }
