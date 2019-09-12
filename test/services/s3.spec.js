@@ -2675,8 +2675,6 @@ describe('AWS.S3', function() {
   });
 
   describe('getSignedUrl', function() {
-    var date = null;
-
     beforeEach(function(done) {
       helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
       return done();
