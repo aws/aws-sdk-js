@@ -53,6 +53,14 @@ declare class EKS extends Service {
    */
   listClusters(callback?: (err: AWSError, data: EKS.Types.ListClustersResponse) => void): Request<EKS.Types.ListClustersResponse, AWSError>;
   /**
+   * List the tags for an Amazon EKS resource.
+   */
+  listTagsForResource(params: EKS.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: EKS.Types.ListTagsForResourceResponse) => void): Request<EKS.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List the tags for an Amazon EKS resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: EKS.Types.ListTagsForResourceResponse) => void): Request<EKS.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Lists the updates associated with an Amazon EKS cluster in your AWS account, in the specified Region.
    */
   listUpdates(params: EKS.Types.ListUpdatesRequest, callback?: (err: AWSError, data: EKS.Types.ListUpdatesResponse) => void): Request<EKS.Types.ListUpdatesResponse, AWSError>;
@@ -60,6 +68,22 @@ declare class EKS extends Service {
    * Lists the updates associated with an Amazon EKS cluster in your AWS account, in the specified Region.
    */
   listUpdates(callback?: (err: AWSError, data: EKS.Types.ListUpdatesResponse) => void): Request<EKS.Types.ListUpdatesResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   */
+  tagResource(params: EKS.Types.TagResourceRequest, callback?: (err: AWSError, data: EKS.Types.TagResourceResponse) => void): Request<EKS.Types.TagResourceResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   */
+  tagResource(callback?: (err: AWSError, data: EKS.Types.TagResourceResponse) => void): Request<EKS.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(params: EKS.Types.UntagResourceRequest, callback?: (err: AWSError, data: EKS.Types.UntagResourceResponse) => void): Request<EKS.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: EKS.Types.UntagResourceResponse) => void): Request<EKS.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see Amazon CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .   At this time, you can not update the subnets or security group IDs for an existing cluster.  Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
    */
@@ -155,6 +179,10 @@ declare namespace EKS {
      * The platform version of your Amazon EKS cluster. For more information, see Platform Versions in the  Amazon EKS User Guide .
      */
     platformVersion?: String;
+    /**
+     * The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.
+     */
+    tags?: TagMap;
   }
   export type ClusterName = string;
   export type ClusterStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
@@ -183,6 +211,10 @@ declare namespace EKS {
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
+    /**
+     * The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.
+     */
+    tags?: TagMap;
   }
   export interface CreateClusterResponse {
     /**
@@ -273,6 +305,18 @@ declare namespace EKS {
      */
     nextToken?: String;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Amazon EKS clusters.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags for the resource.
+     */
+    tags?: TagMap;
+  }
   export interface ListUpdatesRequest {
     /**
      * The name of the Amazon EKS cluster to list updates for.
@@ -325,7 +369,35 @@ declare namespace EKS {
   }
   export type String = string;
   export type StringList = String[];
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resources are Amazon EKS clusters.
+     */
+    resourceArn: String;
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs.
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resources are Amazon EKS clusters.
+     */
+    resourceArn: String;
+    /**
+     * The keys of the tags to be removed.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface Update {
     /**
      * A UUID that is used to track the update.

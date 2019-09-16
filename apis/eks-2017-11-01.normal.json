@@ -165,6 +165,28 @@
       ],
       "documentation": "<p>Lists the Amazon EKS clusters in your AWS account in the specified Region.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>List the tags for an Amazon EKS resource.</p>"
+    },
     "ListUpdates": {
       "name": "ListUpdates",
       "http": {
@@ -192,6 +214,50 @@
         }
       ],
       "documentation": "<p>Lists the updates associated with an Amazon EKS cluster in your AWS account, in the specified Region.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes specified tags from a resource.</p>"
     },
     "UpdateClusterConfig": {
       "name": "UpdateClusterConfig",
@@ -334,6 +400,10 @@
         "platformVersion": {
           "shape": "String",
           "documentation": "<p>The platform version of your Amazon EKS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html\">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.</p>"
         }
       },
       "documentation": "<p>An object representing an Amazon EKS cluster.</p>"
@@ -385,6 +455,10 @@
           "shape": "String",
           "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
           "idempotencyToken": true
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.</p>"
         }
       }
     },
@@ -556,6 +630,29 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Amazon EKS clusters.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags for the resource.</p>"
+        }
+      }
+    },
     "ListUpdatesRequest": {
       "type": "structure",
       "required": [
@@ -666,8 +763,84 @@
         "shape": "String"
       }
     },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resources are Amazon EKS clusters.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256
+    },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resources are Amazon EKS clusters.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The keys of the tags to be removed.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "Update": {
       "type": "structure",

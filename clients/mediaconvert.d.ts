@@ -311,20 +311,30 @@ declare namespace MediaConvert {
      */
     BitDepth?: __integerMin16Max24;
     /**
-     * Set Channels to specify the number of channels in this output audio track. Choosing Mono in the console will give you 1 output channel; choosing Stereo will give you 2. In the API, valid values are 1 and 2.
+     * Specify the number of channels in this output audio track. Valid values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
      */
-    Channels?: __integerMin1Max2;
+    Channels?: __integerMin1Max64;
     /**
      * Sample rate in hz.
      */
     SampleRate?: __integerMin8000Max192000;
   }
+  export type AncillaryConvert608To708 = "UPCONVERT"|"DISABLED"|string;
   export interface AncillarySourceSettings {
+    /**
+     * Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.
+     */
+    Convert608To708?: AncillaryConvert608To708;
     /**
      * Specifies the 608 channel number in the ancillary data track from which to extract captions. Unused for passthrough.
      */
     SourceAncillaryChannelNumber?: __integerMin1Max4;
+    /**
+     * By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting.
+     */
+    TerminateCaptions?: AncillaryTerminateCaptions;
   }
+  export type AncillaryTerminateCaptions = "END_OF_INPUT"|"DISABLED"|string;
   export type AntiAlias = "DISABLED"|"ENABLED"|string;
   export interface AssociateCertificateRequest {
     /**
@@ -634,7 +644,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     BurninDestinationSettings?: BurninDestinationSettings;
     /**
-     * Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).
+     * Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).
      */
     DestinationType?: CaptionDestinationType;
     /**
@@ -645,6 +655,10 @@ All burn-in and DVB-Sub font settings must match.
      * Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number.
      */
     EmbeddedDestinationSettings?: EmbeddedDestinationSettings;
+    /**
+     * Settings specific to IMSC caption outputs.
+     */
+    ImscDestinationSettings?: ImscDestinationSettings;
     /**
      * Settings for SCC caption output.
      */
@@ -658,7 +672,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     TtmlDestinationSettings?: TtmlDestinationSettings;
   }
-  export type CaptionDestinationType = "BURN_IN"|"DVB_SUB"|"EMBEDDED"|"EMBEDDED_PLUS_SCTE20"|"SCTE20_PLUS_EMBEDDED"|"SCC"|"SRT"|"SMI"|"TELETEXT"|"TTML"|"WEBVTT"|string;
+  export type CaptionDestinationType = "BURN_IN"|"DVB_SUB"|"EMBEDDED"|"EMBEDDED_PLUS_SCTE20"|"IMSC"|"SCTE20_PLUS_EMBEDDED"|"SCC"|"SRT"|"SMI"|"TELETEXT"|"TTML"|"WEBVTT"|string;
   export interface CaptionSelector {
     /**
      * The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.
@@ -669,7 +683,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     LanguageCode?: LanguageCode;
     /**
-     * Source settings (SourceSettings) contains the group of settings for captions in the input.
+     * If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file, specify the URI of the input captions source file. If your input captions are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
      */
     SourceSettings?: CaptionSourceSettings;
   }
@@ -687,7 +701,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     EmbeddedSourceSettings?: EmbeddedSourceSettings;
     /**
-     * Settings for File-based Captions in Source
+     * If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
      */
     FileSourceSettings?: FileSourceSettings;
     /**
@@ -699,7 +713,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     TeletextSourceSettings?: TeletextSourceSettings;
     /**
-     * Settings specific to caption sources that are specfied by track number. Sources include IMSC in IMF.
+     * Settings specific to caption sources that are specified by track number. Currently, this is only IMSC captions in an IMF package. If your caption source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead of TrackSourceSettings.
      */
     TrackSourceSettings?: TrackSourceSettings;
   }
@@ -718,7 +732,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     ConstantInitializationVector?: __stringMin32Max32Pattern09aFAF32;
     /**
-     * For DRM with CMAF, the encryption type is always sample AES.
+     * Specify the encryption scheme that you want the service to use when encrypting your CMAF segments. Choose AES-CBC subsample (SAMPLE-AES) or AES_CTR (AES-CTR).
      */
     EncryptionMethod?: CmafEncryptionType;
     /**
@@ -726,7 +740,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     InitializationVectorInManifest?: CmafInitializationVectorInManifest;
     /**
-     * Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is CMAF. If your output group type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider settings instead.
+     * If your output group type is CMAF, use these settings when doing DRM encryption with a SPEKE-compliant key provider. If your output group type is HLS, DASH, or Microsoft Smooth, use the SpekeKeyProvider settings instead.
      */
     SpekeKeyProvider?: SpekeKeyProviderCmaf;
     /**
@@ -738,7 +752,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     Type?: CmafKeyProviderType;
   }
-  export type CmafEncryptionType = "SAMPLE_AES"|string;
+  export type CmafEncryptionType = "SAMPLE_AES"|"AES_CTR"|string;
   export interface CmafGroupSettings {
     /**
      * A partial URI prefix that will be put in the manifest file at the top level BaseURL element. Can be used if streams are delivered from a different URL than the manifest file.
@@ -1033,7 +1047,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     PlaybackDeviceCompatibility?: DashIsoPlaybackDeviceCompatibility;
     /**
-     * Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+     * If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
      */
     SpekeKeyProvider?: SpekeKeyProvider;
   }
@@ -1466,17 +1480,17 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type EmbeddedConvert608To708 = "UPCONVERT"|"DISABLED"|string;
   export interface EmbeddedDestinationSettings {
     /**
-     * Ignore this setting unless your input captions are SCC format and your output captions are embedded in the video stream. Specify a CC number for each captions channel in this output. If you have two channels, pick CC numbers that aren't in the same field. For example, choose 1 and 3. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
+     * Ignore this setting unless your input captions are SCC format and your output captions are embedded in the video stream. Specify a CC number for each captions channel in this output. If you have two channels, choose CC numbers that aren't in the same field. For example, choose 1 and 3. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
      */
     Destination608ChannelNumber?: __integerMin1Max4;
     /**
-     * Ignore this setting unless your input captions are SCC format and you want both 608 and 708 captions embedded in your output stream. Optionally, specify the 708 service number for each output captions channel. Choose a different number for each channel. To use this setting, also set Force 608 to 708 upconvert (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector settings. If you choose to upconvert but don't specify a 708 service number, MediaConvert uses the number you specify for CC channel number (destination608ChannelNumber) for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
+     * Ignore this setting unless your input captions are SCC format and you want both 608 and 708 captions embedded in your output stream. Optionally, specify the 708 service number for each output captions channel. Choose a different number for each channel. To use this setting, also set Force 608 to 708 upconvert (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector settings. If you choose to upconvert but don't specify a 708 service number, MediaConvert uses the number that you specify for CC channel number (destination608ChannelNumber) for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
      */
     Destination708ServiceNumber?: __integerMin1Max6;
   }
   export interface EmbeddedSourceSettings {
     /**
-     * When set to UPCONVERT, 608 data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
+     * Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.
      */
     Convert608To708?: EmbeddedConvert608To708;
     /**
@@ -1487,7 +1501,12 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * Specifies the video track index used for extracting captions. The system only supports one input video track, so this should always be set to '1'.
      */
     Source608TrackNumber?: __integerMin1Max1;
+    /**
+     * By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting.
+     */
+    TerminateCaptions?: EmbeddedTerminateCaptions;
   }
+  export type EmbeddedTerminateCaptions = "END_OF_INPUT"|"DISABLED"|string;
   export interface Endpoint {
     /**
      * URL of endpoint
@@ -1540,13 +1559,13 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type FileSourceConvert608To708 = "UPCONVERT"|"DISABLED"|string;
   export interface FileSourceSettings {
     /**
-     * If set to UPCONVERT, 608 caption data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
+     * Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.
      */
     Convert608To708?: FileSourceConvert608To708;
     /**
-     * External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'.
+     * External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', and 'smi'.
      */
-    SourceFile?: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI;
+    SourceFile?: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI;
     /**
      * Specifies a time delta in seconds to offset the captions from the source file.
      */
@@ -2097,7 +2116,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     OfflineEncrypted?: HlsOfflineEncrypted;
     /**
-     * Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+     * If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
      */
     SpekeKeyProvider?: SpekeKeyProvider;
     /**
@@ -2261,6 +2280,13 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     InsertableImages?: __listOfInsertableImage;
   }
+  export interface ImscDestinationSettings {
+    /**
+     * Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.
+     */
+    StylePassthrough?: ImscStylePassthrough;
+  }
+  export type ImscStylePassthrough = "ENABLED"|"DISABLED"|string;
   export interface Input {
     /**
      * Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See "Audio Selector Group":#inputs-audio_selector_group for more information.
@@ -2327,9 +2353,13 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     SupplementalImps?: __listOf__stringPatternS3ASSETMAPXml;
     /**
-     * Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded timecodes.
+     * Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the service counts input video frames. This input frame count affects only the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting Start timecode (timecodeStart). If you don't specify a value for Timecode source, the service will use Embedded by default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
      */
     TimecodeSource?: InputTimecodeSource;
+    /**
+     * Specify the timecode that you want the service to use for this input's initial frame. To use this setting, you must set the Timecode source setting, located under the input settings (InputTimecodeSource), to Specified start (SPECIFIEDSTART). For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     */
+    TimecodeStart?: __stringMin11Max11Pattern01D20305D205D;
     /**
      * Selector for video.
      */
@@ -2422,9 +2452,13 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     PsiControl?: InputPsiControl;
     /**
-     * Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded timecodes.
+     * Use this Timecode source setting, located under the input settings (InputTimecodeSource), to specify how the service counts input video frames. This input frame count affects only the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded (EMBEDDED) to use the timecodes in your input video. Choose Start at zero (ZEROBASED) to start the first frame at zero. Choose Specified start (SPECIFIEDSTART) to start the first frame at the timecode that you specify in the setting Start timecode (timecodeStart). If you don't specify a value for Timecode source, the service will use Embedded by default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
      */
     TimecodeSource?: InputTimecodeSource;
+    /**
+     * Specify the timecode that you want the service to use for this input's initial frame. To use this setting, you must set the Timecode source setting, located under the input settings (InputTimecodeSource), to Specified start (SPECIFIEDSTART). For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
+     */
+    TimecodeStart?: __stringMin11Max11Pattern01D20305D205D;
     /**
      * Selector for video.
      */
@@ -3321,7 +3355,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type MsSmoothAudioDeduplication = "COMBINE_DUPLICATE_STREAMS"|"NONE"|string;
   export interface MsSmoothEncryptionSettings {
     /**
-     * Use these settings when doing DRM encryption with a SPEKE-compliant key provider, if your output group type is HLS, MS Smooth, or DASH. If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+     * If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
      */
     SpekeKeyProvider?: SpekeKeyProvider;
   }
@@ -3411,7 +3445,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Speed?: __integerMinNegative1Max3;
     /**
-     * Relative strength of noise reducing filter. Higher values produce stronger filtering. Recommended Range: * [0 .. 2] for complexity reduction with minimal sharpness loss * [2 .. 8] for complexity reduction with image preservation * [8 .. 16] for noise reduction. Reduce noise combined high complexity reduction
+     * Specify the strength of the noise reducing filter on this output. Higher values produce stronger filtering. We recommend the following value ranges, depending on the result that you want: * 0-2 for complexity reduction with minimal sharpness loss * 2-8 for complexity reduction with image preservation * 8-16 for a high level of complexity reduction
      */
     Strength?: __integerMin0Max16;
   }
@@ -3707,11 +3741,11 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     /**
      * Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different.
      */
-    ChannelsIn?: __integerMin1Max16;
+    ChannelsIn?: __integerMin1Max64;
     /**
-     * Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8
+     * Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.)
      */
-    ChannelsOut?: __integerMin1Max8;
+    ChannelsOut?: __integerMin1Max64;
   }
   export type RenewalType = "AUTO_RENEW"|"EXPIRE"|string;
   export interface ReservationPlan {
@@ -4109,7 +4143,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     /**
      * Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don't provide a value here, the service will use the input height.
      */
-    Height?: __integerMin32Max2160;
+    Height?: __integerMin32Max4096;
     /**
      * Use Selection placement (position) to define the video area in your output frame. The area outside of the rectangle that you specify here is black.
      */
@@ -4205,9 +4239,9 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     BitDepth?: __integerMin16Max24;
     /**
-     * Set Channels to specify the number of channels in this output audio track. With WAV, valid values 1, 2, 4, and 8. In the console, these values are Mono, Stereo, 4-Channel, and 8-Channel, respectively.
+     * Specify the number of channels in this output audio track. Valid values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
      */
-    Channels?: __integerMin1Max8;
+    Channels?: __integerMin1Max64;
     /**
      * The service defaults to using RIFF for WAV outputs. If your output audio is likely to exceed 4 GB in file size, or if you otherwise need the extended support of the RF64 format, set your output WAV file format to RF64.
      */
@@ -4261,7 +4295,6 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin1Max100 = number;
   export type __integerMin1Max10000000 = number;
   export type __integerMin1Max1001 = number;
-  export type __integerMin1Max16 = number;
   export type __integerMin1Max17895697 = number;
   export type __integerMin1Max2 = number;
   export type __integerMin1Max20 = number;
@@ -4271,14 +4304,13 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin1Max32 = number;
   export type __integerMin1Max4 = number;
   export type __integerMin1Max6 = number;
-  export type __integerMin1Max8 = number;
+  export type __integerMin1Max64 = number;
   export type __integerMin24Max60000 = number;
   export type __integerMin25Max10000 = number;
   export type __integerMin25Max2000 = number;
   export type __integerMin2Max2147483647 = number;
   export type __integerMin32000Max384000 = number;
   export type __integerMin32000Max48000 = number;
-  export type __integerMin32Max2160 = number;
   export type __integerMin32Max4096 = number;
   export type __integerMin32Max8182 = number;
   export type __integerMin384000Max768000 = number;
@@ -4337,7 +4369,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __stringMin14Max1285PatternS3Mov09Png = string;
   export type __stringMin14PatternS3BmpBMPPngPNG = string;
   export type __stringMin14PatternS3BmpBMPPngPNGTgaTGA = string;
-  export type __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI = string;
+  export type __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI = string;
   export type __stringMin16Max24PatternAZaZ0922AZaZ0916 = string;
   export type __stringMin1Max256 = string;
   export type __stringMin24Max512PatternAZaZ0902 = string;
