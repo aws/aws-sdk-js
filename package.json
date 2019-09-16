@@ -40,7 +40,7 @@
   "dependencies": {
     "buffer": "4.9.1",
     "events": "1.1.1",
-    "ieee754": "1.1.8",
+    "ieee754": "1.1.13",
     "jmespath": "0.15.0",
     "querystring": "0.2.0",
     "sax": "1.2.1",
