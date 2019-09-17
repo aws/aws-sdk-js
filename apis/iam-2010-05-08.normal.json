@@ -3722,7 +3722,7 @@
           "documentation": "<p>The data type of the value (or values) specified in the <code>ContextKeyValues</code> parameter.</p>"
         }
       },
-      "documentation": "<p>Contains information about a condition context key. It includes the name of the key and specifies the value (or values, if the context key supports multiple values) to use in the simulation. This information is used when evaluating the <code>Condition</code> elements of the input policies.</p> <p>This data type is used as an input parameter to <code> <a>SimulateCustomPolicy</a> </code> and <code> <a>SimulateCustomPolicy</a> </code>.</p>"
+      "documentation": "<p>Contains information about a condition context key. It includes the name of the key and specifies the value (or values, if the context key supports multiple values) to use in the simulation. This information is used when evaluating the <code>Condition</code> elements of the input policies.</p> <p>This data type is used as an input parameter to <code> <a>SimulateCustomPolicy</a> </code> and <code> <a>SimulatePrincipalPolicy</a> </code>.</p>"
     },
     "ContextEntryListType": {
       "type": "list",
@@ -4007,7 +4007,7 @@
         },
         "AssumeRolePolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The trust relationship policy document that grants an entity permission to assume the role.</p> <p>In IAM, you must provide a JSON policy that has been converted to a string. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul> <p> Upon success, the response includes the same trust policy as a URL-encoded JSON string.</p>"
+          "documentation": "<p>The trust relationship policy document that grants an entity permission to assume the role.</p> <p>In IAM, you must provide a JSON policy that has been converted to a string. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul> <p> Upon success, the response includes the same trust policy in JSON format.</p>"
         },
         "Description": {
           "shape": "roleDescriptionType",

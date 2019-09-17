@@ -126,6 +126,9 @@
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceInUseException"
         }
       ],
       "documentation": "<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source.</p> <important> <p>The dataset import job replaces any previous data in the dataset.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>"
@@ -830,6 +833,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
         }
       ],
       "documentation": "<p>Returns a list of solution versions for the given solution. When a solution is not specified, all the solution versions associated with the account are listed. The response provides the properties for each solution version, including the Amazon Resource Name (ARN). For more information on solutions, see <a>CreateSolution</a>.</p>",
@@ -992,6 +998,9 @@
     "AvroSchema": {
       "type": "string",
       "max": 10000
+    },
+    "Boolean": {
+      "type": "boolean"
     },
     "Campaign": {
       "type": "structure",
@@ -1366,7 +1375,7 @@
           "documentation": "<p>The name for the solution.</p>"
         },
         "performHPO": {
-          "shape": "PerformHPO",
+          "shape": "Boolean",
           "documentation": "<p>Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is <code>false</code>.</p> <p>When performing AutoML, this parameter is always <code>true</code> and you should not set it to <code>false</code>.</p>"
         },
         "performAutoML": {
@@ -2973,6 +2982,10 @@
           "shape": "SolutionConfig",
           "documentation": "<p>Describes the configuration properties for the solution.</p>"
         },
+        "trainingHours": {
+          "shape": "TrainingHours",
+          "documentation": "<p>The time used to train the model. </p>"
+        },
         "status": {
           "shape": "Status",
           "documentation": "<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>"
@@ -3039,6 +3052,10 @@
     "TrackingId": {
       "type": "string",
       "max": 256
+    },
+    "TrainingHours": {
+      "type": "double",
+      "min": 0
     },
     "TrainingInputMode": {
       "type": "string",

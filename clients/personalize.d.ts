@@ -373,6 +373,7 @@ declare namespace Personalize {
     bestRecipeArn?: Arn;
   }
   export type AvroSchema = string;
+  export type Boolean = boolean;
   export interface Campaign {
     /**
      * The name of the campaign.
@@ -623,7 +624,7 @@ declare namespace Personalize {
     /**
      * Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.
      */
-    performHPO?: PerformHPO;
+    performHPO?: Boolean;
     /**
      * Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn. When set to true, Amazon Personalize analyzes your training data and selects the optimal USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit recipeArn. Amazon Personalize determines the optimal recipe by running tests with different values for the hyperparameters. AutoML lengthens the training process as compared to selecting a specific recipe.
      */
@@ -1730,6 +1731,10 @@ declare namespace Personalize {
      */
     solutionConfig?: SolutionConfig;
     /**
+     * The time used to train the model. 
+     */
+    trainingHours?: TrainingHours;
+    /**
      * The status of the solution version. A solution version can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED  
      */
     status?: Status;
@@ -1772,6 +1777,7 @@ declare namespace Personalize {
   export type Solutions = SolutionSummary[];
   export type Status = string;
   export type TrackingId = string;
+  export type TrainingHours = number;
   export type TrainingInputMode = string;
   export type TransactionsPerSecond = number;
   export type Tunable = boolean;
