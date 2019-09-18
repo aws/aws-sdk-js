@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.530.0-->
+<!--LATEST=2.531.0-->
 <!--ENTRYINSERT-->
+
+## 2.531.0
+* bugfix: Dependency: Pin the dependency to the latest
+* feature: APIGateway: Amazon API Gateway simplifies accessing PRIVATE APIs by allowing you to associate one or more Amazon Virtual Private Cloud (VPC) Endpoints to a private API. API Gateway will create and manage DNS alias records necessary for easily invoking the private APIs. With this feature, you can leverage private APIs in web applications hosted within your VPCs.
+* feature: RAM: AWS RAM provides a new ListPendingInvitationResources API action that lists the resources in a resource share that is shared with you but that the invitation is still pending for
+* feature: WAFRegional: Lowering the threshold for Rate Based rule from 2000 to 100.
 
 ## 2.530.0
 * feature: Athena: This release adds DataManifestLocation field indicating the location and file name of the data manifest file. Users can get a list of files that the Athena query wrote or intended to write from the manifest file.

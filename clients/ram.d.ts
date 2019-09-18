@@ -52,59 +52,67 @@ declare class RAM extends Service {
    */
   disassociateResourceShare(callback?: (err: AWSError, data: RAM.Types.DisassociateResourceShareResponse) => void): Request<RAM.Types.DisassociateResourceShareResponse, AWSError>;
   /**
-   * Enables resource sharing within your organization.
+   * Enables resource sharing within your AWS Organization. The caller must be the master account for the AWS Organization.
    */
   enableSharingWithAwsOrganization(params: RAM.Types.EnableSharingWithAwsOrganizationRequest, callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
   /**
-   * Enables resource sharing within your organization.
+   * Enables resource sharing within your AWS Organization. The caller must be the master account for the AWS Organization.
    */
   enableSharingWithAwsOrganization(callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
   /**
-   * Gets the policies for the specifies resources.
+   * Gets the policies for the specified resources that you own and have shared.
    */
   getResourcePolicies(params: RAM.Types.GetResourcePoliciesRequest, callback?: (err: AWSError, data: RAM.Types.GetResourcePoliciesResponse) => void): Request<RAM.Types.GetResourcePoliciesResponse, AWSError>;
   /**
-   * Gets the policies for the specifies resources.
+   * Gets the policies for the specified resources that you own and have shared.
    */
   getResourcePolicies(callback?: (err: AWSError, data: RAM.Types.GetResourcePoliciesResponse) => void): Request<RAM.Types.GetResourcePoliciesResponse, AWSError>;
   /**
-   * Gets the associations for the specified resource share.
+   * Gets the resources or principals for the resource shares that you own.
    */
   getResourceShareAssociations(params: RAM.Types.GetResourceShareAssociationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareAssociationsResponse) => void): Request<RAM.Types.GetResourceShareAssociationsResponse, AWSError>;
   /**
-   * Gets the associations for the specified resource share.
+   * Gets the resources or principals for the resource shares that you own.
    */
   getResourceShareAssociations(callback?: (err: AWSError, data: RAM.Types.GetResourceShareAssociationsResponse) => void): Request<RAM.Types.GetResourceShareAssociationsResponse, AWSError>;
   /**
-   * Gets the specified invitations for resource sharing.
+   * Gets the invitations for resource sharing that you've received.
    */
   getResourceShareInvitations(params: RAM.Types.GetResourceShareInvitationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
   /**
-   * Gets the specified invitations for resource sharing.
+   * Gets the invitations for resource sharing that you've received.
    */
   getResourceShareInvitations(callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
   /**
-   * Gets the specified resource shares or all of your resource shares.
+   * Gets the resource shares that you own or the resource shares that are shared with you.
    */
   getResourceShares(params: RAM.Types.GetResourceSharesRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceSharesResponse) => void): Request<RAM.Types.GetResourceSharesResponse, AWSError>;
   /**
-   * Gets the specified resource shares or all of your resource shares.
+   * Gets the resource shares that you own or the resource shares that are shared with you.
    */
   getResourceShares(callback?: (err: AWSError, data: RAM.Types.GetResourceSharesResponse) => void): Request<RAM.Types.GetResourceSharesResponse, AWSError>;
   /**
-   * Lists the principals with access to the specified resource.
+   * Lists the resources in a resource share that is shared with you but that the invitation is still pending for.
+   */
+  listPendingInvitationResources(params: RAM.Types.ListPendingInvitationResourcesRequest, callback?: (err: AWSError, data: RAM.Types.ListPendingInvitationResourcesResponse) => void): Request<RAM.Types.ListPendingInvitationResourcesResponse, AWSError>;
+  /**
+   * Lists the resources in a resource share that is shared with you but that the invitation is still pending for.
+   */
+  listPendingInvitationResources(callback?: (err: AWSError, data: RAM.Types.ListPendingInvitationResourcesResponse) => void): Request<RAM.Types.ListPendingInvitationResourcesResponse, AWSError>;
+  /**
+   * Lists the principals that you have shared resources with or the principals that have shared resources with you.
    */
   listPrincipals(params: RAM.Types.ListPrincipalsRequest, callback?: (err: AWSError, data: RAM.Types.ListPrincipalsResponse) => void): Request<RAM.Types.ListPrincipalsResponse, AWSError>;
   /**
-   * Lists the principals with access to the specified resource.
+   * Lists the principals that you have shared resources with or the principals that have shared resources with you.
    */
   listPrincipals(callback?: (err: AWSError, data: RAM.Types.ListPrincipalsResponse) => void): Request<RAM.Types.ListPrincipalsResponse, AWSError>;
   /**
-   * Lists the resources that the specified principal can access.
+   * Lists the resources that you added to a resource shares or the resources that are shared with you.
    */
   listResources(params: RAM.Types.ListResourcesRequest, callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
   /**
-   * Lists the resources that the specified principal can access.
+   * Lists the resources that you added to a resource shares or the resources that are shared with you.
    */
   listResources(callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
   /**
@@ -116,27 +124,27 @@ declare class RAM extends Service {
    */
   rejectResourceShareInvitation(callback?: (err: AWSError, data: RAM.Types.RejectResourceShareInvitationResponse) => void): Request<RAM.Types.RejectResourceShareInvitationResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource share.
+   * Adds the specified tags to the specified resource share that you own.
    */
   tagResource(params: RAM.Types.TagResourceRequest, callback?: (err: AWSError, data: RAM.Types.TagResourceResponse) => void): Request<RAM.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource share.
+   * Adds the specified tags to the specified resource share that you own.
    */
   tagResource(callback?: (err: AWSError, data: RAM.Types.TagResourceResponse) => void): Request<RAM.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes the specified tags from the specified resource share.
+   * Removes the specified tags from the specified resource share that you own.
    */
   untagResource(params: RAM.Types.UntagResourceRequest, callback?: (err: AWSError, data: RAM.Types.UntagResourceResponse) => void): Request<RAM.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes the specified tags from the specified resource share.
+   * Removes the specified tags from the specified resource share that you own.
    */
   untagResource(callback?: (err: AWSError, data: RAM.Types.UntagResourceResponse) => void): Request<RAM.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the specified resource share.
+   * Updates the specified resource share that you own.
    */
   updateResourceShare(params: RAM.Types.UpdateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.UpdateResourceShareResponse) => void): Request<RAM.Types.UpdateResourceShareResponse, AWSError>;
   /**
-   * Updates the specified resource share.
+   * Updates the specified resource share that you own.
    */
   updateResourceShare(callback?: (err: AWSError, data: RAM.Types.UpdateResourceShareResponse) => void): Request<RAM.Types.UpdateResourceShareResponse, AWSError>;
 }
@@ -208,7 +216,7 @@ declare namespace RAM {
      */
     tags?: TagList;
     /**
-     * Indicates whether principals outside your organization can be associated with a resource share.
+     * Indicates whether principals outside your AWS organization can be associated with a resource share.
      */
     allowExternalPrincipals?: Boolean;
     /**
@@ -321,15 +329,15 @@ declare namespace RAM {
      */
     resourceShareArns?: ResourceShareArnList;
     /**
-     * The Amazon Resource Name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is PRINCIPAL.
      */
     resourceArn?: String;
     /**
-     * The principal.
+     * The principal. You cannot specify this parameter if the association type is RESOURCE.
      */
     principal?: String;
     /**
-     * The status of the association.
+     * The association status.
      */
     associationStatus?: ResourceShareAssociationStatus;
     /**
@@ -343,7 +351,7 @@ declare namespace RAM {
   }
   export interface GetResourceShareAssociationsResponse {
     /**
-     * Information about the association.
+     * Information about the associations.
      */
     resourceShareAssociations?: ResourceShareAssociationList;
     /**
@@ -419,6 +427,30 @@ declare namespace RAM {
      */
     nextToken?: String;
   }
+  export interface ListPendingInvitationResourcesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the invitation.
+     */
+    resourceShareInvitationArn: String;
+    /**
+     * The token for the next page of results.
+     */
+    nextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListPendingInvitationResourcesResponse {
+    /**
+     * Information about the resources included the resource share.
+     */
+    resources?: ResourceList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: String;
+  }
   export interface ListPrincipalsRequest {
     /**
      * The type of owner.
@@ -433,7 +465,7 @@ declare namespace RAM {
      */
     principals?: PrincipalArnOrIdList;
     /**
-     * The resource type.
+     * The resource type. Valid values: route53resolver:ResolverRule | ec2:TransitGateway | ec2:Subnet | license-manager:LicenseConfiguration 
      */
     resourceType?: String;
     /**
@@ -469,7 +501,7 @@ declare namespace RAM {
      */
     principal?: String;
     /**
-     * The resource type.
+     * The resource type. Valid values: route53resolver:ResolverRule | ec2:TransitGateway | ec2:Subnet | license-manager:LicenseConfiguration 
      */
     resourceType?: String;
     /**
@@ -520,7 +552,7 @@ declare namespace RAM {
      */
     lastUpdatedTime?: DateTime;
     /**
-     * Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
+     * Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
      */
     external?: Boolean;
   }
@@ -593,7 +625,7 @@ declare namespace RAM {
      */
     owningAccountId?: String;
     /**
-     * Indicates whether principals outside your organization can be associated with a resource share.
+     * Indicates whether principals outside your AWS organization can be associated with a resource share.
      */
     allowExternalPrincipals?: Boolean;
     /**
@@ -624,6 +656,10 @@ declare namespace RAM {
      */
     resourceShareArn?: String;
     /**
+     * The name of the resource share.
+     */
+    resourceShareName?: String;
+    /**
      * The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
      */
     associatedEntity?: String;
@@ -648,7 +684,7 @@ declare namespace RAM {
      */
     lastUpdatedTime?: DateTime;
     /**
-     * Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
+     * Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
      */
     external?: Boolean;
   }
@@ -685,7 +721,7 @@ declare namespace RAM {
      */
     status?: ResourceShareInvitationStatus;
     /**
-     * The resources associated with the resource share.
+     * To view the resources associated with a pending resource share invitation, use ListPendingInvitationResources.
      */
     resourceShareAssociations?: ResourceShareAssociationList;
   }
@@ -694,7 +730,7 @@ declare namespace RAM {
   export type ResourceShareInvitationStatus = "PENDING"|"ACCEPTED"|"REJECTED"|"EXPIRED"|string;
   export type ResourceShareList = ResourceShare[];
   export type ResourceShareStatus = "PENDING"|"ACTIVE"|"FAILED"|"DELETING"|"DELETED"|string;
-  export type ResourceStatus = "AVAILABLE"|"ZONAL_RESOURCE_INACCESSIBLE"|"LIMIT_EXCEEDED"|"UNAVAILABLE"|string;
+  export type ResourceStatus = "AVAILABLE"|"ZONAL_RESOURCE_INACCESSIBLE"|"LIMIT_EXCEEDED"|"UNAVAILABLE"|"PENDING"|string;
   export type String = string;
   export interface Tag {
     /**
@@ -756,7 +792,7 @@ declare namespace RAM {
      */
     name?: String;
     /**
-     * Indicates whether principals outside your organization can be associated with a resource share.
+     * Indicates whether principals outside your AWS organization can be associated with a resource share.
      */
     allowExternalPrincipals?: Boolean;
     /**
