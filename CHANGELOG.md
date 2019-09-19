@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.531.0-->
+<!--LATEST=2.532.0-->
 <!--ENTRYINSERT-->
+
+## 2.532.0
+* feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) introduces support for container image manifest digests. This enables you to identify all tasks launched using a container image pulled from ECR in order to correlate what was built with where it is running.
+* feature: Glue: AWS Glue DevEndpoints now supports GlueVersion, enabling you to choose Apache Spark 2.4.3 (in addition to Apache Spark 2.2.1). In addition to supporting the latest version of Spark, you will also have the ability to choose between Python 2 and Python 3.
+* feature: MediaConnect: When you grant an entitlement, you can now specify the percentage of the entitlement data transfer that you want the subscriber to be responsible for.
 
 ## 2.531.0
 * bugfix: Dependency: Pin the dependency to the latest

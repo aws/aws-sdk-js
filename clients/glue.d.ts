@@ -1923,6 +1923,10 @@ declare namespace Glue {
      */
     WorkerType?: WorkerType;
     /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Development endpoints that are created without specifying a Glue version default to Glue 0.9. You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
      * The number of workers of a defined workerType that are allocated to the development endpoint. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
      */
     NumberOfWorkers?: NullableInteger;
@@ -1985,6 +1989,10 @@ declare namespace Glue {
      */
     WorkerType?: WorkerType;
     /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. 
+     */
+    GlueVersion?: GlueVersionString;
+    /**
      * The number of workers of a defined workerType that are allocated to the development endpoint.
      */
     NumberOfWorkers?: NullableInteger;
@@ -2017,7 +2025,7 @@ declare namespace Glue {
      */
     CreatedTimestamp?: TimestampValue;
     /**
-     * The map of arguments used to configure this DevEndpoint.
+     * The map of arguments used to configure this DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
      */
     Arguments?: MapValue;
   }
@@ -2702,6 +2710,10 @@ declare namespace Glue {
      */
     WorkerType?: WorkerType;
     /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Development endpoints that are created without specifying a Glue version default to Glue 0.9. You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
      * The number of workers of a defined workerType that are allocated to the development endpoint. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
      */
     NumberOfWorkers?: NullableInteger;
@@ -2754,7 +2766,7 @@ declare namespace Glue {
      */
     SecurityConfiguration?: NameString;
     /**
-     * A map of arguments used to configure the DevEndpoint. Currently, only "--enable-glue-datacatalog": "" is supported as a valid argument.
+     * A map of arguments used to configure the DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
      */
     Arguments?: MapValue;
   }
@@ -5866,7 +5878,7 @@ declare namespace Glue {
      */
     DeleteArguments?: StringList;
     /**
-     * The map of arguments to add the map of arguments used to configure the DevEndpoint.
+     * The map of arguments to add the map of arguments used to configure the DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
      */
     AddArguments?: MapValue;
   }

@@ -304,6 +304,10 @@ declare namespace MediaConnect {
   }
   export interface Entitlement {
     /**
+     * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+     */
+    DataTransferSubscriberFeePercent?: __integer;
+    /**
      * A description of the entitlement.
      */
     Description?: __string;
@@ -360,6 +364,10 @@ declare namespace MediaConnect {
     Status: Status;
   }
   export interface GrantEntitlementRequest {
+    /**
+     * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+     */
+    DataTransferSubscriberFeePercent?: __integer;
     /**
      * A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
      */
@@ -452,6 +460,10 @@ declare namespace MediaConnect {
   }
   export interface ListedEntitlement {
     /**
+     * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+     */
+    DataTransferSubscriberFeePercent?: __integer;
+    /**
      * The ARN of the entitlement.
      */
     EntitlementArn: __string;
@@ -494,6 +506,10 @@ declare namespace MediaConnect {
     Errors: __listOf__string;
   }
   export interface Output {
+    /**
+     * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+     */
+    DataTransferSubscriberFeePercent?: __integer;
     /**
      * A description of the output.
      */
@@ -615,6 +631,10 @@ declare namespace MediaConnect {
     WhitelistCidr?: __string;
   }
   export interface Source {
+    /**
+     * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+     */
+    DataTransferSubscriberFeePercent?: __integer;
     /**
      * The type of encryption that is used on the content ingested from this source.
      */

@@ -940,6 +940,11 @@
     "Entitlement": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent",
+          "documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber."
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description",
@@ -1035,6 +1040,11 @@
     "GrantEntitlementRequest": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent",
+          "documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber."
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description",
@@ -1195,6 +1205,11 @@
     "ListedEntitlement": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent",
+          "documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber."
+        },
         "EntitlementArn": {
           "shape": "__string",
           "locationName": "entitlementArn",
@@ -1278,6 +1293,11 @@
     "Output": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent",
+          "documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber."
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description",
@@ -1471,6 +1491,11 @@
     "Source": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent",
+          "documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber."
+        },
         "Decryption": {
           "shape": "Encryption",
           "locationName": "decryption",

@@ -5027,6 +5027,10 @@
           "shape": "WorkerType",
           "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul> <p>Known issue: when a development endpoint is created with the <code>G.2X</code> <code>WorkerType</code> configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk. </p>"
         },
+        "GlueVersion": {
+          "shape": "GlueVersionString",
+          "documentation": "<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p> <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>"
+        },
         "NumberOfWorkers": {
           "shape": "NullableInteger",
           "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated to the development endpoint.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
@@ -5092,6 +5096,10 @@
           "shape": "WorkerType",
           "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. May be a value of Standard, G.1X, or G.2X.</p>"
         },
+        "GlueVersion": {
+          "shape": "GlueVersionString",
+          "documentation": "<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>"
+        },
         "NumberOfWorkers": {
           "shape": "NullableInteger",
           "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated to the development endpoint.</p>"
@@ -5126,7 +5134,7 @@
         },
         "Arguments": {
           "shape": "MapValue",
-          "documentation": "<p>The map of arguments used to configure this <code>DevEndpoint</code>.</p>"
+          "documentation": "<p>The map of arguments used to configure this <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>\"--enable-glue-datacatalog\": \"\"</code> </p> </li> <li> <p> <code>\"GLUE_PYTHON_VERSION\": \"3\"</code> </p> </li> <li> <p> <code>\"GLUE_PYTHON_VERSION\": \"2\"</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>"
         }
       }
     },
@@ -6156,6 +6164,10 @@
           "shape": "WorkerType",
           "documentation": "<p>The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul> <p>Known issue: when a development endpoint is created with the <code>G.2X</code> <code>WorkerType</code> configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk. </p>"
         },
+        "GlueVersion": {
+          "shape": "GlueVersionString",
+          "documentation": "<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p> <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>"
+        },
         "NumberOfWorkers": {
           "shape": "NullableInteger",
           "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated to the development endpoint.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
@@ -6210,7 +6222,7 @@
         },
         "Arguments": {
           "shape": "MapValue",
-          "documentation": "<p>A map of arguments used to configure the <code>DevEndpoint</code>.</p> <p>Currently, only <code>\"--enable-glue-datacatalog\": \"\"</code> is supported as a valid argument.</p>"
+          "documentation": "<p>A map of arguments used to configure the <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>\"--enable-glue-datacatalog\": \"\"</code> </p> </li> <li> <p> <code>\"GLUE_PYTHON_VERSION\": \"3\"</code> </p> </li> <li> <p> <code>\"GLUE_PYTHON_VERSION\": \"2\"</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>"
         }
       },
       "documentation": "<p>A development endpoint where a developer can remotely debug extract, transform, and load (ETL) scripts.</p>"
@@ -10942,7 +10954,7 @@
         },
         "AddArguments": {
           "shape": "MapValue",
-          "documentation": "<p>The map of arguments to add the map of arguments used to configure the <code>DevEndpoint</code>.</p>"
+          "documentation": "<p>The map of arguments to add the map of arguments used to configure the <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>\"--enable-glue-datacatalog\": \"\"</code> </p> </li> <li> <p> <code>\"GLUE_PYTHON_VERSION\": \"3\"</code> </p> </li> <li> <p> <code>\"GLUE_PYTHON_VERSION\": \"2\"</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>"
         }
       }
     },
