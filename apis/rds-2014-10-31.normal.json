@@ -7243,6 +7243,10 @@
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether to show only those reservations that support Multi-AZ.</p>"
         },
+        "LeaseId": {
+          "shape": "String",
+          "documentation": "<p>The lease identifier filter value. Specify this parameter to show only the reservation that matches the specified lease ID.</p> <note> <p>AWS Support might request the lease ID for an issue related to a reserved DB instance.</p> </note>"
+        },
         "Filters": {
           "shape": "FilterList",
           "documentation": "<p>This parameter is not currently supported.</p>"
@@ -9589,6 +9593,10 @@
         "ReservedDBInstanceArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) for the reserved DB instance.</p>"
+        },
+        "LeaseId": {
+          "shape": "String",
+          "documentation": "<p>The unique identifier for the lease associated with the reserved DB instance.</p> <note> <p>AWS Support might request the lease ID for an issue related to a reserved DB instance.</p> </note>"
         }
       },
       "documentation": "<p> This data type is used as a response element in the <code>DescribeReservedDBInstances</code> and <code>PurchaseReservedDBInstancesOffering</code> actions. </p>",

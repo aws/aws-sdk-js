@@ -1710,7 +1710,7 @@
           "documentation": "invalid request"
         }
       ],
-      "documentation": "Add resource tags to a Greengrass Resource. Valid resources are Group, Connector, Core, Device, Function, Logger, Subscription, and Resource Defintions, and also BulkDeploymentIds."
+      "documentation": "Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'."
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -3056,6 +3056,10 @@
         "IotJobId": {
           "shape": "__string",
           "documentation": "The IoT Job Id corresponding to this update."
+        },
+        "PlatformSoftwareVersion": {
+          "shape": "__string",
+          "documentation": "The software version installed on the device or devices after the update."
         }
       }
     },
@@ -4356,11 +4360,11 @@
         },
         "Id": {
           "shape": "__string",
-          "documentation": "The ID of the group version."
+          "documentation": "The ID of the group that the version is associated with."
         },
         "Version": {
           "shape": "__string",
-          "documentation": "The unique ID for the version of the group."
+          "documentation": "The ID of the group version."
         }
       }
     },
@@ -6205,11 +6209,11 @@
         },
         "Id": {
           "shape": "__string",
-          "documentation": "The ID of the version."
+          "documentation": "The ID of the parent definition that the version is associated with."
         },
         "Version": {
           "shape": "__string",
-          "documentation": "The unique ID of the version."
+          "documentation": "The ID of the version."
         }
       },
       "documentation": "Information about a version."

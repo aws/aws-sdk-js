@@ -636,11 +636,11 @@ declare class Greengrass extends Service {
    */
   stopBulkDeployment(callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
   /**
-   * Add resource tags to a Greengrass Resource. Valid resources are Group, Connector, Core, Device, Function, Logger, Subscription, and Resource Defintions, and also BulkDeploymentIds.
+   * Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'.
    */
   tagResource(params: Greengrass.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Add resource tags to a Greengrass Resource. Valid resources are Group, Connector, Core, Device, Function, Logger, Subscription, and Resource Defintions, and also BulkDeploymentIds.
+   * Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1545,6 +1545,10 @@ declare namespace Greengrass {
      * The IoT Job Id corresponding to this update.
      */
     IotJobId?: __string;
+    /**
+     * The software version installed on the device or devices after the update.
+     */
+    PlatformSoftwareVersion?: __string;
   }
   export interface CreateSubscriptionDefinitionRequest {
     /**
@@ -2418,11 +2422,11 @@ declare namespace Greengrass {
      */
     Definition?: GroupVersion;
     /**
-     * The ID of the group version.
+     * The ID of the group that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID for the version of the group.
+     * The ID of the group version.
      */
     Version?: __string;
   }
@@ -3583,11 +3587,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }

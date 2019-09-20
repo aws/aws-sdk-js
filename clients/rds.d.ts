@@ -4014,6 +4014,10 @@ declare namespace RDS {
      */
     MultiAZ?: BooleanOptional;
     /**
+     * The lease identifier filter value. Specify this parameter to show only the reservation that matches the specified lease ID.  AWS Support might request the lease ID for an issue related to a reserved DB instance. 
+     */
+    LeaseId?: String;
+    /**
      * This parameter is not currently supported.
      */
     Filters?: FilterList;
@@ -5663,6 +5667,10 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) for the reserved DB instance.
      */
     ReservedDBInstanceArn?: String;
+    /**
+     * The unique identifier for the lease associated with the reserved DB instance.  AWS Support might request the lease ID for an issue related to a reserved DB instance. 
+     */
+    LeaseId?: String;
   }
   export type ReservedDBInstanceList = ReservedDBInstance[];
   export interface ReservedDBInstanceMessage {
