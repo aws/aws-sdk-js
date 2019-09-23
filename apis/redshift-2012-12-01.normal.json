@@ -1211,6 +1211,29 @@
       ],
       "documentation": "<p>Describes whether information, such as queries and connection attempts, is being logged for the specified Amazon Redshift cluster.</p>"
     },
+    "DescribeNodeConfigurationOptions": {
+      "name": "DescribeNodeConfigurationOptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeNodeConfigurationOptionsMessage"
+      },
+      "output": {
+        "shape": "NodeConfigurationOptionsMessage",
+        "resultWrapper": "DescribeNodeConfigurationOptionsResult"
+      },
+      "errors": [
+        {
+          "shape": "ClusterSnapshotNotFoundFault"
+        },
+        {
+          "shape": "InvalidClusterSnapshotStateFault"
+        }
+      ],
+      "documentation": "<p>Returns properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type.</p>"
+    },
     "DescribeOrderableClusterOptions": {
       "name": "DescribeOrderableClusterOptions",
       "http": {
@@ -2333,6 +2356,12 @@
         "locationName": "AccountWithRestoreAccess"
       }
     },
+    "ActionType": {
+      "type": "string",
+      "enum": [
+        "restore-cluster"
+      ]
+    },
     "AssociatedClusterList": {
       "type": "list",
       "member": {
@@ -2724,6 +2753,10 @@
         "ExpectedNextSnapshotScheduleTimeStatus": {
           "shape": "String",
           "documentation": "<p> The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible values are the following:</p> <ul> <li> <p>OnTrack - The next snapshot is expected to be taken on time. </p> </li> <li> <p>Pending - The next snapshot is pending to be taken. </p> </li> </ul>"
+        },
+        "NextMaintenanceWindowStartTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The date and time in UTC when system maintenance can begin.</p>"
         },
         "ResizeInfo": {
           "shape": "ResizeInfo",
@@ -4377,6 +4410,39 @@
       },
       "documentation": "<p/>"
     },
+    "DescribeNodeConfigurationOptionsMessage": {
+      "type": "structure",
+      "required": [
+        "ActionType"
+      ],
+      "members": {
+        "ActionType": {
+          "shape": "ActionType",
+          "documentation": "<p>The action type to evaluate for possible node configurations. Currently, it must be \"restore-cluster\".</p>"
+        },
+        "SnapshotIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the snapshot to evaluate for possible node configurations.</p>"
+        },
+        "OwnerAccount": {
+          "shape": "String",
+          "documentation": "<p>The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.</p>"
+        },
+        "Filters": {
+          "shape": "NodeConfigurationOptionsFilterList",
+          "documentation": "<p>A set of name, operator, and value items to filter the results.</p>",
+          "locationName": "Filter"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeNodeConfigurationOptions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>500</code> </p> <p>Constraints: minimum 100, maximum 500.</p>"
+        }
+      }
+    },
     "DescribeOrderableClusterOptionsMessage": {
       "type": "structure",
       "members": {
@@ -5599,6 +5665,90 @@
         }
       }
     },
+    "NodeConfigurationOption": {
+      "type": "structure",
+      "members": {
+        "NodeType": {
+          "shape": "String",
+          "documentation": "<p>The node type, such as, \"ds2.8xlarge\".</p>"
+        },
+        "NumberOfNodes": {
+          "shape": "Integer",
+          "documentation": "<p>The number of nodes.</p>"
+        },
+        "EstimatedDiskUtilizationPercent": {
+          "shape": "DoubleOptional",
+          "documentation": "<p>The estimated disk utilizaton percentage.</p>"
+        }
+      },
+      "documentation": "<p>A list of node configurations.</p>"
+    },
+    "NodeConfigurationOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "NodeConfigurationOption",
+        "locationName": "NodeConfigurationOption"
+      }
+    },
+    "NodeConfigurationOptionsFilter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NodeConfigurationOptionsFilterName",
+          "documentation": "<p>The name of the element to filter.</p>"
+        },
+        "Operator": {
+          "shape": "OperatorType",
+          "documentation": "<p>The filter operator. If filter Name is NodeType only the 'in' operator is supported. Provide one value to evaluate for 'eq', 'lt', 'le', 'gt', and 'ge'. Provide two values to evaluate for 'between'. Provide a list of values for 'in'.</p>"
+        },
+        "Values": {
+          "shape": "ValueStringList",
+          "documentation": "<p>List of values. Compare Name using Operator to Values. If filter Name is NumberOfNodes, then values can range from 0 to 200. If filter Name is EstimatedDiskUtilizationPercent, then values can range from 0 to 100. For example, filter NumberOfNodes (name) GT (operator) 3 (values).</p>",
+          "locationName": "Value"
+        }
+      },
+      "documentation": "<p>A set of elements to filter the returned node configurations.</p>"
+    },
+    "NodeConfigurationOptionsFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "NodeConfigurationOptionsFilter",
+        "locationName": "NodeConfigurationOptionsFilter"
+      }
+    },
+    "NodeConfigurationOptionsFilterName": {
+      "type": "string",
+      "enum": [
+        "NodeType",
+        "NumberOfNodes",
+        "EstimatedDiskUtilizationPercent"
+      ]
+    },
+    "NodeConfigurationOptionsMessage": {
+      "type": "structure",
+      "members": {
+        "NodeConfigurationOptionList": {
+          "shape": "NodeConfigurationOptionList",
+          "documentation": "<p>A list of valid node configurations.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field is empty, all response records have been retrieved for the request. </p>"
+        }
+      }
+    },
+    "OperatorType": {
+      "type": "string",
+      "enum": [
+        "eq",
+        "lt",
+        "gt",
+        "le",
+        "ge",
+        "in",
+        "between"
+      ]
+    },
     "OrderableClusterOption": {
       "type": "structure",
       "members": {
@@ -6236,6 +6386,10 @@
         "SnapshotScheduleIdentifier": {
           "shape": "String",
           "documentation": "<p>A unique identifier for the snapshot schedule.</p>"
+        },
+        "NumberOfNodes": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of nodes specified when provisioning the restored cluster.</p>"
         }
       },
       "documentation": "<p/>"
@@ -7069,6 +7223,13 @@
         }
       },
       "documentation": "<p>A maintenance track that you can switch the current track to.</p>"
+    },
+    "ValueStringList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      }
     },
     "VpcSecurityGroupIdList": {
       "type": "list",

@@ -381,6 +381,14 @@ declare class Redshift extends Service {
    */
   describeLoggingStatus(callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
   /**
+   * Returns properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type.
+   */
+  describeNodeConfigurationOptions(params: Redshift.Types.DescribeNodeConfigurationOptionsMessage, callback?: (err: AWSError, data: Redshift.Types.NodeConfigurationOptionsMessage) => void): Request<Redshift.Types.NodeConfigurationOptionsMessage, AWSError>;
+  /**
+   * Returns properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type.
+   */
+  describeNodeConfigurationOptions(callback?: (err: AWSError, data: Redshift.Types.NodeConfigurationOptionsMessage) => void): Request<Redshift.Types.NodeConfigurationOptionsMessage, AWSError>;
+  /**
    * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   describeOrderableClusterOptions(params: Redshift.Types.DescribeOrderableClusterOptionsMessage, callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
@@ -733,6 +741,7 @@ declare namespace Redshift {
     AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
+  export type ActionType = "restore-cluster"|string;
   export type AssociatedClusterList = ClusterAssociatedToSchedule[];
   export type AttributeList = AccountAttribute[];
   export type AttributeNameList = String[];
@@ -1019,6 +1028,10 @@ declare namespace Redshift {
      *  The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible values are the following:   OnTrack - The next snapshot is expected to be taken on time.    Pending - The next snapshot is pending to be taken.   
      */
     ExpectedNextSnapshotScheduleTimeStatus?: String;
+    /**
+     * The date and time in UTC when system maintenance can begin.
+     */
+    NextMaintenanceWindowStartTime?: TStamp;
     /**
      * Returns the following:   AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.   ResizeType: Returns ClassicResize  
      */
@@ -2171,6 +2184,32 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
   }
+  export interface DescribeNodeConfigurationOptionsMessage {
+    /**
+     * The action type to evaluate for possible node configurations. Currently, it must be "restore-cluster".
+     */
+    ActionType: ActionType;
+    /**
+     * The identifier of the snapshot to evaluate for possible node configurations.
+     */
+    SnapshotIdentifier?: String;
+    /**
+     * The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
+     */
+    OwnerAccount?: String;
+    /**
+     * A set of name, operator, and value items to filter the results.
+     */
+    Filters?: NodeConfigurationOptionsFilterList;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeNodeConfigurationOptions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: 500  Constraints: minimum 100, maximum 500.
+     */
+    MaxRecords?: IntegerOptional;
+  }
   export interface DescribeOrderableClusterOptionsMessage {
     /**
      * The version filter value. Specify this parameter to show only the available offerings matching the specified version. Default: All versions. Constraints: Must be one of the version returned from DescribeClusterVersions.
@@ -3011,6 +3050,48 @@ declare namespace Redshift {
      */
     ScheduleDefinitions: ScheduleDefinitionList;
   }
+  export interface NodeConfigurationOption {
+    /**
+     * The node type, such as, "ds2.8xlarge".
+     */
+    NodeType?: String;
+    /**
+     * The number of nodes.
+     */
+    NumberOfNodes?: Integer;
+    /**
+     * The estimated disk utilizaton percentage.
+     */
+    EstimatedDiskUtilizationPercent?: DoubleOptional;
+  }
+  export type NodeConfigurationOptionList = NodeConfigurationOption[];
+  export interface NodeConfigurationOptionsFilter {
+    /**
+     * The name of the element to filter.
+     */
+    Name?: NodeConfigurationOptionsFilterName;
+    /**
+     * The filter operator. If filter Name is NodeType only the 'in' operator is supported. Provide one value to evaluate for 'eq', 'lt', 'le', 'gt', and 'ge'. Provide two values to evaluate for 'between'. Provide a list of values for 'in'.
+     */
+    Operator?: OperatorType;
+    /**
+     * List of values. Compare Name using Operator to Values. If filter Name is NumberOfNodes, then values can range from 0 to 200. If filter Name is EstimatedDiskUtilizationPercent, then values can range from 0 to 100. For example, filter NumberOfNodes (name) GT (operator) 3 (values).
+     */
+    Values?: ValueStringList;
+  }
+  export type NodeConfigurationOptionsFilterList = NodeConfigurationOptionsFilter[];
+  export type NodeConfigurationOptionsFilterName = "NodeType"|"NumberOfNodes"|"EstimatedDiskUtilizationPercent"|string;
+  export interface NodeConfigurationOptionsMessage {
+    /**
+     * A list of valid node configurations.
+     */
+    NodeConfigurationOptionList?: NodeConfigurationOptionList;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
+     */
+    Marker?: String;
+  }
+  export type OperatorType = "eq"|"lt"|"gt"|"le"|"ge"|"in"|"between"|string;
   export interface OrderableClusterOption {
     /**
      * The version of the orderable cluster.
@@ -3493,6 +3574,10 @@ declare namespace Redshift {
      * A unique identifier for the snapshot schedule.
      */
     SnapshotScheduleIdentifier?: String;
+    /**
+     * The number of nodes specified when provisioning the restored cluster.
+     */
+    NumberOfNodes?: IntegerOptional;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
@@ -4026,6 +4111,7 @@ declare namespace Redshift {
      */
     SupportedOperations?: SupportedOperationList;
   }
+  export type ValueStringList = String[];
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {
     /**

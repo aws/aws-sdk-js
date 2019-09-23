@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.533.0-->
+<!--LATEST=2.534.0-->
 <!--ENTRYINSERT-->
+
+## 2.534.0
+* feature: RDSDataService: RDS Data API now supports Amazon Aurora Serverless PostgreSQL databases.
+* feature: Redshift: Adds API operation DescribeNodeConfigurationOptions and associated data structures.
 
 ## 2.533.0
 * feature: EC2: G4 instances are Amazon EC2 instances based on NVIDIA T4 GPUs and are designed to provide cost-effective machine learning inference for applications, like image classification, object detection, recommender systems, automated speech recognition, and language translation. G4 instances are also a cost-effective platform for building and running graphics-intensive applications, such as remote graphics workstations, video transcoding, photo-realistic design, and game streaming in the cloud. To get started with G4 instances visit https://aws.amazon.com/ec2/instance-types/g4.

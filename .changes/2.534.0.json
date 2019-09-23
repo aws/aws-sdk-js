@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "RDSDataService",
+        "description": "RDS Data API now supports Amazon Aurora Serverless PostgreSQL databases."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Adds API operation DescribeNodeConfigurationOptions and associated data structures."
+    }
+]
