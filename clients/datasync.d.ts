@@ -44,11 +44,11 @@ declare class DataSync extends Service {
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see Configuring Amazon S3 Location Settings in the AWS DataSync User Guide. 
+   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the AWS DataSync User Guide. 
    */
   createLocationS3(params: DataSync.Types.CreateLocationS3Request, callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see Configuring Amazon S3 Location Settings in the AWS DataSync User Guide. 
+   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the AWS DataSync User Guide. 
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
@@ -276,7 +276,7 @@ declare namespace DataSync {
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * The Amazon Resource Names (ARNs) of the subnets in which DataSync will create Elastic Network Interfaces (ENIs) for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four ENIs for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four ENIs.
+     * The Amazon Resource Names (ARNs) of the subnets in which DataSync will create elastic network interfaces for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four network interfaces for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four network interfaces.
      */
     SubnetArns?: PLSubnetArnList;
     /**
@@ -351,6 +351,10 @@ declare namespace DataSync {
      * The Amazon Resource Name (ARN) of the Amazon S3 bucket.
      */
     S3BucketArn: S3BucketArn;
+    /**
+     * The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For more information about S3 storage classes, see Amazon S3 Storage Classes in the Amazon Simple Storage Service Developer Guide. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes.
+     */
+    S3StorageClass?: S3StorageClass;
     S3Config: S3Config;
     /**
      * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
@@ -369,19 +373,19 @@ declare namespace DataSync {
      */
     Subdirectory: NonEmptySubdirectory;
     /**
-     * The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this host name to mount the SMB server in a network.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     * The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this hostname to mount the SMB server in a network.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
      */
     ServerHostname: ServerHostname;
     /**
-     * The user who can mount the share, has the permissions to access files and directories in the SMB share.
+     * The user who can mount the share, has the permissions to access files and folders in the SMB share.
      */
     User: SmbUser;
     /**
-     * The name of the domain that the SMB server belongs to.
+     * The name of the Windows domain that the SMB server belongs to.
      */
     Domain?: SmbDomain;
     /**
-     * The password of the user who has permission to access the SMB server.
+     * The password of the user who can mount the share, has the permissions to access files and folders in the SMB share.
      */
     Password: SmbPassword;
     /**
@@ -389,7 +393,7 @@ declare namespace DataSync {
      */
     AgentArns: AgentArnList;
     /**
-     * The mount options that are available for DataSync to use to access an SMB location.
+     * The mount options used by DataSync to access the SMB server.
      */
     MountOptions?: SmbMountOptions;
     /**
@@ -494,6 +498,9 @@ declare namespace DataSync {
      * The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. 
      */
     EndpointType?: EndpointType;
+    /**
+     * The subnet and the security group that DataSync used to access a VPC endpoint.
+     */
     PrivateLinkConfig?: PrivateLinkConfig;
   }
   export interface DescribeLocationEfsRequest {
@@ -557,6 +564,10 @@ declare namespace DataSync {
      * The URL of the Amazon S3 location that was described.
      */
     LocationUri?: LocationUri;
+    /**
+     * The Amazon S3 storage class that you chose to store your files in when this location is used as a task destination. For more information about S3 storage classes, see Amazon S3 Storage Classes in the Amazon Simple Storage Service Developer Guide. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes.
+     */
+    S3StorageClass?: S3StorageClass;
     S3Config?: S3Config;
     /**
      * The time that the Amazon S3 bucket location was created.
@@ -583,11 +594,11 @@ declare namespace DataSync {
      */
     AgentArns?: AgentArnList;
     /**
-     * The user who is logged on the SMB server.
+     * The user who can mount the share, has the permissions to access files and folders in the SMB share.
      */
     User?: SmbUser;
     /**
-     * The name of the domain that the SMB server belongs to.
+     * The name of the Windows domain that the SMB server belongs to.
      */
     Domain?: SmbDomain;
     /**
@@ -877,7 +888,7 @@ declare namespace DataSync {
   export type NextToken = string;
   export interface NfsMountOptions {
     /**
-     * The specific NFS version that you want DataSync to use to mount your NFS share. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the NFS server.
+     * The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the NFS server. You can specify the following NFS versions:     NFSv3  - stateless protocol version that allows for asynchronous writes on the server.     NFSv4.0  - stateful, firewall-friendly protocol version that supports delegations and pseudo filesystems.     NFSv4.1  - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.  
      */
     Version?: NfsVersion;
   }
@@ -891,9 +902,13 @@ declare namespace DataSync {
   }
   export interface Options {
     /**
-     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.  Default value: POINT_IN_TIME_CONSISTENT. POINT_IN_TIME_CONSISTENT: Perform verification (recommended).  NONE: Skip verification.
+     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.  Default value: POINT_IN_TIME_CONSISTENT. POINT_IN_TIME_CONSISTENT: Perform verification (recommended).  ONLY_FILES_TRANSFERRED: Perform verification on only files that were transferred. NONE: Skip verification.
      */
     VerifyMode?: VerifyMode;
+    /**
+     * A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to NEVER a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes.  Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes in the AWS DataSync User Guide.
+     */
+    OverwriteMode?: OverwriteMode;
     /**
      * A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to). If you set Atime to BEST_EFFORT, DataSync attempts to preserve the original Atime attribute on all source files (that is, the version before the PREPARING phase). However, Atime's behavior is not fully standard across platforms, so AWS DataSync can only do this on a best-effort basis.  Default value: BEST_EFFORT. BEST_EFFORT: Attempt to preserve the per-file Atime value (recommended). NONE: Ignore Atime.  If Atime is set to BEST_EFFORT, Mtime must be set to PRESERVE.  If Atime is set to NONE, Mtime must also be NONE.  
      */
@@ -911,7 +926,7 @@ declare namespace DataSync {
      */
     Gid?: Gid;
     /**
-     * A value that specifies whether files in the destination that don't exist in the source file system should be preserved.  Default value: PRESERVE. PRESERVE: Ignore such destination files (recommended).  REMOVE: Delete destination files that aren’t present in the source.
+     * A value that specifies whether files in the destination that don't exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see using-storage-classes in the AWS DataSync User Guide. Default value: PRESERVE. PRESERVE: Ignore such destination files (recommended).  REMOVE: Delete destination files that aren’t present in the source.
      */
     PreserveDeletedFiles?: PreserveDeletedFiles;
     /**
@@ -927,6 +942,7 @@ declare namespace DataSync {
      */
     BytesPerSecond?: BytesPerSecond;
   }
+  export type OverwriteMode = "ALWAYS"|"NEVER"|string;
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
   export type PLSubnetArnList = Ec2SubnetArn[];
   export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string;
@@ -958,11 +974,12 @@ declare namespace DataSync {
      */
     BucketAccessRoleArn: IamRoleArn;
   }
+  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
   export type ServerHostname = string;
   export type SmbDomain = string;
   export interface SmbMountOptions {
     /**
-     * The specific SMB version that you want DataSync to use to mount your SMB share. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the SMB Server server.
+     * The specific SMB version that you want DataSync to use to mount your SMB share. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the SMB server.
      */
     Version?: SmbVersion;
   }
@@ -1126,7 +1143,7 @@ declare namespace DataSync {
   }
   export interface UpdateTaskResponse {
   }
-  export type VerifyMode = "POINT_IN_TIME_CONSISTENT"|"NONE"|string;
+  export type VerifyMode = "POINT_IN_TIME_CONSISTENT"|"ONLY_FILES_TRANSFERRED"|"NONE"|string;
   export type VpcEndpointId = string;
   export type long = number;
   /**

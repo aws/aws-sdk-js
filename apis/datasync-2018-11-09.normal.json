@@ -122,7 +122,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see Configuring Amazon S3 Location Settings in the <i>AWS DataSync User Guide.</i> </p>"
+      "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the <i>AWS DataSync User Guide.</i> </p>"
     },
     "CreateLocationSmb": {
       "name": "CreateLocationSmb",
@@ -711,7 +711,7 @@
         },
         "SubnetArns": {
           "shape": "PLSubnetArnList",
-          "documentation": "<p>The Amazon Resource Names (ARNs) of the subnets in which DataSync will create Elastic Network Interfaces (ENIs) for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four ENIs for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four ENIs.</p>"
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the subnets in which DataSync will create elastic network interfaces for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four network interfaces for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four network interfaces.</p>"
         },
         "SecurityGroupArns": {
           "shape": "PLSecurityGroupArnList",
@@ -822,6 +822,10 @@
           "shape": "S3BucketArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket.</p>"
         },
+        "S3StorageClass": {
+          "shape": "S3StorageClass",
+          "documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For more information about S3 storage classes, see <a href=\"https://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.</p>"
+        },
         "S3Config": {
           "shape": "S3Config"
         },
@@ -858,19 +862,19 @@
         },
         "ServerHostname": {
           "shape": "ServerHostname",
-          "documentation": "<p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this host name to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>"
+          "documentation": "<p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this hostname to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>"
         },
         "User": {
           "shape": "SmbUser",
-          "documentation": "<p>The user who can mount the share, has the permissions to access files and directories in the SMB share.</p>"
+          "documentation": "<p>The user who can mount the share, has the permissions to access files and folders in the SMB share.</p>"
         },
         "Domain": {
           "shape": "SmbDomain",
-          "documentation": "<p>The name of the domain that the SMB server belongs to.</p>"
+          "documentation": "<p>The name of the Windows domain that the SMB server belongs to.</p>"
         },
         "Password": {
           "shape": "SmbPassword",
-          "documentation": "<p>The password of the user who has permission to access the SMB server.</p>"
+          "documentation": "<p>The password of the user who can mount the share, has the permissions to access files and folders in the SMB share.</p>"
         },
         "AgentArns": {
           "shape": "AgentArnList",
@@ -878,7 +882,7 @@
         },
         "MountOptions": {
           "shape": "SmbMountOptions",
-          "documentation": "<p>The mount options that are available for DataSync to use to access an SMB location.</p>"
+          "documentation": "<p>The mount options used by DataSync to access the SMB server.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1037,7 +1041,8 @@
           "documentation": "<p>The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. </p>"
         },
         "PrivateLinkConfig": {
-          "shape": "PrivateLinkConfig"
+          "shape": "PrivateLinkConfig",
+          "documentation": "<p>The subnet and the security group that DataSync used to access a VPC endpoint.</p>"
         }
       },
       "documentation": "<p>DescribeAgentResponse</p>"
@@ -1138,6 +1143,10 @@
           "shape": "LocationUri",
           "documentation": "<p>The URL of the Amazon S3 location that was described.</p>"
         },
+        "S3StorageClass": {
+          "shape": "S3StorageClass",
+          "documentation": "<p>The Amazon S3 storage class that you chose to store your files in when this location is used as a task destination. For more information about S3 storage classes, see <a href=\"https://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.</p>"
+        },
         "S3Config": {
           "shape": "S3Config"
         },
@@ -1178,11 +1187,11 @@
         },
         "User": {
           "shape": "SmbUser",
-          "documentation": "<p>The user who is logged on the SMB server.</p>"
+          "documentation": "<p>The user who can mount the share, has the permissions to access files and folders in the SMB share.</p>"
         },
         "Domain": {
           "shape": "SmbDomain",
-          "documentation": "<p>The name of the domain that the SMB server belongs to.</p>"
+          "documentation": "<p>The name of the Windows domain that the SMB server belongs to.</p>"
         },
         "MountOptions": {
           "shape": "SmbMountOptions",
@@ -1662,7 +1671,7 @@
       "members": {
         "Version": {
           "shape": "NfsVersion",
-          "documentation": "<p>The specific NFS version that you want DataSync to use to mount your NFS share. If you don't specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.</p>"
+          "documentation": "<p>The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don't specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.</p> <p>You can specify the following NFS versions:</p> <ul> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc1813\">NFSv3</a> </b> - stateless protocol version that allows for asynchronous writes on the server.</p> </li> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc3530\">NFSv4.0</a> </b> - stateful, firewall-friendly protocol version that supports delegations and pseudo filesystems.</p> </li> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc5661\">NFSv4.1</a> </b> - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Represents the mount options that are available for DataSync to access an NFS location.</p>"
@@ -1699,7 +1708,11 @@
       "members": {
         "VerifyMode": {
           "shape": "VerifyMode",
-          "documentation": "<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>POINT_IN_TIME_CONSISTENT: Perform verification (recommended). </p> <p>NONE: Skip verification.</p>"
+          "documentation": "<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>POINT_IN_TIME_CONSISTENT: Perform verification (recommended). </p> <p>ONLY_FILES_TRANSFERRED: Perform verification on only files that were transferred.</p> <p>NONE: Skip verification.</p>"
+        },
+        "OverwriteMode": {
+          "shape": "OverwriteMode",
+          "documentation": "<p>A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to <code>NEVER</code> a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes. </p> <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a> in the <i>AWS DataSync User Guide</i>.</p>"
         },
         "Atime": {
           "shape": "Atime",
@@ -1719,7 +1732,7 @@
         },
         "PreserveDeletedFiles": {
           "shape": "PreserveDeletedFiles",
-          "documentation": "<p>A value that specifies whether files in the destination that don't exist in the source file system should be preserved. </p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Ignore such destination files (recommended). </p> <p>REMOVE: Delete destination files that aren’t present in the source.</p>"
+          "documentation": "<p>A value that specifies whether files in the destination that don't exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see <a>using-storage-classes</a> in the <i>AWS DataSync User Guide</i>.</p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Ignore such destination files (recommended). </p> <p>REMOVE: Delete destination files that aren’t present in the source.</p>"
         },
         "PreserveDevices": {
           "shape": "PreserveDevices",
@@ -1735,6 +1748,13 @@
         }
       },
       "documentation": "<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don't specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>"
+    },
+    "OverwriteMode": {
+      "type": "string",
+      "enum": [
+        "ALWAYS",
+        "NEVER"
+      ]
     },
     "PLSecurityGroupArnList": {
       "type": "list",
@@ -1822,6 +1842,17 @@
       },
       "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>AWS DataSync User Guide</i>.</p>"
     },
+    "S3StorageClass": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "STANDARD_IA",
+        "ONEZONE_IA",
+        "INTELLIGENT_TIERING",
+        "GLACIER",
+        "DEEP_ARCHIVE"
+      ]
+    },
     "ServerHostname": {
       "type": "string",
       "max": 255,
@@ -1837,7 +1868,7 @@
       "members": {
         "Version": {
           "shape": "SmbVersion",
-          "documentation": "<p>The specific SMB version that you want DataSync to use to mount your SMB share. If you don't specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the SMB Server server.</p>"
+          "documentation": "<p>The specific SMB version that you want DataSync to use to mount your SMB share. If you don't specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the SMB server.</p>"
         }
       },
       "documentation": "<p>Represents the mount options that are available for DataSync to access an SMB location.</p>"
@@ -2176,6 +2207,7 @@
       "type": "string",
       "enum": [
         "POINT_IN_TIME_CONSISTENT",
+        "ONLY_FILES_TRANSFERRED",
         "NONE"
       ]
     },

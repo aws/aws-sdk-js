@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.534.0-->
+<!--LATEST=2.535.0-->
 <!--ENTRYINSERT-->
+
+## 2.535.0
+* feature: ComprehendMedical: Use Amazon Comprehend Medical to analyze medical text stored in the specified Amazon S3 bucket. Use the console to create and manage batch analysis jobs, or use the batch APIs to detect both medical entities and protected health information (PHI). The batch APIs start, stop, list, and retrieve information about batch analysis jobs. This release also includes DetectEntitiesV2 operation which returns the Acuity and Direction entities as attributes instead of types.
+* feature: DataSync: Added S3StorageClass, OverwriteMode sync option, and ONLY_FILES_TRANSFERRED setting for the VerifyMode sync option.
+* feature: TranscribeService: With this update Amazon Transcribe enables you to provide an AWS KMS key to encrypt your transcription output.
 
 ## 2.534.0
 * feature: RDSDataService: RDS Data API now supports Amazon Aurora Serverless PostgreSQL databases.

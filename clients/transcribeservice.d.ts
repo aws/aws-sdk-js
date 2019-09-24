@@ -184,6 +184,7 @@ declare namespace TranscribeService {
      */
     DownloadUri?: Uri;
   }
+  export type KMSKeyId = string;
   export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|"es-ES"|"en-IN"|"hi-IN"|"ar-SA"|"ru-RU"|"zh-CN"|string;
   export interface ListTranscriptionJobsRequest {
     /**
@@ -292,11 +293,11 @@ declare namespace TranscribeService {
      */
     LanguageCode: LanguageCode;
     /**
-     * The sample rate of the audio track in the input media file in Hertz.  If you do not specify the media sample rate, Amazon Transcribe determines the sample rate. If you specify the sample rate, it must match the sample rate detected by Amazon Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank and let Amazon Transcribe determine the sample rate.
+     * The sample rate, in Hertz, of the audio track in the input media file.  If you do not specify the media sample rate, Amazon Transcribe determines the sample rate. If you specify the sample rate, it must match the sample rate detected by Amazon Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank and let Amazon Transcribe determine the sample rate.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
-     * The format of the input media file.  If you do not specify the format of the media file, Amazon Transcribe determines the format. If the format is not recognized, Amazon Transcribe returns an InternalFailureException exception. If you specify the format, it must match the format detected by Amazon Transcribe, otherwise you get an InternalFailureException exception.
+     * The format of the input media file.
      */
     MediaFormat?: MediaFormat;
     /**
@@ -307,6 +308,7 @@ declare namespace TranscribeService {
      * The location where the transcription is stored. If you set the OutputBucketName, Amazon Transcribe puts the transcription in the specified S3 bucket. When you call the GetTranscriptionJob operation, the operation returns this location in the TranscriptFileUri field. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see Permissions Required for IAM User Roles. Amazon Transcribe uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket. You can't specify your own encryption key. If you don't set the OutputBucketName, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the TranscriptFileUri field. Use this URL to download the transcription.
      */
     OutputBucketName?: OutputBucketName;
+    OutputEncryptionKMSKeyId?: KMSKeyId;
     /**
      * A Settings object that provides optional settings for a transcription job.
      */
