@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "ForecastService",
+  "description": "CORS support enabled on ForecastService and ForecastQueryService"
+}
