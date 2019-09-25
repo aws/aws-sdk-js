@@ -502,6 +502,10 @@
           "shape": "IpSets",
           "documentation": "<p>The static IP addresses that Global Accelerator associates with the accelerator.</p>"
         },
+        "DnsName": {
+          "shape": "GenericString",
+          "documentation": "<p>The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses. </p> <p>The naming convention for the DNS name is: a lower case letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com.</p> <p>For more information about the default DNS name, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing\">Support for DNS Addressing in Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+        },
         "Status": {
           "shape": "AcceleratorStatus",
           "documentation": "<p>Describes the deployment status of the accelerator.</p>"

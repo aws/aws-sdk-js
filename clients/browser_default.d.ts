@@ -78,3 +78,5 @@ export import ComprehendMedical = require('./comprehendmedical');
 export import Personalize = require('./personalize');
 export import PersonalizeEvents = require('./personalizeevents');
 export import PersonalizeRuntime = require('./personalizeruntime');
+export import ForecastService = require('./forecastservice');
+export import ForecastQueryService = require('./forecastqueryservice');

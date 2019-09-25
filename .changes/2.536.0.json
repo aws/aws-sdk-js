@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "This release adds a new DeleteConnection API to delete the connection between a replication instance and an endpoint. It also adds an optional S3 setting to specify the precision of any TIMESTAMP column values written to an S3 object file in .parquet format."
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "CORS support enabled on ForecastService and ForecastQueryService"
+    },
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "API Update for AWS Global Accelerator to support for DNS aliasing."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Enable G4D and R5 instances in SageMaker Hosting Services"
+    }
+]

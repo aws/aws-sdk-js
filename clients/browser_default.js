@@ -79,5 +79,7 @@ module.exports = {
   ComprehendMedical: require('./comprehendmedical'),
   Personalize: require('./personalize'),
   PersonalizeEvents: require('./personalizeevents'),
-  PersonalizeRuntime: require('./personalizeruntime')
+  PersonalizeRuntime: require('./personalizeruntime'),
+  ForecastService: require('./forecastservice'),
+  ForecastQueryService: require('./forecastqueryservice')
 };

@@ -171,6 +171,10 @@ declare namespace GlobalAccelerator {
      */
     IpSets?: IpSets;
     /**
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.  The naming convention for the DNS name is: a lower case letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. For more information about the default DNS name, see Support for DNS Addressing in Global Accelerator in the AWS Global Accelerator Developer Guide.
+     */
+    DnsName?: GenericString;
+    /**
      * Describes the deployment status of the accelerator.
      */
     Status?: AcceleratorStatus;
