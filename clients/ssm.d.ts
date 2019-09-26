@@ -884,11 +884,11 @@ declare class SSM extends Service {
    */
   terminateSession(callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
-   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.  When you update an association, the association immediately runs against the specified targets. 
+   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.  In order to call this API action, your IAM user account, group, or role must be configured with permission to call the DescribeAssociation API action. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; is not authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. 
    */
   updateAssociation(params: SSM.Types.UpdateAssociationRequest, callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
   /**
-   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.  When you update an association, the association immediately runs against the specified targets. 
+   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.  In order to call this API action, your IAM user account, group, or role must be configured with permission to call the DescribeAssociation API action. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; is not authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. 
    */
   updateAssociation(callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
   /**
@@ -4726,7 +4726,7 @@ declare namespace SSM {
      */
     AgentVersion?: Version;
     /**
-     * Indicates whether latest version of SSM Agent is running on your instance. Some older versions of Windows Server use the EC2Config service to process SSM requests. For this reason, this field does not indicate whether or not the latest version is installed on Windows managed instances.
+     * Indicates whether the latest version of SSM Agent is running on your Linux Managed Instance. This field does not indicate whether or not the latest version is installed on Windows managed instances, because some older versions of Windows Server use the EC2Config service to process SSM requests.
      */
     IsLatestVersion?: Boolean;
     /**
@@ -5129,7 +5129,7 @@ declare namespace SSM {
      */
     Name: PSParameterName;
     /**
-     * The specific version of the parameter on which you want to attach one or more labels. If no version is specified, the system attaches the label to the latest version.)
+     * The specific version of the parameter on which you want to attach one or more labels. If no version is specified, the system attaches the label to the latest version.
      */
     ParameterVersion?: PSParameterVersion;
     /**
@@ -5142,6 +5142,10 @@ declare namespace SSM {
      * The label does not meet the requirements. For information about parameter label requirements, see Labeling Parameters in the AWS Systems Manager User Guide.
      */
     InvalidLabels?: ParameterLabelList;
+    /**
+     * The version of the parameter that has been labeled.
+     */
+    ParameterVersion?: PSParameterVersion;
   }
   export type LastResourceDataSyncMessage = string;
   export type LastResourceDataSyncStatus = "Successful"|"Failed"|"InProgress"|string;
@@ -6743,6 +6747,10 @@ declare namespace SSM {
      * The new version number of a parameter. If you edit a parameter value, Parameter Store automatically creates a new version and assigns this new version a unique ID. You can reference a parameter version ID in API actions or in Systems Manager documents (SSM documents). By default, if you don't specify a specific version, the system returns the latest parameter value when a parameter is called.
      */
     Version?: PSParameterVersion;
+    /**
+     * The tier assigned to the parameter.
+     */
+    Tier?: ParameterTier;
   }
   export type Region = string;
   export type Regions = Region[];
