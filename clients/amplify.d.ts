@@ -92,6 +92,14 @@ declare class Amplify extends Service {
    */
   deleteWebhook(callback?: (err: AWSError, data: Amplify.Types.DeleteWebhookResult) => void): Request<Amplify.Types.DeleteWebhookResult, AWSError>;
   /**
+   *  Retrieve website access logs for a specific time range via a pre-signed URL. Optionally, deliver the logs to a given S3 bucket. 
+   */
+  generateAccessLogs(params: Amplify.Types.GenerateAccessLogsRequest, callback?: (err: AWSError, data: Amplify.Types.GenerateAccessLogsResult) => void): Request<Amplify.Types.GenerateAccessLogsResult, AWSError>;
+  /**
+   *  Retrieve website access logs for a specific time range via a pre-signed URL. Optionally, deliver the logs to a given S3 bucket. 
+   */
+  generateAccessLogs(callback?: (err: AWSError, data: Amplify.Types.GenerateAccessLogsResult) => void): Request<Amplify.Types.GenerateAccessLogsResult, AWSError>;
+  /**
    *  Retrieves an existing Amplify App by appId. 
    */
   getApp(params: Amplify.Types.GetAppRequest, callback?: (err: AWSError, data: Amplify.Types.GetAppResult) => void): Request<Amplify.Types.GetAppResult, AWSError>;
@@ -99,6 +107,14 @@ declare class Amplify extends Service {
    *  Retrieves an existing Amplify App by appId. 
    */
   getApp(callback?: (err: AWSError, data: Amplify.Types.GetAppResult) => void): Request<Amplify.Types.GetAppResult, AWSError>;
+  /**
+   *  Retrieves artifact info that corresponds to a artifactId. 
+   */
+  getArtifactUrl(params: Amplify.Types.GetArtifactUrlRequest, callback?: (err: AWSError, data: Amplify.Types.GetArtifactUrlResult) => void): Request<Amplify.Types.GetArtifactUrlResult, AWSError>;
+  /**
+   *  Retrieves artifact info that corresponds to a artifactId. 
+   */
+  getArtifactUrl(callback?: (err: AWSError, data: Amplify.Types.GetArtifactUrlResult) => void): Request<Amplify.Types.GetArtifactUrlResult, AWSError>;
   /**
    *  Retrieves a branch for an Amplify App. 
    */
@@ -139,6 +155,14 @@ declare class Amplify extends Service {
    *  Lists existing Amplify Apps. 
    */
   listApps(callback?: (err: AWSError, data: Amplify.Types.ListAppsResult) => void): Request<Amplify.Types.ListAppsResult, AWSError>;
+  /**
+   *  List artifacts with an app, a branch, a job and an artifact type. 
+   */
+  listArtifacts(params: Amplify.Types.ListArtifactsRequest, callback?: (err: AWSError, data: Amplify.Types.ListArtifactsResult) => void): Request<Amplify.Types.ListArtifactsResult, AWSError>;
+  /**
+   *  List artifacts with an app, a branch, a job and an artifact type. 
+   */
+  listArtifacts(callback?: (err: AWSError, data: Amplify.Types.ListArtifactsResult) => void): Request<Amplify.Types.ListArtifactsResult, AWSError>;
   /**
    *  Lists branches for an Amplify App. 
    */
@@ -344,6 +368,21 @@ declare namespace Amplify {
   export type AppArn = string;
   export type AppId = string;
   export type Apps = App[];
+  export interface Artifact {
+    /**
+     *  File name for the artifact. 
+     */
+    artifactFileName: ArtifactFileName;
+    /**
+     *  Unique Id for a artifact. 
+     */
+    artifactId: ArtifactId;
+  }
+  export type ArtifactFileName = string;
+  export type ArtifactId = string;
+  export type ArtifactType = "TEST"|string;
+  export type ArtifactUrl = string;
+  export type Artifacts = Artifact[];
   export type ArtifactsUrl = string;
   export type AssociatedResource = string;
   export type AssociatedResources = AssociatedResource[];
@@ -376,6 +415,10 @@ declare namespace Amplify {
      *  BuildSpec for the auto created branch. 
      */
     buildSpec?: BuildSpec;
+    /**
+     *  Enables Pull Request Preview for auto created branch. 
+     */
+    enablePullRequestPreview?: EnablePullRequestPreview;
   }
   export type AutoBranchCreationPattern = string;
   export type AutoBranchCreationPatterns = AutoBranchCreationPattern[];
@@ -465,6 +508,18 @@ declare namespace Amplify {
      *  List of custom resources that are linked to this branch. 
      */
     associatedResources?: AssociatedResources;
+    /**
+     *  Enables Pull Request Preview for this branch. 
+     */
+    enablePullRequestPreview: EnablePullRequestPreview;
+    /**
+     *  The destination branch if the branch is a pull request branch. 
+     */
+    destinationBranch?: BranchName;
+    /**
+     *  The source branch if the branch is a pull request branch. 
+     */
+    sourceBranch?: BranchName;
   }
   export type BranchArn = string;
   export type BranchName = string;
@@ -606,6 +661,10 @@ declare namespace Amplify {
      *  Display name for a branch, will use as the default domain prefix. 
      */
     displayName?: DisplayName;
+    /**
+     *  Enables Pull Request Preview for this branch. 
+     */
+    enablePullRequestPreview?: EnablePullRequestPreview;
   }
   export interface CreateBranchResult {
     /**
@@ -819,6 +878,7 @@ declare namespace Amplify {
   export type EnableBasicAuth = boolean;
   export type EnableBranchAutoBuild = boolean;
   export type EnableNotification = boolean;
+  export type EnablePullRequestPreview = boolean;
   export type EndTime = Date;
   export type EnvKey = string;
   export type EnvValue = string;
@@ -827,6 +887,30 @@ declare namespace Amplify {
   export type FileName = string;
   export type FileUploadUrls = {[key: string]: UploadUrl};
   export type Framework = string;
+  export interface GenerateAccessLogsRequest {
+    /**
+     *  The time at which the logs should start, inclusive. 
+     */
+    startTime?: StartTime;
+    /**
+     *  The time at which the logs should end, inclusive. 
+     */
+    endTime?: EndTime;
+    /**
+     *  Name of the domain. 
+     */
+    domainName: DomainName;
+    /**
+     *  Unique Id for an Amplify App. 
+     */
+    appId: AppId;
+  }
+  export interface GenerateAccessLogsResult {
+    /**
+     *  Pre-signed URL for the requested access logs. 
+     */
+    logUrl?: LogUrl;
+  }
   export interface GetAppRequest {
     /**
      *  Unique Id for an Amplify App. 
@@ -835,6 +919,22 @@ declare namespace Amplify {
   }
   export interface GetAppResult {
     app: App;
+  }
+  export interface GetArtifactUrlRequest {
+    /**
+     *  Unique Id for a artifact. 
+     */
+    artifactId: ArtifactId;
+  }
+  export interface GetArtifactUrlResult {
+    /**
+     *  Unique Id for a artifact. 
+     */
+    artifactId: ArtifactId;
+    /**
+     *  Presigned url for the artifact. 
+     */
+    artifactUrl: ArtifactUrl;
   }
   export interface GetBranchRequest {
     /**
@@ -966,6 +1066,42 @@ declare namespace Amplify {
     apps: Apps;
     /**
      *  Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListArtifactsRequest {
+    /**
+     *  Unique Id for an Amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Name for a branch, part of an Amplify App. 
+     */
+    branchName: BranchName;
+    /**
+     *  Unique Id for an Job. 
+     */
+    jobId: JobId;
+    /**
+     *  Type for an artifact. 
+     */
+    artifactType?: ArtifactType;
+    /**
+     *  Pagination token. Set to null to start listing artifacts from start. If non-null pagination token is returned in a result, then pass its value in here to list more artifacts. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  Maximum number of records to list in a single response. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListArtifactsResult {
+    /**
+     *  List of artifacts. 
+     */
+    artifacts: Artifacts;
+    /**
+     *  Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. 
      */
     nextToken?: NextToken;
   }
@@ -1112,7 +1248,7 @@ declare namespace Amplify {
   export type ServiceRoleArn = string;
   export type Source = string;
   export type SourceUrl = string;
-  export type Stage = "PRODUCTION"|"BETA"|"DEVELOPMENT"|"EXPERIMENTAL"|string;
+  export type Stage = "PRODUCTION"|"BETA"|"DEVELOPMENT"|"EXPERIMENTAL"|"PULL_REQUEST"|string;
   export interface StartDeploymentRequest {
     /**
      *  Unique Id for an Amplify App. 
@@ -1206,6 +1342,14 @@ declare namespace Amplify {
      */
     artifactsUrl?: ArtifactsUrl;
     /**
+     *  URL to the test artifact for the execution step. 
+     */
+    testArtifactsUrl?: TestArtifactsUrl;
+    /**
+     *  URL to the test config for the execution step. 
+     */
+    testConfigUrl?: TestConfigUrl;
+    /**
      *  List of screenshot URLs for the execution step, if relevant. 
      */
     screenshots?: Screenshots;
@@ -1284,6 +1428,8 @@ declare namespace Amplify {
   }
   export type TagValue = string;
   export type Target = string;
+  export type TestArtifactsUrl = string;
+  export type TestConfigUrl = string;
   export type ThumbnailName = string;
   export type ThumbnailUrl = string;
   export type TotalNumberOfJobs = string;
@@ -1353,9 +1499,21 @@ declare namespace Amplify {
      */
     autoBranchCreationPatterns?: AutoBranchCreationPatterns;
     /**
-     *  Automated branch creation config for the Amplify App. 
+     *  Automated branch creation branchConfig for the Amplify App. 
      */
     autoBranchCreationConfig?: AutoBranchCreationConfig;
+    /**
+     *  Repository for an Amplify App 
+     */
+    repository?: Repository;
+    /**
+     *  OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. 
+     */
+    oauthToken?: OauthToken;
+    /**
+     *  Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. 
+     */
+    accessToken?: AccessToken;
   }
   export interface UpdateAppResult {
     /**
@@ -1416,6 +1574,10 @@ declare namespace Amplify {
      *  Display name for a branch, will use as the default domain prefix. 
      */
     displayName?: DisplayName;
+    /**
+     *  Enables Pull Request Preview for this branch. 
+     */
+    enablePullRequestPreview?: EnablePullRequestPreview;
   }
   export interface UpdateBranchResult {
     /**

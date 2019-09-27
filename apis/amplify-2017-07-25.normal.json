@@ -329,6 +329,34 @@
       ],
       "documentation": "<p> Deletes a webhook. </p>"
     },
+    "GenerateAccessLogs": {
+      "name": "GenerateAccessLogs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/apps/{appId}/accesslogs"
+      },
+      "input": {
+        "shape": "GenerateAccessLogsRequest"
+      },
+      "output": {
+        "shape": "GenerateAccessLogsResult"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p> Retrieve website access logs for a specific time range via a pre-signed URL. Optionally, deliver the logs to a given S3 bucket. </p>"
+    },
     "GetApp": {
       "name": "GetApp",
       "http": {
@@ -356,6 +384,37 @@
         }
       ],
       "documentation": "<p> Retrieves an existing Amplify App by appId. </p>"
+    },
+    "GetArtifactUrl": {
+      "name": "GetArtifactUrl",
+      "http": {
+        "method": "GET",
+        "requestUri": "/artifacts/{artifactId}"
+      },
+      "input": {
+        "shape": "GetArtifactUrlRequest"
+      },
+      "output": {
+        "shape": "GetArtifactUrlResult"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p> Retrieves artifact info that corresponds to a artifactId. </p>"
     },
     "GetBranch": {
       "name": "GetBranch",
@@ -499,6 +558,34 @@
         }
       ],
       "documentation": "<p> Lists existing Amplify Apps. </p>"
+    },
+    "ListArtifacts": {
+      "name": "ListArtifacts",
+      "http": {
+        "method": "GET",
+        "requestUri": "/apps/{appId}/branches/{branchName}/jobs/{jobId}/artifacts"
+      },
+      "input": {
+        "shape": "ListArtifactsRequest"
+      },
+      "output": {
+        "shape": "ListArtifactsResult"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p> List artifacts with an app, a branch, a job and an artifact type. </p>"
     },
     "ListBranches": {
       "name": "ListBranches",
@@ -1025,6 +1112,48 @@
         "shape": "App"
       }
     },
+    "Artifact": {
+      "type": "structure",
+      "required": [
+        "artifactFileName",
+        "artifactId"
+      ],
+      "members": {
+        "artifactFileName": {
+          "shape": "ArtifactFileName",
+          "documentation": "<p> File name for the artifact. </p>"
+        },
+        "artifactId": {
+          "shape": "ArtifactId",
+          "documentation": "<p> Unique Id for a artifact. </p>"
+        }
+      },
+      "documentation": "<p> Structure for artifact. </p>"
+    },
+    "ArtifactFileName": {
+      "type": "string",
+      "max": 1000
+    },
+    "ArtifactId": {
+      "type": "string",
+      "max": 255
+    },
+    "ArtifactType": {
+      "type": "string",
+      "enum": [
+        "TEST"
+      ]
+    },
+    "ArtifactUrl": {
+      "type": "string",
+      "max": 1000
+    },
+    "Artifacts": {
+      "type": "list",
+      "member": {
+        "shape": "Artifact"
+      }
+    },
     "ArtifactsUrl": {
       "type": "string",
       "max": 1000
@@ -1070,6 +1199,10 @@
         "buildSpec": {
           "shape": "BuildSpec",
           "documentation": "<p> BuildSpec for the auto created branch. </p>"
+        },
+        "enablePullRequestPreview": {
+          "shape": "EnablePullRequestPreview",
+          "documentation": "<p> Enables Pull Request Preview for auto created branch. </p>"
         }
       },
       "documentation": "<p> Structure with auto branch creation config. </p>"
@@ -1107,7 +1240,8 @@
         "activeJobId",
         "totalNumberOfJobs",
         "enableBasicAuth",
-        "ttl"
+        "ttl",
+        "enablePullRequestPreview"
       ],
       "members": {
         "branchArn": {
@@ -1193,6 +1327,18 @@
         "associatedResources": {
           "shape": "AssociatedResources",
           "documentation": "<p> List of custom resources that are linked to this branch. </p>"
+        },
+        "enablePullRequestPreview": {
+          "shape": "EnablePullRequestPreview",
+          "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
+        },
+        "destinationBranch": {
+          "shape": "BranchName",
+          "documentation": "<p> The destination branch if the branch is a pull request branch. </p>"
+        },
+        "sourceBranch": {
+          "shape": "BranchName",
+          "documentation": "<p> The source branch if the branch is a pull request branch. </p>"
         }
       },
       "documentation": "<p> Branch for an Amplify App, which maps to a 3rd party repository branch. </p>"
@@ -1394,6 +1540,10 @@
         "displayName": {
           "shape": "DisplayName",
           "documentation": "<p> Display name for a branch, will use as the default domain prefix. </p>"
+        },
+        "enablePullRequestPreview": {
+          "shape": "EnablePullRequestPreview",
+          "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
         }
       },
       "documentation": "<p> Request structure for a branch create request. </p>"
@@ -1857,6 +2007,9 @@
     "EnableNotification": {
       "type": "boolean"
     },
+    "EnablePullRequestPreview": {
+      "type": "boolean"
+    },
     "EndTime": {
       "type": "timestamp"
     },
@@ -1903,6 +2056,44 @@
       "type": "string",
       "max": 255
     },
+    "GenerateAccessLogsRequest": {
+      "type": "structure",
+      "required": [
+        "domainName",
+        "appId"
+      ],
+      "members": {
+        "startTime": {
+          "shape": "StartTime",
+          "documentation": "<p> The time at which the logs should start, inclusive. </p>"
+        },
+        "endTime": {
+          "shape": "EndTime",
+          "documentation": "<p> The time at which the logs should end, inclusive. </p>"
+        },
+        "domainName": {
+          "shape": "DomainName",
+          "documentation": "<p> Name of the domain. </p>"
+        },
+        "appId": {
+          "shape": "AppId",
+          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "location": "uri",
+          "locationName": "appId"
+        }
+      },
+      "documentation": "<p> Request structure for the generate access logs request. </p>"
+    },
+    "GenerateAccessLogsResult": {
+      "type": "structure",
+      "members": {
+        "logUrl": {
+          "shape": "LogUrl",
+          "documentation": "<p> Pre-signed URL for the requested access logs. </p>"
+        }
+      },
+      "documentation": "<p> Result structure for the generate access logs request. </p>"
+    },
     "GetAppRequest": {
       "type": "structure",
       "required": [
@@ -1928,6 +2119,39 @@
           "shape": "App"
         }
       }
+    },
+    "GetArtifactUrlRequest": {
+      "type": "structure",
+      "required": [
+        "artifactId"
+      ],
+      "members": {
+        "artifactId": {
+          "shape": "ArtifactId",
+          "documentation": "<p> Unique Id for a artifact. </p>",
+          "location": "uri",
+          "locationName": "artifactId"
+        }
+      },
+      "documentation": "<p> Request structure for the get artifact request. </p>"
+    },
+    "GetArtifactUrlResult": {
+      "type": "structure",
+      "required": [
+        "artifactId",
+        "artifactUrl"
+      ],
+      "members": {
+        "artifactId": {
+          "shape": "ArtifactId",
+          "documentation": "<p> Unique Id for a artifact. </p>"
+        },
+        "artifactUrl": {
+          "shape": "ArtifactUrl",
+          "documentation": "<p> Presigned url for the artifact. </p>"
+        }
+      },
+      "documentation": "<p> Result structure for the get artifact request. </p>"
     },
     "GetBranchRequest": {
       "type": "structure",
@@ -2212,6 +2436,68 @@
         }
       },
       "documentation": "<p> Result structure for an Amplify App list request. </p>"
+    },
+    "ListArtifactsRequest": {
+      "type": "structure",
+      "required": [
+        "appId",
+        "branchName",
+        "jobId"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppId",
+          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "location": "uri",
+          "locationName": "appId"
+        },
+        "branchName": {
+          "shape": "BranchName",
+          "documentation": "<p> Name for a branch, part of an Amplify App. </p>",
+          "location": "uri",
+          "locationName": "branchName"
+        },
+        "jobId": {
+          "shape": "JobId",
+          "documentation": "<p> Unique Id for an Job. </p>",
+          "location": "uri",
+          "locationName": "jobId"
+        },
+        "artifactType": {
+          "shape": "ArtifactType",
+          "documentation": "<p> Type for an artifact. </p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> Pagination token. Set to null to start listing artifacts from start. If non-null pagination token is returned in a result, then pass its value in here to list more artifacts. </p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      },
+      "documentation": "<p> Request structure for the list artifacts request. </p>"
+    },
+    "ListArtifactsResult": {
+      "type": "structure",
+      "required": [
+        "artifacts"
+      ],
+      "members": {
+        "artifacts": {
+          "shape": "Artifacts",
+          "documentation": "<p> List of artifacts. </p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>"
+        }
+      },
+      "documentation": "<p> Result structure for the list artifacts request. </p>"
     },
     "ListBranchesRequest": {
       "type": "structure",
@@ -2512,7 +2798,8 @@
         "PRODUCTION",
         "BETA",
         "DEVELOPMENT",
-        "EXPERIMENTAL"
+        "EXPERIMENTAL",
+        "PULL_REQUEST"
       ]
     },
     "StartDeploymentRequest": {
@@ -2623,7 +2910,7 @@
     },
     "Status": {
       "type": "string",
-      "max": 3,
+      "max": 7,
       "min": 3
     },
     "StatusReason": {
@@ -2662,6 +2949,14 @@
         "artifactsUrl": {
           "shape": "ArtifactsUrl",
           "documentation": "<p> URL to the artifact for the execution step. </p>"
+        },
+        "testArtifactsUrl": {
+          "shape": "TestArtifactsUrl",
+          "documentation": "<p> URL to the test artifact for the execution step. </p>"
+        },
+        "testConfigUrl": {
+          "shape": "TestConfigUrl",
+          "documentation": "<p> URL to the test config for the execution step. </p>"
         },
         "screenshots": {
           "shape": "Screenshots",
@@ -2848,6 +3143,14 @@
       "max": 2048,
       "min": 1
     },
+    "TestArtifactsUrl": {
+      "type": "string",
+      "max": 1000
+    },
+    "TestConfigUrl": {
+      "type": "string",
+      "max": 1000
+    },
     "ThumbnailName": {
       "type": "string",
       "max": 256
@@ -2950,7 +3253,19 @@
         },
         "autoBranchCreationConfig": {
           "shape": "AutoBranchCreationConfig",
-          "documentation": "<p> Automated branch creation config for the Amplify App. </p>"
+          "documentation": "<p> Automated branch creation branchConfig for the Amplify App. </p>"
+        },
+        "repository": {
+          "shape": "Repository",
+          "documentation": "<p> Repository for an Amplify App </p>"
+        },
+        "oauthToken": {
+          "shape": "OauthToken",
+          "documentation": "<p> OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. </p>"
+        },
+        "accessToken": {
+          "shape": "AccessToken",
+          "documentation": "<p> Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. </p>"
         }
       },
       "documentation": "<p> Request structure for update App request. </p>"
@@ -3030,6 +3345,10 @@
         "displayName": {
           "shape": "DisplayName",
           "documentation": "<p> Display name for a branch, will use as the default domain prefix. </p>"
+        },
+        "enablePullRequestPreview": {
+          "shape": "EnablePullRequestPreview",
+          "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
         }
       },
       "documentation": "<p> Request structure for update branch request. </p>"

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.537.0-->
+<!--LATEST=2.538.0-->
 <!--ENTRYINSERT-->
+
+## 2.538.0
+* feature: Amplify: This release adds access logs APIs and artifact APIs for AWS Amplify Console.
+* feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) removes FirelensConfiguration from the DescribeTask output during the FireLens public preview.
 
 ## 2.537.0
 * feature: SSM: This release updates the AWS Systems Manager Parameter Store PutParameter and LabelParameterVersion APIs to return the "Tier" of parameter created/updated and the "parameter version" labeled respectively. 
