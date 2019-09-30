@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.538.0-->
+<!--LATEST=2.539.0-->
 <!--ENTRYINSERT-->
+
+## 2.539.0
+* feature: MQ: Amazon MQ now includes the ability to scale your brokers by changing the host instance type. See the hostInstanceType property of UpdateBrokerInput (https://docs.aws.amazon.com/amazon-mq/latest/api-reference/brokers-broker-id.html#brokers-broker-id-model-updatebrokerinput), and pendingHostInstanceType property of DescribeBrokerOutput (https://docs.aws.amazon.com/amazon-mq/latest/api-reference/brokers-broker-id.html#brokers-broker-id-model-describebrokeroutput).
+* feature: RDS: This release adds support for creating a Read Replica with Active Directory domain information. This release updates RDS API to indicate whether an OrderableDBInstanceOption supports Kerberos Authentication.
+* feature: WAF: Lowering the threshold for Rate Based rule from 2000 to 100.
 
 ## 2.538.0
 * feature: Amplify: This release adds access logs APIs and artifact APIs for AWS Amplify Console.

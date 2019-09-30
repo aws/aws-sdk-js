@@ -1504,6 +1504,11 @@
           "locationName": "pendingSecurityGroups",
           "documentation": "The list of pending security groups to authorize connections to brokers."
         },
+        "PendingHostInstanceType": {
+          "shape": "__string",
+          "locationName": "pendingHostInstanceType",
+          "documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types"
+        },
         "PubliclyAccessible": {
           "shape": "__boolean",
           "locationName": "publiclyAccessible",
@@ -2064,6 +2069,11 @@
           "locationName": "engineVersion",
           "documentation": "The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
         },
+        "HostInstanceType": {
+          "shape": "__string",
+          "locationName": "hostInstanceType",
+          "documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types"
+        },
         "Logs": {
           "shape": "Logs",
           "locationName": "logs",
@@ -2102,6 +2112,11 @@
           "shape": "__string",
           "locationName": "engineVersion",
           "documentation": "The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html"
+        },
+        "HostInstanceType": {
+          "shape": "__string",
+          "locationName": "hostInstanceType",
+          "documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types"
         },
         "Logs": {
           "shape": "Logs",

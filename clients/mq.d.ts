@@ -667,6 +667,10 @@ declare namespace MQ {
      */
     PendingSecurityGroups?: __listOf__string;
     /**
+     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     */
+    PendingHostInstanceType?: __string;
+    /**
      * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
      */
     PubliclyAccessible?: __boolean;
@@ -1012,6 +1016,10 @@ declare namespace MQ {
      */
     EngineVersion?: __string;
     /**
+     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     */
+    HostInstanceType?: __string;
+    /**
      * Enables Amazon CloudWatch logging for brokers.
      */
     Logs?: Logs;
@@ -1037,6 +1045,10 @@ declare namespace MQ {
      * The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
      */
     EngineVersion?: __string;
+    /**
+     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     */
+    HostInstanceType?: __string;
     /**
      * The list of information about logs to be enabled for the specified broker.
      */
