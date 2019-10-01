@@ -461,6 +461,26 @@
       ],
       "documentation": "<p>Deletes a DB subnet group.</p> <note> <p>The specified database subnet group must not be associated with any DB instances.</p> </note>"
     },
+    "DescribeCertificates": {
+      "name": "DescribeCertificates",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeCertificatesMessage"
+      },
+      "output": {
+        "shape": "CertificateMessage",
+        "resultWrapper": "DescribeCertificatesResult"
+      },
+      "errors": [
+        {
+          "shape": "CertificateNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns a list of certificate authority (CA) certificates provided by Amazon RDS for this AWS account.</p>"
+    },
     "DescribeDBClusterParameterGroups": {
       "name": "DescribeDBClusterParameterGroups",
       "http": {
@@ -1278,6 +1298,57 @@
     "BooleanOptional": {
       "type": "boolean"
     },
+    "Certificate": {
+      "type": "structure",
+      "members": {
+        "CertificateIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The unique key that identifies a certificate.</p> <p>Example: <code>rds-ca-2019</code> </p>"
+        },
+        "CertificateType": {
+          "shape": "String",
+          "documentation": "<p>The type of the certificate.</p> <p>Example: <code>CA</code> </p>"
+        },
+        "Thumbprint": {
+          "shape": "String",
+          "documentation": "<p>The thumbprint of the certificate.</p>"
+        },
+        "ValidFrom": {
+          "shape": "TStamp",
+          "documentation": "<p>The starting date-time from which the certificate is valid.</p> <p>Example: <code>2019-07-31T17:57:09Z</code> </p>"
+        },
+        "ValidTill": {
+          "shape": "TStamp",
+          "documentation": "<p>The date-time after which the certificate is no longer valid.</p> <p>Example: <code>2024-07-31T17:57:09Z</code> </p>"
+        },
+        "CertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the certificate.</p> <p>Example: <code>arn:aws:rds:us-east-1::cert:rds-ca-2019</code> </p>"
+        }
+      },
+      "documentation": "<p>A certificate authority (CA) certificate for an AWS account.</p>",
+      "wrapper": true
+    },
+    "CertificateList": {
+      "type": "list",
+      "member": {
+        "shape": "Certificate",
+        "locationName": "Certificate"
+      }
+    },
+    "CertificateMessage": {
+      "type": "structure",
+      "members": {
+        "Certificates": {
+          "shape": "CertificateList",
+          "documentation": "<p>A list of certificates for this AWS account.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided if the number of records retrieved is greater than <code>MaxRecords</code>. If this parameter is specified, the marker specifies the next record in the list. Including the value of <code>Marker</code> in the next call to <code>DescribeCertificates</code> results in the next page of certificates.</p>"
+        }
+      }
+    },
     "CloudwatchLogsExportConfiguration": {
       "type": "structure",
       "members": {
@@ -1416,11 +1487,11 @@
         },
         "MasterUsername": {
           "shape": "String",
-          "documentation": "<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 16 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>"
+          "documentation": "<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>"
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote (\"), or the \"at\" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>"
+          "documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote (\"), or the \"at\" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>"
         },
         "PreferredBackupWindow": {
           "shape": "String",
@@ -1561,7 +1632,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>The tags to be assigned to the DB instance.</p>"
+          "documentation": "<p>The tags to be assigned to the DB instance. You can assign up to 10 tags to an instance.</p>"
         },
         "DBClusterIdentifier": {
           "shape": "String",
@@ -2140,7 +2211,7 @@
         },
         "PubliclyAccessible": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies the availability options for the DB instance. A value of <code>true</code> specifies an internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of <code>false</code> specifies an internal instance with a DNS name that resolves to a private IP address.</p>"
+          "documentation": "<p>Not supported. Amazon DocumentDB does not currently support public endpoints. The value of <code>PubliclyAccessible</code> is always <code>false</code>.</p>"
         },
         "StatusInfos": {
           "shape": "DBInstanceStatusInfoList",
@@ -2152,7 +2223,7 @@
         },
         "StorageEncrypted": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies whether the DB instance is encrypted.</p>"
+          "documentation": "<p>Specifies whether or not the DB instance is encrypted.</p>"
         },
         "KmsKeyId": {
           "shape": "String",
@@ -2161,6 +2232,10 @@
         "DbiResourceId": {
           "shape": "String",
           "documentation": "<p>The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.</p>"
+        },
+        "CACertificateIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the CA certificate for this DB instance.</p>"
         },
         "PromotionTier": {
           "shape": "IntegerOptional",
@@ -2253,7 +2328,7 @@
         },
         "DBSubnetGroupArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Identifier (ARN) for the DB subnet group.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the DB subnet group.</p>"
         }
       },
       "documentation": "<p>Detailed information about a DB subnet group. </p>",
@@ -2376,6 +2451,27 @@
         }
       },
       "documentation": "<p>Represents the input to <a>DeleteDBSubnetGroup</a>.</p>"
+    },
+    "DescribeCertificatesMessage": {
+      "type": "structure",
+      "members": {
+        "CertificateIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to <code>MaxRecords</code> certificates is returned. This parameter is not case sensitive.</p> <p>Constraints</p> <ul> <li> <p>Must match an existing <code>CertificateIdentifier</code>.</p> </li> </ul>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>This parameter is not currently supported.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints:</p> <ul> <li> <p>Minimum: 20</p> </li> <li> <p>Maximum: 100</p> </li> </ul>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      }
     },
     "DescribeDBClusterParameterGroupsMessage": {
       "type": "structure",
@@ -2999,7 +3095,7 @@
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote (\"), or the \"at\" symbol (@).</p> <p>Constraints: Must contain from 8 to 41 characters.</p>"
+          "documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote (\"), or the \"at\" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>"
         },
         "PreferredBackupWindow": {
           "shape": "String",
@@ -3113,6 +3209,10 @@
         "NewDBInstanceIdentifier": {
           "shape": "String",
           "documentation": "<p> The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot occurs immediately if you set <code>Apply Immediately</code> to <code>true</code>. It occurs during the next maintenance window if you set <code>Apply Immediately</code> to <code>false</code>. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>"
+        },
+        "CACertificateIdentifier": {
+          "shape": "String",
+          "documentation": "<p>Indicates the certificate that needs to be associated with the instance.</p>"
         },
         "PromotionTier": {
           "shape": "IntegerOptional",

@@ -125,6 +125,14 @@ declare class DocDB extends Service {
    */
   deleteDBSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Returns a list of certificate authority (CA) certificates provided by Amazon RDS for this AWS account.
+   */
+  describeCertificates(params: DocDB.Types.DescribeCertificatesMessage, callback?: (err: AWSError, data: DocDB.Types.CertificateMessage) => void): Request<DocDB.Types.CertificateMessage, AWSError>;
+  /**
+   * Returns a list of certificate authority (CA) certificates provided by Amazon RDS for this AWS account.
+   */
+  describeCertificates(callback?: (err: AWSError, data: DocDB.Types.CertificateMessage) => void): Request<DocDB.Types.CertificateMessage, AWSError>;
+  /**
    * Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list contains only the description of the specified DB cluster parameter group. 
    */
   describeDBClusterParameterGroups(params: DocDB.Types.DescribeDBClusterParameterGroupsMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupsMessage) => void): Request<DocDB.Types.DBClusterParameterGroupsMessage, AWSError>;
@@ -397,6 +405,43 @@ declare namespace DocDB {
   export type AvailabilityZones = String[];
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
+  export interface Certificate {
+    /**
+     * The unique key that identifies a certificate. Example: rds-ca-2019 
+     */
+    CertificateIdentifier?: String;
+    /**
+     * The type of the certificate. Example: CA 
+     */
+    CertificateType?: String;
+    /**
+     * The thumbprint of the certificate.
+     */
+    Thumbprint?: String;
+    /**
+     * The starting date-time from which the certificate is valid. Example: 2019-07-31T17:57:09Z 
+     */
+    ValidFrom?: TStamp;
+    /**
+     * The date-time after which the certificate is no longer valid. Example: 2024-07-31T17:57:09Z 
+     */
+    ValidTill?: TStamp;
+    /**
+     * The Amazon Resource Name (ARN) for the certificate. Example: arn:aws:rds:us-east-1::cert:rds-ca-2019 
+     */
+    CertificateArn?: String;
+  }
+  export type CertificateList = Certificate[];
+  export interface CertificateMessage {
+    /**
+     * A list of certificates for this AWS account.
+     */
+    Certificates?: CertificateList;
+    /**
+     * An optional pagination token provided if the number of records retrieved is greater than MaxRecords. If this parameter is specified, the marker specifies the next record in the list. Including the value of Marker in the next call to DescribeCertificates results in the next page of certificates.
+     */
+    Marker?: String;
+  }
   export interface CloudwatchLogsExportConfiguration {
     /**
      * The list of log types to enable.
@@ -495,11 +540,11 @@ declare namespace DocDB {
      */
     Port?: IntegerOptional;
     /**
-     * The name of the master user for the DB cluster. Constraints:   Must be from 1 to 16 letters or numbers.   The first character must be a letter.   Cannot be a reserved word for the chosen database engine.  
+     * The name of the master user for the DB cluster. Constraints:   Must be from 1 to 63 letters or numbers.   The first character must be a letter.   Cannot be a reserved word for the chosen database engine.  
      */
     MasterUsername: String;
     /**
-     * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 41 characters.
+     * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 100 characters.
      */
     MasterUserPassword: String;
     /**
@@ -598,7 +643,7 @@ declare namespace DocDB {
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
-     * The tags to be assigned to the DB instance.
+     * The tags to be assigned to the DB instance. You can assign up to 10 tags to an instance.
      */
     Tags?: TagList;
     /**
@@ -1051,7 +1096,7 @@ declare namespace DocDB {
      */
     AutoMinorVersionUpgrade?: Boolean;
     /**
-     * Specifies the availability options for the DB instance. A value of true specifies an internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.
+     * Not supported. Amazon DocumentDB does not currently support public endpoints. The value of PubliclyAccessible is always false.
      */
     PubliclyAccessible?: Boolean;
     /**
@@ -1063,7 +1108,7 @@ declare namespace DocDB {
      */
     DBClusterIdentifier?: String;
     /**
-     * Specifies whether the DB instance is encrypted.
+     * Specifies whether or not the DB instance is encrypted.
      */
     StorageEncrypted?: Boolean;
     /**
@@ -1074,6 +1119,10 @@ declare namespace DocDB {
      * The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.
      */
     DbiResourceId?: String;
+    /**
+     * The identifier of the CA certificate for this DB instance.
+     */
+    CACertificateIdentifier?: String;
     /**
      * A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.
      */
@@ -1139,7 +1188,7 @@ declare namespace DocDB {
      */
     Subnets?: SubnetList;
     /**
-     * The Amazon Resource Identifier (ARN) for the DB subnet group.
+     * The Amazon Resource Name (ARN) for the DB subnet group.
      */
     DBSubnetGroupArn?: String;
   }
@@ -1200,6 +1249,24 @@ declare namespace DocDB {
      * The name of the database subnet group to delete.  You can't delete the default subnet group.  Constraints: Must match the name of an existing DBSubnetGroup. Must not be default. Example: mySubnetgroup 
      */
     DBSubnetGroupName: String;
+  }
+  export interface DescribeCertificatesMessage {
+    /**
+     * The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to MaxRecords certificates is returned. This parameter is not case sensitive. Constraints   Must match an existing CertificateIdentifier.  
+     */
+    CertificateIdentifier?: String;
+    /**
+     * This parameter is not currently supported.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints:   Minimum: 20   Maximum: 100  
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeCertificates request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
   }
   export interface DescribeDBClusterParameterGroupsMessage {
     /**
@@ -1649,7 +1716,7 @@ declare namespace DocDB {
      */
     Port?: IntegerOptional;
     /**
-     * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 41 characters.
+     * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 100 characters.
      */
     MasterUserPassword?: String;
     /**
@@ -1732,6 +1799,10 @@ declare namespace DocDB {
      *  The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot occurs immediately if you set Apply Immediately to true. It occurs during the next maintenance window if you set Apply Immediately to false. This value is stored as a lowercase string.  Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   The first character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: mydbinstance 
      */
     NewDBInstanceIdentifier?: String;
+    /**
+     * Indicates the certificate that needs to be associated with the instance.
+     */
+    CACertificateIdentifier?: String;
     /**
      * A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance. Default: 1 Valid values: 0-15
      */
