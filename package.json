@@ -125,7 +125,7 @@
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream",
     "browsertest": "rake browser:test && karma start",
     "buildertest": "mocha --require coffeescript/register -s 1000 -t 10000 dist-tools/test/*.coffee",
-    "integration": "cucumber.js",
+    "integration": "cucumber.js --tags ~@s3 --tags ~@elastictranscoder",
     "lint": "eslint lib test dist-tools/*.js",
     "console": "./scripts/console",
     "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",
