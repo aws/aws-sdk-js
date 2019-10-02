@@ -20,27 +20,27 @@ declare class Lightsail extends Service {
    */
   allocateStaticIp(callback?: (err: AWSError, data: Lightsail.Types.AllocateStaticIpResult) => void): Request<Lightsail.Types.AllocateStaticIpResult, AWSError>;
   /**
-   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the Lightsail Dev Guide.
+   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
   attachDisk(params: Lightsail.Types.AttachDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachDiskResult) => void): Request<Lightsail.Types.AttachDiskResult, AWSError>;
   /**
-   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the Lightsail Dev Guide.
+   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
   attachDisk(callback?: (err: AWSError, data: Lightsail.Types.AttachDiskResult) => void): Request<Lightsail.Types.AttachDiskResult, AWSError>;
   /**
-   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available. The attach instances to load balancer operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available. The attach instances to load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   attachInstancesToLoadBalancer(params: Lightsail.Types.AttachInstancesToLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachInstancesToLoadBalancerResult) => void): Request<Lightsail.Types.AttachInstancesToLoadBalancerResult, AWSError>;
   /**
-   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available. The attach instances to load balancer operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available. The attach instances to load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   attachInstancesToLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.AttachInstancesToLoadBalancerResult) => void): Request<Lightsail.Types.AttachInstancesToLoadBalancerResult, AWSError>;
   /**
-   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate operation with the non-attached certificate, and it will replace the existing one and become the attached certificate. The attach load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the attach load balancer tls certificate operation with the non-attached certificate, and it will replace the existing one and become the attached certificate. The attach load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   attachLoadBalancerTlsCertificate(params: Lightsail.Types.AttachLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.AttachLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate operation with the non-attached certificate, and it will replace the existing one and become the attached certificate. The attach load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the attach load balancer tls certificate operation with the non-attached certificate, and it will replace the existing one and become the attached certificate. The attach load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   attachLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.AttachLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.AttachLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -52,19 +52,19 @@ declare class Lightsail extends Service {
    */
   attachStaticIp(callback?: (err: AWSError, data: Lightsail.Types.AttachStaticIpResult) => void): Request<Lightsail.Types.AttachStaticIpResult, AWSError>;
   /**
-   * Closes the public ports on a specific Amazon Lightsail instance. The close instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Closes the public ports on a specific Amazon Lightsail instance. The close instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   closeInstancePublicPorts(params: Lightsail.Types.CloseInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
   /**
-   * Closes the public ports on a specific Amazon Lightsail instance. The close instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Closes the public ports on a specific Amazon Lightsail instance. The close instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   closeInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
   /**
-   * Copies an instance or disk snapshot from one AWS Region to another in Amazon Lightsail.
+   * Copies a manual instance or disk snapshot as another manual snapshot, or copies an automatic instance or disk snapshot as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.  Database snapshots cannot be copied at this time. 
    */
   copySnapshot(params: Lightsail.Types.CopySnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
-   * Copies an instance or disk snapshot from one AWS Region to another in Amazon Lightsail.
+   * Copies a manual instance or disk snapshot as another manual snapshot, or copies an automatic instance or disk snapshot as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.  Database snapshots cannot be copied at this time. 
    */
   copySnapshot(callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
@@ -76,19 +76,19 @@ declare class Lightsail extends Service {
    */
   createCloudFormationStack(callback?: (err: AWSError, data: Lightsail.Types.CreateCloudFormationStackResult) => void): Request<Lightsail.Types.CreateCloudFormationStackResult, AWSError>;
   /**
-   * Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see Regions and Availability Zones in Lightsail. The create disk operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
    */
   createDisk(params: Lightsail.Types.CreateDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
   /**
-   * Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see Regions and Availability Zones in Lightsail. The create disk operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
    */
   createDisk(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
   /**
-   * Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see Regions and Availability Zones in Lightsail. The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by diskSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
    */
   createDiskFromSnapshot(params: Lightsail.Types.CreateDiskFromSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskFromSnapshotResult) => void): Request<Lightsail.Types.CreateDiskFromSnapshotResult, AWSError>;
   /**
-   * Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see Regions and Availability Zones in Lightsail. The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by diskSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
    */
   createDiskFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskFromSnapshotResult) => void): Request<Lightsail.Types.CreateDiskFromSnapshotResult, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class Lightsail extends Service {
    */
   createDomain(callback?: (err: AWSError, data: Lightsail.Types.CreateDomainResult) => void): Request<Lightsail.Types.CreateDomainResult, AWSError>;
   /**
-   * Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the Lightsail Dev Guide.
+   * Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   createDomainEntry(params: Lightsail.Types.CreateDomainEntryRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDomainEntryResult) => void): Request<Lightsail.Types.CreateDomainEntryResult, AWSError>;
   /**
-   * Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the Lightsail Dev Guide.
+   * Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   createDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.CreateDomainEntryResult) => void): Request<Lightsail.Types.CreateDomainEntryResult, AWSError>;
   /**
@@ -124,19 +124,19 @@ declare class Lightsail extends Service {
    */
   createInstanceSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateInstanceSnapshotResult) => void): Request<Lightsail.Types.CreateInstanceSnapshotResult, AWSError>;
   /**
-   * Creates one or more Amazon Lightsail virtual private servers, or instances. Create instances using active blueprints. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. Use the get blueprints operation to return a list of available blueprints. The create instances operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates one or more Amazon Lightsail instances. The create instances operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
    */
   createInstances(params: Lightsail.Types.CreateInstancesRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesResult) => void): Request<Lightsail.Types.CreateInstancesResult, AWSError>;
   /**
-   * Creates one or more Amazon Lightsail virtual private servers, or instances. Create instances using active blueprints. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. Use the get blueprints operation to return a list of available blueprints. The create instances operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates one or more Amazon Lightsail instances. The create instances operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
    */
   createInstances(callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesResult) => void): Request<Lightsail.Types.CreateInstancesResult, AWSError>;
   /**
-   * Uses a specific snapshot as a blueprint for creating one or more new instances that are based on that identical configuration. The create instances from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by instanceSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Creates one or more new instances from a manual or automatic snapshot of an instance. The create instances from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by instance snapshot name. For more information, see the Lightsail Dev Guide.
    */
   createInstancesFromSnapshot(params: Lightsail.Types.CreateInstancesFromSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesFromSnapshotResult) => void): Request<Lightsail.Types.CreateInstancesFromSnapshotResult, AWSError>;
   /**
-   * Uses a specific snapshot as a blueprint for creating one or more new instances that are based on that identical configuration. The create instances from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by instanceSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Creates one or more new instances from a manual or automatic snapshot of an instance. The create instances from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by instance snapshot name. For more information, see the Lightsail Dev Guide.
    */
   createInstancesFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesFromSnapshotResult) => void): Request<Lightsail.Types.CreateInstancesFromSnapshotResult, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class Lightsail extends Service {
    */
   createLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerResult) => void): Request<Lightsail.Types.CreateLoadBalancerResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The create load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The create load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   createLoadBalancerTlsCertificate(params: Lightsail.Types.CreateLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.CreateLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The create load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The create load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   createLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.CreateLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -188,59 +188,67 @@ declare class Lightsail extends Service {
    */
   createRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseSnapshotResult, AWSError>;
   /**
-   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the Lightsail Dev Guide.
+   * Deletes an automatic snapshot for an instance or disk.
+   */
+  deleteAutoSnapshot(params: Lightsail.Types.DeleteAutoSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
+  /**
+   * Deletes an automatic snapshot for an instance or disk.
+   */
+  deleteAutoSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
+  /**
+   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
   deleteDisk(params: Lightsail.Types.DeleteDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskResult) => void): Request<Lightsail.Types.DeleteDiskResult, AWSError>;
   /**
-   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
   deleteDisk(callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskResult) => void): Request<Lightsail.Types.DeleteDiskResult, AWSError>;
   /**
-   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by diskSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
    */
   deleteDiskSnapshot(params: Lightsail.Types.DeleteDiskSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskSnapshotResult) => void): Request<Lightsail.Types.DeleteDiskSnapshotResult, AWSError>;
   /**
-   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by diskSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
    */
   deleteDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskSnapshotResult) => void): Request<Lightsail.Types.DeleteDiskSnapshotResult, AWSError>;
   /**
-   * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   deleteDomain(params: Lightsail.Types.DeleteDomainRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainResult) => void): Request<Lightsail.Types.DeleteDomainResult, AWSError>;
   /**
-   * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   deleteDomain(callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainResult) => void): Request<Lightsail.Types.DeleteDomainResult, AWSError>;
   /**
-   * Deletes a specific domain entry. The delete domain entry operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific domain entry. The delete domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   deleteDomainEntry(params: Lightsail.Types.DeleteDomainEntryRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainEntryResult) => void): Request<Lightsail.Types.DeleteDomainEntryResult, AWSError>;
   /**
-   * Deletes a specific domain entry. The delete domain entry operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific domain entry. The delete domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   deleteDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainEntryResult) => void): Request<Lightsail.Types.DeleteDomainEntryResult, AWSError>;
   /**
-   * Deletes a specific Amazon Lightsail virtual private server, or instance. The delete instance operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Deletes an Amazon Lightsail instance. The delete instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   deleteInstance(params: Lightsail.Types.DeleteInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceResult) => void): Request<Lightsail.Types.DeleteInstanceResult, AWSError>;
   /**
-   * Deletes a specific Amazon Lightsail virtual private server, or instance. The delete instance operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Deletes an Amazon Lightsail instance. The delete instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   deleteInstance(callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceResult) => void): Request<Lightsail.Types.DeleteInstanceResult, AWSError>;
   /**
-   * Deletes a specific snapshot of a virtual private server (or instance). The delete instance snapshot operation supports tag-based access control via resource tags applied to the resource identified by instanceSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific snapshot of a virtual private server (or instance). The delete instance snapshot operation supports tag-based access control via resource tags applied to the resource identified by instance snapshot name. For more information, see the Lightsail Dev Guide.
    */
   deleteInstanceSnapshot(params: Lightsail.Types.DeleteInstanceSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceSnapshotResult) => void): Request<Lightsail.Types.DeleteInstanceSnapshotResult, AWSError>;
   /**
-   * Deletes a specific snapshot of a virtual private server (or instance). The delete instance snapshot operation supports tag-based access control via resource tags applied to the resource identified by instanceSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific snapshot of a virtual private server (or instance). The delete instance snapshot operation supports tag-based access control via resource tags applied to the resource identified by instance snapshot name. For more information, see the Lightsail Dev Guide.
    */
   deleteInstanceSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceSnapshotResult) => void): Request<Lightsail.Types.DeleteInstanceSnapshotResult, AWSError>;
   /**
-   * Deletes a specific SSH key pair. The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by keyPairName. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific SSH key pair. The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Lightsail Dev Guide.
    */
   deleteKeyPair(params: Lightsail.Types.DeleteKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteKeyPairResult) => void): Request<Lightsail.Types.DeleteKeyPairResult, AWSError>;
   /**
-   * Deletes a specific SSH key pair. The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by keyPairName. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific SSH key pair. The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Lightsail Dev Guide.
    */
   deleteKeyPair(callback?: (err: AWSError, data: Lightsail.Types.DeleteKeyPairResult) => void): Request<Lightsail.Types.DeleteKeyPairResult, AWSError>;
   /**
@@ -252,19 +260,19 @@ declare class Lightsail extends Service {
    */
   deleteKnownHostKeys(callback?: (err: AWSError, data: Lightsail.Types.DeleteKnownHostKeysResult) => void): Request<Lightsail.Types.DeleteKnownHostKeysResult, AWSError>;
   /**
-   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again. The delete load balancer operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again. The delete load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   deleteLoadBalancer(params: Lightsail.Types.DeleteLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerResult) => void): Request<Lightsail.Types.DeleteLoadBalancerResult, AWSError>;
   /**
-   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again. The delete load balancer operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again. The delete load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   deleteLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerResult) => void): Request<Lightsail.Types.DeleteLoadBalancerResult, AWSError>;
   /**
-   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The delete load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The delete load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   deleteLoadBalancerTlsCertificate(params: Lightsail.Types.DeleteLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The delete load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The delete load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   deleteLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -284,19 +292,19 @@ declare class Lightsail extends Service {
    */
   deleteRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseSnapshotResult, AWSError>;
   /**
-   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the Lightsail Dev Guide.
+   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
   detachDisk(params: Lightsail.Types.DetachDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.DetachDiskResult) => void): Request<Lightsail.Types.DetachDiskResult, AWSError>;
   /**
-   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the Lightsail Dev Guide.
+   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
   detachDisk(callback?: (err: AWSError, data: Lightsail.Types.DetachDiskResult) => void): Request<Lightsail.Types.DetachDiskResult, AWSError>;
   /**
-   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer. The detach instances from load balancer operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer. The detach instances from load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   detachInstancesFromLoadBalancer(params: Lightsail.Types.DetachInstancesFromLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.DetachInstancesFromLoadBalancerResult) => void): Request<Lightsail.Types.DetachInstancesFromLoadBalancerResult, AWSError>;
   /**
-   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer. The detach instances from load balancer operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer. The detach instances from load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   detachInstancesFromLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.DetachInstancesFromLoadBalancerResult) => void): Request<Lightsail.Types.DetachInstancesFromLoadBalancerResult, AWSError>;
   /**
@@ -308,6 +316,14 @@ declare class Lightsail extends Service {
    */
   detachStaticIp(callback?: (err: AWSError, data: Lightsail.Types.DetachStaticIpResult) => void): Request<Lightsail.Types.DetachStaticIpResult, AWSError>;
   /**
+   * Disables an add-on for an Amazon Lightsail resource. For more information, see the Lightsail Dev Guide.
+   */
+  disableAddOn(params: Lightsail.Types.DisableAddOnRequest, callback?: (err: AWSError, data: Lightsail.Types.DisableAddOnResult) => void): Request<Lightsail.Types.DisableAddOnResult, AWSError>;
+  /**
+   * Disables an add-on for an Amazon Lightsail resource. For more information, see the Lightsail Dev Guide.
+   */
+  disableAddOn(callback?: (err: AWSError, data: Lightsail.Types.DisableAddOnResult) => void): Request<Lightsail.Types.DisableAddOnResult, AWSError>;
+  /**
    * Downloads the default SSH key pair from the user's account.
    */
   downloadDefaultKeyPair(params: Lightsail.Types.DownloadDefaultKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.DownloadDefaultKeyPairResult) => void): Request<Lightsail.Types.DownloadDefaultKeyPairResult, AWSError>;
@@ -316,11 +332,19 @@ declare class Lightsail extends Service {
    */
   downloadDefaultKeyPair(callback?: (err: AWSError, data: Lightsail.Types.DownloadDefaultKeyPairResult) => void): Request<Lightsail.Types.DownloadDefaultKeyPairResult, AWSError>;
   /**
-   * Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the create cloud formation stack operation to create new Amazon EC2 instances. Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.  The export snapshot operation supports tag-based access control via resource tags applied to the resource identified by sourceSnapshotName. For more information, see the Lightsail Dev Guide.  Use the get instance snapshots or get disk snapshots operations to get a list of snapshots that you can export to Amazon EC2. 
+   * Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the Lightsail Dev Guide.
+   */
+  enableAddOn(params: Lightsail.Types.EnableAddOnRequest, callback?: (err: AWSError, data: Lightsail.Types.EnableAddOnResult) => void): Request<Lightsail.Types.EnableAddOnResult, AWSError>;
+  /**
+   * Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the Lightsail Dev Guide.
+   */
+  enableAddOn(callback?: (err: AWSError, data: Lightsail.Types.EnableAddOnResult) => void): Request<Lightsail.Types.EnableAddOnResult, AWSError>;
+  /**
+   * Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the create cloud formation stack operation to create new Amazon EC2 instances. Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.  The export snapshot operation supports tag-based access control via resource tags applied to the resource identified by source snapshot name. For more information, see the Lightsail Dev Guide.  Use the get instance snapshots or get disk snapshots operations to get a list of snapshots that you can export to Amazon EC2. 
    */
   exportSnapshot(params: Lightsail.Types.ExportSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.ExportSnapshotResult) => void): Request<Lightsail.Types.ExportSnapshotResult, AWSError>;
   /**
-   * Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the create cloud formation stack operation to create new Amazon EC2 instances. Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.  The export snapshot operation supports tag-based access control via resource tags applied to the resource identified by sourceSnapshotName. For more information, see the Lightsail Dev Guide.  Use the get instance snapshots or get disk snapshots operations to get a list of snapshots that you can export to Amazon EC2. 
+   * Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the create cloud formation stack operation to create new Amazon EC2 instances. Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.  The export snapshot operation supports tag-based access control via resource tags applied to the resource identified by source snapshot name. For more information, see the Lightsail Dev Guide.  Use the get instance snapshots or get disk snapshots operations to get a list of snapshots that you can export to Amazon EC2. 
    */
   exportSnapshot(callback?: (err: AWSError, data: Lightsail.Types.ExportSnapshotResult) => void): Request<Lightsail.Types.ExportSnapshotResult, AWSError>;
   /**
@@ -332,11 +356,19 @@ declare class Lightsail extends Service {
    */
   getActiveNames(callback?: (err: AWSError, data: Lightsail.Types.GetActiveNamesResult) => void): Request<Lightsail.Types.GetActiveNamesResult, AWSError>;
   /**
-   * Returns the list of available instance images, or blueprints. You can use a blueprint to create a new virtual private server already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.
+   * Returns the available automatic snapshots for the specified resource name. For more information, see the Lightsail Dev Guide.
+   */
+  getAutoSnapshots(params: Lightsail.Types.GetAutoSnapshotsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetAutoSnapshotsResult) => void): Request<Lightsail.Types.GetAutoSnapshotsResult, AWSError>;
+  /**
+   * Returns the available automatic snapshots for the specified resource name. For more information, see the Lightsail Dev Guide.
+   */
+  getAutoSnapshots(callback?: (err: AWSError, data: Lightsail.Types.GetAutoSnapshotsResult) => void): Request<Lightsail.Types.GetAutoSnapshotsResult, AWSError>;
+  /**
+   * Returns the list of available instance images, or blueprints. You can use a blueprint to create a new instance already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
    */
   getBlueprints(params: Lightsail.Types.GetBlueprintsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBlueprintsResult) => void): Request<Lightsail.Types.GetBlueprintsResult, AWSError>;
   /**
-   * Returns the list of available instance images, or blueprints. You can use a blueprint to create a new virtual private server already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.
+   * Returns the list of available instance images, or blueprints. You can use a blueprint to create a new instance already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
    */
   getBlueprints(callback?: (err: AWSError, data: Lightsail.Types.GetBlueprintsResult) => void): Request<Lightsail.Types.GetBlueprintsResult, AWSError>;
   /**
@@ -420,11 +452,11 @@ declare class Lightsail extends Service {
    */
   getInstance(callback?: (err: AWSError, data: Lightsail.Types.GetInstanceResult) => void): Request<Lightsail.Types.GetInstanceResult, AWSError>;
   /**
-   * Returns temporary SSH keys you can use to connect to a specific virtual private server, or instance. The get instance access details operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Returns temporary SSH keys you can use to connect to a specific virtual private server, or instance. The get instance access details operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   getInstanceAccessDetails(params: Lightsail.Types.GetInstanceAccessDetailsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetInstanceAccessDetailsResult) => void): Request<Lightsail.Types.GetInstanceAccessDetailsResult, AWSError>;
   /**
-   * Returns temporary SSH keys you can use to connect to a specific virtual private server, or instance. The get instance access details operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Returns temporary SSH keys you can use to connect to a specific virtual private server, or instance. The get instance access details operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   getInstanceAccessDetails(callback?: (err: AWSError, data: Lightsail.Types.GetInstanceAccessDetailsResult) => void): Request<Lightsail.Types.GetInstanceAccessDetailsResult, AWSError>;
   /**
@@ -604,11 +636,11 @@ declare class Lightsail extends Service {
    */
   getRelationalDatabaseLogStreams(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseLogStreamsResult) => void): Request<Lightsail.Types.GetRelationalDatabaseLogStreamsResult, AWSError>;
   /**
-   * Returns the current, previous, or pending versions of the master user password for a Lightsail database. The asdf operation GetRelationalDatabaseMasterUserPassword supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName.
+   * Returns the current, previous, or pending versions of the master user password for a Lightsail database. The GetRelationalDatabaseMasterUserPassword operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName.
    */
   getRelationalDatabaseMasterUserPassword(params: Lightsail.Types.GetRelationalDatabaseMasterUserPasswordRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseMasterUserPasswordResult) => void): Request<Lightsail.Types.GetRelationalDatabaseMasterUserPasswordResult, AWSError>;
   /**
-   * Returns the current, previous, or pending versions of the master user password for a Lightsail database. The asdf operation GetRelationalDatabaseMasterUserPassword supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName.
+   * Returns the current, previous, or pending versions of the master user password for a Lightsail database. The GetRelationalDatabaseMasterUserPassword operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName.
    */
   getRelationalDatabaseMasterUserPassword(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabaseMasterUserPasswordResult) => void): Request<Lightsail.Types.GetRelationalDatabaseMasterUserPasswordResult, AWSError>;
   /**
@@ -684,11 +716,11 @@ declare class Lightsail extends Service {
    */
   isVpcPeered(callback?: (err: AWSError, data: Lightsail.Types.IsVpcPeeredResult) => void): Request<Lightsail.Types.IsVpcPeeredResult, AWSError>;
   /**
-   * Adds public ports to an Amazon Lightsail instance. The open instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Adds public ports to an Amazon Lightsail instance. The open instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   openInstancePublicPorts(params: Lightsail.Types.OpenInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.OpenInstancePublicPortsResult) => void): Request<Lightsail.Types.OpenInstancePublicPortsResult, AWSError>;
   /**
-   * Adds public ports to an Amazon Lightsail instance. The open instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Adds public ports to an Amazon Lightsail instance. The open instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   openInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.OpenInstancePublicPortsResult) => void): Request<Lightsail.Types.OpenInstancePublicPortsResult, AWSError>;
   /**
@@ -700,19 +732,19 @@ declare class Lightsail extends Service {
    */
   peerVpc(callback?: (err: AWSError, data: Lightsail.Types.PeerVpcResult) => void): Request<Lightsail.Types.PeerVpcResult, AWSError>;
   /**
-   * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request. The put instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request. The put instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   putInstancePublicPorts(params: Lightsail.Types.PutInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
   /**
-   * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request. The put instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request. The put instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   putInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
   /**
-   * Restarts a specific instance. The reboot instance operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Restarts a specific instance. The reboot instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   rebootInstance(params: Lightsail.Types.RebootInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.RebootInstanceResult) => void): Request<Lightsail.Types.RebootInstanceResult, AWSError>;
   /**
-   * Restarts a specific instance. The reboot instance operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Restarts a specific instance. The reboot instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   rebootInstance(callback?: (err: AWSError, data: Lightsail.Types.RebootInstanceResult) => void): Request<Lightsail.Types.RebootInstanceResult, AWSError>;
   /**
@@ -732,11 +764,11 @@ declare class Lightsail extends Service {
    */
   releaseStaticIp(callback?: (err: AWSError, data: Lightsail.Types.ReleaseStaticIpResult) => void): Request<Lightsail.Types.ReleaseStaticIpResult, AWSError>;
   /**
-   * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   startInstance(params: Lightsail.Types.StartInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.StartInstanceResult) => void): Request<Lightsail.Types.StartInstanceResult, AWSError>;
   /**
-   * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   startInstance(callback?: (err: AWSError, data: Lightsail.Types.StartInstanceResult) => void): Request<Lightsail.Types.StartInstanceResult, AWSError>;
   /**
@@ -748,11 +780,11 @@ declare class Lightsail extends Service {
    */
   startRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.StartRelationalDatabaseResult) => void): Request<Lightsail.Types.StartRelationalDatabaseResult, AWSError>;
   /**
-   * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   stopInstance(params: Lightsail.Types.StopInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.StopInstanceResult) => void): Request<Lightsail.Types.StopInstanceResult, AWSError>;
   /**
-   * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   stopInstance(callback?: (err: AWSError, data: Lightsail.Types.StopInstanceResult) => void): Request<Lightsail.Types.StopInstanceResult, AWSError>;
   /**
@@ -764,11 +796,11 @@ declare class Lightsail extends Service {
    */
   stopRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.StopRelationalDatabaseResult) => void): Request<Lightsail.Types.StopRelationalDatabaseResult, AWSError>;
   /**
-   * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Lightsail Dev Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resourceName. For more information, see the Lightsail Dev Guide.
+   * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Lightsail Dev Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
    */
   tagResource(params: Lightsail.Types.TagResourceRequest, callback?: (err: AWSError, data: Lightsail.Types.TagResourceResult) => void): Request<Lightsail.Types.TagResourceResult, AWSError>;
   /**
-   * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Lightsail Dev Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resourceName. For more information, see the Lightsail Dev Guide.
+   * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Lightsail Dev Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
    */
   tagResource(callback?: (err: AWSError, data: Lightsail.Types.TagResourceResult) => void): Request<Lightsail.Types.TagResourceResult, AWSError>;
   /**
@@ -780,27 +812,27 @@ declare class Lightsail extends Service {
    */
   unpeerVpc(callback?: (err: AWSError, data: Lightsail.Types.UnpeerVpcResult) => void): Request<Lightsail.Types.UnpeerVpcResult, AWSError>;
   /**
-   * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resourceName. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
    */
   untagResource(params: Lightsail.Types.UntagResourceRequest, callback?: (err: AWSError, data: Lightsail.Types.UntagResourceResult) => void): Request<Lightsail.Types.UntagResourceResult, AWSError>;
   /**
-   * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resourceName. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
    */
   untagResource(callback?: (err: AWSError, data: Lightsail.Types.UntagResourceResult) => void): Request<Lightsail.Types.UntagResourceResult, AWSError>;
   /**
-   * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the Lightsail Dev Guide.
+   * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   updateDomainEntry(params: Lightsail.Types.UpdateDomainEntryRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateDomainEntryResult) => void): Request<Lightsail.Types.UpdateDomainEntryResult, AWSError>;
   /**
-   * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the Lightsail Dev Guide.
+   * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
   updateDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.UpdateDomainEntryResult) => void): Request<Lightsail.Types.UpdateDomainEntryResult, AWSError>;
   /**
-   * Updates the specified attribute for a load balancer. You can only update one attribute at a time. The update load balancer attribute operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Updates the specified attribute for a load balancer. You can only update one attribute at a time. The update load balancer attribute operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   updateLoadBalancerAttribute(params: Lightsail.Types.UpdateLoadBalancerAttributeRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateLoadBalancerAttributeResult) => void): Request<Lightsail.Types.UpdateLoadBalancerAttributeResult, AWSError>;
   /**
-   * Updates the specified attribute for a load balancer. You can only update one attribute at a time. The update load balancer attribute operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the Lightsail Dev Guide.
+   * Updates the specified attribute for a load balancer. You can only update one attribute at a time. The update load balancer attribute operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   updateLoadBalancerAttribute(callback?: (err: AWSError, data: Lightsail.Types.UpdateLoadBalancerAttributeResult) => void): Request<Lightsail.Types.UpdateLoadBalancerAttributeResult, AWSError>;
   /**
@@ -822,6 +854,37 @@ declare class Lightsail extends Service {
 }
 declare namespace Lightsail {
   export type AccessDirection = "inbound"|"outbound"|string;
+  export interface AddOn {
+    /**
+     * The name of the add-on.
+     */
+    name?: string;
+    /**
+     * The status of the add-on.
+     */
+    status?: string;
+    /**
+     * The daily time when an automatic snapshot is created. The time shown is in HH:00 format, and in Coordinated Universal Time (UTC). The snapshot is automatically created between the time shown and up to 45 minutes after.
+     */
+    snapshotTimeOfDay?: TimeOfDay;
+    /**
+     * The next daily time an automatic snapshot will be created. The time shown is in HH:00 format, and in Coordinated Universal Time (UTC). The snapshot is automatically created between the time shown and up to 45 minutes after.
+     */
+    nextSnapshotTimeOfDay?: TimeOfDay;
+  }
+  export type AddOnList = AddOn[];
+  export interface AddOnRequest {
+    /**
+     * The add-on type.
+     */
+    addOnType: AddOnType;
+    /**
+     * An object that represents additional parameters when enabling or modifying the automatic snapshot add-on.
+     */
+    autoSnapshotAddOnRequest?: AutoSnapshotAddOnRequest;
+  }
+  export type AddOnRequestList = AddOnRequest[];
+  export type AddOnType = "AutoSnapshot"|string;
   export interface AllocateStaticIpRequest {
     /**
      * The name of the static IP address.
@@ -902,7 +965,45 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface AttachedDisk {
+    /**
+     * The path of the disk (e.g., /dev/xvdf).
+     */
+    path?: string;
+    /**
+     * The size of the disk in GB.
+     */
+    sizeInGb?: integer;
+  }
+  export type AttachedDiskList = AttachedDisk[];
   export type AttachedDiskMap = {[key: string]: DiskMapList};
+  export interface AutoSnapshotAddOnRequest {
+    /**
+     * The daily time when an automatic snapshot will be created. Constraints:   Must be in HH:00 format, and in an hourly increment.   Specified in Coordinated Universal Time (UTC).   The snapshot will be automatically created between the time specified and up to 45 minutes after.  
+     */
+    snapshotTimeOfDay?: TimeOfDay;
+  }
+  export type AutoSnapshotDate = string;
+  export interface AutoSnapshotDetails {
+    /**
+     * The date of the automatic snapshot in YYYY-MM-DD format.
+     */
+    date?: string;
+    /**
+     * The timestamp when the automatic snapshot was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The status of the automatic snapshot.
+     */
+    status?: AutoSnapshotStatus;
+    /**
+     * An array of objects that describe the block storage disks attached to the instance when the automatic snapshot was created.
+     */
+    fromAttachedDisks?: AttachedDiskList;
+  }
+  export type AutoSnapshotDetailsList = AutoSnapshotDetails[];
+  export type AutoSnapshotStatus = "Success"|"Failed"|"InProgress"|"NotFound"|string;
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone. The format is us-east-2a (case-sensitive).
@@ -1083,15 +1184,27 @@ declare namespace Lightsail {
   export type CloudFormationStackRecordSourceType = "ExportSnapshotRecord"|string;
   export interface CopySnapshotRequest {
     /**
-     * The name of the source instance or disk snapshot to be copied.
+     * The name of the source instance or disk snapshot to be copied.  Define this parameter only when copying a manual snapshot as another manual snapshot. 
      */
-    sourceSnapshotName: ResourceName;
+    sourceSnapshotName?: ResourceName;
+    /**
+     * The name of the source resource from which the automatic snapshot was created.  Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    sourceResourceName?: string;
+    /**
+     * The date of the automatic snapshot to copy for the new manual snapshot. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.    Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    restoreDate?: string;
+    /**
+     * A Boolean value to indicate whether to use the latest available automatic snapshot. This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.  Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    useLatestRestorableAutoSnapshot?: boolean;
     /**
      * The name of the new instance or disk snapshot to be created as a copy.
      */
     targetSnapshotName: ResourceName;
     /**
-     * The AWS Region where the source snapshot is located.
+     * The AWS Region where the source manual or automatic snapshot is located.
      */
     sourceRegion: RegionName;
   }
@@ -1119,9 +1232,9 @@ declare namespace Lightsail {
      */
     diskName: ResourceName;
     /**
-     * The name of the disk snapshot (e.g., my-snapshot) from which to create the new storage disk.
+     * The name of the disk snapshot (e.g., my-snapshot) from which to create the new storage disk. This parameter cannot be defined together with the source disk name parameter. The disk snapshot name and source disk name parameters are mutually exclusive.
      */
-    diskSnapshotName: ResourceName;
+    diskSnapshotName?: ResourceName;
     /**
      * The Availability Zone where you want to create the disk (e.g., us-east-2a). Choose the same Availability Zone as the Lightsail instance where you want to create the disk. Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.
      */
@@ -1134,6 +1247,22 @@ declare namespace Lightsail {
      * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
      */
     tags?: TagList;
+    /**
+     * An array of objects that represent the add-ons to enable for the new disk.
+     */
+    addOns?: AddOnRequestList;
+    /**
+     * The name of the source disk from which the source automatic snapshot was created. This parameter cannot be defined together with the disk snapshot name parameter. The source disk name and disk snapshot name parameters are mutually exclusive.  Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    sourceDiskName?: string;
+    /**
+     * The date of the automatic snapshot to use for the new disk. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.    Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    restoreDate?: string;
+    /**
+     * A Boolean value to indicate whether to use the latest available automatic snapshot. This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.  Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    useLatestRestorableAutoSnapshot?: boolean;
   }
   export interface CreateDiskFromSnapshotResult {
     /**
@@ -1147,7 +1276,7 @@ declare namespace Lightsail {
      */
     diskName: ResourceName;
     /**
-     * The Availability Zone where you want to create the disk (e.g., us-east-2a). Choose the same Availability Zone as the Lightsail instance where you want to create the disk. Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.
+     * The Availability Zone where you want to create the disk (e.g., us-east-2a). Use the same Availability Zone as the Lightsail instance to which you want to attach the disk. Use the get regions operation to list the Availability Zones where Lightsail is currently available.
      */
     availabilityZone: NonEmptyString;
     /**
@@ -1158,6 +1287,10 @@ declare namespace Lightsail {
      * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
      */
     tags?: TagList;
+    /**
+     * An array of objects that represent the add-ons to enable for the new disk.
+     */
+    addOns?: AddOnRequestList;
   }
   export interface CreateDiskResult {
     /**
@@ -1255,9 +1388,9 @@ declare namespace Lightsail {
      */
     availabilityZone: string;
     /**
-     * The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots.
+     * The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots. This parameter cannot be defined together with the source instance name parameter. The instance snapshot name and source instance name parameters are mutually exclusive.
      */
-    instanceSnapshotName: ResourceName;
+    instanceSnapshotName?: ResourceName;
     /**
      * The bundle of specification information for your virtual private server (or instance), including the pricing plan (e.g., micro_1_0).
      */
@@ -1274,6 +1407,22 @@ declare namespace Lightsail {
      * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
      */
     tags?: TagList;
+    /**
+     * An array of objects representing the add-ons to enable for the new instance.
+     */
+    addOns?: AddOnRequestList;
+    /**
+     * The name of the source instance from which the source automatic snapshot was created. This parameter cannot be defined together with the instance snapshot name parameter. The source instance name and instance snapshot name parameters are mutually exclusive.  Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    sourceInstanceName?: string;
+    /**
+     * The date of the automatic snapshot to use for the new instance. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.    Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    restoreDate?: string;
+    /**
+     * A Boolean value to indicate whether to use the latest available automatic snapshot. This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.  Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     */
+    useLatestRestorableAutoSnapshot?: boolean;
   }
   export interface CreateInstancesFromSnapshotResult {
     /**
@@ -1295,7 +1444,7 @@ declare namespace Lightsail {
      */
     customImageName?: ResourceName;
     /**
-     * The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0). Use the get blueprints operation to return a list of available images (or blueprints).
+     * The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0). Use the get blueprints operation to return a list of available images (or blueprints).  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
      */
     blueprintId: NonEmptyString;
     /**
@@ -1314,6 +1463,10 @@ declare namespace Lightsail {
      * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
      */
     tags?: TagList;
+    /**
+     * An array of objects representing the add-ons to enable for the new instance.
+     */
+    addOns?: AddOnRequestList;
   }
   export interface CreateInstancesResult {
     /**
@@ -1439,7 +1592,7 @@ declare namespace Lightsail {
      */
     sourceRelationalDatabaseName?: ResourceName;
     /**
-     * The date and time to restore your database from. Constraints:   Must be before the latest restorable time for the database.   Cannot be specified if the use latest restorable time parameter is true.   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use a restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the restore time.  
+     * The date and time to restore your database from. Constraints:   Must be before the latest restorable time for the database.   Cannot be specified if the use latest restorable time parameter is true.   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use a restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the restore time.  
      */
     restoreTime?: IsoDate;
     /**
@@ -1487,11 +1640,11 @@ declare namespace Lightsail {
      */
     masterUserPassword?: SensitiveString;
     /**
-     * The daily time range during which automated backups are created for your new database if automated backups are enabled. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the Working With Backups guide in the Amazon Relational Database Service (Amazon RDS) documentation. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created for your new database if automated backups are enabled. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the Working With Backups guide in the Amazon Relational Database Service (Amazon RDS) documentation. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Coordinated Universal Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     preferredBackupWindow?: string;
     /**
-     * The weekly time range during which system maintenance can occur on your new database. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Universal Coordinated Time (UTC).   Example: Tue:17:00-Tue:17:30   
+     * The weekly time range during which system maintenance can occur on your new database. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Coordinated Universal Time (UTC).   Example: Tue:17:00-Tue:17:30   
      */
     preferredMaintenanceWindow?: string;
     /**
@@ -1529,15 +1682,35 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface DeleteAutoSnapshotRequest {
+    /**
+     * The name of the source resource from which to delete the automatic snapshot.
+     */
+    resourceName: ResourceName;
+    /**
+     * The date of the automatic snapshot to delete in YYYY-MM-DD format. Use the get auto snapshots operation to get the available automatic snapshots for a resource.
+     */
+    date: AutoSnapshotDate;
+  }
+  export interface DeleteAutoSnapshotResult {
+    /**
+     * An array of objects that describe the result of your request.
+     */
+    operations?: OperationList;
+  }
   export interface DeleteDiskRequest {
     /**
      * The unique name of the disk you want to delete (e.g., my-disk).
      */
     diskName: ResourceName;
+    /**
+     * A Boolean value to indicate whether to delete the enabled add-ons for the disk.
+     */
+    forceDeleteAddOns?: boolean;
   }
   export interface DeleteDiskResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of your request.
      */
     operations?: OperationList;
   }
@@ -1586,6 +1759,10 @@ declare namespace Lightsail {
      * The name of the instance to delete.
      */
     instanceName: ResourceName;
+    /**
+     * A Boolean value to indicate whether to delete the enabled add-ons for the disk.
+     */
+    forceDeleteAddOns?: boolean;
   }
   export interface DeleteInstanceResult {
     /**
@@ -1743,6 +1920,22 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface DisableAddOnRequest {
+    /**
+     * The add-on type to disable.
+     */
+    addOnType: AddOnType;
+    /**
+     * The name of the source resource from which to disable the add-on.
+     */
+    resourceName: ResourceName;
+  }
+  export interface DisableAddOnResult {
+    /**
+     * An array of objects that describe the result of your request.
+     */
+    operations?: OperationList;
+  }
   export interface Disk {
     /**
      * The unique name of the disk.
@@ -1772,6 +1965,10 @@ declare namespace Lightsail {
      * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
      */
     tags?: TagList;
+    /**
+     * An array of objects representing the add-ons enabled on the disk.
+     */
+    addOns?: AddOnList;
     /**
      * The size of the disk in GB.
      */
@@ -1897,6 +2094,10 @@ declare namespace Lightsail {
      * The Amazon Resource Name (ARN) of the source instance from which the disk (system volume) snapshot was created.
      */
     fromInstanceArn?: NonEmptyString;
+    /**
+     * A Boolean value indicating whether the snapshot was created from an automatic snapshot.
+     */
+    isFromAutoSnapshot?: boolean;
   }
   export interface DiskSnapshotInfo {
     /**
@@ -1985,6 +2186,22 @@ declare namespace Lightsail {
      * A base64-encoded RSA private key.
      */
     privateKeyBase64?: Base64;
+  }
+  export interface EnableAddOnRequest {
+    /**
+     * The name of the source resource for which to enable or modify the add-on.
+     */
+    resourceName: ResourceName;
+    /**
+     * An array of strings representing the add-on to enable or modify.
+     */
+    addOnRequest: AddOnRequest;
+  }
+  export interface EnableAddOnResult {
+    /**
+     * An array of objects that describe the result of your request.
+     */
+    operations?: OperationList;
   }
   export interface ExportSnapshotRecord {
     /**
@@ -2083,6 +2300,26 @@ declare namespace Lightsail {
      * A token used for advancing to the next page of results from your get active names request.
      */
     nextPageToken?: string;
+  }
+  export interface GetAutoSnapshotsRequest {
+    /**
+     * The name of the source resource from which to get automatic snapshot information.
+     */
+    resourceName: ResourceName;
+  }
+  export interface GetAutoSnapshotsResult {
+    /**
+     * The name of the source resource for the automatic snapshots.
+     */
+    resourceName?: ResourceName;
+    /**
+     * The resource type (e.g., Instance or Disk).
+     */
+    resourceType?: ResourceType;
+    /**
+     * An array of objects that describe the automatic snapshots that are available for the specified source resource.asdf
+     */
+    autoSnapshots?: AutoSnapshotDetailsList;
   }
   export interface GetBlueprintsRequest {
     /**
@@ -2618,15 +2855,15 @@ declare namespace Lightsail {
      */
     logStreamName: string;
     /**
-     * The start of the time interval from which to get log events. Constraints:   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the start time.  
+     * The start of the time interval from which to get log events. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the start time.  
      */
     startTime?: IsoDate;
     /**
-     * The end of the time interval from which to get log events. Constraints:   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the end time.  
+     * The end of the time interval from which to get log events. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the end time.  
      */
     endTime?: IsoDate;
     /**
-     * Parameter to specify if the log should start from head or tail. If true is specified, the log event starts from the head of the log. If false is specified, the log event starts from the tail of the log. Default: false 
+     * Parameter to specify if the log should start from head or tail. If true is specified, the log event starts from the head of the log. If false is specified, the log event starts from the tail of the log.  For PostgreSQL, the default value of false is the only option available. 
      */
     startFromHead?: boolean;
     /**
@@ -2694,11 +2931,11 @@ declare namespace Lightsail {
      */
     period: MetricPeriod;
     /**
-     * The start of the time interval from which to get metric data. Constraints:   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the start time.  
+     * The start of the time interval from which to get metric data. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the start time.  
      */
     startTime: IsoDate;
     /**
-     * The end of the time interval from which to get metric data. Constraints:   Specified in Universal Coordinated Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the end time.  
+     * The end of the time interval from which to get metric data. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the end time.  
      */
     endTime: IsoDate;
     /**
@@ -2912,6 +3149,10 @@ declare namespace Lightsail {
      * The bundle for the instance (e.g., micro_1_0).
      */
     bundleId?: NonEmptyString;
+    /**
+     * An array of objects representing the add-ons enabled on the instance.
+     */
+    addOns?: AddOnList;
     /**
      * A Boolean value indicating whether this instance has a static IP assigned to it.
      */
@@ -3167,6 +3408,10 @@ declare namespace Lightsail {
      * The bundle ID from which you created the snapshot (e.g., micro_1_0).
      */
     fromBundleId?: string;
+    /**
+     * A Boolean value indicating whether the snapshot was created from an automatic snapshot.
+     */
+    isFromAutoSnapshot?: boolean;
     /**
      * The size in GB of the SSD.
      */
@@ -3567,7 +3812,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The region and Availability Zone.
+     * The AWS Region and Availability Zone.
      */
     location?: ResourceLocation;
     /**
@@ -3601,7 +3846,7 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
-  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|string;
+  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|string;
   export interface PasswordData {
     /**
      * The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you use the default key pair (LightsailDefaultKeyPair), the decrypted password will be available in the password field. If you are using a custom key pair, you need to use your own means of decryption. If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
@@ -4063,6 +4308,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type ResourceArn = string;
   export interface ResourceLocation {
     /**
      * The Availability Zone. Follows the format us-east-2a (case-sensitive).
@@ -4193,6 +4439,10 @@ declare namespace Lightsail {
      */
     resourceName: ResourceName;
     /**
+     * The Amazon Resource Name (ARN) of the resource to which you want to add a tag.
+     */
+    resourceArn?: ResourceArn;
+    /**
      * The tag key and optional value.
      */
     tags: TagList;
@@ -4204,6 +4454,7 @@ declare namespace Lightsail {
     operations?: OperationList;
   }
   export type TagValue = string;
+  export type TimeOfDay = string;
   export interface UnpeerVpcRequest {
   }
   export interface UnpeerVpcResult {
@@ -4217,6 +4468,10 @@ declare namespace Lightsail {
      * The name of the resource from which you are removing a tag.
      */
     resourceName: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the resource from which you want to remove a tag.
+     */
+    resourceArn?: ResourceArn;
     /**
      * The tag keys to delete from the specified resource.
      */
@@ -4294,11 +4549,11 @@ declare namespace Lightsail {
      */
     rotateMasterUserPassword?: boolean;
     /**
-     * The daily time range during which automated backups are created for your database if automated backups are enabled. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created for your database if automated backups are enabled. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Coordinated Universal Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     preferredBackupWindow?: string;
     /**
-     * The weekly time range during which system maintenance can occur on your database. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Universal Coordinated Time (UTC).   Example: Tue:17:00-Tue:17:30   
+     * The weekly time range during which system maintenance can occur on your database. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Coordinated Universal Time (UTC).   Example: Tue:17:00-Tue:17:30   
      */
     preferredMaintenanceWindow?: string;
     /**

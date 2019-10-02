@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.540.0-->
+<!--LATEST=2.541.0-->
 <!--ENTRYINSERT-->
+
+## 2.541.0
+* feature: Lightsail: This release adds support for the automatic snapshots add-on for instances and block storage disks.
 
 ## 2.540.0
 * feature: DocDB: This release provides support for describe and modify CA certificates.
