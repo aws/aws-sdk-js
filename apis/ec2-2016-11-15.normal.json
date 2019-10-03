@@ -1442,6 +1442,20 @@
       },
       "documentation": "<p>Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
+    "DeleteQueuedReservedInstances": {
+      "name": "DeleteQueuedReservedInstances",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteQueuedReservedInstancesRequest"
+      },
+      "output": {
+        "shape": "DeleteQueuedReservedInstancesResult"
+      },
+      "documentation": "<p>Deletes the queued purchases for the specified Reserved Instances.</p>"
+    },
     "DeleteRoute": {
       "name": "DeleteRoute",
       "http": {
@@ -4304,7 +4318,7 @@
       "output": {
         "shape": "PurchaseReservedInstancesOfferingResult"
       },
-      "documentation": "<p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html\">Reserved Instances</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>To queue a purchase for a future date and time, specify a purchase time. If you do not specify a purchase time, the default is the current time.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html\">Reserved Instances</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "PurchaseScheduledInstances": {
       "name": "PurchaseScheduledInstances",
@@ -10973,6 +10987,71 @@
         }
       }
     },
+    "DeleteQueuedReservedInstancesError": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "DeleteQueuedReservedInstancesErrorCode",
+          "documentation": "<p>The error code.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The error message.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes the error for a Reserved Instance whose queued purchase could not be deleted.</p>"
+    },
+    "DeleteQueuedReservedInstancesErrorCode": {
+      "type": "string",
+      "enum": [
+        "reserved-instances-id-invalid",
+        "reserved-instances-not-in-queued-state",
+        "unexpected-error"
+      ]
+    },
+    "DeleteQueuedReservedInstancesIdList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "DeleteQueuedReservedInstancesRequest": {
+      "type": "structure",
+      "required": [
+        "ReservedInstancesIds"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ReservedInstancesIds": {
+          "shape": "DeleteQueuedReservedInstancesIdList",
+          "documentation": "<p>The IDs of the Reserved Instances.</p>",
+          "locationName": "ReservedInstancesId"
+        }
+      }
+    },
+    "DeleteQueuedReservedInstancesResult": {
+      "type": "structure",
+      "members": {
+        "SuccessfulQueuedPurchaseDeletions": {
+          "shape": "SuccessfulQueuedPurchaseDeletionSet",
+          "documentation": "<p>Information about the queued purchases that were successfully deleted.</p>",
+          "locationName": "successfulQueuedPurchaseDeletionSet"
+        },
+        "FailedQueuedPurchaseDeletions": {
+          "shape": "FailedQueuedPurchaseDeletionSet",
+          "documentation": "<p>Information about the queued purchases that could not be deleted.</p>",
+          "locationName": "failedQueuedPurchaseDeletionSet"
+        }
+      }
+    },
     "DeleteRouteRequest": {
       "type": "structure",
       "required": [
@@ -16571,7 +16650,7 @@
       "members": {
         "DeleteOnTermination": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the EBS volume is deleted on instance termination.</p>",
+          "documentation": "<p>Indicates whether the EBS volume is deleted on instance termination. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination\">Preserving Amazon EBS Volumes on Instance Termination</a> in the Amazon Elastic Compute Cloud User Guide.</p>",
           "locationName": "deleteOnTermination"
         },
         "Iops": {
@@ -17475,6 +17554,29 @@
           "documentation": "<p>The URL of the exported file in Amazon S3. For example, s3://<i>bucket_name</i>/VPCTransitGateway/TransitGatewayRouteTables/<i>file_name</i>.</p>",
           "locationName": "s3Location"
         }
+      }
+    },
+    "FailedQueuedPurchaseDeletion": {
+      "type": "structure",
+      "members": {
+        "Error": {
+          "shape": "DeleteQueuedReservedInstancesError",
+          "documentation": "<p>The error.</p>",
+          "locationName": "error"
+        },
+        "ReservedInstancesId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Reserved Instance.</p>",
+          "locationName": "reservedInstancesId"
+        }
+      },
+      "documentation": "<p>Describes a Reserved Instance whose queued purchase was not deleted.</p>"
+    },
+    "FailedQueuedPurchaseDeletionSet": {
+      "type": "list",
+      "member": {
+        "shape": "FailedQueuedPurchaseDeletion",
+        "locationName": "item"
       }
     },
     "Filter": {
@@ -26158,6 +26260,10 @@
           "shape": "ReservedInstanceLimitPrice",
           "documentation": "<p>Specified for Reserved Instance Marketplace offerings to limit the total order and ensure that the Reserved Instances are not purchased at unexpected prices.</p>",
           "locationName": "limitPrice"
+        },
+        "PurchaseTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time at which to purchase the Reserved Instance.</p>"
         }
       },
       "documentation": "<p>Contains the parameters for PurchaseReservedInstancesOffering.</p>"
@@ -27066,7 +27172,7 @@
         },
         "ValidFrom": {
           "shape": "DateTime",
-          "documentation": "<p>The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.</p>",
+          "documentation": "<p>The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.</p> <p>The specified start date and time cannot be equal to the current date and time. You must specify a start date and time that occurs after the current date and time.</p>",
           "locationName": "validFrom"
         },
         "ValidUntil": {
@@ -27298,7 +27404,9 @@
         "payment-pending",
         "active",
         "payment-failed",
-        "retired"
+        "retired",
+        "queued",
+        "queued-deleted"
       ]
     },
     "ReservedInstances": {
@@ -30943,6 +31051,24 @@
       "type": "list",
       "member": {
         "shape": "SuccessfulInstanceCreditSpecificationItem",
+        "locationName": "item"
+      }
+    },
+    "SuccessfulQueuedPurchaseDeletion": {
+      "type": "structure",
+      "members": {
+        "ReservedInstancesId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Reserved Instance.</p>",
+          "locationName": "reservedInstancesId"
+        }
+      },
+      "documentation": "<p>Describes a Reserved Instance whose queued purchase was successfully deleted.</p>"
+    },
+    "SuccessfulQueuedPurchaseDeletionSet": {
+      "type": "list",
+      "member": {
+        "shape": "SuccessfulQueuedPurchaseDeletion",
         "locationName": "item"
       }
     },

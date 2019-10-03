@@ -284,7 +284,7 @@ declare namespace ES {
   }
   export interface CreateElasticsearchDomainRequest {
     /**
-     * The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+     * The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a lowercase letter and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
      */
     DomainName: DomainName;
     /**
@@ -331,6 +331,10 @@ declare namespace ES {
      * Map of LogType and LogPublishingOption, each containing options to publish a given type of Elasticsearch log.
      */
     LogPublishingOptions?: LogPublishingOptions;
+    /**
+     * Options to specify configuration that will be applied to the domain endpoint.
+     */
+    DomainEndpointOptions?: DomainEndpointOptions;
   }
   export interface CreateElasticsearchDomainResponse {
     /**
@@ -452,6 +456,26 @@ declare namespace ES {
      * List of reserved Elasticsearch instances.
      */
     ReservedElasticsearchInstances?: ReservedElasticsearchInstanceList;
+  }
+  export interface DomainEndpointOptions {
+    /**
+     * Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+     */
+    EnforceHTTPS?: Boolean;
+    /**
+     * Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.  It can be one of the following values:  Policy-Min-TLS-1-0-2019-07:  TLS security policy which supports TLSv1.0 and higher. Policy-Min-TLS-1-2-2019-07:  TLS security policy which supports only TLSv1.2  
+     */
+    TLSSecurityPolicy?: TLSSecurityPolicy;
+  }
+  export interface DomainEndpointOptionsStatus {
+    /**
+     * Options to configure endpoint for the Elasticsearch domain.
+     */
+    Options: DomainEndpointOptions;
+    /**
+     * The status of the endpoint options for the Elasticsearch domain. See OptionStatus for the status information that's included. 
+     */
+    Status: OptionStatus;
   }
   export type DomainId = string;
   export interface DomainInfo {
@@ -578,6 +602,10 @@ declare namespace ES {
      * Log publishing options for the given domain.
      */
     LogPublishingOptions?: LogPublishingOptionsStatus;
+    /**
+     * Specifies the DomainEndpointOptions for the Elasticsearch domain.
+     */
+    DomainEndpointOptions?: DomainEndpointOptionsStatus;
   }
   export interface ElasticsearchDomainStatus {
     /**
@@ -661,6 +689,10 @@ declare namespace ES {
      * The current status of the Elasticsearch domain's service software.
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
+    /**
+     * The current status of the Elasticsearch domain's endpoint options.
+     */
+    DomainEndpointOptions?: DomainEndpointOptions;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
   export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
@@ -1111,6 +1143,7 @@ declare namespace ES {
   export type StorageTypeName = string;
   export type String = string;
   export type StringList = String[];
+  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
   export interface Tag {
     /**
      * Specifies the TagKey, the name of the tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.
@@ -1162,6 +1195,10 @@ declare namespace ES {
      * Map of LogType and LogPublishingOption, each containing options to publish a given type of Elasticsearch log.
      */
     LogPublishingOptions?: LogPublishingOptions;
+    /**
+     * Options to specify configuration that will be applied to the domain endpoint.
+     */
+    DomainEndpointOptions?: DomainEndpointOptions;
   }
   export interface UpdateElasticsearchDomainConfigResponse {
     /**

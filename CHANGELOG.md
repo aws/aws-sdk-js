@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.541.0-->
+<!--LATEST=2.542.0-->
 <!--ENTRYINSERT-->
+
+## 2.542.0
+* feature: EC2: This release allows customers to purchase regional EC2 RIs on a future date.
+* feature: ES: Amazon Elasticsearch Service now supports configuring additional options for domain endpoint, such as whether to require HTTPS for all traffic.
 
 ## 2.541.0
 * feature: Lightsail: This release adds support for the automatic snapshots add-on for instances and block storage disks.

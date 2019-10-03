@@ -861,6 +861,14 @@ declare class EC2 extends Service {
    */
   deletePlacementGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the queued purchases for the specified Reserved Instances.
+   */
+  deleteQueuedReservedInstances(params: EC2.Types.DeleteQueuedReservedInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DeleteQueuedReservedInstancesResult) => void): Request<EC2.Types.DeleteQueuedReservedInstancesResult, AWSError>;
+  /**
+   * Deletes the queued purchases for the specified Reserved Instances.
+   */
+  deleteQueuedReservedInstances(callback?: (err: AWSError, data: EC2.Types.DeleteQueuedReservedInstancesResult) => void): Request<EC2.Types.DeleteQueuedReservedInstancesResult, AWSError>;
+  /**
    * Deletes the specified route from the specified route table.
    */
   deleteRoute(params: EC2.Types.DeleteRouteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -2541,11 +2549,11 @@ declare class EC2 extends Service {
    */
   purchaseHostReservation(callback?: (err: AWSError, data: EC2.Types.PurchaseHostReservationResult) => void): Request<EC2.Types.PurchaseHostReservationResult, AWSError>;
   /**
-   * Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing. Use DescribeReservedInstancesOfferings to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with DescribeReservedInstances. For more information, see Reserved Instances and Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
+   * Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing. Use DescribeReservedInstancesOfferings to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with DescribeReservedInstances. To queue a purchase for a future date and time, specify a purchase time. If you do not specify a purchase time, the default is the current time. For more information, see Reserved Instances and Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
    */
   purchaseReservedInstancesOffering(params: EC2.Types.PurchaseReservedInstancesOfferingRequest, callback?: (err: AWSError, data: EC2.Types.PurchaseReservedInstancesOfferingResult) => void): Request<EC2.Types.PurchaseReservedInstancesOfferingResult, AWSError>;
   /**
-   * Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing. Use DescribeReservedInstancesOfferings to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with DescribeReservedInstances. For more information, see Reserved Instances and Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
+   * Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing. Use DescribeReservedInstancesOfferings to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with DescribeReservedInstances. To queue a purchase for a future date and time, specify a purchase time. If you do not specify a purchase time, the default is the current time. For more information, see Reserved Instances and Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
    */
   purchaseReservedInstancesOffering(callback?: (err: AWSError, data: EC2.Types.PurchaseReservedInstancesOfferingResult) => void): Request<EC2.Types.PurchaseReservedInstancesOfferingResult, AWSError>;
   /**
@@ -6949,6 +6957,38 @@ declare namespace EC2 {
      */
     GroupName: String;
   }
+  export interface DeleteQueuedReservedInstancesError {
+    /**
+     * The error code.
+     */
+    Code?: DeleteQueuedReservedInstancesErrorCode;
+    /**
+     * The error message.
+     */
+    Message?: String;
+  }
+  export type DeleteQueuedReservedInstancesErrorCode = "reserved-instances-id-invalid"|"reserved-instances-not-in-queued-state"|"unexpected-error"|string;
+  export type DeleteQueuedReservedInstancesIdList = String[];
+  export interface DeleteQueuedReservedInstancesRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IDs of the Reserved Instances.
+     */
+    ReservedInstancesIds: DeleteQueuedReservedInstancesIdList;
+  }
+  export interface DeleteQueuedReservedInstancesResult {
+    /**
+     * Information about the queued purchases that were successfully deleted.
+     */
+    SuccessfulQueuedPurchaseDeletions?: SuccessfulQueuedPurchaseDeletionSet;
+    /**
+     * Information about the queued purchases that could not be deleted.
+     */
+    FailedQueuedPurchaseDeletions?: FailedQueuedPurchaseDeletionSet;
+  }
   export interface DeleteRouteRequest {
     /**
      * The IPv4 CIDR range for the route. The value you specify must match the CIDR for the route exactly.
@@ -10713,7 +10753,7 @@ declare namespace EC2 {
   export type Double = number;
   export interface EbsBlockDevice {
     /**
-     * Indicates whether the EBS volume is deleted on instance termination.
+     * Indicates whether the EBS volume is deleted on instance termination. For more information, see Preserving Amazon EBS Volumes on Instance Termination in the Amazon Elastic Compute Cloud User Guide.
      */
     DeleteOnTermination?: Boolean;
     /**
@@ -11224,6 +11264,17 @@ declare namespace EC2 {
      */
     S3Location?: String;
   }
+  export interface FailedQueuedPurchaseDeletion {
+    /**
+     * The error.
+     */
+    Error?: DeleteQueuedReservedInstancesError;
+    /**
+     * The ID of the Reserved Instance.
+     */
+    ReservedInstancesId?: String;
+  }
+  export type FailedQueuedPurchaseDeletionSet = FailedQueuedPurchaseDeletion[];
   export interface Filter {
     /**
      * The name of the filter. Filter names are case-sensitive.
@@ -16446,6 +16497,10 @@ declare namespace EC2 {
      * Specified for Reserved Instance Marketplace offerings to limit the total order and ensure that the Reserved Instances are not purchased at unexpected prices.
      */
     LimitPrice?: ReservedInstanceLimitPrice;
+    /**
+     * The time at which to purchase the Reserved Instance.
+     */
+    PurchaseTime?: DateTime;
   }
   export interface PurchaseReservedInstancesOfferingResult {
     /**
@@ -17019,7 +17074,7 @@ declare namespace EC2 {
      */
     Type?: SpotInstanceType;
     /**
-     * The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.
+     * The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled. The specified start date and time cannot be equal to the current date and time. You must specify a start date and time that occurs after the current date and time.
      */
     ValidFrom?: DateTime;
     /**
@@ -17163,7 +17218,7 @@ declare namespace EC2 {
     ReservedInstanceId?: String;
   }
   export type ReservedInstanceReservationValueSet = ReservedInstanceReservationValue[];
-  export type ReservedInstanceState = "payment-pending"|"active"|"payment-failed"|"retired"|string;
+  export type ReservedInstanceState = "payment-pending"|"active"|"payment-failed"|"retired"|"queued"|"queued-deleted"|string;
   export interface ReservedInstances {
     /**
      * The Availability Zone in which the Reserved Instance can be used.
@@ -19543,6 +19598,13 @@ declare namespace EC2 {
     InstanceId?: String;
   }
   export type SuccessfulInstanceCreditSpecificationSet = SuccessfulInstanceCreditSpecificationItem[];
+  export interface SuccessfulQueuedPurchaseDeletion {
+    /**
+     * The ID of the Reserved Instance.
+     */
+    ReservedInstancesId?: String;
+  }
+  export type SuccessfulQueuedPurchaseDeletionSet = SuccessfulQueuedPurchaseDeletion[];
   export type SummaryStatus = "ok"|"impaired"|"insufficient-data"|"not-applicable"|"initializing"|string;
   export interface Tag {
     /**
