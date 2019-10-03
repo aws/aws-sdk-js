@@ -415,7 +415,8 @@
     "name": "SWF"
   },
   "xray": {
-    "name": "XRay"
+    "name": "XRay",
+    "cors": true
   },
   "waf": {
     "name": "WAF",
