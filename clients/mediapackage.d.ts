@@ -20,6 +20,14 @@ declare class MediaPackage extends Service {
    */
   createChannel(callback?: (err: AWSError, data: MediaPackage.Types.CreateChannelResponse) => void): Request<MediaPackage.Types.CreateChannelResponse, AWSError>;
   /**
+   * Creates a new HarvestJob record.
+   */
+  createHarvestJob(params: MediaPackage.Types.CreateHarvestJobRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateHarvestJobResponse) => void): Request<MediaPackage.Types.CreateHarvestJobResponse, AWSError>;
+  /**
+   * Creates a new HarvestJob record.
+   */
+  createHarvestJob(callback?: (err: AWSError, data: MediaPackage.Types.CreateHarvestJobResponse) => void): Request<MediaPackage.Types.CreateHarvestJobResponse, AWSError>;
+  /**
    * Creates a new OriginEndpoint record.
    */
   createOriginEndpoint(params: MediaPackage.Types.CreateOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateOriginEndpointResponse) => void): Request<MediaPackage.Types.CreateOriginEndpointResponse, AWSError>;
@@ -52,6 +60,14 @@ declare class MediaPackage extends Service {
    */
   describeChannel(callback?: (err: AWSError, data: MediaPackage.Types.DescribeChannelResponse) => void): Request<MediaPackage.Types.DescribeChannelResponse, AWSError>;
   /**
+   * Gets details about an existing HarvestJob.
+   */
+  describeHarvestJob(params: MediaPackage.Types.DescribeHarvestJobRequest, callback?: (err: AWSError, data: MediaPackage.Types.DescribeHarvestJobResponse) => void): Request<MediaPackage.Types.DescribeHarvestJobResponse, AWSError>;
+  /**
+   * Gets details about an existing HarvestJob.
+   */
+  describeHarvestJob(callback?: (err: AWSError, data: MediaPackage.Types.DescribeHarvestJobResponse) => void): Request<MediaPackage.Types.DescribeHarvestJobResponse, AWSError>;
+  /**
    * Gets details about an existing OriginEndpoint.
    */
   describeOriginEndpoint(params: MediaPackage.Types.DescribeOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.DescribeOriginEndpointResponse) => void): Request<MediaPackage.Types.DescribeOriginEndpointResponse, AWSError>;
@@ -67,6 +83,14 @@ declare class MediaPackage extends Service {
    * Returns a collection of Channels.
    */
   listChannels(callback?: (err: AWSError, data: MediaPackage.Types.ListChannelsResponse) => void): Request<MediaPackage.Types.ListChannelsResponse, AWSError>;
+  /**
+   * Returns a collection of HarvestJob records.
+   */
+  listHarvestJobs(params: MediaPackage.Types.ListHarvestJobsRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListHarvestJobsResponse) => void): Request<MediaPackage.Types.ListHarvestJobsResponse, AWSError>;
+  /**
+   * Returns a collection of HarvestJob records.
+   */
+  listHarvestJobs(callback?: (err: AWSError, data: MediaPackage.Types.ListHarvestJobsResponse) => void): Request<MediaPackage.Types.ListHarvestJobsResponse, AWSError>;
   /**
    * Returns a collection of OriginEndpoint records.
    */
@@ -224,6 +248,78 @@ cannot be changed after a Channel is created.
     Id?: __string;
     Tags?: Tags;
   }
+  export interface CreateHarvestJobRequest {
+    /**
+     * The end of the time-window which will be harvested
+
+     */
+    EndTime: __string;
+    /**
+     * The ID of the HarvestJob. The ID must be unique within the region
+and it cannot be changed after the HarvestJob is submitted
+
+     */
+    Id: __string;
+    /**
+     * The ID of the OriginEndpoint that the HarvestJob will harvest from.
+This cannot be changed after the HarvestJob is submitted.
+
+     */
+    OriginEndpointId: __string;
+    S3Destination: S3Destination;
+    /**
+     * The start of the time-window which will be harvested
+
+     */
+    StartTime: __string;
+  }
+  export interface CreateHarvestJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+
+     */
+    Arn?: __string;
+    /**
+     * The ID of the Channel that the HarvestJob will harvest from.
+
+     */
+    ChannelId?: __string;
+    /**
+     * The time the HarvestJob was submitted
+
+     */
+    CreatedAt?: __string;
+    /**
+     * The end of the time-window which will be harvested.
+
+     */
+    EndTime?: __string;
+    /**
+     * The ID of the HarvestJob. The ID must be unique within the region
+and it cannot be changed after the HarvestJob is submitted.
+
+     */
+    Id?: __string;
+    /**
+     * The ID of the OriginEndpoint that the HarvestJob will harvest from.
+This cannot be changed after the HarvestJob is submitted.
+
+     */
+    OriginEndpointId?: __string;
+    S3Destination?: S3Destination;
+    /**
+     * The start of the time-window which will be harvested.
+
+     */
+    StartTime?: __string;
+    /**
+     * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
+HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
+include an explanation of why the HarvestJob failed.
+
+     */
+    Status?: Status;
+  }
   export interface CreateOriginEndpointRequest {
     /**
      * The ID of the Channel that the OriginEndpoint will be associated with.
@@ -249,6 +345,13 @@ and it cannot be changed after the OriginEndpoint is created.
      */
     ManifestName?: __string;
     MssPackage?: MssPackage;
+    /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
     /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
@@ -292,6 +395,13 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     ManifestName?: __string;
     MssPackage?: MssPackage;
+    /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
     /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
@@ -407,6 +517,59 @@ rounded to the nearest multiple of the source segment duration.
     Id?: __string;
     Tags?: Tags;
   }
+  export interface DescribeHarvestJobRequest {
+    /**
+     * The ID of the HarvestJob.
+     */
+    Id: __string;
+  }
+  export interface DescribeHarvestJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+
+     */
+    Arn?: __string;
+    /**
+     * The ID of the Channel that the HarvestJob will harvest from.
+
+     */
+    ChannelId?: __string;
+    /**
+     * The time the HarvestJob was submitted
+
+     */
+    CreatedAt?: __string;
+    /**
+     * The end of the time-window which will be harvested.
+
+     */
+    EndTime?: __string;
+    /**
+     * The ID of the HarvestJob. The ID must be unique within the region
+and it cannot be changed after the HarvestJob is submitted.
+
+     */
+    Id?: __string;
+    /**
+     * The ID of the OriginEndpoint that the HarvestJob will harvest from.
+This cannot be changed after the HarvestJob is submitted.
+
+     */
+    OriginEndpointId?: __string;
+    S3Destination?: S3Destination;
+    /**
+     * The start of the time-window which will be harvested.
+
+     */
+    StartTime?: __string;
+    /**
+     * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
+HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
+include an explanation of why the HarvestJob failed.
+
+     */
+    Status?: Status;
+  }
   export interface DescribeOriginEndpointRequest {
     /**
      * The ID of the OriginEndpoint.
@@ -439,6 +602,13 @@ rounded to the nearest multiple of the source segment duration.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
@@ -461,6 +631,53 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     Whitelist?: __listOf__string;
   }
   export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
+  export interface HarvestJob {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+
+     */
+    Arn?: __string;
+    /**
+     * The ID of the Channel that the HarvestJob will harvest from.
+
+     */
+    ChannelId?: __string;
+    /**
+     * The time the HarvestJob was submitted
+
+     */
+    CreatedAt?: __string;
+    /**
+     * The end of the time-window which will be harvested.
+
+     */
+    EndTime?: __string;
+    /**
+     * The ID of the HarvestJob. The ID must be unique within the region
+and it cannot be changed after the HarvestJob is submitted.
+
+     */
+    Id?: __string;
+    /**
+     * The ID of the OriginEndpoint that the HarvestJob will harvest from.
+This cannot be changed after the HarvestJob is submitted.
+
+     */
+    OriginEndpointId?: __string;
+    S3Destination?: S3Destination;
+    /**
+     * The start of the time-window which will be harvested.
+
+     */
+    StartTime?: __string;
+    /**
+     * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
+HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
+include an explanation of why the HarvestJob failed.
+
+     */
+    Status?: Status;
+  }
   export interface HlsEncryption {
     /**
      * A constant initialization vector for encryption (optional).
@@ -682,6 +899,34 @@ rounded to the nearest multiple of the source fragment duration.
      */
     NextToken?: __string;
   }
+  export interface ListHarvestJobsRequest {
+    /**
+     * When specified, the request will return only HarvestJobs associated with the given Channel ID.
+     */
+    IncludeChannelId?: __string;
+    /**
+     * When specified, the request will return only HarvestJobs in the given status.
+     */
+    IncludeStatus?: __string;
+    /**
+     * The upper bound on the number of records to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token used to resume pagination from the end of a previous request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListHarvestJobsResponse {
+    /**
+     * A list of HarvestJob records.
+     */
+    HarvestJobs?: __listOfHarvestJob;
+    /**
+     * A token that can be used to resume pagination from the end of the collection.
+     */
+    NextToken?: __string;
+  }
   export interface ListOriginEndpointsRequest {
     /**
      * When specified, the request will return only OriginEndpoints associated with the given Channel ID.
@@ -755,6 +1000,13 @@ rounded to the nearest multiple of the source fragment duration.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
@@ -776,6 +1028,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
+  export type Origination = "ALLOW"|"DENY"|string;
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
   export type Profile = "NONE"|"HBBTV_1_5"|string;
   export interface RotateChannelCredentialsRequest {
@@ -826,6 +1079,23 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     Id?: __string;
     Tags?: Tags;
   }
+  export interface S3Destination {
+    /**
+     * The name of an S3 bucket within which harvested content will be exported
+
+     */
+    BucketName: __string;
+    /**
+     * The key in the specified S3 bucket where the harvested top-level manifest will be placed.
+
+     */
+    ManifestKey: __string;
+    /**
+     * The IAM role used to write to the specified S3 bucket
+
+     */
+    RoleArn: __string;
+  }
   export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
   export interface SpekeKeyProvider {
     /**
@@ -854,6 +1124,7 @@ MediaPackage will assume when accessing the key provider service.
      */
     Url: __string;
   }
+  export type Status = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
   export type StreamOrder = "ORIGINAL"|"VIDEO_BITRATE_ASCENDING"|"VIDEO_BITRATE_DESCENDING"|string;
   export interface StreamSelection {
     /**
@@ -925,6 +1196,13 @@ MediaPackage will assume when accessing the key provider service.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (in seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
@@ -967,6 +1245,13 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
@@ -993,6 +1278,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   export type __boolean = boolean;
   export type __integer = number;
   export type __listOfChannel = Channel[];
+  export type __listOfHarvestJob = HarvestJob[];
   export type __listOfHlsManifest = HlsManifest[];
   export type __listOfHlsManifestCreateOrUpdateParameters = HlsManifestCreateOrUpdateParameters[];
   export type __listOfIngestEndpoint = IngestEndpoint[];

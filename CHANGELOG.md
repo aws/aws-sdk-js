@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.542.0-->
+<!--LATEST=2.543.0-->
 <!--ENTRYINSERT-->
+
+## 2.543.0
+* feature: CognitoIdentityServiceProvider: This release adds ClientMetadata input parameter to multiple Cognito User Pools operations, making this parameter available to the customer configured lambda triggers as applicable. 
+* feature: MediaPackage: New Harvest Job APIs to export segment-accurate content windows from MediaPackage Origin Endpoints to S3. See https://docs.aws.amazon.com/mediapackage/latest/ug/harvest-jobs.html for more info
 
 ## 2.542.0
 * feature: EC2: This release allows customers to purchase regional EC2 RIs on a future date.

@@ -20,19 +20,19 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   addCustomAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse, AWSError>;
   /**
-   * Adds the specified user to the specified group. Requires developer credentials.
+   * Adds the specified user to the specified group. Calling this action requires developer credentials.
    */
   adminAddUserToGroup(params: CognitoIdentityServiceProvider.Types.AdminAddUserToGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified user to the specified group. Requires developer credentials.
+   * Adds the specified user to the specified group. Calling this action requires developer credentials.
    */
   adminAddUserToGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Confirms user registration as an admin without using a confirmation code. Works on any user. Requires developer credentials.
+   * Confirms user registration as an admin without using a confirmation code. Works on any user. Calling this action requires developer credentials.
    */
   adminConfirmSignUp(params: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
-   * Confirms user registration as an admin without using a confirmation code. Works on any user. Requires developer credentials.
+   * Confirms user registration as an admin without using a confirmation code. Works on any user. Calling this action requires developer credentials.
    */
   adminConfirmSignUp(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
@@ -44,19 +44,19 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminCreateUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminCreateUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminCreateUserResponse, AWSError>;
   /**
-   * Deletes a user as an administrator. Works on any user. Requires developer credentials.
+   * Deletes a user as an administrator. Works on any user. Calling this action requires developer credentials.
    */
   adminDeleteUser(params: CognitoIdentityServiceProvider.Types.AdminDeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a user as an administrator. Works on any user. Requires developer credentials.
+   * Deletes a user as an administrator. Works on any user. Calling this action requires developer credentials.
    */
   adminDeleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the user attributes in a user pool as an administrator. Works on any user. Requires developer credentials.
+   * Deletes the user attributes in a user pool as an administrator. Works on any user. Calling this action requires developer credentials.
    */
   adminDeleteUserAttributes(params: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse, AWSError>;
   /**
-   * Deletes the user attributes in a user pool as an administrator. Works on any user. Requires developer credentials.
+   * Deletes the user attributes in a user pool as an administrator. Works on any user. Calling this action requires developer credentials.
    */
   adminDeleteUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse, AWSError>;
   /**
@@ -68,51 +68,51 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminDisableProviderForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse, AWSError>;
   /**
-   * Disables the specified user as an administrator. Works on any user. Requires developer credentials.
+   * Disables the specified user. Calling this action requires developer credentials.
    */
   adminDisableUser(params: CognitoIdentityServiceProvider.Types.AdminDisableUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
   /**
-   * Disables the specified user as an administrator. Works on any user. Requires developer credentials.
+   * Disables the specified user. Calling this action requires developer credentials.
    */
   adminDisableUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
   /**
-   * Enables the specified user as an administrator. Works on any user. Requires developer credentials.
+   * Enables the specified user as an administrator. Works on any user. Calling this action requires developer credentials.
    */
   adminEnableUser(params: CognitoIdentityServiceProvider.Types.AdminEnableUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminEnableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminEnableUserResponse, AWSError>;
   /**
-   * Enables the specified user as an administrator. Works on any user. Requires developer credentials.
+   * Enables the specified user as an administrator. Works on any user. Calling this action requires developer credentials.
    */
   adminEnableUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminEnableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminEnableUserResponse, AWSError>;
   /**
-   * Forgets the device, as an administrator. Requires developer credentials.
+   * Forgets the device, as an administrator. Calling this action requires developer credentials.
    */
   adminForgetDevice(params: CognitoIdentityServiceProvider.Types.AdminForgetDeviceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Forgets the device, as an administrator. Requires developer credentials.
+   * Forgets the device, as an administrator. Calling this action requires developer credentials.
    */
   adminForgetDevice(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets the device, as an administrator. Requires developer credentials.
+   * Gets the device, as an administrator. Calling this action requires developer credentials.
    */
   adminGetDevice(params: CognitoIdentityServiceProvider.Types.AdminGetDeviceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse, AWSError>;
   /**
-   * Gets the device, as an administrator. Requires developer credentials.
+   * Gets the device, as an administrator. Calling this action requires developer credentials.
    */
   adminGetDevice(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse, AWSError>;
   /**
-   * Gets the specified user by user name in a user pool as an administrator. Works on any user. Requires developer credentials.
+   * Gets the specified user by user name in a user pool as an administrator. Works on any user. Calling this action requires developer credentials.
    */
   adminGetUser(params: CognitoIdentityServiceProvider.Types.AdminGetUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetUserResponse, AWSError>;
   /**
-   * Gets the specified user by user name in a user pool as an administrator. Works on any user. Requires developer credentials.
+   * Gets the specified user by user name in a user pool as an administrator. Works on any user. Calling this action requires developer credentials.
    */
   adminGetUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetUserResponse, AWSError>;
   /**
-   * Initiates the authentication flow, as an administrator. Requires developer credentials.
+   * Initiates the authentication flow, as an administrator. Calling this action requires developer credentials.
    */
   adminInitiateAuth(params: CognitoIdentityServiceProvider.Types.AdminInitiateAuthRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse, AWSError>;
   /**
-   * Initiates the authentication flow, as an administrator. Requires developer credentials.
+   * Initiates the authentication flow, as an administrator. Calling this action requires developer credentials.
    */
   adminInitiateAuth(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse, AWSError>;
   /**
@@ -124,19 +124,19 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminLinkProviderForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse, AWSError>;
   /**
-   * Lists devices, as an administrator. Requires developer credentials.
+   * Lists devices, as an administrator. Calling this action requires developer credentials.
    */
   adminListDevices(params: CognitoIdentityServiceProvider.Types.AdminListDevicesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListDevicesResponse, AWSError>;
   /**
-   * Lists devices, as an administrator. Requires developer credentials.
+   * Lists devices, as an administrator. Calling this action requires developer credentials.
    */
   adminListDevices(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListDevicesResponse, AWSError>;
   /**
-   * Lists the groups that the user belongs to. Requires developer credentials.
+   * Lists the groups that the user belongs to. Calling this action requires developer credentials.
    */
   adminListGroupsForUser(params: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
   /**
-   * Lists the groups that the user belongs to. Requires developer credentials.
+   * Lists the groups that the user belongs to. Calling this action requires developer credentials.
    */
   adminListGroupsForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
   /**
@@ -148,51 +148,51 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminListUserAuthEvents(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse, AWSError>;
   /**
-   * Removes the specified user from the specified group. Requires developer credentials.
+   * Removes the specified user from the specified group. Calling this action requires developer credentials.
    */
   adminRemoveUserFromGroup(params: CognitoIdentityServiceProvider.Types.AdminRemoveUserFromGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified user from the specified group. Requires developer credentials.
+   * Removes the specified user from the specified group. Calling this action requires developer credentials.
    */
   adminRemoveUserFromGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password. Requires developer credentials.
+   * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password. Calling this action requires developer credentials.
    */
   adminResetUserPassword(params: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse, AWSError>;
   /**
-   * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password. Requires developer credentials.
+   * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password. Calling this action requires developer credentials.
    */
   adminResetUserPassword(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse, AWSError>;
   /**
-   * Responds to an authentication challenge, as an administrator. Requires developer credentials.
+   * Responds to an authentication challenge, as an administrator. Calling this action requires developer credentials.
    */
   adminRespondToAuthChallenge(params: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
   /**
-   * Responds to an authentication challenge, as an administrator. Requires developer credentials.
+   * Responds to an authentication challenge, as an administrator. Calling this action requires developer credentials.
    */
   adminRespondToAuthChallenge(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
   /**
-   * Sets the user's multi-factor authentication (MFA) preference.
+   * Sets the user's multi-factor authentication (MFA) preference, including which MFA options are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in.
    */
   adminSetUserMFAPreference(params: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse, AWSError>;
   /**
-   * Sets the user's multi-factor authentication (MFA) preference.
+   * Sets the user's multi-factor authentication (MFA) preference, including which MFA options are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in.
    */
   adminSetUserMFAPreference(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse, AWSError>;
   /**
-   * 
+   * Sets the specified user's password in a user pool as an administrator. Works on any user.  The password can be temporary or permanent. If it is temporary, the user status will be placed into the FORCE_CHANGE_PASSWORD state. When the user next tries to sign in, the InitiateAuth/AdminInitiateAuth response will contain the NEW_PASSWORD_REQUIRED challenge. If the user does not sign in before it expires, the user will not be able to sign in and their password will need to be reset by an administrator.  Once the user has set a new password, or the password is permanent, the user status will be set to Confirmed.
    */
   adminSetUserPassword(params: CognitoIdentityServiceProvider.Types.AdminSetUserPasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserPasswordResponse, AWSError>;
   /**
-   * 
+   * Sets the specified user's password in a user pool as an administrator. Works on any user.  The password can be temporary or permanent. If it is temporary, the user status will be placed into the FORCE_CHANGE_PASSWORD state. When the user next tries to sign in, the InitiateAuth/AdminInitiateAuth response will contain the NEW_PASSWORD_REQUIRED challenge. If the user does not sign in before it expires, the user will not be able to sign in and their password will need to be reset by an administrator.  Once the user has set a new password, or the password is permanent, the user status will be set to Confirmed.
    */
   adminSetUserPassword(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserPasswordResponse, AWSError>;
   /**
-   * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
+   *  This action is no longer supported. You can use it to configure only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either type of MFA, use the AdminSetUserMFAPreference action instead.
    */
   adminSetUserSettings(params: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
   /**
-   * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
+   *  This action is no longer supported. You can use it to configure only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either type of MFA, use the AdminSetUserMFAPreference action instead.
    */
   adminSetUserSettings(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
   /**
@@ -204,27 +204,27 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminUpdateAuthEventFeedback(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse, AWSError>;
   /**
-   * Updates the device status as an administrator. Requires developer credentials.
+   * Updates the device status as an administrator. Calling this action requires developer credentials.
    */
   adminUpdateDeviceStatus(params: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse, AWSError>;
   /**
-   * Updates the device status as an administrator. Requires developer credentials.
+   * Updates the device status as an administrator. Calling this action requires developer credentials.
    */
   adminUpdateDeviceStatus(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse, AWSError>;
   /**
-   * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user. For custom attributes, you must prepend the custom: prefix to the attribute name. In addition to updating user attributes, this API can also be used to mark phone and email as verified. Requires developer credentials.
+   * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user. For custom attributes, you must prepend the custom: prefix to the attribute name. In addition to updating user attributes, this API can also be used to mark phone and email as verified. Calling this action requires developer credentials.
    */
   adminUpdateUserAttributes(params: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse, AWSError>;
   /**
-   * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user. For custom attributes, you must prepend the custom: prefix to the attribute name. In addition to updating user attributes, this API can also be used to mark phone and email as verified. Requires developer credentials.
+   * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user. For custom attributes, you must prepend the custom: prefix to the attribute name. In addition to updating user attributes, this API can also be used to mark phone and email as verified. Calling this action requires developer credentials.
    */
   adminUpdateUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse, AWSError>;
   /**
-   * Signs out users from all devices, as an administrator. Requires developer credentials.
+   * Signs out users from all devices, as an administrator. Calling this action requires developer credentials.
    */
   adminUserGlobalSignOut(params: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
-   * Signs out users from all devices, as an administrator. Requires developer credentials.
+   * Signs out users from all devices, as an administrator. Calling this action requires developer credentials.
    */
   adminUserGlobalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   confirmSignUp(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse, AWSError>;
   /**
-   * Creates a new group in the specified user pool. Requires developer credentials.
+   * Creates a new group in the specified user pool. Calling this action requires developer credentials.
    */
   createGroup(params: CognitoIdentityServiceProvider.Types.CreateGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateGroupResponse, AWSError>;
   /**
-   * Creates a new group in the specified user pool. Requires developer credentials.
+   * Creates a new group in the specified user pool. Calling this action requires developer credentials.
    */
   createGroup(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateGroupResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   createUserPoolDomain(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserPoolDomainResponse, AWSError>;
   /**
-   * Deletes a group. Currently only groups with no members can be deleted. Requires developer credentials.
+   * Deletes a group. Currently only groups with no members can be deleted. Calling this action requires developer credentials.
    */
   deleteGroup(params: CognitoIdentityServiceProvider.Types.DeleteGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a group. Currently only groups with no members can be deleted. Requires developer credentials.
+   * Deletes a group. Currently only groups with no members can be deleted. Calling this action requires developer credentials.
    */
   deleteGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -476,11 +476,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   getDevice(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetDeviceResponse, AWSError>;
   /**
-   * Gets a group. Requires developer credentials.
+   * Gets a group. Calling this action requires developer credentials.
    */
   getGroup(params: CognitoIdentityServiceProvider.Types.GetGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetGroupResponse, AWSError>;
   /**
-   * Gets a group. Requires developer credentials.
+   * Gets a group. Calling this action requires developer credentials.
    */
   getGroup(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetGroupResponse, AWSError>;
   /**
@@ -556,11 +556,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   listDevices(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListDevicesResponse, AWSError>;
   /**
-   * Lists the groups associated with a user pool. Requires developer credentials.
+   * Lists the groups associated with a user pool. Calling this action requires developer credentials.
    */
   listGroups(params: CognitoIdentityServiceProvider.Types.ListGroupsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListGroupsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListGroupsResponse, AWSError>;
   /**
-   * Lists the groups associated with a user pool. Requires developer credentials.
+   * Lists the groups associated with a user pool. Calling this action requires developer credentials.
    */
   listGroups(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListGroupsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListGroupsResponse, AWSError>;
   /**
@@ -620,11 +620,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   listUsers(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists the users in the specified group. Requires developer credentials.
+   * Lists the users in the specified group. Calling this action requires developer credentials.
    */
   listUsersInGroup(params: CognitoIdentityServiceProvider.Types.ListUsersInGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse, AWSError>;
   /**
-   * Lists the users in the specified group. Requires developer credentials.
+   * Lists the users in the specified group. Calling this action requires developer credentials.
    */
   listUsersInGroup(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse, AWSError>;
   /**
@@ -660,27 +660,27 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   setUICustomization(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUICustomizationResponse, AWSError>;
   /**
-   * Set the user's multi-factor authentication (MFA) method preference.
+   * Set the user's multi-factor authentication (MFA) method preference, including which MFA factors are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in.
    */
   setUserMFAPreference(params: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse, AWSError>;
   /**
-   * Set the user's multi-factor authentication (MFA) method preference.
+   * Set the user's multi-factor authentication (MFA) method preference, including which MFA factors are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in.
    */
   setUserMFAPreference(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse, AWSError>;
   /**
-   * Set the user pool MFA configuration.
+   * Set the user pool multi-factor authentication (MFA) configuration.
    */
   setUserPoolMfaConfig(params: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse, AWSError>;
   /**
-   * Set the user pool MFA configuration.
+   * Set the user pool multi-factor authentication (MFA) configuration.
    */
   setUserPoolMfaConfig(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse, AWSError>;
   /**
-   * Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.
+   *  This action is no longer supported. You can use it to configure only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either type of MFA, use the SetUserMFAPreference action instead.
    */
   setUserSettings(params: CognitoIdentityServiceProvider.Types.SetUserSettingsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserSettingsResponse, AWSError>;
   /**
-   * Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.
+   *  This action is no longer supported. You can use it to configure only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either type of MFA, use the SetUserMFAPreference action instead.
    */
   setUserSettings(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserSettingsResponse, AWSError>;
   /**
@@ -740,11 +740,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   updateDeviceStatus(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateDeviceStatusResponse, AWSError>;
   /**
-   * Updates the specified group with the specified attributes. Requires developer credentials.
+   * Updates the specified group with the specified attributes. Calling this action requires developer credentials.
    */
   updateGroup(params: CognitoIdentityServiceProvider.Types.UpdateGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateGroupResponse, AWSError>;
   /**
-   * Updates the specified group with the specified attributes. Requires developer credentials.
+   * Updates the specified group with the specified attributes. Calling this action requires developer credentials.
    */
   updateGroup(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateGroupResponse, AWSError>;
   /**
@@ -885,6 +885,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The user name for which you want to confirm user registration.
      */
     Username: UsernameType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  If your user pool configuration includes triggers, the AdminConfirmSignUp API action invokes the AWS Lambda function that is specified for the post confirmation trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. In this payload, the clientMetadata attribute provides the data that you assigned to the ClientMetadata parameter in your AdminConfirmSignUp request. In your function code in AWS Lambda, you can process the ClientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface AdminConfirmSignUpResponse {
   }
@@ -935,6 +939,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Specify "EMAIL" if email will be used to send the welcome message. Specify "SMS" if the phone number will be used. The default value is "SMS". More than one value can be specified.
      */
     DesiredDeliveryMediums?: DeliveryMediumListType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the AdminCreateUser API action, Amazon Cognito invokes the function that is assigned to the pre sign-up trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your AdminCreateUser request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface AdminCreateUserResponse {
     /**
@@ -1075,7 +1083,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserStatus?: UserStatusType;
     /**
-     * Specifies the options for MFA (e.g., email or phone number).
+     *  This response parameter is no longer supported. It provides information only about SMS MFA configurations. It doesn't provide information about TOTP software token MFA configurations. To look up information about either type of MFA configuration, use the AdminGetUserResponse$UserMFASettingList response instead.
      */
     MFAOptions?: MFAOptionListType;
     /**
@@ -1083,7 +1091,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     PreferredMfaSetting?: StringType;
     /**
-     * The list of the user's MFA settings.
+     * The MFA options that are enabled for the user. The possible values in this list are SMS_MFA and SOFTWARE_TOKEN_MFA.
      */
     UserMFASettingList?: UserMFASettingListType;
   }
@@ -1105,7 +1113,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AuthParameters?: AuthParametersType;
     /**
-     * This is a random key-value pair map which can contain any key and will be passed to your PreAuthentication Lambda trigger as-is. It can be used to implement additional validations around authentication.
+     * A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers. You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the AdminInitiateAuth API action, Amazon Cognito invokes the AWS Lambda functions that are specified for various triggers. The ClientMetadata value is passed as input to the functions for only the following triggers:   Pre signup   Pre authentication   User migration   When Amazon Cognito invokes the functions for these triggers, it passes a JSON payload, which the function receives as input. This payload contains a validationData attribute, which provides the data that you assigned to the ClientMetadata parameter in your AdminInitiateAuth request. In your function code in AWS Lambda, you can process the validationData value to enhance your workflow for your specific needs. When you use the AdminInitiateAuth API action, Amazon Cognito also invokes the functions for the following triggers, but it does not provide the ClientMetadata value as input:   Post authentication   Custom message   Pre token generation   Create auth challenge   Define auth challenge   Verify auth challenge   For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
      */
     ClientMetadata?: ClientMetadataType;
     /**
@@ -1258,6 +1266,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The user name of the user whose password you wish to reset.
      */
     Username: UsernameType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the AdminResetUserPassword API action, Amazon Cognito invokes the function that is assigned to the custom message trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your AdminResetUserPassword request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface AdminResetUserPasswordResponse {
   }
@@ -1290,6 +1302,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
      */
     ContextData?: ContextDataType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the AdminRespondToAuthChallenge API action, Amazon Cognito invokes any functions that are assigned to the following triggers: pre sign-up, custom message, post authentication, user migration, pre token generation, define auth challenge, create auth challenge, and verify auth challenge response. When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your AdminRespondToAuthChallenge request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface AdminRespondToAuthChallengeResponse {
     /**
@@ -1330,24 +1346,36 @@ declare namespace CognitoIdentityServiceProvider {
   export interface AdminSetUserMFAPreferenceResponse {
   }
   export interface AdminSetUserPasswordRequest {
+    /**
+     * The user pool ID for the user pool where you want to set the user's password.
+     */
     UserPoolId: UserPoolIdType;
+    /**
+     * The user name of the user whose password you wish to set.
+     */
     Username: UsernameType;
+    /**
+     * The password for the user.
+     */
     Password: PasswordType;
+    /**
+     *  True if the password is permanent, False if it is temporary.
+     */
     Permanent?: BooleanType;
   }
   export interface AdminSetUserPasswordResponse {
   }
   export interface AdminSetUserSettingsRequest {
     /**
-     * The user pool ID for the user pool where you want to set the user's settings, such as MFA options.
+     * The ID of the user pool that contains the user that you are setting options for.
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user for whom you wish to set user settings.
+     * The user name of the user that you are setting options for.
      */
     Username: UsernameType;
     /**
-     * Specifies the options for MFA (e.g., email or phone number).
+     * You can use this parameter only to set an SMS configuration that uses SMS for delivery.
      */
     MFAOptions: MFAOptionListType;
   }
@@ -1406,6 +1434,10 @@ declare namespace CognitoIdentityServiceProvider {
      * An array of name-value pairs representing user attributes. For custom attributes, you must prepend the custom: prefix to the attribute name.
      */
     UserAttributes: AttributeListType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the AdminUpdateUserAttributes API action, Amazon Cognito invokes the function that is assigned to the custom message trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your AdminUpdateUserAttributes request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface AdminUpdateUserAttributesResponse {
   }
@@ -1678,6 +1710,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
      */
     UserContextData?: UserContextDataType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the ConfirmForgotPassword API action, Amazon Cognito invokes the functions that are assigned to the post confirmation and pre mutation triggers. When Amazon Cognito invokes either of these functions, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your ConfirmForgotPassword request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface ConfirmForgotPasswordResponse {
   }
@@ -1710,6 +1746,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
      */
     UserContextData?: UserContextDataType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the ConfirmSignUp API action, Amazon Cognito invokes the function that is assigned to the post confirmation trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your ConfirmSignUp request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface ConfirmSignUpResponse {
   }
@@ -1890,7 +1930,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AllowedOAuthFlows?: OAuthFlowsType;
     /**
-     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito".
+     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito". In addition to these values, custom scopes created in Resource Servers are also supported.
      */
     AllowedOAuthScopes?: ScopeListType;
     /**
@@ -2396,6 +2436,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The Amazon Pinpoint analytics metadata for collecting metrics for ForgotPassword calls.
      */
     AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the ForgotPassword API action, Amazon Cognito invokes any functions that are assigned to the following triggers: pre sign-up, custom message, and user migration. When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your ForgotPassword request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface ForgotPasswordResponse {
     /**
@@ -2505,6 +2549,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The attribute name returned by the server response to get the user attribute verification code.
      */
     AttributeName: AttributeNameType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the GetUserAttributeVerificationCode API action, Amazon Cognito invokes the function that is assigned to the custom message trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your GetUserAttributeVerificationCode request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface GetUserAttributeVerificationCodeResponse {
     /**
@@ -2528,7 +2576,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SoftwareTokenMfaConfiguration?: SoftwareTokenMfaConfigType;
     /**
-     * The multi-factor (MFA) configuration.
+     * The multi-factor (MFA) configuration. Valid values include:    OFF MFA will not be used for any users.    ON MFA is required for all users to sign in.    OPTIONAL MFA will be required only for individual users who have an MFA factor enabled.  
      */
     MfaConfiguration?: UserPoolMfaType;
   }
@@ -2548,7 +2596,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserAttributes: AttributeListType;
     /**
-     * Specifies the options for MFA (e.g., email or phone number).
+     *  This response parameter is no longer supported. It provides information only about SMS MFA configurations. It doesn't provide information about TOTP software token MFA configurations. To look up information about either type of MFA configuration, use the use the GetUserResponse$UserMFASettingList response instead.
      */
     MFAOptions?: MFAOptionListType;
     /**
@@ -2556,7 +2604,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     PreferredMfaSetting?: StringType;
     /**
-     * The list of the user's MFA settings.
+     * The MFA options that are enabled for the user. The possible values in this list are SMS_MFA and SOFTWARE_TOKEN_MFA.
      */
     UserMFASettingList?: UserMFASettingListType;
   }
@@ -2661,7 +2709,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AuthParameters?: AuthParametersType;
     /**
-     * This is a random key-value pair map which can contain any key and will be passed to your PreAuthentication Lambda trigger as-is. It can be used to implement additional validations around authentication.
+     * A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers. You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the InitiateAuth API action, Amazon Cognito invokes the AWS Lambda functions that are specified for various triggers. The ClientMetadata value is passed as input to the functions for only the following triggers:   Pre signup   Pre authentication   User migration   When Amazon Cognito invokes the functions for these triggers, it passes a JSON payload, which the function receives as input. This payload contains a validationData attribute, which provides the data that you assigned to the ClientMetadata parameter in your InitiateAuth request. In your function code in AWS Lambda, you can process the validationData value to enhance your workflow for your specific needs. When you use the InitiateAuth API action, Amazon Cognito also invokes the functions for the following triggers, but it does not provide the ClientMetadata value as input:   Post authentication   Custom message   Pre token generation   Create auth challenge   Define auth challenge   Verify auth challenge   For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
      */
     ClientMetadata?: ClientMetadataType;
     /**
@@ -2982,11 +3030,11 @@ declare namespace CognitoIdentityServiceProvider {
   export type MFAOptionListType = MFAOptionType[];
   export interface MFAOptionType {
     /**
-     * The delivery medium (email message or SMS message) to send the MFA code.
+     * The delivery medium to send the MFA code. You can use this parameter to set only the SMS delivery medium value.
      */
     DeliveryMedium?: DeliveryMediumType;
     /**
-     * The attribute name of the MFA option type.
+     * The attribute name of the MFA option type. The only valid value is phone_number.
      */
     AttributeName?: AttributeNameType;
   }
@@ -3091,6 +3139,9 @@ declare namespace CognitoIdentityServiceProvider {
      * In the password policy that you have set, refers to whether you have required users to use at least one symbol in their password.
      */
     RequireSymbols?: BooleanType;
+    /**
+     * In the password policy you have set, refers to the number of days a temporary password is valid. If the user does not sign-in during this time, their password will need to be reset by an administrator.  When you set TemporaryPasswordValidityDays for a user pool, you will no longer be able to set the deprecated UnusedAccountValidityDays value for that user pool. 
+     */
     TemporaryPasswordValidityDays?: TemporaryPasswordValidityDaysType;
   }
   export type PasswordType = string;
@@ -3158,6 +3209,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The Amazon Pinpoint analytics metadata for collecting metrics for ResendConfirmationCode calls.
      */
     AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the ResendConfirmationCode API action, Amazon Cognito invokes the function that is assigned to the custom message trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your ResendConfirmationCode request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface ResendConfirmationCodeResponse {
     /**
@@ -3213,7 +3268,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Session?: SessionType;
     /**
-     * The challenge responses. These are inputs corresponding to the value of ChallengeName, for example:    SMS_MFA: SMS_MFA_CODE, USERNAME, SECRET_HASH (if app client is configured with client secret).    PASSWORD_VERIFIER: PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME, SECRET_HASH (if app client is configured with client secret).    NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes, USERNAME, SECRET_HASH (if app client is configured with client secret).   
+     * The challenge responses. These are inputs corresponding to the value of ChallengeName, for example:   SECRET_HASH (if app client is configured with client secret) applies to all inputs below (including SOFTWARE_TOKEN_MFA).     SMS_MFA: SMS_MFA_CODE, USERNAME.    PASSWORD_VERIFIER: PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME.    NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes, USERNAME.     SOFTWARE_TOKEN_MFA: USERNAME and SOFTWARE_TOKEN_MFA_CODE are required attributes.    DEVICE_SRP_AUTH requires USERNAME, DEVICE_KEY, SRP_A (and SECRET_HASH).    DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER requires plus DEVICE_KEY.  
      */
     ChallengeResponses?: ChallengeResponsesType;
     /**
@@ -3224,6 +3279,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
      */
     UserContextData?: UserContextDataType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the RespondToAuthChallenge API action, Amazon Cognito invokes any functions that are assigned to the following triggers: post authentication, pre token generation, define auth challenge, create auth challenge, and verify auth challenge. When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your RespondToAuthChallenge request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface RespondToAuthChallengeResponse {
     /**
@@ -3288,7 +3347,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Enabled?: BooleanType;
     /**
-     * The preferred MFA method.
+     * Specifies whether SMS is the preferred MFA method.
      */
     PreferredMfa?: BooleanType;
   }
@@ -3392,7 +3451,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SoftwareTokenMfaSettings?: SoftwareTokenMfaSettingsType;
     /**
-     * The access token.
+     * The access token for the user.
      */
     AccessToken: TokenModelType;
   }
@@ -3412,7 +3471,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SoftwareTokenMfaConfiguration?: SoftwareTokenMfaConfigType;
     /**
-     * The MFA configuration.
+     * The MFA configuration. Valid values include:    OFF MFA will not be used for any users.    ON MFA is required for all users to sign in.    OPTIONAL MFA will be required only for individual users who have an MFA factor enabled.  
      */
     MfaConfiguration?: UserPoolMfaType;
   }
@@ -3426,7 +3485,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SoftwareTokenMfaConfiguration?: SoftwareTokenMfaConfigType;
     /**
-     * The MFA configuration.
+     * The MFA configuration. Valid values include:    OFF MFA will not be used for any users.    ON MFA is required for all users to sign in.    OPTIONAL MFA will be required only for individual users who have an MFA factor enabled.  
      */
     MfaConfiguration?: UserPoolMfaType;
   }
@@ -3436,7 +3495,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AccessToken: TokenModelType;
     /**
-     * Specifies the options for MFA (e.g., email or phone number).
+     * You can use this parameter only to set an SMS configuration that uses SMS for delivery.
      */
     MFAOptions: MFAOptionListType;
   }
@@ -3475,6 +3534,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
      */
     UserContextData?: UserContextDataType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the SignUp API action, Amazon Cognito invokes any functions that are assigned to the following triggers: pre sign-up, custom message, and post confirmation. When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your SignUp request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface SignUpResponse {
     /**
@@ -3493,17 +3556,17 @@ declare namespace CognitoIdentityServiceProvider {
   export type SkippedIPRangeListType = StringType[];
   export interface SmsConfigurationType {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller.
+     * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller. This is the ARN of the IAM role in your AWS account which Cognito will use to send SMS messages.
      */
     SnsCallerArn: ArnType;
     /**
-     * The external ID.
+     * The external ID is a value that we recommend you use to add security to your IAM role which is used to call Amazon SNS to send SMS messages for your user pool. If you provide an ExternalId, the Cognito User Pool will include it when attempting to assume your IAM role, so that you can set your roles trust policy to require the ExternalID. If you use the Cognito Management Console to create a role for SMS MFA, Cognito will create a role with the required permissions and a trust policy that demonstrates use of the ExternalId.
      */
     ExternalId?: StringType;
   }
   export interface SmsMfaConfigType {
     /**
-     * The SMS authentication message.
+     * The SMS authentication message that will be sent to users with the code they need to sign in. The message must contain the ‘{####}’ placeholder, which will be replaced with the code. If the message is not included, and default message will be used.
      */
     SmsAuthenticationMessage?: SmsVerificationMessageType;
     /**
@@ -3525,7 +3588,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Enabled?: BooleanType;
     /**
-     * The preferred MFA method.
+     * Specifies whether software token MFA is the preferred MFA method.
      */
     PreferredMfa?: BooleanType;
   }
@@ -3583,7 +3646,7 @@ declare namespace CognitoIdentityServiceProvider {
     /**
      * The tags to assign to the user pool.
      */
-    Tags?: UserPoolTagsType;
+    Tags: UserPoolTagsType;
   }
   export interface TagResourceResponse {
   }
@@ -3628,7 +3691,7 @@ declare namespace CognitoIdentityServiceProvider {
     /**
      * The keys of the tags to remove from the user pool.
      */
-    TagKeys?: UserPoolTagsListType;
+    TagKeys: UserPoolTagsListType;
   }
   export interface UntagResourceResponse {
   }
@@ -3761,6 +3824,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The access token for the request to update user attributes.
      */
     AccessToken: TokenModelType;
+    /**
+     * A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the UpdateUserAttributes API action, Amazon Cognito invokes the functions that are assigned to the custom message and pre mutation triggers. When Amazon Cognito invokes either of these functions, it passes a JSON payload, which the function receives as input. This payload contains a clientMetadata attribute, which provides the data that you assigned to the ClientMetadata parameter in your UpdateUserAttributes request. In your function code in AWS Lambda, you can process the clientMetadata value to enhance your workflow for your specific needs. For more information, see Customizing User Pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  Take the following limitations into consideration when you use the ClientMetadata parameter:   Amazon Cognito does not store the ClientMetadata value. This data is available only to AWS Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose.   Amazon Cognito does not validate the ClientMetadata value.   Amazon Cognito does not encrypt the the ClientMetadata value, so don't use it to provide sensitive information.   
+     */
+    ClientMetadata?: ClientMetadataType;
   }
   export interface UpdateUserAttributesResponse {
     /**
@@ -3818,7 +3885,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AllowedOAuthFlows?: OAuthFlowsType;
     /**
-     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito".
+     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito". In addition to these values, custom scopes created in Resource Servers are also supported.
      */
     AllowedOAuthScopes?: ScopeListType;
     /**
@@ -4073,7 +4140,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AllowedOAuthFlows?: OAuthFlowsType;
     /**
-     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito".
+     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito". In addition to these values, custom scopes created in Resource Servers are also supported.
      */
     AllowedOAuthScopes?: ScopeListType;
     /**

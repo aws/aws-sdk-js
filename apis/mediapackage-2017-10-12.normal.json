@@ -49,6 +49,42 @@
         "shape": "CreateChannelResponse"
       }
     },
+    "CreateHarvestJob": {
+      "documentation": "Creates a new HarvestJob record.",
+      "errors": [
+        {
+          "shape": "UnprocessableEntityException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "http": {
+        "method": "POST",
+        "requestUri": "/harvest_jobs",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "CreateHarvestJobRequest"
+      },
+      "name": "CreateHarvestJob",
+      "output": {
+        "documentation": "A new HarvestJob record.",
+        "shape": "CreateHarvestJobResponse"
+      }
+    },
     "CreateOriginEndpoint": {
       "documentation": "Creates a new OriginEndpoint record.",
       "errors": [
@@ -193,6 +229,42 @@
         "shape": "DescribeChannelResponse"
       }
     },
+    "DescribeHarvestJob": {
+      "documentation": "Gets details about an existing HarvestJob.",
+      "errors": [
+        {
+          "shape": "UnprocessableEntityException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "http": {
+        "method": "GET",
+        "requestUri": "/harvest_jobs/{id}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeHarvestJobRequest"
+      },
+      "name": "DescribeHarvestJob",
+      "output": {
+        "documentation": "An HarvestJob record.",
+        "shape": "DescribeHarvestJobResponse"
+      }
+    },
     "DescribeOriginEndpoint": {
       "documentation": "Gets details about an existing OriginEndpoint.",
       "errors": [
@@ -263,6 +335,42 @@
       "output": {
         "documentation": "A collection of Channel records.",
         "shape": "ListChannelsResponse"
+      }
+    },
+    "ListHarvestJobs": {
+      "documentation": "Returns a collection of HarvestJob records.",
+      "errors": [
+        {
+          "shape": "UnprocessableEntityException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "http": {
+        "method": "GET",
+        "requestUri": "/harvest_jobs",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListHarvestJobsRequest"
+      },
+      "name": "ListHarvestJobs",
+      "output": {
+        "documentation": "A collection of HarvestJob records.",
+        "shape": "ListHarvestJobsResponse"
       }
     },
     "ListOriginEndpoints": {
@@ -670,6 +778,92 @@
       },
       "type": "structure"
     },
+    "CreateHarvestJobRequest": {
+      "documentation": "Configuration parameters used to create a new HarvestJob.",
+      "members": {
+        "EndTime": {
+          "documentation": "The end of the time-window which will be harvested\n",
+          "locationName": "endTime",
+          "shape": "__string"
+        },
+        "Id": {
+          "documentation": "The ID of the HarvestJob. The ID must be unique within the region\nand it cannot be changed after the HarvestJob is submitted\n",
+          "locationName": "id",
+          "shape": "__string"
+        },
+        "OriginEndpointId": {
+          "documentation": "The ID of the OriginEndpoint that the HarvestJob will harvest from.\nThis cannot be changed after the HarvestJob is submitted.\n",
+          "locationName": "originEndpointId",
+          "shape": "__string"
+        },
+        "S3Destination": {
+          "locationName": "s3Destination",
+          "shape": "S3Destination"
+        },
+        "StartTime": {
+          "documentation": "The start of the time-window which will be harvested\n",
+          "locationName": "startTime",
+          "shape": "__string"
+        }
+      },
+      "required": [
+        "S3Destination",
+        "EndTime",
+        "OriginEndpointId",
+        "StartTime",
+        "Id"
+      ],
+      "type": "structure"
+    },
+    "CreateHarvestJobResponse": {
+      "members": {
+        "Arn": {
+          "documentation": "The Amazon Resource Name (ARN) assigned to the HarvestJob.\n",
+          "locationName": "arn",
+          "shape": "__string"
+        },
+        "ChannelId": {
+          "documentation": "The ID of the Channel that the HarvestJob will harvest from.\n",
+          "locationName": "channelId",
+          "shape": "__string"
+        },
+        "CreatedAt": {
+          "documentation": "The time the HarvestJob was submitted\n",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
+        "EndTime": {
+          "documentation": "The end of the time-window which will be harvested.\n",
+          "locationName": "endTime",
+          "shape": "__string"
+        },
+        "Id": {
+          "documentation": "The ID of the HarvestJob. The ID must be unique within the region\nand it cannot be changed after the HarvestJob is submitted.\n",
+          "locationName": "id",
+          "shape": "__string"
+        },
+        "OriginEndpointId": {
+          "documentation": "The ID of the OriginEndpoint that the HarvestJob will harvest from.\nThis cannot be changed after the HarvestJob is submitted.\n",
+          "locationName": "originEndpointId",
+          "shape": "__string"
+        },
+        "S3Destination": {
+          "locationName": "s3Destination",
+          "shape": "S3Destination"
+        },
+        "StartTime": {
+          "documentation": "The start of the time-window which will be harvested.\n",
+          "locationName": "startTime",
+          "shape": "__string"
+        },
+        "Status": {
+          "documentation": "The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for\nHarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will\ninclude an explanation of why the HarvestJob failed.\n",
+          "locationName": "status",
+          "shape": "Status"
+        }
+      },
+      "type": "structure"
+    },
     "CreateOriginEndpointRequest": {
       "documentation": "Configuration parameters used to create a new OriginEndpoint.",
       "members": {
@@ -709,6 +903,11 @@
           "locationName": "mssPackage",
           "shape": "MssPackage"
         },
+        "Origination": {
+          "documentation": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint\nmay by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be\nrequested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination\n",
+          "locationName": "origination",
+          "shape": "Origination"
+        },
         "StartoverWindowSeconds": {
           "documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.\n",
           "locationName": "startoverWindowSeconds",
@@ -730,8 +929,8 @@
         }
       },
       "required": [
-        "ChannelId",
-        "Id"
+        "Id",
+        "ChannelId"
       ],
       "type": "structure"
     },
@@ -777,6 +976,11 @@
         "MssPackage": {
           "locationName": "mssPackage",
           "shape": "MssPackage"
+        },
+        "Origination": {
+          "documentation": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint\nmay by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be\nrequested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination\n",
+          "locationName": "origination",
+          "shape": "Origination"
         },
         "StartoverWindowSeconds": {
           "documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.\n",
@@ -968,6 +1172,69 @@
       },
       "type": "structure"
     },
+    "DescribeHarvestJobRequest": {
+      "members": {
+        "Id": {
+          "documentation": "The ID of the HarvestJob.",
+          "location": "uri",
+          "locationName": "id",
+          "shape": "__string"
+        }
+      },
+      "required": [
+        "Id"
+      ],
+      "type": "structure"
+    },
+    "DescribeHarvestJobResponse": {
+      "members": {
+        "Arn": {
+          "documentation": "The Amazon Resource Name (ARN) assigned to the HarvestJob.\n",
+          "locationName": "arn",
+          "shape": "__string"
+        },
+        "ChannelId": {
+          "documentation": "The ID of the Channel that the HarvestJob will harvest from.\n",
+          "locationName": "channelId",
+          "shape": "__string"
+        },
+        "CreatedAt": {
+          "documentation": "The time the HarvestJob was submitted\n",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
+        "EndTime": {
+          "documentation": "The end of the time-window which will be harvested.\n",
+          "locationName": "endTime",
+          "shape": "__string"
+        },
+        "Id": {
+          "documentation": "The ID of the HarvestJob. The ID must be unique within the region\nand it cannot be changed after the HarvestJob is submitted.\n",
+          "locationName": "id",
+          "shape": "__string"
+        },
+        "OriginEndpointId": {
+          "documentation": "The ID of the OriginEndpoint that the HarvestJob will harvest from.\nThis cannot be changed after the HarvestJob is submitted.\n",
+          "locationName": "originEndpointId",
+          "shape": "__string"
+        },
+        "S3Destination": {
+          "locationName": "s3Destination",
+          "shape": "S3Destination"
+        },
+        "StartTime": {
+          "documentation": "The start of the time-window which will be harvested.\n",
+          "locationName": "startTime",
+          "shape": "__string"
+        },
+        "Status": {
+          "documentation": "The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for\nHarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will\ninclude an explanation of why the HarvestJob failed.\n",
+          "locationName": "status",
+          "shape": "Status"
+        }
+      },
+      "type": "structure"
+    },
     "DescribeOriginEndpointRequest": {
       "members": {
         "Id": {
@@ -1025,6 +1292,11 @@
           "locationName": "mssPackage",
           "shape": "MssPackage"
         },
+        "Origination": {
+          "documentation": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint\nmay by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be\nrequested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination\n",
+          "locationName": "origination",
+          "shape": "Origination"
+        },
         "StartoverWindowSeconds": {
           "documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.\n",
           "locationName": "startoverWindowSeconds",
@@ -1058,6 +1330,56 @@
         "SAMPLE_AES"
       ],
       "type": "string"
+    },
+    "HarvestJob": {
+      "documentation": "A HarvestJob resource configuration",
+      "members": {
+        "Arn": {
+          "documentation": "The Amazon Resource Name (ARN) assigned to the HarvestJob.\n",
+          "locationName": "arn",
+          "shape": "__string"
+        },
+        "ChannelId": {
+          "documentation": "The ID of the Channel that the HarvestJob will harvest from.\n",
+          "locationName": "channelId",
+          "shape": "__string"
+        },
+        "CreatedAt": {
+          "documentation": "The time the HarvestJob was submitted\n",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
+        "EndTime": {
+          "documentation": "The end of the time-window which will be harvested.\n",
+          "locationName": "endTime",
+          "shape": "__string"
+        },
+        "Id": {
+          "documentation": "The ID of the HarvestJob. The ID must be unique within the region\nand it cannot be changed after the HarvestJob is submitted.\n",
+          "locationName": "id",
+          "shape": "__string"
+        },
+        "OriginEndpointId": {
+          "documentation": "The ID of the OriginEndpoint that the HarvestJob will harvest from.\nThis cannot be changed after the HarvestJob is submitted.\n",
+          "locationName": "originEndpointId",
+          "shape": "__string"
+        },
+        "S3Destination": {
+          "locationName": "s3Destination",
+          "shape": "S3Destination"
+        },
+        "StartTime": {
+          "documentation": "The start of the time-window which will be harvested.\n",
+          "locationName": "startTime",
+          "shape": "__string"
+        },
+        "Status": {
+          "documentation": "The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for\nHarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will\ninclude an explanation of why the HarvestJob failed.\n",
+          "locationName": "status",
+          "shape": "Status"
+        }
+      },
+      "type": "structure"
     },
     "HlsEncryption": {
       "documentation": "An HTTP Live Streaming (HLS) encryption configuration.",
@@ -1319,6 +1641,50 @@
       },
       "type": "structure"
     },
+    "ListHarvestJobsRequest": {
+      "members": {
+        "IncludeChannelId": {
+          "documentation": "When specified, the request will return only HarvestJobs associated with the given Channel ID.",
+          "location": "querystring",
+          "locationName": "includeChannelId",
+          "shape": "__string"
+        },
+        "IncludeStatus": {
+          "documentation": "When specified, the request will return only HarvestJobs in the given status.",
+          "location": "querystring",
+          "locationName": "includeStatus",
+          "shape": "__string"
+        },
+        "MaxResults": {
+          "documentation": "The upper bound on the number of records to return.",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "shape": "MaxResults"
+        },
+        "NextToken": {
+          "documentation": "A token used to resume pagination from the end of a previous request.",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "shape": "__string"
+        }
+      },
+      "type": "structure"
+    },
+    "ListHarvestJobsResponse": {
+      "members": {
+        "HarvestJobs": {
+          "documentation": "A list of HarvestJob records.",
+          "locationName": "harvestJobs",
+          "shape": "__listOfHarvestJob"
+        },
+        "NextToken": {
+          "documentation": "A token that can be used to resume pagination from the end of the collection.",
+          "locationName": "nextToken",
+          "shape": "__string"
+        }
+      },
+      "type": "structure"
+    },
     "ListOriginEndpointsRequest": {
       "members": {
         "ChannelId": {
@@ -1472,6 +1838,11 @@
           "locationName": "mssPackage",
           "shape": "MssPackage"
         },
+        "Origination": {
+          "documentation": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint\nmay by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be\nrequested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination\n",
+          "locationName": "origination",
+          "shape": "Origination"
+        },
         "StartoverWindowSeconds": {
           "documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.\n",
           "locationName": "startoverWindowSeconds",
@@ -1498,6 +1869,13 @@
         }
       },
       "type": "structure"
+    },
+    "Origination": {
+      "enum": [
+        "ALLOW",
+        "DENY"
+      ],
+      "type": "string"
     },
     "PlaylistType": {
       "enum": [
@@ -1607,6 +1985,32 @@
       },
       "type": "structure"
     },
+    "S3Destination": {
+      "documentation": "Configuration parameters for where in an S3 bucket to place the harvested content\n",
+      "members": {
+        "BucketName": {
+          "documentation": "The name of an S3 bucket within which harvested content will be exported\n",
+          "locationName": "bucketName",
+          "shape": "__string"
+        },
+        "ManifestKey": {
+          "documentation": "The key in the specified S3 bucket where the harvested top-level manifest will be placed.\n",
+          "locationName": "manifestKey",
+          "shape": "__string"
+        },
+        "RoleArn": {
+          "documentation": "The IAM role used to write to the specified S3 bucket\n",
+          "locationName": "roleArn",
+          "shape": "__string"
+        }
+      },
+      "required": [
+        "ManifestKey",
+        "BucketName",
+        "RoleArn"
+      ],
+      "type": "structure"
+    },
     "SegmentTemplateFormat": {
       "enum": [
         "NUMBER_WITH_TIMELINE",
@@ -1645,12 +2049,20 @@
         }
       },
       "required": [
-        "Url",
         "ResourceId",
-        "RoleArn",
-        "SystemIds"
+        "SystemIds",
+        "Url",
+        "RoleArn"
       ],
       "type": "structure"
+    },
+    "Status": {
+      "enum": [
+        "IN_PROGRESS",
+        "SUCCEEDED",
+        "FAILED"
+      ],
+      "type": "string"
     },
     "StreamOrder": {
       "enum": [
@@ -1812,6 +2224,11 @@
           "locationName": "mssPackage",
           "shape": "MssPackage"
         },
+        "Origination": {
+          "documentation": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint\nmay by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be\nrequested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination\n",
+          "locationName": "origination",
+          "shape": "Origination"
+        },
         "StartoverWindowSeconds": {
           "documentation": "Maximum duration (in seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.\n",
           "locationName": "startoverWindowSeconds",
@@ -1876,6 +2293,11 @@
           "locationName": "mssPackage",
           "shape": "MssPackage"
         },
+        "Origination": {
+          "documentation": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint\nmay by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be\nrequested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination\n",
+          "locationName": "origination",
+          "shape": "Origination"
+        },
         "StartoverWindowSeconds": {
           "documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.\n",
           "locationName": "startoverWindowSeconds",
@@ -1931,6 +2353,12 @@
     "__listOfChannel": {
       "member": {
         "shape": "Channel"
+      },
+      "type": "list"
+    },
+    "__listOfHarvestJob": {
+      "member": {
+        "shape": "HarvestJob"
       },
       "type": "list"
     },
