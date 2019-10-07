@@ -28,21 +28,37 @@ declare class Pinpoint extends Service {
    */
   createCampaign(callback?: (err: AWSError, data: Pinpoint.Types.CreateCampaignResponse) => void): Request<Pinpoint.Types.CreateCampaignResponse, AWSError>;
   /**
-   * Creates a new export job for an application.
+   * Creates a message template that you can use in messages that are sent through the email channel.
+   */
+  createEmailTemplate(params: Pinpoint.Types.CreateEmailTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateEmailTemplateResponse) => void): Request<Pinpoint.Types.CreateEmailTemplateResponse, AWSError>;
+  /**
+   * Creates a message template that you can use in messages that are sent through the email channel.
+   */
+  createEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateEmailTemplateResponse) => void): Request<Pinpoint.Types.CreateEmailTemplateResponse, AWSError>;
+  /**
+   * Creates an export job for an application.
    */
   createExportJob(params: Pinpoint.Types.CreateExportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateExportJobResponse) => void): Request<Pinpoint.Types.CreateExportJobResponse, AWSError>;
   /**
-   * Creates a new export job for an application.
+   * Creates an export job for an application.
    */
   createExportJob(callback?: (err: AWSError, data: Pinpoint.Types.CreateExportJobResponse) => void): Request<Pinpoint.Types.CreateExportJobResponse, AWSError>;
   /**
-   * Creates a new import job for an application.
+   * Creates an import job for an application.
    */
   createImportJob(params: Pinpoint.Types.CreateImportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
   /**
-   * Creates a new import job for an application.
+   * Creates an import job for an application.
    */
   createImportJob(callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
+  /**
+   * Creates a message template that you can use in messages that are sent through a push notification channel.
+   */
+  createPushTemplate(params: Pinpoint.Types.CreatePushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreatePushTemplateResponse) => void): Request<Pinpoint.Types.CreatePushTemplateResponse, AWSError>;
+  /**
+   * Creates a message template that you can use in messages that are sent through a push notification channel.
+   */
+  createPushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreatePushTemplateResponse) => void): Request<Pinpoint.Types.CreatePushTemplateResponse, AWSError>;
   /**
    * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
@@ -51,6 +67,14 @@ declare class Pinpoint extends Service {
    * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
   createSegment(callback?: (err: AWSError, data: Pinpoint.Types.CreateSegmentResponse) => void): Request<Pinpoint.Types.CreateSegmentResponse, AWSError>;
+  /**
+   * Creates a message template that you can use in messages that are sent through the SMS channel.
+   */
+  createSmsTemplate(params: Pinpoint.Types.CreateSmsTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateSmsTemplateResponse) => void): Request<Pinpoint.Types.CreateSmsTemplateResponse, AWSError>;
+  /**
+   * Creates a message template that you can use in messages that are sent through the SMS channel.
+   */
+  createSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateSmsTemplateResponse) => void): Request<Pinpoint.Types.CreateSmsTemplateResponse, AWSError>;
   /**
    * Disables the ADM channel for an application and deletes any existing settings for the channel.
    */
@@ -124,6 +148,14 @@ declare class Pinpoint extends Service {
    */
   deleteEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
+   * Deletes a message template that was designed for use in messages that were sent through the email channel.
+   */
+  deleteEmailTemplate(params: Pinpoint.Types.DeleteEmailTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailTemplateResponse) => void): Request<Pinpoint.Types.DeleteEmailTemplateResponse, AWSError>;
+  /**
+   * Deletes a message template that was designed for use in messages that were sent through the email channel.
+   */
+  deleteEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailTemplateResponse) => void): Request<Pinpoint.Types.DeleteEmailTemplateResponse, AWSError>;
+  /**
    * Deletes an endpoint from an application.
    */
   deleteEndpoint(params: Pinpoint.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEndpointResponse) => void): Request<Pinpoint.Types.DeleteEndpointResponse, AWSError>;
@@ -148,6 +180,14 @@ declare class Pinpoint extends Service {
    */
   deleteGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteGcmChannelResponse) => void): Request<Pinpoint.Types.DeleteGcmChannelResponse, AWSError>;
   /**
+   * Deletes a message template that was designed for use in messages that were sent through a push notification channel.
+   */
+  deletePushTemplate(params: Pinpoint.Types.DeletePushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeletePushTemplateResponse) => void): Request<Pinpoint.Types.DeletePushTemplateResponse, AWSError>;
+  /**
+   * Deletes a message template that was designed for use in messages that were sent through a push notification channel.
+   */
+  deletePushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeletePushTemplateResponse) => void): Request<Pinpoint.Types.DeletePushTemplateResponse, AWSError>;
+  /**
    * Deletes a segment from an application.
    */
   deleteSegment(params: Pinpoint.Types.DeleteSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSegmentResponse) => void): Request<Pinpoint.Types.DeleteSegmentResponse, AWSError>;
@@ -163,6 +203,14 @@ declare class Pinpoint extends Service {
    * Disables the SMS channel for an application and deletes any existing settings for the channel.
    */
   deleteSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
+  /**
+   * Deletes a message template that was designed for use in messages that were sent through the SMS channel.
+   */
+  deleteSmsTemplate(params: Pinpoint.Types.DeleteSmsTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsTemplateResponse) => void): Request<Pinpoint.Types.DeleteSmsTemplateResponse, AWSError>;
+  /**
+   * Deletes a message template that was designed for use in messages that were sent through the SMS channel.
+   */
+  deleteSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsTemplateResponse) => void): Request<Pinpoint.Types.DeleteSmsTemplateResponse, AWSError>;
   /**
    * Deletes all the endpoints that are associated with a specific user ID.
    */
@@ -228,11 +276,11 @@ declare class Pinpoint extends Service {
    */
   getApp(callback?: (err: AWSError, data: Pinpoint.Types.GetAppResponse) => void): Request<Pinpoint.Types.GetAppResponse, AWSError>;
   /**
-   *  Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
+   * Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
    */
   getApplicationDateRangeKpi(params: Pinpoint.Types.GetApplicationDateRangeKpiRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationDateRangeKpiResponse) => void): Request<Pinpoint.Types.GetApplicationDateRangeKpiResponse, AWSError>;
   /**
-   *  Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
+   * Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
    */
   getApplicationDateRangeKpi(callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationDateRangeKpiResponse) => void): Request<Pinpoint.Types.GetApplicationDateRangeKpiResponse, AWSError>;
   /**
@@ -252,11 +300,11 @@ declare class Pinpoint extends Service {
    */
   getApps(callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
   /**
-   * Retrieves information about the status and settings of the Baidu Cloud Push channel for an application.
+   * Retrieves information about the status and settings of the Baidu channel for an application.
    */
   getBaiduChannel(params: Pinpoint.Types.GetBaiduChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetBaiduChannelResponse) => void): Request<Pinpoint.Types.GetBaiduChannelResponse, AWSError>;
   /**
-   * Retrieves information about the status and settings of the Baidu Cloud Push channel for an application.
+   * Retrieves information about the status and settings of the Baidu channel for an application.
    */
   getBaiduChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetBaiduChannelResponse) => void): Request<Pinpoint.Types.GetBaiduChannelResponse, AWSError>;
   /**
@@ -276,11 +324,11 @@ declare class Pinpoint extends Service {
    */
   getCampaignActivities(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignActivitiesResponse) => void): Request<Pinpoint.Types.GetCampaignActivitiesResponse, AWSError>;
   /**
-   *  Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
+   * Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
    */
   getCampaignDateRangeKpi(params: Pinpoint.Types.GetCampaignDateRangeKpiRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignDateRangeKpiResponse) => void): Request<Pinpoint.Types.GetCampaignDateRangeKpiResponse, AWSError>;
   /**
-   *  Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
+   * Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
    */
   getCampaignDateRangeKpi(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignDateRangeKpiResponse) => void): Request<Pinpoint.Types.GetCampaignDateRangeKpiResponse, AWSError>;
   /**
@@ -323,6 +371,14 @@ declare class Pinpoint extends Service {
    * Retrieves information about the status and settings of the email channel for an application.
    */
   getEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
+  /**
+   * Retrieves the content and settings for a message template that you can use in messages that are sent through the email channel.
+   */
+  getEmailTemplate(params: Pinpoint.Types.GetEmailTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEmailTemplateResponse) => void): Request<Pinpoint.Types.GetEmailTemplateResponse, AWSError>;
+  /**
+   * Retrieves the content and settings for a message template that you can use in messages that are sent through the email channel.
+   */
+  getEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetEmailTemplateResponse) => void): Request<Pinpoint.Types.GetEmailTemplateResponse, AWSError>;
   /**
    * Retrieves information about the settings and attributes of a specific endpoint for an application.
    */
@@ -380,6 +436,14 @@ declare class Pinpoint extends Service {
    */
   getImportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobsResponse) => void): Request<Pinpoint.Types.GetImportJobsResponse, AWSError>;
   /**
+   * Retrieves the content and settings for a message template that you can use in messages that are sent through a push notification channel.
+   */
+  getPushTemplate(params: Pinpoint.Types.GetPushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetPushTemplateResponse) => void): Request<Pinpoint.Types.GetPushTemplateResponse, AWSError>;
+  /**
+   * Retrieves the content and settings for a message template that you can use in messages that are sent through a push notification channel.
+   */
+  getPushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetPushTemplateResponse) => void): Request<Pinpoint.Types.GetPushTemplateResponse, AWSError>;
+  /**
    * Retrieves information about the configuration, dimension, and other settings for a specific segment that's associated with an application.
    */
   getSegment(params: Pinpoint.Types.GetSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentResponse) => void): Request<Pinpoint.Types.GetSegmentResponse, AWSError>;
@@ -436,6 +500,14 @@ declare class Pinpoint extends Service {
    */
   getSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
   /**
+   * Retrieves the content and settings for a message template that you can use in messages that are sent through the SMS channel.
+   */
+  getSmsTemplate(params: Pinpoint.Types.GetSmsTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSmsTemplateResponse) => void): Request<Pinpoint.Types.GetSmsTemplateResponse, AWSError>;
+  /**
+   * Retrieves the content and settings for a message template that you can use in messages that are sent through the SMS channel.
+   */
+  getSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetSmsTemplateResponse) => void): Request<Pinpoint.Types.GetSmsTemplateResponse, AWSError>;
+  /**
    * Retrieves information about all the endpoints that are associated with a specific user ID.
    */
   getUserEndpoints(params: Pinpoint.Types.GetUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
@@ -452,13 +524,21 @@ declare class Pinpoint extends Service {
    */
   getVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
   /**
-   * Retrieves all the tags (keys and values) that are associated with an application, campaign, or segment.
+   * Retrieves all the tags (keys and values) that are associated with an application, campaign, message template, or segment.
    */
   listTagsForResource(params: Pinpoint.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves all the tags (keys and values) that are associated with an application, campaign, or segment.
+   * Retrieves all the tags (keys and values) that are associated with an application, campaign, message template, or segment.
    */
   listTagsForResource(callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves information about all the message templates that are associated with your Amazon Pinpoint account.
+   */
+  listTemplates(params: Pinpoint.Types.ListTemplatesRequest, callback?: (err: AWSError, data: Pinpoint.Types.ListTemplatesResponse) => void): Request<Pinpoint.Types.ListTemplatesResponse, AWSError>;
+  /**
+   * Retrieves information about all the message templates that are associated with your Amazon Pinpoint account.
+   */
+  listTemplates(callback?: (err: AWSError, data: Pinpoint.Types.ListTemplatesResponse) => void): Request<Pinpoint.Types.ListTemplatesResponse, AWSError>;
   /**
    * Retrieves information about a phone number.
    */
@@ -508,59 +588,59 @@ declare class Pinpoint extends Service {
    */
   sendUsersMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
-   * Adds one or more tags (keys and values) to an application, campaign, or segment.
+   * Adds one or more tags (keys and values) to an application, campaign, message template, or segment.
    */
   tagResource(params: Pinpoint.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more tags (keys and values) to an application, campaign, or segment.
+   * Adds one or more tags (keys and values) to an application, campaign, message template, or segment.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes one or more tags (keys and values) from an application, campaign, or segment.
+   * Removes one or more tags (keys and values) from an application, campaign, message template, or segment.
    */
   untagResource(params: Pinpoint.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes one or more tags (keys and values) from an application, campaign, or segment.
+   * Removes one or more tags (keys and values) from an application, campaign, message template, or segment.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the ADM channel settings for an application.
+   * Enables the ADM channel for an application or updates the status and settings of the ADM channel for an application.
    */
   updateAdmChannel(params: Pinpoint.Types.UpdateAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateAdmChannelResponse) => void): Request<Pinpoint.Types.UpdateAdmChannelResponse, AWSError>;
   /**
-   * Updates the ADM channel settings for an application.
+   * Enables the ADM channel for an application or updates the status and settings of the ADM channel for an application.
    */
   updateAdmChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateAdmChannelResponse) => void): Request<Pinpoint.Types.UpdateAdmChannelResponse, AWSError>;
   /**
-   * Updates the APNs channel settings for an application.
+   * Enables the APNs channel for an application or updates the status and settings of the APNs channel for an application.
    */
   updateApnsChannel(params: Pinpoint.Types.UpdateApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
   /**
-   * Updates the APNs channel settings for an application.
+   * Enables the APNs channel for an application or updates the status and settings of the APNs channel for an application.
    */
   updateApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
   /**
-   * Updates the APNs sandbox channel settings for an application.
+   * Enables the APNs sandbox channel for an application or updates the status and settings of the APNs sandbox channel for an application.
    */
   updateApnsSandboxChannel(params: Pinpoint.Types.UpdateApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
-   * Updates the APNs sandbox channel settings for an application.
+   * Enables the APNs sandbox channel for an application or updates the status and settings of the APNs sandbox channel for an application.
    */
   updateApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
-   * Updates the APNs VoIP channel settings for an application.
+   * Enables the APNs VoIP channel for an application or updates the status and settings of the APNs VoIP channel for an application.
    */
   updateApnsVoipChannel(params: Pinpoint.Types.UpdateApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipChannelResponse, AWSError>;
   /**
-   * Updates the APNs VoIP channel settings for an application.
+   * Enables the APNs VoIP channel for an application or updates the status and settings of the APNs VoIP channel for an application.
    */
   updateApnsVoipChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipChannelResponse, AWSError>;
   /**
-   * Updates the settings for the APNs VoIP sandbox channel for an application.
+   * Enables the APNs VoIP sandbox channel for an application or updates the status and settings of the APNs VoIP sandbox channel for an application.
    */
   updateApnsVoipSandboxChannel(params: Pinpoint.Types.UpdateApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse, AWSError>;
   /**
-   * Updates the settings for the APNs VoIP sandbox channel for an application.
+   * Enables the APNs VoIP sandbox channel for an application or updates the status and settings of the APNs VoIP sandbox channel for an application.
    */
   updateApnsVoipSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse, AWSError>;
   /**
@@ -572,11 +652,11 @@ declare class Pinpoint extends Service {
    */
   updateApplicationSettings(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApplicationSettingsResponse) => void): Request<Pinpoint.Types.UpdateApplicationSettingsResponse, AWSError>;
   /**
-   * Updates the settings of the Baidu channel for an application.
+   * Enables the Baidu channel for an application or updates the status and settings of the Baidu channel for an application.
    */
   updateBaiduChannel(params: Pinpoint.Types.UpdateBaiduChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateBaiduChannelResponse) => void): Request<Pinpoint.Types.UpdateBaiduChannelResponse, AWSError>;
   /**
-   * Updates the settings of the Baidu channel for an application.
+   * Enables the Baidu channel for an application or updates the status and settings of the Baidu channel for an application.
    */
   updateBaiduChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateBaiduChannelResponse) => void): Request<Pinpoint.Types.UpdateBaiduChannelResponse, AWSError>;
   /**
@@ -588,13 +668,21 @@ declare class Pinpoint extends Service {
    */
   updateCampaign(callback?: (err: AWSError, data: Pinpoint.Types.UpdateCampaignResponse) => void): Request<Pinpoint.Types.UpdateCampaignResponse, AWSError>;
   /**
-   * Updates the status and settings of the email channel for an application.
+   * Enables the email channel for an application or updates the status and settings of the email channel for an application.
    */
   updateEmailChannel(params: Pinpoint.Types.UpdateEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
   /**
-   * Updates the status and settings of the email channel for an application.
+   * Enables the email channel for an application or updates the status and settings of the email channel for an application.
    */
   updateEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
+  /**
+   * Updates an existing message template that you can use in messages that are sent through the email channel.
+   */
+  updateEmailTemplate(params: Pinpoint.Types.UpdateEmailTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailTemplateResponse) => void): Request<Pinpoint.Types.UpdateEmailTemplateResponse, AWSError>;
+  /**
+   * Updates an existing message template that you can use in messages that are sent through the email channel.
+   */
+  updateEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailTemplateResponse) => void): Request<Pinpoint.Types.UpdateEmailTemplateResponse, AWSError>;
   /**
    * Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for an endpoint.
    */
@@ -612,13 +700,21 @@ declare class Pinpoint extends Service {
    */
   updateEndpointsBatch(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
   /**
-   * Updates the status and settings of the GCM channel for an application.
+   * Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.
    */
   updateGcmChannel(params: Pinpoint.Types.UpdateGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
   /**
-   * Updates the status and settings of the GCM channel for an application.
+   * Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.
    */
   updateGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
+  /**
+   * Updates an existing message template that you can use in messages that are sent through a push notification channel.
+   */
+  updatePushTemplate(params: Pinpoint.Types.UpdatePushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdatePushTemplateResponse) => void): Request<Pinpoint.Types.UpdatePushTemplateResponse, AWSError>;
+  /**
+   * Updates an existing message template that you can use in messages that are sent through a push notification channel.
+   */
+  updatePushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdatePushTemplateResponse) => void): Request<Pinpoint.Types.UpdatePushTemplateResponse, AWSError>;
   /**
    * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
@@ -628,19 +724,27 @@ declare class Pinpoint extends Service {
    */
   updateSegment(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
   /**
-   * Updates the status and settings of the SMS channel for an application.
+   * Enables the SMS channel for an application or updates the status and settings of the SMS channel for an application.
    */
   updateSmsChannel(params: Pinpoint.Types.UpdateSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
   /**
-   * Updates the status and settings of the SMS channel for an application.
+   * Enables the SMS channel for an application or updates the status and settings of the SMS channel for an application.
    */
   updateSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
   /**
-   * Updates the status and settings of the voice channel for an application.
+   * Updates an existing message template that you can use in messages that are sent through the SMS channel.
+   */
+  updateSmsTemplate(params: Pinpoint.Types.UpdateSmsTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsTemplateResponse) => void): Request<Pinpoint.Types.UpdateSmsTemplateResponse, AWSError>;
+  /**
+   * Updates an existing message template that you can use in messages that are sent through the SMS channel.
+   */
+  updateSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsTemplateResponse) => void): Request<Pinpoint.Types.UpdateSmsTemplateResponse, AWSError>;
+  /**
+   * Enables the voice channel for an application or updates the status and settings of the voice channel for an application.
    */
   updateVoiceChannel(params: Pinpoint.Types.UpdateVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
   /**
-   * Updates the status and settings of the voice channel for an application.
+   * Enables the voice channel for an application or updates the status and settings of the voice channel for an application.
    */
   updateVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
 }
@@ -889,15 +993,15 @@ declare namespace Pinpoint {
      */
     Priority?: __string;
     /**
-     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message. If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you're sending a standard notification, set the value of content-available to 0. If you're sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can't include the alert, badge, or sound keys. For more information, see Generating a Remote Notification and Pushing Background Updates to Your App on the Apple Developer website.
      */
     RawContent?: __string;
     /**
-     * Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration, displaying messages in an in-app message center, or supporting phone home functionality.
+     * Specifies whether the notification is a silent push notification. A silent (or background) push notification isn't displayed on recipients' devices. You can use silent push notifications to make small updates to your app, or to display messages in an in-app message center. Amazon Pinpoint uses this property to determine the correct value for the apns-push-type request header when it sends the notification message to APNs. If you specify a value of true for this property, Amazon Pinpoint sets the value for the apns-push-type header field to background. If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. For silent (background) notifications, set the value of content-available to 1. Additionally, the message payload for a silent notification can't include the alert, badge, or sound keys. For more information, see Generating a Remote Notification and Pushing Background Updates to Your App on the Apple Developer website. Apple has indicated that they will throttle "excessive" background notifications based on current traffic volumes. To prevent your notifications being throttled, Apple recommends that you send no more than 3 silent push notifications to each recipient per hour.
      */
     SilentPush?: __boolean;
     /**
-     * The key for the sound to play when the recipient receives the push notification. The value of this key is the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.
+     * The key for the sound to play when the recipient receives the push notification. The value for this key is the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.
      */
     Sound?: __string;
     /**
@@ -918,6 +1022,32 @@ declare namespace Pinpoint {
     Title?: __string;
     /**
      * The URL to open in the recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
+     */
+    Url?: __string;
+  }
+  export interface APNSPushNotificationTemplate {
+    /**
+     * The action to occur if a recipient taps a push notification that's based on the message template. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of the iOS platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
+     */
+    Action?: Action;
+    /**
+     * The message body to use in push notifications that are based on the message template.
+     */
+    Body?: __string;
+    /**
+     * The URL of an image or video to display in push notifications that are based on the message template.
+     */
+    MediaUrl?: __string;
+    /**
+     * The key for the sound to play when the recipient receives a push notification that's based on the message template. The value for this key is the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.
+     */
+    Sound?: __string;
+    /**
+     * The title to use in push notifications that are based on the message template. This title appears above the notification message on a recipient's device.
+     */
+    Title?: __string;
+    /**
+     * The URL to open in the recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the Action property is URL.
      */
     Url?: __string;
   }
@@ -1264,13 +1394,47 @@ declare namespace Pinpoint {
      */
     TitleOverride?: __string;
   }
+  export interface AndroidPushNotificationTemplate {
+    /**
+     * The action to occur if a recipient taps a push notification that's based on the message template. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
+     */
+    Action?: Action;
+    /**
+     * The message body to use in a push notification that's based on the message template.
+     */
+    Body?: __string;
+    /**
+     * The URL of the large icon image to display in the content view of a push notification that's based on the message template.
+     */
+    ImageIconUrl?: __string;
+    /**
+     * The URL of an image to display in a push notification that's based on the message template.
+     */
+    ImageUrl?: __string;
+    /**
+     * The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.
+     */
+    SmallImageIconUrl?: __string;
+    /**
+     * The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in /res/raw/.
+     */
+    Sound?: __string;
+    /**
+     * The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.
+     */
+    Title?: __string;
+    /**
+     * The URL to open in a recipient's default mobile browser, if a recipient taps a a push notification that's based on the message template and the value of the Action property is URL.
+     */
+    Url?: __string;
+  }
   export interface ApplicationDateRangeKpiResponse {
     /**
      * The unique identifier for the application that the metric applies to.
      */
     ApplicationId: __string;
     /**
-     * The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.
+     * The last date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.
      */
     EndTime: __timestampIso8601;
     /**
@@ -1282,11 +1446,11 @@ declare namespace Pinpoint {
      */
     KpiResult: BaseKpiResult;
     /**
-     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the App Metrics resource. The App Metrics resource returns all results in a single page.
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the Application Metrics resource. The Application Metrics resource returns all results in a single page.
      */
     NextToken?: __string;
     /**
-     * The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.
+     * The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.
      */
     StartTime: __timestampIso8601;
   }
@@ -1357,7 +1521,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The type of attribute or attributes that were removed from the endpoints. Valid values are: endpoint-custom-attributes - Custom attributes that describe endpoints endpoint-custom-metrics - Custom metrics that your app reports to Amazon Pinpoint for endpoints endpoint-user-attributes - Custom attributes that describe users
+     * The type of attribute or attributes that were removed from the endpoints. Valid values are: endpoint-custom-attributes - Custom attributes that describe endpoints. endpoint-custom-metrics - Custom metrics that your app reports to Amazon Pinpoint for endpoints. endpoint-user-attributes - Custom attributes that describe users.
      */
     AttributeType: __string;
     /**
@@ -1499,7 +1663,7 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.
+     * The last date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.
      */
     EndTime: __timestampIso8601;
     /**
@@ -1515,7 +1679,7 @@ declare namespace Pinpoint {
      */
     NextToken?: __string;
     /**
-     * The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.
+     * The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.
      */
     StartTime: __timestampIso8601;
   }
@@ -1656,6 +1820,7 @@ declare namespace Pinpoint {
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the campaign. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    TemplateConfiguration?: TemplateConfiguration;
     /**
      * The custom description of a variation of the campaign that's used for A/B testing.
      */
@@ -1771,6 +1936,19 @@ declare namespace Pinpoint {
   export interface CreateCampaignResponse {
     CampaignResponse: CampaignResponse;
   }
+  export interface CreateEmailTemplateRequest {
+    /**
+     * Creates a new message template that you can use in messages that are sent through the email channel.
+     */
+    EmailTemplateRequest: EmailTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface CreateEmailTemplateResponse {
+    CreateTemplateMessageBody: CreateTemplateMessageBody;
+  }
   export interface CreateExportJobRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -1791,6 +1969,19 @@ declare namespace Pinpoint {
   export interface CreateImportJobResponse {
     ImportJobResponse: ImportJobResponse;
   }
+  export interface CreatePushTemplateRequest {
+    /**
+     * Creates a message template that you can use in messages that are sent through a push notification channel.
+     */
+    PushNotificationTemplateRequest: PushNotificationTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface CreatePushTemplateResponse {
+    CreateTemplateMessageBody: CreateTemplateMessageBody;
+  }
   export interface CreateSegmentRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -1800,6 +1991,33 @@ declare namespace Pinpoint {
   }
   export interface CreateSegmentResponse {
     SegmentResponse: SegmentResponse;
+  }
+  export interface CreateSmsTemplateRequest {
+    /**
+     * Creates a message template that you can use in messages that are sent through the SMS channel.
+     */
+    SMSTemplateRequest: SMSTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface CreateSmsTemplateResponse {
+    CreateTemplateMessageBody: CreateTemplateMessageBody;
+  }
+  export interface CreateTemplateMessageBody {
+    /**
+     * The Amazon Resource Name (ARN) of the message template.
+     */
+    Arn?: __string;
+    /**
+     * The message that's returned from the API.
+     */
+    Message?: __string;
+    /**
+     * The unique identifier for the request or response.
+     */
+    RequestID?: __string;
   }
   export interface DefaultMessage {
     /**
@@ -1838,6 +2056,28 @@ declare namespace Pinpoint {
     Title?: __string;
     /**
      * The default URL to open in a recipient's default mobile browser, if a recipient taps the push notification and the value of the Action property is URL.
+     */
+    Url?: __string;
+  }
+  export interface DefaultPushNotificationTemplate {
+    /**
+     * The action to occur if a recipient taps a push notification that's based on the message template. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of the iOS and Android platforms. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
+     */
+    Action?: Action;
+    /**
+     * The message body to use in push notifications that are based on the message template.
+     */
+    Body?: __string;
+    /**
+     * The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in /res/raw/. For an iOS platform, this value is the key for the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.
+     */
+    Sound?: __string;
+    /**
+     * The title to use in push notifications that are based on the message template. This title appears above the notification message on a recipient's device.
+     */
+    Title?: __string;
+    /**
+     * The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the Action property is URL.
      */
     Url?: __string;
   }
@@ -1926,6 +2166,15 @@ declare namespace Pinpoint {
   export interface DeleteEmailChannelResponse {
     EmailChannelResponse: EmailChannelResponse;
   }
+  export interface DeleteEmailTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface DeleteEmailTemplateResponse {
+    MessageBody: MessageBody;
+  }
   export interface DeleteEndpointRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -1957,6 +2206,15 @@ declare namespace Pinpoint {
   export interface DeleteGcmChannelResponse {
     GCMChannelResponse: GCMChannelResponse;
   }
+  export interface DeletePushTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface DeletePushTemplateResponse {
+    MessageBody: MessageBody;
+  }
   export interface DeleteSegmentRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -1978,6 +2236,15 @@ declare namespace Pinpoint {
   }
   export interface DeleteSmsChannelResponse {
     SMSChannelResponse: SMSChannelResponse;
+  }
+  export interface DeleteSmsTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface DeleteSmsTemplateResponse {
+    MessageBody: MessageBody;
   }
   export interface DeleteUserEndpointsRequest {
     /**
@@ -2021,7 +2288,7 @@ declare namespace Pinpoint {
      */
     DefaultMessage?: DefaultMessage;
     /**
-     * The default push notification message for all push channels.
+     * The default push notification message for all push notification channels.
      */
     DefaultPushNotificationMessage?: DefaultPushNotificationMessage;
     /**
@@ -2156,6 +2423,62 @@ declare namespace Pinpoint {
      */
     Substitutions?: MapOfListOf__string;
   }
+  export interface EmailTemplateRequest {
+    /**
+     * The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.
+     */
+    HtmlPart?: __string;
+    /**
+     * The subject line, or title, to use in email messages that are based on the message template.
+     */
+    Subject?: __string;
+    /**
+     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don't support HTML and clients that are connected to high-latency networks, such as mobile devices.
+     */
+    TextPart?: __string;
+  }
+  export interface EmailTemplateResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the message template.
+     */
+    Arn?: __string;
+    /**
+     * The date when the message template was created.
+     */
+    CreationDate: __string;
+    /**
+     * The message body, in HTML format, that's used in email messages that are based on the message template.
+     */
+    HtmlPart?: __string;
+    /**
+     * The date when the message template was last modified.
+     */
+    LastModifiedDate: __string;
+    /**
+     * The subject line, or title, that's used in email messages that are based on the message template.
+     */
+    Subject?: __string;
+    /**
+     * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The name of the message template.
+     */
+    TemplateName: __string;
+    /**
+     * The type of channel that the message template is designed for. For an email template, this value is EMAIL.
+     */
+    TemplateType: TemplateType;
+    /**
+     * The message body, in text format, that's used in email messages that are based on the message template.
+     */
+    TextPart?: __string;
+  }
   export interface EndpointBatchItem {
     /**
      * The destination address for messages or push notifications that you send to the endpoint. The address varies by channel. For a push-notification channel, use the token provided by the push notification service, such as an Apple Push Notification service (APNs) device token or a Firebase Cloud Messaging (FCM) registration token. For the SMS channel, use a phone number in E.164 format, such as +12065550100. For the email channel, use an email address.
@@ -2178,7 +2501,7 @@ declare namespace Pinpoint {
      */
     EffectiveDate?: __string;
     /**
-     * Not used.
+     * Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint. Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.
      */
     EndpointStatus?: __string;
     /**
@@ -2304,7 +2627,7 @@ declare namespace Pinpoint {
      */
     StatusMessage?: __string;
     /**
-     * For push notifications that are sent through the GCM channel, specifies whether the token was updated as part of delivering the message.
+     * For push notifications that are sent through the GCM channel, specifies whether the endpoint's device registration token was updated as part of delivering the message.
      */
     UpdatedToken?: __string;
   }
@@ -2330,7 +2653,7 @@ declare namespace Pinpoint {
      */
     EffectiveDate?: __string;
     /**
-     * Not used.
+     * Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint. Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.
      */
     EndpointStatus?: __string;
     /**
@@ -2388,7 +2711,7 @@ declare namespace Pinpoint {
      */
     EffectiveDate?: __string;
     /**
-     * Not used.
+     * Specifies whether messages or push notifications are sent to the endpoint. Possible values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint. Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.
      */
     EndpointStatus?: __string;
     /**
@@ -2675,7 +2998,7 @@ declare namespace Pinpoint {
   export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|string;
   export interface GCMChannelRequest {
     /**
-     * The API key, also referred to as a server key, that you received from Google to communicate with Google services.
+     * The Web API Key, also referred to as an API_KEY or server key, that you received from Google to communicate with Google services.
      */
     ApiKey: __string;
     /**
@@ -2693,7 +3016,7 @@ declare namespace Pinpoint {
      */
     CreationDate?: __string;
     /**
-     * The API key, also referred to as a server key, that you received from Google to communicate with Google services.
+     * The Web API Key, also referred to as an API_KEY or server key, that you received from Google to communicate with Google services.
      */
     Credential: __string;
     /**
@@ -2879,23 +3202,23 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.
+     * The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.
      */
     EndTime?: __timestampIso8601;
     /**
-     * The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the Amazon Pinpoint Developer Guide.
+     * The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the Amazon Pinpoint Developer Guide.
      */
     KpiName: __string;
     /**
-     * The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
-     * The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.
+     * The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.
      */
     StartTime?: __timestampIso8601;
   }
@@ -2913,7 +3236,7 @@ declare namespace Pinpoint {
   }
   export interface GetAppsRequest {
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -2943,7 +3266,7 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -2964,23 +3287,23 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.
+     * The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.
      */
     EndTime?: __timestampIso8601;
     /**
-     * The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the Amazon Pinpoint Developer Guide.
+     * The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the Amazon Pinpoint Developer Guide.
      */
     KpiName: __string;
     /**
-     * The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
-     * The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.
+     * The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.
      */
     StartTime?: __timestampIso8601;
   }
@@ -3027,7 +3350,7 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3044,7 +3367,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3072,6 +3395,15 @@ declare namespace Pinpoint {
   }
   export interface GetEmailChannelResponse {
     EmailChannelResponse: EmailChannelResponse;
+  }
+  export interface GetEmailTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface GetEmailTemplateResponse {
+    EmailTemplateResponse: EmailTemplateResponse;
   }
   export interface GetEndpointRequest {
     /**
@@ -3114,7 +3446,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3153,7 +3485,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3164,13 +3496,22 @@ declare namespace Pinpoint {
   export interface GetImportJobsResponse {
     ImportJobsResponse: ImportJobsResponse;
   }
+  export interface GetPushTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface GetPushTemplateResponse {
+    PushNotificationTemplateResponse: PushNotificationTemplateResponse;
+  }
   export interface GetSegmentExportJobsRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3191,7 +3532,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3242,7 +3583,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3263,7 +3604,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
      */
     PageSize?: __string;
     /**
@@ -3282,6 +3623,15 @@ declare namespace Pinpoint {
   }
   export interface GetSmsChannelResponse {
     SMSChannelResponse: SMSChannelResponse;
+  }
+  export interface GetSmsTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface GetSmsTemplateResponse {
+    SMSTemplateResponse: SMSTemplateResponse;
   }
   export interface GetUserEndpointsRequest {
     /**
@@ -3451,12 +3801,33 @@ declare namespace Pinpoint {
   export type JobStatus = "CREATED"|"INITIALIZING"|"PROCESSING"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string;
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the application, campaign, or segment.
+     * The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.
      */
     ResourceArn: __string;
   }
   export interface ListTagsForResourceResponse {
     TagsModel: TagsModel;
+  }
+  export interface ListTemplatesRequest {
+    /**
+     * The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
+     */
+    NextToken?: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.
+     */
+    PageSize?: __string;
+    /**
+     * The substring to match in the names of the message templates to include in the results. If you specify this value, Amazon Pinpoint returns only those templates whose names begin with the value that you specify.
+     */
+    Prefix?: __string;
+    /**
+     * The type of message template to include in the results. Valid values are: EMAIL, SMS, and PUSH. To include all types of templates in the results, don't include this parameter in your request.
+     */
+    TemplateType?: __string;
+  }
+  export interface ListTemplatesResponse {
+    TemplatesResponse: TemplatesResponse;
   }
   export interface Message {
     /**
@@ -3566,6 +3937,10 @@ declare namespace Pinpoint {
      */
     MessageConfiguration: DirectMessageConfiguration;
     /**
+     * The message template to use for the message.
+     */
+    TemplateConfiguration?: TemplateConfiguration;
+    /**
      * The unique identifier for tracing the message. This identifier is visible to message recipients.
      */
     TraceId?: __string;
@@ -3606,7 +3981,7 @@ declare namespace Pinpoint {
      */
     StatusMessage?: __string;
     /**
-     * For push notifications that are sent through the GCM channel, specifies whether the token was updated as part of delivering the message.
+     * For push notifications that are sent through the GCM channel, specifies whether the endpoint's device registration token was updated as part of delivering the message.
      */
     UpdatedToken?: __string;
   }
@@ -3719,7 +4094,7 @@ declare namespace Pinpoint {
      */
     EffectiveDate?: __string;
     /**
-     * The status of the update request for the endpoint. Possible values are: INACTIVE, the update failed; and, ACTIVE, the endpoint was updated successfully.
+     * Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint. Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.
      */
     EndpointStatus?: __string;
     /**
@@ -3742,6 +4117,78 @@ declare namespace Pinpoint {
      * One or more custom user attributes that your app reports to Amazon Pinpoint for the user who's associated with the endpoint.
      */
     User?: EndpointUser;
+  }
+  export interface PushNotificationTemplateRequest {
+    /**
+     * The message template to use for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+     */
+    ADM?: AndroidPushNotificationTemplate;
+    /**
+     * The message template to use for the APNs (Apple Push Notification service) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+     */
+    APNS?: APNSPushNotificationTemplate;
+    /**
+     * The message template to use for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+     */
+    Baidu?: AndroidPushNotificationTemplate;
+    /**
+     * The default message template to use for push notification channels.
+     */
+    Default?: DefaultPushNotificationTemplate;
+    /**
+     * The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+     */
+    GCM?: AndroidPushNotificationTemplate;
+    /**
+     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+  }
+  export interface PushNotificationTemplateResponse {
+    /**
+     * The message template that's used for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+     */
+    ADM?: AndroidPushNotificationTemplate;
+    /**
+     * The message template that's used for the APNs (Apple Push Notification service) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+     */
+    APNS?: APNSPushNotificationTemplate;
+    /**
+     * The Amazon Resource Name (ARN) of the message template.
+     */
+    Arn?: __string;
+    /**
+     * The message template that's used for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+     */
+    Baidu?: AndroidPushNotificationTemplate;
+    /**
+     * The date when the message template was created.
+     */
+    CreationDate: __string;
+    /**
+     * The default message template that's used for push notification channels.
+     */
+    Default?: DefaultPushNotificationTemplate;
+    /**
+     * The message template that's used for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
+     */
+    GCM?: AndroidPushNotificationTemplate;
+    /**
+     * The date when the message template was last modified.
+     */
+    LastModifiedDate: __string;
+    /**
+     * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The name of the message template.
+     */
+    TemplateName: __string;
+    /**
+     * The type of channel that the message template is designed for. For a push notification template, this value is PUSH.
+     */
+    TemplateType: TemplateType;
   }
   export interface PutEventStreamRequest {
     /**
@@ -3807,17 +4254,17 @@ declare namespace Pinpoint {
   }
   export interface ResultRow {
     /**
-     *  An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.
+     * An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.
      */
     GroupedBys: ListOfResultRowValue;
     /**
-     *  An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.
+     * An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.
      */
     Values: ListOfResultRowValue;
   }
   export interface ResultRowValue {
     /**
-     *  The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.
+     * The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.
      */
     Key: __string;
     /**
@@ -3825,7 +4272,7 @@ declare namespace Pinpoint {
      */
     Type: __string;
     /**
-     *  In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).
+     * In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).
      */
     Value: __string;
   }
@@ -3915,7 +4362,7 @@ declare namespace Pinpoint {
      */
     MessageType?: MessageType;
     /**
-     * The number that the SMS message originates from. This should be one of the dedicated long codes or short codes that you requested from AWS Support and is assigned to your AWS account. If you don't specify a long or short code, Amazon Pinpoint assigns a random long code to the SMS message.
+     * The number to send the SMS message from. This value should be one of the dedicated long or short codes that's assigned to your AWS account. If you don't specify a long or short code, Amazon Pinpoint assigns a random long code to the SMS message and sends the message from that code.
      */
     OriginationNumber?: __string;
     /**
@@ -3926,6 +4373,46 @@ declare namespace Pinpoint {
      * The message variables to use in the SMS message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
+  }
+  export interface SMSTemplateRequest {
+    /**
+     * The message body to use in text messages that are based on the message template.
+     */
+    Body?: __string;
+    /**
+     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+  }
+  export interface SMSTemplateResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the message template.
+     */
+    Arn?: __string;
+    /**
+     * The message body that's used in text messages that are based on the message template.
+     */
+    Body?: __string;
+    /**
+     * The date when the message template was created.
+     */
+    CreationDate: __string;
+    /**
+     * The date when the message template was last modified.
+     */
+    LastModifiedDate: __string;
+    /**
+     * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The name of the message template.
+     */
+    TemplateName: __string;
+    /**
+     * The type of channel that the message template is designed for. For an SMS template, this value is SMS.
+     */
+    TemplateType: TemplateType;
   }
   export interface Schedule {
     /**
@@ -4173,6 +4660,10 @@ declare namespace Pinpoint {
      */
     MessageConfiguration: DirectMessageConfiguration;
     /**
+     * The message template to use for the message.
+     */
+    TemplateConfiguration?: TemplateConfiguration;
+    /**
      * The unique identifier for tracing the message. This identifier is visible to message recipients.
      */
     TraceId?: __string;
@@ -4260,16 +4751,73 @@ declare namespace Pinpoint {
   export type SourceType = "ALL"|"ANY"|"NONE"|string;
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the application, campaign, or segment.
+     * The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.
      */
     ResourceArn: __string;
     TagsModel: TagsModel;
   }
   export interface TagsModel {
     /**
-     * A string-to-string map of key-value pairs that defines the tags for an application, campaign, or segment. A project, campaign, or segment can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     * A string-to-string map of key-value pairs that defines the tags for an application, campaign, message template, or segment. Each project, campaign, message template, or segment can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
     tags: MapOf__string;
+  }
+  export interface Template {
+    /**
+     * The name of the message template to use for the message. If specified, this value must match the name of an existing message template.
+     */
+    Name?: __string;
+  }
+  export interface TemplateConfiguration {
+    /**
+     * The email template to use for the message.
+     */
+    EmailTemplate?: Template;
+    /**
+     * The push notification template to use for the message.
+     */
+    PushTemplate?: Template;
+    /**
+     * The SMS template to use for the message.
+     */
+    SMSTemplate?: Template;
+  }
+  export interface TemplateResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the message template.
+     */
+    Arn?: __string;
+    /**
+     * The date when the message template was created.
+     */
+    CreationDate: __string;
+    /**
+     * The date when the message template was last modified.
+     */
+    LastModifiedDate: __string;
+    /**
+     * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The name of the message template.
+     */
+    TemplateName: __string;
+    /**
+     * The type of channel that the message template is designed for.
+     */
+    TemplateType: TemplateType;
+  }
+  export type TemplateType = "EMAIL"|"SMS"|"PUSH"|string;
+  export interface TemplatesResponse {
+    /**
+     * An array of responses, one for each message template that's associated with your Amazon Pinpoint account and meets any filter criteria that you specified in the request.
+     */
+    Item: ListOfTemplateResponse;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    NextToken?: __string;
   }
   export interface TreatmentResource {
     /**
@@ -4292,6 +4840,7 @@ declare namespace Pinpoint {
      * The status of the treatment.
      */
     State?: CampaignState;
+    TemplateConfiguration?: TemplateConfiguration;
     /**
      * The custom description of the treatment.
      */
@@ -4304,11 +4853,11 @@ declare namespace Pinpoint {
   export type Type = "ALL"|"ANY"|"NONE"|string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the application, campaign, or segment.
+     * The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.
      */
     ResourceArn: __string;
     /**
-     * The key of the tag to remove from the application, campaign, or segment. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).
+     * The key of the tag to remove from the application, campaign, message template, or segment. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).
      */
     TagKeys: ListOf__string;
   }
@@ -4412,6 +4961,16 @@ declare namespace Pinpoint {
   export interface UpdateEmailChannelResponse {
     EmailChannelResponse: EmailChannelResponse;
   }
+  export interface UpdateEmailTemplateRequest {
+    EmailTemplateRequest: EmailTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface UpdateEmailTemplateResponse {
+    MessageBody: MessageBody;
+  }
   export interface UpdateEndpointRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -4446,6 +5005,19 @@ declare namespace Pinpoint {
   export interface UpdateGcmChannelResponse {
     GCMChannelResponse: GCMChannelResponse;
   }
+  export interface UpdatePushTemplateRequest {
+    /**
+     * Updates an existing message template that you can use in messages that are sent through a push notification channel.
+     */
+    PushNotificationTemplateRequest: PushNotificationTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface UpdatePushTemplateResponse {
+    MessageBody: MessageBody;
+  }
   export interface UpdateSegmentRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -4469,6 +5041,16 @@ declare namespace Pinpoint {
   }
   export interface UpdateSmsChannelResponse {
     SMSChannelResponse: SMSChannelResponse;
+  }
+  export interface UpdateSmsTemplateRequest {
+    SMSTemplateRequest: SMSTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface UpdateSmsTemplateResponse {
+    MessageBody: MessageBody;
   }
   export interface UpdateVoiceChannelRequest {
     /**
@@ -4538,7 +5120,7 @@ declare namespace Pinpoint {
      */
     LanguageCode?: __string;
     /**
-     * The phone number from the pool or messaging service to send the message from. Although it isn't required, we recommend that you specify the phone number in E.164 format to ensure prompt and accurate delivery.
+     * The long code to send the voice message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code in E.164 format, for example +12065550100, to ensure prompt and accurate delivery of the message.
      */
     OriginationNumber?: __string;
     /**
@@ -4617,6 +5199,7 @@ declare namespace Pinpoint {
      * A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    TemplateConfiguration?: TemplateConfiguration;
     /**
      * The custom description of a variation of the campaign to use for A/B testing.
      */
@@ -4669,6 +5252,7 @@ declare namespace Pinpoint {
      * The allocated percentage of users (segment members) to send the treatment to.
      */
     SizePercent: __integer;
+    TemplateConfiguration?: TemplateConfiguration;
     /**
      * The custom description of the treatment.
      */
@@ -4694,6 +5278,7 @@ declare namespace Pinpoint {
   export type ListOfSegmentGroup = SegmentGroup[];
   export type ListOfSegmentReference = SegmentReference[];
   export type ListOfSegmentResponse = SegmentResponse[];
+  export type ListOfTemplateResponse = TemplateResponse[];
   export type ListOfTreatmentResource = TreatmentResource[];
   export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
   export type ListOf__string = __string[];

@@ -627,7 +627,7 @@ declare namespace PinpointEmail {
   export type DeliverabilityTestSubject = string;
   export interface DeliveryOptions {
     /**
-     * Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection that’s encrypted by using Transport Layer Security (TLS). If this value is set to Require, Amazon Pinpoint will bounce email messages that cannot be delivered over TLS. The default value is Optional.
+     * Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established.
      */
     TlsPolicy?: TlsPolicy;
     /**
@@ -777,6 +777,10 @@ declare namespace PinpointEmail {
      * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   If you include attachments, they must be in a file format that Amazon Pinpoint supports.    The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
      */
     Raw?: RawMessage;
+    /**
+     * The template to use for the email message.
+     */
+    Template?: Template;
   }
   export type Enabled = boolean;
   export type Esp = string;
@@ -1370,7 +1374,7 @@ declare namespace PinpointEmail {
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
-     * Whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS).
+     * Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established.
      */
     TlsPolicy?: TlsPolicy;
     /**
@@ -1603,6 +1607,18 @@ declare namespace PinpointEmail {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface Template {
+    /**
+     * The Amazon Resource Name (ARN) of the template.
+     */
+    TemplateArn?: TemplateArn;
+    /**
+     * An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.
+     */
+    TemplateData?: TemplateData;
+  }
+  export type TemplateArn = string;
+  export type TemplateData = string;
   export type Timestamp = Date;
   export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string;
   export interface TrackingOptions {

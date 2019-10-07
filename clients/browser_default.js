@@ -63,6 +63,7 @@ module.exports = {
   SSM: require('./ssm'),
   StorageGateway: require('./storagegateway'),
   STS: require('./sts'),
+  XRay: require('./xray'),
   WAF: require('./waf'),
   WorkDocs: require('./workdocs'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),

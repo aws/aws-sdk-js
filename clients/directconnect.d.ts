@@ -212,19 +212,19 @@ declare class DirectConnect extends Service {
    */
   deleteConnection(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are attached to the Direct Connect gateway and disassociate all virtual private gateways that are associated with the Direct Connect gateway.
+   * Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are attached to the Direct Connect gateway and disassociate all virtual private gateways associated with the Direct Connect gateway.
    */
   deleteDirectConnectGateway(params: DirectConnect.Types.DeleteDirectConnectGatewayRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayResult, AWSError>;
   /**
-   * Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are attached to the Direct Connect gateway and disassociate all virtual private gateways that are associated with the Direct Connect gateway.
+   * Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are attached to the Direct Connect gateway and disassociate all virtual private gateways associated with the Direct Connect gateway.
    */
   deleteDirectConnectGateway(callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayResult, AWSError>;
   /**
-   * Deletes the association between the specified Direct Connect gateway and virtual private gateway.
+   * Deletes the association between the specified Direct Connect gateway and virtual private gateway. We recommend that you specify the associationID to delete the association. Alternatively, if you own virtual gateway and a Direct Connect gateway association, you can specify the virtualGatewayId and directConnectGatewayId to delete an association.
    */
   deleteDirectConnectGatewayAssociation(params: DirectConnect.Types.DeleteDirectConnectGatewayAssociationRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult, AWSError>;
   /**
-   * Deletes the association between the specified Direct Connect gateway and virtual private gateway.
+   * Deletes the association between the specified Direct Connect gateway and virtual private gateway. We recommend that you specify the associationID to delete the association. Alternatively, if you own virtual gateway and a Direct Connect gateway association, you can specify the virtualGatewayId and directConnectGatewayId to delete an association.
    */
   deleteDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult, AWSError>;
   /**
@@ -496,7 +496,7 @@ declare namespace DirectConnect {
      */
     vlan: VLAN;
     /**
-     * The tags to assign to the hosted connection.
+     * The tags associated with the connection.
      */
     tags?: TagList;
   }
@@ -766,9 +766,13 @@ declare namespace DirectConnect {
      */
     hasLogicalRedundancy?: HasLogicalRedundancy;
     /**
-     * Any tags assigned to the connection.
+     * The tags associated with the connection.
      */
     tags?: TagList;
+    /**
+     * The name of the service provider associated with the connection.
+     */
+    providerName?: ProviderName;
   }
   export type ConnectionId = string;
   export type ConnectionList = Connection[];
@@ -815,9 +819,13 @@ declare namespace DirectConnect {
      */
     lagId?: LagId;
     /**
-     * The tags to assign to the connection.
+     * The tags to associate with the lag.
      */
     tags?: TagList;
+    /**
+     * The name of the service provider associated with the requested connection.
+     */
+    providerName?: ProviderName;
   }
   export interface CreateDirectConnectGatewayAssociationProposalRequest {
     /**
@@ -857,7 +865,7 @@ declare namespace DirectConnect {
      */
     gatewayId?: GatewayIdToAssociate;
     /**
-     * The Amazon VPC prefixes to advertise to the Direct Connect gateway For information about how to set the prefixes, see Allowed Prefixes in the AWS Direct Connect User Guide.
+     * The Amazon VPC prefixes to advertise to the Direct Connect gateway This parameter is required when you create an association to a transit gateway. For information about how to set the prefixes, see Allowed Prefixes in the AWS Direct Connect User Guide.
      */
     addAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
     /**
@@ -905,9 +913,13 @@ declare namespace DirectConnect {
      */
     lagId?: LagId;
     /**
-     * The tags to assign to the interconnect,
+     * The tags to associate with the interconnect.
      */
     tags?: TagList;
+    /**
+     * The name of the service provider associated with the interconnect.
+     */
+    providerName?: ProviderName;
   }
   export interface CreateLagRequest {
     /**
@@ -931,13 +943,17 @@ declare namespace DirectConnect {
      */
     connectionId?: ConnectionId;
     /**
-     * The tags to assign to the link aggregation group (LAG).
+     * The tags to associate with the LAG.
      */
     tags?: TagList;
     /**
-     * The tags to assign to the child connections of the LAG. Only newly created child connections as the result of creating a LAG connection are assigned the provided tags. The tags are not assigned to an existing connection that is provided via the “connectionId” parameter that will be migrated to the LAG.
+     * The tags to associate with the automtically created LAGs.
      */
     childConnectionTags?: TagList;
+    /**
+     * The name of the service provider associated with the LAG.
+     */
+    providerName?: ProviderName;
   }
   export interface CreatePrivateVirtualInterfaceRequest {
     /**
@@ -1429,7 +1445,7 @@ declare namespace DirectConnect {
      */
     attachmentState?: DirectConnectGatewayAttachmentState;
     /**
-     * The interface type.
+     * The type of attachment.
      */
     attachmentType?: DirectConnectGatewayAttachmentType;
     /**
@@ -1508,9 +1524,13 @@ declare namespace DirectConnect {
      */
     hasLogicalRedundancy?: HasLogicalRedundancy;
     /**
-     * Any tags assigned to the interconnect.
+     * The tags associated with the interconnect.
      */
     tags?: TagList;
+    /**
+     * The name of the service provider associated with the interconnect.
+     */
+    providerName?: ProviderName;
   }
   export type InterconnectId = string;
   export type InterconnectList = Interconnect[];
@@ -1585,9 +1605,13 @@ declare namespace DirectConnect {
      */
     hasLogicalRedundancy?: HasLogicalRedundancy;
     /**
-     * Any tags assigned to link aggregation group (LAG).
+     * The tags associated with the LAG.
      */
     tags?: TagList;
+    /**
+     * The name of the service provider associated with the LAG.
+     */
+    providerName?: ProviderName;
   }
   export type LagId = string;
   export type LagList = Lag[];
@@ -1629,6 +1653,10 @@ declare namespace DirectConnect {
      * The available port speeds for the location.
      */
     availablePortSpeeds?: AvailablePortSpeeds;
+    /**
+     * The name of the service provider for the location.
+     */
+    availableProviders?: ProviderList;
   }
   export type LocationCode = string;
   export type LocationList = Location[];
@@ -1674,7 +1702,7 @@ declare namespace DirectConnect {
      */
     vlan: VLAN;
     /**
-     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. The valid values are 1-2147483647.
      */
     asn: ASN;
     /**
@@ -1706,7 +1734,7 @@ declare namespace DirectConnect {
      */
     directConnectGatewayId?: DirectConnectGatewayId;
     /**
-     * Any tags assigned to the private virtual interface.
+     * The tags associated with the private virtual interface.
      */
     tags?: TagList;
   }
@@ -1720,7 +1748,7 @@ declare namespace DirectConnect {
      */
     vlan: VLAN;
     /**
-     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. The valid values are 1-2147483647.
      */
     asn: ASN;
     /**
@@ -1744,7 +1772,7 @@ declare namespace DirectConnect {
      */
     customerAddress?: CustomerAddress;
     /**
-     * Any tags assigned to the private virtual interface to be provisioned on a connection.
+     * The tags associated with the private virtual interface.
      */
     tags?: TagList;
   }
@@ -1758,7 +1786,7 @@ declare namespace DirectConnect {
      */
     vlan: VLAN;
     /**
-     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. The valid values are 1-2147483647.
      */
     asn: ASN;
     /**
@@ -1782,7 +1810,7 @@ declare namespace DirectConnect {
      */
     routeFilterPrefixes?: RouteFilterPrefixList;
     /**
-     * Any tags assigned to the public virtual interface.
+     * The tags associated with the public virtual interface.
      */
     tags?: TagList;
   }
@@ -1796,7 +1824,7 @@ declare namespace DirectConnect {
      */
     vlan: VLAN;
     /**
-     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. The valid values are 1-2147483647.
      */
     asn: ASN;
     /**
@@ -1820,7 +1848,7 @@ declare namespace DirectConnect {
      */
     routeFilterPrefixes?: RouteFilterPrefixList;
     /**
-     * Any tags assigned to the public virtual interface to be provisioned on a connection.
+     * The tags associated with the public virtual interface.
      */
     tags?: TagList;
   }
@@ -1834,15 +1862,15 @@ declare namespace DirectConnect {
      */
     vlan?: VLAN;
     /**
-     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. The valid values are 1-2147483647.
      */
     asn?: ASN;
     /**
-     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500. 
+     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.
      */
     mtu?: MTU;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -1862,7 +1890,7 @@ declare namespace DirectConnect {
      */
     directConnectGatewayId?: DirectConnectGatewayId;
     /**
-     * Any tags assigned to the transit virtual interface.
+     * The tags associated with the transitive virtual interface.
      */
     tags?: TagList;
   }
@@ -1876,15 +1904,15 @@ declare namespace DirectConnect {
      */
     vlan?: VLAN;
     /**
-     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. The valid values are 1-2147483647.
      */
     asn?: ASN;
     /**
-     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500. 
+     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500. 
      */
     mtu?: MTU;
     /**
-     * The authentication key for BGP configuration.
+     * The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.
      */
     authKey?: BGPAuthKey;
     /**
@@ -1900,7 +1928,7 @@ declare namespace DirectConnect {
      */
     addressFamily?: AddressFamily;
     /**
-     * Any tags assigned to the transit virtual interface.
+     * The tags associated with the transitive virtual interface.
      */
     tags?: TagList;
   }
@@ -1908,6 +1936,7 @@ declare namespace DirectConnect {
   export type PaginationToken = string;
   export type PartnerName = string;
   export type PortSpeed = string;
+  export type ProviderList = ProviderName[];
   export type ProviderName = string;
   export type Region = string;
   export type ResourceArn = string;
@@ -1951,7 +1980,7 @@ declare namespace DirectConnect {
      */
     resourceArn: ResourceArn;
     /**
-     * The tags to assign.
+     * The tags to add.
      */
     tags: TagList;
   }
@@ -2062,7 +2091,7 @@ declare namespace DirectConnect {
      */
     vlan?: VLAN;
     /**
-     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. The valid values are 1-2147483647.
      */
     asn?: ASN;
     /**
@@ -2126,7 +2155,7 @@ declare namespace DirectConnect {
      */
     awsDeviceV2?: AwsDeviceV2;
     /**
-     * Any tags assigned to the virtual interface.
+     * The tags associated with the virtual interface.
      */
     tags?: TagList;
   }

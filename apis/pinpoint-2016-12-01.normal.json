@@ -96,6 +96,44 @@
       ],
       "documentation": "<p>Creates a new campaign for an application or updates the settings of an existing campaign for an application.</p>"
     },
+    "CreateEmailTemplate": {
+      "name": "CreateEmailTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/templates/{template-name}/email",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateEmailTemplateResponse",
+        "documentation": "<p>The request succeeded and the specified resource was created.</p>"
+      },
+      "errors": [
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        }
+      ],
+      "documentation": "<p>Creates a message template that you can use in messages that are sent through the email channel.</p>"
+    },
     "CreateExportJob": {
       "name": "CreateExportJob",
       "http": {
@@ -136,7 +174,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Creates a new export job for an application.</p>"
+      "documentation": "<p>Creates an export job for an application.</p>"
     },
     "CreateImportJob": {
       "name": "CreateImportJob",
@@ -178,7 +216,45 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Creates a new import job for an application.</p>"
+      "documentation": "<p>Creates an import job for an application.</p>"
+    },
+    "CreatePushTemplate": {
+      "name": "CreatePushTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/templates/{template-name}/push",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreatePushTemplateRequest"
+      },
+      "output": {
+        "shape": "CreatePushTemplateResponse",
+        "documentation": "<p>The request succeeded and the specified resource was created.</p>"
+      },
+      "errors": [
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        }
+      ],
+      "documentation": "<p>Creates a message template that you can use in messages that are sent through a push notification channel.</p>"
     },
     "CreateSegment": {
       "name": "CreateSegment",
@@ -221,6 +297,44 @@
         }
       ],
       "documentation": "<p>Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.</p>"
+    },
+    "CreateSmsTemplate": {
+      "name": "CreateSmsTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/templates/{template-name}/sms",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateSmsTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateSmsTemplateResponse",
+        "documentation": "<p>The request succeeded and the specified resource was created.</p>"
+      },
+      "errors": [
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        }
+      ],
+      "documentation": "<p>Creates a message template that you can use in messages that are sent through the SMS channel.</p>"
     },
     "DeleteAdmChannel": {
       "name": "DeleteAdmChannel",
@@ -600,6 +714,48 @@
       ],
       "documentation": "<p>Disables the email channel for an application and deletes any existing settings for the channel.</p>"
     },
+    "DeleteEmailTemplate": {
+      "name": "DeleteEmailTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/templates/{template-name}/email",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeleteEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteEmailTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Deletes a message template that was designed for use in messages that were sent through the email channel.</p>"
+    },
     "DeleteEndpoint": {
       "name": "DeleteEndpoint",
       "http": {
@@ -726,6 +882,48 @@
       ],
       "documentation": "<p>Disables the GCM channel for an application and deletes any existing settings for the channel.</p>"
     },
+    "DeletePushTemplate": {
+      "name": "DeletePushTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/templates/{template-name}/push",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeletePushTemplateRequest"
+      },
+      "output": {
+        "shape": "DeletePushTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Deletes a message template that was designed for use in messages that were sent through a push notification channel.</p>"
+    },
     "DeleteSegment": {
       "name": "DeleteSegment",
       "http": {
@@ -809,6 +1007,48 @@
         }
       ],
       "documentation": "<p>Disables the SMS channel for an application and deletes any existing settings for the channel.</p>"
+    },
+    "DeleteSmsTemplate": {
+      "name": "DeleteSmsTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/templates/{template-name}/sms",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeleteSmsTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteSmsTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Deletes a message template that was designed for use in messages that were sent through the SMS channel.</p>"
     },
     "DeleteUserEndpoints": {
       "name": "DeleteUserEndpoints",
@@ -1186,7 +1426,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": " <p>Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.</p>"
+      "documentation": "<p>Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.</p>"
     },
     "GetApplicationSettings": {
       "name": "GetApplicationSettings",
@@ -1312,7 +1552,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Retrieves information about the status and settings of the Baidu Cloud Push channel for an application.</p>"
+      "documentation": "<p>Retrieves information about the status and settings of the Baidu channel for an application.</p>"
     },
     "GetCampaign": {
       "name": "GetCampaign",
@@ -1438,7 +1678,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": " <p>Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.</p>"
+      "documentation": "<p>Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.</p>"
     },
     "GetCampaignVersion": {
       "name": "GetCampaignVersion",
@@ -1649,6 +1889,48 @@
         }
       ],
       "documentation": "<p>Retrieves information about the status and settings of the email channel for an application.</p>"
+    },
+    "GetEmailTemplate": {
+      "name": "GetEmailTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/templates/{template-name}/email",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "GetEmailTemplateResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the content and settings for a message template that you can use in messages that are sent through the email channel.</p>"
     },
     "GetEndpoint": {
       "name": "GetEndpoint",
@@ -1944,6 +2226,48 @@
       ],
       "documentation": "<p>Retrieves information about the status and settings of all the import jobs for an application.</p>"
     },
+    "GetPushTemplate": {
+      "name": "GetPushTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/templates/{template-name}/push",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetPushTemplateRequest"
+      },
+      "output": {
+        "shape": "GetPushTemplateResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the content and settings for a message template that you can use in messages that are sent through a push notification channel.</p>"
+    },
     "GetSegment": {
       "name": "GetSegment",
       "http": {
@@ -2238,6 +2562,48 @@
       ],
       "documentation": "<p>Retrieves information about the status and settings of the SMS channel for an application.</p>"
     },
+    "GetSmsTemplate": {
+      "name": "GetSmsTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/templates/{template-name}/sms",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetSmsTemplateRequest"
+      },
+      "output": {
+        "shape": "GetSmsTemplateResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the content and settings for a message template that you can use in messages that are sent through the SMS channel.</p>"
+    },
     "GetUserEndpoints": {
       "name": "GetUserEndpoints",
       "http": {
@@ -2337,7 +2703,49 @@
         "documentation": "<p>The request succeeded.</p>"
       },
       "errors": [],
-      "documentation": "<p>Retrieves all the tags (keys and values) that are associated with an application, campaign, or segment.</p>"
+      "documentation": "<p>Retrieves all the tags (keys and values) that are associated with an application, campaign, message template, or segment.</p>"
+    },
+    "ListTemplates": {
+      "name": "ListTemplates",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/templates",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTemplatesRequest"
+      },
+      "output": {
+        "shape": "ListTemplatesResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves information about all the message templates that are associated with your Amazon Pinpoint account.</p>"
     },
     "PhoneNumberValidate": {
       "name": "PhoneNumberValidate",
@@ -2602,7 +3010,7 @@
         "shape": "TagResourceRequest"
       },
       "errors": [],
-      "documentation": "<p>Adds one or more tags (keys and values) to an application, campaign, or segment.</p>"
+      "documentation": "<p>Adds one or more tags (keys and values) to an application, campaign, message template, or segment.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -2615,7 +3023,7 @@
         "shape": "UntagResourceRequest"
       },
       "errors": [],
-      "documentation": "<p>Removes one or more tags (keys and values) from an application, campaign, or segment.</p>"
+      "documentation": "<p>Removes one or more tags (keys and values) from an application, campaign, message template, or segment.</p>"
     },
     "UpdateAdmChannel": {
       "name": "UpdateAdmChannel",
@@ -2657,7 +3065,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the ADM channel settings for an application.</p>"
+      "documentation": "<p>Enables the ADM channel for an application or updates the status and settings of the ADM channel for an application.</p>"
     },
     "UpdateApnsChannel": {
       "name": "UpdateApnsChannel",
@@ -2699,7 +3107,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the APNs channel settings for an application.</p>"
+      "documentation": "<p>Enables the APNs channel for an application or updates the status and settings of the APNs channel for an application.</p>"
     },
     "UpdateApnsSandboxChannel": {
       "name": "UpdateApnsSandboxChannel",
@@ -2741,7 +3149,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the APNs sandbox channel settings for an application.</p>"
+      "documentation": "<p>Enables the APNs sandbox channel for an application or updates the status and settings of the APNs sandbox channel for an application.</p>"
     },
     "UpdateApnsVoipChannel": {
       "name": "UpdateApnsVoipChannel",
@@ -2783,7 +3191,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the APNs VoIP channel settings for an application.</p>"
+      "documentation": "<p>Enables the APNs VoIP channel for an application or updates the status and settings of the APNs VoIP channel for an application.</p>"
     },
     "UpdateApnsVoipSandboxChannel": {
       "name": "UpdateApnsVoipSandboxChannel",
@@ -2825,7 +3233,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the settings for the APNs VoIP sandbox channel for an application.</p>"
+      "documentation": "<p>Enables the APNs VoIP sandbox channel for an application or updates the status and settings of the APNs VoIP sandbox channel for an application.</p>"
     },
     "UpdateApplicationSettings": {
       "name": "UpdateApplicationSettings",
@@ -2909,7 +3317,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the settings of the Baidu channel for an application.</p>"
+      "documentation": "<p>Enables the Baidu channel for an application or updates the status and settings of the Baidu channel for an application.</p>"
     },
     "UpdateCampaign": {
       "name": "UpdateCampaign",
@@ -2993,7 +3401,49 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the status and settings of the email channel for an application.</p>"
+      "documentation": "<p>Enables the email channel for an application or updates the status and settings of the email channel for an application.</p>"
+    },
+    "UpdateEmailTemplate": {
+      "name": "UpdateEmailTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/templates/{template-name}/email",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateEmailTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Updates an existing message template that you can use in messages that are sent through the email channel.</p>"
     },
     "UpdateEndpoint": {
       "name": "UpdateEndpoint",
@@ -3119,7 +3569,49 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the status and settings of the GCM channel for an application.</p>"
+      "documentation": "<p>Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.</p>"
+    },
+    "UpdatePushTemplate": {
+      "name": "UpdatePushTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/templates/{template-name}/push",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdatePushTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdatePushTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Updates an existing message template that you can use in messages that are sent through a push notification channel.</p>"
     },
     "UpdateSegment": {
       "name": "UpdateSegment",
@@ -3203,7 +3695,49 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the status and settings of the SMS channel for an application.</p>"
+      "documentation": "<p>Enables the SMS channel for an application or updates the status and settings of the SMS channel for an application.</p>"
+    },
+    "UpdateSmsTemplate": {
+      "name": "UpdateSmsTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/templates/{template-name}/sms",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateSmsTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateSmsTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Updates an existing message template that you can use in messages that are sent through the SMS channel.</p>"
     },
     "UpdateVoiceChannel": {
       "name": "UpdateVoiceChannel",
@@ -3245,7 +3779,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Updates the status and settings of the voice channel for an application.</p>"
+      "documentation": "<p>Enables the voice channel for an application or updates the status and settings of the voice channel for an application.</p>"
     }
   },
   "shapes": {
@@ -3526,15 +4060,15 @@
         },
         "RawContent": {
           "shape": "__string",
-          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.</p>"
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you're sending a standard notification, set the value of content-available to 0. If you're sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can't include the alert, badge, or sound keys. For more information, see <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification\">Generating a Remote Notification</a> and <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app\">Pushing Background Updates to Your App</a> on the Apple Developer website.</p></note>"
         },
         "SilentPush": {
           "shape": "__boolean",
-          "documentation": "<p>Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration, displaying messages in an in-app message center, or supporting phone home functionality.</p>"
+          "documentation": "<p>Specifies whether the notification is a silent push notification. A silent (or background) push notification isn't displayed on recipients' devices. You can use silent push notifications to make small updates to your app, or to display messages in an in-app message center.</p> <p>Amazon Pinpoint uses this property to determine the correct value for the apns-push-type request header when it sends the notification message to APNs. If you specify a value of true for this property, Amazon Pinpoint sets the value for the apns-push-type header field to background.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. For silent (background) notifications, set the value of content-available to 1. Additionally, the message payload for a silent notification can't include the alert, badge, or sound keys. For more information, see <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification\">Generating a Remote Notification</a> and <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app\">Pushing Background Updates to Your App</a> on the Apple Developer website.</p> <p>Apple has indicated that they will throttle \"excessive\" background notifications based on current traffic volumes. To prevent your notifications being throttled, Apple recommends that you send no more than 3 silent push notifications to each recipient per hour.</p></note>"
         },
         "Sound": {
           "shape": "__string",
-          "documentation": "<p>The key for the sound to play when the recipient receives the push notification. The value of this key is the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.</p>"
+          "documentation": "<p>The key for the sound to play when the recipient receives the push notification. The value for this key is the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.</p>"
         },
         "Substitutions": {
           "shape": "MapOfListOf__string",
@@ -3558,6 +4092,36 @@
         }
       },
       "documentation": "<p>Specifies the settings for a one-time message that's sent directly to an endpoint through the APNs (Apple Push Notification service) channel.</p>"
+    },
+    "APNSPushNotificationTemplate": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>The action to occur if a recipient taps a push notification that's based on the message template. Valid values are:</p> <ul><li><p>OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p></li> <li><p>DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of the iOS platform.</p></li> <li><p>URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p></li></ul>"
+        },
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The message body to use in push notifications that are based on the message template.</p>"
+        },
+        "MediaUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL of an image or video to display in push notifications that are based on the message template.</p>"
+        },
+        "Sound": {
+          "shape": "__string",
+          "documentation": "<p>The key for the sound to play when the recipient receives a push notification that's based on the message template. The value for this key is the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.</p>"
+        },
+        "Title": {
+          "shape": "__string",
+          "documentation": "<p>The title to use in push notifications that are based on the message template. This title appears above the notification message on a recipient's device.</p>"
+        },
+        "Url": {
+          "shape": "__string",
+          "documentation": "<p>The URL to open in the recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the Action property is URL.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the content and settings for a message template that can be used in push notifications that are sent through the APNs (Apple Push Notification service) channel.</p>"
     },
     "APNSSandboxChannelRequest": {
       "type": "structure",
@@ -3962,6 +4526,44 @@
       },
       "documentation": "<p>Specifies address-based configuration settings for a message that's sent directly to an endpoint.</p>"
     },
+    "AndroidPushNotificationTemplate": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>The action to occur if a recipient taps a push notification that's based on the message template. Valid values are:</p> <ul><li><p>OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p></li> <li><p>DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform.</p></li> <li><p>URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p></li></ul>"
+        },
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The message body to use in a push notification that's based on the message template.</p>"
+        },
+        "ImageIconUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL of the large icon image to display in the content view of a push notification that's based on the message template.</p>"
+        },
+        "ImageUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL of an image to display in a push notification that's based on the message template.</p>"
+        },
+        "SmallImageIconUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>"
+        },
+        "Sound": {
+          "shape": "__string",
+          "documentation": "<p>The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in /res/raw/.</p>"
+        },
+        "Title": {
+          "shape": "__string",
+          "documentation": "<p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>"
+        },
+        "Url": {
+          "shape": "__string",
+          "documentation": "<p>The URL to open in a recipient's default mobile browser, if a recipient taps a a push notification that's based on the message template and the value of the Action property is URL.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the content and settings for a message template can be used in push notifications that are sent through the ADM (Amazon Device Messaging), GCM (Firebase Cloud Messaging, formerly Google Cloud Messaging), or Baidu (Baidu Cloud Push) channel.</p>"
+    },
     "ApplicationDateRangeKpiResponse": {
       "type": "structure",
       "members": {
@@ -3971,11 +4573,11 @@
         },
         "EndTime": {
           "shape": "__timestampIso8601",
-          "documentation": "<p>The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.</p>"
+          "documentation": "<p>The last date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.</p>"
         },
         "KpiName": {
           "shape": "__string",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "KpiResult": {
           "shape": "BaseKpiResult",
@@ -3983,11 +4585,11 @@
         },
         "NextToken": {
           "shape": "__string",
-          "documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the App Metrics resource. The App Metrics resource returns all results in a single page.</p>"
+          "documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null for the Application Metrics resource. The Application Metrics resource returns all results in a single page.</p>"
         },
         "StartTime": {
           "shape": "__timestampIso8601",
-          "documentation": "<p>The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.</p>"
+          "documentation": "<p>The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.</p>"
         }
       },
       "documentation": "<p>Provides the results of a query that retrieved the data for a standard metric that applies to an application, and provides information about that query.</p>",
@@ -4103,7 +4705,7 @@
         },
         "AttributeType": {
           "shape": "__string",
-          "documentation": "<p>The type of attribute or attributes that were removed from the endpoints. Valid values are:</p> <ul><li><p>endpoint-custom-attributes - Custom attributes that describe endpoints</p></li> <li><p>endpoint-custom-metrics - Custom metrics that your app reports to Amazon Pinpoint for endpoints</p></li> <li><p>endpoint-user-attributes - Custom attributes that describe users</p></li></ul>"
+          "documentation": "<p>The type of attribute or attributes that were removed from the endpoints. Valid values are:</p> <ul><li><p>endpoint-custom-attributes - Custom attributes that describe endpoints.</p></li> <li><p>endpoint-custom-metrics - Custom metrics that your app reports to Amazon Pinpoint for endpoints.</p></li> <li><p>endpoint-user-attributes - Custom attributes that describe users.</p></li></ul>"
         },
         "Attributes": {
           "shape": "ListOf__string",
@@ -4280,11 +4882,11 @@
         },
         "EndTime": {
           "shape": "__timestampIso8601",
-          "documentation": "<p>The last date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.</p>"
+          "documentation": "<p>The last date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.</p>"
         },
         "KpiName": {
           "shape": "__string",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of valid values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "KpiResult": {
           "shape": "BaseKpiResult",
@@ -4296,7 +4898,7 @@
         },
         "StartTime": {
           "shape": "__timestampIso8601",
-          "documentation": "<p>The first date or date and time of the date range that was used to filter the query results, in ISO 8601 format. The date range is inclusive.</p>"
+          "documentation": "<p>The first date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.</p>"
         }
       },
       "documentation": "<p>Provides the results of a query that retrieved the data for a standard metric that applies to a campaign, and provides information about that query.</p>",
@@ -4471,6 +5073,9 @@
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the campaign. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateConfiguration": {
+          "shape": "TemplateConfiguration"
         },
         "TreatmentDescription": {
           "shape": "__string",
@@ -4696,6 +5301,38 @@
       ],
       "payload": "CampaignResponse"
     },
+    "CreateEmailTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "EmailTemplateRequest": {
+          "shape": "EmailTemplateRequest",
+          "documentation": "<p>Creates a new message template that you can use in messages that are sent through the email channel.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "EmailTemplateRequest"
+      ],
+      "payload": "EmailTemplateRequest"
+    },
+    "CreateEmailTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "CreateTemplateMessageBody": {
+          "shape": "CreateTemplateMessageBody"
+        }
+      },
+      "required": [
+        "CreateTemplateMessageBody"
+      ],
+      "payload": "CreateTemplateMessageBody"
+    },
     "CreateExportJobRequest": {
       "type": "structure",
       "members": {
@@ -4758,6 +5395,38 @@
       ],
       "payload": "ImportJobResponse"
     },
+    "CreatePushTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "PushNotificationTemplateRequest": {
+          "shape": "PushNotificationTemplateRequest",
+          "documentation": "<p>Creates a message template that you can use in messages that are sent through a push notification channel.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "PushNotificationTemplateRequest"
+      ],
+      "payload": "PushNotificationTemplateRequest"
+    },
+    "CreatePushTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "CreateTemplateMessageBody": {
+          "shape": "CreateTemplateMessageBody"
+        }
+      },
+      "required": [
+        "CreateTemplateMessageBody"
+      ],
+      "payload": "CreateTemplateMessageBody"
+    },
     "CreateSegmentRequest": {
       "type": "structure",
       "members": {
@@ -4788,6 +5457,56 @@
         "SegmentResponse"
       ],
       "payload": "SegmentResponse"
+    },
+    "CreateSmsTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "SMSTemplateRequest": {
+          "shape": "SMSTemplateRequest",
+          "documentation": "<p>Creates a message template that you can use in messages that are sent through the SMS channel.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "SMSTemplateRequest"
+      ],
+      "payload": "SMSTemplateRequest"
+    },
+    "CreateSmsTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "CreateTemplateMessageBody": {
+          "shape": "CreateTemplateMessageBody"
+        }
+      },
+      "required": [
+        "CreateTemplateMessageBody"
+      ],
+      "payload": "CreateTemplateMessageBody"
+    },
+    "CreateTemplateMessageBody": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>"
+        },
+        "Message": {
+          "shape": "__string",
+          "documentation": "<p>The message that's returned from the API.</p>"
+        },
+        "RequestID": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the request or response.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about an API request or response.</p>"
     },
     "DefaultMessage": {
       "type": "structure",
@@ -4836,6 +5555,32 @@
         }
       },
       "documentation": "<p>Specifies the default settings and content for a push notification that's sent directly to an endpoint.</p>"
+    },
+    "DefaultPushNotificationTemplate": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>The action to occur if a recipient taps a push notification that's based on the message template. Valid values are:</p> <ul><li><p>OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p></li> <li><p>DEEP_LINK - Your app opens and displays a designated user interface in the app. This setting uses the deep-linking features of the iOS and Android platforms.</p></li> <li><p>URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p></li></ul>"
+        },
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The message body to use in push notifications that are based on the message template.</p>"
+        },
+        "Sound": {
+          "shape": "__string",
+          "documentation": "<p>The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in /res/raw/.</p> <p>For an iOS platform, this value is the key for the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.</p>"
+        },
+        "Title": {
+          "shape": "__string",
+          "documentation": "<p>The title to use in push notifications that are based on the message template. This title appears above the notification message on a recipient's device.</p>"
+        },
+        "Url": {
+          "shape": "__string",
+          "documentation": "<p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the Action property is URL.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the settings and content for the default message template that's used in messages that are sent through a push notification channel.</p>"
     },
     "DeleteAdmChannelRequest": {
       "type": "structure",
@@ -5078,6 +5823,32 @@
       ],
       "payload": "EmailChannelResponse"
     },
+    "DeleteEmailTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "DeleteEmailTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
+    },
     "DeleteEndpointRequest": {
       "type": "structure",
       "members": {
@@ -5163,6 +5934,32 @@
       ],
       "payload": "GCMChannelResponse"
     },
+    "DeletePushTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "DeletePushTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
+    },
     "DeleteSegmentRequest": {
       "type": "structure",
       "members": {
@@ -5221,6 +6018,32 @@
         "SMSChannelResponse"
       ],
       "payload": "SMSChannelResponse"
+    },
+    "DeleteSmsTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "DeleteSmsTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
     },
     "DeleteUserEndpointsRequest": {
       "type": "structure",
@@ -5321,7 +6144,7 @@
         },
         "DefaultPushNotificationMessage": {
           "shape": "DefaultPushNotificationMessage",
-          "documentation": "<p>The default push notification message for all push channels.</p>"
+          "documentation": "<p>The default push notification message for all push notification channels.</p>"
         },
         "EmailMessage": {
           "shape": "EmailMessage",
@@ -5484,6 +6307,78 @@
       },
       "documentation": "<p>Specifies the default settings and content for a one-time email message that's sent directly to an endpoint.</p>"
     },
+    "EmailTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "HtmlPart": {
+          "shape": "__string",
+          "documentation": "<p>The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.</p>"
+        },
+        "Subject": {
+          "shape": "__string",
+          "documentation": "<p>The subject line, or title, to use in email messages that are based on the message template.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TextPart": {
+          "shape": "__string",
+          "documentation": "<p>The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don't support HTML and clients that are connected to high-latency networks, such as mobile devices.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.</p>"
+    },
+    "EmailTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was created.</p>"
+        },
+        "HtmlPart": {
+          "shape": "__string",
+          "documentation": "<p>The message body, in HTML format, that's used in email messages that are based on the message template.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was last modified.</p>"
+        },
+        "Subject": {
+          "shape": "__string",
+          "documentation": "<p>The subject line, or title, that's used in email messages that are based on the message template.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the message template.</p>"
+        },
+        "TemplateType": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type of channel that the message template is designed for. For an email template, this value is EMAIL.</p>"
+        },
+        "TextPart": {
+          "shape": "__string",
+          "documentation": "<p>The message body, in text format, that's used in email messages that are based on the message template.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the content and settings for a message template that can be used in messages that are sent through the email channel.</p>",
+      "required": [
+        "LastModifiedDate",
+        "CreationDate",
+        "TemplateName",
+        "TemplateType"
+      ]
+    },
     "EndpointBatchItem": {
       "type": "structure",
       "members": {
@@ -5509,7 +6404,7 @@
         },
         "EndpointStatus": {
           "shape": "__string",
-          "documentation": "<p>Not used.</p>"
+          "documentation": "<p>Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>"
         },
         "Id": {
           "shape": "__string",
@@ -5658,7 +6553,7 @@
         },
         "UpdatedToken": {
           "shape": "__string",
-          "documentation": "<p>For push notifications that are sent through the GCM channel, specifies whether the token was updated as part of delivering the message.</p>"
+          "documentation": "<p>For push notifications that are sent through the GCM channel, specifies whether the endpoint's device registration token was updated as part of delivering the message.</p>"
         }
       },
       "documentation": "<p>Provides information about the delivery status and results of sending a message directly to an endpoint.</p>",
@@ -5692,7 +6587,7 @@
         },
         "EndpointStatus": {
           "shape": "__string",
-          "documentation": "<p>Not used.</p>"
+          "documentation": "<p>Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>"
         },
         "Location": {
           "shape": "EndpointLocation",
@@ -5754,7 +6649,7 @@
         },
         "EndpointStatus": {
           "shape": "__string",
-          "documentation": "<p>Not used.</p>"
+          "documentation": "<p>Specifies whether messages or push notifications are sent to the endpoint. Possible values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>"
         },
         "Id": {
           "shape": "__string",
@@ -6159,7 +7054,7 @@
       "members": {
         "ApiKey": {
           "shape": "__string",
-          "documentation": "<p>The API key, also referred to as a <i>server key</i>, that you received from Google to communicate with Google services.</p>"
+          "documentation": "<p>The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.</p>"
         },
         "Enabled": {
           "shape": "__boolean",
@@ -6184,7 +7079,7 @@
         },
         "Credential": {
           "shape": "__string",
-          "documentation": "<p>The API key, also referred to as a <i>server key</i>, that you received from Google to communicate with Google services.</p>"
+          "documentation": "<p>The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.</p>"
         },
         "Enabled": {
           "shape": "__boolean",
@@ -6503,31 +7398,31 @@
           "shape": "__timestampIso8601",
           "location": "querystring",
           "locationName": "end-time",
-          "documentation": "<p>The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.</p>"
+          "documentation": "<p>The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.</p>"
         },
         "KpiName": {
           "shape": "__string",
           "location": "uri",
           "locationName": "kpi-name",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "NextToken": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "StartTime": {
           "shape": "__timestampIso8601",
           "location": "querystring",
           "locationName": "start-time",
-          "documentation": "<p>The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.</p>"
+          "documentation": "<p>The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.</p>"
         }
       },
       "required": [
@@ -6580,7 +7475,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6647,7 +7542,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6692,31 +7587,31 @@
           "shape": "__timestampIso8601",
           "location": "querystring",
           "locationName": "end-time",
-          "documentation": "<p>The last date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-19 for July 19, 2019. To define a date range that ends at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-19T20:00Z for 8:00 PM July 19, 2019.</p>"
+          "documentation": "<p>The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.</p>"
         },
         "KpiName": {
           "shape": "__string",
           "location": "uri",
           "locationName": "kpi-name",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are attempted-deliveries and successful-deliveries. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href=\"developerguide.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "NextToken": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "StartTime": {
           "shape": "__timestampIso8601",
           "location": "querystring",
           "locationName": "start-time",
-          "documentation": "<p>The first date to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in ISO 8601 format, for example: 2019-07-15 for July 15, 2019. To define a date range that begins at a specific time, specify the date and time in ISO 8601 format, for example: 2019-07-15T16:00Z for 4:00 PM July 15, 2019.</p>"
+          "documentation": "<p>The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.</p>"
         }
       },
       "required": [
@@ -6829,7 +7724,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6868,7 +7763,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -6944,6 +7839,32 @@
         "EmailChannelResponse"
       ],
       "payload": "EmailChannelResponse"
+    },
+    "GetEmailTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "GetEmailTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "EmailTemplateResponse": {
+          "shape": "EmailTemplateResponse"
+        }
+      },
+      "required": [
+        "EmailTemplateResponse"
+      ],
+      "payload": "EmailTemplateResponse"
     },
     "GetEndpointRequest": {
       "type": "structure",
@@ -7050,7 +7971,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -7147,7 +8068,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -7172,6 +8093,32 @@
       ],
       "payload": "ImportJobsResponse"
     },
+    "GetPushTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "GetPushTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "PushNotificationTemplateResponse": {
+          "shape": "PushNotificationTemplateResponse"
+        }
+      },
+      "required": [
+        "PushNotificationTemplateResponse"
+      ],
+      "payload": "PushNotificationTemplateResponse"
+    },
     "GetSegmentExportJobsRequest": {
       "type": "structure",
       "members": {
@@ -7185,7 +8132,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -7230,7 +8177,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -7348,7 +8295,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -7393,7 +8340,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the App Metrics and Campaign Metrics resources.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -7443,6 +8390,32 @@
         "SMSChannelResponse"
       ],
       "payload": "SMSChannelResponse"
+    },
+    "GetSmsTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "GetSmsTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "SMSTemplateResponse": {
+          "shape": "SMSTemplateResponse"
+        }
+      },
+      "required": [
+        "SMSTemplateResponse"
+      ],
+      "payload": "SMSTemplateResponse"
     },
     "GetUserEndpointsRequest": {
       "type": "structure",
@@ -7713,7 +8686,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the application, campaign, or segment.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.</p>"
         }
       },
       "required": [
@@ -7731,6 +8704,47 @@
         "TagsModel"
       ],
       "payload": "TagsModel"
+    },
+    "ListTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "next-token",
+          "documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
+        },
+        "PageSize": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "page-size",
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported by the Application Metrics and Campaign Metrics resources.</p>"
+        },
+        "Prefix": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "prefix",
+          "documentation": "<p>The substring to match in the names of the message templates to include in the results. If you specify this value, Amazon Pinpoint returns only those templates whose names begin with the value that you specify.</p>"
+        },
+        "TemplateType": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "template-type",
+          "documentation": "<p>The type of message template to include in the results. Valid values are: EMAIL, SMS, and PUSH. To include all types of templates in the results, don't include this parameter in your request.</p>"
+        }
+      }
+    },
+    "ListTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "TemplatesResponse": {
+          "shape": "TemplatesResponse"
+        }
+      },
+      "required": [
+        "TemplatesResponse"
+      ],
+      "payload": "TemplatesResponse"
     },
     "Message": {
       "type": "structure",
@@ -7853,6 +8867,10 @@
           "shape": "DirectMessageConfiguration",
           "documentation": "<p>The set of properties that defines the configuration settings for the message.</p>"
         },
+        "TemplateConfiguration": {
+          "shape": "TemplateConfiguration",
+          "documentation": "<p>The message template to use for the message.</p>"
+        },
         "TraceId": {
           "shape": "__string",
           "documentation": "<p>The unique identifier for tracing the message. This identifier is visible to message recipients.</p>"
@@ -7909,7 +8927,7 @@
         },
         "UpdatedToken": {
           "shape": "__string",
-          "documentation": "<p>For push notifications that are sent through the GCM channel, specifies whether the token was updated as part of delivering the message.</p>"
+          "documentation": "<p>For push notifications that are sent through the GCM channel, specifies whether the endpoint's device registration token was updated as part of delivering the message.</p>"
         }
       },
       "documentation": "<p>Provides information about the results of sending a message directly to an endpoint address.</p>",
@@ -8075,7 +9093,7 @@
         },
         "EndpointStatus": {
           "shape": "__string",
-          "documentation": "<p>The status of the update request for the endpoint. Possible values are: INACTIVE, the update failed; and, ACTIVE, the endpoint was updated successfully.</p>"
+          "documentation": "<p>Specifies whether to send messages or push notifications to the endpoint. Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE, messages aren’t sent to the endpoint.</p> <p>Amazon Pinpoint automatically sets this value to ACTIVE when you create an endpoint or update an existing endpoint. Amazon Pinpoint automatically sets this value to INACTIVE if you update another endpoint that has the same address specified by the Address property.</p>"
         },
         "Location": {
           "shape": "EndpointLocation",
@@ -8099,6 +9117,94 @@
         }
       },
       "documentation": "<p>Specifies the properties and attributes of an endpoint that's associated with an event.</p>"
+    },
+    "PushNotificationTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "ADM": {
+          "shape": "AndroidPushNotificationTemplate",
+          "documentation": "<p>The message template to use for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
+        },
+        "APNS": {
+          "shape": "APNSPushNotificationTemplate",
+          "documentation": "<p>The message template to use for the APNs (Apple Push Notification service) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
+        },
+        "Baidu": {
+          "shape": "AndroidPushNotificationTemplate",
+          "documentation": "<p>The message template to use for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
+        },
+        "Default": {
+          "shape": "DefaultPushNotificationTemplate",
+          "documentation": "<p>The default message template to use for push notification channels.</p>"
+        },
+        "GCM": {
+          "shape": "AndroidPushNotificationTemplate",
+          "documentation": "<p>The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.</p>"
+    },
+    "PushNotificationTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "ADM": {
+          "shape": "AndroidPushNotificationTemplate",
+          "documentation": "<p>The message template that's used for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
+        },
+        "APNS": {
+          "shape": "APNSPushNotificationTemplate",
+          "documentation": "<p>The message template that's used for the APNs (Apple Push Notification service) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
+        },
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>"
+        },
+        "Baidu": {
+          "shape": "AndroidPushNotificationTemplate",
+          "documentation": "<p>The message template that's used for the Baidu (Baidu Cloud Push) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was created.</p>"
+        },
+        "Default": {
+          "shape": "DefaultPushNotificationTemplate",
+          "documentation": "<p>The default message template that's used for push notification channels.</p>"
+        },
+        "GCM": {
+          "shape": "AndroidPushNotificationTemplate",
+          "documentation": "<p>The message template that's used for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was last modified.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the message template.</p>"
+        },
+        "TemplateType": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type of channel that the message template is designed for. For a push notification template, this value is PUSH.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the content and settings for a message template that can be used in messages that are sent through a push notification channel.</p>",
+      "required": [
+        "LastModifiedDate",
+        "CreationDate",
+        "TemplateName",
+        "TemplateType"
+      ]
     },
     "PutEventStreamRequest": {
       "type": "structure",
@@ -8257,11 +9363,11 @@
       "members": {
         "GroupedBys": {
           "shape": "ListOfResultRowValue",
-          "documentation": " <p>An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.</p>"
+          "documentation": "<p>An array of objects that defines the field and field values that were used to group data in a result set that contains multiple results. This value is null if the data in a result set isn’t grouped.</p>"
         },
         "Values": {
           "shape": "ListOfResultRowValue",
-          "documentation": " <p>An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.</p>"
+          "documentation": "<p>An array of objects that provides pre-aggregated values for a standard metric that applies to an application or campaign.</p>"
         }
       },
       "documentation": "<p>Provides the results of a query that retrieved the data for a standard metric that applies to an application or campaign.</p>",
@@ -8275,7 +9381,7 @@
       "members": {
         "Key": {
           "shape": "__string",
-          "documentation": " <p>The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.</p>"
+          "documentation": "<p>The name of the field that Amazon Pinpoint uses to store the value specified by the Value property.</p>"
         },
         "Type": {
           "shape": "__string",
@@ -8283,10 +9389,10 @@
         },
         "Value": {
           "shape": "__string",
-          "documentation": " <p>In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).</p>"
+          "documentation": "<p>In a Values object, the value for the metric that the query retrieved data for. In a GroupedBys object, the value for the field that was used to group data in a result set that contains multiple results (Values objects).</p>"
         }
       },
-      "documentation": " <p>Provides a single value and metadata about that value as part of an array of query results for a standard metric that applies to an application or campaign.</p>",
+      "documentation": "<p>Provides a single value and metadata about that value as part of an array of query results for a standard metric that applies to an application or campaign.</p>",
       "required": [
         "Type",
         "Value",
@@ -8393,7 +9499,7 @@
         },
         "OriginationNumber": {
           "shape": "__string",
-          "documentation": "<p>The number that the SMS message originates from. This should be one of the dedicated long codes or short codes that you requested from AWS Support and is assigned to your AWS account. If you don't specify a long or short code, Amazon Pinpoint assigns a random long code to the SMS message.</p>"
+          "documentation": "<p>The number to send the SMS message from. This value should be one of the dedicated long or short codes that's assigned to your AWS account. If you don't specify a long or short code, Amazon Pinpoint assigns a random long code to the SMS message and sends the message from that code.</p>"
         },
         "SenderId": {
           "shape": "__string",
@@ -8405,6 +9511,62 @@
         }
       },
       "documentation": "<p>Specifies the default settings for a one-time SMS message that's sent directly to an endpoint.</p>"
+    },
+    "SMSTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The message body to use in text messages that are based on the message template.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the content and settings for a message template that can be used in text messages that are sent through the SMS channel.</p>"
+    },
+    "SMSTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>"
+        },
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The message body that's used in text messages that are based on the message template.</p>"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was created.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was last modified.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the message template.</p>"
+        },
+        "TemplateType": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type of channel that the message template is designed for. For an SMS template, this value is SMS.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the content and settings for a message template that can be used in text messages that are sent through the SMS channel.</p>",
+      "required": [
+        "LastModifiedDate",
+        "CreationDate",
+        "TemplateName",
+        "TemplateType"
+      ]
     },
     "Schedule": {
       "type": "structure",
@@ -8745,6 +9907,10 @@
           "shape": "DirectMessageConfiguration",
           "documentation": "<p>The message definitions for the default message and any default messages that you defined for specific channels.</p>"
         },
+        "TemplateConfiguration": {
+          "shape": "TemplateConfiguration",
+          "documentation": "<p>The message template to use for the message.</p>"
+        },
         "TraceId": {
           "shape": "__string",
           "documentation": "<p>The unique identifier for tracing the message. This identifier is visible to message recipients.</p>"
@@ -8871,7 +10037,7 @@
           "documentation": "<p>The body of the email message, in text format. We recommend using a text part for email clients that don't support HTML and clients that are connected to high-latency networks, such as mobile devices.</p>"
         }
       },
-      "documentation": "<p>Specifies the content of an email message, composed of a subject, a text part, and an HTML part.</p>"
+      "documentation": "<p>Specifies the contents of an email message, composed of a subject, a text part, and an HTML part.</p>"
     },
     "SimpleEmailPart": {
       "type": "structure",
@@ -8902,7 +10068,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the application, campaign, or segment.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.</p>"
         },
         "TagsModel": {
           "shape": "TagsModel"
@@ -8920,12 +10086,102 @@
         "tags": {
           "shape": "MapOf__string",
           "locationName": "tags",
-          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, or segment. A project, campaign, or segment can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags for an application, campaign, message template, or segment. Each project, campaign, message template, or segment can have a maximum of 50 tags.</p> <p>Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
         }
       },
-      "documentation": "<p>Specifies the tags (keys and values) for an application, campaign, or segment.</p>",
+      "documentation": "<p>Specifies the tags (keys and values) for an application, campaign, message template, or segment.</p>",
       "required": [
         "tags"
+      ]
+    },
+    "Template": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "documentation": "<p>The name of the message template to use for the message. If specified, this value must match the name of an existing message template.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the name of the message template to use for the message.</p>"
+    },
+    "TemplateConfiguration": {
+      "type": "structure",
+      "members": {
+        "EmailTemplate": {
+          "shape": "Template",
+          "documentation": "<p>The email template to use for the message.</p>"
+        },
+        "PushTemplate": {
+          "shape": "Template",
+          "documentation": "<p>The push notification template to use for the message.</p>"
+        },
+        "SMSTemplate": {
+          "shape": "Template",
+          "documentation": "<p>The SMS template to use for the message.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the message template to use for the message, for each type of channel.</p>"
+    },
+    "TemplateResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was created.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was last modified.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the message template.</p>"
+        },
+        "TemplateType": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type of channel that the message template is designed for.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a message template that's associated with your Amazon Pinpoint account.</p>",
+      "required": [
+        "LastModifiedDate",
+        "CreationDate",
+        "TemplateName",
+        "TemplateType"
+      ]
+    },
+    "TemplateType": {
+      "type": "string",
+      "enum": [
+        "EMAIL",
+        "SMS",
+        "PUSH"
+      ]
+    },
+    "TemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "Item": {
+          "shape": "ListOfTemplateResponse",
+          "documentation": "<p>An array of responses, one for each message template that's associated with your Amazon Pinpoint account and meets any filter criteria that you specified in the request.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about all the message templates that are associated with your Amazon Pinpoint account.</p>",
+      "required": [
+        "Item"
       ]
     },
     "TreatmentResource": {
@@ -8950,6 +10206,9 @@
         "State": {
           "shape": "CampaignState",
           "documentation": "<p>The status of the treatment.</p>"
+        },
+        "TemplateConfiguration": {
+          "shape": "TemplateConfiguration"
         },
         "TreatmentDescription": {
           "shape": "__string",
@@ -8981,13 +10240,13 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the application, campaign, or segment.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the application, campaign, message template, or segment.</p>"
         },
         "TagKeys": {
           "shape": "ListOf__string",
           "location": "querystring",
           "locationName": "tagKeys",
-          "documentation": "<p>The key of the tag to remove from the application, campaign, or segment. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).</p>"
+          "documentation": "<p>The key of the tag to remove from the application, campaign, message template, or segment. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).</p>"
         }
       },
       "required": [
@@ -9291,6 +10550,37 @@
       ],
       "payload": "EmailChannelResponse"
     },
+    "UpdateEmailTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "EmailTemplateRequest": {
+          "shape": "EmailTemplateRequest"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "EmailTemplateRequest"
+      ],
+      "payload": "EmailTemplateRequest"
+    },
+    "UpdateEmailTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
+    },
     "UpdateEndpointRequest": {
       "type": "structure",
       "members": {
@@ -9391,6 +10681,38 @@
       ],
       "payload": "GCMChannelResponse"
     },
+    "UpdatePushTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "PushNotificationTemplateRequest": {
+          "shape": "PushNotificationTemplateRequest",
+          "documentation": "<p>Updates an existing message template that you can use in messages that are sent through a push notification channel.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "PushNotificationTemplateRequest"
+      ],
+      "payload": "PushNotificationTemplateRequest"
+    },
+    "UpdatePushTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
+    },
     "UpdateSegmentRequest": {
       "type": "structure",
       "members": {
@@ -9459,6 +10781,37 @@
         "SMSChannelResponse"
       ],
       "payload": "SMSChannelResponse"
+    },
+    "UpdateSmsTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "SMSTemplateRequest": {
+          "shape": "SMSTemplateRequest"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "SMSTemplateRequest"
+      ],
+      "payload": "SMSTemplateRequest"
+    },
+    "UpdateSmsTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
     },
     "UpdateVoiceChannelRequest": {
       "type": "structure",
@@ -9563,7 +10916,7 @@
         },
         "OriginationNumber": {
           "shape": "__string",
-          "documentation": "<p>The phone number from the pool or messaging service to send the message from. Although it isn't required, we recommend that you specify the phone number in E.164 format to ensure prompt and accurate delivery.</p>"
+          "documentation": "<p>The long code to send the voice message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code in E.164 format, for example +12065550100, to ensure prompt and accurate delivery of the message.</p>"
         },
         "Substitutions": {
           "shape": "MapOfListOf__string",
@@ -9650,6 +11003,9 @@
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.</p>"
         },
+        "TemplateConfiguration": {
+          "shape": "TemplateConfiguration"
+        },
         "TreatmentDescription": {
           "shape": "__string",
           "documentation": "<p>The custom description of a variation of the campaign to use for A/B testing.</p>"
@@ -9716,6 +11072,9 @@
         "SizePercent": {
           "shape": "__integer",
           "documentation": "<p>The allocated percentage of users (segment members) to send the treatment to.</p>"
+        },
+        "TemplateConfiguration": {
+          "shape": "TemplateConfiguration"
         },
         "TreatmentDescription": {
           "shape": "__string",
@@ -9816,6 +11175,12 @@
       "type": "list",
       "member": {
         "shape": "SegmentResponse"
+      }
+    },
+    "ListOfTemplateResponse": {
+      "type": "list",
+      "member": {
+        "shape": "TemplateResponse"
       }
     },
     "ListOfTreatmentResource": {

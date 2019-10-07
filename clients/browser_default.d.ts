@@ -61,6 +61,7 @@ export import SQS = require('./sqs');
 export import SSM = require('./ssm');
 export import StorageGateway = require('./storagegateway');
 export import STS = require('./sts');
+export import XRay = require('./xray');
 export import WAF = require('./waf');
 export import WorkDocs = require('./workdocs');
 export import LexModelBuildingService = require('./lexmodelbuildingservice');
