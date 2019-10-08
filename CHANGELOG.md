@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.544.0-->
+<!--LATEST=2.545.0-->
 <!--ENTRYINSERT-->
+
+## 2.545.0
+* feature: DataSync: Add Sync options to enable/disable TaskQueueing
+* feature: Firehose: With this release, you can use Amazon Kinesis Firehose delivery streams to deliver streaming data to Amazon Elasticsearch Service version 7.x clusters. For technical documentation, look for CreateDeliveryStream operation in Amazon Kinesis Firehose API reference.
 
 ## 2.544.0
 * feature: CORS: Add Xray to default browser SDK distribution

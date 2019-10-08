@@ -36,11 +36,11 @@ declare class DataSync extends Service {
    */
   createLocationEfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationEfsResponse) => void): Request<DataSync.Types.CreateLocationEfsResponse, AWSError>;
   /**
-   * Creates an endpoint for a Network File System (NFS) file system.
+   * Defines a file system on a Network File System (NFS) server that can be read from or written to
    */
   createLocationNfs(params: DataSync.Types.CreateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Creates an endpoint for a Network File System (NFS) file system.
+   * Defines a file system on a Network File System (NFS) server that can be read from or written to
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class DataSync extends Service {
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for a Server Message Block (SMB) file system.
+   * Defines a file system on an Server Message Block (SMB) server that can be read from or written to
    */
   createLocationSmb(params: DataSync.Types.CreateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Creates an endpoint for a Server Message Block (SMB) file system.
+   * Defines a file system on an Server Message Block (SMB) server that can be read from or written to
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
@@ -941,6 +941,10 @@ declare namespace DataSync {
      * A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
      */
     BytesPerSecond?: BytesPerSecond;
+    /**
+     * A value that determines whether tasks should be queued before executing the tasks. If set to Enabled, the tasks will queued. The default is Enabled. If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see task-queue.
+     */
+    TaskQueueing?: TaskQueueing;
   }
   export type OverwriteMode = "ALWAYS"|"NEVER"|string;
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
@@ -1079,7 +1083,7 @@ declare namespace DataSync {
      */
     ErrorDetail?: string;
   }
-  export type TaskExecutionStatus = "LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
+  export type TaskExecutionStatus = "QUEUED"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
   export type TaskList = TaskListEntry[];
   export interface TaskListEntry {
     /**
@@ -1095,7 +1099,8 @@ declare namespace DataSync {
      */
     Name?: TagValue;
   }
-  export type TaskStatus = "AVAILABLE"|"CREATING"|"RUNNING"|"UNAVAILABLE"|string;
+  export type TaskQueueing = "ENABLED"|"DISABLED"|string;
+  export type TaskStatus = "AVAILABLE"|"CREATING"|"QUEUED"|"RUNNING"|"UNAVAILABLE"|string;
   export type Time = Date;
   export type Uid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export interface UntagResourceRequest {

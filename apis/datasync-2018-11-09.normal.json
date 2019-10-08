@@ -100,7 +100,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates an endpoint for a Network File System (NFS) file system.</p>"
+      "documentation": "<p>Defines a file system on a Network File System (NFS) server that can be read from or written to</p>"
     },
     "CreateLocationS3": {
       "name": "CreateLocationS3",
@@ -144,7 +144,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates an endpoint for a Server Message Block (SMB) file system.</p>"
+      "documentation": "<p>Defines a file system on an Server Message Block (SMB) server that can be read from or written to</p>"
     },
     "CreateTask": {
       "name": "CreateTask",
@@ -1745,6 +1745,10 @@
         "BytesPerSecond": {
           "shape": "BytesPerSecond",
           "documentation": "<p>A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to <code>1048576</code> (<code>=1024*1024</code>).</p>"
+        },
+        "TaskQueueing": {
+          "shape": "TaskQueueing",
+          "documentation": "<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>Enabled</code>, the tasks will queued. The default is <code>Enabled</code>.</p> <p>If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see <a>task-queue</a>.</p>"
         }
       },
       "documentation": "<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don't specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>"
@@ -2075,6 +2079,7 @@
     "TaskExecutionStatus": {
       "type": "string",
       "enum": [
+        "QUEUED",
         "LAUNCHING",
         "PREPARING",
         "TRANSFERRING",
@@ -2107,11 +2112,19 @@
       },
       "documentation": "<p>Represents a single entry in a list of tasks. <code>TaskListEntry</code> returns an array that contains a list of tasks when the <a>ListTasks</a> operation is called. A task includes the source and destination file systems to sync and the options to use for the tasks.</p>"
     },
+    "TaskQueueing": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "TaskStatus": {
       "type": "string",
       "enum": [
         "AVAILABLE",
         "CREATING",
+        "QUEUED",
         "RUNNING",
         "UNAVAILABLE"
       ]

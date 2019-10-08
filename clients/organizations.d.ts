@@ -304,11 +304,11 @@ declare class Organizations extends Service {
    */
   listRoots(callback?: (err: AWSError, data: Organizations.Types.ListRootsResponse) => void): Request<Organizations.Types.ListRootsResponse, AWSError>;
   /**
-   * Lists tags for the specified resource.  Currently, you can list tags on an account in AWS Organizations.
+   * Lists tags for the specified resource.  Currently, you can list tags on an account in AWS Organizations. This operation can be called only from the organization's master account.
    */
   listTagsForResource(params: Organizations.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Organizations.Types.ListTagsForResourceResponse) => void): Request<Organizations.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists tags for the specified resource.  Currently, you can list tags on an account in AWS Organizations.
+   * Lists tags for the specified resource.  Currently, you can list tags on an account in AWS Organizations. This operation can be called only from the organization's master account.
    */
   listTagsForResource(callback?: (err: AWSError, data: Organizations.Types.ListTagsForResourceResponse) => void): Request<Organizations.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -336,19 +336,19 @@ declare class Organizations extends Service {
    */
   removeAccountFromOrganization(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more tags to the specified resource. Currently, you can tag and untag accounts in AWS Organizations.
+   * Adds one or more tags to the specified resource. Currently, you can tag and untag accounts in AWS Organizations. This operation can be called only from the organization's master account.
    */
   tagResource(params: Organizations.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more tags to the specified resource. Currently, you can tag and untag accounts in AWS Organizations.
+   * Adds one or more tags to the specified resource. Currently, you can tag and untag accounts in AWS Organizations. This operation can be called only from the organization's master account.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a tag from the specified resource.  Currently, you can tag and untag accounts in AWS Organizations.
+   * Removes a tag from the specified resource.  Currently, you can tag and untag accounts in AWS Organizations. This operation can be called only from the organization's master account.
    */
   untagResource(params: Organizations.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a tag from the specified resource.  Currently, you can tag and untag accounts in AWS Organizations.
+   * Removes a tag from the specified resource.  Currently, you can tag and untag accounts in AWS Organizations. This operation can be called only from the organization's master account.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -512,7 +512,7 @@ declare namespace Organizations {
      */
     GovCloudAccountId?: AccountId;
     /**
-     * If the request failed, a description of the reason for the failure.   ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have reached the limit on the number of accounts in your organization.   EMAIL_ALREADY_EXISTS: The account could not be created because another AWS account with that email address already exists.   INVALID_ADDRESS: The account could not be created because the address you provided is not valid.   INVALID_EMAIL: The account could not be created because the email address you provided is not valid.   INTERNAL_FAILURE: The account could not be created because of an internal failure. Try again later. If the problem persists, contact Customer Support.  
+     * If the request failed, a description of the reason for the failure.   ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have reached the limit on the number of accounts in your organization.   EMAIL_ALREADY_EXISTS: The account could not be created because another AWS account with that email address already exists.   GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the AWS GovCloud (US) Region could not be created because this Region already includes an account with that email address.   INVALID_ADDRESS: The account could not be created because the address you provided is not valid.   INVALID_EMAIL: The account could not be created because the email address you provided is not valid.   INTERNAL_FAILURE: The account could not be created because of an internal failure. Try again later. If the problem persists, contact Customer Support.  
      */
     FailureReason?: CreateAccountFailureReason;
   }

@@ -888,11 +888,11 @@ declare namespace EventBridge {
      */
     Resources?: EventResourceList;
     /**
-     * Free-form string used to decide which fields to expect in the event detail.
+     * Free-form string used to decide which fields to expect in the event detail. This field is required.
      */
     DetailType?: String;
     /**
-     * A valid JSON string. There is no other schema imposed. The JSON string can contain fields and nested subobjects.
+     * A valid JSON object. There is no other schema imposed. The JSON object can contain fields and nested subobjects. This field is required.
      */
     Detail?: String;
     /**
@@ -938,7 +938,7 @@ declare namespace EventBridge {
      */
     Time?: EventTime;
     /**
-     * The event source that is generating the evntry.
+     * The event source that is generating the evntry. This field is required.
      */
     Source?: String;
     /**
@@ -946,11 +946,11 @@ declare namespace EventBridge {
      */
     Resources?: EventResourceList;
     /**
-     * A free-form string used to decide which fields to expect in the event detail.
+     * A free-form string used to decide which fields to expect in the event detail. This field is required.
      */
     DetailType?: String;
     /**
-     * A valid JSON string. There is no other schema imposed. The JSON string can contain fields and nested subobjects.
+     * A valid JSON object. There is no other schema imposed. The JSON object can contain fields and nested subobjects. This field is required.
      */
     Detail?: String;
   }
@@ -990,7 +990,7 @@ declare namespace EventBridge {
      */
     Action: Action;
     /**
-     * The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus. If you specify "*" without specifying Condition, avoid creating rules that might match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an account field with a specific account ID to receive events from. Rules with an account field don't match any events sent from other accounts.
+     * The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus. If you specify "*" without specifying Condition, avoid creating rules that might match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an account field with a specific account ID to receive events from. Rules that have an account field match events sent only from accounts that are listed in the rule's account field.
      */
     Principal: Principal;
     /**
@@ -1004,7 +1004,7 @@ declare namespace EventBridge {
   }
   export interface PutRuleRequest {
     /**
-     * The name of the rule that you're creating or updating.
+     * The name of the rule that you're creating or updating. A rule can't have the same name as another rule in the same Region or on the same event bus.
      */
     Name: RuleName;
     /**
@@ -1237,7 +1237,7 @@ declare namespace EventBridge {
   export type TagValue = string;
   export interface Target {
     /**
-     * The ID of the target.
+     * A name for the target. Use a string that will help you identify the target. Each target associated with a rule must have an Id unique for that rule.
      */
     Id: TargetId;
     /**

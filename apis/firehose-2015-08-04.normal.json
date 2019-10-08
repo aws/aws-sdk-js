@@ -762,7 +762,6 @@
       "required": [
         "RoleARN",
         "IndexName",
-        "TypeName",
         "S3Configuration"
       ],
       "members": {
@@ -784,7 +783,7 @@
         },
         "TypeName": {
           "shape": "ElasticsearchTypeName",
-          "documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during run time.</p>"
+          "documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during run time.</p> <p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>"
         },
         "IndexRotationPeriod": {
           "shape": "ElasticsearchIndexRotationPeriod",
@@ -838,7 +837,7 @@
         },
         "TypeName": {
           "shape": "ElasticsearchTypeName",
-          "documentation": "<p>The Elasticsearch type name.</p>"
+          "documentation": "<p>The Elasticsearch type name. This applies to Elasticsearch 6.x and lower versions. For Elasticsearch 7.x, there's no value for <code>TypeName</code>.</p>"
         },
         "IndexRotationPeriod": {
           "shape": "ElasticsearchIndexRotationPeriod",
@@ -892,7 +891,7 @@
         },
         "TypeName": {
           "shape": "ElasticsearchTypeName",
-          "documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during runtime.</p>"
+          "documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during runtime.</p> <p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream, Kinesis Data Firehose still delivers data to Elasticsearch with the old index name and type name. If you want to update your delivery stream with a new index name, provide an empty string for <code>TypeName</code>. </p>"
         },
         "IndexRotationPeriod": {
           "shape": "ElasticsearchIndexRotationPeriod",
@@ -967,7 +966,7 @@
     "ElasticsearchTypeName": {
       "type": "string",
       "max": 100,
-      "min": 1
+      "min": 0
     },
     "EncryptionConfiguration": {
       "type": "structure",

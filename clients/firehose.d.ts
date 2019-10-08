@@ -378,9 +378,9 @@ declare namespace Firehose {
      */
     IndexName: ElasticsearchIndexName;
     /**
-     * The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during run time.
+     * The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during run time. For Elasticsearch 7.x, don't specify a TypeName.
      */
-    TypeName: ElasticsearchTypeName;
+    TypeName?: ElasticsearchTypeName;
     /**
      * The Elasticsearch index rotation period. Index rotation appends a timestamp to the IndexName to facilitate the expiration of old data. For more information, see Index Rotation for the Amazon ES Destination. The default value is OneDay.
      */
@@ -428,7 +428,7 @@ declare namespace Firehose {
      */
     IndexName?: ElasticsearchIndexName;
     /**
-     * The Elasticsearch type name.
+     * The Elasticsearch type name. This applies to Elasticsearch 6.x and lower versions. For Elasticsearch 7.x, there's no value for TypeName.
      */
     TypeName?: ElasticsearchTypeName;
     /**
@@ -478,7 +478,7 @@ declare namespace Firehose {
      */
     IndexName?: ElasticsearchIndexName;
     /**
-     * The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during runtime.
+     * The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during runtime. If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream, Kinesis Data Firehose still delivers data to Elasticsearch with the old index name and type name. If you want to update your delivery stream with a new index name, provide an empty string for TypeName. 
      */
     TypeName?: ElasticsearchTypeName;
     /**
