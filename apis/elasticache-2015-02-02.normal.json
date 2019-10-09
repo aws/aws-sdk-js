@@ -1595,13 +1595,16 @@
     "BatchApplyUpdateActionMessage": {
       "type": "structure",
       "required": [
-        "ReplicationGroupIds",
         "ServiceUpdateName"
       ],
       "members": {
         "ReplicationGroupIds": {
           "shape": "ReplicationGroupIdList",
           "documentation": "<p>The replication group IDs</p>"
+        },
+        "CacheClusterIds": {
+          "shape": "CacheClusterIdList",
+          "documentation": "<p>The cache cluster IDs</p>"
         },
         "ServiceUpdateName": {
           "shape": "String",
@@ -1612,13 +1615,16 @@
     "BatchStopUpdateActionMessage": {
       "type": "structure",
       "required": [
-        "ReplicationGroupIds",
         "ServiceUpdateName"
       ],
       "members": {
         "ReplicationGroupIds": {
           "shape": "ReplicationGroupIdList",
           "documentation": "<p>The replication group IDs</p>"
+        },
+        "CacheClusterIds": {
+          "shape": "CacheClusterIdList",
+          "documentation": "<p>The cache cluster IDs</p>"
         },
         "ServiceUpdateName": {
           "shape": "String",
@@ -1737,6 +1743,13 @@
       },
       "documentation": "<p>Contains all of the attributes of a specific cluster.</p>",
       "wrapper": true
+    },
+    "CacheClusterIdList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      },
+      "max": 20
     },
     "CacheClusterList": {
       "type": "list",
@@ -1922,6 +1935,51 @@
       "member": {
         "shape": "CacheNodeTypeSpecificValue",
         "locationName": "CacheNodeTypeSpecificValue"
+      }
+    },
+    "CacheNodeUpdateStatus": {
+      "type": "structure",
+      "members": {
+        "CacheNodeId": {
+          "shape": "String",
+          "documentation": "<p>The node ID of the cache cluster</p>"
+        },
+        "NodeUpdateStatus": {
+          "shape": "NodeUpdateStatus",
+          "documentation": "<p>The update status of the node</p>"
+        },
+        "NodeDeletionDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The deletion date of the node</p>"
+        },
+        "NodeUpdateStartDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The start date of the update for a node</p>"
+        },
+        "NodeUpdateEndDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The end date of the update for a node</p>"
+        },
+        "NodeUpdateInitiatedBy": {
+          "shape": "NodeUpdateInitiatedBy",
+          "documentation": "<p>Reflects whether the update was initiated by the customer or automatically applied</p>"
+        },
+        "NodeUpdateInitiatedDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The date when the update is triggered</p>"
+        },
+        "NodeUpdateStatusModifiedDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The date when the NodeUpdateStatus was last modified&gt;</p>"
+        }
+      },
+      "documentation": "<p>The status of the service update on the cache node</p>"
+    },
+    "CacheNodeUpdateStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "CacheNodeUpdateStatus",
+        "locationName": "CacheNodeUpdateStatus"
       }
     },
     "CacheParameterGroup": {
@@ -3079,6 +3137,14 @@
           "shape": "ReplicationGroupIdList",
           "documentation": "<p>The replication group IDs</p>"
         },
+        "CacheClusterIds": {
+          "shape": "CacheClusterIdList",
+          "documentation": "<p>The cache cluster IDs</p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>The Elasticache engine to which the update applies. Either Redis or Memcached </p>"
+        },
         "ServiceUpdateStatus": {
           "shape": "ServiceUpdateStatusList",
           "documentation": "<p>The status of the service update</p>"
@@ -3930,6 +3996,10 @@
           "shape": "String",
           "documentation": "<p>The ID of the replication group</p>"
         },
+        "CacheClusterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the cache cluster</p>"
+        },
         "ServiceUpdateName": {
           "shape": "String",
           "documentation": "<p>The unique ID of the service update</p>"
@@ -4464,11 +4534,11 @@
         },
         "Engine": {
           "shape": "String",
-          "documentation": "<p>The Redis engine to which the service update applies</p>"
+          "documentation": "<p>The Elasticache engine to which the update applies. Either Redis or Memcached</p>"
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The Redis engine version to which the service update applies</p>"
+          "documentation": "<p>The Elasticache engine version to which the update applies. Either Redis or Memcached engine version</p>"
         },
         "AutoUpdateAfterRecommendedApplyByDate": {
           "shape": "BooleanOptional",
@@ -4791,6 +4861,10 @@
           "shape": "String",
           "documentation": "<p>The replication group ID</p>"
         },
+        "CacheClusterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the cache cluster</p>"
+        },
         "ServiceUpdateName": {
           "shape": "String",
           "documentation": "<p>The unique ID of the service update</p>"
@@ -4819,6 +4893,10 @@
         "ReplicationGroupId": {
           "shape": "String",
           "documentation": "<p>The ID of the replication group</p>"
+        },
+        "CacheClusterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the cache cluster</p>"
         },
         "ServiceUpdateName": {
           "shape": "String",
@@ -4868,9 +4946,17 @@
           "shape": "NodeGroupUpdateStatusList",
           "documentation": "<p>The status of the service update on the node group</p>"
         },
+        "CacheNodeUpdateStatus": {
+          "shape": "CacheNodeUpdateStatusList",
+          "documentation": "<p>The status of the service update on the cache node</p>"
+        },
         "EstimatedUpdateTime": {
           "shape": "String",
           "documentation": "<p>The estimated length of time for the update to complete</p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>The Elasticache engine to which the update applies. Either Redis or Memcached</p>"
         }
       },
       "documentation": "<p>The status of the service update for a specific replication group</p>"

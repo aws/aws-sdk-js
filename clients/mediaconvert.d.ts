@@ -297,13 +297,14 @@ declare namespace MediaConvert {
      */
     SampleRate?: __integerMin48000Max48000;
   }
-  export type AccelerationMode = "DISABLED"|"ENABLED"|string;
+  export type AccelerationMode = "DISABLED"|"ENABLED"|"PREFERRED"|string;
   export interface AccelerationSettings {
     /**
-     * Acceleration configuration for the job.
+     * Specify the conditions when the service will run your job with accelerated transcoding.
      */
     Mode: AccelerationMode;
   }
+  export type AccelerationStatus = "NOT_APPLICABLE"|"IN_PROGRESS"|"ACCELERATED"|"NOT_ACCELERATED"|string;
   export type AfdSignaling = "NONE"|"AUTO"|"FIXED"|string;
   export interface AiffSettings {
     /**
@@ -465,7 +466,7 @@ declare namespace MediaConvert {
     /**
      * Specifies audio data from an external file source.
      */
-    ExternalAudioFileInput?: __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE;
+    ExternalAudioFileInput?: __stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE;
     /**
      * Selects a specific language code from within an audio source.
      */
@@ -507,9 +508,9 @@ declare namespace MediaConvert {
     /**
      * Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
      */
-    AvailBlankingImage?: __stringMin14PatternS3BmpBMPPngPNG;
+    AvailBlankingImage?: __stringMin14PatternHttpHttpsS3BmpBMPPngPNG;
   }
-  export type BillingTagsSource = "QUEUE"|"PRESET"|"JOB_TEMPLATE"|string;
+  export type BillingTagsSource = "QUEUE"|"PRESET"|"JOB_TEMPLATE"|"JOB"|string;
   export interface BurninDestinationSettings {
     /**
      * If no explicit x_position or y_position is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
@@ -799,6 +800,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     MinFinalSegmentLength?: __doubleMin0Max2147483647;
     /**
+     * Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE).
+     */
+    MpdProfile?: CmafMpdProfile;
+    /**
      * When set to SINGLE_FILE, a single output file is generated, which is internally segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES, separate segment files will be created.
      */
     SegmentControl?: CmafSegmentControl;
@@ -823,6 +828,7 @@ All burn-in and DVB-Sub font settings must match.
   export type CmafKeyProviderType = "SPEKE"|"STATIC_KEY"|string;
   export type CmafManifestCompression = "GZIP"|"NONE"|string;
   export type CmafManifestDurationFormat = "FLOATING_POINT"|"INTEGER"|string;
+  export type CmafMpdProfile = "MAIN_PROFILE"|"ON_DEMAND_PROFILE"|string;
   export type CmafSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
   export type CmafStreamInfResolution = "INCLUDE"|"EXCLUDE"|string;
   export type CmafWriteDASHManifest = "DISABLED"|"ENABLED"|string;
@@ -926,6 +932,10 @@ All burn-in and DVB-Sub font settings must match.
      * Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
      */
     StatusUpdateInterval?: StatusUpdateInterval;
+    /**
+     * The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+     */
+    Tags?: __mapOf__string;
     /**
      * User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
      */
@@ -1081,6 +1091,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     MinBufferTime?: __integerMin0Max2147483647;
     /**
+     * Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE).
+     */
+    MpdProfile?: DashIsoMpdProfile;
+    /**
      * When set to SINGLE_FILE, a single output file is generated, which is internally segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES, separate segment files will be created.
      */
     SegmentControl?: DashIsoSegmentControl;
@@ -1089,11 +1103,12 @@ All burn-in and DVB-Sub font settings must match.
      */
     SegmentLength?: __integerMin1Max2147483647;
     /**
-     * When you enable Precise segment duration in manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn't enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element.
+     * If you get an HTTP error in the 400 range when you play back your DASH output, enable this setting and run your transcoding job again. When you enable this setting, the service writes precise segment durations in the DASH manifest. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When you don't enable this setting, the service writes approximate segment durations in your DASH manifest.
      */
     WriteSegmentTimelineInRepresentation?: DashIsoWriteSegmentTimelineInRepresentation;
   }
   export type DashIsoHbbtvCompliance = "HBBTV_1_5"|"NONE"|string;
+  export type DashIsoMpdProfile = "MAIN_PROFILE"|"ON_DEMAND_PROFILE"|string;
   export type DashIsoPlaybackDeviceCompatibility = "CENC_V1"|"UNENCRYPTED_SEI"|string;
   export type DashIsoSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
   export type DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
@@ -1565,7 +1580,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     /**
      * External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', and 'smi'.
      */
-    SourceFile?: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI;
+    SourceFile?: __stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI;
     /**
      * Specifies a time delta in seconds to offset the captions from the source file.
      */
@@ -2011,7 +2026,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     UnregisteredSeiTimecode?: H265UnregisteredSeiTimecode;
     /**
-     * Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
+     * If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output. For file MP4 outputs, choosing HVC1 can create video that doesn't work properly with some downstream systems and video players. Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
      */
     WriteMp4PackagingType?: H265WriteMp4PackagingType;
   }
@@ -2483,9 +2498,9 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Height?: __integerMin0Max2147483647;
     /**
-     * Specify the Amazon S3 location of the image that you want to overlay on the video. Use a PNG or TGA file.
+     * Specify the HTTP, HTTPS, or Amazon S3 location of the image that you want to overlay on the video. Use a PNG or TGA file.
      */
-    ImageInserterInput?: __stringMin14PatternS3BmpBMPPngPNGTgaTGA;
+    ImageInserterInput?: __stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA;
     /**
      * Specify the distance, in pixels, between the inserted image and the left edge of the video frame. Required for any image overlay that you specify.
      */
@@ -2516,6 +2531,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * Accelerated transcoding can significantly speed up jobs with long, visually complex content.
      */
     AccelerationSettings?: AccelerationSettings;
+    /**
+     * Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other states. AccelerationStatus is IN_PROGRESS initially, while the service determines whether the input files and job settings are compatible with accelerated transcoding. If they are, AcclerationStatus is ACCELERATED. If your input files and job settings aren't compatible with accelerated transcoding, the service either fails your job or runs it without accelerated transcoding, depending on how you set Acceleration (AccelerationMode). When the service runs your job without accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+     */
+    AccelerationStatus?: AccelerationStatus;
     /**
      * An identifier for this resource that is unique within all of AWS.
      */
@@ -2552,6 +2571,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * The job template that the job is created from, if it is created from a job template.
      */
     JobTemplate?: __string;
+    /**
+     * Provides messages from the service about jobs that you have already successfully submitted.
+     */
+    Messages?: JobMessages;
     /**
      * List of output group details
      */
@@ -2596,6 +2619,16 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
      */
     UserMetadata?: __mapOf__string;
+  }
+  export interface JobMessages {
+    /**
+     * List of messages that are informational only and don't indicate a problem with your job.
+     */
+    Info?: __listOf__string;
+    /**
+     * List of messages that warn about conditions that might cause your job not to run or to fail.
+     */
+    Warning?: __listOf__string;
   }
   export type JobPhase = "PROBING"|"TRANSCODING"|"UPLOADING"|string;
   export interface JobSettings {
@@ -3104,7 +3137,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     /**
      * Specify the .mov file or series of .png files that you want to overlay on your video. For .png files, provide the file name of the first file in the series. Make sure that the names of the .png files end with sequential numbers that specify the order that they are played in. For example, overlay_000.png, overlay_001.png, overlay_002.png, and so on. The sequence must start at zero, and each image file name must have the same number of digits. Pad your initial file names with enough zeros to complete the sequence. For example, if the first image is overlay_0.png, there can be only 10 images in the sequence, with the last image being overlay_9.png. But if the first image is overlay_00.png, there can be 100 images in the sequence.
      */
-    Input?: __stringMin14Max1285PatternS3Mov09Png;
+    Input?: __stringMin14Max1285PatternHttpHttpsS3Mov09Png;
     /**
      * Choose the type of motion graphic asset that you are providing for your overlay. You can choose either a .mov file or a series of .png files.
      */
@@ -4366,10 +4399,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __stringMin0 = string;
   export type __stringMin1 = string;
   export type __stringMin11Max11Pattern01D20305D205D = string;
-  export type __stringMin14Max1285PatternS3Mov09Png = string;
-  export type __stringMin14PatternS3BmpBMPPngPNG = string;
-  export type __stringMin14PatternS3BmpBMPPngPNGTgaTGA = string;
-  export type __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI = string;
+  export type __stringMin14Max1285PatternHttpHttpsS3Mov09Png = string;
+  export type __stringMin14PatternHttpHttpsS3BmpBMPPngPNG = string;
+  export type __stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA = string;
+  export type __stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI = string;
   export type __stringMin16Max24PatternAZaZ0922AZaZ0916 = string;
   export type __stringMin1Max256 = string;
   export type __stringMin24Max512PatternAZaZ0902 = string;
@@ -4388,12 +4421,12 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __stringPatternArnAwsUsGovAcm = string;
   export type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 = string;
   export type __stringPatternDD = string;
+  export type __stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = string;
   export type __stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL = string;
   export type __stringPatternHttps = string;
   export type __stringPatternIdentityAZaZ26AZaZ09163 = string;
   export type __stringPatternS3 = string;
   export type __stringPatternS3ASSETMAPXml = string;
-  export type __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = string;
   export type __stringPatternSNManifestConfirmConditionNotificationNS = string;
   export type __stringPatternSNSignalProcessingNotificationNS = string;
   export type __stringPatternW = string;

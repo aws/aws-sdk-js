@@ -465,7 +465,11 @@ declare namespace ElastiCache {
     /**
      * The replication group IDs
      */
-    ReplicationGroupIds: ReplicationGroupIdList;
+    ReplicationGroupIds?: ReplicationGroupIdList;
+    /**
+     * The cache cluster IDs
+     */
+    CacheClusterIds?: CacheClusterIdList;
     /**
      * The unique ID of the service update
      */
@@ -475,7 +479,11 @@ declare namespace ElastiCache {
     /**
      * The replication group IDs
      */
-    ReplicationGroupIds: ReplicationGroupIdList;
+    ReplicationGroupIds?: ReplicationGroupIdList;
+    /**
+     * The cache cluster IDs
+     */
+    CacheClusterIds?: CacheClusterIdList;
     /**
      * The unique ID of the service update
      */
@@ -582,6 +590,7 @@ declare namespace ElastiCache {
      */
     AtRestEncryptionEnabled?: BooleanOptional;
   }
+  export type CacheClusterIdList = String[];
   export type CacheClusterList = CacheCluster[];
   export interface CacheClusterMessage {
     /**
@@ -708,6 +717,41 @@ declare namespace ElastiCache {
     Value?: String;
   }
   export type CacheNodeTypeSpecificValueList = CacheNodeTypeSpecificValue[];
+  export interface CacheNodeUpdateStatus {
+    /**
+     * The node ID of the cache cluster
+     */
+    CacheNodeId?: String;
+    /**
+     * The update status of the node
+     */
+    NodeUpdateStatus?: NodeUpdateStatus;
+    /**
+     * The deletion date of the node
+     */
+    NodeDeletionDate?: TStamp;
+    /**
+     * The start date of the update for a node
+     */
+    NodeUpdateStartDate?: TStamp;
+    /**
+     * The end date of the update for a node
+     */
+    NodeUpdateEndDate?: TStamp;
+    /**
+     * Reflects whether the update was initiated by the customer or automatically applied
+     */
+    NodeUpdateInitiatedBy?: NodeUpdateInitiatedBy;
+    /**
+     * The date when the update is triggered
+     */
+    NodeUpdateInitiatedDate?: TStamp;
+    /**
+     * The date when the NodeUpdateStatus was last modified&gt;
+     */
+    NodeUpdateStatusModifiedDate?: TStamp;
+  }
+  export type CacheNodeUpdateStatusList = CacheNodeUpdateStatus[];
   export interface CacheParameterGroup {
     /**
      * The name of the cache parameter group.
@@ -1543,6 +1587,14 @@ declare namespace ElastiCache {
      */
     ReplicationGroupIds?: ReplicationGroupIdList;
     /**
+     * The cache cluster IDs
+     */
+    CacheClusterIds?: CacheClusterIdList;
+    /**
+     * The Elasticache engine to which the update applies. Either Redis or Memcached 
+     */
+    Engine?: String;
+    /**
      * The status of the service update
      */
     ServiceUpdateStatus?: ServiceUpdateStatusList;
@@ -2131,6 +2183,10 @@ declare namespace ElastiCache {
      */
     ReplicationGroupId?: String;
     /**
+     * The ID of the cache cluster
+     */
+    CacheClusterId?: String;
+    /**
      * The unique ID of the service update
      */
     ServiceUpdateName?: String;
@@ -2493,11 +2549,11 @@ declare namespace ElastiCache {
      */
     ServiceUpdateType?: ServiceUpdateType;
     /**
-     * The Redis engine to which the service update applies
+     * The Elasticache engine to which the update applies. Either Redis or Memcached
      */
     Engine?: String;
     /**
-     * The Redis engine version to which the service update applies
+     * The Elasticache engine version to which the update applies. Either Redis or Memcached engine version
      */
     EngineVersion?: String;
     /**
@@ -2696,6 +2752,10 @@ declare namespace ElastiCache {
      */
     ReplicationGroupId?: String;
     /**
+     * The ID of the cache cluster
+     */
+    CacheClusterId?: String;
+    /**
      * The unique ID of the service update
      */
     ServiceUpdateName?: String;
@@ -2714,6 +2774,10 @@ declare namespace ElastiCache {
      * The ID of the replication group
      */
     ReplicationGroupId?: String;
+    /**
+     * The ID of the cache cluster
+     */
+    CacheClusterId?: String;
     /**
      * The unique ID of the service update
      */
@@ -2763,9 +2827,17 @@ declare namespace ElastiCache {
      */
     NodeGroupUpdateStatus?: NodeGroupUpdateStatusList;
     /**
+     * The status of the service update on the cache node
+     */
+    CacheNodeUpdateStatus?: CacheNodeUpdateStatusList;
+    /**
      * The estimated length of time for the update to complete
      */
     EstimatedUpdateTime?: String;
+    /**
+     * The Elasticache engine to which the update applies. Either Redis or Memcached
+     */
+    Engine?: String;
   }
   export type UpdateActionList = UpdateAction[];
   export interface UpdateActionResultsMessage {

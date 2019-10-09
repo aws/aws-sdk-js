@@ -1248,10 +1248,11 @@
     },
     "AccelerationMode": {
       "type": "string",
-      "documentation": "Enable Acceleration (AccelerationMode) on any job that you want processed with accelerated transcoding.",
+      "documentation": "Specify whether the service runs your job with accelerated transcoding. Choose DISABLED if you don't want accelerated transcoding. Choose ENABLED if you want your job to run with accelerated transcoding and to fail if your input files or your job settings aren't compatible with accelerated transcoding. Choose PREFERRED if you want your job to run with accelerated transcoding if the job is compatible with the feature and to run at standard speed if it's not.",
       "enum": [
         "DISABLED",
-        "ENABLED"
+        "ENABLED",
+        "PREFERRED"
       ]
     },
     "AccelerationSettings": {
@@ -1260,12 +1261,22 @@
         "Mode": {
           "shape": "AccelerationMode",
           "locationName": "mode",
-          "documentation": "Acceleration configuration for the job."
+          "documentation": "Specify the conditions when the service will run your job with accelerated transcoding."
         }
       },
       "documentation": "Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.",
       "required": [
         "Mode"
+      ]
+    },
+    "AccelerationStatus": {
+      "type": "string",
+      "documentation": "Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other states. AccelerationStatus is IN_PROGRESS initially, while the service determines whether the input files and job settings are compatible with accelerated transcoding. If they are, AcclerationStatus is ACCELERATED. If your input files and job settings aren't compatible with accelerated transcoding, the service either fails your job or runs it without accelerated transcoding, depending on how you set Acceleration (AccelerationMode). When the service runs your job without accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.",
+      "enum": [
+        "NOT_APPLICABLE",
+        "IN_PROGRESS",
+        "ACCELERATED",
+        "NOT_ACCELERATED"
       ]
     },
     "AfdSignaling": {
@@ -1576,7 +1587,7 @@
           "documentation": "Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can't find the specified input audio. If you don't set a default, those outputs have no audio."
         },
         "ExternalAudioFileInput": {
-          "shape": "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+          "shape": "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
           "locationName": "externalAudioFileInput",
           "documentation": "Specifies audio data from an external file source."
         },
@@ -1650,7 +1661,7 @@
       "type": "structure",
       "members": {
         "AvailBlankingImage": {
-          "shape": "__stringMin14PatternS3BmpBMPPngPNG",
+          "shape": "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
           "locationName": "availBlankingImage",
           "documentation": "Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported."
         }
@@ -1663,7 +1674,8 @@
       "enum": [
         "QUEUE",
         "PRESET",
-        "JOB_TEMPLATE"
+        "JOB_TEMPLATE",
+        "JOB"
       ]
     },
     "BurninDestinationSettings": {
@@ -2163,6 +2175,11 @@
           "locationName": "minFinalSegmentLength",
           "documentation": "Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds."
         },
+        "MpdProfile": {
+          "shape": "CmafMpdProfile",
+          "locationName": "mpdProfile",
+          "documentation": "Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE)."
+        },
         "SegmentControl": {
           "shape": "CmafSegmentControl",
           "locationName": "segmentControl",
@@ -2221,6 +2238,14 @@
       "enum": [
         "FLOATING_POINT",
         "INTEGER"
+      ]
+    },
+    "CmafMpdProfile": {
+      "type": "string",
+      "documentation": "Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE).",
+      "enum": [
+        "MAIN_PROFILE",
+        "ON_DEMAND_PROFILE"
       ]
     },
     "CmafSegmentControl": {
@@ -2441,6 +2466,11 @@
           "shape": "StatusUpdateInterval",
           "locationName": "statusUpdateInterval",
           "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key."
         },
         "UserMetadata": {
           "shape": "__mapOf__string",
@@ -2673,6 +2703,11 @@
           "locationName": "minBufferTime",
           "documentation": "Minimum time of initially buffered media that is needed to ensure smooth playout."
         },
+        "MpdProfile": {
+          "shape": "DashIsoMpdProfile",
+          "locationName": "mpdProfile",
+          "documentation": "Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE)."
+        },
         "SegmentControl": {
           "shape": "DashIsoSegmentControl",
           "locationName": "segmentControl",
@@ -2686,7 +2721,7 @@
         "WriteSegmentTimelineInRepresentation": {
           "shape": "DashIsoWriteSegmentTimelineInRepresentation",
           "locationName": "writeSegmentTimelineInRepresentation",
-          "documentation": "When you enable Precise segment duration in manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn't enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element."
+          "documentation": "If you get an HTTP error in the 400 range when you play back your DASH output, enable this setting and run your transcoding job again. When you enable this setting, the service writes precise segment durations in the DASH manifest. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When you don't enable this setting, the service writes approximate segment durations in your DASH manifest."
         }
       },
       "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to DASH_ISO_GROUP_SETTINGS."
@@ -2697,6 +2732,14 @@
       "enum": [
         "HBBTV_1_5",
         "NONE"
+      ]
+    },
+    "DashIsoMpdProfile": {
+      "type": "string",
+      "documentation": "Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE).",
+      "enum": [
+        "MAIN_PROFILE",
+        "ON_DEMAND_PROFILE"
       ]
     },
     "DashIsoPlaybackDeviceCompatibility": {
@@ -3693,7 +3736,7 @@
           "documentation": "Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708."
         },
         "SourceFile": {
-          "shape": "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+          "shape": "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
           "locationName": "sourceFile",
           "documentation": "External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', and 'smi'."
         },
@@ -4636,7 +4679,7 @@
         "WriteMp4PackagingType": {
           "shape": "H265WriteMp4PackagingType",
           "locationName": "writeMp4PackagingType",
-          "documentation": "Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples."
+          "documentation": "If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output. For file MP4 outputs, choosing HVC1 can create video that doesn't work properly with some downstream systems and video players. Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples."
         }
       },
       "documentation": "Settings for H265 codec"
@@ -4700,7 +4743,7 @@
     },
     "H265WriteMp4PackagingType": {
       "type": "string",
-      "documentation": "Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.",
+      "documentation": "If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output. For file MP4 outputs, choosing HVC1 can create video that doesn't work properly with some downstream systems and video players. Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.",
       "enum": [
         "HVC1",
         "HEV1"
@@ -5508,9 +5551,9 @@
           "documentation": "Specify the height of the inserted image in pixels. If you specify a value that's larger than the video resolution height, the service will crop your overlaid image to fit. To use the native height of the image, keep this setting blank."
         },
         "ImageInserterInput": {
-          "shape": "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+          "shape": "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
           "locationName": "imageInserterInput",
-          "documentation": "Specify the Amazon S3 location of the image that you want to overlay on the video. Use a PNG or TGA file."
+          "documentation": "Specify the HTTP, HTTPS, or Amazon S3 location of the image that you want to overlay on the video. Use a PNG or TGA file."
         },
         "ImageX": {
           "shape": "__integerMin0Max2147483647",
@@ -5552,6 +5595,11 @@
           "shape": "AccelerationSettings",
           "locationName": "accelerationSettings",
           "documentation": "Accelerated transcoding can significantly speed up jobs with long, visually complex content."
+        },
+        "AccelerationStatus": {
+          "shape": "AccelerationStatus",
+          "locationName": "accelerationStatus",
+          "documentation": "Describes whether the current job is running with accelerated transcoding. For jobs that have Acceleration (AccelerationMode) set to DISABLED, AccelerationStatus is always NOT_APPLICABLE. For jobs that have Acceleration (AccelerationMode) set to ENABLED or PREFERRED, AccelerationStatus is one of the other states. AccelerationStatus is IN_PROGRESS initially, while the service determines whether the input files and job settings are compatible with accelerated transcoding. If they are, AcclerationStatus is ACCELERATED. If your input files and job settings aren't compatible with accelerated transcoding, the service either fails your job or runs it without accelerated transcoding, depending on how you set Acceleration (AccelerationMode). When the service runs your job without accelerated transcoding, AccelerationStatus is NOT_ACCELERATED."
         },
         "Arn": {
           "shape": "__string",
@@ -5597,6 +5645,11 @@
           "shape": "__string",
           "locationName": "jobTemplate",
           "documentation": "The job template that the job is created from, if it is created from a job template."
+        },
+        "Messages": {
+          "shape": "JobMessages",
+          "locationName": "messages",
+          "documentation": "Provides messages from the service about jobs that you have already successfully submitted."
         },
         "OutputGroupDetails": {
           "shape": "__listOfOutputGroupDetail",
@@ -5659,6 +5712,22 @@
         "Role",
         "Settings"
       ]
+    },
+    "JobMessages": {
+      "type": "structure",
+      "members": {
+        "Info": {
+          "shape": "__listOf__string",
+          "locationName": "info",
+          "documentation": "List of messages that are informational only and don't indicate a problem with your job."
+        },
+        "Warning": {
+          "shape": "__listOf__string",
+          "locationName": "warning",
+          "documentation": "List of messages that warn about conditions that might cause your job not to run or to fail."
+        }
+      },
+      "documentation": "Provides messages from the service about jobs that you have already successfully submitted."
     },
     "JobPhase": {
       "type": "string",
@@ -6692,7 +6761,7 @@
           "documentation": "If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the frame rate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the frame rate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay frame rate doesn't need to match the frame rate of the underlying video."
         },
         "Input": {
-          "shape": "__stringMin14Max1285PatternS3Mov09Png",
+          "shape": "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
           "locationName": "input",
           "documentation": "Specify the .mov file or series of .png files that you want to overlay on your video. For .png files, provide the file name of the first file in the series. Make sure that the names of the .png files end with sequential numbers that specify the order that they are played in. For example, overlay_000.png, overlay_001.png, overlay_002.png, and so on. The sequence must start at zero, and each image file name must have the same number of digits. Pad your initial file names with enough zeros to complete the sequence. For example, if the first image is overlay_0.png, there can be only 10 images in the sequence, with the last image being overlay_9.png. But if the first image is overlay_00.png, there can be 100 images in the sequence."
         },
@@ -9430,26 +9499,26 @@
       "max": 11,
       "pattern": "^((([0-1]\\d)|(2[0-3]))(:[0-5]\\d){2}([:;][0-5]\\d))$"
     },
-    "__stringMin14Max1285PatternS3Mov09Png": {
+    "__stringMin14Max1285PatternHttpHttpsS3Mov09Png": {
       "type": "string",
       "min": 14,
       "max": 1285,
-      "pattern": "^(s3:\\/\\/)(.*)(\\.mov|[0-9]+\\.png)$"
+      "pattern": "^(http|https|s3)://(.*)(\\.mov|[0-9]+\\.png)$"
     },
-    "__stringMin14PatternS3BmpBMPPngPNG": {
+    "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG": {
       "type": "string",
       "min": 14,
-      "pattern": "^(s3:\\/\\/)(.*?)\\.(bmp|BMP|png|PNG)$"
+      "pattern": "^(http|https|s3)://(.*?)\\.(bmp|BMP|png|PNG)$"
     },
-    "__stringMin14PatternS3BmpBMPPngPNGTgaTGA": {
+    "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA": {
       "type": "string",
       "min": 14,
-      "pattern": "^(s3:\\/\\/)(.*?)\\.(bmp|BMP|png|PNG|tga|TGA)$"
+      "pattern": "^(http|https|s3)://(.*?)\\.(bmp|BMP|png|PNG|tga|TGA)$"
     },
-    "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI": {
+    "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI": {
       "type": "string",
       "min": 14,
-      "pattern": "^(s3:\\/\\/)(.*?)\\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI)$"
+      "pattern": "^(http|https|s3)://(.*?)\\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI)$"
     },
     "__stringMin16Max24PatternAZaZ0922AZaZ0916": {
       "type": "string",
@@ -9538,6 +9607,10 @@
       "type": "string",
       "pattern": "^(\\d+(\\/\\d+)*)$"
     },
+    "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE": {
+      "type": "string",
+      "pattern": "^(http|https|s3)://([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))$"
+    },
     "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL": {
       "type": "string",
       "pattern": "^(http|https|s3)://([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$"
@@ -9557,10 +9630,6 @@
     "__stringPatternS3ASSETMAPXml": {
       "type": "string",
       "pattern": "^s3:\\/\\/.*\\/(ASSETMAP.xml)?$"
-    },
-    "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE": {
-      "type": "string",
-      "pattern": "^(s3:\\/\\/)([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))$"
     },
     "__stringPatternSNManifestConfirmConditionNotificationNS": {
       "type": "string",
