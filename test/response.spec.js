@@ -15,6 +15,9 @@
     beforeEach(function() {
       service = new AWS.Service({
         apiConfig: new AWS.Model.Api({
+          metadata: {
+            signingName: 'ocean-wave'
+          },
           operations: {
             op: {}
           }

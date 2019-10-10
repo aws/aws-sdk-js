@@ -6412,7 +6412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Core: new SequentialExecutor().addNamedListeners(function(add, addAsync) {
 	    addAsync('VALIDATE_CREDENTIALS', 'validate',
 	        function VALIDATE_CREDENTIALS(req, done) {
-	      if (!req.service.api.signatureVersion) return done(); // none
+	      if (!req.service.api.signatureVersion && !req.service.config.signatureVersion) return done(); // none
 	      req.service.config.getCredentials(function(err) {
 	        if (err) {
 	          req.response.error = AWS.util.error(err,
@@ -6468,7 +6468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      var operation = req.service.api.operations[req.operation];
 	      var authtype = operation ? operation.authtype : '';
-	      if (!req.service.api.signatureVersion && !authtype) return done(); // none
+	      if (!req.service.api.signatureVersion && !authtype && !req.service.config.signatureVersion) return done(); // none
 	      if (req.service.getSignerClass(req) === AWS.Signers.V4) {
 	        var body = req.httpRequest.body || '';
 	        if (authtype.indexOf('unsigned-body') >= 0) {
@@ -6542,7 +6542,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var operations = req.service.api.operations || {};
 	      var operation = operations[req.operation];
 	      var authtype = operation ? operation.authtype : '';
-	      if (!service.api.signatureVersion && !authtype) return done(); // none
+	      if (!service.api.signatureVersion && !authtype && !service.config.signatureVersion) return done(); // none
 
 	      service.config.getCredentials(function (err, credentials) {
 	        if (err) {
