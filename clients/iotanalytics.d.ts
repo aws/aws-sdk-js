@@ -60,11 +60,11 @@ declare class IoTAnalytics extends Service {
    */
   createDatastore(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
   /**
-   * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store. You must specify both a channel and a datastore activity and, optionally, as many as 23 additional activities in the pipelineActivities array.
+   * Creates a pipeline. A pipeline consumes messages from a channel and allows you to process the messages before storing them in a data store. You must specify both a channel and a datastore activity and, optionally, as many as 23 additional activities in the pipelineActivities array.
    */
   createPipeline(params: IoTAnalytics.Types.CreatePipelineRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreatePipelineResponse) => void): Request<IoTAnalytics.Types.CreatePipelineResponse, AWSError>;
   /**
-   * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store. You must specify both a channel and a datastore activity and, optionally, as many as 23 additional activities in the pipelineActivities array.
+   * Creates a pipeline. A pipeline consumes messages from a channel and allows you to process the messages before storing them in a data store. You must specify both a channel and a datastore activity and, optionally, as many as 23 additional activities in the pipelineActivities array.
    */
   createPipeline(callback?: (err: AWSError, data: IoTAnalytics.Types.CreatePipelineResponse) => void): Request<IoTAnalytics.Types.CreatePipelineResponse, AWSError>;
   /**
@@ -355,7 +355,7 @@ declare namespace IoTAnalytics {
      */
     name?: ChannelName;
     /**
-     * Where channel data is stored.
+     * Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.
      */
     storage?: ChannelStorage;
     /**
@@ -404,11 +404,11 @@ declare namespace IoTAnalytics {
   export type ChannelStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
   export interface ChannelStorage {
     /**
-     * Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+     * Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
      */
     serviceManagedS3?: ServiceManagedChannelS3Storage;
     /**
-     * Use this to store channel data in an S3 bucket that you manage.
+     * Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
      */
     customerManagedS3?: CustomerManagedChannelS3Storage;
   }
@@ -470,11 +470,11 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
-     * Where channel data is stored.
+     * Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.
      */
     channelStorage?: ChannelStorage;
     /**
-     * How long, in days, message data is kept for the channel.
+     * How long, in days, message data is kept for the channel. When "customerManagedS3" storage is selected, this parameter is ignored.
      */
     retentionPeriod?: RetentionPeriod;
     /**
@@ -558,11 +558,11 @@ declare namespace IoTAnalytics {
      */
     datastoreName: DatastoreName;
     /**
-     * Where data store data is stored.
+     * Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.
      */
     datastoreStorage?: DatastoreStorage;
     /**
-     * How long, in days, message data is kept for the data store.
+     * How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.
      */
     retentionPeriod?: RetentionPeriod;
     /**
@@ -614,7 +614,7 @@ declare namespace IoTAnalytics {
      */
     bucket: BucketName;
     /**
-     * The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     * [Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a '/'.
      */
     keyPrefix?: S3KeyPrefix;
     /**
@@ -628,7 +628,7 @@ declare namespace IoTAnalytics {
      */
     bucket?: BucketName;
     /**
-     * The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     * [Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a '/'.
      */
     keyPrefix?: S3KeyPrefix;
     /**
@@ -642,7 +642,7 @@ declare namespace IoTAnalytics {
      */
     bucket: BucketName;
     /**
-     * The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     * [Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a '/'.
      */
     keyPrefix?: S3KeyPrefix;
     /**
@@ -656,7 +656,7 @@ declare namespace IoTAnalytics {
      */
     bucket?: BucketName;
     /**
-     * The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     * [Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a '/'.
      */
     keyPrefix?: S3KeyPrefix;
     /**
@@ -785,6 +785,10 @@ declare namespace IoTAnalytics {
      * The time the creation of the data set contents was scheduled to start.
      */
     scheduleTime?: Timestamp;
+    /**
+     * The time the dataset content status was updated to SUCCEEDED or FAILED.
+     */
+    completionTime?: Timestamp;
   }
   export type DatasetContentVersion = string;
   export interface DatasetContentVersionValue {
@@ -850,7 +854,7 @@ declare namespace IoTAnalytics {
      */
     name?: DatastoreName;
     /**
-     * Where data store data is stored.
+     * Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.
      */
     storage?: DatastoreStorage;
     /**
@@ -862,7 +866,7 @@ declare namespace IoTAnalytics {
      */
     status?: DatastoreStatus;
     /**
-     * How long, in days, message data is kept for the data store.
+     * How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.
      */
     retentionPeriod?: RetentionPeriod;
     /**
@@ -895,11 +899,11 @@ declare namespace IoTAnalytics {
   export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
   export interface DatastoreStorage {
     /**
-     * Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+     * Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
      */
     serviceManagedS3?: ServiceManagedDatastoreS3Storage;
     /**
-     * Use this to store data store data in an S3 bucket that you manage.
+     * Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
      */
     customerManagedS3?: CustomerManagedDatastoreS3Storage;
   }
@@ -986,7 +990,7 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
-     * If true, additional statistical information about the channel is included in the response.
+     * If true, additional statistical information about the channel is included in the response. This feature cannot be used with a channel whose S3 storage is customer-managed.
      */
     includeStatistics?: IncludeStatisticsFlag;
   }
@@ -1018,7 +1022,7 @@ declare namespace IoTAnalytics {
      */
     datastoreName: DatastoreName;
     /**
-     * If true, additional statistical information about the datastore is included in the response.
+     * If true, additional statistical information about the data store is included in the response. This feature cannot be used with a data store whose S3 storage is customer-managed.
      */
     includeStatistics?: IncludeStatisticsFlag;
   }
@@ -1565,7 +1569,7 @@ declare namespace IoTAnalytics {
      */
     bucket: BucketName;
     /**
-     * The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     * The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). To produce a unique key, you can use "!{iotanalytics:scheduledTime}" to insert the time of the scheduled SQL query run, or "!{iotanalytics:versioned} to insert a unique hash identifying the data set, for example: "/DataSet/!{iotanalytics:scheduledTime}/!{iotanalytics:versioned}.csv".
      */
     key: BucketKeyExpression;
     /**
@@ -1719,11 +1723,11 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
-     * Where channel data is stored.
+     * Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.
      */
     channelStorage?: ChannelStorage;
     /**
-     * How long, in days, message data is kept for the channel.
+     * How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel's S3 storage is customer-managed.
      */
     retentionPeriod?: RetentionPeriod;
   }
@@ -1759,11 +1763,11 @@ declare namespace IoTAnalytics {
      */
     datastoreName: DatastoreName;
     /**
-     * How long, in days, message data is kept for the data store.
+     * How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store's S3 storage is customer-managed.
      */
     retentionPeriod?: RetentionPeriod;
     /**
-     * Where data store data is stored.
+     * Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.
      */
     datastoreStorage?: DatastoreStorage;
   }

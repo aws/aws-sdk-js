@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "New EC2 M5n, M5dn, R5n, R5dn instances with 100 Gbps network performance and Elastic Fabric Adapter (EFA) for ultra low latency; New A1.metal bare metal instance powered by AWS Graviton Processors"
+    },
+    {
+        "type": "feature",
+        "category": "FMS",
+        "description": "Firewall Manager now supports Amazon VPC security groups, making it easier to configure and manage security groups across multiple accounts from a single place."
+    },
+    {
+        "type": "feature",
+        "category": "IoTAnalytics",
+        "description": "Add `completionTime` to API call ListDatasetContents."
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntime",
+        "description": "Amazon Lex now supports Session API checkpoints"
+    }
+]

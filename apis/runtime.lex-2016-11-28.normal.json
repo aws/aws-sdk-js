@@ -47,7 +47,7 @@
       "name": "GetSession",
       "http": {
         "method": "GET",
-        "requestUri": "/bot/{botName}/alias/{botAlias}/user/{userId}/session"
+        "requestUri": "/bot/{botName}/alias/{botAlias}/user/{userId}/session/"
       },
       "input": {
         "shape": "GetSessionRequest"
@@ -159,7 +159,7 @@
           "shape": "LoopDetectedException"
         }
       ],
-      "documentation": "<p>Sends user input (text or SSML) to Amazon Lex. Client applications can use this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model it built for the bot. </p> <p> In response, Amazon Lex returns the next <code>message</code> to convey to the user an optional <code>responseCard</code> to display. Consider the following example messages: </p> <ul> <li> <p> For a user input \"I would like a pizza\", Amazon Lex might return a response with a message eliciting slot data (for example, PizzaSize): \"What size pizza would you like?\" </p> </li> <li> <p> After the user provides all of the pizza order information, Amazon Lex might return a response with a message to obtain user confirmation \"Proceed with the pizza order?\". </p> </li> <li> <p> After the user replies to a confirmation prompt with a \"yes\", Amazon Lex might return a conclusion statement: \"Thank you, your cheese pizza has been ordered.\". </p> </li> </ul> <p> Not all Amazon Lex messages require a user response. For example, a conclusion statement does not require a response. Some messages require only a \"yes\" or \"no\" user response. In addition to the <code>message</code>, Amazon Lex provides additional context about the message in the response that you might use to enhance client behavior, for example, to display the appropriate client user interface. These are the <code>slotToElicit</code>, <code>dialogState</code>, <code>intentName</code>, and <code>slots</code> fields in the response. Consider the following examples: </p> <ul> <li> <p>If the message is to elicit slot data, Amazon Lex returns the following context information:</p> <ul> <li> <p> <code>dialogState</code> set to ElicitSlot </p> </li> <li> <p> <code>intentName</code> set to the intent name in the current context </p> </li> <li> <p> <code>slotToElicit</code> set to the slot name for which the <code>message</code> is eliciting information </p> </li> <li> <p> <code>slots</code> set to a map of slots, configured for the intent, with currently known values </p> </li> </ul> </li> <li> <p> If the message is a confirmation prompt, the <code>dialogState</code> is set to ConfirmIntent and <code>SlotToElicit</code> is set to null. </p> </li> <li> <p>If the message is a clarification prompt (configured for the intent) that indicates that user intent is not understood, the <code>dialogState</code> is set to ElicitIntent and <code>slotToElicit</code> is set to null. </p> </li> </ul> <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html\">Managing Conversation Context</a>. </p>"
+      "documentation": "<p>Sends user input to Amazon Lex. Client applications can use this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model it built for the bot. </p> <p> In response, Amazon Lex returns the next <code>message</code> to convey to the user an optional <code>responseCard</code> to display. Consider the following example messages: </p> <ul> <li> <p> For a user input \"I would like a pizza\", Amazon Lex might return a response with a message eliciting slot data (for example, PizzaSize): \"What size pizza would you like?\" </p> </li> <li> <p> After the user provides all of the pizza order information, Amazon Lex might return a response with a message to obtain user confirmation \"Proceed with the pizza order?\". </p> </li> <li> <p> After the user replies to a confirmation prompt with a \"yes\", Amazon Lex might return a conclusion statement: \"Thank you, your cheese pizza has been ordered.\". </p> </li> </ul> <p> Not all Amazon Lex messages require a user response. For example, a conclusion statement does not require a response. Some messages require only a \"yes\" or \"no\" user response. In addition to the <code>message</code>, Amazon Lex provides additional context about the message in the response that you might use to enhance client behavior, for example, to display the appropriate client user interface. These are the <code>slotToElicit</code>, <code>dialogState</code>, <code>intentName</code>, and <code>slots</code> fields in the response. Consider the following examples: </p> <ul> <li> <p>If the message is to elicit slot data, Amazon Lex returns the following context information:</p> <ul> <li> <p> <code>dialogState</code> set to ElicitSlot </p> </li> <li> <p> <code>intentName</code> set to the intent name in the current context </p> </li> <li> <p> <code>slotToElicit</code> set to the slot name for which the <code>message</code> is eliciting information </p> </li> <li> <p> <code>slots</code> set to a map of slots, configured for the intent, with currently known values </p> </li> </ul> </li> <li> <p> If the message is a confirmation prompt, the <code>dialogState</code> is set to ConfirmIntent and <code>SlotToElicit</code> is set to null. </p> </li> <li> <p>If the message is a clarification prompt (configured for the intent) that indicates that user intent is not understood, the <code>dialogState</code> is set to ElicitIntent and <code>slotToElicit</code> is set to null. </p> </li> </ul> <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html\">Managing Conversation Context</a>. </p>"
     },
     "PutSession": {
       "name": "PutSession",
@@ -428,6 +428,12 @@
           "documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation with your bot. </p>",
           "location": "uri",
           "locationName": "userId"
+        },
+        "checkpointLabelFilter": {
+          "shape": "IntentSummaryCheckpointLabel",
+          "documentation": "<p>A string used to filter the intents returned in the <code>recentIntentSummaryView</code> structure. </p> <p>When you specify a filter, only intents with their <code>checkpointLabel</code> field set to that string are returned.</p>",
+          "location": "querystring",
+          "locationName": "checkpointLabelFilter"
         }
       }
     },
@@ -436,7 +442,7 @@
       "members": {
         "recentIntentSummaryView": {
           "shape": "IntentSummaryList",
-          "documentation": "<p>An array of information about the intents used in the session. The array can contain a maximum of three summaries. If more than three intents are used in the session, the <code>recentIntentSummaryView</code> operation contains information about the last three intents used.</p>"
+          "documentation": "<p>An array of information about the intents used in the session. The array can contain a maximum of three summaries. If more than three intents are used in the session, the <code>recentIntentSummaryView</code> operation contains information about the last three intents used.</p> <p>If you set the <code>checkpointLabelFilter</code> parameter in the request, the array contains only the intents with the specified label.</p>"
         },
         "sessionAttributes": {
           "shape": "StringMap",
@@ -468,6 +474,10 @@
           "shape": "IntentName",
           "documentation": "<p>The name of the intent.</p>"
         },
+        "checkpointLabel": {
+          "shape": "IntentSummaryCheckpointLabel",
+          "documentation": "<p>A user-defined label that identifies a particular intent. You can use this label to return to a previous intent. </p> <p>Use the <code>checkpointLabelFilter</code> parameter of the <code>GetSessionRequest</code> operation to filter the intents returned by the operation to those with only the specified label.</p>"
+        },
         "slots": {
           "shape": "StringMap",
           "documentation": "<p>Map of the slots that have been gathered and their values. </p>"
@@ -490,6 +500,12 @@
         }
       },
       "documentation": "<p>Provides information about the state of an intent. You can use this information to get the current state of an intent so that you can process the intent, or so that you can return the intent to its previous state.</p>"
+    },
+    "IntentSummaryCheckpointLabel": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9-]+"
     },
     "IntentSummaryList": {
       "type": "list",
@@ -746,6 +762,10 @@
         "dialogAction": {
           "shape": "DialogAction",
           "documentation": "<p>Sets the next action that the bot should take to fulfill the conversation.</p>"
+        },
+        "recentIntentSummaryView": {
+          "shape": "IntentSummaryList",
+          "documentation": "<p>A summary of the recent intents for the bot. You can use the intent summary view to set a checkpoint label on an intent and modify attributes of intents. You can also use it to remove or add intent summary objects to the list.</p> <p>An intent that you modify or add to the list must make sense for the bot. For example, the intent name must be valid for the bot. You must provide valid values for:</p> <ul> <li> <p> <code>intentName</code> </p> </li> <li> <p>slot names</p> </li> <li> <p> <code>slotToElict</code> </p> </li> </ul> <p>If you send the <code>recentIntentSummaryView</code> parameter in a <code>PutSession</code> request, the contents of the new summary view replaces the old summary view. For example, if a <code>GetSession</code> request returns three intents in the summary view and you call <code>PutSession</code> with one intent in the summary view, the next call to <code>GetSession</code> will only return one intent.</p>"
         },
         "accept": {
           "shape": "Accept",

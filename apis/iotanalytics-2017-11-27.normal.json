@@ -243,7 +243,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.</p>"
+      "documentation": "<p>Creates a pipeline. A pipeline consumes messages from a channel and allows you to process the messages before storing them in a data store. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.</p>"
     },
     "DeleteChannel": {
       "name": "DeleteChannel",
@@ -1210,7 +1210,7 @@
         },
         "storage": {
           "shape": "ChannelStorage",
-          "documentation": "<p>Where channel data is stored.</p>"
+          "documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation of the channel.</p>"
         },
         "arn": {
           "shape": "ChannelArn",
@@ -1289,14 +1289,14 @@
       "members": {
         "serviceManagedS3": {
           "shape": "ServiceManagedChannelS3Storage",
-          "documentation": "<p>Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.</p>"
+          "documentation": "<p>Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.</p>"
         },
         "customerManagedS3": {
           "shape": "CustomerManagedChannelS3Storage",
-          "documentation": "<p>Use this to store channel data in an S3 bucket that you manage.</p>"
+          "documentation": "<p>Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the \"retentionPeriod\" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.</p>"
         }
       },
-      "documentation": "<p>Where channel data is stored.</p>"
+      "documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation of the channel.</p>"
     },
     "ChannelStorageSummary": {
       "type": "structure",
@@ -1390,11 +1390,11 @@
         },
         "channelStorage": {
           "shape": "ChannelStorage",
-          "documentation": "<p>Where channel data is stored.</p>"
+          "documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation of the channel.</p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>How long, in days, message data is kept for the channel.</p>"
+          "documentation": "<p>How long, in days, message data is kept for the channel. When \"customerManagedS3\" storage is selected, this parameter is ignored.</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -1508,11 +1508,11 @@
         },
         "datastoreStorage": {
           "shape": "DatastoreStorage",
-          "documentation": "<p>Where data store data is stored.</p>"
+          "documentation": "<p>Where data store data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after the data store is created.</p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>How long, in days, message data is kept for the data store.</p>"
+          "documentation": "<p>How long, in days, message data is kept for the data store. When \"customerManagedS3\" storage is selected, this parameter is ignored.</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -1584,14 +1584,14 @@
         },
         "keyPrefix": {
           "shape": "S3KeyPrefix",
-          "documentation": "<p>The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).</p>"
+          "documentation": "<p>[Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a '/'.</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>"
         }
       },
-      "documentation": "<p>Use this to store channel data in an S3 bucket that you manage.</p>"
+      "documentation": "<p>Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the \"retentionPeriod\" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.</p>"
     },
     "CustomerManagedChannelS3StorageSummary": {
       "type": "structure",
@@ -1602,7 +1602,7 @@
         },
         "keyPrefix": {
           "shape": "S3KeyPrefix",
-          "documentation": "<p>The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).</p>"
+          "documentation": "<p>[Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a '/'.</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
@@ -1624,14 +1624,14 @@
         },
         "keyPrefix": {
           "shape": "S3KeyPrefix",
-          "documentation": "<p>The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).</p>"
+          "documentation": "<p>[Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a '/'.</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>"
         }
       },
-      "documentation": "<p>Use this to store data store data in an S3 bucket that you manage.</p>"
+      "documentation": "<p>Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the \"retentionPeriod\" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.</p>"
     },
     "CustomerManagedDatastoreS3StorageSummary": {
       "type": "structure",
@@ -1642,7 +1642,7 @@
         },
         "keyPrefix": {
           "shape": "S3KeyPrefix",
-          "documentation": "<p>The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).</p>"
+          "documentation": "<p>[Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a '/'.</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
@@ -1846,6 +1846,10 @@
         "scheduleTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time the creation of the data set contents was scheduled to start.</p>"
+        },
+        "completionTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the dataset content status was updated to SUCCEEDED or FAILED.</p>"
         }
       },
       "documentation": "<p>Summary information about data set contents.</p>"
@@ -1969,7 +1973,7 @@
         },
         "storage": {
           "shape": "DatastoreStorage",
-          "documentation": "<p>Where data store data is stored.</p>"
+          "documentation": "<p>Where data store data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after the data store is created.</p>"
         },
         "arn": {
           "shape": "DatastoreArn",
@@ -1981,7 +1985,7 @@
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>How long, in days, message data is kept for the data store.</p>"
+          "documentation": "<p>How long, in days, message data is kept for the data store. When \"customerManagedS3\" storage is selected, this parameter is ignored.</p>"
         },
         "creationTime": {
           "shape": "Timestamp",
@@ -2044,14 +2048,14 @@
       "members": {
         "serviceManagedS3": {
           "shape": "ServiceManagedDatastoreS3Storage",
-          "documentation": "<p>Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.</p>"
+          "documentation": "<p>Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.</p>"
         },
         "customerManagedS3": {
           "shape": "CustomerManagedDatastoreS3Storage",
-          "documentation": "<p>Use this to store data store data in an S3 bucket that you manage.</p>"
+          "documentation": "<p>Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the \"retentionPeriod\" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.</p>"
         }
       },
-      "documentation": "<p>Where data store data is stored.</p>"
+      "documentation": "<p>Where data store data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after the data store is created.</p>"
     },
     "DatastoreStorageSummary": {
       "type": "structure",
@@ -2207,7 +2211,7 @@
         },
         "includeStatistics": {
           "shape": "IncludeStatisticsFlag",
-          "documentation": "<p>If true, additional statistical information about the channel is included in the response.</p>",
+          "documentation": "<p>If true, additional statistical information about the channel is included in the response. This feature cannot be used with a channel whose S3 storage is customer-managed.</p>",
           "location": "querystring",
           "locationName": "includeStatistics"
         }
@@ -2263,7 +2267,7 @@
         },
         "includeStatistics": {
           "shape": "IncludeStatisticsFlag",
-          "documentation": "<p>If true, additional statistical information about the datastore is included in the response.</p>",
+          "documentation": "<p>If true, additional statistical information about the data store is included in the response. This feature cannot be used with a data store whose S3 storage is customer-managed.</p>",
           "location": "querystring",
           "locationName": "includeStatistics"
         }
@@ -3213,7 +3217,7 @@
         },
         "key": {
           "shape": "BucketKeyExpression",
-          "documentation": "<p>The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).</p>"
+          "documentation": "<p>The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). To produce a unique key, you can use \"!{iotanalytics:scheduledTime}\" to insert the time of the scheduled SQL query run, or \"!{iotanalytics:versioned} to insert a unique hash identifying the data set, for example: \"/DataSet/!{iotanalytics:scheduledTime}/!{iotanalytics:versioned}.csv\".</p>"
         },
         "glueConfiguration": {
           "shape": "GlueConfiguration",
@@ -3311,7 +3315,7 @@
     "ServiceManagedChannelS3Storage": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.</p>"
+      "documentation": "<p>Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.</p>"
     },
     "ServiceManagedChannelS3StorageSummary": {
       "type": "structure",
@@ -3321,7 +3325,7 @@
     "ServiceManagedDatastoreS3Storage": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.</p>"
+      "documentation": "<p>Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.</p>"
     },
     "ServiceManagedDatastoreS3StorageSummary": {
       "type": "structure",
@@ -3521,11 +3525,11 @@
         },
         "channelStorage": {
           "shape": "ChannelStorage",
-          "documentation": "<p>Where channel data is stored.</p>"
+          "documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation of the channel.</p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>How long, in days, message data is kept for the channel.</p>"
+          "documentation": "<p>How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel's S3 storage is customer-managed.</p>"
         }
       }
     },
@@ -3578,11 +3582,11 @@
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>How long, in days, message data is kept for the data store.</p>"
+          "documentation": "<p>How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store's S3 storage is customer-managed.</p>"
         },
         "datastoreStorage": {
           "shape": "DatastoreStorage",
-          "documentation": "<p>Where data store data is stored.</p>"
+          "documentation": "<p>Where data store data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after the data store is created.</p>"
         }
       }
     },
