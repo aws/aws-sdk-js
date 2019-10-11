@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.547.0-->
+<!--LATEST=2.548.0-->
 <!--ENTRYINSERT-->
+
+## 2.548.0
+* feature: Greengrass: Greengrass OTA service supports Raspbian/Armv6l platforms.
 
 ## 2.547.0
 * feature: EC2: New EC2 M5n, M5dn, R5n, R5dn instances with 100 Gbps network performance and Elastic Fabric Adapter (EFA) for ultra low latency; New A1.metal bare metal instance powered by AWS Graviton Processors

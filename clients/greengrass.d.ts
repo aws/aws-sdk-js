@@ -3575,7 +3575,7 @@ declare namespace Greengrass {
   export interface UpdateSubscriptionDefinitionResponse {
   }
   export type UpdateTargets = __string[];
-  export type UpdateTargetsArchitecture = "armv7l"|"x86_64"|"aarch64"|"openwrt"|string;
+  export type UpdateTargetsArchitecture = "armv6l"|"armv7l"|"x86_64"|"aarch64"|"openwrt"|string;
   export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|string;
   export interface VersionInformation {
     /**

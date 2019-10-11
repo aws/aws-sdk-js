@@ -6181,6 +6181,7 @@
       "type": "string",
       "documentation": "The architecture of the cores which are the targets of an update.",
       "enum": [
+        "armv6l",
         "armv7l",
         "x86_64",
         "aarch64",
