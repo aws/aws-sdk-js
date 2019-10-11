@@ -497,6 +497,10 @@
     describe('retryableError', function() {
       it('should retry on throttle error', function() {
         retryableError({
+          code: 'AnyThrottleError',
+          statusCode: 429
+        }, true);
+        retryableError({
           code: 'ProvisionedThroughputExceededException',
           statusCode: 400
         }, true);
