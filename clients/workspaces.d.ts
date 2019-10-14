@@ -469,7 +469,7 @@ declare namespace WorkSpaces {
      */
     EnableWorkDocs?: BooleanObject;
     /**
-     * The public IP address to attach to all WorkSpaces that are created or rebuilt.
+     * Specifies whether to automatically assign a public IP address to WorkSpaces in this directory by default. If enabled, the public IP address allows outbound internet access from your WorkSpaces when you’re using an internet gateway in the Amazon VPC in which your WorkSpaces are located. If you're using a Network Address Translation (NAT) gateway for outbound internet access from your VPC, or if your WorkSpaces are in public subnets and you manually assign them Elastic IP addresses, you should disable this setting. This setting applies to new WorkSpaces that you launch or to existing WorkSpaces that you rebuild. For more information, see  Configure a VPC for Amazon WorkSpaces.
      */
     EnableInternetAccess?: BooleanObject;
     /**
@@ -665,7 +665,7 @@ declare namespace WorkSpaces {
   }
   export interface DescribeWorkspaceSnapshotsResult {
     /**
-     * Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the root volume.
+     * Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the user volume.
      */
     RebuildSnapshots?: SnapshotList;
     /**
@@ -1322,7 +1322,7 @@ declare namespace WorkSpaces {
      */
     RunningMode?: RunningMode;
     /**
-     * The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
+     * The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60-minute intervals.
      */
     RunningModeAutoStopTimeoutInMinutes?: RunningModeAutoStopTimeoutInMinutes;
     /**

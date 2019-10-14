@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.548.0-->
+<!--LATEST=2.549.0-->
 <!--ENTRYINSERT-->
+
+## 2.549.0
+* bugfix: Request Signing: This change allows requests to a service to be signed if the api.json doesn't specify a signatureVersion or authtype, but the configuration has a signatureVersion specified. Prior to this change, the logic to create a signer would use signatureVersion specified in the config, but the code would never reach it if api.json signatureVersion or authtype weren't defined.
+* feature: Personalize: AWS Personalize: Adds ability to create a solution version using FULL or UPDATE training mode
+* feature: Retry: retry all 429 status code exceptions
 
 ## 2.548.0
 * feature: Greengrass: Greengrass OTA service supports Raspbian/Armv6l platforms.

@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Retry",
-  "description": "retry all 429 status code exceptions"
-}

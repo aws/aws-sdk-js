@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.548.0',
+	  VERSION: '2.549.0',
 
 	  /**
 	   * @api private
@@ -4755,6 +4755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  throttledError: function throttledError(error) {
 	    // this logic varies between services
+	    if (error.statusCode === 429) return true;
 	    switch (error.code) {
 	      case 'ProvisionedThroughputExceededException':
 	      case 'Throttling':
