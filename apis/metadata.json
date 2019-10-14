@@ -579,7 +579,8 @@
     "cors": true
   },
   "iotanalytics": {
-    "name": "IoTAnalytics"
+    "name": "IoTAnalytics",
+    "cors": true	
   },
   "iot1clickdevicesservice": {
     "prefix": "iot1click-devices",
