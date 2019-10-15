@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.549.0-->
+<!--LATEST=2.550.0-->
 <!--ENTRYINSERT-->
+
+## 2.550.0
+* feature: KinesisVideoArchivedMedia: Add ON_DISCONTINUITY mode to the GetHLSStreamingSessionURL API
 
 ## 2.549.0
 * bugfix: Request Signing: This change allows requests to a service to be signed if the api.json doesn't specify a signatureVersion or authtype, but the configuration has a signatureVersion specified. Prior to this change, the logic to create a signer would use signatureVersion specified in the config, but the code would never reach it if api.json signatureVersion or authtype weren't defined.
