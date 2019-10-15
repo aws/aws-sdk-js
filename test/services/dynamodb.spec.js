@@ -68,6 +68,26 @@ describe('AWS.DynamoDB', function() {
       })();
       return expect(actualDelays).to.eql(expectedDelays);
     });
+    it('can pass error through to user-defined custom backoff', function() {
+      var customBackoff = function(retryCount, err) {
+        if (err.code === 'NetworkingError') {
+          return -1;
+        } else {
+          return 100 * retryCount;
+        }
+      };
+      var service = ddb({
+        retryDelayOptions: {
+          customBackoff: customBackoff
+        }
+      });
+      var err = {
+        code: 'NetworkingError',
+        message: 'Invalid character',
+      };
+      var delays = service.retryDelays(1, err);
+      return expect(delays).to.eql(-1);
+    });
     return it('can accept a user-defined custom backoff', function() {
       var actualDelays, customBackoff, expectedDelays, i, service;
       customBackoff = function(retryCount) {
