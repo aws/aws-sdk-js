@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "AWS.EventListeners.Core",
+  "description": "add error message"
+}
