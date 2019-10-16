@@ -21,42 +21,42 @@ describe('AWS.S3', function() {
     return done();
   });
 
-  describe('dnsCompatibleBucketName', function() {
+  describe('isDnsCompatible', function() {
     it('must be at least 3 characters', function() {
-      expect(s3.dnsCompatibleBucketName('aa')).to.equal(false);
+      expect(s3.isDnsCompatible('aa')).to.equal(false);
     });
 
     it('must not be longer than 63 characters', function() {
       var b;
       b = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-      expect(s3.dnsCompatibleBucketName(b)).to.equal(false);
+      expect(s3.isDnsCompatible(b)).to.equal(false);
     });
 
     it('must start with a lower-cased letter or number', function() {
-      expect(s3.dnsCompatibleBucketName('Abc')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('-bc')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('abc')).to.equal(true);
+      expect(s3.isDnsCompatible('Abc')).to.equal(false);
+      expect(s3.isDnsCompatible('-bc')).to.equal(false);
+      expect(s3.isDnsCompatible('abc')).to.equal(true);
     });
 
     it('must end with a lower-cased letter or number', function() {
-      expect(s3.dnsCompatibleBucketName('abC')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('ab-')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('abc')).to.equal(true);
+      expect(s3.isDnsCompatible('abC')).to.equal(false);
+      expect(s3.isDnsCompatible('ab-')).to.equal(false);
+      expect(s3.isDnsCompatible('abc')).to.equal(true);
     });
 
     it('may not contain multiple contiguous dots', function() {
-      expect(s3.dnsCompatibleBucketName('abc.123')).to.equal(true);
-      expect(s3.dnsCompatibleBucketName('abc..123')).to.equal(false);
+      expect(s3.isDnsCompatible('abc.123')).to.equal(true);
+      expect(s3.isDnsCompatible('abc..123')).to.equal(false);
     });
 
     it('may only contain letters numbers and dots', function() {
-      expect(s3.dnsCompatibleBucketName('abc123')).to.equal(true);
-      expect(s3.dnsCompatibleBucketName('abc_123')).to.equal(false);
+      expect(s3.isDnsCompatible('abc123')).to.equal(true);
+      expect(s3.isDnsCompatible('abc_123')).to.equal(false);
     });
 
     it('must not look like an ip address', function() {
-      expect(s3.dnsCompatibleBucketName('1.2.3.4')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('a.b.c.d')).to.equal(true);
+      expect(s3.isDnsCompatible('1.2.3.4')).to.equal(false);
+      expect(s3.isDnsCompatible('a.b.c.d')).to.equal(true);
     });
   });
 
@@ -2928,6 +2928,18 @@ describe('AWS.S3', function() {
       });
       invocationDeferred = true;
     });
+
+    it('supports access point ARN', function(done) {
+      s3.getSignedUrl('getObject', {
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      }, function(err, data) {
+        expect(data).to.equal(
+          'https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=R9HjMWdhk69e7%2BwlOpFH1TUkxRY%3D&x-amz-security-token=session'
+        );
+        done();
+      });
+    });
   });
   describe('getSignedUrlPromise', function() {
     var catchFunction, resolveFunction, err, url, date;
@@ -3331,5 +3343,343 @@ describe('AWS.S3', function() {
         });
       });
     }
+  });
+
+  describe('Access Point', function() {
+    var iniLoader = AWS.util.iniLoader;
+    afterEach(function() {
+      if (AWS.util.isNode()) {
+        iniLoader.clearCachedFiles();
+      }
+    });
+
+    it('should correctly generate access point endpoint', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal(
+          'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com'
+        );
+        expect(request.httpRequest.path).to.equal('/key');
+        done();
+      });
+    });
+
+    it('should correctly generate access point endpoint for us-gov partition', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal(
+          'myendpoint-123456789012.s3-accesspoint.us-gov-east-1.amazonaws.com'
+        );
+        expect(request.httpRequest.path).to.equal('/key');
+        done();
+      });
+    });
+
+    it('should use endpoint suffix according to endpoint partition(China)', function(done) {
+      s3 = new AWS.S3({region: 'cn-north-1'});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal('myendpoint-123456789012.s3-accesspoint.cn-north-1.amazonaws.com.cn');
+        expect(request.httpRequest.path).to.equal('/key');
+        done();
+      });
+    });
+
+    it('should correctly generate access point endpoint for pseudo regions', function() {
+      s3 = new AWS.S3({region: 'us-east-1'});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:s3-external-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      var built = request.build(function() {});
+      expect(
+        built.httpRequest.endpoint.hostname
+      ).to.equal('myendpoint-123456789012.s3-accesspoint.s3-external-1.amazonaws.com');
+
+      s3 = new AWS.S3({region: 'us-east-1-fips'});
+      helpers.mockHttpResponse(200, {}, '');
+      request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      var error;
+      request.build(function(err) {
+        error = err;
+      });
+      expect(error.name).to.equal('InvalidConfiguration');
+      expect(error.message).to.equal('Access point endpoint is not compatible with FIPS region');
+    });
+
+    it('should use regions from ARN by default', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2'});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal('myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com');
+        expect(request.httpRequest.path).to.equal('/key');
+        done();
+      });
+    });
+
+    it('should not use regions from ARN if s3UseArnRegion config is set to false', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2', s3UseArnRegion: false});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidConfiguration');
+        expect(err.message).to.equal('Configured region conflicts with access point region');
+        done();
+      });
+    });
+
+    it('should throw if manually-set endpoint is present', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2', endpoint: 'https://bucket.s3.us-west-2.amazonaws.com'});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidConfiguration');
+        expect(err.message).to.equal('Custom endpoint is not compatible with access point ARN');
+        done();
+      });
+    });
+
+    it('should throw if s3forcePathStyle co-exists with access point ARN', function(done) {
+      s3 = new AWS.S3({s3ForcePathStyle: true});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidConfiguration');
+        expect(err.message).to.equal('Cannot construct path-style endpoint with access point');
+        done();
+      });
+    });
+
+    it('should not apply access point ARN parsing to CreateBucketAPI', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.createBucket({
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com');
+        expect(request.httpRequest.path).to.equal('/arn%3Aaws%3As3%3Aus-east-1%3A123456789012%3Aaccesspoint%3Amyendpoint');
+        done();
+      });
+    });
+
+    it('should throw if cross region enabled but region from different partition', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2'});
+      var request = s3.getObject({
+        Bucket: 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidConfiguration');
+        expect(err.message).to.equal('Configured region and access point region not in same partition');
+        done();
+      });
+    });
+
+    if (AWS.util.isNode()) {
+      it('should throw if AWS_S3_USE_ARN_REGION env is invalid', function(done) {
+        process.env.AWS_S3_USE_ARN_REGION = 'foo';
+        s3 = new AWS.S3({region: 'us-west-2'});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('AWS_S3_USE_ARN_REGION only accepts true or false. Got foo');
+          done();
+        });
+      });
+
+      it('should use regions from ARN if AWS_S3_USE_ARN_REGION env is set', function(done) {
+        process.env.AWS_S3_USE_ARN_REGION = 'false';
+        s3 = new AWS.S3({region: 'us-west-2'});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('Configured region conflicts with access point region');
+          done();
+        });
+      });
+
+      it('should throw s3_use_arn_region config is invalid', function(done) {
+        var mock = '[default]\ns3_use_arn_region = foo';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        s3 = new AWS.S3({region: 'us-west-2'});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('s3_use_arn_region only accepts true or false. Got foo');
+          done();
+        });
+      });
+
+      it('should use regions from ARN if s3_use_arn_region config is set', function(done) {
+        var mock = '[default]\ns3_use_arn_region = false';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        s3 = new AWS.S3({region: 'us-west-2'});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('Configured region conflicts with access point region');
+          done();
+        });
+      });
+    }
+
+    it('should correctly generate accelerate endpoint from access point arn', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2', useAccelerateEndpoint: true});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidConfiguration');
+        expect(err.message).to.equal('useAccelerateEndpoint config is not supported with access point ARN');
+        done();
+      });
+    });
+
+    it('should correctly generate dualstack endpoint from access point arn', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2', useDualstack: true});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal('myendpoint-123456789012.s3-accesspoint.dualstack.us-west-2.amazonaws.com');
+        expect(request.httpRequest.path).to.equal('/key');
+        done();
+      });
+    });
+
+    it('should throw if supplied non-s3 ARN', function(done) {
+      s3 = new AWS.S3();
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:sqs:us-west-2:123456789012:someresource',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidAccessPointARN');
+        expect(err.message).to.equal('expect \'s3\' in access point ARN service component');
+        done();
+      });
+    });
+
+    it('should throw if access point ARN is not for access point resournce', function(done) {
+      s3 = new AWS.S3();
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:bucket_name:mybucket',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidAccessPointARN');
+        expect(err.message).to.equal('Access point ARN resource should begin with \'accesspoint/\'');
+        done();
+      });
+    });
+
+    it('should throw if access point is not dns compatible', function(done) {
+      s3 = new AWS.S3();
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:my.bucket',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidAccessPointARN');
+        expect(err.message).to.equal('Access point ARN is not DNS compatible. Got my.bucket');
+        done();
+      });
+    });
+
+    it('should throw if access point ARN missing components', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3::123456789012:accesspoint:mybucket',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidAccessPointARN');
+        done();
+      });
+    });
+
+    it('should throw if access point ARN has extra resource component', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:mybucket:object:foo',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidAccessPointARN');
+        done();
+      });
+    });
   });
 });
