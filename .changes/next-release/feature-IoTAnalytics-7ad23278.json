@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "IoTAnalytics",
+  "description": "enable cors to make IoTAnalytics available in default browser build"
+}
