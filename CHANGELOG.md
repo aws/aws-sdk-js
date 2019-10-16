@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.550.0-->
+<!--LATEST=2.551.0-->
 <!--ENTRYINSERT-->
+
+## 2.551.0
+* feature: IoTAnalytics: enable cors to make IoTAnalytics available in default browser build
+* feature: Kafka: AWS MSK has added support for adding brokers to a cluster.
+* feature: MarketplaceCommerceAnalytics: add 2 more values for the supporting sections - age of past due funds + uncollected funds breakdown
+* feature: RoboMaker: This release adds support for ROS2 Dashing as a beta feature
 
 ## 2.550.0
 * feature: KinesisVideoArchivedMedia: Add ON_DISCONTINUITY mode to the GetHLSStreamingSessionURL API

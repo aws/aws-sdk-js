@@ -599,6 +599,44 @@
       ],
       "documentation": "\n            <p>Removes the tags associated with the keys that are provided in the query.</p>\n         "
     },
+    "UpdateBrokerCount": {
+      "name": "UpdateBrokerCount",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/clusters/{clusterArn}/nodes/count",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateBrokerCountRequest"
+      },
+      "output": {
+        "shape": "UpdateBrokerCountResponse",
+        "documentation": "\n            <p>Successful response.</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>503 response</p>\n         "
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n         "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n         "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n         "
+        }
+      ],
+      "documentation": "\n            <p>Updates the number of broker nodes in the cluster.</p>\n         "
+    },
     "UpdateBrokerStorage": {
       "name": "UpdateBrokerStorage",
       "http": {
@@ -1825,6 +1863,47 @@
         "TagKeys",
         "ResourceArn"
       ]
+    },
+    "UpdateBrokerCountRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>\n         "
+        },
+        "CurrentVersion": {
+          "shape": "__string",
+          "locationName": "currentVersion",
+          "documentation": "\n            <p>The version of cluster to update from. A successful operation will then generate a new version.</p>\n         "
+        },
+        "TargetNumberOfBrokerNodes": {
+          "shape": "__integerMin1Max15",
+          "locationName": "targetNumberOfBrokerNodes",
+          "documentation": "\n            <p>The number of broker nodes that you want the cluster to have after this operation completes successfully.</p>\n         "
+        }
+      },
+      "required": [
+        "ClusterArn",
+        "CurrentVersion",
+        "TargetNumberOfBrokerNodes"
+      ]
+    },
+    "UpdateBrokerCountResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster.</p>\n         "
+        },
+        "ClusterOperationArn": {
+          "shape": "__string",
+          "locationName": "clusterOperationArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster operation.</p>\n         "
+        }
+      }
     },
     "UpdateBrokerStorageRequest": {
       "type": "structure",

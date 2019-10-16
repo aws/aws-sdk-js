@@ -205,6 +205,18 @@ declare class Kafka extends Service {
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * 
+            Updates the number of broker nodes in the cluster.
+         
+   */
+  updateBrokerCount(params: Kafka.Types.UpdateBrokerCountRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerCountResponse) => void): Request<Kafka.Types.UpdateBrokerCountResponse, AWSError>;
+  /**
+   * 
+            Updates the number of broker nodes in the cluster.
+         
+   */
+  updateBrokerCount(callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerCountResponse) => void): Request<Kafka.Types.UpdateBrokerCountResponse, AWSError>;
+  /**
+   * 
             Updates the EBS storage associated with MSK brokers.
          
    */
@@ -1247,6 +1259,40 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     TagKeys: __listOf__string;
+  }
+  export interface UpdateBrokerCountRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The version of cluster to update from. A successful operation will then generate a new version.
+         
+     */
+    CurrentVersion: __string;
+    /**
+     * 
+            The number of broker nodes that you want the cluster to have after this operation completes successfully.
+         
+     */
+    TargetNumberOfBrokerNodes: __integerMin1Max15;
+  }
+  export interface UpdateBrokerCountResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+         
+     */
+    ClusterOperationArn?: __string;
   }
   export interface UpdateBrokerStorageRequest {
     /**

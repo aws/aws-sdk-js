@@ -75,6 +75,7 @@ export import KinesisVideo = require('./kinesisvideo');
 export import Translate = require('./translate');
 export import ResourceGroups = require('./resourcegroups');
 export import SecretsManager = require('./secretsmanager');
+export import IoTAnalytics = require('./iotanalytics');
 export import ComprehendMedical = require('./comprehendmedical');
 export import Personalize = require('./personalize');
 export import PersonalizeEvents = require('./personalizeevents');
