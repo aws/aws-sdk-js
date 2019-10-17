@@ -44,11 +44,11 @@ declare class Batch extends Service {
    */
   deleteComputeEnvironment(callback?: (err: AWSError, data: Batch.Types.DeleteComputeEnvironmentResponse) => void): Request<Batch.Types.DeleteComputeEnvironmentResponse, AWSError>;
   /**
-   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request. 
+   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
    */
   deleteJobQueue(params: Batch.Types.DeleteJobQueueRequest, callback?: (err: AWSError, data: Batch.Types.DeleteJobQueueResponse) => void): Request<Batch.Types.DeleteJobQueueResponse, AWSError>;
   /**
-   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request. 
+   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
    */
   deleteJobQueue(callback?: (err: AWSError, data: Batch.Types.DeleteJobQueueResponse) => void): Request<Batch.Types.DeleteJobQueueResponse, AWSError>;
   /**
@@ -100,19 +100,19 @@ declare class Batch extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Batch.Types.ListJobsResponse) => void): Request<Batch.Types.ListJobsResponse, AWSError>;
   /**
-   * Registers an AWS Batch job definition. 
+   * Registers an AWS Batch job definition.
    */
   registerJobDefinition(params: Batch.Types.RegisterJobDefinitionRequest, callback?: (err: AWSError, data: Batch.Types.RegisterJobDefinitionResponse) => void): Request<Batch.Types.RegisterJobDefinitionResponse, AWSError>;
   /**
-   * Registers an AWS Batch job definition. 
+   * Registers an AWS Batch job definition.
    */
   registerJobDefinition(callback?: (err: AWSError, data: Batch.Types.RegisterJobDefinitionResponse) => void): Request<Batch.Types.RegisterJobDefinitionResponse, AWSError>;
   /**
-   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition. 
+   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition.
    */
   submitJob(params: Batch.Types.SubmitJobRequest, callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
-   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition. 
+   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition.
    */
   submitJob(callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
@@ -222,6 +222,7 @@ declare namespace Batch {
   export type CEState = "ENABLED"|"DISABLED"|string;
   export type CEStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
   export type CEType = "MANAGED"|"UNMANAGED"|string;
+  export type CRAllocationStrategy = "BEST_FIT"|"BEST_FIT_PROGRESSIVE"|"SPOT_CAPACITY_OPTIMIZED"|string;
   export type CRType = "EC2"|"SPOT"|string;
   export interface CancelJobRequest {
     /**
@@ -229,7 +230,7 @@ declare namespace Batch {
      */
     jobId: String;
     /**
-     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs. 
+     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs.
      */
     reason: String;
   }
@@ -237,15 +238,15 @@ declare namespace Batch {
   }
   export interface ComputeEnvironmentDetail {
     /**
-     * The name of the compute environment. 
+     * The name of the compute environment.
      */
     computeEnvironmentName: String;
     /**
-     * The Amazon Resource Name (ARN) of the compute environment. 
+     * The Amazon Resource Name (ARN) of the compute environment.
      */
     computeEnvironmentArn: String;
     /**
-     * The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. 
+     * The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment.
      */
     ecsClusterArn: String;
     /**
@@ -253,7 +254,7 @@ declare namespace Batch {
      */
     type?: CEType;
     /**
-     * The state of the compute environment. The valid values are ENABLED or DISABLED.  If the state is ENABLED, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand. If the state is DISABLED, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a STARTING or RUNNING state continue to progress normally. Managed compute environments in the DISABLED state do not scale out. However, they scale in to minvCpus value after instances become idle.
+     * The state of the compute environment. The valid values are ENABLED or DISABLED. If the state is ENABLED, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand. If the state is DISABLED, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a STARTING or RUNNING state continue to progress normally. Managed compute environments in the DISABLED state do not scale out. However, they scale in to minvCpus value after instances become idle.
      */
     state?: CEState;
     /**
@@ -265,7 +266,7 @@ declare namespace Batch {
      */
     statusReason?: String;
     /**
-     * The compute resources defined for the compute environment. 
+     * The compute resources defined for the compute environment.
      */
     computeResources?: ComputeResource;
     /**
@@ -291,19 +292,23 @@ declare namespace Batch {
      */
     type: CRType;
     /**
-     * The minimum number of EC2 vCPUs that an environment should maintain (even if the compute environment is DISABLED). 
+     * The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or Amazon EC2 service limits. If this is not specified, the default is BEST_FIT, which will use only the best fitting instance type, waiting for additional capacity if it's not available. This allocation strategy keeps costs lower but can limit scaling. BEST_FIT_PROGRESSIVE will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type with a lower cost. SPOT_CAPACITY_OPTIMIZED is only available for Spot Instance compute resources and will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type that is less likely to be interrupted.
+     */
+    allocationStrategy?: CRAllocationStrategy;
+    /**
+     * The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is DISABLED).
      */
     minvCpus: Integer;
     /**
-     * The maximum number of EC2 vCPUs that an environment can reach. 
+     * The maximum number of Amazon EC2 vCPUs that an environment can reach.
      */
     maxvCpus: Integer;
     /**
-     * The desired number of EC2 vCPUS in the compute environment. 
+     * The desired number of Amazon EC2 vCPUS in the compute environment.
      */
     desiredvCpus?: Integer;
     /**
-     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c4 or p3), or you can specify specific sizes within a family (such as c4.8xlarge). You can also choose optimal to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.
+     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c5 or p3), or you can specify specific sizes within a family (such as c5.8xlarge). You can also choose optimal to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.
      */
     instanceTypes: StringList;
     /**
@@ -315,11 +320,11 @@ declare namespace Batch {
      */
     subnets: StringList;
     /**
-     * The EC2 security group that is associated with instances launched in the compute environment. 
+     * The Amazon EC2 security groups associated with instances launched in the compute environment. One or more security groups must be specified, either in securityGroupIds or using a launch template referenced in launchTemplate. If security groups are specified using both securityGroupIds and launchTemplate, the values in securityGroupIds will be used.
      */
     securityGroupIds?: StringList;
     /**
-     * The EC2 key pair that is used for instances launched in the compute environment.
+     * The Amazon EC2 key pair that is used for instances launched in the compute environment.
      */
     ec2KeyPair?: String;
     /**
@@ -335,7 +340,7 @@ declare namespace Batch {
      */
     placementGroup?: String;
     /**
-     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.
+     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.
      */
     bidPercentage?: Integer;
     /**
@@ -349,15 +354,15 @@ declare namespace Batch {
   }
   export interface ComputeResourceUpdate {
     /**
-     * The minimum number of EC2 vCPUs that an environment should maintain.
+     * The minimum number of Amazon EC2 vCPUs that an environment should maintain.
      */
     minvCpus?: Integer;
     /**
-     * The maximum number of EC2 vCPUs that an environment can reach.
+     * The maximum number of Amazon EC2 vCPUs that an environment can reach.
      */
     maxvCpus?: Integer;
     /**
-     * The desired number of EC2 vCPUS in the compute environment.
+     * The desired number of Amazon EC2 vCPUS in the compute environment.
      */
     desiredvCpus?: Integer;
   }
@@ -367,7 +372,7 @@ declare namespace Batch {
      */
     image?: String;
     /**
-     * The number of VCPUs allocated for the job. 
+     * The number of VCPUs allocated for the job.
      */
     vcpus?: Integer;
     /**
@@ -375,11 +380,11 @@ declare namespace Batch {
      */
     memory?: Integer;
     /**
-     * The command that is passed to the container. 
+     * The command that is passed to the container.
      */
     command?: StringList;
     /**
-     * The Amazon Resource Name (ARN) associated with the job upon execution. 
+     * The Amazon Resource Name (ARN) associated with the job upon execution.
      */
     jobRoleArn?: String;
     /**
@@ -573,7 +578,7 @@ declare namespace Batch {
      */
     computeEnvironmentName?: String;
     /**
-     * The Amazon Resource Name (ARN) of the compute environment. 
+     * The Amazon Resource Name (ARN) of the compute environment.
      */
     computeEnvironmentArn?: String;
   }
@@ -607,7 +612,7 @@ declare namespace Batch {
   }
   export interface DeleteComputeEnvironmentRequest {
     /**
-     * The name or Amazon Resource Name (ARN) of the compute environment to delete. 
+     * The name or Amazon Resource Name (ARN) of the compute environment to delete.
      */
     computeEnvironment: String;
   }
@@ -615,7 +620,7 @@ declare namespace Batch {
   }
   export interface DeleteJobQueueRequest {
     /**
-     * The short name or full Amazon Resource Name (ARN) of the queue to delete. 
+     * The short name or full Amazon Resource Name (ARN) of the queue to delete.
      */
     jobQueue: String;
   }
@@ -623,7 +628,7 @@ declare namespace Batch {
   }
   export interface DeregisterJobDefinitionRequest {
     /**
-     * The name and revision (name:revision) or full Amazon Resource Name (ARN) of the job definition to deregister. 
+     * The name and revision (name:revision) or full Amazon Resource Name (ARN) of the job definition to deregister.
      */
     jobDefinition: String;
   }
@@ -631,7 +636,7 @@ declare namespace Batch {
   }
   export interface DescribeComputeEnvironmentsRequest {
     /**
-     * A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries. 
+     * A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries.
      */
     computeEnvironments?: StringList;
     /**
@@ -677,7 +682,7 @@ declare namespace Batch {
   }
   export interface DescribeJobDefinitionsResponse {
     /**
-     * The list of job definitions. 
+     * The list of job definitions.
      */
     jobDefinitions?: JobDefinitionList;
     /**
@@ -701,7 +706,7 @@ declare namespace Batch {
   }
   export interface DescribeJobQueuesResponse {
     /**
-     * The list of job queues. 
+     * The list of job queues.
      */
     jobQueues?: JobQueueDetailList;
     /**
@@ -717,7 +722,7 @@ declare namespace Batch {
   }
   export interface DescribeJobsResponse {
     /**
-     * The list of jobs. 
+     * The list of jobs.
      */
     jobs?: JobDetailList;
   }
@@ -750,11 +755,11 @@ declare namespace Batch {
   export type JQStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
   export interface JobDefinition {
     /**
-     * The name of the job definition. 
+     * The name of the job definition.
      */
     jobDefinitionName: String;
     /**
-     * The Amazon Resource Name (ARN) for the job definition. 
+     * The Amazon Resource Name (ARN) for the job definition.
      */
     jobDefinitionArn: String;
     /**
@@ -778,7 +783,7 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * An object with various properties specific to container-based jobs. 
+     * An object with various properties specific to container-based jobs.
      */
     containerProperties?: ContainerProperties;
     /**
@@ -817,7 +822,7 @@ declare namespace Batch {
      */
     jobQueue: String;
     /**
-     * The current status for the job.   If your jobs do not progress to STARTING, see Jobs Stuck in RUNNABLE Status in the troubleshooting section of the AWS Batch User Guide. 
+     * The current status for the job.  If your jobs do not progress to STARTING, see Jobs Stuck in RUNNABLE Status in the troubleshooting section of the AWS Batch User Guide. 
      */
     status: JobStatus;
     /**
@@ -825,7 +830,7 @@ declare namespace Batch {
      */
     attempts?: AttemptDetails;
     /**
-     * A short, human-readable string to provide additional details about the current status of the job. 
+     * A short, human-readable string to provide additional details about the current status of the job.
      */
     statusReason?: String;
     /**
@@ -853,7 +858,7 @@ declare namespace Batch {
      */
     jobDefinition: String;
     /**
-     * Additional parameters passed to the job that replace parameter substitution placeholders or override any corresponding parameter defaults from the job definition. 
+     * Additional parameters passed to the job that replace parameter substitution placeholders or override any corresponding parameter defaults from the job definition.
      */
     parameters?: ParametersMap;
     /**
@@ -873,7 +878,7 @@ declare namespace Batch {
      */
     arrayProperties?: ArrayPropertiesDetail;
     /**
-     * The timeout configuration for the job. 
+     * The timeout configuration for the job.
      */
     timeout?: JobTimeout;
   }
@@ -900,7 +905,7 @@ declare namespace Batch {
      */
     statusReason?: String;
     /**
-     * The priority of the job queue. 
+     * The priority of the job queue.
      */
     priority: Integer;
     /**
@@ -1118,7 +1123,7 @@ declare namespace Batch {
   export type NodeRangeProperties = NodeRangeProperty[];
   export interface NodeRangeProperty {
     /**
-     * The range of nodes, using node index values. A range of 0:3 indicates nodes with index values of 0 through 3. If the starting range value is omitted (:n), then 0 is used to start the range. If the ending range value is omitted (n:), then the highest possible node index is used to end the range. Your accumulative node ranges must account for all nodes (0:n). You may nest node ranges, for example 0:10 and 4:5, in which case the 4:5 range properties override the 0:10 properties. 
+     * The range of nodes, using node index values. A range of 0:3 indicates nodes with index values of 0 through 3. If the starting range value is omitted (:n), then 0 is used to start the range. If the ending range value is omitted (n:), then the highest possible node index is used to end the range. Your accumulative node ranges must account for all nodes (0:n). You may nest node ranges, for example 0:10 and 4:5, in which case the 4:5 range properties override the 0:10 properties.
      */
     targetNodes: String;
     /**
@@ -1149,7 +1154,7 @@ declare namespace Batch {
      */
     nodeProperties?: NodeProperties;
     /**
-     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried. 
+     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried.
      */
     retryStrategy?: RetryStrategy;
     /**
@@ -1163,7 +1168,7 @@ declare namespace Batch {
      */
     jobDefinitionName: String;
     /**
-     * The Amazon Resource Name (ARN) of the job definition. 
+     * The Amazon Resource Name (ARN) of the job definition.
      */
     jobDefinitionArn: String;
     /**
@@ -1193,11 +1198,11 @@ declare namespace Batch {
   export type StringList = String[];
   export interface SubmitJobRequest {
     /**
-     * The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. 
+     * The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
      */
     jobName: String;
     /**
-     * The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. 
+     * The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue.
      */
     jobQueue: String;
     /**
@@ -1235,7 +1240,7 @@ declare namespace Batch {
   }
   export interface SubmitJobResponse {
     /**
-     * The name of the job. 
+     * The name of the job.
      */
     jobName: String;
     /**
@@ -1250,7 +1255,7 @@ declare namespace Batch {
      */
     jobId: String;
     /**
-     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs. 
+     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs.
      */
     reason: String;
   }
@@ -1295,7 +1300,7 @@ declare namespace Batch {
      */
     computeEnvironmentName?: String;
     /**
-     * The Amazon Resource Name (ARN) of the compute environment. 
+     * The Amazon Resource Name (ARN) of the compute environment.
      */
     computeEnvironmentArn?: String;
   }
@@ -1313,7 +1318,7 @@ declare namespace Batch {
      */
     priority?: Integer;
     /**
-     * Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job. 
+     * Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.
      */
     computeEnvironmentOrder?: ComputeEnvironmentOrders;
   }

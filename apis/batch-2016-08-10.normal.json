@@ -120,7 +120,7 @@
           "shape": "ServerException"
         }
       ],
-      "documentation": "<p>Deletes the specified job queue. You must first disable submissions for a queue with the <a>UpdateJobQueue</a> operation. All jobs in the queue are terminated when you delete a job queue.</p> <p>It is not necessary to disassociate compute environments from a queue before submitting a <code>DeleteJobQueue</code> request. </p>"
+      "documentation": "<p>Deletes the specified job queue. You must first disable submissions for a queue with the <a>UpdateJobQueue</a> operation. All jobs in the queue are terminated when you delete a job queue.</p> <p>It is not necessary to disassociate compute environments from a queue before submitting a <code>DeleteJobQueue</code> request.</p>"
     },
     "DeregisterJobDefinition": {
       "name": "DeregisterJobDefinition",
@@ -274,7 +274,7 @@
           "shape": "ServerException"
         }
       ],
-      "documentation": "<p>Registers an AWS Batch job definition. </p>"
+      "documentation": "<p>Registers an AWS Batch job definition.</p>"
     },
     "SubmitJob": {
       "name": "SubmitJob",
@@ -296,7 +296,7 @@
           "shape": "ServerException"
         }
       ],
-      "documentation": "<p>Submits an AWS Batch job from a job definition. Parameters specified during <a>SubmitJob</a> override parameters defined in the job definition. </p>"
+      "documentation": "<p>Submits an AWS Batch job from a job definition. Parameters specified during <a>SubmitJob</a> override parameters defined in the job definition.</p>"
     },
     "TerminateJob": {
       "name": "TerminateJob",
@@ -510,6 +510,14 @@
         "UNMANAGED"
       ]
     },
+    "CRAllocationStrategy": {
+      "type": "string",
+      "enum": [
+        "BEST_FIT",
+        "BEST_FIT_PROGRESSIVE",
+        "SPOT_CAPACITY_OPTIMIZED"
+      ]
+    },
     "CRType": {
       "type": "string",
       "enum": [
@@ -530,7 +538,7 @@
         },
         "reason": {
           "shape": "String",
-          "documentation": "<p>A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. </p>"
+          "documentation": "<p>A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs.</p>"
         }
       }
     },
@@ -548,15 +556,15 @@
       "members": {
         "computeEnvironmentName": {
           "shape": "String",
-          "documentation": "<p>The name of the compute environment. </p>"
+          "documentation": "<p>The name of the compute environment.</p>"
         },
         "computeEnvironmentArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the compute environment. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the compute environment.</p>"
         },
         "ecsClusterArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment.</p>"
         },
         "type": {
           "shape": "CEType",
@@ -564,7 +572,7 @@
         },
         "state": {
           "shape": "CEState",
-          "documentation": "<p>The state of the compute environment. The valid values are <code>ENABLED</code> or <code>DISABLED</code>. </p> <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand.</p> <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed compute environments in the <code>DISABLED</code> state do not scale out. However, they scale in to <code>minvCpus</code> value after instances become idle.</p>"
+          "documentation": "<p>The state of the compute environment. The valid values are <code>ENABLED</code> or <code>DISABLED</code>.</p> <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand.</p> <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed compute environments in the <code>DISABLED</code> state do not scale out. However, they scale in to <code>minvCpus</code> value after instances become idle.</p>"
         },
         "status": {
           "shape": "CEStatus",
@@ -576,7 +584,7 @@
         },
         "computeResources": {
           "shape": "ComputeResource",
-          "documentation": "<p>The compute resources defined for the compute environment. </p>"
+          "documentation": "<p>The compute resources defined for the compute environment.</p>"
         },
         "serviceRole": {
           "shape": "String",
@@ -628,23 +636,27 @@
       "members": {
         "type": {
           "shape": "CRType",
-          "documentation": "<p>The type of compute environment: EC2 or SPOT.</p>"
+          "documentation": "<p>The type of compute environment: <code>EC2</code> or <code>SPOT</code>.</p>"
+        },
+        "allocationStrategy": {
+          "shape": "CRAllocationStrategy",
+          "documentation": "<p>The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it's not available. This allocation strategy keeps costs lower but can limit scaling. <code>BEST_FIT_PROGRESSIVE</code> will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type with a lower cost. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select an additional instance type that is large enough to meet the requirements of the jobs in the queue, with a preference for an instance type that is less likely to be interrupted.</p>"
         },
         "minvCpus": {
           "shape": "Integer",
-          "documentation": "<p>The minimum number of EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>). </p>"
+          "documentation": "<p>The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is <code>DISABLED</code>).</p>"
         },
         "maxvCpus": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of EC2 vCPUs that an environment can reach. </p>"
+          "documentation": "<p>The maximum number of Amazon EC2 vCPUs that an environment can reach.</p>"
         },
         "desiredvCpus": {
           "shape": "Integer",
-          "documentation": "<p>The desired number of EC2 vCPUS in the compute environment. </p>"
+          "documentation": "<p>The desired number of Amazon EC2 vCPUS in the compute environment.</p>"
         },
         "instanceTypes": {
           "shape": "StringList",
-          "documentation": "<p>The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c4</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c4.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.</p>"
+          "documentation": "<p>The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c5</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c5.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.</p>"
         },
         "imageId": {
           "shape": "String",
@@ -656,11 +668,11 @@
         },
         "securityGroupIds": {
           "shape": "StringList",
-          "documentation": "<p>The EC2 security group that is associated with instances launched in the compute environment. </p>"
+          "documentation": "<p>The Amazon EC2 security groups associated with instances launched in the compute environment. One or more security groups must be specified, either in <code>securityGroupIds</code> or using a launch template referenced in <code>launchTemplate</code>. If security groups are specified using both <code>securityGroupIds</code> and <code>launchTemplate</code>, the values in <code>securityGroupIds</code> will be used.</p>"
         },
         "ec2KeyPair": {
           "shape": "String",
-          "documentation": "<p>The EC2 key pair that is used for instances launched in the compute environment.</p>"
+          "documentation": "<p>The Amazon EC2 key pair that is used for instances launched in the compute environment.</p>"
         },
         "instanceRole": {
           "shape": "String",
@@ -676,7 +688,7 @@
         },
         "bidPercentage": {
           "shape": "Integer",
-          "documentation": "<p>The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.</p>"
+          "documentation": "<p>The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.</p>"
         },
         "spotIamFleetRole": {
           "shape": "String",
@@ -694,15 +706,15 @@
       "members": {
         "minvCpus": {
           "shape": "Integer",
-          "documentation": "<p>The minimum number of EC2 vCPUs that an environment should maintain.</p>"
+          "documentation": "<p>The minimum number of Amazon EC2 vCPUs that an environment should maintain.</p>"
         },
         "maxvCpus": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of EC2 vCPUs that an environment can reach.</p>"
+          "documentation": "<p>The maximum number of Amazon EC2 vCPUs that an environment can reach.</p>"
         },
         "desiredvCpus": {
           "shape": "Integer",
-          "documentation": "<p>The desired number of EC2 vCPUS in the compute environment.</p>"
+          "documentation": "<p>The desired number of Amazon EC2 vCPUS in the compute environment.</p>"
         }
       },
       "documentation": "<p>An object representing the attributes of a compute environment that can be updated.</p>"
@@ -716,7 +728,7 @@
         },
         "vcpus": {
           "shape": "Integer",
-          "documentation": "<p>The number of VCPUs allocated for the job. </p>"
+          "documentation": "<p>The number of VCPUs allocated for the job.</p>"
         },
         "memory": {
           "shape": "Integer",
@@ -724,11 +736,11 @@
         },
         "command": {
           "shape": "StringList",
-          "documentation": "<p>The command that is passed to the container. </p>"
+          "documentation": "<p>The command that is passed to the container.</p>"
         },
         "jobRoleArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) associated with the job upon execution. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) associated with the job upon execution.</p>"
         },
         "volumes": {
           "shape": "Volumes",
@@ -946,7 +958,7 @@
         },
         "computeEnvironmentArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the compute environment. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the compute environment.</p>"
         }
       }
     },
@@ -1001,7 +1013,7 @@
       "members": {
         "computeEnvironment": {
           "shape": "String",
-          "documentation": "<p>The name or Amazon Resource Name (ARN) of the compute environment to delete. </p>"
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the compute environment to delete.</p>"
         }
       }
     },
@@ -1017,7 +1029,7 @@
       "members": {
         "jobQueue": {
           "shape": "String",
-          "documentation": "<p>The short name or full Amazon Resource Name (ARN) of the queue to delete. </p>"
+          "documentation": "<p>The short name or full Amazon Resource Name (ARN) of the queue to delete.</p>"
         }
       }
     },
@@ -1033,7 +1045,7 @@
       "members": {
         "jobDefinition": {
           "shape": "String",
-          "documentation": "<p>The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister. </p>"
+          "documentation": "<p>The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister.</p>"
         }
       }
     },
@@ -1046,7 +1058,7 @@
       "members": {
         "computeEnvironments": {
           "shape": "StringList",
-          "documentation": "<p>A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries. </p>"
+          "documentation": "<p>A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries.</p>"
         },
         "maxResults": {
           "shape": "Integer",
@@ -1101,7 +1113,7 @@
       "members": {
         "jobDefinitions": {
           "shape": "JobDefinitionList",
-          "documentation": "<p>The list of job definitions. </p>"
+          "documentation": "<p>The list of job definitions.</p>"
         },
         "nextToken": {
           "shape": "String",
@@ -1131,7 +1143,7 @@
       "members": {
         "jobQueues": {
           "shape": "JobQueueDetailList",
-          "documentation": "<p>The list of job queues. </p>"
+          "documentation": "<p>The list of job queues.</p>"
         },
         "nextToken": {
           "shape": "String",
@@ -1156,7 +1168,7 @@
       "members": {
         "jobs": {
           "shape": "JobDetailList",
-          "documentation": "<p>The list of jobs. </p>"
+          "documentation": "<p>The list of jobs.</p>"
         }
       }
     },
@@ -1249,11 +1261,11 @@
       "members": {
         "jobDefinitionName": {
           "shape": "String",
-          "documentation": "<p>The name of the job definition. </p>"
+          "documentation": "<p>The name of the job definition.</p>"
         },
         "jobDefinitionArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the job definition. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the job definition.</p>"
         },
         "revision": {
           "shape": "Integer",
@@ -1277,7 +1289,7 @@
         },
         "containerProperties": {
           "shape": "ContainerProperties",
-          "documentation": "<p>An object with various properties specific to container-based jobs. </p>"
+          "documentation": "<p>An object with various properties specific to container-based jobs.</p>"
         },
         "timeout": {
           "shape": "JobTimeout",
@@ -1348,7 +1360,7 @@
         },
         "status": {
           "shape": "JobStatus",
-          "documentation": "<p>The current status for the job. </p> <note> <p>If your jobs do not progress to <code>STARTING</code>, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable\">Jobs Stuck in RUNNABLE Status</a> in the troubleshooting section of the <i>AWS Batch User Guide</i>.</p> </note>"
+          "documentation": "<p>The current status for the job.</p> <note> <p>If your jobs do not progress to <code>STARTING</code>, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable\">Jobs Stuck in RUNNABLE Status</a> in the troubleshooting section of the <i>AWS Batch User Guide</i>.</p> </note>"
         },
         "attempts": {
           "shape": "AttemptDetails",
@@ -1356,7 +1368,7 @@
         },
         "statusReason": {
           "shape": "String",
-          "documentation": "<p>A short, human-readable string to provide additional details about the current status of the job. </p>"
+          "documentation": "<p>A short, human-readable string to provide additional details about the current status of the job.</p>"
         },
         "createdAt": {
           "shape": "Long",
@@ -1384,7 +1396,7 @@
         },
         "parameters": {
           "shape": "ParametersMap",
-          "documentation": "<p>Additional parameters passed to the job that replace parameter substitution placeholders or override any corresponding parameter defaults from the job definition. </p>"
+          "documentation": "<p>Additional parameters passed to the job that replace parameter substitution placeholders or override any corresponding parameter defaults from the job definition.</p>"
         },
         "container": {
           "shape": "ContainerDetail",
@@ -1404,7 +1416,7 @@
         },
         "timeout": {
           "shape": "JobTimeout",
-          "documentation": "<p>The timeout configuration for the job. </p>"
+          "documentation": "<p>The timeout configuration for the job.</p>"
         }
       },
       "documentation": "<p>An object representing an AWS Batch job.</p>"
@@ -1447,7 +1459,7 @@
         },
         "priority": {
           "shape": "Integer",
-          "documentation": "<p>The priority of the job queue. </p>"
+          "documentation": "<p>The priority of the job queue.</p>"
         },
         "computeEnvironmentOrder": {
           "shape": "ComputeEnvironmentOrders",
@@ -1570,7 +1582,7 @@
           "documentation": "<p>The version number of the launch template.</p> <p>Default: The default version of the launch template.</p>"
         }
       },
-      "documentation": "<p>An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both. </p>"
+      "documentation": "<p>An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both.</p>"
     },
     "LinuxParameters": {
       "type": "structure",
@@ -1784,7 +1796,7 @@
       "members": {
         "targetNodes": {
           "shape": "String",
-          "documentation": "<p>The range of nodes, using node index values. A range of <code>0:3</code> indicates nodes with index values of <code>0</code> through <code>3</code>. If the starting range value is omitted (<code>:n</code>), then <code>0</code> is used to start the range. If the ending range value is omitted (<code>n:</code>), then the highest possible node index is used to end the range. Your accumulative node ranges must account for all nodes (0:n). You may nest node ranges, for example 0:10 and 4:5, in which case the 4:5 range properties override the 0:10 properties. </p>"
+          "documentation": "<p>The range of nodes, using node index values. A range of <code>0:3</code> indicates nodes with index values of <code>0</code> through <code>3</code>. If the starting range value is omitted (<code>:n</code>), then <code>0</code> is used to start the range. If the ending range value is omitted (<code>n:</code>), then the highest possible node index is used to end the range. Your accumulative node ranges must account for all nodes (0:n). You may nest node ranges, for example 0:10 and 4:5, in which case the 4:5 range properties override the 0:10 properties.</p>"
         },
         "container": {
           "shape": "ContainerProperties",
@@ -1831,7 +1843,7 @@
         },
         "retryStrategy": {
           "shape": "RetryStrategy",
-          "documentation": "<p>The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried. </p>"
+          "documentation": "<p>The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried.</p>"
         },
         "timeout": {
           "shape": "JobTimeout",
@@ -1853,7 +1865,7 @@
         },
         "jobDefinitionArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the job definition. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the job definition.</p>"
         },
         "revision": {
           "shape": "Integer",
@@ -1920,11 +1932,11 @@
       "members": {
         "jobName": {
           "shape": "String",
-          "documentation": "<p>The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. </p>"
+          "documentation": "<p>The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p>"
         },
         "jobQueue": {
           "shape": "String",
-          "documentation": "<p>The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. </p>"
+          "documentation": "<p>The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue.</p>"
         },
         "arrayProperties": {
           "shape": "ArrayProperties",
@@ -1969,7 +1981,7 @@
       "members": {
         "jobName": {
           "shape": "String",
-          "documentation": "<p>The name of the job. </p>"
+          "documentation": "<p>The name of the job.</p>"
         },
         "jobId": {
           "shape": "String",
@@ -1999,7 +2011,7 @@
         },
         "reason": {
           "shape": "String",
-          "documentation": "<p>A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. </p>"
+          "documentation": "<p>A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs.</p>"
         }
       }
     },
@@ -2069,7 +2081,7 @@
         },
         "computeEnvironmentArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the compute environment. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the compute environment.</p>"
         }
       }
     },
@@ -2093,7 +2105,7 @@
         },
         "computeEnvironmentOrder": {
           "shape": "ComputeEnvironmentOrders",
-          "documentation": "<p>Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job. </p>"
+          "documentation": "<p>Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.</p>"
         }
       }
     },

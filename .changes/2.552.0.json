@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Adding support for Compute Environment Allocation Strategies "
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Amazon RDS now supports Amazon RDS on VMware with the introduction of APIs related to Custom Availability Zones and Media installation."
+    }
+]

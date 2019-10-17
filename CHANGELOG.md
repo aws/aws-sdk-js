@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.551.0-->
+<!--LATEST=2.552.0-->
 <!--ENTRYINSERT-->
+
+## 2.552.0
+* feature: Batch: Adding support for Compute Environment Allocation Strategies 
+* feature: RDS: Amazon RDS now supports Amazon RDS on VMware with the introduction of APIs related to Custom Availability Zones and Media installation.
 
 ## 2.551.0
 * feature: IoTAnalytics: enable cors to make IoTAnalytics available in default browser build

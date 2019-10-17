@@ -110,6 +110,14 @@ declare class RDS extends Service {
    */
   copyOptionGroup(callback?: (err: AWSError, data: RDS.Types.CopyOptionGroupResult) => void): Request<RDS.Types.CopyOptionGroupResult, AWSError>;
   /**
+   * Creates a custom Availability Zone (AZ). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide.  
+   */
+  createCustomAvailabilityZone(params: RDS.Types.CreateCustomAvailabilityZoneMessage, callback?: (err: AWSError, data: RDS.Types.CreateCustomAvailabilityZoneResult) => void): Request<RDS.Types.CreateCustomAvailabilityZoneResult, AWSError>;
+  /**
+   * Creates a custom Availability Zone (AZ). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide.  
+   */
+  createCustomAvailabilityZone(callback?: (err: AWSError, data: RDS.Types.CreateCustomAvailabilityZoneResult) => void): Request<RDS.Types.CreateCustomAvailabilityZoneResult, AWSError>;
+  /**
    * Creates a new Amazon Aurora DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance. For cross-region replication where the DB cluster identified by ReplicationSourceIdentifier is encrypted, you must also specify the PreSignedUrl parameter. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide.   This action only applies to Aurora DB clusters. 
    */
   createDBCluster(params: RDS.Types.CreateDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.CreateDBClusterResult) => void): Request<RDS.Types.CreateDBClusterResult, AWSError>;
@@ -214,6 +222,14 @@ declare class RDS extends Service {
    */
   createOptionGroup(callback?: (err: AWSError, data: RDS.Types.CreateOptionGroupResult) => void): Request<RDS.Types.CreateOptionGroupResult, AWSError>;
   /**
+   * Deletes a custom Availability Zone (AZ). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide.  
+   */
+  deleteCustomAvailabilityZone(params: RDS.Types.DeleteCustomAvailabilityZoneMessage, callback?: (err: AWSError, data: RDS.Types.DeleteCustomAvailabilityZoneResult) => void): Request<RDS.Types.DeleteCustomAvailabilityZoneResult, AWSError>;
+  /**
+   * Deletes a custom Availability Zone (AZ). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide.  
+   */
+  deleteCustomAvailabilityZone(callback?: (err: AWSError, data: RDS.Types.DeleteCustomAvailabilityZoneResult) => void): Request<RDS.Types.DeleteCustomAvailabilityZoneResult, AWSError>;
+  /**
    * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.  For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide.   This action only applies to Aurora DB clusters. 
    */
   deleteDBCluster(params: RDS.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.DeleteDBClusterResult) => void): Request<RDS.Types.DeleteDBClusterResult, AWSError>;
@@ -310,6 +326,14 @@ declare class RDS extends Service {
    */
   deleteGlobalCluster(callback?: (err: AWSError, data: RDS.Types.DeleteGlobalClusterResult) => void): Request<RDS.Types.DeleteGlobalClusterResult, AWSError>;
   /**
+   * Deletes the installation media for an on-premises, bring your own media (BYOM) DB engine, such as Microsoft SQL Server.
+   */
+  deleteInstallationMedia(params: RDS.Types.DeleteInstallationMediaMessage, callback?: (err: AWSError, data: RDS.Types.InstallationMedia) => void): Request<RDS.Types.InstallationMedia, AWSError>;
+  /**
+   * Deletes the installation media for an on-premises, bring your own media (BYOM) DB engine, such as Microsoft SQL Server.
+   */
+  deleteInstallationMedia(callback?: (err: AWSError, data: RDS.Types.InstallationMedia) => void): Request<RDS.Types.InstallationMedia, AWSError>;
+  /**
    * Deletes an existing option group.
    */
   deleteOptionGroup(params: RDS.Types.DeleteOptionGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -333,6 +357,14 @@ declare class RDS extends Service {
    * Lists the set of CA certificates provided by Amazon RDS for this AWS account.
    */
   describeCertificates(callback?: (err: AWSError, data: RDS.Types.CertificateMessage) => void): Request<RDS.Types.CertificateMessage, AWSError>;
+  /**
+   * Returns information about custom Availability Zones (AZs). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide.  
+   */
+  describeCustomAvailabilityZones(params: RDS.Types.DescribeCustomAvailabilityZonesMessage, callback?: (err: AWSError, data: RDS.Types.CustomAvailabilityZoneMessage) => void): Request<RDS.Types.CustomAvailabilityZoneMessage, AWSError>;
+  /**
+   * Returns information about custom Availability Zones (AZs). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide.  
+   */
+  describeCustomAvailabilityZones(callback?: (err: AWSError, data: RDS.Types.CustomAvailabilityZoneMessage) => void): Request<RDS.Types.CustomAvailabilityZoneMessage, AWSError>;
   /**
    * Returns information about backtracks for a DB cluster. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide.   This action only applies to Aurora DB clusters. 
    */
@@ -518,6 +550,14 @@ declare class RDS extends Service {
    */
   describeGlobalClusters(callback?: (err: AWSError, data: RDS.Types.GlobalClustersMessage) => void): Request<RDS.Types.GlobalClustersMessage, AWSError>;
   /**
+   * Describes the available installation media for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.
+   */
+  describeInstallationMedia(params: RDS.Types.DescribeInstallationMediaMessage, callback?: (err: AWSError, data: RDS.Types.InstallationMediaMessage) => void): Request<RDS.Types.InstallationMediaMessage, AWSError>;
+  /**
+   * Describes the available installation media for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.
+   */
+  describeInstallationMedia(callback?: (err: AWSError, data: RDS.Types.InstallationMediaMessage) => void): Request<RDS.Types.InstallationMediaMessage, AWSError>;
+  /**
    * Describes all available options.
    */
   describeOptionGroupOptions(params: RDS.Types.DescribeOptionGroupOptionsMessage, callback?: (err: AWSError, data: RDS.Types.OptionGroupOptionsMessage) => void): Request<RDS.Types.OptionGroupOptionsMessage, AWSError>;
@@ -597,6 +637,14 @@ declare class RDS extends Service {
    * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). Amazon Aurora will automatically fail over to an Aurora Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide.   This action only applies to Aurora DB clusters. 
    */
   failoverDBCluster(callback?: (err: AWSError, data: RDS.Types.FailoverDBClusterResult) => void): Request<RDS.Types.FailoverDBClusterResult, AWSError>;
+  /**
+   * Imports the installation media for an on-premises, bring your own media (BYOM) DB engine, such as SQL Server.
+   */
+  importInstallationMedia(params: RDS.Types.ImportInstallationMediaMessage, callback?: (err: AWSError, data: RDS.Types.InstallationMedia) => void): Request<RDS.Types.InstallationMedia, AWSError>;
+  /**
+   * Imports the installation media for an on-premises, bring your own media (BYOM) DB engine, such as SQL Server.
+   */
+  importInstallationMedia(callback?: (err: AWSError, data: RDS.Types.InstallationMedia) => void): Request<RDS.Types.InstallationMedia, AWSError>;
   /**
    * Lists all tags on an Amazon RDS resource. For an overview on tagging an Amazon RDS resource, see Tagging Amazon RDS Resources in the Amazon RDS User Guide.
    */
@@ -1290,6 +1338,27 @@ declare namespace RDS {
   export interface CopyOptionGroupResult {
     OptionGroup?: OptionGroup;
   }
+  export interface CreateCustomAvailabilityZoneMessage {
+    /**
+     * The name of the custom Availability Zone (AZ).
+     */
+    CustomAvailabilityZoneName: String;
+    /**
+     * The ID of an existing virtual private network (VPN) between the Amazon RDS website and the VMware vSphere cluster.
+     */
+    ExistingVpnId?: String;
+    /**
+     * The name of a new VPN tunnel between the Amazon RDS website and the VMware vSphere cluster. Specify this parameter only if ExistingVpnId is not specified.
+     */
+    NewVpnTunnelName?: String;
+    /**
+     * The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic. Specify this parameter only if ExistingVpnId is not specified.
+     */
+    VpnTunnelOriginatorIP?: String;
+  }
+  export interface CreateCustomAvailabilityZoneResult {
+    CustomAvailabilityZone?: CustomAvailabilityZone;
+  }
   export interface CreateDBClusterEndpointMessage {
     /**
      * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
@@ -1517,7 +1586,7 @@ declare namespace RDS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     *  The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see Regions and Availability Zones.  Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.  Example: us-east-1d   Constraint: The AvailabilityZone parameter can't be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. 
+     *  The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see Regions and Availability Zones.  Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.  Example: us-east-1d   Constraint: The AvailabilityZone parameter can't be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint.   If you're creating a DB instance in an RDS on VMware environment, specify the identifier of the custom Availability Zone to create the DB instance in. For more information about RDS on VMware, see the  RDS on VMware User Guide.   
      */
     AvailabilityZone?: String;
     /**
@@ -1954,6 +2023,35 @@ declare namespace RDS {
   }
   export interface CreateOptionGroupResult {
     OptionGroup?: OptionGroup;
+  }
+  export interface CustomAvailabilityZone {
+    /**
+     * The identifier of the custom AZ. Amazon RDS generates a unique identifier when a custom AZ is created.
+     */
+    CustomAvailabilityZoneId?: String;
+    /**
+     * The name of the custom AZ.
+     */
+    CustomAvailabilityZoneName?: String;
+    /**
+     * The status of the custom AZ.
+     */
+    CustomAvailabilityZoneStatus?: String;
+    /**
+     * Information about the virtual private network (VPN) between the VMware vSphere cluster and the AWS website.
+     */
+    VpnDetails?: VpnDetails;
+  }
+  export type CustomAvailabilityZoneList = CustomAvailabilityZone[];
+  export interface CustomAvailabilityZoneMessage {
+    /**
+     * An optional pagination token provided by a previous DescribeCustomAvailabilityZones request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * The list of CustomAvailabilityZone objects for the AWS account.
+     */
+    CustomAvailabilityZones?: CustomAvailabilityZoneList;
   }
   export interface DBCluster {
     /**
@@ -3234,6 +3332,15 @@ declare namespace RDS {
     DBSubnetGroups?: DBSubnetGroups;
   }
   export type DBSubnetGroups = DBSubnetGroup[];
+  export interface DeleteCustomAvailabilityZoneMessage {
+    /**
+     * The custom AZ identifier.
+     */
+    CustomAvailabilityZoneId: String;
+  }
+  export interface DeleteCustomAvailabilityZoneResult {
+    CustomAvailabilityZone?: CustomAvailabilityZone;
+  }
   export interface DeleteDBClusterEndpointMessage {
     /**
      * The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.
@@ -3347,6 +3454,12 @@ declare namespace RDS {
   export interface DeleteGlobalClusterResult {
     GlobalCluster?: GlobalCluster;
   }
+  export interface DeleteInstallationMediaMessage {
+    /**
+     * The installation media ID.
+     */
+    InstallationMediaId: String;
+  }
   export interface DeleteOptionGroupMessage {
     /**
      * The name of the option group to be deleted.  You can't delete default option groups. 
@@ -3365,11 +3478,29 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
      *  An optional pagination token provided by a previous DescribeCertificates request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeCustomAvailabilityZonesMessage {
+    /**
+     * The custom AZ identifier. If this parameter is specified, information from only the specific custom AZ is returned.
+     */
+    CustomAvailabilityZoneId?: String;
+    /**
+     * A filter that specifies one or more custom AZs to describe.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeCustomAvailabilityZones request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -3387,7 +3518,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3409,7 +3540,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3427,7 +3558,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3449,7 +3580,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3484,7 +3615,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3510,7 +3641,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3540,7 +3671,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more than the MaxRecords value is available, a pagination token called a marker is included in the response so that the following results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more than the MaxRecords value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3578,7 +3709,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3596,7 +3727,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3641,7 +3772,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3669,7 +3800,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3691,7 +3822,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3709,7 +3840,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3744,7 +3875,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3774,7 +3905,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3792,7 +3923,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3813,7 +3944,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3844,7 +3975,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3882,7 +4013,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3900,11 +4031,29 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
      *  An optional pagination token provided by a previous DescribeGlobalClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeInstallationMediaMessage {
+    /**
+     * The installation media ID.
+     */
+    InstallationMediaId?: String;
+    /**
+     * A filter that specifies one or more installation media to describe. Supported filters include the following:    custom-availability-zone-id - Accepts custom Availability Zone (AZ) identifiers. The results list includes information about only the custom AZs identified by these identifiers.    engine - Accepts database engines. The results list includes information about only the database engines identified by these identifiers. For more information about the valid engines for installation media, see ImportInstallationMedia.  
+     */
+    Filters?: FilterList;
+    /**
+     * An optional pagination token provided by a previous DescribeInstallationMedia request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -3922,7 +4071,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3944,7 +4093,7 @@ declare namespace RDS {
      */
     Marker?: String;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -3982,7 +4131,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -4004,7 +4153,7 @@ declare namespace RDS {
      */
     Marker?: String;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
   }
@@ -4046,7 +4195,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more than the MaxRecords value is available, a pagination token called a marker is included in the response so that the following results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more than the MaxRecords value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -4084,7 +4233,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more than the MaxRecords value is available, a pagination token called a marker is included in the response so that the following results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more than the MaxRecords value is available, a pagination token called a marker is included in the response so that you can retrieve the reamaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -4098,7 +4247,7 @@ declare namespace RDS {
      */
     RegionName?: String;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -4444,6 +4593,79 @@ declare namespace RDS {
     CIDRIP?: String;
   }
   export type IPRangeList = IPRange[];
+  export interface ImportInstallationMediaMessage {
+    /**
+     * The identifier of the custom Availability Zone (AZ) to import the installation media to.
+     */
+    CustomAvailabilityZoneId: String;
+    /**
+     * The name of the database engine to be used for this instance.  The list only includes supported on-premises, bring your own media (BYOM) DB engines.  Valid Values:     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
+     */
+    Engine: String;
+    /**
+     * The version number of the database engine to use. For a list of valid engine versions, call DescribeDBEngineVersions. The following are the database engines and links to information about the major and minor versions. The list only includes supported on-premises, bring your own media (BYOM) DB engines.  Microsoft SQL Server  See Version and Feature Support on Amazon RDS in the Amazon RDS User Guide. 
+     */
+    EngineVersion: String;
+    /**
+     * The path to the installation media for the specified DB engine. Example: SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso 
+     */
+    EngineInstallationMediaPath: String;
+    /**
+     * The path to the installation media for the operating system associated with the specified DB engine. Example: WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso 
+     */
+    OSInstallationMediaPath: String;
+  }
+  export interface InstallationMedia {
+    /**
+     * The installation media ID.
+     */
+    InstallationMediaId?: String;
+    /**
+     * The custom Availability Zone (AZ) that contains the installation media.
+     */
+    CustomAvailabilityZoneId?: String;
+    /**
+     * The DB engine.
+     */
+    Engine?: String;
+    /**
+     * The engine version of the DB engine.
+     */
+    EngineVersion?: String;
+    /**
+     * The path to the installation media for the DB engine.
+     */
+    EngineInstallationMediaPath?: String;
+    /**
+     * The path to the installation media for the operating system associated with the DB engine.
+     */
+    OSInstallationMediaPath?: String;
+    /**
+     * The status of the installation media.
+     */
+    Status?: String;
+    /**
+     * If an installation media failure occurred, the cause of the failure.
+     */
+    FailureCause?: InstallationMediaFailureCause;
+  }
+  export interface InstallationMediaFailureCause {
+    /**
+     * The reason that an installation media import failed.
+     */
+    Message?: String;
+  }
+  export type InstallationMediaList = InstallationMedia[];
+  export interface InstallationMediaMessage {
+    /**
+     * An optional pagination token provided by a previous DescribeInstallationMedia request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * The list of InstallationMedia objects for the AWS account.
+     */
+    InstallationMedia?: InstallationMediaList;
+  }
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
@@ -6704,6 +6926,7 @@ declare namespace RDS {
   }
   export type String = string;
   export type StringList = String[];
+  export type StringSensitive = string;
   export interface Subnet {
     /**
      * Specifies the identifier of the subnet.
@@ -6811,6 +7034,32 @@ declare namespace RDS {
     Status?: String;
   }
   export type VpcSecurityGroupMembershipList = VpcSecurityGroupMembership[];
+  export interface VpnDetails {
+    /**
+     * The ID of the VPN.
+     */
+    VpnId?: String;
+    /**
+     * The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.
+     */
+    VpnTunnelOriginatorIP?: String;
+    /**
+     * The IP address of network traffic from AWS to your on-premises data center.
+     */
+    VpnGatewayIp?: String;
+    /**
+     * The preshared key (PSK) for the VPN.
+     */
+    VpnPSK?: StringSensitive;
+    /**
+     * The name of the VPN.
+     */
+    VpnName?: String;
+    /**
+     * The state of the VPN.
+     */
+    VpnState?: String;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -330,6 +330,32 @@
       ],
       "documentation": "<p>Copies the specified option group.</p>"
     },
+    "CreateCustomAvailabilityZone": {
+      "name": "CreateCustomAvailabilityZone",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateCustomAvailabilityZoneMessage"
+      },
+      "output": {
+        "shape": "CreateCustomAvailabilityZoneResult",
+        "resultWrapper": "CreateCustomAvailabilityZoneResult"
+      },
+      "errors": [
+        {
+          "shape": "CustomAvailabilityZoneAlreadyExistsFault"
+        },
+        {
+          "shape": "CustomAvailabilityZoneQuotaExceededFault"
+        },
+        {
+          "shape": "KMSKeyNotAccessibleFault"
+        }
+      ],
+      "documentation": "<p>Creates a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\"> <i>RDS on VMware User Guide.</i> </a> </p>"
+    },
     "CreateDBCluster": {
       "name": "CreateDBCluster",
       "http": {
@@ -839,6 +865,29 @@
       ],
       "documentation": "<p>Creates a new option group. You can create up to 20 option groups.</p>"
     },
+    "DeleteCustomAvailabilityZone": {
+      "name": "DeleteCustomAvailabilityZone",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteCustomAvailabilityZoneMessage"
+      },
+      "output": {
+        "shape": "DeleteCustomAvailabilityZoneResult",
+        "resultWrapper": "DeleteCustomAvailabilityZoneResult"
+      },
+      "errors": [
+        {
+          "shape": "CustomAvailabilityZoneNotFoundFault"
+        },
+        {
+          "shape": "KMSKeyNotAccessibleFault"
+        }
+      ],
+      "documentation": "<p>Deletes a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\"> <i>RDS on VMware User Guide.</i> </a> </p>"
+    },
     "DeleteDBCluster": {
       "name": "DeleteDBCluster",
       "http": {
@@ -1126,6 +1175,26 @@
       ],
       "documentation": "<p> Deletes a global database cluster. The primary and secondary clusters must already be detached or destroyed first. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>"
     },
+    "DeleteInstallationMedia": {
+      "name": "DeleteInstallationMedia",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteInstallationMediaMessage"
+      },
+      "output": {
+        "shape": "InstallationMedia",
+        "resultWrapper": "DeleteInstallationMediaResult"
+      },
+      "errors": [
+        {
+          "shape": "InstallationMediaNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Deletes the installation media for an on-premises, bring your own media (BYOM) DB engine, such as Microsoft SQL Server.</p>"
+    },
     "DeleteOptionGroup": {
       "name": "DeleteOptionGroup",
       "http": {
@@ -1179,6 +1248,26 @@
         }
       ],
       "documentation": "<p>Lists the set of CA certificates provided by Amazon RDS for this AWS account.</p>"
+    },
+    "DescribeCustomAvailabilityZones": {
+      "name": "DescribeCustomAvailabilityZones",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeCustomAvailabilityZonesMessage"
+      },
+      "output": {
+        "shape": "CustomAvailabilityZoneMessage",
+        "resultWrapper": "DescribeCustomAvailabilityZonesResult"
+      },
+      "errors": [
+        {
+          "shape": "CustomAvailabilityZoneNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns information about custom Availability Zones (AZs).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\"> <i>RDS on VMware User Guide.</i> </a> </p>"
     },
     "DescribeDBClusterBacktracks": {
       "name": "DescribeDBClusterBacktracks",
@@ -1618,6 +1707,26 @@
       ],
       "documentation": "<p> Returns information about Aurora global database clusters. This API supports pagination. </p> <p> For more information on Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>"
     },
+    "DescribeInstallationMedia": {
+      "name": "DescribeInstallationMedia",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeInstallationMediaMessage"
+      },
+      "output": {
+        "shape": "InstallationMediaMessage",
+        "resultWrapper": "DescribeInstallationMediaResult"
+      },
+      "errors": [
+        {
+          "shape": "InstallationMediaNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Describes the available installation media for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.</p>"
+    },
     "DescribeOptionGroupOptions": {
       "name": "DescribeOptionGroupOptions",
       "http": {
@@ -1814,6 +1923,29 @@
         }
       ],
       "documentation": "<p>Forces a failover for a DB cluster.</p> <p>A failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer).</p> <p>Amazon Aurora will automatically fail over to an Aurora Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.</p> <p>For more information on Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>"
+    },
+    "ImportInstallationMedia": {
+      "name": "ImportInstallationMedia",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ImportInstallationMediaMessage"
+      },
+      "output": {
+        "shape": "InstallationMedia",
+        "resultWrapper": "ImportInstallationMediaResult"
+      },
+      "errors": [
+        {
+          "shape": "CustomAvailabilityZoneNotFoundFault"
+        },
+        {
+          "shape": "InstallationMediaAlreadyExistsFault"
+        }
+      ],
+      "documentation": "<p>Imports the installation media for an on-premises, bring your own media (BYOM) DB engine, such as SQL Server.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -3746,6 +3878,39 @@
         }
       }
     },
+    "CreateCustomAvailabilityZoneMessage": {
+      "type": "structure",
+      "required": [
+        "CustomAvailabilityZoneName"
+      ],
+      "members": {
+        "CustomAvailabilityZoneName": {
+          "shape": "String",
+          "documentation": "<p>The name of the custom Availability Zone (AZ).</p>"
+        },
+        "ExistingVpnId": {
+          "shape": "String",
+          "documentation": "<p>The ID of an existing virtual private network (VPN) between the Amazon RDS website and the VMware vSphere cluster.</p>"
+        },
+        "NewVpnTunnelName": {
+          "shape": "String",
+          "documentation": "<p>The name of a new VPN tunnel between the Amazon RDS website and the VMware vSphere cluster.</p> <p>Specify this parameter only if <code>ExistingVpnId</code> is not specified.</p>"
+        },
+        "VpnTunnelOriginatorIP": {
+          "shape": "String",
+          "documentation": "<p>The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.</p> <p>Specify this parameter only if <code>ExistingVpnId</code> is not specified.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "CreateCustomAvailabilityZoneResult": {
+      "type": "structure",
+      "members": {
+        "CustomAvailabilityZone": {
+          "shape": "CustomAvailabilityZone"
+        }
+      }
+    },
     "CreateDBClusterEndpointMessage": {
       "type": "structure",
       "required": [
@@ -4029,7 +4194,7 @@
         },
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p> The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html\">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can't be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>"
+          "documentation": "<p> The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html\">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can't be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p> <note> <p>If you're creating a DB instance in an RDS on VMware environment, specify the identifier of the custom Availability Zone to create the DB instance in.</p> <p>For more information about RDS on VMware, see the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\"> <i>RDS on VMware User Guide.</i> </a> </p> </note>"
         },
         "DBSubnetGroupName": {
           "shape": "String",
@@ -4578,6 +4743,49 @@
       "members": {
         "OptionGroup": {
           "shape": "OptionGroup"
+        }
+      }
+    },
+    "CustomAvailabilityZone": {
+      "type": "structure",
+      "members": {
+        "CustomAvailabilityZoneId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the custom AZ.</p> <p>Amazon RDS generates a unique identifier when a custom AZ is created.</p>"
+        },
+        "CustomAvailabilityZoneName": {
+          "shape": "String",
+          "documentation": "<p>The name of the custom AZ.</p>"
+        },
+        "CustomAvailabilityZoneStatus": {
+          "shape": "String",
+          "documentation": "<p>The status of the custom AZ.</p>"
+        },
+        "VpnDetails": {
+          "shape": "VpnDetails",
+          "documentation": "<p>Information about the virtual private network (VPN) between the VMware vSphere cluster and the AWS website.</p>"
+        }
+      },
+      "documentation": "<p>A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\"> <i>RDS on VMware User Guide.</i> </a> </p>",
+      "wrapper": true
+    },
+    "CustomAvailabilityZoneList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomAvailabilityZone",
+        "locationName": "CustomAvailabilityZone"
+      }
+    },
+    "CustomAvailabilityZoneMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeCustomAvailabilityZones</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        },
+        "CustomAvailabilityZones": {
+          "shape": "CustomAvailabilityZoneList",
+          "documentation": "<p>The list of <a>CustomAvailabilityZone</a> objects for the AWS account.</p>"
         }
       }
     },
@@ -6165,6 +6373,26 @@
         "locationName": "DBSubnetGroup"
       }
     },
+    "DeleteCustomAvailabilityZoneMessage": {
+      "type": "structure",
+      "required": [
+        "CustomAvailabilityZoneId"
+      ],
+      "members": {
+        "CustomAvailabilityZoneId": {
+          "shape": "String",
+          "documentation": "<p>The custom AZ identifier.</p>"
+        }
+      }
+    },
+    "DeleteCustomAvailabilityZoneResult": {
+      "type": "structure",
+      "members": {
+        "CustomAvailabilityZone": {
+          "shape": "CustomAvailabilityZone"
+        }
+      }
+    },
     "DeleteDBClusterEndpointMessage": {
       "type": "structure",
       "required": [
@@ -6395,6 +6623,18 @@
         }
       }
     },
+    "DeleteInstallationMediaMessage": {
+      "type": "structure",
+      "required": [
+        "InstallationMediaId"
+      ],
+      "members": {
+        "InstallationMediaId": {
+          "shape": "String",
+          "documentation": "<p>The installation media ID.</p>"
+        }
+      }
+    },
     "DeleteOptionGroupMessage": {
       "type": "structure",
       "required": [
@@ -6426,7 +6666,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6434,6 +6674,27 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DescribeCustomAvailabilityZonesMessage": {
+      "type": "structure",
+      "members": {
+        "CustomAvailabilityZoneId": {
+          "shape": "String",
+          "documentation": "<p>The custom AZ identifier. If this parameter is specified, information from only the specific custom AZ is returned.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>A filter that specifies one or more custom AZs to describe.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeCustomAvailabilityZones</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      }
     },
     "DescribeDBClusterBacktracksMessage": {
       "type": "structure",
@@ -6455,7 +6716,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6481,7 +6742,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6502,7 +6763,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6531,7 +6792,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6582,7 +6843,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6612,7 +6873,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6646,7 +6907,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6687,7 +6948,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6709,7 +6970,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6771,7 +7032,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6807,7 +7068,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6836,7 +7097,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6857,7 +7118,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6908,7 +7169,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6942,7 +7203,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -6967,7 +7228,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7000,7 +7261,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7044,7 +7305,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7086,7 +7347,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7108,11 +7369,32 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
           "documentation": "<p> An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      }
+    },
+    "DescribeInstallationMediaMessage": {
+      "type": "structure",
+      "members": {
+        "InstallationMediaId": {
+          "shape": "String",
+          "documentation": "<p>The installation media ID.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>A filter that specifies one or more installation media to describe. Supported filters include the following:</p> <ul> <li> <p> <code>custom-availability-zone-id</code> - Accepts custom Availability Zone (AZ) identifiers. The results list includes information about only the custom AZs identified by these identifiers.</p> </li> <li> <p> <code>engine</code> - Accepts database engines. The results list includes information about only the database engines identified by these identifiers.</p> <p>For more information about the valid engines for installation media, see <a>ImportInstallationMedia</a>.</p> </li> </ul>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>An optional pagination token provided by a previous DescribeInstallationMedia request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
         }
       }
     },
@@ -7136,7 +7418,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7162,7 +7444,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "EngineName": {
           "shape": "String",
@@ -7207,7 +7489,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7233,7 +7515,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         }
       },
       "documentation": "<p/>"
@@ -7279,7 +7561,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7321,7 +7603,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p> The maximum number of records to include in the response. If more than the <code>MaxRecords</code> value is available, a pagination token called a marker is included in the response so that you can retrieve the reamaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7339,7 +7621,7 @@
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -7879,6 +8161,106 @@
       "member": {
         "shape": "IPRange",
         "locationName": "IPRange"
+      }
+    },
+    "ImportInstallationMediaMessage": {
+      "type": "structure",
+      "required": [
+        "CustomAvailabilityZoneId",
+        "Engine",
+        "EngineVersion",
+        "EngineInstallationMediaPath",
+        "OSInstallationMediaPath"
+      ],
+      "members": {
+        "CustomAvailabilityZoneId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the custom Availability Zone (AZ) to import the installation media to.</p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>The name of the database engine to be used for this instance. </p> <p>The list only includes supported on-premises, bring your own media (BYOM) DB engines. </p> <p>Valid Values: </p> <ul> <li> <p> <code>sqlserver-ee</code> </p> </li> <li> <p> <code>sqlserver-se</code> </p> </li> <li> <p> <code>sqlserver-ex</code> </p> </li> <li> <p> <code>sqlserver-web</code> </p> </li> </ul>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, call <a>DescribeDBEngineVersions</a>.</p> <p>The following are the database engines and links to information about the major and minor versions. The list only includes supported on-premises, bring your own media (BYOM) DB engines.</p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport\">Version and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
+        },
+        "EngineInstallationMediaPath": {
+          "shape": "String",
+          "documentation": "<p>The path to the installation media for the specified DB engine.</p> <p>Example: <code>SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso</code> </p>"
+        },
+        "OSInstallationMediaPath": {
+          "shape": "String",
+          "documentation": "<p>The path to the installation media for the operating system associated with the specified DB engine.</p> <p>Example: <code>WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso</code> </p>"
+        }
+      }
+    },
+    "InstallationMedia": {
+      "type": "structure",
+      "members": {
+        "InstallationMediaId": {
+          "shape": "String",
+          "documentation": "<p>The installation media ID.</p>"
+        },
+        "CustomAvailabilityZoneId": {
+          "shape": "String",
+          "documentation": "<p>The custom Availability Zone (AZ) that contains the installation media.</p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>The DB engine.</p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The engine version of the DB engine.</p>"
+        },
+        "EngineInstallationMediaPath": {
+          "shape": "String",
+          "documentation": "<p>The path to the installation media for the DB engine.</p>"
+        },
+        "OSInstallationMediaPath": {
+          "shape": "String",
+          "documentation": "<p>The path to the installation media for the operating system associated with the DB engine.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The status of the installation media.</p>"
+        },
+        "FailureCause": {
+          "shape": "InstallationMediaFailureCause",
+          "documentation": "<p>If an installation media failure occurred, the cause of the failure.</p>"
+        }
+      },
+      "documentation": "<p>Contains the installation media for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.</p>"
+    },
+    "InstallationMediaFailureCause": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The reason that an installation media import failed.</p>"
+        }
+      },
+      "documentation": "<p>Contains the cause of an installation media failure. Installation media is used for on-premises, bring your own media (BYOM) DB engines, such as Microsoft SQL Server.</p>"
+    },
+    "InstallationMediaList": {
+      "type": "list",
+      "member": {
+        "shape": "InstallationMedia",
+        "locationName": "InstallationMedia"
+      }
+    },
+    "InstallationMediaMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <a>DescribeInstallationMedia</a> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        },
+        "InstallationMedia": {
+          "shape": "InstallationMediaList",
+          "documentation": "<p>The list of <a>InstallationMedia</a> objects for the AWS account.</p>"
+        }
       }
     },
     "Integer": {
@@ -10900,6 +11282,10 @@
         "shape": "String"
       }
     },
+    "StringSensitive": {
+      "type": "string",
+      "sensitive": true
+    },
     "Subnet": {
       "type": "structure",
       "members": {
@@ -11098,7 +11484,37 @@
         "shape": "VpcSecurityGroupMembership",
         "locationName": "VpcSecurityGroupMembership"
       }
+    },
+    "VpnDetails": {
+      "type": "structure",
+      "members": {
+        "VpnId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the VPN.</p>"
+        },
+        "VpnTunnelOriginatorIP": {
+          "shape": "String",
+          "documentation": "<p>The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.</p>"
+        },
+        "VpnGatewayIp": {
+          "shape": "String",
+          "documentation": "<p>The IP address of network traffic from AWS to your on-premises data center.</p>"
+        },
+        "VpnPSK": {
+          "shape": "StringSensitive",
+          "documentation": "<p>The preshared key (PSK) for the VPN.</p>"
+        },
+        "VpnName": {
+          "shape": "String",
+          "documentation": "<p>The name of the VPN.</p>"
+        },
+        "VpnState": {
+          "shape": "String",
+          "documentation": "<p>The state of the VPN.</p>"
+        }
+      },
+      "documentation": "<p>Information about the virtual private network (VPN) between the VMware vSphere cluster and the AWS website.</p> <p>For more information about RDS on VMware, see the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\"> <i>RDS on VMware User Guide.</i> </a> </p>"
     }
   },
-  "documentation": "<fullname>Amazon Relational Database Service</fullname> <p> </p> <p>Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique.</p> <p>Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your DB instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use.</p> <p>This interface reference for Amazon RDS contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. The reference structure is as follows, and we list following some related topics from the user guide.</p> <p> <b>Amazon RDS API Reference</b> </p> <ul> <li> <p>For the alphabetical list of API actions, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html\">API Actions</a>.</p> </li> <li> <p>For the alphabetical list of data types, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html\">Data Types</a>.</p> </li> <li> <p>For a list of common query parameters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p> </li> </ul> <p> <b>Amazon RDS User Guide</b> </p> <ul> <li> <p>For a summary of the Amazon RDS interfaces, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>.</p> </li> <li> <p>For more information about how to use the Query API, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html\">Using the Query API</a>.</p> </li> </ul>"
+  "documentation": "<fullname>Amazon Relational Database Service</fullname> <p> </p> <p>Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique.</p> <p>Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your DB instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use.</p> <p>This interface reference for Amazon RDS contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. The reference structure is as follows, and we list following some related topics from the user guide.</p> <p> <b>Amazon RDS API Reference</b> </p> <ul> <li> <p>For the alphabetical list of API actions, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html\">API Actions</a>.</p> </li> <li> <p>For the alphabetical list of data types, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html\">Data Types</a>.</p> </li> <li> <p>For a list of common query parameters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p> </li> </ul> <p> <b>Amazon RDS User Guide</b> </p> <ul> <li> <p>For a summary of the Amazon RDS interfaces, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>.</p> </li> <li> <p>For more information about how to use the Query API, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html\">Using the Query API</a>.</p> </li> </ul>"
 }
