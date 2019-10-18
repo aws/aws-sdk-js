@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.552.0-->
+<!--LATEST=2.553.0-->
 <!--ENTRYINSERT-->
+
+## 2.553.0
+* feature: CloudWatch: New Period parameter added to MetricDataQuery structure.
 
 ## 2.552.0
 * feature: Batch: Adding support for Compute Environment Allocation Strategies 
