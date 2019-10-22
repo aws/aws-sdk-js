@@ -93,7 +93,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p> Creates and immedately starts a new server. The server is ready to use when it is in the <code>HEALTHY</code> state. By default, you can create a maximum of 10 servers. </p> <p> This operation is asynchronous. </p> <p> A <code>LimitExceededException</code> is thrown when you have created the maximum number of servers (10). A <code>ResourceAlreadyExistsException</code> is thrown when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p> <p> If you do not specify a security group by adding the <code>SecurityGroupIds</code> parameter, AWS OpsWorks creates a new security group. </p> <p> <i>Chef Automate:</i> The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p> <i>Puppet Enterprise:</i> The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p>By default, your server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. </p>"
+      "documentation": "<p> Creates and immedately starts a new server. The server is ready to use when it is in the <code>HEALTHY</code> state. By default, you can create a maximum of 10 servers. </p> <p> This operation is asynchronous. </p> <p> A <code>LimitExceededException</code> is thrown when you have created the maximum number of servers (10). A <code>ResourceAlreadyExistsException</code> is thrown when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p> <p> If you do not specify a security group by adding the <code>SecurityGroupIds</code> parameter, AWS OpsWorks creates a new security group. </p> <p> <i>Chef Automate:</i> The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p> <i>Puppet Enterprise:</i> The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p>By default, your server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. </p> <p>To specify your own domain for a server, and provide your own self-signed or CA-signed certificate and private key, specify values for <code>CustomDomain</code>, <code>CustomCertificate</code>, and <code>CustomPrivateKey</code>.</p>"
     },
     "DeleteBackup": {
       "name": "DeleteBackup",
@@ -471,7 +471,9 @@
       "pattern": "[A-Z][A-Z0-9_]*"
     },
     "AttributeValue": {
-      "type": "string"
+      "type": "string",
+      "max": 10000,
+      "pattern": "(?s).*"
     },
     "Backup": {
       "type": "structure",
@@ -579,7 +581,8 @@
     },
     "BackupId": {
       "type": "string",
-      "max": 79
+      "max": 79,
+      "pattern": "[a-zA-Z][a-zA-Z0-9\\-\\.\\:]*"
     },
     "BackupRetentionCountDefinition": {
       "type": "integer",
@@ -647,6 +650,18 @@
         "AssociatePublicIpAddress": {
           "shape": "Boolean",
           "documentation": "<p> Associate a public IP address with a server that you are launching. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. </p>"
+        },
+        "CustomDomain": {
+          "shape": "CustomDomain",
+          "documentation": "<p>An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. To access the server, create a CNAME DNS record in your preferred DNS service that points the custom domain to the endpoint that is generated when the server is created (the value of the CreateServer Endpoint attribute). You cannot access the server by using the generated <code>Endpoint</code> value if the server is using a custom domain. If you specify a custom domain, you must also specify values for <code>CustomCertificate</code> and <code>CustomPrivateKey</code>.</p>"
+        },
+        "CustomCertificate": {
+          "shape": "CustomCertificate",
+          "documentation": "<p>A PEM-formatted HTTPS certificate. The value can be be a single, self-signed certificate, or a certificate chain. If you specify a custom certificate, you must also specify values for <code>CustomDomain</code> and <code>CustomPrivateKey</code>. The following are requirements for the <code>CustomCertificate</code> value:</p> <ul> <li> <p>You can provide either a self-signed, custom certificate, or the full certificate chain.</p> </li> <li> <p>The certificate must be a valid X509 certificate, or a certificate chain in PEM format.</p> </li> <li> <p>The certificate must be valid at the time of upload. A certificate can't be used before its validity period begins (the certificate's <code>NotBefore</code> date), or after it expires (the certificate's <code>NotAfter</code> date).</p> </li> <li> <p>The certificate’s common name or subject alternative names (SANs), if present, must match the value of <code>CustomDomain</code>.</p> </li> <li> <p>The certificate must match the value of <code>CustomPrivateKey</code>.</p> </li> </ul>"
+        },
+        "CustomPrivateKey": {
+          "shape": "CustomPrivateKey",
+          "documentation": "<p>A private key in PEM format for connecting to the server by using HTTPS. The private key must not be encrypted; it cannot be protected by a password or passphrase. If you specify a custom private key, you must also specify values for <code>CustomDomain</code> and <code>CustomCertificate</code>.</p>"
         },
         "DisableAutomatedBackup": {
           "shape": "Boolean",
@@ -722,6 +737,22 @@
           "documentation": "<p>The server that is created by the request. </p>"
         }
       }
+    },
+    "CustomCertificate": {
+      "type": "string",
+      "max": 2097152,
+      "pattern": "(?s)\\s*-----BEGIN CERTIFICATE-----.+-----END CERTIFICATE-----\\s*"
+    },
+    "CustomDomain": {
+      "type": "string",
+      "max": 253,
+      "pattern": "^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$"
+    },
+    "CustomPrivateKey": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "(?ms)\\s*^-----BEGIN (?-s:.*)PRIVATE KEY-----$.*?^-----END (?-s:.*)PRIVATE KEY-----$\\s*",
+      "sensitive": true
     },
     "DeleteBackupRequest": {
       "type": "structure",
@@ -940,10 +971,14 @@
       "documentation": "<p>A name and value pair that is specific to the engine of the server. </p>"
     },
     "EngineAttributeName": {
-      "type": "string"
+      "type": "string",
+      "max": 10000,
+      "pattern": "(?s).*"
     },
     "EngineAttributeValue": {
       "type": "string",
+      "max": 10000,
+      "pattern": "(?s).*",
       "sensitive": true
     },
     "EngineAttributes": {
@@ -988,13 +1023,16 @@
     },
     "InstanceProfileArn": {
       "type": "string",
+      "max": 10000,
       "pattern": "arn:aws:iam::[0-9]{12}:instance-profile/.*"
     },
     "Integer": {
       "type": "integer"
     },
     "KeyPair": {
-      "type": "string"
+      "type": "string",
+      "max": 10000,
+      "pattern": ".*"
     },
     "MaintenanceStatus": {
       "type": "string",
@@ -1008,7 +1046,9 @@
       "min": 1
     },
     "NextToken": {
-      "type": "string"
+      "type": "string",
+      "max": 10000,
+      "pattern": "(?s).*"
     },
     "NodeAssociationStatus": {
       "type": "string",
@@ -1020,11 +1060,14 @@
       ]
     },
     "NodeAssociationStatusToken": {
-      "type": "string"
+      "type": "string",
+      "max": 10000,
+      "pattern": "(?s).*"
     },
     "NodeName": {
       "type": "string",
       "documentation": "<p>The node name that is used by <code>chef-client</code> or <code>puppet-agent</code>for a new node. We recommend to use a unique FQDN as hostname. For more information, see the <a href=\"https://docs.aws.amazon.com/https:/docs.chef.io/nodes.html#about-node-names\">Chef</a> or <a href=\"https://docs.aws.amazon.com/https:/docs.puppet.com/puppet/4.10/man/agent.html\">Puppet</a> documentation. </p>",
+      "max": 10000,
       "pattern": "^[\\-\\p{Alnum}_:.]+$"
     },
     "RestoreServerRequest": {
@@ -1079,13 +1122,17 @@
           "shape": "String",
           "documentation": "<p>The ARN of the CloudFormation stack that was used to create the server. </p>"
         },
+        "CustomDomain": {
+          "shape": "CustomDomain",
+          "documentation": "<p>An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified.</p>"
+        },
         "DisableAutomatedBackup": {
           "shape": "Boolean",
           "documentation": "<p>Disables automated backups. The number of stored backups is dependent on the value of PreferredBackupCount. </p>"
         },
         "Endpoint": {
           "shape": "String",
-          "documentation": "<p> A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code> </p>"
+          "documentation": "<p> A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code>. You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified. </p>"
         },
         "Engine": {
           "shape": "String",
@@ -1214,6 +1261,7 @@
     },
     "ServiceRoleArn": {
       "type": "string",
+      "max": 10000,
       "pattern": "arn:aws:iam::[0-9]{12}:role/.*"
     },
     "StartMaintenanceRequest": {
@@ -1242,7 +1290,9 @@
       }
     },
     "String": {
-      "type": "string"
+      "type": "string",
+      "max": 10000,
+      "pattern": "(?s).*"
     },
     "Strings": {
       "type": "list",
@@ -1253,6 +1303,7 @@
     "TimeWindowDefinition": {
       "type": "string",
       "documentation": "<p> <code>DDD:HH:MM</code> (weekly start time) or <code>HH:MM</code> (daily start time). </p> <p> Time windows always use coordinated universal time (UTC). Valid strings for day of week (<code>DDD</code>) are: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thr</code>, <code>Fri</code>, <code>Sat</code>, or <code>Sun</code>.</p>",
+      "max": 10000,
       "pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$"
     },
     "Timestamp": {

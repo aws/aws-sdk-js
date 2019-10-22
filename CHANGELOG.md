@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.553.0-->
+<!--LATEST=2.554.0-->
 <!--ENTRYINSERT-->
+
+## 2.554.0
+* feature: IoTEvents: Add support for new serial evaluation method for events in a detector model.
+* feature: OpsWorksCM: AWS OpsWorks for Chef Automate (OWCA) now allows customers to use a custom domain and respective certificate, for their AWS OpsWorks For Chef Automate servers. Customers can now provide a CustomDomain, CustomCertificate and CustomPrivateKey in CreateServer API to configure their Chef Automate servers with a custom domain and certificate.
 
 ## 2.553.0
 * feature: CloudWatch: New Period parameter added to MetricDataQuery structure.
