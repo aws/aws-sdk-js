@@ -146,7 +146,7 @@ export interface RetryDelayOptions {
      * A custom function that accepts a retry count and error and returns the amount of time to delay in milliseconds. If the result is a non-zero negative value, no further retry attempts will be made.
      * The base option will be ignored if this option is supplied.
      */
-    customBackoff?: (retryCount: number, err: Error) => number
+    customBackoff?: (retryCount: number, err?: Error) => number
 }
 
 export interface APIVersions {
