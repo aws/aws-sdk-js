@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.554.0-->
+<!--LATEST=2.555.0-->
 <!--ENTRYINSERT-->
+
+## 2.555.0
+* feature: Connect: This release adds 4 new APIs ListQueues, ListPhoneNumbers, ListContactFlows, and ListHoursOfOperations, which can be used to programmatically list Queues, PhoneNumbers, ContactFlows, and HoursOfOperations configured for an Amazon Connect instance respectively. You can learn more about the new APIs here: https://docs.aws.amazon.com/connect/latest/APIReference/Welcome.html.
+* feature: Polly: Amazon Polly adds new female voices: US Spanish - Lupe and Brazilian Portuguese - Camila; both voices are available in Standard and Neural engine.
 
 ## 2.554.0
 * feature: IoTEvents: Add support for new serial evaluation method for events in a detector model.
