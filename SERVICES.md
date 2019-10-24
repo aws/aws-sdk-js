@@ -114,7 +114,7 @@ AWS Step Functions | AWS.StepFunctions | 2016-11-23 |  |
 AWS Security Token Service | AWS.STS | 2011-06-15 | :tada: |
 AWS Support | AWS.Support | 2013-04-15 |  |
 Amazon Simple Workflow Service | AWS.SWF | 2012-01-25 |  |
-AWS X-Ray | AWS.XRay | 2016-04-12 |  |
+AWS X-Ray | AWS.XRay | 2016-04-12 | :tada: |
 AWS WAF | AWS.WAF | 2015-08-24 | :tada: |
 AWS WAF Regional | AWS.WAFRegional | 2016-11-28 |  |
 Amazon WorkDocs | AWS.WorkDocs | 2016-05-01 | :tada: |
@@ -155,11 +155,11 @@ AWS Cloud Map | AWS.ServiceDiscovery | 2017-03-14 |  |
 Amazon WorkMail | AWS.WorkMail | 2017-10-01 |  |
 AWS Auto Scaling Plans | AWS.AutoScalingPlans | 2018-01-06 |  |
 Amazon Transcribe Service | AWS.TranscribeService | 2017-10-26 |  |
-Amazon Connect Service | AWS.Connect | 2017-08-08 |  |
+Amazon Connect Service | AWS.Connect | 2017-08-08 | :tada: |
 AWS Certificate Manager Private Certificate Authority | AWS.ACMPCA | 2017-08-22 |  |
 Firewall Management Service | AWS.FMS | 2018-01-01 |  |
 AWS Secrets Manager | AWS.SecretsManager | 2017-10-17 | :tada: |
-AWS IoT Analytics | AWS.IoTAnalytics | 2017-11-27 |  |
+AWS IoT Analytics | AWS.IoTAnalytics | 2017-11-27 | :tada: |
 AWS IoT 1-Click Devices Service | AWS.IoT1ClickDevicesService | 2018-05-14 |  |
 AWS IoT 1-Click Projects Service | AWS.IoT1ClickProjects | 2018-05-14 |  |
 AWS Performance Insights | AWS.PI | 2018-02-27 |  |
