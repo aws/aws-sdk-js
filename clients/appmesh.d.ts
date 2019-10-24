@@ -409,6 +409,49 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     virtualRouterName: ResourceName;
   }
   export type TagKeyList = TagKey[];
+  export interface GrpcRetryPolicy {
+    /**
+     * Specify at least one of the valid values.
+     */
+    grpcRetryEvents?: GrpcRetryPolicyEvents;
+    /**
+     * Specify at least one of the following values.
+         
+            
+               
+                  server-error – HTTP status codes 500, 501,
+                  502, 503, 504, 505, 506, 507, 508, 510, and 511
+            
+            
+               
+                  gateway-error – HTTP status codes 502,
+                  503, and 504
+            
+            
+               
+                  client-error – HTTP status code 409
+            
+            
+               
+                  stream-error – Retry on refused
+                  stream
+            
+         
+     */
+    httpRetryEvents?: HttpRetryPolicyEvents;
+    /**
+     * The maximum number of retry attempts.
+     */
+    maxRetries: MaxRetries;
+    /**
+     * An object that represents a duration of time.
+     */
+    perRetryTimeout: Duration;
+    /**
+     * Specify a valid value.
+     */
+    tcpRetryEvents?: TcpRetryPolicyEvents;
+  }
   export interface ListTagsForResourceInput {
     /**
      * The maximum number of tag results returned by ListTagsForResource in
@@ -445,6 +488,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     accessLog?: AccessLog;
   }
+  export type GrpcRetryPolicyEvents = GrpcRetryPolicyEvent[];
   export type Long = number;
   export interface UpdateVirtualRouterOutput {
     /**
@@ -526,7 +570,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export type Listeners = Listener[];
   export type Backends = Backend[];
-  export type PortProtocol = "http"|"tcp"|string;
+  export type PortProtocol = "grpc"|"http"|"http2"|"tcp"|string;
   export interface UpdateVirtualNodeOutput {
     /**
      * A full description of the virtual node that was updated.
@@ -582,11 +626,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     route: RouteData;
   }
   export type PercentInt = number;
+  export type GrpcRouteMetadataList = GrpcRouteMetadata[];
+  export type MethodName = string;
   export type TagValue = string;
   export interface HttpRouteAction {
     /**
-     * The targets that traffic is routed to when a request matches the route. You can specify
-         one or more targets and their relative weights to distribute traffic with.
+     * An object that represents the targets that traffic is routed to when a request matches the route.
      */
     weightedTargets: WeightedTargets;
   }
@@ -720,7 +765,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type Boolean = boolean;
   export interface HttpRouteHeader {
     /**
-     * Specify True to match the opposite of the HeaderMatchMethod method and value. The default value is False.
+     * Specify True to match anything except the match criteria. The default value is False.
      */
     invert?: Boolean;
     /**
@@ -777,6 +822,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     tags?: TagList;
   }
+  export interface GrpcRouteAction {
+    /**
+     * An object that represents the targets that traffic is routed to when a request matches the route.
+     */
+    weightedTargets: WeightedTargets;
+  }
   export interface DescribeVirtualNodeOutput {
     /**
      * The full description of your virtual node.
@@ -792,6 +843,28 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full description of your mesh following the create call.
      */
     route: RouteData;
+  }
+  export interface GrpcRouteMetadataMatchMethod {
+    /**
+     * The value sent by the client must match the specified value exactly.
+     */
+    exact?: HeaderMatch;
+    /**
+     * The value sent by the client must begin with the specified characters.
+     */
+    prefix?: HeaderMatch;
+    /**
+     * An object that represents the range of values to match on.
+     */
+    range?: MatchRange;
+    /**
+     * The value sent by the client must include the specified characters.
+     */
+    regex?: HeaderMatch;
+    /**
+     * The value sent by the client must end with the specified characters.
+     */
+    suffix?: HeaderMatch;
   }
   export interface DnsServiceDiscovery {
     /**
@@ -850,8 +923,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export interface AwsCloudMapInstanceAttribute {
     /**
-     * The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance
-         that contains the specified key and value is returned.
+     * The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
+         instance that contains the specified key and value is returned.
      */
     key: AwsCloudMapInstanceAttributeKey;
     /**
@@ -1095,7 +1168,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export interface VirtualRouterSpec {
     /**
      * The listeners that the virtual router is expected to receive inbound traffic from.
-         Currently only one listener is supported per virtual router.
+         You can specify one listener.
      */
     listeners?: VirtualRouterListeners;
   }
@@ -1108,7 +1181,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     backends?: Backends;
     /**
      * The listeners that the virtual node is expected to receive inbound traffic from.
-         Currently only one listener is supported per virtual node.
+         You can specify one listener.
      */
     listeners?: Listeners;
     /**
@@ -1138,11 +1211,11 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type HttpMethod = "CONNECT"|"DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT"|"TRACE"|string;
   export interface Duration {
     /**
-     * The unit of time between retry attempts.
+     * A unit of time.
      */
     unit?: DurationUnit;
     /**
-     * The duration of time between retry attempts.
+     * A number of time units.
      */
     value?: DurationValue;
   }
@@ -1154,11 +1227,11 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export interface HttpRouteMatch {
     /**
-     * The client request headers to match on.
+     * An object that represents the client request headers to match on.
      */
     headers?: HttpRouteHeaders;
     /**
-     * The client request header method to match on.
+     * The client request method to match on. Specify only one.
      */
     method?: HttpMethod;
     /**
@@ -1171,7 +1244,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     prefix: String;
     /**
-     * The client request header scheme to match on.
+     * The client request scheme to match on. Specify only one.
      */
     scheme?: HttpScheme;
   }
@@ -1206,7 +1279,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     port: PortNumber;
     /**
-     * The protocol used for the port mapping.
+     * The protocol used for the port mapping. Specify one protocol.
      */
     protocol: PortProtocol;
   }
@@ -1260,8 +1333,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export interface TcpRouteAction {
     /**
-     * The targets that traffic is routed to when a request matches the route. You can specify
-         one or more targets and their relative weights to distribute traffic with.
+     * An object that represents the targets that traffic is routed to when a request matches the route.
      */
     weightedTargets: WeightedTargets;
   }
@@ -1308,6 +1380,20 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The port mapping information for the listener.
      */
     portMapping: PortMapping;
+  }
+  export interface GrpcRoute {
+    /**
+     * An object that represents the action to take if a match is determined.
+     */
+    action: GrpcRouteAction;
+    /**
+     * An object that represents the criteria for determining a request match.
+     */
+    match: GrpcRouteMatch;
+    /**
+     * An object that represents a retry policy.
+     */
+    retryPolicy?: GrpcRetryPolicy;
   }
   export interface DeleteVirtualNodeInput {
     /**
@@ -1361,6 +1447,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export type HeaderName = string;
   export type TagList = TagRef[];
+  export type GrpcRetryPolicyEvent = "cancelled"|"deadline-exceeded"|"internal"|"resource-exhausted"|"unavailable"|string;
   export interface HttpRetryPolicy {
     /**
      * Specify at least one of the following values.
@@ -1368,12 +1455,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
             
                
                   server-error – HTTP status codes 500, 501,
-               502, 503, 504, 505, 506, 507, 508, 510, and 511
+                  502, 503, 504, 505, 506, 507, 508, 510, and 511
             
             
                
                   gateway-error – HTTP status codes 502,
-               503, and 504
+                  503, and 504
             
             
                
@@ -1382,17 +1469,17 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
             
                
                   stream-error – Retry on refused
-               stream
+                  stream
             
          
      */
     httpRetryEvents?: HttpRetryPolicyEvents;
     /**
-     * The maximum number of retry attempts. If no value is specified, the default is 1.
+     * The maximum number of retry attempts.
      */
     maxRetries: MaxRetries;
     /**
-     * An object that represents the retry duration.
+     * An object that represents a duration of time.
      */
     perRetryTimeout: Duration;
     /**
@@ -1415,23 +1502,23 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type RouteList = RouteRef[];
   export interface HeaderMatchMethod {
     /**
-     * The header value sent by the client must match the specified value exactly.
+     * The value sent by the client must match the specified value exactly.
      */
     exact?: HeaderMatch;
     /**
-     * The header value sent by the client must begin with the specified characters.
+     * The value sent by the client must begin with the specified characters.
      */
     prefix?: HeaderMatch;
     /**
-     * The object that specifies the range of numbers that the header value sent by the client must be included in.
+     * An object that represents the range of values to match on.
      */
     range?: MatchRange;
     /**
-     * The header value sent by the client must include the specified characters.
+     * The value sent by the client must include the specified characters.
      */
     regex?: HeaderMatch;
     /**
-     * The header value sent by the client must end with the specified characters.
+     * The value sent by the client must end with the specified characters.
      */
     suffix?: HeaderMatch;
   }
@@ -1456,6 +1543,20 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
             a maximum length of 256 characters.
      */
     tags: TagList;
+  }
+  export interface GrpcRouteMetadata {
+    /**
+     * Specify True to match anything except the match criteria. The default value is False.
+     */
+    invert?: Boolean;
+    /**
+     * An object that represents the data to match from the request.
+     */
+    match?: GrpcRouteMetadataMatchMethod;
+    /**
+     * The name of the route.
+     */
+    name: HeaderName;
   }
   export interface CreateRouteInput {
     /**
@@ -1498,6 +1599,20 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The virtual router associated with a virtual service.
      */
     virtualRouter?: VirtualRouterServiceProvider;
+  }
+  export interface GrpcRouteMatch {
+    /**
+     * An object that represents the data to match from the request.
+     */
+    metadata?: GrpcRouteMetadataList;
+    /**
+     * The method name to match from the request. If you specify a name, you must also specify a serviceName.
+     */
+    methodName?: MethodName;
+    /**
+     * The fully qualified domain name for the service to match from the request.
+     */
+    serviceName?: ServiceName;
   }
   export type String = string;
   export interface AwsCloudMapServiceDiscovery {
@@ -1580,25 +1695,34 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export interface RouteSpec {
     /**
-     * The HTTP routing information for the route.
+     * An object that represents the specification of a GRPC route.
+     */
+    grpcRoute?: GrpcRoute;
+    /**
+     * An object that represents the specification of an HTTP2 route.
+     */
+    http2Route?: HttpRoute;
+    /**
+     * An object that represents the specification of an HTTP route.
      */
     httpRoute?: HttpRoute;
     /**
-     * The priority for the route. Routes are matched based on the specified value, where 0 is the highest priority.
+     * The priority for the route. Routes are matched based on the specified value, where 0 is
+         the highest priority.
      */
     priority?: RoutePriority;
     /**
-     * The TCP routing information for the route.
+     * An object that represents the specification of a TCP route.
      */
     tcpRoute?: TcpRoute;
   }
   export interface HttpRoute {
     /**
-     * The action to take if a match is determined.
+     * An object that represents the action to take if a match is determined.
      */
     action: HttpRouteAction;
     /**
-     * The criteria for determining an HTTP request match.
+     * An object that represents the criteria for determining a request match.
      */
     match: HttpRouteMatch;
     /**

@@ -37,6 +37,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ThrottledClientException"
         },
         {
@@ -75,6 +78,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ThrottledClientException"
         },
         {
@@ -84,7 +90,48 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Associates a phone number with the specified Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Associates phone numbers with the specified Amazon Chime Voice Connector.</p>"
+    },
+    "AssociatePhoneNumbersWithVoiceConnectorGroup": {
+      "name": "AssociatePhoneNumbersWithVoiceConnectorGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/voice-connector-groups/{voiceConnectorGroupId}?operation=associate-phone-numbers",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "AssociatePhoneNumbersWithVoiceConnectorGroupRequest"
+      },
+      "output": {
+        "shape": "AssociatePhoneNumbersWithVoiceConnectorGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Associates phone numbers with the specified Amazon Chime Voice Connector group.</p>"
     },
     "BatchDeletePhoneNumber": {
       "name": "BatchDeletePhoneNumber",
@@ -236,7 +283,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.</p>"
+      "documentation": "<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update either the product type or the calling name.</p> <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
     },
     "BatchUpdateUser": {
       "name": "BatchUpdateUser",
@@ -367,16 +414,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedClientException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ForbiddenException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
         },
         {
           "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
         },
         {
           "shape": "ServiceUnavailableException"
@@ -385,7 +438,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.</p>"
+      "documentation": "<p>Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p>"
     },
     "CreateVoiceConnector": {
       "name": "CreateVoiceConnector",
@@ -402,16 +455,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedClientException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ForbiddenException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
         },
         {
           "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
         },
         {
           "shape": "ServiceUnavailableException"
@@ -420,7 +479,48 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Creates an Amazon Chime Voice Connector under the administrator's AWS account. Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.</p>"
+      "documentation": "<p>Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.</p> <p>Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.</p>"
+    },
+    "CreateVoiceConnectorGroup": {
+      "name": "CreateVoiceConnectorGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/voice-connector-groups",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateVoiceConnectorGroupRequest"
+      },
+      "output": {
+        "shape": "CreateVoiceConnectorGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate up to three existing Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including <code>VoiceConnectorItems</code> in the request.</p> <p>You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>"
     },
     "DeleteAccount": {
       "name": "DeleteAccount",
@@ -554,6 +654,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "ThrottledClientException"
         },
         {
@@ -563,7 +666,45 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Deletes the specified Amazon Chime Voice Connector. Any phone numbers assigned to the Amazon Chime Voice Connector must be unassigned from it before it can be deleted.</p>"
+      "documentation": "<p>Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.</p>"
+    },
+    "DeleteVoiceConnectorGroup": {
+      "name": "DeleteVoiceConnectorGroup",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/voice-connector-groups/{voiceConnectorGroupId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteVoiceConnectorGroupRequest"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted.</p>"
     },
     "DeleteVoiceConnectorOrigination": {
       "name": "DeleteVoiceConnectorOrigination",
@@ -599,6 +740,41 @@
         }
       ],
       "documentation": "<p>Deletes the origination settings for the specified Amazon Chime Voice Connector.</p>"
+    },
+    "DeleteVoiceConnectorStreamingConfiguration": {
+      "name": "DeleteVoiceConnectorStreamingConfiguration",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/voice-connectors/{voiceConnectorId}/streaming-configuration",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteVoiceConnectorStreamingConfigurationRequest"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes the streaming configuration for the specified Amazon Chime Voice Connector.</p>"
     },
     "DeleteVoiceConnectorTermination": {
       "name": "DeleteVoiceConnectorTermination",
@@ -744,7 +920,45 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Disassociates the specified phone number from the specified Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector.</p>"
+    },
+    "DisassociatePhoneNumbersFromVoiceConnectorGroup": {
+      "name": "DisassociatePhoneNumbersFromVoiceConnectorGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/voice-connector-groups/{voiceConnectorGroupId}?operation=disassociate-phone-numbers",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DisassociatePhoneNumbersFromVoiceConnectorGroupRequest"
+      },
+      "output": {
+        "shape": "DisassociatePhoneNumbersFromVoiceConnectorGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.</p>"
     },
     "GetAccount": {
       "name": "GetAccount",
@@ -1000,6 +1214,38 @@
       ],
       "documentation": "<p>Retrieves details for the specified phone number order, such as order creation timestamp, phone numbers in E.164 format, product type, and order status.</p>"
     },
+    "GetPhoneNumberSettings": {
+      "name": "GetPhoneNumberSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/settings/phone-number",
+        "responseCode": 200
+      },
+      "output": {
+        "shape": "GetPhoneNumberSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves the phone number settings for the administrator's AWS account, such as the default outbound calling name.</p>"
+    },
     "GetUser": {
       "name": "GetUser",
       "http": {
@@ -1114,6 +1360,82 @@
       ],
       "documentation": "<p>Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps, name, outbound host, and encryption requirements.</p>"
     },
+    "GetVoiceConnectorGroup": {
+      "name": "GetVoiceConnectorGroup",
+      "http": {
+        "method": "GET",
+        "requestUri": "/voice-connector-groups/{voiceConnectorGroupId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetVoiceConnectorGroupRequest"
+      },
+      "output": {
+        "shape": "GetVoiceConnectorGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps, name, and associated <code>VoiceConnectorItems</code>.</p>"
+    },
+    "GetVoiceConnectorLoggingConfiguration": {
+      "name": "GetVoiceConnectorLoggingConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/voice-connectors/{voiceConnectorId}/logging-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetVoiceConnectorLoggingConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetVoiceConnectorLoggingConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p>"
+    },
     "GetVoiceConnectorOrigination": {
       "name": "GetVoiceConnectorOrigination",
       "http": {
@@ -1151,6 +1473,44 @@
         }
       ],
       "documentation": "<p>Retrieves origination setting details for the specified Amazon Chime Voice Connector.</p>"
+    },
+    "GetVoiceConnectorStreamingConfiguration": {
+      "name": "GetVoiceConnectorStreamingConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/voice-connectors/{voiceConnectorId}/streaming-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetVoiceConnectorStreamingConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetVoiceConnectorStreamingConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.</p>"
     },
     "GetVoiceConnectorTermination": {
       "name": "GetVoiceConnectorTermination",
@@ -1405,7 +1765,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, or Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, Amazon Chime Voice Connector, or Amazon Chime Voice Connector group.</p>"
     },
     "ListUsers": {
       "name": "ListUsers",
@@ -1444,6 +1804,41 @@
         }
       ],
       "documentation": "<p>Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.</p>"
+    },
+    "ListVoiceConnectorGroups": {
+      "name": "ListVoiceConnectorGroups",
+      "http": {
+        "method": "GET",
+        "requestUri": "/voice-connector-groups",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListVoiceConnectorGroupsRequest"
+      },
+      "output": {
+        "shape": "ListVoiceConnectorGroupsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists the Amazon Chime Voice Connector groups for the administrator's AWS account.</p>"
     },
     "ListVoiceConnectorTerminationCredentials": {
       "name": "ListVoiceConnectorTerminationCredentials",
@@ -1594,6 +1989,44 @@
       ],
       "documentation": "<p>Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime. Choose either an HTTPS endpoint or a Lambda function ARN. For more information, see <a>Bot</a>.</p>"
     },
+    "PutVoiceConnectorLoggingConfiguration": {
+      "name": "PutVoiceConnectorLoggingConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/voice-connectors/{voiceConnectorId}/logging-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutVoiceConnectorLoggingConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutVoiceConnectorLoggingConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p>"
+    },
     "PutVoiceConnectorOrigination": {
       "name": "PutVoiceConnectorOrigination",
       "http": {
@@ -1632,6 +2065,44 @@
       ],
       "documentation": "<p>Adds origination settings for the specified Amazon Chime Voice Connector.</p>"
     },
+    "PutVoiceConnectorStreamingConfiguration": {
+      "name": "PutVoiceConnectorStreamingConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/voice-connectors/{voiceConnectorId}/streaming-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutVoiceConnectorStreamingConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutVoiceConnectorStreamingConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis, and sets the retention period for the Amazon Kinesis data, in hours.</p>"
+    },
     "PutVoiceConnectorTermination": {
       "name": "PutVoiceConnectorTermination",
       "http": {
@@ -1657,6 +2128,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
         },
         {
           "shape": "ThrottledClientException"
@@ -1808,6 +2282,9 @@
           "shape": "ThrottledClientException"
         },
         {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -1830,13 +2307,16 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedClientException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ForbiddenException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
         },
         {
           "shape": "ThrottledClientException"
@@ -2032,7 +2512,39 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates phone number details, such as product type, for the specified phone number ID. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.</p>"
+      "documentation": "<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
+    },
+    "UpdatePhoneNumberSettings": {
+      "name": "UpdatePhoneNumberSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/settings/phone-number",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UpdatePhoneNumberSettingsRequest"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to be updated.</p>"
     },
     "UpdateUser": {
       "name": "UpdateUser",
@@ -2144,6 +2656,47 @@
         }
       ],
       "documentation": "<p>Updates details for the specified Amazon Chime Voice Connector.</p>"
+    },
+    "UpdateVoiceConnectorGroup": {
+      "name": "UpdateVoiceConnectorGroup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/voice-connector-groups/{voiceConnectorGroupId}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateVoiceConnectorGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateVoiceConnectorGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates details for the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.</p>"
     }
   },
   "shapes": {
@@ -2251,6 +2804,37 @@
       "type": "structure",
       "members": {}
     },
+    "AssociatePhoneNumbersWithVoiceConnectorGroupRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorGroupId"
+      ],
+      "members": {
+        "VoiceConnectorGroupId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector group ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorGroupId"
+        },
+        "E164PhoneNumbers": {
+          "shape": "E164PhoneNumberList",
+          "documentation": "<p>List of phone numbers, in E.164 format.</p>"
+        },
+        "ForceAssociate": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector Group and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.</p>"
+        }
+      }
+    },
+    "AssociatePhoneNumbersWithVoiceConnectorGroupResponse": {
+      "type": "structure",
+      "members": {
+        "PhoneNumberErrors": {
+          "shape": "PhoneNumberErrorList",
+          "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
+        }
+      }
+    },
     "AssociatePhoneNumbersWithVoiceConnectorRequest": {
       "type": "structure",
       "required": [
@@ -2266,6 +2850,10 @@
         "E164PhoneNumbers": {
           "shape": "E164PhoneNumberList",
           "documentation": "<p>List of phone numbers, in E.164 format.</p>"
+        },
+        "ForceAssociate": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.</p>"
         }
       }
     },
@@ -2363,7 +2951,7 @@
       "members": {
         "UpdatePhoneNumberRequestItems": {
           "shape": "UpdatePhoneNumberRequestItemList",
-          "documentation": "<p>The request containing the phone number IDs and product types to update.</p>"
+          "documentation": "<p>The request containing the phone number IDs and product types or calling names to update.</p>"
         }
       }
     },
@@ -2472,6 +3060,20 @@
       },
       "documentation": "<p>The Amazon Chime Business Calling settings for the administrator's AWS account. Includes any Amazon S3 buckets designated for storing call detail records.</p>"
     },
+    "CallingName": {
+      "type": "string",
+      "pattern": "^$|^[a-zA-Z0-9 ]{2,15}$",
+      "sensitive": true
+    },
+    "CallingNameStatus": {
+      "type": "string",
+      "enum": [
+        "Unassigned",
+        "UpdateInProgress",
+        "UpdateSucceeded",
+        "UpdateFailed"
+      ]
+    },
     "CallingRegion": {
       "type": "string"
     },
@@ -2564,6 +3166,31 @@
         }
       }
     },
+    "CreateVoiceConnectorGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "VoiceConnectorGroupName",
+          "documentation": "<p>The name of the Amazon Chime Voice Connector group.</p>"
+        },
+        "VoiceConnectorItems": {
+          "shape": "VoiceConnectorItemList",
+          "documentation": "<p>The Amazon Chime Voice Connectors to route inbound calls to.</p>"
+        }
+      }
+    },
+    "CreateVoiceConnectorGroupResponse": {
+      "type": "structure",
+      "members": {
+        "VoiceConnectorGroup": {
+          "shape": "VoiceConnectorGroup",
+          "documentation": "<p>The Amazon Chime Voice Connector group details.</p>"
+        }
+      }
+    },
     "CreateVoiceConnectorRequest": {
       "type": "structure",
       "required": [
@@ -2574,6 +3201,10 @@
         "Name": {
           "shape": "VoiceConnectorName",
           "documentation": "<p>The name of the Amazon Chime Voice Connector.</p>"
+        },
+        "AwsRegion": {
+          "shape": "VoiceConnectorAwsRegion",
+          "documentation": "<p>The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code>.</p>"
         },
         "RequireEncryption": {
           "shape": "Boolean",
@@ -2609,6 +3240,10 @@
       "member": {
         "shape": "Credential"
       }
+    },
+    "DataRetentionInHours": {
+      "type": "integer",
+      "min": 0
     },
     "DeleteAccountRequest": {
       "type": "structure",
@@ -2663,6 +3298,20 @@
         }
       }
     },
+    "DeleteVoiceConnectorGroupRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorGroupId"
+      ],
+      "members": {
+        "VoiceConnectorGroupId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector group ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorGroupId"
+        }
+      }
+    },
     "DeleteVoiceConnectorOriginationRequest": {
       "type": "structure",
       "required": [
@@ -2678,6 +3327,20 @@
       }
     },
     "DeleteVoiceConnectorRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorId"
+        }
+      }
+    },
+    "DeleteVoiceConnectorStreamingConfigurationRequest": {
       "type": "structure",
       "required": [
         "VoiceConnectorId"
@@ -2748,6 +3411,33 @@
       "type": "structure",
       "members": {}
     },
+    "DisassociatePhoneNumbersFromVoiceConnectorGroupRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorGroupId"
+      ],
+      "members": {
+        "VoiceConnectorGroupId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector group ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorGroupId"
+        },
+        "E164PhoneNumbers": {
+          "shape": "E164PhoneNumberList",
+          "documentation": "<p>List of phone numbers, in E.164 format.</p>"
+        }
+      }
+    },
+    "DisassociatePhoneNumbersFromVoiceConnectorGroupResponse": {
+      "type": "structure",
+      "members": {
+        "PhoneNumberErrors": {
+          "shape": "PhoneNumberErrorList",
+          "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
+        }
+      }
+    },
     "DisassociatePhoneNumbersFromVoiceConnectorRequest": {
       "type": "structure",
       "required": [
@@ -2802,16 +3492,20 @@
     "ErrorCode": {
       "type": "string",
       "enum": [
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
         "BadRequest",
         "Conflict",
+        "Forbidden",
+        "NotFound",
+        "PreconditionFailed",
+        "ResourceLimitExceeded",
         "ServiceFailure",
+        "AccessDenied",
         "ServiceUnavailable",
-        "Unprocessable",
         "Throttled",
-        "PreconditionFailed"
+        "Unauthorized",
+        "Unprocessable",
+        "VoiceConnectorGroupAssociationsExist",
+        "PhoneNumberAssociationsExist"
       ]
     },
     "EventsConfiguration": {
@@ -2997,6 +3691,19 @@
         }
       }
     },
+    "GetPhoneNumberSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "CallingName": {
+          "shape": "CallingName",
+          "documentation": "<p>The default outbound calling name for the account.</p>"
+        },
+        "CallingNameUpdatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The updated outbound calling name timestamp, in ISO 8601 format.</p>"
+        }
+      }
+    },
     "GetUserRequest": {
       "type": "structure",
       "required": [
@@ -3057,6 +3764,52 @@
         }
       }
     },
+    "GetVoiceConnectorGroupRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorGroupId"
+      ],
+      "members": {
+        "VoiceConnectorGroupId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector group ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorGroupId"
+        }
+      }
+    },
+    "GetVoiceConnectorGroupResponse": {
+      "type": "structure",
+      "members": {
+        "VoiceConnectorGroup": {
+          "shape": "VoiceConnectorGroup",
+          "documentation": "<p>The Amazon Chime Voice Connector group details.</p>"
+        }
+      }
+    },
+    "GetVoiceConnectorLoggingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorId"
+        }
+      }
+    },
+    "GetVoiceConnectorLoggingConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "LoggingConfiguration": {
+          "shape": "LoggingConfiguration",
+          "documentation": "<p>The logging configuration details.</p>"
+        }
+      }
+    },
     "GetVoiceConnectorOriginationRequest": {
       "type": "structure",
       "required": [
@@ -3100,6 +3853,29 @@
         "VoiceConnector": {
           "shape": "VoiceConnector",
           "documentation": "<p>The Amazon Chime Voice Connector details.</p>"
+        }
+      }
+    },
+    "GetVoiceConnectorStreamingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorId"
+        }
+      }
+    },
+    "GetVoiceConnectorStreamingConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "StreamingConfiguration": {
+          "shape": "StreamingConfiguration",
+          "documentation": "<p>The streaming configuration details.</p>"
         }
       }
     },
@@ -3446,6 +4222,36 @@
         }
       }
     },
+    "ListVoiceConnectorGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "ListVoiceConnectorGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "VoiceConnectorGroups": {
+          "shape": "VoiceConnectorGroupList",
+          "documentation": "<p>The details of the Amazon Chime Voice Connector groups.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
     "ListVoiceConnectorTerminationCredentialsRequest": {
       "type": "structure",
       "required": [
@@ -3498,6 +4304,16 @@
           "documentation": "<p>The token to use to retrieve the next page of results.</p>"
         }
       }
+    },
+    "LoggingConfiguration": {
+      "type": "structure",
+      "members": {
+        "EnableSIPLogs": {
+          "shape": "Boolean",
+          "documentation": "<p>When true, enables SIP message logs for sending to Amazon CloudWatch Logs.</p>"
+        }
+      },
+      "documentation": "<p>The logging configuration associated with an Amazon Chime Voice Connector. Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p>"
     },
     "LogoutUserRequest": {
       "type": "structure",
@@ -3585,7 +4401,7 @@
       "members": {
         "Host": {
           "shape": "String",
-          "documentation": "<p>The FODN or IP address to contact for origination traffic.</p>"
+          "documentation": "<p>The FQDN or IP address to contact for origination traffic.</p>"
         },
         "Port": {
           "shape": "Port",
@@ -3604,7 +4420,7 @@
           "documentation": "<p>The weight associated with the host. If hosts are equal in priority, calls are distributed among them based on their relative weight.</p>"
         }
       },
-      "documentation": "<p>Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: 10 origination routes per Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.</p>"
     },
     "OriginationRouteList": {
       "type": "list",
@@ -3660,6 +4476,14 @@
           "shape": "PhoneNumberAssociationList",
           "documentation": "<p>The phone number associations.</p>"
         },
+        "CallingName": {
+          "shape": "CallingName",
+          "documentation": "<p>The outbound calling name associated with the phone number.</p>"
+        },
+        "CallingNameStatus": {
+          "shape": "CallingNameStatus",
+          "documentation": "<p>The outbound calling name status.</p>"
+        },
         "CreatedTimestamp": {
           "shape": "Iso8601Timestamp",
           "documentation": "<p>The phone number creation timestamp, in ISO 8601 format.</p>"
@@ -3684,14 +4508,14 @@
         },
         "Name": {
           "shape": "PhoneNumberAssociationName",
-          "documentation": "<p>Defines the association with an Amazon Chime account ID, user ID, or Amazon Chime Voice Connector ID.</p>"
+          "documentation": "<p>Defines the association with an Amazon Chime account ID, user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.</p>"
         },
         "AssociatedTimestamp": {
           "shape": "Iso8601Timestamp",
           "documentation": "<p>The timestamp of the phone number association, in ISO 8601 format.</p>"
         }
       },
-      "documentation": "<p>The phone number associations, such as Amazon Chime account ID, Amazon Chime user ID, or Amazon Chime Voice Connector ID.</p>"
+      "documentation": "<p>The phone number associations, such as Amazon Chime account ID, Amazon Chime user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.</p>"
     },
     "PhoneNumberAssociationList": {
       "type": "list",
@@ -3704,7 +4528,8 @@
       "enum": [
         "AccountId",
         "UserId",
-        "VoiceConnectorId"
+        "VoiceConnectorId",
+        "VoiceConnectorGroupId"
       ]
     },
     "PhoneNumberCapabilities": {
@@ -3735,7 +4560,7 @@
           "documentation": "<p>Allows or denies outbound MMS messaging for the specified phone number.</p>"
         }
       },
-      "documentation": "<p>The phone number capabilities, such as enabled inbound and outbound calling and text messaging.</p>"
+      "documentation": "<p>The phone number capabilities for Amazon Chime Business Calling phone numbers, such as enabled inbound and outbound calling and text messaging.</p>"
     },
     "PhoneNumberError": {
       "type": "structure",
@@ -3891,6 +4716,34 @@
         }
       }
     },
+    "PutVoiceConnectorLoggingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId",
+        "LoggingConfiguration"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorId"
+        },
+        "LoggingConfiguration": {
+          "shape": "LoggingConfiguration",
+          "documentation": "<p>The logging configuration details to add.</p>"
+        }
+      }
+    },
+    "PutVoiceConnectorLoggingConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "LoggingConfiguration": {
+          "shape": "LoggingConfiguration",
+          "documentation": "<p>The updated logging configuration details.</p>"
+        }
+      }
+    },
     "PutVoiceConnectorOriginationRequest": {
       "type": "structure",
       "required": [
@@ -3916,6 +4769,34 @@
         "Origination": {
           "shape": "Origination",
           "documentation": "<p>The updated origination setting details.</p>"
+        }
+      }
+    },
+    "PutVoiceConnectorStreamingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId",
+        "StreamingConfiguration"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorId"
+        },
+        "StreamingConfiguration": {
+          "shape": "StreamingConfiguration",
+          "documentation": "<p>The streaming configuration details to add.</p>"
+        }
+      }
+    },
+    "PutVoiceConnectorStreamingConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "StreamingConfiguration": {
+          "shape": "StreamingConfiguration",
+          "documentation": "<p>The updated streaming configuration details.</p>"
         }
       }
     },
@@ -4126,6 +5007,23 @@
         "shape": "SensitiveString"
       }
     },
+    "StreamingConfiguration": {
+      "type": "structure",
+      "required": [
+        "DataRetentionInHours"
+      ],
+      "members": {
+        "DataRetentionInHours": {
+          "shape": "DataRetentionInHours",
+          "documentation": "<p>The retention period for the Amazon Kinesis data, in hours.</p>"
+        },
+        "Disabled": {
+          "shape": "Boolean",
+          "documentation": "<p>When true, media streaming to Amazon Kinesis is turned off.</p>"
+        }
+      },
+      "documentation": "<p>The streaming configuration associated with an Amazon Chime Voice Connector. Specifies whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.</p>"
+    },
     "String": {
       "type": "string"
     },
@@ -4171,11 +5069,11 @@
         },
         "CallingRegions": {
           "shape": "CallingRegionList",
-          "documentation": "<p>The countries to which calls are allowed.</p>"
+          "documentation": "<p>The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.</p>"
         },
         "CidrAllowedList": {
           "shape": "StringList",
-          "documentation": "<p>The IP addresses allowed to make calls, in CIDR format.</p>"
+          "documentation": "<p>The IP addresses allowed to make calls, in CIDR format. Required.</p>"
         },
         "Disabled": {
           "shape": "Boolean",
@@ -4320,6 +5218,10 @@
         "ProductType": {
           "shape": "PhoneNumberProductType",
           "documentation": "<p>The product type.</p>"
+        },
+        "CallingName": {
+          "shape": "CallingName",
+          "documentation": "<p>The outbound calling name associated with the phone number.</p>"
         }
       }
     },
@@ -4336,9 +5238,13 @@
         "ProductType": {
           "shape": "PhoneNumberProductType",
           "documentation": "<p>The product type to update.</p>"
+        },
+        "CallingName": {
+          "shape": "CallingName",
+          "documentation": "<p>The outbound calling name to update.</p>"
         }
       },
-      "documentation": "<p>The phone number ID and product type fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.</p>"
+      "documentation": "<p>The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.</p>"
     },
     "UpdatePhoneNumberRequestItemList": {
       "type": "list",
@@ -4352,6 +5258,18 @@
         "PhoneNumber": {
           "shape": "PhoneNumber",
           "documentation": "<p>The updated phone number details.</p>"
+        }
+      }
+    },
+    "UpdatePhoneNumberSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "CallingName"
+      ],
+      "members": {
+        "CallingName": {
+          "shape": "CallingName",
+          "documentation": "<p>The default outbound calling name for the account.</p>"
         }
       }
     },
@@ -4439,6 +5357,39 @@
         }
       }
     },
+    "UpdateVoiceConnectorGroupRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorGroupId",
+        "Name",
+        "VoiceConnectorItems"
+      ],
+      "members": {
+        "VoiceConnectorGroupId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector group ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorGroupId"
+        },
+        "Name": {
+          "shape": "VoiceConnectorGroupName",
+          "documentation": "<p>The name of the Amazon Chime Voice Connector group.</p>"
+        },
+        "VoiceConnectorItems": {
+          "shape": "VoiceConnectorItemList",
+          "documentation": "<p>The <code>VoiceConnectorItems</code> to associate with the group.</p>"
+        }
+      }
+    },
+    "UpdateVoiceConnectorGroupResponse": {
+      "type": "structure",
+      "members": {
+        "VoiceConnectorGroup": {
+          "shape": "VoiceConnectorGroup",
+          "documentation": "<p>The updated Amazon Chime Voice Connector group details.</p>"
+        }
+      }
+    },
     "UpdateVoiceConnectorRequest": {
       "type": "structure",
       "required": [
@@ -4468,7 +5419,7 @@
       "members": {
         "VoiceConnector": {
           "shape": "VoiceConnector",
-          "documentation": "<p>The Amazon Chime Voice Connector details.</p>"
+          "documentation": "<p>The updated Amazon Chime Voice Connector details.</p>"
         }
       }
     },
@@ -4589,6 +5540,10 @@
           "shape": "NonEmptyString",
           "documentation": "<p>The Amazon Chime Voice Connector ID.</p>"
         },
+        "AwsRegion": {
+          "shape": "VoiceConnectorAwsRegion",
+          "documentation": "<p>The AWS Region in which the Amazon Chime Voice Connector is created. Default: <code>us-east-1</code>.</p>"
+        },
         "Name": {
           "shape": "VoiceConnectorName",
           "documentation": "<p>The name of the Amazon Chime Voice Connector.</p>"
@@ -4611,6 +5566,79 @@
         }
       },
       "documentation": "<p>The Amazon Chime Voice Connector configuration, including outbound host name and encryption settings.</p>"
+    },
+    "VoiceConnectorAwsRegion": {
+      "type": "string",
+      "enum": [
+        "us-east-1",
+        "us-west-2"
+      ]
+    },
+    "VoiceConnectorGroup": {
+      "type": "structure",
+      "members": {
+        "VoiceConnectorGroupId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector group ID.</p>"
+        },
+        "Name": {
+          "shape": "VoiceConnectorGroupName",
+          "documentation": "<p>The name of the Amazon Chime Voice Connector group.</p>"
+        },
+        "VoiceConnectorItems": {
+          "shape": "VoiceConnectorItemList",
+          "documentation": "<p>The Amazon Chime Voice Connectors to which to route inbound calls.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The Amazon Chime Voice Connector group creation timestamp, in ISO 8601 format.</p>"
+        },
+        "UpdatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The updated Amazon Chime Voice Connector group timestamp, in ISO 8601 format.</p>"
+        }
+      },
+      "documentation": "<p>The Amazon Chime Voice Connector group configuration, including associated Amazon Chime Voice Connectors. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>"
+    },
+    "VoiceConnectorGroupList": {
+      "type": "list",
+      "member": {
+        "shape": "VoiceConnectorGroup"
+      }
+    },
+    "VoiceConnectorGroupName": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "VoiceConnectorItem": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId",
+        "Priority"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>"
+        },
+        "Priority": {
+          "shape": "VoiceConnectorItemPriority",
+          "documentation": "<p>The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first. </p>"
+        }
+      },
+      "documentation": "<p>For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group.</p>"
+    },
+    "VoiceConnectorItemList": {
+      "type": "list",
+      "member": {
+        "shape": "VoiceConnectorItem"
+      }
+    },
+    "VoiceConnectorItemPriority": {
+      "type": "integer",
+      "max": 99,
+      "min": 1
     },
     "VoiceConnectorList": {
       "type": "list",
