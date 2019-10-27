@@ -972,7 +972,8 @@
       });
 
       it('translates values containing unknown shape type by excluding when excludeUnknownInputTypes option set', function() {
-        var unknown, bar, baz, fizz, buzz, bang, mapIn, quux, qaax, qiix, input, params, request, client;
+        var unknown, bar, baz, fizz, buzz, bang, mapIn, quux, qaax, qiix, outputIfUnknown, input, params, request, client;
+        outputIfUnknown = null;
         unknown = function() { };
         bar = 'bar';
         baz = 3;
@@ -981,7 +982,7 @@
         quux = docClient.createSet([bar]);
         qaax = docClient.createSet([baz]);
         qiix = docClient.createSet([fizz]);
-        mapIn = {alpha: bar, beta: baz, gamma: fizz, delta: bang};
+        mapIn = {alpha: bar, beta: baz, gamma: fizz, delta: bang, epsilon: unknown};
         input = {
           Item: {
             foo: unknown,
@@ -997,7 +998,7 @@
         };
         params = {
           Item: {
-            foo: null,
+            foo: outputIfUnknown,
             bar: {
               S: 'bar'
             },
@@ -1023,7 +1024,8 @@
                 },
                 delta: {
                   NULL: true
-                }
+                } //,
+                //epsilon: outputIfUnknown
               }
             },
             quux: {
