@@ -949,6 +949,101 @@
         };
         expect(translateInput(input)).to.eql(params);
       });
+
+      it('translates unserializable values of unknown shape type', function() {
+        var input, params, unknownValue;
+        unknownValue = function() { };
+        input = {
+          Item: {
+            foo: 'bar',
+            bar: unknownValue
+          }
+        };
+        params = {
+          Item: {
+            foo: {
+              S: 'bar'
+            },
+            bar: null
+          }
+        };
+        expect( function() { translateInput(input); } ).to.not.throw('shape.toType is not a function');
+        expect(translateInput(input)).to.eql(params);
+      });
+
+      it('translates values containing unknown shape type by excluding when excludeUnknownInputTypes option set', function() {
+        var unknown, bar, baz, fizz, buzz, bang, mapIn, quux, qaax, qiix, input, params, request, client;
+        unknown = function() { };
+        bar = 'bar';
+        baz = 3;
+        fizz = toBuffer('fizz');
+        bang = null;
+        quux = docClient.createSet([bar]);
+        qaax = docClient.createSet([baz]);
+        qiix = docClient.createSet([fizz]);
+        mapIn = {alpha: bar, beta: baz, gamma: fizz, delta: bang};
+        input = {
+          Item: {
+            foo: unknown,
+            bar: bar,
+            baz: baz,
+            fizz: fizz,
+            bang: bang,
+            buzz: mapIn,
+            quux: quux,
+            qaax: qaax,
+            qiix: qiix
+          }
+        };
+        params = {
+          Item: {
+            foo: null,
+            bar: {
+              S: 'bar'
+            },
+            baz: {
+              N: '3'
+            },
+            fizz: {
+              B: fizz
+            },
+            bang: {
+              NULL: true
+            },
+            buzz: {
+              M: {
+                alpha: {
+                  S: 'bar'
+                },
+                beta: {
+                  N: '3'
+                },
+                gamma: {
+                  B: fizz
+                },
+                delta: {
+                  NULL: true
+                }
+              }
+            },
+            quux: {
+              SS: [bar]
+            },
+            qaax: {
+              NS: [baz.toString()]
+            },
+            qiix: {
+              BS: [fizz]
+            }
+          }
+        };
+        client = new AWS.DynamoDB.DocumentClient({
+          excludeUnknownInputTypes: true
+        });
+        request = client.put(input);
+        request.emit('validate', [request]);
+        expect(request.params).to.eql(params);
+      });
     });
 
     describe('output', function() {
