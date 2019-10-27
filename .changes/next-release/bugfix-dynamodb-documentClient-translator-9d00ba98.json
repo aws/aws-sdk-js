@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "dynamodb-documentClient-translator",
+  "description": "Fixes runtime exception in the documentClient translator when a native javascript input object contains a top-level property with a non-serializable value (eg, when the input object was created after Object.prototype was modified to include a property whose value is a function) -- see Issue #1236"
+}
