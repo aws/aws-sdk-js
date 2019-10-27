@@ -10,6 +10,11 @@ new S3({
     credentials: null
 });
 
+// Instantiate S3 with an Endpoint object
+new S3({
+    endpoint: new Endpoint('awsproxy.example.com')
+});
+
 // test waiters
 s3.waitFor('bucketExists', {
     Bucket: 'test',
