@@ -951,27 +951,6 @@
       });
 
       it('translates unserializable values of unknown shape type', function() {
-        var input, params, unknownValue;
-        unknownValue = function() { };
-        input = {
-          Item: {
-            foo: 'bar',
-            bar: unknownValue
-          }
-        };
-        params = {
-          Item: {
-            foo: {
-              S: 'bar'
-            },
-            bar: null
-          }
-        };
-        expect( function() { translateInput(input); } ).to.not.throw('shape.toType is not a function');
-        expect(translateInput(input)).to.eql(params);
-      });
-
-      it('translates values containing unknown shape type by excluding when excludeUnknownInputTypes option set', function() {
         var unknown, bar, baz, fizz, buzz, bang, mapIn, quux, qaax, qiix, outputIfUnknown, input, params, request, client;
         outputIfUnknown = null;
         unknown = function() { };
@@ -1044,6 +1023,8 @@
         });
         request = client.put(input);
         request.emit('validate', [request]);
+
+        expect( function() { translateInput(input); } ).to.not.throw('shape.toType is not a function');
         expect(request.params).to.eql(params);
       });
     });
