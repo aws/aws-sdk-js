@@ -45,6 +45,14 @@ declare class ElastiCache extends Service {
    */
   batchStopUpdateAction(callback?: (err: AWSError, data: ElastiCache.Types.UpdateActionResultsMessage) => void): Request<ElastiCache.Types.UpdateActionResultsMessage, AWSError>;
   /**
+   * Complete the migration of data.
+   */
+  completeMigration(params: ElastiCache.Types.CompleteMigrationMessage, callback?: (err: AWSError, data: ElastiCache.Types.CompleteMigrationResponse) => void): Request<ElastiCache.Types.CompleteMigrationResponse, AWSError>;
+  /**
+   * Complete the migration of data.
+   */
+  completeMigration(callback?: (err: AWSError, data: ElastiCache.Types.CompleteMigrationResponse) => void): Request<ElastiCache.Types.CompleteMigrationResponse, AWSError>;
+  /**
    * Makes a copy of an existing snapshot.  This operation is valid for Redis only.   Users or groups that have permissions to use the CopySnapshot operation can create their own Amazon S3 buckets and copy snapshots to it. To control access to your snapshots, use an IAM policy to control who has the ability to use the CopySnapshot operation. For more information about using IAM to control the use of ElastiCache operations, see Exporting Snapshots and Authentication &amp; Access Control.  You could receive the following error messages.  Error Messages     Error Message: The S3 bucket %s is outside of the region.  Solution: Create an Amazon S3 bucket in the same region as your snapshot. For more information, see Step 1: Create an Amazon S3 Bucket in the ElastiCache User Guide.    Error Message: The S3 bucket %s does not exist.  Solution: Create an Amazon S3 bucket in the same region as your snapshot. For more information, see Step 1: Create an Amazon S3 Bucket in the ElastiCache User Guide.    Error Message: The S3 bucket %s is not owned by the authenticated user.  Solution: Create an Amazon S3 bucket in the same region as your snapshot. For more information, see Step 1: Create an Amazon S3 Bucket in the ElastiCache User Guide.    Error Message: The authenticated user does not have sufficient permissions to perform the desired activity.  Solution: Contact your system administrator to get the needed permissions.    Error Message: The S3 bucket %s already contains an object with key %s.  Solution: Give the TargetSnapshotName a new and unique value. If exporting a snapshot, you could alternatively create a new Amazon S3 bucket and use this same value for TargetSnapshotName.    Error Message:  ElastiCache has not been granted READ permissions %s on the S3 Bucket.  Solution: Add List and Read permissions on the bucket. For more information, see Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket in the ElastiCache User Guide.    Error Message:  ElastiCache has not been granted WRITE permissions %s on the S3 Bucket.  Solution: Add Upload/Delete permissions on the bucket. For more information, see Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket in the ElastiCache User Guide.    Error Message:  ElastiCache has not been granted READ_ACP permissions %s on the S3 Bucket.  Solution: Add View Permissions on the bucket. For more information, see Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket in the ElastiCache User Guide.  
    */
   copySnapshot(params: ElastiCache.Types.CopySnapshotMessage, callback?: (err: AWSError, data: ElastiCache.Types.CopySnapshotResult) => void): Request<ElastiCache.Types.CopySnapshotResult, AWSError>;
@@ -372,6 +380,14 @@ declare class ElastiCache extends Service {
    * Revokes ingress from a cache security group. Use this operation to disallow access from an Amazon EC2 security group that had been previously authorized.
    */
   revokeCacheSecurityGroupIngress(callback?: (err: AWSError, data: ElastiCache.Types.RevokeCacheSecurityGroupIngressResult) => void): Request<ElastiCache.Types.RevokeCacheSecurityGroupIngressResult, AWSError>;
+  /**
+   * Start the migration of data.
+   */
+  startMigration(params: ElastiCache.Types.StartMigrationMessage, callback?: (err: AWSError, data: ElastiCache.Types.StartMigrationResponse) => void): Request<ElastiCache.Types.StartMigrationResponse, AWSError>;
+  /**
+   * Start the migration of data.
+   */
+  startMigration(callback?: (err: AWSError, data: ElastiCache.Types.StartMigrationResponse) => void): Request<ElastiCache.Types.StartMigrationResponse, AWSError>;
   /**
    * Represents the input of a TestFailover operation which test automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).  Note the following    A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and AWS CLI) in any rolling 24-hour period.   If calling this operation on shards in different clusters (called replication groups in the API and CLI), the calls can be made concurrently.     If calling this operation multiple times on different shards in the same Redis (cluster mode enabled) replication group, the first node replacement must complete before a subsequent call can be made.   To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console, the AWS CLI, or the ElastiCache API. Look for the following automatic failover related events, listed here in order of occurrance:   Replication group message: Test Failover API called for node group &lt;node-group-id&gt;    Cache cluster message: Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed    Replication group message: Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed    Cache cluster message: Recovering cache nodes &lt;node-id&gt;    Cache cluster message: Finished recovery for cache nodes &lt;node-id&gt;    For more information see:    Viewing ElastiCache Events in the ElastiCache User Guide     DescribeEvents in the ElastiCache API Reference     Also see, Testing Multi-AZ with Automatic Failover in the ElastiCache User Guide.
    */
@@ -883,6 +899,19 @@ declare namespace ElastiCache {
   export type CacheSubnetGroups = CacheSubnetGroup[];
   export type ChangeType = "immediate"|"requires-reboot"|string;
   export type ClusterIdList = String[];
+  export interface CompleteMigrationMessage {
+    /**
+     * The ID of the replication group to which data is being migrated.
+     */
+    ReplicationGroupId: String;
+    /**
+     * Forces the migration to stop without ensuring that data is in sync. It is recommended to use this option only to abort the migration and not recommended when application wants to continue migration to ElastiCache.
+     */
+    Force?: Boolean;
+  }
+  export interface CompleteMigrationResponse {
+    ReplicationGroup?: ReplicationGroup;
+  }
   export interface ConfigureShard {
     /**
      * The 4-digit id for the node group you are configuring. For Redis (cluster mode disabled) replication groups, the node group id is always 0001. To find a Redis (cluster mode enabled)'s node group's (shard's) id, see Finding a Shard's Id.
@@ -1204,6 +1233,17 @@ declare namespace ElastiCache {
   export interface CreateSnapshotResult {
     Snapshot?: Snapshot;
   }
+  export interface CustomerNodeEndpoint {
+    /**
+     * The address of the node endpoint
+     */
+    Address?: String;
+    /**
+     * The port of the node endpoint
+     */
+    Port?: IntegerOptional;
+  }
+  export type CustomerNodeEndpointList = CustomerNodeEndpoint[];
   export interface DecreaseReplicaCountMessage {
     /**
      * The id of the replication group from which you want to remove replica nodes.
@@ -2692,6 +2732,19 @@ declare namespace ElastiCache {
   export type SnapshotArnsList = String[];
   export type SnapshotList = Snapshot[];
   export type SourceType = "cache-cluster"|"cache-parameter-group"|"cache-security-group"|"cache-subnet-group"|"replication-group"|string;
+  export interface StartMigrationMessage {
+    /**
+     * The ID of the replication group to which data should be migrated.
+     */
+    ReplicationGroupId: String;
+    /**
+     * List of endpoints from which data should be migrated. For Redis (cluster mode disabled), list should have only one element.
+     */
+    CustomerNodeEndpointList: CustomerNodeEndpointList;
+  }
+  export interface StartMigrationResponse {
+    ReplicationGroup?: ReplicationGroup;
+  }
   export type String = string;
   export interface Subnet {
     /**

@@ -161,7 +161,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates an image repository.</p>"
+      "documentation": "<p>Creates an Amazon Elastic Container Registry (Amazon ECR) repository, where users can push and pull Docker images. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html\">Amazon ECR Repositories</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "DeleteLifecyclePolicy": {
       "name": "DeleteLifecyclePolicy",
@@ -246,6 +246,37 @@
         }
       ],
       "documentation": "<p>Deletes the repository policy from a specified repository.</p>"
+    },
+    "DescribeImageScanFindings": {
+      "name": "DescribeImageScanFindings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeImageScanFindingsRequest"
+      },
+      "output": {
+        "shape": "DescribeImageScanFindingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "RepositoryNotFoundException"
+        },
+        {
+          "shape": "ImageNotFoundException"
+        },
+        {
+          "shape": "ScanNotFoundException"
+        }
+      ],
+      "documentation": "<p>Describes the image scan findings for the specified image.</p>"
     },
     "DescribeImages": {
       "name": "DescribeImages",
@@ -549,6 +580,31 @@
       ],
       "documentation": "<p>Creates or updates the image manifest and tags associated with an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
+    "PutImageScanningConfiguration": {
+      "name": "PutImageScanningConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutImageScanningConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutImageScanningConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "RepositoryNotFoundException"
+        }
+      ],
+      "documentation": "<p>Updates the image scanning configuration for a repository.</p>"
+    },
     "PutImageTagMutability": {
       "name": "PutImageTagMutability",
       "http": {
@@ -623,6 +679,34 @@
         }
       ],
       "documentation": "<p>Applies a repository policy on a specified repository to control access permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicies.html\">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+    },
+    "StartImageScan": {
+      "name": "StartImageScan",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartImageScanRequest"
+      },
+      "output": {
+        "shape": "StartImageScanResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "RepositoryNotFoundException"
+        },
+        {
+          "shape": "ImageNotFoundException"
+        }
+      ],
+      "documentation": "<p>Starts an image vulnerability scan.</p>"
     },
     "StartLifecyclePolicyPreview": {
       "name": "StartLifecyclePolicyPreview",
@@ -755,6 +839,41 @@
   "shapes": {
     "Arn": {
       "type": "string"
+    },
+    "Attribute": {
+      "type": "structure",
+      "required": [
+        "key"
+      ],
+      "members": {
+        "key": {
+          "shape": "AttributeKey",
+          "documentation": "<p>The attribute key.</p>"
+        },
+        "value": {
+          "shape": "AttributeValue",
+          "documentation": "<p>The value assigned to the attribute key.</p>"
+        }
+      },
+      "documentation": "<p>This data type is used in the <a>ImageScanFinding</a> data type.</p>"
+    },
+    "AttributeKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "AttributeList": {
+      "type": "list",
+      "member": {
+        "shape": "Attribute"
+      },
+      "max": 50,
+      "min": 0
+    },
+    "AttributeValue": {
+      "type": "string",
+      "max": 256,
+      "min": 1
     },
     "AuthorizationData": {
       "type": "structure",
@@ -968,6 +1087,10 @@
         "imageTagMutability": {
           "shape": "ImageTagMutability",
           "documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the default setting of <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.</p>"
+        },
+        "imageScanningConfiguration": {
+          "shape": "ImageScanningConfiguration",
+          "documentation": "<p>The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.</p>"
         }
       }
     },
@@ -1082,6 +1205,62 @@
         }
       }
     },
+    "DescribeImageScanFindingsRequest": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "imageId"
+      ],
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to describe the image scan findings for. If you do not specify a registry, the default registry is assumed.</p>"
+        },
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The repository for the image for which to describe the scan findings.</p>"
+        },
+        "imageId": {
+          "shape": "ImageIdentifier"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeImageScanFindings</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is null when there are no more results to return.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of image scan results returned by <code>DescribeImageScanFindings</code> in paginated output. When this parameter is used, <code>DescribeImageScanFindings</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImageScanFindings</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImageScanFindings</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.</p>"
+        }
+      }
+    },
+    "DescribeImageScanFindingsResponse": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The registry ID associated with the request.</p>"
+        },
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The repository name associated with the request.</p>"
+        },
+        "imageId": {
+          "shape": "ImageIdentifier"
+        },
+        "imageScanStatus": {
+          "shape": "ImageScanStatus",
+          "documentation": "<p>The current state of the scan.</p>"
+        },
+        "imageScanFindings": {
+          "shape": "ImageScanFindings",
+          "documentation": "<p>The information contained in the image scan findings.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>DescribeImageScanFindings</code> request. When the results of a <code>DescribeImageScanFindings</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+        }
+      }
+    },
     "DescribeImagesFilter": {
       "type": "structure",
       "members": {
@@ -1176,6 +1355,32 @@
     },
     "ExpirationTimestamp": {
       "type": "timestamp"
+    },
+    "FindingDescription": {
+      "type": "string"
+    },
+    "FindingName": {
+      "type": "string"
+    },
+    "FindingSeverity": {
+      "type": "string",
+      "enum": [
+        "INFORMATIONAL",
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL",
+        "UNDEFINED"
+      ]
+    },
+    "FindingSeverityCounts": {
+      "type": "map",
+      "key": {
+        "shape": "FindingSeverity"
+      },
+      "value": {
+        "shape": "SeverityCount"
+      }
     },
     "ForceFlag": {
       "type": "boolean"
@@ -1433,6 +1638,14 @@
         "imagePushedAt": {
           "shape": "PushTimestamp",
           "documentation": "<p>The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. </p>"
+        },
+        "imageScanStatus": {
+          "shape": "ImageScanStatus",
+          "documentation": "<p>The current state of the scan.</p>"
+        },
+        "imageScanFindingsSummary": {
+          "shape": "ImageScanFindingsSummary",
+          "documentation": "<p>A summary of the last completed image scan.</p>"
         }
       },
       "documentation": "<p>An object that describes an image returned by a <a>DescribeImages</a> operation.</p>"
@@ -1512,7 +1725,105 @@
       }
     },
     "ImageManifest": {
-      "type": "string"
+      "type": "string",
+      "max": 4194304,
+      "min": 1
+    },
+    "ImageScanFinding": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "FindingName",
+          "documentation": "<p>The name associated with the finding, usually a CVE number.</p>"
+        },
+        "description": {
+          "shape": "FindingDescription",
+          "documentation": "<p>The description of the finding.</p>"
+        },
+        "uri": {
+          "shape": "Url",
+          "documentation": "<p>A link containing additional details about the security vulnerability.</p>"
+        },
+        "severity": {
+          "shape": "FindingSeverity",
+          "documentation": "<p>The finding severity.</p>"
+        },
+        "attributes": {
+          "shape": "AttributeList",
+          "documentation": "<p>A collection of attributes of the host from which the finding is generated.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about an image scan finding.</p>"
+    },
+    "ImageScanFindingList": {
+      "type": "list",
+      "member": {
+        "shape": "ImageScanFinding"
+      }
+    },
+    "ImageScanFindings": {
+      "type": "structure",
+      "members": {
+        "imageScanCompletedAt": {
+          "shape": "ScanTimestamp",
+          "documentation": "<p>The time of the last completed image scan.</p>"
+        },
+        "vulnerabilitySourceUpdatedAt": {
+          "shape": "VulnerabilitySourceUpdateTimestamp",
+          "documentation": "<p>The time when the vulnerability data was last scanned.</p>"
+        },
+        "findings": {
+          "shape": "ImageScanFindingList",
+          "documentation": "<p>The findings from the image scan.</p>"
+        },
+        "findingSeverityCounts": {
+          "shape": "FindingSeverityCounts",
+          "documentation": "<p>The image vulnerability counts, sorted by severity.</p>"
+        }
+      },
+      "documentation": "<p>The details of an image scan.</p>"
+    },
+    "ImageScanFindingsSummary": {
+      "type": "structure",
+      "members": {
+        "imageScanCompletedAt": {
+          "shape": "ScanTimestamp",
+          "documentation": "<p>The time of the last completed image scan.</p>"
+        },
+        "vulnerabilitySourceUpdatedAt": {
+          "shape": "VulnerabilitySourceUpdateTimestamp",
+          "documentation": "<p>The time when the vulnerability data was last scanned.</p>"
+        },
+        "findingSeverityCounts": {
+          "shape": "FindingSeverityCounts",
+          "documentation": "<p>The image vulnerability counts, sorted by severity.</p>"
+        }
+      },
+      "documentation": "<p>A summary of the last completed image scan.</p>"
+    },
+    "ImageScanStatus": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "ScanStatus",
+          "documentation": "<p>The current state of an image scan.</p>"
+        },
+        "description": {
+          "shape": "ScanStatusDescription",
+          "documentation": "<p>The description of the image scan status.</p>"
+        }
+      },
+      "documentation": "<p>The current status of an image scan.</p>"
+    },
+    "ImageScanningConfiguration": {
+      "type": "structure",
+      "members": {
+        "scanOnPush": {
+          "shape": "ScanOnPushFlag",
+          "documentation": "<p>The setting that determines whether images are scanned after being pushed to a repository. If set to <code>true</code>, images will be scanned after being pushed. If this parameter is not specified, it will default to <code>false</code> and images will not be scanned unless a scan is manually started with the <a>StartImageScan</a> API.</p>"
+        }
+      },
+      "documentation": "<p>The image scanning configuration for a repository.</p>"
     },
     "ImageSizeInBytes": {
       "type": "long"
@@ -1646,7 +1957,9 @@
       }
     },
     "LayerPartBlob": {
-      "type": "blob"
+      "type": "blob",
+      "max": 20971520,
+      "min": 0
     },
     "LayerSizeInBytes": {
       "type": "long"
@@ -1871,6 +2184,44 @@
         }
       }
     },
+    "PutImageScanningConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "imageScanningConfiguration"
+      ],
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to update the image scanning configuration setting. If you do not specify a registry, the default registry is assumed.</p>"
+        },
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository in which to update the image scanning configuration setting.</p>"
+        },
+        "imageScanningConfiguration": {
+          "shape": "ImageScanningConfiguration",
+          "documentation": "<p>The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.</p>"
+        }
+      }
+    },
+    "PutImageScanningConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The registry ID associated with the request.</p>"
+        },
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The repository name associated with the request.</p>"
+        },
+        "imageScanningConfiguration": {
+          "shape": "ImageScanningConfiguration",
+          "documentation": "<p>The image scanning configuration setting for the repository.</p>"
+        }
+      }
+    },
     "PutImageTagMutabilityRequest": {
       "type": "structure",
       "required": [
@@ -1977,6 +2328,9 @@
         "imageTagMutability": {
           "shape": "ImageTagMutability",
           "documentation": "<p>The tag mutability setting for the repository.</p>"
+        },
+        "imageScanningConfiguration": {
+          "shape": "ImageScanningConfiguration"
         }
       },
       "documentation": "<p>An object representing a repository.</p>"
@@ -2005,6 +2359,23 @@
       "type": "string",
       "max": 10240,
       "min": 0
+    },
+    "ScanOnPushFlag": {
+      "type": "boolean"
+    },
+    "ScanStatus": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "COMPLETE",
+        "FAILED"
+      ]
+    },
+    "ScanStatusDescription": {
+      "type": "string"
+    },
+    "ScanTimestamp": {
+      "type": "timestamp"
     },
     "SetRepositoryPolicyRequest": {
       "type": "structure",
@@ -2045,6 +2416,50 @@
         "policyText": {
           "shape": "RepositoryPolicyText",
           "documentation": "<p>The JSON repository policy text applied to the repository.</p>"
+        }
+      }
+    },
+    "SeverityCount": {
+      "type": "integer",
+      "min": 0
+    },
+    "StartImageScanRequest": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "imageId"
+      ],
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to start an image scan request. If you do not specify a registry, the default registry is assumed.</p>"
+        },
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository that contains the images to scan.</p>"
+        },
+        "imageId": {
+          "shape": "ImageIdentifier"
+        }
+      }
+    },
+    "StartImageScanResponse": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The registry ID associated with the request.</p>"
+        },
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The repository name associated with the request.</p>"
+        },
+        "imageId": {
+          "shape": "ImageIdentifier"
+        },
+        "imageScanStatus": {
+          "shape": "ImageScanStatus",
+          "documentation": "<p>The current state of the scan.</p>"
         }
       }
     },
@@ -2234,6 +2649,9 @@
     },
     "Url": {
       "type": "string"
+    },
+    "VulnerabilitySourceUpdateTimestamp": {
+      "type": "timestamp"
     }
   },
   "documentation": "<fullname>Amazon Elastic Container Registry</fullname> <p>Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.</p>"

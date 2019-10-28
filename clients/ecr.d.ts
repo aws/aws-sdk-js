@@ -44,11 +44,11 @@ declare class ECR extends Service {
    */
   completeLayerUpload(callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
   /**
-   * Creates an image repository.
+   * Creates an Amazon Elastic Container Registry (Amazon ECR) repository, where users can push and pull Docker images. For more information, see Amazon ECR Repositories in the Amazon Elastic Container Registry User Guide.
    */
   createRepository(params: ECR.Types.CreateRepositoryRequest, callback?: (err: AWSError, data: ECR.Types.CreateRepositoryResponse) => void): Request<ECR.Types.CreateRepositoryResponse, AWSError>;
   /**
-   * Creates an image repository.
+   * Creates an Amazon Elastic Container Registry (Amazon ECR) repository, where users can push and pull Docker images. For more information, see Amazon ECR Repositories in the Amazon Elastic Container Registry User Guide.
    */
   createRepository(callback?: (err: AWSError, data: ECR.Types.CreateRepositoryResponse) => void): Request<ECR.Types.CreateRepositoryResponse, AWSError>;
   /**
@@ -75,6 +75,14 @@ declare class ECR extends Service {
    * Deletes the repository policy from a specified repository.
    */
   deleteRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryPolicyResponse) => void): Request<ECR.Types.DeleteRepositoryPolicyResponse, AWSError>;
+  /**
+   * Describes the image scan findings for the specified image.
+   */
+  describeImageScanFindings(params: ECR.Types.DescribeImageScanFindingsRequest, callback?: (err: AWSError, data: ECR.Types.DescribeImageScanFindingsResponse) => void): Request<ECR.Types.DescribeImageScanFindingsResponse, AWSError>;
+  /**
+   * Describes the image scan findings for the specified image.
+   */
+  describeImageScanFindings(callback?: (err: AWSError, data: ECR.Types.DescribeImageScanFindingsResponse) => void): Request<ECR.Types.DescribeImageScanFindingsResponse, AWSError>;
   /**
    * Returns metadata about the images in a repository, including image size, image tags, and creation date.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
    */
@@ -164,6 +172,14 @@ declare class ECR extends Service {
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
+   * Updates the image scanning configuration for a repository.
+   */
+  putImageScanningConfiguration(params: ECR.Types.PutImageScanningConfigurationRequest, callback?: (err: AWSError, data: ECR.Types.PutImageScanningConfigurationResponse) => void): Request<ECR.Types.PutImageScanningConfigurationResponse, AWSError>;
+  /**
+   * Updates the image scanning configuration for a repository.
+   */
+  putImageScanningConfiguration(callback?: (err: AWSError, data: ECR.Types.PutImageScanningConfigurationResponse) => void): Request<ECR.Types.PutImageScanningConfigurationResponse, AWSError>;
+  /**
    * Updates the image tag mutability settings for a repository.
    */
   putImageTagMutability(params: ECR.Types.PutImageTagMutabilityRequest, callback?: (err: AWSError, data: ECR.Types.PutImageTagMutabilityResponse) => void): Request<ECR.Types.PutImageTagMutabilityResponse, AWSError>;
@@ -187,6 +203,14 @@ declare class ECR extends Service {
    * Applies a repository policy on a specified repository to control access permissions. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
    */
   setRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
+  /**
+   * Starts an image vulnerability scan.
+   */
+  startImageScan(params: ECR.Types.StartImageScanRequest, callback?: (err: AWSError, data: ECR.Types.StartImageScanResponse) => void): Request<ECR.Types.StartImageScanResponse, AWSError>;
+  /**
+   * Starts an image vulnerability scan.
+   */
+  startImageScan(callback?: (err: AWSError, data: ECR.Types.StartImageScanResponse) => void): Request<ECR.Types.StartImageScanResponse, AWSError>;
   /**
    * Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
    */
@@ -222,6 +246,19 @@ declare class ECR extends Service {
 }
 declare namespace ECR {
   export type Arn = string;
+  export interface Attribute {
+    /**
+     * The attribute key.
+     */
+    key: AttributeKey;
+    /**
+     * The value assigned to the attribute key.
+     */
+    value?: AttributeValue;
+  }
+  export type AttributeKey = string;
+  export type AttributeList = Attribute[];
+  export type AttributeValue = string;
   export interface AuthorizationData {
     /**
      * A base64-encoded string that contains authorization data for the specified Amazon ECR registry. When the string is decoded, it is presented in the format user:password for private registry authentication using docker login.
@@ -365,6 +402,10 @@ declare namespace ECR {
      * The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
      */
     imageTagMutability?: ImageTagMutability;
+    /**
+     * The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.
+     */
+    imageScanningConfiguration?: ImageScanningConfiguration;
   }
   export interface CreateRepositoryResponse {
     /**
@@ -445,6 +486,48 @@ declare namespace ECR {
      */
     repository?: Repository;
   }
+  export interface DescribeImageScanFindingsRequest {
+    /**
+     * The AWS account ID associated with the registry that contains the repository in which to describe the image scan findings for. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository for the image for which to describe the scan findings.
+     */
+    repositoryName: RepositoryName;
+    imageId: ImageIdentifier;
+    /**
+     * The nextToken value returned from a previous paginated DescribeImageScanFindings request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of image scan results returned by DescribeImageScanFindings in paginated output. When this parameter is used, DescribeImageScanFindings only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeImageScanFindings request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then DescribeImageScanFindings returns up to 100 results and a nextToken value, if applicable.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface DescribeImageScanFindingsResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    imageId?: ImageIdentifier;
+    /**
+     * The current state of the scan.
+     */
+    imageScanStatus?: ImageScanStatus;
+    /**
+     * The information contained in the image scan findings.
+     */
+    imageScanFindings?: ImageScanFindings;
+    /**
+     * The nextToken value to include in a future DescribeImageScanFindings request. When the results of a DescribeImageScanFindings request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
   export interface DescribeImagesFilter {
     /**
      * The tag status with which to filter your DescribeImages results. You can filter results based on whether they are TAGGED or UNTAGGED.
@@ -517,6 +600,10 @@ declare namespace ECR {
   }
   export type EvaluationTimestamp = Date;
   export type ExpirationTimestamp = Date;
+  export type FindingDescription = string;
+  export type FindingName = string;
+  export type FindingSeverity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNDEFINED"|string;
+  export type FindingSeverityCounts = {[key: string]: SeverityCount};
   export type ForceFlag = boolean;
   export type GetAuthorizationTokenRegistryIdList = RegistryId[];
   export interface GetAuthorizationTokenRequest {
@@ -708,6 +795,14 @@ declare namespace ECR {
      * The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. 
      */
     imagePushedAt?: PushTimestamp;
+    /**
+     * The current state of the scan.
+     */
+    imageScanStatus?: ImageScanStatus;
+    /**
+     * A summary of the last completed image scan.
+     */
+    imageScanFindingsSummary?: ImageScanFindingsSummary;
   }
   export type ImageDetailList = ImageDetail[];
   export type ImageDigest = string;
@@ -741,6 +836,77 @@ declare namespace ECR {
   export type ImageIdentifierList = ImageIdentifier[];
   export type ImageList = Image[];
   export type ImageManifest = string;
+  export interface ImageScanFinding {
+    /**
+     * The name associated with the finding, usually a CVE number.
+     */
+    name?: FindingName;
+    /**
+     * The description of the finding.
+     */
+    description?: FindingDescription;
+    /**
+     * A link containing additional details about the security vulnerability.
+     */
+    uri?: Url;
+    /**
+     * The finding severity.
+     */
+    severity?: FindingSeverity;
+    /**
+     * A collection of attributes of the host from which the finding is generated.
+     */
+    attributes?: AttributeList;
+  }
+  export type ImageScanFindingList = ImageScanFinding[];
+  export interface ImageScanFindings {
+    /**
+     * The time of the last completed image scan.
+     */
+    imageScanCompletedAt?: ScanTimestamp;
+    /**
+     * The time when the vulnerability data was last scanned.
+     */
+    vulnerabilitySourceUpdatedAt?: VulnerabilitySourceUpdateTimestamp;
+    /**
+     * The findings from the image scan.
+     */
+    findings?: ImageScanFindingList;
+    /**
+     * The image vulnerability counts, sorted by severity.
+     */
+    findingSeverityCounts?: FindingSeverityCounts;
+  }
+  export interface ImageScanFindingsSummary {
+    /**
+     * The time of the last completed image scan.
+     */
+    imageScanCompletedAt?: ScanTimestamp;
+    /**
+     * The time when the vulnerability data was last scanned.
+     */
+    vulnerabilitySourceUpdatedAt?: VulnerabilitySourceUpdateTimestamp;
+    /**
+     * The image vulnerability counts, sorted by severity.
+     */
+    findingSeverityCounts?: FindingSeverityCounts;
+  }
+  export interface ImageScanStatus {
+    /**
+     * The current state of an image scan.
+     */
+    status?: ScanStatus;
+    /**
+     * The description of the image scan status.
+     */
+    description?: ScanStatusDescription;
+  }
+  export interface ImageScanningConfiguration {
+    /**
+     * The setting that determines whether images are scanned after being pushed to a repository. If set to true, images will be scanned after being pushed. If this parameter is not specified, it will default to false and images will not be scanned unless a scan is manually started with the StartImageScan API.
+     */
+    scanOnPush?: ScanOnPushFlag;
+  }
   export type ImageSizeInBytes = number;
   export type ImageTag = string;
   export type ImageTagList = ImageTag[];
@@ -932,6 +1098,34 @@ declare namespace ECR {
      */
     image?: Image;
   }
+  export interface PutImageScanningConfigurationRequest {
+    /**
+     * The AWS account ID associated with the registry that contains the repository in which to update the image scanning configuration setting. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The name of the repository in which to update the image scanning configuration setting.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.
+     */
+    imageScanningConfiguration: ImageScanningConfiguration;
+  }
+  export interface PutImageScanningConfigurationResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The image scanning configuration setting for the repository.
+     */
+    imageScanningConfiguration?: ImageScanningConfiguration;
+  }
   export interface PutImageTagMutabilityRequest {
     /**
      * The AWS account ID associated with the registry that contains the repository in which to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.
@@ -1014,11 +1208,16 @@ declare namespace ECR {
      * The tag mutability setting for the repository.
      */
     imageTagMutability?: ImageTagMutability;
+    imageScanningConfiguration?: ImageScanningConfiguration;
   }
   export type RepositoryList = Repository[];
   export type RepositoryName = string;
   export type RepositoryNameList = RepositoryName[];
   export type RepositoryPolicyText = string;
+  export type ScanOnPushFlag = boolean;
+  export type ScanStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
+  export type ScanStatusDescription = string;
+  export type ScanTimestamp = Date;
   export interface SetRepositoryPolicyRequest {
     /**
      * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
@@ -1050,6 +1249,33 @@ declare namespace ECR {
      * The JSON repository policy text applied to the repository.
      */
     policyText?: RepositoryPolicyText;
+  }
+  export type SeverityCount = number;
+  export interface StartImageScanRequest {
+    /**
+     * The AWS account ID associated with the registry that contains the repository in which to start an image scan request. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The name of the repository that contains the images to scan.
+     */
+    repositoryName: RepositoryName;
+    imageId: ImageIdentifier;
+  }
+  export interface StartImageScanResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    imageId?: ImageIdentifier;
+    /**
+     * The current state of the scan.
+     */
+    imageScanStatus?: ImageScanStatus;
   }
   export interface StartLifecyclePolicyPreviewRequest {
     /**
@@ -1168,6 +1394,7 @@ declare namespace ECR {
     lastByteReceived?: PartSize;
   }
   export type Url = string;
+  export type VulnerabilitySourceUpdateTimestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

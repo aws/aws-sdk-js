@@ -118,6 +118,32 @@
       ],
       "documentation": "<p>Stop the service update. For more information on service updates and stopping them, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/stopping-self-service-updates.html\">Stopping Service Updates</a>.</p>"
     },
+    "CompleteMigration": {
+      "name": "CompleteMigration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CompleteMigrationMessage"
+      },
+      "output": {
+        "shape": "CompleteMigrationResponse",
+        "resultWrapper": "CompleteMigrationResult"
+      },
+      "errors": [
+        {
+          "shape": "ReplicationGroupNotFoundFault"
+        },
+        {
+          "shape": "InvalidReplicationGroupStateFault"
+        },
+        {
+          "shape": "ReplicationGroupNotUnderMigrationFault"
+        }
+      ],
+      "documentation": "<p>Complete the migration of data.</p>"
+    },
     "CopySnapshot": {
       "name": "CopySnapshot",
       "http": {
@@ -1443,6 +1469,35 @@
       ],
       "documentation": "<p>Revokes ingress from a cache security group. Use this operation to disallow access from an Amazon EC2 security group that had been previously authorized.</p>"
     },
+    "StartMigration": {
+      "name": "StartMigration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartMigrationMessage"
+      },
+      "output": {
+        "shape": "StartMigrationResponse",
+        "resultWrapper": "StartMigrationResult"
+      },
+      "errors": [
+        {
+          "shape": "ReplicationGroupNotFoundFault"
+        },
+        {
+          "shape": "InvalidReplicationGroupStateFault"
+        },
+        {
+          "shape": "ReplicationGroupAlreadyUnderMigrationFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ],
+      "documentation": "<p>Start the migration of data.</p>"
+    },
     "TestFailover": {
       "name": "TestFailover",
       "http": {
@@ -2198,6 +2253,30 @@
         "locationName": "ClusterId"
       }
     },
+    "CompleteMigrationMessage": {
+      "type": "structure",
+      "required": [
+        "ReplicationGroupId"
+      ],
+      "members": {
+        "ReplicationGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the replication group to which data is being migrated.</p>"
+        },
+        "Force": {
+          "shape": "Boolean",
+          "documentation": "<p>Forces the migration to stop without ensuring that data is in sync. It is recommended to use this option only to abort the migration and not recommended when application wants to continue migration to ElastiCache.</p>"
+        }
+      }
+    },
+    "CompleteMigrationResponse": {
+      "type": "structure",
+      "members": {
+        "ReplicationGroup": {
+          "shape": "ReplicationGroup"
+        }
+      }
+    },
     "ConfigureShard": {
       "type": "structure",
       "required": [
@@ -2616,6 +2695,26 @@
         "Snapshot": {
           "shape": "Snapshot"
         }
+      }
+    },
+    "CustomerNodeEndpoint": {
+      "type": "structure",
+      "members": {
+        "Address": {
+          "shape": "String",
+          "documentation": "<p>The address of the node endpoint</p>"
+        },
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The port of the node endpoint</p>"
+        }
+      },
+      "documentation": "<p>The endpoint from which data should be migrated.</p>"
+    },
+    "CustomerNodeEndpointList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomerNodeEndpoint"
       }
     },
     "DecreaseReplicaCountMessage": {
@@ -4749,6 +4848,31 @@
         "cache-subnet-group",
         "replication-group"
       ]
+    },
+    "StartMigrationMessage": {
+      "type": "structure",
+      "required": [
+        "ReplicationGroupId",
+        "CustomerNodeEndpointList"
+      ],
+      "members": {
+        "ReplicationGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the replication group to which data should be migrated.</p>"
+        },
+        "CustomerNodeEndpointList": {
+          "shape": "CustomerNodeEndpointList",
+          "documentation": "<p>List of endpoints from which data should be migrated. For Redis (cluster mode disabled), list should have only one element.</p>"
+        }
+      }
+    },
+    "StartMigrationResponse": {
+      "type": "structure",
+      "members": {
+        "ReplicationGroup": {
+          "shape": "ReplicationGroup"
+        }
+      }
     },
     "String": {
       "type": "string"
