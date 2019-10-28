@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.557.0-->
+<!--LATEST=2.558.0-->
 <!--ENTRYINSERT-->
+
+## 2.558.0
+* feature: S3: Adding support in SelectObjectContent for scanning a portion of an object specified by a scan range.
 
 ## 2.557.0
 * feature: ECR: This release of Amazon Elastic Container Registry Service (Amazon ECR) introduces support for image scanning. This identifies the software vulnerabilities in the container image based on the Common Vulnerabilities and Exposures (CVE) database.

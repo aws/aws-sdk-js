@@ -1824,6 +1824,7 @@ declare namespace S3 {
      */
     ReplicaKmsKeyID?: ReplicaKmsKeyID;
   }
+  export type End = number;
   export interface EndEvent {
   }
   export interface Error {
@@ -4720,6 +4721,16 @@ declare namespace S3 {
   export type SSEKMSKeyId = string;
   export interface SSES3 {
   }
+  export interface ScanRange {
+    /**
+     * Specifies the start of the byte range. This parameter is optional. Valid values: non-negative integers. The default value is 0.
+     */
+    Start?: Start;
+    /**
+     * Specifies the end of the byte range. This parameter is optional. Valid values: non-negative integers. The default value is one less than the size of the object being queried.
+     */
+    End?: End;
+  }
   export type SelectObjectContentEventStream = EventStream<{Records?:RecordsEvent,Stats?:StatsEvent,Progress?:ProgressEvent,Cont?:ContinuationEvent,End?:EndEvent}>;
   export interface SelectObjectContentOutput {
     /**
@@ -4768,6 +4779,10 @@ declare namespace S3 {
      * Describes the format of the data that you want Amazon S3 to return in response.
      */
     OutputSerialization: OutputSerialization;
+    /**
+     * Specifies the byte range of the object to get the records from. A record is processed when its first byte is contained by the range. This parameter is optional, but when specified, it must not be empty. See RFC 2616, Section 14.35.1 about how to specify the start and end of the range.
+     */
+    ScanRange?: ScanRange;
   }
   export interface SelectParameters {
     /**
@@ -4826,6 +4841,7 @@ declare namespace S3 {
     Status: SseKmsEncryptedObjectsStatus;
   }
   export type SseKmsEncryptedObjectsStatus = "Enabled"|"Disabled"|string;
+  export type Start = number;
   export type StartAfter = string;
   export interface Stats {
     /**

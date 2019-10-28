@@ -3239,6 +3239,9 @@
       },
       "documentation": "<p>Specifies encryption-related information for an Amazon S3 bucket that is a destination for replicated objects.</p>"
     },
+    "End": {
+      "type": "long"
+    },
     "EndEvent": {
       "type": "structure",
       "members": {},
@@ -8427,6 +8430,19 @@
       "documentation": "<p>Specifies the use of SSE-S3 to encrypt delivered Inventory reports.</p>",
       "locationName": "SSE-S3"
     },
+    "ScanRange": {
+      "type": "structure",
+      "members": {
+        "Start": {
+          "shape": "Start",
+          "documentation": "<p>Specifies the start of the byte range. This parameter is optional. Valid values: non-negative integers. The default value is 0.</p>"
+        },
+        "End": {
+          "shape": "End",
+          "documentation": "<p>Specifies the end of the byte range. This parameter is optional. Valid values: non-negative integers. The default value is one less than the size of the object being queried.</p>"
+        }
+      }
+    },
     "SelectObjectContentEventStream": {
       "type": "structure",
       "members": {
@@ -8524,6 +8540,10 @@
         "OutputSerialization": {
           "shape": "OutputSerialization",
           "documentation": "<p>Describes the format of the data that you want Amazon S3 to return in response.</p>"
+        },
+        "ScanRange": {
+          "shape": "ScanRange",
+          "documentation": "<p>Specifies the byte range of the object to get the records from. A record is processed when its first byte is contained by the range. This parameter is optional, but when specified, it must not be empty. See RFC 2616, Section 14.35.1 about how to specify the start and end of the range.</p>"
         }
       },
       "documentation": "<p>Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records. It returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html\">S3Select API Documentation</a>.</p>"
@@ -8646,6 +8666,9 @@
         "Enabled",
         "Disabled"
       ]
+    },
+    "Start": {
+      "type": "long"
     },
     "StartAfter": {
       "type": "string"
