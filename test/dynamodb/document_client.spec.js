@@ -1021,10 +1021,16 @@
         client = new AWS.DynamoDB.DocumentClient({
           excludeUnknownInputTypes: true
         });
+        Object.prototype.newProp = unknown;
         request = client.put(input);
         request.emit('validate', [request]);
+        delete Object.prototype.newProp;
 
-        expect( function() { translateInput(input); } ).to.not.throw('shape.toType is not a function');
+        expect( function() {
+            Object.prototype.newProp = unknownn;
+            translateInput(input);
+            delete Object.prototype.newProp;
+        }).to.not.throw('shape.toType is not a function');
         expect(request.params).to.eql(params);
       });
     });
