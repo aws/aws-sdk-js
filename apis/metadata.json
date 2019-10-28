@@ -565,7 +565,8 @@
     "name": "TranscribeService"
   },
   "connect": {
-    "name": "Connect"
+    "name": "Connect",
+    "cors": true
   },
   "acmpca": {
     "prefix": "acm-pca",
