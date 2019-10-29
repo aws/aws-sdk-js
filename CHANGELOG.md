@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.558.0-->
+<!--LATEST=2.559.0-->
 <!--ENTRYINSERT-->
+
+## 2.559.0
+* feature: AppStream: Adds support for providing domain names that can embed streaming sessions
+* feature: Cloud9: Added CREATING and CREATE_FAILED environment lifecycle statuses.  
+* feature: Connect: enable cors to make connect service available in default browser built
+* feature: X-ray, Connect, IotAnalytics: updated SERVICES.md for 3 services, x-ray, connect, IotAnalytics
 
 ## 2.558.0
 * feature: S3: Adding support in SelectObjectContent for scanning a portion of an object specified by a scan range.

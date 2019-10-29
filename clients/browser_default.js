@@ -76,6 +76,7 @@ module.exports = {
   KinesisVideo: require('./kinesisvideo'),
   Translate: require('./translate'),
   ResourceGroups: require('./resourcegroups'),
+  Connect: require('./connect'),
   SecretsManager: require('./secretsmanager'),
   IoTAnalytics: require('./iotanalytics'),
   ComprehendMedical: require('./comprehendmedical'),

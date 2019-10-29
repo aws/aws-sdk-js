@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "Adds support for providing domain names that can embed streaming sessions"
+    },
+    {
+        "type": "feature",
+        "category": "Cloud9",
+        "description": "Added CREATING and CREATE_FAILED environment lifecycle statuses.  "
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "enable cors to make connect service available in default browser built"
+    },
+    {
+        "type": "feature",
+        "category": "X-ray, Connect, IotAnalytics",
+        "description": "updated SERVICES.md for 3 services, x-ray, connect, IotAnalytics"
+    }
+]

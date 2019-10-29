@@ -267,7 +267,7 @@ declare namespace Cloud9 {
   export type EnvironmentIdList = EnvironmentId[];
   export interface EnvironmentLifecycle {
     /**
-     * The current creation or deletion lifecycle state of the environment.    CREATED: The environment was successfully created.    DELETE_FAILED: The environment failed to delete.    DELETING: The environment is in the process of being deleted.  
+     * The current creation or deletion lifecycle state of the environment.    CREATING: The environment is in the process of being created.    CREATED: The environment was successfully created.    CREATE_FAILED: The environment failed to be created.    DELETING: The environment is in the process of being deleted.    DELETE_FAILED: The environment failed to delete.  
      */
     status?: EnvironmentLifecycleStatus;
     /**
@@ -279,7 +279,7 @@ declare namespace Cloud9 {
      */
     failureResource?: String;
   }
-  export type EnvironmentLifecycleStatus = "CREATED"|"DELETING"|"DELETE_FAILED"|string;
+  export type EnvironmentLifecycleStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED"|string;
   export type EnvironmentList = Environment[];
   export interface EnvironmentMember {
     /**

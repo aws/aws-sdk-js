@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Connect",
-  "description": "enable cors to make connect service available in default browser built"
-}
