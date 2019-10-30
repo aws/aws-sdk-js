@@ -1675,6 +1675,44 @@
           return done();
         });
       });
+      it('retries with custom backoff', function(done) {
+        helpers.spyOn(AWS.util, 'error').andReturn({
+          retryable: true
+        });
+        var topLevelScope = null;
+        if (typeof global === 'object') {
+          topLevelScope = global;
+        } else if (typeof self === 'object') {
+          topLevelScope = self;
+        } else {
+          topLevelScope = window;
+        }
+        var setTimeoutSpy = helpers.spyOn(topLevelScope, 'setTimeout').andCallFake(function (cb) {
+          process.nextTick(cb);
+        });
+        options = {
+          maxRetries: 2,
+          retryDelayOptions: {
+            customBackoff: function(retryCount, err) {
+              return 2 * retryCount;
+            },
+          },
+        };
+        app = function(req, resp) {
+          resp.writeHead(400, {});
+          resp.write('FOOBAR');
+          return resp.end();
+        };
+        return sendRequest(function(err, data) {
+          expect(data).to.be.undefined;
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
+          expect(setTimeoutSpy.calls.length).to.equal(options.maxRetries);
+          expect(setTimeoutSpy.calls[0].arguments[1]).to.equal(0);
+          expect(setTimeoutSpy.calls[1].arguments[1]).to.equal(2);
+          return done();
+        });
+      });
     });
   }
 
