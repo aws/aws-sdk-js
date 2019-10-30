@@ -49,6 +49,12 @@ describe('AWS.Config', function() {
     });
 
     if (AWS.util.isNode()) {
+      it('grabs AWS_DEFAULT_REGION from the env', function() {
+        process.env.AWS_DEFAULT_REGION = 'us-east-2';
+        var config = new AWS.Config();
+        expect(config.region).to.equal('us-east-2');
+      });
+
       it('grabs AWS_REGION from the env', function() {
         process.env.AWS_REGION = 'us-west-2';
         var config = new AWS.Config();
@@ -59,6 +65,14 @@ describe('AWS.Config', function() {
         process.env.AMAZON_REGION = 'us-west-1';
         var config = new AWS.Config();
         expect(config.region).to.equal('us-west-1');
+      });
+
+      it('prefers AWS_DEFAULT_REGION to AWS_REGION and AMAZON_REGION', function() {
+        process.env.AWS_DEFAULT_REGION = 'us-east-2';
+        process.env.AWS_REGION = 'us-west-2';
+        process.env.AMAZON_REGION = 'us-west-1';
+        var config = new AWS.Config();
+        expect(config.region).to.equal('us-east-2');
       });
 
       it('prefers AWS_REGION to AMAZON_REGION', function() {

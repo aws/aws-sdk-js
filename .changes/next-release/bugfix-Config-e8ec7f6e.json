@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Config",
+  "description": "Prefer AWS_DEFAULT_REGION environment variable to AWS_REGION or AMAZON_REGION, as indicated by the AWS CLI documentation."
+}
