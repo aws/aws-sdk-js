@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.559.0-->
+<!--LATEST=2.560.0-->
 <!--ENTRYINSERT-->
+
+## 2.560.0
+* feature: ElastiCache: Amazon ElastiCache for Redis 5.0.5 now allows you to modify authentication tokens by setting and rotating new tokens. You can now modify active tokens while in use, or add brand-new tokens to existing encryption-in-transit enabled clusters that were previously setup without authentication tokens. This is a two-step process that allows you to set and rotate the token without interrupting client requests.
 
 ## 2.559.0
 * feature: AppStream: Adds support for providing domain names that can embed streaming sessions

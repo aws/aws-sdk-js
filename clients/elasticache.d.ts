@@ -452,6 +452,8 @@ declare namespace ElastiCache {
      */
     ScaleDownModifications?: NodeTypeList;
   }
+  export type AuthTokenUpdateStatus = "SETTING"|"ROTATING"|string;
+  export type AuthTokenUpdateStrategyType = "SET"|"ROTATE"|string;
   export interface AuthorizeCacheSecurityGroupIngressMessage {
     /**
      * The cache security group that allows network ingress.
@@ -597,6 +599,10 @@ declare namespace ElastiCache {
      * A flag that enables using an AuthToken (password) when issuing Redis commands. Default: false 
      */
     AuthTokenEnabled?: BooleanOptional;
+    /**
+     * The date the auth token was last modified
+     */
+    AuthTokenLastModifiedDate?: TStamp;
     /**
      * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
      */
@@ -1037,7 +1043,7 @@ declare namespace ElastiCache {
      */
     SnapshotWindow?: String;
     /**
-     *  Reserved parameter. The password used to access a password protected server. Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   Cannot contain any of the following characters: '/', '"', or '@'.    For more information, see AUTH password at http://redis.io/commands/AUTH.
+     *  Reserved parameter. The password used to access a password protected server. Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.   For more information, see AUTH password at http://redis.io/commands/AUTH.
      */
     AuthToken?: String;
   }
@@ -1193,7 +1199,7 @@ declare namespace ElastiCache {
      */
     SnapshotWindow?: String;
     /**
-     *  Reserved parameter. The password used to access a password protected server.  AuthToken can be specified only on replication groups where TransitEncryptionEnabled is true.  For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup.  Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   Cannot contain any of the following characters: '/', '"', or '@'.    For more information, see AUTH password at http://redis.io/commands/AUTH.
+     *  Reserved parameter. The password used to access a password protected server.  AuthToken can be specified only on replication groups where TransitEncryptionEnabled is true.  For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup.  Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.   For more information, see AUTH password at http://redis.io/commands/AUTH.
      */
     AuthToken?: String;
     /**
@@ -1786,7 +1792,7 @@ declare namespace ElastiCache {
      */
     CacheNodeIdsToRemove?: CacheNodeIdsList;
     /**
-     * Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones. Valid values: single-az | cross-az. This option is only supported for Memcached clusters.  You cannot specify single-az if the Memcached cluster already has cache nodes in different Availability Zones. If cross-az is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes are located in different Availability Zones. For instructions on how to move existing Memcached nodes to different Availability Zones, see the Availability Zone Considerations section of Cache Node Considerations for Memcached. 
+     * Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones. Valid values: single-az | cross-az. This option is only supported for Memcached clusters.  You cannot specify single-az if the Memcached cluster already has cache nodes in different Availability Zones. If cross-az is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes are located in different Availability Zones.  
      */
     AZMode?: AZMode;
     /**
@@ -1841,6 +1847,14 @@ declare namespace ElastiCache {
      * A valid cache node type that you want to scale this cluster up to.
      */
     CacheNodeType?: String;
+    /**
+     * Reserved parameter. The password used to access a password protected server. This parameter must be specified with the auth-token-update parameter. Password constraints:   Must be only printable ASCII characters   Must be at least 16 characters and no more than 128 characters in length   Cannot contain any of the following characters: '/', '"', or '@', '%'    For more information, see AUTH password at AUTH.
+     */
+    AuthToken?: String;
+    /**
+     * Specifies the strategy to use to update the AUTH token. This parameter must be specified with the auth-token parameter. Possible values:   Rotate   Set    For more information, see Authenticating Users with Redis AUTH 
+     */
+    AuthTokenUpdateStrategy?: AuthTokenUpdateStrategyType;
   }
   export interface ModifyCacheClusterResult {
     CacheCluster?: CacheCluster;
@@ -1894,6 +1908,10 @@ declare namespace ElastiCache {
      */
     AutomaticFailoverEnabled?: BooleanOptional;
     /**
+     * Deprecated. This parameter is not used.
+     */
+    NodeGroupId?: String;
+    /**
      * A list of cache security group names to authorize for the clusters in this replication group. This change is asynchronously applied as soon as possible. This parameter can be used only with replication group containing clusters running outside of an Amazon Virtual Private Cloud (Amazon VPC). Constraints: Must contain no more than 255 alphanumeric characters. Must not be Default.
      */
     CacheSecurityGroupNames?: CacheSecurityGroupNameList;
@@ -1942,9 +1960,13 @@ declare namespace ElastiCache {
      */
     CacheNodeType?: String;
     /**
-     * Deprecated. This parameter is not used.
+     * Reserved parameter. The password used to access a password protected server. This parameter must be specified with the auth-token-update-strategy  parameter. Password constraints:   Must be only printable ASCII characters   Must be at least 16 characters and no more than 128 characters in length   Cannot contain any of the following characters: '/', '"', or '@', '%'    For more information, see AUTH password at AUTH.
      */
-    NodeGroupId?: String;
+    AuthToken?: String;
+    /**
+     * Specifies the strategy to use to update the AUTH token. This parameter must be specified with the auth-token parameter. Possible values:   Rotate   Set    For more information, see Authenticating Users with Redis AUTH 
+     */
+    AuthTokenUpdateStrategy?: AuthTokenUpdateStrategyType;
   }
   export interface ModifyReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -2215,6 +2237,10 @@ declare namespace ElastiCache {
      * The cache node type that this cluster or replication group is scaled to.
      */
     CacheNodeType?: String;
+    /**
+     * The auth token status
+     */
+    AuthTokenStatus?: AuthTokenUpdateStatus;
   }
   export type PreferredAvailabilityZoneList = String[];
   export interface ProcessedUpdateAction {
@@ -2347,6 +2373,10 @@ declare namespace ElastiCache {
      */
     AuthTokenEnabled?: BooleanOptional;
     /**
+     * The date the auth token was last modified
+     */
+    AuthTokenLastModifiedDate?: TStamp;
+    /**
      * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
      */
     TransitEncryptionEnabled?: BooleanOptional;
@@ -2384,6 +2414,10 @@ declare namespace ElastiCache {
      * The status of an online resharding operation.
      */
     Resharding?: ReshardingStatus;
+    /**
+     * The auth token status
+     */
+    AuthTokenStatus?: AuthTokenUpdateStatus;
   }
   export interface ReservedCacheNode {
     /**
