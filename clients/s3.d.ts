@@ -2776,7 +2776,7 @@ declare namespace S3 {
   export type InventoryFrequency = "Daily"|"Weekly"|string;
   export type InventoryId = string;
   export type InventoryIncludedObjectVersions = "All"|"Current"|string;
-  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|"EncryptionStatus"|"ObjectLockRetainUntilDate"|"ObjectLockMode"|"ObjectLockLegalHoldStatus"|string;
+  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|"EncryptionStatus"|"ObjectLockRetainUntilDate"|"ObjectLockMode"|"ObjectLockLegalHoldStatus"|"IntelligentTieringAccessTier"|string;
   export type InventoryOptionalFields = InventoryOptionalField[];
   export interface InventoryS3BucketDestination {
     /**

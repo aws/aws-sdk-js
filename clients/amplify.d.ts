@@ -92,11 +92,11 @@ declare class Amplify extends Service {
    */
   deleteWebhook(callback?: (err: AWSError, data: Amplify.Types.DeleteWebhookResult) => void): Request<Amplify.Types.DeleteWebhookResult, AWSError>;
   /**
-   *  Retrieve website access logs for a specific time range via a pre-signed URL. Optionally, deliver the logs to a given S3 bucket. 
+   *  Retrieve website access logs for a specific time range via a pre-signed URL. 
    */
   generateAccessLogs(params: Amplify.Types.GenerateAccessLogsRequest, callback?: (err: AWSError, data: Amplify.Types.GenerateAccessLogsResult) => void): Request<Amplify.Types.GenerateAccessLogsResult, AWSError>;
   /**
-   *  Retrieve website access logs for a specific time range via a pre-signed URL. Optionally, deliver the logs to a given S3 bucket. 
+   *  Retrieve website access logs for a specific time range via a pre-signed URL. 
    */
   generateAccessLogs(callback?: (err: AWSError, data: Amplify.Types.GenerateAccessLogsResult) => void): Request<Amplify.Types.GenerateAccessLogsResult, AWSError>;
   /**
@@ -380,7 +380,6 @@ declare namespace Amplify {
   }
   export type ArtifactFileName = string;
   export type ArtifactId = string;
-  export type ArtifactType = "TEST"|string;
   export type ArtifactUrl = string;
   export type Artifacts = Artifact[];
   export type ArtifactsUrl = string;
@@ -419,9 +418,14 @@ declare namespace Amplify {
      *  Enables Pull Request Preview for auto created branch. 
      */
     enablePullRequestPreview?: EnablePullRequestPreview;
+    /**
+     *  The Amplify Environment name for the pull request. 
+     */
+    pullRequestEnvironmentName?: PullRequestEnvironmentName;
   }
   export type AutoBranchCreationPattern = string;
   export type AutoBranchCreationPatterns = AutoBranchCreationPattern[];
+  export type BackendEnvironmentArn = string;
   export type BasicAuthCredentials = string;
   export interface Branch {
     /**
@@ -513,6 +517,10 @@ declare namespace Amplify {
      */
     enablePullRequestPreview: EnablePullRequestPreview;
     /**
+     *  The Amplify Environment name for the pull request. 
+     */
+    pullRequestEnvironmentName?: PullRequestEnvironmentName;
+    /**
      *  The destination branch if the branch is a pull request branch. 
      */
     destinationBranch?: BranchName;
@@ -520,6 +528,10 @@ declare namespace Amplify {
      *  The source branch if the branch is a pull request branch. 
      */
     sourceBranch?: BranchName;
+    /**
+     *  ARN for a Backend Environment, part of an Amplify App. 
+     */
+    backendEnvironmentArn?: BackendEnvironmentArn;
   }
   export type BranchArn = string;
   export type BranchName = string;
@@ -665,6 +677,14 @@ declare namespace Amplify {
      *  Enables Pull Request Preview for this branch. 
      */
     enablePullRequestPreview?: EnablePullRequestPreview;
+    /**
+     *  The Amplify Environment name for the pull request. 
+     */
+    pullRequestEnvironmentName?: PullRequestEnvironmentName;
+    /**
+     *  ARN for a Backend Environment, part of an Amplify App. 
+     */
+    backendEnvironmentArn?: BackendEnvironmentArn;
   }
   export interface CreateBranchResult {
     /**
@@ -710,7 +730,7 @@ declare namespace Amplify {
      */
     domainName: DomainName;
     /**
-     *  Enables automated creation of Subdomains for branches. 
+     *  Enables automated creation of Subdomains for branches. (Currently not supported) 
      */
     enableAutoSubDomain?: EnableAutoSubDomain;
     /**
@@ -847,7 +867,7 @@ declare namespace Amplify {
      */
     domainName: DomainName;
     /**
-     *  Enables automated creation of Subdomains for branches. 
+     *  Enables automated creation of Subdomains for branches. (Currently not supported) 
      */
     enableAutoSubDomain: EnableAutoSubDomain;
     /**
@@ -1083,10 +1103,6 @@ declare namespace Amplify {
      */
     jobId: JobId;
     /**
-     *  Type for an artifact. 
-     */
-    artifactType?: ArtifactType;
-    /**
      *  Pagination token. Set to null to start listing artifacts from start. If non-null pagination token is returned in a result, then pass its value in here to list more artifacts. 
      */
     nextToken?: NextToken;
@@ -1242,6 +1258,7 @@ declare namespace Amplify {
      */
     branchName?: BranchName;
   }
+  export type PullRequestEnvironmentName = string;
   export type Repository = string;
   export type ResourceArn = string;
   export type Screenshots = {[key: string]: ThumbnailUrl};
@@ -1578,6 +1595,14 @@ declare namespace Amplify {
      *  Enables Pull Request Preview for this branch. 
      */
     enablePullRequestPreview?: EnablePullRequestPreview;
+    /**
+     *  The Amplify Environment name for the pull request. 
+     */
+    pullRequestEnvironmentName?: PullRequestEnvironmentName;
+    /**
+     *  ARN for a Backend Environment, part of an Amplify App. 
+     */
+    backendEnvironmentArn?: BackendEnvironmentArn;
   }
   export interface UpdateBranchResult {
     /**
@@ -1595,7 +1620,7 @@ declare namespace Amplify {
      */
     domainName: DomainName;
     /**
-     *  Enables automated creation of Subdomains for branches. 
+     *  Enables automated creation of Subdomains for branches. (Currently not supported) 
      */
     enableAutoSubDomain?: EnableAutoSubDomain;
     /**

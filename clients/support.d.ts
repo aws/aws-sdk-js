@@ -28,11 +28,11 @@ declare class Support extends Service {
    */
   addCommunicationToCase(callback?: (err: AWSError, data: Support.Types.AddCommunicationToCaseResponse) => void): Request<Support.Types.AddCommunicationToCaseResponse, AWSError>;
   /**
-   * Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center Create Case page. Its parameters require you to specify the following information:     issueType. The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."     serviceCode. The code for an AWS service. You obtain the serviceCode by calling DescribeServices.     categoryCode. The category for the service defined for the serviceCode value. You also obtain the category code for a service by calling DescribeServices. Each AWS service defines its own set of category codes.     severityCode. A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You obtain the SeverityCode by calling DescribeSeverityLevels.    subject. The Subject field on the AWS Support Center Create Case page.    communicationBody. The Description field on the AWS Support Center Create Case page.    attachmentSetId. The ID of a set of attachments that has been created by using AddAttachmentsToSet.    language. The human language in which AWS Support handles the case. English and Japanese are currently supported.    ccEmailAddresses. The AWS Support Center CC field on the Create Case page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an AWS SDK.     To add additional communication or attachments to an existing case, use AddCommunicationToCase.  A successful CreateCase request returns an AWS Support case number. Case numbers are used by the DescribeCases operation to retrieve existing AWS Support cases. 
+   * Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center Create Case page. Its parameters require you to specify the following information:    issueType. The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."  Service limit increases are not supported by the Support API; you must submit service limit increase requests in Support Center. The caseId is not the displayId that appears in Support Center. You can use the DescribeCases API to get the displayId.     serviceCode. The code for an AWS service. You can get the possible serviceCode values by calling DescribeServices.    categoryCode. The category for the service defined for the serviceCode value. You also get the category code for a service by calling DescribeServices. Each AWS service defines its own set of category codes.    severityCode. A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You can get the possible severityCode values by calling DescribeSeverityLevels. For more information about the meaning of the codes, see SeverityLevel and Choosing a Severity.    subject. The Subject field on the AWS Support Center Create Case page.    communicationBody. The Description field on the AWS Support Center Create Case page.    attachmentSetId. The ID of a set of attachments that has been created by using AddAttachmentsToSet.    language. The human language in which AWS Support handles the case. English and Japanese are currently supported.    ccEmailAddresses. The AWS Support Center CC field on the Create Case page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an AWS SDK.     To add additional communication or attachments to an existing case, use AddCommunicationToCase.  A successful CreateCase request returns an AWS Support case number. Case numbers are used by the DescribeCases operation to retrieve existing AWS Support cases.
    */
   createCase(params: Support.Types.CreateCaseRequest, callback?: (err: AWSError, data: Support.Types.CreateCaseResponse) => void): Request<Support.Types.CreateCaseResponse, AWSError>;
   /**
-   * Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center Create Case page. Its parameters require you to specify the following information:     issueType. The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."     serviceCode. The code for an AWS service. You obtain the serviceCode by calling DescribeServices.     categoryCode. The category for the service defined for the serviceCode value. You also obtain the category code for a service by calling DescribeServices. Each AWS service defines its own set of category codes.     severityCode. A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You obtain the SeverityCode by calling DescribeSeverityLevels.    subject. The Subject field on the AWS Support Center Create Case page.    communicationBody. The Description field on the AWS Support Center Create Case page.    attachmentSetId. The ID of a set of attachments that has been created by using AddAttachmentsToSet.    language. The human language in which AWS Support handles the case. English and Japanese are currently supported.    ccEmailAddresses. The AWS Support Center CC field on the Create Case page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an AWS SDK.     To add additional communication or attachments to an existing case, use AddCommunicationToCase.  A successful CreateCase request returns an AWS Support case number. Case numbers are used by the DescribeCases operation to retrieve existing AWS Support cases. 
+   * Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center Create Case page. Its parameters require you to specify the following information:    issueType. The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."  Service limit increases are not supported by the Support API; you must submit service limit increase requests in Support Center. The caseId is not the displayId that appears in Support Center. You can use the DescribeCases API to get the displayId.     serviceCode. The code for an AWS service. You can get the possible serviceCode values by calling DescribeServices.    categoryCode. The category for the service defined for the serviceCode value. You also get the category code for a service by calling DescribeServices. Each AWS service defines its own set of category codes.    severityCode. A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You can get the possible severityCode values by calling DescribeSeverityLevels. For more information about the meaning of the codes, see SeverityLevel and Choosing a Severity.    subject. The Subject field on the AWS Support Center Create Case page.    communicationBody. The Description field on the AWS Support Center Create Case page.    attachmentSetId. The ID of a set of attachments that has been created by using AddAttachmentsToSet.    language. The human language in which AWS Support handles the case. English and Japanese are currently supported.    ccEmailAddresses. The AWS Support Center CC field on the Create Case page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an AWS SDK.     To add additional communication or attachments to an existing case, use AddCommunicationToCase.  A successful CreateCase request returns an AWS Support case number. Case numbers are used by the DescribeCases operation to retrieve existing AWS Support cases.
    */
   createCase(callback?: (err: AWSError, data: Support.Types.CreateCaseResponse) => void): Request<Support.Types.CreateCaseResponse, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class Support extends Service {
    */
   describeAttachment(callback?: (err: AWSError, data: Support.Types.DescribeAttachmentResponse) => void): Request<Support.Types.DescribeAttachmentResponse, AWSError>;
   /**
-   * Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the afterTime and beforeTime request parameters. You can set values for the includeResolvedCases and includeCommunications request parameters to control how much information is returned.  Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error. The response returns the following in JSON format:   One or more CaseDetails data types.    One or more nextToken values, which specify where to paginate the returned records represented by the CaseDetails objects.  
+   * Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the afterTime and beforeTime request parameters. You can set values for the includeResolvedCases and includeCommunications request parameters to control how much information is returned. Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error. The response returns the following in JSON format:   One or more CaseDetails data types.   One or more nextToken values, which specify where to paginate the returned records represented by the CaseDetails objects.  
    */
   describeCases(params: Support.Types.DescribeCasesRequest, callback?: (err: AWSError, data: Support.Types.DescribeCasesResponse) => void): Request<Support.Types.DescribeCasesResponse, AWSError>;
   /**
-   * Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the afterTime and beforeTime request parameters. You can set values for the includeResolvedCases and includeCommunications request parameters to control how much information is returned.  Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error. The response returns the following in JSON format:   One or more CaseDetails data types.    One or more nextToken values, which specify where to paginate the returned records represented by the CaseDetails objects.  
+   * Returns a list of cases that you specify by passing one or more case IDs. In addition, you can filter the cases by date by setting values for the afterTime and beforeTime request parameters. You can set values for the includeResolvedCases and includeCommunications request parameters to control how much information is returned. Case data is available for 12 months after creation. If a case was created more than 12 months ago, a request for data might cause an error. The response returns the following in JSON format:   One or more CaseDetails data types.   One or more nextToken values, which specify where to paginate the returned records represented by the CaseDetails objects.  
    */
   describeCases(callback?: (err: AWSError, data: Support.Types.DescribeCasesResponse) => void): Request<Support.Types.DescribeCasesResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class Support extends Service {
    */
   describeServices(callback?: (err: AWSError, data: Support.Types.DescribeServicesResponse) => void): Request<Support.Types.DescribeServicesResponse, AWSError>;
   /**
-   * Returns the list of severity levels that you can assign to an AWS Support case. The severity level for a case is also a field in the CaseDetails data type included in any CreateCase request. 
+   * Returns the list of severity levels that you can assign to an AWS Support case. The severity level for a case is also a field in the CaseDetails data type included in any CreateCase request.
    */
   describeSeverityLevels(params: Support.Types.DescribeSeverityLevelsRequest, callback?: (err: AWSError, data: Support.Types.DescribeSeverityLevelsResponse) => void): Request<Support.Types.DescribeSeverityLevelsResponse, AWSError>;
   /**
-   * Returns the list of severity levels that you can assign to an AWS Support case. The severity level for a case is also a field in the CaseDetails data type included in any CreateCase request. 
+   * Returns the list of severity levels that you can assign to an AWS Support case. The severity level for a case is also a field in the CaseDetails data type included in any CreateCase request.
    */
   describeSeverityLevels(callback?: (err: AWSError, data: Support.Types.DescribeSeverityLevelsResponse) => void): Request<Support.Types.DescribeSeverityLevelsResponse, AWSError>;
   /**
@@ -100,19 +100,19 @@ declare class Support extends Service {
    */
   describeTrustedAdvisorCheckSummaries(callback?: (err: AWSError, data: Support.Types.DescribeTrustedAdvisorCheckSummariesResponse) => void): Request<Support.Types.DescribeTrustedAdvisorCheckSummariesResponse, AWSError>;
   /**
-   * Returns information about all available Trusted Advisor checks, including name, ID, category, description, and metadata. You must specify a language code; English ("en") and Japanese ("ja") are currently supported. The response contains a TrustedAdvisorCheckDescription for each check.
+   * Returns information about all available Trusted Advisor checks, including name, ID, category, description, and metadata. You must specify a language code; English ("en") and Japanese ("ja") are currently supported. The response contains a TrustedAdvisorCheckDescription for each check. The region must be set to us-east-1.
    */
   describeTrustedAdvisorChecks(params: Support.Types.DescribeTrustedAdvisorChecksRequest, callback?: (err: AWSError, data: Support.Types.DescribeTrustedAdvisorChecksResponse) => void): Request<Support.Types.DescribeTrustedAdvisorChecksResponse, AWSError>;
   /**
-   * Returns information about all available Trusted Advisor checks, including name, ID, category, description, and metadata. You must specify a language code; English ("en") and Japanese ("ja") are currently supported. The response contains a TrustedAdvisorCheckDescription for each check.
+   * Returns information about all available Trusted Advisor checks, including name, ID, category, description, and metadata. You must specify a language code; English ("en") and Japanese ("ja") are currently supported. The response contains a TrustedAdvisorCheckDescription for each check. The region must be set to us-east-1.
    */
   describeTrustedAdvisorChecks(callback?: (err: AWSError, data: Support.Types.DescribeTrustedAdvisorChecksResponse) => void): Request<Support.Types.DescribeTrustedAdvisorChecksResponse, AWSError>;
   /**
-   * Requests a refresh of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.  Some checks are refreshed automatically, and they cannot be refreshed by using this operation. Use of the RefreshTrustedAdvisorCheck operation for these checks causes an InvalidParameterValue error.  The response contains a TrustedAdvisorCheckRefreshStatus object, which contains these fields:    status. The refresh status of the check: "none", "enqueued", "processing", "success", or "abandoned".    millisUntilNextRefreshable. The amount of time, in milliseconds, until the check is eligible for refresh.    checkId. The unique identifier for the check.  
+   * Requests a refresh of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.  Some checks are refreshed automatically, and they cannot be refreshed by using this operation. Use of the RefreshTrustedAdvisorCheck operation for these checks causes an InvalidParameterValue error.  The response contains a TrustedAdvisorCheckRefreshStatus object, which contains these fields:    status. The refresh status of the check:     none: The check is not refreshed or the non-success status exceeds the timeout    enqueued: The check refresh requests has entered the refresh queue    processing: The check refresh request is picked up by the rule processing engine    success: The check is successfully refreshed    abandoned: The check refresh has failed      millisUntilNextRefreshable. The amount of time, in milliseconds, until the check is eligible for refresh.    checkId. The unique identifier for the check.  
    */
   refreshTrustedAdvisorCheck(params: Support.Types.RefreshTrustedAdvisorCheckRequest, callback?: (err: AWSError, data: Support.Types.RefreshTrustedAdvisorCheckResponse) => void): Request<Support.Types.RefreshTrustedAdvisorCheckResponse, AWSError>;
   /**
-   * Requests a refresh of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.  Some checks are refreshed automatically, and they cannot be refreshed by using this operation. Use of the RefreshTrustedAdvisorCheck operation for these checks causes an InvalidParameterValue error.  The response contains a TrustedAdvisorCheckRefreshStatus object, which contains these fields:    status. The refresh status of the check: "none", "enqueued", "processing", "success", or "abandoned".    millisUntilNextRefreshable. The amount of time, in milliseconds, until the check is eligible for refresh.    checkId. The unique identifier for the check.  
+   * Requests a refresh of the Trusted Advisor check that has the specified check ID. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.  Some checks are refreshed automatically, and they cannot be refreshed by using this operation. Use of the RefreshTrustedAdvisorCheck operation for these checks causes an InvalidParameterValue error.  The response contains a TrustedAdvisorCheckRefreshStatus object, which contains these fields:    status. The refresh status of the check:     none: The check is not refreshed or the non-success status exceeds the timeout    enqueued: The check refresh requests has entered the refresh queue    processing: The check refresh request is picked up by the rule processing engine    success: The check is successfully refreshed    abandoned: The check refresh has failed      millisUntilNextRefreshable. The amount of time, in milliseconds, until the check is eligible for refresh.    checkId. The unique identifier for the check.  
    */
   refreshTrustedAdvisorCheck(callback?: (err: AWSError, data: Support.Types.RefreshTrustedAdvisorCheckResponse) => void): Request<Support.Types.RefreshTrustedAdvisorCheckResponse, AWSError>;
   /**
@@ -210,11 +210,11 @@ declare namespace Support {
      */
     subject?: Subject;
     /**
-     * The status of the case.
+     * The status of the case. Valid values: resolved | pending-customer-action | opened | unassigned | work-in-progress.
      */
     status?: Status;
     /**
-     * The code for the AWS service returned by the call to DescribeServices.
+     * The code for the AWS service. You can get a list of codes and the corresponding service names by calling DescribeServices.
      */
     serviceCode?: ServiceCode;
     /**
@@ -275,7 +275,7 @@ declare namespace Support {
      */
     body?: CommunicationBody;
     /**
-     * The email address of the account that submitted the AWS Support case.
+     * The identity of the account that submitted, or responded to, the support case. Customer entries include the role or IAM user as well as the email address. For example, "AdminRole (Role) &lt;someone@example.com&gt;. Entries from the AWS Support team display "Amazon Web Services," and do not show an email address. 
      */
     submittedBy?: SubmittedBy;
     /**
@@ -299,7 +299,7 @@ declare namespace Support {
      */
     serviceCode?: ServiceCode;
     /**
-     * The code for the severity level returned by the call to DescribeSeverityLevels.  The availability of severity levels depends on each customer's support subscription. In other words, your subscription may not necessarily require the urgent level of response time. 
+     * The code for the severity level returned by the call to DescribeSeverityLevels.  The availability of severity levels depends on the support plan for the account. 
      */
     severityCode?: SeverityCode;
     /**
@@ -319,7 +319,7 @@ declare namespace Support {
      */
     language?: Language;
     /**
-     * The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."
+     * The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."  Service limit increases are not supported by the Support API; you must submit service limit increase requests in Support Center. 
      */
     issueType?: IssueType;
     /**
@@ -577,11 +577,11 @@ declare namespace Support {
   export type SeverityCode = string;
   export interface SeverityLevel {
     /**
-     * One of four values: "low," "medium," "high," and "urgent". These values correspond to response times returned to the caller in severityLevel.name. 
+     * The code for case severity level. Valid values: low | normal | high | urgent | critical 
      */
     code?: SeverityLevelCode;
     /**
-     * The name of the severity level that corresponds to the severity level code.
+     * The name of the severity level that corresponds to the severity level code.  The values returned by the API differ from the values that are displayed in the AWS Support Center. For example, for the code "low", the API name is "Low", but the name in the Support Center is "General guidance". These are the Support Center code/name mappings:    low: General guidance    normal: System impaired    high: Production system impaired    urgent: Production system down    critical: Business-critical system down    For more information, see Choosing a Severity 
      */
     name?: SeverityLevelName;
   }
@@ -629,7 +629,7 @@ declare namespace Support {
      */
     checkId: String;
     /**
-     * The status of the Trusted Advisor check for which a refresh has been requested: "none", "enqueued", "processing", "success", or "abandoned".
+     * The status of the Trusted Advisor check for which a refresh has been requested:     none: The check is not refreshed or the non-success status exceeds the timeout    enqueued: The check refresh requests has entered the refresh queue    processing: The check refresh request is picked up by the rule processing engine    success: The check is successfully refreshed    abandoned: The check refresh has failed  
      */
     status: String;
     /**
@@ -713,7 +713,7 @@ declare namespace Support {
      */
     isSuppressed?: Boolean;
     /**
-     * Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the TrustedAdvisorCheckDescription object returned by the call to DescribeTrustedAdvisorChecks. Metadata contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. 
+     * Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the TrustedAdvisorCheckDescription object returned by the call to DescribeTrustedAdvisorChecks. Metadata contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data.
      */
     metadata: StringList;
   }

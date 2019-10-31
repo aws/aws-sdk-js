@@ -355,7 +355,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Retrieve website access logs for a specific time range via a pre-signed URL. Optionally, deliver the logs to a given S3 bucket. </p>"
+      "documentation": "<p> Retrieve website access logs for a specific time range via a pre-signed URL. </p>"
     },
     "GetApp": {
       "name": "GetApp",
@@ -1138,12 +1138,6 @@
       "type": "string",
       "max": 255
     },
-    "ArtifactType": {
-      "type": "string",
-      "enum": [
-        "TEST"
-      ]
-    },
     "ArtifactUrl": {
       "type": "string",
       "max": 1000
@@ -1203,6 +1197,10 @@
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
           "documentation": "<p> Enables Pull Request Preview for auto created branch. </p>"
+        },
+        "pullRequestEnvironmentName": {
+          "shape": "PullRequestEnvironmentName",
+          "documentation": "<p> The Amplify Environment name for the pull request. </p>"
         }
       },
       "documentation": "<p> Structure with auto branch creation config. </p>"
@@ -1217,6 +1215,11 @@
       "member": {
         "shape": "AutoBranchCreationPattern"
       }
+    },
+    "BackendEnvironmentArn": {
+      "type": "string",
+      "max": 1000,
+      "min": 1
     },
     "BasicAuthCredentials": {
       "type": "string",
@@ -1332,6 +1335,10 @@
           "shape": "EnablePullRequestPreview",
           "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
         },
+        "pullRequestEnvironmentName": {
+          "shape": "PullRequestEnvironmentName",
+          "documentation": "<p> The Amplify Environment name for the pull request. </p>"
+        },
         "destinationBranch": {
           "shape": "BranchName",
           "documentation": "<p> The destination branch if the branch is a pull request branch. </p>"
@@ -1339,6 +1346,10 @@
         "sourceBranch": {
           "shape": "BranchName",
           "documentation": "<p> The source branch if the branch is a pull request branch. </p>"
+        },
+        "backendEnvironmentArn": {
+          "shape": "BackendEnvironmentArn",
+          "documentation": "<p> ARN for a Backend Environment, part of an Amplify App. </p>"
         }
       },
       "documentation": "<p> Branch for an Amplify App, which maps to a 3rd party repository branch. </p>"
@@ -1544,6 +1555,14 @@
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
           "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
+        },
+        "pullRequestEnvironmentName": {
+          "shape": "PullRequestEnvironmentName",
+          "documentation": "<p> The Amplify Environment name for the pull request. </p>"
+        },
+        "backendEnvironmentArn": {
+          "shape": "BackendEnvironmentArn",
+          "documentation": "<p> ARN for a Backend Environment, part of an Amplify App. </p>"
         }
       },
       "documentation": "<p> Request structure for a branch create request. </p>"
@@ -1629,7 +1648,7 @@
         },
         "enableAutoSubDomain": {
           "shape": "EnableAutoSubDomain",
-          "documentation": "<p> Enables automated creation of Subdomains for branches. </p>"
+          "documentation": "<p> Enables automated creation of Subdomains for branches. (Currently not supported) </p>"
         },
         "subDomainSettings": {
           "shape": "SubDomainSettings",
@@ -1936,7 +1955,7 @@
         },
         "enableAutoSubDomain": {
           "shape": "EnableAutoSubDomain",
-          "documentation": "<p> Enables automated creation of Subdomains for branches. </p>"
+          "documentation": "<p> Enables automated creation of Subdomains for branches. (Currently not supported) </p>"
         },
         "domainStatus": {
           "shape": "DomainStatus",
@@ -2173,7 +2192,7 @@
           "locationName": "branchName"
         }
       },
-      "documentation": "<p> Result structure for get branch request. </p>"
+      "documentation": "<p> Request structure for get branch request. </p>"
     },
     "GetBranchResult": {
       "type": "structure",
@@ -2462,10 +2481,6 @@
           "documentation": "<p> Unique Id for an Job. </p>",
           "location": "uri",
           "locationName": "jobId"
-        },
-        "artifactType": {
-          "shape": "ArtifactType",
-          "documentation": "<p> Type for an artifact. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -2760,6 +2775,10 @@
         }
       },
       "documentation": "<p> Structure with Production Branch information. </p>"
+    },
+    "PullRequestEnvironmentName": {
+      "type": "string",
+      "max": 20
     },
     "Repository": {
       "type": "string",
@@ -3349,6 +3368,14 @@
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
           "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
+        },
+        "pullRequestEnvironmentName": {
+          "shape": "PullRequestEnvironmentName",
+          "documentation": "<p> The Amplify Environment name for the pull request. </p>"
+        },
+        "backendEnvironmentArn": {
+          "shape": "BackendEnvironmentArn",
+          "documentation": "<p> ARN for a Backend Environment, part of an Amplify App. </p>"
         }
       },
       "documentation": "<p> Request structure for update branch request. </p>"
@@ -3388,7 +3415,7 @@
         },
         "enableAutoSubDomain": {
           "shape": "EnableAutoSubDomain",
-          "documentation": "<p> Enables automated creation of Subdomains for branches. </p>"
+          "documentation": "<p> Enables automated creation of Subdomains for branches. (Currently not supported) </p>"
         },
         "subDomainSettings": {
           "shape": "SubDomainSettings",
