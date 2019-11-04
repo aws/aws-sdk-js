@@ -84,11 +84,11 @@ declare class DAX extends Service {
    */
   describeDefaultParameters(callback?: (err: AWSError, data: DAX.Types.DescribeDefaultParametersResponse) => void): Request<DAX.Types.DescribeDefaultParametersResponse, AWSError>;
   /**
-   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
+   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last 24 hours are returned; however, you can retrieve up to 14 days' worth of events if necessary.
    */
   describeEvents(params: DAX.Types.DescribeEventsRequest, callback?: (err: AWSError, data: DAX.Types.DescribeEventsResponse) => void): Request<DAX.Types.DescribeEventsResponse, AWSError>;
   /**
-   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
+   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last 24 hours are returned; however, you can retrieve up to 14 days' worth of events if necessary.
    */
   describeEvents(callback?: (err: AWSError, data: DAX.Types.DescribeEventsResponse) => void): Request<DAX.Types.DescribeEventsResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class DAX extends Service {
    */
   listTags(callback?: (err: AWSError, data: DAX.Types.ListTagsResponse) => void): Request<DAX.Types.ListTagsResponse, AWSError>;
   /**
-   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.
+   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.   RebootNode restarts the DAX engine process and does not remove the contents of the cache.  
    */
   rebootNode(params: DAX.Types.RebootNodeRequest, callback?: (err: AWSError, data: DAX.Types.RebootNodeResponse) => void): Request<DAX.Types.RebootNodeResponse, AWSError>;
   /**
-   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.
+   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.   RebootNode restarts the DAX engine process and does not remove the contents of the cache.  
    */
   rebootNode(callback?: (err: AWSError, data: DAX.Types.RebootNodeResponse) => void): Request<DAX.Types.RebootNodeResponse, AWSError>;
   /**
@@ -269,11 +269,11 @@ declare namespace DAX {
      */
     Description?: String;
     /**
-     * The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set ReplicationFactor to 2 or more.  AWS recommends that you have at least two read replicas per cluster. 
+     * The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set ReplicationFactor to a number between 3 (one primary and two read replicas) and 10 (one primary and nine read replicas). If the AvailabilityZones parameter is provided, its length must equal the ReplicationFactor.  AWS recommends that you have at least two read replicas per cluster. 
      */
     ReplicationFactor: Integer;
     /**
-     * The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
+     * The Availability Zones (AZs) in which the cluster nodes will reside after the cluster has been created or updated. If provided, the length of this list must equal the ReplicationFactor parameter. If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest availability.
      */
     AvailabilityZones?: AvailabilityZoneList;
     /**
@@ -824,7 +824,7 @@ declare namespace DAX {
      */
     SubnetIdentifier?: String;
     /**
-     * The Availability Zone (AZ) for subnet subnet.
+     * The Availability Zone (AZ) for the subnet.
      */
     SubnetAvailabilityZone?: String;
   }

@@ -1880,6 +1880,10 @@
         "robotDeploymentTimeoutInSeconds": {
           "shape": "DeploymentTimeout",
           "documentation": "<p>The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.</p>"
+        },
+        "downloadConditionFile": {
+          "shape": "S3Object",
+          "documentation": "<p>The download condition file.</p>"
         }
       },
       "documentation": "<p>Information about a deployment configuration.</p>"
@@ -1941,6 +1945,7 @@
         "PreLaunchFileFailure",
         "PostLaunchFileFailure",
         "BadPermissionError",
+        "DownloadConditionFailed",
         "InternalServerError"
       ]
     },
@@ -3150,6 +3155,7 @@
       "enum": [
         "Validating",
         "DownloadingExtracting",
+        "ExecutingDownloadCondition",
         "ExecutingPreLaunch",
         "Launching",
         "ExecutingPostLaunch",
@@ -3253,6 +3259,28 @@
       },
       "max": 100,
       "min": 1
+    },
+    "S3Object": {
+      "type": "structure",
+      "required": [
+        "bucket",
+        "key"
+      ],
+      "members": {
+        "bucket": {
+          "shape": "S3Bucket",
+          "documentation": "<p>The bucket containing the object.</p>"
+        },
+        "key": {
+          "shape": "S3Key",
+          "documentation": "<p>The key of the object.</p>"
+        },
+        "etag": {
+          "shape": "S3Etag",
+          "documentation": "<p>The etag of the object.</p>"
+        }
+      },
+      "documentation": "<p>Information about an S3 object.</p>"
     },
     "SecurityGroups": {
       "type": "list",
@@ -3417,7 +3445,7 @@
         },
         "networkInterface": {
           "shape": "NetworkInterface",
-          "documentation": "<p/>"
+          "documentation": "<p>Information about a network interface.</p>"
         }
       },
       "documentation": "<p>Information about a simulation job.</p>"

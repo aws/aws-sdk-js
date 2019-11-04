@@ -333,7 +333,7 @@
           "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.</p>"
+      "documentation": "<p>Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last 24 hours are returned; however, you can retrieve up to 14 days' worth of events if necessary.</p>"
     },
     "DescribeParameterGroups": {
       "name": "DescribeParameterGroups",
@@ -522,7 +522,7 @@
           "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.</p>"
+      "documentation": "<p>Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.</p> <note> <p> <code>RebootNode</code> restarts the DAX engine process and does not remove the contents of the cache. </p> </note>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -821,11 +821,11 @@
         },
         "ReplicationFactor": {
           "shape": "Integer",
-          "documentation": "<p>The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set <i>ReplicationFactor</i> to 2 or more.</p> <note> <p>AWS recommends that you have at least two read replicas per cluster.</p> </note>"
+          "documentation": "<p>The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set <code>ReplicationFactor</code> to a number between 3 (one primary and two read replicas) and 10 (one primary and nine read replicas). <code>If the AvailabilityZones</code> parameter is provided, its length must equal the <code>ReplicationFactor</code>.</p> <note> <p>AWS recommends that you have at least two read replicas per cluster.</p> </note>"
         },
         "AvailabilityZones": {
           "shape": "AvailabilityZoneList",
-          "documentation": "<p>The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.</p>"
+          "documentation": "<p>The Availability Zones (AZs) in which the cluster nodes will reside after the cluster has been created or updated. If provided, the length of this list must equal the <code>ReplicationFactor</code> parameter. If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest availability.</p>"
         },
         "SubnetGroupName": {
           "shape": "String",
@@ -1648,7 +1648,7 @@
         },
         "SubnetAvailabilityZone": {
           "shape": "String",
-          "documentation": "<p>The Availability Zone (AZ) for subnet subnet.</p>"
+          "documentation": "<p>The Availability Zone (AZ) for the subnet.</p>"
         }
       },
       "documentation": "<p>Represents the subnet associated with a DAX cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with DAX.</p>"

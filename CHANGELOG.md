@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.562.0-->
+<!--LATEST=2.563.0-->
 <!--ENTRYINSERT-->
+
+## 2.563.0
+* feature: RoboMaker: RoboMaker Fleet Management launch a feature to verify your robot is ready to download and install the new robot application using a download condition file, which is a script run on the robot prior to downloading the new deployment. 
 
 ## 2.562.0
 * feature: CloudTrail: This release adds two new APIs, GetTrail and ListTrails, and support for adding tags when you create a trail by using a new TagsList parameter on CreateTrail operations.

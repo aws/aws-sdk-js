@@ -549,11 +549,11 @@ declare class EC2 extends Service {
    */
   createSnapshot(callback?: (err: AWSError, data: EC2.Types.Snapshot) => void): Request<EC2.Types.Snapshot, AWSError>;
   /**
-   * Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the paramaters. 
+   * Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the parameters. 
    */
   createSnapshots(params: EC2.Types.CreateSnapshotsRequest, callback?: (err: AWSError, data: EC2.Types.CreateSnapshotsResult) => void): Request<EC2.Types.CreateSnapshotsResult, AWSError>;
   /**
-   * Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the paramaters. 
+   * Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the parameters. 
    */
   createSnapshots(callback?: (err: AWSError, data: EC2.Types.CreateSnapshotsResult) => void): Request<EC2.Types.CreateSnapshotsResult, AWSError>;
   /**
@@ -589,11 +589,11 @@ declare class EC2 extends Service {
    */
   createTrafficMirrorFilter(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterResult, AWSError>;
   /**
-   * Creates a Traffic Mirror rule.  A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
+   * Creates a Traffic Mirror filter rule.  A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
    */
   createTrafficMirrorFilterRule(params: EC2.Types.CreateTrafficMirrorFilterRuleRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterRuleResult, AWSError>;
   /**
-   * Creates a Traffic Mirror rule.  A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
+   * Creates a Traffic Mirror filter rule.  A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
    */
   createTrafficMirrorFilterRule(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterRuleResult, AWSError>;
   /**
@@ -2253,11 +2253,11 @@ declare class EC2 extends Service {
    */
   modifyEbsDefaultKmsKeyId(callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
   /**
-   * Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of type maintain. While the EC2 Fleet is being modified, it is in the modifying state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is lowestPrice, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.
+   * Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of type maintain. While the EC2 Fleet is being modified, it is in the modifying state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is lowest-price, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowest-price, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacity-optimized, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifyFleet(params: EC2.Types.ModifyFleetRequest, callback?: (err: AWSError, data: EC2.Types.ModifyFleetResult) => void): Request<EC2.Types.ModifyFleetResult, AWSError>;
   /**
-   * Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of type maintain. While the EC2 Fleet is being modified, it is in the modifying state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is lowestPrice, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.
+   * Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of type maintain. While the EC2 Fleet is being modified, it is in the modifying state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is lowest-price, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowest-price, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacity-optimized, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifyFleet(callback?: (err: AWSError, data: EC2.Types.ModifyFleetResult) => void): Request<EC2.Types.ModifyFleetResult, AWSError>;
   /**
@@ -2389,11 +2389,11 @@ declare class EC2 extends Service {
    */
   modifySubnetAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter.  FFor information about filter rule properties, see Network Services in the Traffic Mirroring User Guide .
+   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter.  For information about filter rule properties, see Network Services in the Traffic Mirroring User Guide .
    */
   modifyTrafficMirrorFilterNetworkServices(params: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult) => void): Request<EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult, AWSError>;
   /**
-   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter.  FFor information about filter rule properties, see Network Services in the Traffic Mirroring User Guide .
+   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter.  For information about filter rule properties, see Network Services in the Traffic Mirroring User Guide .
    */
   modifyTrafficMirrorFilterNetworkServices(callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult) => void): Request<EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult, AWSError>;
   /**
@@ -3158,7 +3158,7 @@ declare namespace EC2 {
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -3178,7 +3178,7 @@ declare namespace EC2 {
     /**
      * The ID of the endpoint service.
      */
-    ServiceId: String;
+    ServiceId: ServiceId;
     /**
      * The IDs of one or more interface VPC endpoints.
      */
@@ -3198,7 +3198,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC peering connection. You must specify this parameter in the request.
      */
-    VpcPeeringConnectionId?: String;
+    VpcPeeringConnectionId?: VpcPeeringConnectionId;
   }
   export interface AcceptVpcPeeringConnectionResult {
     /**
@@ -3378,6 +3378,7 @@ declare namespace EC2 {
      */
     HostIds?: ResponseHostIdList;
   }
+  export type AllocationId = string;
   export type AllocationIdList = String[];
   export type AllocationState = "available"|"under-assessment"|"permanent-failure"|"released"|"released-permanent-failure"|"pending"|string;
   export type AllocationStrategy = "lowestPrice"|"diversified"|"capacityOptimized"|string;
@@ -3396,11 +3397,11 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The ID of the VPC in which the associated target network is located.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * The IDs of the security groups to apply to the associated target network. Up to 5 security groups can be applied to an associated target network.
      */
@@ -3429,7 +3430,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
   }
   export interface AssignIpv6AddressesResult {
     /**
@@ -3449,7 +3450,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
     /**
      * One or more IP addresses to be assigned as a secondary private IP address to the network interface. You can't specify this parameter when also specifying a number of secondary IP addresses. If you don't specify an IP address, Amazon EC2 automatically selects an IP address within the subnet range.
      */
@@ -3480,11 +3481,11 @@ declare namespace EC2 {
     /**
      * [EC2-VPC] The allocation ID. This is required for EC2-VPC.
      */
-    AllocationId?: String;
+    AllocationId?: AllocationId;
     /**
      * The ID of the instance. This is required for EC2-Classic. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. The operation fails if you specify an instance ID unless exactly one network interface is attached.
      */
-    InstanceId?: String;
+    InstanceId?: InstanceId;
     /**
      * The Elastic IP address to associate with the instance. This is required for EC2-Classic.
      */
@@ -3500,7 +3501,7 @@ declare namespace EC2 {
     /**
      * [EC2-VPC] The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. 
      */
-    NetworkInterfaceId?: String;
+    NetworkInterfaceId?: NetworkInterfaceId;
     /**
      * [EC2-VPC] The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
      */
@@ -3516,11 +3517,11 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The ID of the subnet to associate with the Client VPN endpoint.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
@@ -3544,11 +3545,11 @@ declare namespace EC2 {
     /**
      * The ID of the DHCP options set, or default to associate no DHCP options with the VPC.
      */
-    DhcpOptionsId: String;
+    DhcpOptionsId: DhcpOptionsId;
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -3562,7 +3563,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
   }
   export interface AssociateIamInstanceProfileResult {
     /**
@@ -3578,11 +3579,11 @@ declare namespace EC2 {
     /**
      * The ID of the route table.
      */
-    RouteTableId: String;
+    RouteTableId: RouteTableId;
     /**
      * The ID of the subnet.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
   }
   export interface AssociateRouteTableResult {
     /**
@@ -3598,7 +3599,7 @@ declare namespace EC2 {
     /**
      * The ID of your subnet.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
   }
   export interface AssociateSubnetCidrBlockResult {
     /**
@@ -3614,11 +3615,11 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -3642,7 +3643,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface AssociateVpcCidrBlockResult {
     /**
@@ -3694,11 +3695,11 @@ declare namespace EC2 {
     /**
      * The ID of an EC2-Classic instance to link to the ClassicLink-enabled VPC.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The ID of a ClassicLink-enabled VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface AttachClassicLinkVpcResult {
     /**
@@ -3714,11 +3715,11 @@ declare namespace EC2 {
     /**
      * The ID of the internet gateway.
      */
-    InternetGatewayId: String;
+    InternetGatewayId: InternetGatewayId;
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface AttachNetworkInterfaceRequest {
     /**
@@ -3732,11 +3733,11 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
   }
   export interface AttachNetworkInterfaceResult {
     /**
@@ -3752,11 +3753,11 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The ID of the EBS volume. The volume and instance must be within the same Availability Zone.
      */
-    VolumeId: String;
+    VolumeId: VolumeId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -3766,11 +3767,11 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * The ID of the virtual private gateway.
      */
-    VpnGatewayId: String;
+    VpnGatewayId: VpnGatewayId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -3782,6 +3783,7 @@ declare namespace EC2 {
      */
     VpcAttachment?: VpcAttachment;
   }
+  export type AttachmentId = string;
   export type AttachmentStatus = "attaching"|"attached"|"detaching"|"detached"|string;
   export interface AttributeBooleanValue {
     /**
@@ -3826,7 +3828,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The IPv4 address range, in CIDR notation, of the network for which access is being authorized.
      */
@@ -4014,7 +4016,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance to bundle. Type: String Default: None Required: Yes
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The bucket in which to store the AMI. You can specify a bucket that you already own or a new bucket that Amazon EC2 creates on your behalf. If you specify a bucket that belongs to someone else, Amazon EC2 returns an error.
      */
@@ -4117,7 +4119,7 @@ declare namespace EC2 {
     /**
      * The ID of the Capacity Reservation to be cancelled.
      */
-    CapacityReservationId: String;
+    CapacityReservationId: CapacityReservationId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -4133,7 +4135,7 @@ declare namespace EC2 {
     /**
      * The ID of the conversion task.
      */
-    ConversionTaskId: String;
+    ConversionTaskId: ConversionTaskId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -4147,7 +4149,7 @@ declare namespace EC2 {
     /**
      * The ID of the export task. This is the ID returned by CreateInstanceExportTask.
      */
-    ExportTaskId: String;
+    ExportTaskId: ExportTaskId;
   }
   export interface CancelImportTaskRequest {
     /**
@@ -4161,7 +4163,7 @@ declare namespace EC2 {
     /**
      * The ID of the import image or import snapshot task to be canceled.
      */
-    ImportTaskId?: String;
+    ImportTaskId?: ImportTaskId;
   }
   export interface CancelImportTaskResult {
     /**
@@ -4181,7 +4183,7 @@ declare namespace EC2 {
     /**
      * The ID of the Reserved Instance listing.
      */
-    ReservedInstancesListingId: String;
+    ReservedInstancesListingId: ReservedInstancesListingId;
   }
   export interface CancelReservedInstancesListingResult {
     /**
@@ -4351,6 +4353,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type CapacityReservationId = string;
   export type CapacityReservationIdSet = String[];
   export type CapacityReservationInstancePlatform = "Linux/UNIX"|"Red Hat Enterprise Linux"|"SUSE Linux"|"Windows"|"Windows with SQL Server"|"Windows with SQL Server Enterprise"|"Windows with SQL Server Standard"|"Windows with SQL Server Web"|"Linux with SQL Server Standard"|"Linux with SQL Server Web"|"Linux with SQL Server Enterprise"|string;
   export type CapacityReservationPreference = "open"|"none"|string;
@@ -4664,6 +4667,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type ClientVpnEndpointId = string;
   export interface ClientVpnEndpointStatus {
     /**
      * The state of the Client VPN endpoint. Possible states include:    pending-associate - The Client VPN endpoint has been created but no target networks have been associated. The Client VPN endpoint cannot accept connections.    available - The Client VPN endpoint has been created and a target network has been associated. The Client VPN endpoint can accept connections.    deleting - The Client VPN endpoint is being deleted. The Client VPN endpoint cannot accept connections.    deleted - The Client VPN endpoint has been deleted. The Client VPN endpoint cannot accept connections.  
@@ -4722,7 +4726,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The product code. This must be a product code that you own.
      */
@@ -4800,6 +4804,7 @@ declare namespace EC2 {
      */
     ConnectionNotificationState?: ConnectionNotificationState;
   }
+  export type ConnectionNotificationId = string;
   export type ConnectionNotificationSet = ConnectionNotification[];
   export type ConnectionNotificationState = "Enabled"|"Disabled"|string;
   export type ConnectionNotificationType = "Topic"|string;
@@ -4835,6 +4840,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type ConversionTaskId = string;
   export type ConversionTaskState = "active"|"cancelling"|"cancelled"|"completed"|string;
   export interface CopyFpgaImageRequest {
     /**
@@ -4884,7 +4890,7 @@ declare namespace EC2 {
     /**
      * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with "alias/". For example:   Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to. 
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKeyId;
     /**
      * The name of the new AMI in the destination Region.
      */
@@ -4924,7 +4930,7 @@ declare namespace EC2 {
     /**
      * The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted state must be true. You can specify the CMK using any of the following:   Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias. For example, alias/ExampleAlias.   Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKeyId;
     /**
      * When you copy an encrypted source snapshot using the Amazon EC2 Query API, you must supply a pre-signed URL. This parameter is optional for unencrypted snapshots. For more information, see Query Requests. The PresignedUrl should use the snapshot source endpoint, the CopySnapshot action, and include the SourceRegion, SourceSnapshotId, and DestinationRegion parameters. The PresignedUrl must be signed using AWS Signature Version 4. Because EBS snapshots are stored in Amazon S3, the signing algorithm for this parameter uses the same logic that is described in Authenticating Requests by Using Query Parameters (AWS Signature Version 4) in the Amazon Simple Storage Service API Reference. An invalid or improperly signed PresignedUrl will cause the copy operation to fail asynchronously, and the snapshot will move to an error state.
      */
@@ -5097,7 +5103,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint to which to add the route.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The IPv4 address range, in CIDR notation, of the route destination. For example:   To add a route for Internet access, enter 0.0.0.0/0    To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range   To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range   Route address ranges cannot overlap with the CIDR range specified for client allocation.
      */
@@ -5209,7 +5215,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC for which to create the egress-only internet gateway.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface CreateEgressOnlyInternetGatewayResult {
     /**
@@ -5443,7 +5449,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * A name for the new image. Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)
      */
@@ -5471,7 +5477,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The target virtualization environment.
      */
@@ -5499,7 +5505,7 @@ declare namespace EC2 {
     /**
      * A unique name for the key pair. Constraints: Up to 255 ASCII characters
      */
-    KeyName: String;
+    KeyName: KeyPairName;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -5549,7 +5555,7 @@ declare namespace EC2 {
     /**
      * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
      */
-    LaunchTemplateId?: String;
+    LaunchTemplateId?: LaunchTemplateId;
     /**
      * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
      */
@@ -5577,7 +5583,7 @@ declare namespace EC2 {
     /**
      * The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.
      */
-    AllocationId: String;
+    AllocationId: AllocationId;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency. Constraint: Maximum 64 ASCII characters.
      */
@@ -5585,7 +5591,7 @@ declare namespace EC2 {
     /**
      * The subnet in which to create the NAT gateway.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
   }
   export interface CreateNatGatewayResult {
     /**
@@ -5621,7 +5627,7 @@ declare namespace EC2 {
     /**
      * The ID of the network ACL.
      */
-    NetworkAclId: String;
+    NetworkAclId: NetworkAclId;
     /**
      * TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).
      */
@@ -5647,7 +5653,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface CreateNetworkAclResult {
     /**
@@ -5659,7 +5665,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
     /**
      * The AWS account ID.
      */
@@ -5723,7 +5729,7 @@ declare namespace EC2 {
     /**
      * The ID of the subnet to associate with the network interface.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
   }
   export interface CreateNetworkInterfaceResult {
     /**
@@ -5789,35 +5795,35 @@ declare namespace EC2 {
     /**
      * [IPv6 traffic only] The ID of an egress-only internet gateway.
      */
-    EgressOnlyInternetGatewayId?: String;
+    EgressOnlyInternetGatewayId?: EgressOnlyInternetGatewayId;
     /**
      * The ID of an internet gateway or virtual private gateway attached to your VPC.
      */
-    GatewayId?: String;
+    GatewayId?: RouteTableGatewayId;
     /**
      * The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.
      */
-    InstanceId?: String;
+    InstanceId?: InstanceId;
     /**
      * [IPv4 traffic only] The ID of a NAT gateway.
      */
-    NatGatewayId?: String;
+    NatGatewayId?: NatGatewayId;
     /**
      * The ID of a transit gateway.
      */
-    TransitGatewayId?: String;
+    TransitGatewayId?: TransitGatewayId;
     /**
      * The ID of a network interface.
      */
-    NetworkInterfaceId?: String;
+    NetworkInterfaceId?: NetworkInterfaceId;
     /**
      * The ID of the route table for the route.
      */
-    RouteTableId: String;
+    RouteTableId: RouteTableId;
     /**
      * The ID of a VPC peering connection.
      */
-    VpcPeeringConnectionId?: String;
+    VpcPeeringConnectionId?: VpcPeeringConnectionId;
   }
   export interface CreateRouteResult {
     /**
@@ -5833,7 +5839,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface CreateRouteTableResult {
     /**
@@ -5853,7 +5859,7 @@ declare namespace EC2 {
     /**
      * [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
      */
-    VpcId?: String;
+    VpcId?: VpcId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -5873,7 +5879,7 @@ declare namespace EC2 {
     /**
      * The ID of the EBS volume.
      */
-    VolumeId: String;
+    VolumeId: VolumeId;
     /**
      * The tags to apply to the snapshot during creation.
      */
@@ -5951,7 +5957,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -6009,7 +6015,7 @@ declare namespace EC2 {
     /**
      * The ID of the filter that this rule is associated with.
      */
-    TrafficMirrorFilterId: String;
+    TrafficMirrorFilterId: TrafficMirrorFilterId;
     /**
      * The type of traffic (ingress | egress).
      */
@@ -6069,17 +6075,17 @@ declare namespace EC2 {
     /**
      * The ID of the source network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
     /**
      * The ID of the Traffic Mirror target.
      */
-    TrafficMirrorTargetId: String;
+    TrafficMirrorTargetId: TrafficMirrorTargetId;
     /**
      * The ID of the Traffic Mirror filter.
      */
-    TrafficMirrorFilterId: String;
+    TrafficMirrorFilterId: TrafficMirrorFilterId;
     /**
-     * The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 1network0, then the first 100 bytes that meet the filter criteria are copied to the target. If you do not want to mirror the entire packet, use the PacketLength parameter to specify the number of bytes in each packet to mirror.
+     * The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target. If you do not want to mirror the entire packet, use the PacketLength parameter to specify the number of bytes in each packet to mirror.
      */
     PacketLength?: Integer;
     /**
@@ -6121,7 +6127,7 @@ declare namespace EC2 {
     /**
      * The network interface ID that is associated with the target.
      */
-    NetworkInterfaceId?: String;
+    NetworkInterfaceId?: NetworkInterfaceId;
     /**
      * The Amazon Resource Name (ARN) of the Network Load Balancer that is associated with the target.
      */
@@ -6185,11 +6191,11 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId?: String;
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
     /**
      * Indicates whether to drop traffic that matches this route.
      */
@@ -6209,7 +6215,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway.
      */
-    TransitGatewayId: String;
+    TransitGatewayId: TransitGatewayId;
     /**
      * The tags to apply to the transit gateway route table.
      */
@@ -6229,11 +6235,11 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway.
      */
-    TransitGatewayId: String;
+    TransitGatewayId: TransitGatewayId;
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * The IDs of one or more subnets. You can specify only one subnet per Availability Zone. You must specify at least one subnet, but we recommend that you specify two subnets for better availability. The transit gateway uses one IP address from each specified subnet.
      */
@@ -6304,7 +6310,7 @@ declare namespace EC2 {
     /**
      * The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted state must be true. You can specify the CMK using any of the following:   Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias. For example, alias/ExampleAlias.   Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKeyId;
     /**
      * The size of the volume, in GiBs. Constraints: 1-16,384 for gp2, 4-16,384 for io1, 500-16,384 for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.  At least one of Size or SnapshotId is required. 
      */
@@ -6312,7 +6318,7 @@ declare namespace EC2 {
     /**
      * The snapshot from which to create the volume.  At least one of Size or SnapshotId are required. 
      */
-    SnapshotId?: String;
+    SnapshotId?: SnapshotId;
     /**
      * The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes. Default: gp2 
      */
@@ -6334,11 +6340,11 @@ declare namespace EC2 {
     /**
      * The ID of the endpoint service.
      */
-    ServiceId?: String;
+    ServiceId?: ServiceId;
     /**
      * The ID of the endpoint. 
      */
-    VpcEndpointId?: String;
+    VpcEndpointId?: VpcEndpointId;
     /**
      * The ARN of the SNS topic for the notifications.
      */
@@ -6374,7 +6380,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC in which the endpoint will be used.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * The service name. To get a list of available services, use the DescribeVpcEndpointServices request, or get the name from the service provider.
      */
@@ -6458,7 +6464,7 @@ declare namespace EC2 {
     /**
      * The ID of the requester VPC. You must specify this parameter in the request.
      */
-    VpcId?: String;
+    VpcId?: VpcId;
     /**
      * The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request. Default: The Region in which you make the request.
      */
@@ -6498,7 +6504,7 @@ declare namespace EC2 {
     /**
      * The ID of the customer gateway.
      */
-    CustomerGatewayId: String;
+    CustomerGatewayId: CustomerGatewayId;
     /**
      * The type of VPN connection (ipsec.1).
      */
@@ -6506,11 +6512,11 @@ declare namespace EC2 {
     /**
      * The ID of the virtual private gateway. If you specify a virtual private gateway, you cannot specify a transit gateway.
      */
-    VpnGatewayId?: String;
+    VpnGatewayId?: VpnGatewayId;
     /**
      * The ID of the transit gateway. If you specify a transit gateway, you cannot specify a virtual private gateway.
      */
-    TransitGatewayId?: String;
+    TransitGatewayId?: TransitGatewayId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -6534,7 +6540,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPN connection.
      */
-    VpnConnectionId: String;
+    VpnConnectionId: VpnConnectionId;
   }
   export interface CreateVpnGatewayRequest {
     /**
@@ -6603,6 +6609,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type CustomerGatewayId = string;
   export type CustomerGatewayIdStringList = String[];
   export type CustomerGatewayList = CustomerGateway[];
   export type DatafeedSubscriptionState = "Active"|"Inactive"|string;
@@ -6614,7 +6621,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN to be deleted.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -6630,7 +6637,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint from which the route is to be deleted.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The ID of the target subnet used by the route.
      */
@@ -6654,7 +6661,7 @@ declare namespace EC2 {
     /**
      * The ID of the customer gateway.
      */
-    CustomerGatewayId: String;
+    CustomerGatewayId: CustomerGatewayId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -6664,7 +6671,7 @@ declare namespace EC2 {
     /**
      * The ID of the DHCP options set.
      */
-    DhcpOptionsId: String;
+    DhcpOptionsId: DhcpOptionsId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -6771,7 +6778,7 @@ declare namespace EC2 {
     /**
      * The ID of the AFI.
      */
-    FpgaImageId: String;
+    FpgaImageId: FpgaImageId;
   }
   export interface DeleteFpgaImageResult {
     /**
@@ -6787,7 +6794,7 @@ declare namespace EC2 {
     /**
      * The ID of the internet gateway.
      */
-    InternetGatewayId: String;
+    InternetGatewayId: InternetGatewayId;
   }
   export interface DeleteKeyPairRequest {
     /**
@@ -6807,7 +6814,7 @@ declare namespace EC2 {
     /**
      * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
      */
-    LaunchTemplateId?: String;
+    LaunchTemplateId?: LaunchTemplateId;
     /**
      * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
      */
@@ -6827,7 +6834,7 @@ declare namespace EC2 {
     /**
      * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
      */
-    LaunchTemplateId?: String;
+    LaunchTemplateId?: LaunchTemplateId;
     /**
      * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
      */
@@ -6885,7 +6892,7 @@ declare namespace EC2 {
     /**
      * The ID of the NAT gateway.
      */
-    NatGatewayId: String;
+    NatGatewayId: NatGatewayId;
   }
   export interface DeleteNatGatewayResult {
     /**
@@ -6905,7 +6912,7 @@ declare namespace EC2 {
     /**
      * The ID of the network ACL.
      */
-    NetworkAclId: String;
+    NetworkAclId: NetworkAclId;
     /**
      * The rule number of the entry to delete.
      */
@@ -6919,7 +6926,7 @@ declare namespace EC2 {
     /**
      * The ID of the network ACL.
      */
-    NetworkAclId: String;
+    NetworkAclId: NetworkAclId;
   }
   export interface DeleteNetworkInterfacePermissionRequest {
     /**
@@ -6949,7 +6956,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
   }
   export interface DeletePlacementGroupRequest {
     /**
@@ -7009,7 +7016,7 @@ declare namespace EC2 {
     /**
      * The ID of the route table.
      */
-    RouteTableId: String;
+    RouteTableId: RouteTableId;
   }
   export interface DeleteRouteTableRequest {
     /**
@@ -7039,7 +7046,7 @@ declare namespace EC2 {
     /**
      * The ID of the EBS snapshot.
      */
-    SnapshotId: String;
+    SnapshotId: SnapshotId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7055,7 +7062,7 @@ declare namespace EC2 {
     /**
      * The ID of the subnet.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7079,7 +7086,7 @@ declare namespace EC2 {
     /**
      * The ID of the Traffic Mirror filter.
      */
-    TrafficMirrorFilterId: String;
+    TrafficMirrorFilterId: TrafficMirrorFilterId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7095,7 +7102,7 @@ declare namespace EC2 {
     /**
      * The ID of the Traffic Mirror rule.
      */
-    TrafficMirrorFilterRuleId: String;
+    TrafficMirrorFilterRuleId: TrafficMirrorFilterRuleId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7111,7 +7118,7 @@ declare namespace EC2 {
     /**
      * The ID of the Traffic Mirror session.
      */
-    TrafficMirrorSessionId: String;
+    TrafficMirrorSessionId: TrafficMirrorSessionId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7127,7 +7134,7 @@ declare namespace EC2 {
     /**
      * The ID of the Traffic Mirror target.
      */
-    TrafficMirrorTargetId: String;
+    TrafficMirrorTargetId: TrafficMirrorTargetId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7143,7 +7150,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway.
      */
-    TransitGatewayId: String;
+    TransitGatewayId: TransitGatewayId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7159,7 +7166,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * The CIDR range for the route. This must match the CIDR for the route exactly.
      */
@@ -7179,7 +7186,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7195,7 +7202,7 @@ declare namespace EC2 {
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7211,7 +7218,7 @@ declare namespace EC2 {
     /**
      * The ID of the volume.
      */
-    VolumeId: String;
+    VolumeId: VolumeId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7273,7 +7280,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC peering connection.
      */
-    VpcPeeringConnectionId: String;
+    VpcPeeringConnectionId: VpcPeeringConnectionId;
   }
   export interface DeleteVpcPeeringConnectionResult {
     /**
@@ -7285,7 +7292,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7295,7 +7302,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPN connection.
      */
-    VpnConnectionId: String;
+    VpnConnectionId: VpnConnectionId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7309,13 +7316,13 @@ declare namespace EC2 {
     /**
      * The ID of the VPN connection.
      */
-    VpnConnectionId: String;
+    VpnConnectionId: VpnConnectionId;
   }
   export interface DeleteVpnGatewayRequest {
     /**
      * The ID of the virtual private gateway.
      */
-    VpnGatewayId: String;
+    VpnGatewayId: VpnGatewayId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7341,7 +7348,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: String;
+    ImageId: ImageId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -9565,7 +9572,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface DescribeStaleSecurityGroupsResult {
     /**
@@ -10366,11 +10373,11 @@ declare namespace EC2 {
     /**
      * The ID of the instance to unlink from the VPC.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The ID of the VPC to which the instance is linked.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface DetachClassicLinkVpcResult {
     /**
@@ -10386,17 +10393,17 @@ declare namespace EC2 {
     /**
      * The ID of the internet gateway.
      */
-    InternetGatewayId: String;
+    InternetGatewayId: InternetGatewayId;
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface DetachNetworkInterfaceRequest {
     /**
      * The ID of the attachment.
      */
-    AttachmentId: String;
+    AttachmentId: AttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -10418,11 +10425,11 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId?: String;
+    InstanceId?: InstanceId;
     /**
      * The ID of the volume.
      */
-    VolumeId: String;
+    VolumeId: VolumeId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -10432,11 +10439,11 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * The ID of the virtual private gateway.
      */
-    VpnGatewayId: String;
+    VpnGatewayId: VpnGatewayId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -10473,6 +10480,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type DhcpOptionsId = string;
   export type DhcpOptionsIdStringList = String[];
   export type DhcpOptionsList = DhcpOptions[];
   export interface DirectoryServiceAuthentication {
@@ -10503,11 +10511,11 @@ declare namespace EC2 {
     /**
      * The ID of the propagation route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -10523,17 +10531,17 @@ declare namespace EC2 {
     /**
      * The ID of the virtual private gateway.
      */
-    GatewayId: String;
+    GatewayId: VpnGatewayId;
     /**
      * The ID of the route table.
      */
-    RouteTableId: String;
+    RouteTableId: RouteTableId;
   }
   export interface DisableVpcClassicLinkDnsSupportRequest {
     /**
      * The ID of the VPC.
      */
-    VpcId?: String;
+    VpcId?: VpcId;
   }
   export interface DisableVpcClassicLinkDnsSupportResult {
     /**
@@ -10549,7 +10557,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface DisableVpcClassicLinkResult {
     /**
@@ -10575,7 +10583,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint from which to disassociate the target network.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The ID of the target network association.
      */
@@ -10611,7 +10619,7 @@ declare namespace EC2 {
     /**
      * The association ID representing the current association between the route table and subnet.
      */
-    AssociationId: String;
+    AssociationId: RouteTableAssociationId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -10621,7 +10629,7 @@ declare namespace EC2 {
     /**
      * The association ID for the CIDR block.
      */
-    AssociationId: String;
+    AssociationId: SubnetCidrAssociationId;
   }
   export interface DisassociateSubnetCidrBlockResult {
     /**
@@ -10637,11 +10645,11 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -10657,7 +10665,7 @@ declare namespace EC2 {
     /**
      * The association ID for the CIDR block.
      */
-    AssociationId: String;
+    AssociationId: VpcCidrAssociationId;
   }
   export interface DisassociateVpcCidrBlockResult {
     /**
@@ -10938,11 +10946,11 @@ declare namespace EC2 {
     /**
      * The ID of the propagation route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -10958,11 +10966,11 @@ declare namespace EC2 {
     /**
      * The ID of the virtual private gateway that is attached to a VPC. The virtual private gateway must be attached to the same VPC that the routing tables are associated with. 
      */
-    GatewayId: String;
+    GatewayId: VpnGatewayId;
     /**
      * The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. 
      */
-    RouteTableId: String;
+    RouteTableId: RouteTableId;
   }
   export interface EnableVolumeIORequest {
     /**
@@ -10972,13 +10980,13 @@ declare namespace EC2 {
     /**
      * The ID of the volume.
      */
-    VolumeId: String;
+    VolumeId: VolumeId;
   }
   export interface EnableVpcClassicLinkDnsSupportRequest {
     /**
      * The ID of the VPC.
      */
-    VpcId?: String;
+    VpcId?: VpcId;
   }
   export interface EnableVpcClassicLinkDnsSupportResult {
     /**
@@ -10994,7 +11002,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface EnableVpcClassicLinkResult {
     /**
@@ -11026,7 +11034,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -11046,7 +11054,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -11079,7 +11087,7 @@ declare namespace EC2 {
     /**
      * The ID of the image.
      */
-    ImageId: String;
+    ImageId: ImageId;
     /**
      * Information about the destination S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
      */
@@ -11185,6 +11193,7 @@ declare namespace EC2 {
      */
     StatusMessage?: String;
   }
+  export type ExportTaskId = string;
   export type ExportTaskIdStringList = String[];
   export type ExportTaskList = ExportTask[];
   export interface ExportTaskS3Location {
@@ -11248,7 +11257,7 @@ declare namespace EC2 {
     /**
      * The ID of the route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id - The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-route-destination-cidr-block - The CIDR range.    type - The type of route (active | blackhole).  
      */
@@ -11631,6 +11640,7 @@ declare namespace EC2 {
     ProductCodes?: ProductCodeList;
   }
   export type FpgaImageAttributeName = "description"|"name"|"loadPermission"|"productCodes"|string;
+  export type FpgaImageId = string;
   export type FpgaImageIdList = String[];
   export type FpgaImageList = FpgaImage[];
   export interface FpgaImageState {
@@ -11649,7 +11659,7 @@ declare namespace EC2 {
     /**
      * The ID of the Capacity Reservation.
      */
-    CapacityReservationId: String;
+    CapacityReservationId: CapacityReservationId;
     /**
      * The token to retrieve the next page of results.
      */
@@ -11698,7 +11708,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -11730,7 +11740,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * When set to true, acts as keystroke input and wakes up an instance that's in standby or "sleep" mode.
      */
@@ -11778,7 +11788,7 @@ declare namespace EC2 {
     /**
      * The offering ID of the reservation.
      */
-    OfferingId: String;
+    OfferingId: OfferingId;
   }
   export interface GetHostReservationPurchasePreviewResult {
     /**
@@ -11806,7 +11816,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
   }
   export interface GetLaunchTemplateDataResult {
     /**
@@ -11818,7 +11828,7 @@ declare namespace EC2 {
     /**
      * The ID of the Windows instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -11894,7 +11904,7 @@ declare namespace EC2 {
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * One or more filters. The possible values are:    transit-gateway-route-table-id - The ID of the transit gateway route table.  
      */
@@ -11926,7 +11936,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn).    transit-gateway-attachment-id - The ID of the attachment.  
      */
@@ -11958,7 +11968,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn).    transit-gateway-attachment-id - The ID of the attachment.  
      */
@@ -12097,6 +12107,7 @@ declare namespace EC2 {
      */
     HostRecovery?: HostRecovery;
   }
+  export type HostId = string;
   export interface HostInstance {
     /**
      * the IDs of instances that are running on the Dedicated Host.
@@ -12464,6 +12475,7 @@ declare namespace EC2 {
     UserBucket?: UserBucket;
   }
   export type ImageDiskContainerList = ImageDiskContainer[];
+  export type ImageId = string;
   export type ImageIdStringList = String[];
   export type ImageList = Image[];
   export type ImageState = "pending"|"available"|"invalid"|"deregistered"|"transient"|"failed"|"error"|string;
@@ -12472,7 +12484,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint to which the client certificate revocation list applies.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The client certificate revocation list file. For more information, see Generate a Client Certificate Revocation List in the AWS Client VPN Administrator Guide.
      */
@@ -12524,7 +12536,7 @@ declare namespace EC2 {
     /**
      * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the AMI is being copied to.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKeyId;
     /**
      * The license type to be used for the Amazon Machine Image (AMI) after importing. By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify AWS to replace the source-system license with an AWS license, if appropriate. Specify BYOL to retain the source-system license, if appropriate. To use BYOL, you must have existing licenses with rights to use these licenses in a third party cloud, such as AWS. For more information, see Prerequisites in the VM Import/Export User Guide.
      */
@@ -12822,7 +12834,7 @@ declare namespace EC2 {
     /**
      * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted snapshot. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKeyId;
     /**
      * The name of the role to use when not using the default role, 'vmimport'.
      */
@@ -12857,6 +12869,7 @@ declare namespace EC2 {
     SnapshotTaskDetail?: SnapshotTaskDetail;
   }
   export type ImportSnapshotTaskList = ImportSnapshotTask[];
+  export type ImportTaskId = string;
   export type ImportTaskIdList = String[];
   export interface ImportVolumeRequest {
     /**
@@ -13578,7 +13591,7 @@ declare namespace EC2 {
      */
     Status?: SummaryStatus;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.18xlarge"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|string;
+  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.18xlarge"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|string;
   export type InstanceTypeList = InstanceType[];
   export interface InstanceUsage {
     /**
@@ -13622,6 +13635,7 @@ declare namespace EC2 {
     VpcId?: String;
   }
   export type InternetGatewayAttachmentList = InternetGatewayAttachment[];
+  export type InternetGatewayId = string;
   export type InternetGatewayList = InternetGateway[];
   export interface IpPermission {
     /**
@@ -13687,6 +13701,7 @@ declare namespace EC2 {
   }
   export type Ipv6RangeList = Ipv6Range[];
   export type Ipv6SupportValue = "enable"|"disable"|string;
+  export type KernelId = string;
   export type KeyNameStringList = String[];
   export interface KeyPair {
     /**
@@ -13696,7 +13711,7 @@ declare namespace EC2 {
     /**
      * An unencrypted PEM encoded RSA private key.
      */
-    KeyMaterial?: String;
+    KeyMaterial?: SensitiveUserData;
     /**
      * The name of the key pair.
      */
@@ -13713,6 +13728,8 @@ declare namespace EC2 {
     KeyName?: String;
   }
   export type KeyPairList = KeyPairInfo[];
+  export type KeyPairName = string;
+  export type KmsKeyId = string;
   export interface LaunchPermission {
     /**
      * The name of the group.
@@ -14030,6 +14047,7 @@ declare namespace EC2 {
      */
     Name?: String;
   }
+  export type LaunchTemplateId = string;
   export interface LaunchTemplateInstanceMarketOptions {
     /**
      * The market type.
@@ -14449,7 +14467,7 @@ declare namespace EC2 {
     /**
      * The ID of the Capacity Reservation.
      */
-    CapacityReservationId: String;
+    CapacityReservationId: CapacityReservationId;
     /**
      * The number of instances for which to reserve capacity.
      */
@@ -14477,7 +14495,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint to modify.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The ARN of the server certificate to be used. The server certificate must be provisioned in AWS Certificate Manager (ACM).
      */
@@ -14513,7 +14531,7 @@ declare namespace EC2 {
     /**
      * The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted state must be true. You can specify the CMK using any of the following:   Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias. For example, alias/ExampleAlias.   Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.
      */
-    KmsKeyId: String;
+    KmsKeyId: KmsKeyId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -14557,7 +14575,7 @@ declare namespace EC2 {
     /**
      * The ID of the AFI.
      */
-    FpgaImageId: String;
+    FpgaImageId: FpgaImageId;
     /**
      * The name of the attribute.
      */
@@ -14657,7 +14675,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: String;
+    ImageId: ImageId;
     /**
      * A new launch permission for the AMI.
      */
@@ -14723,7 +14741,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * Specifies whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).
      */
@@ -14757,7 +14775,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance to be modified.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * Information about the Capacity Reservation targeting option.
      */
@@ -14805,7 +14823,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance with the scheduled event.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The ID of the event whose date and time you are modifying.
      */
@@ -14826,15 +14844,15 @@ declare namespace EC2 {
     /**
      * The name of the placement group in which to place the instance. For spread placement groups, the instance must have a tenancy of default. For cluster and partition placement groups, the instance must have a tenancy of default or dedicated. To remove an instance from a placement group, specify an empty string ("").
      */
-    GroupName?: String;
+    GroupName?: PlacementGroupName;
     /**
      * The ID of the Dedicated Host with which to associate the instance.
      */
-    HostId?: String;
+    HostId?: HostId;
     /**
      * The ID of the instance that you are modifying.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * The tenancy for the instance.
      */
@@ -14862,7 +14880,7 @@ declare namespace EC2 {
     /**
      * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
      */
-    LaunchTemplateId?: String;
+    LaunchTemplateId?: LaunchTemplateId;
     /**
      * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
      */
@@ -14898,7 +14916,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
     /**
      * Indicates whether source/destination checking is enabled. A value of true means checking is enabled, and false means checking is disabled. This value must be false for a NAT instance to perform NAT. For more information, see NAT Instances in the Amazon Virtual Private Cloud User Guide.
      */
@@ -14944,7 +14962,7 @@ declare namespace EC2 {
     /**
      * The ID of the snapshot.
      */
-    SnapshotId: String;
+    SnapshotId: SnapshotId;
     /**
      * The account ID to modify for the snapshot.
      */
@@ -14962,7 +14980,7 @@ declare namespace EC2 {
     /**
      * The ID of the Spot Fleet request.
      */
-    SpotFleetRequestId: String;
+    SpotFleetRequestId: SpotFleetRequestId;
     /**
      * The size of the fleet.
      */
@@ -14990,13 +15008,13 @@ declare namespace EC2 {
     /**
      * The ID of the subnet.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
   }
   export interface ModifyTrafficMirrorFilterNetworkServicesRequest {
     /**
      * The ID of the Traffic Mirror filter.
      */
-    TrafficMirrorFilterId: String;
+    TrafficMirrorFilterId: TrafficMirrorFilterId;
     /**
      * The network service, for example Amazon DNS, that you want to mirror.
      */
@@ -15020,7 +15038,7 @@ declare namespace EC2 {
     /**
      * The ID of the Traffic Mirror rule.
      */
-    TrafficMirrorFilterRuleId: String;
+    TrafficMirrorFilterRuleId: TrafficMirrorFilterRuleId;
     /**
      * The type of traffic (ingress | egress) to assign to the rule.
      */
@@ -15076,15 +15094,15 @@ declare namespace EC2 {
     /**
      * The ID of the Traffic Mirror session.
      */
-    TrafficMirrorSessionId: String;
+    TrafficMirrorSessionId: TrafficMirrorSessionId;
     /**
      * The Traffic Mirror target. The target must be in the same VPC as the source, or have a VPC peering connection with the source.
      */
-    TrafficMirrorTargetId?: String;
+    TrafficMirrorTargetId?: TrafficMirrorTargetId;
     /**
      * The ID of the Traffic Mirror filter.
      */
-    TrafficMirrorFilterId?: String;
+    TrafficMirrorFilterId?: TrafficMirrorFilterId;
     /**
      * The number of bytes in each packet to mirror. These are bytes after the VXLAN header. To mirror a subset, set this to the length (in bytes) to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target. Do not specify this parameter when you want to mirror the entire packet.
      */
@@ -15120,7 +15138,7 @@ declare namespace EC2 {
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * The IDs of one or more subnets to add. You can specify at most one subnet per Availability Zone.
      */
@@ -15162,7 +15180,7 @@ declare namespace EC2 {
     /**
      * The ID of the volume.
      */
-    VolumeId: String;
+    VolumeId: VolumeId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -15176,7 +15194,7 @@ declare namespace EC2 {
     /**
      * The ID of the volume.
      */
-    VolumeId: String;
+    VolumeId: VolumeId;
     /**
      * The target size of the volume, in GiB. The target volume size must be greater than or equal to than the existing size of the volume. For information about available EBS volume sizes, see Amazon EBS Volume Types. Default: If no size is specified, the existing size is retained.
      */
@@ -15208,7 +15226,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
   }
   export interface ModifyVpcEndpointConnectionNotificationRequest {
     /**
@@ -15218,7 +15236,7 @@ declare namespace EC2 {
     /**
      * The ID of the notification.
      */
-    ConnectionNotificationId: String;
+    ConnectionNotificationId: ConnectionNotificationId;
     /**
      * The ARN for the SNS topic for the notification.
      */
@@ -15242,7 +15260,7 @@ declare namespace EC2 {
     /**
      * The ID of the endpoint.
      */
-    VpcEndpointId: String;
+    VpcEndpointId: VpcEndpointId;
     /**
      * (Gateway endpoint) Specify true to reset the policy document to the default policy. The default policy allows full access to the service.
      */
@@ -15294,7 +15312,7 @@ declare namespace EC2 {
     /**
      * The ID of the service.
      */
-    ServiceId: String;
+    ServiceId: ServiceId;
     /**
      * Indicate whether requests to create an endpoint to your service must be accepted.
      */
@@ -15354,7 +15372,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC peering connection.
      */
-    VpcPeeringConnectionId: String;
+    VpcPeeringConnectionId: VpcPeeringConnectionId;
   }
   export interface ModifyVpcPeeringConnectionOptionsResult {
     /**
@@ -15370,7 +15388,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * The instance tenancy attribute for the VPC. 
      */
@@ -15390,19 +15408,19 @@ declare namespace EC2 {
     /**
      * The ID of the VPN connection.
      */
-    VpnConnectionId: String;
+    VpnConnectionId: VpnConnectionId;
     /**
      * The ID of the transit gateway.
      */
-    TransitGatewayId?: String;
+    TransitGatewayId?: TransitGatewayId;
     /**
      * The ID of the customer gateway at your end of the VPN connection.
      */
-    CustomerGatewayId?: String;
+    CustomerGatewayId?: CustomerGatewayId;
     /**
      * The ID of the virtual private gateway at the AWS side of the VPN connection.
      */
-    VpnGatewayId?: String;
+    VpnGatewayId?: VpnGatewayId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -15415,7 +15433,7 @@ declare namespace EC2 {
     /**
      * The ID of the AWS Site-to-Site VPN connection.
      */
-    VpnConnectionId: String;
+    VpnConnectionId: VpnConnectionId;
     /**
      * The external IP address of the VPN tunnel.
      */
@@ -15432,7 +15450,7 @@ declare namespace EC2 {
     /**
      * The ID of the AWS Site-to-Site VPN connection.
      */
-    VpnConnectionId: String;
+    VpnConnectionId: VpnConnectionId;
     /**
      * The external IP address of the VPN tunnel.
      */
@@ -15631,6 +15649,7 @@ declare namespace EC2 {
     PublicIp?: String;
   }
   export type NatGatewayAddressList = NatGatewayAddress[];
+  export type NatGatewayId = string;
   export type NatGatewayList = NatGateway[];
   export type NatGatewayState = "pending"|"failed"|"available"|"deleting"|"deleted"|string;
   export interface NetworkAcl {
@@ -15677,6 +15696,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
   }
+  export type NetworkAclAssociationId = string;
   export type NetworkAclAssociationList = NetworkAclAssociation[];
   export interface NetworkAclEntry {
     /**
@@ -15713,6 +15733,7 @@ declare namespace EC2 {
     RuleNumber?: Integer;
   }
   export type NetworkAclEntryList = NetworkAclEntry[];
+  export type NetworkAclId = string;
   export type NetworkAclList = NetworkAcl[];
   export interface NetworkInterface {
     /**
@@ -15860,6 +15881,7 @@ declare namespace EC2 {
   }
   export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|string;
   export type NetworkInterfaceCreationType = "efa"|string;
+  export type NetworkInterfaceId = string;
   export type NetworkInterfaceIdList = String[];
   export interface NetworkInterfaceIpv6Address {
     /**
@@ -15938,6 +15960,7 @@ declare namespace EC2 {
   export type OccurrenceDayRequestSet = Integer[];
   export type OccurrenceDaySet = Integer[];
   export type OfferingClassType = "standard"|"convertible"|string;
+  export type OfferingId = string;
   export type OfferingTypeValues = "Heavy Utilization"|"Medium Utilization"|"Light Utilization"|"No Upfront"|"Partial Upfront"|"All Upfront"|string;
   export type OnDemandAllocationStrategy = "lowestPrice"|"prioritized"|string;
   export interface OnDemandOptions {
@@ -16167,6 +16190,7 @@ declare namespace EC2 {
     PartitionCount?: Integer;
   }
   export type PlacementGroupList = PlacementGroup[];
+  export type PlacementGroupName = string;
   export type PlacementGroupState = "pending"|"available"|"deleting"|"deleted"|string;
   export type PlacementGroupStringList = String[];
   export interface PlacementResponse {
@@ -16449,7 +16473,7 @@ declare namespace EC2 {
     /**
      * The ID of the offering.
      */
-    OfferingId: String;
+    OfferingId: OfferingId;
   }
   export interface PurchaseHostReservationResult {
     /**
@@ -16502,7 +16526,7 @@ declare namespace EC2 {
      */
     LimitPrice?: ReservedInstanceLimitPrice;
     /**
-     * The time at which to purchase the Reserved Instance.
+     * The time at which to purchase the Reserved Instance, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
      */
     PurchaseTime?: DateTime;
   }
@@ -16535,6 +16559,7 @@ declare namespace EC2 {
   export type PurchaseSet = Purchase[];
   export type PurchasedScheduledInstanceSet = ScheduledInstance[];
   export type RIProductDescription = "Linux/UNIX"|"Linux/UNIX (Amazon VPC)"|"Windows"|"Windows (Amazon VPC)"|string;
+  export type RamdiskId = string;
   export type ReasonCodesList = ReportInstanceReasonCodes[];
   export interface RebootInstancesRequest {
     /**
@@ -16602,7 +16627,7 @@ declare namespace EC2 {
     /**
      * The ID of the kernel.
      */
-    KernelId?: String;
+    KernelId?: KernelId;
     /**
      * A name for your AMI. Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)
      */
@@ -16614,7 +16639,7 @@ declare namespace EC2 {
     /**
      * The ID of the RAM disk.
      */
-    RamdiskId?: String;
+    RamdiskId?: RamdiskId;
     /**
      * The device name of the root device volume (for example, /dev/sda1).
      */
@@ -16638,7 +16663,7 @@ declare namespace EC2 {
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: String;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -16658,7 +16683,7 @@ declare namespace EC2 {
     /**
      * The ID of the service.
      */
-    ServiceId: String;
+    ServiceId: ServiceId;
     /**
      * The IDs of one or more VPC endpoints.
      */
@@ -16678,7 +16703,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC peering connection.
      */
-    VpcPeeringConnectionId: String;
+    VpcPeeringConnectionId: VpcPeeringConnectionId;
   }
   export interface RejectVpcPeeringConnectionResult {
     /**
@@ -16690,7 +16715,7 @@ declare namespace EC2 {
     /**
      * [EC2-VPC] The allocation ID. Required for EC2-VPC.
      */
-    AllocationId?: String;
+    AllocationId?: AllocationId;
     /**
      * [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
      */
@@ -16736,7 +16761,7 @@ declare namespace EC2 {
     /**
      * The ID of the current association between the original network ACL and the subnet.
      */
-    AssociationId: String;
+    AssociationId: NetworkAclAssociationId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -16744,7 +16769,7 @@ declare namespace EC2 {
     /**
      * The ID of the new network ACL to associate with the subnet.
      */
-    NetworkAclId: String;
+    NetworkAclId: NetworkAclId;
   }
   export interface ReplaceNetworkAclAssociationResult {
     /**
@@ -16776,7 +16801,7 @@ declare namespace EC2 {
     /**
      * The ID of the ACL.
      */
-    NetworkAclId: String;
+    NetworkAclId: NetworkAclId;
     /**
      * TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).
      */
@@ -16810,41 +16835,41 @@ declare namespace EC2 {
     /**
      * [IPv6 traffic only] The ID of an egress-only internet gateway.
      */
-    EgressOnlyInternetGatewayId?: String;
+    EgressOnlyInternetGatewayId?: EgressOnlyInternetGatewayId;
     /**
      * The ID of an internet gateway or virtual private gateway.
      */
-    GatewayId?: String;
+    GatewayId?: RouteTableGatewayId;
     /**
      * The ID of a NAT instance in your VPC.
      */
-    InstanceId?: String;
+    InstanceId?: InstanceId;
     /**
      * [IPv4 traffic only] The ID of a NAT gateway.
      */
-    NatGatewayId?: String;
+    NatGatewayId?: NatGatewayId;
     /**
      * The ID of a transit gateway.
      */
-    TransitGatewayId?: String;
+    TransitGatewayId?: TransitGatewayId;
     /**
      * The ID of a network interface.
      */
-    NetworkInterfaceId?: String;
+    NetworkInterfaceId?: NetworkInterfaceId;
     /**
      * The ID of the route table.
      */
-    RouteTableId: String;
+    RouteTableId: RouteTableId;
     /**
      * The ID of a VPC peering connection.
      */
-    VpcPeeringConnectionId?: String;
+    VpcPeeringConnectionId?: VpcPeeringConnectionId;
   }
   export interface ReplaceRouteTableAssociationRequest {
     /**
      * The association ID.
      */
-    AssociationId: String;
+    AssociationId: RouteTableAssociationId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -16852,7 +16877,7 @@ declare namespace EC2 {
     /**
      * The ID of the new route table to associate with the subnet.
      */
-    RouteTableId: String;
+    RouteTableId: RouteTableId;
   }
   export interface ReplaceRouteTableAssociationResult {
     /**
@@ -16868,11 +16893,11 @@ declare namespace EC2 {
     /**
      * The ID of the route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId?: String;
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
     /**
      * Indicates whether traffic matching this route is to be dropped.
      */
@@ -16921,7 +16946,7 @@ declare namespace EC2 {
   }
   export type ReportStatusType = "ok"|"impaired"|string;
   export type RequestHostIdList = String[];
-  export type RequestHostIdSet = String[];
+  export type RequestHostIdSet = HostId[];
   export interface RequestLaunchTemplateData {
     /**
      * The ID of the kernel.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User Provided Kernels in the Amazon Elastic Compute Cloud User Guide. 
@@ -17020,7 +17045,7 @@ declare namespace EC2 {
      */
     LicenseSpecifications?: LaunchTemplateLicenseSpecificationListRequest;
     /**
-     * Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the hibernation prerequisites. Hibernation is currently supported only for Amazon Linux. For more information, see Hibernate Your Instance in the Amazon Elastic Compute Cloud User Guide.
+     * Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the hibernation prerequisites. For more information, see Hibernate Your Instance in the Amazon Elastic Compute Cloud User Guide.
      */
     HibernationOptions?: LaunchTemplateHibernationOptionsRequest;
   }
@@ -17370,6 +17395,7 @@ declare namespace EC2 {
      */
     UpdateDate?: DateTime;
   }
+  export type ReservedInstancesListingId = string;
   export type ReservedInstancesListingList = ReservedInstancesListing[];
   export interface ReservedInstancesModification {
     /**
@@ -17508,7 +17534,7 @@ declare namespace EC2 {
     /**
      * The ID of the AFI.
      */
-    FpgaImageId: String;
+    FpgaImageId: FpgaImageId;
     /**
      * The attribute.
      */
@@ -17529,7 +17555,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: String;
+    ImageId: ImageId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -17547,7 +17573,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
   }
   export interface ResetNetworkInterfaceAttributeRequest {
     /**
@@ -17557,7 +17583,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
     /**
      * The source/destination checking attribute. Resets the value to true.
      */
@@ -17571,7 +17597,7 @@ declare namespace EC2 {
     /**
      * The ID of the snapshot.
      */
-    SnapshotId: String;
+    SnapshotId: SnapshotId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -17719,7 +17745,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint with which the authorization rule is associated.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The IPv4 address range, in CIDR notation, of the network for which access is being removed.
      */
@@ -17928,7 +17954,10 @@ declare namespace EC2 {
      */
     SubnetId?: String;
   }
+  export type RouteTableAssociationId = string;
   export type RouteTableAssociationList = RouteTableAssociation[];
+  export type RouteTableGatewayId = string;
+  export type RouteTableId = string;
   export type RouteTableList = RouteTable[];
   export type RuleAction = "allow"|"deny"|string;
   export interface RunInstancesMonitoringEnabled {
@@ -17945,7 +17974,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI. An AMI ID is required to launch an instance and must be specified here or in a launch template.
      */
-    ImageId?: String;
+    ImageId?: ImageId;
     /**
      * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide. Default: m1.small 
      */
@@ -18099,7 +18128,7 @@ declare namespace EC2 {
     /**
      * The Scheduled Instance ID.
      */
-    ScheduledInstanceId: String;
+    ScheduledInstanceId: ScheduledInstanceId;
   }
   export interface RunScheduledInstancesResult {
     /**
@@ -18246,6 +18275,7 @@ declare namespace EC2 {
     TotalScheduledInstanceHours?: Integer;
   }
   export type ScheduledInstanceAvailabilitySet = ScheduledInstanceAvailability[];
+  export type ScheduledInstanceId = string;
   export type ScheduledInstanceIdRequestSet = String[];
   export interface ScheduledInstanceRecurrence {
     /**
@@ -18494,7 +18524,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway route table.
      */
-    TransitGatewayRouteTableId: String;
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
      * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id- The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    attachment.resource-type - The attachment resource type (vpc | vpn).    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route (active | blackhole).    type - The type of route (propagated | static).  
      */
@@ -18584,12 +18614,13 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
   }
+  export type SensitiveUserData = string;
   export interface ServiceConfiguration {
     /**
      * The type of service.
@@ -18684,6 +18715,7 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type ServiceDetailSet = ServiceDetail[];
+  export type ServiceId = string;
   export type ServiceState = "Pending"|"Available"|"Deleting"|"Deleted"|"Failed"|string;
   export type ServiceType = "Interface"|"Gateway"|string;
   export interface ServiceTypeDetail {
@@ -18834,6 +18866,7 @@ declare namespace EC2 {
      */
     UserBucket?: UserBucket;
   }
+  export type SnapshotId = string;
   export type SnapshotIdStringList = String[];
   export interface SnapshotInfo {
     /**
@@ -19142,6 +19175,7 @@ declare namespace EC2 {
     InstancePoolsToUseCount?: Integer;
   }
   export type SpotFleetRequestConfigSet = SpotFleetRequestConfig[];
+  export type SpotFleetRequestId = string;
   export interface SpotFleetTagSpecification {
     /**
      * The type of resource. Currently, the only resource type that is supported is instance.
@@ -19284,7 +19318,7 @@ declare namespace EC2 {
   }
   export interface SpotOptions {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowestPrice, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -19292,7 +19326,7 @@ declare namespace EC2 {
      */
     InstanceInterruptionBehavior?: SpotInstanceInterruptionBehavior;
     /**
-     * The number of Spot pools across which to allocate your target Spot capacity. Valid only when AllocationStrategy is set to lowestPrice. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.
+     * The number of Spot pools across which to allocate your target Spot capacity. Valid only when AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify.
      */
     InstancePoolsToUseCount?: Integer;
     /**
@@ -19314,7 +19348,7 @@ declare namespace EC2 {
   }
   export interface SpotOptionsRequest {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowestPrice, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacityOptimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -19566,6 +19600,7 @@ declare namespace EC2 {
      */
     SubnetArn?: String;
   }
+  export type SubnetCidrAssociationId = string;
   export interface SubnetCidrBlockState {
     /**
      * The state of a CIDR block.
@@ -19577,6 +19612,7 @@ declare namespace EC2 {
     StatusMessage?: String;
   }
   export type SubnetCidrBlockStateCode = "associating"|"associated"|"disassociating"|"disassociated"|"failing"|"failed"|string;
+  export type SubnetId = string;
   export type SubnetIdStringList = String[];
   export interface SubnetIpv6CidrBlockAssociation {
     /**
@@ -19765,7 +19801,7 @@ declare namespace EC2 {
     /**
      * The ID of the Client VPN endpoint to which the client is connected.
      */
-    ClientVpnEndpointId: String;
+    ClientVpnEndpointId: ClientVpnEndpointId;
     /**
      * The ID of the client connection to be terminated.
      */
@@ -19851,6 +19887,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type TrafficMirrorFilterId = string;
   export interface TrafficMirrorFilterRule {
     /**
      * The ID of the Traffic Mirror rule.
@@ -19899,6 +19936,7 @@ declare namespace EC2 {
   }
   export type TrafficMirrorFilterRuleField = "destination-port-range"|"source-port-range"|"protocol"|"description"|string;
   export type TrafficMirrorFilterRuleFieldList = TrafficMirrorFilterRuleField[];
+  export type TrafficMirrorFilterRuleId = string;
   export type TrafficMirrorFilterRuleList = TrafficMirrorFilterRule[];
   export type TrafficMirrorFilterSet = TrafficMirrorFilter[];
   export type TrafficMirrorNetworkService = "amazon-dns"|string;
@@ -19968,6 +20006,7 @@ declare namespace EC2 {
   }
   export type TrafficMirrorSessionField = "packet-length"|"description"|"virtual-network-id"|string;
   export type TrafficMirrorSessionFieldList = TrafficMirrorSessionField[];
+  export type TrafficMirrorSessionId = string;
   export type TrafficMirrorSessionSet = TrafficMirrorSession[];
   export interface TrafficMirrorTarget {
     /**
@@ -19999,6 +20038,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type TrafficMirrorTargetId = string;
   export type TrafficMirrorTargetSet = TrafficMirrorTarget[];
   export type TrafficMirrorTargetType = "network-interface"|"network-load-balancer"|string;
   export type TrafficMirroringMaxResults = number;
@@ -20112,6 +20152,7 @@ declare namespace EC2 {
      */
     State?: TransitGatewayAssociationState;
   }
+  export type TransitGatewayAttachmentId = string;
   export type TransitGatewayAttachmentIdStringList = String[];
   export type TransitGatewayAttachmentList = TransitGatewayAttachment[];
   export interface TransitGatewayAttachmentPropagation {
@@ -20127,6 +20168,7 @@ declare namespace EC2 {
   export type TransitGatewayAttachmentPropagationList = TransitGatewayAttachmentPropagation[];
   export type TransitGatewayAttachmentResourceType = "vpc"|"vpn"|"direct-connect-gateway"|string;
   export type TransitGatewayAttachmentState = "pendingAcceptance"|"rollingBack"|"pending"|"available"|"modifying"|"deleting"|"deleted"|"failed"|"rejected"|"rejecting"|"failing"|string;
+  export type TransitGatewayId = string;
   export type TransitGatewayIdStringList = String[];
   export type TransitGatewayList = TransitGateway[];
   export type TransitGatewayMaxResults = number;
@@ -20297,6 +20339,7 @@ declare namespace EC2 {
     State?: TransitGatewayAssociationState;
   }
   export type TransitGatewayRouteTableAssociationList = TransitGatewayRouteTableAssociation[];
+  export type TransitGatewayRouteTableId = string;
   export type TransitGatewayRouteTableIdStringList = String[];
   export type TransitGatewayRouteTableList = TransitGatewayRouteTable[];
   export interface TransitGatewayRouteTablePropagation {
@@ -20446,7 +20489,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
   }
   export interface UnassignIpv6AddressesResult {
     /**
@@ -20462,7 +20505,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: String;
+    NetworkInterfaceId: NetworkInterfaceId;
     /**
      * The secondary private IP addresses to unassign from the network interface. You can specify this option multiple times to unassign more than one IP address.
      */
@@ -20752,6 +20795,7 @@ declare namespace EC2 {
      */
     Size: Long;
   }
+  export type VolumeId = string;
   export type VolumeIdStringList = String[];
   export type VolumeList = Volume[];
   export interface VolumeModification {
@@ -20950,6 +20994,7 @@ declare namespace EC2 {
   }
   export type VpcAttachmentList = VpcAttachment[];
   export type VpcAttributeName = "enableDnsSupport"|"enableDnsHostnames"|string;
+  export type VpcCidrAssociationId = string;
   export interface VpcCidrBlockAssociation {
     /**
      * The association ID for the IPv4 CIDR block.
@@ -21089,8 +21134,10 @@ declare namespace EC2 {
     NetworkLoadBalancerArns?: ValueStringList;
   }
   export type VpcEndpointConnectionSet = VpcEndpointConnection[];
+  export type VpcEndpointId = string;
   export type VpcEndpointSet = VpcEndpoint[];
   export type VpcEndpointType = "Interface"|"Gateway"|string;
+  export type VpcId = string;
   export type VpcIdStringList = String[];
   export interface VpcIpv6CidrBlockAssociation {
     /**
@@ -21134,6 +21181,7 @@ declare namespace EC2 {
      */
     VpcPeeringConnectionId?: String;
   }
+  export type VpcPeeringConnectionId = string;
   export type VpcPeeringConnectionList = VpcPeeringConnection[];
   export interface VpcPeeringConnectionOptionsDescription {
     /**
@@ -21242,6 +21290,7 @@ declare namespace EC2 {
      */
     VgwTelemetry?: VgwTelemetryList;
   }
+  export type VpnConnectionId = string;
   export type VpnConnectionIdStringList = String[];
   export type VpnConnectionList = VpnConnection[];
   export interface VpnConnectionOptions {
@@ -21295,6 +21344,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type VpnGatewayId = string;
   export type VpnGatewayIdStringList = String[];
   export type VpnGatewayList = VpnGateway[];
   export type VpnProtocol = "openvpn"|string;

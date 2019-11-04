@@ -896,6 +896,10 @@ declare namespace RoboMaker {
      * The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.
      */
     robotDeploymentTimeoutInSeconds?: DeploymentTimeout;
+    /**
+     * The download condition file.
+     */
+    downloadConditionFile?: S3Object;
   }
   export interface DeploymentJob {
     /**
@@ -931,7 +935,7 @@ declare namespace RoboMaker {
      */
     createdAt?: CreatedAt;
   }
-  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"InternalServerError"|string;
+  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"DownloadConditionFailed"|"InternalServerError"|string;
   export type DeploymentJobs = DeploymentJob[];
   export interface DeploymentLaunchConfig {
     /**
@@ -1756,7 +1760,7 @@ declare namespace RoboMaker {
      */
     failureCode?: DeploymentJobErrorCode;
   }
-  export type RobotDeploymentStep = "Validating"|"DownloadingExtracting"|"ExecutingPreLaunch"|"Launching"|"ExecutingPostLaunch"|"Finished"|string;
+  export type RobotDeploymentStep = "Validating"|"DownloadingExtracting"|"ExecutingDownloadCondition"|"ExecutingPreLaunch"|"Launching"|"ExecutingPostLaunch"|"Finished"|string;
   export type RobotDeploymentSummary = RobotDeployment[];
   export interface RobotSoftwareSuite {
     /**
@@ -1787,6 +1791,20 @@ declare namespace RoboMaker {
   }
   export type S3KeyOutputs = S3KeyOutput[];
   export type S3Keys = S3Key[];
+  export interface S3Object {
+    /**
+     * The bucket containing the object.
+     */
+    bucket: S3Bucket;
+    /**
+     * The key of the object.
+     */
+    key: S3Key;
+    /**
+     * The etag of the object.
+     */
+    etag?: S3Etag;
+  }
   export type SecurityGroups = NonEmptyString[];
   export interface SimulationApplicationConfig {
     /**
@@ -1909,7 +1927,7 @@ declare namespace RoboMaker {
      */
     vpcConfig?: VPCConfigResponse;
     /**
-     * 
+     * Information about a network interface.
      */
     networkInterface?: NetworkInterface;
   }
