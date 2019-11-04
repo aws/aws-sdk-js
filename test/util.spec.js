@@ -1308,12 +1308,13 @@
     });
     return it('allows custom backoff function', function() {
       var customBackoff, delay;
-      customBackoff = function(retryCount) {
+      customBackoff = function(retryCount, err) {
+        expect(err).to.exist;
         return 100 * Math.pow(3, retryCount);
       };
       delay = AWS.util.calculateRetryDelay(2, {
         customBackoff: customBackoff
-      });
+      }, new Error('passed through to customBackoff'));
       return expect(delay).to.equal(900);
     });
   });
@@ -1485,9 +1486,7 @@
       app = null;
       httpRequest = null;
       spy = null;
-      options = {
-        maxRetries: 2
-      };
+      options = null;
       httpClient = AWS.HttpClient.getInstance();
       sendRequest = function(cb) {
         return AWS.util.handleRequestWithRetries(httpRequest, options, cb);
@@ -1511,6 +1510,9 @@
       });
       beforeEach(function(done) {
         httpRequest = new AWS.HttpRequest('http://127.0.0.1');
+        options = {
+          maxRetries: 2
+        };
         spy = helpers.spyOn(httpClient, 'handleRequest').andCallThrough();
         return getport(function(port) {
           httpRequest.endpoint.port = port;
@@ -1644,6 +1646,70 @@
           expect(data).to.be.undefined;
           expect(err).to.not.be['null'];
           expect(spy.calls.length).to.equal(1);
+          return done();
+        });
+      });
+      it('does not retry if customBackoff returns negative value', function(done) {
+        helpers.spyOn(AWS.util, 'error').andReturn({
+          retryable: true
+        });
+        options = {
+          maxRetries: 2,
+          retryDelayOptions: {
+            customBackoff: function(retryCount, err) {
+              return -1;
+            },
+          },
+        };
+        app = function(req, resp) {
+          resp.writeHead(400, {});
+          resp.write('FOOBAR');
+          return resp.end();
+        };
+        return sendRequest(function(err, data) {
+          expect(data).to.be.undefined;
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
+          expect(spy.calls.length).to.not.equal(options.maxRetries + 1);
+          expect(spy.calls.length).to.equal(1);
+          return done();
+        });
+      });
+      it('retries with custom backoff', function(done) {
+        helpers.spyOn(AWS.util, 'error').andReturn({
+          retryable: true
+        });
+        var topLevelScope = null;
+        if (typeof global === 'object') {
+          topLevelScope = global;
+        } else if (typeof self === 'object') {
+          topLevelScope = self;
+        } else {
+          topLevelScope = window;
+        }
+        var setTimeoutSpy = helpers.spyOn(topLevelScope, 'setTimeout').andCallFake(function (cb) {
+          process.nextTick(cb);
+        });
+        options = {
+          maxRetries: 2,
+          retryDelayOptions: {
+            customBackoff: function(retryCount, err) {
+              return 2 * retryCount;
+            },
+          },
+        };
+        app = function(req, resp) {
+          resp.writeHead(400, {});
+          resp.write('FOOBAR');
+          return resp.end();
+        };
+        return sendRequest(function(err, data) {
+          expect(data).to.be.undefined;
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
+          expect(setTimeoutSpy.calls.length).to.equal(options.maxRetries);
+          expect(setTimeoutSpy.calls[0].arguments[1]).to.equal(0);
+          expect(setTimeoutSpy.calls[1].arguments[1]).to.equal(2);
           return done();
         });
       });

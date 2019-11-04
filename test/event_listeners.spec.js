@@ -665,6 +665,25 @@
         makeRequest(function() {});
         return expect(delays).to.eql([0, 2, 4]);
       });
+      it('skips retries if custom backoff returns negative delay', function() {
+        service.config.update({
+          retryDelayOptions: {
+            customBackoff: function(retryCount, err) {
+              if (err.code === 'NetworkingError') {
+                return -1;
+              } else {
+                return 2 * retryCount;
+              }
+            }
+          }
+        });
+        helpers.mockHttpResponse({
+          code: 'NetworkingError',
+          message: 'Cannot connect'
+        });
+        makeRequest(function() {});
+        return expect(delays).to.eql([]);
+      });
       it('uses retry from error.retryDelay property', function() {
         var request, response;
         helpers.mockHttpResponse({
