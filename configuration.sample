@@ -1,10 +1,11 @@
 {
   "region": "us-east-1",
+  "stsRegionalEndpoints": "regional",
   "s3": {
     "params": { "Bucket": "test-s3-bucket" }
   },
   "dynamodb": {
-    "params": { "TableName": "aws-sdk-js-integration-test" }
+    "params": { "TableName": "aws-sdk-js-integration-test", "BillingMode": "PAY_PER_REQUEST" }
   },
   "devicefarm": {
     "region": "us-west-2"
