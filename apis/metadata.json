@@ -581,7 +581,7 @@
   },
   "iotanalytics": {
     "name": "IoTAnalytics",
-    "cors": true	
+    "cors": true
   },
   "iot1clickdevicesservice": {
     "prefix": "iot1click-devices",
@@ -769,5 +769,9 @@
   },
   "workmailmessageflow": {
     "name": "WorkMailMessageFlow"
+  },
+  "codestarnotifications": {
+    "prefix": "codestar-notifications",
+    "name": "CodeStarNotifications"
   }
 }

@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Config",
-  "description": "Allow shortcutting in customBackoff based on error"
-}

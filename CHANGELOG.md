@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.563.0-->
+<!--LATEST=2.564.0-->
 <!--ENTRYINSERT-->
+
+## 2.564.0
+* feature: CodeStarNotifications: This release adds a notification manager for events in repositories, build projects, deployments, and pipelines. You can now configure rules and receive notifications about events that occur for resources. Each notification includes a status message as well as a link to the resource (repository, build project, deployment application, or pipeline) whose event generated the notification.
+* feature: Config: Allow shortcutting in customBackoff based on error
 
 ## 2.563.0
 * feature: RoboMaker: RoboMaker Fleet Management launch a feature to verify your robot is ready to download and install the new robot application using a download condition file, which is a script run on the robot prior to downloading the new deployment. 
