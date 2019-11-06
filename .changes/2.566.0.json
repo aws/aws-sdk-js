@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "SavingsPlans",
+        "description": "This is the first release of Savings Plans, a new flexible pricing model that offers low prices on Amazon EC2 and AWS Fargate usage."
+    }
+]

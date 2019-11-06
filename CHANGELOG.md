@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.565.0-->
+<!--LATEST=2.566.0-->
 <!--ENTRYINSERT-->
+
+## 2.566.0
+* feature: SavingsPlans: This is the first release of Savings Plans, a new flexible pricing model that offers low prices on Amazon EC2 and AWS Fargate usage.
 
 ## 2.565.0
 * feature: CodeBuild: Add support for Build Number, Secrets Manager and Exported Environment Variables.
