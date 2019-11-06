@@ -68,6 +68,38 @@ declare class CostExplorer extends Service {
    */
   getRightsizingRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetRightsizingRecommendationResponse) => void): Request<CostExplorer.Types.GetRightsizingRecommendationResponse, AWSError>;
   /**
+   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s master account can see the coverage of the associated member accounts. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
+   */
+  getSavingsPlansCoverage(params: CostExplorer.Types.GetSavingsPlansCoverageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
+  /**
+   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s master account can see the coverage of the associated member accounts. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
+   */
+  getSavingsPlansCoverage(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
+  /**
+   * Retrieves your request parameters, Savings Plan Recommendations Summary and Details.
+   */
+  getSavingsPlansPurchaseRecommendation(params: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse, AWSError>;
+  /**
+   * Retrieves your request parameters, Savings Plan Recommendations Summary and Details.
+   */
+  getSavingsPlansPurchaseRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse, AWSError>;
+  /**
+   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Master accounts in an organization have access to member accounts. You can use GetDimensionValues to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization. 
+   */
+  getSavingsPlansUtilization(params: CostExplorer.Types.GetSavingsPlansUtilizationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationResponse, AWSError>;
+  /**
+   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Master accounts in an organization have access to member accounts. You can use GetDimensionValues to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization. 
+   */
+  getSavingsPlansUtilization(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationResponse, AWSError>;
+  /**
+   * Retrieves a single daily or monthly Savings Plans utilization rate and details for your account. Master accounts in an organization have access to member accounts. You can use GetDimensionValues to determine the possible dimension values.  You can't group by any dimension values for GetSavingsPlansUtilizationDetails. 
+   */
+  getSavingsPlansUtilizationDetails(params: CostExplorer.Types.GetSavingsPlansUtilizationDetailsRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationDetailsResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationDetailsResponse, AWSError>;
+  /**
+   * Retrieves a single daily or monthly Savings Plans utilization rate and details for your account. Master accounts in an organization have access to member accounts. You can use GetDimensionValues to determine the possible dimension values.  You can't group by any dimension values for GetSavingsPlansUtilizationDetails. 
+   */
+  getSavingsPlansUtilizationDetails(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationDetailsResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationDetailsResponse, AWSError>;
+  /**
    * Queries for available tag keys and tag values for a specified period. You can search the tag values for an arbitrary string. 
    */
   getTags(params: CostExplorer.Types.GetTagsRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetTagsResponse) => void): Request<CostExplorer.Types.GetTagsResponse, AWSError>;
@@ -91,7 +123,7 @@ declare namespace CostExplorer {
   export type AttributeType = string;
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
-  export type Context = "COST_AND_USAGE"|"RESERVATIONS"|string;
+  export type Context = "COST_AND_USAGE"|"RESERVATIONS"|"SAVINGS_PLANS"|string;
   export interface Coverage {
     /**
      * The amount of instance usage that the reservation covered, in hours.
@@ -187,6 +219,10 @@ declare namespace CostExplorer {
      */
     ReservationCoveredHoursInLookbackPeriod?: GenericString;
     /**
+     * Number of hours during the lookback period covered by Savings Plans.
+     */
+    SavingsPlansCoveredHoursInLookbackPeriod?: GenericString;
+    /**
      *  Number of hours during the lookback period billed at On Demand rates.
      */
     OnDemandHoursInLookbackPeriod?: GenericString;
@@ -213,7 +249,7 @@ declare namespace CostExplorer {
      */
     End: YearMonthDay;
   }
-  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RIGHTSIZING_TYPE"|string;
+  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|string;
   export interface DimensionValues {
     /**
      * The names of the metadata types that you can use to filter and group your results. For example, AZ returns a list of Availability Zones.
@@ -503,11 +539,11 @@ declare namespace CostExplorer {
      */
     TimePeriod: DateInterval;
     /**
-     * The name of the dimension. Each Dimension is available for a different Context. For more information, see Context.
+     * The name of the dimension. Each Dimension is available for a different Context. For more information, see Context. 
      */
     Dimension: Dimension;
     /**
-     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
+     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The AWS Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan  
      */
     Context?: Context;
     /**
@@ -517,7 +553,7 @@ declare namespace CostExplorer {
   }
   export interface GetDimensionValuesResponse {
     /**
-     * The filters that you used to filter your request. Some dimensions are available only for a specific context. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.  
+     * The filters that you used to filter your request. Some dimensions are available only for a specific context. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The AWS Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan  
      */
     DimensionValues: DimensionValuesWithAttributesList;
     /**
@@ -664,7 +700,7 @@ declare namespace CostExplorer {
   export interface GetRightsizingRecommendationRequest {
     Filter?: Expression;
     /**
-     * The specific service that you want recommendations for.
+     * The specific service that you want recommendations for. The only valid value for GetRightsizingRecommendation is "AmazonEC2".
      */
     Service: GenericString;
     /**
@@ -693,6 +729,143 @@ declare namespace CostExplorer {
      * The token to retrieve the next set of results.
      */
     NextPageToken?: NextPageToken;
+  }
+  export interface GetSavingsPlansCoverageRequest {
+    /**
+     * The time period that you want the usage and costs for. The Start date must be within 13 months. The End date must be after the Start date, and before the current date. Future dates can't be used as an End date.
+     */
+    TimePeriod: DateInterval;
+    /**
+     * You can group the data using the attributes INSTANCE_FAMILY, REGION, or SERVICE.
+     */
+    GroupBy?: GroupDefinitions;
+    /**
+     * The granularity of the Amazon Web Services cost data for your Savings Plans. Granularity can't be set if GroupBy is set.
+     */
+    Granularity?: Granularity;
+    /**
+     * Filters Savings Plans coverage data by dimensions. You can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY     GetSavingsPlansCoverage uses the same Expression object as the other operations, but only AND is supported among each dimension. If there are multiple values for a dimension, they are OR'd together.
+     */
+    Filter?: Expression;
+    /**
+     * The measurement that you want your Savings Plans coverage reported in. The only valid value is spendCoveredBySavingsPlans.
+     */
+    Metrics?: MetricNames;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
+     */
+    NextToken?: NextPageToken;
+    /**
+     * The number of items to be returned in a response. The default is 20, with a minimum value of 1.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface GetSavingsPlansCoverageResponse {
+    /**
+     * The amount of spend that your Savings Plans covered.
+     */
+    SavingsPlansCoverages: SavingsPlansCoverages;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
+     */
+    NextToken?: NextPageToken;
+  }
+  export interface GetSavingsPlansPurchaseRecommendationRequest {
+    /**
+     * The Savings Plans recommendation type requested.
+     */
+    SavingsPlansType: SupportedSavingsPlansType;
+    /**
+     * The savings plan recommendation term used to generated these recommendations.
+     */
+    TermInYears: TermInYears;
+    /**
+     * The payment option used to generate these recommendations.
+     */
+    PaymentOption: PaymentOption;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
+     */
+    NextPageToken?: NextPageToken;
+    /**
+     * The number of recommendations that you want returned in a single response object.
+     */
+    PageSize?: NonNegativeInteger;
+    /**
+     * The lookback period used to generate the recommendation.
+     */
+    LookbackPeriodInDays: LookbackPeriodInDays;
+  }
+  export interface GetSavingsPlansPurchaseRecommendationResponse {
+    /**
+     * The accountIDs these recommendations are generated for.
+     */
+    Metadata?: SavingsPlansPurchaseRecommendationMetadata;
+    /**
+     * Contains your request parameters, Savings Plan Recommendations Summary, and Details.
+     */
+    SavingsPlansPurchaseRecommendation?: SavingsPlansPurchaseRecommendation;
+    /**
+     * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     */
+    NextPageToken?: NextPageToken;
+  }
+  export interface GetSavingsPlansUtilizationDetailsRequest {
+    /**
+     * The time period that you want the usage and costs for. The Start date must be within 13 months. The End date must be after the Start date, and before the current date. Future dates can't be used as an End date.
+     */
+    TimePeriod: DateInterval;
+    /**
+     * Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:    LINKED_ACCOUNT     SAVINGS_PLAN_ARN     REGION     PAYMENT_OPTIONS     INSTANCE_TYPE_FAMILY     GetSavingsPlansUtilizationDetails uses the same Expression object as the other operations, but only AND is supported among each dimension. If there are multiple values for a dimension, they are OR'd together.
+     */
+    Filter?: Expression;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
+     */
+    NextToken?: NextPageToken;
+    /**
+     * The number of items to be returned in a response. The default is 20, with a minimum value of 1.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface GetSavingsPlansUtilizationDetailsResponse {
+    /**
+     * Retrieves a single daily or monthly Savings Plans utilization rate and details for your account.
+     */
+    SavingsPlansUtilizationDetails: SavingsPlansUtilizationDetails;
+    /**
+     * The total Savings Plans utilization, regardless of time period.
+     */
+    Total?: SavingsPlansUtilizationAggregates;
+    TimePeriod: DateInterval;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
+     */
+    NextToken?: NextPageToken;
+  }
+  export interface GetSavingsPlansUtilizationRequest {
+    /**
+     * The time period that you want the usage and costs for. The Start date must be within 13 months. The End date must be after the Start date, and before the current date. Future dates can't be used as an End date.
+     */
+    TimePeriod: DateInterval;
+    /**
+     * The granularity of the Amazon Web Services utillization data for your Savings Plans.
+     */
+    Granularity?: Granularity;
+    /**
+     * Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:    LINKED_ACCOUNT     SAVINGS_PLAN_ARN     SAVINGS_PLANS_TYPE     REGION     PAYMENT_OPTIONS     INSTANCE_TYPE_FAMILY     GetSavingsPlansUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension. If there are multiple values for a dimension, they are OR'd together.
+     */
+    Filter?: Expression;
+  }
+  export interface GetSavingsPlansUtilizationResponse {
+    /**
+     * The amount of time (in hours) ou used your Savings Plans. This allows you to specify date ranges.
+     */
+    SavingsPlansUtilizationsByTime?: SavingsPlansUtilizationsByTime;
+    /**
+     * The total amount of time that you used your Savings Plans, regardless of date ranges.
+     */
+    Total: SavingsPlansUtilizationAggregates;
   }
   export interface GetTagsRequest {
     /**
@@ -812,6 +985,7 @@ declare namespace CostExplorer {
   export type Key = string;
   export type Keys = Key[];
   export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
+  export type MaxResults = number;
   export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string;
   export type MetricAmount = string;
   export type MetricName = string;
@@ -1074,7 +1248,7 @@ declare namespace CostExplorer {
      */
     EstimatedMonthlyOnDemandCost?: GenericString;
     /**
-     * How much AWS estimates that you would have spent for all usage during the specified historical period if you had had a reservation.
+     * How much AWS estimates that you would have spent for all usage during the specified historical period if you had a reservation.
      */
     EstimatedReservationCostForLookbackPeriod?: GenericString;
     /**
@@ -1220,6 +1394,287 @@ declare namespace CostExplorer {
     SavingsPercentage?: GenericString;
   }
   export type RightsizingType = "TERMINATE"|"MODIFY"|string;
+  export type SavingsPlanArn = string;
+  export interface SavingsPlansAmortizedCommitment {
+    /**
+     * The amortized amount of your Savings Plans commitment that was purchased with either a Partial or a NoUpfront.
+     */
+    AmortizedRecurringCommitment?: GenericString;
+    /**
+     * The amortized amount of your Savings Plans commitment that was purchased with an Upfront or PartialUpfront Savings Plans.
+     */
+    AmortizedUpfrontCommitment?: GenericString;
+    /**
+     * The total amortized amount of your Savings Plans commitment, regardless of your Savings Plans purchase method. 
+     */
+    TotalAmortizedCommitment?: GenericString;
+  }
+  export interface SavingsPlansCoverage {
+    /**
+     * The attribute that applies to a specific Dimension.
+     */
+    Attributes?: Attributes;
+    /**
+     * The amount of Savings Plans eligible usage that the Savings Plans covered.
+     */
+    Coverage?: SavingsPlansCoverageData;
+    TimePeriod?: DateInterval;
+  }
+  export interface SavingsPlansCoverageData {
+    /**
+     * The amount of your Amazon Web Services usage that is covered by a Savings Plans.
+     */
+    SpendCoveredBySavingsPlans?: GenericString;
+    /**
+     * The cost of your Amazon Web Services usage at the public On-Demand rate.
+     */
+    OnDemandCost?: GenericString;
+    /**
+     * The total cost of your Amazon Web Services usage, regardless of your purchase option.
+     */
+    TotalCost?: GenericString;
+    /**
+     * The percentage of your existing Savings Planscovered usage, divided by all of your eligible Savings Plans usage in an account(or set of accounts).
+     */
+    CoveragePercentage?: GenericString;
+  }
+  export type SavingsPlansCoverages = SavingsPlansCoverage[];
+  export interface SavingsPlansDetails {
+    /**
+     * A geographic location where the Savings Plans is hosted.
+     */
+    Region?: GenericString;
+    /**
+     * A group of instance types that Savings Plans applies to.
+     */
+    InstanceFamily?: GenericString;
+    /**
+     * The unique ID used to distinguish Savings Plans from one another.
+     */
+    OfferingId?: GenericString;
+  }
+  export interface SavingsPlansPurchaseRecommendation {
+    /**
+     * The requested Savings Plans recommendation type.
+     */
+    SavingsPlansType?: SupportedSavingsPlansType;
+    /**
+     * The Savings Plans recommendation term in years, used to generate the recommendation.
+     */
+    TermInYears?: TermInYears;
+    /**
+     * The payment option used to generate the recommendation.
+     */
+    PaymentOption?: PaymentOption;
+    /**
+     * The lookback period in days, used to generate the recommendation.
+     */
+    LookbackPeriodInDays?: LookbackPeriodInDays;
+    /**
+     * Details for the Savings Plans we recommend you to purchase to cover existing, Savings Plans eligible workloads.
+     */
+    SavingsPlansPurchaseRecommendationDetails?: SavingsPlansPurchaseRecommendationDetailList;
+    /**
+     * Summary metrics for your Savings Plans Recommendations. 
+     */
+    SavingsPlansPurchaseRecommendationSummary?: SavingsPlansPurchaseRecommendationSummary;
+  }
+  export interface SavingsPlansPurchaseRecommendationDetail {
+    /**
+     * Details for your recommended Savings Plans.
+     */
+    SavingsPlansDetails?: SavingsPlansDetails;
+    /**
+     * The AccountID the recommendation is generated for.
+     */
+    AccountId?: GenericString;
+    /**
+     * The upfront cost of the recommended Savings Plans, based on the selected payment option.
+     */
+    UpfrontCost?: GenericString;
+    /**
+     * The estimated return on investment based on the recommended Savings Plans purchased. This is calculated as estimatedSavingsAmount/ estimatedSPCost*100.
+     */
+    EstimatedROI?: GenericString;
+    /**
+     * The currency code Amazon Web Services used to generate the recommendations and present potential savings.
+     */
+    CurrencyCode?: GenericString;
+    /**
+     * The cost of the recommended Savings Plans over the length of the lookback period.
+     */
+    EstimatedSPCost?: GenericString;
+    /**
+     * The remaining On-Demand cost estimated to not be covered by the recommended Savings Plans, over the length of the lookback period.
+     */
+    EstimatedOnDemandCost?: GenericString;
+    /**
+     * The estimated savings amount based on the recommended Savings Plans over the length of the lookback period.
+     */
+    EstimatedSavingsAmount?: GenericString;
+    /**
+     * The estimated savings percentage relative to the total cost of applicable On-Demand usage over the lookback period.
+     */
+    EstimatedSavingsPercentage?: GenericString;
+    /**
+     * The recommended hourly commitment level for the Savings Plans type, and configuration based on the usage during the lookback period.
+     */
+    HourlyCommitmentToPurchase?: GenericString;
+    /**
+     * The estimated utilization of the recommended Savings Plans.
+     */
+    EstimatedAverageUtilization?: GenericString;
+    /**
+     * The estimated monthly savings amount, based on the recommended Savings Plans.
+     */
+    EstimatedMonthlySavingsAmount?: GenericString;
+    /**
+     * The lowest value of hourly On-Demand spend over the lookback period of the applicable usage type.
+     */
+    CurrentMinimumHourlyOnDemandSpend?: GenericString;
+    /**
+     * The highest value of hourly On-Demand spend over the lookback period of the applicable usage type.
+     */
+    CurrentMaximumHourlyOnDemandSpend?: GenericString;
+    /**
+     * The average value of hourly On-Demand spend over the lookback period of the applicable usage type.
+     */
+    CurrentAverageHourlyOnDemandSpend?: GenericString;
+  }
+  export type SavingsPlansPurchaseRecommendationDetailList = SavingsPlansPurchaseRecommendationDetail[];
+  export interface SavingsPlansPurchaseRecommendationMetadata {
+    /**
+     * The unique identifier for the recommendation set.
+     */
+    RecommendationId?: GenericString;
+    /**
+     * The timestamp showing when the recommendations were generated.
+     */
+    GenerationTimestamp?: GenericString;
+  }
+  export interface SavingsPlansPurchaseRecommendationSummary {
+    /**
+     * The estimated return on investment based on the recommended Savings Plans and estimated savings.
+     */
+    EstimatedROI?: GenericString;
+    /**
+     * The currency code Amazon Web Services used to generate the recommendations and present potential savings.
+     */
+    CurrencyCode?: GenericString;
+    /**
+     * The estimated total cost of the usage after purchasing the recommended Savings Plans. This is a sum of the cost of Savings Plans during this term, and the remaining On-Demand usage.
+     */
+    EstimatedTotalCost?: GenericString;
+    /**
+     * The current total on demand spend of the applicable usage types over the lookback period.
+     */
+    CurrentOnDemandSpend?: GenericString;
+    /**
+     * The estimated total savings over the lookback period, based on the purchase of the recommended Savings Plans.
+     */
+    EstimatedSavingsAmount?: GenericString;
+    /**
+     * The aggregate number of Savings Plans recommendations that exist for your account.
+     */
+    TotalRecommendationCount?: GenericString;
+    /**
+     * The recommended Savings Plans cost on a daily (24 hourly) basis.
+     */
+    DailyCommitmentToPurchase?: GenericString;
+    /**
+     * The recommended hourly commitment based on the recommendation parameters.
+     */
+    HourlyCommitmentToPurchase?: GenericString;
+    /**
+     * The estimated savings relative to the total cost of On-Demand usage, over the lookback period. This is calculated as estimatedSavingsAmount/ CurrentOnDemandSpend*100.
+     */
+    EstimatedSavingsPercentage?: GenericString;
+    /**
+     * The estimated monthly savings amount, based on the recommended Savings Plans purchase.
+     */
+    EstimatedMonthlySavingsAmount?: GenericString;
+  }
+  export interface SavingsPlansSavings {
+    /**
+     * The savings amount that you are accumulating for the usage that is covered by a Savings Plans, when compared to the On-Demand equivalent of the same usage.
+     */
+    NetSavings?: GenericString;
+    /**
+     * How much the amount that the usage would have cost if it was accrued at the On-Demand rate.
+     */
+    OnDemandCostEquivalent?: GenericString;
+  }
+  export interface SavingsPlansUtilization {
+    /**
+     * The total amount of Savings Plans commitment that's been purchased in an account (or set of accounts).
+     */
+    TotalCommitment?: GenericString;
+    /**
+     * The amount of your Savings Plans commitment that was not consumed from Savings Plans eligible usage in a specific period.
+     */
+    UsedCommitment?: GenericString;
+    /**
+     * The amount of your Savings Plans commitment that was not consumed from Savings Plans eligible usage in a specific period.
+     */
+    UnusedCommitment?: GenericString;
+    /**
+     * The amount of UsedCommitment divided by the TotalCommitment for your Savings Plans.
+     */
+    UtilizationPercentage?: GenericString;
+  }
+  export interface SavingsPlansUtilizationAggregates {
+    /**
+     * A ratio of your effectiveness of using existing Savings Plans to apply to workloads that are Savings Plans eligible.
+     */
+    Utilization: SavingsPlansUtilization;
+    /**
+     * The amount saved by using existing Savings Plans. Savings returns both net savings from Savings Plans, as well as the onDemandCostEquivalent of the Savings Plans when considering the utilization rate.
+     */
+    Savings?: SavingsPlansSavings;
+    /**
+     * The total amortized commitment for a Savings Plans. This includes the sum of the upfront and recurring Savings Plans fees.
+     */
+    AmortizedCommitment?: SavingsPlansAmortizedCommitment;
+  }
+  export interface SavingsPlansUtilizationByTime {
+    TimePeriod: DateInterval;
+    /**
+     * A ratio of your effectiveness of using existing Savings Plans to apply to workloads that are Savings Plans eligible.
+     */
+    Utilization: SavingsPlansUtilization;
+    /**
+     * The amount saved by using existing Savings Plans. Savings returns both net savings from Savings Plans as well as the onDemandCostEquivalent of the Savings Plans when considering the utilization rate.
+     */
+    Savings?: SavingsPlansSavings;
+    /**
+     * The total amortized commitment for a Savings Plans. This includes the sum of the upfront and recurring Savings Plans fees.
+     */
+    AmortizedCommitment?: SavingsPlansAmortizedCommitment;
+  }
+  export interface SavingsPlansUtilizationDetail {
+    /**
+     * The unique Amazon Resource Name (ARN) for a particular Savings Plan.
+     */
+    SavingsPlanArn?: SavingsPlanArn;
+    /**
+     * The attribute that applies to a specific Dimension.
+     */
+    Attributes?: Attributes;
+    /**
+     * A ratio of your effectiveness of using existing Savings Plans to apply to workloads that are Savings Plans eligible.
+     */
+    Utilization?: SavingsPlansUtilization;
+    /**
+     * The amount saved by using existing Savings Plans. Savings returns both net savings from savings plans as well as the onDemandCostEquivalent of the Savings Plans when considering the utilization rate.
+     */
+    Savings?: SavingsPlansSavings;
+    /**
+     * The total amortized commitment for a Savings Plans. Includes the sum of the upfront and recurring Savings Plans fees.
+     */
+    AmortizedCommitment?: SavingsPlansAmortizedCommitment;
+  }
+  export type SavingsPlansUtilizationDetails = SavingsPlansUtilizationDetail[];
+  export type SavingsPlansUtilizationsByTime = SavingsPlansUtilizationByTime[];
   export type SearchString = string;
   export interface ServiceSpecification {
     /**
@@ -1227,6 +1682,7 @@ declare namespace CostExplorer {
      */
     EC2Specification?: EC2Specification;
   }
+  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|string;
   export type TagKey = string;
   export type TagList = Entity[];
   export interface TagValues {

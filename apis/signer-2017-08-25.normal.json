@@ -142,7 +142,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Lists all your signing jobs. You can use the <code>maxResults</code> parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, AWS Signer returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that AWS Signer returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned. </p>"
+      "documentation": "<p>Lists all your signing jobs. You can use the <code>maxResults</code> parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that code signing returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned. </p>"
     },
     "ListSigningPlatforms": {
       "name": "ListSigningPlatforms",
@@ -170,7 +170,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Lists all signing platforms available in AWS Signer that match the request parameters. If additional jobs remain to be listed, AWS Signer returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that AWS Signer returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned.</p>"
+      "documentation": "<p>Lists all signing platforms available in code signing that match the request parameters. If additional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that code signing returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned.</p>"
     },
     "ListSigningProfiles": {
       "name": "ListSigningProfiles",
@@ -195,7 +195,32 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Lists all available signing profiles in your AWS account. Returns only profiles with an <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is set to <code>true</code>. If additional jobs remain to be listed, AWS Signer returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that AWS Signer returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned.</p>"
+      "documentation": "<p>Lists all available signing profiles in your AWS account. Returns only profiles with an <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is set to <code>true</code>. If additional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can continue calling <code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with new values that code signing returns in the <code>nextToken</code> parameter until all of your signing jobs have been returned.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns a list of the tags associated with a signing profile resource.</p>"
     },
     "PutSigningProfile": {
       "name": "PutSigningProfile",
@@ -226,7 +251,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Creates a signing profile. A signing profile is an AWS Signer template that can be used to carry out a pre-defined signing job. For more information, see <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html\">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a> </p>"
+      "documentation": "<p>Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html\">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a> </p>"
     },
     "StartSigningJob": {
       "name": "StartSigningJob",
@@ -257,7 +282,57 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the <code>ListSigningJobs</code> operation for two years after they are performed. Note the following requirements: </p> <ul> <li> <p> You must create an Amazon S3 source bucket. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html\">Create a Bucket</a> in the <i>Amazon S3 Getting Started Guide</i>. </p> </li> <li> <p>Your S3 source bucket must be version enabled.</p> </li> <li> <p>You must create an S3 destination bucket. AWS Signer uses your S3 destination bucket to write your signed code.</p> </li> <li> <p>You specify the name of the source and destination buckets when calling the <code>StartSigningJob</code> operation.</p> </li> <li> <p>You must also specify a request token that identifies your request to AWS Signer. </p> </li> </ul> <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call <code>StartSigningJob</code>.</p> <p>For a Java example that shows how to use this action, see <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">http://docs.aws.amazon.com/acm/latest/userguide/</a> </p>"
+      "documentation": "<p>Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the <code>ListSigningJobs</code> operation for two years after they are performed. Note the following requirements: </p> <ul> <li> <p> You must create an Amazon S3 source bucket. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html\">Create a Bucket</a> in the <i>Amazon S3 Getting Started Guide</i>. </p> </li> <li> <p>Your S3 source bucket must be version enabled.</p> </li> <li> <p>You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.</p> </li> <li> <p>You specify the name of the source and destination buckets when calling the <code>StartSigningJob</code> operation.</p> </li> <li> <p>You must also specify a request token that identifies your request to code signing.</p> </li> </ul> <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call <code>StartSigningJob</code>.</p> <p>For a Java example that shows how to use this action, see <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">http://docs.aws.amazon.com/acm/latest/userguide/</a> </p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the signing profile using its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Remove one or more tags from a signing profile. Specify a list of tag keys to remove the tags.</p>"
     }
   },
   "shapes": {
@@ -366,7 +441,7 @@
         },
         "signedObject": {
           "shape": "SignedObject",
-          "documentation": "<p>Name of the S3 bucket where the signed code image is saved by AWS Signer.</p>"
+          "documentation": "<p>Name of the S3 bucket where the signed code image is saved by code signing.</p>"
         }
       }
     },
@@ -399,14 +474,14 @@
       "members": {
         "allowedValues": {
           "shape": "EncryptionAlgorithms",
-          "documentation": "<p>The set of accepted encryption algorithms that are allowed in an AWS Signer job.</p>"
+          "documentation": "<p>The set of accepted encryption algorithms that are allowed in a code signing job.</p>"
         },
         "defaultValue": {
           "shape": "EncryptionAlgorithm",
-          "documentation": "<p>The default encryption algorithm that is used by an AWS Signer job.</p>"
+          "documentation": "<p>The default encryption algorithm that is used by a code signing job.</p>"
         }
       },
-      "documentation": "<p>The encryption algorithm options that are available to an AWS Signer job.</p>"
+      "documentation": "<p>The encryption algorithm options that are available to a code signing job.</p>"
     },
     "EncryptionAlgorithms": {
       "type": "list",
@@ -505,6 +580,14 @@
         "status": {
           "shape": "SigningProfileStatus",
           "documentation": "<p>The status of the target signing profile.</p>"
+        },
+        "arn": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A list of tags associated with the signing profile.</p>"
         }
       }
     },
@@ -524,14 +607,14 @@
       "members": {
         "allowedValues": {
           "shape": "HashAlgorithms",
-          "documentation": "<p>The set of accepted hash algorithms allowed in an AWS Signer job.</p>"
+          "documentation": "<p>The set of accepted hash algorithms allowed in a code signing job.</p>"
         },
         "defaultValue": {
           "shape": "HashAlgorithm",
-          "documentation": "<p>The default hash algorithm that is used in an AWS Signer job.</p>"
+          "documentation": "<p>The default hash algorithm that is used in a code signing job.</p>"
         }
       },
-      "documentation": "<p>The hash algorithms that are available to an AWS Signer job.</p>"
+      "documentation": "<p>The hash algorithms that are available to a code signing job.</p>"
     },
     "HashAlgorithms": {
       "type": "list",
@@ -689,6 +772,29 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A list of tags associated with the signing profile.</p>"
+        }
+      }
+    },
     "MaxResults": {
       "type": "integer",
       "box": true,
@@ -742,6 +848,10 @@
         "signingParameters": {
           "shape": "SigningParameters",
           "documentation": "<p>Map of key-value pairs for signing. These can include any information that you want to use during signing.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>Tags to be associated with the signing profile being created.</p>"
         }
       }
     },
@@ -769,7 +879,7 @@
           "documentation": "<p>An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.</p>"
         }
       },
-      "documentation": "<p>The name and prefix of the S3 bucket where AWS Signer saves your signed objects.</p>"
+      "documentation": "<p>The name and prefix of the S3 bucket where code signing saves your signed objects.</p>"
     },
     "S3SignedObject": {
       "type": "structure",
@@ -783,7 +893,7 @@
           "documentation": "<p>Key name that uniquely identifies a signed code image in your bucket.</p>"
         }
       },
-      "documentation": "<p>The S3 bucket name and key where AWS Signer saved your signed code image.</p>"
+      "documentation": "<p>The S3 bucket name and key where code signing saved your signed code image.</p>"
     },
     "S3Source": {
       "type": "structure",
@@ -827,25 +937,25 @@
       "members": {
         "encryptionAlgorithmOptions": {
           "shape": "EncryptionAlgorithmOptions",
-          "documentation": "<p>The encryption algorithm options that are available for an AWS Signer job.</p>"
+          "documentation": "<p>The encryption algorithm options that are available for a code signing job.</p>"
         },
         "hashAlgorithmOptions": {
           "shape": "HashAlgorithmOptions",
-          "documentation": "<p>The hash algorithm options that are available for an AWS Signer job.</p>"
+          "documentation": "<p>The hash algorithm options that are available for a a code signing job.</p>"
         }
       },
-      "documentation": "<p>The configuration of an AWS Signer operation.</p>"
+      "documentation": "<p>The configuration of a code signing operation.</p>"
     },
     "SigningConfigurationOverrides": {
       "type": "structure",
       "members": {
         "encryptionAlgorithm": {
           "shape": "EncryptionAlgorithm",
-          "documentation": "<p>A specified override of the default encryption algorithm that is used in an AWS Signer job.</p>"
+          "documentation": "<p>A specified override of the default encryption algorithm that is used in a code signing job.</p>"
         },
         "hashAlgorithm": {
           "shape": "HashAlgorithm",
-          "documentation": "<p>A specified override of the default hash algorithm that is used in an AWS Signer job.</p>"
+          "documentation": "<p>A specified override of the default hash algorithm that is used in a code signing job.</p>"
         }
       },
       "documentation": "<p>A signing configuration that overrides the default encryption or hash algorithm of a signing job.</p>"
@@ -859,14 +969,14 @@
       "members": {
         "supportedFormats": {
           "shape": "ImageFormats",
-          "documentation": "<p>The supported formats of an AWS Signer signing image.</p>"
+          "documentation": "<p>The supported formats of a code signing signing image.</p>"
         },
         "defaultFormat": {
           "shape": "ImageFormat",
-          "documentation": "<p>The default format of an AWS Signer signing image.</p>"
+          "documentation": "<p>The default format of a code signing signing image.</p>"
         }
       },
-      "documentation": "<p>The image format of an AWS Signer platform or profile.</p>"
+      "documentation": "<p>The image format of a code signing platform or profile.</p>"
     },
     "SigningJob": {
       "type": "structure",
@@ -937,47 +1047,47 @@
       "members": {
         "platformId": {
           "shape": "String",
-          "documentation": "<p>The ID of an AWS Signer platform.</p>"
+          "documentation": "<p>The ID of a code signing; platform.</p>"
         },
         "displayName": {
           "shape": "String",
-          "documentation": "<p>The display name of an AWS Signer platform.</p>"
+          "documentation": "<p>The display name of a code signing platform.</p>"
         },
         "partner": {
           "shape": "String",
-          "documentation": "<p>Any partner entities linked to an AWS Signer platform.</p>"
+          "documentation": "<p>Any partner entities linked to a code signing platform.</p>"
         },
         "target": {
           "shape": "String",
-          "documentation": "<p>The types of targets that can be signed by an AWS Signer platform.</p>"
+          "documentation": "<p>The types of targets that can be signed by a code signing platform.</p>"
         },
         "category": {
           "shape": "Category",
-          "documentation": "<p>The category of an AWS Signer platform.</p>"
+          "documentation": "<p>The category of a code signing platform.</p>"
         },
         "signingConfiguration": {
           "shape": "SigningConfiguration",
-          "documentation": "<p>The configuration of an AWS Signer platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.</p>"
+          "documentation": "<p>The configuration of a code signing platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.</p>"
         },
         "signingImageFormat": {
-          "shape": "SigningImageFormat",
-          "documentation": "<p>The signing image format that is used by an AWS Signer platform.</p>"
+          "shape": "SigningImageFormat"
         },
         "maxSizeInMB": {
           "shape": "MaxSizeInMB",
-          "documentation": "<p>The maximum size (in MB) of code that can be signed by a AWS Signer platform.</p>"
+          "documentation": "<p>The maximum size (in MB) of code that can be signed by a code signing platform.</p>"
         }
       },
-      "documentation": "<p>Contains information about the signing configurations and parameters that is used to perform an AWS Signer job.</p>"
+      "documentation": "<p>Contains information about the signing configurations and parameters that is used to perform a code signing job.</p>"
     },
     "SigningPlatformOverrides": {
       "type": "structure",
       "members": {
         "signingConfiguration": {
-          "shape": "SigningConfigurationOverrides"
+          "shape": "SigningConfigurationOverrides",
+          "documentation": "<p>A signing configuration that overrides the default encryption or hash algorithm of a signing job.</p>"
         }
       },
-      "documentation": "<p>Any overrides that are applied to the signing configuration of an AWS Signer platform.</p>"
+      "documentation": "<p>Any overrides that are applied to the signing configuration of a code signing platform.</p>"
     },
     "SigningPlatforms": {
       "type": "list",
@@ -990,7 +1100,7 @@
       "members": {
         "profileName": {
           "shape": "ProfileName",
-          "documentation": "<p>The name of the AWS Signer profile.</p>"
+          "documentation": "<p>The name of the signing profile.</p>"
         },
         "signingMaterial": {
           "shape": "SigningMaterial",
@@ -1002,14 +1112,22 @@
         },
         "signingParameters": {
           "shape": "SigningParameters",
-          "documentation": "<p>The parameters that are available for use by an AWS Signer user.</p>"
+          "documentation": "<p>The parameters that are available for use by a code signing user.</p>"
         },
         "status": {
           "shape": "SigningProfileStatus",
-          "documentation": "<p>The status of an AWS Signer profile.</p>"
+          "documentation": "<p>The status of a code signing profile.</p>"
+        },
+        "arn": {
+          "shape": "string",
+          "documentation": "<p>Amazon Resource Name (ARN) for the signing profile.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A list of tags associated with the signing profile.</p>"
         }
       },
-      "documentation": "<p>Contains information about the ACM certificates and AWS Signer configuration parameters that can be used by a given AWS Signer user.</p>"
+      "documentation": "<p>Contains information about the ACM certificates and code signing configuration parameters that can be used by a given code signing user.</p>"
     },
     "SigningProfileStatus": {
       "type": "string",
@@ -1084,6 +1202,83 @@
     "String": {
       "type": "string"
     },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 200,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) for the signing profile.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags to be associated with the signing profile.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) for the signing profile .</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>A list of tag keys to be removed from the signing profile .</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "Version": {
       "type": "string"
     },
@@ -1094,5 +1289,5 @@
       "type": "string"
     }
   },
-  "documentation": "<p>You can use Code Signing for Amazon FreeRTOS (AWS Signer) to sign code that you created for any of the IoT devices that Amazon Web Services supports. AWS Signer is integrated with Amazon FreeRTOS, AWS Certificate Manager, and AWS CloudTrail. Amazon FreeRTOS customers can use AWS Signer to sign code images before making them available for microcontrollers. You can use ACM to import third-party certificates to be used by AWS Signer. For general information about using AWS Signer, see the <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html\">Code Signing for Amazon FreeRTOS Developer Guide</a>.</p>"
+  "documentation": "<p>With code signing for IoT, you can sign code that you create for any IoT device that is supported by Amazon Web Services (AWS). Code signing is available through <a href=\"http://docs.aws.amazon.com/freertos/latest/userguide/\">Amazon FreeRTOS</a> and <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/\">AWS IoT Device Management</a>, and integrated with <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code signing certificate with ACM that is used to sign updates in Amazon FreeRTOS and AWS IoT Device Management. For general information about using code signing, see the <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html\">Code Signing for IoT Developer Guide</a>.</p>"
 }

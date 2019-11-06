@@ -491,7 +491,7 @@ declare namespace EFS {
   export type Tags = Tag[];
   export type ThroughputMode = "bursting"|"provisioned"|string;
   export type Timestamp = Date;
-  export type TransitionToIARules = "AFTER_14_DAYS"|"AFTER_30_DAYS"|"AFTER_60_DAYS"|"AFTER_90_DAYS"|string;
+  export type TransitionToIARules = "AFTER_7_DAYS"|"AFTER_14_DAYS"|"AFTER_30_DAYS"|"AFTER_60_DAYS"|"AFTER_90_DAYS"|string;
   export interface UpdateFileSystemRequest {
     /**
      * The ID of the file system that you want to update.

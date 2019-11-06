@@ -132,7 +132,7 @@ declare namespace Budgets {
      */
     BudgetName: BudgetName;
     /**
-     * The total amount of cost, usage, RI utilization, or RI coverage that you want to track with your budget.  BudgetLimit is required for cost or usage budgets, but optional for RI utilization or coverage budgets. RI utilization or coverage budgets default to 100, which is the only valid value for RI utilization or coverage budgets. You can't use BudgetLimit with PlannedBudgetLimits for CreateBudget and UpdateBudget actions. 
+     * The total amount of cost, usage, RI utilization, RI coverage, Savings Plans utilization, or Savings Plans coverage that you want to track with your budget.  BudgetLimit is required for cost or usage budgets, but optional for RI or Savings Plans utilization or coverage budgets. RI and Savings Plans utilization or coverage budgets default to 100, which is the only valid value for RI or Savings Plans utilization or coverage budgets. You can't use BudgetLimit with PlannedBudgetLimits for CreateBudget and UpdateBudget actions. 
      */
     BudgetLimit?: Spend;
     /**
@@ -144,11 +144,11 @@ declare namespace Budgets {
      */
     CostFilters?: CostFilters;
     /**
-     * The types of costs that are included in this COST budget.  USAGE, RI_UTILIZATION, and RI_COVERAGE budgets do not have CostTypes.
+     * The types of costs that are included in this COST budget.  USAGE, RI_UTILIZATION, RI_COVERAGE, Savings_Plans_Utilization, and Savings_Plans_Coverage budgets do not have CostTypes.
      */
     CostTypes?: CostTypes;
     /**
-     * The length of time until a budget resets the actual and forecasted spend. DAILY is available only for RI_UTILIZATION and RI_COVERAGE budgets.
+     * The length of time until a budget resets the actual and forecasted spend. DAILY is available only for RI_UTILIZATION, RI_COVERAGE, Savings_Plans_Utilization, and Savings_Plans_Coverage budgets.
      */
     TimeUnit: TimeUnit;
     /**
@@ -160,7 +160,7 @@ declare namespace Budgets {
      */
     CalculatedSpend?: CalculatedSpend;
     /**
-     * Whether this budget tracks costs, usage, RI utilization, or RI coverage.
+     * Whether this budget tracks costs, usage, RI utilization, RI coverage, Savings Plans utilization, or Savings Plans coverage.
      */
     BudgetType: BudgetType;
     /**
@@ -186,7 +186,7 @@ declare namespace Budgets {
      */
     BudgetedAndActualAmountsList?: BudgetedAndActualAmountsList;
   }
-  export type BudgetType = "USAGE"|"COST"|"RI_UTILIZATION"|"RI_COVERAGE"|string;
+  export type BudgetType = "USAGE"|"COST"|"RI_UTILIZATION"|"RI_COVERAGE"|"SAVINGS_PLANS_UTILIZATION"|"SAVINGS_PLANS_COVERAGE"|string;
   export interface BudgetedAndActualAmounts {
     /**
      * The amount of cost or usage that you created the budget for.
@@ -542,7 +542,7 @@ declare namespace Budgets {
      */
     SubscriptionType: SubscriptionType;
     /**
-     * The address that AWS sends budget notifications to, either an SNS topic or an email. AWS validates the address for a CreateSubscriber request with the .* regex.
+     * The address that AWS sends budget notifications to, either an SNS topic or an email. When you create a subscriber, the value of Address can't contain line breaks.
      */
     Address: SubscriberAddress;
   }

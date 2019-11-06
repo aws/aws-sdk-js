@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Add support for Build Number, Secrets Manager and Exported Environment Variables."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This launch provides customers with access to Savings Plans management APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EFS",
+        "description": "EFS customers can select a lifecycle policy that automatically moves files that have not been accessed for 7 days into the EFS Infrequent Access (EFS IA) storage class. EFS IA provides price/performance that is cost-optimized for files that are not accessed every day."
+    },
+    {
+        "type": "feature",
+        "category": "SavingsPlans",
+        "description": "This is the first release of Savings Plans, a new flexible pricing model that offers low prices on Amazon EC2 and AWS Fargate usage."
+    },
+    {
+        "type": "feature",
+        "category": "Signer",
+        "description": "This release adds support for tagging code-signing profiles in AWS Signer."
+    }
+]

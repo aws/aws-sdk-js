@@ -773,5 +773,8 @@
   "codestarnotifications": {
     "prefix": "codestar-notifications",
     "name": "CodeStarNotifications"
+  },
+  "savingsplans": {
+    "name": "SavingsPlans"
   }
 }

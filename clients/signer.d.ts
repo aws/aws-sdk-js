@@ -45,45 +45,69 @@ declare class Signer extends Service {
    */
   getSigningProfile(callback?: (err: AWSError, data: Signer.Types.GetSigningProfileResponse) => void): Request<Signer.Types.GetSigningProfileResponse, AWSError>;
   /**
-   * Lists all your signing jobs. You can use the maxResults parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, AWS Signer returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that AWS Signer returns in the nextToken parameter until all of your signing jobs have been returned. 
+   * Lists all your signing jobs. You can use the maxResults parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, code signing returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that code signing returns in the nextToken parameter until all of your signing jobs have been returned. 
    */
   listSigningJobs(params: Signer.Types.ListSigningJobsRequest, callback?: (err: AWSError, data: Signer.Types.ListSigningJobsResponse) => void): Request<Signer.Types.ListSigningJobsResponse, AWSError>;
   /**
-   * Lists all your signing jobs. You can use the maxResults parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, AWS Signer returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that AWS Signer returns in the nextToken parameter until all of your signing jobs have been returned. 
+   * Lists all your signing jobs. You can use the maxResults parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, code signing returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that code signing returns in the nextToken parameter until all of your signing jobs have been returned. 
    */
   listSigningJobs(callback?: (err: AWSError, data: Signer.Types.ListSigningJobsResponse) => void): Request<Signer.Types.ListSigningJobsResponse, AWSError>;
   /**
-   * Lists all signing platforms available in AWS Signer that match the request parameters. If additional jobs remain to be listed, AWS Signer returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that AWS Signer returns in the nextToken parameter until all of your signing jobs have been returned.
+   * Lists all signing platforms available in code signing that match the request parameters. If additional jobs remain to be listed, code signing returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that code signing returns in the nextToken parameter until all of your signing jobs have been returned.
    */
   listSigningPlatforms(params: Signer.Types.ListSigningPlatformsRequest, callback?: (err: AWSError, data: Signer.Types.ListSigningPlatformsResponse) => void): Request<Signer.Types.ListSigningPlatformsResponse, AWSError>;
   /**
-   * Lists all signing platforms available in AWS Signer that match the request parameters. If additional jobs remain to be listed, AWS Signer returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that AWS Signer returns in the nextToken parameter until all of your signing jobs have been returned.
+   * Lists all signing platforms available in code signing that match the request parameters. If additional jobs remain to be listed, code signing returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that code signing returns in the nextToken parameter until all of your signing jobs have been returned.
    */
   listSigningPlatforms(callback?: (err: AWSError, data: Signer.Types.ListSigningPlatformsResponse) => void): Request<Signer.Types.ListSigningPlatformsResponse, AWSError>;
   /**
-   * Lists all available signing profiles in your AWS account. Returns only profiles with an ACTIVE status unless the includeCanceled request field is set to true. If additional jobs remain to be listed, AWS Signer returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that AWS Signer returns in the nextToken parameter until all of your signing jobs have been returned.
+   * Lists all available signing profiles in your AWS account. Returns only profiles with an ACTIVE status unless the includeCanceled request field is set to true. If additional jobs remain to be listed, code signing returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that code signing returns in the nextToken parameter until all of your signing jobs have been returned.
    */
   listSigningProfiles(params: Signer.Types.ListSigningProfilesRequest, callback?: (err: AWSError, data: Signer.Types.ListSigningProfilesResponse) => void): Request<Signer.Types.ListSigningProfilesResponse, AWSError>;
   /**
-   * Lists all available signing profiles in your AWS account. Returns only profiles with an ACTIVE status unless the includeCanceled request field is set to true. If additional jobs remain to be listed, AWS Signer returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that AWS Signer returns in the nextToken parameter until all of your signing jobs have been returned.
+   * Lists all available signing profiles in your AWS account. Returns only profiles with an ACTIVE status unless the includeCanceled request field is set to true. If additional jobs remain to be listed, code signing returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that code signing returns in the nextToken parameter until all of your signing jobs have been returned.
    */
   listSigningProfiles(callback?: (err: AWSError, data: Signer.Types.ListSigningProfilesResponse) => void): Request<Signer.Types.ListSigningProfilesResponse, AWSError>;
   /**
-   * Creates a signing profile. A signing profile is an AWS Signer template that can be used to carry out a pre-defined signing job. For more information, see http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html 
+   * Returns a list of the tags associated with a signing profile resource.
+   */
+  listTagsForResource(params: Signer.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Signer.Types.ListTagsForResourceResponse) => void): Request<Signer.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of the tags associated with a signing profile resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Signer.Types.ListTagsForResourceResponse) => void): Request<Signer.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html 
    */
   putSigningProfile(params: Signer.Types.PutSigningProfileRequest, callback?: (err: AWSError, data: Signer.Types.PutSigningProfileResponse) => void): Request<Signer.Types.PutSigningProfileResponse, AWSError>;
   /**
-   * Creates a signing profile. A signing profile is an AWS Signer template that can be used to carry out a pre-defined signing job. For more information, see http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html 
+   * Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html 
    */
   putSigningProfile(callback?: (err: AWSError, data: Signer.Types.PutSigningProfileResponse) => void): Request<Signer.Types.PutSigningProfileResponse, AWSError>;
   /**
-   * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Create a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. AWS Signer uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to AWS Signer.    You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see http://docs.aws.amazon.com/acm/latest/userguide/ 
+   * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Create a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to code signing.   You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see http://docs.aws.amazon.com/acm/latest/userguide/ 
    */
   startSigningJob(params: Signer.Types.StartSigningJobRequest, callback?: (err: AWSError, data: Signer.Types.StartSigningJobResponse) => void): Request<Signer.Types.StartSigningJobResponse, AWSError>;
   /**
-   * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Create a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. AWS Signer uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to AWS Signer.    You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see http://docs.aws.amazon.com/acm/latest/userguide/ 
+   * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Create a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to code signing.   You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see http://docs.aws.amazon.com/acm/latest/userguide/ 
    */
   startSigningJob(callback?: (err: AWSError, data: Signer.Types.StartSigningJobResponse) => void): Request<Signer.Types.StartSigningJobResponse, AWSError>;
+  /**
+   * Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the signing profile using its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.
+   */
+  tagResource(params: Signer.Types.TagResourceRequest, callback?: (err: AWSError, data: Signer.Types.TagResourceResponse) => void): Request<Signer.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the signing profile using its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.
+   */
+  tagResource(callback?: (err: AWSError, data: Signer.Types.TagResourceResponse) => void): Request<Signer.Types.TagResourceResponse, AWSError>;
+  /**
+   * Remove one or more tags from a signing profile. Specify a list of tag keys to remove the tags.
+   */
+  untagResource(params: Signer.Types.UntagResourceRequest, callback?: (err: AWSError, data: Signer.Types.UntagResourceResponse) => void): Request<Signer.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Remove one or more tags from a signing profile. Specify a list of tag keys to remove the tags.
+   */
+  untagResource(callback?: (err: AWSError, data: Signer.Types.UntagResourceResponse) => void): Request<Signer.Types.UntagResourceResponse, AWSError>;
   /**
    * Waits for the successfulSigningJob state by periodically calling the underlying Signer.describeSigningJoboperation every 20 seconds (at most 25 times).
    */
@@ -163,7 +187,7 @@ declare namespace Signer {
      */
     statusReason?: StatusReason;
     /**
-     * Name of the S3 bucket where the signed code image is saved by AWS Signer.
+     * Name of the S3 bucket where the signed code image is saved by code signing.
      */
     signedObject?: SignedObject;
   }
@@ -177,11 +201,11 @@ declare namespace Signer {
   export type EncryptionAlgorithm = "RSA"|"ECDSA"|string;
   export interface EncryptionAlgorithmOptions {
     /**
-     * The set of accepted encryption algorithms that are allowed in an AWS Signer job.
+     * The set of accepted encryption algorithms that are allowed in a code signing job.
      */
     allowedValues: EncryptionAlgorithms;
     /**
-     * The default encryption algorithm that is used by an AWS Signer job.
+     * The default encryption algorithm that is used by a code signing job.
      */
     defaultValue: EncryptionAlgorithm;
   }
@@ -257,15 +281,23 @@ declare namespace Signer {
      * The status of the target signing profile.
      */
     status?: SigningProfileStatus;
+    /**
+     * The Amazon Resource Name (ARN) for the signing profile.
+     */
+    arn?: string;
+    /**
+     * A list of tags associated with the signing profile.
+     */
+    tags?: TagMap;
   }
   export type HashAlgorithm = "SHA1"|"SHA256"|string;
   export interface HashAlgorithmOptions {
     /**
-     * The set of accepted hash algorithms allowed in an AWS Signer job.
+     * The set of accepted hash algorithms allowed in a code signing job.
      */
     allowedValues: HashAlgorithms;
     /**
-     * The default hash algorithm that is used in an AWS Signer job.
+     * The default hash algorithm that is used in a code signing job.
      */
     defaultValue: HashAlgorithm;
   }
@@ -362,6 +394,18 @@ declare namespace Signer {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the signing profile.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tags associated with the signing profile.
+     */
+    tags?: TagMap;
+  }
   export type MaxResults = number;
   export type MaxSizeInMB = number;
   export type NextToken = string;
@@ -389,6 +433,10 @@ declare namespace Signer {
      * Map of key-value pairs for signing. These can include any information that you want to use during signing.
      */
     signingParameters?: SigningParameters;
+    /**
+     * Tags to be associated with the signing profile being created.
+     */
+    tags?: TagMap;
   }
   export interface PutSigningProfileResponse {
     /**
@@ -439,31 +487,31 @@ declare namespace Signer {
   }
   export interface SigningConfiguration {
     /**
-     * The encryption algorithm options that are available for an AWS Signer job.
+     * The encryption algorithm options that are available for a code signing job.
      */
     encryptionAlgorithmOptions: EncryptionAlgorithmOptions;
     /**
-     * The hash algorithm options that are available for an AWS Signer job.
+     * The hash algorithm options that are available for a a code signing job.
      */
     hashAlgorithmOptions: HashAlgorithmOptions;
   }
   export interface SigningConfigurationOverrides {
     /**
-     * A specified override of the default encryption algorithm that is used in an AWS Signer job.
+     * A specified override of the default encryption algorithm that is used in a code signing job.
      */
     encryptionAlgorithm?: EncryptionAlgorithm;
     /**
-     * A specified override of the default hash algorithm that is used in an AWS Signer job.
+     * A specified override of the default hash algorithm that is used in a code signing job.
      */
     hashAlgorithm?: HashAlgorithm;
   }
   export interface SigningImageFormat {
     /**
-     * The supported formats of an AWS Signer signing image.
+     * The supported formats of a code signing signing image.
      */
     supportedFormats: ImageFormats;
     /**
-     * The default format of an AWS Signer signing image.
+     * The default format of a code signing signing image.
      */
     defaultFormat: ImageFormat;
   }
@@ -505,45 +553,45 @@ declare namespace Signer {
   export type SigningParameters = {[key: string]: SigningParameterValue};
   export interface SigningPlatform {
     /**
-     * The ID of an AWS Signer platform.
+     * The ID of a code signing; platform.
      */
     platformId?: String;
     /**
-     * The display name of an AWS Signer platform.
+     * The display name of a code signing platform.
      */
     displayName?: String;
     /**
-     * Any partner entities linked to an AWS Signer platform.
+     * Any partner entities linked to a code signing platform.
      */
     partner?: String;
     /**
-     * The types of targets that can be signed by an AWS Signer platform.
+     * The types of targets that can be signed by a code signing platform.
      */
     target?: String;
     /**
-     * The category of an AWS Signer platform.
+     * The category of a code signing platform.
      */
     category?: Category;
     /**
-     * The configuration of an AWS Signer platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
+     * The configuration of a code signing platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
      */
     signingConfiguration?: SigningConfiguration;
-    /**
-     * The signing image format that is used by an AWS Signer platform.
-     */
     signingImageFormat?: SigningImageFormat;
     /**
-     * The maximum size (in MB) of code that can be signed by a AWS Signer platform.
+     * The maximum size (in MB) of code that can be signed by a code signing platform.
      */
     maxSizeInMB?: MaxSizeInMB;
   }
   export interface SigningPlatformOverrides {
+    /**
+     * A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+     */
     signingConfiguration?: SigningConfigurationOverrides;
   }
   export type SigningPlatforms = SigningPlatform[];
   export interface SigningProfile {
     /**
-     * The name of the AWS Signer profile.
+     * The name of the signing profile.
      */
     profileName?: ProfileName;
     /**
@@ -555,13 +603,21 @@ declare namespace Signer {
      */
     platformId?: PlatformId;
     /**
-     * The parameters that are available for use by an AWS Signer user.
+     * The parameters that are available for use by a code signing user.
      */
     signingParameters?: SigningParameters;
     /**
-     * The status of an AWS Signer profile.
+     * The status of a code signing profile.
      */
     status?: SigningProfileStatus;
+    /**
+     * Amazon Resource Name (ARN) for the signing profile.
+     */
+    arn?: string;
+    /**
+     * A list of tags associated with the signing profile.
+     */
+    tags?: TagMap;
   }
   export type SigningProfileStatus = "Active"|"Canceled"|string;
   export type SigningProfiles = SigningProfile[];
@@ -598,6 +654,34 @@ declare namespace Signer {
   }
   export type StatusReason = string;
   export type String = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * Amazon Resource Name (ARN) for the signing profile.
+     */
+    resourceArn: String;
+    /**
+     * One or more tags to be associated with the signing profile.
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * Amazon Resource Name (ARN) for the signing profile .
+     */
+    resourceArn: String;
+    /**
+     * A list of tag keys to be removed from the signing profile .
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type Version = string;
   export type bool = boolean;
   /**

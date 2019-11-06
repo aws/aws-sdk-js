@@ -193,6 +193,7 @@ export abstract class ConfigurationServicePlaceholders {
   qldbsession?: AWS.QLDBSession.Types.ClientConfiguration;
   workmailmessageflow?: AWS.WorkMailMessageFlow.Types.ClientConfiguration;
   codestarnotifications?: AWS.CodeStarNotifications.Types.ClientConfiguration;
+  savingsplans?: AWS.SavingsPlans.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -388,4 +389,5 @@ export interface ConfigurationServiceApiVersions {
   qldbsession?: AWS.QLDBSession.Types.apiVersion;
   workmailmessageflow?: AWS.WorkMailMessageFlow.Types.apiVersion;
   codestarnotifications?: AWS.CodeStarNotifications.Types.apiVersion;
+  savingsplans?: AWS.SavingsPlans.Types.apiVersion;
 }

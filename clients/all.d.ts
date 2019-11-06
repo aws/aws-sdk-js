@@ -191,3 +191,4 @@ export import QLDB = require('./qldb');
 export import QLDBSession = require('./qldbsession');
 export import WorkMailMessageFlow = require('./workmailmessageflow');
 export import CodeStarNotifications = require('./codestarnotifications');
+export import SavingsPlans = require('./savingsplans');
