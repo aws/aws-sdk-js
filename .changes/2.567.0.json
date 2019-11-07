@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "This release adds new languages (ar, hi, ko, ja, zh, zh-TW) for Amazon Comprehend's DetectSentiment, DetectEntities, DetectKeyPhrases, BatchDetectSentiment, BatchDetectEntities and BatchDetectKeyPhrases APIs"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "AWS Systems Manager Session Manager target length increased to 400."
+    },
+    {
+        "type": "feature",
+        "category": "SSO",
+        "description": "This is an initial release of AWS Single Sign-On (SSO) end-user access. This release adds support for accessing AWS accounts assigned in AWS SSO using short term credentials."
+    },
+    {
+        "type": "feature",
+        "category": "SSOOIDC",
+        "description": "This is an initial release of AWS Single Sign-On OAuth device code authorization service."
+    }
+]

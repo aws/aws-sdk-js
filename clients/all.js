@@ -193,5 +193,7 @@ module.exports = {
   QLDBSession: require('./qldbsession'),
   WorkMailMessageFlow: require('./workmailmessageflow'),
   CodeStarNotifications: require('./codestarnotifications'),
-  SavingsPlans: require('./savingsplans')
+  SavingsPlans: require('./savingsplans'),
+  SSO: require('./sso'),
+  SSOOIDC: require('./ssooidc')
 };

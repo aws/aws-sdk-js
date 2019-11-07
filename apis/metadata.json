@@ -776,5 +776,12 @@
   },
   "savingsplans": {
     "name": "SavingsPlans"
+  },
+  "sso": {
+    "name": "SSO"
+  },
+  "ssooidc": {
+    "prefix": "sso-oidc",
+    "name": "SSOOIDC"
   }
 }

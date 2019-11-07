@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.566.0-->
+<!--LATEST=2.567.0-->
 <!--ENTRYINSERT-->
+
+## 2.567.0
+* feature: Comprehend: This release adds new languages (ar, hi, ko, ja, zh, zh-TW) for Amazon Comprehend's DetectSentiment, DetectEntities, DetectKeyPhrases, BatchDetectSentiment, BatchDetectEntities and BatchDetectKeyPhrases APIs
+* feature: SSM: AWS Systems Manager Session Manager target length increased to 400.
+* feature: SSO: This is an initial release of AWS Single Sign-On (SSO) end-user access. This release adds support for accessing AWS accounts assigned in AWS SSO using short term credentials.
+* feature: SSOOIDC: This is an initial release of AWS Single Sign-On OAuth device code authorization service.
 
 ## 2.566.0
 * feature: SavingsPlans: This is the first release of Savings Plans, a new flexible pricing model that offers low prices on Amazon EC2 and AWS Fargate usage.

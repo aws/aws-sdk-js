@@ -194,6 +194,8 @@ export abstract class ConfigurationServicePlaceholders {
   workmailmessageflow?: AWS.WorkMailMessageFlow.Types.ClientConfiguration;
   codestarnotifications?: AWS.CodeStarNotifications.Types.ClientConfiguration;
   savingsplans?: AWS.SavingsPlans.Types.ClientConfiguration;
+  sso?: AWS.SSO.Types.ClientConfiguration;
+  ssooidc?: AWS.SSOOIDC.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -390,4 +392,6 @@ export interface ConfigurationServiceApiVersions {
   workmailmessageflow?: AWS.WorkMailMessageFlow.Types.apiVersion;
   codestarnotifications?: AWS.CodeStarNotifications.Types.apiVersion;
   savingsplans?: AWS.SavingsPlans.Types.apiVersion;
+  sso?: AWS.SSO.Types.apiVersion;
+  ssooidc?: AWS.SSOOIDC.Types.apiVersion;
 }

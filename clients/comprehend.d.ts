@@ -1278,7 +1278,7 @@ declare namespace Comprehend {
      */
     EvaluationMetrics?: EntityTypesEvaluationMetrics;
     /**
-     * indicates the number of times the given entity name was seen in the training data. 
+     * Indicates the number of times the given entity type was seen in the training data. 
      */
     NumberOfTrainMentions?: Integer;
   }
@@ -1465,7 +1465,7 @@ declare namespace Comprehend {
   }
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
   export type KmsKeyId = string;
-  export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;
+  export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|"ar"|"hi"|"ja"|"ko"|"zh"|"zh-TW"|string;
   export interface ListDocumentClassificationJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
