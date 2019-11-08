@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.567.0-->
+<!--LATEST=2.568.0-->
 <!--ENTRYINSERT-->
+
+## 2.568.0
+* feature: CognitoIdentity: This release adds support for disabling classic flow.
 
 ## 2.567.0
 * feature: Comprehend: This release adds new languages (ar, hi, ko, ja, zh, zh-TW) for Amazon Comprehend's DetectSentiment, DetectEntities, DetectKeyPhrases, BatchDetectSentiment, BatchDetectEntities and BatchDetectKeyPhrases APIs

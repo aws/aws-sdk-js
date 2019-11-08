@@ -12,11 +12,11 @@ declare class CognitoIdentity extends Service {
   constructor(options?: CognitoIdentity.Types.ClientConfiguration)
   config: Config & CognitoIdentity.Types.ClientConfiguration;
   /**
-   * Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for SupportedLoginProviders are as follows:   Facebook: graph.facebook.com    Google: accounts.google.com    Amazon: www.amazon.com    Twitter: api.twitter.com    Digits: www.digits.com    You must use AWS Developer credentials to call this API.
+   * Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The keys for SupportedLoginProviders are as follows:   Facebook: graph.facebook.com    Google: accounts.google.com    Amazon: www.amazon.com    Twitter: api.twitter.com    Digits: www.digits.com    You must use AWS Developer credentials to call this API.
    */
   createIdentityPool(params: CognitoIdentity.Types.CreateIdentityPoolInput, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
   /**
-   * Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for SupportedLoginProviders are as follows:   Facebook: graph.facebook.com    Google: accounts.google.com    Amazon: www.amazon.com    Twitter: api.twitter.com    Digits: www.digits.com    You must use AWS Developer credentials to call this API.
+   * Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The keys for SupportedLoginProviders are as follows:   Facebook: graph.facebook.com    Google: accounts.google.com    Amazon: www.amazon.com    Twitter: api.twitter.com    Digits: www.digits.com    You must use AWS Developer credentials to call this API.
    */
   createIdentityPool(callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
   /**
@@ -187,6 +187,7 @@ declare namespace CognitoIdentity {
   export type AmbiguousRoleResolutionType = "AuthenticatedRole"|"Deny"|string;
   export type ClaimName = string;
   export type ClaimValue = string;
+  export type ClassicFlow = boolean;
   export interface CognitoIdentityProvider {
     /**
      * The provider name for an Amazon Cognito user pool. For example, cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
@@ -214,6 +215,10 @@ declare namespace CognitoIdentity {
      * TRUE if the identity pool supports unauthenticated logins.
      */
     AllowUnauthenticatedIdentities: IdentityPoolUnauthenticated;
+    /**
+     * Enables or disables the Basic (Classic) authentication flow. For more information, see Identity Pools (Federated Identities) Authentication Flow in the Amazon Cognito Developer Guide.
+     */
+    AllowClassicFlow?: ClassicFlow;
     /**
      * Optional key:value pairs mapping provider names to provider app IDs.
      */
@@ -370,7 +375,7 @@ declare namespace CognitoIdentity {
      */
     Logins: LoginsMap;
     /**
-     * The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don't provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token's duration.
+     * The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don't provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token's duration.  Please provide for a small grace period, usually no more than 5 minutes, to account for clock skew. 
      */
     TokenDuration?: TokenDuration;
   }
@@ -439,6 +444,10 @@ declare namespace CognitoIdentity {
      * TRUE if the identity pool supports unauthenticated logins.
      */
     AllowUnauthenticatedIdentities: IdentityPoolUnauthenticated;
+    /**
+     * Enables or disables the Basic (Classic) authentication flow. For more information, see Identity Pools (Federated Identities) Authentication Flow in the Amazon Cognito Developer Guide.
+     */
+    AllowClassicFlow?: ClassicFlow;
     /**
      * Optional key:value pairs mapping provider names to provider app IDs.
      */
@@ -684,7 +693,7 @@ declare namespace CognitoIdentity {
     /**
      * The tags to assign to the identity pool.
      */
-    Tags?: IdentityPoolTagsType;
+    Tags: IdentityPoolTagsType;
   }
   export interface TagResourceResponse {
   }
@@ -741,7 +750,7 @@ declare namespace CognitoIdentity {
     /**
      * The keys of the tags to remove from the user pool.
      */
-    TagKeys?: IdentityPoolTagsListType;
+    TagKeys: IdentityPoolTagsListType;
   }
   export interface UntagResourceResponse {
   }

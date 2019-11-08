@@ -180,11 +180,11 @@ declare class ECR extends Service {
    */
   putImageScanningConfiguration(callback?: (err: AWSError, data: ECR.Types.PutImageScanningConfigurationResponse) => void): Request<ECR.Types.PutImageScanningConfigurationResponse, AWSError>;
   /**
-   * Updates the image tag mutability settings for a repository.
+   * Updates the image tag mutability settings for a repository. When a repository is configured with tag immutability, all image tags within the repository will be prevented them from being overwritten. For more information, see Image Tag Mutability in the Amazon Elastic Container Registry User Guide.
    */
   putImageTagMutability(params: ECR.Types.PutImageTagMutabilityRequest, callback?: (err: AWSError, data: ECR.Types.PutImageTagMutabilityResponse) => void): Request<ECR.Types.PutImageTagMutabilityResponse, AWSError>;
   /**
-   * Updates the image tag mutability settings for a repository.
+   * Updates the image tag mutability settings for a repository. When a repository is configured with tag immutability, all image tags within the repository will be prevented them from being overwritten. For more information, see Image Tag Mutability in the Amazon Elastic Container Registry User Guide.
    */
   putImageTagMutability(callback?: (err: AWSError, data: ECR.Types.PutImageTagMutabilityResponse) => void): Request<ECR.Types.PutImageTagMutabilityResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class ECR extends Service {
    */
   setRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
   /**
-   * Starts an image vulnerability scan.
+   * Starts an image vulnerability scan. An image scan can only be started once per day on an individual image. This limit includes if an image was scanned on initial push. For more information, see Image Scanning in the Amazon Elastic Container Registry User Guide.
    */
   startImageScan(params: ECR.Types.StartImageScanRequest, callback?: (err: AWSError, data: ECR.Types.StartImageScanResponse) => void): Request<ECR.Types.StartImageScanResponse, AWSError>;
   /**
-   * Starts an image vulnerability scan.
+   * Starts an image vulnerability scan. An image scan can only be started once per day on an individual image. This limit includes if an image was scanned on initial push. For more information, see Image Scanning in the Amazon Elastic Container Registry User Guide.
    */
   startImageScan(callback?: (err: AWSError, data: ECR.Types.StartImageScanResponse) => void): Request<ECR.Types.StartImageScanResponse, AWSError>;
   /**
