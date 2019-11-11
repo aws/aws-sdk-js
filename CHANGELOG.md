@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.568.0-->
+<!--LATEST=2.569.0-->
 <!--ENTRYINSERT-->
+
+## 2.569.0
+* feature: CloudFormation: The Resource Import feature enables customers to import existing AWS resources into new or existing CloudFormation Stacks.
+* feature: CostExplorer: This launch provides customers with access to GetCostAndUsageWithResources API.
 
 ## 2.568.0
 * feature: CognitoIdentity: This release adds support for disabling classic flow.
