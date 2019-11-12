@@ -684,6 +684,9 @@
         },
         {
           "shape": "InvalidJobStateException"
+        },
+        {
+          "shape": "OutputVariablesSizeExceededException"
         }
       ],
       "documentation": "<p>Represents the success of a job as returned to the pipeline by a job worker. Used for custom actions only.</p>"
@@ -1204,6 +1207,10 @@
         "region": {
           "shape": "AWSRegionName",
           "documentation": "<p>The action declaration's AWS Region, such as us-east-1.</p>"
+        },
+        "namespace": {
+          "shape": "ActionNamespace",
+          "documentation": "<p>The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.</p>"
         }
       },
       "documentation": "<p>Represents information about an action declaration.</p>"
@@ -1325,6 +1332,10 @@
           "shape": "ActionConfigurationMap",
           "documentation": "<p>Configuration data for an action execution.</p>"
         },
+        "resolvedConfiguration": {
+          "shape": "ResolvedActionConfigurationMap",
+          "documentation": "<p>Configuration data for an action execution with all variable references replaced with their real values for the execution.</p>"
+        },
         "roleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline. </p>"
@@ -1336,6 +1347,10 @@
         "inputArtifacts": {
           "shape": "ArtifactDetailList",
           "documentation": "<p>Details of input artifacts of the action that correspond to the action execution.</p>"
+        },
+        "namespace": {
+          "shape": "ActionNamespace",
+          "documentation": "<p>The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.</p>"
         }
       },
       "documentation": "<p>Input information used for an action execution.</p>"
@@ -1350,6 +1365,10 @@
         "executionResult": {
           "shape": "ActionExecutionResult",
           "documentation": "<p>Execution result information listed in the output details for an action execution.</p>"
+        },
+        "outputVariables": {
+          "shape": "OutputVariablesMap",
+          "documentation": "<p>The outputVariables field shows the key-value pairs that were output as part of that execution.</p>"
         }
       },
       "documentation": "<p>Output details listed for an action execution, such as the action execution result.</p>"
@@ -1388,6 +1407,12 @@
       "max": 100,
       "min": 1,
       "pattern": "[A-Za-z0-9.@\\-_]+"
+    },
+    "ActionNamespace": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "[A-Za-z0-9@\\-_]+"
     },
     "ActionOwner": {
       "type": "string",
@@ -2743,6 +2768,22 @@
         "shape": "OutputArtifact"
       }
     },
+    "OutputVariablesKey": {
+      "type": "string",
+      "pattern": "[A-Za-z0-9@\\-_]+"
+    },
+    "OutputVariablesMap": {
+      "type": "map",
+      "key": {
+        "shape": "OutputVariablesKey"
+      },
+      "value": {
+        "shape": "OutputVariablesValue"
+      }
+    },
+    "OutputVariablesValue": {
+      "type": "string"
+    },
     "Percentage": {
       "type": "integer",
       "max": 100,
@@ -3132,6 +3173,10 @@
         "executionDetails": {
           "shape": "ExecutionDetails",
           "documentation": "<p>The execution details of the successful job, such as the actions taken by the job worker.</p>"
+        },
+        "outputVariables": {
+          "shape": "OutputVariablesMap",
+          "documentation": "<p>Key-value pairs produced as output by a job worker that can be made available to a downstream action configuration. <code>outputVariables</code> can be included only when there is no continuation token on the request.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>PutJobSuccessResult</code> action.</p>"
@@ -3237,6 +3282,15 @@
     "RegisterWebhookWithThirdPartyOutput": {
       "type": "structure",
       "members": {}
+    },
+    "ResolvedActionConfigurationMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      }
     },
     "ResourceArn": {
       "type": "string",
@@ -3529,6 +3583,9 @@
         }
       },
       "documentation": "<p>Represents the output of a <code>StartPipelineExecution</code> action.</p>"
+    },
+    "String": {
+      "type": "string"
     },
     "Tag": {
       "type": "structure",

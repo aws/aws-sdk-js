@@ -195,5 +195,6 @@ module.exports = {
   CodeStarNotifications: require('./codestarnotifications'),
   SavingsPlans: require('./savingsplans'),
   SSO: require('./sso'),
-  SSOOIDC: require('./ssooidc')
+  SSOOIDC: require('./ssooidc'),
+  MarketplaceCatalog: require('./marketplacecatalog')
 };

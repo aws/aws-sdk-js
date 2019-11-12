@@ -440,6 +440,10 @@ declare namespace CodePipeline {
      * The action declaration's AWS Region, such as us-east-1.
      */
     region?: AWSRegionName;
+    /**
+     * The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
+     */
+    namespace?: ActionNamespace;
   }
   export interface ActionExecution {
     /**
@@ -536,6 +540,10 @@ declare namespace CodePipeline {
      */
     configuration?: ActionConfigurationMap;
     /**
+     * Configuration data for an action execution with all variable references replaced with their real values for the execution.
+     */
+    resolvedConfiguration?: ResolvedActionConfigurationMap;
+    /**
      * The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline. 
      */
     roleArn?: RoleArn;
@@ -547,6 +555,10 @@ declare namespace CodePipeline {
      * Details of input artifacts of the action that correspond to the action execution.
      */
     inputArtifacts?: ArtifactDetailList;
+    /**
+     * The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
+     */
+    namespace?: ActionNamespace;
   }
   export interface ActionExecutionOutput {
     /**
@@ -557,6 +569,10 @@ declare namespace CodePipeline {
      * Execution result information listed in the output details for an action execution.
      */
     executionResult?: ActionExecutionResult;
+    /**
+     * The outputVariables field shows the key-value pairs that were output as part of that execution.
+     */
+    outputVariables?: OutputVariablesMap;
   }
   export interface ActionExecutionResult {
     /**
@@ -575,6 +591,7 @@ declare namespace CodePipeline {
   export type ActionExecutionStatus = "InProgress"|"Succeeded"|"Failed"|string;
   export type ActionExecutionToken = string;
   export type ActionName = string;
+  export type ActionNamespace = string;
   export type ActionOwner = "AWS"|"ThirdParty"|"Custom"|string;
   export type ActionProvider = string;
   export interface ActionRevision {
@@ -1364,6 +1381,9 @@ declare namespace CodePipeline {
     name: ArtifactName;
   }
   export type OutputArtifactList = OutputArtifact[];
+  export type OutputVariablesKey = string;
+  export type OutputVariablesMap = {[key: string]: OutputVariablesValue};
+  export type OutputVariablesValue = string;
   export type Percentage = number;
   export type PipelineArn = string;
   export interface PipelineContext {
@@ -1620,6 +1640,10 @@ declare namespace CodePipeline {
      * The execution details of the successful job, such as the actions taken by the job worker.
      */
     executionDetails?: ExecutionDetails;
+    /**
+     * Key-value pairs produced as output by a job worker that can be made available to a downstream action configuration. outputVariables can be included only when there is no continuation token on the request.
+     */
+    outputVariables?: OutputVariablesMap;
   }
   export interface PutThirdPartyJobFailureResultInput {
     /**
@@ -1682,6 +1706,7 @@ declare namespace CodePipeline {
   }
   export interface RegisterWebhookWithThirdPartyOutput {
   }
+  export type ResolvedActionConfigurationMap = {[key: string]: String};
   export type ResourceArn = string;
   export interface RetryStageExecutionInput {
     /**
@@ -1827,6 +1852,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
   }
+  export type String = string;
   export interface Tag {
     /**
      * The tag's key.

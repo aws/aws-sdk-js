@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.569.0-->
+<!--LATEST=2.570.0-->
 <!--ENTRYINSERT-->
+
+## 2.570.0
+* feature: CodePipeline: AWS CodePipeline now supports the use of variables in action configuration.
+* feature: DynamoDB: Amazon DynamoDB enables you to restore your data to a new DynamoDB table using a point-in-time or on-demand backup. You now can modify the settings on the new restored table. Specifically, you can exclude some or all of the local and global secondary indexes from being created with the restored table. In addition, you can change the billing mode and provisioned capacity settings.
+* feature: MarketplaceCatalog: This is the first release for the AWS Marketplace Catalog service which allows you to list, describe and manage change requests on your published entities on AWS Marketplace. 
+* feature: TranscribeService: With this release, Amazon Transcribe now supports transcriptions from audio sources in Welsh English (en-WL), Scottish English(en-AB), Irish English(en-IE), Farsi(fa-IR), Tamil(ta-IN), Indonesian(id-ID), Portuguese (pt-PT), Dutch(nl-NL).
 
 ## 2.569.0
 * feature: CloudFormation: The Resource Import feature enables customers to import existing AWS resources into new or existing CloudFormation Stacks.

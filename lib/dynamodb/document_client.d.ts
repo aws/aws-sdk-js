@@ -187,11 +187,11 @@ export namespace DocumentClient {
      */
     MaximumUnits?: PositiveLongObject;
     /**
-     * Disabled autoscaling for this global table or global secondary index.
+     * Disabled auto scaling for this global table or global secondary index.
      */
     AutoScalingDisabled?: BooleanObject;
     /**
-     * Role ARN used for configuring autoScaling policy.
+     * Role ARN used for configuring the auto scaling policy.
      */
     AutoScalingRoleArn?: String;
     /**
@@ -209,11 +209,11 @@ export namespace DocumentClient {
      */
     MaximumUnits?: PositiveLongObject;
     /**
-     * Disabled autoscaling for this global table or global secondary index.
+     * Disabled auto scaling for this global table or global secondary index.
      */
     AutoScalingDisabled?: BooleanObject;
     /**
-     * Role ARN used for configuring autoscaling policy.
+     * Role ARN used for configuring auto scaling policy.
      */
     AutoScalingRoleArn?: AutoScalingRoleArn;
     /**
@@ -227,7 +227,7 @@ export namespace DocumentClient {
      */
     DisableScaleIn?: BooleanObject;
     /**
-     * The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application autoscaling scales out your scalable target immediately. 
+     * The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application auto scaling scales out your scalable target immediately. 
      */
     ScaleInCooldown?: IntegerObject;
     /**
@@ -245,7 +245,7 @@ export namespace DocumentClient {
      */
     DisableScaleIn?: BooleanObject;
     /**
-     * The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application autoscaling scales out your scalable target immediately. 
+     * The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. You should scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, application auto scaling scales out your scalable target immediately. 
      */
     ScaleInCooldown?: IntegerObject;
     /**
@@ -567,7 +567,7 @@ export namespace DocumentClient {
   }
   export interface CreateReplicaAction {
     /**
-     * The region of the replica to be added.
+     * The Region of the replica to be added.
      */
     RegionName: RegionName;
   }
@@ -593,7 +593,7 @@ export namespace DocumentClient {
      */
     GlobalSecondaryIndexes?: GlobalSecondaryIndexList;
     /**
-     * Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.    PROVISIONED - Sets the billing mode to PROVISIONED. We recommend using PROVISIONED for predictable workloads.    PAY_PER_REQUEST - Sets the billing mode to PAY_PER_REQUEST. We recommend using PAY_PER_REQUEST for unpredictable workloads.   
+     * Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned Mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode.   
      */
     BillingMode?: BillingMode;
     /**
@@ -719,7 +719,7 @@ export namespace DocumentClient {
   }
   export interface DeleteReplicaAction {
     /**
-     * The region of the replica to be removed.
+     * The Region of the replica to be removed.
      */
     RegionName: RegionName;
   }
@@ -942,7 +942,7 @@ export namespace DocumentClient {
      */
     IndexName: IndexName;
     /**
-     * The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     * The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
      */
     KeySchema: KeySchema;
     /**
@@ -960,7 +960,7 @@ export namespace DocumentClient {
      */
     IndexName?: IndexName;
     /**
-     * The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     * The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
      */
     KeySchema?: KeySchema;
     /**
@@ -972,7 +972,7 @@ export namespace DocumentClient {
      */
     IndexStatus?: IndexStatus;
     /**
-     * Indicates whether the index is currently backfilling. Backfilling is the process of reading items from the table and determining whether they can be added to the index. (Not all items will qualify: For example, a partition key cannot have any duplicate values.) If an item can be added to the index, DynamoDB will do so. After all items have been processed, the backfilling operation is complete and Backfilling is false.  For indexes that were created during a CreateTable operation, the Backfilling attribute does not appear in the DescribeTable output. 
+     * Indicates whether the index is currently backfilling. Backfilling is the process of reading items from the table and determining whether they can be added to the index. (Not all items will qualify: For example, a partition key cannot have any duplicate values.) If an item can be added to the index, DynamoDB will do so. After all items have been processed, the backfilling operation is complete and Backfilling is false. You can delete an index that is being created during the Backfilling phase when IndexStatus is set to CREATING and Backfilling is true. You can't delete the index that is being created when IndexStatus is set to CREATING and Backfilling is false.   For indexes that were created during a CreateTable operation, the Backfilling attribute does not appear in the DescribeTable output. 
      */
     Backfilling?: Backfilling;
     /**
@@ -999,7 +999,7 @@ export namespace DocumentClient {
      */
     IndexName?: IndexName;
     /**
-     * The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     * The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
      */
     KeySchema?: KeySchema;
     /**
@@ -1034,14 +1034,14 @@ export namespace DocumentClient {
      */
     GlobalTableName?: TableName;
     /**
-     * The regions where the global table has replicas.
+     * The Regions where the global table has replicas.
      */
     ReplicationGroup?: ReplicaList;
   }
   export type GlobalTableArnString = string;
   export interface GlobalTableDescription {
     /**
-     * The regions where the global table has replicas.
+     * The Regions where the global table has replicas.
      */
     ReplicationGroup?: ReplicaDescriptionList;
     /**
@@ -1071,7 +1071,7 @@ export namespace DocumentClient {
      */
     ProvisionedWriteCapacityUnits?: PositiveLongObject;
     /**
-     * AutoScaling settings for managing a global secondary index's write capacity units.
+     * Auto scaling settings for managing a global secondary index's write capacity units.
      */
     ProvisionedWriteCapacityAutoScalingSettingsUpdate?: AutoScalingSettingsUpdate;
   }
@@ -1120,7 +1120,7 @@ export namespace DocumentClient {
      */
     AttributeName: KeySchemaAttributeName;
     /**
-     * The role that this key attribute will assume:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     * The role that this key attribute will assume:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
      */
     KeyType: KeyType;
   }
@@ -1255,7 +1255,7 @@ export namespace DocumentClient {
      */
     IndexName: IndexName;
     /**
-     * The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     * The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
      */
     KeySchema: KeySchema;
     /**
@@ -1269,7 +1269,7 @@ export namespace DocumentClient {
      */
     IndexName?: IndexName;
     /**
-     * The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     * The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
      */
     KeySchema?: KeySchema;
     /**
@@ -1296,7 +1296,7 @@ export namespace DocumentClient {
      */
     IndexName?: IndexName;
     /**
-     * The complete key schema for a local secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     * The complete key schema for a local secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
      */
     KeySchema?: KeySchema;
     /**
@@ -1321,7 +1321,7 @@ export namespace DocumentClient {
      */
     PointInTimeRecoveryStatus?: PointInTimeRecoveryStatus;
     /**
-     * Specifies the earliest point in time you can restore your table to. It You can restore your table to any point in time during the last 35 days. 
+     * Specifies the earliest point in time you can restore your table to. You can restore your table to any point in time during the last 35 days. 
      */
     EarliestRestorableDateTime?: _Date;
     /**
@@ -1340,7 +1340,7 @@ export namespace DocumentClient {
   export type PositiveLongObject = number;
   export interface Projection {
     /**
-     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes are in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.  
+     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.  
      */
     ProjectionType?: ProjectionType;
     /**
@@ -1464,7 +1464,7 @@ export namespace DocumentClient {
   }
   export interface PutRequest {
     /**
-     * A map of attribute name to attribute values, representing the primary key of an item to be processed by PutItem. All of the table's primary key attributes must be specified, and their data types must match those of the table's key schema. If any attributes are present in the item which are part of an index key schema for the table, their types must match the index key schema.
+     * A map of attribute name to attribute values, representing the primary key of an item to be processed by PutItem. All of the table's primary key attributes must be specified, and their data types must match those of the table's key schema. If any attributes are present in the item that are part of an index key schema for the table, their types must match the index key schema.
      */
     Item: PutItemInputAttributeMap;
   }
@@ -1560,13 +1560,13 @@ export namespace DocumentClient {
   export type RegionName = string;
   export interface Replica {
     /**
-     * The region where the replica needs to be created.
+     * The Region where the replica needs to be created.
      */
     RegionName?: RegionName;
   }
   export interface ReplicaDescription {
     /**
-     * The name of the region.
+     * The name of the Region.
      */
     RegionName?: RegionName;
   }
@@ -1585,7 +1585,7 @@ export namespace DocumentClient {
      */
     ProvisionedReadCapacityUnits?: PositiveLongObject;
     /**
-     * Autoscaling settings for a global secondary index replica's read capacity units.
+     * Auto scaling settings for a global secondary index replica's read capacity units.
      */
     ProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
     /**
@@ -1593,7 +1593,7 @@ export namespace DocumentClient {
      */
     ProvisionedWriteCapacityUnits?: PositiveLongObject;
     /**
-     * AutoScaling settings for a global secondary index replica's write capacity units.
+     * Auto scaling settings for a global secondary index replica's write capacity units.
      */
     ProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
   }
@@ -1608,7 +1608,7 @@ export namespace DocumentClient {
      */
     ProvisionedReadCapacityUnits?: PositiveLongObject;
     /**
-     * Autoscaling settings for managing a global secondary index replica's read capacity units.
+     * Auto scaling settings for managing a global secondary index replica's read capacity units.
      */
     ProvisionedReadCapacityAutoScalingSettingsUpdate?: AutoScalingSettingsUpdate;
   }
@@ -1616,11 +1616,11 @@ export namespace DocumentClient {
   export type ReplicaList = Replica[];
   export interface ReplicaSettingsDescription {
     /**
-     * The region name of the replica.
+     * The Region name of the replica.
      */
     RegionName: RegionName;
     /**
-     * The current state of the region:    CREATING - The region is being created.    UPDATING - The region is being updated.    DELETING - The region is being deleted.    ACTIVE - The region is ready for use.  
+     * The current state of the Region:    CREATING - The Region is being created.    UPDATING - The Region is being updated.    DELETING - The Region is being deleted.    ACTIVE - The Region is ready for use.  
      */
     ReplicaStatus?: ReplicaStatus;
     /**
@@ -1632,7 +1632,7 @@ export namespace DocumentClient {
      */
     ReplicaProvisionedReadCapacityUnits?: NonNegativeLongObject;
     /**
-     * Autoscaling settings for a global table replica's read capacity units.
+     * Auto scaling settings for a global table replica's read capacity units.
      */
     ReplicaProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
     /**
@@ -1640,7 +1640,7 @@ export namespace DocumentClient {
      */
     ReplicaProvisionedWriteCapacityUnits?: NonNegativeLongObject;
     /**
-     * AutoScaling settings for a global table replica's write capacity units.
+     * Auto scaling settings for a global table replica's write capacity units.
      */
     ReplicaProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
     /**
@@ -1651,7 +1651,7 @@ export namespace DocumentClient {
   export type ReplicaSettingsDescriptionList = ReplicaSettingsDescription[];
   export interface ReplicaSettingsUpdate {
     /**
-     * The region of the replica to be added.
+     * The Region of the replica to be added.
      */
     RegionName: RegionName;
     /**
@@ -1659,7 +1659,7 @@ export namespace DocumentClient {
      */
     ReplicaProvisionedReadCapacityUnits?: PositiveLongObject;
     /**
-     * Autoscaling settings for managing a global table replica's read capacity units.
+     * Auto scaling settings for managing a global table replica's read capacity units.
      */
     ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate?: AutoScalingSettingsUpdate;
     /**
@@ -1684,11 +1684,11 @@ export namespace DocumentClient {
   export type RestoreInProgress = boolean;
   export interface RestoreSummary {
     /**
-     * ARN of the backup from which the table was restored.
+     * The Amazon Resource Name (ARN) of the backup from which the table was restored.
      */
     SourceBackupArn?: BackupArn;
     /**
-     * ARN of the source table of the backup that is being restored.
+     * The ARN of the source table of the backup that is being restored.
      */
     SourceTableArn?: TableArn;
     /**
@@ -1709,6 +1709,22 @@ export namespace DocumentClient {
      * The Amazon Resource Name (ARN) associated with the backup.
      */
     BackupArn: BackupArn;
+    /**
+     * The billing mode of the restored table.
+     */
+    BillingModeOverride?: BillingMode;
+    /**
+     * List of global secondary indexes for the restored table. The indexes provided should match existing secondary indexes. You can choose to exclude some or all of the indexes at the time of restore.
+     */
+    GlobalSecondaryIndexOverride?: GlobalSecondaryIndexList;
+    /**
+     * List of local secondary indexes for the restored table. The indexes provided should match existing secondary indexes. You can choose to exclude some or all of the indexes at the time of restore.
+     */
+    LocalSecondaryIndexOverride?: LocalSecondaryIndexList;
+    /**
+     * Provisioned throughput settings for the restored table.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughput;
   }
   export interface RestoreTableFromBackupOutput {
     /**
@@ -1733,6 +1749,22 @@ export namespace DocumentClient {
      * Time in the past to restore the table to.
      */
     RestoreDateTime?: _Date;
+    /**
+     * The billing mode of the restored table.
+     */
+    BillingModeOverride?: BillingMode;
+    /**
+     * List of global secondary indexes for the restored table. The indexes provided should match existing secondary indexes. You can choose to exclude some or all of the indexes at the time of restore.
+     */
+    GlobalSecondaryIndexOverride?: GlobalSecondaryIndexList;
+    /**
+     * List of local secondary indexes for the restored table. The indexes provided should match existing secondary indexes. You can choose to exclude some or all of the indexes at the time of restore.
+     */
+    LocalSecondaryIndexOverride?: LocalSecondaryIndexList;
+    /**
+     * Provisioned throughput settings for the restored table.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughput;
   }
   export interface RestoreTableToPointInTimeOutput {
     /**
@@ -1750,11 +1782,11 @@ export namespace DocumentClient {
      */
     Status?: SSEStatus;
     /**
-     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).  
+     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses AWS Key Management Service. The key is stored in your account and is managed by AWS KMS (AWS KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
-     * The KMS customer master key (CMK) ARN used for the KMS encryption.
+     * The KMS customer master key (CMK) ARN used for the AWS KMS encryption.
      */
     KMSMasterKeyArn?: KMSMasterKeyArn;
   }
@@ -1765,11 +1797,11 @@ export namespace DocumentClient {
      */
     Enabled?: SSEEnabled;
     /**
-     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).  
+     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses AWS Key Management Service. The key is stored in your account and is managed by AWS KMS (AWS KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
-     * The KMS Customer Master Key (CMK) which should be used for the KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB Customer Master Key alias/aws/dynamodb.
+     * The KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
   }
@@ -1879,7 +1911,7 @@ export namespace DocumentClient {
      */
     TableArn?: TableArn;
     /**
-     * Size of the table in bytes. Please note this is an approximate value.
+     * Size of the table in bytes. Note that this is an approximate value.
      */
     TableSizeBytes?: Long;
     /**
@@ -1895,7 +1927,7 @@ export namespace DocumentClient {
      */
     ProvisionedThroughput: ProvisionedThroughput;
     /**
-     * Number of items in the table. Please note this is an approximate value. 
+     * Number of items in the table. Note that this is an approximate value. 
      */
     ItemCount?: ItemCount;
     /**
@@ -1909,7 +1941,7 @@ export namespace DocumentClient {
      */
     LocalSecondaryIndexes?: LocalSecondaryIndexes;
     /**
-     * Represents the GSI properties for the table when the backup was created. It includes the IndexName, KeySchema, Projection and ProvisionedThroughput for the GSIs on the table at the time of backup. 
+     * Represents the GSI properties for the table when the backup was created. It includes the IndexName, KeySchema, Projection, and ProvisionedThroughput for the GSIs on the table at the time of backup. 
      */
     GlobalSecondaryIndexes?: GlobalSecondaryIndexes;
     /**
@@ -1989,11 +2021,11 @@ export namespace DocumentClient {
      */
     BillingModeSummary?: BillingModeSummary;
     /**
-     * Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:    IndexName - The name of the local secondary index.    KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes are in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      IndexSizeBytes - Represents the total size of the index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.    ItemCount - Represents the number of items in the index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.   If the table is in the DELETING state, no information about indexes will be returned.
+     * Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:    IndexName - The name of the local secondary index.    KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      IndexSizeBytes - Represents the total size of the index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.    ItemCount - Represents the number of items in the index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.   If the table is in the DELETING state, no information about indexes will be returned.
      */
     LocalSecondaryIndexes?: LocalSecondaryIndexDescriptionList;
     /**
-     * The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:    Backfilling - If true, then the index is currently in the backfilling phase. Backfilling occurs only when a new global secondary index is added to the table; it is the process by which DynamoDB populates the new index with data from the table. (This attribute does not appear for indexes that were created during a CreateTable operation.)    IndexName - The name of the global secondary index.    IndexSizeBytes - The total size of the global secondary index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     IndexStatus - The current status of the global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.      ItemCount - The number of items in the global secondary index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes are in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      ProvisionedThroughput - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units, along with data about increases and decreases.    If the table is in the DELETING state, no information about indexes will be returned.
+     * The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:    Backfilling - If true, then the index is currently in the backfilling phase. Backfilling occurs only when a new global secondary index is added to the table. It is the process by which DynamoDB populates the new index with data from the table. (This attribute does not appear for indexes that were created during a CreateTable operation.)   You can delete an index that is being created during the Backfilling phase when IndexStatus is set to CREATING and Backfilling is true. You can't delete the index that is being created when IndexStatus is set to CREATING and Backfilling is false. (This attribute does not appear for indexes that were created during a CreateTable operation.)    IndexName - The name of the global secondary index.    IndexSizeBytes - The total size of the global secondary index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     IndexStatus - The current status of the global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.      ItemCount - The number of items in the global secondary index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      ProvisionedThroughput - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units, along with data about increases and decreases.    If the table is in the DELETING state, no information about indexes will be returned.
      */
     GlobalSecondaryIndexes?: GlobalSecondaryIndexDescriptionList;
     /**
@@ -2001,7 +2033,7 @@ export namespace DocumentClient {
      */
     StreamSpecification?: StreamSpecification;
     /**
-     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   the AWS customer ID.   the table name.   the StreamLabel.  
+     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   AWS customer ID   Table name    StreamLabel   
      */
     LatestStreamLabel?: String;
     /**
@@ -2230,7 +2262,7 @@ export namespace DocumentClient {
      */
     GlobalTableName: TableName;
     /**
-     * The billing mode of the global table. If GlobalTableBillingMode is not specified, the global table defaults to PROVISIONED capacity billing mode.
+     * The billing mode of the global table. If GlobalTableBillingMode is not specified, the global table defaults to PROVISIONED capacity billing mode.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned Mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode.   
      */
     GlobalTableBillingMode?: BillingMode;
     /**
@@ -2331,7 +2363,7 @@ export namespace DocumentClient {
      */
     TableName: TableName;
     /**
-     * Controls how you are charged for read and write throughput and how you manage capacity. When switching from pay-per-request to provisioned capacity, initial provisioned capacity values must be set. The initial provisioned capacity values are estimated based on the consumed read and write capacity of your table and global secondary indexes over the past 30 minutes.    PROVISIONED - Sets the billing mode to PROVISIONED. We recommend using PROVISIONED for predictable workloads.    PAY_PER_REQUEST - Sets the billing mode to PAY_PER_REQUEST. We recommend using PAY_PER_REQUEST for unpredictable workloads.   
+     * Controls how you are charged for read and write throughput and how you manage capacity. When switching from pay-per-request to provisioned capacity, initial provisioned capacity values must be set. The initial provisioned capacity values are estimated based on the consumed read and write capacity of your table and global secondary indexes over the past 30 minutes.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned Mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode.   
      */
     BillingMode?: BillingMode;
     /**
@@ -2339,7 +2371,7 @@ export namespace DocumentClient {
      */
     ProvisionedThroughput?: ProvisionedThroughput;
     /**
-     * An array of one or more global secondary indexes for the table. For each index in the array, you can request one action:    Create - add a new global secondary index to the table.    Update - modify the provisioned throughput settings of an existing global secondary index.    Delete - remove a global secondary index from the table.   For more information, see Managing Global Secondary Indexes in the Amazon DynamoDB Developer Guide. 
+     * An array of one or more global secondary indexes for the table. For each index in the array, you can request one action:    Create - add a new global secondary index to the table.    Update - modify the provisioned throughput settings of an existing global secondary index.    Delete - remove a global secondary index from the table.   You can create or delete only one global secondary index per UpdateTable operation. For more information, see Managing Global Secondary Indexes in the Amazon DynamoDB Developer Guide. 
      */
     GlobalSecondaryIndexUpdates?: GlobalSecondaryIndexUpdateList;
     /**

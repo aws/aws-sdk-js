@@ -783,5 +783,9 @@
   "ssooidc": {
     "prefix": "sso-oidc",
     "name": "SSOOIDC"
+  },
+  "marketplacecatalog": {
+    "prefix": "marketplace-catalog",
+    "name": "MarketplaceCatalog"
   }
 }

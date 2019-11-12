@@ -196,6 +196,7 @@ export abstract class ConfigurationServicePlaceholders {
   savingsplans?: AWS.SavingsPlans.Types.ClientConfiguration;
   sso?: AWS.SSO.Types.ClientConfiguration;
   ssooidc?: AWS.SSOOIDC.Types.ClientConfiguration;
+  marketplacecatalog?: AWS.MarketplaceCatalog.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -394,4 +395,5 @@ export interface ConfigurationServiceApiVersions {
   savingsplans?: AWS.SavingsPlans.Types.apiVersion;
   sso?: AWS.SSO.Types.apiVersion;
   ssooidc?: AWS.SSOOIDC.Types.apiVersion;
+  marketplacecatalog?: AWS.MarketplaceCatalog.Types.apiVersion;
 }
