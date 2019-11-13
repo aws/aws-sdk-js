@@ -228,11 +228,11 @@ declare class Iot extends Service {
    */
   createSecurityProfile(callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
   /**
-   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.
+   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream.
    */
   createStream(params: Iot.Types.CreateStreamRequest, callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
-   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.
+   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream.
    */
   createStream(callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
@@ -684,6 +684,14 @@ declare class Iot extends Service {
    */
   enableTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Returns the number of things with distinct values for the aggregation field. 
+   */
+  getCardinality(params: Iot.Types.GetCardinalityRequest, callback?: (err: AWSError, data: Iot.Types.GetCardinalityResponse) => void): Request<Iot.Types.GetCardinalityResponse, AWSError>;
+  /**
+   * Returns the number of things with distinct values for the aggregation field. 
+   */
+  getCardinality(callback?: (err: AWSError, data: Iot.Types.GetCardinalityResponse) => void): Request<Iot.Types.GetCardinalityResponse, AWSError>;
+  /**
    * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
    */
   getEffectivePolicies(params: Iot.Types.GetEffectivePoliciesRequest, callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
@@ -724,6 +732,14 @@ declare class Iot extends Service {
    */
   getOTAUpdate(callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
   /**
+   * Returns the percentile values for the aggregation field. The results from GetPercentiles is an approximation. The default percentile groupings are: 1,5,25,50,75,95,99. You can specify custom percentile grouping using the percents argument to the GetPercentiles API.
+   */
+  getPercentiles(params: Iot.Types.GetPercentilesRequest, callback?: (err: AWSError, data: Iot.Types.GetPercentilesResponse) => void): Request<Iot.Types.GetPercentilesResponse, AWSError>;
+  /**
+   * Returns the percentile values for the aggregation field. The results from GetPercentiles is an approximation. The default percentile groupings are: 1,5,25,50,75,95,99. You can specify custom percentile grouping using the percents argument to the GetPercentiles API.
+   */
+  getPercentiles(callback?: (err: AWSError, data: Iot.Types.GetPercentilesResponse) => void): Request<Iot.Types.GetPercentilesResponse, AWSError>;
+  /**
    * Gets information about the specified policy with the policy document of the default version.
    */
   getPolicy(params: Iot.Types.GetPolicyRequest, callback?: (err: AWSError, data: Iot.Types.GetPolicyResponse) => void): Request<Iot.Types.GetPolicyResponse, AWSError>;
@@ -748,11 +764,11 @@ declare class Iot extends Service {
    */
   getRegistrationCode(callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
   /**
-   * Gets statistics about things that match the specified query.
+   * Gets statistics returns the count, average, sum, minimum, maximum, sumOfSquares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.
    */
   getStatistics(params: Iot.Types.GetStatisticsRequest, callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
-   * Gets statistics about things that match the specified query.
+   * Gets statistics returns the count, average, sum, minimum, maximum, sumOfSquares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.
    */
   getStatistics(callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
@@ -1132,11 +1148,11 @@ declare class Iot extends Service {
    */
   registerCertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
-   * Provisions a thing.
+   * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
    */
   registerThing(params: Iot.Types.RegisterThingRequest, callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
-   * Provisions a thing.
+   * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
    */
   registerThing(callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
@@ -1719,7 +1735,7 @@ declare namespace Iot {
      */
     thingName: ThingName;
     /**
-     * The principal, such as a certificate or other credential.
+     * The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID.
      */
     principal: Principal;
   }
@@ -2014,6 +2030,7 @@ declare namespace Iot {
   }
   export type Authorizers = AuthorizerSummary[];
   export type AutoRegistrationStatus = "ENABLE"|"DISABLE"|string;
+  export type Average = number;
   export type AwsAccountId = string;
   export type AwsArn = string;
   export type AwsIotJobArn = string;
@@ -4087,6 +4104,19 @@ declare namespace Iot {
   export type FailedChecksCount = number;
   export type FailedFindingsCount = number;
   export type FailedThings = number;
+  export interface Field {
+    /**
+     * The name of the field.
+     */
+    name?: FieldName;
+    /**
+     * The datatype of the field.
+     */
+    type?: FieldType;
+  }
+  export type FieldName = string;
+  export type FieldType = "Number"|"String"|"Boolean"|string;
+  export type Fields = Field[];
   export type FileId = number;
   export interface FileLocation {
     /**
@@ -4124,6 +4154,30 @@ declare namespace Iot {
   export type FunctionArn = string;
   export type GEMaxResults = number;
   export type GenerationId = string;
+  export interface GetCardinalityRequest {
+    /**
+     * The name of the index to search.
+     */
+    indexName?: IndexName;
+    /**
+     * The search query.
+     */
+    queryString: QueryString;
+    /**
+     * The field to aggregate.
+     */
+    aggregationField?: AggregationField;
+    /**
+     * The query version.
+     */
+    queryVersion?: QueryVersion;
+  }
+  export interface GetCardinalityResponse {
+    /**
+     * The number of things that match the query.
+     */
+    cardinality?: Count;
+  }
   export interface GetEffectivePoliciesRequest {
     /**
      * The principal.
@@ -4191,6 +4245,34 @@ declare namespace Iot {
      * The OTA update info.
      */
     otaUpdateInfo?: OTAUpdateInfo;
+  }
+  export interface GetPercentilesRequest {
+    /**
+     * The name of the index to search.
+     */
+    indexName?: IndexName;
+    /**
+     * The query string.
+     */
+    queryString: QueryString;
+    /**
+     * The field to aggregate.
+     */
+    aggregationField?: AggregationField;
+    /**
+     * The query version.
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * The percentile groups returned.
+     */
+    percents?: PercentList;
+  }
+  export interface GetPercentilesResponse {
+    /**
+     * The percentile values of the aggregated fields.
+     */
+    percentiles?: Percentiles;
   }
   export interface GetPolicyRequest {
     /**
@@ -4260,11 +4342,11 @@ declare namespace Iot {
      */
     isDefaultVersion?: IsDefaultVersion;
     /**
-     * The date the policy version was created.
+     * The date the policy was created.
      */
     creationDate?: DateType;
     /**
-     * The date the policy version was last modified.
+     * The date the policy was last modified.
      */
     lastModifiedDate?: DateType;
     /**
@@ -4290,7 +4372,7 @@ declare namespace Iot {
      */
     queryString: QueryString;
     /**
-     * The aggregation field name. Currently not supported.
+     * The aggregation field name.
      */
     aggregationField?: AggregationField;
     /**
@@ -5863,6 +5945,7 @@ declare namespace Iot {
   export type Marker = string;
   export type MaxJobExecutionsPerMin = number;
   export type MaxResults = number;
+  export type Maximum = number;
   export type MaximumPerMinute = number;
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
@@ -5881,6 +5964,7 @@ declare namespace Iot {
      */
     ports?: Ports;
   }
+  export type Minimum = number;
   export type MinimumNumberOfExecutedThings = number;
   export type MissingContextValue = string;
   export type MissingContextValues = MissingContextValue[];
@@ -6103,7 +6187,21 @@ declare namespace Iot {
   export type Parameters = {[key: string]: Value};
   export type PartitionKey = string;
   export type PayloadField = string;
+  export type Percent = number;
+  export type PercentList = Percent[];
+  export interface PercentPair {
+    /**
+     * The percentile.
+     */
+    percent?: Percent;
+    /**
+     * The value.
+     */
+    value?: PercentValue;
+  }
+  export type PercentValue = number;
   export type Percentage = number;
+  export type Percentiles = PercentPair[];
   export type Platform = string;
   export type Policies = Policy[];
   export interface Policy {
@@ -6398,7 +6496,7 @@ declare namespace Iot {
      */
     topic: TopicPattern;
     /**
-     * The Quality of Service (QoS) level to use when republishing messages.
+     * The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
      */
     qos?: Qos;
   }
@@ -6823,8 +6921,37 @@ declare namespace Iot {
      * The count of things that match the query.
      */
     count?: Count;
+    /**
+     * The average of the aggregated field values.
+     */
+    average?: Average;
+    /**
+     * The sum of the aggregated field values.
+     */
+    sum?: Sum;
+    /**
+     * The minimum aggregated field value.
+     */
+    minimum?: Minimum;
+    /**
+     * The maximum aggregated field value.
+     */
+    maximum?: Maximum;
+    /**
+     * The sum of the squares of the aggregated field values.
+     */
+    sumOfSquares?: SumOfSquares;
+    /**
+     * The variance of the aggregated field values.
+     */
+    variance?: Variance;
+    /**
+     * The standard deviation of the aggregated field valuesl
+     */
+    stdDeviation?: StdDeviation;
   }
   export type Status = "InProgress"|"Completed"|"Failed"|"Cancelled"|"Cancelling"|string;
+  export type StdDeviation = number;
   export interface StepFunctionsAction {
     /**
      * (Optional) A name will be given to the state machine execution consisting of this prefix followed by a UUID. Step Functions automatically creates a unique name for each state machine execution if one is not provided.
@@ -6930,6 +7057,8 @@ declare namespace Iot {
   export type StringMap = {[key: string]: String};
   export type SucceededFindingsCount = number;
   export type SucceededThings = number;
+  export type Sum = number;
+  export type SumOfSquares = number;
   export type TableName = string;
   export interface Tag {
     /**
@@ -7182,6 +7311,14 @@ declare namespace Iot {
      * Thing group indexing mode.
      */
     thingGroupIndexingMode: ThingGroupIndexingMode;
+    /**
+     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+     */
+    managedFields?: Fields;
+    /**
+     * Contains custom field names and their data type.
+     */
+    customFields?: Fields;
   }
   export type ThingGroupIndexingMode = "OFF"|"ON"|string;
   export type ThingGroupList = ThingGroupName[];
@@ -7223,6 +7360,14 @@ declare namespace Iot {
      * Thing connectivity indexing mode. Valid values are:    STATUS – Your thing index contains connectivity status. To enable thing connectivity indexing, thingIndexMode must not be set to OFF.   OFF - Thing connectivity status indexing is disabled.  
      */
     thingConnectivityIndexingMode?: ThingConnectivityIndexingMode;
+    /**
+     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+     */
+    managedFields?: Fields;
+    /**
+     * Contains custom field names and their data type.
+     */
+    customFields?: Fields;
   }
   export type ThingIndexingMode = "OFF"|"REGISTRY"|"REGISTRY_AND_SHADOW"|string;
   export type ThingName = string;
@@ -7897,6 +8042,7 @@ declare namespace Iot {
   }
   export type ValidationErrors = ValidationError[];
   export type Value = string;
+  export type Variance = number;
   export type Version = number;
   export type VersionNumber = number;
   export interface ViolationEvent {

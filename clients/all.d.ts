@@ -195,3 +195,5 @@ export import SavingsPlans = require('./savingsplans');
 export import SSO = require('./sso');
 export import SSOOIDC = require('./ssooidc');
 export import MarketplaceCatalog = require('./marketplacecatalog');
+export import DataExchange = require('./dataexchange');
+export import SESV2 = require('./sesv2');

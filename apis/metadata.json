@@ -787,5 +787,11 @@
   "marketplacecatalog": {
     "prefix": "marketplace-catalog",
     "name": "MarketplaceCatalog"
+  },
+  "dataexchange": {
+    "name": "DataExchange"
+  },
+  "sesv2": {
+    "name": "SESV2"
   }
 }

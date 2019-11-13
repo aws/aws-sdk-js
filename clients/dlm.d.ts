@@ -44,6 +44,30 @@ declare class DLM extends Service {
    */
   getLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.GetLifecyclePolicyResponse) => void): Request<DLM.Types.GetLifecyclePolicyResponse, AWSError>;
   /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(params: DLM.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DLM.Types.ListTagsForResourceResponse) => void): Request<DLM.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: DLM.Types.ListTagsForResourceResponse) => void): Request<DLM.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds the specified tags to the specified resource.
+   */
+  tagResource(params: DLM.Types.TagResourceRequest, callback?: (err: AWSError, data: DLM.Types.TagResourceResponse) => void): Request<DLM.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds the specified tags to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: DLM.Types.TagResourceResponse) => void): Request<DLM.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified resource.
+   */
+  untagResource(params: DLM.Types.UntagResourceRequest, callback?: (err: AWSError, data: DLM.Types.UntagResourceResponse) => void): Request<DLM.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: DLM.Types.UntagResourceResponse) => void): Request<DLM.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates the specified lifecycle policy.
    */
   updateLifecyclePolicy(params: DLM.Types.UpdateLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
@@ -69,9 +93,13 @@ declare namespace DLM {
      */
     State: SettablePolicyStateValues;
     /**
-     * The configuration details of the lifecycle policy. Target tags cannot be re-used across lifecycle policies.
+     * The configuration details of the lifecycle policy.
      */
     PolicyDetails: PolicyDetails;
+    /**
+     * The tags to apply to the lifecycle policy during creation.
+     */
+    Tags?: TagMap;
   }
   export interface CreateLifecyclePolicyResponse {
     /**
@@ -160,6 +188,10 @@ declare namespace DLM {
      */
     State?: GettablePolicyStateValues;
     /**
+     * The description of the status.
+     */
+    StatusMessage?: StatusMessage;
+    /**
      * The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
      */
     ExecutionRoleArn?: ExecutionRoleArn;
@@ -175,6 +207,14 @@ declare namespace DLM {
      * The configuration of the lifecycle policy
      */
     PolicyDetails?: PolicyDetails;
+    /**
+     * The tags.
+     */
+    Tags?: TagMap;
+    /**
+     * The Amazon Resource Name (ARN) of the policy.
+     */
+    PolicyArn?: PolicyArn;
   }
   export interface LifecyclePolicySummary {
     /**
@@ -189,14 +229,31 @@ declare namespace DLM {
      * The activation state of the lifecycle policy.
      */
     State?: GettablePolicyStateValues;
+    /**
+     * The tags.
+     */
+    Tags?: TagMap;
   }
   export type LifecyclePolicySummaryList = LifecyclePolicySummary[];
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: PolicyArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Information about the tags.
+     */
+    Tags?: TagMap;
+  }
   export interface Parameters {
     /**
      * When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the excludeBootVolume set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.
      */
     ExcludeBootVolume?: ExcludeBootVolume;
   }
+  export type PolicyArn = string;
   export type PolicyDescription = string;
   export interface PolicyDetails {
     /**
@@ -260,6 +317,7 @@ declare namespace DLM {
   export type ScheduleList = Schedule[];
   export type ScheduleName = string;
   export type SettablePolicyStateValues = "ENABLED"|"DISABLED"|string;
+  export type StatusMessage = string;
   export type String = string;
   export interface Tag {
     /**
@@ -272,6 +330,22 @@ declare namespace DLM {
     Value: String;
   }
   export type TagFilter = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: PolicyArn;
+    /**
+     * One or more tags.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type TagsToAddFilterList = TagFilter[];
   export type TagsToAddList = Tag[];
   export type TargetTagList = Tag[];
@@ -279,6 +353,18 @@ declare namespace DLM {
   export type Time = string;
   export type TimesList = Time[];
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: PolicyArn;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateLifecyclePolicyRequest {
     /**
      * The identifier of the lifecycle policy.
@@ -297,7 +383,7 @@ declare namespace DLM {
      */
     Description?: PolicyDescription;
     /**
-     * The configuration of the lifecycle policy. Target tags cannot be re-used across policies.
+     * The configuration of the lifecycle policy. You cannot update the policy type or the resource type.
      */
     PolicyDetails?: PolicyDetails;
   }

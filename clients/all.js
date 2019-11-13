@@ -196,5 +196,7 @@ module.exports = {
   SavingsPlans: require('./savingsplans'),
   SSO: require('./sso'),
   SSOOIDC: require('./ssooidc'),
-  MarketplaceCatalog: require('./marketplacecatalog')
+  MarketplaceCatalog: require('./marketplacecatalog'),
+  DataExchange: require('./dataexchange'),
+  SESV2: require('./sesv2')
 };

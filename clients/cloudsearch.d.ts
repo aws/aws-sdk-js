@@ -116,6 +116,14 @@ declare class CloudSearch extends Service {
    */
   describeAvailabilityOptions(callback?: (err: AWSError, data: CloudSearch.Types.DescribeAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.DescribeAvailabilityOptionsResponse, AWSError>;
   /**
+   * Returns the domain's endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see Configuring Domain Endpoint Options in the Amazon CloudSearch Developer Guide.
+   */
+  describeDomainEndpointOptions(params: CloudSearch.Types.DescribeDomainEndpointOptionsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeDomainEndpointOptionsResponse) => void): Request<CloudSearch.Types.DescribeDomainEndpointOptionsResponse, AWSError>;
+  /**
+   * Returns the domain's endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see Configuring Domain Endpoint Options in the Amazon CloudSearch Developer Guide.
+   */
+  describeDomainEndpointOptions(callback?: (err: AWSError, data: CloudSearch.Types.DescribeDomainEndpointOptionsResponse) => void): Request<CloudSearch.Types.DescribeDomainEndpointOptionsResponse, AWSError>;
+  /**
    * Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a matchall request to your domain's search endpoint: q=matchall&amp;amp;q.parser=structured&amp;amp;size=0. For more information, see Getting Information about a Search Domain in the Amazon CloudSearch Developer Guide.
    */
   describeDomains(params: CloudSearch.Types.DescribeDomainsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeDomainsResponse) => void): Request<CloudSearch.Types.DescribeDomainsResponse, AWSError>;
@@ -183,6 +191,14 @@ declare class CloudSearch extends Service {
    * Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see Configuring Availability Options in the Amazon CloudSearch Developer Guide.
    */
   updateAvailabilityOptions(callback?: (err: AWSError, data: CloudSearch.Types.UpdateAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.UpdateAvailabilityOptionsResponse, AWSError>;
+  /**
+   * Updates the domain's endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see Configuring Domain Endpoint Options in the Amazon CloudSearch Developer Guide.
+   */
+  updateDomainEndpointOptions(params: CloudSearch.Types.UpdateDomainEndpointOptionsRequest, callback?: (err: AWSError, data: CloudSearch.Types.UpdateDomainEndpointOptionsResponse) => void): Request<CloudSearch.Types.UpdateDomainEndpointOptionsResponse, AWSError>;
+  /**
+   * Updates the domain's endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see Configuring Domain Endpoint Options in the Amazon CloudSearch Developer Guide.
+   */
+  updateDomainEndpointOptions(callback?: (err: AWSError, data: CloudSearch.Types.UpdateDomainEndpointOptionsResponse) => void): Request<CloudSearch.Types.UpdateDomainEndpointOptionsResponse, AWSError>;
   /**
    * Configures scaling parameters for a domain. A domain's scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see Configuring Scaling Options in the Amazon CloudSearch Developer Guide. 
    */
@@ -437,6 +453,22 @@ declare namespace CloudSearch {
      */
     AvailabilityOptions?: AvailabilityOptionsStatus;
   }
+  export interface DescribeDomainEndpointOptionsRequest {
+    /**
+     * A string that represents the name of a domain.
+     */
+    DomainName: DomainName;
+    /**
+     * Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration. Defaults to false.
+     */
+    Deployed?: Boolean;
+  }
+  export interface DescribeDomainEndpointOptionsResponse {
+    /**
+     * The status and configuration of a search domain's endpoint options.
+     */
+    DomainEndpointOptions?: DomainEndpointOptionsStatus;
+  }
   export interface DescribeDomainsRequest {
     /**
      * The names of the domains you want to include in the response.
@@ -541,6 +573,26 @@ declare namespace CloudSearch {
      * An expression that computes a score for each suggestion to control how they are sorted. The scores are rounded to the nearest integer, with a floor of 0 and a ceiling of 2^31-1. A document's relevance score is not computed for suggestions, so sort expressions cannot reference the _score value. To sort suggestions using a numeric field or existing expression, simply specify the name of the field or expression. If no expression is configured for the suggester, the suggestions are sorted with the closest matches listed first.
      */
     SortExpression?: String;
+  }
+  export interface DomainEndpointOptions {
+    /**
+     * Whether the domain is HTTPS only enabled.
+     */
+    EnforceHTTPS?: Boolean;
+    /**
+     * The minimum required TLS version
+     */
+    TLSSecurityPolicy?: TLSSecurityPolicy;
+  }
+  export interface DomainEndpointOptionsStatus {
+    /**
+     * The domain endpoint options configured for the domain.
+     */
+    Options: DomainEndpointOptions;
+    /**
+     * The status of the configured domain endpoint options.
+     */
+    Status: OptionStatus;
   }
   export type DomainId = string;
   export type DomainName = string;
@@ -836,7 +888,7 @@ declare namespace CloudSearch {
      */
     UpdateVersion?: UIntValue;
     /**
-     * The state of processing a change to an option. Possible values:   RequiresIndexDocuments: the option's latest value will not be deployed until IndexDocuments has been called and indexing is complete.  Processing: the option's latest value is in the process of being activated.   Active: the option's latest value is completely deployed.  FailedToValidate: the option value is not compatible with the domain's data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents. 
+     * The state of processing a change to an option. Possible values: RequiresIndexDocuments: the option's latest value will not be deployed until IndexDocuments has been called and indexing is complete. Processing: the option's latest value is in the process of being activated.  Active: the option's latest value is completely deployed. FailedToValidate: the option value is not compatible with the domain's data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents. 
      */
     State: OptionState;
     /**
@@ -883,6 +935,7 @@ declare namespace CloudSearch {
     Status: OptionStatus;
   }
   export type SuggesterStatusList = SuggesterStatus[];
+  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
   export interface TextArrayOptions {
     /**
      * A value to use for the field if the field isn't specified for a document.
@@ -941,6 +994,22 @@ declare namespace CloudSearch {
      * The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. 
      */
     AvailabilityOptions?: AvailabilityOptionsStatus;
+  }
+  export interface UpdateDomainEndpointOptionsRequest {
+    /**
+     * A string that represents the name of a domain.
+     */
+    DomainName: DomainName;
+    /**
+     * Whether to require that all requests to the domain arrive over HTTPS. We recommend Policy-Min-TLS-1-2-2019-07 for TLSSecurityPolicy. For compatibility with older clients, the default is Policy-Min-TLS-1-0-2019-07. 
+     */
+    DomainEndpointOptions: DomainEndpointOptions;
+  }
+  export interface UpdateDomainEndpointOptionsResponse {
+    /**
+     * The newly-configured domain endpoint options.
+     */
+    DomainEndpointOptions?: DomainEndpointOptionsStatus;
   }
   export interface UpdateScalingParametersRequest {
     DomainName: DomainName;

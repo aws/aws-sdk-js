@@ -197,6 +197,8 @@ export abstract class ConfigurationServicePlaceholders {
   sso?: AWS.SSO.Types.ClientConfiguration;
   ssooidc?: AWS.SSOOIDC.Types.ClientConfiguration;
   marketplacecatalog?: AWS.MarketplaceCatalog.Types.ClientConfiguration;
+  dataexchange?: AWS.DataExchange.Types.ClientConfiguration;
+  sesv2?: AWS.SESV2.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -396,4 +398,6 @@ export interface ConfigurationServiceApiVersions {
   sso?: AWS.SSO.Types.apiVersion;
   ssooidc?: AWS.SSOOIDC.Types.apiVersion;
   marketplacecatalog?: AWS.MarketplaceCatalog.Types.apiVersion;
+  dataexchange?: AWS.DataExchange.Types.apiVersion;
+  sesv2?: AWS.SESV2.Types.apiVersion;
 }
