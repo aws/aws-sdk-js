@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "clock skew",
+  "description": "update clock skew duration from 30s to 300s"
+}
