@@ -229,6 +229,7 @@
           });
         });
       }
+
       describe('service client stsRegionalConfig config', function() {
         var originalRegion;
         var originalEnv;
