@@ -12,6 +12,14 @@ declare class Personalize extends Service {
   constructor(options?: Personalize.Types.ClientConfiguration)
   config: Config & Personalize.Types.ClientConfiguration;
   /**
+   * Creates a batch inference job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see recommendations-batch.
+   */
+  createBatchInferenceJob(params: Personalize.Types.CreateBatchInferenceJobRequest, callback?: (err: AWSError, data: Personalize.Types.CreateBatchInferenceJobResponse) => void): Request<Personalize.Types.CreateBatchInferenceJobResponse, AWSError>;
+  /**
+   * Creates a batch inference job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see recommendations-batch.
+   */
+  createBatchInferenceJob(callback?: (err: AWSError, data: Personalize.Types.CreateBatchInferenceJobResponse) => void): Request<Personalize.Types.CreateBatchInferenceJobResponse, AWSError>;
+  /**
    * Creates a campaign by deploying a solution version. When a client calls the GetRecommendations and GetPersonalizedRanking APIs, a campaign is specified in the request.  Minimum Provisioned TPS and Auto-Scaling  A transaction is a single GetRecommendations or GetPersonalizedRanking call. Transactions per second (TPS) is the throughput and unit of billing for Amazon Personalize. The minimum provisioned TPS (minProvisionedTPS) specifies the baseline throughput provisioned by Amazon Personalize, and thus, the minimum billing charge. If your TPS increases beyond minProvisionedTPS, Amazon Personalize auto-scales the provisioned capacity up and down, but never below minProvisionedTPS, to maintain a 70% utilization. There's a short time delay while the capacity is increased that might cause loss of transactions. It's recommended to start with a low minProvisionedTPS, track your usage using Amazon CloudWatch metrics, and then increase the minProvisionedTPS as necessary.  Status  A campaign can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the campaign status, call DescribeCampaign.  Wait until the status of the campaign is ACTIVE before asking the campaign for recommendations.   Related APIs     ListCampaigns     DescribeCampaign     UpdateCampaign     DeleteCampaign   
    */
   createCampaign(params: Personalize.Types.CreateCampaignRequest, callback?: (err: AWSError, data: Personalize.Types.CreateCampaignResponse) => void): Request<Personalize.Types.CreateCampaignResponse, AWSError>;
@@ -132,6 +140,14 @@ declare class Personalize extends Service {
    */
   describeAlgorithm(callback?: (err: AWSError, data: Personalize.Types.DescribeAlgorithmResponse) => void): Request<Personalize.Types.DescribeAlgorithmResponse, AWSError>;
   /**
+   * Gets the properties of a batch inference job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate the recommendations.
+   */
+  describeBatchInferenceJob(params: Personalize.Types.DescribeBatchInferenceJobRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeBatchInferenceJobResponse) => void): Request<Personalize.Types.DescribeBatchInferenceJobResponse, AWSError>;
+  /**
+   * Gets the properties of a batch inference job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate the recommendations.
+   */
+  describeBatchInferenceJob(callback?: (err: AWSError, data: Personalize.Types.DescribeBatchInferenceJobResponse) => void): Request<Personalize.Types.DescribeBatchInferenceJobResponse, AWSError>;
+  /**
    * Describes the given campaign, including its status. A campaign can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   When the status is CREATE FAILED, the response includes the failureReason key, which describes why. For more information on campaigns, see CreateCampaign.
    */
   describeCampaign(params: Personalize.Types.DescribeCampaignRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeCampaignResponse) => void): Request<Personalize.Types.DescribeCampaignResponse, AWSError>;
@@ -219,6 +235,14 @@ declare class Personalize extends Service {
    * Gets the metrics for the specified solution version.
    */
   getSolutionMetrics(callback?: (err: AWSError, data: Personalize.Types.GetSolutionMetricsResponse) => void): Request<Personalize.Types.GetSolutionMetricsResponse, AWSError>;
+  /**
+   * Gets a list of the batch inference jobs that have been performed off of a solution version.
+   */
+  listBatchInferenceJobs(params: Personalize.Types.ListBatchInferenceJobsRequest, callback?: (err: AWSError, data: Personalize.Types.ListBatchInferenceJobsResponse) => void): Request<Personalize.Types.ListBatchInferenceJobsResponse, AWSError>;
+  /**
+   * Gets a list of the batch inference jobs that have been performed off of a solution version.
+   */
+  listBatchInferenceJobs(callback?: (err: AWSError, data: Personalize.Types.ListBatchInferenceJobsResponse) => void): Request<Personalize.Types.ListBatchInferenceJobsResponse, AWSError>;
   /**
    * Returns a list of campaigns that use the given solution. When a solution is not specified, all the campaigns associated with the account are listed. The response provides the properties for each campaign, including the Amazon Resource Name (ARN). For more information on campaigns, see CreateCampaign.
    */
@@ -373,6 +397,91 @@ declare namespace Personalize {
     bestRecipeArn?: Arn;
   }
   export type AvroSchema = string;
+  export interface BatchInferenceJob {
+    /**
+     * The name of the batch inference job.
+     */
+    jobName?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the batch inference job.
+     */
+    batchInferenceJobArn?: Arn;
+    /**
+     * If the batch inference job failed, the reason for the failure.
+     */
+    failureReason?: FailureReason;
+    /**
+     * The Amazon Resource Name (ARN) of the solution version from which the batch inference job was created.
+     */
+    solutionVersionArn?: Arn;
+    /**
+     * The number of recommendations generated by the batch inference job. This number includes the error messages generated for failed input records.
+     */
+    numResults?: NumBatchResults;
+    /**
+     * The Amazon S3 path that leads to the input data used to generate the batch inference job.
+     */
+    jobInput?: BatchInferenceJobInput;
+    /**
+     * The Amazon S3 bucket that contains the output data generated by the batch inference job.
+     */
+    jobOutput?: BatchInferenceJobOutput;
+    /**
+     * The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch inference job.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The status of the batch inference job. The status is one of the following values:   PENDING   IN PROGRESS   ACTIVE   CREATE FAILED  
+     */
+    status?: Status;
+    /**
+     * The time at which the batch inference job was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The time at which the batch inference job was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+  }
+  export interface BatchInferenceJobInput {
+    /**
+     * The URI of the Amazon S3 location that contains your input data. The Amazon S3 bucket must be in the same region as the API endpoint you are calling.
+     */
+    s3DataSource: S3DataConfig;
+  }
+  export interface BatchInferenceJobOutput {
+    /**
+     * Information on the Amazon S3 bucket in which the batch inference job's output is stored.
+     */
+    s3DataDestination: S3DataConfig;
+  }
+  export interface BatchInferenceJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the batch inference job.
+     */
+    batchInferenceJobArn?: Arn;
+    /**
+     * The name of the batch inference job.
+     */
+    jobName?: Name;
+    /**
+     * The status of the batch inference job. The status is one of the following values:   PENDING   IN PROGRESS   ACTIVE   CREATE FAILED  
+     */
+    status?: Status;
+    /**
+     * The time at which the batch inference job was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The time at which the batch inference job was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * If the batch inference job failed, the reason for the failure.
+     */
+    failureReason?: FailureReason;
+  }
+  export type BatchInferenceJobs = BatchInferenceJobSummary[];
   export type Boolean = boolean;
   export interface Campaign {
     /**
@@ -492,6 +601,38 @@ declare namespace Personalize {
   export type ContinuousHyperParameterRanges = ContinuousHyperParameterRange[];
   export type ContinuousMaxValue = number;
   export type ContinuousMinValue = number;
+  export interface CreateBatchInferenceJobRequest {
+    /**
+     * The name of the batch inference job to create.
+     */
+    jobName: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the solution version that will be used to generate the batch inference recommendations.
+     */
+    solutionVersionArn: Arn;
+    /**
+     * The number of recommendations to retreive.
+     */
+    numResults?: NumBatchResults;
+    /**
+     * The Amazon S3 path that leads to the input file to base your recommendations on. The input material must be in JSON format.
+     */
+    jobInput: BatchInferenceJobInput;
+    /**
+     * The path to the Amazon S3 bucket where the job's output will be stored.
+     */
+    jobOutput: BatchInferenceJobOutput;
+    /**
+     * The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and out Amazon S3 buckets respectively.
+     */
+    roleArn: RoleArn;
+  }
+  export interface CreateBatchInferenceJobResponse {
+    /**
+     * The ARN of the batch inference job.
+     */
+    batchInferenceJobArn?: Arn;
+  }
   export interface CreateCampaignRequest {
     /**
      * A name for the new campaign. The campaign name must be unique within your account.
@@ -1018,6 +1159,18 @@ declare namespace Personalize {
      */
     algorithm?: Algorithm;
   }
+  export interface DescribeBatchInferenceJobRequest {
+    /**
+     * The ARN of the batch inference job to describe.
+     */
+    batchInferenceJobArn: Arn;
+  }
+  export interface DescribeBatchInferenceJobResponse {
+    /**
+     * Information on the specified batch inference job.
+     */
+    batchInferenceJob?: BatchInferenceJob;
+  }
   export interface DescribeCampaignRequest {
     /**
      * The Amazon Resource Name (ARN) of the campaign.
@@ -1317,6 +1470,30 @@ declare namespace Personalize {
   export type IntegerMaxValue = number;
   export type IntegerMinValue = number;
   export type KmsKeyArn = string;
+  export interface ListBatchInferenceJobsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the solution version from which the batch inference jobs were created.
+     */
+    solutionVersionArn?: Arn;
+    /**
+     * The token to request the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of batch inference job results to return in each page. The default value is 100.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListBatchInferenceJobsResponse {
+    /**
+     * A list containing information on each job that is returned.
+     */
+    batchInferenceJobs?: BatchInferenceJobs;
+    /**
+     * The token to use to retreive the next page of results. The value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListCampaignsRequest {
     /**
      * The Amazon Resource Name (ARN) of the solution to list the campaigns for. When a solution is not specified, all the campaigns associated with the account are listed.
@@ -1532,6 +1709,7 @@ declare namespace Personalize {
   export type Metrics = {[key: string]: MetricValue};
   export type Name = string;
   export type NextToken = string;
+  export type NumBatchResults = number;
   export type ParameterName = string;
   export type ParameterValue = string;
   export type PerformAutoML = boolean;
@@ -1601,6 +1779,16 @@ declare namespace Personalize {
   export type Recipes = RecipeSummary[];
   export type ResourceConfig = {[key: string]: ParameterValue};
   export type RoleArn = string;
+  export interface S3DataConfig {
+    /**
+     * The file path of the Amazon S3 bucket.
+     */
+    path: S3Location;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Key Management Service (KMS) key that Amazon Personalize uses to encrypt or decrypt the input and output files of a batch inference job.
+     */
+    kmsKeyArn?: KmsKeyArn;
+  }
   export type S3Location = string;
   export type Schemas = DatasetSchemaSummary[];
   export interface Solution {
@@ -1663,7 +1851,7 @@ declare namespace Personalize {
      */
     eventValueThreshold?: EventValueThreshold;
     /**
-     * Describes the properties for hyperparameter optimization (HPO). For use with the bring-your-own-recipe feature. Not used with Amazon Personalize predefined recipes.
+     * Describes the properties for hyperparameter optimization (HPO).
      */
     hpoConfig?: HPOConfig;
     /**

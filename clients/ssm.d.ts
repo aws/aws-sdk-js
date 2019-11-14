@@ -1409,6 +1409,7 @@ declare namespace SSM {
   export type AttachmentContentList = AttachmentContent[];
   export type AttachmentHash = string;
   export type AttachmentHashType = "Sha256"|string;
+  export type AttachmentIdentifier = string;
   export interface AttachmentInformation {
     /**
      * The name of the attachment.
@@ -1420,15 +1421,19 @@ declare namespace SSM {
   export type AttachmentUrl = string;
   export interface AttachmentsSource {
     /**
-     * The key of a key and value pair that identifies the location of an attachment to a document.
+     * The key of a key-value pair that identifies the location of an attachment to a document.
      */
     Key?: AttachmentsSourceKey;
     /**
-     * The URL of the location of a document attachment, such as the URL of an Amazon S3 bucket.
+     * The value of a key-value pair that identifies the location of an attachment to a document. The format is the URL of the location of a document attachment, such as the URL of an Amazon S3 bucket.
      */
     Values?: AttachmentsSourceValues;
+    /**
+     * The name of the document attachment file.
+     */
+    Name?: AttachmentIdentifier;
   }
-  export type AttachmentsSourceKey = "SourceUrl"|string;
+  export type AttachmentsSourceKey = "SourceUrl"|"S3FileUrl"|string;
   export type AttachmentsSourceList = AttachmentsSource[];
   export type AttachmentsSourceValue = string;
   export type AttachmentsSourceValues = AttachmentsSourceValue[];
@@ -5217,7 +5222,7 @@ declare namespace SSM {
      */
     NextToken?: NextToken;
     /**
-     * (Optional) One or more filters. Use a filter to return a more specific list of results.
+     * (Optional) One or more filters. Use a filter to return a more specific list of results. Note that the DocumentName filter is not supported for ListCommandInvocations.
      */
     Filters?: CommandFilterList;
     /**
@@ -6686,7 +6691,7 @@ declare namespace SSM {
   export type PutInventoryMessage = string;
   export interface PutInventoryRequest {
     /**
-     * One or more instance IDs where you want to add or update inventory items.
+     * An instance ID where you want to add or update inventory items.
      */
     InstanceId: InstanceId;
     /**

@@ -107,7 +107,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>Describes the specified user account.</p>"
+      "documentation": "<p>Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.</p>"
     },
     "DescribeUserHierarchyGroup": {
       "name": "DescribeUserHierarchyGroup",
@@ -478,6 +478,37 @@
       ],
       "documentation": "<p>Provides summary information about the security profiles for the specified Amazon Connect instance.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists the tags for the specified resource.</p>"
+    },
     "ListUserHierarchyGroups": {
       "name": "ListUserHierarchyGroups",
       "http": {
@@ -607,6 +638,62 @@
         }
       ],
       "documentation": "<p>Ends the specified contact.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Adds the specified tags to the specified resource.</p> <p>The supported resource type is users.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Removes the specified tags from the specified resource.</p>"
     },
     "UpdateContactAttributes": {
       "name": "UpdateContactAttributes",
@@ -954,6 +1041,10 @@
           "documentation": "<p>The identifier of the Amazon Connect instance.</p>",
           "location": "uri",
           "locationName": "InstanceId"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
         }
       }
     },
@@ -1916,6 +2007,29 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>Information about the tags.</p>"
+        }
+      }
+    },
     "ListUserHierarchyGroupsRequest": {
       "type": "structure",
       "required": [
@@ -2544,6 +2658,54 @@
       "type": "structure",
       "members": {}
     },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        }
+      }
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256
+    },
     "Threshold": {
       "type": "structure",
       "members": {
@@ -2569,6 +2731,27 @@
         "COUNT",
         "PERCENT"
       ]
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The tag keys.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
     },
     "UpdateContactAttributesRequest": {
       "type": "structure",
@@ -2763,6 +2946,10 @@
         "HierarchyGroupId": {
           "shape": "HierarchyGroupId",
           "documentation": "<p>The identifier of the hierarchy group for the user.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags.</p>"
         }
       },
       "documentation": "<p>Contains information about a user account for a Amazon Connect instance.</p>"

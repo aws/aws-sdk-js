@@ -28,11 +28,11 @@ declare class Connect extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes the specified user account.
+   * Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
    */
   describeUser(params: Connect.Types.DescribeUserRequest, callback?: (err: AWSError, data: Connect.Types.DescribeUserResponse) => void): Request<Connect.Types.DescribeUserResponse, AWSError>;
   /**
-   * Describes the specified user account.
+   * Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
    */
   describeUser(callback?: (err: AWSError, data: Connect.Types.DescribeUserResponse) => void): Request<Connect.Types.DescribeUserResponse, AWSError>;
   /**
@@ -132,6 +132,14 @@ declare class Connect extends Service {
    */
   listSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(params: Connect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Provides summary information about the hierarchy groups for the specified Amazon Connect instance.
    */
   listUserHierarchyGroups(params: Connect.Types.ListUserHierarchyGroupsRequest, callback?: (err: AWSError, data: Connect.Types.ListUserHierarchyGroupsResponse) => void): Request<Connect.Types.ListUserHierarchyGroupsResponse, AWSError>;
@@ -163,6 +171,22 @@ declare class Connect extends Service {
    * Ends the specified contact.
    */
   stopContact(callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
+  /**
+   * Adds the specified tags to the specified resource. The supported resource type is users.
+   */
+  tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds the specified tags to the specified resource. The supported resource type is users.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified tags from the specified resource.
+   */
+  untagResource(params: Connect.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
@@ -287,6 +311,10 @@ declare namespace Connect {
      * The identifier of the Amazon Connect instance.
      */
     InstanceId: InstanceId;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
   }
   export interface CreateUserResponse {
     /**
@@ -859,6 +887,18 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    resourceArn: ARN;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Information about the tags.
+     */
+    tags?: TagMap;
+  }
   export interface ListUserHierarchyGroupsRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1060,6 +1100,20 @@ declare namespace Connect {
   }
   export interface StopContactResponse {
   }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    resourceArn: ARN;
+    /**
+     * One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    tags: TagMap;
+  }
+  export type TagValue = string;
   export interface Threshold {
     /**
      * The type of comparison. Only "less than" (LT) comparisons are supported.
@@ -1072,6 +1126,16 @@ declare namespace Connect {
   }
   export type ThresholdValue = number;
   export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    resourceArn: ARN;
+    /**
+     * The tag keys.
+     */
+    tagKeys: TagKeyList;
+  }
   export interface UpdateContactAttributesRequest {
     /**
      * The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
@@ -1195,6 +1259,10 @@ declare namespace Connect {
      * The identifier of the hierarchy group for the user.
      */
     HierarchyGroupId?: HierarchyGroupId;
+    /**
+     * The tags.
+     */
+    Tags?: TagMap;
   }
   export type UserId = string;
   export interface UserIdentityInfo {
