@@ -125,22 +125,24 @@
     describe('regional endpoints', function() {
       describe('stsRegionalConfig client config', function() {
         it ('should set the service client stsRegionalConfig config', function() {
+          helpers.mockHttpResponse(200, {}, '{}');
           var values = ['regional', 'RegionaL', 'legacy', 'LegacY'];
           for (var i = 0; i < values.length; i++) {
             var sts = new AWS.STS({stsRegionalEndpoints: values[i]});
-            expect(['regional', 'legacy'].indexOf(sts.config.stsRegionalEndpoints) >= 0).to.equal(true);
+            var request = sts.getCallerIdentity().build(function() {});
+            expect(['regional', 'legacy'].indexOf(request.service.config.stsRegionalEndpoints) >= 0).to.equal(true);
           }
         });
 
         it('should throw if the config is set to invalid values', function() {
+          helpers.mockHttpResponse(200, {}, '{}');
           var values = ['foo', 'bar', 'region'];
           var errors = [];
           for (var i = 0; i < values.length; i++) {
-            try {
-              new AWS.STS({stsRegionalEndpoints: values[i]});
-            } catch (e) {
-              errors.push(e);
-            }
+            var sts = new AWS.STS({stsRegionalEndpoints: values[i]});
+            sts.getCallerIdentity().build(function(err) {
+              errors.push(err);
+            });
           }
           expect(errors.length).to.equal(values.length);
           for (var i = 0; i < errors.length; i++) {
@@ -162,9 +164,11 @@
           it('should be used if client config is not set', function() {
             process.env.AWS_STS_REGIONAL_ENDPOINTS = 'Regional';
             var sts = new AWS.STS();
+            sts.getCallerIdentity().build(function(err) {});
             expect(sts.config.stsRegionalEndpoints).to.equal('regional');
             process.env.AWS_STS_REGIONAL_ENDPOINTS = 'LegacY';
             sts = new AWS.STS();
+            sts.getCallerIdentity().build(function(err) {});
             expect(sts.config.stsRegionalEndpoints).to.equal('legacy');
           });
 
@@ -172,12 +176,11 @@
             var values = ['foo', 'bar', 'region'];
             var errors = [];
             for (var i = 0; i < values.length; i++) {
-              try {
-                process.env.AWS_STS_REGIONAL_ENDPOINTS = values[i];
-                new AWS.STS();
-              } catch (e) {
-                errors.push(e);
-              }
+              process.env.AWS_STS_REGIONAL_ENDPOINTS = values[i];
+              sts = new AWS.STS();
+              sts.getCallerIdentity().build(function(err) {
+                errors.push(err);
+              });
             }
             expect(errors.length).to.equal(values.length);
             for (var i = 0; i < errors.length; i++) {
@@ -194,6 +197,7 @@
               }
             });
             var sts = new AWS.STS();
+            sts.getCallerIdentity().build(function() {});
             expect(sts.config.stsRegionalEndpoints).to.equal('regional');
             helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({
               default: {
@@ -201,6 +205,7 @@
               }
             });
             var sts = new AWS.STS();
+            sts.getCallerIdentity().build(function() {});
             expect(sts.config.stsRegionalEndpoints).to.equal('legacy');
           });
           it('should throw if the config is set to invalid values', function() {
@@ -212,11 +217,10 @@
                   sts_regional_endpoints: values[i]
                 }
               });
-              try {
-                new AWS.STS();
-              } catch (e) {
-                errors.push(e);
-              }
+              sts = new AWS.STS();
+              sts.getCallerIdentity().build(function(err) {
+                errors.push(err);
+              });
             }
             expect(errors.length).to.equal(values.length);
             for (var i = 0; i < errors.length; i++) {
@@ -247,36 +251,41 @@
           var regions = ['us-west-2', 'ap-east-1'];
           for (var i = 0; i < regions.length; i++) {
             var sts = new AWS.STS({region: regions[i]});
-            expect(sts.config.endpoint).to.contain('sts.amazonaws.com');
+            var request = sts.getCallerIdentity().build(function() {});
+            expect(request.httpRequest.endpoint.hostname).to.contain('sts.amazonaws.com');
           }
           var sts = new AWS.STS({region: 'cn-north-1'});
-          expect(sts.config.endpoint).to.contain('sts.cn-north-1.amazonaws.com.cn');
+          request = sts.getCallerIdentity().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('sts.cn-north-1.amazonaws.com.cn');
         });
         it('should use global endpoints for when config is set to legacy', function() {
           var regions = ['us-west-2', 'ap-east-1'];
           for (var i = 0; i < regions.length; i++) {
             var sts = new AWS.STS({region: regions[i], stsRegionalEndpoints: 'legacy'});
-            expect(sts.config.endpoint).to.contain('sts.amazonaws.com');
+            var request = sts.getCallerIdentity().build(function() {});
+            expect(request.httpRequest.endpoint.hostname).to.contain('sts.amazonaws.com');
           }
           var sts = new AWS.STS({region: 'cn-north-1', stsRegionalEndpoints: 'legacy'});
-          expect(sts.config.endpoint).to.contain('sts.cn-north-1.amazonaws.com.cn');
+          request = sts.getCallerIdentity().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('sts.cn-north-1.amazonaws.com.cn');
         });
         it('should use regional endpoints for when config is set to regional', function() {
           var regions = ['us-west-2', 'ap-east-1'];
           for (var i = 0; i < regions.length; i++) {
             var sts = new AWS.STS({region: regions[i], stsRegionalEndpoints: 'regional'});
-            expect(sts.config.endpoint).to.contain('sts.' + regions[i] + '.amazonaws.com');
+            var request = sts.getCallerIdentity().build(function() {});
+            expect(request.httpRequest.endpoint.hostname).to.contain('sts.' + regions[i] + '.amazonaws.com');
           }
           var sts = new AWS.STS({region: 'cn-north-1', stsRegionalEndpoints: 'regional'});
-          expect(sts.config.endpoint).to.contain('sts.cn-north-1.amazonaws.com.cn');
+          request = sts.getCallerIdentity().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('sts.cn-north-1.amazonaws.com.cn');
         });
         it('should ask for region if stsRegionalEndpoints is set', function() {
           var error;
-          try {
-            new AWS.STS({stsRegionalEndpoints: 'regional'});
-          } catch (e) {
-            error = e;
-          }
+          sts = new AWS.STS({stsRegionalEndpoints: 'regional'});
+          sts.getCallerIdentity().build(function(err) {
+            error = err;
+          });
           expect(error.code).to.equal('ConfigError');
           expect(error.message).to.equal('Missing region in config');
         });
