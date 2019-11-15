@@ -833,48 +833,48 @@
         });
         done();
       });
-      it('should find whether a time deviates from skew-corrected date for more than 30 seconds', function() {
+      it('should find whether a time deviates from skew-corrected date for more than 300 seconds', function() {
         var mockService = new MockService();
         var now = new Date().getTime();
-        helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 120000));
+        helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 300100));
         expect(mockService.isClockSkewed(now)).to.equal(true);
-        helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 29900));
+        helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 299900));
         expect(mockService.isClockSkewed(now)).to.equal(false);
       });
       it('should apply the clock offset to service config', function() {
         var mockService = new MockService();
         expect(mockService.config.systemClockOffset).to.equal(0);
-        mockService.applyClockOffset(new Date().getTime() + 30000);
+        mockService.applyClockOffset(new Date().getTime() + 300000);
         var offset = mockService.config.systemClockOffset;
-        expect(offset > 29900 && offset < 30100).to.equal(true);
+        expect(offset > 299900 && offset < 300100).to.equal(true);
       });
       it('should get skew-corrected date for each service', function() {
         var mockService = new MockService();
         mockService.config.update({
-          systemClockOffset: 30000
+          systemClockOffset: 300000
         });
         var now = new Date().getTime();
         var serviceTime = mockService.getSkewCorrectedDate().getTime();
-        expect(now + 29900 < serviceTime && serviceTime < now + 30100).to.equal(true);
+        expect(now + 299900 < serviceTime && serviceTime < now + 300100).to.equal(true);
       });
       it('should update each client\'s systemClockOffset respectively', function() {
         helpers.spyOn(Date, 'now').andReturn(0);
         var mockService1 = new MockService({correctClockSkew: true});
-        var serverDate = new Date(60000);
+        var serverDate = new Date(600000);
         helpers.mockHttpResponse(200, {
           date: serverDate.toString()
         }, '');
         mockService1.makeRequest().send();
         var mockService2 = new MockService({correctClockSkew: true});
-        serverDate = new Date(120000);
+        serverDate = new Date(1200000);
         helpers.mockHttpResponse(200, {
           date: serverDate.toString()
         }, '');
         mockService2.makeRequest().send();
         var offset = mockService1.config.systemClockOffset;
-        expect(59900 < offset && 60100 > offset).to.equal(true);
+        expect(599900 < offset && 600100 > offset).to.equal(true);
         offset = mockService2.config.systemClockOffset;
-        expect(119900 < offset && 120100 > offset).to.equal(true);
+        expect(1199900 < offset && 1200100 > offset).to.equal(true);
       });
     });
 
