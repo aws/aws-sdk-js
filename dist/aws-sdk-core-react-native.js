@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.572.0',
+	  VERSION: '2.573.0',
 
 	  /**
 	   * @api private
@@ -4746,7 +4746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  isClockSkewed: function isClockSkewed(newServerTime) {
 	    if (newServerTime) {
-	      return Math.abs(this.getSkewCorrectedDate().getTime() - newServerTime) >= 30000;
+	      return Math.abs(this.getSkewCorrectedDate().getTime() - newServerTime) >= 300000;
 	    }
 	  },
 

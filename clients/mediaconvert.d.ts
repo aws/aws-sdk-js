@@ -403,15 +403,15 @@ declare namespace MediaConvert {
      */
     CodecSettings?: AudioCodecSettings;
     /**
-     * Specify the language for this audio output track, using the ISO 639-2 or ISO 639-3 three-letter language code. The language specified will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input.
+     * Specify the language for this audio output track. The service puts this language code into your output audio track when you set Language code control (AudioLanguageCodeControl) to Use configured (USE_CONFIGURED). The service also uses your specified custom language code when you set Language code control (AudioLanguageCodeControl) to Follow input (FOLLOW_INPUT), but your input file doesn't specify a language code. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
      */
-    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
+    CustomLanguageCode?: __stringPatternAZaZ23AZaZ;
     /**
      * Indicates the language of the audio output track. The ISO 639 language specified in the 'Language Code' drop down will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input.
      */
     LanguageCode?: LanguageCode;
     /**
-     * Choosing FOLLOW_INPUT will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The language specified for languageCode' will be used when USE_CONFIGURED is selected or when FOLLOW_INPUT is selected but there is no ISO 639 language code specified by the input.
+     * Specify which source for language code takes precedence for this audio track. When you choose Follow input (FOLLOW_INPUT), the service uses the language code from the input track if it's present. If there's no languge code on the input track, the service uses the code that you specify in the setting Language code (languageCode or customLanguageCode). When you choose Use configured (USE_CONFIGURED), the service uses the language code that you specify.
      */
     LanguageCodeControl?: AudioLanguageCodeControl;
     /**
@@ -605,9 +605,9 @@ All burn-in and DVB-Sub font settings must match.
      */
     CaptionSelectorName?: __stringMin1;
     /**
-     * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.
+     * Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when  automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
      */
-    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
+    CustomLanguageCode?: __stringPatternAZaZ23AZaZ;
     /**
      * Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext.
      */
@@ -623,9 +623,9 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface CaptionDescriptionPreset {
     /**
-     * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.
+     * Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when  automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
      */
-    CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
+    CustomLanguageCode?: __stringPatternAZaZ23AZaZ;
     /**
      * Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext.
      */
@@ -725,6 +725,16 @@ All burn-in and DVB-Sub font settings must match.
      */
     OutputChannels?: __listOfOutputChannelMapping;
   }
+  export interface CmafAdditionalManifest {
+    /**
+     * Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your HLS group is film-name.m3u8. If you enter "-no-premium" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.m3u8. For HLS output groups, specify a manifestNameModifier that is different from the nameModifier of the output. The service uses the output name modifier to create unique names for the individual variant manifests.
+     */
+    ManifestNameModifier?: __stringMin1;
+    /**
+     * Specify the outputs that you want this additional top-level manifest to reference.
+     */
+    SelectedOutputs?: __listOf__stringMin1;
+  }
   export type CmafClientCache = "DISABLED"|"ENABLED"|string;
   export type CmafCodecSpecification = "RFC_6381"|"RFC_4281"|string;
   export interface CmafEncryptionSettings {
@@ -755,6 +765,10 @@ All burn-in and DVB-Sub font settings must match.
   }
   export type CmafEncryptionType = "SAMPLE_AES"|"AES_CTR"|string;
   export interface CmafGroupSettings {
+    /**
+     * By default, the service creates one top-level .m3u8 HLS manifest and one top -level .mpd DASH manifest for each CMAF output group in your job. These default manifests reference every output in the output group. To create additional top-level manifests that reference a subset of the outputs in the output group, specify a list of them here. For each additional manifest that you specify, the service creates one HLS manifest and one DASH manifest.
+     */
+    AdditionalManifests?: __listOfCmafAdditionalManifest;
     /**
      * A partial URI prefix that will be put in the manifest file at the top level BaseURL element. Can be used if streams are delivered from a different URL than the manifest file.
      */
@@ -889,6 +903,10 @@ All burn-in and DVB-Sub font settings must match.
      * Settings for MP4 container. You can create audio-only AAC outputs with this container.
      */
     Mp4Settings?: Mp4Settings;
+    /**
+     * Settings for MP4 segments in DASH
+     */
+    MpdSettings?: MpdSettings;
   }
   export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"RAW"|string;
   export interface CreateJobRequest {
@@ -1051,6 +1069,16 @@ All burn-in and DVB-Sub font settings must match.
      */
     Queue?: Queue;
   }
+  export interface DashAdditionalManifest {
+    /**
+     * Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your DASH group is film-name.mpd. If you enter "-no-premium" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.mpd.
+     */
+    ManifestNameModifier?: __stringMin1;
+    /**
+     * Specify the outputs that you want this additional top-level manifest to reference.
+     */
+    SelectedOutputs?: __listOf__stringMin1;
+  }
   export interface DashIsoEncryptionSettings {
     /**
      * This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption. Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1). If you choose Unencrypted SEI, for that output, the service will exclude the access unit delimiter and will leave the SEI NAL units unencrypted.
@@ -1062,6 +1090,10 @@ All burn-in and DVB-Sub font settings must match.
     SpekeKeyProvider?: SpekeKeyProvider;
   }
   export interface DashIsoGroupSettings {
+    /**
+     * By default, the service creates one .mpd DASH manifest for each DASH ISO output group in your job. This default manifest references every output in the output group. To create additional DASH manifests that reference a subset of the outputs in the output group, specify a list of them here.
+     */
+    AdditionalManifests?: __listOfDashAdditionalManifest;
     /**
      * A partial URI prefix that will be put in the manifest (.mpd) file at the top level BaseURL element. Can be used if streams are delivered from a different URL than the manifest file.
      */
@@ -1193,6 +1225,32 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface DisassociateCertificateResponse {
   }
+  export interface DolbyVision {
+    /**
+     * Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override the MaxCLL and MaxFALL values in your input with new values.
+     */
+    L6Metadata?: DolbyVisionLevel6Metadata;
+    /**
+     * Use Dolby Vision Mode to choose how the service will handle Dolby Vision MaxCLL and MaxFALL properies.
+     */
+    L6Mode?: DolbyVisionLevel6Mode;
+    /**
+     * In the current MediaConvert implementation, the Dolby Vision profile is always 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame interleaved data.
+     */
+    Profile?: DolbyVisionProfile;
+  }
+  export interface DolbyVisionLevel6Metadata {
+    /**
+     * Maximum Content Light Level. Static HDR metadata that corresponds to the brightest pixel in the entire stream. Measured in nits.
+     */
+    MaxCll?: __integerMin0Max65535;
+    /**
+     * Maximum Frame-Average Light Level. Static HDR metadata that corresponds to the highest frame-average brightness in the entire stream. Measured in nits.
+     */
+    MaxFall?: __integerMin0Max65535;
+  }
+  export type DolbyVisionLevel6Mode = "PASSTHROUGH"|"RECALCULATE"|"SPECIFY"|string;
+  export type DolbyVisionProfile = "PROFILE_5"|string;
   export type DropFrameTimecode = "DISABLED"|"ENABLED"|string;
   export interface DvbNitSettings {
     /**
@@ -2026,7 +2084,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     UnregisteredSeiTimecode?: H265UnregisteredSeiTimecode;
     /**
-     * If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output. For file MP4 outputs, choosing HVC1 can create video that doesn't work properly with some downstream systems and video players. Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
+     * If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might not work properly with some downstream systems and video players. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
      */
     WriteMp4PackagingType?: H265WriteMp4PackagingType;
   }
@@ -2089,6 +2147,16 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     WhitePointY?: __integerMin0Max50000;
   }
   export type HlsAdMarkers = "ELEMENTAL"|"ELEMENTAL_SCTE35"|string;
+  export interface HlsAdditionalManifest {
+    /**
+     * Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your HLS group is film-name.m3u8. If you enter "-no-premium" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.m3u8. For HLS output groups, specify a manifestNameModifier that is different from the nameModifier of the output. The service uses the output name modifier to create unique names for the individual variant manifests.
+     */
+    ManifestNameModifier?: __stringMin1;
+    /**
+     * Specify the outputs that you want this additional top-level manifest to reference.
+     */
+    SelectedOutputs?: __listOf__stringMin1;
+  }
   export type HlsAudioOnlyContainer = "AUTOMATIC"|"M2TS"|string;
   export type HlsAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|"AUDIO_ONLY_VARIANT_STREAM"|string;
   export interface HlsCaptionLanguageMapping {
@@ -2097,7 +2165,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     CaptionChannel?: __integerMinNegative2147483648Max2147483647;
     /**
-     * Specify the language for this caption channel, using the ISO 639-2 or ISO 639-3 three-letter language code
+     * Specify the language for this captions channel, using the ISO 639-2 or ISO 639-3 three-letter language code
      */
     CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
     /**
@@ -2149,6 +2217,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * Choose one or more ad marker types to decorate your Apple HLS manifest. This setting does not determine whether SCTE-35 markers appear in the outputs themselves.
      */
     AdMarkers?: __listOfHlsAdMarkers;
+    /**
+     * By default, the service creates one top-level .m3u8 HLS manifest for each HLS output group in your job. This default manifest references every output in the output group. To create additional top-level manifests that reference a subset of the outputs in the output group, specify a list of them here.
+     */
+    AdditionalManifests?: __listOfHlsAdditionalManifest;
     /**
      * A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file.
      */
@@ -3239,6 +3311,23 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Mp4MajorBrand?: __string;
   }
+  export type MpdCaptionContainerType = "RAW"|"FRAGMENTED_MP4"|string;
+  export type MpdScte35Esam = "INSERT"|"NONE"|string;
+  export type MpdScte35Source = "PASSTHROUGH"|"NONE"|string;
+  export interface MpdSettings {
+    /**
+     * Use this setting only in DASH output groups that include sidecar TTML or IMSC captions.  You specify sidecar captions in a separate output from your audio and video. Choose Raw (RAW) for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 (FRAGMENTED_MP4) for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files.
+     */
+    CaptionContainerType?: MpdCaptionContainerType;
+    /**
+     * Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
+     */
+    Scte35Esam?: MpdScte35Esam;
+    /**
+     * Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.
+     */
+    Scte35Source?: MpdScte35Source;
+  }
   export type Mpeg2AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|string;
   export type Mpeg2CodecLevel = "AUTO"|"LOW"|"MAIN"|"HIGH1440"|"HIGH"|string;
   export type Mpeg2CodecProfile = "MAIN"|"PROFILE_422"|string;
@@ -3385,6 +3474,16 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type Mpeg2Syntax = "DEFAULT"|"D_10"|string;
   export type Mpeg2Telecine = "NONE"|"SOFT"|"HARD"|string;
   export type Mpeg2TemporalAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
+  export interface MsSmoothAdditionalManifest {
+    /**
+     * Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your Microsoft Smooth group is film-name.ismv. If you enter "-no-premium" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.ismv.
+     */
+    ManifestNameModifier?: __stringMin1;
+    /**
+     * Specify the outputs that you want this additional top-level manifest to reference.
+     */
+    SelectedOutputs?: __listOf__stringMin1;
+  }
   export type MsSmoothAudioDeduplication = "COMBINE_DUPLICATE_STREAMS"|"NONE"|string;
   export interface MsSmoothEncryptionSettings {
     /**
@@ -3393,6 +3492,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     SpekeKeyProvider?: SpekeKeyProvider;
   }
   export interface MsSmoothGroupSettings {
+    /**
+     * By default, the service creates one .ism Microsoft Smooth Streaming manifest for each Microsoft Smooth Streaming output group in your job. This default manifest references every output in the output group. To create additional manifests that reference a subset of the outputs in the output group, specify a list of them here.
+     */
+    AdditionalManifests?: __listOfMsSmoothAdditionalManifest;
     /**
      * COMBINE_DUPLICATE_STREAMS combines identical audio encoding settings across a Microsoft Smooth output group into a single audio stream.
      */
@@ -3833,7 +3936,17 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     Tags?: __mapOf__string;
   }
   export type RespondToAfd = "NONE"|"RESPOND"|"PASSTHROUGH"|string;
+  export interface S3DestinationAccessControl {
+    /**
+     * Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
+     */
+    CannedAcl?: S3ObjectCannedAcl;
+  }
   export interface S3DestinationSettings {
+    /**
+     * Optional. Have MediaConvert automatically apply Amazon S3 access control for the outputs in this output group. When you don't use this setting, S3 automatically applies the default access control list PRIVATE.
+     */
+    AccessControl?: S3DestinationAccessControl;
     /**
      * Settings for how your job outputs are encrypted as they are uploaded to Amazon S3.
      */
@@ -3849,9 +3962,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     KmsKeyArn?: __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912;
   }
+  export type S3ObjectCannedAcl = "PUBLIC_READ"|"AUTHENTICATED_READ"|"BUCKET_OWNER_READ"|"BUCKET_OWNER_FULL_CONTROL"|string;
   export type S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_S3"|"SERVER_SIDE_ENCRYPTION_KMS"|string;
   export type ScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string;
-  export type SccDestinationFramerate = "FRAMERATE_23_97"|"FRAMERATE_24"|"FRAMERATE_29_97_DROPFRAME"|"FRAMERATE_29_97_NON_DROPFRAME"|string;
+  export type SccDestinationFramerate = "FRAMERATE_23_97"|"FRAMERATE_24"|"FRAMERATE_25"|"FRAMERATE_29_97_DROPFRAME"|"FRAMERATE_29_97_NON_DROPFRAME"|string;
   export interface SccDestinationSettings {
     /**
      * Set Framerate (SccDestinationFramerate) to make sure that the captions and the video are synchronized in the output. Specify a frame rate that matches the frame rate of the associated video. If the video frame rate is 29.97, choose 29.97 dropframe (FRAMERATE_29_97_DROPFRAME) only if the video has video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97 non-dropframe (FRAMERATE_29_97_NON_DROPFRAME).
@@ -4226,6 +4340,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Deinterlacer?: Deinterlacer;
     /**
+     * Enable Dolby Vision feature to produce Dolby Vision compatible video output.
+     */
+    DolbyVision?: DolbyVision;
+    /**
      * Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each output individually. This setting is disabled by default.
      */
     ImageInserter?: ImageInserter;
@@ -4365,8 +4483,11 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __listOfAudioDescription = AudioDescription[];
   export type __listOfCaptionDescription = CaptionDescription[];
   export type __listOfCaptionDescriptionPreset = CaptionDescriptionPreset[];
+  export type __listOfCmafAdditionalManifest = CmafAdditionalManifest[];
+  export type __listOfDashAdditionalManifest = DashAdditionalManifest[];
   export type __listOfEndpoint = Endpoint[];
   export type __listOfHlsAdMarkers = HlsAdMarkers[];
+  export type __listOfHlsAdditionalManifest = HlsAdditionalManifest[];
   export type __listOfHlsCaptionLanguageMapping = HlsCaptionLanguageMapping[];
   export type __listOfId3Insertion = Id3Insertion[];
   export type __listOfInput = Input[];
@@ -4375,6 +4496,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __listOfInsertableImage = InsertableImage[];
   export type __listOfJob = Job[];
   export type __listOfJobTemplate = JobTemplate[];
+  export type __listOfMsSmoothAdditionalManifest = MsSmoothAdditionalManifest[];
   export type __listOfOutput = Output[];
   export type __listOfOutputChannelMapping = OutputChannelMapping[];
   export type __listOfOutputDetail = OutputDetail[];
@@ -4418,6 +4540,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = string;
   export type __stringPatternAZaZ0902 = string;
   export type __stringPatternAZaZ0932 = string;
+  export type __stringPatternAZaZ23AZaZ = string;
   export type __stringPatternArnAwsUsGovAcm = string;
   export type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 = string;
   export type __stringPatternDD = string;

@@ -421,7 +421,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.</p>"
+      "documentation": "<p>Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the request of filter by <code>StepStates</code>. You can specify a maximum of ten <code>stepIDs</code>.</p>"
     },
     "ModifyInstanceFleet": {
       "name": "ModifyInstanceFleet",
@@ -579,7 +579,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p> <i>This member will be deprecated.</i> </p> <p>Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.</p>"
+      "documentation": "<p>Sets the <a>Cluster$VisibleToAllUsers</a> value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to <code>false</code>, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default <code>true</code> setting when you create a cluster by using the <code>VisibleToAllUsers</code> parameter with <code>RunJobFlow</code>.</p>"
     },
     "TerminateJobFlows": {
       "name": "TerminateJobFlows",
@@ -635,6 +635,10 @@
         "InstanceFleetId": {
           "shape": "InstanceFleetId",
           "documentation": "<p>The unique identifier of the instance fleet.</p>"
+        },
+        "ClusterArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
         }
       }
     },
@@ -666,6 +670,10 @@
         "InstanceGroupIds": {
           "shape": "InstanceGroupIdsList",
           "documentation": "<p>Instance group IDs of the newly created instance groups.</p>"
+        },
+        "ClusterArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
         }
       },
       "documentation": "<p>Output from an AddInstanceGroups call.</p>"
@@ -996,7 +1004,7 @@
         },
         "EvaluationPeriods": {
           "shape": "Integer",
-          "documentation": "<p>The number of periods, expressed in seconds using <code>Period</code>, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is <code>1</code>.</p>"
+          "documentation": "<p>The number of periods, in five-minute increments, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is <code>1</code>.</p>"
         },
         "MetricName": {
           "shape": "String",
@@ -1078,7 +1086,7 @@
         },
         "VisibleToAllUsers": {
           "shape": "Boolean",
-          "documentation": "<p> <i>This member will be deprecated.</i> </p> <p>Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the cluster if they have the proper policy permissions set. If this value is <code>false</code>, only the IAM user that created the cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.</p>"
+          "documentation": "<p>Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.</p>"
         },
         "Applications": {
           "shape": "ApplicationList",
@@ -1131,6 +1139,10 @@
         "KerberosAttributes": {
           "shape": "KerberosAttributes",
           "documentation": "<p>Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html\">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.</p>"
+        },
+        "ClusterArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
         }
       },
       "documentation": "<p>The detailed description of the cluster.</p>"
@@ -1219,6 +1231,10 @@
         "NormalizedInstanceHours": {
           "shape": "Integer",
           "documentation": "<p>An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
+        },
+        "ClusterArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
         }
       },
       "documentation": "<p>The summary description of the cluster.</p>"
@@ -1983,7 +1999,7 @@
         },
         "BidPrice": {
           "shape": "String",
-          "documentation": "<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specify the maximum spot price in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>"
+          "documentation": "<p>The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
         },
         "InstanceType": {
           "shape": "InstanceType",
@@ -2058,7 +2074,7 @@
         },
         "BidPrice": {
           "shape": "XmlStringMaxLen256",
-          "documentation": "<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specify the maximum spot price in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>"
+          "documentation": "<p>The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
         },
         "InstanceType": {
           "shape": "InstanceType",
@@ -2119,7 +2135,7 @@
         },
         "BidPrice": {
           "shape": "XmlStringMaxLen256",
-          "documentation": "<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specified in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>"
+          "documentation": "<p>The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
         },
         "InstanceType": {
           "shape": "InstanceType",
@@ -2551,7 +2567,7 @@
         },
         "VisibleToAllUsers": {
           "shape": "Boolean",
-          "documentation": "<p> <i>This member will be deprecated.</i> </p> <p>Specifies whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to <code>true</code>, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to <code>false</code>, only the IAM user that created the cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.</p>"
+          "documentation": "<p>Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.</p>"
         },
         "JobFlowRole": {
           "shape": "XmlString",
@@ -3035,7 +3051,7 @@
         },
         "StepIds": {
           "shape": "XmlStringList",
-          "documentation": "<p>The filter to limit the step list based on the identifier of the steps.</p>"
+          "documentation": "<p>The filter to limit the step list based on the identifier of the steps. You can specify a maximum of ten Step IDs. The character constraint applies to the overall length of the array.</p>"
         },
         "Marker": {
           "shape": "Marker",
@@ -3210,6 +3226,10 @@
         "AutoScalingPolicy": {
           "shape": "AutoScalingPolicyDescription",
           "documentation": "<p>The automatic scaling policy definition.</p>"
+        },
+        "ClusterArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
         }
       }
     },
@@ -3340,7 +3360,7 @@
         },
         "VisibleToAllUsers": {
           "shape": "Boolean",
-          "documentation": "<p> <i>This member will be deprecated.</i> </p> <p>Whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to <code>true</code>, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to <code>false</code>, only the IAM user that created the cluster can view and manage it.</p>"
+          "documentation": "<p>A value of <code>true</code> indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of <code>false</code> indicates that only the IAM user who created the cluster can perform actions.</p>"
         },
         "JobFlowRole": {
           "shape": "XmlString",
@@ -3391,6 +3411,10 @@
         "JobFlowId": {
           "shape": "XmlStringMaxLen256",
           "documentation": "<p>An unique identifier for the job flow.</p>"
+        },
+        "ClusterArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
         }
       },
       "documentation": "<p> The result of the <a>RunJobFlow</a> operation. </p>"
@@ -3553,14 +3577,14 @@
       "members": {
         "JobFlowIds": {
           "shape": "XmlStringList",
-          "documentation": "<p>Identifiers of the job flows to receive the new visibility setting.</p>"
+          "documentation": "<p>The unique identifier of the job flow (cluster).</p>"
         },
         "VisibleToAllUsers": {
           "shape": "Boolean",
-          "documentation": "<p> <i>This member will be deprecated.</i> </p> <p>Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.</p>"
+          "documentation": "<p>A value of <code>true</code> indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of <code>false</code> indicates that only the IAM user who created the cluster can perform actions.</p>"
         }
       },
-      "documentation": "<p> <i>This member will be deprecated.</i> </p> <p>The input to the SetVisibleToAllUsers action.</p>"
+      "documentation": "<p>The input to the SetVisibleToAllUsers action.</p>"
     },
     "ShrinkPolicy": {
       "type": "structure",

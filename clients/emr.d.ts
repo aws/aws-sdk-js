@@ -157,11 +157,11 @@ declare class EMR extends Service {
    */
   listSecurityConfigurations(callback?: (err: AWSError, data: EMR.Types.ListSecurityConfigurationsOutput) => void): Request<EMR.Types.ListSecurityConfigurationsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of ten stepIDs.
    */
   listSteps(params: EMR.Types.ListStepsInput, callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of ten stepIDs.
    */
   listSteps(callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
@@ -229,11 +229,11 @@ declare class EMR extends Service {
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This member will be deprecated.  Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+   * Sets the Cluster$VisibleToAllUsers value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to false, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default true setting when you create a cluster by using the VisibleToAllUsers parameter with RunJobFlow.
    */
   setVisibleToAllUsers(params: EMR.Types.SetVisibleToAllUsersInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This member will be deprecated.  Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+   * Sets the Cluster$VisibleToAllUsers value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to false, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default true setting when you create a cluster by using the VisibleToAllUsers parameter with RunJobFlow.
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -290,6 +290,10 @@ declare namespace EMR {
      * The unique identifier of the instance fleet.
      */
     InstanceFleetId?: InstanceFleetId;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export interface AddInstanceGroupsInput {
     /**
@@ -310,6 +314,10 @@ declare namespace EMR {
      * Instance group IDs of the newly created instance groups.
      */
     InstanceGroupIds?: InstanceGroupIdsList;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export interface AddJobFlowStepsInput {
     /**
@@ -484,7 +492,7 @@ declare namespace EMR {
      */
     ComparisonOperator: ComparisonOperator;
     /**
-     * The number of periods, expressed in seconds using Period, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is 1.
+     * The number of periods, in five-minute increments, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is 1.
      */
     EvaluationPeriods?: Integer;
     /**
@@ -562,7 +570,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     *  This member will be deprecated.  Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and manage the cluster if they have the proper policy permissions set. If this value is false, only the IAM user that created the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is false, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the SetVisibleToAllUsers action. You can override the default value of true when you create a cluster by using the VisibleToAllUsers parameter of the RunJobFlow action.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -617,6 +625,10 @@ declare namespace EMR {
      * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see Use Kerberos Authentication in the EMR Management Guide.
      */
     KerberosAttributes?: KerberosAttributes;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -663,6 +675,10 @@ declare namespace EMR {
      * An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
      */
     NormalizedInstanceHours?: Integer;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export type ClusterSummaryList = ClusterSummary[];
   export interface ClusterTimeline {
@@ -1165,7 +1181,7 @@ declare namespace EMR {
      */
     InstanceGroupType?: InstanceGroupType;
     /**
-     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specify the maximum spot price in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
+     * The bid price for each EC2 Spot instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPrice?: String;
     /**
@@ -1231,7 +1247,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specify the maximum spot price in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
+     * The bid price for each EC2 Spot instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1274,7 +1290,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specified in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
+     * The bid price for each EC2 Spot instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1539,7 +1555,7 @@ declare namespace EMR {
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     *  This member will be deprecated.  Specifies whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to false, only the IAM user that created the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is false, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the SetVisibleToAllUsers action. You can override the default value of true when you create a cluster by using the VisibleToAllUsers parameter of the RunJobFlow action.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -1899,7 +1915,7 @@ declare namespace EMR {
      */
     StepStates?: StepStateList;
     /**
-     * The filter to limit the step list based on the identifier of the steps.
+     * The filter to limit the step list based on the identifier of the steps. You can specify a maximum of ten Step IDs. The character constraint applies to the overall length of the array.
      */
     StepIds?: XmlStringList;
     /**
@@ -2002,6 +2018,10 @@ declare namespace EMR {
      * The automatic scaling policy definition.
      */
     AutoScalingPolicy?: AutoScalingPolicyDescription;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export interface PutBlockPublicAccessConfigurationInput {
     /**
@@ -2087,7 +2107,7 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
-     *  This member will be deprecated.  Whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to false, only the IAM user that created the cluster can view and manage it.
+     * A value of true indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of false indicates that only the IAM user who created the cluster can perform actions.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -2136,6 +2156,10 @@ declare namespace EMR {
      * An unique identifier for the job flow.
      */
     JobFlowId?: XmlStringMaxLen256;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export type ScaleDownBehavior = "TERMINATE_AT_INSTANCE_HOUR"|"TERMINATE_AT_TASK_COMPLETION"|string;
   export interface ScalingAction {
@@ -2217,11 +2241,11 @@ declare namespace EMR {
   }
   export interface SetVisibleToAllUsersInput {
     /**
-     * Identifiers of the job flows to receive the new visibility setting.
+     * The unique identifier of the job flow (cluster).
      */
     JobFlowIds: XmlStringList;
     /**
-     *  This member will be deprecated.  Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.
+     * A value of true indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of false indicates that only the IAM user who created the cluster can perform actions.
      */
     VisibleToAllUsers: Boolean;
   }

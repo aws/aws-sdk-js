@@ -133,6 +133,41 @@
       ],
       "documentation": "<p>Associates phone numbers with the specified Amazon Chime Voice Connector group.</p>"
     },
+    "BatchCreateRoomMembership": {
+      "name": "BatchCreateRoomMembership",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}/memberships?operation=batch-create",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "BatchCreateRoomMembershipRequest"
+      },
+      "output": {
+        "shape": "BatchCreateRoomMembershipResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Adds up to 50 members to a chat room. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.</p>"
+    },
     "BatchDeletePhoneNumber": {
       "name": "BatchDeletePhoneNumber",
       "http": {
@@ -440,6 +475,85 @@
       ],
       "documentation": "<p>Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p>"
     },
+    "CreateRoom": {
+      "name": "CreateRoom",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}/rooms",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateRoomRequest"
+      },
+      "output": {
+        "shape": "CreateRoomResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a chat room for the specified Amazon Chime account.</p>"
+    },
+    "CreateRoomMembership": {
+      "name": "CreateRoomMembership",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}/memberships",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateRoomMembershipRequest"
+      },
+      "output": {
+        "shape": "CreateRoomMembershipResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.</p>"
+    },
     "CreateVoiceConnector": {
       "name": "CreateVoiceConnector",
       "http": {
@@ -629,6 +743,70 @@
         }
       ],
       "documentation": "<p>Moves the specified phone number into the <b>Deletion queue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>"
+    },
+    "DeleteRoom": {
+      "name": "DeleteRoom",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteRoomRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes a chat room.</p>"
+    },
+    "DeleteRoomMembership": {
+      "name": "DeleteRoomMembership",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}/memberships/{memberId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteRoomMembershipRequest"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Removes a member from a chat room.</p>"
     },
     "DeleteVoiceConnector": {
       "name": "DeleteVoiceConnector",
@@ -1246,6 +1424,41 @@
       ],
       "documentation": "<p>Retrieves the phone number settings for the administrator's AWS account, such as the default outbound calling name.</p>"
     },
+    "GetRoom": {
+      "name": "GetRoom",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetRoomRequest"
+      },
+      "output": {
+        "shape": "GetRoomResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves room details, such as name.</p>"
+    },
     "GetUser": {
       "name": "GetUser",
       "http": {
@@ -1510,7 +1723,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.</p>"
+      "documentation": "<p>Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.</p>"
     },
     "GetVoiceConnectorTermination": {
       "name": "GetVoiceConnectorTermination",
@@ -1624,7 +1837,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Sends email invites to as many as 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. </p>"
+      "documentation": "<p>Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. </p>"
     },
     "ListAccounts": {
       "name": "ListAccounts",
@@ -1766,6 +1979,76 @@
         }
       ],
       "documentation": "<p>Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, Amazon Chime Voice Connector, or Amazon Chime Voice Connector group.</p>"
+    },
+    "ListRoomMemberships": {
+      "name": "ListRoomMemberships",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}/memberships",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListRoomMembershipsRequest"
+      },
+      "output": {
+        "shape": "ListRoomMembershipsResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists the membership details for the specified room, such as member IDs, member email addresses, and member names.</p>"
+    },
+    "ListRooms": {
+      "name": "ListRooms",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{accountId}/rooms",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListRoomsRequest"
+      },
+      "output": {
+        "shape": "ListRoomsResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists the room details for the specified Amazon Chime account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.</p>"
     },
     "ListUsers": {
       "name": "ListUsers",
@@ -2101,7 +2384,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis, and sets the retention period for the Amazon Kinesis data, in hours.</p>"
+      "documentation": "<p>Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.</p>"
     },
     "PutVoiceConnectorTermination": {
       "name": "PutVoiceConnectorTermination",
@@ -2544,7 +2827,77 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to be updated.</p>"
+      "documentation": "<p>Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to update.</p>"
+    },
+    "UpdateRoom": {
+      "name": "UpdateRoom",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateRoomRequest"
+      },
+      "output": {
+        "shape": "UpdateRoomResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates room details, such as the room name.</p>"
+    },
+    "UpdateRoomMembership": {
+      "name": "UpdateRoomMembership",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}/memberships/{memberId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateRoomMembershipRequest"
+      },
+      "output": {
+        "shape": "UpdateRoomMembershipResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Updates room membership details, such as member role. The member role designates whether the member is a chat room administrator or a general chat room member. Member role can only be updated for user IDs.</p>"
     },
     "UpdateUser": {
       "name": "UpdateUser",
@@ -2866,6 +3219,41 @@
         }
       }
     },
+    "BatchCreateRoomMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId",
+        "MembershipItemList"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
+        },
+        "MembershipItemList": {
+          "shape": "MembershipItemList",
+          "documentation": "<p>The list of membership items.</p>"
+        }
+      }
+    },
+    "BatchCreateRoomMembershipResponse": {
+      "type": "structure",
+      "members": {
+        "Errors": {
+          "shape": "MemberErrorList",
+          "documentation": "<p>If the action fails for one or more of the member IDs in the request, a list of the member IDs is returned, along with error codes and error messages.</p>"
+        }
+      }
+    },
     "BatchDeletePhoneNumberRequest": {
       "type": "structure",
       "required": [
@@ -3083,6 +3471,13 @@
         "shape": "CallingRegion"
       }
     },
+    "ClientRequestToken": {
+      "type": "string",
+      "max": 64,
+      "min": 2,
+      "pattern": "[-_a-zA-Z0-9]*",
+      "sensitive": true
+    },
     "CpsLimit": {
       "type": "integer",
       "min": 1
@@ -3163,6 +3558,78 @@
         "PhoneNumberOrder": {
           "shape": "PhoneNumberOrder",
           "documentation": "<p>The phone number order details.</p>"
+        }
+      }
+    },
+    "CreateRoomMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId",
+        "MemberId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
+        },
+        "MemberId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime member ID (user ID or bot ID).</p>"
+        },
+        "Role": {
+          "shape": "RoomMembershipRole",
+          "documentation": "<p>The role of the member.</p>"
+        }
+      }
+    },
+    "CreateRoomMembershipResponse": {
+      "type": "structure",
+      "members": {
+        "RoomMembership": {
+          "shape": "RoomMembership",
+          "documentation": "<p>The room membership details.</p>"
+        }
+      }
+    },
+    "CreateRoomRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "Name": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The room name.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>The idempotency token for the request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateRoomResponse": {
+      "type": "structure",
+      "members": {
+        "Room": {
+          "shape": "Room",
+          "documentation": "<p>The room details.</p>"
         }
       }
     },
@@ -3295,6 +3762,55 @@
           "documentation": "<p>The phone number ID.</p>",
           "location": "uri",
           "locationName": "phoneNumberId"
+        }
+      }
+    },
+    "DeleteRoomMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId",
+        "MemberId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
+        },
+        "MemberId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The member ID (user ID or bot ID).</p>",
+          "location": "uri",
+          "locationName": "memberId"
+        }
+      }
+    },
+    "DeleteRoomRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The chat room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
         }
       }
     },
@@ -3704,6 +4220,36 @@
         }
       }
     },
+    "GetRoomRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
+        }
+      }
+    },
+    "GetRoomResponse": {
+      "type": "structure",
+      "members": {
+        "Room": {
+          "shape": "Room",
+          "documentation": "<p>The room details.</p>"
+        }
+      }
+    },
     "GetUserRequest": {
       "type": "structure",
       "required": [
@@ -3980,7 +4526,7 @@
         },
         "UserEmailList": {
           "shape": "UserEmailList",
-          "documentation": "<p>The user email addresses to which to send the invite.</p>"
+          "documentation": "<p>The user email addresses to which to send the email invitation.</p>"
         }
       }
     },
@@ -3989,7 +4535,7 @@
       "members": {
         "Invites": {
           "shape": "InviteList",
-          "documentation": "<p>The invite details.</p>"
+          "documentation": "<p>The email invitation details.</p>"
         }
       }
     },
@@ -4068,7 +4614,7 @@
         },
         "MaxResults": {
           "shape": "ResultMax",
-          "documentation": "<p>The maximum number of results to return in a single call. Default is 10.</p>",
+          "documentation": "<p>The maximum number of results to return in a single call. The default is 10.</p>",
           "location": "querystring",
           "locationName": "max-results"
         },
@@ -4170,6 +4716,97 @@
         "PhoneNumbers": {
           "shape": "PhoneNumberList",
           "documentation": "<p>The phone number details.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "ListRoomMembershipsRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
+        },
+        "MaxResults": {
+          "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListRoomMembershipsResponse": {
+      "type": "structure",
+      "members": {
+        "RoomMemberships": {
+          "shape": "RoomMembershipList",
+          "documentation": "<p>The room membership details.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "ListRoomsRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "MemberId": {
+          "shape": "String",
+          "documentation": "<p>The member ID (user ID or bot ID).</p>",
+          "location": "querystring",
+          "locationName": "member-id"
+        },
+        "MaxResults": {
+          "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        }
+      }
+    },
+    "ListRoomsResponse": {
+      "type": "structure",
+      "members": {
+        "Rooms": {
+          "shape": "RoomList",
+          "documentation": "<p>The room details.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -4339,6 +4976,85 @@
     "LogoutUserResponse": {
       "type": "structure",
       "members": {}
+    },
+    "Member": {
+      "type": "structure",
+      "members": {
+        "MemberId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The member ID (user ID or bot ID).</p>"
+        },
+        "MemberType": {
+          "shape": "MemberType",
+          "documentation": "<p>The member type.</p>"
+        },
+        "Email": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The member email address.</p>"
+        },
+        "FullName": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The member name.</p>"
+        },
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>"
+        }
+      },
+      "documentation": "<p>The member details, such as email address, name, member ID, and member type.</p>"
+    },
+    "MemberError": {
+      "type": "structure",
+      "members": {
+        "MemberId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The member ID.</p>"
+        },
+        "ErrorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>The error code.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message.</p>"
+        }
+      },
+      "documentation": "<p>The list of errors returned when a member action results in an error.</p>"
+    },
+    "MemberErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "MemberError"
+      }
+    },
+    "MemberType": {
+      "type": "string",
+      "enum": [
+        "User",
+        "Bot",
+        "Webhook"
+      ]
+    },
+    "MembershipItem": {
+      "type": "structure",
+      "members": {
+        "MemberId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The member ID.</p>"
+        },
+        "Role": {
+          "shape": "RoomMembershipRole",
+          "documentation": "<p>The member role.</p>"
+        }
+      },
+      "documentation": "<p>Membership details, such as member ID and member role.</p>"
+    },
+    "MembershipItemList": {
+      "type": "list",
+      "member": {
+        "shape": "MembershipItem"
+      },
+      "max": 50
     },
     "NonEmptyString": {
       "type": "string",
@@ -4941,6 +5657,80 @@
       "max": 99,
       "min": 1
     },
+    "Room": {
+      "type": "structure",
+      "members": {
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>"
+        },
+        "Name": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The room name.</p>"
+        },
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>"
+        },
+        "CreatedBy": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the room creator.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The room creation timestamp, in ISO 8601 format.</p>"
+        },
+        "UpdatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The room update timestamp, in ISO 8601 format.</p>"
+        }
+      },
+      "documentation": "<p>The Amazon Chime chat room details.</p>"
+    },
+    "RoomList": {
+      "type": "list",
+      "member": {
+        "shape": "Room"
+      }
+    },
+    "RoomMembership": {
+      "type": "structure",
+      "members": {
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>"
+        },
+        "Member": {
+          "shape": "Member"
+        },
+        "Role": {
+          "shape": "RoomMembershipRole",
+          "documentation": "<p>The membership role.</p>"
+        },
+        "InvitedBy": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the user that invited the room member.</p>"
+        },
+        "UpdatedTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The room membership update timestamp, in ISO 8601 format.</p>"
+        }
+      },
+      "documentation": "<p>The room membership details.</p>"
+    },
+    "RoomMembershipList": {
+      "type": "list",
+      "member": {
+        "shape": "RoomMembership"
+      }
+    },
+    "RoomMembershipRole": {
+      "type": "string",
+      "enum": [
+        "Administrator",
+        "Member"
+      ]
+    },
     "SearchAvailablePhoneNumbersRequest": {
       "type": "structure",
       "members": {
@@ -5015,7 +5805,7 @@
       "members": {
         "DataRetentionInHours": {
           "shape": "DataRetentionInHours",
-          "documentation": "<p>The retention period for the Amazon Kinesis data, in hours.</p>"
+          "documentation": "<p>The retention period, in hours, for the Amazon Kinesis data.</p>"
         },
         "Disabled": {
           "shape": "Boolean",
@@ -5270,6 +6060,81 @@
         "CallingName": {
           "shape": "CallingName",
           "documentation": "<p>The default outbound calling name for the account.</p>"
+        }
+      }
+    },
+    "UpdateRoomMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId",
+        "MemberId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
+        },
+        "MemberId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The member ID.</p>",
+          "location": "uri",
+          "locationName": "memberId"
+        },
+        "Role": {
+          "shape": "RoomMembershipRole",
+          "documentation": "<p>The role of the member.</p>"
+        }
+      }
+    },
+    "UpdateRoomMembershipResponse": {
+      "type": "structure",
+      "members": {
+        "RoomMembership": {
+          "shape": "RoomMembership",
+          "documentation": "<p>The room membership details.</p>"
+        }
+      }
+    },
+    "UpdateRoomRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
+        },
+        "Name": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The room name.</p>"
+        }
+      }
+    },
+    "UpdateRoomResponse": {
+      "type": "structure",
+      "members": {
+        "Room": {
+          "shape": "Room",
+          "documentation": "<p>The room details.</p>"
         }
       }
     },

@@ -36,6 +36,14 @@ declare class Chime extends Service {
    */
   associatePhoneNumbersWithVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse) => void): Request<Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse, AWSError>;
   /**
+   * Adds up to 50 members to a chat room. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+   */
+  batchCreateRoomMembership(params: Chime.Types.BatchCreateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateRoomMembershipResponse) => void): Request<Chime.Types.BatchCreateRoomMembershipResponse, AWSError>;
+  /**
+   * Adds up to 50 members to a chat room. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+   */
+  batchCreateRoomMembership(callback?: (err: AWSError, data: Chime.Types.BatchCreateRoomMembershipResponse) => void): Request<Chime.Types.BatchCreateRoomMembershipResponse, AWSError>;
+  /**
    * Moves phone numbers into the Deletion queue. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted. Phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
    */
   batchDeletePhoneNumber(params: Chime.Types.BatchDeletePhoneNumberRequest, callback?: (err: AWSError, data: Chime.Types.BatchDeletePhoneNumberResponse) => void): Request<Chime.Types.BatchDeletePhoneNumberResponse, AWSError>;
@@ -100,6 +108,22 @@ declare class Chime extends Service {
    */
   createPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
+   * Creates a chat room for the specified Amazon Chime account.
+   */
+  createRoom(params: Chime.Types.CreateRoomRequest, callback?: (err: AWSError, data: Chime.Types.CreateRoomResponse) => void): Request<Chime.Types.CreateRoomResponse, AWSError>;
+  /**
+   * Creates a chat room for the specified Amazon Chime account.
+   */
+  createRoom(callback?: (err: AWSError, data: Chime.Types.CreateRoomResponse) => void): Request<Chime.Types.CreateRoomResponse, AWSError>;
+  /**
+   * Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
+   */
+  createRoomMembership(params: Chime.Types.CreateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.CreateRoomMembershipResponse) => void): Request<Chime.Types.CreateRoomMembershipResponse, AWSError>;
+  /**
+   * Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
+   */
+  createRoomMembership(callback?: (err: AWSError, data: Chime.Types.CreateRoomMembershipResponse) => void): Request<Chime.Types.CreateRoomMembershipResponse, AWSError>;
+  /**
    * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region. Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.
    */
   createVoiceConnector(params: Chime.Types.CreateVoiceConnectorRequest, callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorResponse) => void): Request<Chime.Types.CreateVoiceConnectorResponse, AWSError>;
@@ -139,6 +163,22 @@ declare class Chime extends Service {
    * Moves the specified phone number into the Deletion queue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
    */
   deletePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a chat room.
+   */
+  deleteRoom(params: Chime.Types.DeleteRoomRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a chat room.
+   */
+  deleteRoom(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a member from a chat room.
+   */
+  deleteRoomMembership(params: Chime.Types.DeleteRoomMembershipRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a member from a chat room.
+   */
+  deleteRoomMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.
    */
@@ -268,6 +308,14 @@ declare class Chime extends Service {
    */
   getPhoneNumberSettings(callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberSettingsResponse) => void): Request<Chime.Types.GetPhoneNumberSettingsResponse, AWSError>;
   /**
+   * Retrieves room details, such as name.
+   */
+  getRoom(params: Chime.Types.GetRoomRequest, callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
+  /**
+   * Retrieves room details, such as name.
+   */
+  getRoom(callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
+  /**
    * Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN. To retrieve user details with an email address instead of a user ID, use the ListUsers action, and then filter by email address.
    */
   getUser(params: Chime.Types.GetUserRequest, callback?: (err: AWSError, data: Chime.Types.GetUserResponse) => void): Request<Chime.Types.GetUserResponse, AWSError>;
@@ -316,11 +364,11 @@ declare class Chime extends Service {
    */
   getVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorOriginationResponse) => void): Request<Chime.Types.GetVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.
+   * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.
    */
   getVoiceConnectorStreamingConfiguration(params: Chime.Types.GetVoiceConnectorStreamingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.
+   * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.
    */
   getVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
@@ -340,11 +388,11 @@ declare class Chime extends Service {
    */
   getVoiceConnectorTerminationHealth(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorTerminationHealthResponse) => void): Request<Chime.Types.GetVoiceConnectorTerminationHealthResponse, AWSError>;
   /**
-   * Sends email invites to as many as 50 users, inviting them to the specified Amazon Chime Team account. Only Team account types are currently supported for this action. 
+   * Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime Team account. Only Team account types are currently supported for this action. 
    */
   inviteUsers(params: Chime.Types.InviteUsersRequest, callback?: (err: AWSError, data: Chime.Types.InviteUsersResponse) => void): Request<Chime.Types.InviteUsersResponse, AWSError>;
   /**
-   * Sends email invites to as many as 50 users, inviting them to the specified Amazon Chime Team account. Only Team account types are currently supported for this action. 
+   * Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime Team account. Only Team account types are currently supported for this action. 
    */
   inviteUsers(callback?: (err: AWSError, data: Chime.Types.InviteUsersResponse) => void): Request<Chime.Types.InviteUsersResponse, AWSError>;
   /**
@@ -379,6 +427,22 @@ declare class Chime extends Service {
    * Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, Amazon Chime Voice Connector, or Amazon Chime Voice Connector group.
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Chime.Types.ListPhoneNumbersResponse) => void): Request<Chime.Types.ListPhoneNumbersResponse, AWSError>;
+  /**
+   * Lists the membership details for the specified room, such as member IDs, member email addresses, and member names.
+   */
+  listRoomMemberships(params: Chime.Types.ListRoomMembershipsRequest, callback?: (err: AWSError, data: Chime.Types.ListRoomMembershipsResponse) => void): Request<Chime.Types.ListRoomMembershipsResponse, AWSError>;
+  /**
+   * Lists the membership details for the specified room, such as member IDs, member email addresses, and member names.
+   */
+  listRoomMemberships(callback?: (err: AWSError, data: Chime.Types.ListRoomMembershipsResponse) => void): Request<Chime.Types.ListRoomMembershipsResponse, AWSError>;
+  /**
+   * Lists the room details for the specified Amazon Chime account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.
+   */
+  listRooms(params: Chime.Types.ListRoomsRequest, callback?: (err: AWSError, data: Chime.Types.ListRoomsResponse) => void): Request<Chime.Types.ListRoomsResponse, AWSError>;
+  /**
+   * Lists the room details for the specified Amazon Chime account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.
+   */
+  listRooms(callback?: (err: AWSError, data: Chime.Types.ListRoomsResponse) => void): Request<Chime.Types.ListRoomsResponse, AWSError>;
   /**
    * Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.
    */
@@ -444,11 +508,11 @@ declare class Chime extends Service {
    */
   putVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorOriginationResponse) => void): Request<Chime.Types.PutVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis, and sets the retention period for the Amazon Kinesis data, in hours.
+   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
    */
   putVoiceConnectorStreamingConfiguration(params: Chime.Types.PutVoiceConnectorStreamingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis, and sets the retention period for the Amazon Kinesis data, in hours.
+   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
    */
   putVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
@@ -540,13 +604,29 @@ declare class Chime extends Service {
    */
   updatePhoneNumber(callback?: (err: AWSError, data: Chime.Types.UpdatePhoneNumberResponse) => void): Request<Chime.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to be updated.
+   * Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to update.
    */
   updatePhoneNumberSettings(params: Chime.Types.UpdatePhoneNumberSettingsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to be updated.
+   * Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to update.
    */
   updatePhoneNumberSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates room details, such as the room name.
+   */
+  updateRoom(params: Chime.Types.UpdateRoomRequest, callback?: (err: AWSError, data: Chime.Types.UpdateRoomResponse) => void): Request<Chime.Types.UpdateRoomResponse, AWSError>;
+  /**
+   * Updates room details, such as the room name.
+   */
+  updateRoom(callback?: (err: AWSError, data: Chime.Types.UpdateRoomResponse) => void): Request<Chime.Types.UpdateRoomResponse, AWSError>;
+  /**
+   * Updates room membership details, such as member role. The member role designates whether the member is a chat room administrator or a general chat room member. Member role can only be updated for user IDs.
+   */
+  updateRoomMembership(params: Chime.Types.UpdateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
+  /**
+   * Updates room membership details, such as member role. The member role designates whether the member is a chat room administrator or a general chat room member. Member role can only be updated for user IDs.
+   */
+  updateRoomMembership(callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
   /**
    * Updates user details for a specified user ID. Currently, only LicenseType updates are supported for this action.
    */
@@ -680,6 +760,26 @@ declare namespace Chime {
      */
     PhoneNumberErrors?: PhoneNumberErrorList;
   }
+  export interface BatchCreateRoomMembershipRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room ID.
+     */
+    RoomId: NonEmptyString;
+    /**
+     * The list of membership items.
+     */
+    MembershipItemList: MembershipItemList;
+  }
+  export interface BatchCreateRoomMembershipResponse {
+    /**
+     * If the action fails for one or more of the member IDs in the request, a list of the member IDs is returned, along with error codes and error messages.
+     */
+    Errors?: MemberErrorList;
+  }
   export interface BatchDeletePhoneNumberRequest {
     /**
      * List of phone number IDs.
@@ -803,6 +903,7 @@ declare namespace Chime {
   export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed"|string;
   export type CallingRegion = string;
   export type CallingRegionList = CallingRegion[];
+  export type ClientRequestToken = string;
   export type CpsLimit = number;
   export interface CreateAccountRequest {
     /**
@@ -851,6 +952,50 @@ declare namespace Chime {
      * The phone number order details.
      */
     PhoneNumberOrder?: PhoneNumberOrder;
+  }
+  export interface CreateRoomMembershipRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room ID.
+     */
+    RoomId: NonEmptyString;
+    /**
+     * The Amazon Chime member ID (user ID or bot ID).
+     */
+    MemberId: NonEmptyString;
+    /**
+     * The role of the member.
+     */
+    Role?: RoomMembershipRole;
+  }
+  export interface CreateRoomMembershipResponse {
+    /**
+     * The room membership details.
+     */
+    RoomMembership?: RoomMembership;
+  }
+  export interface CreateRoomRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room name.
+     */
+    Name: SensitiveString;
+    /**
+     * The idempotency token for the request.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateRoomResponse {
+    /**
+     * The room details.
+     */
+    Room?: Room;
   }
   export interface CreateVoiceConnectorGroupRequest {
     /**
@@ -923,6 +1068,30 @@ declare namespace Chime {
      * The phone number ID.
      */
     PhoneNumberId: String;
+  }
+  export interface DeleteRoomMembershipRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room ID.
+     */
+    RoomId: NonEmptyString;
+    /**
+     * The member ID (user ID or bot ID).
+     */
+    MemberId: NonEmptyString;
+  }
+  export interface DeleteRoomRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The chat room ID.
+     */
+    RoomId: NonEmptyString;
   }
   export interface DeleteVoiceConnectorGroupRequest {
     /**
@@ -1127,6 +1296,22 @@ declare namespace Chime {
      */
     CallingNameUpdatedTimestamp?: Iso8601Timestamp;
   }
+  export interface GetRoomRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room ID.
+     */
+    RoomId: NonEmptyString;
+  }
+  export interface GetRoomResponse {
+    /**
+     * The room details.
+     */
+    Room?: Room;
+  }
   export interface GetUserRequest {
     /**
      * The Amazon Chime account ID.
@@ -1270,13 +1455,13 @@ declare namespace Chime {
      */
     AccountId: NonEmptyString;
     /**
-     * The user email addresses to which to send the invite.
+     * The user email addresses to which to send the email invitation.
      */
     UserEmailList: UserEmailList;
   }
   export interface InviteUsersResponse {
     /**
-     * The invite details.
+     * The email invitation details.
      */
     Invites?: InviteList;
   }
@@ -1317,7 +1502,7 @@ declare namespace Chime {
      */
     AccountId: NonEmptyString;
     /**
-     * The maximum number of results to return in a single call. Default is 10.
+     * The maximum number of results to return in a single call. The default is 10.
      */
     MaxResults?: ResultMax;
     /**
@@ -1386,6 +1571,62 @@ declare namespace Chime {
      * The phone number details.
      */
     PhoneNumbers?: PhoneNumberList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListRoomMembershipsRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room ID.
+     */
+    RoomId: NonEmptyString;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: ResultMax;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListRoomMembershipsResponse {
+    /**
+     * The room membership details.
+     */
+    RoomMemberships?: RoomMembershipList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListRoomsRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The member ID (user ID or bot ID).
+     */
+    MemberId?: String;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: ResultMax;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListRoomsResponse {
+    /**
+     * The room details.
+     */
+    Rooms?: RoomList;
     /**
      * The token to use to retrieve the next page of results.
      */
@@ -1489,6 +1730,55 @@ declare namespace Chime {
   }
   export interface LogoutUserResponse {
   }
+  export interface Member {
+    /**
+     * The member ID (user ID or bot ID).
+     */
+    MemberId?: NonEmptyString;
+    /**
+     * The member type.
+     */
+    MemberType?: MemberType;
+    /**
+     * The member email address.
+     */
+    Email?: SensitiveString;
+    /**
+     * The member name.
+     */
+    FullName?: SensitiveString;
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId?: NonEmptyString;
+  }
+  export interface MemberError {
+    /**
+     * The member ID.
+     */
+    MemberId?: NonEmptyString;
+    /**
+     * The error code.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * The error message.
+     */
+    ErrorMessage?: String;
+  }
+  export type MemberErrorList = MemberError[];
+  export type MemberType = "User"|"Bot"|"Webhook"|string;
+  export interface MembershipItem {
+    /**
+     * The member ID.
+     */
+    MemberId?: NonEmptyString;
+    /**
+     * The member role.
+     */
+    Role?: RoomMembershipRole;
+  }
+  export type MembershipItemList = MembershipItem[];
   export type NonEmptyString = string;
   export type NonEmptyStringList = String[];
   export type NullableBoolean = boolean;
@@ -1820,6 +2110,54 @@ declare namespace Chime {
     PhoneNumber?: PhoneNumber;
   }
   export type ResultMax = number;
+  export interface Room {
+    /**
+     * The room ID.
+     */
+    RoomId?: NonEmptyString;
+    /**
+     * The room name.
+     */
+    Name?: SensitiveString;
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId?: NonEmptyString;
+    /**
+     * The identifier of the room creator.
+     */
+    CreatedBy?: NonEmptyString;
+    /**
+     * The room creation timestamp, in ISO 8601 format.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The room update timestamp, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type RoomList = Room[];
+  export interface RoomMembership {
+    /**
+     * The room ID.
+     */
+    RoomId?: NonEmptyString;
+    Member?: Member;
+    /**
+     * The membership role.
+     */
+    Role?: RoomMembershipRole;
+    /**
+     * The identifier of the user that invited the room member.
+     */
+    InvitedBy?: NonEmptyString;
+    /**
+     * The room membership update timestamp, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type RoomMembershipList = RoomMembership[];
+  export type RoomMembershipRole = "Administrator"|"Member"|string;
   export interface SearchAvailablePhoneNumbersRequest {
     /**
      * The area code used to filter results.
@@ -1860,7 +2198,7 @@ declare namespace Chime {
   export type SensitiveStringList = SensitiveString[];
   export interface StreamingConfiguration {
     /**
-     * The retention period for the Amazon Kinesis data, in hours.
+     * The retention period, in hours, for the Amazon Kinesis data.
      */
     DataRetentionInHours: DataRetentionInHours;
     /**
@@ -2015,6 +2353,50 @@ declare namespace Chime {
      * The default outbound calling name for the account.
      */
     CallingName: CallingName;
+  }
+  export interface UpdateRoomMembershipRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room ID.
+     */
+    RoomId: NonEmptyString;
+    /**
+     * The member ID.
+     */
+    MemberId: NonEmptyString;
+    /**
+     * The role of the member.
+     */
+    Role?: RoomMembershipRole;
+  }
+  export interface UpdateRoomMembershipResponse {
+    /**
+     * The room membership details.
+     */
+    RoomMembership?: RoomMembership;
+  }
+  export interface UpdateRoomRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room ID.
+     */
+    RoomId: NonEmptyString;
+    /**
+     * The room name.
+     */
+    Name?: SensitiveString;
+  }
+  export interface UpdateRoomResponse {
+    /**
+     * The room details.
+     */
+    Room?: Room;
   }
   export interface UpdateUserRequest {
     /**

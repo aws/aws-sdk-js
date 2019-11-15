@@ -84,19 +84,27 @@ declare class WorkSpaces extends Service {
    */
   deleteWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
-   * Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.
+   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.
+   */
+  deregisterWorkspaceDirectory(params: WorkSpaces.Types.DeregisterWorkspaceDirectoryRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeregisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.DeregisterWorkspaceDirectoryResult, AWSError>;
+  /**
+   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.
+   */
+  deregisterWorkspaceDirectory(callback?: (err: AWSError, data: WorkSpaces.Types.DeregisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.DeregisterWorkspaceDirectoryResult, AWSError>;
+  /**
+   * Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.
    */
   describeAccount(params: WorkSpaces.Types.DescribeAccountRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountResult) => void): Request<WorkSpaces.Types.DescribeAccountResult, AWSError>;
   /**
-   * Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.
+   * Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.
    */
   describeAccount(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountResult) => void): Request<WorkSpaces.Types.DescribeAccountResult, AWSError>;
   /**
-   * Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.
+   * Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
    */
   describeAccountModifications(params: WorkSpaces.Types.DescribeAccountModificationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
   /**
-   * Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.
+   * Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
    */
   describeAccountModifications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
   /**
@@ -132,11 +140,11 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspaceBundles(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceBundlesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceBundlesResult, AWSError>;
   /**
-   * Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.
+   * Describes the available directories that are registered with Amazon WorkSpaces.
    */
   describeWorkspaceDirectories(params: WorkSpaces.Types.DescribeWorkspaceDirectoriesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
   /**
-   * Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.
+   * Describes the available directories that are registered with Amazon WorkSpaces.
    */
   describeWorkspaceDirectories(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
   /**
@@ -180,27 +188,27 @@ declare class WorkSpaces extends Service {
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
   /**
-   * Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
+   * Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
    */
   importWorkspaceImage(params: WorkSpaces.Types.ImportWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
+   * Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
    */
   importWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
   listAvailableManagementCidrRanges(params: WorkSpaces.Types.ListAvailableManagementCidrRangesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
   /**
-   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
   listAvailableManagementCidrRanges(callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
   /**
-   * Modifies the configuration of bring your own license (BYOL) for the specified account.
+   * Modifies the configuration of Bring Your Own License (BYOL) for the specified account.
    */
   modifyAccount(params: WorkSpaces.Types.ModifyAccountRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
   /**
-   * Modifies the configuration of bring your own license (BYOL) for the specified account.
+   * Modifies the configuration of Bring Your Own License (BYOL) for the specified account.
    */
   modifyAccount(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
   /**
@@ -211,6 +219,30 @@ declare class WorkSpaces extends Service {
    * Modifies the properties of the specified Amazon WorkSpaces clients.
    */
   modifyClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
+  /**
+   * Modifies the self-service WorkSpace management capabilities for your users. For more information, see Enable Self-Service WorkSpace Management Capabilities for Your Users.
+   */
+  modifySelfservicePermissions(params: WorkSpaces.Types.ModifySelfservicePermissionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifySelfservicePermissionsResult) => void): Request<WorkSpaces.Types.ModifySelfservicePermissionsResult, AWSError>;
+  /**
+   * Modifies the self-service WorkSpace management capabilities for your users. For more information, see Enable Self-Service WorkSpace Management Capabilities for Your Users.
+   */
+  modifySelfservicePermissions(callback?: (err: AWSError, data: WorkSpaces.Types.ModifySelfservicePermissionsResult) => void): Request<WorkSpaces.Types.ModifySelfservicePermissionsResult, AWSError>;
+  /**
+   * Specifies which devices and operating systems users can use to access their Workspaces. For more information, see  Control Device Access.
+   */
+  modifyWorkspaceAccessProperties(params: WorkSpaces.Types.ModifyWorkspaceAccessPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceAccessPropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceAccessPropertiesResult, AWSError>;
+  /**
+   * Specifies which devices and operating systems users can use to access their Workspaces. For more information, see  Control Device Access.
+   */
+  modifyWorkspaceAccessProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceAccessPropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceAccessPropertiesResult, AWSError>;
+  /**
+   * Modify the default properties used to create WorkSpaces.
+   */
+  modifyWorkspaceCreationProperties(params: WorkSpaces.Types.ModifyWorkspaceCreationPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceCreationPropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceCreationPropertiesResult, AWSError>;
+  /**
+   * Modify the default properties used to create WorkSpaces.
+   */
+  modifyWorkspaceCreationProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceCreationPropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceCreationPropertiesResult, AWSError>;
   /**
    * Modifies the specified WorkSpace properties.
    */
@@ -243,6 +275,14 @@ declare class WorkSpaces extends Service {
    * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
   rebuildWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
+  /**
+   * Registers the specified directory. This operation is asynchronous and returns before the WorkSpace directory is registered. If this is the first time you are registering a directory, you will need to create the workspaces_DefaultRole role before you can register a directory. For more information, see  Creating the workspaces_DefaultRole Role.
+   */
+  registerWorkspaceDirectory(params: WorkSpaces.Types.RegisterWorkspaceDirectoryRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RegisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.RegisterWorkspaceDirectoryResult, AWSError>;
+  /**
+   * Registers the specified directory. This operation is asynchronous and returns before the WorkSpace directory is registered. If this is the first time you are registering a directory, you will need to create the workspaces_DefaultRole role before you can register a directory. For more information, see  Creating the workspaces_DefaultRole Role.
+   */
+  registerWorkspaceDirectory(callback?: (err: AWSError, data: WorkSpaces.Types.RegisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.RegisterWorkspaceDirectoryResult, AWSError>;
   /**
    * Restores the specified WorkSpace to its last known healthy state. You cannot restore a WorkSpace unless its state is  AVAILABLE, ERROR, or UNHEALTHY. Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Restore a WorkSpace. This operation is asynchronous and returns before the WorkSpace is completely restored.
    */
@@ -294,6 +334,7 @@ declare class WorkSpaces extends Service {
 }
 declare namespace WorkSpaces {
   export type ARN = string;
+  export type AccessPropertyValue = "ALLOW"|"DENY"|string;
   export interface AccountModification {
     /**
      * The state of the modification to the configuration of BYOL.
@@ -481,9 +522,13 @@ declare namespace WorkSpaces {
      */
     CustomSecurityGroupId?: SecurityGroupId;
     /**
-     * Specifies whether the WorkSpace user is an administrator on the WorkSpace.
+     * Specifies whether WorkSpace users are local administrators on their WorkSpaces.
      */
     UserEnabledAsLocalAdministrator?: BooleanObject;
+    /**
+     * Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see WorkSpace Maintenance.
+     */
+    EnableMaintenanceMode?: BooleanObject;
   }
   export interface DeleteIpGroupRequest {
     /**
@@ -512,6 +557,14 @@ declare namespace WorkSpaces {
     ImageId: WorkspaceImageId;
   }
   export interface DeleteWorkspaceImageResult {
+  }
+  export interface DeregisterWorkspaceDirectoryRequest {
+    /**
+     * The identifier of the directory. If any WorkSpaces are registered to this directory, you must remove them before you deregister the directory, or you will receive an OperationNotSupportedException error.
+     */
+    DirectoryId: DirectoryId;
+  }
+  export interface DeregisterWorkspaceDirectoryResult {
   }
   export interface DescribeAccountModificationsRequest {
     /**
@@ -618,6 +671,10 @@ declare namespace WorkSpaces {
      * The identifiers of the directories. If the value is null, all directories are retrieved.
      */
     DirectoryIds?: DirectoryIdList;
+    /**
+     * The maximum number of directories to return.
+     */
+    Limit?: Limit;
     /**
      * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
@@ -894,6 +951,42 @@ declare namespace WorkSpaces {
   }
   export interface ModifyClientPropertiesResult {
   }
+  export interface ModifySelfservicePermissionsRequest {
+    /**
+     * The identifier of the directory.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The permissions to enable or disable self-service capabilities.
+     */
+    SelfservicePermissions: SelfservicePermissions;
+  }
+  export interface ModifySelfservicePermissionsResult {
+  }
+  export interface ModifyWorkspaceAccessPropertiesRequest {
+    /**
+     * The identifier of the directory.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The device types and operating systems to enable or disable for access.
+     */
+    WorkspaceAccessProperties: WorkspaceAccessProperties;
+  }
+  export interface ModifyWorkspaceAccessPropertiesResult {
+  }
+  export interface ModifyWorkspaceCreationPropertiesRequest {
+    /**
+     * The identifier of the directory.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The default properties for creating WorkSpaces.
+     */
+    WorkspaceCreationProperties: WorkspaceCreationProperties;
+  }
+  export interface ModifyWorkspaceCreationPropertiesResult {
+  }
   export interface ModifyWorkspacePropertiesRequest {
     /**
      * The identifier of the WorkSpace.
@@ -967,6 +1060,34 @@ declare namespace WorkSpaces {
   }
   export type ReconnectEnum = "ENABLED"|"DISABLED"|string;
   export type Region = string;
+  export interface RegisterWorkspaceDirectoryRequest {
+    /**
+     * The identifier of the directory. You cannot register a directory if it does not have a status of Active. If the directory does not have a status of Active, you will receive an InvalidResourceStateException error. If you have already registered the maximum number of directories that you can register with Amazon WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister directories that you are not using for WorkSpaces, and try again.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the subnets are in supported Availability Zones. The subnets must also be in separate Availability Zones. If these conditions are not met, you will receive an OperationNotSupportedException error.
+     */
+    SubnetIds?: SubnetIds;
+    /**
+     * Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this parameter and WorkDocs is not available in the Region, you will receive an OperationNotSupportedException error. Set EnableWorkDocs to disabled, and try again.
+     */
+    EnableWorkDocs: BooleanObject;
+    /**
+     * Indicates whether self-service capabilities are enabled or disabled.
+     */
+    EnableSelfService?: BooleanObject;
+    /**
+     * Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to DEDICATED and your AWS account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see Bring Your Own Windows Desktop Images.
+     */
+    Tenancy?: Tenancy;
+    /**
+     * The tags associated with the directory.
+     */
+    Tags?: TagList;
+  }
+  export interface RegisterWorkspaceDirectoryResult {
+  }
   export type RegistrationCode = string;
   export type ResourceIdList = NonEmptyString[];
   export interface RestoreWorkspaceRequest {
@@ -999,6 +1120,28 @@ declare namespace WorkSpaces {
   export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|string;
   export type RunningModeAutoStopTimeoutInMinutes = number;
   export type SecurityGroupId = string;
+  export interface SelfservicePermissions {
+    /**
+     * Specifies whether users can restart their WorkSpace.
+     */
+    RestartWorkspace?: ReconnectEnum;
+    /**
+     * Specifies whether users can increase the volume size of the drives on their WorkSpace.
+     */
+    IncreaseVolumeSize?: ReconnectEnum;
+    /**
+     * Specifies whether users can change the compute type (bundle) for their WorkSpace.
+     */
+    ChangeComputeType?: ReconnectEnum;
+    /**
+     * Specifies whether users can switch the running mode of their WorkSpace.
+     */
+    SwitchRunningMode?: ReconnectEnum;
+    /**
+     * Specifies whether users can rebuild the operating system of a WorkSpace to its original state.
+     */
+    RebuildWorkspace?: ReconnectEnum;
+  }
   export interface Snapshot {
     /**
      * The time when the snapshot was created.
@@ -1061,6 +1204,7 @@ declare namespace WorkSpaces {
   export type TagList = Tag[];
   export type TagValue = string;
   export type TargetWorkspaceState = "AVAILABLE"|"ADMIN_MAINTENANCE"|string;
+  export type Tenancy = "DEDICATED"|"SHARED"|string;
   export interface TerminateRequest {
     /**
      * The identifier of the WorkSpace.
@@ -1164,6 +1308,36 @@ declare namespace WorkSpaces {
      */
     ModificationStates?: ModificationStateList;
   }
+  export interface WorkspaceAccessProperties {
+    /**
+     * Indicates whether users can use Windows clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of TRUST. For more information, see Restrict WorkSpaces Access to Trusted Devices. 
+     */
+    DeviceTypeWindows?: AccessPropertyValue;
+    /**
+     * Indicates whether users can use macOS clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of TRUST. For more information, see Restrict WorkSpaces Access to Trusted Devices. 
+     */
+    DeviceTypeOsx?: AccessPropertyValue;
+    /**
+     * Indicates whether users can access their WorkSpaces through a web browser.
+     */
+    DeviceTypeWeb?: AccessPropertyValue;
+    /**
+     * Indicates whether users can use iOS devices to access their WorkSpaces.
+     */
+    DeviceTypeIos?: AccessPropertyValue;
+    /**
+     * Indicates whether users can use Android devices to access their WorkSpaces.
+     */
+    DeviceTypeAndroid?: AccessPropertyValue;
+    /**
+     * Indicates whether users can use Chromebooks to access their WorkSpaces.
+     */
+    DeviceTypeChromeOs?: AccessPropertyValue;
+    /**
+     * Indicates whether users can use zero client devices to access their WorkSpaces.
+     */
+    DeviceTypeZeroClient?: AccessPropertyValue;
+  }
   export interface WorkspaceBundle {
     /**
      * The bundle identifier.
@@ -1213,6 +1387,28 @@ declare namespace WorkSpaces {
     LastKnownUserConnectionTimestamp?: Timestamp;
   }
   export type WorkspaceConnectionStatusList = WorkspaceConnectionStatus[];
+  export interface WorkspaceCreationProperties {
+    /**
+     * Indicates whether internet access is enabled for your WorkSpaces.
+     */
+    EnableInternetAccess?: BooleanObject;
+    /**
+     * The default organizational unit (OU) for your WorkSpace directories.
+     */
+    DefaultOu?: DefaultOu;
+    /**
+     * The identifier of your custom security group.
+     */
+    CustomSecurityGroupId?: SecurityGroupId;
+    /**
+     * Indicates whether users are local administrators of their WorkSpaces.
+     */
+    UserEnabledAsLocalAdministrator?: BooleanObject;
+    /**
+     * Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see WorkSpace Maintenance. 
+     */
+    EnableMaintenanceMode?: BooleanObject;
+  }
   export interface WorkspaceDirectory {
     /**
      * The directory identifier.
@@ -1255,7 +1451,7 @@ declare namespace WorkSpaces {
      */
     WorkspaceSecurityGroupId?: SecurityGroupId;
     /**
-     * The state of the directory's registration with Amazon WorkSpaces
+     * The state of the directory's registration with Amazon WorkSpaces.
      */
     State?: WorkspaceDirectoryState;
     /**
@@ -1266,6 +1462,18 @@ declare namespace WorkSpaces {
      * The identifiers of the IP access control groups associated with the directory.
      */
     ipGroupIds?: IpGroupIdList;
+    /**
+     * The devices and operating systems that users can use to access Workspaces.
+     */
+    WorkspaceAccessProperties?: WorkspaceAccessProperties;
+    /**
+     * Specifies whether the directory is dedicated or shared. To use Bring Your Own License (BYOL), this value must be set to DEDICATED. For more information, see Bring Your Own Windows Desktop Images.
+     */
+    Tenancy?: Tenancy;
+    /**
+     * The default self-service permissions for WorkSpaces in the directory.
+     */
+    SelfservicePermissions?: SelfservicePermissions;
   }
   export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
   export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string;
@@ -1294,7 +1502,7 @@ declare namespace WorkSpaces {
      */
     State?: WorkspaceImageState;
     /**
-     * Specifies whether the image is running on dedicated hardware. When bring your own license (BYOL) is enabled, this value is set to DEDICATED. 
+     * Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to DEDICATED. For more information, see Bring Your Own Windows Desktop Images.
      */
     RequiredTenancy?: WorkspaceImageRequiredTenancy;
     /**
@@ -1344,7 +1552,7 @@ declare namespace WorkSpaces {
      */
     DirectoryId: DirectoryId;
     /**
-     * The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.
+     * The user name of the user for the WorkSpace. This user name must exist in the AWS Directory Service directory for the WorkSpace.
      */
     UserName: UserName;
     /**

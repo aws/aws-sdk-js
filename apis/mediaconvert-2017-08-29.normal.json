@@ -1468,9 +1468,9 @@
           "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings"
         },
         "CustomLanguageCode": {
-          "shape": "__stringMin3Max3PatternAZaZ3",
+          "shape": "__stringPatternAZaZ23AZaZ",
           "locationName": "customLanguageCode",
-          "documentation": "Specify the language for this audio output track, using the ISO 639-2 or ISO 639-3 three-letter language code. The language specified will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input."
+          "documentation": "Specify the language for this audio output track. The service puts this language code into your output audio track when you set Language code control (AudioLanguageCodeControl) to Use configured (USE_CONFIGURED). The service also uses your specified custom language code when you set Language code control (AudioLanguageCodeControl) to Follow input (FOLLOW_INPUT), but your input file doesn't specify a language code. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
         },
         "LanguageCode": {
           "shape": "LanguageCode",
@@ -1480,7 +1480,7 @@
         "LanguageCodeControl": {
           "shape": "AudioLanguageCodeControl",
           "locationName": "languageCodeControl",
-          "documentation": "Choosing FOLLOW_INPUT will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The language specified for languageCode' will be used when USE_CONFIGURED is selected or when FOLLOW_INPUT is selected but there is no ISO 639 language code specified by the input."
+          "documentation": "Specify which source for language code takes precedence for this audio track. When you choose Follow input (FOLLOW_INPUT), the service uses the language code from the input track if it's present. If there's no languge code on the input track, the service uses the code that you specify in the setting Language code (languageCode or customLanguageCode). When you choose Use configured (USE_CONFIGURED), the service uses the language code that you specify."
         },
         "RemixSettings": {
           "shape": "RemixSettings",
@@ -1497,7 +1497,7 @@
     },
     "AudioLanguageCodeControl": {
       "type": "string",
-      "documentation": "Choosing FOLLOW_INPUT will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The language specified for languageCode' will be used when USE_CONFIGURED is selected or when FOLLOW_INPUT is selected but there is no ISO 639 language code specified by the input.",
+      "documentation": "Specify which source for language code takes precedence for this audio track. When you choose Follow input (FOLLOW_INPUT), the service uses the language code from the input track if it's present. If there's no languge code on the input track, the service uses the code that you specify in the setting Language code (languageCode or customLanguageCode). When you choose Use configured (USE_CONFIGURED), the service uses the language code that you specify.",
       "enum": [
         "FOLLOW_INPUT",
         "USE_CONFIGURED"
@@ -1854,9 +1854,9 @@
           "documentation": "Specifies which \"Caption Selector\":#inputs-caption_selector to use from each input when generating captions. The name should be of the format \"Caption Selector <N>\", which denotes that the Nth Caption Selector will be used from each input."
         },
         "CustomLanguageCode": {
-          "shape": "__stringMin3Max3PatternAZaZ3",
+          "shape": "__stringPatternAZaZ23AZaZ",
           "locationName": "customLanguageCode",
-          "documentation": "Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text."
+          "documentation": "Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when  automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
         },
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
@@ -1880,9 +1880,9 @@
       "type": "structure",
       "members": {
         "CustomLanguageCode": {
-          "shape": "__stringMin3Max3PatternAZaZ3",
+          "shape": "__stringPatternAZaZ23AZaZ",
           "locationName": "customLanguageCode",
-          "documentation": "Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text."
+          "documentation": "Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when  automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
         },
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
@@ -2057,6 +2057,22 @@
       },
       "documentation": "Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification)."
     },
+    "CmafAdditionalManifest": {
+      "type": "structure",
+      "members": {
+        "ManifestNameModifier": {
+          "shape": "__stringMin1",
+          "locationName": "manifestNameModifier",
+          "documentation": "Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your HLS group is film-name.m3u8. If you enter \"-no-premium\" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.m3u8. For HLS output groups, specify a manifestNameModifier that is different from the nameModifier of the output. The service uses the output name modifier to create unique names for the individual variant manifests."
+        },
+        "SelectedOutputs": {
+          "shape": "__listOf__stringMin1",
+          "locationName": "selectedOutputs",
+          "documentation": "Specify the outputs that you want this additional top-level manifest to reference."
+        }
+      },
+      "documentation": "Specify the details for each pair of HLS and DASH additional manifests that you want the service to generate for this CMAF output group. Each pair of manifests can reference a different subset of outputs in the group."
+    },
     "CmafClientCache": {
       "type": "string",
       "documentation": "When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents client from saving media segments for later replay.",
@@ -2120,6 +2136,11 @@
     "CmafGroupSettings": {
       "type": "structure",
       "members": {
+        "AdditionalManifests": {
+          "shape": "__listOfCmafAdditionalManifest",
+          "locationName": "additionalManifests",
+          "documentation": "By default, the service creates one top-level .m3u8 HLS manifest and one top -level .mpd DASH manifest for each CMAF output group in your job. These default manifests reference every output in the output group. To create additional top-level manifests that reference a subset of the outputs in the output group, specify a list of them here. For each additional manifest that you specify, the service creates one HLS manifest and one DASH manifest."
+        },
         "BaseUrl": {
           "shape": "__string",
           "locationName": "baseUrl",
@@ -2393,6 +2414,11 @@
           "shape": "Mp4Settings",
           "locationName": "mp4Settings",
           "documentation": "Settings for MP4 container. You can create audio-only AAC outputs with this container."
+        },
+        "MpdSettings": {
+          "shape": "MpdSettings",
+          "locationName": "mpdSettings",
+          "documentation": "Settings for MP4 segments in DASH"
         }
       },
       "documentation": "Container specific settings."
@@ -2649,6 +2675,22 @@
         }
       }
     },
+    "DashAdditionalManifest": {
+      "type": "structure",
+      "members": {
+        "ManifestNameModifier": {
+          "shape": "__stringMin1",
+          "locationName": "manifestNameModifier",
+          "documentation": "Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your DASH group is film-name.mpd. If you enter \"-no-premium\" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.mpd."
+        },
+        "SelectedOutputs": {
+          "shape": "__listOf__stringMin1",
+          "locationName": "selectedOutputs",
+          "documentation": "Specify the outputs that you want this additional top-level manifest to reference."
+        }
+      },
+      "documentation": "Specify the details for each additional DASH manifest that you want the service to generate for this output group. Each manifest can reference a different subset of outputs in the group."
+    },
     "DashIsoEncryptionSettings": {
       "type": "structure",
       "members": {
@@ -2668,6 +2710,11 @@
     "DashIsoGroupSettings": {
       "type": "structure",
       "members": {
+        "AdditionalManifests": {
+          "shape": "__listOfDashAdditionalManifest",
+          "locationName": "additionalManifests",
+          "documentation": "By default, the service creates one .mpd DASH manifest for each DASH ISO output group in your job. This default manifest references every output in the output group. To create additional DASH manifests that reference a subset of the outputs in the output group, specify a list of them here."
+        },
         "BaseUrl": {
           "shape": "__string",
           "locationName": "baseUrl",
@@ -2949,6 +2996,59 @@
     "DisassociateCertificateResponse": {
       "type": "structure",
       "members": {}
+    },
+    "DolbyVision": {
+      "type": "structure",
+      "members": {
+        "L6Metadata": {
+          "shape": "DolbyVisionLevel6Metadata",
+          "locationName": "l6Metadata",
+          "documentation": "Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override the MaxCLL and MaxFALL values in your input with new values."
+        },
+        "L6Mode": {
+          "shape": "DolbyVisionLevel6Mode",
+          "locationName": "l6Mode",
+          "documentation": "Use Dolby Vision Mode to choose how the service will handle Dolby Vision MaxCLL and MaxFALL properies."
+        },
+        "Profile": {
+          "shape": "DolbyVisionProfile",
+          "locationName": "profile",
+          "documentation": "In the current MediaConvert implementation, the Dolby Vision profile is always 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame interleaved data."
+        }
+      },
+      "documentation": "Settings for Dolby Vision"
+    },
+    "DolbyVisionLevel6Metadata": {
+      "type": "structure",
+      "members": {
+        "MaxCll": {
+          "shape": "__integerMin0Max65535",
+          "locationName": "maxCll",
+          "documentation": "Maximum Content Light Level. Static HDR metadata that corresponds to the brightest pixel in the entire stream. Measured in nits."
+        },
+        "MaxFall": {
+          "shape": "__integerMin0Max65535",
+          "locationName": "maxFall",
+          "documentation": "Maximum Frame-Average Light Level. Static HDR metadata that corresponds to the highest frame-average brightness in the entire stream. Measured in nits."
+        }
+      },
+      "documentation": "Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override the MaxCLL and MaxFALL values in your input with new values."
+    },
+    "DolbyVisionLevel6Mode": {
+      "type": "string",
+      "documentation": "Use Dolby Vision Mode to choose how the service will handle Dolby Vision MaxCLL and MaxFALL properies.",
+      "enum": [
+        "PASSTHROUGH",
+        "RECALCULATE",
+        "SPECIFY"
+      ]
+    },
+    "DolbyVisionProfile": {
+      "type": "string",
+      "documentation": "In the current MediaConvert implementation, the Dolby Vision profile is always 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame interleaved data.",
+      "enum": [
+        "PROFILE_5"
+      ]
     },
     "DropFrameTimecode": {
       "type": "string",
@@ -4679,7 +4779,7 @@
         "WriteMp4PackagingType": {
           "shape": "H265WriteMp4PackagingType",
           "locationName": "writeMp4PackagingType",
-          "documentation": "If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output. For file MP4 outputs, choosing HVC1 can create video that doesn't work properly with some downstream systems and video players. Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples."
+          "documentation": "If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might not work properly with some downstream systems and video players. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples."
         }
       },
       "documentation": "Settings for H265 codec"
@@ -4743,7 +4843,7 @@
     },
     "H265WriteMp4PackagingType": {
       "type": "string",
-      "documentation": "If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output. For file MP4 outputs, choosing HVC1 can create video that doesn't work properly with some downstream systems and video players. Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.",
+      "documentation": "If the location of parameter set NAL units doesn't matter in your workflow, ignore this setting. Use this setting only with CMAF or DASH outputs, or with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose HVC1 to mark your output as HVC1. This makes your output compliant with the following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. For MP4 outputs, when you choose HVC1, your output video might not work properly with some downstream systems and video players. The service defaults to marking your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.",
       "enum": [
         "HVC1",
         "HEV1"
@@ -4822,6 +4922,22 @@
         "ELEMENTAL_SCTE35"
       ]
     },
+    "HlsAdditionalManifest": {
+      "type": "structure",
+      "members": {
+        "ManifestNameModifier": {
+          "shape": "__stringMin1",
+          "locationName": "manifestNameModifier",
+          "documentation": "Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your HLS group is film-name.m3u8. If you enter \"-no-premium\" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.m3u8. For HLS output groups, specify a manifestNameModifier that is different from the nameModifier of the output. The service uses the output name modifier to create unique names for the individual variant manifests."
+        },
+        "SelectedOutputs": {
+          "shape": "__listOf__stringMin1",
+          "locationName": "selectedOutputs",
+          "documentation": "Specify the outputs that you want this additional top-level manifest to reference."
+        }
+      },
+      "documentation": "Specify the details for each additional HLS manifest that you want the service to generate for this output group. Each manifest can reference a different subset of outputs in the group."
+    },
     "HlsAudioOnlyContainer": {
       "type": "string",
       "documentation": "Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream (M2TS) to create a file in an MPEG2-TS container. Keep the default value Automatic (AUTOMATIC) to create a raw audio-only file with no container. Regardless of the value that you specify here, if this output has video, the service will place outputs into an MPEG2-TS container.",
@@ -4851,7 +4967,7 @@
         "CustomLanguageCode": {
           "shape": "__stringMin3Max3PatternAZaZ3",
           "locationName": "customLanguageCode",
-          "documentation": "Specify the language for this caption channel, using the ISO 639-2 or ISO 639-3 three-letter language code"
+          "documentation": "Specify the language for this captions channel, using the ISO 639-2 or ISO 639-3 three-letter language code"
         },
         "LanguageCode": {
           "shape": "LanguageCode",
@@ -4955,6 +5071,11 @@
           "shape": "__listOfHlsAdMarkers",
           "locationName": "adMarkers",
           "documentation": "Choose one or more ad marker types to decorate your Apple HLS manifest. This setting does not determine whether SCTE-35 markers appear in the outputs themselves."
+        },
+        "AdditionalManifests": {
+          "shape": "__listOfHlsAdditionalManifest",
+          "locationName": "additionalManifests",
+          "documentation": "By default, the service creates one top-level .m3u8 HLS manifest for each HLS output group in your job. This default manifest references every output in the output group. To create additional top-level manifests that reference a subset of the outputs in the output group, specify a list of them here."
         },
         "BaseUrl": {
           "shape": "__string",
@@ -6978,6 +7099,51 @@
       },
       "documentation": "Settings for MP4 container. You can create audio-only AAC outputs with this container."
     },
+    "MpdCaptionContainerType": {
+      "type": "string",
+      "documentation": "Use this setting only in DASH output groups that include sidecar TTML or IMSC captions.  You specify sidecar captions in a separate output from your audio and video. Choose Raw (RAW) for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 (FRAGMENTED_MP4) for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files.",
+      "enum": [
+        "RAW",
+        "FRAGMENTED_MP4"
+      ]
+    },
+    "MpdScte35Esam": {
+      "type": "string",
+      "documentation": "Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).",
+      "enum": [
+        "INSERT",
+        "NONE"
+      ]
+    },
+    "MpdScte35Source": {
+      "type": "string",
+      "documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.",
+      "enum": [
+        "PASSTHROUGH",
+        "NONE"
+      ]
+    },
+    "MpdSettings": {
+      "type": "structure",
+      "members": {
+        "CaptionContainerType": {
+          "shape": "MpdCaptionContainerType",
+          "locationName": "captionContainerType",
+          "documentation": "Use this setting only in DASH output groups that include sidecar TTML or IMSC captions.  You specify sidecar captions in a separate output from your audio and video. Choose Raw (RAW) for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 (FRAGMENTED_MP4) for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files."
+        },
+        "Scte35Esam": {
+          "shape": "MpdScte35Esam",
+          "locationName": "scte35Esam",
+          "documentation": "Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml)."
+        },
+        "Scte35Source": {
+          "shape": "MpdScte35Source",
+          "locationName": "scte35Source",
+          "documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output."
+        }
+      },
+      "documentation": "Settings for MP4 segments in DASH"
+    },
     "Mpeg2AdaptiveQuantization": {
       "type": "string",
       "documentation": "Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.",
@@ -7295,6 +7461,22 @@
         "ENABLED"
       ]
     },
+    "MsSmoothAdditionalManifest": {
+      "type": "structure",
+      "members": {
+        "ManifestNameModifier": {
+          "shape": "__stringMin1",
+          "locationName": "manifestNameModifier",
+          "documentation": "Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your Microsoft Smooth group is film-name.ismv. If you enter \"-no-premium\" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.ismv."
+        },
+        "SelectedOutputs": {
+          "shape": "__listOf__stringMin1",
+          "locationName": "selectedOutputs",
+          "documentation": "Specify the outputs that you want this additional top-level manifest to reference."
+        }
+      },
+      "documentation": "Specify the details for each additional Microsoft Smooth Streaming manifest that you want the service to generate for this output group. Each manifest can reference a different subset of outputs in the group."
+    },
     "MsSmoothAudioDeduplication": {
       "type": "string",
       "documentation": "COMBINE_DUPLICATE_STREAMS combines identical audio encoding settings across a Microsoft Smooth output group into a single audio stream.",
@@ -7317,6 +7499,11 @@
     "MsSmoothGroupSettings": {
       "type": "structure",
       "members": {
+        "AdditionalManifests": {
+          "shape": "__listOfMsSmoothAdditionalManifest",
+          "locationName": "additionalManifests",
+          "documentation": "By default, the service creates one .ism Microsoft Smooth Streaming manifest for each Microsoft Smooth Streaming output group in your job. This default manifest references every output in the output group. To create additional manifests that reference a subset of the outputs in the output group, specify a list of them here."
+        },
         "AudioDeduplication": {
           "shape": "MsSmoothAudioDeduplication",
           "locationName": "audioDeduplication",
@@ -8098,9 +8285,25 @@
         "PASSTHROUGH"
       ]
     },
+    "S3DestinationAccessControl": {
+      "type": "structure",
+      "members": {
+        "CannedAcl": {
+          "shape": "S3ObjectCannedAcl",
+          "locationName": "cannedAcl",
+          "documentation": "Choose an Amazon S3 canned ACL for MediaConvert to apply to this output."
+        }
+      },
+      "documentation": "Optional. Have MediaConvert automatically apply Amazon S3 access control for the outputs in this output group. When you don't use this setting, S3 automatically applies the default access control list PRIVATE."
+    },
     "S3DestinationSettings": {
       "type": "structure",
       "members": {
+        "AccessControl": {
+          "shape": "S3DestinationAccessControl",
+          "locationName": "accessControl",
+          "documentation": "Optional. Have MediaConvert automatically apply Amazon S3 access control for the outputs in this output group. When you don't use this setting, S3 automatically applies the default access control list PRIVATE."
+        },
         "Encryption": {
           "shape": "S3EncryptionSettings",
           "locationName": "encryption",
@@ -8125,6 +8328,16 @@
       },
       "documentation": "Settings for how your job outputs are encrypted as they are uploaded to Amazon S3."
     },
+    "S3ObjectCannedAcl": {
+      "type": "string",
+      "documentation": "Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.",
+      "enum": [
+        "PUBLIC_READ",
+        "AUTHENTICATED_READ",
+        "BUCKET_OWNER_READ",
+        "BUCKET_OWNER_FULL_CONTROL"
+      ]
+    },
     "S3ServerSideEncryptionType": {
       "type": "string",
       "documentation": "Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn).",
@@ -8147,6 +8360,7 @@
       "enum": [
         "FRAMERATE_23_97",
         "FRAMERATE_24",
+        "FRAMERATE_25",
         "FRAMERATE_29_97_DROPFRAME",
         "FRAMERATE_29_97_NON_DROPFRAME"
       ]
@@ -8800,6 +9014,11 @@
           "locationName": "deinterlacer",
           "documentation": "Use Deinterlacer (Deinterlacer) to produce smoother motion and a clearer picture."
         },
+        "DolbyVision": {
+          "shape": "DolbyVision",
+          "locationName": "dolbyVision",
+          "documentation": "Enable Dolby Vision feature to produce Dolby Vision compatible video output."
+        },
         "ImageInserter": {
           "shape": "ImageInserter",
           "locationName": "imageInserter",
@@ -9290,6 +9509,18 @@
         "shape": "CaptionDescriptionPreset"
       }
     },
+    "__listOfCmafAdditionalManifest": {
+      "type": "list",
+      "member": {
+        "shape": "CmafAdditionalManifest"
+      }
+    },
+    "__listOfDashAdditionalManifest": {
+      "type": "list",
+      "member": {
+        "shape": "DashAdditionalManifest"
+      }
+    },
     "__listOfEndpoint": {
       "type": "list",
       "member": {
@@ -9300,6 +9531,12 @@
       "type": "list",
       "member": {
         "shape": "HlsAdMarkers"
+      }
+    },
+    "__listOfHlsAdditionalManifest": {
+      "type": "list",
+      "member": {
+        "shape": "HlsAdditionalManifest"
       }
     },
     "__listOfHlsCaptionLanguageMapping": {
@@ -9348,6 +9585,12 @@
       "type": "list",
       "member": {
         "shape": "JobTemplate"
+      }
+    },
+    "__listOfMsSmoothAdditionalManifest": {
+      "type": "list",
+      "member": {
+        "shape": "MsSmoothAdditionalManifest"
       }
     },
     "__listOfOutput": {
@@ -9595,6 +9838,10 @@
       "type": "string",
       "pattern": "^[A-Za-z0-9]{32}$"
     },
+    "__stringPatternAZaZ23AZaZ": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(-[A-Za-z-]+)?$"
+    },
     "__stringPatternArnAwsUsGovAcm": {
       "type": "string",
       "pattern": "^arn:aws(-us-gov)?:acm:"
@@ -9609,11 +9856,11 @@
     },
     "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE": {
       "type": "string",
-      "pattern": "^(http|https|s3)://([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))$"
+      "pattern": "^(http|https|s3)://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))$"
     },
     "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL": {
       "type": "string",
-      "pattern": "^(http|https|s3)://([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$"
+      "pattern": "^(http|https|s3)://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$"
     },
     "__stringPatternHttps": {
       "type": "string",

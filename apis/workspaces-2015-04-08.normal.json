@@ -267,6 +267,37 @@
       ],
       "documentation": "<p>Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. </p>"
     },
+    "DeregisterWorkspaceDirectory": {
+      "name": "DeregisterWorkspaceDirectory",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeregisterWorkspaceDirectoryRequest"
+      },
+      "output": {
+        "shape": "DeregisterWorkspaceDirectoryResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidResourceStateException"
+        }
+      ],
+      "documentation": "<p>Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.</p>"
+    },
     "DescribeAccount": {
       "name": "DescribeAccount",
       "http": {
@@ -284,7 +315,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.</p>"
+      "documentation": "<p>Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.</p>"
     },
     "DescribeAccountModifications": {
       "name": "DescribeAccountModifications",
@@ -303,7 +334,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.</p>"
+      "documentation": "<p>Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.</p>"
     },
     "DescribeClientProperties": {
       "name": "DescribeClientProperties",
@@ -407,7 +438,7 @@
           "shape": "InvalidParameterValuesException"
         }
       ],
-      "documentation": "<p>Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.</p>"
+      "documentation": "<p>Describes the available directories that are registered with Amazon WorkSpaces.</p>"
     },
     "DescribeWorkspaceImages": {
       "name": "DescribeWorkspaceImages",
@@ -554,7 +585,7 @@
           "shape": "InvalidParameterValuesException"
         }
       ],
-      "documentation": "<p>Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. </p>"
+      "documentation": "<p>Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. </p>"
     },
     "ListAvailableManagementCidrRanges": {
       "name": "ListAvailableManagementCidrRanges",
@@ -576,7 +607,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL). </p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
+      "documentation": "<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL). </p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
     },
     "ModifyAccount": {
       "name": "ModifyAccount",
@@ -607,7 +638,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Modifies the configuration of bring your own license (BYOL) for the specified account.</p>"
+      "documentation": "<p>Modifies the configuration of Bring Your Own License (BYOL) for the specified account.</p>"
     },
     "ModifyClientProperties": {
       "name": "ModifyClientProperties",
@@ -633,6 +664,78 @@
         }
       ],
       "documentation": "<p>Modifies the properties of the specified Amazon WorkSpaces clients.</p>"
+    },
+    "ModifySelfservicePermissions": {
+      "name": "ModifySelfservicePermissions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifySelfservicePermissionsRequest"
+      },
+      "output": {
+        "shape": "ModifySelfservicePermissionsResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Modifies the self-service WorkSpace management capabilities for your users. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html\">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.</p>"
+    },
+    "ModifyWorkspaceAccessProperties": {
+      "name": "ModifyWorkspaceAccessProperties",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyWorkspaceAccessPropertiesRequest"
+      },
+      "output": {
+        "shape": "ModifyWorkspaceAccessPropertiesResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Specifies which devices and operating systems users can use to access their Workspaces. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access\"> Control Device Access</a>.</p>"
+    },
+    "ModifyWorkspaceCreationProperties": {
+      "name": "ModifyWorkspaceCreationProperties",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyWorkspaceCreationPropertiesRequest"
+      },
+      "output": {
+        "shape": "ModifyWorkspaceCreationPropertiesResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Modify the default properties used to create WorkSpaces.</p>"
     },
     "ModifyWorkspaceProperties": {
       "name": "ModifyWorkspaceProperties",
@@ -723,6 +826,46 @@
         "shape": "RebuildWorkspacesResult"
       },
       "documentation": "<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>"
+    },
+    "RegisterWorkspaceDirectory": {
+      "name": "RegisterWorkspaceDirectory",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RegisterWorkspaceDirectoryRequest"
+      },
+      "output": {
+        "shape": "RegisterWorkspaceDirectoryResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "WorkspacesDefaultRoleNotFoundException"
+        },
+        {
+          "shape": "InvalidResourceStateException"
+        },
+        {
+          "shape": "UnsupportedNetworkConfigurationException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        }
+      ],
+      "documentation": "<p>Registers the specified directory. This operation is asynchronous and returns before the WorkSpace directory is registered. If this is the first time you are registering a directory, you will need to create the workspaces_DefaultRole role before you can register a directory. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role\"> Creating the workspaces_DefaultRole Role</a>.</p>"
     },
     "RestoreWorkspace": {
       "name": "RestoreWorkspace",
@@ -856,6 +999,13 @@
       "type": "string",
       "pattern": "^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$"
     },
+    "AccessPropertyValue": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "DENY"
+      ]
+    },
     "AccountModification": {
       "type": "structure",
       "members": {
@@ -884,7 +1034,7 @@
           "documentation": "<p>The text of the error message that is returned if the configuration of BYOL cannot be modified.</p>"
         }
       },
-      "documentation": "<p>Describes a modification to the configuration of bring your own license (BYOL) for the specified account. </p>"
+      "documentation": "<p>Describes a modification to the configuration of Bring Your Own License (BYOL) for the specified account. </p>"
     },
     "AccountModificationList": {
       "type": "list",
@@ -1197,10 +1347,14 @@
         },
         "UserEnabledAsLocalAdministrator": {
           "shape": "BooleanObject",
-          "documentation": "<p>Specifies whether the WorkSpace user is an administrator on the WorkSpace.</p>"
+          "documentation": "<p>Specifies whether WorkSpace users are local administrators on their WorkSpaces.</p>"
+        },
+        "EnableMaintenanceMode": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html\">WorkSpace Maintenance</a>.</p>"
         }
       },
-      "documentation": "<p>Describes the default values used to create a WorkSpace.</p>"
+      "documentation": "<p>Describes the default values that are used to create WorkSpaces. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html\">Update Directory Details for Your WorkSpaces</a>.</p>"
     },
     "DeleteIpGroupRequest": {
       "type": "structure",
@@ -1252,6 +1406,22 @@
       }
     },
     "DeleteWorkspaceImageResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeregisterWorkspaceDirectoryRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory. If any WorkSpaces are registered to this directory, you must remove them before you deregister the directory, or you will receive an OperationNotSupportedException error.</p>"
+        }
+      }
+    },
+    "DeregisterWorkspaceDirectoryResult": {
       "type": "structure",
       "members": {}
     },
@@ -1403,6 +1573,10 @@
           "shape": "DirectoryIdList",
           "documentation": "<p>The identifiers of the directories. If the value is null, all directories are retrieved.</p>"
         },
+        "Limit": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of directories to return.</p>"
+        },
         "NextToken": {
           "shape": "PaginationToken",
           "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
@@ -1550,6 +1724,8 @@
     },
     "DirectoryId": {
       "type": "string",
+      "max": 65,
+      "min": 10,
       "pattern": "^d-[0-9a-f]{8,63}$"
     },
     "DirectoryIdList": {
@@ -1886,6 +2062,69 @@
       "type": "structure",
       "members": {}
     },
+    "ModifySelfservicePermissionsRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceId",
+        "SelfservicePermissions"
+      ],
+      "members": {
+        "ResourceId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "SelfservicePermissions": {
+          "shape": "SelfservicePermissions",
+          "documentation": "<p>The permissions to enable or disable self-service capabilities.</p>"
+        }
+      }
+    },
+    "ModifySelfservicePermissionsResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "ModifyWorkspaceAccessPropertiesRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceId",
+        "WorkspaceAccessProperties"
+      ],
+      "members": {
+        "ResourceId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "WorkspaceAccessProperties": {
+          "shape": "WorkspaceAccessProperties",
+          "documentation": "<p>The device types and operating systems to enable or disable for access.</p>"
+        }
+      }
+    },
+    "ModifyWorkspaceAccessPropertiesResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "ModifyWorkspaceCreationPropertiesRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceId",
+        "WorkspaceCreationProperties"
+      ],
+      "members": {
+        "ResourceId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "WorkspaceCreationProperties": {
+          "shape": "WorkspaceCreationProperties",
+          "documentation": "<p>The default properties for creating WorkSpaces.</p>"
+        }
+      }
+    },
+    "ModifyWorkspaceCreationPropertiesResult": {
+      "type": "structure",
+      "members": {}
+    },
     "ModifyWorkspacePropertiesRequest": {
       "type": "structure",
       "required": [
@@ -2051,6 +2290,43 @@
       "min": 1,
       "pattern": "^[-0-9a-z]{1,31}$"
     },
+    "RegisterWorkspaceDirectoryRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId",
+        "EnableWorkDocs"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory. You cannot register a directory if it does not have a status of Active. If the directory does not have a status of Active, you will receive an InvalidResourceStateException error. If you have already registered the maximum number of directories that you can register with Amazon WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister directories that you are not using for WorkSpaces, and try again.</p>"
+        },
+        "SubnetIds": {
+          "shape": "SubnetIds",
+          "documentation": "<p>The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the subnets are in supported Availability Zones. The subnets must also be in separate Availability Zones. If these conditions are not met, you will receive an OperationNotSupportedException error.</p>"
+        },
+        "EnableWorkDocs": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this parameter and WorkDocs is not available in the Region, you will receive an OperationNotSupportedException error. Set <code>EnableWorkDocs</code> to disabled, and try again.</p>"
+        },
+        "EnableSelfService": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Indicates whether self-service capabilities are enabled or disabled.</p>"
+        },
+        "Tenancy": {
+          "shape": "Tenancy",
+          "documentation": "<p>Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to <code>DEDICATED</code> and your AWS account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">Bring Your Own Windows Desktop Images</a>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags associated with the directory.</p>"
+        }
+      }
+    },
+    "RegisterWorkspaceDirectoryResult": {
+      "type": "structure",
+      "members": {}
+    },
     "RegistrationCode": {
       "type": "string",
       "max": 20,
@@ -2126,7 +2402,35 @@
     },
     "SecurityGroupId": {
       "type": "string",
-      "pattern": "^(sg-[0-9a-f]{8})$"
+      "max": 20,
+      "min": 11,
+      "pattern": "^(sg-([0-9a-f]{8}|[0-9a-f]{17}))$"
+    },
+    "SelfservicePermissions": {
+      "type": "structure",
+      "members": {
+        "RestartWorkspace": {
+          "shape": "ReconnectEnum",
+          "documentation": "<p>Specifies whether users can restart their WorkSpace.</p>"
+        },
+        "IncreaseVolumeSize": {
+          "shape": "ReconnectEnum",
+          "documentation": "<p>Specifies whether users can increase the volume size of the drives on their WorkSpace.</p>"
+        },
+        "ChangeComputeType": {
+          "shape": "ReconnectEnum",
+          "documentation": "<p>Specifies whether users can change the compute type (bundle) for their WorkSpace.</p>"
+        },
+        "SwitchRunningMode": {
+          "shape": "ReconnectEnum",
+          "documentation": "<p>Specifies whether users can switch the running mode of their WorkSpace.</p>"
+        },
+        "RebuildWorkspace": {
+          "shape": "ReconnectEnum",
+          "documentation": "<p>Specifies whether users can rebuild the operating system of a WorkSpace to its original state.</p>"
+        }
+      },
+      "documentation": "<p>Describes the self-service permissions for a directory. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html\">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.</p>"
     },
     "Snapshot": {
       "type": "structure",
@@ -2224,13 +2528,16 @@
     },
     "SubnetId": {
       "type": "string",
-      "pattern": "^(subnet-[0-9a-f]{8})$"
+      "max": 24,
+      "min": 15,
+      "pattern": "^(subnet-([0-9a-f]{8}|[0-9a-f]{17}))$"
     },
     "SubnetIds": {
       "type": "list",
       "member": {
         "shape": "SubnetId"
-      }
+      },
+      "max": 2
     },
     "Tag": {
       "type": "structure",
@@ -2275,6 +2582,13 @@
       "enum": [
         "AVAILABLE",
         "ADMIN_MAINTENANCE"
+      ]
+    },
+    "Tenancy": {
+      "type": "string",
+      "enum": [
+        "DEDICATED",
+        "SHARED"
       ]
     },
     "TerminateRequest": {
@@ -2430,6 +2744,40 @@
       },
       "documentation": "<p>Describes a WorkSpace.</p>"
     },
+    "WorkspaceAccessProperties": {
+      "type": "structure",
+      "members": {
+        "DeviceTypeWindows": {
+          "shape": "AccessPropertyValue",
+          "documentation": "<p>Indicates whether users can use Windows clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html\">Restrict WorkSpaces Access to Trusted Devices</a>. </p>"
+        },
+        "DeviceTypeOsx": {
+          "shape": "AccessPropertyValue",
+          "documentation": "<p>Indicates whether users can use macOS clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html\">Restrict WorkSpaces Access to Trusted Devices</a>. </p>"
+        },
+        "DeviceTypeWeb": {
+          "shape": "AccessPropertyValue",
+          "documentation": "<p>Indicates whether users can access their WorkSpaces through a web browser.</p>"
+        },
+        "DeviceTypeIos": {
+          "shape": "AccessPropertyValue",
+          "documentation": "<p>Indicates whether users can use iOS devices to access their WorkSpaces.</p>"
+        },
+        "DeviceTypeAndroid": {
+          "shape": "AccessPropertyValue",
+          "documentation": "<p>Indicates whether users can use Android devices to access their WorkSpaces.</p>"
+        },
+        "DeviceTypeChromeOs": {
+          "shape": "AccessPropertyValue",
+          "documentation": "<p>Indicates whether users can use Chromebooks to access their WorkSpaces.</p>"
+        },
+        "DeviceTypeZeroClient": {
+          "shape": "AccessPropertyValue",
+          "documentation": "<p>Indicates whether users can use zero client devices to access their WorkSpaces.</p>"
+        }
+      },
+      "documentation": "<p>The device types and operating systems that can be used to access a WorkSpace. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html\">Amazon WorkSpaces Client Network Requirements</a>.</p>"
+    },
     "WorkspaceBundle": {
       "type": "structure",
       "members": {
@@ -2492,6 +2840,32 @@
         "shape": "WorkspaceConnectionStatus"
       }
     },
+    "WorkspaceCreationProperties": {
+      "type": "structure",
+      "members": {
+        "EnableInternetAccess": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Indicates whether internet access is enabled for your WorkSpaces.</p>"
+        },
+        "DefaultOu": {
+          "shape": "DefaultOu",
+          "documentation": "<p>The default organizational unit (OU) for your WorkSpace directories.</p>"
+        },
+        "CustomSecurityGroupId": {
+          "shape": "SecurityGroupId",
+          "documentation": "<p>The identifier of your custom security group.</p>"
+        },
+        "UserEnabledAsLocalAdministrator": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Indicates whether users are local administrators of their WorkSpaces.</p>"
+        },
+        "EnableMaintenanceMode": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html\">WorkSpace Maintenance</a>. </p>"
+        }
+      },
+      "documentation": "<p>Describes the default properties that are used for creating WorkSpaces. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html\">Update Directory Details for Your WorkSpaces</a>. </p>"
+    },
     "WorkspaceDirectory": {
       "type": "structure",
       "members": {
@@ -2537,7 +2911,7 @@
         },
         "State": {
           "shape": "WorkspaceDirectoryState",
-          "documentation": "<p>The state of the directory's registration with Amazon WorkSpaces</p>"
+          "documentation": "<p>The state of the directory's registration with Amazon WorkSpaces.</p>"
         },
         "WorkspaceCreationProperties": {
           "shape": "DefaultWorkspaceCreationProperties",
@@ -2546,9 +2920,21 @@
         "ipGroupIds": {
           "shape": "IpGroupIdList",
           "documentation": "<p>The identifiers of the IP access control groups associated with the directory.</p>"
+        },
+        "WorkspaceAccessProperties": {
+          "shape": "WorkspaceAccessProperties",
+          "documentation": "<p>The devices and operating systems that users can use to access Workspaces.</p>"
+        },
+        "Tenancy": {
+          "shape": "Tenancy",
+          "documentation": "<p>Specifies whether the directory is dedicated or shared. To use Bring Your Own License (BYOL), this value must be set to <code>DEDICATED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">Bring Your Own Windows Desktop Images</a>.</p>"
+        },
+        "SelfservicePermissions": {
+          "shape": "SelfservicePermissions",
+          "documentation": "<p>The default self-service permissions for WorkSpaces in the directory.</p>"
         }
       },
-      "documentation": "<p>Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.</p>"
+      "documentation": "<p>Describes a directory that is used with Amazon WorkSpaces.</p>"
     },
     "WorkspaceDirectoryState": {
       "type": "string",
@@ -2607,7 +2993,7 @@
         },
         "RequiredTenancy": {
           "shape": "WorkspaceImageRequiredTenancy",
-          "documentation": "<p>Specifies whether the image is running on dedicated hardware. When bring your own license (BYOL) is enabled, this value is set to DEDICATED. </p>"
+          "documentation": "<p>Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to <code>DEDICATED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">Bring Your Own Windows Desktop Images</a>.</p>"
         },
         "ErrorCode": {
           "shape": "WorkspaceImageErrorCode",
@@ -2722,7 +3108,7 @@
         },
         "UserName": {
           "shape": "UserName",
-          "documentation": "<p>The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.</p>"
+          "documentation": "<p>The user name of the user for the WorkSpace. This user name must exist in the AWS Directory Service directory for the WorkSpace.</p>"
         },
         "BundleId": {
           "shape": "BundleId",

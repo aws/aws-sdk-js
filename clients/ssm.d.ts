@@ -412,11 +412,11 @@ declare class SSM extends Service {
    */
   describeOpsItems(callback?: (err: AWSError, data: SSM.Types.DescribeOpsItemsResponse) => void): Request<SSM.Types.DescribeOpsItemsResponse, AWSError>;
   /**
-   * Get information about a parameter. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.
+   * Get information about a parameter.  Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results. 
    */
   describeParameters(params: SSM.Types.DescribeParametersRequest, callback?: (err: AWSError, data: SSM.Types.DescribeParametersResult) => void): Request<SSM.Types.DescribeParametersResult, AWSError>;
   /**
-   * Get information about a parameter. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.
+   * Get information about a parameter.  Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results. 
    */
   describeParameters(callback?: (err: AWSError, data: SSM.Types.DescribeParametersResult) => void): Request<SSM.Types.DescribeParametersResult, AWSError>;
   /**
@@ -604,11 +604,11 @@ declare class SSM extends Service {
    */
   getParameters(callback?: (err: AWSError, data: SSM.Types.GetParametersResult) => void): Request<SSM.Types.GetParametersResult, AWSError>;
   /**
-   * Retrieve parameters in a specific hierarchy. For more information, see Working with Systems Manager Parameters in the AWS Systems Manager User Guide.  Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.  This API action doesn't support filtering by tags.  
+   * Retrieve information about one or more parameters in a specific hierarchy.   Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results. 
    */
   getParametersByPath(params: SSM.Types.GetParametersByPathRequest, callback?: (err: AWSError, data: SSM.Types.GetParametersByPathResult) => void): Request<SSM.Types.GetParametersByPathResult, AWSError>;
   /**
-   * Retrieve parameters in a specific hierarchy. For more information, see Working with Systems Manager Parameters in the AWS Systems Manager User Guide.  Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.  This API action doesn't support filtering by tags.  
+   * Retrieve information about one or more parameters in a specific hierarchy.   Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results. 
    */
   getParametersByPath(callback?: (err: AWSError, data: SSM.Types.GetParametersByPathResult) => void): Request<SSM.Types.GetParametersByPathResult, AWSError>;
   /**
@@ -3332,7 +3332,7 @@ declare namespace SSM {
   }
   export interface DescribeParametersRequest {
     /**
-     * One or more filters. Use a filter to return a more specific list of results.
+     * This data type is deprecated. Instead, use ParameterFilters.
      */
     Filters?: ParametersFilterList;
     /**
@@ -4462,7 +4462,7 @@ declare namespace SSM {
      */
     Recursive?: Boolean;
     /**
-     * Filters to limit the request results.  You can't filter using the parameter name. 
+     * Filters to limit the request results.
      */
     ParameterFilters?: ParameterStringFilterList;
     /**
@@ -6360,7 +6360,7 @@ declare namespace SSM {
      */
     Key: ParameterStringFilterKey;
     /**
-     * Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.
+     * For all filters used with DescribeParameters, valid options include Equals and BeginsWith. The Name filter additionally supports the Contains option. (Exception: For filters using the key Path, valid options include Recursive and OneLevel.) For filters used with GetParametersByPath, valid options include Equals and BeginsWith. (Exception: For filters using the key Label, the only valid option is Equals.)
      */
     Option?: ParameterStringQueryOption;
     /**
