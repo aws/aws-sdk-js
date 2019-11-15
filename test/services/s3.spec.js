@@ -3320,6 +3320,15 @@ describe('AWS.S3', function() {
           request = s3.listBuckets().build(function() {});
           expect(request.httpRequest.endpoint.hostname).to.contain('s3.amazonaws.com');
         });
+        it('should not update endpoint if supplied a custom endpoint', function() {
+          s3 = new AWS.S3({
+            region: 'us-east-1',
+            s3UsEast1RegionalEndpoint: 'regional',
+            endpoint: 's3.amazonaws.com'
+          });
+          request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('s3.amazonaws.com');
+        });
       });
     }
   });
