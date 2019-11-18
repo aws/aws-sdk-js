@@ -378,6 +378,44 @@
       ],
       "documentation": "<p>Creates a message template that you can use in messages that are sent through the SMS channel.</p>"
     },
+    "CreateVoiceTemplate": {
+      "name": "CreateVoiceTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/templates/{template-name}/voice",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateVoiceTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateVoiceTemplateResponse",
+        "documentation": "<p>The request succeeded and the specified resource was created.</p>"
+      },
+      "errors": [
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        }
+      ],
+      "documentation": "<p>Creates a message template that you can use in messages that are sent through the voice channel.</p>"
+    },
     "DeleteAdmChannel": {
       "name": "DeleteAdmChannel",
       "http": {
@@ -1217,6 +1255,48 @@
         }
       ],
       "documentation": "<p>Disables the voice channel for an application and deletes any existing settings for the channel.</p>"
+    },
+    "DeleteVoiceTemplate": {
+      "name": "DeleteVoiceTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/templates/{template-name}/voice",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeleteVoiceTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteVoiceTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Deletes a message template that was designed for use in messages that were sent through the voice channel.</p>"
     },
     "GetAdmChannel": {
       "name": "GetAdmChannel",
@@ -2940,6 +3020,48 @@
       ],
       "documentation": "<p>Retrieves information about the status and settings of the voice channel for an application.</p>"
     },
+    "GetVoiceTemplate": {
+      "name": "GetVoiceTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/templates/{template-name}/voice",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetVoiceTemplateRequest"
+      },
+      "output": {
+        "shape": "GetVoiceTemplateResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the content and settings for a message template that you can use in messages that are sent through the voice channel.</p>"
+    },
     "ListJourneys": {
       "name": "ListJourneys",
       "http": {
@@ -4154,6 +4276,48 @@
         }
       ],
       "documentation": "<p>Enables the voice channel for an application or updates the status and settings of the voice channel for an application.</p>"
+    },
+    "UpdateVoiceTemplate": {
+      "name": "UpdateVoiceTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/templates/{template-name}/voice",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateVoiceTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateVoiceTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Updates an existing message template that you can use in messages that are sent through the voice channel.</p>"
     }
   },
   "shapes": {
@@ -4269,7 +4433,7 @@
         },
         "RawContent": {
           "shape": "__string",
-          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.</p>"
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.</p>"
         },
         "SilentPush": {
           "shape": "__boolean",
@@ -4438,7 +4602,7 @@
         },
         "RawContent": {
           "shape": "__string",
-          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides all other content for the message.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you're sending a standard notification, set the value of content-available to 0. If you're sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can't include the alert, badge, or sound keys. For more information, see <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification\">Generating a Remote Notification</a> and <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app\">Pushing Background Updates to Your App</a> on the Apple Developer website.</p></note>"
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you're sending a standard notification, set the value of content-available to 0. If you're sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can't include the alert, badge, or sound keys. For more information, see <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification\">Generating a Remote Notification</a> and <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app\">Pushing Background Updates to Your App</a> on the Apple Developer website.</p></note>"
         },
         "SilentPush": {
           "shape": "__boolean",
@@ -4485,6 +4649,10 @@
         "MediaUrl": {
           "shape": "__string",
           "documentation": "<p>The URL of an image or video to display in push notifications that are based on the message template.</p>"
+        },
+        "RawContent": {
+          "shape": "__string",
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for push notifications that are based on the message template. If specified, this value overrides all other content for the message template.</p>"
         },
         "Sound": {
           "shape": "__string",
@@ -4925,11 +5093,11 @@
         },
         "RawContent": {
           "shape": "__string",
-          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.</p>"
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides all other values for the message.</p>"
         },
         "Substitutions": {
           "shape": "MapOfListOf__string",
-          "documentation": "<p>An object that maps variable values for the message. Amazon Pinpoint merges these values with the variable values specified by properties of the DefaultMessage object. The substitutions in this map take precedence over all other substitutions.</p>"
+          "documentation": "<p>A map of the message variables to merge with the variables specified by properties of the DefaultMessage object. The variables specified in this map take precedence over all other variables.</p>"
         },
         "TitleOverride": {
           "shape": "__string",
@@ -4956,6 +5124,10 @@
         "ImageUrl": {
           "shape": "__string",
           "documentation": "<p>The URL of an image to display in a push notification that's based on the message template.</p>"
+        },
+        "RawContent": {
+          "shape": "__string",
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for a push notification that's based on the message template. If specified, this value overrides all other content for the message template.</p>"
         },
         "SmallImageIconUrl": {
           "shape": "__string",
@@ -5235,7 +5407,7 @@
         },
         "RawContent": {
           "shape": "__string",
-          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.</p>"
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.</p>"
         },
         "SilentPush": {
           "shape": "__boolean",
@@ -5328,7 +5500,7 @@
       "members": {
         "Body": {
           "shape": "__string",
-          "documentation": "<p>The body of the email for recipients whose email clients don't support HTML content.</p>"
+          "documentation": "<p>The body of the email for recipients whose email clients don't render HTML content.</p>"
         },
         "FromAddress": {
           "shape": "__string",
@@ -5336,7 +5508,7 @@
         },
         "HtmlBody": {
           "shape": "__string",
-          "documentation": "<p>The body of the email, in HTML format, for recipients whose email clients support HTML content.</p>"
+          "documentation": "<p>The body of the email, in HTML format, for recipients whose email clients render HTML content.</p>"
         },
         "Title": {
           "shape": "__string",
@@ -5988,19 +6160,50 @@
       },
       "documentation": "<p>Provides information about a request to create a message template.</p>"
     },
+    "CreateVoiceTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        },
+        "VoiceTemplateRequest": {
+          "shape": "VoiceTemplateRequest"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "VoiceTemplateRequest"
+      ],
+      "payload": "VoiceTemplateRequest"
+    },
+    "CreateVoiceTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "CreateTemplateMessageBody": {
+          "shape": "CreateTemplateMessageBody"
+        }
+      },
+      "required": [
+        "CreateTemplateMessageBody"
+      ],
+      "payload": "CreateTemplateMessageBody"
+    },
     "DefaultMessage": {
       "type": "structure",
       "members": {
         "Body": {
           "shape": "__string",
-          "documentation": "<p>The default message body of the push notification, email, or SMS message.</p>"
+          "documentation": "<p>The default body of the message.</p>"
         },
         "Substitutions": {
           "shape": "MapOfListOf__string",
-          "documentation": "<p>The default message variables to use in the push notification, email, or SMS message. You can override these default variables with individual address variables.</p>"
+          "documentation": "<p>The default message variables to use in the message. You can override these default variables with individual address variables.</p>"
         }
       },
-      "documentation": "<p>Specifies the default message to use for all channels.</p>"
+      "documentation": "<p>Specifies the default message for all channels.</p>"
     },
     "DefaultPushNotificationMessage": {
       "type": "structure",
@@ -6617,6 +6820,32 @@
       ],
       "payload": "VoiceChannelResponse"
     },
+    "DeleteVoiceTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "DeleteVoiceTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
+    },
     "DeliveryStatus": {
       "type": "string",
       "enum": [
@@ -6653,7 +6882,7 @@
         },
         "DefaultMessage": {
           "shape": "DefaultMessage",
-          "documentation": "<p>The default message body for all channels.</p>"
+          "documentation": "<p>The default message for all channels.</p>"
         },
         "DefaultPushNotificationMessage": {
           "shape": "DefaultPushNotificationMessage",
@@ -6841,9 +7070,13 @@
     "EmailTemplateRequest": {
       "type": "structure",
       "members": {
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that's based on the template, you can override these defaults with message-specific and address-specific variables and values.</p>"
+        },
         "HtmlPart": {
           "shape": "__string",
-          "documentation": "<p>The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.</p>"
+          "documentation": "<p>The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.</p>"
         },
         "Subject": {
           "shape": "__string",
@@ -6854,9 +7087,13 @@
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
         },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>A custom description of the message template.</p>"
+        },
         "TextPart": {
           "shape": "__string",
-          "documentation": "<p>The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don't support HTML and clients that are connected to high-latency networks, such as mobile devices.</p>"
+          "documentation": "<p>The message body, in plain text format, to use in email messages that are based on the message template. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.</p>"
         }
       },
       "documentation": "<p>Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.</p>"
@@ -6871,6 +7108,10 @@
         "CreationDate": {
           "shape": "__string",
           "documentation": "<p>The date when the message template was created.</p>"
+        },
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.</p>"
         },
         "HtmlPart": {
           "shape": "__string",
@@ -6889,6 +7130,10 @@
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
         },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The custom description of the message template.</p>"
+        },
         "TemplateName": {
           "shape": "__string",
           "documentation": "<p>The name of the message template.</p>"
@@ -6899,7 +7144,7 @@
         },
         "TextPart": {
           "shape": "__string",
-          "documentation": "<p>The message body, in text format, that's used in email messages that are based on the message template.</p>"
+          "documentation": "<p>The message body, in plain text format, that's used in email messages that are based on the message template.</p>"
         }
       },
       "documentation": "<p>Provides information about the content and settings for a message template that can be used in messages that are sent through the email channel.</p>",
@@ -7222,7 +7467,7 @@
         },
         "RawContent": {
           "shape": "__string",
-          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides the message.</p>"
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides all other values for the message.</p>"
         },
         "Substitutions": {
           "shape": "MapOfListOf__string",
@@ -7705,7 +7950,7 @@
         },
         "RawContent": {
           "shape": "__string",
-          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.</p>"
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.</p>"
         },
         "RestrictedPackageName": {
           "shape": "__string",
@@ -9218,6 +9463,32 @@
       ],
       "payload": "VoiceChannelResponse"
     },
+    "GetVoiceTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "GetVoiceTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "VoiceTemplateResponse": {
+          "shape": "VoiceTemplateResponse"
+        }
+      },
+      "required": [
+        "VoiceTemplateResponse"
+      ],
+      "payload": "VoiceTemplateResponse"
+    },
     "HoldoutActivity": {
       "type": "structure",
       "members": {
@@ -9550,7 +9821,7 @@
           "documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         }
       },
-      "documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey.</p>",
+      "documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey, and provides information about that query.</p>",
       "required": [
         "Metrics",
         "JourneyId",
@@ -9782,7 +10053,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "template-type",
-          "documentation": "<p>The type of message template to include in the results. Valid values are: EMAIL, SMS, and PUSH. To include all types of templates in the results, don't include this parameter in your request.</p>"
+          "documentation": "<p>The type of message template to include in the results. Valid values are: EMAIL, SMS, PUSH, and VOICE. To include all types of templates in the results, don't include this parameter in your request.</p>"
         }
       }
     },
@@ -9831,7 +10102,7 @@
         },
         "RawContent": {
           "shape": "__string",
-          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. This value overrides other values for the message.</p>"
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.</p>"
         },
         "SilentPush": {
           "shape": "__boolean",
@@ -9917,7 +10188,7 @@
         },
         "MessageConfiguration": {
           "shape": "DirectMessageConfiguration",
-          "documentation": "<p>The set of properties that defines the configuration settings for the message.</p>"
+          "documentation": "<p>The settings and content for the default message and any default messages that you defined for specific channels.</p>"
         },
         "TemplateConfiguration": {
           "shape": "TemplateConfiguration",
@@ -9928,7 +10199,7 @@
           "documentation": "<p>The unique identifier for tracing the message. This identifier is visible to message recipients.</p>"
         }
       },
-      "documentation": "<p>Specifies the objects that define configuration and other settings for a message.</p>",
+      "documentation": "<p>Specifies the configuration and other settings for a message.</p>",
       "required": [
         "MessageConfiguration"
       ]
@@ -10228,6 +10499,10 @@
           "shape": "DefaultPushNotificationTemplate",
           "documentation": "<p>The default message template to use for push notification channels.</p>"
         },
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that's based on the template, you can override these defaults with message-specific and address-specific variables and values.</p>"
+        },
         "GCM": {
           "shape": "AndroidPushNotificationTemplate",
           "documentation": "<p>The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
@@ -10236,6 +10511,10 @@
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>A custom description of the message template.</p>"
         }
       },
       "documentation": "<p>Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.</p>"
@@ -10267,6 +10546,10 @@
           "shape": "DefaultPushNotificationTemplate",
           "documentation": "<p>The default message template that's used for push notification channels.</p>"
         },
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.</p>"
+        },
         "GCM": {
           "shape": "AndroidPushNotificationTemplate",
           "documentation": "<p>The message template that's used for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).</p>"
@@ -10279,6 +10562,10 @@
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The custom description of the message template.</p>"
         },
         "TemplateName": {
           "shape": "__string",
@@ -10634,10 +10921,18 @@
           "shape": "__string",
           "documentation": "<p>The message body to use in text messages that are based on the message template.</p>"
         },
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that's based on the template, you can override these defaults with message-specific and address-specific variables and values.</p>"
+        },
         "tags": {
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>A custom description of the message template.</p>"
         }
       },
       "documentation": "<p>Specifies the content and settings for a message template that can be used in text messages that are sent through the SMS channel.</p>"
@@ -10657,6 +10952,10 @@
           "shape": "__string",
           "documentation": "<p>The date when the message template was created.</p>"
         },
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.</p>"
+        },
         "LastModifiedDate": {
           "shape": "__string",
           "documentation": "<p>The date when the message template was last modified.</p>"
@@ -10665,6 +10964,10 @@
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The custom description of the message template.</p>"
         },
         "TemplateName": {
           "shape": "__string",
@@ -11033,7 +11336,7 @@
         },
         "MessageConfiguration": {
           "shape": "DirectMessageConfiguration",
-          "documentation": "<p>The message definitions for the default message and any default messages that you defined for specific channels.</p>"
+          "documentation": "<p>The settings and content for the default message and any default messages that you defined for specific channels.</p>"
         },
         "TemplateConfiguration": {
           "shape": "TemplateConfiguration",
@@ -11173,7 +11476,7 @@
       "members": {
         "HtmlPart": {
           "shape": "SimpleEmailPart",
-          "documentation": "<p>The body of the email message, in HTML format. We recommend using an HTML part for email clients that support HTML. You can include links, formatted text, and more in an HTML message.</p>"
+          "documentation": "<p>The body of the email message, in HTML format. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.</p>"
         },
         "Subject": {
           "shape": "SimpleEmailPart",
@@ -11181,7 +11484,7 @@
         },
         "TextPart": {
           "shape": "SimpleEmailPart",
-          "documentation": "<p>The body of the email message, in text format. We recommend using a text part for email clients that don't support HTML and clients that are connected to high-latency networks, such as mobile devices.</p>"
+          "documentation": "<p>The body of the email message, in plain text format. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.</p>"
         }
       },
       "documentation": "<p>Specifies the contents of an email message, composed of a subject, a text part, and an HTML part.</p>"
@@ -11289,9 +11592,13 @@
         "SMSTemplate": {
           "shape": "Template",
           "documentation": "<p>The SMS template to use for the message.</p>"
+        },
+        "VoiceTemplate": {
+          "shape": "Template",
+          "documentation": "<p>The voice template to use for the message.</p>"
         }
       },
-      "documentation": "<p>Specifies the message template for each type of channel.</p>"
+      "documentation": "<p>Specifies the message template to use for the message, for each type of channel.</p>"
     },
     "TemplateResponse": {
       "type": "structure",
@@ -11304,6 +11611,10 @@
           "shape": "__string",
           "documentation": "<p>The date when the message template was created.</p>"
         },
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.</p>"
+        },
         "LastModifiedDate": {
           "shape": "__string",
           "documentation": "<p>The date when the message template was last modified.</p>"
@@ -11312,6 +11623,10 @@
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The custom description of the message template.</p>"
         },
         "TemplateName": {
           "shape": "__string",
@@ -12093,6 +12408,37 @@
       ],
       "payload": "VoiceChannelResponse"
     },
+    "UpdateVoiceTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        },
+        "VoiceTemplateRequest": {
+          "shape": "VoiceTemplateRequest"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "VoiceTemplateRequest"
+      ],
+      "payload": "VoiceTemplateRequest"
+    },
+    "UpdateVoiceTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
+    },
     "VoiceChannelRequest": {
       "type": "structure",
       "members": {
@@ -12157,11 +12503,11 @@
       "members": {
         "Body": {
           "shape": "__string",
-          "documentation": "<p>The text script for the voice message.</p>"
+          "documentation": "<p>The text of the script to use for the voice message.</p>"
         },
         "LanguageCode": {
           "shape": "__string",
-          "documentation": "<p>The language to use when delivering the message. For a list of supported languages, see the <a href=\"AmazonPollyDG.html\">Amazon Polly Developer Guide</a>.</p>"
+          "documentation": "<p>The code for the language to use when synthesizing the text of the message script. For a list of supported languages and the code for each one, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/what-is.html\">Amazon Polly Developer Guide</a>.</p>"
         },
         "OriginationNumber": {
           "shape": "__string",
@@ -12173,10 +12519,98 @@
         },
         "VoiceId": {
           "shape": "__string",
-          "documentation": "<p>The name of the voice to use when delivering the message. For a list of supported voices, see the <a href=\"AmazonPollyDG.html\">Amazon Polly Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the voice to use when delivering the message. For a list of supported voices, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/what-is.html\">Amazon Polly Developer Guide</a>.</p>"
         }
       },
       "documentation": "<p>Specifies the settings for a one-time voice message that's sent directly to an endpoint through the voice channel.</p>"
+    },
+    "VoiceTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The text of the script to use in messages that are based on the message template, in plain text format.</p>"
+        },
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that's based on the template, you can override these defaults with message-specific and address-specific variables and values.</p>"
+        },
+        "LanguageCode": {
+          "shape": "__string",
+          "documentation": "<p>The code for the language to use when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/what-is.html\">Amazon Polly Developer Guide</a>.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>A custom description of the message template.</p>"
+        },
+        "VoiceId": {
+          "shape": "__string",
+          "documentation": "<p>The name of the voice to use when delivering messages that are based on the message template. For a list of supported voices, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/what-is.html\">Amazon Polly Developer Guide</a>.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the content and settings for a message template that can be used in messages that are sent through the voice channel.</p>"
+    },
+    "VoiceTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>"
+        },
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The text of the script that's used in messages that are based on the message template, in plain text format.</p>"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was created.</p>"
+        },
+        "DefaultSubstitutions": {
+          "shape": "__string",
+          "documentation": "<p>The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.</p>"
+        },
+        "LanguageCode": {
+          "shape": "__string",
+          "documentation": "<p>The code for the language that's used when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/what-is.html\">Amazon Polly Developer Guide</a>.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "__string",
+          "documentation": "<p>The date when the message template was last modified.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The custom description of the message template.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the message template.</p>"
+        },
+        "TemplateType": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type of channel that the message template is designed for. For a voice template, this value is VOICE.</p>"
+        },
+        "VoiceId": {
+          "shape": "__string",
+          "documentation": "<p>The name of the voice that's used when delivering messages that are based on the message template. For a list of supported voices, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/what-is.html\">Amazon Polly Developer Guide</a>.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the content and settings for a message template that can be used in messages that are sent through the voice channel.</p>",
+      "required": [
+        "LastModifiedDate",
+        "CreationDate",
+        "TemplateName",
+        "TemplateType"
+      ]
     },
     "WaitActivity": {
       "type": "structure",
@@ -12197,7 +12631,7 @@
       "members": {
         "WaitFor": {
           "shape": "__string",
-          "documentation": "<p>The amount of time, as a duration in ISO 8601 format, to wait before determining whether the activity's conditions have been met or moving participants to the next activity in the journey.</p>"
+          "documentation": "<p>The amount of time to wait, as a duration in ISO 8601 format, before determining whether the activity's conditions have been met or moving participants to the next activity in the journey.</p>"
         },
         "WaitUntil": {
           "shape": "__string",
@@ -12237,7 +12671,7 @@
         },
         "Description": {
           "shape": "__string",
-          "documentation": "<p>The custom description of the campaign.</p>"
+          "documentation": "<p>A custom description of the campaign.</p>"
         },
         "HoldoutPercent": {
           "shape": "__integer",
@@ -12286,7 +12720,7 @@
         },
         "TreatmentDescription": {
           "shape": "__string",
-          "documentation": "<p>The custom description of a variation of the campaign to use for A/B testing.</p>"
+          "documentation": "<p>A custom description of a variation of the campaign to use for A/B testing.</p>"
         },
         "TreatmentName": {
           "shape": "__string",
@@ -12414,7 +12848,7 @@
         },
         "TreatmentDescription": {
           "shape": "__string",
-          "documentation": "<p>The custom description of the treatment.</p>"
+          "documentation": "<p>A custom description of the treatment.</p>"
         },
         "TreatmentName": {
           "shape": "__string",

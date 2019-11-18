@@ -84,6 +84,14 @@ declare class Pinpoint extends Service {
    */
   createSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateSmsTemplateResponse) => void): Request<Pinpoint.Types.CreateSmsTemplateResponse, AWSError>;
   /**
+   * Creates a message template that you can use in messages that are sent through the voice channel.
+   */
+  createVoiceTemplate(params: Pinpoint.Types.CreateVoiceTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateVoiceTemplateResponse) => void): Request<Pinpoint.Types.CreateVoiceTemplateResponse, AWSError>;
+  /**
+   * Creates a message template that you can use in messages that are sent through the voice channel.
+   */
+  createVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateVoiceTemplateResponse) => void): Request<Pinpoint.Types.CreateVoiceTemplateResponse, AWSError>;
+  /**
    * Disables the ADM channel for an application and deletes any existing settings for the channel.
    */
   deleteAdmChannel(params: Pinpoint.Types.DeleteAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAdmChannelResponse) => void): Request<Pinpoint.Types.DeleteAdmChannelResponse, AWSError>;
@@ -243,6 +251,14 @@ declare class Pinpoint extends Service {
    * Disables the voice channel for an application and deletes any existing settings for the channel.
    */
   deleteVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceChannelResponse) => void): Request<Pinpoint.Types.DeleteVoiceChannelResponse, AWSError>;
+  /**
+   * Deletes a message template that was designed for use in messages that were sent through the voice channel.
+   */
+  deleteVoiceTemplate(params: Pinpoint.Types.DeleteVoiceTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceTemplateResponse) => void): Request<Pinpoint.Types.DeleteVoiceTemplateResponse, AWSError>;
+  /**
+   * Deletes a message template that was designed for use in messages that were sent through the voice channel.
+   */
+  deleteVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceTemplateResponse) => void): Request<Pinpoint.Types.DeleteVoiceTemplateResponse, AWSError>;
   /**
    * Retrieves information about the status and settings of the ADM channel for an application.
    */
@@ -572,6 +588,14 @@ declare class Pinpoint extends Service {
    */
   getVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
   /**
+   * Retrieves the content and settings for a message template that you can use in messages that are sent through the voice channel.
+   */
+  getVoiceTemplate(params: Pinpoint.Types.GetVoiceTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceTemplateResponse) => void): Request<Pinpoint.Types.GetVoiceTemplateResponse, AWSError>;
+  /**
+   * Retrieves the content and settings for a message template that you can use in messages that are sent through the voice channel.
+   */
+  getVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceTemplateResponse) => void): Request<Pinpoint.Types.GetVoiceTemplateResponse, AWSError>;
+  /**
    * Retrieves information about the status, configuration, and other settings for all the journeys that are associated with an application.
    */
   listJourneys(params: Pinpoint.Types.ListJourneysRequest, callback?: (err: AWSError, data: Pinpoint.Types.ListJourneysResponse) => void): Request<Pinpoint.Types.ListJourneysResponse, AWSError>;
@@ -819,6 +843,14 @@ declare class Pinpoint extends Service {
    * Enables the voice channel for an application or updates the status and settings of the voice channel for an application.
    */
   updateVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
+  /**
+   * Updates an existing message template that you can use in messages that are sent through the voice channel.
+   */
+  updateVoiceTemplate(params: Pinpoint.Types.UpdateVoiceTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceTemplateResponse) => void): Request<Pinpoint.Types.UpdateVoiceTemplateResponse, AWSError>;
+  /**
+   * Updates an existing message template that you can use in messages that are sent through the voice channel.
+   */
+  updateVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceTemplateResponse) => void): Request<Pinpoint.Types.UpdateVoiceTemplateResponse, AWSError>;
 }
 declare namespace Pinpoint {
   export interface ADMChannelRequest {
@@ -915,7 +947,7 @@ declare namespace Pinpoint {
      */
     MD5?: __string;
     /**
-     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.
      */
     RawContent?: __string;
     /**
@@ -1069,7 +1101,7 @@ declare namespace Pinpoint {
      */
     Priority?: __string;
     /**
-     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides all other content for the message. If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you're sending a standard notification, set the value of content-available to 0. If you're sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can't include the alert, badge, or sound keys. For more information, see Generating a Remote Notification and Pushing Background Updates to Your App on the Apple Developer website.
+     * The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message. If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. The value of the content-available key has to be an integer, and can only be 0 or 1. If you're sending a standard notification, set the value of content-available to 0. If you're sending a silent (background) notification, set the value of content-available to 1. Additionally, silent notification payloads can't include the alert, badge, or sound keys. For more information, see Generating a Remote Notification and Pushing Background Updates to Your App on the Apple Developer website.
      */
     RawContent?: __string;
     /**
@@ -1114,6 +1146,10 @@ declare namespace Pinpoint {
      * The URL of an image or video to display in push notifications that are based on the message template.
      */
     MediaUrl?: __string;
+    /**
+     * The raw, JSON-formatted string to use as the payload for push notifications that are based on the message template. If specified, this value overrides all other content for the message template.
+     */
+    RawContent?: __string;
     /**
      * The key for the sound to play when the recipient receives a push notification that's based on the message template. The value for this key is the name of a sound file in your app's main bundle or the Library/Sounds folder in your app's data container. If the sound file can't be found or you specify default for the value, the system plays the default alert sound.
      */
@@ -1488,11 +1524,11 @@ declare namespace Pinpoint {
      */
     Context?: MapOf__string;
     /**
-     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides all other values for the message.
      */
     RawContent?: __string;
     /**
-     * An object that maps variable values for the message. Amazon Pinpoint merges these values with the variable values specified by properties of the DefaultMessage object. The substitutions in this map take precedence over all other substitutions.
+     * A map of the message variables to merge with the variables specified by properties of the DefaultMessage object. The variables specified in this map take precedence over all other variables.
      */
     Substitutions?: MapOfListOf__string;
     /**
@@ -1517,6 +1553,10 @@ declare namespace Pinpoint {
      * The URL of an image to display in a push notification that's based on the message template.
      */
     ImageUrl?: __string;
+    /**
+     * The raw, JSON-formatted string to use as the payload for a push notification that's based on the message template. If specified, this value overrides all other content for the message template.
+     */
+    RawContent?: __string;
     /**
      * The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.
      */
@@ -1721,7 +1761,7 @@ declare namespace Pinpoint {
      */
     ImageUrl?: __string;
     /**
-     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.
      */
     RawContent?: __string;
     /**
@@ -1791,7 +1831,7 @@ declare namespace Pinpoint {
   }
   export interface CampaignEmailMessage {
     /**
-     * The body of the email for recipients whose email clients don't support HTML content.
+     * The body of the email for recipients whose email clients don't render HTML content.
      */
     Body?: __string;
     /**
@@ -1799,7 +1839,7 @@ declare namespace Pinpoint {
      */
     FromAddress?: __string;
     /**
-     * The body of the email, in HTML format, for recipients whose email clients support HTML content.
+     * The body of the email, in HTML format, for recipients whose email clients render HTML content.
      */
     HtmlBody?: __string;
     /**
@@ -2166,13 +2206,23 @@ declare namespace Pinpoint {
      */
     RequestID?: __string;
   }
+  export interface CreateVoiceTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    VoiceTemplateRequest: VoiceTemplateRequest;
+  }
+  export interface CreateVoiceTemplateResponse {
+    CreateTemplateMessageBody: CreateTemplateMessageBody;
+  }
   export interface DefaultMessage {
     /**
-     * The default message body of the push notification, email, or SMS message.
+     * The default body of the message.
      */
     Body?: __string;
     /**
-     * The default message variables to use in the push notification, email, or SMS message. You can override these default variables with individual address variables.
+     * The default message variables to use in the message. You can override these default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
   }
@@ -2428,6 +2478,15 @@ declare namespace Pinpoint {
   export interface DeleteVoiceChannelResponse {
     VoiceChannelResponse: VoiceChannelResponse;
   }
+  export interface DeleteVoiceTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface DeleteVoiceTemplateResponse {
+    MessageBody: MessageBody;
+  }
   export type DeliveryStatus = "SUCCESSFUL"|"THROTTLED"|"TEMPORARY_FAILURE"|"PERMANENT_FAILURE"|"UNKNOWN_FAILURE"|"OPT_OUT"|"DUPLICATE"|string;
   export type DimensionType = "INCLUSIVE"|"EXCLUSIVE"|string;
   export interface DirectMessageConfiguration {
@@ -2444,7 +2503,7 @@ declare namespace Pinpoint {
      */
     BaiduMessage?: BaiduMessage;
     /**
-     * The default message body for all channels.
+     * The default message for all channels.
      */
     DefaultMessage?: DefaultMessage;
     /**
@@ -2599,7 +2658,11 @@ declare namespace Pinpoint {
   }
   export interface EmailTemplateRequest {
     /**
-     * The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that support HTML. You can include links, formatted text, and more in an HTML message.
+     * A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that's based on the template, you can override these defaults with message-specific and address-specific variables and values.
+     */
+    DefaultSubstitutions?: __string;
+    /**
+     * The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.
      */
     HtmlPart?: __string;
     /**
@@ -2611,7 +2674,11 @@ declare namespace Pinpoint {
      */
     tags?: MapOf__string;
     /**
-     * The message body, in text format, to use in email messages that are based on the message template. We recommend using text format for email clients that don't support HTML and clients that are connected to high-latency networks, such as mobile devices.
+     * A custom description of the message template.
+     */
+    TemplateDescription?: __string;
+    /**
+     * The message body, in plain text format, to use in email messages that are based on the message template. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.
      */
     TextPart?: __string;
   }
@@ -2624,6 +2691,10 @@ declare namespace Pinpoint {
      * The date when the message template was created.
      */
     CreationDate: __string;
+    /**
+     * The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+     */
+    DefaultSubstitutions?: __string;
     /**
      * The message body, in HTML format, that's used in email messages that are based on the message template.
      */
@@ -2641,6 +2712,10 @@ declare namespace Pinpoint {
      */
     tags?: MapOf__string;
     /**
+     * The custom description of the message template.
+     */
+    TemplateDescription?: __string;
+    /**
      * The name of the message template.
      */
     TemplateName: __string;
@@ -2649,7 +2724,7 @@ declare namespace Pinpoint {
      */
     TemplateType: TemplateType;
     /**
-     * The message body, in text format, that's used in email messages that are based on the message template.
+     * The message body, in plain text format, that's used in email messages that are based on the message template.
      */
     TextPart?: __string;
   }
@@ -2923,7 +2998,7 @@ declare namespace Pinpoint {
      */
     Context?: MapOf__string;
     /**
-     * The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the message. If specified, this value overrides all other values for the message.
      */
     RawContent?: __string;
     /**
@@ -3270,7 +3345,7 @@ declare namespace Pinpoint {
      */
     Priority?: __string;
     /**
-     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.
      */
     RawContent?: __string;
     /**
@@ -3931,6 +4006,15 @@ declare namespace Pinpoint {
   export interface GetVoiceChannelResponse {
     VoiceChannelResponse: VoiceChannelResponse;
   }
+  export interface GetVoiceTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface GetVoiceTemplateResponse {
+    VoiceTemplateResponse: VoiceTemplateResponse;
+  }
   export interface HoldoutActivity {
     /**
      * The unique identifier for the next activity to perform, after performing the holdout activity.
@@ -4316,7 +4400,7 @@ declare namespace Pinpoint {
      */
     Prefix?: __string;
     /**
-     * The type of message template to include in the results. Valid values are: EMAIL, SMS, and PUSH. To include all types of templates in the results, don't include this parameter in your request.
+     * The type of message template to include in the results. Valid values are: EMAIL, SMS, PUSH, and VOICE. To include all types of templates in the results, don't include this parameter in your request.
      */
     TemplateType?: __string;
   }
@@ -4353,7 +4437,7 @@ declare namespace Pinpoint {
      */
     MediaUrl?: __string;
     /**
-     * The raw, JSON-formatted string to use as the payload for the notification message. This value overrides other values for the message.
+     * The raw, JSON-formatted string to use as the payload for the notification message. If specified, this value overrides all other content for the message.
      */
     RawContent?: __string;
     /**
@@ -4427,7 +4511,7 @@ declare namespace Pinpoint {
      */
     Endpoints?: MapOfEndpointSendConfiguration;
     /**
-     * The set of properties that defines the configuration settings for the message.
+     * The settings and content for the default message and any default messages that you defined for specific channels.
      */
     MessageConfiguration: DirectMessageConfiguration;
     /**
@@ -4655,6 +4739,10 @@ declare namespace Pinpoint {
      */
     Default?: DefaultPushNotificationTemplate;
     /**
+     * A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that's based on the template, you can override these defaults with message-specific and address-specific variables and values.
+     */
+    DefaultSubstitutions?: __string;
+    /**
      * The message template to use for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
      */
     GCM?: AndroidPushNotificationTemplate;
@@ -4662,6 +4750,10 @@ declare namespace Pinpoint {
      * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    /**
+     * A custom description of the message template.
+     */
+    TemplateDescription?: __string;
   }
   export interface PushNotificationTemplateResponse {
     /**
@@ -4689,6 +4781,10 @@ declare namespace Pinpoint {
      */
     Default?: DefaultPushNotificationTemplate;
     /**
+     * The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+     */
+    DefaultSubstitutions?: __string;
+    /**
      * The message template that's used for the GCM channel, which is used to send notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
      */
     GCM?: AndroidPushNotificationTemplate;
@@ -4700,6 +4796,10 @@ declare namespace Pinpoint {
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    /**
+     * The custom description of the message template.
+     */
+    TemplateDescription?: __string;
     /**
      * The name of the message template.
      */
@@ -4915,9 +5015,17 @@ declare namespace Pinpoint {
      */
     Body?: __string;
     /**
+     * A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that's based on the template, you can override these defaults with message-specific and address-specific variables and values.
+     */
+    DefaultSubstitutions?: __string;
+    /**
      * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    /**
+     * A custom description of the message template.
+     */
+    TemplateDescription?: __string;
   }
   export interface SMSTemplateResponse {
     /**
@@ -4933,6 +5041,10 @@ declare namespace Pinpoint {
      */
     CreationDate: __string;
     /**
+     * The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+     */
+    DefaultSubstitutions?: __string;
+    /**
      * The date when the message template was last modified.
      */
     LastModifiedDate: __string;
@@ -4940,6 +5052,10 @@ declare namespace Pinpoint {
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    /**
+     * The custom description of the message template.
+     */
+    TemplateDescription?: __string;
     /**
      * The name of the message template.
      */
@@ -5197,7 +5313,7 @@ declare namespace Pinpoint {
      */
     Context?: MapOf__string;
     /**
-     * The message definitions for the default message and any default messages that you defined for specific channels.
+     * The settings and content for the default message and any default messages that you defined for specific channels.
      */
     MessageConfiguration: DirectMessageConfiguration;
     /**
@@ -5281,7 +5397,7 @@ declare namespace Pinpoint {
   }
   export interface SimpleEmail {
     /**
-     * The body of the email message, in HTML format. We recommend using an HTML part for email clients that support HTML. You can include links, formatted text, and more in an HTML message.
+     * The body of the email message, in HTML format. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.
      */
     HtmlPart?: SimpleEmailPart;
     /**
@@ -5289,7 +5405,7 @@ declare namespace Pinpoint {
      */
     Subject?: SimpleEmailPart;
     /**
-     * The body of the email message, in text format. We recommend using a text part for email clients that don't support HTML and clients that are connected to high-latency networks, such as mobile devices.
+     * The body of the email message, in plain text format. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.
      */
     TextPart?: SimpleEmailPart;
   }
@@ -5347,6 +5463,10 @@ declare namespace Pinpoint {
      * The SMS template to use for the message.
      */
     SMSTemplate?: Template;
+    /**
+     * The voice template to use for the message.
+     */
+    VoiceTemplate?: Template;
   }
   export interface TemplateResponse {
     /**
@@ -5358,6 +5478,10 @@ declare namespace Pinpoint {
      */
     CreationDate: __string;
     /**
+     * The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+     */
+    DefaultSubstitutions?: __string;
+    /**
      * The date when the message template was last modified.
      */
     LastModifiedDate: __string;
@@ -5365,6 +5489,10 @@ declare namespace Pinpoint {
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    /**
+     * The custom description of the message template.
+     */
+    TemplateDescription?: __string;
     /**
      * The name of the message template.
      */
@@ -5659,6 +5787,16 @@ declare namespace Pinpoint {
   export interface UpdateVoiceChannelResponse {
     VoiceChannelResponse: VoiceChannelResponse;
   }
+  export interface UpdateVoiceTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    VoiceTemplateRequest: VoiceTemplateRequest;
+  }
+  export interface UpdateVoiceTemplateResponse {
+    MessageBody: MessageBody;
+  }
   export interface VoiceChannelRequest {
     /**
      * Specifies whether to enable the voice channel for the application.
@@ -5709,11 +5847,11 @@ declare namespace Pinpoint {
   }
   export interface VoiceMessage {
     /**
-     * The text script for the voice message.
+     * The text of the script to use for the voice message.
      */
     Body?: __string;
     /**
-     * The language to use when delivering the message. For a list of supported languages, see the Amazon Polly Developer Guide.
+     * The code for the language to use when synthesizing the text of the message script. For a list of supported languages and the code for each one, see the Amazon Polly Developer Guide.
      */
     LanguageCode?: __string;
     /**
@@ -5729,6 +5867,78 @@ declare namespace Pinpoint {
      */
     VoiceId?: __string;
   }
+  export interface VoiceTemplateRequest {
+    /**
+     * The text of the script to use in messages that are based on the message template, in plain text format.
+     */
+    Body?: __string;
+    /**
+     * A JSON object that specifies the default values to use for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable. When you create a message that's based on the template, you can override these defaults with message-specific and address-specific variables and values.
+     */
+    DefaultSubstitutions?: __string;
+    /**
+     * The code for the language to use when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the Amazon Polly Developer Guide.
+     */
+    LanguageCode?: __string;
+    /**
+     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * A custom description of the message template.
+     */
+    TemplateDescription?: __string;
+    /**
+     * The name of the voice to use when delivering messages that are based on the message template. For a list of supported voices, see the Amazon Polly Developer Guide.
+     */
+    VoiceId?: __string;
+  }
+  export interface VoiceTemplateResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the message template.
+     */
+    Arn?: __string;
+    /**
+     * The text of the script that's used in messages that are based on the message template, in plain text format.
+     */
+    Body?: __string;
+    /**
+     * The date when the message template was created.
+     */
+    CreationDate: __string;
+    /**
+     * The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+     */
+    DefaultSubstitutions?: __string;
+    /**
+     * The code for the language that's used when synthesizing the text of the script in messages that are based on the message template. For a list of supported languages and the code for each one, see the Amazon Polly Developer Guide.
+     */
+    LanguageCode?: __string;
+    /**
+     * The date when the message template was last modified.
+     */
+    LastModifiedDate: __string;
+    /**
+     * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The custom description of the message template.
+     */
+    TemplateDescription?: __string;
+    /**
+     * The name of the message template.
+     */
+    TemplateName: __string;
+    /**
+     * The type of channel that the message template is designed for. For a voice template, this value is VOICE.
+     */
+    TemplateType: TemplateType;
+    /**
+     * The name of the voice that's used when delivering messages that are based on the message template. For a list of supported voices, see the Amazon Polly Developer Guide.
+     */
+    VoiceId?: __string;
+  }
   export interface WaitActivity {
     /**
      * The unique identifier for the next activity to perform, after performing the wait activity.
@@ -5741,7 +5951,7 @@ declare namespace Pinpoint {
   }
   export interface WaitTime {
     /**
-     * The amount of time, as a duration in ISO 8601 format, to wait before determining whether the activity's conditions have been met or moving participants to the next activity in the journey.
+     * The amount of time to wait, as a duration in ISO 8601 format, before determining whether the activity's conditions have been met or moving participants to the next activity in the journey.
      */
     WaitFor?: __string;
     /**
@@ -5773,7 +5983,7 @@ declare namespace Pinpoint {
      */
     AdditionalTreatments?: ListOfWriteTreatmentResource;
     /**
-     * The custom description of the campaign.
+     * A custom description of the campaign.
      */
     Description?: __string;
     /**
@@ -5821,7 +6031,7 @@ declare namespace Pinpoint {
      */
     TemplateConfiguration?: TemplateConfiguration;
     /**
-     * The custom description of a variation of the campaign to use for A/B testing.
+     * A custom description of a variation of the campaign to use for A/B testing.
      */
     TreatmentDescription?: __string;
     /**
@@ -5927,7 +6137,7 @@ declare namespace Pinpoint {
      */
     TemplateConfiguration?: TemplateConfiguration;
     /**
-     * The custom description of the treatment.
+     * A custom description of the treatment.
      */
     TreatmentDescription?: __string;
     /**

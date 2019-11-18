@@ -254,6 +254,30 @@
       ],
       "documentation": "<p>Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see <a>DeleteStackInstances</a>. </p>"
     },
+    "DeregisterType": {
+      "name": "DeregisterType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeregisterTypeInput"
+      },
+      "output": {
+        "shape": "DeregisterTypeOutput",
+        "resultWrapper": "DeregisterTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        },
+        {
+          "shape": "TypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations.</p> <p>To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered. </p> <p>You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. </p>",
+      "idempotent": true
+    },
     "DescribeAccountLimits": {
       "name": "DescribeAccountLimits",
       "http": {
@@ -444,6 +468,51 @@
         "resultWrapper": "DescribeStacksResult"
       },
       "documentation": "<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.</p> <note> <p>If the stack does not exist, an <code>AmazonCloudFormationException</code> is returned.</p> </note>"
+    },
+    "DescribeType": {
+      "name": "DescribeType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTypeInput"
+      },
+      "output": {
+        "shape": "DescribeTypeOutput",
+        "resultWrapper": "DescribeTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        },
+        {
+          "shape": "TypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns detailed information about a type that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>",
+      "idempotent": true
+    },
+    "DescribeTypeRegistration": {
+      "name": "DescribeTypeRegistration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTypeRegistrationInput"
+      },
+      "output": {
+        "shape": "DescribeTypeRegistrationOutput",
+        "resultWrapper": "DescribeTypeRegistrationResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        }
+      ],
+      "documentation": "<p>Returns information about a type's registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed informaiton about a type.</p>",
+      "idempotent": true
     },
     "DetectStackDrift": {
       "name": "DetectStackDrift",
@@ -727,6 +796,114 @@
       },
       "documentation": "<p>Returns the summary information for stacks whose status matches the specified StackStatusFilter. Summary information for stacks that have been deleted is kept for 90 days after the stack is deleted. If no StackStatusFilter is specified, summary information for all stacks is returned (including existing stacks and stacks that have been deleted).</p>"
     },
+    "ListTypeRegistrations": {
+      "name": "ListTypeRegistrations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTypeRegistrationsInput"
+      },
+      "output": {
+        "shape": "ListTypeRegistrationsOutput",
+        "resultWrapper": "ListTypeRegistrationsResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        }
+      ],
+      "documentation": "<p>Returns a list of registration tokens for the specified type.</p>",
+      "idempotent": true
+    },
+    "ListTypeVersions": {
+      "name": "ListTypeVersions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTypeVersionsInput"
+      },
+      "output": {
+        "shape": "ListTypeVersionsOutput",
+        "resultWrapper": "ListTypeVersionsResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        }
+      ],
+      "documentation": "<p>Returns summary information about the versions of a type.</p>",
+      "idempotent": true
+    },
+    "ListTypes": {
+      "name": "ListTypes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTypesInput"
+      },
+      "output": {
+        "shape": "ListTypesOutput",
+        "resultWrapper": "ListTypesResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        }
+      ],
+      "documentation": "<p>Returns summary information about types that have been registered with CloudFormation.</p>",
+      "idempotent": true
+    },
+    "RecordHandlerProgress": {
+      "name": "RecordHandlerProgress",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RecordHandlerProgressInput"
+      },
+      "output": {
+        "shape": "RecordHandlerProgressOutput",
+        "resultWrapper": "RecordHandlerProgressResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidStateTransitionException"
+        },
+        {
+          "shape": "OperationStatusCheckFailedException"
+        }
+      ],
+      "documentation": "<p>Reports progress of a resource handler to CloudFormation.</p> <p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>. Do not use this API in your code.</p>",
+      "idempotent": true
+    },
+    "RegisterType": {
+      "name": "RegisterType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RegisterTypeInput"
+      },
+      "output": {
+        "shape": "RegisterTypeOutput",
+        "resultWrapper": "RegisterTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        }
+      ],
+      "documentation": "<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href=\"cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>",
+      "idempotent": true
+    },
     "SetStackPolicy": {
       "name": "SetStackPolicy",
       "http": {
@@ -737,6 +914,30 @@
         "shape": "SetStackPolicyInput"
       },
       "documentation": "<p>Sets a stack policy for a specified stack.</p>"
+    },
+    "SetTypeDefaultVersion": {
+      "name": "SetTypeDefaultVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SetTypeDefaultVersionInput"
+      },
+      "output": {
+        "shape": "SetTypeDefaultVersionOutput",
+        "resultWrapper": "SetTypeDefaultVersionResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        },
+        {
+          "shape": "TypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Specify the default version of a type. The default version of a type will be used in CloudFormation operations.</p>",
+      "idempotent": true
     },
     "SignalResource": {
       "name": "SignalResource",
@@ -1577,6 +1778,38 @@
     "DeletionTime": {
       "type": "timestamp"
     },
+    "DeprecatedStatus": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "DEPRECATED"
+      ]
+    },
+    "DeregisterTypeInput": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "PrivateTypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "VersionId": {
+          "shape": "TypeVersionId",
+          "documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>"
+        }
+      }
+    },
+    "DeregisterTypeOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DescribeAccountLimitsInput": {
       "type": "structure",
       "members": {
@@ -1973,6 +2206,125 @@
       },
       "documentation": "<p>The output for a <a>DescribeStacks</a> action.</p>"
     },
+    "DescribeTypeInput": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "Arn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "VersionId": {
+          "shape": "TypeVersionId",
+          "documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>"
+        }
+      }
+    },
+    "DescribeTypeOutput": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p>"
+        },
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the registered type.</p>"
+        },
+        "DefaultVersionId": {
+          "shape": "TypeVersionId",
+          "documentation": "<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p> <p>To set the default version of a type, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the registered type.</p>"
+        },
+        "Schema": {
+          "shape": "TypeSchema",
+          "documentation": "<p>The schema that defines the type.</p> <p>For more information on type schemas, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">Resource Provider Schema</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
+        },
+        "ProvisioningType": {
+          "shape": "ProvisioningType",
+          "documentation": "<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include all of the following handlers, and therefore cannot actually be provisioned.</p> <ul> <li> <p>create</p> </li> <li> <p>read</p> </li> <li> <p>delete</p> </li> </ul> </li> </ul>"
+        },
+        "DeprecatedStatus": {
+          "shape": "DeprecatedStatus",
+          "documentation": "<p>The deprecation status of the type.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>"
+        },
+        "LoggingConfig": {
+          "shape": "LoggingConfig",
+          "documentation": "<p>Contains logging configuration information for a type.</p>"
+        },
+        "ExecutionRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.</p>"
+        },
+        "Visibility": {
+          "shape": "Visibility",
+          "documentation": "<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul>"
+        },
+        "SourceUrl": {
+          "shape": "OptionalSecureUrl",
+          "documentation": "<p>The URL of the source code for the type.</p>"
+        },
+        "DocumentationUrl": {
+          "shape": "OptionalSecureUrl",
+          "documentation": "<p>The URL of a page providing detailed documentation for this type.</p>"
+        },
+        "LastUpdated": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the specified type version was registered.</p>"
+        },
+        "TimeCreated": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the specified type version was registered.</p>"
+        }
+      }
+    },
+    "DescribeTypeRegistrationInput": {
+      "type": "structure",
+      "required": [
+        "RegistrationToken"
+      ],
+      "members": {
+        "RegistrationToken": {
+          "shape": "RegistrationToken",
+          "documentation": "<p>The identifier for this registration request.</p> <p>This registration token is generated by CloudFormation when you initiate a registration request using <code> <a>RegisterType</a> </code>.</p>"
+        }
+      }
+    },
+    "DescribeTypeRegistrationOutput": {
+      "type": "structure",
+      "members": {
+        "ProgressStatus": {
+          "shape": "RegistrationStatus",
+          "documentation": "<p>The current status of the type registration request.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the type registration request.</p>"
+        },
+        "TypeArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type being registered.</p> <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>"
+        },
+        "TypeVersionArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of this specific version of the type being registered.</p> <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>"
+        }
+      }
+    },
     "Description": {
       "type": "string",
       "max": 1024,
@@ -2288,6 +2640,25 @@
       },
       "documentation": "<p>The output for the <a>GetTemplateSummary</a> action.</p>"
     },
+    "HandlerErrorCode": {
+      "type": "string",
+      "enum": [
+        "NotUpdatable",
+        "InvalidRequest",
+        "AccessDenied",
+        "InvalidCredentials",
+        "AlreadyExists",
+        "NotFound",
+        "ResourceConflict",
+        "Throttling",
+        "ServiceLimitExceeded",
+        "NotStabilized",
+        "GeneralServiceException",
+        "ServiceInternalError",
+        "NetworkFailure",
+        "InternalFailure"
+      ]
+    },
     "Imports": {
       "type": "list",
       "member": {
@@ -2589,6 +2960,152 @@
       },
       "documentation": "<p>The output for <a>ListStacks</a> action.</p>"
     },
+    "ListTypeRegistrationsInput": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "TypeArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "RegistrationStatusFilter": {
+          "shape": "RegistrationStatus",
+          "documentation": "<p>The current status of the type registration request.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+        }
+      }
+    },
+    "ListTypeRegistrationsOutput": {
+      "type": "structure",
+      "members": {
+        "RegistrationTokenList": {
+          "shape": "RegistrationTokenList",
+          "documentation": "<p> A list of type registration tokens.</p> <p>Use <code> <a>DescribeTypeRegistration</a> </code> to return detailed information about a type registration request.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the request doesn't return all of the remaining results, <code>NextToken</code> is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to <code>null</code>.</p>"
+        }
+      }
+    },
+    "ListTypeVersionsInput": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of the type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "Arn": {
+          "shape": "PrivateTypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+        },
+        "DeprecatedStatus": {
+          "shape": "DeprecatedStatus",
+          "documentation": "<p>The deprecation status of the type versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>"
+        }
+      }
+    },
+    "ListTypeVersionsOutput": {
+      "type": "structure",
+      "members": {
+        "TypeVersionSummaries": {
+          "shape": "TypeVersionSummaries",
+          "documentation": "<p>A list of <code>TypeVersionSummary</code> structures that contain information about the specified type's versions.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the request doesn't return all of the remaining results, <code>NextToken</code> is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to <code>null</code>.</p>"
+        }
+      }
+    },
+    "ListTypesInput": {
+      "type": "structure",
+      "members": {
+        "Visibility": {
+          "shape": "Visibility",
+          "documentation": "<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul>"
+        },
+        "ProvisioningType": {
+          "shape": "ProvisioningType",
+          "documentation": "<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>"
+        },
+        "DeprecatedStatus": {
+          "shape": "DeprecatedStatus",
+          "documentation": "<p>The deprecation status of the types that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+        }
+      }
+    },
+    "ListTypesOutput": {
+      "type": "structure",
+      "members": {
+        "TypeSummaries": {
+          "shape": "TypeSummaries",
+          "documentation": "<p>A list of <code>TypeSummary</code> structures that contain information about the specified types.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the request doesn't return all of the remaining results, <code>NextToken</code> is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to <code>null</code>.</p>"
+        }
+      }
+    },
+    "LogGroupName": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "[\\.\\-_/#A-Za-z0-9]+"
+    },
+    "LoggingConfig": {
+      "type": "structure",
+      "required": [
+        "LogRoleArn",
+        "LogGroupName"
+      ],
+      "members": {
+        "LogRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.</p>"
+        },
+        "LogGroupName": {
+          "shape": "LogGroupName",
+          "documentation": "<p>The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.</p>"
+        }
+      },
+      "documentation": "<p>Contains logging configuration information for a type.</p>"
+    },
     "LogicalResourceId": {
       "type": "string"
     },
@@ -2647,6 +3164,19 @@
         "ROLLBACK",
         "DELETE"
       ]
+    },
+    "OperationStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "SUCCESS",
+        "FAILED"
+      ]
+    },
+    "OptionalSecureUrl": {
+      "type": "string",
+      "max": 4096
     },
     "Output": {
       "type": "structure",
@@ -2793,6 +3323,11 @@
       },
       "documentation": "<p>Context information that enables AWS CloudFormation to uniquely identify a resource. AWS CloudFormation uses context key-value pairs in cases where a resource's logical and physical IDs are not enough to uniquely identify that resource. Each context key-value pair specifies a resource that contains the targeted resource.</p>"
     },
+    "PrivateTypeArn": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+"
+    },
     "Properties": {
       "type": "string"
     },
@@ -2839,8 +3374,57 @@
     "PropertyValue": {
       "type": "string"
     },
+    "ProvisioningType": {
+      "type": "string",
+      "enum": [
+        "NON_PROVISIONABLE",
+        "IMMUTABLE",
+        "FULLY_MUTABLE"
+      ]
+    },
     "Reason": {
       "type": "string"
+    },
+    "RecordHandlerProgressInput": {
+      "type": "structure",
+      "required": [
+        "BearerToken",
+        "OperationStatus"
+      ],
+      "members": {
+        "BearerToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>.</p>"
+        },
+        "OperationStatus": {
+          "shape": "OperationStatus",
+          "documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>.</p>"
+        },
+        "CurrentOperationStatus": {
+          "shape": "OperationStatus",
+          "documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>.</p>"
+        },
+        "StatusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>.</p>"
+        },
+        "ErrorCode": {
+          "shape": "HandlerErrorCode",
+          "documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>.</p>"
+        },
+        "ResourceModel": {
+          "shape": "ResourceModel",
+          "documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>.</p>"
+        }
+      }
+    },
+    "RecordHandlerProgressOutput": {
+      "type": "structure",
+      "members": {}
     },
     "Region": {
       "type": "string"
@@ -2851,6 +3435,74 @@
         "shape": "Region"
       }
     },
+    "RegisterTypeInput": {
+      "type": "structure",
+      "required": [
+        "TypeName",
+        "SchemaHandlerPackage"
+      ],
+      "members": {
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of type.</p> <p>Currently, the only valid value is <code>RESOURCE</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the type being registered.</p> <p>We recommend that type names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your resource type names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>"
+        },
+        "SchemaHandlerPackage": {
+          "shape": "S3Url",
+          "documentation": "<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p> <p>For information on generating a schema handler package for the type you want to register, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html\">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
+        },
+        "LoggingConfig": {
+          "shape": "LoggingConfig",
+          "documentation": "<p>Specifies logging configuration information for a type.</p>"
+        },
+        "ExecutionRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "RequestToken",
+          "documentation": "<p>A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of a type from the same registeration request, even if the request is submitted multiple times. </p>"
+        }
+      }
+    },
+    "RegisterTypeOutput": {
+      "type": "structure",
+      "members": {
+        "RegistrationToken": {
+          "shape": "RegistrationToken",
+          "documentation": "<p>The identifier for this registration request.</p> <p>Use this registration token when calling <code> <a>DescribeTypeRegistration</a> </code>, which returns information about the status and IDs of the type registration. </p>"
+        }
+      }
+    },
+    "RegistrationStatus": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "IN_PROGRESS",
+        "FAILED"
+      ]
+    },
+    "RegistrationToken": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9][-a-zA-Z0-9]*"
+    },
+    "RegistrationTokenList": {
+      "type": "list",
+      "member": {
+        "shape": "RegistrationToken"
+      }
+    },
+    "RegistryType": {
+      "type": "string",
+      "enum": [
+        "RESOURCE"
+      ]
+    },
     "Replacement": {
       "type": "string",
       "enum": [
@@ -2858,6 +3510,12 @@
         "False",
         "Conditional"
       ]
+    },
+    "RequestToken": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9][-a-zA-Z0-9]*"
     },
     "RequiresRecreation": {
       "type": "string",
@@ -2991,6 +3649,11 @@
         "shape": "ResourceIdentifierPropertyKey"
       }
     },
+    "ResourceModel": {
+      "type": "string",
+      "max": 16384,
+      "min": 1
+    },
     "ResourceProperties": {
       "type": "string"
     },
@@ -3116,6 +3779,12 @@
       "max": 2048,
       "min": 20
     },
+    "RoleArn": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "arn:.+:iam::[0-9]{12}:role/.+"
+    },
     "RollbackConfiguration": {
       "type": "structure",
       "members": {
@@ -3155,6 +3824,11 @@
       },
       "max": 5
     },
+    "S3Url": {
+      "type": "string",
+      "max": 4096,
+      "min": 1
+    },
     "Scope": {
       "type": "list",
       "member": {
@@ -3181,6 +3855,31 @@
         }
       },
       "documentation": "<p>The input for the <a>SetStackPolicy</a> action.</p>"
+    },
+    "SetTypeDefaultVersionInput": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "PrivateTypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of type.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+        },
+        "VersionId": {
+          "shape": "TypeVersionId",
+          "documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>"
+        }
+      }
+    },
+    "SetTypeDefaultVersionOutput": {
+      "type": "structure",
+      "members": {}
     },
     "SignalResourceInput": {
       "type": "structure",
@@ -4180,6 +4879,10 @@
         "shape": "TemplateStage"
       }
     },
+    "StatusMessage": {
+      "type": "string",
+      "max": 1024
+    },
     "StopStackSetOperationInput": {
       "type": "structure",
       "required": [
@@ -4301,6 +5004,100 @@
     },
     "Type": {
       "type": "string"
+    },
+    "TypeArn": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+"
+    },
+    "TypeName": {
+      "type": "string",
+      "max": 196,
+      "min": 10,
+      "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}"
+    },
+    "TypeSchema": {
+      "type": "string",
+      "max": 16777216,
+      "min": 1
+    },
+    "TypeSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "TypeSummary"
+      }
+    },
+    "TypeSummary": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of type.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the type.</p>"
+        },
+        "DefaultVersionId": {
+          "shape": "TypeVersionId",
+          "documentation": "<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p> <p>To set the default version of a type, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>"
+        },
+        "TypeArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p>"
+        },
+        "LastUpdated": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the current default version of the type was registered.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the type.</p>"
+        }
+      },
+      "documentation": "<p>Contains summary information about the specified CloudFormation type.</p>"
+    },
+    "TypeVersionId": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[A-Za-z0-9-]+"
+    },
+    "TypeVersionSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "TypeVersionSummary"
+      }
+    },
+    "TypeVersionSummary": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "RegistryType",
+          "documentation": "<p>The kind of type.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the type.</p>"
+        },
+        "VersionId": {
+          "shape": "TypeVersionId",
+          "documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>"
+        },
+        "Arn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type version.</p>"
+        },
+        "TimeCreated": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the version was registered.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the type version.</p>"
+        }
+      },
+      "documentation": "<p>Contains summary information about a specific version of a CloudFormation type.</p>"
     },
     "UpdateStackInput": {
       "type": "structure",
@@ -4583,6 +5380,13 @@
     },
     "Version": {
       "type": "string"
+    },
+    "Visibility": {
+      "type": "string",
+      "enum": [
+        "PUBLIC",
+        "PRIVATE"
+      ]
     }
   },
   "documentation": "<fullname>AWS CloudFormation</fullname> <p>AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use AWS CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure.</p> <p>With AWS CloudFormation, you declare all of your resources and dependencies in a template file. The template defines a collection of resources as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together and manages all dependencies between the resources for you.</p> <p>For more information about AWS CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">AWS CloudFormation Product Page</a>.</p> <p>Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the product's technical documentation at <a href=\"https://docs.aws.amazon.com/\">docs.aws.amazon.com</a>.</p>"

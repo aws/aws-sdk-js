@@ -894,7 +894,7 @@
         },
         "Granularity": {
           "shape": "Granularity",
-          "documentation": "<p>Sets the AWS cost granularity to <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn't set, the response object doesn't include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. </p> <p>The <code>GetCostAndUsageRequest</code> operation supports only <code>DAILY</code> and <code>MONTHLY</code> granularities.</p>"
+          "documentation": "<p>Sets the AWS cost granularity to <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn't set, the response object doesn't include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. </p>"
         },
         "Filter": {
           "shape": "Expression",
@@ -906,7 +906,7 @@
         },
         "GroupBy": {
           "shape": "GroupDefinitions",
-          "documentation": "<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, or both.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, and <code>USAGE_TYPE</code>.</p>"
+          "documentation": "<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, or both.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>"
         },
         "NextPageToken": {
           "shape": "NextPageToken",
@@ -2408,6 +2408,10 @@
           "shape": "GenericString",
           "documentation": "<p>The remaining On-Demand cost estimated to not be covered by the recommended Savings Plans, over the length of the lookback period.</p>"
         },
+        "EstimatedOnDemandCostWithCurrentCommitment": {
+          "shape": "GenericString",
+          "documentation": "<p> The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. </p>"
+        },
         "EstimatedSavingsAmount": {
           "shape": "GenericString",
           "documentation": "<p>The estimated savings amount based on the recommended Savings Plans over the length of the lookback period.</p>"
@@ -2505,6 +2509,10 @@
         "EstimatedMonthlySavingsAmount": {
           "shape": "GenericString",
           "documentation": "<p>The estimated monthly savings amount, based on the recommended Savings Plans purchase.</p>"
+        },
+        "EstimatedOnDemandCostWithCurrentCommitment": {
+          "shape": "GenericString",
+          "documentation": "<p> The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. </p>"
         }
       },
       "documentation": "<p>Summary metrics for your Savings Plans Purchase Recommendations.</p>"

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.573.0-->
+<!--LATEST=2.574.0-->
 <!--ENTRYINSERT-->
+
+## 2.574.0
+* feature: CloudFormation: This release introduces APIs for the CloudFormation Registry, a new service to submit and discover resource providers with which you can manage third-party resources natively in CloudFormation.
+* feature: CostExplorer: add EstimatedOnDemandCostWithCurrentCommitment to GetSavingsPlansPurchaseRecommendationRequest API
+* feature: Pinpoint: This release of the Amazon Pinpoint API introduces support for using and managing message templates for messages that are sent through the voice channel. It also introduces support for specifying default values for message variables in message templates. 
+* feature: S3: Added support for S3 Replication for existing objects. This release allows customers who have requested and been granted access to replicate existing S3 objects across buckets.
+* feature: SSM: The release contains new API and API changes for AWS Systems Manager Explorer product.
+* feature: SageMaker: Amazon SageMaker now supports multi-model endpoints to host multiple models on an endpoint using a single inference container.
+* feature: SageMakerRuntime: Amazon SageMaker Runtime now supports a new TargetModel header to invoke a specific model hosted on multi model endpoints.
 
 ## 2.573.0
 * bugfix: clock skew: update clock skew duration from 30s to 300s

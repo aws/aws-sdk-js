@@ -15721,7 +15721,7 @@ module.exports =
 
 	'use strict';
 
-	/* eslint complexity: [2, 17], max-statements: [2, 33] */
+	/* eslint complexity: [2, 18], max-statements: [2, 33] */
 	module.exports = function hasSymbols() {
 		if (typeof Symbol !== 'function' || typeof Object.getOwnPropertySymbols !== 'function') { return false; }
 		if (typeof Symbol.iterator === 'symbol') { return true; }

@@ -471,7 +471,7 @@ declare namespace CostExplorer {
      */
     TimePeriod: DateInterval;
     /**
-     * Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, either MONTHLY or DAILY, or HOURLY.  The GetCostAndUsageRequest operation supports only DAILY and MONTHLY granularities.
+     * Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, either MONTHLY or DAILY, or HOURLY. 
      */
     Granularity?: Granularity;
     /**
@@ -483,7 +483,7 @@ declare namespace CostExplorer {
      */
     Metrics?: MetricNames;
     /**
-     * You can group AWS costs using up to two different groups, either dimensions, tag keys, or both. When you group by tag key, you get all tag values, including empty strings. Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY, and USAGE_TYPE.
+     * You can group AWS costs using up to two different groups, either dimensions, tag keys, or both. When you group by tag key, you get all tag values, including empty strings. Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY, RECORD_TYPE, and USAGE_TYPE.
      */
     GroupBy?: GroupDefinitions;
     /**
@@ -1557,6 +1557,10 @@ declare namespace CostExplorer {
      */
     EstimatedOnDemandCost?: GenericString;
     /**
+     *  The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. 
+     */
+    EstimatedOnDemandCostWithCurrentCommitment?: GenericString;
+    /**
      * The estimated savings amount based on the recommended Savings Plans over the length of the lookback period.
      */
     EstimatedSavingsAmount?: GenericString;
@@ -1641,6 +1645,10 @@ declare namespace CostExplorer {
      * The estimated monthly savings amount, based on the recommended Savings Plans purchase.
      */
     EstimatedMonthlySavingsAmount?: GenericString;
+    /**
+     *  The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. 
+     */
+    EstimatedOnDemandCostWithCurrentCommitment?: GenericString;
   }
   export interface SavingsPlansSavings {
     /**

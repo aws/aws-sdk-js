@@ -92,11 +92,11 @@ declare class SSM extends Service {
    */
   createPatchBaseline(callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
   /**
-   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. For more information, see Configuring Resource Data Sync for Inventory in the AWS Systems Manager User Guide.
+   * A resource data sync helps you view data from multiple sources in a single location. Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple AWS Regions to a single Amazon S3 bucket. For more information, see Configuring Resource Data Sync for Inventory in the AWS Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncToDestination type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple AWS Regions to a single Amazon S3 bucket. You can also configure Explorer to use the SyncFromSource type. This type synchronizes OpsItems and OpsData from multiple AWS accounts and Regions by using AWS Organizations. For more information, see Setting Up Explorer to Display Data from Multiple Accounts and Regions in the AWS Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
    */
   createResourceDataSync(params: SSM.Types.CreateResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
-   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. For more information, see Configuring Resource Data Sync for Inventory in the AWS Systems Manager User Guide.
+   * A resource data sync helps you view data from multiple sources in a single location. Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple AWS Regions to a single Amazon S3 bucket. For more information, see Configuring Resource Data Sync for Inventory in the AWS Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncToDestination type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple AWS Regions to a single Amazon S3 bucket. You can also configure Explorer to use the SyncFromSource type. This type synchronizes OpsItems and OpsData from multiple AWS accounts and Regions by using AWS Organizations. For more information, see Setting Up Explorer to Display Data from Multiple Accounts and Regions in the AWS Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
    */
   createResourceDataSync(callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class SSM extends Service {
    */
   deletePatchBaseline(callback?: (err: AWSError, data: SSM.Types.DeletePatchBaselineResult) => void): Request<SSM.Types.DeletePatchBaselineResult, AWSError>;
   /**
-   * Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to inventory data on managed instances are no longer synced with the target Amazon S3 bucket. Deleting a sync configuration does not delete data in the target Amazon S3 bucket.
+   * Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to data on managed instances are no longer synced to or from the target. Deleting a sync configuration does not delete data.
    */
   deleteResourceDataSync(params: SSM.Types.DeleteResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
-   * Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to inventory data on managed instances are no longer synced with the target Amazon S3 bucket. Deleting a sync configuration does not delete data in the target Amazon S3 bucket.
+   * Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to data on managed instances are no longer synced to or from the target. Deleting a sync configuration does not delete data.
    */
   deleteResourceDataSync(callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
@@ -2350,6 +2350,14 @@ declare namespace SSM {
      * Optional metadata that you assign to a resource. You can restrict access to OpsItems by using an inline IAM policy that specifies tags. For more information, see Getting Started with OpsCenter in the AWS Systems Manager User Guide. Tags use a key-value pair. For example:  Key=Department,Value=Finance   To add tags to an existing OpsItem, use the AddTagsToResource action. 
      */
     Tags?: TagList;
+    /**
+     * Specify a category to assign to an OpsItem. 
+     */
+    Category?: OpsItemCategory;
+    /**
+     * Specify a severity to assign to an OpsItem.
+     */
+    Severity?: OpsItemSeverity;
   }
   export interface CreateOpsItemResponse {
     /**
@@ -2425,7 +2433,15 @@ declare namespace SSM {
     /**
      * Amazon S3 configuration details for the sync.
      */
-    S3Destination: ResourceDataSyncS3Destination;
+    S3Destination?: ResourceDataSyncS3Destination;
+    /**
+     * Specify SyncToDestination to create a resource data sync that synchronizes data from multiple AWS Regions to an Amazon S3 bucket. Specify SyncFromSource to synchronize data from multiple AWS accounts and Regions, as listed in AWS Organizations.
+     */
+    SyncType?: ResourceDataSyncType;
+    /**
+     * Specify information about the data sources to synchronize.
+     */
+    SyncSource?: ResourceDataSyncSource;
   }
   export interface CreateResourceDataSyncResult {
   }
@@ -2558,6 +2574,10 @@ declare namespace SSM {
      * The name of the configuration to delete.
      */
     SyncName: ResourceDataSyncName;
+    /**
+     * Specify the type of resource data sync to delete.
+     */
+    SyncType?: ResourceDataSyncType;
   }
   export interface DeleteResourceDataSyncResult {
   }
@@ -4381,13 +4401,21 @@ declare namespace SSM {
   }
   export interface GetOpsSummaryRequest {
     /**
+     * Specify the name of a resource data sync to get.
+     */
+    SyncName?: ResourceDataSyncName;
+    /**
      * Optional filters used to scope down the returned OpsItems. 
      */
     Filters?: OpsFilterList;
     /**
      * Optional aggregators that return counts of OpsItems based on one or more expressions.
      */
-    Aggregators: OpsAggregatorList;
+    Aggregators?: OpsAggregatorList;
+    /**
+     * The OpsItem data type to return.
+     */
+    ResultAttributes?: OpsResultAttributeList;
     /**
      * A token to start the list. Use this token to get the next set of results. 
      */
@@ -5454,6 +5482,10 @@ declare namespace SSM {
   }
   export interface ListResourceDataSyncRequest {
     /**
+     * View a list of resource data syncs according to the sync type. Specify SyncToDestination to view resource data syncs that synchronize data to an Amazon S3 buckets. Specify SyncFromSource to view resource data syncs from AWS Organizations or from multiple AWS Regions. 
+     */
+    SyncType?: ResourceDataSyncType;
+    /**
      * A token to start the list. Use this token to get the next set of results. 
      */
     NextToken?: NextToken;
@@ -6009,10 +6041,15 @@ declare namespace SSM {
   export type OpsEntityId = string;
   export interface OpsEntityItem {
     /**
+     * The time OpsItem data was captured.
+     */
+    CaptureTime?: OpsEntityItemCaptureTime;
+    /**
      * The detailed data content for an OpsItem summaries result item.
      */
     Content?: OpsEntityItemEntryList;
   }
+  export type OpsEntityItemCaptureTime = string;
   export type OpsEntityItemEntry = {[key: string]: AttributeValue};
   export type OpsEntityItemEntryList = OpsEntityItemEntry[];
   export type OpsEntityItemKey = string;
@@ -6094,7 +6131,16 @@ declare namespace SSM {
      * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.  Operational data keys can't begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.  You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action). Use the /aws/resources key in OperationalData to specify a related resource in the request. Use the /aws/automations key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see Creating OpsItems Manually in the AWS Systems Manager User Guide.
      */
     OperationalData?: OpsItemOperationalData;
+    /**
+     * An OpsItem category. Category options include: Availability, Cost, Performance, Recovery, Security.
+     */
+    Category?: OpsItemCategory;
+    /**
+     * The severity of the OpsItem. Severity options range from 1 to 4.
+     */
+    Severity?: OpsItemSeverity;
   }
+  export type OpsItemCategory = string;
   export type OpsItemDataKey = string;
   export type OpsItemDataType = "SearchableString"|"String"|string;
   export interface OpsItemDataValue {
@@ -6123,7 +6169,7 @@ declare namespace SSM {
      */
     Operator: OpsItemFilterOperator;
   }
-  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|string;
+  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|"Category"|"Severity"|string;
   export type OpsItemFilterOperator = "Equal"|"Contains"|"GreaterThan"|"LessThan"|string;
   export type OpsItemFilterValue = string;
   export type OpsItemFilterValues = OpsItemFilterValue[];
@@ -6140,6 +6186,7 @@ declare namespace SSM {
   export type OpsItemOperationalData = {[key: string]: OpsItemDataValue};
   export type OpsItemOpsDataKeysList = String[];
   export type OpsItemPriority = number;
+  export type OpsItemSeverity = string;
   export type OpsItemSource = string;
   export type OpsItemStatus = "Open"|"InProgress"|"Resolved"|string;
   export type OpsItemSummaries = OpsItemSummary[];
@@ -6184,8 +6231,23 @@ declare namespace SSM {
      * Operational data is custom data that provides useful reference details about the OpsItem. 
      */
     OperationalData?: OpsItemOperationalData;
+    /**
+     * A list of OpsItems by category.
+     */
+    Category?: OpsItemCategory;
+    /**
+     * A list of OpsItems by severity.
+     */
+    Severity?: OpsItemSeverity;
   }
   export type OpsItemTitle = string;
+  export interface OpsResultAttribute {
+    /**
+     * Name of the data type. Valid value: AWS:OpsItem, AWS:EC2InstanceInformation, AWS:OpsItemTrendline, or AWS:ComplianceSummary.
+     */
+    TypeName: OpsDataTypeName;
+  }
+  export type OpsResultAttributeList = OpsResultAttribute[];
   export interface OutputSource {
     /**
      * The ID of the output source, for example the URL of an Amazon S3 bucket.
@@ -6977,12 +7039,31 @@ declare namespace SSM {
   export type ResourceCount = number;
   export type ResourceCountByStatus = string;
   export type ResourceDataSyncAWSKMSKeyARN = string;
+  export interface ResourceDataSyncAwsOrganizationsSource {
+    /**
+     * If an AWS Organization is present, this is either OrganizationalUnits or EntireOrganization. For OrganizationalUnits, the data is aggregated from a set of organization units. For EntireOrganization, the data is aggregated from the entire AWS Organization. 
+     */
+    OrganizationSourceType: ResourceDataSyncOrganizationSourceType;
+    /**
+     * The AWS Organizations organization units included in the sync.
+     */
+    OrganizationalUnits?: ResourceDataSyncOrganizationalUnitList;
+  }
   export type ResourceDataSyncCreatedTime = Date;
+  export type ResourceDataSyncIncludeFutureRegions = boolean;
   export interface ResourceDataSyncItem {
     /**
      * The name of the Resource Data Sync.
      */
     SyncName?: ResourceDataSyncName;
+    /**
+     * The type of resource data sync. If SyncType is SyncToDestination, then the resource data sync synchronizes data to an Amazon S3 bucket. If the SyncType is SyncFromSource then the resource data sync synchronizes data from AWS Organizations or from multiple AWS Regions.
+     */
+    SyncType?: ResourceDataSyncType;
+    /**
+     * Information about the source where the data was synchronized. 
+     */
+    SyncSource?: ResourceDataSyncSourceWithState;
     /**
      * Configuration information for the target Amazon S3 bucket.
      */
@@ -6995,6 +7076,10 @@ declare namespace SSM {
      * The last time the sync operations returned a status of SUCCESSFUL (UTC).
      */
     LastSuccessfulSyncTime?: LastSuccessfulResourceDataSyncTime;
+    /**
+     * The date and time the resource data sync was changed. 
+     */
+    SyncLastModifiedTime?: ResourceDataSyncLastModifiedTime;
     /**
      * The status reported by the last sync.
      */
@@ -7009,7 +7094,17 @@ declare namespace SSM {
     LastSyncStatusMessage?: LastResourceDataSyncMessage;
   }
   export type ResourceDataSyncItemList = ResourceDataSyncItem[];
+  export type ResourceDataSyncLastModifiedTime = Date;
   export type ResourceDataSyncName = string;
+  export type ResourceDataSyncOrganizationSourceType = string;
+  export interface ResourceDataSyncOrganizationalUnit {
+    /**
+     * The AWS Organization unit ID data source for the sync.
+     */
+    OrganizationalUnitId?: ResourceDataSyncOrganizationalUnitId;
+  }
+  export type ResourceDataSyncOrganizationalUnitId = string;
+  export type ResourceDataSyncOrganizationalUnitList = ResourceDataSyncOrganizationalUnit[];
   export type ResourceDataSyncS3BucketName = string;
   export interface ResourceDataSyncS3Destination {
     /**
@@ -7036,6 +7131,51 @@ declare namespace SSM {
   export type ResourceDataSyncS3Format = "JsonSerDe"|string;
   export type ResourceDataSyncS3Prefix = string;
   export type ResourceDataSyncS3Region = string;
+  export interface ResourceDataSyncSource {
+    /**
+     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in AWS Organizations) or singleAccountMultiRegions.
+     */
+    SourceType: ResourceDataSyncSourceType;
+    /**
+     * The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource type.
+     */
+    AwsOrganizationsSource?: ResourceDataSyncAwsOrganizationsSource;
+    /**
+     * The SyncSource AWS Regions included in the resource data sync.
+     */
+    SourceRegions: ResourceDataSyncSourceRegionList;
+    /**
+     * Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.
+     */
+    IncludeFutureRegions?: ResourceDataSyncIncludeFutureRegions;
+  }
+  export type ResourceDataSyncSourceRegion = string;
+  export type ResourceDataSyncSourceRegionList = ResourceDataSyncSourceRegion[];
+  export type ResourceDataSyncSourceType = string;
+  export interface ResourceDataSyncSourceWithState {
+    /**
+     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in AWS Organizations) or singleAccountMultiRegions.
+     */
+    SourceType?: ResourceDataSyncSourceType;
+    /**
+     * The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource type.
+     */
+    AwsOrganizationsSource?: ResourceDataSyncAwsOrganizationsSource;
+    /**
+     * The SyncSource AWS Regions included in the resource data sync.
+     */
+    SourceRegions?: ResourceDataSyncSourceRegionList;
+    /**
+     * Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.
+     */
+    IncludeFutureRegions?: ResourceDataSyncIncludeFutureRegions;
+    /**
+     * The data type name for including resource data sync state. There are four sync states:  OrganizationNotExists: Your organization doesn't exist.  NoPermissions: The system can't locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.  InvalidOrganizationalUnit: You specified or selected an invalid unit in the resource data sync configuration.  TrustedAccessDisabled: You disabled Systems Manager access in the organization in AWS Organizations.
+     */
+    State?: ResourceDataSyncState;
+  }
+  export type ResourceDataSyncState = string;
+  export type ResourceDataSyncType = string;
   export type ResourceId = string;
   export type ResourceType = "ManagedInstance"|"Document"|"EC2Instance"|string;
   export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|"OpsItem"|string;
@@ -8065,6 +8205,14 @@ declare namespace SSM {
      * A short heading that describes the nature of the OpsItem and the impacted resource.
      */
     Title?: OpsItemTitle;
+    /**
+     * Specify a new category for an OpsItem.
+     */
+    Category?: OpsItemCategory;
+    /**
+     * Specify a new severity for an OpsItem.
+     */
+    Severity?: OpsItemSeverity;
   }
   export interface UpdateOpsItemResponse {
   }

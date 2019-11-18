@@ -93,6 +93,14 @@ declare class CloudFormation extends Service {
    */
   deleteStackSet(callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackSetOutput) => void): Request<CloudFormation.Types.DeleteStackSetOutput, AWSError>;
   /**
+   * Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations. To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered.  You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. 
+   */
+  deregisterType(params: CloudFormation.Types.DeregisterTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.DeregisterTypeOutput) => void): Request<CloudFormation.Types.DeregisterTypeOutput, AWSError>;
+  /**
+   * Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations. To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered.  You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. 
+   */
+  deregisterType(callback?: (err: AWSError, data: CloudFormation.Types.DeregisterTypeOutput) => void): Request<CloudFormation.Types.DeregisterTypeOutput, AWSError>;
+  /**
    * Retrieves your account's AWS CloudFormation limits, such as the maximum number of stacks that you can create in your account. For more information about account limits, see AWS CloudFormation Limits in the AWS CloudFormation User Guide.
    */
   describeAccountLimits(params: CloudFormation.Types.DescribeAccountLimitsInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeAccountLimitsOutput) => void): Request<CloudFormation.Types.DescribeAccountLimitsOutput, AWSError>;
@@ -180,6 +188,22 @@ declare class CloudFormation extends Service {
    * Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.  If the stack does not exist, an AmazonCloudFormationException is returned. 
    */
   describeStacks(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
+  /**
+   * Returns detailed information about a type that has been registered. If you specify a VersionId, DescribeType returns information about that specific type version. Otherwise, it returns information about the default type version.
+   */
+  describeType(params: CloudFormation.Types.DescribeTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeTypeOutput) => void): Request<CloudFormation.Types.DescribeTypeOutput, AWSError>;
+  /**
+   * Returns detailed information about a type that has been registered. If you specify a VersionId, DescribeType returns information about that specific type version. Otherwise, it returns information about the default type version.
+   */
+  describeType(callback?: (err: AWSError, data: CloudFormation.Types.DescribeTypeOutput) => void): Request<CloudFormation.Types.DescribeTypeOutput, AWSError>;
+  /**
+   * Returns information about a type's registration, including its current status and type and version identifiers. When you initiate a registration request using  RegisterType , you can then use  DescribeTypeRegistration  to monitor the progress of that registration request. Once the registration request has completed, use  DescribeType  to return detailed informaiton about a type.
+   */
+  describeTypeRegistration(params: CloudFormation.Types.DescribeTypeRegistrationInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeTypeRegistrationOutput) => void): Request<CloudFormation.Types.DescribeTypeRegistrationOutput, AWSError>;
+  /**
+   * Returns information about a type's registration, including its current status and type and version identifiers. When you initiate a registration request using  RegisterType , you can then use  DescribeTypeRegistration  to monitor the progress of that registration request. Once the registration request has completed, use  DescribeType  to return detailed informaiton about a type.
+   */
+  describeTypeRegistration(callback?: (err: AWSError, data: CloudFormation.Types.DescribeTypeRegistrationOutput) => void): Request<CloudFormation.Types.DescribeTypeRegistrationOutput, AWSError>;
   /**
    * Detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For each resource in the stack that supports drift detection, AWS CloudFormation compares the actual configuration of the resource with its expected template configuration. Only resource properties explicitly defined in the stack template are checked for drift. A stack is considered to have drifted if one or more of its resources differ from their expected template configurations. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to detect drift on all supported resources for a given stack, or DetectStackResourceDrift to detect drift on individual resources. For a list of stack resources that currently support drift detection, see Resources that Support Drift Detection.  DetectStackDrift can take up to several minutes, depending on the number of resources contained within the stack. Use DescribeStackDriftDetectionStatus to monitor the progress of a detect stack drift operation. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources. When detecting drift on a stack, AWS CloudFormation does not detect drift on any nested stacks belonging to that stack. Perform DetectStackDrift directly on the nested stack itself.
    */
@@ -309,6 +333,46 @@ declare class CloudFormation extends Service {
    */
   listStacks(callback?: (err: AWSError, data: CloudFormation.Types.ListStacksOutput) => void): Request<CloudFormation.Types.ListStacksOutput, AWSError>;
   /**
+   * Returns a list of registration tokens for the specified type.
+   */
+  listTypeRegistrations(params: CloudFormation.Types.ListTypeRegistrationsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListTypeRegistrationsOutput) => void): Request<CloudFormation.Types.ListTypeRegistrationsOutput, AWSError>;
+  /**
+   * Returns a list of registration tokens for the specified type.
+   */
+  listTypeRegistrations(callback?: (err: AWSError, data: CloudFormation.Types.ListTypeRegistrationsOutput) => void): Request<CloudFormation.Types.ListTypeRegistrationsOutput, AWSError>;
+  /**
+   * Returns summary information about the versions of a type.
+   */
+  listTypeVersions(params: CloudFormation.Types.ListTypeVersionsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListTypeVersionsOutput) => void): Request<CloudFormation.Types.ListTypeVersionsOutput, AWSError>;
+  /**
+   * Returns summary information about the versions of a type.
+   */
+  listTypeVersions(callback?: (err: AWSError, data: CloudFormation.Types.ListTypeVersionsOutput) => void): Request<CloudFormation.Types.ListTypeVersionsOutput, AWSError>;
+  /**
+   * Returns summary information about types that have been registered with CloudFormation.
+   */
+  listTypes(params: CloudFormation.Types.ListTypesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListTypesOutput) => void): Request<CloudFormation.Types.ListTypesOutput, AWSError>;
+  /**
+   * Returns summary information about types that have been registered with CloudFormation.
+   */
+  listTypes(callback?: (err: AWSError, data: CloudFormation.Types.ListTypesOutput) => void): Request<CloudFormation.Types.ListTypesOutput, AWSError>;
+  /**
+   * Reports progress of a resource handler to CloudFormation. Reserved for use by the CloudFormation CLI. Do not use this API in your code.
+   */
+  recordHandlerProgress(params: CloudFormation.Types.RecordHandlerProgressInput, callback?: (err: AWSError, data: CloudFormation.Types.RecordHandlerProgressOutput) => void): Request<CloudFormation.Types.RecordHandlerProgressOutput, AWSError>;
+  /**
+   * Reports progress of a resource handler to CloudFormation. Reserved for use by the CloudFormation CLI. Do not use this API in your code.
+   */
+  recordHandlerProgress(callback?: (err: AWSError, data: CloudFormation.Types.RecordHandlerProgressOutput) => void): Request<CloudFormation.Types.RecordHandlerProgressOutput, AWSError>;
+  /**
+   * Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the resource schema   Determining which handlers have been specified for the resource   Making the resource type available for use in your account   For more information on how to develop types and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request.
+   */
+  registerType(params: CloudFormation.Types.RegisterTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
+  /**
+   * Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the resource schema   Determining which handlers have been specified for the resource   Making the resource type available for use in your account   For more information on how to develop types and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request.
+   */
+  registerType(callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
+  /**
    * Sets a stack policy for a specified stack.
    */
   setStackPolicy(params: CloudFormation.Types.SetStackPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -316,6 +380,14 @@ declare class CloudFormation extends Service {
    * Sets a stack policy for a specified stack.
    */
   setStackPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Specify the default version of a type. The default version of a type will be used in CloudFormation operations.
+   */
+  setTypeDefaultVersion(params: CloudFormation.Types.SetTypeDefaultVersionInput, callback?: (err: AWSError, data: CloudFormation.Types.SetTypeDefaultVersionOutput) => void): Request<CloudFormation.Types.SetTypeDefaultVersionOutput, AWSError>;
+  /**
+   * Specify the default version of a type. The default version of a type will be used in CloudFormation operations.
+   */
+  setTypeDefaultVersion(callback?: (err: AWSError, data: CloudFormation.Types.SetTypeDefaultVersionOutput) => void): Request<CloudFormation.Types.SetTypeDefaultVersionOutput, AWSError>;
   /**
    * Sends a signal to the specified resource with a success or failure status. You can use the SignalResource API in conjunction with a creation policy or update policy. AWS CloudFormation doesn't proceed with a stack creation or update until resources receive the required number of signals or the timeout period is exceeded. The SignalResource API is useful in cases where you want to send signals from anywhere other than an Amazon EC2 instance.
    */
@@ -420,6 +492,14 @@ declare class CloudFormation extends Service {
    * Waits for the changeSetCreateComplete state by periodically calling the underlying CloudFormation.describeChangeSetoperation every 30 seconds (at most 120 times). Wait until change set status is CREATE_COMPLETE.
    */
   waitFor(state: "changeSetCreateComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
+  /**
+   * Waits for the typeRegistrationComplete state by periodically calling the underlying CloudFormation.describeTypeRegistrationoperation every 30 seconds (at most 120 times). Wait until type registration is COMPLETE.
+   */
+  waitFor(state: "typeRegistrationComplete", params: CloudFormation.Types.DescribeTypeRegistrationInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFormation.Types.DescribeTypeRegistrationOutput) => void): Request<CloudFormation.Types.DescribeTypeRegistrationOutput, AWSError>;
+  /**
+   * Waits for the typeRegistrationComplete state by periodically calling the underlying CloudFormation.describeTypeRegistrationoperation every 30 seconds (at most 120 times). Wait until type registration is COMPLETE.
+   */
+  waitFor(state: "typeRegistrationComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeTypeRegistrationOutput) => void): Request<CloudFormation.Types.DescribeTypeRegistrationOutput, AWSError>;
 }
 declare namespace CloudFormation {
   export type Account = string;
@@ -851,6 +931,27 @@ declare namespace CloudFormation {
   export interface DeleteStackSetOutput {
   }
   export type DeletionTime = Date;
+  export type DeprecatedStatus = "LIVE"|"DEPRECATED"|string;
+  export interface DeregisterTypeInput {
+    /**
+     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify TypeName or Arn.
+     */
+    Arn?: PrivateTypeArn;
+    /**
+     * The kind of type. Currently the only valid value is RESOURCE.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the type. Conditional: You must specify TypeName or Arn.
+     */
+    TypeName?: TypeName;
+    /**
+     * The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+     */
+    VersionId?: TypeVersionId;
+  }
+  export interface DeregisterTypeOutput {
+  }
   export interface DescribeAccountLimitsInput {
     /**
      * A string that identifies the next page of limits that you want to retrieve.
@@ -1135,6 +1236,110 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeTypeInput {
+    /**
+     * The kind of type.  Currently the only valid value is RESOURCE.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the type. Conditional: You must specify TypeName or Arn.
+     */
+    TypeName?: TypeName;
+    /**
+     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify TypeName or Arn.
+     */
+    Arn?: TypeArn;
+    /**
+     * The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered. If you specify a VersionId, DescribeType returns information about that specific type version. Otherwise, it returns information about the default type version.
+     */
+    VersionId?: TypeVersionId;
+  }
+  export interface DescribeTypeOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the type.
+     */
+    Arn?: TypeArn;
+    /**
+     * The kind of type.  Currently the only valid value is RESOURCE.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the registered type.
+     */
+    TypeName?: TypeName;
+    /**
+     * The ID of the default version of the type. The default version is used when the type version is not specified. To set the default version of a type, use  SetTypeDefaultVersion . 
+     */
+    DefaultVersionId?: TypeVersionId;
+    /**
+     * The description of the registered type.
+     */
+    Description?: Description;
+    /**
+     * The schema that defines the type. For more information on type schemas, see Resource Provider Schema in the CloudFormation CLI User Guide.
+     */
+    Schema?: TypeSchema;
+    /**
+     * The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted. Valid values include:    FULLY_MUTABLE: The type includes an update handler to process updates to the type during stack update operations.    IMMUTABLE: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.    NON_PROVISIONABLE: The type does not include all of the following handlers, and therefore cannot actually be provisioned.   create   read   delete    
+     */
+    ProvisioningType?: ProvisioningType;
+    /**
+     * The deprecation status of the type. Valid values include:    LIVE: The type is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.    DEPRECATED: The type has been deregistered and can no longer be used in CloudFormation operations.   
+     */
+    DeprecatedStatus?: DeprecatedStatus;
+    /**
+     * Contains logging configuration information for a type.
+     */
+    LoggingConfig?: LoggingConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM execution role used to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.
+     */
+    ExecutionRoleArn?: RoleArn;
+    /**
+     * The scope at which the type is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as PRIVATE.    PUBLIC: The type is publically visible and usable within any Amazon account.  
+     */
+    Visibility?: Visibility;
+    /**
+     * The URL of the source code for the type.
+     */
+    SourceUrl?: OptionalSecureUrl;
+    /**
+     * The URL of a page providing detailed documentation for this type.
+     */
+    DocumentationUrl?: OptionalSecureUrl;
+    /**
+     * When the specified type version was registered.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * When the specified type version was registered.
+     */
+    TimeCreated?: Timestamp;
+  }
+  export interface DescribeTypeRegistrationInput {
+    /**
+     * The identifier for this registration request. This registration token is generated by CloudFormation when you initiate a registration request using  RegisterType .
+     */
+    RegistrationToken: RegistrationToken;
+  }
+  export interface DescribeTypeRegistrationOutput {
+    /**
+     * The current status of the type registration request.
+     */
+    ProgressStatus?: RegistrationStatus;
+    /**
+     * The description of the type registration request.
+     */
+    Description?: Description;
+    /**
+     * The Amazon Resource Name (ARN) of the type being registered. For registration requests with a ProgressStatus of other than COMPLETE, this will be null.
+     */
+    TypeArn?: TypeArn;
+    /**
+     * The Amazon Resource Name (ARN) of this specific version of the type being registered. For registration requests with a ProgressStatus of other than COMPLETE, this will be null.
+     */
+    TypeVersionArn?: TypeArn;
+  }
   export type Description = string;
   export interface DetectStackDriftInput {
     /**
@@ -1322,6 +1527,7 @@ declare namespace CloudFormation {
      */
     ResourceIdentifierSummaries?: ResourceIdentifierSummaries;
   }
+  export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"NetworkFailure"|"InternalFailure"|string;
   export type Imports = StackName[];
   export type Key = string;
   export type LastUpdatedTime = Date;
@@ -1531,6 +1737,121 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
   }
+  export interface ListTypeRegistrationsInput {
+    /**
+     * The kind of type. Currently the only valid value is RESOURCE.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the type. Conditional: You must specify TypeName or Arn.
+     */
+    TypeName?: TypeName;
+    /**
+     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify TypeName or Arn.
+     */
+    TypeArn?: TypeArn;
+    /**
+     * The current status of the type registration request.
+     */
+    RegistrationStatusFilter?: RegistrationStatus;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous paginated request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTypeRegistrationsOutput {
+    /**
+     *  A list of type registration tokens. Use  DescribeTypeRegistration  to return detailed information about a type registration request.
+     */
+    RegistrationTokenList?: RegistrationTokenList;
+    /**
+     * If the request doesn't return all of the remaining results, NextToken is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTypeVersionsInput {
+    /**
+     * The kind of the type. Currently the only valid value is RESOURCE.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the type for which you want version summary information. Conditional: You must specify TypeName or Arn.
+     */
+    TypeName?: TypeName;
+    /**
+     * The Amazon Resource Name (ARN) of the type for which you want version summary information. Conditional: You must specify TypeName or Arn.
+     */
+    Arn?: PrivateTypeArn;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous paginated request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+    /**
+     * The deprecation status of the type versions that you want to get summary information about. Valid values include:    LIVE: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.    DEPRECATED: The type version has been deregistered and can no longer be used in CloudFormation operations.   
+     */
+    DeprecatedStatus?: DeprecatedStatus;
+  }
+  export interface ListTypeVersionsOutput {
+    /**
+     * A list of TypeVersionSummary structures that contain information about the specified type's versions.
+     */
+    TypeVersionSummaries?: TypeVersionSummaries;
+    /**
+     * If the request doesn't return all of the remaining results, NextToken is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTypesInput {
+    /**
+     * The scope at which the type is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as PRIVATE.    PUBLIC: The type is publically visible and usable within any Amazon account.  
+     */
+    Visibility?: Visibility;
+    /**
+     * The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted. Valid values include:    FULLY_MUTABLE: The type includes an update handler to process updates to the type during stack update operations.    IMMUTABLE: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.    NON_PROVISIONABLE: The type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.  
+     */
+    ProvisioningType?: ProvisioningType;
+    /**
+     * The deprecation status of the types that you want to get summary information about. Valid values include:    LIVE: The type is registered for use in CloudFormation operations.    DEPRECATED: The type has been deregistered and can no longer be used in CloudFormation operations.   
+     */
+    DeprecatedStatus?: DeprecatedStatus;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous paginated request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTypesOutput {
+    /**
+     * A list of TypeSummary structures that contain information about the specified types.
+     */
+    TypeSummaries?: TypeSummaries;
+    /**
+     * If the request doesn't return all of the remaining results, NextToken is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
+     */
+    NextToken?: NextToken;
+  }
+  export type LogGroupName = string;
+  export interface LoggingConfig {
+    /**
+     * The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.
+     */
+    LogRoleArn: RoleArn;
+    /**
+     * The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.
+     */
+    LogGroupName: LogGroupName;
+  }
   export type LogicalResourceId = string;
   export type LogicalResourceIds = LogicalResourceId[];
   export type MaxConcurrentCount = number;
@@ -1543,6 +1864,8 @@ declare namespace CloudFormation {
   export type NotificationARN = string;
   export type NotificationARNs = NotificationARN[];
   export type OnFailure = "DO_NOTHING"|"ROLLBACK"|"DELETE"|string;
+  export type OperationStatus = "PENDING"|"IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
+  export type OptionalSecureUrl = string;
   export interface Output {
     /**
      * The key associated with the output.
@@ -1631,6 +1954,7 @@ declare namespace CloudFormation {
      */
     Value: Value;
   }
+  export type PrivateTypeArn = string;
   export type Properties = string;
   export interface PropertyDifference {
     /**
@@ -1654,10 +1978,80 @@ declare namespace CloudFormation {
   export type PropertyName = string;
   export type PropertyPath = string;
   export type PropertyValue = string;
+  export type ProvisioningType = "NON_PROVISIONABLE"|"IMMUTABLE"|"FULLY_MUTABLE"|string;
   export type Reason = string;
+  export interface RecordHandlerProgressInput {
+    /**
+     * Reserved for use by the CloudFormation CLI.
+     */
+    BearerToken: ClientToken;
+    /**
+     * Reserved for use by the CloudFormation CLI.
+     */
+    OperationStatus: OperationStatus;
+    /**
+     * Reserved for use by the CloudFormation CLI.
+     */
+    CurrentOperationStatus?: OperationStatus;
+    /**
+     * Reserved for use by the CloudFormation CLI.
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     * Reserved for use by the CloudFormation CLI.
+     */
+    ErrorCode?: HandlerErrorCode;
+    /**
+     * Reserved for use by the CloudFormation CLI.
+     */
+    ResourceModel?: ResourceModel;
+    /**
+     * Reserved for use by the CloudFormation CLI.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface RecordHandlerProgressOutput {
+  }
   export type Region = string;
   export type RegionList = Region[];
+  export interface RegisterTypeInput {
+    /**
+     * The kind of type. Currently, the only valid value is RESOURCE.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the type being registered. We recommend that type names adhere to the following pattern: company_or_organization::service::type.  The following organization namespaces are reserved and cannot be used in your resource type names:    Alexa     AMZN     Amazon     AWS     Custom     Dev    
+     */
+    TypeName: TypeName;
+    /**
+     * A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register. For information on generating a schema handler package for the type you want to register, see submit in the CloudFormation CLI User Guide.
+     */
+    SchemaHandlerPackage: S3Url;
+    /**
+     * Specifies logging configuration information for a type.
+     */
+    LoggingConfig?: LoggingConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.
+     */
+    ExecutionRoleArn?: RoleArn;
+    /**
+     * A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of a type from the same registeration request, even if the request is submitted multiple times. 
+     */
+    ClientRequestToken?: RequestToken;
+  }
+  export interface RegisterTypeOutput {
+    /**
+     * The identifier for this registration request. Use this registration token when calling  DescribeTypeRegistration , which returns information about the status and IDs of the type registration. 
+     */
+    RegistrationToken?: RegistrationToken;
+  }
+  export type RegistrationStatus = "COMPLETE"|"IN_PROGRESS"|"FAILED"|string;
+  export type RegistrationToken = string;
+  export type RegistrationTokenList = RegistrationToken[];
+  export type RegistryType = "RESOURCE"|string;
   export type Replacement = "True"|"False"|"Conditional"|string;
+  export type RequestToken = string;
   export type RequiresRecreation = "Never"|"Conditionally"|"Always"|string;
   export type ResourceAttribute = "Properties"|"Metadata"|"CreationPolicy"|"UpdatePolicy"|"DeletionPolicy"|"Tags"|string;
   export interface ResourceChange {
@@ -1728,6 +2122,7 @@ declare namespace CloudFormation {
     ResourceIdentifiers?: ResourceIdentifiers;
   }
   export type ResourceIdentifiers = ResourceIdentifierPropertyKey[];
+  export type ResourceModel = string;
   export type ResourceProperties = string;
   export type ResourceSignalStatus = "SUCCESS"|"FAILURE"|string;
   export type ResourceSignalUniqueId = string;
@@ -1770,6 +2165,7 @@ declare namespace CloudFormation {
   export type RetainStacks = boolean;
   export type RetainStacksNullable = boolean;
   export type RoleARN = string;
+  export type RoleArn = string;
   export interface RollbackConfiguration {
     /**
      * The triggers to monitor during stack creation or update actions.  By default, AWS CloudFormation saves the rollback triggers specified for a stack and applies them to any subsequent update operations for the stack, unless you specify otherwise. If you do specify rollback triggers for this parameter, those triggers replace any list of triggers previously specified for the stack. This means:   To use the rollback triggers previously specified for this stack, if any, don't specify this parameter.   To specify new or updated rollback triggers, you must specify all the triggers that you want used for this stack, even triggers you've specifed before (for example, when creating the stack or during a previous stack update). Any triggers that you don't include in the updated list of triggers are no longer applied to the stack.   To remove all currently specified triggers, specify an empty list for this parameter.   If a specified trigger is missing, the entire stack operation fails and is rolled back. 
@@ -1791,6 +2187,7 @@ declare namespace CloudFormation {
     Type: Type;
   }
   export type RollbackTriggers = RollbackTrigger[];
+  export type S3Url = string;
   export type Scope = ResourceAttribute[];
   export interface SetStackPolicyInput {
     /**
@@ -1805,6 +2202,26 @@ declare namespace CloudFormation {
      * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
      */
     StackPolicyURL?: StackPolicyURL;
+  }
+  export interface SetTypeDefaultVersionInput {
+    /**
+     * The Amazon Resource Name (ARN) of the type for which you want version summary information. Conditional: You must specify TypeName or Arn.
+     */
+    Arn?: PrivateTypeArn;
+    /**
+     * The kind of type.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the type. Conditional: You must specify TypeName or Arn.
+     */
+    TypeName?: TypeName;
+    /**
+     * The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+     */
+    VersionId?: TypeVersionId;
+  }
+  export interface SetTypeDefaultVersionOutput {
   }
   export interface SignalResourceInput {
     /**
@@ -2470,6 +2887,7 @@ declare namespace CloudFormation {
   }
   export type Stacks = Stack[];
   export type StageList = TemplateStage[];
+  export type StatusMessage = string;
   export interface StopStackSetOperationInput {
     /**
      * The name or unique ID of the stack set that you want to stop the operation for.
@@ -2523,6 +2941,64 @@ declare namespace CloudFormation {
   export type TransformName = string;
   export type TransformsList = TransformName[];
   export type Type = string;
+  export type TypeArn = string;
+  export type TypeName = string;
+  export type TypeSchema = string;
+  export type TypeSummaries = TypeSummary[];
+  export interface TypeSummary {
+    /**
+     * The kind of type.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the type.
+     */
+    TypeName?: TypeName;
+    /**
+     * The ID of the default version of the type. The default version is used when the type version is not specified. To set the default version of a type, use  SetTypeDefaultVersion . 
+     */
+    DefaultVersionId?: TypeVersionId;
+    /**
+     * The Amazon Resource Name (ARN) of the type.
+     */
+    TypeArn?: TypeArn;
+    /**
+     * When the current default version of the type was registered.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * The description of the type.
+     */
+    Description?: Description;
+  }
+  export type TypeVersionId = string;
+  export type TypeVersionSummaries = TypeVersionSummary[];
+  export interface TypeVersionSummary {
+    /**
+     * The kind of type.
+     */
+    Type?: RegistryType;
+    /**
+     * The name of the type.
+     */
+    TypeName?: TypeName;
+    /**
+     * The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+     */
+    VersionId?: TypeVersionId;
+    /**
+     * The Amazon Resource Name (ARN) of the type version.
+     */
+    Arn?: TypeArn;
+    /**
+     * When the version was registered.
+     */
+    TimeCreated?: Timestamp;
+    /**
+     * The description of the type version.
+     */
+    Description?: Description;
+  }
   export interface UpdateStackInput {
     /**
      * The name or unique stack ID of the stack to update.
@@ -2744,6 +3220,7 @@ declare namespace CloudFormation {
   }
   export type Value = string;
   export type Version = string;
+  export type Visibility = "PUBLIC"|"PRIVATE"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
