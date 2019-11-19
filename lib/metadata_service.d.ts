@@ -12,6 +12,11 @@ export class MetadataService {
      * Sends a request to the instance metadata service for a given resource.
      */
     request(path: string, callback: (err: AWSError, data: string) => void): void;
+    request(
+        path: string,
+        options: {method?: string, headers?: {[key: string]: String} },
+        callback: (err: AWSError, data: string) => void
+    ): void;
     /**
      * 169.254.169.254
      */
