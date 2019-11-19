@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "IMDS",
+  "description": "Signed IMDS workflow"
+}
