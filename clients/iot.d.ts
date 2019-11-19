@@ -124,6 +124,14 @@ declare class Iot extends Service {
    */
   clearDefaultAuthorizer(callback?: (err: AWSError, data: Iot.Types.ClearDefaultAuthorizerResponse) => void): Request<Iot.Types.ClearDefaultAuthorizerResponse, AWSError>;
   /**
+   * Confirms a topic rule destination. When you create a rule requiring a destination, AWS IoT sends a confirmation message to the endpoint or base address you specify. The message includes a token which you pass back when calling ConfirmTopicRuleDestination to confirm that you own or have access to the endpoint.
+   */
+  confirmTopicRuleDestination(params: Iot.Types.ConfirmTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.ConfirmTopicRuleDestinationResponse) => void): Request<Iot.Types.ConfirmTopicRuleDestinationResponse, AWSError>;
+  /**
+   * Confirms a topic rule destination. When you create a rule requiring a destination, AWS IoT sends a confirmation message to the endpoint or base address you specify. The message includes a token which you pass back when calling ConfirmTopicRuleDestination to confirm that you own or have access to the endpoint.
+   */
+  confirmTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.ConfirmTopicRuleDestinationResponse) => void): Request<Iot.Types.ConfirmTopicRuleDestinationResponse, AWSError>;
+  /**
    * Creates an authorizer.
    */
   createAuthorizer(params: Iot.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.CreateAuthorizerResponse) => void): Request<Iot.Types.CreateAuthorizerResponse, AWSError>;
@@ -267,6 +275,14 @@ declare class Iot extends Service {
    * Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
    */
   createTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates a topic rule destination. The destination must be confirmed prior to use.
+   */
+  createTopicRuleDestination(params: Iot.Types.CreateTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.CreateTopicRuleDestinationResponse) => void): Request<Iot.Types.CreateTopicRuleDestinationResponse, AWSError>;
+  /**
+   * Creates a topic rule destination. The destination must be confirmed prior to use.
+   */
+  createTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.CreateTopicRuleDestinationResponse) => void): Request<Iot.Types.CreateTopicRuleDestinationResponse, AWSError>;
   /**
    * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
    */
@@ -435,6 +451,14 @@ declare class Iot extends Service {
    * Deletes the rule.
    */
   deleteTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a topic rule destination.
+   */
+  deleteTopicRuleDestination(params: Iot.Types.DeleteTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteTopicRuleDestinationResponse) => void): Request<Iot.Types.DeleteTopicRuleDestinationResponse, AWSError>;
+  /**
+   * Deletes a topic rule destination.
+   */
+  deleteTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.DeleteTopicRuleDestinationResponse) => void): Request<Iot.Types.DeleteTopicRuleDestinationResponse, AWSError>;
   /**
    * Deletes a logging level.
    */
@@ -684,11 +708,11 @@ declare class Iot extends Service {
    */
   enableTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns the number of things with distinct values for the aggregation field. 
+   * Returns the approximate count of unique values that match the query.
    */
   getCardinality(params: Iot.Types.GetCardinalityRequest, callback?: (err: AWSError, data: Iot.Types.GetCardinalityResponse) => void): Request<Iot.Types.GetCardinalityResponse, AWSError>;
   /**
-   * Returns the number of things with distinct values for the aggregation field. 
+   * Returns the approximate count of unique values that match the query.
    */
   getCardinality(callback?: (err: AWSError, data: Iot.Types.GetCardinalityResponse) => void): Request<Iot.Types.GetCardinalityResponse, AWSError>;
   /**
@@ -732,11 +756,11 @@ declare class Iot extends Service {
    */
   getOTAUpdate(callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
   /**
-   * Returns the percentile values for the aggregation field. The results from GetPercentiles is an approximation. The default percentile groupings are: 1,5,25,50,75,95,99. You can specify custom percentile grouping using the percents argument to the GetPercentiles API.
+   * Groups the aggregated values that match the query into percentile groupings. The default percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own when you call GetPercentiles. This function returns a value for each percentile group specified (or the default percentile groupings). The percentile group "1" contains the aggregated field value that occurs in approximately one percent of the values that match the query. The percentile group "5" contains the aggregated field value that occurs in approximately five percent of the values that match the query, and so on. The result is an approximation, the more values that match the query, the more accurate the percentile values.
    */
   getPercentiles(params: Iot.Types.GetPercentilesRequest, callback?: (err: AWSError, data: Iot.Types.GetPercentilesResponse) => void): Request<Iot.Types.GetPercentilesResponse, AWSError>;
   /**
-   * Returns the percentile values for the aggregation field. The results from GetPercentiles is an approximation. The default percentile groupings are: 1,5,25,50,75,95,99. You can specify custom percentile grouping using the percents argument to the GetPercentiles API.
+   * Groups the aggregated values that match the query into percentile groupings. The default percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own when you call GetPercentiles. This function returns a value for each percentile group specified (or the default percentile groupings). The percentile group "1" contains the aggregated field value that occurs in approximately one percent of the values that match the query. The percentile group "5" contains the aggregated field value that occurs in approximately five percent of the values that match the query, and so on. The result is an approximation, the more values that match the query, the more accurate the percentile values.
    */
   getPercentiles(callback?: (err: AWSError, data: Iot.Types.GetPercentilesResponse) => void): Request<Iot.Types.GetPercentilesResponse, AWSError>;
   /**
@@ -764,11 +788,11 @@ declare class Iot extends Service {
    */
   getRegistrationCode(callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
   /**
-   * Gets statistics returns the count, average, sum, minimum, maximum, sumOfSquares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.
+   * Gets statistics about things that match the specified query.
    */
   getStatistics(params: Iot.Types.GetStatisticsRequest, callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
-   * Gets statistics returns the count, average, sum, minimum, maximum, sumOfSquares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.
+   * Gets statistics about things that match the specified query.
    */
   getStatistics(callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
@@ -779,6 +803,14 @@ declare class Iot extends Service {
    * Gets information about the rule.
    */
   getTopicRule(callback?: (err: AWSError, data: Iot.Types.GetTopicRuleResponse) => void): Request<Iot.Types.GetTopicRuleResponse, AWSError>;
+  /**
+   * Gets information about a topic rule destination.
+   */
+  getTopicRuleDestination(params: Iot.Types.GetTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.GetTopicRuleDestinationResponse) => void): Request<Iot.Types.GetTopicRuleDestinationResponse, AWSError>;
+  /**
+   * Gets information about a topic rule destination.
+   */
+  getTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.GetTopicRuleDestinationResponse) => void): Request<Iot.Types.GetTopicRuleDestinationResponse, AWSError>;
   /**
    * Gets the fine grained logging options.
    */
@@ -1108,6 +1140,14 @@ declare class Iot extends Service {
    */
   listThingsInThingGroup(callback?: (err: AWSError, data: Iot.Types.ListThingsInThingGroupResponse) => void): Request<Iot.Types.ListThingsInThingGroupResponse, AWSError>;
   /**
+   * Lists all the topic rule destinations in your AWS account.
+   */
+  listTopicRuleDestinations(params: Iot.Types.ListTopicRuleDestinationsRequest, callback?: (err: AWSError, data: Iot.Types.ListTopicRuleDestinationsResponse) => void): Request<Iot.Types.ListTopicRuleDestinationsResponse, AWSError>;
+  /**
+   * Lists all the topic rule destinations in your AWS account.
+   */
+  listTopicRuleDestinations(callback?: (err: AWSError, data: Iot.Types.ListTopicRuleDestinationsResponse) => void): Request<Iot.Types.ListTopicRuleDestinationsResponse, AWSError>;
+  /**
    * Lists the rules for the specific topic.
    */
   listTopicRules(params: Iot.Types.ListTopicRulesRequest, callback?: (err: AWSError, data: Iot.Types.ListTopicRulesResponse) => void): Request<Iot.Types.ListTopicRulesResponse, AWSError>;
@@ -1148,11 +1188,11 @@ declare class Iot extends Service {
    */
   registerCertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
-   * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
+   * Provisions a thing.
    */
   registerThing(params: Iot.Types.RegisterThingRequest, callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
-   * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
+   * Provisions a thing.
    */
   registerThing(callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
@@ -1444,6 +1484,14 @@ declare class Iot extends Service {
    */
   updateThingGroupsForThing(callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupsForThingResponse) => void): Request<Iot.Types.UpdateThingGroupsForThingResponse, AWSError>;
   /**
+   * Updates a topic rule destination. You use this to change the status, endpoint URL, or confirmation URL of the destination.
+   */
+  updateTopicRuleDestination(params: Iot.Types.UpdateTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateTopicRuleDestinationResponse) => void): Request<Iot.Types.UpdateTopicRuleDestinationResponse, AWSError>;
+  /**
+   * Updates a topic rule destination. You use this to change the status, endpoint URL, or confirmation URL of the destination.
+   */
+  updateTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.UpdateTopicRuleDestinationResponse) => void): Request<Iot.Types.UpdateTopicRuleDestinationResponse, AWSError>;
+  /**
    * Validates a Device Defender security profile behaviors specification.
    */
   validateSecurityProfileBehaviors(params: Iot.Types.ValidateSecurityProfileBehaviorsRequest, callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
@@ -1555,6 +1603,10 @@ declare namespace Iot {
      * Starts execution of a Step Functions state machine.
      */
     stepFunctions?: StepFunctionsAction;
+    /**
+     * Send data to an HTTPS endpoint.
+     */
+    http?: HttpAction;
   }
   export type ActionList = Action[];
   export type ActionType = "PUBLISH"|"SUBSCRIBE"|"RECEIVE"|"CONNECT"|string;
@@ -2436,6 +2488,15 @@ declare namespace Iot {
      */
     Enabled?: Enabled;
   }
+  export interface ConfirmTopicRuleDestinationRequest {
+    /**
+     * The token used to confirm ownership or access to the topic rule confirmation URL.
+     */
+    confirmationToken: ConfirmationToken;
+  }
+  export interface ConfirmTopicRuleDestinationResponse {
+  }
+  export type ConfirmationToken = string;
   export type ConnectivityTimestamp = number;
   export type ConsecutiveDatapointsToAlarm = number;
   export type ConsecutiveDatapointsToClear = number;
@@ -3032,6 +3093,18 @@ declare namespace Iot {
      */
     thingTypeId?: ThingTypeId;
   }
+  export interface CreateTopicRuleDestinationRequest {
+    /**
+     * The topic rule destination configuration.
+     */
+    destinationConfiguration: TopicRuleDestinationConfiguration;
+  }
+  export interface CreateTopicRuleDestinationResponse {
+    /**
+     * The topic rule destination.
+     */
+    topicRuleDestination?: TopicRuleDestination;
+  }
   export interface CreateTopicRuleRequest {
     /**
      * The name of the rule.
@@ -3273,6 +3346,14 @@ declare namespace Iot {
     thingTypeName: ThingTypeName;
   }
   export interface DeleteThingTypeResponse {
+  }
+  export interface DeleteTopicRuleDestinationRequest {
+    /**
+     * The ARN of the topic rule destination to delete.
+     */
+    arn: AwsArn;
+  }
+  export interface DeleteTopicRuleDestinationResponse {
   }
   export interface DeleteTopicRuleRequest {
     /**
@@ -4110,7 +4191,7 @@ declare namespace Iot {
      */
     name?: FieldName;
     /**
-     * The datatype of the field.
+     * The data type of the field.
      */
     type?: FieldType;
   }
@@ -4152,7 +4233,6 @@ declare namespace Iot {
   export type ForceFlag = boolean;
   export type Forced = boolean;
   export type FunctionArn = string;
-  export type GEMaxResults = number;
   export type GenerationId = string;
   export interface GetCardinalityRequest {
     /**
@@ -4174,7 +4254,7 @@ declare namespace Iot {
   }
   export interface GetCardinalityResponse {
     /**
-     * The number of things that match the query.
+     * The approximate count of unique values that match the query.
      */
     cardinality?: Count;
   }
@@ -4342,11 +4422,11 @@ declare namespace Iot {
      */
     isDefaultVersion?: IsDefaultVersion;
     /**
-     * The date the policy was created.
+     * The date the policy version was created.
      */
     creationDate?: DateType;
     /**
-     * The date the policy was last modified.
+     * The date the policy version was last modified.
      */
     lastModifiedDate?: DateType;
     /**
@@ -4372,7 +4452,7 @@ declare namespace Iot {
      */
     queryString: QueryString;
     /**
-     * The aggregation field name.
+     * The aggregation field name. Currently not supported.
      */
     aggregationField?: AggregationField;
     /**
@@ -4385,6 +4465,18 @@ declare namespace Iot {
      * The statistics returned by the Fleet Indexing service based on the query and aggregation field.
      */
     statistics?: Statistics;
+  }
+  export interface GetTopicRuleDestinationRequest {
+    /**
+     * The ARN of the topic rule destination.
+     */
+    arn: AwsArn;
+  }
+  export interface GetTopicRuleDestinationResponse {
+    /**
+     * The topic rule destination.
+     */
+    topicRuleDestination?: TopicRuleDestination;
   }
   export interface GetTopicRuleRequest {
     /**
@@ -4431,6 +4523,61 @@ declare namespace Iot {
   export type HashAlgorithm = string;
   export type HashKeyField = string;
   export type HashKeyValue = string;
+  export type HeaderKey = string;
+  export type HeaderList = HttpActionHeader[];
+  export type HeaderValue = string;
+  export interface HttpAction {
+    /**
+     * The endpoint URL. If substitution templates are used in the URL, you must also specify a confirmationUrl. If this is a new destination, a new TopicRuleDestination is created if possible.
+     */
+    url: Url;
+    /**
+     * The URL to which AWS IoT sends a confirmation message. The value of the confirmation URL must be a prefix of the endpoint URL. If you do not specify a confirmation URL AWS IoT uses the endpoint URL as the confirmation URL. If you use substitution templates in the confirmationUrl, you must create and enable topic rule destinations that match each possible value of the substituion template before traffic is allowed to your endpoint URL.
+     */
+    confirmationUrl?: Url;
+    /**
+     * The HTTP headers to send with the message data.
+     */
+    headers?: HeaderList;
+    /**
+     * The authentication method to use when sending data to an HTTPS endpoint.
+     */
+    auth?: HttpAuthorization;
+  }
+  export interface HttpActionHeader {
+    /**
+     * The HTTP header key.
+     */
+    key: HeaderKey;
+    /**
+     * The HTTP header value. Substitution templates are supported.
+     */
+    value: HeaderValue;
+  }
+  export interface HttpAuthorization {
+    /**
+     * Use Sig V4 authorization. For more information, see Signature Version 4 Signing Process.
+     */
+    sigv4?: SigV4Authorization;
+  }
+  export interface HttpUrlDestinationConfiguration {
+    /**
+     * The URL AWS IoT uses to confirm ownership of or access to the topic rule destination URL.
+     */
+    confirmationUrl: Url;
+  }
+  export interface HttpUrlDestinationProperties {
+    /**
+     * The URL used to confirm the HTTP topic rule destination URL.
+     */
+    confirmationUrl?: Url;
+  }
+  export interface HttpUrlDestinationSummary {
+    /**
+     * The URL used to confirm ownership of or access to the HTTP topic rule destination URL.
+     */
+    confirmationUrl?: Url;
+  }
   export interface ImplicitDeny {
     /**
      * Policies that don't contain a matching allow or deny statement for the specified action on the specified resource. 
@@ -5820,6 +5967,26 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListTopicRuleDestinationsRequest {
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: TopicRuleDestinationMaxResults;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTopicRuleDestinationsResponse {
+    /**
+     * Information about a topic rule destination.
+     */
+    destinationSummaries?: TopicRuleDestinationSummaries;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListTopicRulesRequest {
     /**
      * The topic.
@@ -5828,7 +5995,7 @@ declare namespace Iot {
     /**
      * The maximum number of results to return.
      */
-    maxResults?: GEMaxResults;
+    maxResults?: TopicRuleMaxResults;
     /**
      * A token used to retrieve the next value.
      */
@@ -6195,7 +6362,7 @@ declare namespace Iot {
      */
     percent?: Percent;
     /**
-     * The value.
+     * The value of the percentile.
      */
     value?: PercentValue;
   }
@@ -6725,6 +6892,7 @@ declare namespace Iot {
   }
   export type SecurityProfileTargetMappings = SecurityProfileTargetMapping[];
   export type SecurityProfileTargets = SecurityProfileTarget[];
+  export type ServiceName = string;
   export type SetAsActive = boolean;
   export type SetAsActiveFlag = boolean;
   export type SetAsDefault = boolean;
@@ -6784,6 +6952,20 @@ declare namespace Iot {
      */
     disableAllLogs?: DisableAllLogs;
   }
+  export interface SigV4Authorization {
+    /**
+     * The signing region.
+     */
+    signingRegion: SigningRegion;
+    /**
+     * The service name to use while signing with Sig V4.
+     */
+    serviceName: ServiceName;
+    /**
+     * The ARN of the signing role.
+     */
+    roleArn: AwsArn;
+  }
   export type Signature = Buffer|Uint8Array|Blob|string;
   export type SignatureAlgorithm = string;
   export type SigningJobId = string;
@@ -6802,6 +6984,7 @@ declare namespace Iot {
      */
     certificatePathOnDevice?: CertificatePathOnDevice;
   }
+  export type SigningRegion = string;
   export type SkippedFindingsCount = number;
   export type SkyfallMaxResults = number;
   export interface SnsAction {
@@ -6922,19 +7105,19 @@ declare namespace Iot {
      */
     count?: Count;
     /**
-     * The average of the aggregated field values.
+     * The average of the aggregated fields. If the field data type is String this value is indeterminate.
      */
     average?: Average;
     /**
-     * The sum of the aggregated field values.
+     * The sum of the aggregated fields. If the field data type is String this value is indeterminate.
      */
     sum?: Sum;
     /**
-     * The minimum aggregated field value.
+     * The minimum value of the aggregated fields. If the field data type is String this value is indeterminate.
      */
     minimum?: Minimum;
     /**
-     * The maximum aggregated field value.
+     * The maximum value of the aggregated fields. If the field data type is String this value is indeterminate.
      */
     maximum?: Maximum;
     /**
@@ -6946,7 +7129,7 @@ declare namespace Iot {
      */
     variance?: Variance;
     /**
-     * The standard deviation of the aggregated field valuesl
+     * The standard deviation of the aggregated field values.
      */
     stdDeviation?: StdDeviation;
   }
@@ -7312,11 +7495,11 @@ declare namespace Iot {
      */
     thingGroupIndexingMode: ThingGroupIndexingMode;
     /**
-     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+     * A list of automatically indexed thing group fields.
      */
     managedFields?: Fields;
     /**
-     * Contains custom field names and their data type.
+     * A list of thing group fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.
      */
     customFields?: Fields;
   }
@@ -7361,11 +7544,11 @@ declare namespace Iot {
      */
     thingConnectivityIndexingMode?: ThingConnectivityIndexingMode;
     /**
-     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+     * A list of automatically indexed thing fields.
      */
     managedFields?: Fields;
     /**
-     * Contains custom field names and their data type.
+     * A list of thing fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.
      */
     customFields?: Fields;
   }
@@ -7466,6 +7649,51 @@ declare namespace Iot {
      */
     errorAction?: Action;
   }
+  export interface TopicRuleDestination {
+    /**
+     * The topic rule destination URL.
+     */
+    arn?: AwsArn;
+    /**
+     * The status of the topic rule destination. Valid values are:  IN_PROGRESS  A topic rule destination was created but has not been confirmed. You can set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling UpdateTopicRuleDestination causes a new confirmation challenge to be sent to your confirmation endpoint.  ENABLED  Confirmation was completed, and traffic to this destination is allowed. You can set status to DISABLED by calling UpdateTopicRuleDestination.  DISABLED  Confirmation was completed, and traffic to this destination is not allowed. You can set status to ENABLED by calling UpdateTopicRuleDestination.  ERROR  Confirmation could not be completed, for example if the confirmation timed out. You can call GetTopicRuleDestination for details about the error. You can set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling UpdateTopicRuleDestination causes a new confirmation challenge to be sent to your confirmation endpoint.  
+     */
+    status?: TopicRuleDestinationStatus;
+    /**
+     * Additional details or reason why the topic rule destination is in the current status.
+     */
+    statusReason?: String;
+    /**
+     * Properties of the HTTP URL.
+     */
+    httpUrlProperties?: HttpUrlDestinationProperties;
+  }
+  export interface TopicRuleDestinationConfiguration {
+    /**
+     * Configuration of the HTTP URL.
+     */
+    httpUrlConfiguration?: HttpUrlDestinationConfiguration;
+  }
+  export type TopicRuleDestinationMaxResults = number;
+  export type TopicRuleDestinationStatus = "ENABLED"|"IN_PROGRESS"|"DISABLED"|"ERROR"|string;
+  export type TopicRuleDestinationSummaries = TopicRuleDestinationSummary[];
+  export interface TopicRuleDestinationSummary {
+    /**
+     * The topic rule destination ARN.
+     */
+    arn?: AwsArn;
+    /**
+     * The status of the topic rule destination. Valid values are:  IN_PROGRESS  A topic rule destination was created but has not been confirmed. You can set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling UpdateTopicRuleDestination causes a new confirmation challenge to be sent to your confirmation endpoint.  ENABLED  Confirmation was completed, and traffic to this destination is allowed. You can set status to DISABLED by calling UpdateTopicRuleDestination.  DISABLED  Confirmation was completed, and traffic to this destination is not allowed. You can set status to ENABLED by calling UpdateTopicRuleDestination.  ERROR  Confirmation could not be completed, for example if the confirmation timed out. You can call GetTopicRuleDestination for details about the error. You can set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling UpdateTopicRuleDestination causes a new confirmation challenge to be sent to your confirmation endpoint.  
+     */
+    status?: TopicRuleDestinationStatus;
+    /**
+     * The reason the topic rule destination is in the current status.
+     */
+    statusReason?: String;
+    /**
+     * Information about the HTTP URL.
+     */
+    httpUrlSummary?: HttpUrlDestinationSummary;
+  }
   export type TopicRuleList = TopicRuleListItem[];
   export interface TopicRuleListItem {
     /**
@@ -7489,6 +7717,7 @@ declare namespace Iot {
      */
     ruleDisabled?: IsDisabled;
   }
+  export type TopicRuleMaxResults = number;
   export interface TopicRulePayload {
     /**
      * The SQL statement used to query the topic. For more information, see AWS IoT SQL Reference in the AWS IoT Developer Guide.
@@ -8016,6 +8245,19 @@ declare namespace Iot {
   }
   export interface UpdateThingResponse {
   }
+  export interface UpdateTopicRuleDestinationRequest {
+    /**
+     * The ARN of the topic rule destination.
+     */
+    arn: AwsArn;
+    /**
+     * The status of the topic rule destination. Valid values are:  IN_PROGRESS  A topic rule destination was created but has not been confirmed. You can set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling UpdateTopicRuleDestination causes a new confirmation challenge to be sent to your confirmation endpoint.  ENABLED  Confirmation was completed, and traffic to this destination is allowed. You can set status to DISABLED by calling UpdateTopicRuleDestination.  DISABLED  Confirmation was completed, and traffic to this destination is not allowed. You can set status to ENABLED by calling UpdateTopicRuleDestination.  ERROR  Confirmation could not be completed, for example if the confirmation timed out. You can call GetTopicRuleDestination for details about the error. You can set status to IN_PROGRESS by calling UpdateTopicRuleDestination. Calling UpdateTopicRuleDestination causes a new confirmation challenge to be sent to your confirmation endpoint.  
+     */
+    status: TopicRuleDestinationStatus;
+  }
+  export interface UpdateTopicRuleDestinationResponse {
+  }
+  export type Url = string;
   export type UseBase64 = boolean;
   export type Valid = boolean;
   export interface ValidateSecurityProfileBehaviorsRequest {

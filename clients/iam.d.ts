@@ -1866,7 +1866,7 @@ declare namespace IAM {
      */
     Id: idType;
     /**
-     * The path to the entity (user or role). For more information about paths, see IAM Identifiers in the Using IAM guide. 
+     * The path to the entity (user or role). For more information about paths, see IAM Identifiers in the IAM User Guide. 
      */
     Path?: pathType;
   }
@@ -2479,7 +2479,7 @@ declare namespace IAM {
   }
   export interface Group {
     /**
-     * The path to the group. For more information about paths, see IAM Identifiers in the Using IAM guide. 
+     * The path to the group. For more information about paths, see IAM Identifiers in the IAM User Guide. 
      */
     Path: pathType;
     /**
@@ -2487,11 +2487,11 @@ declare namespace IAM {
      */
     GroupName: groupNameType;
     /**
-     *  The stable and unique string identifying the group. For more information about IDs, see IAM Identifiers in the Using IAM guide. 
+     *  The stable and unique string identifying the group. For more information about IDs, see IAM Identifiers in the IAM User Guide. 
      */
     GroupId: idType;
     /**
-     *  The Amazon Resource Name (ARN) specifying the group. For more information about ARNs and how to use them in policies, see IAM Identifiers in the Using IAM guide. 
+     *  The Amazon Resource Name (ARN) specifying the group. For more information about ARNs and how to use them in policies, see IAM Identifiers in the IAM User Guide. 
      */
     Arn: arnType;
     /**
@@ -2501,7 +2501,7 @@ declare namespace IAM {
   }
   export interface GroupDetail {
     /**
-     * The path to the group. For more information about paths, see IAM Identifiers in the Using IAM guide.
+     * The path to the group. For more information about paths, see IAM Identifiers in the IAM User Guide.
      */
     Path?: pathType;
     /**
@@ -2509,7 +2509,7 @@ declare namespace IAM {
      */
     GroupName?: groupNameType;
     /**
-     * The stable and unique string identifying the group. For more information about IDs, see IAM Identifiers in the Using IAM guide.
+     * The stable and unique string identifying the group. For more information about IDs, see IAM Identifiers in the IAM User Guide.
      */
     GroupId?: idType;
     Arn?: arnType;
@@ -2528,7 +2528,7 @@ declare namespace IAM {
   }
   export interface InstanceProfile {
     /**
-     *  The path to the instance profile. For more information about paths, see IAM Identifiers in the Using IAM guide. 
+     *  The path to the instance profile. For more information about paths, see IAM Identifiers in the IAM User Guide. 
      */
     Path: pathType;
     /**
@@ -2536,11 +2536,11 @@ declare namespace IAM {
      */
     InstanceProfileName: instanceProfileNameType;
     /**
-     *  The stable and unique string identifying the instance profile. For more information about IDs, see IAM Identifiers in the Using IAM guide. 
+     *  The stable and unique string identifying the instance profile. For more information about IDs, see IAM Identifiers in the IAM User Guide. 
      */
     InstanceProfileId: idType;
     /**
-     *  The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see IAM Identifiers in the Using IAM guide. 
+     *  The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see IAM Identifiers in the IAM User Guide. 
      */
     Arn: arnType;
     /**
@@ -3369,16 +3369,16 @@ declare namespace IAM {
      */
     PolicyName?: policyNameType;
     /**
-     * The stable and unique string identifying the policy. For more information about IDs, see IAM Identifiers in the Using IAM guide.
+     * The stable and unique string identifying the policy. For more information about IDs, see IAM Identifiers in the IAM User Guide.
      */
     PolicyId?: idType;
     Arn?: arnType;
     /**
-     * The path to the policy. For more information about paths, see IAM Identifiers in the Using IAM guide.
+     * The path to the policy. For more information about paths, see IAM Identifiers in the IAM User Guide.
      */
     Path?: policyPathType;
     /**
-     * The identifier for the version of the policy that is set as the default (operative) version. For more information about policy versions, see Versioning for Managed Policies in the Using IAM guide. 
+     * The identifier for the version of the policy that is set as the default (operative) version. For more information about policy versions, see Versioning for Managed Policies in the IAM User Guide. 
      */
     DefaultVersionId?: policyVersionIdType;
     /**
@@ -3471,12 +3471,12 @@ declare namespace IAM {
      */
     PolicyName?: policyNameType;
     /**
-     * The stable and unique string identifying the policy. For more information about IDs, see IAM Identifiers in the Using IAM guide.
+     * The stable and unique string identifying the policy. For more information about IDs, see IAM Identifiers in the IAM User Guide.
      */
     PolicyId?: idType;
     Arn?: arnType;
     /**
-     * The path to the policy. For more information about paths, see IAM Identifiers in the Using IAM guide.
+     * The path to the policy. For more information about paths, see IAM Identifiers in the IAM User Guide.
      */
     Path?: policyPathType;
     /**
@@ -3762,7 +3762,7 @@ declare namespace IAM {
   }
   export interface Role {
     /**
-     *  The path to the role. For more information about paths, see IAM Identifiers in the Using IAM guide. 
+     *  The path to the role. For more information about paths, see IAM Identifiers in the IAM User Guide. 
      */
     Path: pathType;
     /**
@@ -3770,7 +3770,7 @@ declare namespace IAM {
      */
     RoleName: roleNameType;
     /**
-     *  The stable and unique string identifying the role. For more information about IDs, see IAM Identifiers in the Using IAM guide. 
+     *  The stable and unique string identifying the role. For more information about IDs, see IAM Identifiers in the IAM User Guide. 
      */
     RoleId: idType;
     /**
@@ -3801,10 +3801,14 @@ declare namespace IAM {
      * A list of tags that are attached to the specified role. For more information about tagging, see Tagging IAM Identities in the IAM User Guide.
      */
     Tags?: tagListType;
+    /**
+     * Contains information about the last time that an IAM role was used. This includes the date and time and the Region in which the role was last used. Activity is only reported for the trailing 400 days. This period can be shorter if your Region began supporting these features within the last year. The role might have been used more than 400 days ago. For more information, see Regions Where Data Is Tracked in the IAM User Guide.
+     */
+    RoleLastUsed?: RoleLastUsed;
   }
   export interface RoleDetail {
     /**
-     * The path to the role. For more information about paths, see IAM Identifiers in the Using IAM guide.
+     * The path to the role. For more information about paths, see IAM Identifiers in the IAM User Guide.
      */
     Path?: pathType;
     /**
@@ -3812,7 +3816,7 @@ declare namespace IAM {
      */
     RoleName?: roleNameType;
     /**
-     * The stable and unique string identifying the role. For more information about IDs, see IAM Identifiers in the Using IAM guide.
+     * The stable and unique string identifying the role. For more information about IDs, see IAM Identifiers in the IAM User Guide.
      */
     RoleId?: idType;
     Arn?: arnType;
@@ -3844,6 +3848,20 @@ declare namespace IAM {
      * A list of tags that are attached to the specified role. For more information about tagging, see Tagging IAM Identities in the IAM User Guide.
      */
     Tags?: tagListType;
+    /**
+     * Contains information about the last time that an IAM role was used. This includes the date and time and the Region in which the role was last used. Activity is only reported for the trailing 400 days. This period can be shorter if your Region began supporting these features within the last year. The role might have been used more than 400 days ago. For more information, see Regions Where Data Is Tracked in the IAM User Guide.
+     */
+    RoleLastUsed?: RoleLastUsed;
+  }
+  export interface RoleLastUsed {
+    /**
+     * The date and time, in ISO 8601 date-time format that the role was last used. This field is null if the role has not been used within the IAM tracking period. For more information about the tracking period, see Regions Where Data Is Tracked in the IAM User Guide. 
+     */
+    LastUsedDate?: dateType;
+    /**
+     * The name of the AWS Region in which the role was last used.
+     */
+    Region?: stringType;
   }
   export type RoleUsageListType = RoleUsageType[];
   export interface RoleUsageType {
@@ -3934,7 +3952,7 @@ declare namespace IAM {
   }
   export interface ServerCertificateMetadata {
     /**
-     *  The path to the server certificate. For more information about paths, see IAM Identifiers in the Using IAM guide. 
+     *  The path to the server certificate. For more information about paths, see IAM Identifiers in the IAM User Guide. 
      */
     Path: pathType;
     /**
@@ -3942,11 +3960,11 @@ declare namespace IAM {
      */
     ServerCertificateName: serverCertificateNameType;
     /**
-     *  The stable and unique string identifying the server certificate. For more information about IDs, see IAM Identifiers in the Using IAM guide. 
+     *  The stable and unique string identifying the server certificate. For more information about IDs, see IAM Identifiers in the IAM User Guide. 
      */
     ServerCertificateId: idType;
     /**
-     *  The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see IAM Identifiers in the Using IAM guide. 
+     *  The Amazon Resource Name (ARN) specifying the server certificate. For more information about ARNs and how to use them in policies, see IAM Identifiers in the IAM User Guide. 
      */
     Arn: arnType;
     /**
@@ -4528,7 +4546,7 @@ declare namespace IAM {
   }
   export interface User {
     /**
-     * The path to the user. For more information about paths, see IAM Identifiers in the Using IAM guide.
+     * The path to the user. For more information about paths, see IAM Identifiers in the IAM User Guide.
      */
     Path: pathType;
     /**
@@ -4536,11 +4554,11 @@ declare namespace IAM {
      */
     UserName: userNameType;
     /**
-     * The stable and unique string identifying the user. For more information about IDs, see IAM Identifiers in the Using IAM guide.
+     * The stable and unique string identifying the user. For more information about IDs, see IAM Identifiers in the IAM User Guide.
      */
     UserId: idType;
     /**
-     * The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see IAM Identifiers in the Using IAM guide. 
+     * The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see IAM Identifiers in the IAM User Guide. 
      */
     Arn: arnType;
     /**
@@ -4548,7 +4566,7 @@ declare namespace IAM {
      */
     CreateDate: dateType;
     /**
-     * The date and time, in ISO 8601 date-time format, when the user's password was last used to sign in to an AWS website. For a list of AWS websites that capture a user's last sign-in time, see the Credential Reports topic in the Using IAM guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. If the field is null (no value), then it indicates that they never signed in with a password. This can be because:   The user never had a password.   A password exists but has not been used since IAM started tracking this information on October 20, 2014.   A null value does not mean that the user never had a password. Also, if the user does not currently have a password, but had one in the past, then this field contains the date and time the most recent password was used. This value is returned only in the GetUser and ListUsers operations. 
+     * The date and time, in ISO 8601 date-time format, when the user's password was last used to sign in to an AWS website. For a list of AWS websites that capture a user's last sign-in time, see the Credential Reports topic in the IAM User Guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. If the field is null (no value), then it indicates that they never signed in with a password. This can be because:   The user never had a password.   A password exists but has not been used since IAM started tracking this information on October 20, 2014.   A null value does not mean that the user never had a password. Also, if the user does not currently have a password but had one in the past, then this field contains the date and time the most recent password was used. This value is returned only in the GetUser and ListUsers operations. 
      */
     PasswordLastUsed?: dateType;
     /**
@@ -4562,7 +4580,7 @@ declare namespace IAM {
   }
   export interface UserDetail {
     /**
-     * The path to the user. For more information about paths, see IAM Identifiers in the Using IAM guide.
+     * The path to the user. For more information about paths, see IAM Identifiers in the IAM User Guide.
      */
     Path?: pathType;
     /**
@@ -4570,7 +4588,7 @@ declare namespace IAM {
      */
     UserName?: userNameType;
     /**
-     * The stable and unique string identifying the user. For more information about IDs, see IAM Identifiers in the Using IAM guide.
+     * The stable and unique string identifying the user. For more information about IDs, see IAM Identifiers in the IAM User Guide.
      */
     UserId?: idType;
     Arn?: arnType;

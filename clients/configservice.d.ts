@@ -60,6 +60,14 @@ declare class ConfigService extends Service {
    */
   deleteConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified conformance pack and all the AWS Config rules and all evaluation results within that conformance pack. AWS Config sets the conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state.
+   */
+  deleteConformancePack(params: ConfigService.Types.DeleteConformancePackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified conformance pack and all the AWS Config rules and all evaluation results within that conformance pack. AWS Config sets the conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state.
+   */
+  deleteConformancePack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the delivery channel. Before you can delete the delivery channel, you must stop the configuration recorder by using the StopConfigurationRecorder action.
    */
   deleteDeliveryChannel(params: ConfigService.Types.DeleteDeliveryChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -83,6 +91,14 @@ declare class ConfigService extends Service {
    * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization. Only a master account can delete an organization config rule. AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
    */
   deleteOrganizationConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization. Only a master account can delete an organization conformance pack. AWS Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
+   */
+  deleteOrganizationConformancePack(params: ConfigService.Types.DeleteOrganizationConformancePackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization. Only a master account can delete an organization conformance pack. AWS Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
+   */
+  deleteOrganizationConformancePack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes pending authorization requests for a specified aggregator account in a specified region.
    */
@@ -204,6 +220,30 @@ declare class ConfigService extends Service {
    */
   describeConfigurationRecorders(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationRecordersResponse) => void): Request<ConfigService.Types.DescribeConfigurationRecordersResponse, AWSError>;
   /**
+   * Returns compliance information for each rule in that conformance pack.  You must provide exact rule names otherwise AWS Config cannot return evaluation results due to insufficient data. 
+   */
+  describeConformancePackCompliance(params: ConfigService.Types.DescribeConformancePackComplianceRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConformancePackComplianceResponse) => void): Request<ConfigService.Types.DescribeConformancePackComplianceResponse, AWSError>;
+  /**
+   * Returns compliance information for each rule in that conformance pack.  You must provide exact rule names otherwise AWS Config cannot return evaluation results due to insufficient data. 
+   */
+  describeConformancePackCompliance(callback?: (err: AWSError, data: ConfigService.Types.DescribeConformancePackComplianceResponse) => void): Request<ConfigService.Types.DescribeConformancePackComplianceResponse, AWSError>;
+  /**
+   * Provides one or more conformance packs deployment status.
+   */
+  describeConformancePackStatus(params: ConfigService.Types.DescribeConformancePackStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConformancePackStatusResponse) => void): Request<ConfigService.Types.DescribeConformancePackStatusResponse, AWSError>;
+  /**
+   * Provides one or more conformance packs deployment status.
+   */
+  describeConformancePackStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeConformancePackStatusResponse) => void): Request<ConfigService.Types.DescribeConformancePackStatusResponse, AWSError>;
+  /**
+   * Returns a list of one or more conformance packs.
+   */
+  describeConformancePacks(params: ConfigService.Types.DescribeConformancePacksRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConformancePacksResponse) => void): Request<ConfigService.Types.DescribeConformancePacksResponse, AWSError>;
+  /**
+   * Returns a list of one or more conformance packs.
+   */
+  describeConformancePacks(callback?: (err: AWSError, data: ConfigService.Types.DescribeConformancePacksResponse) => void): Request<ConfigService.Types.DescribeConformancePacksResponse, AWSError>;
+  /**
    * Returns the current status of the specified delivery channel. If a delivery channel is not specified, this action returns the current status of all delivery channels associated with the account.  Currently, you can specify only one delivery channel per region in your account. 
    */
   describeDeliveryChannelStatus(params: ConfigService.Types.DescribeDeliveryChannelStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeDeliveryChannelStatusResponse) => void): Request<ConfigService.Types.DescribeDeliveryChannelStatusResponse, AWSError>;
@@ -235,6 +275,22 @@ declare class ConfigService extends Service {
    * Returns a list of organization config rules.  When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. Only a master account can call this API. 
    */
   describeOrganizationConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
+  /**
+   * Provides organization conformance pack deployment status for an organization.  The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs. Only a master account can call this API. 
+   */
+  describeOrganizationConformancePackStatuses(params: ConfigService.Types.DescribeOrganizationConformancePackStatusesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConformancePackStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConformancePackStatusesResponse, AWSError>;
+  /**
+   * Provides organization conformance pack deployment status for an organization.  The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs. Only a master account can call this API. 
+   */
+  describeOrganizationConformancePackStatuses(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConformancePackStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConformancePackStatusesResponse, AWSError>;
+  /**
+   * Returns a list of organization conformance packs.  When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs. Only a master account can call this API. 
+   */
+  describeOrganizationConformancePacks(params: ConfigService.Types.DescribeOrganizationConformancePacksRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConformancePacksResponse) => void): Request<ConfigService.Types.DescribeOrganizationConformancePacksResponse, AWSError>;
+  /**
+   * Returns a list of organization conformance packs.  When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs. Only a master account can call this API. 
+   */
+  describeOrganizationConformancePacks(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConformancePacksResponse) => void): Request<ConfigService.Types.DescribeOrganizationConformancePacksResponse, AWSError>;
   /**
    * Returns a list of all pending aggregation requests.
    */
@@ -336,6 +392,22 @@ declare class ConfigService extends Service {
    */
   getComplianceSummaryByResourceType(callback?: (err: AWSError, data: ConfigService.Types.GetComplianceSummaryByResourceTypeResponse) => void): Request<ConfigService.Types.GetComplianceSummaryByResourceTypeResponse, AWSError>;
   /**
+   * Returns compliance details of a conformance pack for all AWS resources that are monitered by conformance pack.
+   */
+  getConformancePackComplianceDetails(params: ConfigService.Types.GetConformancePackComplianceDetailsRequest, callback?: (err: AWSError, data: ConfigService.Types.GetConformancePackComplianceDetailsResponse) => void): Request<ConfigService.Types.GetConformancePackComplianceDetailsResponse, AWSError>;
+  /**
+   * Returns compliance details of a conformance pack for all AWS resources that are monitered by conformance pack.
+   */
+  getConformancePackComplianceDetails(callback?: (err: AWSError, data: ConfigService.Types.GetConformancePackComplianceDetailsResponse) => void): Request<ConfigService.Types.GetConformancePackComplianceDetailsResponse, AWSError>;
+  /**
+   * 
+   */
+  getConformancePackComplianceSummary(params: ConfigService.Types.GetConformancePackComplianceSummaryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetConformancePackComplianceSummaryResponse, AWSError>;
+  /**
+   * 
+   */
+  getConformancePackComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetConformancePackComplianceSummaryResponse, AWSError>;
+  /**
    * Returns the resource types, the number of each resource type, and the total number of resources that AWS Config is recording in this region for your AWS account.   Example    AWS Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets.   You make a call to the GetDiscoveredResourceCounts action and specify that you want all resource types.    AWS Config returns the following:   The resource types (EC2 instances, IAM users, and S3 buckets).   The number of each resource type (25, 20, and 15).   The total number of all resources (60).     The response is paginated. By default, AWS Config lists 100 ResourceCount objects on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  If you make a call to the GetDiscoveredResourceCounts action, you might not immediately receive resource counts in the following situations:   You are a new AWS Config customer.   You just enabled resource recording.   It might take a few minutes for AWS Config to record and count your resources. Wait a few minutes and then retry the GetDiscoveredResourceCounts action.  
    */
   getDiscoveredResourceCounts(params: ConfigService.Types.GetDiscoveredResourceCountsRequest, callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
@@ -351,6 +423,14 @@ declare class ConfigService extends Service {
    * Returns detailed status for each member account within an organization for a given organization config rule.  Only a master account can call this API. 
    */
   getOrganizationConfigRuleDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
+  /**
+   * Returns detailed status for each member account within an organization for a given organization conformance pack. Only a master account can call this API.
+   */
+  getOrganizationConformancePackDetailedStatus(params: ConfigService.Types.GetOrganizationConformancePackDetailedStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse, AWSError>;
+  /**
+   * Returns detailed status for each member account within an organization for a given organization conformance pack. Only a master account can call this API.
+   */
+  getOrganizationConformancePackDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse, AWSError>;
   /**
    * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
    */
@@ -416,6 +496,14 @@ declare class ConfigService extends Service {
    */
   putConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region. This API creates a service linked role AWSServiceRoleForConfigConforms in your account. The service linked role is created only when the role does not exist in your account. AWS Config verifies the existence of role with GetRole action.  You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
+   */
+  putConformancePack(params: ConfigService.Types.PutConformancePackRequest, callback?: (err: AWSError, data: ConfigService.Types.PutConformancePackResponse) => void): Request<ConfigService.Types.PutConformancePackResponse, AWSError>;
+  /**
+   * Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region. This API creates a service linked role AWSServiceRoleForConfigConforms in your account. The service linked role is created only when the role does not exist in your account. AWS Config verifies the existence of role with GetRole action.  You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
+   */
+  putConformancePack(callback?: (err: AWSError, data: ConfigService.Types.PutConformancePackResponse) => void): Request<ConfigService.Types.PutConformancePackResponse, AWSError>;
+  /**
    * Creates a delivery channel object to deliver configuration information to an Amazon S3 bucket and Amazon SNS topic. Before you can create a delivery channel, you must create a configuration recorder. You can use this action to change the Amazon S3 bucket or an Amazon SNS topic of the existing delivery channel. To change the Amazon S3 bucket or an Amazon SNS topic, call this action and specify the changed values for the S3 bucket and the SNS topic. If you specify a different value for either the S3 bucket or the SNS topic, this action will keep the existing value for the parameter that is not changed.  You can have only one delivery channel per region in your account. 
    */
   putDeliveryChannel(params: ConfigService.Types.PutDeliveryChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -439,6 +527,14 @@ declare class ConfigService extends Service {
    * Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations. Only a master account can create or update an organization config rule. This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with GetRole action. You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account that the rule invokes to evaluate your resources. When you use the PutOrganizationConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that AWS Config supports is 150.  Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
    */
   putOrganizationConfigRule(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
+  /**
+   * Deploys conformance packs across member accounts in an AWS Organization. This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with GetRole action.   The SPN is config-multiaccountsetup.amazonaws.com. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
+   */
+  putOrganizationConformancePack(params: ConfigService.Types.PutOrganizationConformancePackRequest, callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConformancePackResponse) => void): Request<ConfigService.Types.PutOrganizationConformancePackResponse, AWSError>;
+  /**
+   * Deploys conformance packs across member accounts in an AWS Organization. This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with GetRole action.   The SPN is config-multiaccountsetup.amazonaws.com. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
+   */
+  putOrganizationConformancePack(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConformancePackResponse) => void): Request<ConfigService.Types.PutOrganizationConformancePackResponse, AWSError>;
   /**
    * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. 
    */
@@ -678,6 +774,7 @@ declare namespace ConfigService {
   export type AggregatorRegionList = String[];
   export type AllSupported = boolean;
   export type AmazonResourceName = string;
+  export type Annotation = string;
   export type AutoRemediationAttemptSeconds = number;
   export type AutoRemediationAttempts = number;
   export type AvailabilityZone = string;
@@ -1188,6 +1285,158 @@ declare namespace ConfigService {
   }
   export type ConfigurationRecorderStatusList = ConfigurationRecorderStatus[];
   export type ConfigurationStateId = string;
+  export type ConformancePackArn = string;
+  export interface ConformancePackComplianceFilters {
+    /**
+     * Filters the results by AWS Config rule names.
+     */
+    ConfigRuleNames?: ConformancePackConfigRuleNames;
+    /**
+     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
+     */
+    ComplianceType?: ConformancePackComplianceType;
+  }
+  export type ConformancePackComplianceResourceIds = StringWithCharLimit256[];
+  export interface ConformancePackComplianceSummary {
+    ConformancePackName: ConformancePackName;
+    ConformancePackComplianceStatus: ConformancePackComplianceType;
+  }
+  export type ConformancePackComplianceSummaryList = ConformancePackComplianceSummary[];
+  export type ConformancePackComplianceType = "COMPLIANT"|"NON_COMPLIANT"|string;
+  export type ConformancePackConfigRuleNames = StringWithCharLimit64[];
+  export interface ConformancePackDetail {
+    /**
+     * Name of the conformance pack.
+     */
+    ConformancePackName: ConformancePackName;
+    /**
+     * Amazon Resource Name (ARN) of the conformance pack.
+     */
+    ConformancePackArn: ConformancePackArn;
+    /**
+     * ID of the conformance pack.
+     */
+    ConformancePackId: ConformancePackId;
+    /**
+     * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results and conformance pack template that is used to create a pack.
+     */
+    DeliveryS3Bucket: DeliveryS3Bucket;
+    /**
+     * Any folder structure you want to add to an Amazon S3 bucket.
+     */
+    DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
+    /**
+     * A list of ConformancePackInputParameter objects.
+     */
+    ConformancePackInputParameters?: ConformancePackInputParameters;
+    /**
+     * Last time when conformation pack update was requested. 
+     */
+    LastUpdateRequestedTime?: _Date;
+    CreatedBy?: StringWithCharLimit256;
+  }
+  export type ConformancePackDetailList = ConformancePackDetail[];
+  export interface ConformancePackEvaluationFilters {
+    /**
+     * Filters the results by AWS Config rule names.
+     */
+    ConfigRuleNames?: ConformancePackConfigRuleNames;
+    /**
+     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
+     */
+    ComplianceType?: ConformancePackComplianceType;
+    /**
+     * Filters the results by the resource type (for example, "AWS::EC2::Instance"). 
+     */
+    ResourceType?: StringWithCharLimit256;
+    /**
+     * Filters the results by resource IDs.
+     */
+    ResourceIds?: ConformancePackComplianceResourceIds;
+  }
+  export interface ConformancePackEvaluationResult {
+    /**
+     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
+     */
+    ComplianceType: ConformancePackComplianceType;
+    EvaluationResultIdentifier: EvaluationResultIdentifier;
+    /**
+     * The time when AWS Config rule evaluated AWS resource.
+     */
+    ConfigRuleInvokedTime: _Date;
+    /**
+     * The time when AWS Config recorded the evaluation result. 
+     */
+    ResultRecordedTime: _Date;
+    /**
+     * Supplementary information about how the evaluation determined the compliance. 
+     */
+    Annotation?: Annotation;
+  }
+  export type ConformancePackId = string;
+  export interface ConformancePackInputParameter {
+    /**
+     * One part of a key-value pair.
+     */
+    ParameterName: ParameterName;
+    /**
+     * Another part of the key-value pair. 
+     */
+    ParameterValue: ParameterValue;
+  }
+  export type ConformancePackInputParameters = ConformancePackInputParameter[];
+  export type ConformancePackName = string;
+  export type ConformancePackNamesList = ConformancePackName[];
+  export type ConformancePackNamesToSummarizeList = ConformancePackName[];
+  export interface ConformancePackRuleCompliance {
+    /**
+     * Filters the results by AWS Config rule name.
+     */
+    ConfigRuleName?: ConfigRuleName;
+    /**
+     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
+     */
+    ComplianceType?: ConformancePackComplianceType;
+  }
+  export type ConformancePackRuleComplianceList = ConformancePackRuleCompliance[];
+  export type ConformancePackRuleEvaluationResultsList = ConformancePackEvaluationResult[];
+  export type ConformancePackState = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|string;
+  export interface ConformancePackStatusDetail {
+    /**
+     * Name of the conformance pack.
+     */
+    ConformancePackName: ConformancePackName;
+    /**
+     * ID of the conformance pack.
+     */
+    ConformancePackId: ConformancePackId;
+    /**
+     * Amazon Resource Name (ARN) of comformance pack.
+     */
+    ConformancePackArn: ConformancePackArn;
+    /**
+     * Indicates deployment status of conformance pack. AWS Config sets the state of the conformance pack to:   CREATE_IN_PROGRESS when a conformance pack creation is in progress for an account.   CREATE_COMPLETE when a conformance pack has been successfully created in your account.   CREATE_FAILED when a conformance pack creation failed in your account.   DELETE_IN_PROGRESS when a conformance pack deletion is in progress.    DELETE_FAILED when a conformance pack deletion failed from your account.  
+     */
+    ConformancePackState: ConformancePackState;
+    /**
+     * Amazon Resource Name (ARN) of AWS CloudFormation stack. 
+     */
+    StackArn: StackArn;
+    /**
+     * The reason of conformance pack creation failure.
+     */
+    ConformancePackStatusReason?: ConformancePackStatusReason;
+    /**
+     * Last time when conformation pack creation and update was requested.
+     */
+    LastUpdateRequestedTime: _Date;
+    /**
+     * Last time when conformation pack creation and update was successful.
+     */
+    LastUpdateCompletedTime?: _Date;
+  }
+  export type ConformancePackStatusDetailsList = ConformancePackStatusDetail[];
+  export type ConformancePackStatusReason = string;
   export type CosmosPageLimit = number;
   export type _Date = Date;
   export interface DeleteAggregationAuthorizationRequest {
@@ -1218,6 +1467,12 @@ declare namespace ConfigService {
      */
     ConfigurationRecorderName: RecorderName;
   }
+  export interface DeleteConformancePackRequest {
+    /**
+     * Name of the conformance pack you want to delete.
+     */
+    ConformancePackName: ConformancePackName;
+  }
   export interface DeleteDeliveryChannelRequest {
     /**
      * The name of the delivery channel to delete.
@@ -1237,6 +1492,12 @@ declare namespace ConfigService {
      * The name of organization config rule that you want to delete.
      */
     OrganizationConfigRuleName: OrganizationConfigRuleName;
+  }
+  export interface DeleteOrganizationConformancePackRequest {
+    /**
+     * The name of organization conformance pack that you want to delete.
+     */
+    OrganizationConformancePackName: OrganizationConformancePackName;
   }
   export interface DeletePendingAggregationRequestRequest {
     /**
@@ -1337,6 +1598,8 @@ declare namespace ConfigService {
     configStreamDeliveryInfo?: ConfigStreamDeliveryInfo;
   }
   export type DeliveryChannelStatusList = DeliveryChannelStatus[];
+  export type DeliveryS3Bucket = string;
+  export type DeliveryS3KeyPrefix = string;
   export type DeliveryStatus = "Success"|"Failure"|"Not_Applicable"|string;
   export interface DescribeAggregateComplianceByConfigRulesRequest {
     /**
@@ -1562,6 +1825,87 @@ declare namespace ConfigService {
      */
     ConfigurationRecorders?: ConfigurationRecorderList;
   }
+  export type DescribeConformancePackComplianceLimit = number;
+  export interface DescribeConformancePackComplianceRequest {
+    /**
+     * Name of the conformance pack.
+     */
+    ConformancePackName: ConformancePackName;
+    /**
+     * A ConformancePackComplianceFilters object.
+     */
+    Filters?: ConformancePackComplianceFilters;
+    /**
+     * The maximum number of AWS Config rules within a conformance pack are returned on each page.
+     */
+    Limit?: DescribeConformancePackComplianceLimit;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeConformancePackComplianceResponse {
+    /**
+     * Name of the conformance pack.
+     */
+    ConformancePackName: ConformancePackName;
+    /**
+     * Returns a list of ConformancePackRuleCompliance objects.
+     */
+    ConformancePackRuleComplianceList: ConformancePackRuleComplianceList;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeConformancePackStatusRequest {
+    /**
+     * Comma-separated list of conformance pack names.
+     */
+    ConformancePackNames?: ConformancePackNamesList;
+    /**
+     * The maximum number of conformance packs returned on each page.
+     */
+    Limit?: PageSizeLimit;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeConformancePackStatusResponse {
+    /**
+     * A list of ConformancePackStatusDetail objects.
+     */
+    ConformancePackStatusDetails?: ConformancePackStatusDetailsList;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeConformancePacksRequest {
+    /**
+     * Comma-separated list of conformance pack names for which you want details. If you do not specify any names, AWS Config returns details for all your conformance packs. 
+     */
+    ConformancePackNames?: ConformancePackNamesList;
+    /**
+     * The maximum number of conformance packs returned on each page.
+     */
+    Limit?: PageSizeLimit;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeConformancePacksResponse {
+    /**
+     * Returns a list of ConformancePackDetail objects.
+     */
+    ConformancePackDetails?: ConformancePackDetailList;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeDeliveryChannelStatusRequest {
     /**
      * A list of delivery channel names.
@@ -1626,11 +1970,59 @@ declare namespace ConfigService {
   }
   export interface DescribeOrganizationConfigRulesResponse {
     /**
-     * Retuns a list OrganizationConfigRule objects.
+     * Returns a list of OrganizationConfigRule objects.
      */
     OrganizationConfigRules?: OrganizationConfigRules;
     /**
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeOrganizationConformancePackStatusesRequest {
+    /**
+     * The names of organization conformance packs for which you want status details. If you do not specify any names, AWS Config returns details for all your organization conformance packs. 
+     */
+    OrganizationConformancePackNames?: OrganizationConformancePackNames;
+    /**
+     * The maximum number of OrganizationConformancePackStatuses returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100. 
+     */
+    Limit?: CosmosPageLimit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeOrganizationConformancePackStatusesResponse {
+    /**
+     * A list of OrganizationConformancePackStatus objects. 
+     */
+    OrganizationConformancePackStatuses?: OrganizationConformancePackStatuses;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeOrganizationConformancePacksRequest {
+    /**
+     * The name that you assign to an organization conformance pack.
+     */
+    OrganizationConformancePackNames?: OrganizationConformancePackNames;
+    /**
+     * The maximum number of organization config packs returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.
+     */
+    Limit?: CosmosPageLimit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeOrganizationConformancePacksResponse {
+    /**
+     * Returns a list of OrganizationConformancePacks objects.
+     */
+    OrganizationConformancePacks?: OrganizationConformancePacks;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: String;
   }
@@ -2076,6 +2468,48 @@ declare namespace ConfigService {
      */
     ComplianceSummariesByResourceType?: ComplianceSummariesByResourceType;
   }
+  export type GetConformancePackComplianceDetailsLimit = number;
+  export interface GetConformancePackComplianceDetailsRequest {
+    /**
+     * Name of the conformance pack.
+     */
+    ConformancePackName: ConformancePackName;
+    /**
+     * A ConformancePackEvaluationFilters object.
+     */
+    Filters?: ConformancePackEvaluationFilters;
+    /**
+     * The maximum number of evaluation results returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.
+     */
+    Limit?: GetConformancePackComplianceDetailsLimit;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetConformancePackComplianceDetailsResponse {
+    /**
+     * Name of the conformance pack.
+     */
+    ConformancePackName: ConformancePackName;
+    /**
+     * Returns a list of ConformancePackEvaluationResult objects.
+     */
+    ConformancePackRuleEvaluationResults?: ConformancePackRuleEvaluationResultsList;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetConformancePackComplianceSummaryRequest {
+    ConformancePackNames: ConformancePackNamesToSummarizeList;
+    Limit?: PageSizeLimit;
+    NextToken?: NextToken;
+  }
+  export interface GetConformancePackComplianceSummaryResponse {
+    ConformancePackComplianceSummaryList?: ConformancePackComplianceSummaryList;
+    NextToken?: NextToken;
+  }
   export interface GetDiscoveredResourceCountsRequest {
     /**
      * The comma-separated list that specifies the resource types that you want AWS Config to return (for example, "AWS::EC2::Instance", "AWS::IAM::User"). If a value for resourceTypes is not specified, AWS Config returns all resource types that AWS Config is recording in the region for your account.  If the configuration recorder is turned off, AWS Config returns an empty list of ResourceCount objects. If the configuration recorder is not recording a specific resource type (for example, S3 buckets), that resource type is not returned in the list of ResourceCount objects. 
@@ -2127,6 +2561,34 @@ declare namespace ConfigService {
      * A list of MemberAccountStatus objects.
      */
     OrganizationConfigRuleDetailedStatus?: OrganizationConfigRuleDetailedStatus;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: String;
+  }
+  export interface GetOrganizationConformancePackDetailedStatusRequest {
+    /**
+     * The name of organization conformance pack for which you want status details for member accounts.
+     */
+    OrganizationConformancePackName: OrganizationConformancePackName;
+    /**
+     * An OrganizationResourceDetailedStatusFilters object.
+     */
+    Filters?: OrganizationResourceDetailedStatusFilters;
+    /**
+     * The maximum number of OrganizationConformancePackDetailedStatuses returned on each page. If you do not specify a number, AWS Config uses the default. The default is 100. 
+     */
+    Limit?: CosmosPageLimit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: String;
+  }
+  export interface GetOrganizationConformancePackDetailedStatusResponse {
+    /**
+     * A list of OrganizationConformancePackDetailedStatus objects. 
+     */
+    OrganizationConformancePackDetailedStatuses?: OrganizationConformancePackDetailedStatuses;
     /**
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
      */
@@ -2282,7 +2744,7 @@ declare namespace ConfigService {
   }
   export type Long = number;
   export type MaximumExecutionFrequency = "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"|string;
-  export type MemberAccountRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"UPDATE_IN_PROGRESS"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export type MemberAccountRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
   export interface MemberAccountStatus {
     /**
      * The 12-digit account ID of a member account.
@@ -2333,7 +2795,7 @@ declare namespace ConfigService {
      */
     OrganizationConfigRuleName: OrganizationConfigRuleName;
     /**
-     * The Amazon Resource Name (ARN) of organization config rule.
+     * Amazon Resource Name (ARN) of organization config rule.
      */
     OrganizationConfigRuleArn: StringWithCharLimit256;
     /**
@@ -2382,6 +2844,89 @@ declare namespace ConfigService {
   export type OrganizationConfigRuleTriggerType = "ConfigurationItemChangeNotification"|"OversizedConfigurationItemChangeNotification"|"ScheduledNotification"|string;
   export type OrganizationConfigRuleTriggerTypes = OrganizationConfigRuleTriggerType[];
   export type OrganizationConfigRules = OrganizationConfigRule[];
+  export interface OrganizationConformancePack {
+    /**
+     * The name you assign to an organization conformance pack.
+     */
+    OrganizationConformancePackName: OrganizationConformancePackName;
+    /**
+     * Amazon Resource Name (ARN) of organization conformance pack.
+     */
+    OrganizationConformancePackArn: StringWithCharLimit256;
+    /**
+     * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results and conformance pack template that is used to create a pack. 
+     */
+    DeliveryS3Bucket: DeliveryS3Bucket;
+    /**
+     * Any folder structure you want to add to an Amazon S3 bucket.
+     */
+    DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
+    /**
+     * A list of ConformancePackInputParameter objects.
+     */
+    ConformancePackInputParameters?: ConformancePackInputParameters;
+    /**
+     * A comma-separated list of accounts excluded from organization conformance pack.
+     */
+    ExcludedAccounts?: ExcludedAccounts;
+    /**
+     * Last time when organization conformation pack was updated.
+     */
+    LastUpdateTime: _Date;
+  }
+  export interface OrganizationConformancePackDetailedStatus {
+    /**
+     * The 12-digit account ID of a member account.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of conformance pack deployed in the member account.
+     */
+    ConformancePackName: StringWithCharLimit256;
+    /**
+     * Indicates deployment status for conformance pack in a member account. When master account calls PutOrganizationConformancePack action for the first time, conformance pack status is created in the member account. When master account calls PutOrganizationConformancePack action for the second time, conformance pack status is updated in the member account. Conformance pack status is deleted when the master account deletes OrganizationConformancePack and disables service access for config-multiaccountsetup.amazonaws.com.   AWS Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when conformance pack has been created in the member account.     CREATE_IN_PROGRESS when conformance pack is being created in the member account.    CREATE_FAILED when conformance pack creation has failed in the member account.    DELETE_FAILED when conformance pack deletion has failed in the member account.    DELETE_IN_PROGRESS when conformance pack is being deleted in the member account.    DELETE_SUCCESSFUL when conformance pack has been deleted in the member account.     UPDATE_SUCCESSFUL when conformance pack has been updated in the member account.    UPDATE_IN_PROGRESS when conformance pack is being updated in the member account.    UPDATE_FAILED when conformance pack deletion has failed in the member account.  
+     */
+    Status: OrganizationResourceDetailedStatus;
+    /**
+     * An error code that is returned when conformance pack creation or deletion failed in the member account. 
+     */
+    ErrorCode?: String;
+    /**
+     * An error message indicating that conformance pack account creation or deletion has failed due to an error in the member account. 
+     */
+    ErrorMessage?: String;
+    /**
+     * The timestamp of the last status update.
+     */
+    LastUpdateTime?: _Date;
+  }
+  export type OrganizationConformancePackDetailedStatuses = OrganizationConformancePackDetailedStatus[];
+  export type OrganizationConformancePackName = string;
+  export type OrganizationConformancePackNames = OrganizationConformancePackName[];
+  export interface OrganizationConformancePackStatus {
+    /**
+     * The name that you assign to organization conformance pack.
+     */
+    OrganizationConformancePackName: OrganizationConformancePackName;
+    /**
+     * Indicates deployment status of an organization conformance pack. When master account calls PutOrganizationConformancePack for the first time, conformance pack status is created in all the member accounts. When master account calls PutOrganizationConformancePack for the second time, conformance pack status is updated in all the member accounts. Additionally, conformance pack status is updated when one or more member accounts join or leave an organization. Conformance pack status is deleted when the master account deletes OrganizationConformancePack in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com. AWS Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when an organization conformance pack has been successfully created in all the member accounts.     CREATE_IN_PROGRESS when an organization conformance pack creation is in progress.    CREATE_FAILED when an organization conformance pack creation failed in one or more member accounts within that organization.    DELETE_FAILED when an organization conformance pack deletion failed in one or more member accounts within that organization.    DELETE_IN_PROGRESS when an organization conformance pack deletion is in progress.    DELETE_SUCCESSFUL when an organization conformance pack has been successfully deleted from all the member accounts.    UPDATE_SUCCESSFUL when an organization conformance pack has been successfully updated in all the member accounts.    UPDATE_IN_PROGRESS when an organization conformance pack update is in progress.    UPDATE_FAILED when an organization conformance pack update failed in one or more member accounts within that organization.  
+     */
+    Status: OrganizationResourceStatus;
+    /**
+     * An error code that is returned when organization conformance pack creation or deletion has failed in the member account. 
+     */
+    ErrorCode?: String;
+    /**
+     * An error message indicating that organization conformance pack creation or deletion failed due to an error. 
+     */
+    ErrorMessage?: String;
+    /**
+     * The timestamp of the last update.
+     */
+    LastUpdateTime?: _Date;
+  }
+  export type OrganizationConformancePackStatuses = OrganizationConformancePackStatus[];
+  export type OrganizationConformancePacks = OrganizationConformancePack[];
   export interface OrganizationCustomRuleMetadata {
     /**
      * The description that you provide for organization config rule.
@@ -2454,8 +2999,23 @@ declare namespace ConfigService {
      */
     TagValueScope?: StringWithCharLimit256;
   }
-  export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"UPDATE_IN_PROGRESS"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export type OrganizationResourceDetailedStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
+  export interface OrganizationResourceDetailedStatusFilters {
+    /**
+     * The 12-digit account ID of the member account within an organization.
+     */
+    AccountId?: AccountId;
+    /**
+     * Indicates deployment status for conformance pack in a member account. When master account calls PutOrganizationConformancePack action for the first time, conformance pack status is created in the member account. When master account calls PutOrganizationConformancePack action for the second time, conformance pack status is updated in the member account. Conformance pack status is deleted when the master account deletes OrganizationConformancePack and disables service access for config-multiaccountsetup.amazonaws.com.   AWS Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when conformance pack has been created in the member account.     CREATE_IN_PROGRESS when conformance pack is being created in the member account.    CREATE_FAILED when conformance pack creation has failed in the member account.    DELETE_FAILED when conformance pack deletion has failed in the member account.    DELETE_IN_PROGRESS when conformance pack is being deleted in the member account.    DELETE_SUCCESSFUL when conformance pack has been deleted in the member account.     UPDATE_SUCCESSFUL when conformance pack has been updated in the member account.    UPDATE_IN_PROGRESS when conformance pack is being updated in the member account.    UPDATE_FAILED when conformance pack deletion has failed in the member account.  
+     */
+    Status?: OrganizationResourceDetailedStatus;
+  }
+  export type OrganizationResourceStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
+  export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
   export type Owner = "CUSTOM_LAMBDA"|"AWS"|string;
+  export type PageSizeLimit = number;
+  export type ParameterName = string;
+  export type ParameterValue = string;
   export interface PendingAggregationRequest {
     /**
      * The 12-digit account ID of the account requesting to aggregate data.
@@ -2528,6 +3088,38 @@ declare namespace ConfigService {
      */
     ConfigurationRecorder: ConfigurationRecorder;
   }
+  export interface PutConformancePackRequest {
+    /**
+     * Name of the conformance pack you want to create.
+     */
+    ConformancePackName: ConformancePackName;
+    /**
+     * Location of file containing the template body. The uri must point to the conformance pack template (max size: 300,000 bytes) that is located in an Amazon S3 bucket in the same region as the conformance pack.  You must have access to read Amazon S3 bucket. 
+     */
+    TemplateS3Uri?: TemplateS3Uri;
+    /**
+     * A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.  You can only use a YAML template with one resource type, that is, config rule. 
+     */
+    TemplateBody?: TemplateBody;
+    /**
+     * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template.
+     */
+    DeliveryS3Bucket: DeliveryS3Bucket;
+    /**
+     * The prefix for the Amazon S3 bucket. 
+     */
+    DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
+    /**
+     * A list of ConformancePackInputParameter objects.
+     */
+    ConformancePackInputParameters?: ConformancePackInputParameters;
+  }
+  export interface PutConformancePackResponse {
+    /**
+     * ARN of the conformance pack.
+     */
+    ConformancePackArn?: ConformancePackArn;
+  }
   export interface PutDeliveryChannelRequest {
     /**
      * The configuration delivery channel object that delivers the configuration information to an Amazon S3 bucket and to an Amazon SNS topic.
@@ -2577,6 +3169,42 @@ declare namespace ConfigService {
      * The Amazon Resource Name (ARN) of an organization config rule.
      */
     OrganizationConfigRuleArn?: StringWithCharLimit256;
+  }
+  export interface PutOrganizationConformancePackRequest {
+    /**
+     * Name of the organization conformance pack you want to create.
+     */
+    OrganizationConformancePackName: OrganizationConformancePackName;
+    /**
+     * Location of file containing the template body. The uri must point to the conformance pack template (max size: 300,000 bytes).  You must have access to read Amazon S3 bucket. 
+     */
+    TemplateS3Uri?: TemplateS3Uri;
+    /**
+     * A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
+     */
+    TemplateBody?: TemplateBody;
+    /**
+     * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template.
+     */
+    DeliveryS3Bucket: DeliveryS3Bucket;
+    /**
+     * The prefix for the Amazon S3 bucket.
+     */
+    DeliveryS3KeyPrefix?: DeliveryS3KeyPrefix;
+    /**
+     * A list of ConformancePackInputParameter objects.
+     */
+    ConformancePackInputParameters?: ConformancePackInputParameters;
+    /**
+     * A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.
+     */
+    ExcludedAccounts?: ExcludedAccounts;
+  }
+  export interface PutOrganizationConformancePackResponse {
+    /**
+     * ARN of the organization conformance pack.
+     */
+    OrganizationConformancePackArn?: StringWithCharLimit256;
   }
   export interface PutRemediationConfigurationsRequest {
     /**
@@ -3005,6 +3633,7 @@ declare namespace ConfigService {
      */
     ErrorPercentage?: Percentage;
   }
+  export type StackArn = string;
   export interface StartConfigRulesEvaluationRequest {
     /**
      * The list of names of AWS Config rules that you want to run evaluations for.
@@ -3099,6 +3728,8 @@ declare namespace ConfigService {
   export type TagValue = string;
   export type Tags = {[key: string]: Value};
   export type TagsList = Tag[];
+  export type TemplateBody = string;
+  export type TemplateS3Uri = string;
   export type UnprocessedResourceIdentifierList = AggregateResourceIdentifier[];
   export interface UntagResourceRequest {
     /**

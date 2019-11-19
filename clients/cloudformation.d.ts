@@ -221,6 +221,14 @@ declare class CloudFormation extends Service {
    */
   detectStackResourceDrift(callback?: (err: AWSError, data: CloudFormation.Types.DetectStackResourceDriftOutput) => void): Request<CloudFormation.Types.DetectStackResourceDriftOutput, AWSError>;
   /**
+   * Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see How CloudFormation Performs Drift Detection on a Stack Set.  DetectStackSetDrift returns the OperationId of the stack set drift detection operation. Use this operation id with  DescribeStackSetOperation  to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack. Once the operation has completed, use the following actions to return drift information:   Use  DescribeStackSet  to return detailed informaiton about the stack set, including detailed information about the last completed drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)   Use  ListStackInstances  to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.   Use  DescribeStackInstance  to return detailed information about a specific stack instance, including its drift status and last drift time checked.   For more information on performing a drift detection operation on a stack set, see Detecting Unmanaged Changes in Stack Sets.  You can only run a single drift detection operation on a given stack set at one time.  To stop a drift detection stack set operation, use  StopStackSetOperation .
+   */
+  detectStackSetDrift(params: CloudFormation.Types.DetectStackSetDriftInput, callback?: (err: AWSError, data: CloudFormation.Types.DetectStackSetDriftOutput) => void): Request<CloudFormation.Types.DetectStackSetDriftOutput, AWSError>;
+  /**
+   * Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see How CloudFormation Performs Drift Detection on a Stack Set.  DetectStackSetDrift returns the OperationId of the stack set drift detection operation. Use this operation id with  DescribeStackSetOperation  to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack. Once the operation has completed, use the following actions to return drift information:   Use  DescribeStackSet  to return detailed informaiton about the stack set, including detailed information about the last completed drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)   Use  ListStackInstances  to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.   Use  DescribeStackInstance  to return detailed information about a specific stack instance, including its drift status and last drift time checked.   For more information on performing a drift detection operation on a stack set, see Detecting Unmanaged Changes in Stack Sets.  You can only run a single drift detection operation on a given stack set at one time.  To stop a drift detection stack set operation, use  StopStackSetOperation .
+   */
+  detectStackSetDrift(callback?: (err: AWSError, data: CloudFormation.Types.DetectStackSetDriftOutput) => void): Request<CloudFormation.Types.DetectStackSetDriftOutput, AWSError>;
+  /**
    * Returns the estimated monthly cost of a template. The return value is an AWS Simple Monthly Calculator URL with a query string that describes the resources required to run the template.
    */
   estimateTemplateCost(params: CloudFormation.Types.EstimateTemplateCostInput, callback?: (err: AWSError, data: CloudFormation.Types.EstimateTemplateCostOutput) => void): Request<CloudFormation.Types.EstimateTemplateCostOutput, AWSError>;
@@ -1373,8 +1381,26 @@ declare namespace CloudFormation {
      */
     StackResourceDrift: StackResourceDrift;
   }
+  export interface DetectStackSetDriftInput {
+    /**
+     * The name of the stack set on which to perform the drift detection operation.
+     */
+    StackSetName: StackSetNameOrId;
+    OperationPreferences?: StackSetOperationPreferences;
+    /**
+     *  The ID of the stack set operation. 
+     */
+    OperationId?: ClientRequestToken;
+  }
+  export interface DetectStackSetDriftOutput {
+    /**
+     * The ID of the drift detection stack set operation.  you can use this operation id with  DescribeStackSetOperation  to monitor the progress of the drift detection operation. 
+     */
+    OperationId?: ClientRequestToken;
+  }
   export type DifferenceType = "ADD"|"REMOVE"|"NOT_EQUAL"|string;
   export type DisableRollback = boolean;
+  export type DriftedStackInstancesCount = number;
   export type EnableTerminationProtection = boolean;
   export interface EstimateTemplateCostInput {
     /**
@@ -1433,6 +1459,7 @@ declare namespace CloudFormation {
   export type ExportName = string;
   export type ExportValue = string;
   export type Exports = Export[];
+  export type FailedStackInstancesCount = number;
   export type FailureToleranceCount = number;
   export type FailureTolerancePercentage = number;
   export interface GetStackPolicyInput {
@@ -1529,6 +1556,8 @@ declare namespace CloudFormation {
   }
   export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"NetworkFailure"|"InternalFailure"|string;
   export type Imports = StackName[];
+  export type InProgressStackInstancesCount = number;
+  export type InSyncStackInstancesCount = number;
   export type Key = string;
   export type LastUpdatedTime = Date;
   export type LimitName = string;
@@ -2432,6 +2461,14 @@ declare namespace CloudFormation {
      * The explanation for the specific status code that is assigned to this stack instance.
      */
     StatusReason?: Reason;
+    /**
+     * Status of the stack instance's actual configuration compared to the expected template and parameter configuration of the stack set to which it belongs.     DRIFTED: The stack differs from the expected template and parameter configuration of the stack set to which it belongs. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.    NOT_CHECKED: AWS CloudFormation has not checked if the stack instance differs from its expected stack set configuration.    IN_SYNC: The stack instance's actual configuration matches its expected stack set configuration.    UNKNOWN: This value is reserved for future use.  
+     */
+    DriftStatus?: StackDriftStatus;
+    /**
+     * Most recent time when CloudFormation performed a drift detection operation on the stack instance. This value will be NULL for any stack instance on which drift detection has not yet been performed.
+     */
+    LastDriftCheckTimestamp?: Timestamp;
   }
   export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE"|string;
   export type StackInstanceSummaries = StackInstanceSummary[];
@@ -2460,6 +2497,14 @@ declare namespace CloudFormation {
      * The explanation for the specific status code assigned to this stack instance.
      */
     StatusReason?: Reason;
+    /**
+     * Status of the stack instance's actual configuration compared to the expected template and parameter configuration of the stack set to which it belongs.     DRIFTED: The stack differs from the expected template and parameter configuration of the stack set to which it belongs. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.    NOT_CHECKED: AWS CloudFormation has not checked if the stack instance differs from its expected stack set configuration.    IN_SYNC: The stack instance's actual configuration matches its expected stack set configuration.    UNKNOWN: This value is reserved for future use.  
+     */
+    DriftStatus?: StackDriftStatus;
+    /**
+     * Most recent time when CloudFormation performed a drift detection operation on the stack instance. This value will be NULL for any stack instance on which drift detection has not yet been performed.
+     */
+    LastDriftCheckTimestamp?: Timestamp;
   }
   export type StackName = string;
   export type StackNameOrId = string;
@@ -2697,8 +2742,48 @@ declare namespace CloudFormation {
      * The name of the IAM execution role used to create or update the stack set.  Use customized execution roles to control which stack resources users and groups can include in their stack sets. 
      */
     ExecutionRoleName?: ExecutionRoleName;
+    /**
+     * Detailed information about the drift status of the stack set. For stack sets, contains information about the last completed drift operation performed on the stack set. Information about drift operations currently in progress is not included.
+     */
+    StackSetDriftDetectionDetails?: StackSetDriftDetectionDetails;
   }
   export type StackSetARN = string;
+  export interface StackSetDriftDetectionDetails {
+    /**
+     * Status of the stack set's actual configuration compared to its expected template and parameter configuration. A stack set is considered to have drifted if one or more of its stack instances have drifted from their expected template and parameter configuration.    DRIFTED: One or more of the stack instances belonging to the stack set stack differs from the expected template and parameter configuration. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.    NOT_CHECKED: AWS CloudFormation has not checked the stack set for drift.    IN_SYNC: All of the stack instances belonging to the stack set stack match from the expected template and parameter configuration.  
+     */
+    DriftStatus?: StackSetDriftStatus;
+    /**
+     * The status of the stack set drift detection operation.    COMPLETED: The drift detection operation completed without failing on any stack instances.    FAILED: The drift detection operation exceeded the specified failure tolerance.     PARTIAL_SUCCESS: The drift detection operation completed without exceeding the failure tolerance for the operation.    IN_PROGRESS: The drift detection operation is currently being performed.    STOPPED: The user has cancelled the drift detection operation.  
+     */
+    DriftDetectionStatus?: StackSetDriftDetectionStatus;
+    /**
+     * Most recent time when CloudFormation performed a drift detection operation on the stack set. This value will be NULL for any stack set on which drift detection has not yet been performed.
+     */
+    LastDriftCheckTimestamp?: Timestamp;
+    /**
+     * The total number of stack instances belonging to this stack set.  The total number of stack instances is equal to the total of:   Stack instances that match the stack set configuration.    Stack instances that have drifted from the stack set configuration.    Stack instances where the drift detection operation has failed.   Stack instances currently being checked for drift.  
+     */
+    TotalStackInstancesCount?: TotalStackInstancesCount;
+    /**
+     * The number of stack instances that have drifted from the expected template and parameter configuration of the stack set. A stack instance is considered to have drifted if one or more of the resources in the associated stack do not match their expected configuration.
+     */
+    DriftedStackInstancesCount?: DriftedStackInstancesCount;
+    /**
+     * The number of stack instances which match the expected template and parameter configuration of the stack set.
+     */
+    InSyncStackInstancesCount?: InSyncStackInstancesCount;
+    /**
+     * The number of stack instances that are currently being checked for drift.
+     */
+    InProgressStackInstancesCount?: InProgressStackInstancesCount;
+    /**
+     * The number of stack instances for which the drift detection operation failed.
+     */
+    FailedStackInstancesCount?: FailedStackInstancesCount;
+  }
+  export type StackSetDriftDetectionStatus = "COMPLETED"|"FAILED"|"PARTIAL_SUCCESS"|"IN_PROGRESS"|"STOPPED"|string;
+  export type StackSetDriftStatus = "DRIFTED"|"IN_SYNC"|"NOT_CHECKED"|string;
   export type StackSetId = string;
   export type StackSetName = string;
   export type StackSetNameOrId = string;
@@ -2743,8 +2828,12 @@ declare namespace CloudFormation {
      * The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or region.
      */
     EndTimestamp?: Timestamp;
+    /**
+     * Detailed information about the drift status of the stack set. This includes information about drift operations currently being performed on the stack set. this information will only be present for stack set operations whose Action type is DETECT_DRIFT. For more information, see Detecting Unmanaged Changes in Stack Sets in the AWS CloudFormation User Guide.
+     */
+    StackSetDriftDetectionDetails?: StackSetDriftDetectionDetails;
   }
-  export type StackSetOperationAction = "CREATE"|"UPDATE"|"DELETE"|string;
+  export type StackSetOperationAction = "CREATE"|"UPDATE"|"DELETE"|"DETECT_DRIFT"|string;
   export interface StackSetOperationPreferences {
     /**
      * The order of the regions in where you want to perform the stack operation.
@@ -2834,6 +2923,14 @@ declare namespace CloudFormation {
      * The status of the stack set.
      */
     Status?: StackSetStatus;
+    /**
+     * Status of the stack set's actual configuration compared to its expected template and parameter configuration. A stack set is considered to have drifted if one or more of its stack instances have drifted from their expected template and parameter configuration.    DRIFTED: One or more of the stack instances belonging to the stack set stack differs from the expected template and parameter configuration. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.    NOT_CHECKED: AWS CloudFormation has not checked the stack set for drift.    IN_SYNC: All of the stack instances belonging to the stack set stack match from the expected template and parameter configuration.    UNKNOWN: This value is reserved for future use.  
+     */
+    DriftStatus?: StackDriftStatus;
+    /**
+     * Most recent time when CloudFormation performed a drift detection operation on the stack set. This value will be NULL for any stack set on which drift detection has not yet been performed.
+     */
+    LastDriftCheckTimestamp?: Timestamp;
   }
   export type StackStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"CREATE_COMPLETE"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_FAILED"|"ROLLBACK_COMPLETE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETE_COMPLETE"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_ROLLBACK_IN_PROGRESS"|"UPDATE_ROLLBACK_FAILED"|"UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"|"UPDATE_ROLLBACK_COMPLETE"|"REVIEW_IN_PROGRESS"|"IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_ROLLBACK_IN_PROGRESS"|"IMPORT_ROLLBACK_FAILED"|"IMPORT_ROLLBACK_COMPLETE"|string;
   export type StackStatusFilter = StackStatus[];
@@ -2938,6 +3035,7 @@ declare namespace CloudFormation {
   export type TemplateURL = string;
   export type TimeoutMinutes = number;
   export type Timestamp = Date;
+  export type TotalStackInstancesCount = number;
   export type TransformName = string;
   export type TransformsList = TransformName[];
   export type Type = string;

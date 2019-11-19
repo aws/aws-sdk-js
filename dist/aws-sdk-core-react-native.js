@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.574.0',
+	  VERSION: '2.575.0',
 
 	  /**
 	   * @api private
@@ -1071,7 +1071,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	          } else {
 	            var retryAfter = parseInt(httpResponse.headers['retry-after'], 10) * 1000 || 0;
 	            var err = util.error(new Error(),
-	              { retryable: statusCode >= 500 || statusCode === 429 }
+	              {
+	                statusCode: statusCode,
+	                retryable: statusCode >= 500 || statusCode === 429
+	              }
 	            );
 	            if (retryAfter && err.retryable) err.retryAfter = retryAfter;
 	            errCallback(err);
