@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "util",
+  "description": "Fix `name.endsWith is not a function` exception when inspecting some generated errors with some versions of nodejs"
+}
