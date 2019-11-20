@@ -1,12 +1,14 @@
 .changes
 .yard*
 .eslintrc
+.eslintignore
 .travis.yml
 .github
 .gitignore
 .jshintrc
 .npmignore
 .tesselinclude
+.vscode/
 apis/*.normal.json
 appveyor.yml
 bower.json
