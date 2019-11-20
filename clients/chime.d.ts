@@ -36,6 +36,14 @@ declare class Chime extends Service {
    */
   associatePhoneNumbersWithVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse) => void): Request<Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse, AWSError>;
   /**
+   * Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
+   */
+  batchCreateAttendee(params: Chime.Types.BatchCreateAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
+  /**
+   * Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
+   */
+  batchCreateAttendee(callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
+  /**
    * Adds up to 50 members to a chat room. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   batchCreateRoomMembership(params: Chime.Types.BatchCreateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateRoomMembershipResponse) => void): Request<Chime.Types.BatchCreateRoomMembershipResponse, AWSError>;
@@ -92,6 +100,14 @@ declare class Chime extends Service {
    */
   createAccount(callback?: (err: AWSError, data: Chime.Types.CreateAccountResponse) => void): Request<Chime.Types.CreateAccountResponse, AWSError>;
   /**
+   * Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  createAttendee(params: Chime.Types.CreateAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.CreateAttendeeResponse) => void): Request<Chime.Types.CreateAttendeeResponse, AWSError>;
+  /**
+   * Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  createAttendee(callback?: (err: AWSError, data: Chime.Types.CreateAttendeeResponse) => void): Request<Chime.Types.CreateAttendeeResponse, AWSError>;
+  /**
    * Creates a bot for an Amazon Chime Enterprise account.
    */
   createBot(params: Chime.Types.CreateBotRequest, callback?: (err: AWSError, data: Chime.Types.CreateBotResponse) => void): Request<Chime.Types.CreateBotResponse, AWSError>;
@@ -99,6 +115,14 @@ declare class Chime extends Service {
    * Creates a bot for an Amazon Chime Enterprise account.
    */
   createBot(callback?: (err: AWSError, data: Chime.Types.CreateBotResponse) => void): Request<Chime.Types.CreateBotResponse, AWSError>;
+  /**
+   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  createMeeting(params: Chime.Types.CreateMeetingRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
+  /**
+   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  createMeeting(callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
   /**
    * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.
    */
@@ -148,6 +172,14 @@ declare class Chime extends Service {
    */
   deleteAccount(callback?: (err: AWSError, data: Chime.Types.DeleteAccountResponse) => void): Request<Chime.Types.DeleteAccountResponse, AWSError>;
   /**
+   * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  deleteAttendee(params: Chime.Types.DeleteAttendeeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  deleteAttendee(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the events configuration that allows a bot to receive outgoing events.
    */
   deleteEventsConfiguration(params: Chime.Types.DeleteEventsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -155,6 +187,14 @@ declare class Chime extends Service {
    * Deletes the events configuration that allows a bot to receive outgoing events.
    */
   deleteEventsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted and clients can no longer join it. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  deleteMeeting(params: Chime.Types.DeleteMeetingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted and clients can no longer join it. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  deleteMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Moves the specified phone number into the Deletion queue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
    */
@@ -268,6 +308,14 @@ declare class Chime extends Service {
    */
   getAccountSettings(callback?: (err: AWSError, data: Chime.Types.GetAccountSettingsResponse) => void): Request<Chime.Types.GetAccountSettingsResponse, AWSError>;
   /**
+   * Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  getAttendee(params: Chime.Types.GetAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.GetAttendeeResponse) => void): Request<Chime.Types.GetAttendeeResponse, AWSError>;
+  /**
+   * Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  getAttendee(callback?: (err: AWSError, data: Chime.Types.GetAttendeeResponse) => void): Request<Chime.Types.GetAttendeeResponse, AWSError>;
+  /**
    * Retrieves details for the specified bot, such as bot email address, bot type, status, and display name.
    */
   getBot(params: Chime.Types.GetBotRequest, callback?: (err: AWSError, data: Chime.Types.GetBotResponse) => void): Request<Chime.Types.GetBotResponse, AWSError>;
@@ -287,6 +335,14 @@ declare class Chime extends Service {
    * Retrieves global settings for the administrator's AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.
    */
   getGlobalSettings(callback?: (err: AWSError, data: Chime.Types.GetGlobalSettingsResponse) => void): Request<Chime.Types.GetGlobalSettingsResponse, AWSError>;
+  /**
+   * Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  getMeeting(params: Chime.Types.GetMeetingRequest, callback?: (err: AWSError, data: Chime.Types.GetMeetingResponse) => void): Request<Chime.Types.GetMeetingResponse, AWSError>;
+  /**
+   * Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  getMeeting(callback?: (err: AWSError, data: Chime.Types.GetMeetingResponse) => void): Request<Chime.Types.GetMeetingResponse, AWSError>;
   /**
    * Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.
    */
@@ -404,6 +460,14 @@ declare class Chime extends Service {
    */
   listAccounts(callback?: (err: AWSError, data: Chime.Types.ListAccountsResponse) => void): Request<Chime.Types.ListAccountsResponse, AWSError>;
   /**
+   * Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  listAttendees(params: Chime.Types.ListAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
+  /**
+   * Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  listAttendees(callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
+  /**
    * Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.
    */
   listBots(params: Chime.Types.ListBotsRequest, callback?: (err: AWSError, data: Chime.Types.ListBotsResponse) => void): Request<Chime.Types.ListBotsResponse, AWSError>;
@@ -411,6 +475,14 @@ declare class Chime extends Service {
    * Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.
    */
   listBots(callback?: (err: AWSError, data: Chime.Types.ListBotsResponse) => void): Request<Chime.Types.ListBotsResponse, AWSError>;
+  /**
+   * Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  listMeetings(params: Chime.Types.ListMeetingsRequest, callback?: (err: AWSError, data: Chime.Types.ListMeetingsResponse) => void): Request<Chime.Types.ListMeetingsResponse, AWSError>;
+  /**
+   * Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  listMeetings(callback?: (err: AWSError, data: Chime.Types.ListMeetingsResponse) => void): Request<Chime.Types.ListMeetingsResponse, AWSError>;
   /**
    * Lists the phone number orders for the administrator's Amazon Chime account.
    */
@@ -704,6 +776,7 @@ declare namespace Chime {
     EnableDialOut?: Boolean;
   }
   export type AccountType = "Team"|"EnterpriseDirectory"|"EnterpriseLWA"|"EnterpriseOIDC"|string;
+  export type Arn = string;
   export interface AssociatePhoneNumberWithUserRequest {
     /**
      * The Amazon Chime account ID.
@@ -759,6 +832,42 @@ declare namespace Chime {
      * If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.
      */
     PhoneNumberErrors?: PhoneNumberErrorList;
+  }
+  export interface Attendee {
+    /**
+     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     */
+    ExternalUserId?: ExternalUserIdType;
+    /**
+     * The Amazon Chime SDK attendee ID.
+     */
+    AttendeeId?: GuidString;
+    /**
+     * The join token used by the Amazon Chime SDK attendee.
+     */
+    JoinToken?: JoinTokenString;
+  }
+  export type AttendeeList = Attendee[];
+  export type BatchCreateAttendeeErrorList = CreateAttendeeError[];
+  export interface BatchCreateAttendeeRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The request containing the attendees to create.
+     */
+    Attendees: CreateAttendeeRequestItemList;
+  }
+  export interface BatchCreateAttendeeResponse {
+    /**
+     * The attendee information, including attendees IDs and join tokens.
+     */
+    Attendees?: AttendeeList;
+    /**
+     * If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.
+     */
+    Errors?: BatchCreateAttendeeErrorList;
   }
   export interface BatchCreateRoomMembershipRequest {
     /**
@@ -917,6 +1026,43 @@ declare namespace Chime {
      */
     Account?: Account;
   }
+  export interface CreateAttendeeError {
+    /**
+     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     */
+    ExternalUserId?: ExternalUserIdType;
+    /**
+     * The error code.
+     */
+    ErrorCode?: String;
+    /**
+     * The error message.
+     */
+    ErrorMessage?: String;
+  }
+  export interface CreateAttendeeRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     */
+    ExternalUserId: ExternalUserIdType;
+  }
+  export interface CreateAttendeeRequestItem {
+    /**
+     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     */
+    ExternalUserId: ExternalUserIdType;
+  }
+  export type CreateAttendeeRequestItemList = CreateAttendeeRequestItem[];
+  export interface CreateAttendeeResponse {
+    /**
+     * The attendee information, including attendee ID and join token.
+     */
+    Attendee?: Attendee;
+  }
   export interface CreateBotRequest {
     /**
      * The Amazon Chime account ID.
@@ -936,6 +1082,30 @@ declare namespace Chime {
      * The bot details.
      */
     Bot?: Bot;
+  }
+  export interface CreateMeetingRequest {
+    /**
+     * The unique identifier for the client request. Use a different token for different meetings.
+     */
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * Reserved.
+     */
+    MeetingHostId?: ExternalUserIdType;
+    /**
+     * The Region in which to create the meeting. Available values: us-east-1, us-west-2.
+     */
+    MediaRegion?: String;
+    /**
+     * The configuration for resource targets to receive notifications when meeting and attendee events occur.
+     */
+    NotificationsConfiguration?: MeetingNotificationConfiguration;
+  }
+  export interface CreateMeetingResponse {
+    /**
+     * The meeting information, including the meeting ID and MediaPlacement.
+     */
+    Meeting?: Meeting;
   }
   export interface CreatePhoneNumberOrderRequest {
     /**
@@ -1053,6 +1223,16 @@ declare namespace Chime {
   }
   export interface DeleteAccountResponse {
   }
+  export interface DeleteAttendeeRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The Amazon Chime SDK attendee ID.
+     */
+    AttendeeId: GuidString;
+  }
   export interface DeleteEventsConfigurationRequest {
     /**
      * The Amazon Chime account ID.
@@ -1062,6 +1242,12 @@ declare namespace Chime {
      * The bot ID.
      */
     BotId: NonEmptyString;
+  }
+  export interface DeleteMeetingRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
   }
   export interface DeletePhoneNumberRequest {
     /**
@@ -1196,6 +1382,7 @@ declare namespace Chime {
      */
     LambdaFunctionArn?: SensitiveString;
   }
+  export type ExternalUserIdType = string;
   export interface GetAccountRequest {
     /**
      * The Amazon Chime account ID.
@@ -1219,6 +1406,22 @@ declare namespace Chime {
      * The Amazon Chime account settings.
      */
     AccountSettings?: AccountSettings;
+  }
+  export interface GetAttendeeRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The Amazon Chime SDK attendee ID.
+     */
+    AttendeeId: GuidString;
+  }
+  export interface GetAttendeeResponse {
+    /**
+     * The Amazon Chime SDK attendee information.
+     */
+    Attendee?: Attendee;
   }
   export interface GetBotRequest {
     /**
@@ -1261,6 +1464,18 @@ declare namespace Chime {
      * The Amazon Chime Voice Connector settings.
      */
     VoiceConnector?: VoiceConnectorSettings;
+  }
+  export interface GetMeetingRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+  }
+  export interface GetMeetingResponse {
+    /**
+     * The Amazon Chime SDK meeting information.
+     */
+    Meeting?: Meeting;
   }
   export interface GetPhoneNumberOrderRequest {
     /**
@@ -1466,6 +1681,7 @@ declare namespace Chime {
     Invites?: InviteList;
   }
   export type Iso8601Timestamp = Date;
+  export type JoinTokenString = string;
   export type License = "Basic"|"Plus"|"Pro"|"ProTrial"|string;
   export type LicenseList = License[];
   export interface ListAccountsRequest {
@@ -1496,6 +1712,30 @@ declare namespace Chime {
      */
     NextToken?: String;
   }
+  export interface ListAttendeesRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: ResultMax;
+  }
+  export interface ListAttendeesResponse {
+    /**
+     * The Amazon Chime SDK attendee information.
+     */
+    Attendees?: AttendeeList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
   export interface ListBotsRequest {
     /**
      * The Amazon Chime account ID.
@@ -1515,6 +1755,26 @@ declare namespace Chime {
      * List of bots and bot details.
      */
     Bots?: BotList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListMeetingsRequest {
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: ResultMax;
+  }
+  export interface ListMeetingsResponse {
+    /**
+     * The Amazon Chime SDK meeting information.
+     */
+    Meetings?: MeetingList;
     /**
      * The token to use to retrieve the next page of results.
      */
@@ -1729,6 +1989,57 @@ declare namespace Chime {
     UserId: NonEmptyString;
   }
   export interface LogoutUserResponse {
+  }
+  export interface MediaPlacement {
+    /**
+     * The audio host URL.
+     */
+    AudioHostUrl?: UriType;
+    /**
+     * The screen data URL.
+     */
+    ScreenDataUrl?: UriType;
+    /**
+     * The screen sharing URL.
+     */
+    ScreenSharingUrl?: UriType;
+    /**
+     * The screen viewing URL.
+     */
+    ScreenViewingUrl?: UriType;
+    /**
+     * The signaling URL.
+     */
+    SignalingUrl?: UriType;
+    /**
+     * The turn control URL.
+     */
+    TurnControlUrl?: UriType;
+  }
+  export interface Meeting {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId?: GuidString;
+    /**
+     * The media placement for the meeting.
+     */
+    MediaPlacement?: MediaPlacement;
+    /**
+     * The Region in which to create the meeting. Available values: us-east-1, us-west-2.
+     */
+    MediaRegion?: String;
+  }
+  export type MeetingList = Meeting[];
+  export interface MeetingNotificationConfiguration {
+    /**
+     * The SNS topic ARN.
+     */
+    SnsTopicArn?: Arn;
+    /**
+     * The SQS queue ARN.
+     */
+    SqsQueueArn?: Arn;
   }
   export interface Member {
     /**
@@ -2483,6 +2794,7 @@ declare namespace Chime {
      */
     VoiceConnector?: VoiceConnector;
   }
+  export type UriType = string;
   export interface User {
     /**
      * The user ID.

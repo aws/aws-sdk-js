@@ -148,19 +148,19 @@ declare class StorageGateway extends Service {
    */
   createTapes(callback?: (err: AWSError, data: StorageGateway.Types.CreateTapesOutput) => void): Request<StorageGateway.Types.CreateTapesOutput, AWSError>;
   /**
-   * Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request. This operation is supported for the stored volume, cached volume and tape gateway types.
    */
   deleteBandwidthRateLimit(params: StorageGateway.Types.DeleteBandwidthRateLimitInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DeleteBandwidthRateLimitOutput, AWSError>;
   /**
-   * Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request. This operation is supported for the stored volume, cached volume and tape gateway types.
    */
   deleteBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.DeleteBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DeleteBandwidthRateLimitOutput, AWSError>;
   /**
-   * Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair.
+   * Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair. This operation is supported in volume and tape gateway types.
    */
   deleteChapCredentials(params: StorageGateway.Types.DeleteChapCredentialsInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteChapCredentialsOutput) => void): Request<StorageGateway.Types.DeleteChapCredentialsOutput, AWSError>;
   /**
-   * Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair.
+   * Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair. This operation is supported in volume and tape gateway types.
    */
   deleteChapCredentials(callback?: (err: AWSError, data: StorageGateway.Types.DeleteChapCredentialsOutput) => void): Request<StorageGateway.Types.DeleteChapCredentialsOutput, AWSError>;
   /**
@@ -212,11 +212,19 @@ declare class StorageGateway extends Service {
    */
   deleteVolume(callback?: (err: AWSError, data: StorageGateway.Types.DeleteVolumeOutput) => void): Request<StorageGateway.Types.DeleteVolumeOutput, AWSError>;
   /**
-   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.
+   */
+  describeAvailabilityMonitorTest(params: StorageGateway.Types.DescribeAvailabilityMonitorTestInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeAvailabilityMonitorTestOutput) => void): Request<StorageGateway.Types.DescribeAvailabilityMonitorTestOutput, AWSError>;
+  /**
+   * Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.
+   */
+  describeAvailabilityMonitorTest(callback?: (err: AWSError, data: StorageGateway.Types.DescribeAvailabilityMonitorTestOutput) => void): Request<StorageGateway.Types.DescribeAvailabilityMonitorTestOutput, AWSError>;
+  /**
+   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume and tape gateway types.' This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   describeBandwidthRateLimit(params: StorageGateway.Types.DescribeBandwidthRateLimitInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitOutput, AWSError>;
   /**
-   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume and tape gateway types.' This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   describeBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitOutput, AWSError>;
   /**
@@ -236,11 +244,11 @@ declare class StorageGateway extends Service {
    */
   describeCachediSCSIVolumes(callback?: (err: AWSError, data: StorageGateway.Types.DescribeCachediSCSIVolumesOutput) => void): Request<StorageGateway.Types.DescribeCachediSCSIVolumesOutput, AWSError>;
   /**
-   * Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair.
+   * Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair. This operation is supported in the volume and tape gateway types.
    */
   describeChapCredentials(params: StorageGateway.Types.DescribeChapCredentialsInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeChapCredentialsOutput) => void): Request<StorageGateway.Types.DescribeChapCredentialsOutput, AWSError>;
   /**
-   * Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair.
+   * Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair. This operation is supported in the volume and tape gateway types.
    */
   describeChapCredentials(callback?: (err: AWSError, data: StorageGateway.Types.DescribeChapCredentialsOutput) => void): Request<StorageGateway.Types.DescribeChapCredentialsOutput, AWSError>;
   /**
@@ -348,11 +356,11 @@ declare class StorageGateway extends Service {
    */
   describeWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.DescribeWorkingStorageOutput) => void): Request<StorageGateway.Types.DescribeWorkingStorageOutput, AWSError>;
   /**
-   * Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   * Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance. This operation is only supported in the volume gateway type.
    */
   detachVolume(params: StorageGateway.Types.DetachVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.DetachVolumeOutput) => void): Request<StorageGateway.Types.DetachVolumeOutput, AWSError>;
   /**
-   * Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   * Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance. This operation is only supported in the volume gateway type.
    */
   detachVolume(callback?: (err: AWSError, data: StorageGateway.Types.DetachVolumeOutput) => void): Request<StorageGateway.Types.DetachVolumeOutput, AWSError>;
   /**
@@ -396,11 +404,11 @@ declare class StorageGateway extends Service {
    */
   listLocalDisks(callback?: (err: AWSError, data: StorageGateway.Types.ListLocalDisksOutput) => void): Request<StorageGateway.Types.ListLocalDisksOutput, AWSError>;
   /**
-   * Lists the tags that have been added to the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway type.
+   * Lists the tags that have been added to the specified resource. This operation is supported in storage gateways of all types.
    */
   listTagsForResource(params: StorageGateway.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: StorageGateway.Types.ListTagsForResourceOutput) => void): Request<StorageGateway.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Lists the tags that have been added to the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway type.
+   * Lists the tags that have been added to the specified resource. This operation is supported in storage gateways of all types.
    */
   listTagsForResource(callback?: (err: AWSError, data: StorageGateway.Types.ListTagsForResourceOutput) => void): Request<StorageGateway.Types.ListTagsForResourceOutput, AWSError>;
   /**
@@ -444,19 +452,19 @@ declare class StorageGateway extends Service {
    */
   notifyWhenUploaded(callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting Notified About File Operations. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes. 
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting Notified About File Operations. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes.  Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting Notified About File Operations. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see "https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification".
    */
   refreshCache(params: StorageGateway.Types.RefreshCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting Notified About File Operations. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes. 
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting Notified About File Operations. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes.  Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting Notified About File Operations. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see "https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification".
    */
   refreshCache(callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Removes one or more tags from the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway types.
+   * Removes one or more tags from the specified resource. This operation is supported in storage gateways of all types.
    */
   removeTagsFromResource(params: StorageGateway.Types.RemoveTagsFromResourceInput, callback?: (err: AWSError, data: StorageGateway.Types.RemoveTagsFromResourceOutput) => void): Request<StorageGateway.Types.RemoveTagsFromResourceOutput, AWSError>;
   /**
-   * Removes one or more tags from the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway types.
+   * Removes one or more tags from the specified resource. This operation is supported in storage gateways of all types.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: StorageGateway.Types.RemoveTagsFromResourceOutput) => void): Request<StorageGateway.Types.RemoveTagsFromResourceOutput, AWSError>;
   /**
@@ -508,6 +516,14 @@ declare class StorageGateway extends Service {
    */
   shutdownGateway(callback?: (err: AWSError, data: StorageGateway.Types.ShutdownGatewayOutput) => void): Request<StorageGateway.Types.ShutdownGatewayOutput, AWSError>;
   /**
+   * Start a test that verifies that the specified gateway is configured for High Availability monitoring in your host environment. This request only initiates the test and that a successful response only indicates that the test was started. It doesn't indicate that the test passed. For the status of the test, invoke the DescribeAvailabilityMonitorTest API.   Starting this test will cause your gateway to go offline for a brief period. 
+   */
+  startAvailabilityMonitorTest(params: StorageGateway.Types.StartAvailabilityMonitorTestInput, callback?: (err: AWSError, data: StorageGateway.Types.StartAvailabilityMonitorTestOutput) => void): Request<StorageGateway.Types.StartAvailabilityMonitorTestOutput, AWSError>;
+  /**
+   * Start a test that verifies that the specified gateway is configured for High Availability monitoring in your host environment. This request only initiates the test and that a successful response only indicates that the test was started. It doesn't indicate that the test passed. For the status of the test, invoke the DescribeAvailabilityMonitorTest API.   Starting this test will cause your gateway to go offline for a brief period. 
+   */
+  startAvailabilityMonitorTest(callback?: (err: AWSError, data: StorageGateway.Types.StartAvailabilityMonitorTestOutput) => void): Request<StorageGateway.Types.StartAvailabilityMonitorTestOutput, AWSError>;
+  /**
    * Starts a gateway that you previously shut down (see ShutdownGateway). After the gateway starts, you can then make other API calls, your applications can read from or write to the gateway's storage volumes and you will be able to take snapshot backups.  When you make a request, you will get a 200 OK success response immediately. However, it might take some time for the gateway to be ready. You should call DescribeGatewayInformation and check the status before making any additional API calls. For more information, see ActivateGateway.  To specify which gateway to start, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   startGateway(params: StorageGateway.Types.StartGatewayInput, callback?: (err: AWSError, data: StorageGateway.Types.StartGatewayOutput) => void): Request<StorageGateway.Types.StartGatewayOutput, AWSError>;
@@ -516,19 +532,19 @@ declare class StorageGateway extends Service {
    */
   startGateway(callback?: (err: AWSError, data: StorageGateway.Types.StartGatewayOutput) => void): Request<StorageGateway.Types.StartGatewayOutput, AWSError>;
   /**
-   * Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume and tape gateway types.' By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   updateBandwidthRateLimit(params: StorageGateway.Types.UpdateBandwidthRateLimitInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitOutput, AWSError>;
   /**
-   * Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume and tape gateway types.' By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   updateBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitOutput, AWSError>;
   /**
-   * Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it.  When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials. 
+   * Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it. This operation is supported in the volume and tape gateway types.  When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials. 
    */
   updateChapCredentials(params: StorageGateway.Types.UpdateChapCredentialsInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateChapCredentialsOutput) => void): Request<StorageGateway.Types.UpdateChapCredentialsOutput, AWSError>;
   /**
-   * Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it.  When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials. 
+   * Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it. This operation is supported in the volume and tape gateway types.  When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials. 
    */
   updateChapCredentials(callback?: (err: AWSError, data: StorageGateway.Types.UpdateChapCredentialsOutput) => void): Request<StorageGateway.Types.UpdateChapCredentialsOutput, AWSError>;
   /**
@@ -635,6 +651,7 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export type ActivationKey = string;
+  export type ActiveDirectoryStatus = "ACCESS_DENIED"|"DETACHED"|"JOINED"|"JOINING"|"NETWORK_ERROR"|"TIMEOUT"|"UNKNOWN_ERROR"|string;
   export interface AddCacheInput {
     GatewayARN: GatewayARN;
     /**
@@ -730,6 +747,7 @@ declare namespace StorageGateway {
     TargetARN?: TargetARN;
   }
   export type Authentication = string;
+  export type AvailabilityMonitorTestStatus = "COMPLETE"|"FAILED"|"PENDING"|string;
   export type BandwidthDownloadRateLimit = number;
   export type BandwidthType = string;
   export type BandwidthUploadRateLimit = number;
@@ -1315,6 +1333,20 @@ declare namespace StorageGateway {
      */
     VolumeARN?: VolumeARN;
   }
+  export interface DescribeAvailabilityMonitorTestInput {
+    GatewayARN: GatewayARN;
+  }
+  export interface DescribeAvailabilityMonitorTestOutput {
+    GatewayARN?: GatewayARN;
+    /**
+     * The status of the High Availability monitoring test. If a test hasn't been performed, the value of this field is null.
+     */
+    Status?: AvailabilityMonitorTestStatus;
+    /**
+     * The time the High Availability monitoring test was started. If a test hasn't been performed, the value of this field is null.
+     */
+    StartTime?: Time;
+  }
   export interface DescribeBandwidthRateLimitInput {
     GatewayARN: GatewayARN;
   }
@@ -1437,9 +1469,13 @@ declare namespace StorageGateway {
      */
     VPCEndpoint?: string;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the gateway.
+     * The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is used to monitor events in the gateway.
      */
     CloudWatchLogGroupARN?: CloudWatchLogGroupARN;
+    /**
+     * The type of hypervisor environment used by the host.
+     */
+    HostEnvironment?: HostEnvironment;
   }
   export interface DescribeMaintenanceStartTimeInput {
     GatewayARN: GatewayARN;
@@ -1500,6 +1536,10 @@ declare namespace StorageGateway {
      * The name of the domain that the gateway is joined to.
      */
     DomainName?: DomainName;
+    /**
+     * Indicates the status of a gateway that is a member of the Active Directory domain.   ACCESS_DENIED: Indicates that the JoinDomain operation failed due to an authentication error.   DETACHED: Indicates that gateway is not joined to a domain.   JOINED: Indicates that the gateway has successfully joined a domain.   JOINING: Indicates that a JoinDomain operation is in progress.   NETWORK_ERROR: Indicates that JoinDomain operation failed due to a network or connectivity error.   TIMEOUT: Indicates that the JoinDomain operation failed because the operation didn't complete within the allotted time.   UNKNOWN_ERROR: Indicates that the JoinDomain operation failed due to another type of error.  
+     */
+    ActiveDirectoryStatus?: ActiveDirectoryStatus;
     /**
      * This value is true if a password for the guest user “smbguest” is set, and otherwise false.
      */
@@ -1829,6 +1869,7 @@ declare namespace StorageGateway {
   export type GatewayType = string;
   export type Gateways = GatewayInfo[];
   export type Host = string;
+  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"OTHER"|string;
   export type Hosts = Host[];
   export type HourOfDay = number;
   export type IPV4AddressCIDR = string;
@@ -1853,7 +1894,11 @@ declare namespace StorageGateway {
      */
     DomainControllers?: Hosts;
     /**
-     * Sets the user name of user who has permission to add the gateway to the Active Directory domain.
+     * Specifies the time in seconds, in which the JoinDomain operation must complete. The default is 20 seconds.
+     */
+    TimeoutInSeconds?: TimeoutInSeconds;
+    /**
+     * Sets the user name of user who has permission to add the gateway to the Active Directory domain. The domain user account should be enabled to join computers to the domain. For example, you can use the domain administrator account or an account with delegated permissions to join computers to the domain.
      */
     UserName: DomainUserName;
     /**
@@ -1866,6 +1911,10 @@ declare namespace StorageGateway {
      * The unique Amazon Resource Name (ARN) of the gateway that joined the domain.
      */
     GatewayARN?: GatewayARN;
+    /**
+     * Indicates the status of the gateway as a member of the Active Directory domain.   ACCESS_DENIED: Indicates that the JoinDomain operation failed due to an authentication error.   DETACHED: Indicates that gateway is not joined to a domain.   JOINED: Indicates that the gateway has successfully joined a domain.   JOINING: Indicates that a JoinDomain operation is in progress.   NETWORK_ERROR: Indicates that JoinDomain operation failed due to a network or connectivity error.   TIMEOUT: Indicates that the JoinDomain operation failed because the operation didn't complete within the allotted time.   UNKNOWN_ERROR: Indicates that the JoinDomain operation failed due to another type of error.  
+     */
+    ActiveDirectoryStatus?: ActiveDirectoryStatus;
   }
   export type KMSKey = string;
   export type LastSoftwareUpdate = string;
@@ -2274,6 +2323,12 @@ declare namespace StorageGateway {
   export type SnapshotDescription = string;
   export type SnapshotId = string;
   export type Squash = string;
+  export interface StartAvailabilityMonitorTestInput {
+    GatewayARN: GatewayARN;
+  }
+  export interface StartAvailabilityMonitorTestOutput {
+    GatewayARN?: GatewayARN;
+  }
   export interface StartGatewayInput {
     GatewayARN: GatewayARN;
   }
@@ -2494,6 +2549,7 @@ declare namespace StorageGateway {
   export type TargetARN = string;
   export type TargetName = string;
   export type Time = Date;
+  export type TimeoutInSeconds = number;
   export interface UpdateBandwidthRateLimitInput {
     GatewayARN: GatewayARN;
     /**

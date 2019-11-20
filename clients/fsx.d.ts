@@ -247,11 +247,11 @@ declare namespace FSx {
      */
     FileSystemType: FileSystemType;
     /**
-     * The storage capacity of the file system being created. For Windows file systems, the storage capacity has a minimum of 300 GiB, and a maximum of 65,536 GiB. For Lustre file systems, the storage capacity has a minimum of 3,600 GiB. Storage capacity is provisioned in increments of 3,600 GiB.
+     * The storage capacity of the file system being created. For Windows file systems, valid values are 32 GiB - 65,536 GiB. For Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing in increments of 3600 GiB.
      */
     StorageCapacity: StorageCapacity;
     /**
-     * The IDs of the subnets that the file system will be accessible from. File systems support only one subnet. The file server is also launched in that subnet's Availability Zone.
+     * Specifies the IDs of the subnets that the file system will be accessible from. For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standy file server. You specify one of these subnets as the preferred subnet using the WindowsConfiguration &gt; PreferredSubnetID property. For Windows SINGLE_AZ_1 file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.
      */
     SubnetIds: SubnetIds;
     /**
@@ -281,6 +281,14 @@ declare namespace FSx {
      */
     ActiveDirectoryId?: DirectoryId;
     SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryConfiguration;
+    /**
+     * Specifies the file system deployment type, valid values are the following:   MULTI_AZ_1 - Deploys a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of three Availability Zones.   SINGLE_AZ_1 - (Default) Choose to deploy a file system that is configured for single AZ redundancy.   To learn more about high availability Multi-AZ file systems, see  High Availability for Amazon FSx for Windows File Server.
+     */
+    DeploymentType?: WindowsDeploymentType;
+    /**
+     * Required when DeploymentType is set to MULTI_AZ_1. This specifies the subnet in which you want the preferred file server to be located. For in-AWS applications, we recommend that you launch your clients in the same Availability Zone (AZ) as your preferred file server to reduce cross-AZ data transfer costs and minimize latency. 
+     */
+    PreferredSubnetId?: SubnetId;
     /**
      * The throughput of an Amazon FSx file system, measured in megabytes per second, in 2 to the nth increments, between 2^3 (8) and 2^11 (2048).
      */
@@ -456,7 +464,7 @@ declare namespace FSx {
      */
     FileSystemType?: FileSystemType;
     /**
-     * The lifecycle status of the file system:    AVAILABLE indicates that the file system is reachable and available for use.    CREATING indicates that Amazon FSx is in the process of creating the new file system.    DELETING indicates that Amazon FSx is in the process of deleting the file system.    FAILED indicates that Amazon FSx was not able to create the file system.    MISCONFIGURED indicates that the file system is in a failed but recoverable state.    UPDATING indicates that the file system is undergoing a customer initiated update.  
+     * The lifecycle status of the file system, following are the possible values and what they mean:    AVAILABLE - The file system is in a healthy state, and is reachable and available for use.    CREATING - Amazon FSx is creating the new file system.    DELETING - Amazon FSx is deleting an existing file system.    FAILED - An existing file system has experienced an unrecoverable failure. When creating a new file system, Amazon FSx was unable to create the file system.    MISCONFIGURED indicates that the file system is in a failed but recoverable state.    UPDATING indicates that the file system is undergoing a customer initiated update.  
      */
     Lifecycle?: FileSystemLifecycle;
     FailureDetails?: FileSystemFailureDetails;
@@ -603,7 +611,7 @@ declare namespace FSx {
      */
     OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
     /**
-     * (Optional) The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. If you don't provide one, your AD domain's Domain Admins group is used.
+     * (Optional) The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, setting audit controls (audit ACLs) on files and folders, and administering the file system remotely by using the FSx Remote PowerShell. The group that you specify must already exist in your domain. If you don't provide one, your AD domain's Domain Admins group is used.
      */
     FileSystemAdministratorsGroup?: FileSystemAdministratorsGroupName;
     /**
@@ -718,12 +726,29 @@ declare namespace FSx {
   }
   export type VpcId = string;
   export type WeeklyTime = string;
+  export type WindowsDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|string;
   export interface WindowsFileSystemConfiguration {
     /**
      * The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.
      */
     ActiveDirectoryId?: DirectoryId;
     SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryAttributes;
+    /**
+     * Specifies the file system deployment type, valid values are the following:    MULTI_AZ_1 - Specifies a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.    SINGLE_AZ_1 - (Default) Specifies a file system that is configured for single AZ redundancy.  
+     */
+    DeploymentType?: WindowsDeploymentType;
+    /**
+     * For MULTI_AZ_1 deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell. For SINGLE_AZ_1 deployment types, this is the DNS name of the file system. This endpoint is temporarily unavailable when the file system is undergoing maintenance.
+     */
+    RemoteAdministrationEndpoint?: DNSName;
+    /**
+     * For MULTI_AZ_1 deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in SubnetIds property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server. For SINGLE_AZ_1 deployment types, this value is the same as that for SubnetIDs.
+     */
+    PreferredSubnetId?: SubnetId;
+    /**
+     * For MULTI_AZ_1 deployment types, the IP address of the primary, or preferred, file server. Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients that are not joined to a Microsoft Active Directory. Applicable for both SINGLE_AZ_1 and MULTI_AZ_1 deployment types. This IP address is temporarily unavailable when the file system is undergoing maintenance. For Linux and Windows SMB clients that are joined to an Active Directory, use the file system's DNSName instead. For more information and instruction on mapping and mounting file shares, see https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html.
+     */
+    PreferredFileServerIp?: IpAddress;
     /**
      * The throughput of an Amazon FSx file system, measured in megabytes per second.
      */

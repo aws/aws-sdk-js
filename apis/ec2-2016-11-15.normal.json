@@ -2061,6 +2061,20 @@
       },
       "documentation": "<p>Describes the specified export instance tasks or all your export instance tasks.</p>"
     },
+    "DescribeFastSnapshotRestores": {
+      "name": "DescribeFastSnapshotRestores",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFastSnapshotRestoresRequest"
+      },
+      "output": {
+        "shape": "DescribeFastSnapshotRestoresResult"
+      },
+      "documentation": "<p>Describes the state of fast snapshot restores for your snapshots.</p>"
+    },
     "DescribeFleetHistory": {
       "name": "DescribeFleetHistory",
       "http": {
@@ -3242,6 +3256,20 @@
       },
       "documentation": "<p>Disables EBS encryption by default for your account in the current Region.</p> <p>After you disable encryption by default, you can still create encrypted volumes by enabling encryption when you create each volume.</p> <p>Disabling encryption by default does not change the encryption status of your existing volumes.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
+    "DisableFastSnapshotRestores": {
+      "name": "DisableFastSnapshotRestores",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisableFastSnapshotRestoresRequest"
+      },
+      "output": {
+        "shape": "DisableFastSnapshotRestoresResult"
+      },
+      "documentation": "<p>Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.</p>"
+    },
     "DisableTransitGatewayRouteTablePropagation": {
       "name": "DisableTransitGatewayRouteTablePropagation",
       "http": {
@@ -3400,6 +3428,20 @@
         "shape": "EnableEbsEncryptionByDefaultResult"
       },
       "documentation": "<p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>.</p>"
+    },
+    "EnableFastSnapshotRestores": {
+      "name": "EnableFastSnapshotRestores",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "EnableFastSnapshotRestoresRequest"
+      },
+      "output": {
+        "shape": "EnableFastSnapshotRestoresResult"
+      },
+      "documentation": "<p>Enables fast snapshot restores for the specified snapshots in the specified Availability Zones.</p> <p>You get the full benefit of fast snapshot restores after they enter the <code>enabled</code> state. To get the current state of fast snapshot restores, use <a>DescribeFastSnapshotRestores</a>. To disable fast snapshot restores, use <a>DisableFastSnapshotRestores</a>.</p>"
     },
     "EnableTransitGatewayRouteTablePropagation": {
       "name": "EnableTransitGatewayRouteTablePropagation",
@@ -5951,8 +5993,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for AttachVolume.</p>"
+      }
     },
     "AttachVpnGatewayRequest": {
       "type": "structure",
@@ -6290,6 +6331,13 @@
         "impaired",
         "unavailable"
       ]
+    },
+    "AvailabilityZoneStringList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "AvailabilityZone"
+      }
     },
     "AvailableCapacity": {
       "type": "structure",
@@ -8008,6 +8056,7 @@
         },
         "TagSpecifications": {
           "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the new snapshot.</p>",
           "locationName": "TagSpecification"
         },
         "DryRun": {
@@ -8015,8 +8064,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for CopySnapshot.</p>"
+      }
     },
     "CopySnapshotResult": {
       "type": "structure",
@@ -8028,10 +8076,10 @@
         },
         "Tags": {
           "shape": "TagList",
+          "documentation": "<p>Any tags applied to the new snapshot.</p>",
           "locationName": "tagSet"
         }
-      },
-      "documentation": "<p>Contains the output of CopySnapshot.</p>"
+      }
     },
     "CopyTagsFromSource": {
       "type": "string",
@@ -9377,8 +9425,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateSnapshot.</p>"
+      }
     },
     "CreateSnapshotsRequest": {
       "type": "structure",
@@ -9401,7 +9448,7 @@
         },
         "DryRun": {
           "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the action without actually making the request. Provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.</p>"
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
         "CopyTagsFromSource": {
           "shape": "CopyTagsFromSource",
@@ -9992,8 +10039,7 @@
           "documentation": "<p>The tags to apply to the volume during creation.</p>",
           "locationName": "TagSpecification"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateVolume.</p>"
+      }
     },
     "CreateVpcEndpointConnectionNotificationRequest": {
       "type": "structure",
@@ -11188,8 +11234,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteSnapshot.</p>"
+      }
     },
     "DeleteSpotDatafeedSubscriptionRequest": {
       "type": "structure",
@@ -11470,8 +11515,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DeleteVolume.</p>"
+      }
     },
     "DeleteVpcEndpointConnectionNotificationsRequest": {
       "type": "structure",
@@ -12502,6 +12546,116 @@
           "shape": "ExportTaskList",
           "documentation": "<p>Information about the export tasks.</p>",
           "locationName": "exportTaskSet"
+        }
+      }
+    },
+    "DescribeFastSnapshotRestoreSuccessItem": {
+      "type": "structure",
+      "members": {
+        "SnapshotId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the snapshot.</p>",
+          "locationName": "snapshotId"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone.</p>",
+          "locationName": "availabilityZone"
+        },
+        "State": {
+          "shape": "FastSnapshotRestoreStateCode",
+          "documentation": "<p>The state of fast snapshot restores.</p>",
+          "locationName": "state"
+        },
+        "StateTransitionReason": {
+          "shape": "String",
+          "documentation": "<p>The reason for the state transition. The possible values are as follows:</p> <ul> <li> <p> <code>Client.UserInitiated</code> - The state successfully transitioned to <code>enabling</code> or <code>disabling</code>.</p> </li> <li> <p> <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned to <code>optimizing</code>, <code>enabled</code>, or <code>disabled</code>.</p> </li> </ul>",
+          "locationName": "stateTransitionReason"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the AWS account that owns the snapshot.</p>",
+          "locationName": "ownerId"
+        },
+        "OwnerAlias": {
+          "shape": "String",
+          "documentation": "<p>The alias of the snapshot owner.</p>",
+          "locationName": "ownerAlias"
+        },
+        "EnablingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>enabling</code> state.</p>",
+          "locationName": "enablingTime"
+        },
+        "OptimizingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>optimizing</code> state.</p>",
+          "locationName": "optimizingTime"
+        },
+        "EnabledTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>enabled</code> state.</p>",
+          "locationName": "enabledTime"
+        },
+        "DisablingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>disabling</code> state.</p>",
+          "locationName": "disablingTime"
+        },
+        "DisabledTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>disabled</code> state.</p>",
+          "locationName": "disabledTime"
+        }
+      },
+      "documentation": "<p>Describes fast snapshot restores for a snapshot.</p>"
+    },
+    "DescribeFastSnapshotRestoreSuccessSet": {
+      "type": "list",
+      "member": {
+        "shape": "DescribeFastSnapshotRestoreSuccessItem",
+        "locationName": "item"
+      }
+    },
+    "DescribeFastSnapshotRestoresMaxResults": {
+      "type": "integer",
+      "max": 200,
+      "min": 0
+    },
+    "DescribeFastSnapshotRestoresRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>The filters. The possible values are:</p> <ul> <li> <p> <code>availability-zone</code>: The Availability Zone of the snapshot.</p> </li> <li> <p> <code>owner-id</code>: The ID of the AWS account that owns the snapshot.</p> </li> <li> <p> <code>snapshot-id</code>: The ID of the snapshot.</p> </li> <li> <p> <code>state</code>: The state of fast snapshot restores for the snapshot (<code>enabling</code> | <code>optimizing</code> | <code>enabled</code> | <code>disabling</code> | <code>disabled</code>).</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "DescribeFastSnapshotRestoresMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeFastSnapshotRestoresResult": {
+      "type": "structure",
+      "members": {
+        "FastSnapshotRestores": {
+          "shape": "DescribeFastSnapshotRestoreSuccessSet",
+          "documentation": "<p>Information about the state of fast snapshot restores.</p>",
+          "locationName": "fastSnapshotRestoreSet"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
         }
       }
     },
@@ -14496,8 +14650,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeSnapshotAttribute.</p>"
+      }
     },
     "DescribeSnapshotAttributeResult": {
       "type": "structure",
@@ -14517,8 +14670,7 @@
           "documentation": "<p>The ID of the EBS snapshot.</p>",
           "locationName": "snapshotId"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeSnapshotAttribute.</p>"
+      }
     },
     "DescribeSnapshotsRequest": {
       "type": "structure",
@@ -15327,8 +15479,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeVolumeAttribute.</p>"
+      }
     },
     "DescribeVolumeAttributeResult": {
       "type": "structure",
@@ -15348,8 +15499,7 @@
           "documentation": "<p>The ID of the volume.</p>",
           "locationName": "volumeId"
         }
-      },
-      "documentation": "<p>Contains the output of DescribeVolumeAttribute.</p>"
+      }
     },
     "DescribeVolumeStatusRequest": {
       "type": "structure",
@@ -16123,8 +16273,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DetachVolume.</p>"
+      }
     },
     "DetachVpnGatewayRequest": {
       "type": "structure",
@@ -16255,7 +16404,7 @@
       "members": {
         "DryRun": {
           "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>. </p>"
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
       }
     },
@@ -16266,6 +16415,174 @@
           "shape": "Boolean",
           "documentation": "<p>The updated status of encryption by default.</p>",
           "locationName": "ebsEncryptionByDefault"
+        }
+      }
+    },
+    "DisableFastSnapshotRestoreErrorItem": {
+      "type": "structure",
+      "members": {
+        "SnapshotId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the snapshot.</p>",
+          "locationName": "snapshotId"
+        },
+        "FastSnapshotRestoreStateErrors": {
+          "shape": "DisableFastSnapshotRestoreStateErrorSet",
+          "documentation": "<p>The errors.</p>",
+          "locationName": "fastSnapshotRestoreStateErrorSet"
+        }
+      },
+      "documentation": "<p>Contains information about the errors that occurred when disabling fast snapshot restores.</p>"
+    },
+    "DisableFastSnapshotRestoreErrorSet": {
+      "type": "list",
+      "member": {
+        "shape": "DisableFastSnapshotRestoreErrorItem",
+        "locationName": "item"
+      }
+    },
+    "DisableFastSnapshotRestoreStateError": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "String",
+          "documentation": "<p>The error code.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The error message.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes an error that occurred when disabling fast snapshot restores.</p>"
+    },
+    "DisableFastSnapshotRestoreStateErrorItem": {
+      "type": "structure",
+      "members": {
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone.</p>",
+          "locationName": "availabilityZone"
+        },
+        "Error": {
+          "shape": "DisableFastSnapshotRestoreStateError",
+          "documentation": "<p>The error.</p>",
+          "locationName": "error"
+        }
+      },
+      "documentation": "<p>Contains information about an error that occurred when disabling fast snapshot restores.</p>"
+    },
+    "DisableFastSnapshotRestoreStateErrorSet": {
+      "type": "list",
+      "member": {
+        "shape": "DisableFastSnapshotRestoreStateErrorItem",
+        "locationName": "item"
+      }
+    },
+    "DisableFastSnapshotRestoreSuccessItem": {
+      "type": "structure",
+      "members": {
+        "SnapshotId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the snapshot.</p>",
+          "locationName": "snapshotId"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone.</p>",
+          "locationName": "availabilityZone"
+        },
+        "State": {
+          "shape": "FastSnapshotRestoreStateCode",
+          "documentation": "<p>The state of fast snapshot restores for the snapshot.</p>",
+          "locationName": "state"
+        },
+        "StateTransitionReason": {
+          "shape": "String",
+          "documentation": "<p>The reason for the state transition. The possible values are as follows:</p> <ul> <li> <p> <code>Client.UserInitiated</code> - The state successfully transitioned to <code>enabling</code> or <code>disabling</code>.</p> </li> <li> <p> <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned to <code>optimizing</code>, <code>enabled</code>, or <code>disabled</code>.</p> </li> </ul>",
+          "locationName": "stateTransitionReason"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the AWS account that owns the snapshot.</p>",
+          "locationName": "ownerId"
+        },
+        "OwnerAlias": {
+          "shape": "String",
+          "documentation": "<p>The alias of the snapshot owner.</p>",
+          "locationName": "ownerAlias"
+        },
+        "EnablingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>enabling</code> state.</p>",
+          "locationName": "enablingTime"
+        },
+        "OptimizingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>optimizing</code> state.</p>",
+          "locationName": "optimizingTime"
+        },
+        "EnabledTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>enabled</code> state.</p>",
+          "locationName": "enabledTime"
+        },
+        "DisablingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>disabling</code> state.</p>",
+          "locationName": "disablingTime"
+        },
+        "DisabledTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>disabled</code> state.</p>",
+          "locationName": "disabledTime"
+        }
+      },
+      "documentation": "<p>Describes fast snapshot restores that were successfully disabled.</p>"
+    },
+    "DisableFastSnapshotRestoreSuccessSet": {
+      "type": "list",
+      "member": {
+        "shape": "DisableFastSnapshotRestoreSuccessItem",
+        "locationName": "item"
+      }
+    },
+    "DisableFastSnapshotRestoresRequest": {
+      "type": "structure",
+      "required": [
+        "AvailabilityZones",
+        "SourceSnapshotIds"
+      ],
+      "members": {
+        "AvailabilityZones": {
+          "shape": "AvailabilityZoneStringList",
+          "documentation": "<p>One or more Availability Zones. For example, <code>us-east-2a</code>.</p>",
+          "locationName": "AvailabilityZone"
+        },
+        "SourceSnapshotIds": {
+          "shape": "SnapshotIdStringList",
+          "documentation": "<p>The IDs of one or more snapshots. For example, <code>snap-1234567890abcdef0</code>.</p>",
+          "locationName": "SourceSnapshotId"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DisableFastSnapshotRestoresResult": {
+      "type": "structure",
+      "members": {
+        "Successful": {
+          "shape": "DisableFastSnapshotRestoreSuccessSet",
+          "documentation": "<p>Information about the snapshots for which fast snapshot restores were successfully disabled.</p>",
+          "locationName": "successful"
+        },
+        "Unsuccessful": {
+          "shape": "DisableFastSnapshotRestoreErrorSet",
+          "documentation": "<p>Information about the snapshots for which fast snapshot restores could not be disabled.</p>",
+          "locationName": "unsuccessful"
         }
       }
     },
@@ -17030,7 +17347,7 @@
       "members": {
         "DryRun": {
           "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>. </p>"
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
       }
     },
@@ -17041,6 +17358,174 @@
           "shape": "Boolean",
           "documentation": "<p>The updated status of encryption by default.</p>",
           "locationName": "ebsEncryptionByDefault"
+        }
+      }
+    },
+    "EnableFastSnapshotRestoreErrorItem": {
+      "type": "structure",
+      "members": {
+        "SnapshotId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the snapshot.</p>",
+          "locationName": "snapshotId"
+        },
+        "FastSnapshotRestoreStateErrors": {
+          "shape": "EnableFastSnapshotRestoreStateErrorSet",
+          "documentation": "<p>The errors.</p>",
+          "locationName": "fastSnapshotRestoreStateErrorSet"
+        }
+      },
+      "documentation": "<p>Contains information about the errors that occurred when enabling fast snapshot restores.</p>"
+    },
+    "EnableFastSnapshotRestoreErrorSet": {
+      "type": "list",
+      "member": {
+        "shape": "EnableFastSnapshotRestoreErrorItem",
+        "locationName": "item"
+      }
+    },
+    "EnableFastSnapshotRestoreStateError": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "String",
+          "documentation": "<p>The error code.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The error message.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes an error that occurred when enabling fast snapshot restores.</p>"
+    },
+    "EnableFastSnapshotRestoreStateErrorItem": {
+      "type": "structure",
+      "members": {
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone.</p>",
+          "locationName": "availabilityZone"
+        },
+        "Error": {
+          "shape": "EnableFastSnapshotRestoreStateError",
+          "documentation": "<p>The error.</p>",
+          "locationName": "error"
+        }
+      },
+      "documentation": "<p>Contains information about an error that occurred when enabling fast snapshot restores.</p>"
+    },
+    "EnableFastSnapshotRestoreStateErrorSet": {
+      "type": "list",
+      "member": {
+        "shape": "EnableFastSnapshotRestoreStateErrorItem",
+        "locationName": "item"
+      }
+    },
+    "EnableFastSnapshotRestoreSuccessItem": {
+      "type": "structure",
+      "members": {
+        "SnapshotId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the snapshot.</p>",
+          "locationName": "snapshotId"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone.</p>",
+          "locationName": "availabilityZone"
+        },
+        "State": {
+          "shape": "FastSnapshotRestoreStateCode",
+          "documentation": "<p>The state of fast snapshot restores.</p>",
+          "locationName": "state"
+        },
+        "StateTransitionReason": {
+          "shape": "String",
+          "documentation": "<p>The reason for the state transition. The possible values are as follows:</p> <ul> <li> <p> <code>Client.UserInitiated</code> - The state successfully transitioned to <code>enabling</code> or <code>disabling</code>.</p> </li> <li> <p> <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned to <code>optimizing</code>, <code>enabled</code>, or <code>disabled</code>.</p> </li> </ul>",
+          "locationName": "stateTransitionReason"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the AWS account that owns the snapshot.</p>",
+          "locationName": "ownerId"
+        },
+        "OwnerAlias": {
+          "shape": "String",
+          "documentation": "<p>The alias of the snapshot owner.</p>",
+          "locationName": "ownerAlias"
+        },
+        "EnablingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>enabling</code> state.</p>",
+          "locationName": "enablingTime"
+        },
+        "OptimizingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>optimizing</code> state.</p>",
+          "locationName": "optimizingTime"
+        },
+        "EnabledTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>enabled</code> state.</p>",
+          "locationName": "enabledTime"
+        },
+        "DisablingTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>disabling</code> state.</p>",
+          "locationName": "disablingTime"
+        },
+        "DisabledTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The time at which fast snapshot restores entered the <code>disabled</code> state.</p>",
+          "locationName": "disabledTime"
+        }
+      },
+      "documentation": "<p>Describes fast snapshot restores that were successfully enabled.</p>"
+    },
+    "EnableFastSnapshotRestoreSuccessSet": {
+      "type": "list",
+      "member": {
+        "shape": "EnableFastSnapshotRestoreSuccessItem",
+        "locationName": "item"
+      }
+    },
+    "EnableFastSnapshotRestoresRequest": {
+      "type": "structure",
+      "required": [
+        "AvailabilityZones",
+        "SourceSnapshotIds"
+      ],
+      "members": {
+        "AvailabilityZones": {
+          "shape": "AvailabilityZoneStringList",
+          "documentation": "<p>One or more Availability Zones. For example, <code>us-east-2a</code>.</p>",
+          "locationName": "AvailabilityZone"
+        },
+        "SourceSnapshotIds": {
+          "shape": "SnapshotIdStringList",
+          "documentation": "<p>The IDs of one or more snapshots. For example, <code>snap-1234567890abcdef0</code>. You can specify a snapshot that was shared with you from another AWS account.</p>",
+          "locationName": "SourceSnapshotId"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "EnableFastSnapshotRestoresResult": {
+      "type": "structure",
+      "members": {
+        "Successful": {
+          "shape": "EnableFastSnapshotRestoreSuccessSet",
+          "documentation": "<p>Information about the snapshots for which fast snapshot restores were successfully enabled.</p>",
+          "locationName": "successful"
+        },
+        "Unsuccessful": {
+          "shape": "EnableFastSnapshotRestoreErrorSet",
+          "documentation": "<p>Information about the snapshots for which fast snapshot restores could not be enabled.</p>",
+          "locationName": "unsuccessful"
         }
       }
     },
@@ -17109,8 +17594,7 @@
           "documentation": "<p>The ID of the volume.</p>",
           "locationName": "volumeId"
         }
-      },
-      "documentation": "<p>Contains the parameters for EnableVolumeIO.</p>"
+      }
     },
     "EnableVpcClassicLinkDnsSupportRequest": {
       "type": "structure",
@@ -17641,6 +18125,16 @@
         "shape": "FailedQueuedPurchaseDeletion",
         "locationName": "item"
       }
+    },
+    "FastSnapshotRestoreStateCode": {
+      "type": "string",
+      "enum": [
+        "enabling",
+        "optimizing",
+        "enabled",
+        "disabling",
+        "disabled"
+      ]
     },
     "Filter": {
       "type": "structure",
@@ -23880,8 +24374,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for ModifySnapshotAttribute.</p>"
+      }
     },
     "ModifySpotFleetRequestRequest": {
       "type": "structure",
@@ -24172,8 +24665,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for ModifyVolumeAttribute.</p>"
+      }
     },
     "ModifyVolumeRequest": {
       "type": "structure",
@@ -28234,8 +28726,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for ResetSnapshotAttribute.</p>"
+      }
     },
     "ResourceIdList": {
       "type": "list",
@@ -33340,6 +33831,11 @@
           "shape": "VolumeType",
           "documentation": "<p>The volume type. This can be <code>gp2</code> for General Purpose SSD, <code>io1</code> for Provisioned IOPS SSD, <code>st1</code> for Throughput Optimized HDD, <code>sc1</code> for Cold HDD, or <code>standard</code> for Magnetic volumes.</p>",
           "locationName": "volumeType"
+        },
+        "FastRestored": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the volume was created using fast snapshot restore.</p>",
+          "locationName": "fastRestored"
         }
       },
       "documentation": "<p>Describes a volume.</p>"

@@ -1237,6 +1237,14 @@ declare class EC2 extends Service {
    */
   describeExportTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
+   * Describes the state of fast snapshot restores for your snapshots.
+   */
+  describeFastSnapshotRestores(params: EC2.Types.DescribeFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFastSnapshotRestoresResult) => void): Request<EC2.Types.DescribeFastSnapshotRestoresResult, AWSError>;
+  /**
+   * Describes the state of fast snapshot restores for your snapshots.
+   */
+  describeFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DescribeFastSnapshotRestoresResult) => void): Request<EC2.Types.DescribeFastSnapshotRestoresResult, AWSError>;
+  /**
    * Describes the events for the specified EC2 Fleet during the specified time.
    */
   describeFleetHistory(params: EC2.Types.DescribeFleetHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
@@ -1917,6 +1925,14 @@ declare class EC2 extends Service {
    */
   disableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
   /**
+   * Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.
+   */
+  disableFastSnapshotRestores(params: EC2.Types.DisableFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
+  /**
+   * Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.
+   */
+  disableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
+  /**
    * Disables the specified resource attachment from propagating routes to the specified propagation route table.
    */
   disableTransitGatewayRouteTablePropagation(params: EC2.Types.DisableTransitGatewayRouteTablePropagationRequest, callback?: (err: AWSError, data: EC2.Types.DisableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.DisableTransitGatewayRouteTablePropagationResult, AWSError>;
@@ -2012,6 +2028,14 @@ declare class EC2 extends Service {
    * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported Instance Types.
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
+  /**
+   * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores.
+   */
+  enableFastSnapshotRestores(params: EC2.Types.EnableFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
+  /**
+   * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores.
+   */
+  enableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
   /**
    * Enables the specified attachment to propagate routes to the specified propagation route table.
    */
@@ -3045,6 +3069,14 @@ declare class EC2 extends Service {
    */
   waitFor(state: "snapshotCompleted", callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
   /**
+   * Waits for the securityGroupExists state by periodically calling the underlying EC2.describeSecurityGroupsoperation every 5 seconds (at most 6 times).
+   */
+  waitFor(state: "securityGroupExists", params: EC2.Types.DescribeSecurityGroupsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupsResult) => void): Request<EC2.Types.DescribeSecurityGroupsResult, AWSError>;
+  /**
+   * Waits for the securityGroupExists state by periodically calling the underlying EC2.describeSecurityGroupsoperation every 5 seconds (at most 6 times).
+   */
+  waitFor(state: "securityGroupExists", callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupsResult) => void): Request<EC2.Types.DescribeSecurityGroupsResult, AWSError>;
+  /**
    * Waits for the spotInstanceRequestFulfilled state by periodically calling the underlying EC2.describeSpotInstanceRequestsoperation every 15 seconds (at most 40 times).
    */
   waitFor(state: "spotInstanceRequestFulfilled", params: EC2.Types.DescribeSpotInstanceRequestsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
@@ -3981,6 +4013,7 @@ declare namespace EC2 {
   }
   export type AvailabilityZoneMessageList = AvailabilityZoneMessage[];
   export type AvailabilityZoneState = "available"|"information"|"impaired"|"unavailable"|string;
+  export type AvailabilityZoneStringList = String[];
   export interface AvailableCapacity {
     /**
      * The total number of instances supported by the Dedicated Host.
@@ -4951,6 +4984,9 @@ declare namespace EC2 {
      * The ID of the EBS snapshot to copy.
      */
     SourceSnapshotId: String;
+    /**
+     * The tags to apply to the new snapshot.
+     */
     TagSpecifications?: TagSpecificationList;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -4962,6 +4998,9 @@ declare namespace EC2 {
      * The ID of the new snapshot.
      */
     SnapshotId?: String;
+    /**
+     * Any tags applied to the new snapshot.
+     */
     Tags?: TagList;
   }
   export type CopyTagsFromSource = "volume"|string;
@@ -5917,7 +5956,7 @@ declare namespace EC2 {
      */
     TagSpecifications?: TagSpecificationList;
     /**
-     * Checks whether you have the required permissions for the action without actually making the request. Provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
@@ -7912,6 +7951,82 @@ declare namespace EC2 {
      * Information about the export tasks.
      */
     ExportTasks?: ExportTaskList;
+  }
+  export interface DescribeFastSnapshotRestoreSuccessItem {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The state of fast snapshot restores.
+     */
+    State?: FastSnapshotRestoreStateCode;
+    /**
+     * The reason for the state transition. The possible values are as follows:    Client.UserInitiated - The state successfully transitioned to enabling or disabling.    Client.UserInitiated - Lifecycle state transition - The state successfully transitioned to optimizing, enabled, or disabled.  
+     */
+    StateTransitionReason?: String;
+    /**
+     * The ID of the AWS account that owns the snapshot.
+     */
+    OwnerId?: String;
+    /**
+     * The alias of the snapshot owner.
+     */
+    OwnerAlias?: String;
+    /**
+     * The time at which fast snapshot restores entered the enabling state.
+     */
+    EnablingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the optimizing state.
+     */
+    OptimizingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the enabled state.
+     */
+    EnabledTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the disabling state.
+     */
+    DisablingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the disabled state.
+     */
+    DisabledTime?: MillisecondDateTime;
+  }
+  export type DescribeFastSnapshotRestoreSuccessSet = DescribeFastSnapshotRestoreSuccessItem[];
+  export type DescribeFastSnapshotRestoresMaxResults = number;
+  export interface DescribeFastSnapshotRestoresRequest {
+    /**
+     * The filters. The possible values are:    availability-zone: The Availability Zone of the snapshot.    owner-id: The ID of the AWS account that owns the snapshot.    snapshot-id: The ID of the snapshot.    state: The state of fast snapshot restores for the snapshot (enabling | optimizing | enabled | disabling | disabled).  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeFastSnapshotRestoresMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeFastSnapshotRestoresResult {
+    /**
+     * Information about the state of fast snapshot restores.
+     */
+    FastSnapshotRestores?: DescribeFastSnapshotRestoreSuccessSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
   }
   export interface DescribeFleetError {
     /**
@@ -10515,7 +10630,7 @@ declare namespace EC2 {
   }
   export interface DisableEbsEncryptionByDefaultRequest {
     /**
-     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation. 
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
   }
@@ -10524,6 +10639,109 @@ declare namespace EC2 {
      * The updated status of encryption by default.
      */
     EbsEncryptionByDefault?: Boolean;
+  }
+  export interface DisableFastSnapshotRestoreErrorItem {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The errors.
+     */
+    FastSnapshotRestoreStateErrors?: DisableFastSnapshotRestoreStateErrorSet;
+  }
+  export type DisableFastSnapshotRestoreErrorSet = DisableFastSnapshotRestoreErrorItem[];
+  export interface DisableFastSnapshotRestoreStateError {
+    /**
+     * The error code.
+     */
+    Code?: String;
+    /**
+     * The error message.
+     */
+    Message?: String;
+  }
+  export interface DisableFastSnapshotRestoreStateErrorItem {
+    /**
+     * The Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The error.
+     */
+    Error?: DisableFastSnapshotRestoreStateError;
+  }
+  export type DisableFastSnapshotRestoreStateErrorSet = DisableFastSnapshotRestoreStateErrorItem[];
+  export interface DisableFastSnapshotRestoreSuccessItem {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The state of fast snapshot restores for the snapshot.
+     */
+    State?: FastSnapshotRestoreStateCode;
+    /**
+     * The reason for the state transition. The possible values are as follows:    Client.UserInitiated - The state successfully transitioned to enabling or disabling.    Client.UserInitiated - Lifecycle state transition - The state successfully transitioned to optimizing, enabled, or disabled.  
+     */
+    StateTransitionReason?: String;
+    /**
+     * The ID of the AWS account that owns the snapshot.
+     */
+    OwnerId?: String;
+    /**
+     * The alias of the snapshot owner.
+     */
+    OwnerAlias?: String;
+    /**
+     * The time at which fast snapshot restores entered the enabling state.
+     */
+    EnablingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the optimizing state.
+     */
+    OptimizingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the enabled state.
+     */
+    EnabledTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the disabling state.
+     */
+    DisablingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the disabled state.
+     */
+    DisabledTime?: MillisecondDateTime;
+  }
+  export type DisableFastSnapshotRestoreSuccessSet = DisableFastSnapshotRestoreSuccessItem[];
+  export interface DisableFastSnapshotRestoresRequest {
+    /**
+     * One or more Availability Zones. For example, us-east-2a.
+     */
+    AvailabilityZones: AvailabilityZoneStringList;
+    /**
+     * The IDs of one or more snapshots. For example, snap-1234567890abcdef0.
+     */
+    SourceSnapshotIds: SnapshotIdStringList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableFastSnapshotRestoresResult {
+    /**
+     * Information about the snapshots for which fast snapshot restores were successfully disabled.
+     */
+    Successful?: DisableFastSnapshotRestoreSuccessSet;
+    /**
+     * Information about the snapshots for which fast snapshot restores could not be disabled.
+     */
+    Unsuccessful?: DisableFastSnapshotRestoreErrorSet;
   }
   export interface DisableTransitGatewayRouteTablePropagationRequest {
     /**
@@ -10950,7 +11168,7 @@ declare namespace EC2 {
   export type ElasticInferenceAccelerators = ElasticInferenceAccelerator[];
   export interface EnableEbsEncryptionByDefaultRequest {
     /**
-     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation. 
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
   }
@@ -10959,6 +11177,109 @@ declare namespace EC2 {
      * The updated status of encryption by default.
      */
     EbsEncryptionByDefault?: Boolean;
+  }
+  export interface EnableFastSnapshotRestoreErrorItem {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The errors.
+     */
+    FastSnapshotRestoreStateErrors?: EnableFastSnapshotRestoreStateErrorSet;
+  }
+  export type EnableFastSnapshotRestoreErrorSet = EnableFastSnapshotRestoreErrorItem[];
+  export interface EnableFastSnapshotRestoreStateError {
+    /**
+     * The error code.
+     */
+    Code?: String;
+    /**
+     * The error message.
+     */
+    Message?: String;
+  }
+  export interface EnableFastSnapshotRestoreStateErrorItem {
+    /**
+     * The Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The error.
+     */
+    Error?: EnableFastSnapshotRestoreStateError;
+  }
+  export type EnableFastSnapshotRestoreStateErrorSet = EnableFastSnapshotRestoreStateErrorItem[];
+  export interface EnableFastSnapshotRestoreSuccessItem {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The state of fast snapshot restores.
+     */
+    State?: FastSnapshotRestoreStateCode;
+    /**
+     * The reason for the state transition. The possible values are as follows:    Client.UserInitiated - The state successfully transitioned to enabling or disabling.    Client.UserInitiated - Lifecycle state transition - The state successfully transitioned to optimizing, enabled, or disabled.  
+     */
+    StateTransitionReason?: String;
+    /**
+     * The ID of the AWS account that owns the snapshot.
+     */
+    OwnerId?: String;
+    /**
+     * The alias of the snapshot owner.
+     */
+    OwnerAlias?: String;
+    /**
+     * The time at which fast snapshot restores entered the enabling state.
+     */
+    EnablingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the optimizing state.
+     */
+    OptimizingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the enabled state.
+     */
+    EnabledTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the disabling state.
+     */
+    DisablingTime?: MillisecondDateTime;
+    /**
+     * The time at which fast snapshot restores entered the disabled state.
+     */
+    DisabledTime?: MillisecondDateTime;
+  }
+  export type EnableFastSnapshotRestoreSuccessSet = EnableFastSnapshotRestoreSuccessItem[];
+  export interface EnableFastSnapshotRestoresRequest {
+    /**
+     * One or more Availability Zones. For example, us-east-2a.
+     */
+    AvailabilityZones: AvailabilityZoneStringList;
+    /**
+     * The IDs of one or more snapshots. For example, snap-1234567890abcdef0. You can specify a snapshot that was shared with you from another AWS account.
+     */
+    SourceSnapshotIds: SnapshotIdStringList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableFastSnapshotRestoresResult {
+    /**
+     * Information about the snapshots for which fast snapshot restores were successfully enabled.
+     */
+    Successful?: EnableFastSnapshotRestoreSuccessSet;
+    /**
+     * Information about the snapshots for which fast snapshot restores could not be enabled.
+     */
+    Unsuccessful?: EnableFastSnapshotRestoreErrorSet;
   }
   export interface EnableTransitGatewayRouteTablePropagationRequest {
     /**
@@ -11306,6 +11627,7 @@ declare namespace EC2 {
     ReservedInstancesId?: String;
   }
   export type FailedQueuedPurchaseDeletionSet = FailedQueuedPurchaseDeletion[];
+  export type FastSnapshotRestoreStateCode = "enabling"|"optimizing"|"enabled"|"disabling"|"disabled"|string;
   export interface Filter {
     /**
      * The name of the filter. Filter names are case-sensitive.
@@ -20852,6 +21174,10 @@ declare namespace EC2 {
      * The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
      */
     VolumeType?: VolumeType;
+    /**
+     * Indicates whether the volume was created using fast snapshot restore.
+     */
+    FastRestored?: Boolean;
   }
   export interface VolumeAttachment {
     /**

@@ -793,5 +793,9 @@
   },
   "sesv2": {
     "name": "SESV2"
+  },
+  "migrationhubconfig": {
+    "prefix": "migrationhub-config",
+    "name": "MigrationHubConfig"
   }
 }

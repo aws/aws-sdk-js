@@ -221,6 +221,20 @@
     }
   },
   "shapes": {
+    "AvailabilityZone": {
+      "type": "string",
+      "max": 16,
+      "min": 0,
+      "pattern": "([a-z]+-){2,3}\\d[a-z]"
+    },
+    "AvailabilityZoneList": {
+      "type": "list",
+      "member": {
+        "shape": "AvailabilityZone"
+      },
+      "max": 10,
+      "min": 1
+    },
     "CopyTags": {
       "type": "boolean"
     },
@@ -317,6 +331,24 @@
       "max": 2048,
       "min": 0,
       "pattern": "arn:aws:iam::\\d+:role/.*"
+    },
+    "FastRestoreRule": {
+      "type": "structure",
+      "required": [
+        "Count",
+        "AvailabilityZones"
+      ],
+      "members": {
+        "Count": {
+          "shape": "Count",
+          "documentation": "<p>The number of snapshots to be enabled with fast snapshot restore.</p>"
+        },
+        "AvailabilityZones": {
+          "shape": "AvailabilityZoneList",
+          "documentation": "<p>The Availability Zones in which to enable fast snapshot restore.</p>"
+        }
+      },
+      "documentation": "<p>Specifies when to enable fast snapshot restore.</p>"
     },
     "GetLifecyclePoliciesRequest": {
       "type": "structure",
@@ -618,6 +650,10 @@
         "RetainRule": {
           "shape": "RetainRule",
           "documentation": "<p>The retain rule.</p>"
+        },
+        "FastRestoreRule": {
+          "shape": "FastRestoreRule",
+          "documentation": "<p>Enable fast snapshot restore.</p>"
         }
       },
       "documentation": "<p>Specifies a schedule.</p>"

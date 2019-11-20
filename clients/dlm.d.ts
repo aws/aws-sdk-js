@@ -77,6 +77,8 @@ declare class DLM extends Service {
   updateLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
 }
 declare namespace DLM {
+  export type AvailabilityZone = string;
+  export type AvailabilityZoneList = AvailabilityZone[];
   export type CopyTags = boolean;
   export type Count = number;
   export interface CreateLifecyclePolicyRequest {
@@ -131,6 +133,16 @@ declare namespace DLM {
   }
   export type ExcludeBootVolume = boolean;
   export type ExecutionRoleArn = string;
+  export interface FastRestoreRule {
+    /**
+     * The number of snapshots to be enabled with fast snapshot restore.
+     */
+    Count: Count;
+    /**
+     * The Availability Zones in which to enable fast snapshot restore.
+     */
+    AvailabilityZones: AvailabilityZoneList;
+  }
   export interface GetLifecyclePoliciesRequest {
     /**
      * The identifiers of the data lifecycle policies.
@@ -313,6 +325,10 @@ declare namespace DLM {
      * The retain rule.
      */
     RetainRule?: RetainRule;
+    /**
+     * Enable fast snapshot restore.
+     */
+    FastRestoreRule?: FastRestoreRule;
   }
   export type ScheduleList = Schedule[];
   export type ScheduleName = string;

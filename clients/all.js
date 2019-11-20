@@ -198,5 +198,6 @@ module.exports = {
   SSOOIDC: require('./ssooidc'),
   MarketplaceCatalog: require('./marketplacecatalog'),
   DataExchange: require('./dataexchange'),
-  SESV2: require('./sesv2')
+  SESV2: require('./sesv2'),
+  MigrationHubConfig: require('./migrationhubconfig')
 };

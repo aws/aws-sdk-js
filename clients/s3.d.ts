@@ -1795,6 +1795,14 @@ declare namespace S3 {
      * A container that provides information about encryption. If SourceSelectionCriteria is specified, you must specify this element.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     *  A container specifying the time when all objects and operations on objects are replicated. Must be specified together with a Metrics block. 
+     */
+    ReplicationTime?: ReplicationTime;
+    /**
+     *  A container specifying replication metrics-related information, including whether emitting metrics and Amazon S3 events for replication are enabled. In addition, contains configurations related to specific metrics or events. Must be specified together with a ReplicationTime block. 
+     */
+    Metrics?: Metrics;
   }
   export type DisplayName = string;
   export type ETag = string;
@@ -1849,7 +1857,7 @@ declare namespace S3 {
     Key: ObjectKey;
   }
   export type Errors = Error[];
-  export type Event = "s3:ReducedRedundancyLostObject"|"s3:ObjectCreated:*"|"s3:ObjectCreated:Put"|"s3:ObjectCreated:Post"|"s3:ObjectCreated:Copy"|"s3:ObjectCreated:CompleteMultipartUpload"|"s3:ObjectRemoved:*"|"s3:ObjectRemoved:Delete"|"s3:ObjectRemoved:DeleteMarkerCreated"|"s3:ObjectRestore:Post"|"s3:ObjectRestore:Completed"|string;
+  export type Event = "s3:ReducedRedundancyLostObject"|"s3:ObjectCreated:*"|"s3:ObjectCreated:Put"|"s3:ObjectCreated:Post"|"s3:ObjectCreated:Copy"|"s3:ObjectCreated:CompleteMultipartUpload"|"s3:ObjectRemoved:*"|"s3:ObjectRemoved:Delete"|"s3:ObjectRemoved:DeleteMarkerCreated"|"s3:ObjectRestore:*"|"s3:ObjectRestore:Post"|"s3:ObjectRestore:Completed"|"s3:Replication:*"|"s3:Replication:OperationFailedReplication"|"s3:Replication:OperationNotTracked"|"s3:Replication:OperationMissedThreshold"|"s3:Replication:OperationReplicatedAfterThreshold"|string;
   export type EventList = Event[];
   export interface ExistingObjectReplication {
     /**
@@ -3434,6 +3442,16 @@ declare namespace S3 {
   }
   export type MetadataKey = string;
   export type MetadataValue = string;
+  export interface Metrics {
+    /**
+     *  Specifies whether the replication metrics are enabled. 
+     */
+    Status: MetricsStatus;
+    /**
+     *  A container specifying the time threshold for emitting the s3:Replication:OperationMissedThreshold event. 
+     */
+    EventThreshold: ReplicationTimeValue;
+  }
   export interface MetricsAndOperator {
     /**
      * The prefix used when evaluating an AND predicate.
@@ -3470,6 +3488,8 @@ declare namespace S3 {
     And?: MetricsAndOperator;
   }
   export type MetricsId = string;
+  export type MetricsStatus = "Enabled"|"Disabled"|string;
+  export type Minutes = number;
   export type MissingMeta = number;
   export interface MultipartUpload {
     /**
@@ -4505,6 +4525,23 @@ declare namespace S3 {
   export type ReplicationRuleStatus = "Enabled"|"Disabled"|string;
   export type ReplicationRules = ReplicationRule[];
   export type ReplicationStatus = "COMPLETE"|"PENDING"|"FAILED"|"REPLICA"|string;
+  export interface ReplicationTime {
+    /**
+     *  Specifies whether the replication time is enabled. 
+     */
+    Status: ReplicationTimeStatus;
+    /**
+     *  A container specifying the time by which replication should complete for all objects and operations on objects. 
+     */
+    Time: ReplicationTimeValue;
+  }
+  export type ReplicationTimeStatus = "Enabled"|"Disabled"|string;
+  export interface ReplicationTimeValue {
+    /**
+     *  Contains an integer specifying time in minutes. 
+     */
+    Minutes?: Minutes;
+  }
   export type RequestCharged = "requester"|string;
   export type RequestPayer = "requester"|string;
   export interface RequestPaymentConfiguration {

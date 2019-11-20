@@ -144,7 +144,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Defines a file system on an Server Message Block (SMB) server that can be read from or written to</p>"
+      "documentation": "<p>Defines a file system on an Server Message Block (SMB) server that can be read from or written to.</p>"
     },
     "CreateTask": {
       "name": "CreateTask",
@@ -739,7 +739,7 @@
       "members": {
         "Subdirectory": {
           "shape": "Subdirectory",
-          "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.</p>"
+          "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note>"
         },
         "EfsFilesystemArn": {
           "shape": "EfsFilesystemArn",
@@ -858,7 +858,7 @@
       "members": {
         "Subdirectory": {
           "shape": "NonEmptySubdirectory",
-          "documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>"
+          "documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>"
         },
         "ServerHostname": {
           "shape": "ServerHostname",
@@ -931,6 +931,10 @@
         "Excludes": {
           "shape": "FilterList",
           "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code> </p> <p> </p>"
+        },
+        "Schedule": {
+          "shape": "TaskSchedule",
+          "documentation": "<p>Specifies a schedule used to periodically transfer files from a source to a destination location. The schedule should be specified in UTC time. For more information, see <a>task-scheduling</a>.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1330,6 +1334,10 @@
           "shape": "FilterList",
           "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code> </p> <p> </p>"
         },
+        "Schedule": {
+          "shape": "TaskSchedule",
+          "documentation": "<p>The schedule used to periodically transfer files from a source to a destination location.</p>"
+        },
         "ErrorCode": {
           "shape": "string",
           "documentation": "<p>Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.</p>"
@@ -1406,7 +1414,8 @@
       "type": "string",
       "enum": [
         "PUBLIC",
-        "PRIVATE_LINK"
+        "PRIVATE_LINK",
+        "FIPS"
       ]
     },
     "FilterList": {
@@ -1688,7 +1697,7 @@
     "NonEmptySubdirectory": {
       "type": "string",
       "max": 4096,
-      "pattern": "^[a-zA-Z0-9_\\-\\./]+$"
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]+$"
     },
     "OnPremConfig": {
       "type": "structure",
@@ -1748,7 +1757,7 @@
         },
         "TaskQueueing": {
           "shape": "TaskQueueing",
-          "documentation": "<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>Enabled</code>, the tasks will queued. The default is <code>Enabled</code>.</p> <p>If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see <a>task-queue</a>.</p>"
+          "documentation": "<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p> <p>If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see <a>queue-task-execution</a>.</p>"
         }
       },
       "documentation": "<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don't specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>"
@@ -1788,7 +1797,6 @@
       "type": "string",
       "enum": [
         "NONE",
-        "BEST_EFFORT",
         "PRESERVE"
       ]
     },
@@ -1857,6 +1865,11 @@
         "DEEP_ARCHIVE"
       ]
     },
+    "ScheduleExpressionCron": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^[a-zA-Z0-9\\ \\_\\*\\?\\,\\|\\^\\-\\/\\#\\s\\(\\)\\+]*$"
+    },
     "ServerHostname": {
       "type": "string",
       "max": 255,
@@ -1880,12 +1893,13 @@
     "SmbPassword": {
       "type": "string",
       "max": 104,
-      "pattern": "^.{0,104}$"
+      "pattern": "^.{0,104}$",
+      "sensitive": true
     },
     "SmbUser": {
       "type": "string",
       "max": 104,
-      "pattern": "^[^\\\\x5B\\\\x5D\\\\/:;|=,+*?]{1,104}$"
+      "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$"
     },
     "SmbVersion": {
       "type": "string",
@@ -1934,7 +1948,7 @@
     "Subdirectory": {
       "type": "string",
       "max": 4096,
-      "pattern": "^[a-zA-Z0-9_\\-\\./]*$"
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"
     },
     "TagKey": {
       "type": "string",
@@ -2049,6 +2063,10 @@
           "shape": "PhaseStatus",
           "documentation": "<p>The status of the PREPARING phase.</p>"
         },
+        "TotalDuration": {
+          "shape": "Duration",
+          "documentation": "<p>The total time in milliseconds that AWS DataSync took to transfer the file from the source to the destination location.</p>"
+        },
         "TransferDuration": {
           "shape": "Duration",
           "documentation": "<p>The total time in milliseconds that AWS DataSync spent in the TRANSFERRING phase.</p>"
@@ -2118,6 +2136,19 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "TaskSchedule": {
+      "type": "structure",
+      "required": [
+        "ScheduleExpression"
+      ],
+      "members": {
+        "ScheduleExpression": {
+          "shape": "ScheduleExpressionCron",
+          "documentation": "<p>A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location. </p>"
+        }
+      },
+      "documentation": "<p>Specifies the schedule you want your task to use for repeated executions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule Expressions for Rules</a>.</p>"
     },
     "TaskStatus": {
       "type": "string",
@@ -2200,6 +2231,10 @@
         "Excludes": {
           "shape": "FilterList",
           "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code> </p> <p> </p>"
+        },
+        "Schedule": {
+          "shape": "TaskSchedule",
+          "documentation": "<p>Specifies a schedule used to periodically transfer files from a source to a destination location. You can configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day or hour you want the task to execute. The time you specify is UTC time. For more information, see <a>task-scheduling</a>.</p>"
         },
         "Name": {
           "shape": "TagValue",

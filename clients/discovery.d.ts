@@ -574,7 +574,7 @@ declare namespace Discovery {
   }
   export interface DescribeExportConfigurationsRequest {
     /**
-     * A list of continuous export ids to search for.
+     * A list of continuous export IDs to search for.
      */
     exportIds?: ExportIds;
     /**

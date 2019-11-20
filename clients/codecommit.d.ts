@@ -12,6 +12,22 @@ declare class CodeCommit extends Service {
   constructor(options?: CodeCommit.Types.ClientConfiguration)
   config: Config & CodeCommit.Types.ClientConfiguration;
   /**
+   * Creates an association between an approval rule template and a specified repository. Then, the next time a pull request is created in the repository where the destination reference (if specified) matches the destination reference (branch) for the pull request, an approval rule that matches the template conditions is automatically created for that pull request. If no destination references are specified in the template, an approval rule that matches the template contents is created for all pull requests in that repository.
+   */
+  associateApprovalRuleTemplateWithRepository(params: CodeCommit.Types.AssociateApprovalRuleTemplateWithRepositoryInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates an association between an approval rule template and a specified repository. Then, the next time a pull request is created in the repository where the destination reference (if specified) matches the destination reference (branch) for the pull request, an approval rule that matches the template conditions is automatically created for that pull request. If no destination references are specified in the template, an approval rule that matches the template contents is created for all pull requests in that repository.
+   */
+  associateApprovalRuleTemplateWithRepository(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates an association between an approval rule template and one or more specified repositories. 
+   */
+  batchAssociateApprovalRuleTemplateWithRepositories(params: CodeCommit.Types.BatchAssociateApprovalRuleTemplateWithRepositoriesInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput) => void): Request<CodeCommit.Types.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput, AWSError>;
+  /**
+   * Creates an association between an approval rule template and one or more specified repositories. 
+   */
+  batchAssociateApprovalRuleTemplateWithRepositories(callback?: (err: AWSError, data: CodeCommit.Types.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput) => void): Request<CodeCommit.Types.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput, AWSError>;
+  /**
    * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
    */
   batchDescribeMergeConflicts(params: CodeCommit.Types.BatchDescribeMergeConflictsInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchDescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.BatchDescribeMergeConflictsOutput, AWSError>;
@@ -19,6 +35,14 @@ declare class CodeCommit extends Service {
    * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
    */
   batchDescribeMergeConflicts(callback?: (err: AWSError, data: CodeCommit.Types.BatchDescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.BatchDescribeMergeConflictsOutput, AWSError>;
+  /**
+   * Removes the association between an approval rule template and one or more specified repositories. 
+   */
+  batchDisassociateApprovalRuleTemplateFromRepositories(params: CodeCommit.Types.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput) => void): Request<CodeCommit.Types.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, AWSError>;
+  /**
+   * Removes the association between an approval rule template and one or more specified repositories. 
+   */
+  batchDisassociateApprovalRuleTemplateFromRepositories(callback?: (err: AWSError, data: CodeCommit.Types.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput) => void): Request<CodeCommit.Types.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, AWSError>;
   /**
    * Returns information about the contents of one or more commits in a repository.
    */
@@ -28,19 +52,27 @@ declare class CodeCommit extends Service {
    */
   batchGetCommits(callback?: (err: AWSError, data: CodeCommit.Types.BatchGetCommitsOutput) => void): Request<CodeCommit.Types.BatchGetCommitsOutput, AWSError>;
   /**
-   * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
+   * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage. 
    */
   batchGetRepositories(params: CodeCommit.Types.BatchGetRepositoriesInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
   /**
-   * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
+   * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage. 
    */
   batchGetRepositories(callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
   /**
-   * Creates a new branch in a repository and points the branch to a commit.  Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation. 
+   * Creates a template for approval rules that can then be associated with one or more repositories in your AWS account. When you associate a template with a repository, AWS CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see AssociateApprovalRuleTemplateWithRepository.
+   */
+  createApprovalRuleTemplate(params: CodeCommit.Types.CreateApprovalRuleTemplateInput, callback?: (err: AWSError, data: CodeCommit.Types.CreateApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.CreateApprovalRuleTemplateOutput, AWSError>;
+  /**
+   * Creates a template for approval rules that can then be associated with one or more repositories in your AWS account. When you associate a template with a repository, AWS CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see AssociateApprovalRuleTemplateWithRepository.
+   */
+  createApprovalRuleTemplate(callback?: (err: AWSError, data: CodeCommit.Types.CreateApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.CreateApprovalRuleTemplateOutput, AWSError>;
+  /**
+   * Creates a branch in a repository and points the branch to a commit.  Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation. 
    */
   createBranch(params: CodeCommit.Types.CreateBranchInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a new branch in a repository and points the branch to a commit.  Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation. 
+   * Creates a branch in a repository and points the branch to a commit.  Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation. 
    */
   createBranch(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -60,6 +92,14 @@ declare class CodeCommit extends Service {
    */
   createPullRequest(callback?: (err: AWSError, data: CodeCommit.Types.CreatePullRequestOutput) => void): Request<CodeCommit.Types.CreatePullRequestOutput, AWSError>;
   /**
+   * Creates an approval rule for a pull request.
+   */
+  createPullRequestApprovalRule(params: CodeCommit.Types.CreatePullRequestApprovalRuleInput, callback?: (err: AWSError, data: CodeCommit.Types.CreatePullRequestApprovalRuleOutput) => void): Request<CodeCommit.Types.CreatePullRequestApprovalRuleOutput, AWSError>;
+  /**
+   * Creates an approval rule for a pull request.
+   */
+  createPullRequestApprovalRule(callback?: (err: AWSError, data: CodeCommit.Types.CreatePullRequestApprovalRuleOutput) => void): Request<CodeCommit.Types.CreatePullRequestApprovalRuleOutput, AWSError>;
+  /**
    * Creates a new, empty repository.
    */
   createRepository(params: CodeCommit.Types.CreateRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.CreateRepositoryOutput) => void): Request<CodeCommit.Types.CreateRepositoryOutput, AWSError>;
@@ -68,13 +108,21 @@ declare class CodeCommit extends Service {
    */
   createRepository(callback?: (err: AWSError, data: CodeCommit.Types.CreateRepositoryOutput) => void): Request<CodeCommit.Types.CreateRepositoryOutput, AWSError>;
   /**
-   * Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy, as that strategy does not create a merge commit.  This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
+   * Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy because that strategy does not create a merge commit.  This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
    */
   createUnreferencedMergeCommit(params: CodeCommit.Types.CreateUnreferencedMergeCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.CreateUnreferencedMergeCommitOutput) => void): Request<CodeCommit.Types.CreateUnreferencedMergeCommitOutput, AWSError>;
   /**
-   * Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy, as that strategy does not create a merge commit.  This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
+   * Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy because that strategy does not create a merge commit.  This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
    */
   createUnreferencedMergeCommit(callback?: (err: AWSError, data: CodeCommit.Types.CreateUnreferencedMergeCommitOutput) => void): Request<CodeCommit.Types.CreateUnreferencedMergeCommitOutput, AWSError>;
+  /**
+   * Deletes a specified approval rule template. Deleting a template does not remove approval rules on pull requests already created with the template.
+   */
+  deleteApprovalRuleTemplate(params: CodeCommit.Types.DeleteApprovalRuleTemplateInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.DeleteApprovalRuleTemplateOutput, AWSError>;
+  /**
+   * Deletes a specified approval rule template. Deleting a template does not remove approval rules on pull requests already created with the template.
+   */
+  deleteApprovalRuleTemplate(callback?: (err: AWSError, data: CodeCommit.Types.DeleteApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.DeleteApprovalRuleTemplateOutput, AWSError>;
   /**
    * Deletes a branch from a repository, unless that branch is the default branch for the repository. 
    */
@@ -92,27 +140,35 @@ declare class CodeCommit extends Service {
    */
   deleteCommentContent(callback?: (err: AWSError, data: CodeCommit.Types.DeleteCommentContentOutput) => void): Request<CodeCommit.Types.DeleteCommentContentOutput, AWSError>;
   /**
-   * Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file will still exist in the commits prior to the commit that contains the deletion.
+   * Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file still exists in the commits earlier to the commit that contains the deletion.
    */
   deleteFile(params: CodeCommit.Types.DeleteFileInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteFileOutput) => void): Request<CodeCommit.Types.DeleteFileOutput, AWSError>;
   /**
-   * Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file will still exist in the commits prior to the commit that contains the deletion.
+   * Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file still exists in the commits earlier to the commit that contains the deletion.
    */
   deleteFile(callback?: (err: AWSError, data: CodeCommit.Types.DeleteFileOutput) => void): Request<CodeCommit.Types.DeleteFileOutput, AWSError>;
   /**
-   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
+   * Deletes an approval rule from a specified pull request. Approval rules can be deleted from a pull request only if the pull request is open, and if the approval rule was created specifically for a pull request and not generated from an approval rule template associated with the repository where the pull request was created. You cannot delete an approval rule from a merged or closed pull request.
+   */
+  deletePullRequestApprovalRule(params: CodeCommit.Types.DeletePullRequestApprovalRuleInput, callback?: (err: AWSError, data: CodeCommit.Types.DeletePullRequestApprovalRuleOutput) => void): Request<CodeCommit.Types.DeletePullRequestApprovalRuleOutput, AWSError>;
+  /**
+   * Deletes an approval rule from a specified pull request. Approval rules can be deleted from a pull request only if the pull request is open, and if the approval rule was created specifically for a pull request and not generated from an approval rule template associated with the repository where the pull request was created. You cannot delete an approval rule from a merged or closed pull request.
+   */
+  deletePullRequestApprovalRule(callback?: (err: AWSError, data: CodeCommit.Types.DeletePullRequestApprovalRuleOutput) => void): Request<CodeCommit.Types.DeletePullRequestApprovalRuleOutput, AWSError>;
+  /**
+   * Deletes a repository. If a specified repository was already deleted, a null repository ID is returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository fail. 
    */
   deleteRepository(params: CodeCommit.Types.DeleteRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
   /**
-   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
+   * Deletes a repository. If a specified repository was already deleted, a null repository ID is returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository fail. 
    */
   deleteRepository(callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
   /**
-   * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception will be thrown.
+   * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception is thrown.
    */
   describeMergeConflicts(params: CodeCommit.Types.DescribeMergeConflictsInput, callback?: (err: AWSError, data: CodeCommit.Types.DescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.DescribeMergeConflictsOutput, AWSError>;
   /**
-   * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception will be thrown.
+   * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception is thrown.
    */
   describeMergeConflicts(callback?: (err: AWSError, data: CodeCommit.Types.DescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.DescribeMergeConflictsOutput, AWSError>;
   /**
@@ -124,11 +180,35 @@ declare class CodeCommit extends Service {
    */
   describePullRequestEvents(callback?: (err: AWSError, data: CodeCommit.Types.DescribePullRequestEventsOutput) => void): Request<CodeCommit.Types.DescribePullRequestEventsOutput, AWSError>;
   /**
-   * Returns the base-64 encoded content of an individual blob within a repository.
+   * Removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository. This does not delete any approval rules previously created for pull requests through the template association.
+   */
+  disassociateApprovalRuleTemplateFromRepository(params: CodeCommit.Types.DisassociateApprovalRuleTemplateFromRepositoryInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository. This does not delete any approval rules previously created for pull requests through the template association.
+   */
+  disassociateApprovalRuleTemplateFromRepository(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Evaluates whether a pull request has met all the conditions specified in its associated approval rules.
+   */
+  evaluatePullRequestApprovalRules(params: CodeCommit.Types.EvaluatePullRequestApprovalRulesInput, callback?: (err: AWSError, data: CodeCommit.Types.EvaluatePullRequestApprovalRulesOutput) => void): Request<CodeCommit.Types.EvaluatePullRequestApprovalRulesOutput, AWSError>;
+  /**
+   * Evaluates whether a pull request has met all the conditions specified in its associated approval rules.
+   */
+  evaluatePullRequestApprovalRules(callback?: (err: AWSError, data: CodeCommit.Types.EvaluatePullRequestApprovalRulesOutput) => void): Request<CodeCommit.Types.EvaluatePullRequestApprovalRulesOutput, AWSError>;
+  /**
+   * Returns information about a specified approval rule template.
+   */
+  getApprovalRuleTemplate(params: CodeCommit.Types.GetApprovalRuleTemplateInput, callback?: (err: AWSError, data: CodeCommit.Types.GetApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.GetApprovalRuleTemplateOutput, AWSError>;
+  /**
+   * Returns information about a specified approval rule template.
+   */
+  getApprovalRuleTemplate(callback?: (err: AWSError, data: CodeCommit.Types.GetApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.GetApprovalRuleTemplateOutput, AWSError>;
+  /**
+   * Returns the base-64 encoded content of an individual blob in a repository.
    */
   getBlob(params: CodeCommit.Types.GetBlobInput, callback?: (err: AWSError, data: CodeCommit.Types.GetBlobOutput) => void): Request<CodeCommit.Types.GetBlobOutput, AWSError>;
   /**
-   * Returns the base-64 encoded content of an individual blob within a repository.
+   * Returns the base-64 encoded content of an individual blob in a repository.
    */
   getBlob(callback?: (err: AWSError, data: CodeCommit.Types.GetBlobOutput) => void): Request<CodeCommit.Types.GetBlobOutput, AWSError>;
   /**
@@ -172,11 +252,11 @@ declare class CodeCommit extends Service {
    */
   getCommit(callback?: (err: AWSError, data: CodeCommit.Types.GetCommitOutput) => void): Request<CodeCommit.Types.GetCommitOutput, AWSError>;
   /**
-   * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.
+   * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can be limited to a specified path.
    */
   getDifferences(params: CodeCommit.Types.GetDifferencesInput, callback?: (err: AWSError, data: CodeCommit.Types.GetDifferencesOutput) => void): Request<CodeCommit.Types.GetDifferencesOutput, AWSError>;
   /**
-   * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.
+   * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can be limited to a specified path.
    */
   getDifferences(callback?: (err: AWSError, data: CodeCommit.Types.GetDifferencesOutput) => void): Request<CodeCommit.Types.GetDifferencesOutput, AWSError>;
   /**
@@ -212,11 +292,11 @@ declare class CodeCommit extends Service {
    */
   getMergeConflicts(callback?: (err: AWSError, data: CodeCommit.Types.GetMergeConflictsOutput) => void): Request<CodeCommit.Types.GetMergeConflictsOutput, AWSError>;
   /**
-   * Returns information about the merge options available for merging two specified branches. For details about why a particular merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
+   * Returns information about the merge options available for merging two specified branches. For details about why a merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
    */
   getMergeOptions(params: CodeCommit.Types.GetMergeOptionsInput, callback?: (err: AWSError, data: CodeCommit.Types.GetMergeOptionsOutput) => void): Request<CodeCommit.Types.GetMergeOptionsOutput, AWSError>;
   /**
-   * Returns information about the merge options available for merging two specified branches. For details about why a particular merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
+   * Returns information about the merge options available for merging two specified branches. For details about why a merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
    */
   getMergeOptions(callback?: (err: AWSError, data: CodeCommit.Types.GetMergeOptionsOutput) => void): Request<CodeCommit.Types.GetMergeOptionsOutput, AWSError>;
   /**
@@ -228,11 +308,27 @@ declare class CodeCommit extends Service {
    */
   getPullRequest(callback?: (err: AWSError, data: CodeCommit.Types.GetPullRequestOutput) => void): Request<CodeCommit.Types.GetPullRequestOutput, AWSError>;
   /**
-   * Returns information about a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
+   * Gets information about the approval states for a specified pull request. Approval states only apply to pull requests that have one or more approval rules applied to them.
+   */
+  getPullRequestApprovalStates(params: CodeCommit.Types.GetPullRequestApprovalStatesInput, callback?: (err: AWSError, data: CodeCommit.Types.GetPullRequestApprovalStatesOutput) => void): Request<CodeCommit.Types.GetPullRequestApprovalStatesOutput, AWSError>;
+  /**
+   * Gets information about the approval states for a specified pull request. Approval states only apply to pull requests that have one or more approval rules applied to them.
+   */
+  getPullRequestApprovalStates(callback?: (err: AWSError, data: CodeCommit.Types.GetPullRequestApprovalStatesOutput) => void): Request<CodeCommit.Types.GetPullRequestApprovalStatesOutput, AWSError>;
+  /**
+   * Returns information about whether approval rules have been set aside (overridden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.
+   */
+  getPullRequestOverrideState(params: CodeCommit.Types.GetPullRequestOverrideStateInput, callback?: (err: AWSError, data: CodeCommit.Types.GetPullRequestOverrideStateOutput) => void): Request<CodeCommit.Types.GetPullRequestOverrideStateOutput, AWSError>;
+  /**
+   * Returns information about whether approval rules have been set aside (overridden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.
+   */
+  getPullRequestOverrideState(callback?: (err: AWSError, data: CodeCommit.Types.GetPullRequestOverrideStateOutput) => void): Request<CodeCommit.Types.GetPullRequestOverrideStateOutput, AWSError>;
+  /**
+   * Returns information about a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage. 
    */
   getRepository(params: CodeCommit.Types.GetRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryOutput) => void): Request<CodeCommit.Types.GetRepositoryOutput, AWSError>;
   /**
-   * Returns information about a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
+   * Returns information about a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage. 
    */
   getRepository(callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryOutput) => void): Request<CodeCommit.Types.GetRepositoryOutput, AWSError>;
   /**
@@ -243,6 +339,22 @@ declare class CodeCommit extends Service {
    * Gets information about triggers configured for a repository.
    */
   getRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryTriggersOutput) => void): Request<CodeCommit.Types.GetRepositoryTriggersOutput, AWSError>;
+  /**
+   * Lists all approval rule templates in the specified AWS Region in your AWS account. If an AWS Region is not specified, the AWS Region where you are signed in is used.
+   */
+  listApprovalRuleTemplates(params: CodeCommit.Types.ListApprovalRuleTemplatesInput, callback?: (err: AWSError, data: CodeCommit.Types.ListApprovalRuleTemplatesOutput) => void): Request<CodeCommit.Types.ListApprovalRuleTemplatesOutput, AWSError>;
+  /**
+   * Lists all approval rule templates in the specified AWS Region in your AWS account. If an AWS Region is not specified, the AWS Region where you are signed in is used.
+   */
+  listApprovalRuleTemplates(callback?: (err: AWSError, data: CodeCommit.Types.ListApprovalRuleTemplatesOutput) => void): Request<CodeCommit.Types.ListApprovalRuleTemplatesOutput, AWSError>;
+  /**
+   * Lists all approval rule templates that are associated with a specified repository.
+   */
+  listAssociatedApprovalRuleTemplatesForRepository(params: CodeCommit.Types.ListAssociatedApprovalRuleTemplatesForRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.ListAssociatedApprovalRuleTemplatesForRepositoryOutput) => void): Request<CodeCommit.Types.ListAssociatedApprovalRuleTemplatesForRepositoryOutput, AWSError>;
+  /**
+   * Lists all approval rule templates that are associated with a specified repository.
+   */
+  listAssociatedApprovalRuleTemplatesForRepository(callback?: (err: AWSError, data: CodeCommit.Types.ListAssociatedApprovalRuleTemplatesForRepositoryOutput) => void): Request<CodeCommit.Types.ListAssociatedApprovalRuleTemplatesForRepositoryOutput, AWSError>;
   /**
    * Gets information about one or more branches in a repository.
    */
@@ -267,6 +379,14 @@ declare class CodeCommit extends Service {
    * Gets information about one or more repositories.
    */
   listRepositories(callback?: (err: AWSError, data: CodeCommit.Types.ListRepositoriesOutput) => void): Request<CodeCommit.Types.ListRepositoriesOutput, AWSError>;
+  /**
+   * Lists all repositories associated with the specified approval rule template.
+   */
+  listRepositoriesForApprovalRuleTemplate(params: CodeCommit.Types.ListRepositoriesForApprovalRuleTemplateInput, callback?: (err: AWSError, data: CodeCommit.Types.ListRepositoriesForApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.ListRepositoriesForApprovalRuleTemplateOutput, AWSError>;
+  /**
+   * Lists all repositories associated with the specified approval rule template.
+   */
+  listRepositoriesForApprovalRuleTemplate(callback?: (err: AWSError, data: CodeCommit.Types.ListRepositoriesForApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.ListRepositoriesForApprovalRuleTemplateOutput, AWSError>;
   /**
    * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
    */
@@ -324,6 +444,14 @@ declare class CodeCommit extends Service {
    */
   mergePullRequestByThreeWay(callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByThreeWayOutput) => void): Request<CodeCommit.Types.MergePullRequestByThreeWayOutput, AWSError>;
   /**
+   * Sets aside (overrides) all approval rule requirements for a specified pull request.
+   */
+  overridePullRequestApprovalRules(params: CodeCommit.Types.OverridePullRequestApprovalRulesInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets aside (overrides) all approval rule requirements for a specified pull request.
+   */
+  overridePullRequestApprovalRules(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Posts a comment on the comparison between two commits.
    */
   postCommentForComparedCommit(params: CodeCommit.Types.PostCommentForComparedCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.PostCommentForComparedCommitOutput) => void): Request<CodeCommit.Types.PostCommentForComparedCommitOutput, AWSError>;
@@ -356,11 +484,11 @@ declare class CodeCommit extends Service {
    */
   putFile(callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
   /**
-   * Replaces all triggers for a repository. This can be used to create or delete triggers.
+   * Replaces all triggers for a repository. Used to create or delete triggers.
    */
   putRepositoryTriggers(params: CodeCommit.Types.PutRepositoryTriggersInput, callback?: (err: AWSError, data: CodeCommit.Types.PutRepositoryTriggersOutput) => void): Request<CodeCommit.Types.PutRepositoryTriggersOutput, AWSError>;
   /**
-   * Replaces all triggers for a repository. This can be used to create or delete triggers.
+   * Replaces all triggers for a repository. Used to create or delete triggers.
    */
   putRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.PutRepositoryTriggersOutput) => void): Request<CodeCommit.Types.PutRepositoryTriggersOutput, AWSError>;
   /**
@@ -372,11 +500,11 @@ declare class CodeCommit extends Service {
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.
+   * Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test sends data from the last commit. If no data is available, sample data is generated.
    */
   testRepositoryTriggers(params: CodeCommit.Types.TestRepositoryTriggersInput, callback?: (err: AWSError, data: CodeCommit.Types.TestRepositoryTriggersOutput) => void): Request<CodeCommit.Types.TestRepositoryTriggersOutput, AWSError>;
   /**
-   * Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.
+   * Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test sends data from the last commit. If no data is available, sample data is generated.
    */
   testRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.TestRepositoryTriggersOutput) => void): Request<CodeCommit.Types.TestRepositoryTriggersOutput, AWSError>;
   /**
@@ -387,6 +515,30 @@ declare class CodeCommit extends Service {
    * Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the content of an approval rule template. You can change the number of required approvals, the membership of the approval rule, and whether an approval pool is defined.
+   */
+  updateApprovalRuleTemplateContent(params: CodeCommit.Types.UpdateApprovalRuleTemplateContentInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdateApprovalRuleTemplateContentOutput) => void): Request<CodeCommit.Types.UpdateApprovalRuleTemplateContentOutput, AWSError>;
+  /**
+   * Updates the content of an approval rule template. You can change the number of required approvals, the membership of the approval rule, and whether an approval pool is defined.
+   */
+  updateApprovalRuleTemplateContent(callback?: (err: AWSError, data: CodeCommit.Types.UpdateApprovalRuleTemplateContentOutput) => void): Request<CodeCommit.Types.UpdateApprovalRuleTemplateContentOutput, AWSError>;
+  /**
+   * Updates the description for a specified approval rule template.
+   */
+  updateApprovalRuleTemplateDescription(params: CodeCommit.Types.UpdateApprovalRuleTemplateDescriptionInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdateApprovalRuleTemplateDescriptionOutput) => void): Request<CodeCommit.Types.UpdateApprovalRuleTemplateDescriptionOutput, AWSError>;
+  /**
+   * Updates the description for a specified approval rule template.
+   */
+  updateApprovalRuleTemplateDescription(callback?: (err: AWSError, data: CodeCommit.Types.UpdateApprovalRuleTemplateDescriptionOutput) => void): Request<CodeCommit.Types.UpdateApprovalRuleTemplateDescriptionOutput, AWSError>;
+  /**
+   * Updates the name of a specified approval rule template.
+   */
+  updateApprovalRuleTemplateName(params: CodeCommit.Types.UpdateApprovalRuleTemplateNameInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdateApprovalRuleTemplateNameOutput) => void): Request<CodeCommit.Types.UpdateApprovalRuleTemplateNameOutput, AWSError>;
+  /**
+   * Updates the name of a specified approval rule template.
+   */
+  updateApprovalRuleTemplateName(callback?: (err: AWSError, data: CodeCommit.Types.UpdateApprovalRuleTemplateNameOutput) => void): Request<CodeCommit.Types.UpdateApprovalRuleTemplateNameOutput, AWSError>;
   /**
    * Replaces the contents of a comment.
    */
@@ -403,6 +555,22 @@ declare class CodeCommit extends Service {
    * Sets or changes the default branch name for the specified repository.  If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change. 
    */
   updateDefaultBranch(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the structure of an approval rule created specifically for a pull request. For example, you can change the number of required approvers and the approval pool for approvers. 
+   */
+  updatePullRequestApprovalRuleContent(params: CodeCommit.Types.UpdatePullRequestApprovalRuleContentInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestApprovalRuleContentOutput) => void): Request<CodeCommit.Types.UpdatePullRequestApprovalRuleContentOutput, AWSError>;
+  /**
+   * Updates the structure of an approval rule created specifically for a pull request. For example, you can change the number of required approvers and the approval pool for approvers. 
+   */
+  updatePullRequestApprovalRuleContent(callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestApprovalRuleContentOutput) => void): Request<CodeCommit.Types.UpdatePullRequestApprovalRuleContentOutput, AWSError>;
+  /**
+   * Updates the state of a user's approval on a pull request. The user is derived from the signed-in account when the request is made.
+   */
+  updatePullRequestApprovalState(params: CodeCommit.Types.UpdatePullRequestApprovalStateInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the state of a user's approval on a pull request. The user is derived from the signed-in account when the request is made.
+   */
+  updatePullRequestApprovalState(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Replaces the contents of the description of a pull request.
    */
@@ -428,26 +596,197 @@ declare class CodeCommit extends Service {
    */
   updatePullRequestTitle(callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestTitleOutput) => void): Request<CodeCommit.Types.UpdatePullRequestTitleOutput, AWSError>;
   /**
-   * Sets or changes the comment or description for a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
+   * Sets or changes the comment or description for a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage. 
    */
   updateRepositoryDescription(params: CodeCommit.Types.UpdateRepositoryDescriptionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets or changes the comment or description for a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
+   * Sets or changes the comment or description for a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage. 
    */
   updateRepositoryDescription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Renames a repository. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix ".git" is prohibited. For a full description of the limits on repository names, see Limits in the AWS CodeCommit User Guide.
+   * Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see Limits in the AWS CodeCommit User Guide.
    */
   updateRepositoryName(params: CodeCommit.Types.UpdateRepositoryNameInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Renames a repository. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix ".git" is prohibited. For a full description of the limits on repository names, see Limits in the AWS CodeCommit User Guide.
+   * Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see Limits in the AWS CodeCommit User Guide.
    */
   updateRepositoryName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace CodeCommit {
   export type AccountId = string;
   export type AdditionalData = string;
+  export interface Approval {
+    /**
+     * The Amazon Resource Name (ARN) of the user.
+     */
+    userArn?: Arn;
+    /**
+     * The state of the approval, APPROVE or REVOKE. REVOKE states are not stored.
+     */
+    approvalState?: ApprovalState;
+  }
+  export type ApprovalList = Approval[];
+  export interface ApprovalRule {
+    /**
+     * The system-generated ID of the approval rule.
+     */
+    approvalRuleId?: ApprovalRuleId;
+    /**
+     * The name of the approval rule.
+     */
+    approvalRuleName?: ApprovalRuleName;
+    /**
+     * The content of the approval rule.
+     */
+    approvalRuleContent?: ApprovalRuleContent;
+    /**
+     * The SHA-256 hash signature for the content of the approval rule.
+     */
+    ruleContentSha256?: RuleContentSha256;
+    /**
+     * The date the approval rule was most recently changed, in timestamp format.
+     */
+    lastModifiedDate?: LastModifiedDate;
+    /**
+     * The date the approval rule was created, in timestamp format.
+     */
+    creationDate?: CreationDate;
+    /**
+     * The Amazon Resource Name (ARN) of the user who made the most recent changes to the approval rule.
+     */
+    lastModifiedUser?: Arn;
+    /**
+     * The approval rule template used to create the rule.
+     */
+    originApprovalRuleTemplate?: OriginApprovalRuleTemplate;
+  }
+  export type ApprovalRuleContent = string;
+  export interface ApprovalRuleEventMetadata {
+    /**
+     * The name of the approval rule.
+     */
+    approvalRuleName?: ApprovalRuleName;
+    /**
+     * The system-generated ID of the approval rule.
+     */
+    approvalRuleId?: ApprovalRuleId;
+    /**
+     * The content of the approval rule.
+     */
+    approvalRuleContent?: ApprovalRuleContent;
+  }
+  export type ApprovalRuleId = string;
+  export type ApprovalRuleName = string;
+  export interface ApprovalRuleOverriddenEventMetadata {
+    /**
+     * The revision ID of the pull request when the override event occurred.
+     */
+    revisionId?: RevisionId;
+    /**
+     * The status of the override event.
+     */
+    overrideStatus?: OverrideStatus;
+  }
+  export interface ApprovalRuleTemplate {
+    /**
+     * The system-generated ID of the approval rule template.
+     */
+    approvalRuleTemplateId?: ApprovalRuleTemplateId;
+    /**
+     * The name of the approval rule template.
+     */
+    approvalRuleTemplateName?: ApprovalRuleTemplateName;
+    /**
+     * The description of the approval rule template.
+     */
+    approvalRuleTemplateDescription?: ApprovalRuleTemplateDescription;
+    /**
+     * The content of the approval rule template.
+     */
+    approvalRuleTemplateContent?: ApprovalRuleTemplateContent;
+    /**
+     * The SHA-256 hash signature for the content of the approval rule template.
+     */
+    ruleContentSha256?: RuleContentSha256;
+    /**
+     * The date the approval rule template was most recently changed, in timestamp format.
+     */
+    lastModifiedDate?: LastModifiedDate;
+    /**
+     * The date the approval rule template was created, in timestamp format.
+     */
+    creationDate?: CreationDate;
+    /**
+     * The Amazon Resource Name (ARN) of the user who made the most recent changes to the approval rule template.
+     */
+    lastModifiedUser?: Arn;
+  }
+  export type ApprovalRuleTemplateContent = string;
+  export type ApprovalRuleTemplateDescription = string;
+  export type ApprovalRuleTemplateId = string;
+  export type ApprovalRuleTemplateName = string;
+  export type ApprovalRuleTemplateNameList = ApprovalRuleTemplateName[];
+  export type ApprovalRulesList = ApprovalRule[];
+  export type ApprovalRulesNotSatisfiedList = ApprovalRuleName[];
+  export type ApprovalRulesSatisfiedList = ApprovalRuleName[];
+  export type ApprovalState = "APPROVE"|"REVOKE"|string;
+  export interface ApprovalStateChangedEventMetadata {
+    /**
+     * The revision ID of the pull request when the approval state changed.
+     */
+    revisionId?: RevisionId;
+    /**
+     * The approval status for the pull request.
+     */
+    approvalStatus?: ApprovalState;
+  }
+  export type Approved = boolean;
   export type Arn = string;
+  export interface AssociateApprovalRuleTemplateWithRepositoryInput {
+    /**
+     * The name for the approval rule template. 
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * The name of the repository that you want to associate with the template.
+     */
+    repositoryName: RepositoryName;
+  }
+  export interface BatchAssociateApprovalRuleTemplateWithRepositoriesError {
+    /**
+     * The name of the repository where the association was not made.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * An error code that specifies whether the repository name was not valid or not found.
+     */
+    errorCode?: ErrorCode;
+    /**
+     * An error message that provides details about why the repository name was not found or not valid.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export type BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList = BatchAssociateApprovalRuleTemplateWithRepositoriesError[];
+  export interface BatchAssociateApprovalRuleTemplateWithRepositoriesInput {
+    /**
+     * The name of the template you want to associate with one or more repositories.
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * The names of the repositories you want to associate with the template.  The length constraint limit is for each string in the array. The array itself can be empty. 
+     */
+    repositoryNames: RepositoryNameList;
+  }
+  export interface BatchAssociateApprovalRuleTemplateWithRepositoriesOutput {
+    /**
+     * A list of names of the repositories that have been associated with the template.
+     */
+    associatedRepositoryNames: RepositoryNameList;
+    /**
+     * A list of any errors that might have occurred while attempting to create the association between the template and the repositories.
+     */
+    errors: BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList;
+  }
   export interface BatchDescribeMergeConflictsError {
     /**
      * The path to the file.
@@ -469,11 +808,11 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
@@ -493,15 +832,15 @@ declare namespace CodeCommit {
      */
     filePaths?: FilePaths;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
      */
     nextToken?: NextToken;
   }
@@ -531,6 +870,41 @@ declare namespace CodeCommit {
      */
     baseCommitId?: ObjectId;
   }
+  export interface BatchDisassociateApprovalRuleTemplateFromRepositoriesError {
+    /**
+     * The name of the repository where the association with the template was not able to be removed.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * An error code that specifies whether the repository name was not valid or not found.
+     */
+    errorCode?: ErrorCode;
+    /**
+     * An error message that provides details about why the repository name was either not found or not valid.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export type BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList = BatchDisassociateApprovalRuleTemplateFromRepositoriesError[];
+  export interface BatchDisassociateApprovalRuleTemplateFromRepositoriesInput {
+    /**
+     * The name of the template that you want to disassociate from one or more repositories.
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * The repository names that you want to disassociate from the approval rule template.  The length constraint limit is for each string in the array. The array itself can be empty. 
+     */
+    repositoryNames: RepositoryNameList;
+  }
+  export interface BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput {
+    /**
+     * A list of repository names that have had their association with the template removed.
+     */
+    disassociatedRepositoryNames: RepositoryNameList;
+    /**
+     * A list of any errors that might have occurred while attempting to remove the association between the template and the repositories.
+     */
+    errors: BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList;
+  }
   export interface BatchGetCommitsError {
     /**
      * A commit ID that either could not be found or was not in a valid format.
@@ -548,7 +922,7 @@ declare namespace CodeCommit {
   export type BatchGetCommitsErrorsList = BatchGetCommitsError[];
   export interface BatchGetCommitsInput {
     /**
-     * The full commit IDs of the commits to get information about.  You must supply the full SHAs of each commit. You cannot use shortened SHAs. 
+     * The full commit IDs of the commits to get information about.  You must supply the full SHA IDs of each commit. You cannot use shortened SHA IDs. 
      */
     commitIds: CommitIdsInputList;
     /**
@@ -562,13 +936,13 @@ declare namespace CodeCommit {
      */
     commits?: CommitObjectsList;
     /**
-     * Returns any commit IDs for which information could not be found. For example, if one of the commit IDs was a shortened SHA or that commit was not found in the specified repository, the ID will return an error object with additional information.
+     * Returns any commit IDs for which information could not be found. For example, if one of the commit IDs was a shortened SHA ID or that commit was not found in the specified repository, the ID returns an error object with more information.
      */
     errors?: BatchGetCommitsErrorsList;
   }
   export interface BatchGetRepositoriesInput {
     /**
-     * The names of the repositories to get information about.
+     * The names of the repositories to get information about.  The length constraint limit is for each string in the array. The array itself can be empty. 
      */
     repositoryNames: RepositoryNameList;
   }
@@ -588,7 +962,7 @@ declare namespace CodeCommit {
      */
     blobId?: ObjectId;
     /**
-     * The path to the blob and any associated file name, if any.
+     * The path to the blob and associated file name, if any.
      */
     path?: Path;
     /**
@@ -643,7 +1017,7 @@ declare namespace CodeCommit {
      */
     deleted?: IsCommentDeleted;
     /**
-     * A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.
+     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.
      */
     clientRequestToken?: ClientRequestToken;
   }
@@ -655,23 +1029,23 @@ declare namespace CodeCommit {
      */
     repositoryName?: RepositoryName;
     /**
-     * The full commit ID of the commit used to establish the 'before' of the comparison.
+     * The full commit ID of the commit used to establish the before of the comparison.
      */
     beforeCommitId?: CommitId;
     /**
-     * The full commit ID of the commit used to establish the 'after' of the comparison.
+     * The full commit ID of the commit used to establish the after of the comparison.
      */
     afterCommitId?: CommitId;
     /**
-     * The full blob ID of the commit used to establish the 'before' of the comparison.
+     * The full blob ID of the commit used to establish the before of the comparison.
      */
     beforeBlobId?: ObjectId;
     /**
-     * The full blob ID of the commit used to establish the 'after' of the comparison.
+     * The full blob ID of the commit used to establish the after of the comparison.
      */
     afterBlobId?: ObjectId;
     /**
-     * Location information about the comment on the comparison, including the file name, line number, and whether the version of the file where the comment was made is 'BEFORE' or 'AFTER'.
+     * Location information about the comment on the comparison, including the file name, line number, and whether the version of the file where the comment was made is BEFORE or AFTER.
      */
     location?: Location;
     /**
@@ -690,11 +1064,11 @@ declare namespace CodeCommit {
      */
     repositoryName?: RepositoryName;
     /**
-     * The full commit ID of the commit that was the tip of the destination branch when the pull request was created. This commit will be superceded by the after commit in the source branch when and if you merge the source branch into the destination branch.
+     * The full commit ID of the commit that was the tip of the destination branch when the pull request was created. This commit is superceded by the after commit in the source branch when and if you merge the source branch into the destination branch.
      */
     beforeCommitId?: CommitId;
     /**
-     * he full commit ID of the commit that was the tip of the source branch at the time the comment was made. 
+     * The full commit ID of the commit that was the tip of the source branch at the time the comment was made. 
      */
     afterCommitId?: CommitId;
     /**
@@ -706,7 +1080,7 @@ declare namespace CodeCommit {
      */
     afterBlobId?: ObjectId;
     /**
-     * Location information about the comment on the pull request, including the file name, line number, and whether the version of the file where the comment was made is 'BEFORE' (destination branch) or 'AFTER' (source branch).
+     * Location information about the comment on the pull request, including the file name, line number, and whether the version of the file where the comment was made is BEFORE (destination branch) or AFTER (source branch).
      */
     location?: Location;
     /**
@@ -717,7 +1091,7 @@ declare namespace CodeCommit {
   export type CommentsForPullRequestData = CommentsForPullRequest[];
   export interface Commit {
     /**
-     * The full SHA of the specified commit. 
+     * The full SHA ID of the specified commit. 
      */
     commitId?: ObjectId;
     /**
@@ -741,7 +1115,7 @@ declare namespace CodeCommit {
      */
     committer?: UserInfo;
     /**
-     * Any additional data associated with the specified commit.
+     * Any other data associated with the specified commit.
      */
     additionalData?: AdditionalData;
   }
@@ -805,21 +1179,41 @@ declare namespace CodeCommit {
   export type ConflictMetadataList = ConflictMetadata[];
   export interface ConflictResolution {
     /**
-     * Files that will have content replaced as part of the merge conflict resolution.
+     * Files to have content replaced as part of the merge conflict resolution.
      */
     replaceContents?: ReplaceContentEntries;
     /**
-     * Files that will be deleted as part of the merge conflict resolution.
+     * Files to be deleted as part of the merge conflict resolution.
      */
     deleteFiles?: DeleteFileEntries;
     /**
-     * File modes that will be set as part of the merge conflict resolution.
+     * File modes that are set as part of the merge conflict resolution.
      */
     setFileModes?: SetFileModeEntries;
   }
   export type ConflictResolutionStrategyTypeEnum = "NONE"|"ACCEPT_SOURCE"|"ACCEPT_DESTINATION"|"AUTOMERGE"|string;
   export type Conflicts = Conflict[];
   export type Content = string;
+  export interface CreateApprovalRuleTemplateInput {
+    /**
+     * The name of the approval rule template. Provide descriptive names, because this name is applied to the approval rules created automatically in associated repositories.
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * The content of the approval rule that is created on pull requests in associated repositories. If you specify one or more destination references (branches), approval rules are created in an associated repository only if their destination references (branches) match those specified in the template.  When you create the content of the approval rule template, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account 123456789012 and Mary_Major, all of the following are counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
+     */
+    approvalRuleTemplateContent: ApprovalRuleTemplateContent;
+    /**
+     * The description of the approval rule template. Consider providing a description that explains what this template does and when it might be appropriate to associate it with repositories.
+     */
+    approvalRuleTemplateDescription?: ApprovalRuleTemplateDescription;
+  }
+  export interface CreateApprovalRuleTemplateOutput {
+    /**
+     * The content and structure of the created approval rule template.
+     */
+    approvalRuleTemplate: ApprovalRuleTemplate;
+  }
   export interface CreateBranchInput {
     /**
      * The name of the repository in which you want to create the new branch.
@@ -836,19 +1230,19 @@ declare namespace CodeCommit {
   }
   export interface CreateCommitInput {
     /**
-     * The name of the repository where you will create the commit.
+     * The name of the repository where you create the commit.
      */
     repositoryName: RepositoryName;
     /**
-     * The name of the branch where you will create the commit.
+     * The name of the branch where you create the commit.
      */
     branchName: BranchName;
     /**
-     * The ID of the commit that is the parent of the commit you will create. If this is an empty repository, this is not required.
+     * The ID of the commit that is the parent of the commit you create. Not required if this is an empty repository.
      */
     parentCommitId?: CommitId;
     /**
-     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     * The name of the author who created the commit. This information is used as both the author and committer for the commit.
      */
     authorName?: Name;
     /**
@@ -856,11 +1250,11 @@ declare namespace CodeCommit {
      */
     email?: Email;
     /**
-     * The commit message you want to include as part of creating the commit. Commit messages are limited to 256 KB. If no message is specified, a default message will be used.
+     * The commit message you want to include in the commit. Commit messages are limited to 256 KB. If no message is specified, a default message is used.
      */
     commitMessage?: Message;
     /**
-     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If true, a ..gitkeep file is created for empty folders. The default is false.
      */
     keepEmptyFolders?: KeepEmptyFolders;
     /**
@@ -868,7 +1262,7 @@ declare namespace CodeCommit {
      */
     putFiles?: PutFileEntries;
     /**
-     * The files to delete in this commit. These files will still exist in prior commits.
+     * The files to delete in this commit. These files still exist in earlier commits.
      */
     deleteFiles?: DeleteFileEntries;
     /**
@@ -898,9 +1292,29 @@ declare namespace CodeCommit {
      */
     filesDeleted?: FilesMetadata;
   }
+  export interface CreatePullRequestApprovalRuleInput {
+    /**
+     * The system-generated ID of the pull request for which you want to create the approval rule.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The name for the approval rule.
+     */
+    approvalRuleName: ApprovalRuleName;
+    /**
+     * The content of the approval rule, including the number of approvals needed and the structure of an approval pool defined for approvals, if any. For more information about approval pools, see the AWS CodeCommit User Guide.  When you create the content of the approval rule, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account 123456789012 and Mary_Major, all of the following would be counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
+     */
+    approvalRuleContent: ApprovalRuleContent;
+  }
+  export interface CreatePullRequestApprovalRuleOutput {
+    /**
+     * Information about the created approval rule.
+     */
+    approvalRule: ApprovalRule;
+  }
   export interface CreatePullRequestInput {
     /**
-     * The title of the pull request. This title will be used to identify the pull request to other users in the repository.
+     * The title of the pull request. This title is used to identify the pull request to other users in the repository.
      */
     title: Title;
     /**
@@ -908,11 +1322,11 @@ declare namespace CodeCommit {
      */
     description?: Description;
     /**
-     * The targets for the pull request, including the source of the code to be reviewed (the source branch), and the destination where the creator of the pull request intends the code to be merged after the pull request is closed (the destination branch).
+     * The targets for the pull request, including the source of the code to be reviewed (the source branch) and the destination where the creator of the pull request intends the code to be merged after the pull request is closed (the destination branch).
      */
     targets: TargetList;
     /**
-     * A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.  The AWS SDKs prepopulate client request tokens. If using an AWS SDK, you do not have to generate an idempotency token, as this will be done for you. 
+     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.  The AWS SDKs prepopulate client request tokens. If you are using an AWS SDK, an idempotency token is created for you. 
      */
     clientRequestToken?: ClientRequestToken;
   }
@@ -924,11 +1338,11 @@ declare namespace CodeCommit {
   }
   export interface CreateRepositoryInput {
     /**
-     * The name of the new repository to be created.  The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. For a full description of the limits on repository names, see Limits in the AWS CodeCommit User Guide. The suffix ".git" is prohibited. 
+     * The name of the new repository to be created.  The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. For more information about the limits on repository names, see Limits in the AWS CodeCommit User Guide. The suffix .git is prohibited. 
      */
     repositoryName: RepositoryName;
     /**
-     * A comment or description about the new repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
+     * A comment or description about the new repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage. 
      */
     repositoryDescription?: RepositoryDescription;
     /**
@@ -948,11 +1362,11 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
@@ -960,15 +1374,15 @@ declare namespace CodeCommit {
      */
     mergeOption: MergeOptionTypeEnum;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
     /**
-     * The name of the author who created the unreferenced commit. This information will be used as both the author and committer for the commit.
+     * The name of the author who created the unreferenced commit. This information is used as both the author and committer for the commit.
      */
     authorName?: Name;
     /**
@@ -980,11 +1394,11 @@ declare namespace CodeCommit {
      */
     commitMessage?: Message;
     /**
-     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file is created for empty folders. The default is false.
      */
     keepEmptyFolders?: KeepEmptyFolders;
     /**
-     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     * If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
      */
     conflictResolution?: ConflictResolution;
   }
@@ -1000,6 +1414,18 @@ declare namespace CodeCommit {
   }
   export type CreationDate = Date;
   export type _Date = string;
+  export interface DeleteApprovalRuleTemplateInput {
+    /**
+     * The name of the approval rule template to delete.
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+  }
+  export interface DeleteApprovalRuleTemplateOutput {
+    /**
+     * The system-generated ID of the deleted approval rule template. If the template has been previously deleted, the only response is a 200 OK.
+     */
+    approvalRuleTemplateId: ApprovalRuleTemplateId;
+  }
   export interface DeleteBranchInput {
     /**
      * The name of the repository that contains the branch to be deleted.
@@ -1031,7 +1457,7 @@ declare namespace CodeCommit {
   export type DeleteFileEntries = DeleteFileEntry[];
   export interface DeleteFileEntry {
     /**
-     * The full path of the file that will be deleted, including the name of the file.
+     * The full path of the file to be deleted, including the name of the file.
      */
     filePath: Path;
   }
@@ -1041,31 +1467,31 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The name of the branch where the commit will be made deleting the file.
+     * The name of the branch where the commit that deletes the file is made.
      */
     branchName: BranchName;
     /**
-     * The fully-qualified path to the file that will be deleted, including the full name and extension of that file. For example, /examples/file.md is a fully qualified path to a file named file.md in a folder named examples.
+     * The fully qualified path to the file that to be deleted, including the full name and extension of that file. For example, /examples/file.md is a fully qualified path to a file named file.md in a folder named examples.
      */
     filePath: Path;
     /**
-     * The ID of the commit that is the tip of the branch where you want to create the commit that will delete the file. This must be the HEAD commit for the branch. The commit that deletes the file will be created from this commit ID.
+     * The ID of the commit that is the tip of the branch where you want to create the commit that deletes the file. This must be the HEAD commit for the branch. The commit that deletes the file is created from this commit ID.
      */
     parentCommitId: CommitId;
     /**
-     * Specifies whether to delete the folder or directory that contains the file you want to delete if that file is the only object in the folder or directory. By default, empty folders will be deleted. This includes empty folders that are part of the directory structure. For example, if the path to a file is dir1/dir2/dir3/dir4, and dir2 and dir3 are empty, deleting the last file in dir4 will also delete the empty folders dir4, dir3, and dir2.
+     * If a file is the only object in the folder or directory, specifies whether to delete the folder or directory that contains the file. By default, empty folders are deleted. This includes empty folders that are part of the directory structure. For example, if the path to a file is dir1/dir2/dir3/dir4, and dir2 and dir3 are empty, deleting the last file in dir4 also deletes the empty folders dir4, dir3, and dir2.
      */
     keepEmptyFolders?: KeepEmptyFolders;
     /**
-     * The commit message you want to include as part of deleting the file. Commit messages are limited to 256 KB. If no message is specified, a default message will be used.
+     * The commit message you want to include as part of deleting the file. Commit messages are limited to 256 KB. If no message is specified, a default message is used.
      */
     commitMessage?: Message;
     /**
-     * The name of the author of the commit that deletes the file. If no name is specified, the user's ARN will be used as the author name and committer name.
+     * The name of the author of the commit that deletes the file. If no name is specified, the user's ARN is used as the author name and committer name.
      */
     name?: Name;
     /**
-     * The email address for the commit that deletes the file. If no email address is specified, the email address will be left blank.
+     * The email address for the commit that deletes the file. If no email address is specified, the email address is left blank.
      */
     email?: Email;
   }
@@ -1083,9 +1509,25 @@ declare namespace CodeCommit {
      */
     treeId: ObjectId;
     /**
-     * The fully-qualified path to the file that will be deleted, including the full name and extension of that file.
+     * The fully qualified path to the file to be deleted, including the full name and extension of that file.
      */
     filePath: Path;
+  }
+  export interface DeletePullRequestApprovalRuleInput {
+    /**
+     * The system-generated ID of the pull request that contains the approval rule you want to delete.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The name of the approval rule you want to delete.
+     */
+    approvalRuleName: ApprovalRuleName;
+  }
+  export interface DeletePullRequestApprovalRuleOutput {
+    /**
+     * The ID of the deleted approval rule.   If the approval rule was deleted in an earlier API call, the response is 200 OK without content. 
+     */
+    approvalRuleId: ApprovalRuleId;
   }
   export interface DeleteRepositoryInput {
     /**
@@ -1105,11 +1547,11 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
@@ -1125,15 +1567,15 @@ declare namespace CodeCommit {
      */
     filePath: Path;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
      */
     nextToken?: NextToken;
   }
@@ -1173,15 +1615,15 @@ declare namespace CodeCommit {
      */
     pullRequestEventType?: PullRequestEventType;
     /**
-     * The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
+     * The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with more commits or changing the status of a pull request.
      */
     actorArn?: Arn;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
      */
     nextToken?: NextToken;
     /**
-     * A non-negative integer used to limit the number of returned results. The default is 100 events, which is also the maximum number of events that can be returned in a result.
+     * A non-zero, non-negative integer used to limit the number of returned results. The default is 100 events, which is also the maximum number of events that can be returned in a result.
      */
     maxResults?: MaxResults;
   }
@@ -1211,9 +1653,53 @@ declare namespace CodeCommit {
     changeType?: ChangeTypeEnum;
   }
   export type DifferenceList = Difference[];
+  export interface DisassociateApprovalRuleTemplateFromRepositoryInput {
+    /**
+     * The name of the approval rule template to disassociate from a specified repository.
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * The name of the repository you want to disassociate from the template.
+     */
+    repositoryName: RepositoryName;
+  }
   export type Email = string;
   export type ErrorCode = string;
   export type ErrorMessage = string;
+  export interface EvaluatePullRequestApprovalRulesInput {
+    /**
+     * The system-generated ID of the pull request you want to evaluate.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The system-generated ID for the pull request revision. To retrieve the most recent revision ID for a pull request, use GetPullRequest.
+     */
+    revisionId: RevisionId;
+  }
+  export interface EvaluatePullRequestApprovalRulesOutput {
+    /**
+     * The result of the evaluation, including the names of the rules whose conditions have been met (if any), the names of the rules whose conditions have not been met (if any), whether the pull request is in the approved state, and whether the pull request approval rule has been set aside by an override. 
+     */
+    evaluation: Evaluation;
+  }
+  export interface Evaluation {
+    /**
+     * Whether the state of the pull request is approved.
+     */
+    approved?: Approved;
+    /**
+     * Whether the approval rule requirements for the pull request have been overridden and no longer need to be met.
+     */
+    overridden?: Overridden;
+    /**
+     * The names of the approval rules that have had their conditions met.
+     */
+    approvalRulesSatisfied?: ApprovalRulesSatisfiedList;
+    /**
+     * The names of the approval rules that have not had their conditions met.
+     */
+    approvalRulesNotSatisfied?: ApprovalRulesNotSatisfiedList;
+  }
   export type EventDate = Date;
   export type ExceptionName = string;
   export interface File {
@@ -1222,7 +1708,7 @@ declare namespace CodeCommit {
      */
     blobId?: ObjectId;
     /**
-     * The fully-qualified path to the file in the repository.
+     * The fully qualified path to the file in the repository.
      */
     absolutePath?: Path;
     /**
@@ -1238,7 +1724,7 @@ declare namespace CodeCommit {
   export type FileList = File[];
   export interface FileMetadata {
     /**
-     * The full path to the file that will be added or updated, including the name of the file.
+     * The full path to the file to be added or updated, including the name of the file.
      */
     absolutePath?: Path;
     /**
@@ -1288,7 +1774,7 @@ declare namespace CodeCommit {
      */
     treeId?: ObjectId;
     /**
-     * The fully-qualified path of the folder in the repository.
+     * The fully qualified path of the folder in the repository.
      */
     absolutePath?: Path;
     /**
@@ -1297,6 +1783,18 @@ declare namespace CodeCommit {
     relativePath?: Path;
   }
   export type FolderList = Folder[];
+  export interface GetApprovalRuleTemplateInput {
+    /**
+     * The name of the approval rule template for which you want to get information.
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+  }
+  export interface GetApprovalRuleTemplateOutput {
+    /**
+     * The content and structure of the approval rule template.
+     */
+    approvalRuleTemplate: ApprovalRuleTemplate;
+  }
   export interface GetBlobInput {
     /**
      * The name of the repository that contains the blob.
@@ -1347,11 +1845,11 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * To establish the directionality of the comparison, the full commit ID of the 'before' commit.
+     * To establish the directionality of the comparison, the full commit ID of the before commit.
      */
     beforeCommitId?: CommitId;
     /**
-     * To establish the directionality of the comparison, the full commit ID of the 'after' commit.
+     * To establish the directionality of the comparison, the full commit ID of the after commit.
      */
     afterCommitId: CommitId;
     /**
@@ -1359,7 +1857,7 @@ declare namespace CodeCommit {
      */
     nextToken?: NextToken;
     /**
-     * A non-negative integer used to limit the number of returned results. The default is 100 comments, and is configurable up to 500.
+     * A non-zero, non-negative integer used to limit the number of returned results. The default is 100 comments, but you can configure up to 500.
      */
     maxResults?: MaxResults;
   }
@@ -1391,11 +1889,11 @@ declare namespace CodeCommit {
      */
     afterCommitId?: CommitId;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
      */
     nextToken?: NextToken;
     /**
-     * A non-negative integer used to limit the number of returned results. The default is 100 comments. You can return up to 500 comments with a single request.
+     * A non-zero, non-negative integer used to limit the number of returned results. The default is 100 comments. You can return up to 500 comments with a single request.
      */
     maxResults?: MaxResults;
   }
@@ -1415,7 +1913,7 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The commit ID. Commit IDs are the full SHA of the commit.
+     * The commit ID. Commit IDs are the full SHA ID of the commit.
      */
     commitId: ObjectId;
   }
@@ -1431,7 +1929,7 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, the full commit ID. Optional. If not specified, all changes prior to the afterCommitSpecifier value will be shown. If you do not use beforeCommitSpecifier in your request, consider limiting the results with maxResults.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, the full commit ID). Optional. If not specified, all changes before the afterCommitSpecifier value are shown. If you do not use beforeCommitSpecifier in your request, consider limiting the results with maxResults.
      */
     beforeCommitSpecifier?: CommitName;
     /**
@@ -1439,25 +1937,25 @@ declare namespace CodeCommit {
      */
     afterCommitSpecifier: CommitName;
     /**
-     * The file path in which to check for differences. Limits the results to this path. Can also be used to specify the previous name of a directory or folder. If beforePath and afterPath are not specified, differences will be shown for all paths.
+     * The file path in which to check for differences. Limits the results to this path. Can also be used to specify the previous name of a directory or folder. If beforePath and afterPath are not specified, differences are shown for all paths.
      */
     beforePath?: Path;
     /**
-     * The file path in which to check differences. Limits the results to this path. Can also be used to specify the changed name of a directory or folder, if it has changed. If not specified, differences will be shown for all paths.
+     * The file path in which to check differences. Limits the results to this path. Can also be used to specify the changed name of a directory or folder, if it has changed. If not specified, differences are shown for all paths.
      */
     afterPath?: Path;
     /**
-     * A non-negative integer used to limit the number of returned results.
+     * A non-zero, non-negative integer used to limit the number of returned results.
      */
     MaxResults?: Limit;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
      */
     NextToken?: NextToken;
   }
   export interface GetDifferencesOutput {
     /**
-     * A differences data type object that contains information about the differences, including whether the difference is added, modified, or deleted (A, D, M).
+     * A data type object that contains information about the differences, including whether the difference is added, modified, or deleted (A, D, M).
      */
     differences?: DifferenceList;
     /**
@@ -1471,11 +1969,11 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The fully-quaified reference that identifies the commit that contains the file. For example, you could specify a full commit ID, a tag, a branch name, or a reference such as refs/heads/master. If none is provided, then the head commit will be used.
+     * The fully quaified reference that identifies the commit that contains the file. For example, you can specify a full commit ID, a tag, a branch name, or a reference such as refs/heads/master. If none is provided, the head commit is used.
      */
     commitSpecifier?: CommitName;
     /**
-     * The fully-qualified path to the file, including the full name and extension of the file. For example, /examples/file.md is the fully-qualified path to a file named file.md in a folder named examples.
+     * The fully qualified path to the file, including the full name and extension of the file. For example, /examples/file.md is the fully qualified path to a file named file.md in a folder named examples.
      */
     filePath: Path;
   }
@@ -1489,11 +1987,11 @@ declare namespace CodeCommit {
      */
     blobId: ObjectId;
     /**
-     * The fully qualified path to the specified file. This returns the name and extension of the file.
+     * The fully qualified path to the specified file. Returns the name and extension of the file.
      */
     filePath: Path;
     /**
-     * The extrapolated file mode permissions of the blob. Valid values include strings such as EXECUTABLE and not numeric values.  The file mode permissions returned by this API are not the standard file mode permission values, such as 100644, but rather extrapolated values. See below for a full list of supported return values. 
+     * The extrapolated file mode permissions of the blob. Valid values include strings such as EXECUTABLE and not numeric values.  The file mode permissions returned by this API are not the standard file mode permission values, such as 100644, but rather extrapolated values. See the supported return values. 
      */
     fileMode: FileModeTypeEnum;
     /**
@@ -1511,21 +2009,21 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * A fully-qualified reference used to identify a commit that contains the version of the folder's content to return. A fully-qualified reference can be a commit ID, branch name, tag, or reference such as HEAD. If no specifier is provided, the folder content will be returned as it exists in the HEAD commit.
+     * A fully qualified reference used to identify a commit that contains the version of the folder's content to return. A fully qualified reference can be a commit ID, branch name, tag, or reference such as HEAD. If no specifier is provided, the folder content is returned as it exists in the HEAD commit.
      */
     commitSpecifier?: CommitName;
     /**
-     * The fully-qualified path to the folder whose contents will be returned, including the folder name. For example, /examples is a fully-qualified path to a folder named examples that was created off of the root directory (/) of a repository. 
+     * The fully qualified path to the folder whose contents are returned, including the folder name. For example, /examples is a fully-qualified path to a folder named examples that was created off of the root directory (/) of a repository. 
      */
     folderPath: Path;
   }
   export interface GetFolderOutput {
     /**
-     * The full commit ID used as a reference for which version of the folder content is returned.
+     * The full commit ID used as a reference for the returned version of the folder content.
      */
     commitId: ObjectId;
     /**
-     * The fully-qualified path of the folder whose contents are returned.
+     * The fully qualified path of the folder whose contents are returned.
      */
     folderPath: Path;
     /**
@@ -1533,19 +2031,19 @@ declare namespace CodeCommit {
      */
     treeId?: ObjectId;
     /**
-     * The list of folders that exist beneath the specified folder, if any.
+     * The list of folders that exist under the specified folder, if any.
      */
     subFolders?: FolderList;
     /**
-     * The list of files that exist in the specified folder, if any.
+     * The list of files in the specified folder, if any.
      */
     files?: FileList;
     /**
-     * The list of symbolic links to other files and folders that exist in the specified folder, if any.
+     * The list of symbolic links to other files and folders in the specified folder, if any.
      */
     symbolicLinks?: SymbolicLinkList;
     /**
-     * The list of submodules that exist in the specified folder, if any.
+     * The list of submodules in the specified folder, if any.
      */
     subModules?: SubModuleList;
   }
@@ -1555,19 +2053,19 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
   }
@@ -1585,7 +2083,7 @@ declare namespace CodeCommit {
      */
     baseCommitId?: ObjectId;
     /**
-     * The commit ID for the merge commit created when the source branch was merged into the destination branch. If the fast-forward merge strategy was used, no merge commit exists.
+     * The commit ID for the merge commit created when the source branch was merged into the destination branch. If the fast-forward merge strategy was used, there is no merge commit.
      */
     mergedCommitId?: ObjectId;
   }
@@ -1595,11 +2093,11 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
@@ -1607,7 +2105,7 @@ declare namespace CodeCommit {
      */
     mergeOption: MergeOptionTypeEnum;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
@@ -1615,11 +2113,11 @@ declare namespace CodeCommit {
      */
     maxConflictFiles?: MaxResults;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
      */
     nextToken?: NextToken;
   }
@@ -1641,7 +2139,7 @@ declare namespace CodeCommit {
      */
     baseCommitId?: ObjectId;
     /**
-     * A list of metadata for any conflicting files. If the specified merge strategy is FAST_FORWARD_MERGE, this list will always be empty.
+     * A list of metadata for any conflicting files. If the specified merge strategy is FAST_FORWARD_MERGE, this list is always empty.
      */
     conflictMetadataList: ConflictMetadataList;
     /**
@@ -1655,19 +2153,19 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
   }
@@ -1689,6 +2187,22 @@ declare namespace CodeCommit {
      */
     baseCommitId: ObjectId;
   }
+  export interface GetPullRequestApprovalStatesInput {
+    /**
+     * The system-generated ID for the pull request.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The system-generated ID for the pull request revision.
+     */
+    revisionId: RevisionId;
+  }
+  export interface GetPullRequestApprovalStatesOutput {
+    /**
+     * Information about users who have approved the pull request.
+     */
+    approvals?: ApprovalList;
+  }
   export interface GetPullRequestInput {
     /**
      * The system-generated ID of the pull request. To get this ID, use ListPullRequests.
@@ -1700,6 +2214,26 @@ declare namespace CodeCommit {
      * Information about the specified pull request.
      */
     pullRequest: PullRequest;
+  }
+  export interface GetPullRequestOverrideStateInput {
+    /**
+     * The ID of the pull request for which you want to get information about whether approval rules have been set aside (overridden).
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The system-generated ID of the revision for the pull request. To retrieve the most recent revision ID, use GetPullRequest.
+     */
+    revisionId: RevisionId;
+  }
+  export interface GetPullRequestOverrideStateOutput {
+    /**
+     * A Boolean value that indicates whether a pull request has had its rules set aside (TRUE) or whether all approval rules still apply (FALSE).
+     */
+    overridden?: Overridden;
+    /**
+     * The Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.
+     */
+    overrider?: Arn;
   }
   export interface GetRepositoryInput {
     /**
@@ -1756,6 +2290,50 @@ declare namespace CodeCommit {
   export type LastModifiedDate = Date;
   export type Limit = number;
   export type LineNumber = number;
+  export interface ListApprovalRuleTemplatesInput {
+    /**
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
+     */
+    nextToken?: NextToken;
+    /**
+     * A non-zero, non-negative integer used to limit the number of returned results.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListApprovalRuleTemplatesOutput {
+    /**
+     * The names of all the approval rule templates found in the AWS Region for your AWS account.
+     */
+    approvalRuleTemplateNames?: ApprovalRuleTemplateNameList;
+    /**
+     * An enumeration token that allows the operation to batch the next results of the operation.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAssociatedApprovalRuleTemplatesForRepositoryInput {
+    /**
+     * The name of the repository for which you want to list all associated approval rule templates.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
+     */
+    nextToken?: NextToken;
+    /**
+     * A non-zero, non-negative integer used to limit the number of returned results.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAssociatedApprovalRuleTemplatesForRepositoryOutput {
+    /**
+     * The names of all approval rule templates associated with the repository.
+     */
+    approvalRuleTemplateNames?: ApprovalRuleTemplateNameList;
+    /**
+     * An enumeration token that allows the operation to batch the next results of the operation.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListBranchesInput {
     /**
      * The name of the repository that contains the branches.
@@ -1790,11 +2368,11 @@ declare namespace CodeCommit {
      */
     pullRequestStatus?: PullRequestStatusEnum;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
      */
     nextToken?: NextToken;
     /**
-     * A non-negative integer used to limit the number of returned results.
+     * A non-zero, non-negative integer used to limit the number of returned results.
      */
     maxResults?: MaxResults;
   }
@@ -1804,7 +2382,31 @@ declare namespace CodeCommit {
      */
     pullRequestIds: PullRequestIdList;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that allows the operation to batch the next results of the operation.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListRepositoriesForApprovalRuleTemplateInput {
+    /**
+     * The name of the approval rule template for which you want to list repositories that are associated with that template.
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
+     */
+    nextToken?: NextToken;
+    /**
+     * A non-zero, non-negative integer used to limit the number of returned results.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListRepositoriesForApprovalRuleTemplateOutput {
+    /**
+     * A list of repository names that are associated with the specified approval rule template.
+     */
+    repositoryNames?: RepositoryNameList;
+    /**
+     * An enumeration token that allows the operation to batch the next results of the operation.
      */
     nextToken?: NextToken;
   }
@@ -1838,7 +2440,7 @@ declare namespace CodeCommit {
      */
     resourceArn: ResourceArn;
     /**
-     * An enumeration token that when provided in a request, returns the next batch of the results.
+     * An enumeration token that, when provided in a request, returns the next batch of the results.
      */
     nextToken?: NextToken;
   }
@@ -1858,11 +2460,11 @@ declare namespace CodeCommit {
      */
     filePath?: Path;
     /**
-     * The position of a change within a compared file, in line number format.
+     * The position of a change in a compared file, in line number format.
      */
     filePosition?: Position;
     /**
-     * In a comparison of commits or a pull request, whether the change is in the 'before' or 'after' of that comparison.
+     * In a comparison of commits or a pull request, whether the change is in the before or after of that comparison.
      */
     relativeFileVersion?: RelativeFileVersionEnum;
   }
@@ -1873,15 +2475,15 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
-     * The branch where the merge will be applied.
+     * The branch where the merge is applied.
      */
     targetBranch?: BranchName;
   }
@@ -1901,31 +2503,31 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
-     * The branch where the merge will be applied. 
+     * The branch where the merge is applied. 
      */
     targetBranch?: BranchName;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
     /**
-     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     * The name of the author who created the commit. This information is used as both the author and committer for the commit.
      */
     authorName?: Name;
     /**
-     * The email address of the person merging the branches. This information will be used in the commit information for the merge.
+     * The email address of the person merging the branches. This information is used in the commit information for the merge.
      */
     email?: Email;
     /**
@@ -1933,11 +2535,11 @@ declare namespace CodeCommit {
      */
     commitMessage?: Message;
     /**
-     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file is created for empty folders. The default is false.
      */
     keepEmptyFolders?: KeepEmptyFolders;
     /**
-     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     * If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
      */
     conflictResolution?: ConflictResolution;
   }
@@ -1957,31 +2559,31 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     sourceCommitSpecifier: CommitName;
     /**
-     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
      */
     destinationCommitSpecifier: CommitName;
     /**
-     * The branch where the merge will be applied. 
+     * The branch where the merge is applied. 
      */
     targetBranch?: BranchName;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
     /**
-     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     * The name of the author who created the commit. This information is used as both the author and committer for the commit.
      */
     authorName?: Name;
     /**
-     * The email address of the person merging the branches. This information will be used in the commit information for the merge.
+     * The email address of the person merging the branches. This information is used in the commit information for the merge.
      */
     email?: Email;
     /**
@@ -1989,11 +2591,11 @@ declare namespace CodeCommit {
      */
     commitMessage?: Message;
     /**
-     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If true, a .gitkeep file is created for empty folders. The default is false.
      */
     keepEmptyFolders?: KeepEmptyFolders;
     /**
-     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     * If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
      */
     conflictResolution?: ConflictResolution;
   }
@@ -2009,7 +2611,7 @@ declare namespace CodeCommit {
   }
   export interface MergeHunk {
     /**
-     * A Boolean value indicating whether a combination of hunks contains a conflict. Conflicts occur when the same file or the same lines in a file were modified in both the source and destination of a merge or pull request. Valid values include true, false, and null. This will be true when the hunk represents a conflict and one or more files contains a line conflict. File mode conflicts in a merge will not set this to be true.
+     * A Boolean value indicating whether a combination of hunks contains a conflict. Conflicts occur when the same file or the same lines in a file were modified in both the source and destination of a merge or pull request. Valid values include true, false, and null. True when the hunk represents a conflict and one or more files contains a line conflict. File mode conflicts in a merge do not set this to true.
      */
     isConflict?: IsHunkConflict;
     /**
@@ -2035,7 +2637,7 @@ declare namespace CodeCommit {
      */
     endLine?: LineNumber;
     /**
-     * The base-64 encoded content of the hunk merged region that might or might not contain a conflict.
+     * The base-64 encoded content of the hunk merged region that might contain a conflict.
      */
     hunkContent?: HunkContent;
   }
@@ -2060,7 +2662,7 @@ declare namespace CodeCommit {
   }
   export interface MergeOperations {
     /**
-     * The operation on a file (add, modify, or delete) of a file in the source of a merge or pull request.
+     * The operation (add, modify, or delete) on a file in the source of a merge or pull request.
      */
     source?: ChangeTypeEnum;
     /**
@@ -2086,7 +2688,7 @@ declare namespace CodeCommit {
   }
   export interface MergePullRequestByFastForwardOutput {
     /**
-     * Information about the specified pull request, including information about the merge.
+     * Information about the specified pull request, including the merge.
      */
     pullRequest?: PullRequest;
   }
@@ -2104,11 +2706,11 @@ declare namespace CodeCommit {
      */
     sourceCommitId?: ObjectId;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
     /**
@@ -2116,19 +2718,19 @@ declare namespace CodeCommit {
      */
     commitMessage?: Message;
     /**
-     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     * The name of the author who created the commit. This information is used as both the author and committer for the commit.
      */
     authorName?: Name;
     /**
-     * The email address of the person merging the branches. This information will be used in the commit information for the merge.
+     * The email address of the person merging the branches. This information is used in the commit information for the merge.
      */
     email?: Email;
     /**
-     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If true, a .gitkeep file is created for empty folders. The default is false.
      */
     keepEmptyFolders?: KeepEmptyFolders;
     /**
-     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     * If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
      */
     conflictResolution?: ConflictResolution;
   }
@@ -2149,11 +2751,11 @@ declare namespace CodeCommit {
      */
     sourceCommitId?: ObjectId;
     /**
-     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which returns a not-mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in both branches has differences on the same line.
      */
     conflictDetailLevel?: ConflictDetailLevelTypeEnum;
     /**
-     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation is successful.
      */
     conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
     /**
@@ -2161,19 +2763,19 @@ declare namespace CodeCommit {
      */
     commitMessage?: Message;
     /**
-     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     * The name of the author who created the commit. This information is used as both the author and committer for the commit.
      */
     authorName?: Name;
     /**
-     * The email address of the person merging the branches. This information will be used in the commit information for the merge.
+     * The email address of the person merging the branches. This information is used in the commit information for the merge.
      */
     email?: Email;
     /**
-     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If true, a .gitkeep file is created for empty folders. The default is false.
      */
     keepEmptyFolders?: KeepEmptyFolders;
     /**
-     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     * If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
      */
     conflictResolution?: ConflictResolution;
   }
@@ -2203,6 +2805,32 @@ declare namespace CodeCommit {
     base?: ObjectTypeEnum;
   }
   export type OrderEnum = "ascending"|"descending"|string;
+  export interface OriginApprovalRuleTemplate {
+    /**
+     * The ID of the template that created the approval rule.
+     */
+    approvalRuleTemplateId?: ApprovalRuleTemplateId;
+    /**
+     * The name of the template that created the approval rule.
+     */
+    approvalRuleTemplateName?: ApprovalRuleTemplateName;
+  }
+  export type Overridden = boolean;
+  export interface OverridePullRequestApprovalRulesInput {
+    /**
+     * The system-generated ID of the pull request for which you want to override all approval rule requirements. To get this information, use GetPullRequest.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The system-generated ID of the most recent revision of the pull request. You cannot override approval rules for anything but the most recent revision of a pull request. To get the revision ID, use GetPullRequest.
+     */
+    revisionId: RevisionId;
+    /**
+     * Whether you want to set aside approval rule requirements for the pull request (OVERRIDE) or revoke a previous override and apply approval rule requirements (REVOKE). REVOKE status is not stored.
+     */
+    overrideStatus: OverrideStatus;
+  }
+  export type OverrideStatus = "OVERRIDE"|"REVOKE"|string;
   export type ParentList = ObjectId[];
   export type Path = string;
   export type Position = number;
@@ -2212,11 +2840,11 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * To establish the directionality of the comparison, the full commit ID of the 'before' commit.  This is required for commenting on any commit unless that commit is the initial commit. 
+     * To establish the directionality of the comparison, the full commit ID of the before commit. Required for commenting on any commit unless that commit is the initial commit.
      */
     beforeCommitId?: CommitId;
     /**
-     * To establish the directionality of the comparison, the full commit ID of the 'after' commit.
+     * To establish the directionality of the comparison, the full commit ID of the after commit.
      */
     afterCommitId: CommitId;
     /**
@@ -2228,7 +2856,7 @@ declare namespace CodeCommit {
      */
     content: Content;
     /**
-     * A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.
+     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.
      */
     clientRequestToken?: ClientRequestToken;
   }
@@ -2238,19 +2866,19 @@ declare namespace CodeCommit {
      */
     repositoryName?: RepositoryName;
     /**
-     * In the directionality you established, the full commit ID of the 'before' commit.
+     * In the directionality you established, the full commit ID of the before commit.
      */
     beforeCommitId?: CommitId;
     /**
-     * In the directionality you established, the full commit ID of the 'after' commit.
+     * In the directionality you established, the full commit ID of the after commit.
      */
     afterCommitId?: CommitId;
     /**
-     * In the directionality you established, the blob ID of the 'before' blob.
+     * In the directionality you established, the blob ID of the before blob.
      */
     beforeBlobId?: ObjectId;
     /**
-     * In the directionality you established, the blob ID of the 'after' blob.
+     * In the directionality you established, the blob ID of the after blob.
      */
     afterBlobId?: ObjectId;
     /**
@@ -2280,7 +2908,7 @@ declare namespace CodeCommit {
      */
     afterCommitId: CommitId;
     /**
-     * The location of the change where you want to post your comment. If no location is provided, the comment will be posted as a general comment on the pull request difference between the before commit ID and the after commit ID.
+     * The location of the change where you want to post your comment. If no location is provided, the comment is posted as a general comment on the pull request difference between the before commit ID and the after commit ID.
      */
     location?: Location;
     /**
@@ -2288,7 +2916,7 @@ declare namespace CodeCommit {
      */
     content: Content;
     /**
-     * A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.
+     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.
      */
     clientRequestToken?: ClientRequestToken;
   }
@@ -2306,15 +2934,15 @@ declare namespace CodeCommit {
      */
     beforeCommitId?: CommitId;
     /**
-     * The full commit ID of the commit in the destination branch where the pull request will be merged.
+     * The full commit ID of the commit in the destination branch where the pull request is merged.
      */
     afterCommitId?: CommitId;
     /**
-     * In the directionality of the pull request, the blob ID of the 'before' blob.
+     * In the directionality of the pull request, the blob ID of the before blob.
      */
     beforeBlobId?: ObjectId;
     /**
-     * In the directionality of the pull request, the blob ID of the 'after' blob.
+     * In the directionality of the pull request, the blob ID of the after blob.
      */
     afterBlobId?: ObjectId;
     /**
@@ -2332,7 +2960,7 @@ declare namespace CodeCommit {
      */
     inReplyTo: CommentId;
     /**
-     * A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.
+     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.
      */
     clientRequestToken?: ClientRequestToken;
     /**
@@ -2352,7 +2980,7 @@ declare namespace CodeCommit {
      */
     pullRequestId?: PullRequestId;
     /**
-     * The user-defined title of the pull request. This title is displayed in the list of pull requests to other users of the repository.
+     * The user-defined title of the pull request. This title is displayed in the list of pull requests to other repository users.
      */
     title?: Title;
     /**
@@ -2380,9 +3008,17 @@ declare namespace CodeCommit {
      */
     pullRequestTargets?: PullRequestTargetList;
     /**
-     * A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.
+     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.
      */
     clientRequestToken?: ClientRequestToken;
+    /**
+     * The system-generated revision ID for the pull request.
+     */
+    revisionId?: RevisionId;
+    /**
+     * The approval rules applied to the pull request.
+     */
+    approvalRules?: ApprovalRulesList;
   }
   export interface PullRequestCreatedEventMetadata {
     /**
@@ -2412,11 +3048,11 @@ declare namespace CodeCommit {
      */
     eventDate?: EventDate;
     /**
-     * The type of the pull request event, for example a status change event (PULL_REQUEST_STATUS_CHANGED) or update event (PULL_REQUEST_SOURCE_REFERENCE_UPDATED).
+     * The type of the pull request event (for example, a status change event (PULL_REQUEST_STATUS_CHANGED) or update event (PULL_REQUEST_SOURCE_REFERENCE_UPDATED)).
      */
     pullRequestEventType?: PullRequestEventType;
     /**
-     * The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
+     * The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with more commits or changing the status of a pull request.
      */
     actorArn?: Arn;
     /**
@@ -2435,9 +3071,21 @@ declare namespace CodeCommit {
      * Information about the change in mergability state for the pull request event.
      */
     pullRequestMergedStateChangedEventMetadata?: PullRequestMergedStateChangedEventMetadata;
+    /**
+     * Information about a pull request event.
+     */
+    approvalRuleEventMetadata?: ApprovalRuleEventMetadata;
+    /**
+     * Information about an approval state change for a pull request.
+     */
+    approvalStateChangedEventMetadata?: ApprovalStateChangedEventMetadata;
+    /**
+     * Information about an approval rule override event for a pull request.
+     */
+    approvalRuleOverriddenEventMetadata?: ApprovalRuleOverriddenEventMetadata;
   }
   export type PullRequestEventList = PullRequestEvent[];
-  export type PullRequestEventType = "PULL_REQUEST_CREATED"|"PULL_REQUEST_STATUS_CHANGED"|"PULL_REQUEST_SOURCE_REFERENCE_UPDATED"|"PULL_REQUEST_MERGE_STATE_CHANGED"|string;
+  export type PullRequestEventType = "PULL_REQUEST_CREATED"|"PULL_REQUEST_STATUS_CHANGED"|"PULL_REQUEST_SOURCE_REFERENCE_UPDATED"|"PULL_REQUEST_MERGE_STATE_CHANGED"|"PULL_REQUEST_APPROVAL_RULE_CREATED"|"PULL_REQUEST_APPROVAL_RULE_UPDATED"|"PULL_REQUEST_APPROVAL_RULE_DELETED"|"PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"|"PULL_REQUEST_APPROVAL_STATE_CHANGED"|string;
   export type PullRequestId = string;
   export type PullRequestIdList = PullRequestId[];
   export interface PullRequestMergedStateChangedEventMetadata {
@@ -2446,7 +3094,7 @@ declare namespace CodeCommit {
      */
     repositoryName?: RepositoryName;
     /**
-     * The name of the branch that the pull request will be merged into.
+     * The name of the branch that the pull request is merged into.
      */
     destinationReference?: ReferenceName;
     /**
@@ -2489,7 +3137,7 @@ declare namespace CodeCommit {
      */
     sourceReference?: ReferenceName;
     /**
-     * The branch of the repository where the pull request changes will be merged into. Also known as the destination branch. 
+     * The branch of the repository where the pull request changes are merged. Also known as the destination branch. 
      */
     destinationReference?: ReferenceName;
     /**
@@ -2497,7 +3145,7 @@ declare namespace CodeCommit {
      */
     destinationCommit?: CommitId;
     /**
-     * The full commit ID of the tip of the source branch used to create the pull request. If the pull request branch is updated by a push while the pull request is open, the commit ID will change to reflect the new tip of the branch.
+     * The full commit ID of the tip of the source branch used to create the pull request. If the pull request branch is updated by a push while the pull request is open, the commit ID changes to reflect the new tip of the branch.
      */
     sourceCommit?: CommitId;
     /**
@@ -2535,7 +3183,7 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The name of the branch where you want to add or update the file. If this is an empty repository, this branch will be created.
+     * The name of the branch where you want to add or update the file. If this is an empty repository, this branch is created.
      */
     branchName: BranchName;
     /**
@@ -2543,23 +3191,23 @@ declare namespace CodeCommit {
      */
     fileContent: FileContent;
     /**
-     * The name of the file you want to add or update, including the relative path to the file in the repository.  If the path does not currently exist in the repository, the path will be created as part of adding the file. 
+     * The name of the file you want to add or update, including the relative path to the file in the repository.  If the path does not currently exist in the repository, the path is created as part of adding the file. 
      */
     filePath: Path;
     /**
-     * The file mode permissions of the blob. Valid file mode permissions are listed below.
+     * The file mode permissions of the blob. Valid file mode permissions are listed here.
      */
     fileMode?: FileModeTypeEnum;
     /**
-     * The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository, no commit ID is required. If this is not an empty repository, a commit ID is required.  The commit ID must match the ID of the head commit at the time of the operation, or an error will occur, and the file will not be added or updated.
+     * The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository, no commit ID is required. If this is not an empty repository, a commit ID is required.  The commit ID must match the ID of the head commit at the time of the operation. Otherwise, an error occurs, and the file is not added or updated.
      */
     parentCommitId?: CommitId;
     /**
-     * A message about why this file was added or updated. While optional, adding a message is strongly encouraged in order to provide a more useful commit history for your repository.
+     * A message about why this file was added or updated. Although it is optional, a message makes the commit history for your repository more useful.
      */
     commitMessage?: Message;
     /**
-     * The name of the person adding or updating the file. While optional, adding a name is strongly encouraged in order to provide a more useful commit history for your repository.
+     * The name of the person adding or updating the file. Although it is optional, a name makes the commit history for your repository more useful.
      */
     name?: Name;
     /**
@@ -2569,7 +3217,7 @@ declare namespace CodeCommit {
   }
   export interface PutFileOutput {
     /**
-     * The full SHA of the commit that contains this file change.
+     * The full SHA ID of the commit that contains this file change.
      */
     commitId: ObjectId;
     /**
@@ -2684,19 +3332,19 @@ declare namespace CodeCommit {
      */
     name: RepositoryTriggerName;
     /**
-     * The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon SNS.
+     * The ARN of the resource that is the target for a trigger (for example, the ARN of a topic in Amazon SNS).
      */
     destinationArn: Arn;
     /**
-     * Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
+     * Any custom data associated with the trigger to be included in the information sent to the target of the trigger.
      */
     customData?: RepositoryTriggerCustomData;
     /**
-     * The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.  Although no content is required in the array, you must include the array itself. 
+     * The branches to be included in the trigger configuration. If you specify an empty array, the trigger applies to all branches.  Although no content is required in the array, you must include the array itself. 
      */
     branches?: BranchNameList;
     /**
-     * The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon SNS.   The valid value "all" cannot be used with any other values. 
+     * The repository events that cause the trigger to run actions in another service, such as sending a notification through Amazon SNS.   The valid value "all" cannot be used with any other values. 
      */
     events: RepositoryTriggerEventList;
   }
@@ -2709,7 +3357,7 @@ declare namespace CodeCommit {
      */
     trigger?: RepositoryTriggerName;
     /**
-     * Additional message information about the trigger that did not run.
+     * Message information about the trigger that did not run.
      */
     failureMessage?: RepositoryTriggerExecutionFailureMessage;
   }
@@ -2720,6 +3368,8 @@ declare namespace CodeCommit {
   export type RepositoryTriggersConfigurationId = string;
   export type RepositoryTriggersList = RepositoryTrigger[];
   export type ResourceArn = string;
+  export type RevisionId = string;
+  export type RuleContentSha256 = string;
   export type SetFileModeEntries = SetFileModeEntry[];
   export interface SetFileModeEntry {
     /**
@@ -2763,7 +3413,7 @@ declare namespace CodeCommit {
      */
     blobId?: ObjectId;
     /**
-     * The fully-qualified path to the folder that contains the symbolic link.
+     * The fully qualified path to the folder that contains the symbolic link.
      */
     absolutePath?: Path;
     /**
@@ -2800,7 +3450,7 @@ declare namespace CodeCommit {
      */
     sourceReference: ReferenceName;
     /**
-     * The branch of the repository where the pull request changes will be merged into. Also known as the destination branch.
+     * The branch of the repository where the pull request changes are merged. Also known as the destination branch.
      */
     destinationReference?: ReferenceName;
   }
@@ -2821,7 +3471,7 @@ declare namespace CodeCommit {
      */
     successfulExecutions?: RepositoryTriggerNameList;
     /**
-     * The list of triggers that were not able to be tested. This list provides the names of the triggers that could not be tested, separated by commas.
+     * The list of triggers that were not tested. This list provides the names of the triggers that could not be tested, separated by commas.
      */
     failedExecutions?: RepositoryTriggerExecutionFailureList;
   }
@@ -2836,13 +3486,62 @@ declare namespace CodeCommit {
      */
     tagKeys: TagKeysList;
   }
+  export interface UpdateApprovalRuleTemplateContentInput {
+    /**
+     * The name of the approval rule template where you want to update the content of the rule. 
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * The content that replaces the existing content of the rule. Content statements must be complete. You cannot provide only the changes.
+     */
+    newRuleContent: ApprovalRuleTemplateContent;
+    /**
+     * The SHA-256 hash signature for the content of the approval rule. You can retrieve this information by using GetPullRequest.
+     */
+    existingRuleContentSha256?: RuleContentSha256;
+  }
+  export interface UpdateApprovalRuleTemplateContentOutput {
+    approvalRuleTemplate: ApprovalRuleTemplate;
+  }
+  export interface UpdateApprovalRuleTemplateDescriptionInput {
+    /**
+     * The name of the template for which you want to update the description.
+     */
+    approvalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * The updated description of the approval rule template.
+     */
+    approvalRuleTemplateDescription: ApprovalRuleTemplateDescription;
+  }
+  export interface UpdateApprovalRuleTemplateDescriptionOutput {
+    /**
+     * The structure and content of the updated approval rule template.
+     */
+    approvalRuleTemplate: ApprovalRuleTemplate;
+  }
+  export interface UpdateApprovalRuleTemplateNameInput {
+    /**
+     * The current name of the approval rule template.
+     */
+    oldApprovalRuleTemplateName: ApprovalRuleTemplateName;
+    /**
+     * The new name you want to apply to the approval rule template.
+     */
+    newApprovalRuleTemplateName: ApprovalRuleTemplateName;
+  }
+  export interface UpdateApprovalRuleTemplateNameOutput {
+    /**
+     * The structure and content of the updated approval rule template.
+     */
+    approvalRuleTemplate: ApprovalRuleTemplate;
+  }
   export interface UpdateCommentInput {
     /**
      * The system-generated ID of the comment you want to update. To get this ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest.
      */
     commentId: CommentId;
     /**
-     * The updated content with which you want to replace the existing content of the comment.
+     * The updated content to replace the existing content of the comment.
      */
     content: Content;
   }
@@ -2862,13 +3561,51 @@ declare namespace CodeCommit {
      */
     defaultBranchName: BranchName;
   }
+  export interface UpdatePullRequestApprovalRuleContentInput {
+    /**
+     * The system-generated ID of the pull request.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The name of the approval rule you want to update.
+     */
+    approvalRuleName: ApprovalRuleName;
+    /**
+     * The SHA-256 hash signature for the content of the approval rule. You can retrieve this information by using GetPullRequest.
+     */
+    existingRuleContentSha256?: RuleContentSha256;
+    /**
+     * The updated content for the approval rule.  When you update the content of the approval rule, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account 123456789012 and Mary_Major, all of the following are counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
+     */
+    newRuleContent: ApprovalRuleContent;
+  }
+  export interface UpdatePullRequestApprovalRuleContentOutput {
+    /**
+     * Information about the updated approval rule.
+     */
+    approvalRule: ApprovalRule;
+  }
+  export interface UpdatePullRequestApprovalStateInput {
+    /**
+     * The system-generated ID of the pull request.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The system-generated ID of the revision.
+     */
+    revisionId: RevisionId;
+    /**
+     * The approval state to associate with the user on the pull request.
+     */
+    approvalState: ApprovalState;
+  }
   export interface UpdatePullRequestDescriptionInput {
     /**
      * The system-generated ID of the pull request. To get this ID, use ListPullRequests.
      */
     pullRequestId: PullRequestId;
     /**
-     * The updated content of the description for the pull request. This content will replace the existing description.
+     * The updated content of the description for the pull request. This content replaces the existing description.
      */
     description: Description;
   }
@@ -2884,7 +3621,7 @@ declare namespace CodeCommit {
      */
     pullRequestId: PullRequestId;
     /**
-     * The status of the pull request. The only valid operations are to update the status from OPEN to OPEN, OPEN to CLOSED or from from CLOSED to CLOSED.
+     * The status of the pull request. The only valid operations are to update the status from OPEN to OPEN, OPEN to CLOSED or from CLOSED to CLOSED.
      */
     pullRequestStatus: PullRequestStatusEnum;
   }
@@ -2900,7 +3637,7 @@ declare namespace CodeCommit {
      */
     pullRequestId: PullRequestId;
     /**
-     * The updated title of the pull request. This will replace the existing title.
+     * The updated title of the pull request. This replaces the existing title.
      */
     title: Title;
   }
@@ -2922,7 +3659,7 @@ declare namespace CodeCommit {
   }
   export interface UpdateRepositoryNameInput {
     /**
-     * The existing name of the repository.
+     * The current name of the repository.
      */
     oldName: RepositoryName;
     /**

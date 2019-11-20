@@ -197,3 +197,4 @@ export import SSOOIDC = require('./ssooidc');
 export import MarketplaceCatalog = require('./marketplacecatalog');
 export import DataExchange = require('./dataexchange');
 export import SESV2 = require('./sesv2');
+export import MigrationHubConfig = require('./migrationhubconfig');

@@ -250,6 +250,7 @@ declare namespace TranscribeService {
      */
     Vocabularies?: Vocabularies;
   }
+  export type MaxAlternatives = number;
   export type MaxResults = number;
   export type MaxSpeakers = number;
   export interface Media {
@@ -282,6 +283,14 @@ declare namespace TranscribeService {
      * Instructs Amazon Transcribe to process each audio channel separately and then merge the transcription output of each channel into a single transcription.  Amazon Transcribe also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of the item including the confidence that Amazon Transcribe has in the transcription. You can't set both ShowSpeakerLabels and ChannelIdentification in the same request. If you set both, your request returns a BadRequestException.
      */
     ChannelIdentification?: Boolean;
+    /**
+     * Determines whether the transcription contains alternative transcriptions. If you set the ShowAlternatives field to true, you must also set the maximum number of alternatives to return in the MaxAlternatives field.
+     */
+    ShowAlternatives?: Boolean;
+    /**
+     * The number of alternative transcriptions that the service should return. If you specify the MaxAlternatives field, you must set the ShowAlternatives field to true.
+     */
+    MaxAlternatives?: MaxAlternatives;
   }
   export interface StartTranscriptionJobRequest {
     /**

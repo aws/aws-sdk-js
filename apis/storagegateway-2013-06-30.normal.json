@@ -412,7 +412,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
+      "documentation": "<p>Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request. This operation is supported for the stored volume, cached volume and tape gateway types.</p>"
     },
     "DeleteChapCredentials": {
       "name": "DeleteChapCredentials",
@@ -434,7 +434,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair.</p>"
+      "documentation": "<p>Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair. This operation is supported in volume and tape gateway types.</p>"
     },
     "DeleteFileShare": {
       "name": "DeleteFileShare",
@@ -568,6 +568,28 @@
       ],
       "documentation": "<p>Deletes the specified storage volume that you previously created using the <a>CreateCachediSCSIVolume</a> or <a>CreateStorediSCSIVolume</a> API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume. </p> <p>Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> <p>In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.</p>"
     },
+    "DescribeAvailabilityMonitorTest": {
+      "name": "DescribeAvailabilityMonitorTest",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAvailabilityMonitorTestInput"
+      },
+      "output": {
+        "shape": "DescribeAvailabilityMonitorTestOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.</p>"
+    },
     "DescribeBandwidthRateLimit": {
       "name": "DescribeBandwidthRateLimit",
       "http": {
@@ -588,7 +610,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect.</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
+      "documentation": "<p>Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume and tape gateway types.'</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
     "DescribeCache": {
       "name": "DescribeCache",
@@ -654,7 +676,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair.</p>"
+      "documentation": "<p>Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair. This operation is supported in the volume and tape gateway types.</p>"
     },
     "DescribeGatewayInformation": {
       "name": "DescribeGatewayInformation",
@@ -962,7 +984,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.</p>"
+      "documentation": "<p>Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance. This operation is only supported in the volume gateway type.</p>"
     },
     "DisableGateway": {
       "name": "DisableGateway",
@@ -1094,7 +1116,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Lists the tags that have been added to the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway type.</p>"
+      "documentation": "<p>Lists the tags that have been added to the specified resource. This operation is supported in storage gateways of all types.</p>"
     },
     "ListTapes": {
       "name": "ListTapes",
@@ -1226,7 +1248,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting Notified About File Operations</a>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your <code>RefreshCache</code> operation completes. </p>"
+      "documentation": "<p>Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting Notified About File Operations</a>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your <code>RefreshCache</code> operation completes. </p> <p>Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting Notified About File Operations</a>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see \"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\".</p>"
     },
     "RemoveTagsFromResource": {
       "name": "RemoveTagsFromResource",
@@ -1248,7 +1270,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Removes one or more tags from the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway types.</p>"
+      "documentation": "<p>Removes one or more tags from the specified resource. This operation is supported in storage gateways of all types.</p>"
     },
     "ResetCache": {
       "name": "ResetCache",
@@ -1382,6 +1404,28 @@
       ],
       "documentation": "<p>Shuts down a gateway. To specify which gateway to shut down, use the Amazon Resource Name (ARN) of the gateway in the body of your request.</p> <p>The operation shuts down the gateway service component running in the gateway's virtual machine (VM) and not the host VM.</p> <note> <p>If you want to shut down the VM, it is recommended that you first shut down the gateway component in the VM to avoid unpredictable conditions.</p> </note> <p>After the gateway is shutdown, you cannot call any other API except <a>StartGateway</a>, <a>DescribeGatewayInformation</a>, and <a>ListGateways</a>. For more information, see <a>ActivateGateway</a>. Your applications cannot read from or write to the gateway's storage volumes, and there are no snapshots taken.</p> <note> <p>When you make a shutdown request, you will get a <code>200 OK</code> success response immediately. However, it might take some time for the gateway to shut down. You can call the <a>DescribeGatewayInformation</a> API to check the status. For more information, see <a>ActivateGateway</a>.</p> </note> <p>If do not intend to use the gateway again, you must delete the gateway (using <a>DeleteGateway</a>) to no longer pay software charges associated with the gateway.</p>"
     },
+    "StartAvailabilityMonitorTest": {
+      "name": "StartAvailabilityMonitorTest",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartAvailabilityMonitorTestInput"
+      },
+      "output": {
+        "shape": "StartAvailabilityMonitorTestOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Start a test that verifies that the specified gateway is configured for High Availability monitoring in your host environment. This request only initiates the test and that a successful response only indicates that the test was started. It doesn't indicate that the test passed. For the status of the test, invoke the <code>DescribeAvailabilityMonitorTest</code> API. </p> <note> <p>Starting this test will cause your gateway to go offline for a brief period.</p> </note>"
+    },
     "StartGateway": {
       "name": "StartGateway",
       "http": {
@@ -1424,7 +1468,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains.</p> <p>By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth.</p> <p>To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
+      "documentation": "<p>Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume and tape gateway types.'</p> <p>By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth.</p> <p>To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
     "UpdateChapCredentials": {
       "name": "UpdateChapCredentials",
@@ -1446,7 +1490,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it.</p> <important> <p>When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials.</p> </important>"
+      "documentation": "<p>Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it. This operation is supported in the volume and tape gateway types.</p> <important> <p>When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials.</p> </important>"
     },
     "UpdateGatewayInformation": {
       "name": "UpdateGatewayInformation",
@@ -1684,6 +1728,18 @@
       "max": 50,
       "min": 1
     },
+    "ActiveDirectoryStatus": {
+      "type": "string",
+      "enum": [
+        "ACCESS_DENIED",
+        "DETACHED",
+        "JOINED",
+        "JOINING",
+        "NETWORK_ERROR",
+        "TIMEOUT",
+        "UNKNOWN_ERROR"
+      ]
+    },
     "AddCacheInput": {
       "type": "structure",
       "required": [
@@ -1862,6 +1918,14 @@
       "documentation": "<p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>",
       "max": 15,
       "min": 5
+    },
+    "AvailabilityMonitorTestStatus": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "FAILED",
+        "PENDING"
+      ]
     },
     "BandwidthDownloadRateLimit": {
       "type": "long",
@@ -2737,6 +2801,33 @@
       },
       "documentation": "<p>A JSON object containing the of the storage volume that was deleted</p>"
     },
+    "DescribeAvailabilityMonitorTestInput": {
+      "type": "structure",
+      "required": [
+        "GatewayARN"
+      ],
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        }
+      }
+    },
+    "DescribeAvailabilityMonitorTestOutput": {
+      "type": "structure",
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        },
+        "Status": {
+          "shape": "AvailabilityMonitorTestStatus",
+          "documentation": "<p>The status of the High Availability monitoring test. If a test hasn't been performed, the value of this field is null.</p>"
+        },
+        "StartTime": {
+          "shape": "Time",
+          "documentation": "<p>The time the High Availability monitoring test was started. If a test hasn't been performed, the value of this field is null.</p>"
+        }
+      }
+    },
     "DescribeBandwidthRateLimitInput": {
       "type": "structure",
       "required": [
@@ -2922,7 +3013,11 @@
         },
         "CloudWatchLogGroupARN": {
           "shape": "CloudWatchLogGroupARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the gateway.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is used to monitor events in the gateway.</p>"
+        },
+        "HostEnvironment": {
+          "shape": "HostEnvironment",
+          "documentation": "<p>The type of hypervisor environment used by the host.</p>"
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
@@ -3034,6 +3129,10 @@
         "DomainName": {
           "shape": "DomainName",
           "documentation": "<p>The name of the domain that the gateway is joined to.</p>"
+        },
+        "ActiveDirectoryStatus": {
+          "shape": "ActiveDirectoryStatus",
+          "documentation": "<p>Indicates the status of a gateway that is a member of the Active Directory domain.</p> <ul> <li> <p>ACCESS_DENIED: Indicates that the <code>JoinDomain</code> operation failed due to an authentication error.</p> </li> <li> <p>DETACHED: Indicates that gateway is not joined to a domain.</p> </li> <li> <p>JOINED: Indicates that the gateway has successfully joined a domain.</p> </li> <li> <p>JOINING: Indicates that a <code>JoinDomain</code> operation is in progress.</p> </li> <li> <p>NETWORK_ERROR: Indicates that <code>JoinDomain</code> operation failed due to a network or connectivity error.</p> </li> <li> <p>TIMEOUT: Indicates that the <code>JoinDomain</code> operation failed because the operation didn't complete within the allotted time.</p> </li> <li> <p>UNKNOWN_ERROR: Indicates that the <code>JoinDomain</code> operation failed due to another type of error.</p> </li> </ul>"
         },
         "SMBGuestPasswordSet": {
           "shape": "Boolean",
@@ -3687,6 +3786,15 @@
       "type": "string",
       "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])(:(\\d+))?$"
     },
+    "HostEnvironment": {
+      "type": "string",
+      "enum": [
+        "VMWARE",
+        "HYPER-V",
+        "EC2",
+        "OTHER"
+      ]
+    },
     "Hosts": {
       "type": "list",
       "member": {
@@ -3744,9 +3852,13 @@
           "shape": "Hosts",
           "documentation": "<p>List of IPv4 addresses, NetBIOS names, or host names of your domain server. If you need to specify the port number include it after the colon (“:”). For example, <code>mydc.mydomain.com:389</code>.</p>"
         },
+        "TimeoutInSeconds": {
+          "shape": "TimeoutInSeconds",
+          "documentation": "<p>Specifies the time in seconds, in which the <code>JoinDomain</code> operation must complete. The default is 20 seconds.</p>"
+        },
         "UserName": {
           "shape": "DomainUserName",
-          "documentation": "<p>Sets the user name of user who has permission to add the gateway to the Active Directory domain.</p>"
+          "documentation": "<p>Sets the user name of user who has permission to add the gateway to the Active Directory domain. The domain user account should be enabled to join computers to the domain. For example, you can use the domain administrator account or an account with delegated permissions to join computers to the domain.</p>"
         },
         "Password": {
           "shape": "DomainUserPassword",
@@ -3761,6 +3873,10 @@
         "GatewayARN": {
           "shape": "GatewayARN",
           "documentation": "<p>The unique Amazon Resource Name (ARN) of the gateway that joined the domain.</p>"
+        },
+        "ActiveDirectoryStatus": {
+          "shape": "ActiveDirectoryStatus",
+          "documentation": "<p>Indicates the status of the gateway as a member of the Active Directory domain.</p> <ul> <li> <p>ACCESS_DENIED: Indicates that the <code>JoinDomain</code> operation failed due to an authentication error.</p> </li> <li> <p>DETACHED: Indicates that gateway is not joined to a domain.</p> </li> <li> <p>JOINED: Indicates that the gateway has successfully joined a domain.</p> </li> <li> <p>JOINING: Indicates that a <code>JoinDomain</code> operation is in progress.</p> </li> <li> <p>NETWORK_ERROR: Indicates that <code>JoinDomain</code> operation failed due to a network or connectivity error.</p> </li> <li> <p>TIMEOUT: Indicates that the <code>JoinDomain</code> operation failed because the operation didn't complete within the allotted time.</p> </li> <li> <p>UNKNOWN_ERROR: Indicates that the <code>JoinDomain</code> operation failed due to another type of error.</p> </li> </ul>"
         }
       },
       "documentation": "<p>JoinDomainOutput</p>"
@@ -4577,6 +4693,25 @@
       "max": 15,
       "min": 5
     },
+    "StartAvailabilityMonitorTestInput": {
+      "type": "structure",
+      "required": [
+        "GatewayARN"
+      ],
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        }
+      }
+    },
+    "StartAvailabilityMonitorTestOutput": {
+      "type": "structure",
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        }
+      }
+    },
     "StartGatewayInput": {
       "type": "structure",
       "required": [
@@ -4940,6 +5075,11 @@
     },
     "Time": {
       "type": "timestamp"
+    },
+    "TimeoutInSeconds": {
+      "type": "integer",
+      "max": 3600,
+      "min": 0
     },
     "UpdateBandwidthRateLimitInput": {
       "type": "structure",

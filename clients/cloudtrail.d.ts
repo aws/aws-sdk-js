@@ -52,6 +52,14 @@ declare class CloudTrail extends Service {
    */
   getEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetEventSelectorsResponse) => void): Request<CloudTrail.Types.GetEventSelectorsResponse, AWSError>;
   /**
+   * Describes the settings for the Insights event selectors that you configured for your trail. GetInsightSelectors shows if CloudTrail Insights event logging is enabled on the trail, and if it is, which insight types are enabled. If you run GetInsightSelectors on a trail that does not have Insights events enabled, the operation throws the exception InsightNotEnabledException  For more information, see Logging CloudTrail Insights Events for Trails  in the AWS CloudTrail User Guide.
+   */
+  getInsightSelectors(params: CloudTrail.Types.GetInsightSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetInsightSelectorsResponse) => void): Request<CloudTrail.Types.GetInsightSelectorsResponse, AWSError>;
+  /**
+   * Describes the settings for the Insights event selectors that you configured for your trail. GetInsightSelectors shows if CloudTrail Insights event logging is enabled on the trail, and if it is, which insight types are enabled. If you run GetInsightSelectors on a trail that does not have Insights events enabled, the operation throws the exception InsightNotEnabledException  For more information, see Logging CloudTrail Insights Events for Trails  in the AWS CloudTrail User Guide.
+   */
+  getInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetInsightSelectorsResponse) => void): Request<CloudTrail.Types.GetInsightSelectorsResponse, AWSError>;
+  /**
    * Returns settings information for a specified trail.
    */
   getTrail(params: CloudTrail.Types.GetTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetTrailResponse) => void): Request<CloudTrail.Types.GetTrailResponse, AWSError>;
@@ -92,11 +100,11 @@ declare class CloudTrail extends Service {
    */
   listTrails(callback?: (err: AWSError, data: CloudTrail.Types.ListTrailsResponse) => void): Request<CloudTrail.Types.ListTrailsResponse, AWSError>;
   /**
-   * Looks up management events captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs. Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred. 
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second per account. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(params: CloudTrail.Types.LookupEventsRequest, callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Looks up management events captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs. Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred. 
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second per account. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
@@ -107,6 +115,14 @@ declare class CloudTrail extends Service {
    * Configures an event selector for your trail. Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events.  When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  and Limits in AWS CloudTrail in the AWS CloudTrail User Guide.
    */
   putEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
+  /**
+   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of insight types. In this release, only ApiCallRateInsight is supported as an Insights selector.
+   */
+  putInsightSelectors(params: CloudTrail.Types.PutInsightSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
+  /**
+   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of insight types. In this release, only ApiCallRateInsight is supported as an Insights selector.
+   */
+  putInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
   /**
    * Removes the specified tags from a trail.
    */
@@ -289,7 +305,7 @@ declare namespace CloudTrail {
   }
   export interface DescribeTrailsResponse {
     /**
-     * The list of trail objects.
+     * The list of trail objects. Trail objects with string values are only returned if values for the objects exist in a trail's configuration. For example, SNSTopicName and SNSTopicARN are only returned in results if a trail is configured to send SNS notifications. Similarly, KMSKeyId only appears in results if a trail's log files are encrypted with AWS KMS-managed keys.
      */
     trailList?: TrailList;
   }
@@ -331,6 +347,7 @@ declare namespace CloudTrail {
      */
     CloudTrailEvent?: String;
   }
+  export type EventCategory = "insight"|string;
   export interface EventSelector {
     /**
      * Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.  By default, the value is All.
@@ -344,9 +361,14 @@ declare namespace CloudTrail {
      * CloudTrail supports data event logging for Amazon S3 objects and AWS Lambda functions. You can specify up to 250 resources for an individual event selector, but the total number of data resources cannot exceed 250 across all event selectors in a trail. This limit does not apply if you configure resource logging for all data events.  For more information, see Data Events and Limits in AWS CloudTrail in the AWS CloudTrail User Guide.
      */
     DataResources?: DataResources;
+    /**
+     * An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing "kms.amazonaws.com". By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail. 
+     */
+    ExcludeManagementEventSources?: ExcludeManagementEventSources;
   }
   export type EventSelectors = EventSelector[];
   export type EventsList = Event[];
+  export type ExcludeManagementEventSources = String[];
   export interface GetEventSelectorsRequest {
     /**
      * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
@@ -362,6 +384,22 @@ declare namespace CloudTrail {
      * The event selectors that are configured for the trail.
      */
     EventSelectors?: EventSelectors;
+  }
+  export interface GetInsightSelectorsRequest {
+    /**
+     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
+     */
+    TrailName: String;
+  }
+  export interface GetInsightSelectorsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of a trail for which you want to get Insights selectors.
+     */
+    TrailARN?: String;
+    /**
+     * A JSON string that contains the insight types you want to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     */
+    InsightSelectors?: InsightSelectors;
   }
   export interface GetTrailRequest {
     /**
@@ -448,6 +486,14 @@ declare namespace CloudTrail {
      */
     TimeLoggingStopped?: String;
   }
+  export interface InsightSelector {
+    /**
+     * The type of insights to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     */
+    InsightType?: InsightType;
+  }
+  export type InsightSelectors = InsightSelector[];
+  export type InsightType = "ApiCallRateInsight"|string;
   export interface ListPublicKeysRequest {
     /**
      * Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used, and the current public key is returned.
@@ -493,6 +539,9 @@ declare namespace CloudTrail {
     NextToken?: String;
   }
   export interface ListTrailsRequest {
+    /**
+     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     */
     NextToken?: String;
   }
   export interface ListTrailsResponse {
@@ -500,6 +549,9 @@ declare namespace CloudTrail {
      * Returns the name, ARN, and home region of trails in the current account.
      */
     Trails?: Trails;
+    /**
+     * The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     */
     NextToken?: String;
   }
   export interface LookupAttribute {
@@ -527,6 +579,10 @@ declare namespace CloudTrail {
      * Specifies that only events that occur before or at the specified time are returned. If the specified end time is before the specified start time, an error is returned.
      */
     EndTime?: _Date;
+    /**
+     * Specifies the event category. If you do not specify an event category, events of the category are not returned in the response. For example, if you do not specify insight as the value of EventCategory, no Insights events are returned.
+     */
+    EventCategory?: EventCategory;
     /**
      * The number of events to return. Possible values are 1 through 50. The default is 50.
      */
@@ -586,6 +642,26 @@ declare namespace CloudTrail {
      * Specifies the event selectors configured for your trail.
      */
     EventSelectors?: EventSelectors;
+  }
+  export interface PutInsightSelectorsRequest {
+    /**
+     * The name of the CloudTrail trail for which you want to change or add Insights selectors.
+     */
+    TrailName: String;
+    /**
+     * A JSON string that contains the insight types you want to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     */
+    InsightSelectors: InsightSelectors;
+  }
+  export interface PutInsightSelectorsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of a trail for which you want to change or add Insights selectors.
+     */
+    TrailARN?: String;
+    /**
+     * A JSON string that contains the insight types you want to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     */
+    InsightSelectors?: InsightSelectors;
   }
   export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string;
   export interface RemoveTagsRequest {
@@ -708,6 +784,10 @@ declare namespace CloudTrail {
      * Specifies if the trail has custom event selectors.
      */
     HasCustomEventSelectors?: Boolean;
+    /**
+     * Specifies whether a trail has insight types specified in an InsightSelector list.
+     */
+    HasInsightSelectors?: Boolean;
     /**
      * Specifies whether the trail is an organization trail.
      */

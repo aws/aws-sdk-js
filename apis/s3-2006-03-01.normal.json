@@ -3184,6 +3184,14 @@
         "EncryptionConfiguration": {
           "shape": "EncryptionConfiguration",
           "documentation": "<p>A container that provides information about encryption. If <code>SourceSelectionCriteria</code> is specified, you must specify this element.</p>"
+        },
+        "ReplicationTime": {
+          "shape": "ReplicationTime",
+          "documentation": "<p> A container specifying the time when all objects and operations on objects are replicated. Must be specified together with a <code>Metrics</code> block. </p>"
+        },
+        "Metrics": {
+          "shape": "Metrics",
+          "documentation": "<p> A container specifying replication metrics-related information, including whether emitting metrics and Amazon S3 events for replication are enabled. In addition, contains configurations related to specific metrics or events. Must be specified together with a <code>ReplicationTime</code> block. </p>"
         }
       },
       "documentation": "<p>Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket.</p>"
@@ -3302,8 +3310,14 @@
         "s3:ObjectRemoved:*",
         "s3:ObjectRemoved:Delete",
         "s3:ObjectRemoved:DeleteMarkerCreated",
+        "s3:ObjectRestore:*",
         "s3:ObjectRestore:Post",
-        "s3:ObjectRestore:Completed"
+        "s3:ObjectRestore:Completed",
+        "s3:Replication:*",
+        "s3:Replication:OperationFailedReplication",
+        "s3:Replication:OperationNotTracked",
+        "s3:Replication:OperationMissedThreshold",
+        "s3:Replication:OperationReplicatedAfterThreshold"
       ]
     },
     "EventList": {
@@ -6067,6 +6081,24 @@
     "MetadataValue": {
       "type": "string"
     },
+    "Metrics": {
+      "type": "structure",
+      "required": [
+        "Status",
+        "EventThreshold"
+      ],
+      "members": {
+        "Status": {
+          "shape": "MetricsStatus",
+          "documentation": "<p> Specifies whether the replication metrics are enabled. </p>"
+        },
+        "EventThreshold": {
+          "shape": "ReplicationTimeValue",
+          "documentation": "<p> A container specifying the time threshold for emitting the <code>s3:Replication:OperationMissedThreshold</code> event. </p>"
+        }
+      },
+      "documentation": "<p> A container specifying replication metrics-related information, including whether emitting metrics and Amazon S3 events for replication are enabled. In addition, contains configurations related to specific metrics or events. Must be specified together with a <code>ReplicationTime</code> block. </p>"
+    },
     "MetricsAndOperator": {
       "type": "structure",
       "members": {
@@ -6127,6 +6159,16 @@
     },
     "MetricsId": {
       "type": "string"
+    },
+    "MetricsStatus": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "Minutes": {
+      "type": "integer"
     },
     "MissingMeta": {
       "type": "integer"
@@ -8113,6 +8155,41 @@
         "FAILED",
         "REPLICA"
       ]
+    },
+    "ReplicationTime": {
+      "type": "structure",
+      "required": [
+        "Status",
+        "Time"
+      ],
+      "members": {
+        "Status": {
+          "shape": "ReplicationTimeStatus",
+          "documentation": "<p> Specifies whether the replication time is enabled. </p>"
+        },
+        "Time": {
+          "shape": "ReplicationTimeValue",
+          "documentation": "<p> A container specifying the time by which replication should complete for all objects and operations on objects. </p>"
+        }
+      },
+      "documentation": "<p> A container specifying the time when all objects and operations on objects are replicated. Must be specified together with a <code>Metrics</code> block. </p>"
+    },
+    "ReplicationTimeStatus": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "ReplicationTimeValue": {
+      "type": "structure",
+      "members": {
+        "Minutes": {
+          "shape": "Minutes",
+          "documentation": "<p> Contains an integer specifying time in minutes. </p>"
+        }
+      },
+      "documentation": "<p> A container specifying the time value. </p>"
     },
     "RequestCharged": {
       "type": "string",

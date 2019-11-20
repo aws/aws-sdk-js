@@ -52,11 +52,11 @@ declare class DataSync extends Service {
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Defines a file system on an Server Message Block (SMB) server that can be read from or written to
+   * Defines a file system on an Server Message Block (SMB) server that can be read from or written to.
    */
   createLocationSmb(params: DataSync.Types.CreateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Defines a file system on an Server Message Block (SMB) server that can be read from or written to
+   * Defines a file system on an Server Message Block (SMB) server that can be read from or written to.
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
@@ -292,7 +292,7 @@ declare namespace DataSync {
   }
   export interface CreateLocationEfsRequest {
     /**
-     * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.
+     * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.   Subdirectory must be specified with forward slashes. For example /path/to/folder. 
      */
     Subdirectory?: Subdirectory;
     /**
@@ -369,7 +369,7 @@ declare namespace DataSync {
   }
   export interface CreateLocationSmbRequest {
     /**
-     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network. To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.
+     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example /path/to/folder.  To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.
      */
     Subdirectory: NonEmptySubdirectory;
     /**
@@ -432,6 +432,10 @@ declare namespace DataSync {
      * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2"   
      */
     Excludes?: FilterList;
+    /**
+     * Specifies a schedule used to periodically transfer files from a source to a destination location. The schedule should be specified in UTC time. For more information, see task-scheduling.
+     */
+    Schedule?: TaskSchedule;
     /**
      * The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. 
      */
@@ -715,6 +719,10 @@ declare namespace DataSync {
      */
     Excludes?: FilterList;
     /**
+     * The schedule used to periodically transfer files from a source to a destination location.
+     */
+    Schedule?: TaskSchedule;
+    /**
      * Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
      */
     ErrorCode?: string;
@@ -744,7 +752,7 @@ declare namespace DataSync {
   export type Ec2SubnetArn = string;
   export type EfsFilesystemArn = string;
   export type Endpoint = string;
-  export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|string;
+  export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|"FIPS"|string;
   export type FilterList = FilterRule[];
   export interface FilterRule {
     /**
@@ -942,7 +950,7 @@ declare namespace DataSync {
      */
     BytesPerSecond?: BytesPerSecond;
     /**
-     * A value that determines whether tasks should be queued before executing the tasks. If set to Enabled, the tasks will queued. The default is Enabled. If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see task-queue.
+     * A value that determines whether tasks should be queued before executing the tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see queue-task-execution.
      */
     TaskQueueing?: TaskQueueing;
   }
@@ -950,7 +958,7 @@ declare namespace DataSync {
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
   export type PLSubnetArnList = Ec2SubnetArn[];
   export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string;
-  export type PosixPermissions = "NONE"|"BEST_EFFORT"|"PRESERVE"|string;
+  export type PosixPermissions = "NONE"|"PRESERVE"|string;
   export type PreserveDeletedFiles = "PRESERVE"|"REMOVE"|string;
   export type PreserveDevices = "NONE"|"PRESERVE"|string;
   export interface PrivateLinkConfig {
@@ -979,6 +987,7 @@ declare namespace DataSync {
     BucketAccessRoleArn: IamRoleArn;
   }
   export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
+  export type ScheduleExpressionCron = string;
   export type ServerHostname = string;
   export type SmbDomain = string;
   export interface SmbMountOptions {
@@ -1059,6 +1068,10 @@ declare namespace DataSync {
      */
     PrepareStatus?: PhaseStatus;
     /**
+     * The total time in milliseconds that AWS DataSync took to transfer the file from the source to the destination location.
+     */
+    TotalDuration?: Duration;
+    /**
      * The total time in milliseconds that AWS DataSync spent in the TRANSFERRING phase.
      */
     TransferDuration?: Duration;
@@ -1100,6 +1113,12 @@ declare namespace DataSync {
     Name?: TagValue;
   }
   export type TaskQueueing = "ENABLED"|"DISABLED"|string;
+  export interface TaskSchedule {
+    /**
+     * A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location. 
+     */
+    ScheduleExpression: ScheduleExpressionCron;
+  }
   export type TaskStatus = "AVAILABLE"|"CREATING"|"QUEUED"|"RUNNING"|"UNAVAILABLE"|string;
   export type Time = Date;
   export type Uid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
@@ -1137,6 +1156,10 @@ declare namespace DataSync {
      * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
      */
     Excludes?: FilterList;
+    /**
+     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day or hour you want the task to execute. The time you specify is UTC time. For more information, see task-scheduling.
+     */
+    Schedule?: TaskSchedule;
     /**
      * The name of the task to update.
      */
