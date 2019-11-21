@@ -797,5 +797,8 @@
   "migrationhubconfig": {
     "prefix": "migrationhub-config",
     "name": "MigrationHubConfig"
+  },
+  "connectparticipant": {
+    "name": "ConnectParticipant"
   }
 }

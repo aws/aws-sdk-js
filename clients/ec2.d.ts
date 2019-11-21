@@ -61,11 +61,11 @@ declare class EC2 extends Service {
    */
   allocateAddress(callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
-   * Allocates a Dedicated Host to your account. At a minimum, specify the instance size type, Availability Zone, and quantity of hosts to allocate.
+   * Allocates a Dedicated Host to your account. At a minimum, specify the supported instance type or instance family, the Availability Zone in which to allocate the host, and the number of hosts to allocate.
    */
   allocateHosts(params: EC2.Types.AllocateHostsRequest, callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
   /**
-   * Allocates a Dedicated Host to your account. At a minimum, specify the instance size type, Availability Zone, and quantity of hosts to allocate.
+   * Allocates a Dedicated Host to your account. At a minimum, specify the supported instance type or instance family, the Availability Zone in which to allocate the host, and the number of hosts to allocate.
    */
   allocateHosts(callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
   /**
@@ -1293,11 +1293,11 @@ declare class EC2 extends Service {
    */
   describeFpgaImages(callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImagesResult) => void): Request<EC2.Types.DescribeFpgaImagesResult, AWSError>;
   /**
-   * Describes the Dedicated Host reservations that are available to purchase. The results describe all the Dedicated Host reservation offerings, including offerings that may not match the instance family and Region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see Dedicated Hosts Overview in the Amazon Elastic Compute Cloud User Guide. 
+   * Describes the Dedicated Host reservations that are available to purchase. The results describe all of the Dedicated Host reservation offerings, including offerings that might not match the instance family and Region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see Dedicated Hosts Overview in the Amazon Elastic Compute Cloud User Guide. 
    */
   describeHostReservationOfferings(params: EC2.Types.DescribeHostReservationOfferingsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeHostReservationOfferingsResult) => void): Request<EC2.Types.DescribeHostReservationOfferingsResult, AWSError>;
   /**
-   * Describes the Dedicated Host reservations that are available to purchase. The results describe all the Dedicated Host reservation offerings, including offerings that may not match the instance family and Region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see Dedicated Hosts Overview in the Amazon Elastic Compute Cloud User Guide. 
+   * Describes the Dedicated Host reservations that are available to purchase. The results describe all of the Dedicated Host reservation offerings, including offerings that might not match the instance family and Region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see Dedicated Hosts Overview in the Amazon Elastic Compute Cloud User Guide. 
    */
   describeHostReservationOfferings(callback?: (err: AWSError, data: EC2.Types.DescribeHostReservationOfferingsResult) => void): Request<EC2.Types.DescribeHostReservationOfferingsResult, AWSError>;
   /**
@@ -2293,11 +2293,11 @@ declare class EC2 extends Service {
    */
   modifyFpgaImageAttribute(callback?: (err: AWSError, data: EC2.Types.ModifyFpgaImageAttributeResult) => void): Request<EC2.Types.ModifyFpgaImageAttributeResult, AWSError>;
   /**
-   * Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of host but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.
+   * Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of host but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled. You can also use this API action to modify a Dedicated Host to support either multiple instance types in an instance family, or to support a specific instance type only.
    */
   modifyHosts(params: EC2.Types.ModifyHostsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyHostsResult) => void): Request<EC2.Types.ModifyHostsResult, AWSError>;
   /**
-   * Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of host but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.
+   * Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of host but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled. You can also use this API action to modify a Dedicated Host to support either multiple instance types in an instance family, or to support a specific instance type only.
    */
   modifyHosts(callback?: (err: AWSError, data: EC2.Types.ModifyHostsResult) => void): Request<EC2.Types.ModifyHostsResult, AWSError>;
   /**
@@ -3396,9 +3396,13 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * Specifies the instance type for which to configure your Dedicated Hosts. When you specify the instance type, that is the only instance type that you can launch onto that host.
+     * Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only. If you want the Dedicated Hosts to support multiple instance types in a specific instance family, omit this parameter and specify InstanceFamily instead. You cannot specify InstanceType and InstanceFamily in the same request.
      */
-    InstanceType: String;
+    InstanceType?: String;
+    /**
+     * Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family. If you want the Dedicated Hosts to support a specific instance type only, omit this parameter and specify InstanceType instead. You cannot specify InstanceFamily and InstanceType in the same request.
+     */
+    InstanceFamily?: String;
     /**
      * The number of Dedicated Hosts to allocate to your account with these parameters.
      */
@@ -3433,6 +3437,7 @@ declare namespace EC2 {
     Principal?: String;
   }
   export type AllowedPrincipalSet = AllowedPrincipal[];
+  export type AllowsMultipleInstanceTypes = "on"|"off"|string;
   export interface ApplySecurityGroupsToClientVpnTargetNetworkRequest {
     /**
      * The ID of the Client VPN endpoint.
@@ -4016,11 +4021,11 @@ declare namespace EC2 {
   export type AvailabilityZoneStringList = String[];
   export interface AvailableCapacity {
     /**
-     * The total number of instances supported by the Dedicated Host.
+     * The number of instances that can be launched onto the Dedicated Host depending on the host's available capacity. For Dedicated Hosts that support multiple instance types, this parameter represents the number of instances for each instance size that is supported on the host.
      */
     AvailableInstanceCapacity?: AvailableInstanceCapacityList;
     /**
-     * The number of vCPUs available on the Dedicated Host.
+     * The number of vCPUs available for launching instances onto the Dedicated Host.
      */
     AvailableVCpus?: Integer;
   }
@@ -4931,7 +4936,7 @@ declare namespace EC2 {
     /**
      * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with "alias/". For example:   Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to. 
      */
-    KmsKeyId?: KmsKeyId;
+    KmsKeyId?: String;
     /**
      * The name of the new AMI in the destination Region.
      */
@@ -5502,7 +5507,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: InstanceId;
+    InstanceId: String;
     /**
      * A name for the new image. Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)
      */
@@ -7405,7 +7410,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: ImageId;
+    ImageId: String;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -12403,7 +12408,7 @@ declare namespace EC2 {
      */
     AvailabilityZone?: String;
     /**
-     * The number of new instances that can be launched onto the Dedicated Host.
+     * Information about the instances running on the Dedicated Host.
      */
     AvailableCapacity?: AvailableCapacity;
     /**
@@ -12446,17 +12451,33 @@ declare namespace EC2 {
      * Indicates whether host recovery is enabled or disabled for the Dedicated Host.
      */
     HostRecovery?: HostRecovery;
+    /**
+     * Indicates whether the Dedicated Host supports multiple instance types of the same instance family, or a specific instance type only. one indicates that the Dedicated Host supports multiple instance types in the instance family. off indicates that the Dedicated Host supports a single instance type only.
+     */
+    AllowsMultipleInstanceTypes?: AllowsMultipleInstanceTypes;
+    /**
+     * The ID of the AWS account that owns the Dedicated Host.
+     */
+    OwnerId?: String;
+    /**
+     * The ID of the Availability Zone in which the Dedicated Host is allocated.
+     */
+    AvailabilityZoneId?: String;
   }
   export type HostId = string;
   export interface HostInstance {
     /**
-     * the IDs of instances that are running on the Dedicated Host.
+     * The ID of instance that is running on the Dedicated Host.
      */
     InstanceId?: String;
     /**
-     * The instance type size (for example, m3.medium) of the running instance.
+     * The instance type (for example, m3.medium) of the running instance.
      */
     InstanceType?: String;
+    /**
+     * The ID of the AWS account that owns the instance.
+     */
+    OwnerId?: String;
   }
   export type HostInstanceList = HostInstance[];
   export type HostList = Host[];
@@ -12497,15 +12518,19 @@ declare namespace EC2 {
      */
     Cores?: Integer;
     /**
-     * The instance type size that the Dedicated Host supports (for example, m3.medium).
+     * The instance type supported by the Dedicated Host. For example, m5.large. If the host supports multiple instance types, no instanceType is returned.
      */
     InstanceType?: String;
+    /**
+     * The instance family supported by the Dedicated Host. For example, m5.
+     */
+    InstanceFamily?: String;
     /**
      * The number of sockets on the Dedicated Host.
      */
     Sockets?: Integer;
     /**
-     * The number of vCPUs on the Dedicated Host.
+     * The total number of vCPUs on the Dedicated Host.
      */
     TotalVCpus?: Integer;
   }
@@ -12841,6 +12866,20 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface ImportImageLicenseConfigurationRequest {
+    /**
+     * The ARN of a license configuration.
+     */
+    LicenseConfigurationArn?: String;
+  }
+  export interface ImportImageLicenseConfigurationResponse {
+    /**
+     * The ARN of a license configuration.
+     */
+    LicenseConfigurationArn?: String;
+  }
+  export type ImportImageLicenseSpecificationListRequest = ImportImageLicenseConfigurationRequest[];
+  export type ImportImageLicenseSpecificationListResponse = ImportImageLicenseConfigurationResponse[];
   export interface ImportImageRequest {
     /**
      * The architecture of the virtual machine. Valid values: i386 | x86_64 | arm64 
@@ -12877,7 +12916,7 @@ declare namespace EC2 {
     /**
      * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the AMI is being copied to.
      */
-    KmsKeyId?: KmsKeyId;
+    KmsKeyId?: String;
     /**
      * The license type to be used for the Amazon Machine Image (AMI) after importing. By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify AWS to replace the source-system license with an AWS license, if appropriate. Specify BYOL to retain the source-system license, if appropriate. To use BYOL, you must have existing licenses with rights to use these licenses in a third party cloud, such as AWS. For more information, see Prerequisites in the VM Import/Export User Guide.
      */
@@ -12890,6 +12929,10 @@ declare namespace EC2 {
      * The name of the role to use when not using the default role, 'vmimport'.
      */
     RoleName?: String;
+    /**
+     * The ARNs of the license configurations.
+     */
+    LicenseSpecifications?: ImportImageLicenseSpecificationListRequest;
   }
   export interface ImportImageResult {
     /**
@@ -12944,6 +12987,10 @@ declare namespace EC2 {
      * A detailed status message of the import task.
      */
     StatusMessage?: String;
+    /**
+     * The ARNs of the license configurations.
+     */
+    LicenseSpecifications?: ImportImageLicenseSpecificationListResponse;
   }
   export interface ImportImageTask {
     /**
@@ -12998,6 +13045,10 @@ declare namespace EC2 {
      * A descriptive status message for the import image task.
      */
     StatusMessage?: String;
+    /**
+     * The ARNs of the license configurations associated to the import image task.
+     */
+    LicenseSpecifications?: ImportImageLicenseSpecificationListResponse;
   }
   export type ImportImageTaskList = ImportImageTask[];
   export interface ImportInstanceLaunchSpecification {
@@ -13543,15 +13594,15 @@ declare namespace EC2 {
   export type InstanceBlockDeviceMappingSpecificationList = InstanceBlockDeviceMappingSpecification[];
   export interface InstanceCapacity {
     /**
-     * The number of instances that can still be launched onto the Dedicated Host.
+     * The number of instances that can be launched onto the Dedicated Host based on the host's available capacity.
      */
     AvailableCapacity?: Integer;
     /**
-     * The instance type size supported by the Dedicated Host.
+     * The instance type supported by the Dedicated Host.
      */
     InstanceType?: String;
     /**
-     * The total number of instances that can be launched onto the Dedicated Host.
+     * The total number of instances that can be launched onto the Dedicated Host if there are no instances running on it.
      */
     TotalCapacity?: Integer;
   }
@@ -14080,7 +14131,6 @@ declare namespace EC2 {
   }
   export type Ipv6RangeList = Ipv6Range[];
   export type Ipv6SupportValue = "enable"|"disable"|string;
-  export type KernelId = string;
   export type KeyNameStringList = String[];
   export interface KeyPair {
     /**
@@ -15007,6 +15057,14 @@ declare namespace EC2 {
      * Indicates whether to enable or disable host recovery for the Dedicated Host. For more information, see  Host Recovery in the Amazon Elastic Compute Cloud User Guide.
      */
     HostRecovery?: HostRecovery;
+    /**
+     * Specifies the instance type to be supported by the Dedicated Host. Specify this parameter to modify a Dedicated Host to support only a specific instance type. If you want to modify a Dedicated Host to support multiple instance types in its current instance family, omit this parameter and specify InstanceFamily instead. You cannot specify InstanceType and InstanceFamily in the same request.
+     */
+    InstanceType?: String;
+    /**
+     * Specifies the instance family to be supported by the Dedicated Host. Specify this parameter to modify a Dedicated Host to support multiple instance types within its current instance family. If you want to modify a Dedicated Host to support a specific instance type only, omit this parameter and specify InstanceType instead. You cannot specify InstanceFamily and InstanceType in the same request.
+     */
+    InstanceFamily?: String;
   }
   export interface ModifyHostsResult {
     /**
@@ -15054,7 +15112,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: ImageId;
+    ImageId: String;
     /**
      * A new launch permission for the AMI.
      */
@@ -16970,7 +17028,6 @@ declare namespace EC2 {
   export type PurchaseSet = Purchase[];
   export type PurchasedScheduledInstanceSet = ScheduledInstance[];
   export type RIProductDescription = "Linux/UNIX"|"Linux/UNIX (Amazon VPC)"|"Windows"|"Windows (Amazon VPC)"|string;
-  export type RamdiskId = string;
   export type ReasonCodesList = ReportInstanceReasonCodes[];
   export interface RebootInstancesRequest {
     /**
@@ -17038,7 +17095,7 @@ declare namespace EC2 {
     /**
      * The ID of the kernel.
      */
-    KernelId?: KernelId;
+    KernelId?: String;
     /**
      * A name for your AMI. Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)
      */
@@ -17050,7 +17107,7 @@ declare namespace EC2 {
     /**
      * The ID of the RAM disk.
      */
-    RamdiskId?: RamdiskId;
+    RamdiskId?: String;
     /**
      * The device name of the root device volume (for example, /dev/sda1).
      */
@@ -17966,7 +18023,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: ImageId;
+    ImageId: String;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */

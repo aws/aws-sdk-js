@@ -44,6 +44,37 @@
       ],
       "documentation": "<p> Creates a new Amplify App. </p>"
     },
+    "CreateBackendEnvironment": {
+      "name": "CreateBackendEnvironment",
+      "http": {
+        "method": "POST",
+        "requestUri": "/apps/{appId}/backendenvironments"
+      },
+      "input": {
+        "shape": "CreateBackendEnvironmentRequest"
+      },
+      "output": {
+        "shape": "CreateBackendEnvironmentResult"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p> Creates a new backend environment for an Amplify App. </p>"
+    },
     "CreateBranch": {
       "name": "CreateBranch",
       "http": {
@@ -204,6 +235,37 @@
         }
       ],
       "documentation": "<p> Delete an existing Amplify App by appId. </p>"
+    },
+    "DeleteBackendEnvironment": {
+      "name": "DeleteBackendEnvironment",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/apps/{appId}/backendenvironments/{environmentName}"
+      },
+      "input": {
+        "shape": "DeleteBackendEnvironmentRequest"
+      },
+      "output": {
+        "shape": "DeleteBackendEnvironmentResult"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "DependentServiceFailureException"
+        }
+      ],
+      "documentation": "<p> Delete backend environment for an Amplify App. </p>"
     },
     "DeleteBranch": {
       "name": "DeleteBranch",
@@ -416,6 +478,34 @@
       ],
       "documentation": "<p> Retrieves artifact info that corresponds to a artifactId. </p>"
     },
+    "GetBackendEnvironment": {
+      "name": "GetBackendEnvironment",
+      "http": {
+        "method": "GET",
+        "requestUri": "/apps/{appId}/backendenvironments/{environmentName}"
+      },
+      "input": {
+        "shape": "GetBackendEnvironmentRequest"
+      },
+      "output": {
+        "shape": "GetBackendEnvironmentResult"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p> Retrieves a backend environment for an Amplify App. </p>"
+    },
     "GetBranch": {
       "name": "GetBranch",
       "http": {
@@ -586,6 +676,31 @@
         }
       ],
       "documentation": "<p> List artifacts with an app, a branch, a job and an artifact type. </p>"
+    },
+    "ListBackendEnvironments": {
+      "name": "ListBackendEnvironments",
+      "http": {
+        "method": "GET",
+        "requestUri": "/apps/{appId}/backendenvironments"
+      },
+      "input": {
+        "shape": "ListBackendEnvironmentsRequest"
+      },
+      "output": {
+        "shape": "ListBackendEnvironmentsResult"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p> Lists backend environments for an Amplify App. </p>"
     },
     "ListBranches": {
       "name": "ListBranches",
@@ -1216,10 +1331,52 @@
         "shape": "AutoBranchCreationPattern"
       }
     },
+    "BackendEnvironment": {
+      "type": "structure",
+      "required": [
+        "backendEnvironmentArn",
+        "environmentName",
+        "createTime",
+        "updateTime"
+      ],
+      "members": {
+        "backendEnvironmentArn": {
+          "shape": "BackendEnvironmentArn",
+          "documentation": "<p> Arn for a backend environment, part of an Amplify App. </p>"
+        },
+        "environmentName": {
+          "shape": "EnvironmentName",
+          "documentation": "<p> Name for a backend environment, part of an Amplify App. </p>"
+        },
+        "stackName": {
+          "shape": "StackName",
+          "documentation": "<p> CloudFormation stack name of backend environment. </p>"
+        },
+        "deploymentArtifacts": {
+          "shape": "DeploymentArtifacts",
+          "documentation": "<p> Name of deployment artifacts. </p>"
+        },
+        "createTime": {
+          "shape": "CreateTime",
+          "documentation": "<p> Creation date and time for a backend environment, part of an Amplify App. </p>"
+        },
+        "updateTime": {
+          "shape": "UpdateTime",
+          "documentation": "<p> Last updated date and time for a backend environment, part of an Amplify App. </p>"
+        }
+      },
+      "documentation": "<p> Backend environment for an Amplify App. </p>"
+    },
     "BackendEnvironmentArn": {
       "type": "string",
       "max": 1000,
       "min": 1
+    },
+    "BackendEnvironments": {
+      "type": "list",
+      "member": {
+        "shape": "BackendEnvironment"
+      }
     },
     "BasicAuthCredentials": {
       "type": "string",
@@ -1486,6 +1643,47 @@
           "shape": "App"
         }
       }
+    },
+    "CreateBackendEnvironmentRequest": {
+      "type": "structure",
+      "required": [
+        "appId",
+        "environmentName"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppId",
+          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "location": "uri",
+          "locationName": "appId"
+        },
+        "environmentName": {
+          "shape": "EnvironmentName",
+          "documentation": "<p> Name for the backend environment. </p>"
+        },
+        "stackName": {
+          "shape": "StackName",
+          "documentation": "<p> CloudFormation stack name of backend environment. </p>"
+        },
+        "deploymentArtifacts": {
+          "shape": "DeploymentArtifacts",
+          "documentation": "<p> Name of deployment artifacts. </p>"
+        }
+      },
+      "documentation": "<p> Request structure for a backend environment create request. </p>"
+    },
+    "CreateBackendEnvironmentResult": {
+      "type": "structure",
+      "required": [
+        "backendEnvironment"
+      ],
+      "members": {
+        "backendEnvironment": {
+          "shape": "BackendEnvironment",
+          "documentation": "<p> Backend environment structure for an amplify App. </p>"
+        }
+      },
+      "documentation": "<p> Result structure for create backend environment. </p>"
     },
     "CreateBranchRequest": {
       "type": "structure",
@@ -1789,6 +1987,41 @@
       },
       "documentation": "<p> Result structure for an Amplify App delete request. </p>"
     },
+    "DeleteBackendEnvironmentRequest": {
+      "type": "structure",
+      "required": [
+        "appId",
+        "environmentName"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppId",
+          "documentation": "<p> Unique Id of an Amplify App. </p>",
+          "location": "uri",
+          "locationName": "appId"
+        },
+        "environmentName": {
+          "shape": "EnvironmentName",
+          "documentation": "<p> Name of a backend environment of an Amplify App. </p>",
+          "location": "uri",
+          "locationName": "environmentName"
+        }
+      },
+      "documentation": "<p> Request structure for delete backend environment request. </p>"
+    },
+    "DeleteBackendEnvironmentResult": {
+      "type": "structure",
+      "required": [
+        "backendEnvironment"
+      ],
+      "members": {
+        "backendEnvironment": {
+          "shape": "BackendEnvironment",
+          "documentation": "<p> Backend environment structure for an Amplify App. </p>"
+        }
+      },
+      "documentation": "<p> Result structure of a delete backend environment result. </p>"
+    },
     "DeleteBranchRequest": {
       "type": "structure",
       "required": [
@@ -1926,6 +2159,11 @@
       },
       "documentation": "<p> Result structure for the delete webhook request. </p>"
     },
+    "DeploymentArtifacts": {
+      "type": "string",
+      "max": 1000,
+      "min": 1
+    },
     "Description": {
       "type": "string",
       "max": 1000
@@ -2039,6 +2277,11 @@
     "EnvValue": {
       "type": "string",
       "max": 1000
+    },
+    "EnvironmentName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
     },
     "EnvironmentVariables": {
       "type": "map",
@@ -2171,6 +2414,41 @@
         }
       },
       "documentation": "<p> Result structure for the get artifact request. </p>"
+    },
+    "GetBackendEnvironmentRequest": {
+      "type": "structure",
+      "required": [
+        "appId",
+        "environmentName"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppId",
+          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "location": "uri",
+          "locationName": "appId"
+        },
+        "environmentName": {
+          "shape": "EnvironmentName",
+          "documentation": "<p> Name for the backend environment. </p>",
+          "location": "uri",
+          "locationName": "environmentName"
+        }
+      },
+      "documentation": "<p> Request structure for get backend environment request. </p>"
+    },
+    "GetBackendEnvironmentResult": {
+      "type": "structure",
+      "required": [
+        "backendEnvironment"
+      ],
+      "members": {
+        "backendEnvironment": {
+          "shape": "BackendEnvironment",
+          "documentation": "<p> Backend environment structure for an an Amplify App. </p>"
+        }
+      },
+      "documentation": "<p> Result structure for get backend environment result. </p>"
     },
     "GetBranchRequest": {
       "type": "structure",
@@ -2514,6 +2792,54 @@
       },
       "documentation": "<p> Result structure for the list artifacts request. </p>"
     },
+    "ListBackendEnvironmentsRequest": {
+      "type": "structure",
+      "required": [
+        "appId"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppId",
+          "documentation": "<p> Unique Id for an amplify App. </p>",
+          "location": "uri",
+          "locationName": "appId"
+        },
+        "environmentName": {
+          "shape": "EnvironmentName",
+          "documentation": "<p> Name of the backend environment </p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> Pagination token. Set to null to start listing backen environments from start. If a non-null pagination token is returned in a result, then pass its value in here to list more backend environments. </p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      },
+      "documentation": "<p> Request structure for list backend environments request. </p>"
+    },
+    "ListBackendEnvironmentsResult": {
+      "type": "structure",
+      "required": [
+        "backendEnvironments"
+      ],
+      "members": {
+        "backendEnvironments": {
+          "shape": "BackendEnvironments",
+          "documentation": "<p> List of backend environments for an Amplify App. </p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>"
+        }
+      },
+      "documentation": "<p> Result structure for list backend environments result. </p>"
+    },
     "ListBranchesRequest": {
       "type": "structure",
       "required": [
@@ -2810,6 +3136,11 @@
     "SourceUrl": {
       "type": "string",
       "max": 1000
+    },
+    "StackName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
     },
     "Stage": {
       "type": "string",

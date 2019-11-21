@@ -283,6 +283,10 @@ declare namespace LexRuntime {
      */
     sessionAttributes?: String;
     /**
+     * The sentiment expressed in and utterance. When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.
+     */
+    sentimentResponse?: String;
+    /**
      * The message to convey to the user. The message can come from the bot's configuration or from a Lambda function. If the intent is not configured with a Lambda function, or if the Lambda function returned Delegate as the dialogAction.type in its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot's configuration based on the current interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message. When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see msg-prompts-formats. If the Lambda function returns a message, Amazon Lex passes it to the client in its response.
      */
     message?: Text;
@@ -350,6 +354,10 @@ declare namespace LexRuntime {
      * The message to convey to the user. The message can come from the bot's configuration or from a Lambda function. If the intent is not configured with a Lambda function, or if the Lambda function returned Delegate as the dialogAction.type its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot's configuration based on the current interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message. When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see msg-prompts-formats. If the Lambda function returns a message, Amazon Lex passes it to the client in its response.
      */
     message?: Text;
+    /**
+     * The sentiment expressed in and utterance. When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.
+     */
+    sentimentResponse?: SentimentResponse;
     /**
      * The format of the response message. One of the following values:    PlainText - The message contains plain UTF-8 text.    CustomPayload - The message is a custom format defined by the Lambda function.    SSML - The message contains text formatted for voice output.    Composite - The message contains an escaped JSON object containing one or more messages from the groups that messages were assigned to when the intent was created.  
      */
@@ -453,6 +461,18 @@ declare namespace LexRuntime {
      */
     genericAttachments?: genericAttachmentList;
   }
+  export type SentimentLabel = string;
+  export interface SentimentResponse {
+    /**
+     * The inferred sentiment that Amazon Comprehend has the highest confidence in.
+     */
+    sentimentLabel?: SentimentLabel;
+    /**
+     * The likelihood that the sentiment was correctly inferred.
+     */
+    sentimentScore?: SentimentScore;
+  }
+  export type SentimentScore = string;
   export type String = string;
   export type StringMap = {[key: string]: String};
   export type StringUrlWithLength = string;

@@ -199,5 +199,6 @@ module.exports = {
   MarketplaceCatalog: require('./marketplacecatalog'),
   DataExchange: require('./dataexchange'),
   SESV2: require('./sesv2'),
-  MigrationHubConfig: require('./migrationhubconfig')
+  MigrationHubConfig: require('./migrationhubconfig'),
+  ConnectParticipant: require('./connectparticipant')
 };

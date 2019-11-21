@@ -141,7 +141,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Deletes the specified conformance pack and all the AWS Config rules and all evaluation results within that conformance pack.</p> <p>AWS Config sets the conformance pack to <code>DELETE_IN_PROGRESS</code> until the deletion is complete. You cannot update a conformance pack while it is in this state.</p>"
+      "documentation": "<p>Deletes the specified conformance pack and all the AWS Config rules, remediation actions, and all evaluation results within that conformance pack.</p> <p>AWS Config sets the conformance pack to <code>DELETE_IN_PROGRESS</code> until the deletion is complete. You cannot update a conformance pack while it is in this state.</p>"
     },
     "DeleteDeliveryChannel": {
       "name": "DeleteDeliveryChannel",
@@ -284,6 +284,25 @@
         }
       ],
       "documentation": "<p>Deletes one or more remediation exceptions mentioned in the resource keys.</p>"
+    },
+    "DeleteResourceConfig": {
+      "name": "DeleteResourceConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteResourceConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "NoRunningConfigurationRecorderException"
+        }
+      ],
+      "documentation": "<p>Records the configuration state for a custom resource that has been deleted. This API records a new ConfigurationItem with a ResourceDeleted status. You can retrieve the ConfigurationItems recorded for this resource in your AWS Config History. </p>"
     },
     "DeleteRetentionConfiguration": {
       "name": "DeleteRetentionConfiguration",
@@ -599,7 +618,7 @@
           "shape": "NoSuchConformancePackException"
         }
       ],
-      "documentation": "<p>Returns compliance information for each rule in that conformance pack.</p> <note> <p>You must provide exact rule names otherwise AWS Config cannot return evaluation results due to insufficient data.</p> </note>"
+      "documentation": "<p>Returns compliance details for each rule in that conformance pack.</p> <note> <p>You must provide exact rule names.</p> </note>"
     },
     "DescribeConformancePackStatus": {
       "name": "DescribeConformancePackStatus",
@@ -621,7 +640,7 @@
           "shape": "InvalidNextTokenException"
         }
       ],
-      "documentation": "<p>Provides one or more conformance packs deployment status.</p>"
+      "documentation": "<p>Provides one or more conformance packs deployment status.</p> <note> <p>If there are no conformance packs then you will see an empty result.</p> </note>"
     },
     "DescribeConformancePacks": {
       "name": "DescribeConformancePacks",
@@ -796,7 +815,7 @@
           "shape": "OrganizationAccessDeniedException"
         }
       ],
-      "documentation": "<p>Returns a list of organization conformance packs.</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs. Only a master account can call this API.</p> </note>"
+      "documentation": "<p>Returns a list of organization conformance packs.</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs. </p> <p>Only a master account can call this API.</p> </note>"
     },
     "DescribePendingAggregationRequests": {
       "name": "DescribePendingAggregationRequests",
@@ -1145,7 +1164,8 @@
         {
           "shape": "InvalidNextTokenException"
         }
-      ]
+      ],
+      "documentation": "<p>Returns compliance details for the conformance pack based on the cumulative compliance results of all the rules in that conformance pack.</p>"
     },
     "GetDiscoveredResourceCounts": {
       "name": "GetDiscoveredResourceCounts",
@@ -1481,7 +1501,7 @@
           "shape": "MaxNumberOfConformancePacksExceededException"
         }
       ],
-      "documentation": "<p>Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region.</p> <p>This API creates a service linked role <code>AWSServiceRoleForConfigConforms</code> in your account. The service linked role is created only when the role does not exist in your account. AWS Config verifies the existence of role with <code>GetRole</code> action.</p> <note> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> </note>"
+      "documentation": "<p>Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region and across AWS Organization.</p> <p>This API creates a service linked role <code>AWSServiceRoleForConfigConforms</code> in your account. The service linked role is created only when the role does not exist in your account. AWS Config verifies the existence of role with <code>GetRole</code> action.</p> <note> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> </note>"
     },
     "PutDeliveryChannel": {
       "name": "PutDeliveryChannel",
@@ -1620,7 +1640,7 @@
           "shape": "NoAvailableOrganizationException"
         }
       ],
-      "documentation": "<p>Deploys conformance packs across member accounts in an AWS Organization.</p> <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with GetRole action. </p> <note> <p>The SPN is <code>config-multiaccountsetup.amazonaws.com</code>.</p> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> </note>"
+      "documentation": "<p>Deploys conformance packs across member accounts in an AWS Organization.</p> <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code> through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with GetRole action.</p> <note> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the confomance pack is created or updated. You cannot update a conformance pack while it is in this state.</p> <p>You can create 6 conformance packs with 25 AWS Config rules in each pack.</p> </note>"
     },
     "PutRemediationConfigurations": {
       "name": "PutRemediationConfigurations",
@@ -1662,6 +1682,31 @@
         }
       ],
       "documentation": "<p>A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. </p>"
+    },
+    "PutResourceConfig": {
+      "name": "PutResourceConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutResourceConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InsufficientPermissionsException"
+        },
+        {
+          "shape": "NoRunningConfigurationRecorderException"
+        },
+        {
+          "shape": "MaxActiveResourcesExceededException"
+        }
+      ],
+      "documentation": "<p>Records the configuration state for the resource provided in the request. The configuration state of a resource is represented in AWS Config as Configuration Items. Once this API records the configuration item, you can retrieve the list of configuration items for the custom resource type using existing AWS Config APIs. </p> <note> <p>The custom resource type must be registered with AWS CloudFormation. This API accepts the configuration item registered with AWS CloudFormation.</p> <p>When you call this API, AWS Config only stores configuration state of the resource provided in the request. This API does not change or remediate the configuration of the resource. </p> </note>"
     },
     "PutRetentionConfiguration": {
       "name": "PutRetentionConfiguration",
@@ -2769,7 +2814,7 @@
         },
         "relatedEvents": {
           "shape": "RelatedEventList",
-          "documentation": "<p>A list of CloudTrail event IDs.</p> <p>A populated field indicates that the current configuration was initiated by the events recorded in the CloudTrail log. For more information about CloudTrail, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html\">What Is AWS CloudTrail</a>.</p> <p>An empty field indicates that the current configuration was not initiated by any event.</p>"
+          "documentation": "<p>A list of CloudTrail event IDs.</p> <p>A populated field indicates that the current configuration was initiated by the events recorded in the CloudTrail log. For more information about CloudTrail, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html\">What Is AWS CloudTrail</a>.</p> <p>An empty field indicates that the current configuration was not initiated by any event. As of Version 1.3, the relatedEvents field is empty. You can access the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html\">LookupEvents API</a> in the <i>AWS CloudTrail API Reference</i> to retrieve the events for the resource.</p>"
         },
         "relationships": {
           "shape": "RelationshipList",
@@ -2920,12 +2965,15 @@
       ],
       "members": {
         "ConformancePackName": {
-          "shape": "ConformancePackName"
+          "shape": "ConformancePackName",
+          "documentation": "<p>The name of the conformance pack name.</p>"
         },
         "ConformancePackComplianceStatus": {
-          "shape": "ConformancePackComplianceType"
+          "shape": "ConformancePackComplianceType",
+          "documentation": "<p>The status of the conformance pack. The allowed values are COMPLIANT and NON_COMPLIANT. </p>"
         }
-      }
+      },
+      "documentation": "<p>Summary includes the name and status of the conformance pack.</p>"
     },
     "ConformancePackComplianceSummaryList": {
       "type": "list",
@@ -2973,11 +3021,11 @@
         },
         "DeliveryS3Bucket": {
           "shape": "DeliveryS3Bucket",
-          "documentation": "<p>Location of an Amazon S3 bucket where AWS Config can deliver evaluation results and conformance pack template that is used to create a pack.</p>"
+          "documentation": "<p>Conformance pack template that is used to create a pack. The delivery bucket name should start with awsconfigconforms. For example: \"Resource\": \"arn:aws:s3:::your_bucket_name/*\".</p>"
         },
         "DeliveryS3KeyPrefix": {
           "shape": "DeliveryS3KeyPrefix",
-          "documentation": "<p>Any folder structure you want to add to an Amazon S3 bucket.</p>"
+          "documentation": "<p>The prefix for the Amazon S3 bucket.</p>"
         },
         "ConformancePackInputParameters": {
           "shape": "ConformancePackInputParameters",
@@ -2988,10 +3036,11 @@
           "documentation": "<p>Last time when conformation pack update was requested. </p>"
         },
         "CreatedBy": {
-          "shape": "StringWithCharLimit256"
+          "shape": "StringWithCharLimit256",
+          "documentation": "<p>AWS service that created the conformance pack.</p>"
         }
       },
-      "documentation": "<p>Returns details of a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region.</p>"
+      "documentation": "<p>Returns details of a conformance pack. A conformance pack is a collection of AWS Config rules and remediation actions that can be easily deployed in an account and a region.</p>"
     },
     "ConformancePackDetailList": {
       "type": "list",
@@ -3018,7 +3067,7 @@
         },
         "ResourceIds": {
           "shape": "ConformancePackComplianceResourceIds",
-          "documentation": "<p>Filters the results by resource IDs.</p>"
+          "documentation": "<p>Filters the results by resource IDs.</p> <note> <p>This is valid only when you provide resource type. If there is no resource type, you will see an error.</p> </note>"
         }
       },
       "documentation": "<p>Filters a conformance pack by AWS Config rule names, compliance types, AWS resource types, and resource IDs.</p>"
@@ -3034,7 +3083,7 @@
       "members": {
         "ComplianceType": {
           "shape": "ConformancePackComplianceType",
-          "documentation": "<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
+          "documentation": "<p>The compliance type. The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. </p>"
         },
         "EvaluationResultIdentifier": {
           "shape": "EvaluationResultIdentifier"
@@ -3112,11 +3161,11 @@
       "members": {
         "ConfigRuleName": {
           "shape": "ConfigRuleName",
-          "documentation": "<p>Filters the results by AWS Config rule name.</p>"
+          "documentation": "<p>Name of the config rule.</p>"
         },
         "ComplianceType": {
           "shape": "ConformancePackComplianceType",
-          "documentation": "<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
+          "documentation": "<p>Compliance of the AWS Config rule</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
         }
       },
       "documentation": "<p>Compliance information of one or more AWS Config rules within a conformance pack. You can filter using AWS Config rule names and compliance types.</p>"
@@ -3172,7 +3221,7 @@
         },
         "ConformancePackState": {
           "shape": "ConformancePackState",
-          "documentation": "<p>Indicates deployment status of conformance pack.</p> <p>AWS Config sets the state of the conformance pack to:</p> <ul> <li> <p>CREATE_IN_PROGRESS when a conformance pack creation is in progress for an account.</p> </li> <li> <p>CREATE_COMPLETE when a conformance pack has been successfully created in your account.</p> </li> <li> <p>CREATE_FAILED when a conformance pack creation failed in your account.</p> </li> <li> <p>DELETE_IN_PROGRESS when a conformance pack deletion is in progress. </p> </li> <li> <p>DELETE_FAILED when a conformance pack deletion failed from your account.</p> </li> </ul>"
+          "documentation": "<p>Indicates deployment status of conformance pack.</p> <p>AWS Config sets the state of the conformance pack to:</p> <ul> <li> <p>CREATE_IN_PROGRESS when a conformance pack creation is in progress for an account.</p> </li> <li> <p>CREATE_COMPLETE when a conformance pack has been successfully created in your account.</p> </li> <li> <p>CREATE_FAILED when a conformance pack creation failed in your account.</p> </li> <li> <p>DELETE_IN_PROGRESS when a conformance pack deletion is in progress. </p> </li> <li> <p>DELETE_FAILED when a conformance pack deletion failed in your account.</p> </li> </ul>"
         },
         "StackArn": {
           "shape": "StackArn",
@@ -3396,6 +3445,23 @@
         "FailedBatches": {
           "shape": "FailedDeleteRemediationExceptionsBatches",
           "documentation": "<p>Returns a list of failed delete remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.</p>"
+        }
+      }
+    },
+    "DeleteResourceConfigRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceType",
+        "ResourceId"
+      ],
+      "members": {
+        "ResourceType": {
+          "shape": "ResourceTypeString",
+          "documentation": "<p>The type of the resource.</p>"
+        },
+        "ResourceId": {
+          "shape": "ResourceId",
+          "documentation": "<p>Unique identifier of the resource.</p>"
         }
       }
     },
@@ -3879,7 +3945,7 @@
         },
         "Limit": {
           "shape": "PageSizeLimit",
-          "documentation": "<p>The maximum number of conformance packs returned on each page.</p>"
+          "documentation": "<p>The maximum number of conformance packs status returned on each page.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -4812,13 +4878,16 @@
       ],
       "members": {
         "ConformancePackNames": {
-          "shape": "ConformancePackNamesToSummarizeList"
+          "shape": "ConformancePackNamesToSummarizeList",
+          "documentation": "<p>Names of conformance packs.</p>"
         },
         "Limit": {
-          "shape": "PageSizeLimit"
+          "shape": "PageSizeLimit",
+          "documentation": "<p>The maximum number of conformance packs returned on each page.</p>"
         },
         "NextToken": {
-          "shape": "NextToken"
+          "shape": "NextToken",
+          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -4826,10 +4895,12 @@
       "type": "structure",
       "members": {
         "ConformancePackComplianceSummaryList": {
-          "shape": "ConformancePackComplianceSummaryList"
+          "shape": "ConformancePackComplianceSummaryList",
+          "documentation": "<p>A list of <code>ConformancePackComplianceSummary</code> objects. </p>"
         },
         "NextToken": {
-          "shape": "NextToken"
+          "shape": "NextToken",
+          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
         }
       }
     },
@@ -5481,7 +5552,7 @@
         },
         "ErrorCode": {
           "shape": "String",
-          "documentation": "<p>An error code that is returned when organization conformance pack creation or deletion has failed in the member account. </p>"
+          "documentation": "<p>An error code that is returned when organization conformance pack creation or deletion has failed in a member account. </p>"
         },
         "ErrorMessage": {
           "shape": "String",
@@ -5802,15 +5873,15 @@
         },
         "TemplateS3Uri": {
           "shape": "TemplateS3Uri",
-          "documentation": "<p>Location of file containing the template body. The uri must point to the conformance pack template (max size: 300,000 bytes) that is located in an Amazon S3 bucket in the same region as the conformance pack.</p> <note> <p>You must have access to read Amazon S3 bucket.</p> </note>"
+          "documentation": "<p>Location of file containing the template body (<code>s3://bucketname/prefix</code>). The uri must point to the conformance pack template (max size: 300 KB) that is located in an Amazon S3 bucket in the same region as the conformance pack. </p> <note> <p>You must have access to read Amazon S3 bucket.</p> </note>"
         },
         "TemplateBody": {
           "shape": "TemplateBody",
-          "documentation": "<p>A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.</p> <note> <p>You can only use a YAML template with one resource type, that is, config rule.</p> </note>"
+          "documentation": "<p>A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.</p> <note> <p>You can only use a YAML template with one resource type, that is, config rule and a remediation action. </p> </note>"
         },
         "DeliveryS3Bucket": {
           "shape": "DeliveryS3Bucket",
-          "documentation": "<p>Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template.</p>"
+          "documentation": "<p>AWS Config stores intermediate files while processing conformance pack template.</p>"
         },
         "DeliveryS3KeyPrefix": {
           "shape": "DeliveryS3KeyPrefix",
@@ -5921,7 +5992,7 @@
         },
         "TemplateS3Uri": {
           "shape": "TemplateS3Uri",
-          "documentation": "<p>Location of file containing the template body. The uri must point to the conformance pack template (max size: 300,000 bytes).</p> <note> <p>You must have access to read Amazon S3 bucket.</p> </note>"
+          "documentation": "<p>Location of file containing the template body. The uri must point to the conformance pack template (max size: 300 KB).</p> <note> <p>You must have access to read Amazon S3 bucket.</p> </note>"
         },
         "TemplateBody": {
           "shape": "TemplateBody",
@@ -5929,7 +6000,7 @@
         },
         "DeliveryS3Bucket": {
           "shape": "DeliveryS3Bucket",
-          "documentation": "<p>Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template.</p>"
+          "documentation": "<p>Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template. </p> <p>The delivery bucket name should start with awsconfigconforms. For example: \"Resource\": \"arn:aws:s3:::your_bucket_name/*\". For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html\">Permissions for cross account bucket access</a>.</p>"
         },
         "DeliveryS3KeyPrefix": {
           "shape": "DeliveryS3KeyPrefix",
@@ -6006,6 +6077,41 @@
         "FailedBatches": {
           "shape": "FailedRemediationExceptionBatches",
           "documentation": "<p>Returns a list of failed remediation exceptions batch objects. Each object in the batch consists of a list of failed items and failure messages.</p>"
+        }
+      }
+    },
+    "PutResourceConfigRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceType",
+        "SchemaVersionId",
+        "ResourceId",
+        "Configuration"
+      ],
+      "members": {
+        "ResourceType": {
+          "shape": "ResourceTypeString",
+          "documentation": "<p>The type of the resource. The custom resource type must be registered with AWS CloudFormation. </p> <note> <p>You cannot use the organization names “aws”, “amzn”, “amazon”, “alexa”, “custom” with custom resource types. It is the first part of the ResourceType up to the first ::.</p> </note>"
+        },
+        "SchemaVersionId": {
+          "shape": "SchemaVersionId",
+          "documentation": "<p>Version of the schema registered for the ResourceType in AWS CloudFormation.</p>"
+        },
+        "ResourceId": {
+          "shape": "ResourceId",
+          "documentation": "<p>Unique identifier of the resource.</p>"
+        },
+        "ResourceName": {
+          "shape": "ResourceName",
+          "documentation": "<p>Name of the resource.</p>"
+        },
+        "Configuration": {
+          "shape": "Configuration",
+          "documentation": "<p>The configuration object of the resource in valid JSON format. It must match the schema registered with AWS CloudFormation.</p> <note> <p>The configuration JSON must not exceed 64 KB.</p> </note>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>Tags associated with the resource.</p>"
         }
       }
     },
@@ -6609,6 +6715,11 @@
         "shape": "ResourceType"
       }
     },
+    "ResourceTypeString": {
+      "type": "string",
+      "max": 196,
+      "min": 1
+    },
     "ResourceTypes": {
       "type": "list",
       "member": {
@@ -6697,6 +6808,12 @@
       "type": "integer",
       "max": 50,
       "min": 0
+    },
+    "SchemaVersionId": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[A-Za-z0-9-]+"
     },
     "Scope": {
       "type": "structure",

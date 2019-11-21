@@ -200,6 +200,7 @@ export abstract class ConfigurationServicePlaceholders {
   dataexchange?: AWS.DataExchange.Types.ClientConfiguration;
   sesv2?: AWS.SESV2.Types.ClientConfiguration;
   migrationhubconfig?: AWS.MigrationHubConfig.Types.ClientConfiguration;
+  connectparticipant?: AWS.ConnectParticipant.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -402,4 +403,5 @@ export interface ConfigurationServiceApiVersions {
   dataexchange?: AWS.DataExchange.Types.apiVersion;
   sesv2?: AWS.SESV2.Types.apiVersion;
   migrationhubconfig?: AWS.MigrationHubConfig.Types.apiVersion;
+  connectparticipant?: AWS.ConnectParticipant.Types.apiVersion;
 }

@@ -135,7 +135,7 @@
           "shape": "TableNotFoundException"
         }
       ],
-      "documentation": "<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions. </p> <p>If you want to add a new replica table to a global table, each of the following conditions must be true:</p> <ul> <li> <p>The table must have the same primary key as all of the other replicas.</p> </li> <li> <p>The table must have the same name as all of the other replicas.</p> </li> <li> <p>The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.</p> </li> <li> <p>None of the replica tables in the global table can contain any data.</p> </li> </ul> <p> If global secondary indexes are specified, then the following conditions must also be met: </p> <ul> <li> <p> The global secondary indexes must have the same name. </p> </li> <li> <p> The global secondary indexes must have the same hash key and sort key (if present). </p> </li> </ul> <important> <p> Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes. </p> <p> If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table. </p> </important>",
+      "documentation": "<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions. </p> <note> <p>This method only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.</p> </note> <p>If you want to add a new replica table to a global table, each of the following conditions must be true:</p> <ul> <li> <p>The table must have the same primary key as all of the other replicas.</p> </li> <li> <p>The table must have the same name as all of the other replicas.</p> </li> <li> <p>The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.</p> </li> <li> <p>None of the replica tables in the global table can contain any data.</p> </li> </ul> <p> If global secondary indexes are specified, then the following conditions must also be met: </p> <ul> <li> <p> The global secondary indexes must have the same name. </p> </li> <li> <p> The global secondary indexes must have the same hash key and sort key (if present). </p> </li> </ul> <important> <p> Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes. </p> <p> If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table. </p> </important>",
       "endpointdiscovery": {}
     },
     "CreateTable": {
@@ -341,7 +341,7 @@
           "shape": "GlobalTableNotFoundException"
         }
       ],
-      "documentation": "<p>Returns information about the specified global table.</p>",
+      "documentation": "<p>Returns information about the specified global table.</p> <note> <p>This method only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.</p> </note>",
       "endpointdiscovery": {}
     },
     "DescribeGlobalTableSettings": {
@@ -364,7 +364,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Describes Region-specific settings for a global table.</p>",
+      "documentation": "<p>Describes Region-specific settings for a global table.</p> <note> <p>This method only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.</p> </note>",
       "endpointdiscovery": {}
     },
     "DescribeLimits": {
@@ -409,6 +409,28 @@
       ],
       "documentation": "<p>Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.</p> <note> <p>If you issue a <code>DescribeTable</code> request immediately after a <code>CreateTable</code> request, DynamoDB might return a <code>ResourceNotFoundException</code>. This is because <code>DescribeTable</code> uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the <code>DescribeTable</code> request again.</p> </note>",
       "endpointdiscovery": {}
+    },
+    "DescribeTableReplicaAutoScaling": {
+      "name": "DescribeTableReplicaAutoScaling",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTableReplicaAutoScalingInput"
+      },
+      "output": {
+        "shape": "DescribeTableReplicaAutoScalingOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Describes auto scaling settings across replicas of the global table at once.</p> <note> <p>This method only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html\">Version 2019.11.21</a> of global tables.</p> </note>"
     },
     "DescribeTimeToLive": {
       "name": "DescribeTimeToLive",
@@ -499,7 +521,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Lists all global tables that have a replica in the specified Region.</p>",
+      "documentation": "<p>Lists all global tables that have a replica in the specified Region.</p> <note> <p>This method only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.</p> </note>",
       "endpointdiscovery": {}
     },
     "ListTables": {
@@ -995,6 +1017,34 @@
       ],
       "documentation": "<p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.</p> <p>You can only perform one of the following operations at once:</p> <ul> <li> <p>Modify the provisioned throughput settings of the table.</p> </li> <li> <p>Enable or disable DynamoDB Streams on the table.</p> </li> <li> <p>Remove a global secondary index from the table.</p> </li> <li> <p>Create a new global secondary index on the table. After the index begins backfilling, you can use <code>UpdateTable</code> to perform other operations.</p> </li> </ul> <p> <code>UpdateTable</code> is an asynchronous operation; while it is executing, the table status changes from <code>ACTIVE</code> to <code>UPDATING</code>. While it is <code>UPDATING</code>, you cannot issue another <code>UpdateTable</code> request. When the table returns to the <code>ACTIVE</code> state, the <code>UpdateTable</code> operation is complete.</p>",
       "endpointdiscovery": {}
+    },
+    "UpdateTableReplicaAutoScaling": {
+      "name": "UpdateTableReplicaAutoScaling",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateTableReplicaAutoScalingInput"
+      },
+      "output": {
+        "shape": "UpdateTableReplicaAutoScalingOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Updates auto scaling settings on your global tables at once.</p> <note> <p>This method only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html\">Version 2019.11.21</a> of global tables.</p> </note>"
     },
     "UpdateTimeToLive": {
       "name": "UpdateTimeToLive",
@@ -1871,6 +1921,31 @@
       },
       "documentation": "<p>Represents a replica to be added.</p>"
     },
+    "CreateReplicationGroupMemberAction": {
+      "type": "structure",
+      "required": [
+        "RegionName"
+      ],
+      "members": {
+        "RegionName": {
+          "shape": "RegionName",
+          "documentation": "<p>The Region where the new replica will be created.</p>"
+        },
+        "KMSMasterKeyId": {
+          "shape": "KMSMasterKeyId",
+          "documentation": "<p>The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption in the new replica. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.</p>"
+        },
+        "ProvisionedThroughputOverride": {
+          "shape": "ProvisionedThroughputOverride",
+          "documentation": "<p>Replica-specific provisioned throughput. If not specified, uses the source table's provisioned throughput settings.</p>"
+        },
+        "GlobalSecondaryIndexes": {
+          "shape": "ReplicaGlobalSecondaryIndexList",
+          "documentation": "<p>Replica-specific global secondary index settings.</p>"
+        }
+      },
+      "documentation": "<p>Represents a replica to be created.</p>"
+    },
     "CreateTableInput": {
       "type": "structure",
       "required": [
@@ -2083,6 +2158,19 @@
       },
       "documentation": "<p>Represents a replica to be removed.</p>"
     },
+    "DeleteReplicationGroupMemberAction": {
+      "type": "structure",
+      "required": [
+        "RegionName"
+      ],
+      "members": {
+        "RegionName": {
+          "shape": "RegionName",
+          "documentation": "<p>The Region where the replica exists.</p>"
+        }
+      },
+      "documentation": "<p>Represents a replica to be deleted.</p>"
+    },
     "DeleteRequest": {
       "type": "structure",
       "required": [
@@ -2272,6 +2360,27 @@
         }
       },
       "documentation": "<p>Represents the output of a <code>DescribeTable</code> operation.</p>"
+    },
+    "DescribeTableReplicaAutoScalingInput": {
+      "type": "structure",
+      "required": [
+        "TableName"
+      ],
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table.</p>"
+        }
+      }
+    },
+    "DescribeTableReplicaAutoScalingOutput": {
+      "type": "structure",
+      "members": {
+        "TableAutoScalingDescription": {
+          "shape": "TableAutoScalingDescription",
+          "documentation": "<p>Represents the auto scaling properties of the table.</p>"
+        }
+      }
     },
     "DescribeTimeToLiveInput": {
       "type": "structure",
@@ -2488,6 +2597,26 @@
         }
       },
       "documentation": "<p>Represents the properties of a global secondary index.</p>"
+    },
+    "GlobalSecondaryIndexAutoScalingUpdate": {
+      "type": "structure",
+      "members": {
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The name of the global secondary index.</p>"
+        },
+        "ProvisionedWriteCapacityAutoScalingUpdate": {
+          "shape": "AutoScalingSettingsUpdate"
+        }
+      },
+      "documentation": "<p>Represents the auto scaling settings of a global secondary index for a global table that will be modified.</p>"
+    },
+    "GlobalSecondaryIndexAutoScalingUpdateList": {
+      "type": "list",
+      "member": {
+        "shape": "GlobalSecondaryIndexAutoScalingUpdate"
+      },
+      "min": 1
     },
     "GlobalSecondaryIndexDescription": {
       "type": "structure",
@@ -3268,6 +3397,16 @@
       },
       "documentation": "<p>Represents the provisioned throughput settings for the table, consisting of read and write capacity units, along with data about increases and decreases.</p>"
     },
+    "ProvisionedThroughputOverride": {
+      "type": "structure",
+      "members": {
+        "ReadCapacityUnits": {
+          "shape": "PositiveLongObject",
+          "documentation": "<p>Replica-specific read capacity units. If not specified, uses the source table's read capacity settings.</p>"
+        }
+      },
+      "documentation": "<p>Replica-specific provisioned throughput settings. If not specified, uses the source table's provisioned throughput settings.</p>"
+    },
     "Put": {
       "type": "structure",
       "required": [
@@ -3506,12 +3645,93 @@
       },
       "documentation": "<p>Represents the properties of a replica.</p>"
     },
+    "ReplicaAutoScalingDescription": {
+      "type": "structure",
+      "members": {
+        "RegionName": {
+          "shape": "RegionName",
+          "documentation": "<p>The Region where the replica exists.</p>"
+        },
+        "GlobalSecondaryIndexes": {
+          "shape": "ReplicaGlobalSecondaryIndexAutoScalingDescriptionList",
+          "documentation": "<p>Replica-specific global secondary index auto scaling settings.</p>"
+        },
+        "ReplicaProvisionedReadCapacityAutoScalingSettings": {
+          "shape": "AutoScalingSettingsDescription"
+        },
+        "ReplicaProvisionedWriteCapacityAutoScalingSettings": {
+          "shape": "AutoScalingSettingsDescription"
+        },
+        "ReplicaStatus": {
+          "shape": "ReplicaStatus",
+          "documentation": "<p>The current state of the replica:</p> <ul> <li> <p> <code>CREATING</code> - The replica is being created.</p> </li> <li> <p> <code>UPDATING</code> - The replica is being updated.</p> </li> <li> <p> <code>DELETING</code> - The replica is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The replica is ready for use.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Represents the auto scaling settings of the replica.</p>"
+    },
+    "ReplicaAutoScalingDescriptionList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicaAutoScalingDescription"
+      }
+    },
+    "ReplicaAutoScalingUpdate": {
+      "type": "structure",
+      "required": [
+        "RegionName"
+      ],
+      "members": {
+        "RegionName": {
+          "shape": "RegionName",
+          "documentation": "<p>The Region where the replica exists.</p>"
+        },
+        "ReplicaGlobalSecondaryIndexUpdates": {
+          "shape": "ReplicaGlobalSecondaryIndexAutoScalingUpdateList",
+          "documentation": "<p>Represents the auto scaling settings of global secondary indexes that will be modified.</p>"
+        },
+        "ReplicaProvisionedReadCapacityAutoScalingUpdate": {
+          "shape": "AutoScalingSettingsUpdate"
+        }
+      },
+      "documentation": "<p>Represents the auto scaling settings of a replica that will be modified.</p>"
+    },
+    "ReplicaAutoScalingUpdateList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicaAutoScalingUpdate"
+      },
+      "min": 1
+    },
     "ReplicaDescription": {
       "type": "structure",
       "members": {
         "RegionName": {
           "shape": "RegionName",
           "documentation": "<p>The name of the Region.</p>"
+        },
+        "ReplicaStatus": {
+          "shape": "ReplicaStatus",
+          "documentation": "<p>The current state of the replica:</p> <ul> <li> <p> <code>CREATING</code> - The replica is being created.</p> </li> <li> <p> <code>UPDATING</code> - The replica is being updated.</p> </li> <li> <p> <code>DELETING</code> - The replica is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The replica is ready for use.</p> </li> </ul>"
+        },
+        "ReplicaStatusDescription": {
+          "shape": "ReplicaStatusDescription",
+          "documentation": "<p>Detailed information about the replica status.</p>"
+        },
+        "ReplicaStatusPercentProgress": {
+          "shape": "ReplicaStatusPercentProgress",
+          "documentation": "<p>Specifies the progress of a Create, Update, or Delete action on the replica as a percentage.</p>"
+        },
+        "KMSMasterKeyId": {
+          "shape": "KMSMasterKeyId",
+          "documentation": "<p>The AWS KMS customer master key (CMK) of the replica that will be used for AWS KMS encryption.</p>"
+        },
+        "ProvisionedThroughputOverride": {
+          "shape": "ProvisionedThroughputOverride",
+          "documentation": "<p>Replica-specific provisioned throughput. If not described, uses the source table's provisioned throughput settings.</p>"
+        },
+        "GlobalSecondaryIndexes": {
+          "shape": "ReplicaGlobalSecondaryIndexDescriptionList",
+          "documentation": "<p>Replica-specific global secondary index settings.</p>"
         }
       },
       "documentation": "<p>Contains the details of the replica.</p>"
@@ -3521,6 +3741,95 @@
       "member": {
         "shape": "ReplicaDescription"
       }
+    },
+    "ReplicaGlobalSecondaryIndex": {
+      "type": "structure",
+      "required": [
+        "IndexName"
+      ],
+      "members": {
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The name of the global secondary index.</p>"
+        },
+        "ProvisionedThroughputOverride": {
+          "shape": "ProvisionedThroughputOverride",
+          "documentation": "<p>Replica table GSI-specific provisioned throughput. If not specified, uses the source table GSI's read capacity settings.</p>"
+        }
+      },
+      "documentation": "<p>Represents the properties of a replica global secondary index.</p>"
+    },
+    "ReplicaGlobalSecondaryIndexAutoScalingDescription": {
+      "type": "structure",
+      "members": {
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The name of the global secondary index.</p>"
+        },
+        "IndexStatus": {
+          "shape": "IndexStatus",
+          "documentation": "<p>The current state of the replica global secondary index:</p> <ul> <li> <p> <code>CREATING</code> - The index is being created.</p> </li> <li> <p> <code>UPDATING</code> - The index is being updated.</p> </li> <li> <p> <code>DELETING</code> - The index is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The index is ready for use.</p> </li> </ul>"
+        },
+        "ProvisionedReadCapacityAutoScalingSettings": {
+          "shape": "AutoScalingSettingsDescription"
+        },
+        "ProvisionedWriteCapacityAutoScalingSettings": {
+          "shape": "AutoScalingSettingsDescription"
+        }
+      },
+      "documentation": "<p>Represents the auto scaling configuration for a replica global secondary index.</p>"
+    },
+    "ReplicaGlobalSecondaryIndexAutoScalingDescriptionList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicaGlobalSecondaryIndexAutoScalingDescription"
+      }
+    },
+    "ReplicaGlobalSecondaryIndexAutoScalingUpdate": {
+      "type": "structure",
+      "members": {
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The name of the global secondary index.</p>"
+        },
+        "ProvisionedReadCapacityAutoScalingUpdate": {
+          "shape": "AutoScalingSettingsUpdate"
+        }
+      },
+      "documentation": "<p>Represents the auto scaling settings of a global secondary index for a replica that will be modified.</p>"
+    },
+    "ReplicaGlobalSecondaryIndexAutoScalingUpdateList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicaGlobalSecondaryIndexAutoScalingUpdate"
+      }
+    },
+    "ReplicaGlobalSecondaryIndexDescription": {
+      "type": "structure",
+      "members": {
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The name of the global secondary index.</p>"
+        },
+        "ProvisionedThroughputOverride": {
+          "shape": "ProvisionedThroughputOverride",
+          "documentation": "<p>If not described, uses the source table GSI's read capacity settings.</p>"
+        }
+      },
+      "documentation": "<p>Represents the properties of a replica global secondary index.</p>"
+    },
+    "ReplicaGlobalSecondaryIndexDescriptionList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicaGlobalSecondaryIndexDescription"
+      }
+    },
+    "ReplicaGlobalSecondaryIndexList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicaGlobalSecondaryIndex"
+      },
+      "min": 1
     },
     "ReplicaGlobalSecondaryIndexSettingsDescription": {
       "type": "structure",
@@ -3680,10 +3989,17 @@
       "type": "string",
       "enum": [
         "CREATING",
+        "CREATION_FAILED",
         "UPDATING",
         "DELETING",
         "ACTIVE"
       ]
+    },
+    "ReplicaStatusDescription": {
+      "type": "string"
+    },
+    "ReplicaStatusPercentProgress": {
+      "type": "string"
     },
     "ReplicaUpdate": {
       "type": "structure",
@@ -3704,6 +4020,31 @@
       "member": {
         "shape": "ReplicaUpdate"
       }
+    },
+    "ReplicationGroupUpdate": {
+      "type": "structure",
+      "members": {
+        "Create": {
+          "shape": "CreateReplicationGroupMemberAction",
+          "documentation": "<p>The parameters required for creating a replica for the table.</p>"
+        },
+        "Update": {
+          "shape": "UpdateReplicationGroupMemberAction",
+          "documentation": "<p>The parameters required for updating a replica for the table.</p>"
+        },
+        "Delete": {
+          "shape": "DeleteReplicationGroupMemberAction",
+          "documentation": "<p>The parameters required for deleting a replica for the table.</p>"
+        }
+      },
+      "documentation": "<p>Represents one of the following:</p> <ul> <li> <p>A new replica to be added to an existing regional table or global table. This request invokes the <code>CreateTableReplica</code> action in the destination Region.</p> </li> <li> <p>New parameters for an existing replica. This request invokes the <code>UpdateTable</code> action in the destination Region.</p> </li> <li> <p>An existing replica to be deleted. The request invokes the <code>DeleteTableReplica</code> action in the destination Region, deleting the replica and all if its items in the destination Region.</p> </li> </ul>"
+    },
+    "ReplicationGroupUpdateList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicationGroupUpdate"
+      },
+      "min": 1
     },
     "ResourceArnString": {
       "type": "string",
@@ -3877,7 +4218,7 @@
         },
         "KMSMasterKeyArn": {
           "shape": "KMSMasterKeyArn",
-          "documentation": "<p>The KMS customer master key (CMK) ARN used for the AWS KMS encryption.</p>"
+          "documentation": "<p>The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.</p>"
         }
       },
       "documentation": "<p>The description of the server-side encryption status on the specified table.</p>"
@@ -3898,7 +4239,7 @@
         },
         "KMSMasterKeyId": {
           "shape": "KMSMasterKeyId",
-          "documentation": "<p>The KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.</p>"
+          "documentation": "<p>The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.</p>"
         }
       },
       "documentation": "<p>Represents the settings used to enable server-side encryption.</p>"
@@ -4139,6 +4480,9 @@
     },
     "StreamSpecification": {
       "type": "structure",
+      "required": [
+        "StreamEnabled"
+      ],
       "members": {
         "StreamEnabled": {
           "shape": "StreamEnabled",
@@ -4174,6 +4518,24 @@
     },
     "TableArn": {
       "type": "string"
+    },
+    "TableAutoScalingDescription": {
+      "type": "structure",
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table.</p>"
+        },
+        "TableStatus": {
+          "shape": "TableStatus",
+          "documentation": "<p>The current state of the table:</p> <ul> <li> <p> <code>CREATING</code> - The table is being created.</p> </li> <li> <p> <code>UPDATING</code> - The table is being updated.</p> </li> <li> <p> <code>DELETING</code> - The table is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The table is ready for use.</p> </li> </ul>"
+        },
+        "Replicas": {
+          "shape": "ReplicaAutoScalingDescriptionList",
+          "documentation": "<p>Represents replicas of the global table.</p>"
+        }
+      },
+      "documentation": "<p>Represents the auto scaling configuration for a global table.</p>"
     },
     "TableCreationDateTime": {
       "type": "timestamp"
@@ -4244,6 +4606,14 @@
         "LatestStreamArn": {
           "shape": "StreamArn",
           "documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the latest stream for this table.</p>"
+        },
+        "GlobalTableVersion": {
+          "shape": "String",
+          "documentation": "<p>Represents the version of <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html\">global tables</a> in use, if the table is replicated across AWS Regions.</p>"
+        },
+        "Replicas": {
+          "shape": "ReplicaDescriptionList",
+          "documentation": "<p>Represents replicas of the table.</p>"
         },
         "RestoreSummary": {
           "shape": "RestoreSummary",
@@ -4759,6 +5129,31 @@
       },
       "documentation": "<p>Represents the output of an <code>UpdateItem</code> operation.</p>"
     },
+    "UpdateReplicationGroupMemberAction": {
+      "type": "structure",
+      "required": [
+        "RegionName"
+      ],
+      "members": {
+        "RegionName": {
+          "shape": "RegionName",
+          "documentation": "<p>The Region where the replica exists.</p>"
+        },
+        "KMSMasterKeyId": {
+          "shape": "KMSMasterKeyId",
+          "documentation": "<p>The AWS KMS customer master key (CMK) of the replica that should be used for AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.</p>"
+        },
+        "ProvisionedThroughputOverride": {
+          "shape": "ProvisionedThroughputOverride",
+          "documentation": "<p>Replica-specific provisioned throughput. If not specified, uses the source table's provisioned throughput settings.</p>"
+        },
+        "GlobalSecondaryIndexes": {
+          "shape": "ReplicaGlobalSecondaryIndexList",
+          "documentation": "<p>Replica-specific global secondary index settings.</p>"
+        }
+      },
+      "documentation": "<p>Represents a replica to be modified.</p>"
+    },
     "UpdateTableInput": {
       "type": "structure",
       "required": [
@@ -4792,6 +5187,10 @@
         "SSESpecification": {
           "shape": "SSESpecification",
           "documentation": "<p>The new server-side encryption settings for the specified table.</p>"
+        },
+        "ReplicaUpdates": {
+          "shape": "ReplicationGroupUpdateList",
+          "documentation": "<p>A list of replica update actions (create, delete, or update) for the table.</p> <note> <p>This property only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html\">Version 2019.11.21</a> of global tables.</p> </note>"
         }
       },
       "documentation": "<p>Represents the input of an <code>UpdateTable</code> operation.</p>"
@@ -4805,6 +5204,38 @@
         }
       },
       "documentation": "<p>Represents the output of an <code>UpdateTable</code> operation.</p>"
+    },
+    "UpdateTableReplicaAutoScalingInput": {
+      "type": "structure",
+      "required": [
+        "TableName"
+      ],
+      "members": {
+        "GlobalSecondaryIndexUpdates": {
+          "shape": "GlobalSecondaryIndexAutoScalingUpdateList",
+          "documentation": "<p>Represents the auto scaling settings of the global secondary indexes of the replica to be updated.</p>"
+        },
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the global table to be updated.</p>"
+        },
+        "ProvisionedWriteCapacityAutoScalingUpdate": {
+          "shape": "AutoScalingSettingsUpdate"
+        },
+        "ReplicaUpdates": {
+          "shape": "ReplicaAutoScalingUpdateList",
+          "documentation": "<p>Represents the auto scaling settings of replicas of the table that will be modified.</p>"
+        }
+      }
+    },
+    "UpdateTableReplicaAutoScalingOutput": {
+      "type": "structure",
+      "members": {
+        "TableAutoScalingDescription": {
+          "shape": "TableAutoScalingDescription",
+          "documentation": "<p>Returns information about the auto scaling settings of a table with replicas.</p>"
+        }
+      }
     },
     "UpdateTimeToLiveInput": {
       "type": "structure",

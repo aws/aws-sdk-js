@@ -12,6 +12,14 @@ declare class AppSync extends Service {
   constructor(options?: AppSync.Types.ClientConfiguration)
   config: Config & AppSync.Types.ClientConfiguration;
   /**
+   * Creates a cache for the GraphQL API.
+   */
+  createApiCache(params: AppSync.Types.CreateApiCacheRequest, callback?: (err: AWSError, data: AppSync.Types.CreateApiCacheResponse) => void): Request<AppSync.Types.CreateApiCacheResponse, AWSError>;
+  /**
+   * Creates a cache for the GraphQL API.
+   */
+  createApiCache(callback?: (err: AWSError, data: AppSync.Types.CreateApiCacheResponse) => void): Request<AppSync.Types.CreateApiCacheResponse, AWSError>;
+  /**
    * Creates a unique key that you can distribute to clients who are executing your API.
    */
   createApiKey(params: AppSync.Types.CreateApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.CreateApiKeyResponse) => void): Request<AppSync.Types.CreateApiKeyResponse, AWSError>;
@@ -60,6 +68,14 @@ declare class AppSync extends Service {
    */
   createType(callback?: (err: AWSError, data: AppSync.Types.CreateTypeResponse) => void): Request<AppSync.Types.CreateTypeResponse, AWSError>;
   /**
+   * Deletes an ApiCache object.
+   */
+  deleteApiCache(params: AppSync.Types.DeleteApiCacheRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteApiCacheResponse) => void): Request<AppSync.Types.DeleteApiCacheResponse, AWSError>;
+  /**
+   * Deletes an ApiCache object.
+   */
+  deleteApiCache(callback?: (err: AWSError, data: AppSync.Types.DeleteApiCacheResponse) => void): Request<AppSync.Types.DeleteApiCacheResponse, AWSError>;
+  /**
    * Deletes an API key.
    */
   deleteApiKey(params: AppSync.Types.DeleteApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteApiKeyResponse) => void): Request<AppSync.Types.DeleteApiKeyResponse, AWSError>;
@@ -107,6 +123,22 @@ declare class AppSync extends Service {
    * Deletes a Type object.
    */
   deleteType(callback?: (err: AWSError, data: AppSync.Types.DeleteTypeResponse) => void): Request<AppSync.Types.DeleteTypeResponse, AWSError>;
+  /**
+   * Flushes an ApiCache object.
+   */
+  flushApiCache(params: AppSync.Types.FlushApiCacheRequest, callback?: (err: AWSError, data: AppSync.Types.FlushApiCacheResponse) => void): Request<AppSync.Types.FlushApiCacheResponse, AWSError>;
+  /**
+   * Flushes an ApiCache object.
+   */
+  flushApiCache(callback?: (err: AWSError, data: AppSync.Types.FlushApiCacheResponse) => void): Request<AppSync.Types.FlushApiCacheResponse, AWSError>;
+  /**
+   * Retrieves an ApiCache object.
+   */
+  getApiCache(params: AppSync.Types.GetApiCacheRequest, callback?: (err: AWSError, data: AppSync.Types.GetApiCacheResponse) => void): Request<AppSync.Types.GetApiCacheResponse, AWSError>;
+  /**
+   * Retrieves an ApiCache object.
+   */
+  getApiCache(callback?: (err: AWSError, data: AppSync.Types.GetApiCacheResponse) => void): Request<AppSync.Types.GetApiCacheResponse, AWSError>;
   /**
    * Retrieves a DataSource object.
    */
@@ -252,6 +284,14 @@ declare class AppSync extends Service {
    */
   untagResource(callback?: (err: AWSError, data: AppSync.Types.UntagResourceResponse) => void): Request<AppSync.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates the cache for the GraphQL API.
+   */
+  updateApiCache(params: AppSync.Types.UpdateApiCacheRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateApiCacheResponse) => void): Request<AppSync.Types.UpdateApiCacheResponse, AWSError>;
+  /**
+   * Updates the cache for the GraphQL API.
+   */
+  updateApiCache(callback?: (err: AWSError, data: AppSync.Types.UpdateApiCacheResponse) => void): Request<AppSync.Types.UpdateApiCacheResponse, AWSError>;
+  /**
    * Updates an API key.
    */
   updateApiKey(params: AppSync.Types.UpdateApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
@@ -316,6 +356,35 @@ declare namespace AppSync {
     userPoolConfig?: CognitoUserPoolConfig;
   }
   export type AdditionalAuthenticationProviders = AdditionalAuthenticationProvider[];
+  export interface ApiCache {
+    /**
+     * TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
+     */
+    ttl?: Long;
+    /**
+     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.  
+     */
+    apiCachingBehavior?: ApiCachingBehavior;
+    /**
+     * Transit encryption flag when connecting to cache. This setting cannot be updated after creation.
+     */
+    transitEncryptionEnabled?: Boolean;
+    /**
+     * At rest encryption flag for cache. This setting cannot be updated after creation.
+     */
+    atRestEncryptionEnabled?: Boolean;
+    /**
+     * The cache instance type.    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     */
+    type?: ApiCacheType;
+    /**
+     * The cache instance status.    AVAILABLE: The instance is available for use.    CREATING: The instance is currently creating.    DELETING: The instance is currently deleting.    MODIFYING: The instance is currently modifying.    FAILED: The instance has failed creation.  
+     */
+    status?: ApiCacheStatus;
+  }
+  export type ApiCacheStatus = "AVAILABLE"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED"|string;
+  export type ApiCacheType = "T2_SMALL"|"T2_MEDIUM"|"R4_LARGE"|"R4_XLARGE"|"R4_2XLARGE"|"R4_4XLARGE"|"R4_8XLARGE"|string;
+  export type ApiCachingBehavior = "FULL_REQUEST_CACHING"|"PER_RESOLVER_CACHING"|string;
   export interface ApiKey {
     /**
      * The API key ID.
@@ -356,6 +425,17 @@ declare namespace AppSync {
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
   export type BooleanValue = boolean;
+  export interface CachingConfig {
+    /**
+     * The TTL in seconds for a resolver that has caching enabled. Valid values are between 1 and 3600 seconds.
+     */
+    ttl?: Long;
+    /**
+     * The caching keys for a resolver that has caching enabled. Valid values are entries from the $context.identity and $context.arguments maps.
+     */
+    cachingKeys?: CachingKeys;
+  }
+  export type CachingKeys = String[];
   export interface CognitoUserPoolConfig {
     /**
      * The user pool ID.
@@ -369,6 +449,40 @@ declare namespace AppSync {
      * A regular expression for validating the incoming Amazon Cognito user pool app client ID.
      */
     appIdClientRegex?: String;
+  }
+  export type ConflictDetectionType = "VERSION"|"NONE"|string;
+  export type ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string;
+  export interface CreateApiCacheRequest {
+    /**
+     * The GraphQL API Id.
+     */
+    apiId: String;
+    /**
+     * TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
+     */
+    ttl: Long;
+    /**
+     * Transit encryption flag when connecting to cache. This setting cannot be updated after creation.
+     */
+    transitEncryptionEnabled?: Boolean;
+    /**
+     * At rest encryption flag for cache. This setting cannot be updated after creation.
+     */
+    atRestEncryptionEnabled?: Boolean;
+    /**
+     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.  
+     */
+    apiCachingBehavior: ApiCachingBehavior;
+    /**
+     * The cache instance type.    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     */
+    type: ApiCacheType;
+  }
+  export interface CreateApiCacheResponse {
+    /**
+     * The ApiCache object.
+     */
+    apiCache?: ApiCache;
   }
   export interface CreateApiKeyRequest {
     /**
@@ -543,6 +657,14 @@ declare namespace AppSync {
      * The PipelineConfig.
      */
     pipelineConfig?: PipelineConfig;
+    /**
+     * The SyncConfig for a resolver attached to a versioned datasource.
+     */
+    syncConfig?: SyncConfig;
+    /**
+     * The caching configuration for the resolver.
+     */
+    cachingConfig?: CachingConfig;
   }
   export interface CreateResolverResponse {
     /**
@@ -615,6 +737,14 @@ declare namespace AppSync {
   export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|string;
   export type DataSources = DataSource[];
   export type DefaultAction = "ALLOW"|"DENY"|string;
+  export interface DeleteApiCacheRequest {
+    /**
+     * The API ID.
+     */
+    apiId: String;
+  }
+  export interface DeleteApiCacheResponse {
+  }
   export interface DeleteApiKeyRequest {
     /**
      * The API ID.
@@ -687,6 +817,20 @@ declare namespace AppSync {
   }
   export interface DeleteTypeResponse {
   }
+  export interface DeltaSyncConfig {
+    /**
+     * The number of minutes an Item is stored in the datasource.
+     */
+    baseTableTTL?: Long;
+    /**
+     * The Delta Sync table name.
+     */
+    deltaSyncTableName?: String;
+    /**
+     * The number of minutes a Delta Sync log entry is stored in the Delta Sync table.
+     */
+    deltaSyncTableTTL?: Long;
+  }
   export interface DynamodbDataSourceConfig {
     /**
      * The table name.
@@ -700,6 +844,14 @@ declare namespace AppSync {
      * Set to TRUE to use Amazon Cognito credentials with this data source.
      */
     useCallerCredentials?: Boolean;
+    /**
+     * The DeltaSyncConfig for a versioned datasource.
+     */
+    deltaSyncConfig?: DeltaSyncConfig;
+    /**
+     * Set to TRUE to use Conflict Detection and Resolution with this data source.
+     */
+    versioned?: Boolean;
   }
   export interface ElasticsearchDataSourceConfig {
     /**
@@ -712,6 +864,14 @@ declare namespace AppSync {
     awsRegion: String;
   }
   export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
+  export interface FlushApiCacheRequest {
+    /**
+     * The API ID.
+     */
+    apiId: String;
+  }
+  export interface FlushApiCacheResponse {
+  }
   export interface FunctionConfiguration {
     /**
      * A unique ID representing the Function object.
@@ -748,6 +908,15 @@ declare namespace AppSync {
   }
   export type Functions = FunctionConfiguration[];
   export type FunctionsIds = String[];
+  export interface GetApiCacheRequest {
+    /**
+     * The API ID.
+     */
+    apiId: String;
+  }
+  export interface GetApiCacheResponse {
+    apiCache?: ApiCache;
+  }
   export interface GetDataSourceRequest {
     /**
      * The API ID.
@@ -920,6 +1089,12 @@ declare namespace AppSync {
      * The authorization config in case the HTTP endpoint requires authorization.
      */
     authorizationConfig?: AuthorizationConfig;
+  }
+  export interface LambdaConflictHandlerConfig {
+    /**
+     * The Arn for the Lambda function to use as the Conflict Handler.
+     */
+    lambdaConflictHandlerArn?: String;
   }
   export interface LambdaDataSourceConfig {
     /**
@@ -1225,6 +1400,14 @@ declare namespace AppSync {
      * The PipelineConfig.
      */
     pipelineConfig?: PipelineConfig;
+    /**
+     * The SyncConfig for a resolver attached to a versioned datasource.
+     */
+    syncConfig?: SyncConfig;
+    /**
+     * The caching configuration for the resolver.
+     */
+    cachingConfig?: CachingConfig;
   }
   export type ResolverKind = "UNIT"|"PIPELINE"|string;
   export type Resolvers = Resolver[];
@@ -1248,6 +1431,20 @@ declare namespace AppSync {
     status?: SchemaStatus;
   }
   export type String = string;
+  export interface SyncConfig {
+    /**
+     * The Conflict Resolution strategy to perform in the event of a conflict.    OPTIMISTIC_CONCURRENCY: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.    AUTOMERGE: Resolve conflicts with the Automerge conflict resolution strategy.    LAMBDA: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.  
+     */
+    conflictHandler?: ConflictHandlerType;
+    /**
+     * The Conflict Detection strategy to use.    VERSION: Detect conflicts based on object versions for this resolver.    NONE: Do not detect conflicts when executing this resolver.  
+     */
+    conflictDetection?: ConflictDetectionType;
+    /**
+     * The LambdaConflictHandlerConfig when configuring LAMBDA as the Conflict Handler.
+     */
+    lambdaConflictHandlerConfig?: LambdaConflictHandlerConfig;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -1299,6 +1496,30 @@ declare namespace AppSync {
     tagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateApiCacheRequest {
+    /**
+     * The GraphQL API Id.
+     */
+    apiId: String;
+    /**
+     * TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
+     */
+    ttl: Long;
+    /**
+     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.  
+     */
+    apiCachingBehavior: ApiCachingBehavior;
+    /**
+     * The cache instance type.    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     */
+    type: ApiCacheType;
+  }
+  export interface UpdateApiCacheResponse {
+    /**
+     * The ApiCache object.
+     */
+    apiCache?: ApiCache;
   }
   export interface UpdateApiKeyRequest {
     /**
@@ -1481,6 +1702,14 @@ declare namespace AppSync {
      * The PipelineConfig.
      */
     pipelineConfig?: PipelineConfig;
+    /**
+     * The SyncConfig for a resolver attached to a versioned datasource.
+     */
+    syncConfig?: SyncConfig;
+    /**
+     * The caching configuration for the resolver.
+     */
+    cachingConfig?: CachingConfig;
   }
   export interface UpdateResolverResponse {
     /**

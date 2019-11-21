@@ -614,6 +614,12 @@
           "location": "header",
           "locationName": "x-amz-lex-session-attributes"
         },
+        "sentimentResponse": {
+          "shape": "String",
+          "documentation": "<p>The sentiment expressed in and utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>",
+          "location": "header",
+          "locationName": "x-amz-lex-sentiment"
+        },
         "message": {
           "shape": "Text",
           "documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot's configuration based on the current interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p>",
@@ -710,6 +716,10 @@
         "message": {
           "shape": "Text",
           "documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot's configuration based on the current interaction context. For example, if Amazon Lex isn't able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p>"
+        },
+        "sentimentResponse": {
+          "shape": "SentimentResponse",
+          "documentation": "<p>The sentiment expressed in and utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>"
         },
         "messageFormat": {
           "shape": "MessageFormatType",
@@ -858,6 +868,26 @@
         }
       },
       "documentation": "<p>If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).</p>"
+    },
+    "SentimentLabel": {
+      "type": "string"
+    },
+    "SentimentResponse": {
+      "type": "structure",
+      "members": {
+        "sentimentLabel": {
+          "shape": "SentimentLabel",
+          "documentation": "<p>The inferred sentiment that Amazon Comprehend has the highest confidence in.</p>"
+        },
+        "sentimentScore": {
+          "shape": "SentimentScore",
+          "documentation": "<p>The likelihood that the sentiment was correctly inferred.</p>"
+        }
+      },
+      "documentation": "<p>The sentiment expressed in an utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field structure contains the result of the analysis.</p>"
+    },
+    "SentimentScore": {
+      "type": "string"
     },
     "String": {
       "type": "string"

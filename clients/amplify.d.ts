@@ -20,6 +20,14 @@ declare class Amplify extends Service {
    */
   createApp(callback?: (err: AWSError, data: Amplify.Types.CreateAppResult) => void): Request<Amplify.Types.CreateAppResult, AWSError>;
   /**
+   *  Creates a new backend environment for an Amplify App. 
+   */
+  createBackendEnvironment(params: Amplify.Types.CreateBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.CreateBackendEnvironmentResult) => void): Request<Amplify.Types.CreateBackendEnvironmentResult, AWSError>;
+  /**
+   *  Creates a new backend environment for an Amplify App. 
+   */
+  createBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.CreateBackendEnvironmentResult) => void): Request<Amplify.Types.CreateBackendEnvironmentResult, AWSError>;
+  /**
    *  Creates a new Branch for an Amplify App. 
    */
   createBranch(params: Amplify.Types.CreateBranchRequest, callback?: (err: AWSError, data: Amplify.Types.CreateBranchResult) => void): Request<Amplify.Types.CreateBranchResult, AWSError>;
@@ -59,6 +67,14 @@ declare class Amplify extends Service {
    *  Delete an existing Amplify App by appId. 
    */
   deleteApp(callback?: (err: AWSError, data: Amplify.Types.DeleteAppResult) => void): Request<Amplify.Types.DeleteAppResult, AWSError>;
+  /**
+   *  Delete backend environment for an Amplify App. 
+   */
+  deleteBackendEnvironment(params: Amplify.Types.DeleteBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteBackendEnvironmentResult) => void): Request<Amplify.Types.DeleteBackendEnvironmentResult, AWSError>;
+  /**
+   *  Delete backend environment for an Amplify App. 
+   */
+  deleteBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.DeleteBackendEnvironmentResult) => void): Request<Amplify.Types.DeleteBackendEnvironmentResult, AWSError>;
   /**
    *  Deletes a branch for an Amplify App. 
    */
@@ -116,6 +132,14 @@ declare class Amplify extends Service {
    */
   getArtifactUrl(callback?: (err: AWSError, data: Amplify.Types.GetArtifactUrlResult) => void): Request<Amplify.Types.GetArtifactUrlResult, AWSError>;
   /**
+   *  Retrieves a backend environment for an Amplify App. 
+   */
+  getBackendEnvironment(params: Amplify.Types.GetBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.GetBackendEnvironmentResult) => void): Request<Amplify.Types.GetBackendEnvironmentResult, AWSError>;
+  /**
+   *  Retrieves a backend environment for an Amplify App. 
+   */
+  getBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.GetBackendEnvironmentResult) => void): Request<Amplify.Types.GetBackendEnvironmentResult, AWSError>;
+  /**
    *  Retrieves a branch for an Amplify App. 
    */
   getBranch(params: Amplify.Types.GetBranchRequest, callback?: (err: AWSError, data: Amplify.Types.GetBranchResult) => void): Request<Amplify.Types.GetBranchResult, AWSError>;
@@ -163,6 +187,14 @@ declare class Amplify extends Service {
    *  List artifacts with an app, a branch, a job and an artifact type. 
    */
   listArtifacts(callback?: (err: AWSError, data: Amplify.Types.ListArtifactsResult) => void): Request<Amplify.Types.ListArtifactsResult, AWSError>;
+  /**
+   *  Lists backend environments for an Amplify App. 
+   */
+  listBackendEnvironments(params: Amplify.Types.ListBackendEnvironmentsRequest, callback?: (err: AWSError, data: Amplify.Types.ListBackendEnvironmentsResult) => void): Request<Amplify.Types.ListBackendEnvironmentsResult, AWSError>;
+  /**
+   *  Lists backend environments for an Amplify App. 
+   */
+  listBackendEnvironments(callback?: (err: AWSError, data: Amplify.Types.ListBackendEnvironmentsResult) => void): Request<Amplify.Types.ListBackendEnvironmentsResult, AWSError>;
   /**
    *  Lists branches for an Amplify App. 
    */
@@ -425,7 +457,34 @@ declare namespace Amplify {
   }
   export type AutoBranchCreationPattern = string;
   export type AutoBranchCreationPatterns = AutoBranchCreationPattern[];
+  export interface BackendEnvironment {
+    /**
+     *  Arn for a backend environment, part of an Amplify App. 
+     */
+    backendEnvironmentArn: BackendEnvironmentArn;
+    /**
+     *  Name for a backend environment, part of an Amplify App. 
+     */
+    environmentName: EnvironmentName;
+    /**
+     *  CloudFormation stack name of backend environment. 
+     */
+    stackName?: StackName;
+    /**
+     *  Name of deployment artifacts. 
+     */
+    deploymentArtifacts?: DeploymentArtifacts;
+    /**
+     *  Creation date and time for a backend environment, part of an Amplify App. 
+     */
+    createTime: CreateTime;
+    /**
+     *  Last updated date and time for a backend environment, part of an Amplify App. 
+     */
+    updateTime: UpdateTime;
+  }
   export type BackendEnvironmentArn = string;
+  export type BackendEnvironments = BackendEnvironment[];
   export type BasicAuthCredentials = string;
   export interface Branch {
     /**
@@ -616,6 +675,30 @@ declare namespace Amplify {
   export interface CreateAppResult {
     app: App;
   }
+  export interface CreateBackendEnvironmentRequest {
+    /**
+     *  Unique Id for an Amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Name for the backend environment. 
+     */
+    environmentName: EnvironmentName;
+    /**
+     *  CloudFormation stack name of backend environment. 
+     */
+    stackName?: StackName;
+    /**
+     *  Name of deployment artifacts. 
+     */
+    deploymentArtifacts?: DeploymentArtifacts;
+  }
+  export interface CreateBackendEnvironmentResult {
+    /**
+     *  Backend environment structure for an amplify App. 
+     */
+    backendEnvironment: BackendEnvironment;
+  }
   export interface CreateBranchRequest {
     /**
      *  Unique Id for an Amplify App. 
@@ -797,6 +880,22 @@ declare namespace Amplify {
   export interface DeleteAppResult {
     app: App;
   }
+  export interface DeleteBackendEnvironmentRequest {
+    /**
+     *  Unique Id of an Amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Name of a backend environment of an Amplify App. 
+     */
+    environmentName: EnvironmentName;
+  }
+  export interface DeleteBackendEnvironmentResult {
+    /**
+     *  Backend environment structure for an Amplify App. 
+     */
+    backendEnvironment: BackendEnvironment;
+  }
   export interface DeleteBranchRequest {
     /**
      *  Unique Id for an Amplify App. 
@@ -855,6 +954,7 @@ declare namespace Amplify {
      */
     webhook: Webhook;
   }
+  export type DeploymentArtifacts = string;
   export type Description = string;
   export type DisplayName = string;
   export interface DomainAssociation {
@@ -902,6 +1002,7 @@ declare namespace Amplify {
   export type EndTime = Date;
   export type EnvKey = string;
   export type EnvValue = string;
+  export type EnvironmentName = string;
   export type EnvironmentVariables = {[key: string]: EnvValue};
   export type FileMap = {[key: string]: MD5Hash};
   export type FileName = string;
@@ -955,6 +1056,22 @@ declare namespace Amplify {
      *  Presigned url for the artifact. 
      */
     artifactUrl: ArtifactUrl;
+  }
+  export interface GetBackendEnvironmentRequest {
+    /**
+     *  Unique Id for an Amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Name for the backend environment. 
+     */
+    environmentName: EnvironmentName;
+  }
+  export interface GetBackendEnvironmentResult {
+    /**
+     *  Backend environment structure for an an Amplify App. 
+     */
+    backendEnvironment: BackendEnvironment;
   }
   export interface GetBranchRequest {
     /**
@@ -1121,6 +1238,34 @@ declare namespace Amplify {
      */
     nextToken?: NextToken;
   }
+  export interface ListBackendEnvironmentsRequest {
+    /**
+     *  Unique Id for an amplify App. 
+     */
+    appId: AppId;
+    /**
+     *  Name of the backend environment 
+     */
+    environmentName?: EnvironmentName;
+    /**
+     *  Pagination token. Set to null to start listing backen environments from start. If a non-null pagination token is returned in a result, then pass its value in here to list more backend environments. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  Maximum number of records to list in a single response. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListBackendEnvironmentsResult {
+    /**
+     *  List of backend environments for an Amplify App. 
+     */
+    backendEnvironments: BackendEnvironments;
+    /**
+     *  Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. 
+     */
+    nextToken?: NextToken;
+  }
   export interface ListBranchesRequest {
     /**
      *  Unique Id for an Amplify App. 
@@ -1265,6 +1410,7 @@ declare namespace Amplify {
   export type ServiceRoleArn = string;
   export type Source = string;
   export type SourceUrl = string;
+  export type StackName = string;
   export type Stage = "PRODUCTION"|"BETA"|"DEVELOPMENT"|"EXPERIMENTAL"|"PULL_REQUEST"|string;
   export interface StartDeploymentRequest {
     /**

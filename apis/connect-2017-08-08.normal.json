@@ -571,6 +571,37 @@
       ],
       "documentation": "<p>Provides summary information about the users for the specified Amazon Connect instance.</p>"
     },
+    "StartChatContact": {
+      "name": "StartChatContact",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/contact/chat"
+      },
+      "input": {
+        "shape": "StartChatContactRequest"
+      },
+      "output": {
+        "shape": "StartChatContactResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p> <p>When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>"
+    },
     "StartOutboundVoiceContact": {
       "name": "StartOutboundVoiceContact",
       "http": {
@@ -884,9 +915,8 @@
     },
     "AgentUsername": {
       "type": "string",
-      "max": 20,
-      "min": 1,
-      "pattern": "[a-zA-Z0-9\\_\\-\\.]+"
+      "max": 100,
+      "min": 1
     },
     "AttributeName": {
       "type": "string",
@@ -913,7 +943,8 @@
     "Channel": {
       "type": "string",
       "enum": [
-        "VOICE"
+        "VOICE",
+        "CHAT"
       ]
     },
     "Channels": {
@@ -922,6 +953,34 @@
         "shape": "Channel"
       },
       "max": 1
+    },
+    "ChatContent": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "ChatContentType": {
+      "type": "string",
+      "max": 100,
+      "min": 1
+    },
+    "ChatMessage": {
+      "type": "structure",
+      "required": [
+        "ContentType",
+        "Content"
+      ],
+      "members": {
+        "ContentType": {
+          "shape": "ChatContentType",
+          "documentation": "<p>The type of the content. Supported types are text/plain.</p>"
+        },
+        "Content": {
+          "shape": "ChatContent",
+          "documentation": "<p>The content of the chat message.</p>"
+        }
+      },
+      "documentation": "<p>A chat message.</p>"
     },
     "ClientToken": {
       "type": "string",
@@ -1131,7 +1190,10 @@
         "AGENTS_STAFFED",
         "CONTACTS_IN_QUEUE",
         "OLDEST_CONTACT_AGE",
-        "CONTACTS_SCHEDULED"
+        "CONTACTS_SCHEDULED",
+        "AGENTS_ON_CONTACT",
+        "SLOTS_ACTIVE",
+        "SLOTS_AVAILABLE"
       ]
     },
     "CurrentMetricResult": {
@@ -1281,6 +1343,11 @@
     "DirectoryUserId": {
       "type": "string"
     },
+    "DisplayName": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
     "Email": {
       "type": "string"
     },
@@ -1352,7 +1419,7 @@
         },
         "CurrentMetrics": {
           "shape": "CurrentMetrics",
-          "documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available:</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> </dd> </dl>"
+          "documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available:</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> </dl>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -2123,6 +2190,29 @@
     "NextToken": {
       "type": "string"
     },
+    "ParticipantDetails": {
+      "type": "structure",
+      "required": [
+        "DisplayName"
+      ],
+      "members": {
+        "DisplayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>Display name of the participant.</p>"
+        }
+      },
+      "documentation": "<p>The customer's details.</p>"
+    },
+    "ParticipantId": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "ParticipantToken": {
+      "type": "string",
+      "max": 1000,
+      "min": 1
+    },
     "Password": {
       "type": "string",
       "pattern": "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\S]{8,64}$/"
@@ -2580,6 +2670,58 @@
     "SecurityToken": {
       "type": "string",
       "sensitive": true
+    },
+    "StartChatContactRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "ContactFlowId",
+        "ParticipantDetails"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance.</p>"
+        },
+        "ContactFlowId": {
+          "shape": "ContactFlowId",
+          "documentation": "<p>The identifier of the contact flow for the chat.</p>"
+        },
+        "Attributes": {
+          "shape": "Attributes",
+          "documentation": "<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. </p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>"
+        },
+        "ParticipantDetails": {
+          "shape": "ParticipantDetails",
+          "documentation": "<p>Information identifying the participant.</p>"
+        },
+        "InitialMessage": {
+          "shape": "ChatMessage",
+          "documentation": "<p>The initial message to be sent to the newly created chat.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "StartChatContactResponse": {
+      "type": "structure",
+      "members": {
+        "ContactId": {
+          "shape": "ContactId",
+          "documentation": "<p>The identifier of this contact within the Amazon Connect instance. </p>"
+        },
+        "ParticipantId": {
+          "shape": "ParticipantId",
+          "documentation": "<p>The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat lifecycle.</p>"
+        },
+        "ParticipantToken": {
+          "shape": "ParticipantToken",
+          "documentation": "<p>The token used by the chat participant to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat participant.</p>"
+        }
+      }
     },
     "StartOutboundVoiceContactRequest": {
       "type": "structure",

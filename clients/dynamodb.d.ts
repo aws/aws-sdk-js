@@ -39,11 +39,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   createBackup(callback?: (err: AWSError, data: DynamoDB.Types.CreateBackupOutput) => void): Request<DynamoDB.Types.CreateBackupOutput, AWSError>;
   /**
-   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.   This method only applies to Version 2017.11.29 of global tables.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
    */
   createGlobalTable(params: DynamoDB.Types.CreateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
   /**
-   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.   This method only applies to Version 2017.11.29 of global tables.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
    */
   createGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
   /**
@@ -103,19 +103,19 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeEndpoints(callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
   /**
-   * Returns information about the specified global table.
+   * Returns information about the specified global table.  This method only applies to Version 2017.11.29 of global tables. 
    */
   describeGlobalTable(params: DynamoDB.Types.DescribeGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
   /**
-   * Returns information about the specified global table.
+   * Returns information about the specified global table.  This method only applies to Version 2017.11.29 of global tables. 
    */
   describeGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
   /**
-   * Describes Region-specific settings for a global table.
+   * Describes Region-specific settings for a global table.  This method only applies to Version 2017.11.29 of global tables. 
    */
   describeGlobalTableSettings(params: DynamoDB.Types.DescribeGlobalTableSettingsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
   /**
-   * Describes Region-specific settings for a global table.
+   * Describes Region-specific settings for a global table.  This method only applies to Version 2017.11.29 of global tables. 
    */
   describeGlobalTableSettings(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
   /**
@@ -134,6 +134,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.  If you issue a DescribeTable request immediately after a CreateTable request, DynamoDB might return a ResourceNotFoundException. This is because DescribeTable uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the DescribeTable request again. 
    */
   describeTable(callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
+  /**
+   * Describes auto scaling settings across replicas of the global table at once.  This method only applies to Version 2019.11.21 of global tables. 
+   */
+  describeTableReplicaAutoScaling(params: DynamoDB.Types.DescribeTableReplicaAutoScalingInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableReplicaAutoScalingOutput) => void): Request<DynamoDB.Types.DescribeTableReplicaAutoScalingOutput, AWSError>;
+  /**
+   * Describes auto scaling settings across replicas of the global table at once.  This method only applies to Version 2019.11.21 of global tables. 
+   */
+  describeTableReplicaAutoScaling(callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableReplicaAutoScalingOutput) => void): Request<DynamoDB.Types.DescribeTableReplicaAutoScalingOutput, AWSError>;
   /**
    * Gives a description of the Time to Live (TTL) status on the specified table. 
    */
@@ -159,11 +167,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   listBackups(callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
   /**
-   * Lists all global tables that have a replica in the specified Region.
+   * Lists all global tables that have a replica in the specified Region.  This method only applies to Version 2017.11.29 of global tables. 
    */
   listGlobalTables(params: DynamoDB.Types.ListGlobalTablesInput, callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
   /**
-   * Lists all global tables that have a replica in the specified Region.
+   * Lists all global tables that have a replica in the specified Region.  This method only applies to Version 2017.11.29 of global tables. 
    */
   listGlobalTables(callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
   /**
@@ -294,6 +302,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table. You can only perform one of the following operations at once:   Modify the provisioned throughput settings of the table.   Enable or disable DynamoDB Streams on the table.   Remove a global secondary index from the table.   Create a new global secondary index on the table. After the index begins backfilling, you can use UpdateTable to perform other operations.    UpdateTable is an asynchronous operation; while it is executing, the table status changes from ACTIVE to UPDATING. While it is UPDATING, you cannot issue another UpdateTable request. When the table returns to the ACTIVE state, the UpdateTable operation is complete.
    */
   updateTable(callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableOutput) => void): Request<DynamoDB.Types.UpdateTableOutput, AWSError>;
+  /**
+   * Updates auto scaling settings on your global tables at once.  This method only applies to Version 2019.11.21 of global tables. 
+   */
+  updateTableReplicaAutoScaling(params: DynamoDB.Types.UpdateTableReplicaAutoScalingInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableReplicaAutoScalingOutput) => void): Request<DynamoDB.Types.UpdateTableReplicaAutoScalingOutput, AWSError>;
+  /**
+   * Updates auto scaling settings on your global tables at once.  This method only applies to Version 2019.11.21 of global tables. 
+   */
+  updateTableReplicaAutoScaling(callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableReplicaAutoScalingOutput) => void): Request<DynamoDB.Types.UpdateTableReplicaAutoScalingOutput, AWSError>;
   /**
    * The UpdateTimeToLive method enables or disables Time to Live (TTL) for the specified table. A successful UpdateTimeToLive call returns the current TimeToLiveSpecification. It can take up to one hour for the change to fully process. Any additional UpdateTimeToLive calls for the same table during this one hour duration result in a ValidationException.  TTL compares the current time in epoch time format to the time stored in the TTL attribute of an item. If the epoch time value stored in the attribute is less than the current time, the item is marked as expired and subsequently deleted.   The epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.   DynamoDB deletes expired items on a best-effort basis to ensure availability of throughput for other data operations.   DynamoDB typically deletes expired items within two days of expiration. The exact duration within which an item gets deleted after expiration is specific to the nature of the workload. Items that have expired and not been deleted will still show up in reads, queries, and scans.  As items are deleted, they are removed from any local secondary index and global secondary index immediately in the same eventually consistent way as a standard delete operation. For more information, see Time To Live in the Amazon DynamoDB Developer Guide. 
    */
@@ -810,6 +826,24 @@ declare namespace DynamoDB {
      */
     RegionName: RegionName;
   }
+  export interface CreateReplicationGroupMemberAction {
+    /**
+     * The Region where the new replica will be created.
+     */
+    RegionName: RegionName;
+    /**
+     * The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption in the new replica. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.
+     */
+    KMSMasterKeyId?: KMSMasterKeyId;
+    /**
+     * Replica-specific provisioned throughput. If not specified, uses the source table's provisioned throughput settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Replica-specific global secondary index settings.
+     */
+    GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
+  }
   export interface CreateTableInput {
     /**
      * An array of attributes that describe the key schema for the table and indexes.
@@ -962,6 +996,12 @@ declare namespace DynamoDB {
      */
     RegionName: RegionName;
   }
+  export interface DeleteReplicationGroupMemberAction {
+    /**
+     * The Region where the replica exists.
+     */
+    RegionName: RegionName;
+  }
   export interface DeleteRequest {
     /**
      * A map of attribute name to attribute values, representing the primary key of the item to delete. All of the table's primary key attributes must be specified, and their data types must match those of the table's key schema.
@@ -1071,6 +1111,18 @@ declare namespace DynamoDB {
      * The properties of the table.
      */
     Table?: TableDescription;
+  }
+  export interface DescribeTableReplicaAutoScalingInput {
+    /**
+     * The name of the table.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeTableReplicaAutoScalingOutput {
+    /**
+     * Represents the auto scaling properties of the table.
+     */
+    TableAutoScalingDescription?: TableAutoScalingDescription;
   }
   export interface DescribeTimeToLiveInput {
     /**
@@ -1193,6 +1245,14 @@ declare namespace DynamoDB {
      */
     ProvisionedThroughput?: ProvisionedThroughput;
   }
+  export interface GlobalSecondaryIndexAutoScalingUpdate {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    ProvisionedWriteCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
+  }
+  export type GlobalSecondaryIndexAutoScalingUpdateList = GlobalSecondaryIndexAutoScalingUpdate[];
   export interface GlobalSecondaryIndexDescription {
     /**
      * The name of the global secondary index.
@@ -1621,6 +1681,12 @@ declare namespace DynamoDB {
      */
     WriteCapacityUnits?: NonNegativeLongObject;
   }
+  export interface ProvisionedThroughputOverride {
+    /**
+     * Replica-specific read capacity units. If not specified, uses the source table's read capacity settings.
+     */
+    ReadCapacityUnits?: PositiveLongObject;
+  }
   export interface Put {
     /**
      * A map of attribute name to attribute values, representing the primary key of the item to be written by PutItem. All of the table's primary key attributes must be specified, and their data types must match those of the table's key schema. If any attributes are present in the item that are part of an index key schema for the table, their types must match the index key schema. 
@@ -1803,13 +1869,109 @@ declare namespace DynamoDB {
      */
     RegionName?: RegionName;
   }
+  export interface ReplicaAutoScalingDescription {
+    /**
+     * The Region where the replica exists.
+     */
+    RegionName?: RegionName;
+    /**
+     * Replica-specific global secondary index auto scaling settings.
+     */
+    GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexAutoScalingDescriptionList;
+    ReplicaProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+    ReplicaProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+    /**
+     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.  
+     */
+    ReplicaStatus?: ReplicaStatus;
+  }
+  export type ReplicaAutoScalingDescriptionList = ReplicaAutoScalingDescription[];
+  export interface ReplicaAutoScalingUpdate {
+    /**
+     * The Region where the replica exists.
+     */
+    RegionName: RegionName;
+    /**
+     * Represents the auto scaling settings of global secondary indexes that will be modified.
+     */
+    ReplicaGlobalSecondaryIndexUpdates?: ReplicaGlobalSecondaryIndexAutoScalingUpdateList;
+    ReplicaProvisionedReadCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
+  }
+  export type ReplicaAutoScalingUpdateList = ReplicaAutoScalingUpdate[];
   export interface ReplicaDescription {
     /**
      * The name of the Region.
      */
     RegionName?: RegionName;
+    /**
+     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.  
+     */
+    ReplicaStatus?: ReplicaStatus;
+    /**
+     * Detailed information about the replica status.
+     */
+    ReplicaStatusDescription?: ReplicaStatusDescription;
+    /**
+     * Specifies the progress of a Create, Update, or Delete action on the replica as a percentage.
+     */
+    ReplicaStatusPercentProgress?: ReplicaStatusPercentProgress;
+    /**
+     * The AWS KMS customer master key (CMK) of the replica that will be used for AWS KMS encryption.
+     */
+    KMSMasterKeyId?: KMSMasterKeyId;
+    /**
+     * Replica-specific provisioned throughput. If not described, uses the source table's provisioned throughput settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Replica-specific global secondary index settings.
+     */
+    GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexDescriptionList;
   }
   export type ReplicaDescriptionList = ReplicaDescription[];
+  export interface ReplicaGlobalSecondaryIndex {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName: IndexName;
+    /**
+     * Replica table GSI-specific provisioned throughput. If not specified, uses the source table GSI's read capacity settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+  }
+  export interface ReplicaGlobalSecondaryIndexAutoScalingDescription {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    /**
+     * The current state of the replica global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.  
+     */
+    IndexStatus?: IndexStatus;
+    ProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+    ProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+  }
+  export type ReplicaGlobalSecondaryIndexAutoScalingDescriptionList = ReplicaGlobalSecondaryIndexAutoScalingDescription[];
+  export interface ReplicaGlobalSecondaryIndexAutoScalingUpdate {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    ProvisionedReadCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
+  }
+  export type ReplicaGlobalSecondaryIndexAutoScalingUpdateList = ReplicaGlobalSecondaryIndexAutoScalingUpdate[];
+  export interface ReplicaGlobalSecondaryIndexDescription {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    /**
+     * If not described, uses the source table GSI's read capacity settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+  }
+  export type ReplicaGlobalSecondaryIndexDescriptionList = ReplicaGlobalSecondaryIndexDescription[];
+  export type ReplicaGlobalSecondaryIndexList = ReplicaGlobalSecondaryIndex[];
   export interface ReplicaGlobalSecondaryIndexSettingsDescription {
     /**
      * The name of the global secondary index. The name must be unique among all other indexes on this table.
@@ -1907,7 +2069,9 @@ declare namespace DynamoDB {
     ReplicaGlobalSecondaryIndexSettingsUpdate?: ReplicaGlobalSecondaryIndexSettingsUpdateList;
   }
   export type ReplicaSettingsUpdateList = ReplicaSettingsUpdate[];
-  export type ReplicaStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type ReplicaStatusDescription = string;
+  export type ReplicaStatusPercentProgress = string;
   export interface ReplicaUpdate {
     /**
      * The parameters required for creating a replica on an existing global table.
@@ -1919,6 +2083,21 @@ declare namespace DynamoDB {
     Delete?: DeleteReplicaAction;
   }
   export type ReplicaUpdateList = ReplicaUpdate[];
+  export interface ReplicationGroupUpdate {
+    /**
+     * The parameters required for creating a replica for the table.
+     */
+    Create?: CreateReplicationGroupMemberAction;
+    /**
+     * The parameters required for updating a replica for the table.
+     */
+    Update?: UpdateReplicationGroupMemberAction;
+    /**
+     * The parameters required for deleting a replica for the table.
+     */
+    Delete?: DeleteReplicationGroupMemberAction;
+  }
+  export type ReplicationGroupUpdateList = ReplicationGroupUpdate[];
   export type ResourceArnString = string;
   export type RestoreInProgress = boolean;
   export interface RestoreSummary {
@@ -2025,7 +2204,7 @@ declare namespace DynamoDB {
      */
     SSEType?: SSEType;
     /**
-     * The KMS customer master key (CMK) ARN used for the AWS KMS encryption.
+     * The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
      */
     KMSMasterKeyArn?: KMSMasterKeyArn;
   }
@@ -2040,7 +2219,7 @@ declare namespace DynamoDB {
      */
     SSEType?: SSEType;
     /**
-     * The KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.
+     * The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
   }
@@ -2202,7 +2381,7 @@ declare namespace DynamoDB {
     /**
      * Indicates whether DynamoDB Streams is enabled (true) or disabled (false) on the table.
      */
-    StreamEnabled?: StreamEnabled;
+    StreamEnabled: StreamEnabled;
     /**
      *  When an item in the table is modified, StreamViewType determines what information is written to the stream for this table. Valid values for StreamViewType are:    KEYS_ONLY - Only the key attributes of the modified item are written to the stream.    NEW_IMAGE - The entire item, as it appears after it was modified, is written to the stream.    OLD_IMAGE - The entire item, as it appeared before it was modified, is written to the stream.    NEW_AND_OLD_IMAGES - Both the new and the old item images of the item are written to the stream.  
      */
@@ -2213,6 +2392,20 @@ declare namespace DynamoDB {
   export type StringAttributeValue = string;
   export type StringSetAttributeValue = StringAttributeValue[];
   export type TableArn = string;
+  export interface TableAutoScalingDescription {
+    /**
+     * The name of the table.
+     */
+    TableName?: TableName;
+    /**
+     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.  
+     */
+    TableStatus?: TableStatus;
+    /**
+     * Represents replicas of the global table.
+     */
+    Replicas?: ReplicaAutoScalingDescriptionList;
+  }
   export type TableCreationDateTime = Date;
   export interface TableDescription {
     /**
@@ -2279,6 +2472,14 @@ declare namespace DynamoDB {
      * The Amazon Resource Name (ARN) that uniquely identifies the latest stream for this table.
      */
     LatestStreamArn?: StreamArn;
+    /**
+     * Represents the version of global tables in use, if the table is replicated across AWS Regions.
+     */
+    GlobalTableVersion?: String;
+    /**
+     * Represents replicas of the table.
+     */
+    Replicas?: ReplicaDescriptionList;
     /**
      * Contains details for the restore.
      */
@@ -2592,6 +2793,24 @@ declare namespace DynamoDB {
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }
+  export interface UpdateReplicationGroupMemberAction {
+    /**
+     * The Region where the replica exists.
+     */
+    RegionName: RegionName;
+    /**
+     * The AWS KMS customer master key (CMK) of the replica that should be used for AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.
+     */
+    KMSMasterKeyId?: KMSMasterKeyId;
+    /**
+     * Replica-specific provisioned throughput. If not specified, uses the source table's provisioned throughput settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Replica-specific global secondary index settings.
+     */
+    GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
+  }
   export interface UpdateTableInput {
     /**
      * An array of attributes that describe the key schema for the table and indexes. If you are adding a new global secondary index to the table, AttributeDefinitions must include the key element(s) of the new index.
@@ -2621,12 +2840,37 @@ declare namespace DynamoDB {
      * The new server-side encryption settings for the specified table.
      */
     SSESpecification?: SSESpecification;
+    /**
+     * A list of replica update actions (create, delete, or update) for the table.  This property only applies to Version 2019.11.21 of global tables. 
+     */
+    ReplicaUpdates?: ReplicationGroupUpdateList;
   }
   export interface UpdateTableOutput {
     /**
      * Represents the properties of the table.
      */
     TableDescription?: TableDescription;
+  }
+  export interface UpdateTableReplicaAutoScalingInput {
+    /**
+     * Represents the auto scaling settings of the global secondary indexes of the replica to be updated.
+     */
+    GlobalSecondaryIndexUpdates?: GlobalSecondaryIndexAutoScalingUpdateList;
+    /**
+     * The name of the global table to be updated.
+     */
+    TableName: TableName;
+    ProvisionedWriteCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
+    /**
+     * Represents the auto scaling settings of replicas of the table that will be modified.
+     */
+    ReplicaUpdates?: ReplicaAutoScalingUpdateList;
+  }
+  export interface UpdateTableReplicaAutoScalingOutput {
+    /**
+     * Returns information about the auto scaling settings of a table with replicas.
+     */
+    TableAutoScalingDescription?: TableAutoScalingDescription;
   }
   export interface UpdateTimeToLiveInput {
     /**

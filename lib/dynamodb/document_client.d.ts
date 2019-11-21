@@ -571,6 +571,24 @@ export namespace DocumentClient {
      */
     RegionName: RegionName;
   }
+  export interface CreateReplicationGroupMemberAction {
+    /**
+     * The Region where the new replica will be created.
+     */
+    RegionName: RegionName;
+    /**
+     * The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption in the new replica. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.
+     */
+    KMSMasterKeyId?: KMSMasterKeyId;
+    /**
+     * Replica-specific provisioned throughput. If not specified, uses the source table's provisioned throughput settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Replica-specific global secondary index settings.
+     */
+    GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
+  }
   export interface CreateTableInput {
     /**
      * An array of attributes that describe the key schema for the table and indexes.
@@ -723,6 +741,12 @@ export namespace DocumentClient {
      */
     RegionName: RegionName;
   }
+  export interface DeleteReplicationGroupMemberAction {
+    /**
+     * The Region where the replica exists.
+     */
+    RegionName: RegionName;
+  }
   export interface DeleteRequest {
     /**
      * A map of attribute name to attribute values, representing the primary key of the item to delete. All of the table's primary key attributes must be specified, and their data types must match those of the table's key schema.
@@ -832,6 +856,18 @@ export namespace DocumentClient {
      * The properties of the table.
      */
     Table?: TableDescription;
+  }
+  export interface DescribeTableReplicaAutoScalingInput {
+    /**
+     * The name of the table.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeTableReplicaAutoScalingOutput {
+    /**
+     * Represents the auto scaling properties of the table.
+     */
+    TableAutoScalingDescription?: TableAutoScalingDescription;
   }
   export interface DescribeTimeToLiveInput {
     /**
@@ -954,6 +990,14 @@ export namespace DocumentClient {
      */
     ProvisionedThroughput?: ProvisionedThroughput;
   }
+  export interface GlobalSecondaryIndexAutoScalingUpdate {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    ProvisionedWriteCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
+  }
+  export type GlobalSecondaryIndexAutoScalingUpdateList = GlobalSecondaryIndexAutoScalingUpdate[];
   export interface GlobalSecondaryIndexDescription {
     /**
      * The name of the global secondary index.
@@ -1382,6 +1426,12 @@ export namespace DocumentClient {
      */
     WriteCapacityUnits?: NonNegativeLongObject;
   }
+  export interface ProvisionedThroughputOverride {
+    /**
+     * Replica-specific read capacity units. If not specified, uses the source table's read capacity settings.
+     */
+    ReadCapacityUnits?: PositiveLongObject;
+  }
   export interface Put {
     /**
      * A map of attribute name to attribute values, representing the primary key of the item to be written by PutItem. All of the table's primary key attributes must be specified, and their data types must match those of the table's key schema. If any attributes are present in the item that are part of an index key schema for the table, their types must match the index key schema. 
@@ -1564,13 +1614,109 @@ export namespace DocumentClient {
      */
     RegionName?: RegionName;
   }
+  export interface ReplicaAutoScalingDescription {
+    /**
+     * The Region where the replica exists.
+     */
+    RegionName?: RegionName;
+    /**
+     * Replica-specific global secondary index auto scaling settings.
+     */
+    GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexAutoScalingDescriptionList;
+    ReplicaProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+    ReplicaProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+    /**
+     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.  
+     */
+    ReplicaStatus?: ReplicaStatus;
+  }
+  export type ReplicaAutoScalingDescriptionList = ReplicaAutoScalingDescription[];
+  export interface ReplicaAutoScalingUpdate {
+    /**
+     * The Region where the replica exists.
+     */
+    RegionName: RegionName;
+    /**
+     * Represents the auto scaling settings of global secondary indexes that will be modified.
+     */
+    ReplicaGlobalSecondaryIndexUpdates?: ReplicaGlobalSecondaryIndexAutoScalingUpdateList;
+    ReplicaProvisionedReadCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
+  }
+  export type ReplicaAutoScalingUpdateList = ReplicaAutoScalingUpdate[];
   export interface ReplicaDescription {
     /**
      * The name of the Region.
      */
     RegionName?: RegionName;
+    /**
+     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.  
+     */
+    ReplicaStatus?: ReplicaStatus;
+    /**
+     * Detailed information about the replica status.
+     */
+    ReplicaStatusDescription?: ReplicaStatusDescription;
+    /**
+     * Specifies the progress of a Create, Update, or Delete action on the replica as a percentage.
+     */
+    ReplicaStatusPercentProgress?: ReplicaStatusPercentProgress;
+    /**
+     * The AWS KMS customer master key (CMK) of the replica that will be used for AWS KMS encryption.
+     */
+    KMSMasterKeyId?: KMSMasterKeyId;
+    /**
+     * Replica-specific provisioned throughput. If not described, uses the source table's provisioned throughput settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Replica-specific global secondary index settings.
+     */
+    GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexDescriptionList;
   }
   export type ReplicaDescriptionList = ReplicaDescription[];
+  export interface ReplicaGlobalSecondaryIndex {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName: IndexName;
+    /**
+     * Replica table GSI-specific provisioned throughput. If not specified, uses the source table GSI's read capacity settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+  }
+  export interface ReplicaGlobalSecondaryIndexAutoScalingDescription {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    /**
+     * The current state of the replica global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.  
+     */
+    IndexStatus?: IndexStatus;
+    ProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+    ProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
+  }
+  export type ReplicaGlobalSecondaryIndexAutoScalingDescriptionList = ReplicaGlobalSecondaryIndexAutoScalingDescription[];
+  export interface ReplicaGlobalSecondaryIndexAutoScalingUpdate {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    ProvisionedReadCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
+  }
+  export type ReplicaGlobalSecondaryIndexAutoScalingUpdateList = ReplicaGlobalSecondaryIndexAutoScalingUpdate[];
+  export interface ReplicaGlobalSecondaryIndexDescription {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    /**
+     * If not described, uses the source table GSI's read capacity settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+  }
+  export type ReplicaGlobalSecondaryIndexDescriptionList = ReplicaGlobalSecondaryIndexDescription[];
+  export type ReplicaGlobalSecondaryIndexList = ReplicaGlobalSecondaryIndex[];
   export interface ReplicaGlobalSecondaryIndexSettingsDescription {
     /**
      * The name of the global secondary index. The name must be unique among all other indexes on this table.
@@ -1668,7 +1814,9 @@ export namespace DocumentClient {
     ReplicaGlobalSecondaryIndexSettingsUpdate?: ReplicaGlobalSecondaryIndexSettingsUpdateList;
   }
   export type ReplicaSettingsUpdateList = ReplicaSettingsUpdate[];
-  export type ReplicaStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type ReplicaStatusDescription = string;
+  export type ReplicaStatusPercentProgress = string;
   export interface ReplicaUpdate {
     /**
      * The parameters required for creating a replica on an existing global table.
@@ -1680,6 +1828,21 @@ export namespace DocumentClient {
     Delete?: DeleteReplicaAction;
   }
   export type ReplicaUpdateList = ReplicaUpdate[];
+  export interface ReplicationGroupUpdate {
+    /**
+     * The parameters required for creating a replica for the table.
+     */
+    Create?: CreateReplicationGroupMemberAction;
+    /**
+     * The parameters required for updating a replica for the table.
+     */
+    Update?: UpdateReplicationGroupMemberAction;
+    /**
+     * The parameters required for deleting a replica for the table.
+     */
+    Delete?: DeleteReplicationGroupMemberAction;
+  }
+  export type ReplicationGroupUpdateList = ReplicationGroupUpdate[];
   export type ResourceArnString = string;
   export type RestoreInProgress = boolean;
   export interface RestoreSummary {
@@ -1786,7 +1949,7 @@ export namespace DocumentClient {
      */
     SSEType?: SSEType;
     /**
-     * The KMS customer master key (CMK) ARN used for the AWS KMS encryption.
+     * The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
      */
     KMSMasterKeyArn?: KMSMasterKeyArn;
   }
@@ -1801,7 +1964,7 @@ export namespace DocumentClient {
      */
     SSEType?: SSEType;
     /**
-     * The KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.
+     * The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
   }
@@ -1963,7 +2126,7 @@ export namespace DocumentClient {
     /**
      * Indicates whether DynamoDB Streams is enabled (true) or disabled (false) on the table.
      */
-    StreamEnabled?: StreamEnabled;
+    StreamEnabled: StreamEnabled;
     /**
      *  When an item in the table is modified, StreamViewType determines what information is written to the stream for this table. Valid values for StreamViewType are:    KEYS_ONLY - Only the key attributes of the modified item are written to the stream.    NEW_IMAGE - The entire item, as it appears after it was modified, is written to the stream.    OLD_IMAGE - The entire item, as it appeared before it was modified, is written to the stream.    NEW_AND_OLD_IMAGES - Both the new and the old item images of the item are written to the stream.  
      */
@@ -1974,6 +2137,20 @@ export namespace DocumentClient {
   export type StringAttributeValue = string;
   export type StringSetAttributeValue = StringAttributeValue[];
   export type TableArn = string;
+  export interface TableAutoScalingDescription {
+    /**
+     * The name of the table.
+     */
+    TableName?: TableName;
+    /**
+     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.  
+     */
+    TableStatus?: TableStatus;
+    /**
+     * Represents replicas of the global table.
+     */
+    Replicas?: ReplicaAutoScalingDescriptionList;
+  }
   export type TableCreationDateTime = Date;
   export interface TableDescription {
     /**
@@ -2040,6 +2217,14 @@ export namespace DocumentClient {
      * The Amazon Resource Name (ARN) that uniquely identifies the latest stream for this table.
      */
     LatestStreamArn?: StreamArn;
+    /**
+     * Represents the version of global tables in use, if the table is replicated across AWS Regions.
+     */
+    GlobalTableVersion?: String;
+    /**
+     * Represents replicas of the table.
+     */
+    Replicas?: ReplicaDescriptionList;
     /**
      * Contains details for the restore.
      */
@@ -2353,6 +2538,24 @@ export namespace DocumentClient {
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }
+  export interface UpdateReplicationGroupMemberAction {
+    /**
+     * The Region where the replica exists.
+     */
+    RegionName: RegionName;
+    /**
+     * The AWS KMS customer master key (CMK) of the replica that should be used for AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.
+     */
+    KMSMasterKeyId?: KMSMasterKeyId;
+    /**
+     * Replica-specific provisioned throughput. If not specified, uses the source table's provisioned throughput settings.
+     */
+    ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Replica-specific global secondary index settings.
+     */
+    GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
+  }
   export interface UpdateTableInput {
     /**
      * An array of attributes that describe the key schema for the table and indexes. If you are adding a new global secondary index to the table, AttributeDefinitions must include the key element(s) of the new index.
@@ -2382,12 +2585,37 @@ export namespace DocumentClient {
      * The new server-side encryption settings for the specified table.
      */
     SSESpecification?: SSESpecification;
+    /**
+     * A list of replica update actions (create, delete, or update) for the table.  This property only applies to Version 2019.11.21 of global tables. 
+     */
+    ReplicaUpdates?: ReplicationGroupUpdateList;
   }
   export interface UpdateTableOutput {
     /**
      * Represents the properties of the table.
      */
     TableDescription?: TableDescription;
+  }
+  export interface UpdateTableReplicaAutoScalingInput {
+    /**
+     * Represents the auto scaling settings of the global secondary indexes of the replica to be updated.
+     */
+    GlobalSecondaryIndexUpdates?: GlobalSecondaryIndexAutoScalingUpdateList;
+    /**
+     * The name of the global table to be updated.
+     */
+    TableName: TableName;
+    ProvisionedWriteCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
+    /**
+     * Represents the auto scaling settings of replicas of the table that will be modified.
+     */
+    ReplicaUpdates?: ReplicaAutoScalingUpdateList;
+  }
+  export interface UpdateTableReplicaAutoScalingOutput {
+    /**
+     * Returns information about the auto scaling settings of a table with replicas.
+     */
+    TableAutoScalingDescription?: TableAutoScalingDescription;
   }
   export interface UpdateTimeToLiveInput {
     /**

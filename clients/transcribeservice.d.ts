@@ -185,7 +185,7 @@ declare namespace TranscribeService {
     DownloadUri?: Uri;
   }
   export type KMSKeyId = string;
-  export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|"es-ES"|"en-IN"|"hi-IN"|"ar-SA"|"ru-RU"|"zh-CN"|"nl-NL"|"id-ID"|"ta-IN"|"fa-IR"|"en-IE"|"en-AB"|"en-WL"|"pt-PT"|string;
+  export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|"es-ES"|"en-IN"|"hi-IN"|"ar-SA"|"ru-RU"|"zh-CN"|"nl-NL"|"id-ID"|"ta-IN"|"fa-IR"|"en-IE"|"en-AB"|"en-WL"|"pt-PT"|"te-IN"|"tr-TR"|"de-CH"|"he-IL"|"ms-MY"|"ja-JP"|"ar-AE"|string;
   export interface ListTranscriptionJobsRequest {
     /**
      * When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date. 

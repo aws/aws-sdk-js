@@ -108,7 +108,7 @@
       "output": {
         "shape": "AllocateHostsResult"
       },
-      "documentation": "<p>Allocates a Dedicated Host to your account. At a minimum, specify the instance size type, Availability Zone, and quantity of hosts to allocate.</p>"
+      "documentation": "<p>Allocates a Dedicated Host to your account. At a minimum, specify the supported instance type or instance family, the Availability Zone in which to allocate the host, and the number of hosts to allocate.</p>"
     },
     "ApplySecurityGroupsToClientVpnTargetNetwork": {
       "name": "ApplySecurityGroupsToClientVpnTargetNetwork",
@@ -2171,7 +2171,7 @@
       "output": {
         "shape": "DescribeHostReservationOfferingsResult"
       },
-      "documentation": "<p>Describes the Dedicated Host reservations that are available to purchase.</p> <p>The results describe all the Dedicated Host reservation offerings, including offerings that may not match the instance family and Region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html\">Dedicated Hosts Overview</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>"
+      "documentation": "<p>Describes the Dedicated Host reservations that are available to purchase.</p> <p>The results describe all of the Dedicated Host reservation offerings, including offerings that might not match the instance family and Region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html\">Dedicated Hosts Overview</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>"
     },
     "DescribeHostReservations": {
       "name": "DescribeHostReservations",
@@ -3897,7 +3897,7 @@
       "output": {
         "shape": "ModifyHostsResult"
       },
-      "documentation": "<p>Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of <code>host</code> but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.</p>"
+      "documentation": "<p>Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of <code>host</code> but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.</p> <p>You can also use this API action to modify a Dedicated Host to support either multiple instance types in an instance family, or to support a specific instance type only.</p>"
     },
     "ModifyIdFormat": {
       "name": "ModifyIdFormat",
@@ -5274,7 +5274,6 @@
       "type": "structure",
       "required": [
         "AvailabilityZone",
-        "InstanceType",
         "Quantity"
       ],
       "members": {
@@ -5295,8 +5294,12 @@
         },
         "InstanceType": {
           "shape": "String",
-          "documentation": "<p>Specifies the instance type for which to configure your Dedicated Hosts. When you specify the instance type, that is the only instance type that you can launch onto that host.</p>",
+          "documentation": "<p>Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.</p> <p>If you want the Dedicated Hosts to support multiple instance types in a specific instance family, omit this parameter and specify <b>InstanceFamily</b> instead. You cannot specify <b>InstanceType</b> and <b>InstanceFamily</b> in the same request.</p>",
           "locationName": "instanceType"
+        },
+        "InstanceFamily": {
+          "shape": "String",
+          "documentation": "<p>Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.</p> <p>If you want the Dedicated Hosts to support a specific instance type only, omit this parameter and specify <b>InstanceType</b> instead. You cannot specify <b>InstanceFamily</b> and <b>InstanceType</b> in the same request.</p>"
         },
         "Quantity": {
           "shape": "Integer",
@@ -5376,6 +5379,13 @@
         "shape": "AllowedPrincipal",
         "locationName": "item"
       }
+    },
+    "AllowsMultipleInstanceTypes": {
+      "type": "string",
+      "enum": [
+        "on",
+        "off"
+      ]
     },
     "ApplySecurityGroupsToClientVpnTargetNetworkRequest": {
       "type": "structure",
@@ -6344,16 +6354,16 @@
       "members": {
         "AvailableInstanceCapacity": {
           "shape": "AvailableInstanceCapacityList",
-          "documentation": "<p>The total number of instances supported by the Dedicated Host.</p>",
+          "documentation": "<p>The number of instances that can be launched onto the Dedicated Host depending on the host's available capacity. For Dedicated Hosts that support multiple instance types, this parameter represents the number of instances for each instance size that is supported on the host.</p>",
           "locationName": "availableInstanceCapacity"
         },
         "AvailableVCpus": {
           "shape": "Integer",
-          "documentation": "<p>The number of vCPUs available on the Dedicated Host.</p>",
+          "documentation": "<p>The number of vCPUs available for launching instances onto the Dedicated Host.</p>",
           "locationName": "availableVCpus"
         }
       },
-      "documentation": "<p>The capacity information for instances launched onto the Dedicated Host.</p>"
+      "documentation": "<p>The capacity information for instances that can be launched onto the Dedicated Host. </p>"
     },
     "AvailableInstanceCapacityList": {
       "type": "list",
@@ -7980,7 +7990,7 @@
           "locationName": "encrypted"
         },
         "KmsKeyId": {
-          "shape": "KmsKeyId",
+          "shape": "String",
           "documentation": "<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with \"alias/\". For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the Region that the snapshot is being copied to. </p>",
           "locationName": "kmsKeyId"
         },
@@ -8770,7 +8780,7 @@
           "locationName": "dryRun"
         },
         "InstanceId": {
-          "shape": "InstanceId",
+          "shape": "String",
           "documentation": "<p>The ID of the instance.</p>",
           "locationName": "instanceId"
         },
@@ -11732,7 +11742,7 @@
       ],
       "members": {
         "ImageId": {
-          "shape": "ImageId",
+          "shape": "String",
           "documentation": "<p>The ID of the AMI.</p>"
         },
         "DryRun": {
@@ -19395,7 +19405,7 @@
         },
         "AvailableCapacity": {
           "shape": "AvailableCapacity",
-          "documentation": "<p>The number of new instances that can be launched onto the Dedicated Host.</p>",
+          "documentation": "<p>Information about the instances running on the Dedicated Host.</p>",
           "locationName": "availableCapacity"
         },
         "ClientToken": {
@@ -19447,6 +19457,21 @@
           "shape": "HostRecovery",
           "documentation": "<p>Indicates whether host recovery is enabled or disabled for the Dedicated Host.</p>",
           "locationName": "hostRecovery"
+        },
+        "AllowsMultipleInstanceTypes": {
+          "shape": "AllowsMultipleInstanceTypes",
+          "documentation": "<p>Indicates whether the Dedicated Host supports multiple instance types of the same instance family, or a specific instance type only. <code>one</code> indicates that the Dedicated Host supports multiple instance types in the instance family. <code>off</code> indicates that the Dedicated Host supports a single instance type only.</p>",
+          "locationName": "allowsMultipleInstanceTypes"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the AWS account that owns the Dedicated Host.</p>",
+          "locationName": "ownerId"
+        },
+        "AvailabilityZoneId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Availability Zone in which the Dedicated Host is allocated.</p>",
+          "locationName": "availabilityZoneId"
         }
       },
       "documentation": "<p>Describes the properties of the Dedicated Host.</p>"
@@ -19459,13 +19484,18 @@
       "members": {
         "InstanceId": {
           "shape": "String",
-          "documentation": "<p>the IDs of instances that are running on the Dedicated Host.</p>",
+          "documentation": "<p>The ID of instance that is running on the Dedicated Host.</p>",
           "locationName": "instanceId"
         },
         "InstanceType": {
           "shape": "String",
-          "documentation": "<p>The instance type size (for example, <code>m3.medium</code>) of the running instance.</p>",
+          "documentation": "<p>The instance type (for example, <code>m3.medium</code>) of the running instance.</p>",
           "locationName": "instanceType"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the AWS account that owns the instance.</p>",
+          "locationName": "ownerId"
         }
       },
       "documentation": "<p>Describes an instance running on a Dedicated Host.</p>"
@@ -19542,8 +19572,13 @@
         },
         "InstanceType": {
           "shape": "String",
-          "documentation": "<p>The instance type size that the Dedicated Host supports (for example, <code>m3.medium</code>).</p>",
+          "documentation": "<p>The instance type supported by the Dedicated Host. For example, <code>m5.large</code>. If the host supports multiple instance types, no <b>instanceType</b> is returned.</p>",
           "locationName": "instanceType"
+        },
+        "InstanceFamily": {
+          "shape": "String",
+          "documentation": "<p>The instance family supported by the Dedicated Host. For example, <code>m5</code>.</p>",
+          "locationName": "instanceFamily"
         },
         "Sockets": {
           "shape": "Integer",
@@ -19552,11 +19587,11 @@
         },
         "TotalVCpus": {
           "shape": "Integer",
-          "documentation": "<p>The number of vCPUs on the Dedicated Host.</p>",
+          "documentation": "<p>The total number of vCPUs on the Dedicated Host.</p>",
           "locationName": "totalVCpus"
         }
       },
-      "documentation": "<p>Describes properties of a Dedicated Host.</p>"
+      "documentation": "<p>Describes the properties of a Dedicated Host.</p>"
     },
     "HostRecovery": {
       "type": "string",
@@ -20123,6 +20158,41 @@
         }
       }
     },
+    "ImportImageLicenseConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "LicenseConfigurationArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of a license configuration.</p>"
+        }
+      },
+      "documentation": "<p>The request information of license configurations.</p>"
+    },
+    "ImportImageLicenseConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "LicenseConfigurationArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of a license configuration.</p>",
+          "locationName": "licenseConfigurationArn"
+        }
+      },
+      "documentation": "<p> The response information of license configurations.</p>"
+    },
+    "ImportImageLicenseSpecificationListRequest": {
+      "type": "list",
+      "member": {
+        "shape": "ImportImageLicenseConfigurationRequest",
+        "locationName": "item"
+      }
+    },
+    "ImportImageLicenseSpecificationListResponse": {
+      "type": "list",
+      "member": {
+        "shape": "ImportImageLicenseConfigurationResponse",
+        "locationName": "item"
+      }
+    },
     "ImportImageRequest": {
       "type": "structure",
       "members": {
@@ -20160,7 +20230,7 @@
           "documentation": "<p>The target hypervisor platform.</p> <p>Valid values: <code>xen</code> </p>"
         },
         "KmsKeyId": {
-          "shape": "KmsKeyId",
+          "shape": "String",
           "documentation": "<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>Key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the Region that the AMI is being copied to.</p>"
         },
         "LicenseType": {
@@ -20174,6 +20244,10 @@
         "RoleName": {
           "shape": "String",
           "documentation": "<p>The name of the role to use when not using the default role, 'vmimport'.</p>"
+        },
+        "LicenseSpecifications": {
+          "shape": "ImportImageLicenseSpecificationListRequest",
+          "documentation": "<p>The ARNs of the license configurations.</p>"
         }
       }
     },
@@ -20244,6 +20318,11 @@
           "shape": "String",
           "documentation": "<p>A detailed status message of the import task.</p>",
           "locationName": "statusMessage"
+        },
+        "LicenseSpecifications": {
+          "shape": "ImportImageLicenseSpecificationListResponse",
+          "documentation": "<p>The ARNs of the license configurations.</p>",
+          "locationName": "licenseSpecifications"
         }
       }
     },
@@ -20314,6 +20393,11 @@
           "shape": "String",
           "documentation": "<p>A descriptive status message for the import image task.</p>",
           "locationName": "statusMessage"
+        },
+        "LicenseSpecifications": {
+          "shape": "ImportImageLicenseSpecificationListResponse",
+          "documentation": "<p>The ARNs of the license configurations associated to the import image task.</p>",
+          "locationName": "licenseSpecifications"
         }
       },
       "documentation": "<p>Describes an import image task.</p>"
@@ -21110,21 +21194,21 @@
       "members": {
         "AvailableCapacity": {
           "shape": "Integer",
-          "documentation": "<p>The number of instances that can still be launched onto the Dedicated Host.</p>",
+          "documentation": "<p>The number of instances that can be launched onto the Dedicated Host based on the host's available capacity.</p>",
           "locationName": "availableCapacity"
         },
         "InstanceType": {
           "shape": "String",
-          "documentation": "<p>The instance type size supported by the Dedicated Host.</p>",
+          "documentation": "<p>The instance type supported by the Dedicated Host.</p>",
           "locationName": "instanceType"
         },
         "TotalCapacity": {
           "shape": "Integer",
-          "documentation": "<p>The total number of instances that can be launched onto the Dedicated Host.</p>",
+          "documentation": "<p>The total number of instances that can be launched onto the Dedicated Host if there are no instances running on it.</p>",
           "locationName": "totalCapacity"
         }
       },
-      "documentation": "<p>Information about the instance type that the Dedicated Host supports.</p>"
+      "documentation": "<p>Information about the number of instances that can be launched onto the Dedicated Host.</p>"
     },
     "InstanceCount": {
       "type": "structure",
@@ -22367,9 +22451,6 @@
         "enable",
         "disable"
       ]
-    },
-    "KernelId": {
-      "type": "string"
     },
     "KeyNameStringList": {
       "type": "list",
@@ -23835,6 +23916,14 @@
         "HostRecovery": {
           "shape": "HostRecovery",
           "documentation": "<p>Indicates whether to enable or disable host recovery for the Dedicated Host. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html\"> Host Recovery</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
+        "InstanceType": {
+          "shape": "String",
+          "documentation": "<p>Specifies the instance type to be supported by the Dedicated Host. Specify this parameter to modify a Dedicated Host to support only a specific instance type.</p> <p>If you want to modify a Dedicated Host to support multiple instance types in its current instance family, omit this parameter and specify <b>InstanceFamily</b> instead. You cannot specify <b>InstanceType</b> and <b>InstanceFamily</b> in the same request.</p>"
+        },
+        "InstanceFamily": {
+          "shape": "String",
+          "documentation": "<p>Specifies the instance family to be supported by the Dedicated Host. Specify this parameter to modify a Dedicated Host to support multiple instance types within its current instance family.</p> <p>If you want to modify a Dedicated Host to support a specific instance type only, omit this parameter and specify <b>InstanceType</b> instead. You cannot specify <b>InstanceFamily</b> and <b>InstanceType</b> in the same request.</p>"
         }
       }
     },
@@ -23910,7 +23999,7 @@
           "documentation": "<p>A new description for the AMI.</p>"
         },
         "ImageId": {
-          "shape": "ImageId",
+          "shape": "String",
           "documentation": "<p>The ID of the AMI.</p>"
         },
         "LaunchPermission": {
@@ -27084,9 +27173,6 @@
         "Windows (Amazon VPC)"
       ]
     },
-    "RamdiskId": {
-      "type": "string"
-    },
     "ReasonCodesList": {
       "type": "list",
       "member": {
@@ -27212,7 +27298,7 @@
           "locationName": "enaSupport"
         },
         "KernelId": {
-          "shape": "KernelId",
+          "shape": "String",
           "documentation": "<p>The ID of the kernel.</p>",
           "locationName": "kernelId"
         },
@@ -27227,7 +27313,7 @@
           "locationName": "BillingProduct"
         },
         "RamdiskId": {
-          "shape": "RamdiskId",
+          "shape": "String",
           "documentation": "<p>The ID of the RAM disk.</p>",
           "locationName": "ramdiskId"
         },
@@ -28647,7 +28733,7 @@
           "documentation": "<p>The attribute to reset (currently you can only reset the launch permission attribute).</p>"
         },
         "ImageId": {
-          "shape": "ImageId",
+          "shape": "String",
           "documentation": "<p>The ID of the AMI.</p>"
         },
         "DryRun": {

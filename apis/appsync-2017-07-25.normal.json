@@ -13,6 +13,37 @@
     "uid": "appsync-2017-07-25"
   },
   "operations": {
+    "CreateApiCache": {
+      "name": "CreateApiCache",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/apis/{apiId}/ApiCaches"
+      },
+      "input": {
+        "shape": "CreateApiCacheRequest"
+      },
+      "output": {
+        "shape": "CreateApiCacheResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a cache for the GraphQL API.</p>"
+    },
     "CreateApiKey": {
       "name": "CreateApiKey",
       "http": {
@@ -205,6 +236,37 @@
       ],
       "documentation": "<p>Creates a <code>Type</code> object.</p>"
     },
+    "DeleteApiCache": {
+      "name": "DeleteApiCache",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/apis/{apiId}/ApiCaches"
+      },
+      "input": {
+        "shape": "DeleteApiCacheRequest"
+      },
+      "output": {
+        "shape": "DeleteApiCacheResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes an <code>ApiCache</code> object.</p>"
+    },
     "DeleteApiKey": {
       "name": "DeleteApiKey",
       "http": {
@@ -384,6 +446,68 @@
         }
       ],
       "documentation": "<p>Deletes a <code>Type</code> object.</p>"
+    },
+    "FlushApiCache": {
+      "name": "FlushApiCache",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/apis/{apiId}/FlushCache"
+      },
+      "input": {
+        "shape": "FlushApiCacheRequest"
+      },
+      "output": {
+        "shape": "FlushApiCacheResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Flushes an <code>ApiCache</code> object.</p>"
+    },
+    "GetApiCache": {
+      "name": "GetApiCache",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apis/{apiId}/ApiCaches"
+      },
+      "input": {
+        "shape": "GetApiCacheRequest"
+      },
+      "output": {
+        "shape": "GetApiCacheResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Retrieves an <code>ApiCache</code> object.</p>"
     },
     "GetDataSource": {
       "name": "GetDataSource",
@@ -913,6 +1037,37 @@
       ],
       "documentation": "<p>Untags a resource.</p>"
     },
+    "UpdateApiCache": {
+      "name": "UpdateApiCache",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/apis/{apiId}/ApiCaches/update"
+      },
+      "input": {
+        "shape": "UpdateApiCacheRequest"
+      },
+      "output": {
+        "shape": "UpdateApiCacheResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the cache for the GraphQL API.</p>"
+    },
     "UpdateApiKey": {
       "name": "UpdateApiKey",
       "http": {
@@ -1125,6 +1280,64 @@
         "shape": "AdditionalAuthenticationProvider"
       }
     },
+    "ApiCache": {
+      "type": "structure",
+      "members": {
+        "ttl": {
+          "shape": "Long",
+          "documentation": "<p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>"
+        },
+        "apiCachingBehavior": {
+          "shape": "ApiCachingBehavior",
+          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>"
+        },
+        "transitEncryptionEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Transit encryption flag when connecting to cache. This setting cannot be updated after creation.</p>"
+        },
+        "atRestEncryptionEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>At rest encryption flag for cache. This setting cannot be updated after creation.</p>"
+        },
+        "type": {
+          "shape": "ApiCacheType",
+          "documentation": "<p>The cache instance type.</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
+        },
+        "status": {
+          "shape": "ApiCacheStatus",
+          "documentation": "<p>The cache instance status.</p> <ul> <li> <p> <b>AVAILABLE</b>: The instance is available for use.</p> </li> <li> <p> <b>CREATING</b>: The instance is currently creating.</p> </li> <li> <p> <b>DELETING</b>: The instance is currently deleting.</p> </li> <li> <p> <b>MODIFYING</b>: The instance is currently modifying.</p> </li> <li> <p> <b>FAILED</b>: The instance has failed creation.</p> </li> </ul>"
+        }
+      }
+    },
+    "ApiCacheStatus": {
+      "type": "string",
+      "enum": [
+        "AVAILABLE",
+        "CREATING",
+        "DELETING",
+        "MODIFYING",
+        "FAILED"
+      ]
+    },
+    "ApiCacheType": {
+      "type": "string",
+      "enum": [
+        "T2_SMALL",
+        "T2_MEDIUM",
+        "R4_LARGE",
+        "R4_XLARGE",
+        "R4_2XLARGE",
+        "R4_4XLARGE",
+        "R4_8XLARGE"
+      ]
+    },
+    "ApiCachingBehavior": {
+      "type": "string",
+      "enum": [
+        "FULL_REQUEST_CACHING",
+        "PER_RESOLVER_CACHING"
+      ]
+    },
     "ApiKey": {
       "type": "structure",
       "members": {
@@ -1204,6 +1417,26 @@
     "BooleanValue": {
       "type": "boolean"
     },
+    "CachingConfig": {
+      "type": "structure",
+      "members": {
+        "ttl": {
+          "shape": "Long",
+          "documentation": "<p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>"
+        },
+        "cachingKeys": {
+          "shape": "CachingKeys",
+          "documentation": "<p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.identity</code> and <code>$context.arguments</code> maps.</p>"
+        }
+      },
+      "documentation": "<p>The caching configuration for a resolver that has caching enabled.</p>"
+    },
+    "CachingKeys": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "CognitoUserPoolConfig": {
       "type": "structure",
       "required": [
@@ -1225,6 +1458,70 @@
         }
       },
       "documentation": "<p>Describes an Amazon Cognito user pool configuration.</p>"
+    },
+    "ConflictDetectionType": {
+      "type": "string",
+      "enum": [
+        "VERSION",
+        "NONE"
+      ]
+    },
+    "ConflictHandlerType": {
+      "type": "string",
+      "enum": [
+        "OPTIMISTIC_CONCURRENCY",
+        "LAMBDA",
+        "AUTOMERGE",
+        "NONE"
+      ]
+    },
+    "CreateApiCacheRequest": {
+      "type": "structure",
+      "required": [
+        "apiId",
+        "ttl",
+        "apiCachingBehavior",
+        "type"
+      ],
+      "members": {
+        "apiId": {
+          "shape": "String",
+          "documentation": "<p>The GraphQL API Id.</p>",
+          "location": "uri",
+          "locationName": "apiId"
+        },
+        "ttl": {
+          "shape": "Long",
+          "documentation": "<p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>"
+        },
+        "transitEncryptionEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Transit encryption flag when connecting to cache. This setting cannot be updated after creation.</p>"
+        },
+        "atRestEncryptionEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>At rest encryption flag for cache. This setting cannot be updated after creation.</p>"
+        },
+        "apiCachingBehavior": {
+          "shape": "ApiCachingBehavior",
+          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>"
+        },
+        "type": {
+          "shape": "ApiCacheType",
+          "documentation": "<p>The cache instance type.</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Represents the input of a <code>CreateApiCache</code> operation.</p>"
+    },
+    "CreateApiCacheResponse": {
+      "type": "structure",
+      "members": {
+        "apiCache": {
+          "shape": "ApiCache",
+          "documentation": "<p>The <code>ApiCache</code> object.</p>"
+        }
+      },
+      "documentation": "<p>Represents the output of a <code>CreateApiCache</code> operation.</p>"
     },
     "CreateApiKeyRequest": {
       "type": "structure",
@@ -1459,6 +1756,14 @@
         "pipelineConfig": {
           "shape": "PipelineConfig",
           "documentation": "<p>The <code>PipelineConfig</code>.</p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig",
+          "documentation": "<p>The <code>SyncConfig</code> for a resolver attached to a versioned datasource.</p>"
+        },
+        "cachingConfig": {
+          "shape": "CachingConfig",
+          "documentation": "<p>The caching configuration for the resolver.</p>"
         }
       }
     },
@@ -1573,6 +1878,26 @@
         "ALLOW",
         "DENY"
       ]
+    },
+    "DeleteApiCacheRequest": {
+      "type": "structure",
+      "required": [
+        "apiId"
+      ],
+      "members": {
+        "apiId": {
+          "shape": "String",
+          "documentation": "<p>The API ID.</p>",
+          "location": "uri",
+          "locationName": "apiId"
+        }
+      },
+      "documentation": "<p>Represents the input of a <code>DeleteApiCache</code> operation.</p>"
+    },
+    "DeleteApiCacheResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>Represents the output of a <code>DeleteApiCache</code> operation.</p>"
     },
     "DeleteApiKeyRequest": {
       "type": "structure",
@@ -1724,6 +2049,24 @@
       "type": "structure",
       "members": {}
     },
+    "DeltaSyncConfig": {
+      "type": "structure",
+      "members": {
+        "baseTableTTL": {
+          "shape": "Long",
+          "documentation": "<p>The number of minutes an Item is stored in the datasource.</p>"
+        },
+        "deltaSyncTableName": {
+          "shape": "String",
+          "documentation": "<p>The Delta Sync table name.</p>"
+        },
+        "deltaSyncTableTTL": {
+          "shape": "Long",
+          "documentation": "<p>The number of minutes a Delta Sync log entry is stored in the Delta Sync table.</p>"
+        }
+      },
+      "documentation": "<p>Describes a Delta Sync configuration.</p>"
+    },
     "DynamodbDataSourceConfig": {
       "type": "structure",
       "required": [
@@ -1742,6 +2085,14 @@
         "useCallerCredentials": {
           "shape": "Boolean",
           "documentation": "<p>Set to TRUE to use Amazon Cognito credentials with this data source.</p>"
+        },
+        "deltaSyncConfig": {
+          "shape": "DeltaSyncConfig",
+          "documentation": "<p>The <code>DeltaSyncConfig</code> for a versioned datasource.</p>"
+        },
+        "versioned": {
+          "shape": "Boolean",
+          "documentation": "<p>Set to TRUE to use Conflict Detection and Resolution with this data source.</p>"
         }
       },
       "documentation": "<p>Describes an Amazon DynamoDB data source configuration.</p>"
@@ -1771,6 +2122,26 @@
         "ERROR",
         "ALL"
       ]
+    },
+    "FlushApiCacheRequest": {
+      "type": "structure",
+      "required": [
+        "apiId"
+      ],
+      "members": {
+        "apiId": {
+          "shape": "String",
+          "documentation": "<p>The API ID.</p>",
+          "location": "uri",
+          "locationName": "apiId"
+        }
+      },
+      "documentation": "<p>Represents the input of a <code>FlushApiCache</code> operation.</p>"
+    },
+    "FlushApiCacheResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>Represents the output of a <code>FlushApiCache</code> operation.</p>"
     },
     "FunctionConfiguration": {
       "type": "structure",
@@ -1821,6 +2192,30 @@
       "member": {
         "shape": "String"
       }
+    },
+    "GetApiCacheRequest": {
+      "type": "structure",
+      "required": [
+        "apiId"
+      ],
+      "members": {
+        "apiId": {
+          "shape": "String",
+          "documentation": "<p>The API ID.</p>",
+          "location": "uri",
+          "locationName": "apiId"
+        }
+      },
+      "documentation": "<p>Represents the input of a <code>GetApiCache</code> operation.</p>"
+    },
+    "GetApiCacheResponse": {
+      "type": "structure",
+      "members": {
+        "apiCache": {
+          "shape": "ApiCache"
+        }
+      },
+      "documentation": "<p>Represents the output of a <code>GetApiCache</code> operation.</p>"
     },
     "GetDataSourceRequest": {
       "type": "structure",
@@ -2108,6 +2503,15 @@
         }
       },
       "documentation": "<p>Describes an HTTP data source configuration.</p>"
+    },
+    "LambdaConflictHandlerConfig": {
+      "type": "structure",
+      "members": {
+        "lambdaConflictHandlerArn": {
+          "shape": "String",
+          "documentation": "<p>The Arn for the Lambda function to use as the Conflict Handler.</p>"
+        }
+      }
     },
     "LambdaDataSourceConfig": {
       "type": "structure",
@@ -2508,6 +2912,8 @@
     },
     "PaginationToken": {
       "type": "string",
+      "max": 65536,
+      "min": 1,
       "pattern": "[\\\\S]+"
     },
     "PipelineConfig": {
@@ -2600,6 +3006,14 @@
         "pipelineConfig": {
           "shape": "PipelineConfig",
           "documentation": "<p>The <code>PipelineConfig</code>.</p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig",
+          "documentation": "<p>The <code>SyncConfig</code> for a resolver attached to a versioned datasource.</p>"
+        },
+        "cachingConfig": {
+          "shape": "CachingConfig",
+          "documentation": "<p>The caching configuration for the resolver.</p>"
         }
       },
       "documentation": "<p>Describes a resolver.</p>"
@@ -2625,6 +3039,8 @@
     },
     "ResourceName": {
       "type": "string",
+      "max": 65536,
+      "min": 1,
       "pattern": "[_A-Za-z][_0-9A-Za-z]*"
     },
     "SchemaStatus": {
@@ -2668,6 +3084,24 @@
     },
     "String": {
       "type": "string"
+    },
+    "SyncConfig": {
+      "type": "structure",
+      "members": {
+        "conflictHandler": {
+          "shape": "ConflictHandlerType",
+          "documentation": "<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>"
+        },
+        "conflictDetection": {
+          "shape": "ConflictDetectionType",
+          "documentation": "<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>"
+        },
+        "lambdaConflictHandlerConfig": {
+          "shape": "LambdaConflictHandlerConfig",
+          "documentation": "<p>The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.</p>"
+        }
+      },
+      "documentation": "<p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -2787,6 +3221,46 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateApiCacheRequest": {
+      "type": "structure",
+      "required": [
+        "apiId",
+        "ttl",
+        "apiCachingBehavior",
+        "type"
+      ],
+      "members": {
+        "apiId": {
+          "shape": "String",
+          "documentation": "<p>The GraphQL API Id.</p>",
+          "location": "uri",
+          "locationName": "apiId"
+        },
+        "ttl": {
+          "shape": "Long",
+          "documentation": "<p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>"
+        },
+        "apiCachingBehavior": {
+          "shape": "ApiCachingBehavior",
+          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>"
+        },
+        "type": {
+          "shape": "ApiCacheType",
+          "documentation": "<p>The cache instance type.</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Represents the input of a <code>UpdateApiCache</code> operation.</p>"
+    },
+    "UpdateApiCacheResponse": {
+      "type": "structure",
+      "members": {
+        "apiCache": {
+          "shape": "ApiCache",
+          "documentation": "<p>The <code>ApiCache</code> object.</p>"
+        }
+      },
+      "documentation": "<p>Represents the output of a <code>UpdateApiCache</code> operation.</p>"
     },
     "UpdateApiKeyRequest": {
       "type": "structure",
@@ -3041,6 +3515,14 @@
         "pipelineConfig": {
           "shape": "PipelineConfig",
           "documentation": "<p>The <code>PipelineConfig</code>.</p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig",
+          "documentation": "<p>The <code>SyncConfig</code> for a resolver attached to a versioned datasource.</p>"
+        },
+        "cachingConfig": {
+          "shape": "CachingConfig",
+          "documentation": "<p>The caching configuration for the resolver.</p>"
         }
       }
     },

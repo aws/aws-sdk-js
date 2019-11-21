@@ -3213,6 +3213,34 @@
       ],
       "documentation": "<p>Modifies an existing patch baseline. Fields not specified in the request are left unchanged.</p> <note> <p>For information about valid key and value pairs in <code>PatchFilters</code> for each supported operating system type, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html\">PatchFilter</a>.</p> </note>"
     },
+    "UpdateResourceDataSync": {
+      "name": "UpdateResourceDataSync",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateResourceDataSyncRequest"
+      },
+      "output": {
+        "shape": "UpdateResourceDataSyncResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceDataSyncNotFoundException"
+        },
+        {
+          "shape": "ResourceDataSyncInvalidConfigurationException"
+        },
+        {
+          "shape": "ResourceDataSyncConflictException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Update a resource data sync. After you create a resource data sync for a Region, you can't change the account options for that sync. For example, if you create a sync in the us-east-2 (Ohio) Region and you choose the Include only the current account option, you can't edit that sync later and choose the Include all accounts from my AWS Organizations configuration option. Instead, you must delete the first resource data sync, and create a new one.</p>"
+    },
     "UpdateServiceSetting": {
       "name": "UpdateServiceSetting",
       "http": {
@@ -14893,6 +14921,32 @@
           "documentation": "<p>Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.</p>"
         }
       }
+    },
+    "UpdateResourceDataSyncRequest": {
+      "type": "structure",
+      "required": [
+        "SyncName",
+        "SyncType",
+        "SyncSource"
+      ],
+      "members": {
+        "SyncName": {
+          "shape": "ResourceDataSyncName",
+          "documentation": "<p>The name of the resource data sync you want to update.</p>"
+        },
+        "SyncType": {
+          "shape": "ResourceDataSyncType",
+          "documentation": "<p>The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>, then the resource data sync synchronizes data to an Amazon S3 bucket. If the <code>SyncType</code> is <code>SyncFromSource</code> then the resource data sync synchronizes data from AWS Organizations or from multiple AWS Regions.</p>"
+        },
+        "SyncSource": {
+          "shape": "ResourceDataSyncSource",
+          "documentation": "<p>Specify information about the data sources to synchronize.</p>"
+        }
+      }
+    },
+    "UpdateResourceDataSyncResult": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateServiceSettingRequest": {
       "type": "structure",
