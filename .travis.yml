@@ -11,6 +11,7 @@ node_js:
   - "8"
   - "9"
   - "10"
+  - "12"
 env:
   - TEST_SCRIPT=coverage
 
