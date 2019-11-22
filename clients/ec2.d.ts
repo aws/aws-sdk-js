@@ -1245,11 +1245,11 @@ declare class EC2 extends Service {
    */
   describeFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DescribeFastSnapshotRestoresResult) => void): Request<EC2.Types.DescribeFastSnapshotRestoresResult, AWSError>;
   /**
-   * Describes the events for the specified EC2 Fleet during the specified time.
+   * Describes the events for the specified EC2 Fleet during the specified time. EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours.
    */
   describeFleetHistory(params: EC2.Types.DescribeFleetHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
   /**
-   * Describes the events for the specified EC2 Fleet during the specified time.
+   * Describes the events for the specified EC2 Fleet during the specified time. EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours.
    */
   describeFleetHistory(callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
   /**
@@ -1396,6 +1396,22 @@ declare class EC2 extends Service {
    * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status Checks for Your Instances and Troubleshooting Instances with Failed Status Checks in the Amazon Elastic Compute Cloud User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled Events for Your Instances in the Amazon Elastic Compute Cloud User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide.  
    */
   describeInstanceStatus(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
+  /**
+   * Returns a list of all instance types offered. The results can be filtered by location (Region or Availability Zone). If no location is specified, the instance types offered in the current Region are returned.
+   */
+  describeInstanceTypeOfferings(params: EC2.Types.DescribeInstanceTypeOfferingsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypeOfferingsResult) => void): Request<EC2.Types.DescribeInstanceTypeOfferingsResult, AWSError>;
+  /**
+   * Returns a list of all instance types offered. The results can be filtered by location (Region or Availability Zone). If no location is specified, the instance types offered in the current Region are returned.
+   */
+  describeInstanceTypeOfferings(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypeOfferingsResult) => void): Request<EC2.Types.DescribeInstanceTypeOfferingsResult, AWSError>;
+  /**
+   * Returns a list of all instance types offered in your current AWS Region. The results can be filtered by the attributes of the instance types.
+   */
+  describeInstanceTypes(params: EC2.Types.DescribeInstanceTypesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypesResult) => void): Request<EC2.Types.DescribeInstanceTypesResult, AWSError>;
+  /**
+   * Returns a list of all instance types offered in your current AWS Region. The results can be filtered by the attributes of the instance types.
+   */
+  describeInstanceTypes(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypesResult) => void): Request<EC2.Types.DescribeInstanceTypesResult, AWSError>;
   /**
    * Describes the specified instances or all of AWS account's instances. If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
    */
@@ -3462,6 +3478,8 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: ClientVpnSecurityGroupIdSet;
   }
+  export type ArchitectureType = "i386"|"x86_64"|"arm64"|string;
+  export type ArchitectureTypeList = ArchitectureType[];
   export type ArchitectureValues = "i386"|"x86_64"|"arm64"|string;
   export interface AssignIpv6AddressesRequest {
     /**
@@ -3987,6 +4005,7 @@ declare namespace EC2 {
   }
   export type AutoAcceptSharedAttachmentsValue = "enable"|"disable"|string;
   export type AutoPlacement = "on"|"off"|string;
+  export type AutoRecoveryFlag = boolean;
   export interface AvailabilityZone {
     /**
      * The state of the Availability Zone.
@@ -4030,6 +4049,7 @@ declare namespace EC2 {
     AvailableVCpus?: Integer;
   }
   export type AvailableInstanceCapacityList = InstanceCapacity[];
+  export type BareMetalFlag = boolean;
   export type BatchState = "submitted"|"active"|"cancelled"|"failed"|"cancelled_running"|"cancelled_terminating"|"modifying"|string;
   export type BillingProductList = String[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
@@ -4124,6 +4144,7 @@ declare namespace EC2 {
   }
   export type BundleTaskList = BundleTask[];
   export type BundleTaskState = "pending"|"waiting-for-shutdown"|"bundling"|"storing"|"cancelling"|"complete"|"failed"|string;
+  export type BurstablePerformanceFlag = boolean;
   export interface ByoipCidr {
     /**
      * The public IPv4 address range, in CIDR notation.
@@ -5009,6 +5030,8 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type CopyTagsFromSource = "volume"|string;
+  export type CoreCount = number;
+  export type CoreCountList = CoreCount[];
   export interface CpuOptions {
     /**
      * The number of CPU cores for the instance.
@@ -6637,6 +6660,7 @@ declare namespace EC2 {
     CpuCredits: String;
   }
   export type CurrencyCodeValues = "USD"|string;
+  export type CurrentGenerationFlag = boolean;
   export interface CustomerGateway {
     /**
      * The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).
@@ -6674,8 +6698,11 @@ declare namespace EC2 {
   export type CustomerGatewayId = string;
   export type CustomerGatewayIdStringList = String[];
   export type CustomerGatewayList = CustomerGateway[];
+  export type DITMaxResults = number;
+  export type DITOMaxResults = number;
   export type DatafeedSubscriptionState = "Active"|"Inactive"|string;
   export type DateTime = Date;
+  export type DedicatedHostFlag = boolean;
   export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
   export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
@@ -8618,6 +8645,70 @@ declare namespace EC2 {
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
+  }
+  export interface DescribeInstanceTypeOfferingsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The location type.
+     */
+    LocationType?: LocationType;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.    location - This depends on the location type. For example, if the location type is region (default), the location is the Region code (for example, us-east-2.)    instance-type - The instance type.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the next token value.
+     */
+    MaxResults?: DITOMaxResults;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeInstanceTypeOfferingsResult {
+    /**
+     * The instance types offered.
+     */
+    InstanceTypeOfferings?: InstanceTypeOfferingsList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeInstanceTypesRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The instance types. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
+     */
+    InstanceTypes?: RequestInstanceTypeList;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported. (true | false)    bare-metal - Indicates whether it is a bare metal instance type. (true | false)    burstable-performance-supported - Indicates whether it is a burstable performance instance type. (true | false)    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family. (true | false)    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized. (true | false)    ebs-info.encryption-support - Indicates whether EBS encryption is supported. (true | false)    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier. (true | false)    hibernation-supported - Indicates whether On-Demand hibernation is supported. (true | false)    hypervisor - The hypervisor used. (nitro | xen)    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks. (hdd | ssd)    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage. (true | false)    memory-info.size-in-mib - The memory size.    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required. (required | supported | unsupported)    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6. (true | false)    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - Describes the network performance.    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per cores for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the next token value.
+     */
+    MaxResults?: DITMaxResults;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeInstanceTypesResult {
+    /**
+     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
+     */
+    InstanceTypes?: InstanceTypeInfoList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
   }
   export interface DescribeInstancesRequest {
     /**
@@ -10922,6 +11013,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
   }
+  export type DiskCount = number;
   export interface DiskImage {
     /**
      * A description of the disk image.
@@ -10980,6 +11072,23 @@ declare namespace EC2 {
      */
     Size?: Long;
   }
+  export interface DiskInfo {
+    /**
+     * The size of the disk in GiB.
+     */
+    SizeInGB?: DiskSize;
+    /**
+     * The number of disks with this configuration.
+     */
+    Count?: DiskCount;
+    /**
+     * The type of disk.
+     */
+    Type?: DiskType;
+  }
+  export type DiskInfoList = DiskInfo[];
+  export type DiskSize = number;
+  export type DiskType = "hdd"|"ssd"|string;
   export interface DnsEntry {
     /**
      * The DNS name.
@@ -11034,6 +11143,17 @@ declare namespace EC2 {
      */
     KmsKeyId?: String;
   }
+  export type EbsEncryptionSupport = "unsupported"|"supported"|string;
+  export interface EbsInfo {
+    /**
+     * Indicates that the instance type is Amazon EBS-optimized. For more information, see Amazon EBS-Optimized Instances in Amazon EC2 User Guide for Linux Instances.
+     */
+    EbsOptimizedSupport?: EbsOptimizedSupport;
+    /**
+     * Indicates whether Amazon EBS encryption is supported.
+     */
+    EncryptionSupport?: EbsEncryptionSupport;
+  }
   export interface EbsInstanceBlockDevice {
     /**
      * The time stamp when the attachment initiated.
@@ -11062,6 +11182,7 @@ declare namespace EC2 {
      */
     VolumeId?: String;
   }
+  export type EbsOptimizedSupport = "unsupported"|"supported"|"default"|string;
   export interface EgressOnlyInternetGateway {
     /**
      * Information about the attachment of the egress-only internet gateway.
@@ -11171,6 +11292,7 @@ declare namespace EC2 {
   }
   export type ElasticInferenceAcceleratorAssociationList = ElasticInferenceAcceleratorAssociation[];
   export type ElasticInferenceAccelerators = ElasticInferenceAccelerator[];
+  export type EnaSupport = "unsupported"|"supported"|"required"|string;
   export interface EnableEbsEncryptionByDefaultRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -11900,6 +12022,35 @@ declare namespace EC2 {
   }
   export type FlowLogSet = FlowLog[];
   export type FlowLogsResourceType = "VPC"|"Subnet"|"NetworkInterface"|string;
+  export type FpgaDeviceCount = number;
+  export interface FpgaDeviceInfo {
+    /**
+     * The name of the FPGA accelerator.
+     */
+    Name?: FpgaDeviceName;
+    /**
+     * The manufacturer of the FPGA accelerator.
+     */
+    Manufacturer?: FpgaDeviceManufacturerName;
+    /**
+     * The count of FPGA accelerators for the instance type.
+     */
+    Count?: FpgaDeviceCount;
+    /**
+     * Describes the memory for the FPGA accelerator for the instance type.
+     */
+    MemoryInfo?: FpgaDeviceMemoryInfo;
+  }
+  export type FpgaDeviceInfoList = FpgaDeviceInfo[];
+  export type FpgaDeviceManufacturerName = string;
+  export interface FpgaDeviceMemoryInfo {
+    /**
+     * The size (in MiB) for the memory available to the FPGA accelerator.
+     */
+    SizeInMiB?: FpgaDeviceMemorySize;
+  }
+  export type FpgaDeviceMemorySize = number;
+  export type FpgaDeviceName = string;
   export interface FpgaImage {
     /**
      * The FPGA image identifier (AFI ID).
@@ -11999,6 +12150,17 @@ declare namespace EC2 {
     Message?: String;
   }
   export type FpgaImageStateCode = "pending"|"failed"|"available"|"unavailable"|string;
+  export interface FpgaInfo {
+    /**
+     * Describes the FPGAs for the instance type.
+     */
+    Fpgas?: FpgaDeviceInfoList;
+    /**
+     * The total memory of all FPGA accelerators for the instance type.
+     */
+    TotalFpgaMemoryInMiB?: totalFpgaMemory;
+  }
+  export type FreeTierEligibleFlag = boolean;
   export type GatewayType = "ipsec.1"|string;
   export interface GetCapacityReservationUsageRequest {
     /**
@@ -12341,6 +12503,45 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type GpuDeviceCount = number;
+  export interface GpuDeviceInfo {
+    /**
+     * The name of the GPU accelerator.
+     */
+    Name?: GpuDeviceName;
+    /**
+     * The manufacturer of the GPU accelerator.
+     */
+    Manufacturer?: GpuDeviceManufacturerName;
+    /**
+     * The number of GPUs for the instance type.
+     */
+    Count?: GpuDeviceCount;
+    /**
+     * Describes the memory available to the GPU accelerator.
+     */
+    MemoryInfo?: GpuDeviceMemoryInfo;
+  }
+  export type GpuDeviceInfoList = GpuDeviceInfo[];
+  export type GpuDeviceManufacturerName = string;
+  export interface GpuDeviceMemoryInfo {
+    /**
+     * The size (in MiB) for the memory available to the GPU accelerator.
+     */
+    SizeInMiB?: GpuDeviceMemorySize;
+  }
+  export type GpuDeviceMemorySize = number;
+  export type GpuDeviceName = string;
+  export interface GpuInfo {
+    /**
+     * Describes the GPU accelerators for the instance type.
+     */
+    Gpus?: GpuDeviceInfoList;
+    /**
+     * The total size of the memory for the GPU accelerators for the instance type.
+     */
+    TotalGpuMemoryInMiB?: totalGpuMemory;
+  }
   export type GroupIdStringList = String[];
   export interface GroupIdentifier {
     /**
@@ -12356,6 +12557,7 @@ declare namespace EC2 {
   export type GroupIdentifierSet = SecurityGroupIdentifier[];
   export type GroupIds = String[];
   export type GroupNameStringList = String[];
+  export type HibernationFlag = boolean;
   export interface HibernationOptions {
     /**
      * If this parameter is set to true, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.
@@ -14021,8 +14223,122 @@ declare namespace EC2 {
      */
     Status?: SummaryStatus;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.18xlarge"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|string;
+  export type InstanceStorageFlag = boolean;
+  export interface InstanceStorageInfo {
+    /**
+     * The total size of the disks, in GiB.
+     */
+    TotalSizeInGB?: DiskSize;
+    /**
+     * Array describing the disks that are available for the instance type.
+     */
+    Disks?: DiskInfoList;
+  }
+  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|string;
+  export type InstanceTypeHypervisor = "nitro"|"xen"|string;
+  export interface InstanceTypeInfo {
+    /**
+     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * Indicates whether the instance type is a current generation.
+     */
+    CurrentGeneration?: CurrentGenerationFlag;
+    /**
+     * Indicates whether the instance type is eligible for the free tier.
+     */
+    FreeTierEligible?: FreeTierEligibleFlag;
+    /**
+     * Indicates whether the instance type is offered for spot or On-Demand.
+     */
+    SupportedUsageClasses?: UsageClassTypeList;
+    /**
+     * Indicates the supported root devices.
+     */
+    SupportedRootDevices?: RootDeviceTypeList;
+    /**
+     * Indicates whether the instance is bare metal.
+     */
+    BareMetal?: BareMetalFlag;
+    /**
+     * Indicates the hypervisor used for the instance type.
+     */
+    Hypervisor?: InstanceTypeHypervisor;
+    /**
+     * Describes the processor.
+     */
+    ProcessorInfo?: ProcessorInfo;
+    /**
+     * Describes the vCPU configurations for the instance type.
+     */
+    VCpuInfo?: VCpuInfo;
+    /**
+     * Describes the memory for the instance type.
+     */
+    MemoryInfo?: MemoryInfo;
+    /**
+     * Indicates whether instance storage is supported.
+     */
+    InstanceStorageSupported?: InstanceStorageFlag;
+    /**
+     * Describes the disks for the instance type.
+     */
+    InstanceStorageInfo?: InstanceStorageInfo;
+    /**
+     * Describes the Amazon EBS settings for the instance type.
+     */
+    EbsInfo?: EbsInfo;
+    /**
+     * Describes the network settings for the instance type.
+     */
+    NetworkInfo?: NetworkInfo;
+    /**
+     * Describes the GPU accelerator settings for the instance type.
+     */
+    GpuInfo?: GpuInfo;
+    /**
+     * Describes the FPGA accelerator settings for the instance type.
+     */
+    FpgaInfo?: FpgaInfo;
+    /**
+     * Describes the placement group settings for the instance type.
+     */
+    PlacementGroupInfo?: PlacementGroupInfo;
+    /**
+     * Indicates whether On-Demand hibernation is supported.
+     */
+    HibernationSupported?: HibernationFlag;
+    /**
+     * Indicates whether the instance type is a burstable performance instance type.
+     */
+    BurstablePerformanceSupported?: BurstablePerformanceFlag;
+    /**
+     * Indicates whether Dedicated Hosts are supported on the instance type.
+     */
+    DedicatedHostsSupported?: DedicatedHostFlag;
+    /**
+     * Indicates whether auto recovery is supported.
+     */
+    AutoRecoverySupported?: AutoRecoveryFlag;
+  }
+  export type InstanceTypeInfoList = InstanceTypeInfo[];
   export type InstanceTypeList = InstanceType[];
+  export interface InstanceTypeOffering {
+    /**
+     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The location type.
+     */
+    LocationType?: LocationType;
+    /**
+     * The identifier for the location. This depends on the location type. For example, if the location type is region, the location is the Region code (for example, us-east-2.)
+     */
+    Location?: Location;
+  }
+  export type InstanceTypeOfferingsList = InstanceTypeOffering[];
   export interface InstanceUsage {
     /**
      * The ID of the AWS account that is making use of the Capacity Reservation.
@@ -14119,6 +14435,7 @@ declare namespace EC2 {
     Ipv6CidrBlock?: String;
   }
   export type Ipv6CidrBlockSet = Ipv6CidrBlock[];
+  export type Ipv6Flag = boolean;
   export interface Ipv6Range {
     /**
      * The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix length.
@@ -14888,9 +15205,21 @@ declare namespace EC2 {
      */
     UserId?: String;
   }
+  export type Location = string;
+  export type LocationType = "region"|"availability-zone"|"availability-zone-id"|string;
   export type LogDestinationType = "cloud-watch-logs"|"s3"|string;
   export type Long = number;
   export type MarketType = "spot"|string;
+  export type MaxIpv4AddrPerInterface = number;
+  export type MaxIpv6AddrPerInterface = number;
+  export type MaxNetworkInterfaces = number;
+  export interface MemoryInfo {
+    /**
+     * Size of the memory, in MiB.
+     */
+    SizeInMiB?: MemorySize;
+  }
+  export type MemorySize = number;
   export type MillisecondDateTime = Date;
   export interface ModifyCapacityReservationRequest {
     /**
@@ -16204,6 +16533,32 @@ declare namespace EC2 {
   export type NetworkAclEntryList = NetworkAclEntry[];
   export type NetworkAclId = string;
   export type NetworkAclList = NetworkAcl[];
+  export interface NetworkInfo {
+    /**
+     * Describes the network performance.
+     */
+    NetworkPerformance?: NetworkPerformance;
+    /**
+     * The maximum number of network interfaces for the instance type.
+     */
+    MaximumNetworkInterfaces?: MaxNetworkInterfaces;
+    /**
+     * The maximum number of IPv4 addresses per network interface.
+     */
+    Ipv4AddressesPerInterface?: MaxIpv4AddrPerInterface;
+    /**
+     * The maximum number of IPv6 addresses per network interface.
+     */
+    Ipv6AddressesPerInterface?: MaxIpv6AddrPerInterface;
+    /**
+     * Indicates whether IPv6 is supported.
+     */
+    Ipv6Supported?: Ipv6Flag;
+    /**
+     * Indicates whether Elastic Network Adapter (ENA) is supported.
+     */
+    EnaSupport?: EnaSupport;
+  }
   export interface NetworkInterface {
     /**
      * The association information for an Elastic IP address (IPv4) associated with the network interface.
@@ -16420,6 +16775,7 @@ declare namespace EC2 {
   export type NetworkInterfacePrivateIpAddressList = NetworkInterfacePrivateIpAddress[];
   export type NetworkInterfaceStatus = "available"|"associated"|"attaching"|"in-use"|"detaching"|string;
   export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|string;
+  export type NetworkPerformance = string;
   export interface NewDhcpConfiguration {
     Key?: String;
     Values?: ValueStringList;
@@ -16658,9 +17014,17 @@ declare namespace EC2 {
      */
     PartitionCount?: Integer;
   }
+  export interface PlacementGroupInfo {
+    /**
+     * A list of supported placement groups types.
+     */
+    SupportedStrategies?: PlacementGroupStrategyList;
+  }
   export type PlacementGroupList = PlacementGroup[];
   export type PlacementGroupName = string;
   export type PlacementGroupState = "pending"|"available"|"deleting"|"deleted"|string;
+  export type PlacementGroupStrategy = "cluster"|"partition"|"spread"|string;
+  export type PlacementGroupStrategyList = PlacementGroupStrategy[];
   export type PlacementGroupStringList = String[];
   export interface PlacementResponse {
     /**
@@ -16778,6 +17142,17 @@ declare namespace EC2 {
   }
   export type PrivateIpAddressSpecificationList = PrivateIpAddressSpecification[];
   export type PrivateIpAddressStringList = String[];
+  export interface ProcessorInfo {
+    /**
+     * A list of architectures supported by the instance type.
+     */
+    SupportedArchitectures?: ArchitectureTypeList;
+    /**
+     * The speed of the processor, in GHz.
+     */
+    SustainedClockSpeedInGhz?: ProcessorSustainedClockSpeed;
+  }
+  export type ProcessorSustainedClockSpeed = number;
   export interface ProductCode {
     /**
      * The product code.
@@ -17415,6 +17790,7 @@ declare namespace EC2 {
   export type ReportStatusType = "ok"|"impaired"|string;
   export type RequestHostIdList = String[];
   export type RequestHostIdSet = HostId[];
+  export type RequestInstanceTypeList = InstanceType[];
   export interface RequestLaunchTemplateData {
     /**
      * The ID of the kernel.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User Provided Kernels in the Amazon Elastic Compute Cloud User Guide. 
@@ -18317,6 +18693,8 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export type RootDeviceType = "ebs"|"instance-store"|string;
+  export type RootDeviceTypeList = RootDeviceType[];
   export interface Route {
     /**
      * The IPv4 CIDR block used for the destination match.
@@ -20332,6 +20710,8 @@ declare namespace EC2 {
      */
     TerminatingInstances?: InstanceStateChangeList;
   }
+  export type ThreadsPerCore = number;
+  export type ThreadsPerCoreList = ThreadsPerCore[];
   export type TrafficDirection = "ingress"|"egress"|string;
   export interface TrafficMirrorFilter {
     /**
@@ -21091,6 +21471,8 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export type UsageClassType = "spot"|"on-demand"|string;
+  export type UsageClassTypeList = UsageClassType[];
   export interface UserBucket {
     /**
      * The name of the S3 bucket where the disk image is located.
@@ -21151,6 +21533,29 @@ declare namespace EC2 {
   export type UserIdGroupPairList = UserIdGroupPair[];
   export type UserIdGroupPairSet = UserIdGroupPair[];
   export type UserIdStringList = String[];
+  export type VCpuCount = number;
+  export interface VCpuInfo {
+    /**
+     * The default number of vCPUs for the instance type.
+     */
+    DefaultVCpus?: VCpuCount;
+    /**
+     * The default number of cores for the instance type.
+     */
+    DefaultCores?: CoreCount;
+    /**
+     * The default number of threads per core for the instance type.
+     */
+    DefaultThreadsPerCore?: ThreadsPerCore;
+    /**
+     * List of the valid number of cores that can be configured for the instance type.
+     */
+    ValidCores?: CoreCountList;
+    /**
+     * List of the valid number of threads per core that can be configured for the instance type. 
+     */
+    ValidThreadsPerCore?: ThreadsPerCoreList;
+  }
   export type ValueStringList = String[];
   export type VersionDescription = string;
   export type VersionStringList = String[];
@@ -21923,6 +22328,8 @@ declare namespace EC2 {
   export type ZoneIdStringList = String[];
   export type ZoneNameStringList = String[];
   export type scope = "Availability Zone"|"Region"|string;
+  export type totalFpgaMemory = number;
+  export type totalGpuMemory = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -52,11 +52,11 @@ declare class CodeBuild extends Service {
    */
   createWebhook(callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
-   * Deletes a build project.
+   *  Deletes a build project. When you delete a project, its builds are not deleted. 
    */
   deleteProject(params: CodeBuild.Types.DeleteProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
   /**
-   * Deletes a build project.
+   *  Deletes a build project. When you delete a project, its builds are not deleted. 
    */
   deleteProject(callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
   /**
@@ -670,7 +670,7 @@ declare namespace CodeBuild {
      */
     sortOrder?: SortOrderType;
     /**
-     * During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a next token. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
+     * During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a nextToken. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
      */
     nextToken?: String;
   }
@@ -680,7 +680,7 @@ declare namespace CodeBuild {
      */
     ids?: BuildIds;
     /**
-     * If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a next token. To get the next batch of items in the list, call this operation again, adding the next token to the call.
+     * If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a nextToken. To get the next batch of items in the list, call this operation again, adding the next token to the call.
      */
     nextToken?: String;
   }
@@ -690,7 +690,7 @@ declare namespace CodeBuild {
      */
     sortOrder?: SortOrderType;
     /**
-     * During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a next token. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
+     * During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a nextToken. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
      */
     nextToken?: String;
   }
@@ -700,7 +700,7 @@ declare namespace CodeBuild {
      */
     ids?: BuildIds;
     /**
-     * If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a next token. To get the next batch of items in the list, call this operation again, adding the next token to the call.
+     * If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a nextToken. To get the next batch of items in the list, call this operation again, adding the next token to the call.
      */
     nextToken?: String;
   }
@@ -722,13 +722,13 @@ declare namespace CodeBuild {
      */
     sortOrder?: SortOrderType;
     /**
-     * During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a next token. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
+     * During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a nextToken. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
      */
     nextToken?: NonEmptyString;
   }
   export interface ListProjectsOutput {
     /**
-     * If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a next token. To get the next batch of items in the list, call this operation again, adding the next token to the call.
+     * If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a nextToken. To get the next batch of items in the list, call this operation again, adding the next token to the call.
      */
     nextToken?: String;
     /**
@@ -772,6 +772,14 @@ declare namespace CodeBuild {
      *  The URL to a build log in an S3 bucket. 
      */
     s3DeepLink?: String;
+    /**
+     *  The ARN of Amazon CloudWatch Logs for a build project. Its format is arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}. For more information, see Resources Defined by Amazon CloudWatch Logs. 
+     */
+    cloudWatchLogsArn?: String;
+    /**
+     *  The ARN of S3 logs for a build project. Its format is arn:${Partition}:s3:::${BucketName}/${ObjectName}. For more information, see Resources Defined by Amazon S3. 
+     */
+    s3LogsArn?: String;
     /**
      *  Information about Amazon CloudWatch Logs for a build project. 
      */

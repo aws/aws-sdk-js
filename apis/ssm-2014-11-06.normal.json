@@ -6955,6 +6955,11 @@
           "shape": "Integer",
           "documentation": "<p>The number of instances with patches installed that aren't defined in the patch baseline.</p>"
         },
+        "InstancesWithInstalledPendingRebootPatches": {
+          "shape": "InstancesCount",
+          "documentation": "<p>The number of instances with patches installed that have not been rebooted after the patch installation. The status of these instances is NON_COMPLIANT.</p>",
+          "box": true
+        },
         "InstancesWithInstalledRejectedPatches": {
           "shape": "InstancesCount",
           "documentation": "<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>INSTALLED_REJECTED</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero).</p> </note>",
@@ -9018,6 +9023,11 @@
           "shape": "PatchInstalledOtherCount",
           "documentation": "<p>The number of patches not specified in the patch baseline that are installed on the instance.</p>"
         },
+        "InstalledPendingRebootCount": {
+          "shape": "PatchInstalledPendingRebootCount",
+          "documentation": "<p>The number of patches installed since the last time the instance was rebooted.</p>",
+          "box": true
+        },
         "InstalledRejectedCount": {
           "shape": "PatchInstalledRejectedCount",
           "documentation": "<p>The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of <i>InstalledRejected</i> were typically installed before they were added to a RejectedPatches list.</p> <note> <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero).</p> </note>",
@@ -9051,6 +9061,14 @@
         "Operation": {
           "shape": "PatchOperationType",
           "documentation": "<p>The type of patching operation that was performed: SCAN (assess patch compliance state) or INSTALL (install missing patches).</p>"
+        },
+        "LastNoRebootInstallOperationTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time of the last attempt to patch the instance with <code>NoReboot</code> specified as the reboot option.</p>"
+        },
+        "RebootOption": {
+          "shape": "RebootOption",
+          "documentation": "<p>Indicates the reboot option specified in the patch baseline.</p> <note> <p>Reboot options apply to <code>Install</code> operations only. Reboots are not attempted for Patch Manager <code>Scan</code> operations.</p> </note> <ul> <li> <p> <b>RebootIfNeeded</b>: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of <code>InstalledPendingReboot</code>.</p> </li> <li> <p> <b>NoReboot</b>: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is performed.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.</p>"
@@ -12016,6 +12034,7 @@
       "enum": [
         "INSTALLED",
         "INSTALLED_OTHER",
+        "INSTALLED_PENDING_REBOOT",
         "INSTALLED_REJECTED",
         "MISSING",
         "NOT_APPLICABLE",
@@ -12171,6 +12190,9 @@
       "type": "integer"
     },
     "PatchInstalledOtherCount": {
+      "type": "integer"
+    },
+    "PatchInstalledPendingRebootCount": {
       "type": "integer"
     },
     "PatchInstalledRejectedCount": {
@@ -12546,7 +12568,7 @@
       "members": {
         "Name": {
           "shape": "PSParameterName",
-          "documentation": "<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can't be prefixed with \"aws\" or \"ssm\" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can't include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html\">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>"
+          "documentation": "<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can't be prefixed with \"aws\" or \"ssm\" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can't include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html\">Requirements and Constraints for Parameter Names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters, including the full length of the parameter ARN. For example, the following fully qualified parameter name is 65 characters, not 20 characters:</p> <p> <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code> </p> </note>"
         },
         "Description": {
           "shape": "ParameterDescription",
@@ -12599,6 +12621,13 @@
           "documentation": "<p>The tier assigned to the parameter.</p>"
         }
       }
+    },
+    "RebootOption": {
+      "type": "string",
+      "enum": [
+        "RebootIfNeeded",
+        "NoReboot"
+      ]
     },
     "Region": {
       "type": "string"

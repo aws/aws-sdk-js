@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.577.0-->
+<!--LATEST=2.578.0-->
 <!--ENTRYINSERT-->
+
+## 2.578.0
+* feature: ACM: This release adds support for Tag-Based IAM for AWS Certificate Manager and adding tags to certificates upon creation.
+* feature: ApplicationAutoScaling: Update default endpoint for Application Auto Scaling.
+* feature: AutoScalingPlans: Update default endpoint for AWS Auto Scaling.
+* feature: CodeBuild: Add Canonical ARN to LogsLocation.
+* feature: EC2: This release adds two new APIs (DescribeInstanceTypes and DescribeInstanceTypeOfferings) that give customers access to instance type attributes and regional and zonal offerings.
+* feature: EMR: Amazon EMR adds support for concurrent step execution and cancelling running steps. Amazon EMR has added a new Outpost ARN field in the ListCluster and DescribeCluster API responses that is populated for clusters launched in an AWS Outpost subnet.
+* feature: ForecastService: This release adds two key updates to existing APIs. 1. Amazon Forecast can now generate forecasts in any quantile using the optional parameter forecastTypes in the CreateForecast API and 2. You can get additional details (metrics and relevant error messages) on your AutoML runs using the DescribePredictor and GetAccuracyMetrics APIs.
+* feature: MediaPackageVod: Includes the submission time of Asset ingestion request in the API response for Create/List/Describe Assets.
+* feature: Rekognition: This release adds enhanced face filtering support to the IndexFaces API operation, and introduces face filtering for CompareFaces and SearchFacesByImage API operations.
+* feature: SSM: Add RebootOption and LastNoRebootInstallOperationTime for DescribeInstancePatchStates and DescribeInstancePatchStatesForPatchGroup API
+* feature: STS: Support tagging for STS sessions and tag based access control for the STS APIs
 
 ## 2.577.0
 * feature: Amplify: This release of AWS Amplify Console introduces support for backend environments. Backend environments are containers for AWS deployments. Each environment is a collection of AWS resources.

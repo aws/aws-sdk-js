@@ -3430,6 +3430,10 @@ declare namespace SSM {
      */
     InstancesWithInstalledOtherPatches?: Integer;
     /**
+     * The number of instances with patches installed that have not been rebooted after the patch installation. The status of these instances is NON_COMPLIANT.
+     */
+    InstancesWithInstalledPendingRebootPatches?: InstancesCount;
+    /**
      * The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero). 
      */
     InstancesWithInstalledRejectedPatches?: InstancesCount;
@@ -4888,6 +4892,10 @@ declare namespace SSM {
      */
     InstalledOtherCount?: PatchInstalledOtherCount;
     /**
+     * The number of patches installed since the last time the instance was rebooted.
+     */
+    InstalledPendingRebootCount?: PatchInstalledPendingRebootCount;
+    /**
      * The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of InstalledRejected were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero). 
      */
     InstalledRejectedCount?: PatchInstalledRejectedCount;
@@ -4919,6 +4927,14 @@ declare namespace SSM {
      * The type of patching operation that was performed: SCAN (assess patch compliance state) or INSTALL (install missing patches).
      */
     Operation: PatchOperationType;
+    /**
+     * The time of the last attempt to patch the instance with NoReboot specified as the reboot option.
+     */
+    LastNoRebootInstallOperationTime?: DateTime;
+    /**
+     * Indicates the reboot option specified in the patch baseline.  Reboot options apply to Install operations only. Reboots are not attempted for Patch Manager Scan operations.     RebootIfNeeded: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of InstalledPendingReboot.    NoReboot: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of InstalledPendingReboot. These patches might not be in effect until a reboot is performed.  
+     */
+    RebootOption?: RebootOption;
   }
   export interface InstancePatchStateFilter {
     /**
@@ -6569,7 +6585,7 @@ declare namespace SSM {
     InstalledTime: DateTime;
   }
   export type PatchComplianceDataList = PatchComplianceData[];
-  export type PatchComplianceDataState = "INSTALLED"|"INSTALLED_OTHER"|"INSTALLED_REJECTED"|"MISSING"|"NOT_APPLICABLE"|"FAILED"|string;
+  export type PatchComplianceDataState = "INSTALLED"|"INSTALLED_OTHER"|"INSTALLED_PENDING_REBOOT"|"INSTALLED_REJECTED"|"MISSING"|"NOT_APPLICABLE"|"FAILED"|string;
   export type PatchComplianceLevel = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"INFORMATIONAL"|"UNSPECIFIED"|string;
   export type PatchComplianceMaxResults = number;
   export type PatchContentUrl = string;
@@ -6613,6 +6629,7 @@ declare namespace SSM {
   export type PatchIdList = PatchId[];
   export type PatchInstalledCount = number;
   export type PatchInstalledOtherCount = number;
+  export type PatchInstalledPendingRebootCount = number;
   export type PatchInstalledRejectedCount = number;
   export type PatchKbNumber = string;
   export type PatchLanguage = string;
@@ -6777,7 +6794,7 @@ declare namespace SSM {
   }
   export interface PutParameterRequest {
     /**
-     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an AWS Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-/    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Requirements and Constraints for Parameter Names in the AWS Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters.  
+     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an AWS Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-/    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Requirements and Constraints for Parameter Names in the AWS Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters, including the full length of the parameter ARN. For example, the following fully qualified parameter name is 65 characters, not 20 characters:  arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName  
      */
     Name: PSParameterName;
     /**
@@ -6827,6 +6844,7 @@ declare namespace SSM {
      */
     Tier?: ParameterTier;
   }
+  export type RebootOption = "RebootIfNeeded"|"NoReboot"|string;
   export type Region = string;
   export type Regions = Region[];
   export interface RegisterDefaultPatchBaselineRequest {

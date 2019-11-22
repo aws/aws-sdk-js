@@ -12,211 +12,211 @@ declare class ForecastService extends Service {
   constructor(options?: ForecastService.Types.ClientConfiguration)
   config: Config & ForecastService.Types.ClientConfiguration;
   /**
-   * Creates an Amazon Forecast dataset. The information about the dataset that you provide helps Forecast understand how to consume the data for model training. This includes the following:     DataFrequency  - How frequently your historical time-series data is collected. Amazon Forecast uses this information when training the model and generating a forecast.     Domain  and  DatasetType  - Each dataset has an associated dataset domain and a type within the domain. Amazon Forecast provides a list of predefined domains and types within each domain. For each unique dataset domain and type within the domain, Amazon Forecast requires your data to include a minimum set of predefined fields.     Schema  - A schema specifies the fields of the dataset, including the field name and data type.   After creating a dataset, you import your training data into the dataset and add the dataset to a dataset group. You then use the dataset group to create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets, use the ListDatasets operation.  The Status of a dataset must be ACTIVE before you can import training data. Use the DescribeDataset operation to get the status. 
+   * Creates an Amazon Forecast dataset. The information about the dataset that you provide helps Forecast understand how to consume the data for model training. This includes the following:     DataFrequency  - How frequently your historical time-series data is collected.     Domain  and  DatasetType  - Each dataset has an associated dataset domain and a type within the domain. Amazon Forecast provides a list of predefined domains and types within each domain. For each unique dataset domain and type within the domain, Amazon Forecast requires your data to include a minimum set of predefined fields.     Schema  - A schema specifies the fields in the dataset, including the field name and data type.   After creating a dataset, you import your training data into it and add the dataset to a dataset group. You use the dataset group to create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets, use the ListDatasets operation. For example Forecast datasets, see the Amazon Forecast Sample GitHub repository.  The Status of a dataset must be ACTIVE before you can import training data. Use the DescribeDataset operation to get the status. 
    */
   createDataset(params: ForecastService.Types.CreateDatasetRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetResponse) => void): Request<ForecastService.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates an Amazon Forecast dataset. The information about the dataset that you provide helps Forecast understand how to consume the data for model training. This includes the following:     DataFrequency  - How frequently your historical time-series data is collected. Amazon Forecast uses this information when training the model and generating a forecast.     Domain  and  DatasetType  - Each dataset has an associated dataset domain and a type within the domain. Amazon Forecast provides a list of predefined domains and types within each domain. For each unique dataset domain and type within the domain, Amazon Forecast requires your data to include a minimum set of predefined fields.     Schema  - A schema specifies the fields of the dataset, including the field name and data type.   After creating a dataset, you import your training data into the dataset and add the dataset to a dataset group. You then use the dataset group to create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets, use the ListDatasets operation.  The Status of a dataset must be ACTIVE before you can import training data. Use the DescribeDataset operation to get the status. 
+   * Creates an Amazon Forecast dataset. The information about the dataset that you provide helps Forecast understand how to consume the data for model training. This includes the following:     DataFrequency  - How frequently your historical time-series data is collected.     Domain  and  DatasetType  - Each dataset has an associated dataset domain and a type within the domain. Amazon Forecast provides a list of predefined domains and types within each domain. For each unique dataset domain and type within the domain, Amazon Forecast requires your data to include a minimum set of predefined fields.     Schema  - A schema specifies the fields in the dataset, including the field name and data type.   After creating a dataset, you import your training data into it and add the dataset to a dataset group. You use the dataset group to create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets, use the ListDatasets operation. For example Forecast datasets, see the Amazon Forecast Sample GitHub repository.  The Status of a dataset must be ACTIVE before you can import training data. Use the DescribeDataset operation to get the status. 
    */
   createDataset(callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetResponse) => void): Request<ForecastService.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates an Amazon Forecast dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or you can add datasets later with the UpdateDatasetGroup operation. After creating a dataset group and adding datasets, you use the dataset group when you create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets groups, use the ListDatasetGroups operation.  The Status of a dataset group must be ACTIVE before you can create a predictor using the dataset group. Use the DescribeDatasetGroup operation to get the status. 
+   * Creates a dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or later by using the UpdateDatasetGroup operation. After creating a dataset group and adding datasets, you use the dataset group when you create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets groups, use the ListDatasetGroups operation.  The Status of a dataset group must be ACTIVE before you can create use the dataset group to create a predictor. To get the status, use the DescribeDatasetGroup operation. 
    */
   createDatasetGroup(params: ForecastService.Types.CreateDatasetGroupRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetGroupResponse) => void): Request<ForecastService.Types.CreateDatasetGroupResponse, AWSError>;
   /**
-   * Creates an Amazon Forecast dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or you can add datasets later with the UpdateDatasetGroup operation. After creating a dataset group and adding datasets, you use the dataset group when you create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets groups, use the ListDatasetGroups operation.  The Status of a dataset group must be ACTIVE before you can create a predictor using the dataset group. Use the DescribeDatasetGroup operation to get the status. 
+   * Creates a dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or later by using the UpdateDatasetGroup operation. After creating a dataset group and adding datasets, you use the dataset group when you create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets groups, use the ListDatasetGroups operation.  The Status of a dataset group must be ACTIVE before you can create use the dataset group to create a predictor. To get the status, use the DescribeDatasetGroup operation. 
    */
   createDatasetGroup(callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetGroupResponse) => void): Request<ForecastService.Types.CreateDatasetGroupResponse, AWSError>;
   /**
-   * Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to. You must specify a DataSource object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. For more information, see aws-forecast-iam-roles. Two properties of the training data are optionally specified:   The delimiter that separates the data fields. The default delimiter is a comma (,), which is the only supported delimiter in this release.   The format of timestamps. If the format is not specified, Amazon Forecast expects the format to be "yyyy-MM-dd HH:mm:ss".   When Amazon Forecast uploads your training data, it verifies that the data was collected at the DataFrequency specified when the target dataset was created. For more information, see CreateDataset and howitworks-datasets-groups. Amazon Forecast also verifies the delimiter and timestamp format. You can use the ListDatasetImportJobs operation to get a list of all your dataset import jobs, filtered by specified criteria. To get a list of all your dataset import jobs, filtered by the specified criteria, use the ListDatasetGroups operation.
+   * Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to. You must specify a DataSource object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. For more information, see aws-forecast-iam-roles. The training data must be in CSV format. The delimiter must be a comma (,). You can specify the path to a specific CSV file, the S3 bucket, or to a folder in the S3 bucket. For the latter two cases, Amazon Forecast imports all files up to the limit of 10,000 files. To get a list of all your dataset import jobs, filtered by specified criteria, use the ListDatasetImportJobs operation.
    */
   createDatasetImportJob(params: ForecastService.Types.CreateDatasetImportJobRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetImportJobResponse) => void): Request<ForecastService.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
-   * Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to. You must specify a DataSource object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. For more information, see aws-forecast-iam-roles. Two properties of the training data are optionally specified:   The delimiter that separates the data fields. The default delimiter is a comma (,), which is the only supported delimiter in this release.   The format of timestamps. If the format is not specified, Amazon Forecast expects the format to be "yyyy-MM-dd HH:mm:ss".   When Amazon Forecast uploads your training data, it verifies that the data was collected at the DataFrequency specified when the target dataset was created. For more information, see CreateDataset and howitworks-datasets-groups. Amazon Forecast also verifies the delimiter and timestamp format. You can use the ListDatasetImportJobs operation to get a list of all your dataset import jobs, filtered by specified criteria. To get a list of all your dataset import jobs, filtered by the specified criteria, use the ListDatasetGroups operation.
+   * Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to. You must specify a DataSource object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. For more information, see aws-forecast-iam-roles. The training data must be in CSV format. The delimiter must be a comma (,). You can specify the path to a specific CSV file, the S3 bucket, or to a folder in the S3 bucket. For the latter two cases, Amazon Forecast imports all files up to the limit of 10,000 files. To get a list of all your dataset import jobs, filtered by specified criteria, use the ListDatasetImportJobs operation.
    */
   createDatasetImportJob(callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetImportJobResponse) => void): Request<ForecastService.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
-   * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3), use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon, specified in the CreatePredictor request, multiplied by the DataFrequency, specified in the CreateDataset request. When you query a forecast, you can request a specific date range within the complete forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same timezone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
+   * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3) bucket, use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon value, which you specify in the CreatePredictor request, multiplied by the DataFrequency value, which you specify in the CreateDataset request. When you query a forecast, you can request a specific date range within the forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same time zone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
    */
   createForecast(params: ForecastService.Types.CreateForecastRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateForecastResponse) => void): Request<ForecastService.Types.CreateForecastResponse, AWSError>;
   /**
-   * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3), use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon, specified in the CreatePredictor request, multiplied by the DataFrequency, specified in the CreateDataset request. When you query a forecast, you can request a specific date range within the complete forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same timezone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
+   * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3) bucket, use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon value, which you specify in the CreatePredictor request, multiplied by the DataFrequency value, which you specify in the CreateDataset request. When you query a forecast, you can request a specific date range within the forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same time zone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
    */
   createForecast(callback?: (err: AWSError, data: ForecastService.Types.CreateForecastResponse) => void): Request<ForecastService.Types.CreateForecastResponse, AWSError>;
   /**
-   * Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage Service (Amazon S3) bucket. You must specify a DataDestination object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a list of all your forecast export jobs, use the ListForecastExportJobs operation.  The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. Use the DescribeForecastExportJob operation to get the status. 
+   * Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage Service (Amazon S3) bucket. The forecast file name will match the following conventions: &lt;ForecastExportJobName&gt;_&lt;ExportTimestamp&gt;_&lt;PageNumber&gt; where the &lt;ExportTimestamp&gt; component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a list of all your forecast export jobs, use the ListForecastExportJobs operation.  The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. To get the status, use the DescribeForecastExportJob operation. 
    */
   createForecastExportJob(params: ForecastService.Types.CreateForecastExportJobRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateForecastExportJobResponse) => void): Request<ForecastService.Types.CreateForecastExportJobResponse, AWSError>;
   /**
-   * Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage Service (Amazon S3) bucket. You must specify a DataDestination object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a list of all your forecast export jobs, use the ListForecastExportJobs operation.  The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. Use the DescribeForecastExportJob operation to get the status. 
+   * Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage Service (Amazon S3) bucket. The forecast file name will match the following conventions: &lt;ForecastExportJobName&gt;_&lt;ExportTimestamp&gt;_&lt;PageNumber&gt; where the &lt;ExportTimestamp&gt; component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a list of all your forecast export jobs, use the ListForecastExportJobs operation.  The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. To get the status, use the DescribeForecastExportJob operation. 
    */
   createForecastExportJob(callback?: (err: AWSError, data: ForecastService.Types.CreateForecastExportJobResponse) => void): Request<ForecastService.Types.CreateForecastExportJobResponse, AWSError>;
   /**
-   * Creates an Amazon Forecast predictor. In the request, you provide a dataset group and either specify an algorithm or let Amazon Forecast choose the algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters. Amazon Forecast uses the chosen algorithm to train a model using the latest version of the datasets in the specified dataset group. The result is called a predictor. You then generate a forecast using the CreateForecast operation. After training a model, the CreatePredictor operation also evaluates it. To see the evaluation metrics, use the GetAccuracyMetrics operation. Always review the evaluation metrics before deciding to use the predictor to generate a forecast. Optionally, you can specify a featurization configuration to fill and aggragate the data fields in the TARGET_TIME_SERIES dataset to improve model training. For more information, see FeaturizationConfig.  AutoML  If you set PerformAutoML to true, Amazon Forecast evaluates each algorithm and chooses the one that minimizes the objective function. The objective function is defined as the mean of the weighted p10, p50, and p90 quantile losses. For more information, see EvaluationResult. When AutoML is enabled, the following properties are disallowed:    AlgorithmArn     HPOConfig     PerformHPO     TrainingParameters    To get a list of all your predictors, use the ListPredictors operation.  The Status of the predictor must be ACTIVE, signifying that training has completed, before you can use the predictor to create a forecast. Use the DescribePredictor operation to get the status. 
+   * Creates an Amazon Forecast predictor. In the request, you provide a dataset group and either specify an algorithm or let Amazon Forecast choose the algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters. Amazon Forecast uses the chosen algorithm to train a model using the latest version of the datasets in the specified dataset group. The result is called a predictor. You then generate a forecast using the CreateForecast operation. After training a model, the CreatePredictor operation also evaluates it. To see the evaluation metrics, use the GetAccuracyMetrics operation. Always review the evaluation metrics before deciding to use the predictor to generate a forecast. Optionally, you can specify a featurization configuration to fill and aggregate the data fields in the TARGET_TIME_SERIES dataset to improve model training. For more information, see FeaturizationConfig. For RELATED_TIME_SERIES datasets, CreatePredictor verifies that the DataFrequency specified when the dataset was created matches the ForecastFrequency. TARGET_TIME_SERIES datasets don't have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see howitworks-datasets-groups.  AutoML  If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the objective function, set PerformAutoML to true. The objective function is defined as the mean of the weighted p10, p50, and p90 quantile losses. For more information, see EvaluationResult. When AutoML is enabled, the following properties are disallowed:    AlgorithmArn     HPOConfig     PerformHPO     TrainingParameters    To get a list of all of your predictors, use the ListPredictors operation.  Before you can use the predictor to create a forecast, the Status of the predictor must be ACTIVE, signifying that training has completed. To get the status, use the DescribePredictor operation. 
    */
   createPredictor(params: ForecastService.Types.CreatePredictorRequest, callback?: (err: AWSError, data: ForecastService.Types.CreatePredictorResponse) => void): Request<ForecastService.Types.CreatePredictorResponse, AWSError>;
   /**
-   * Creates an Amazon Forecast predictor. In the request, you provide a dataset group and either specify an algorithm or let Amazon Forecast choose the algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters. Amazon Forecast uses the chosen algorithm to train a model using the latest version of the datasets in the specified dataset group. The result is called a predictor. You then generate a forecast using the CreateForecast operation. After training a model, the CreatePredictor operation also evaluates it. To see the evaluation metrics, use the GetAccuracyMetrics operation. Always review the evaluation metrics before deciding to use the predictor to generate a forecast. Optionally, you can specify a featurization configuration to fill and aggragate the data fields in the TARGET_TIME_SERIES dataset to improve model training. For more information, see FeaturizationConfig.  AutoML  If you set PerformAutoML to true, Amazon Forecast evaluates each algorithm and chooses the one that minimizes the objective function. The objective function is defined as the mean of the weighted p10, p50, and p90 quantile losses. For more information, see EvaluationResult. When AutoML is enabled, the following properties are disallowed:    AlgorithmArn     HPOConfig     PerformHPO     TrainingParameters    To get a list of all your predictors, use the ListPredictors operation.  The Status of the predictor must be ACTIVE, signifying that training has completed, before you can use the predictor to create a forecast. Use the DescribePredictor operation to get the status. 
+   * Creates an Amazon Forecast predictor. In the request, you provide a dataset group and either specify an algorithm or let Amazon Forecast choose the algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters. Amazon Forecast uses the chosen algorithm to train a model using the latest version of the datasets in the specified dataset group. The result is called a predictor. You then generate a forecast using the CreateForecast operation. After training a model, the CreatePredictor operation also evaluates it. To see the evaluation metrics, use the GetAccuracyMetrics operation. Always review the evaluation metrics before deciding to use the predictor to generate a forecast. Optionally, you can specify a featurization configuration to fill and aggregate the data fields in the TARGET_TIME_SERIES dataset to improve model training. For more information, see FeaturizationConfig. For RELATED_TIME_SERIES datasets, CreatePredictor verifies that the DataFrequency specified when the dataset was created matches the ForecastFrequency. TARGET_TIME_SERIES datasets don't have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see howitworks-datasets-groups.  AutoML  If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the objective function, set PerformAutoML to true. The objective function is defined as the mean of the weighted p10, p50, and p90 quantile losses. For more information, see EvaluationResult. When AutoML is enabled, the following properties are disallowed:    AlgorithmArn     HPOConfig     PerformHPO     TrainingParameters    To get a list of all of your predictors, use the ListPredictors operation.  Before you can use the predictor to create a forecast, the Status of the predictor must be ACTIVE, signifying that training has completed. To get the status, use the DescribePredictor operation. 
    */
   createPredictor(callback?: (err: AWSError, data: ForecastService.Types.CreatePredictorResponse) => void): Request<ForecastService.Types.CreatePredictorResponse, AWSError>;
   /**
-   * Deletes an Amazon Forecast dataset created using the CreateDataset operation. To be deleted, the dataset must have a status of ACTIVE or CREATE_FAILED. Use the DescribeDataset operation to get the status.
+   * Deletes an Amazon Forecast dataset that was created using the CreateDataset operation. You can only delete datasets that have a status of ACTIVE or CREATE_FAILED. To get the status use the DescribeDataset operation.
    */
   deleteDataset(params: ForecastService.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Amazon Forecast dataset created using the CreateDataset operation. To be deleted, the dataset must have a status of ACTIVE or CREATE_FAILED. Use the DescribeDataset operation to get the status.
+   * Deletes an Amazon Forecast dataset that was created using the CreateDataset operation. You can only delete datasets that have a status of ACTIVE or CREATE_FAILED. To get the status use the DescribeDataset operation.
    */
   deleteDataset(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a dataset group created using the CreateDatasetGroup operation. To be deleted, the dataset group must have a status of ACTIVE, CREATE_FAILED, or UPDATE_FAILED. Use the DescribeDatasetGroup operation to get the status. The operation deletes only the dataset group, not the datasets in the group.
+   * Deletes a dataset group created using the CreateDatasetGroup operation. You can only delete dataset groups that have a status of ACTIVE, CREATE_FAILED, or UPDATE_FAILED. To get the status, use the DescribeDatasetGroup operation. This operation deletes only the dataset group, not the datasets in the group.
    */
   deleteDatasetGroup(params: ForecastService.Types.DeleteDatasetGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a dataset group created using the CreateDatasetGroup operation. To be deleted, the dataset group must have a status of ACTIVE, CREATE_FAILED, or UPDATE_FAILED. Use the DescribeDatasetGroup operation to get the status. The operation deletes only the dataset group, not the datasets in the group.
+   * Deletes a dataset group created using the CreateDatasetGroup operation. You can only delete dataset groups that have a status of ACTIVE, CREATE_FAILED, or UPDATE_FAILED. To get the status, use the DescribeDatasetGroup operation. This operation deletes only the dataset group, not the datasets in the group.
    */
   deleteDatasetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a dataset import job created using the CreateDatasetImportJob operation. To be deleted, the import job must have a status of ACTIVE or CREATE_FAILED. Use the DescribeDatasetImportJob operation to get the status.
+   * Deletes a dataset import job created using the CreateDatasetImportJob operation. You can delete only dataset import jobs that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeDatasetImportJob operation.
    */
   deleteDatasetImportJob(params: ForecastService.Types.DeleteDatasetImportJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a dataset import job created using the CreateDatasetImportJob operation. To be deleted, the import job must have a status of ACTIVE or CREATE_FAILED. Use the DescribeDatasetImportJob operation to get the status.
+   * Deletes a dataset import job created using the CreateDatasetImportJob operation. You can delete only dataset import jobs that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeDatasetImportJob operation.
    */
   deleteDatasetImportJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a forecast created using the CreateForecast operation. To be deleted, the forecast must have a status of ACTIVE or CREATE_FAILED. Use the DescribeForecast operation to get the status. You can't delete a forecast while it is being exported.
+   * Deletes a forecast created using the CreateForecast operation. You can delete only forecasts that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeForecast operation. You can't delete a forecast while it is being exported. After a forecast is deleted, you can no longer query the forecast.
    */
   deleteForecast(params: ForecastService.Types.DeleteForecastRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a forecast created using the CreateForecast operation. To be deleted, the forecast must have a status of ACTIVE or CREATE_FAILED. Use the DescribeForecast operation to get the status. You can't delete a forecast while it is being exported.
+   * Deletes a forecast created using the CreateForecast operation. You can delete only forecasts that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeForecast operation. You can't delete a forecast while it is being exported. After a forecast is deleted, you can no longer query the forecast.
    */
   deleteForecast(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a forecast export job created using the CreateForecastExportJob operation. To be deleted, the export job must have a status of ACTIVE or CREATE_FAILED. Use the DescribeForecastExportJob operation to get the status.
+   * Deletes a forecast export job created using the CreateForecastExportJob operation. You can delete only export jobs that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeForecastExportJob operation.
    */
   deleteForecastExportJob(params: ForecastService.Types.DeleteForecastExportJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a forecast export job created using the CreateForecastExportJob operation. To be deleted, the export job must have a status of ACTIVE or CREATE_FAILED. Use the DescribeForecastExportJob operation to get the status.
+   * Deletes a forecast export job created using the CreateForecastExportJob operation. You can delete only export jobs that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeForecastExportJob operation.
    */
   deleteForecastExportJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a predictor created using the CreatePredictor operation. To be deleted, the predictor must have a status of ACTIVE or CREATE_FAILED. Use the DescribePredictor operation to get the status. Any forecasts generated by the predictor will no longer be available.
+   * Deletes a predictor created using the CreatePredictor operation. You can delete only predictor that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribePredictor operation.
    */
   deletePredictor(params: ForecastService.Types.DeletePredictorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a predictor created using the CreatePredictor operation. To be deleted, the predictor must have a status of ACTIVE or CREATE_FAILED. Use the DescribePredictor operation to get the status. Any forecasts generated by the predictor will no longer be available.
+   * Deletes a predictor created using the CreatePredictor operation. You can delete only predictor that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribePredictor operation.
    */
   deletePredictor(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes an Amazon Forecast dataset created using the CreateDataset operation. In addition to listing the properties provided by the user in the CreateDataset request, this operation includes the following properties:    CreationTime     LastModificationTime     Status   
+   * Describes an Amazon Forecast dataset created using the CreateDataset operation. In addition to listing the parameters specified in the CreateDataset request, this operation includes the following dataset properties:    CreationTime     LastModificationTime     Status   
    */
   describeDataset(params: ForecastService.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetResponse) => void): Request<ForecastService.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Describes an Amazon Forecast dataset created using the CreateDataset operation. In addition to listing the properties provided by the user in the CreateDataset request, this operation includes the following properties:    CreationTime     LastModificationTime     Status   
+   * Describes an Amazon Forecast dataset created using the CreateDataset operation. In addition to listing the parameters specified in the CreateDataset request, this operation includes the following dataset properties:    CreationTime     LastModificationTime     Status   
    */
   describeDataset(callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetResponse) => void): Request<ForecastService.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Describes a dataset group created using the CreateDatasetGroup operation. In addition to listing the properties provided by the user in the CreateDatasetGroup request, this operation includes the following properties:    DatasetArns - The datasets belonging to the group.    CreationTime     LastModificationTime     Status   
+   * Describes a dataset group created using the CreateDatasetGroup operation. In addition to listing the parameters provided in the CreateDatasetGroup request, this operation includes the following properties:    DatasetArns - The datasets belonging to the group.    CreationTime     LastModificationTime     Status   
    */
   describeDatasetGroup(params: ForecastService.Types.DescribeDatasetGroupRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetGroupResponse) => void): Request<ForecastService.Types.DescribeDatasetGroupResponse, AWSError>;
   /**
-   * Describes a dataset group created using the CreateDatasetGroup operation. In addition to listing the properties provided by the user in the CreateDatasetGroup request, this operation includes the following properties:    DatasetArns - The datasets belonging to the group.    CreationTime     LastModificationTime     Status   
+   * Describes a dataset group created using the CreateDatasetGroup operation. In addition to listing the parameters provided in the CreateDatasetGroup request, this operation includes the following properties:    DatasetArns - The datasets belonging to the group.    CreationTime     LastModificationTime     Status   
    */
   describeDatasetGroup(callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetGroupResponse) => void): Request<ForecastService.Types.DescribeDatasetGroupResponse, AWSError>;
   /**
-   * Describes a dataset import job created using the CreateDatasetImportJob operation. In addition to listing the properties provided by the user in the CreateDatasetImportJob request, this operation includes the following properties:    CreationTime     LastModificationTime     DataSize     FieldStatistics     Status     Message - If an error occurred, information about the error.  
+   * Describes a dataset import job created using the CreateDatasetImportJob operation. In addition to listing the parameters provided in the CreateDatasetImportJob request, this operation includes the following properties:    CreationTime     LastModificationTime     DataSize     FieldStatistics     Status     Message - If an error occurred, information about the error.  
    */
   describeDatasetImportJob(params: ForecastService.Types.DescribeDatasetImportJobRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetImportJobResponse) => void): Request<ForecastService.Types.DescribeDatasetImportJobResponse, AWSError>;
   /**
-   * Describes a dataset import job created using the CreateDatasetImportJob operation. In addition to listing the properties provided by the user in the CreateDatasetImportJob request, this operation includes the following properties:    CreationTime     LastModificationTime     DataSize     FieldStatistics     Status     Message - If an error occurred, information about the error.  
+   * Describes a dataset import job created using the CreateDatasetImportJob operation. In addition to listing the parameters provided in the CreateDatasetImportJob request, this operation includes the following properties:    CreationTime     LastModificationTime     DataSize     FieldStatistics     Status     Message - If an error occurred, information about the error.  
    */
   describeDatasetImportJob(callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetImportJobResponse) => void): Request<ForecastService.Types.DescribeDatasetImportJobResponse, AWSError>;
   /**
-   * Describes a forecast created using the CreateForecast operation. In addition to listing the properties provided by the user in the CreateForecast request, this operation includes the following properties:    DatasetGroupArn - The dataset group that provided the training data.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
+   * Describes a forecast created using the CreateForecast operation. In addition to listing the properties provided in the CreateForecast request, this operation lists the following properties:    DatasetGroupArn - The dataset group that provided the training data.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describeForecast(params: ForecastService.Types.DescribeForecastRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeForecastResponse) => void): Request<ForecastService.Types.DescribeForecastResponse, AWSError>;
   /**
-   * Describes a forecast created using the CreateForecast operation. In addition to listing the properties provided by the user in the CreateForecast request, this operation includes the following properties:    DatasetGroupArn - The dataset group that provided the training data.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
+   * Describes a forecast created using the CreateForecast operation. In addition to listing the properties provided in the CreateForecast request, this operation lists the following properties:    DatasetGroupArn - The dataset group that provided the training data.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describeForecast(callback?: (err: AWSError, data: ForecastService.Types.DescribeForecastResponse) => void): Request<ForecastService.Types.DescribeForecastResponse, AWSError>;
   /**
-   * Describes a forecast export job created using the CreateForecastExportJob operation. In addition to listing the properties provided by the user in the CreateForecastExportJob request, this operation includes the following properties:    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
+   * Describes a forecast export job created using the CreateForecastExportJob operation. In addition to listing the properties provided by the user in the CreateForecastExportJob request, this operation lists the following properties:    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describeForecastExportJob(params: ForecastService.Types.DescribeForecastExportJobRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeForecastExportJobResponse) => void): Request<ForecastService.Types.DescribeForecastExportJobResponse, AWSError>;
   /**
-   * Describes a forecast export job created using the CreateForecastExportJob operation. In addition to listing the properties provided by the user in the CreateForecastExportJob request, this operation includes the following properties:    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
+   * Describes a forecast export job created using the CreateForecastExportJob operation. In addition to listing the properties provided by the user in the CreateForecastExportJob request, this operation lists the following properties:    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describeForecastExportJob(callback?: (err: AWSError, data: ForecastService.Types.DescribeForecastExportJobResponse) => void): Request<ForecastService.Types.DescribeForecastExportJobResponse, AWSError>;
   /**
-   * Describes a predictor created using the CreatePredictor operation. In addition to listing the properties provided by the user in the CreatePredictor request, this operation includes the following properties:    DatasetImportJobArns - The dataset import jobs used to import training data.    AutoMLAlgorithmArns - If AutoML is performed, the algorithms evaluated.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
+   * Describes a predictor created using the CreatePredictor operation. In addition to listing the properties provided in the CreatePredictor request, this operation lists the following properties:    DatasetImportJobArns - The dataset import jobs used to import training data.    AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were evaluated.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describePredictor(params: ForecastService.Types.DescribePredictorRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribePredictorResponse) => void): Request<ForecastService.Types.DescribePredictorResponse, AWSError>;
   /**
-   * Describes a predictor created using the CreatePredictor operation. In addition to listing the properties provided by the user in the CreatePredictor request, this operation includes the following properties:    DatasetImportJobArns - The dataset import jobs used to import training data.    AutoMLAlgorithmArns - If AutoML is performed, the algorithms evaluated.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
+   * Describes a predictor created using the CreatePredictor operation. In addition to listing the properties provided in the CreatePredictor request, this operation lists the following properties:    DatasetImportJobArns - The dataset import jobs used to import training data.    AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were evaluated.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describePredictor(callback?: (err: AWSError, data: ForecastService.Types.DescribePredictorResponse) => void): Request<ForecastService.Types.DescribePredictorResponse, AWSError>;
   /**
-   * Provides metrics on the accuracy of the models that were trained by the CreatePredictor operation. Use metrics to see how well the model performed and to decide whether to use the predictor to generate a forecast. Metrics are generated for each backtest window evaluated. For more information, see EvaluationParameters. The parameters of the filling method determine which items contribute to the metrics. If zero is specified, all items contribute. If nan is specified, only those items that have complete data in the range being evaluated contribute. For more information, see FeaturizationMethod. For an example of how to train a model and review metrics, see getting-started.
+   * Provides metrics on the accuracy of the models that were trained by the CreatePredictor operation. Use metrics to see how well the model performed and to decide whether to use the predictor to generate a forecast. For more information, see metrics. This operation generates metrics for each backtest window that was evaluated. The number of backtest windows (NumberOfBacktestWindows) is specified using the EvaluationParameters object, which is optionally included in the CreatePredictor request. If NumberOfBacktestWindows isn't specified, the number defaults to one. The parameters of the filling method determine which items contribute to the metrics. If you want all items to contribute, specify zero. If you want only those items that have complete data in the range being evaluated to contribute, specify nan. For more information, see FeaturizationMethod.  Before you can get accuracy metrics, the Status of the predictor must be ACTIVE, signifying that training has completed. To get the status, use the DescribePredictor operation. 
    */
   getAccuracyMetrics(params: ForecastService.Types.GetAccuracyMetricsRequest, callback?: (err: AWSError, data: ForecastService.Types.GetAccuracyMetricsResponse) => void): Request<ForecastService.Types.GetAccuracyMetricsResponse, AWSError>;
   /**
-   * Provides metrics on the accuracy of the models that were trained by the CreatePredictor operation. Use metrics to see how well the model performed and to decide whether to use the predictor to generate a forecast. Metrics are generated for each backtest window evaluated. For more information, see EvaluationParameters. The parameters of the filling method determine which items contribute to the metrics. If zero is specified, all items contribute. If nan is specified, only those items that have complete data in the range being evaluated contribute. For more information, see FeaturizationMethod. For an example of how to train a model and review metrics, see getting-started.
+   * Provides metrics on the accuracy of the models that were trained by the CreatePredictor operation. Use metrics to see how well the model performed and to decide whether to use the predictor to generate a forecast. For more information, see metrics. This operation generates metrics for each backtest window that was evaluated. The number of backtest windows (NumberOfBacktestWindows) is specified using the EvaluationParameters object, which is optionally included in the CreatePredictor request. If NumberOfBacktestWindows isn't specified, the number defaults to one. The parameters of the filling method determine which items contribute to the metrics. If you want all items to contribute, specify zero. If you want only those items that have complete data in the range being evaluated to contribute, specify nan. For more information, see FeaturizationMethod.  Before you can get accuracy metrics, the Status of the predictor must be ACTIVE, signifying that training has completed. To get the status, use the DescribePredictor operation. 
    */
   getAccuracyMetrics(callback?: (err: AWSError, data: ForecastService.Types.GetAccuracyMetricsResponse) => void): Request<ForecastService.Types.GetAccuracyMetricsResponse, AWSError>;
   /**
-   * Returns a list of dataset groups created using the CreateDatasetGroup operation. For each dataset group, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeDatasetGroup operation.
+   * Returns a list of dataset groups created using the CreateDatasetGroup operation. For each dataset group, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the dataset group ARN with the DescribeDatasetGroup operation.
    */
   listDatasetGroups(params: ForecastService.Types.ListDatasetGroupsRequest, callback?: (err: AWSError, data: ForecastService.Types.ListDatasetGroupsResponse) => void): Request<ForecastService.Types.ListDatasetGroupsResponse, AWSError>;
   /**
-   * Returns a list of dataset groups created using the CreateDatasetGroup operation. For each dataset group, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeDatasetGroup operation.
+   * Returns a list of dataset groups created using the CreateDatasetGroup operation. For each dataset group, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the dataset group ARN with the DescribeDatasetGroup operation.
    */
   listDatasetGroups(callback?: (err: AWSError, data: ForecastService.Types.ListDatasetGroupsResponse) => void): Request<ForecastService.Types.ListDatasetGroupsResponse, AWSError>;
   /**
-   * Returns a list of dataset import jobs created using the CreateDatasetImportJob operation. For each import job, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeDatasetImportJob operation. You can filter the list by providing an array of Filter objects.
+   * Returns a list of dataset import jobs created using the CreateDatasetImportJob operation. For each import job, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the ARN with the DescribeDatasetImportJob operation. You can filter the list by providing an array of Filter objects.
    */
   listDatasetImportJobs(params: ForecastService.Types.ListDatasetImportJobsRequest, callback?: (err: AWSError, data: ForecastService.Types.ListDatasetImportJobsResponse) => void): Request<ForecastService.Types.ListDatasetImportJobsResponse, AWSError>;
   /**
-   * Returns a list of dataset import jobs created using the CreateDatasetImportJob operation. For each import job, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeDatasetImportJob operation. You can filter the list by providing an array of Filter objects.
+   * Returns a list of dataset import jobs created using the CreateDatasetImportJob operation. For each import job, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the ARN with the DescribeDatasetImportJob operation. You can filter the list by providing an array of Filter objects.
    */
   listDatasetImportJobs(callback?: (err: AWSError, data: ForecastService.Types.ListDatasetImportJobsResponse) => void): Request<ForecastService.Types.ListDatasetImportJobsResponse, AWSError>;
   /**
-   * Returns a list of datasets created using the CreateDataset operation. For each dataset, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeDataset operation.
+   * Returns a list of datasets created using the CreateDataset operation. For each dataset, a summary of its properties, including its Amazon Resource Name (ARN), is returned. To retrieve the complete set of properties, use the ARN with the DescribeDataset operation.
    */
   listDatasets(params: ForecastService.Types.ListDatasetsRequest, callback?: (err: AWSError, data: ForecastService.Types.ListDatasetsResponse) => void): Request<ForecastService.Types.ListDatasetsResponse, AWSError>;
   /**
-   * Returns a list of datasets created using the CreateDataset operation. For each dataset, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeDataset operation.
+   * Returns a list of datasets created using the CreateDataset operation. For each dataset, a summary of its properties, including its Amazon Resource Name (ARN), is returned. To retrieve the complete set of properties, use the ARN with the DescribeDataset operation.
    */
   listDatasets(callback?: (err: AWSError, data: ForecastService.Types.ListDatasetsResponse) => void): Request<ForecastService.Types.ListDatasetsResponse, AWSError>;
   /**
-   * Returns a list of forecast export jobs created using the CreateForecastExportJob operation. For each forecast export job, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeForecastExportJob operation. The list can be filtered using an array of Filter objects.
+   * Returns a list of forecast export jobs created using the CreateForecastExportJob operation. For each forecast export job, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). To retrieve the complete set of properties, use the ARN with the DescribeForecastExportJob operation. You can filter the list using an array of Filter objects.
    */
   listForecastExportJobs(params: ForecastService.Types.ListForecastExportJobsRequest, callback?: (err: AWSError, data: ForecastService.Types.ListForecastExportJobsResponse) => void): Request<ForecastService.Types.ListForecastExportJobsResponse, AWSError>;
   /**
-   * Returns a list of forecast export jobs created using the CreateForecastExportJob operation. For each forecast export job, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeForecastExportJob operation. The list can be filtered using an array of Filter objects.
+   * Returns a list of forecast export jobs created using the CreateForecastExportJob operation. For each forecast export job, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). To retrieve the complete set of properties, use the ARN with the DescribeForecastExportJob operation. You can filter the list using an array of Filter objects.
    */
   listForecastExportJobs(callback?: (err: AWSError, data: ForecastService.Types.ListForecastExportJobsResponse) => void): Request<ForecastService.Types.ListForecastExportJobsResponse, AWSError>;
   /**
-   * Returns a list of forecasts created using the CreateForecast operation. For each forecast, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeForecast operation. The list can be filtered using an array of Filter objects.
+   * Returns a list of forecasts created using the CreateForecast operation. For each forecast, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). To retrieve the complete set of properties, specify the ARN with the DescribeForecast operation. You can filter the list using an array of Filter objects.
    */
   listForecasts(params: ForecastService.Types.ListForecastsRequest, callback?: (err: AWSError, data: ForecastService.Types.ListForecastsResponse) => void): Request<ForecastService.Types.ListForecastsResponse, AWSError>;
   /**
-   * Returns a list of forecasts created using the CreateForecast operation. For each forecast, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribeForecast operation. The list can be filtered using an array of Filter objects.
+   * Returns a list of forecasts created using the CreateForecast operation. For each forecast, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). To retrieve the complete set of properties, specify the ARN with the DescribeForecast operation. You can filter the list using an array of Filter objects.
    */
   listForecasts(callback?: (err: AWSError, data: ForecastService.Types.ListForecastsResponse) => void): Request<ForecastService.Types.ListForecastsResponse, AWSError>;
   /**
-   * Returns a list of predictors created using the CreatePredictor operation. For each predictor, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribePredictor operation. The list can be filtered using an array of Filter objects.
+   * Returns a list of predictors created using the CreatePredictor operation. For each predictor, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the ARN with the DescribePredictor operation. You can filter the list using an array of Filter objects.
    */
   listPredictors(params: ForecastService.Types.ListPredictorsRequest, callback?: (err: AWSError, data: ForecastService.Types.ListPredictorsResponse) => void): Request<ForecastService.Types.ListPredictorsResponse, AWSError>;
   /**
-   * Returns a list of predictors created using the CreatePredictor operation. For each predictor, a summary of its properties, including its Amazon Resource Name (ARN), is returned. You can retrieve the complete set of properties by using the ARN with the DescribePredictor operation. The list can be filtered using an array of Filter objects.
+   * Returns a list of predictors created using the CreatePredictor operation. For each predictor, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the ARN with the DescribePredictor operation. You can filter the list using an array of Filter objects.
    */
   listPredictors(callback?: (err: AWSError, data: ForecastService.Types.ListPredictorsResponse) => void): Request<ForecastService.Types.ListPredictorsResponse, AWSError>;
   /**
-   * Replaces any existing datasets in the dataset group with the specified datasets.  The Status of the dataset group must be ACTIVE before creating a predictor using the dataset group. Use the DescribeDatasetGroup operation to get the status. 
+   * Replaces the datasets in a dataset group with the specified datasets.  The Status of the dataset group must be ACTIVE before you can use the dataset group to create a predictor. Use the DescribeDatasetGroup operation to get the status. 
    */
   updateDatasetGroup(params: ForecastService.Types.UpdateDatasetGroupRequest, callback?: (err: AWSError, data: ForecastService.Types.UpdateDatasetGroupResponse) => void): Request<ForecastService.Types.UpdateDatasetGroupResponse, AWSError>;
   /**
-   * Replaces any existing datasets in the dataset group with the specified datasets.  The Status of the dataset group must be ACTIVE before creating a predictor using the dataset group. Use the DescribeDatasetGroup operation to get the status. 
+   * Replaces the datasets in a dataset group with the specified datasets.  The Status of the dataset group must be ACTIVE before you can use the dataset group to create a predictor. Use the DescribeDatasetGroup operation to get the status. 
    */
   updateDatasetGroup(callback?: (err: AWSError, data: ForecastService.Types.UpdateDatasetGroupResponse) => void): Request<ForecastService.Types.UpdateDatasetGroupResponse, AWSError>;
 }
@@ -250,7 +250,7 @@ declare namespace ForecastService {
      */
     MinValue: Double;
     /**
-     * The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see Hyperparameter Scaling. One of the following values:  Auto  Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.  Linear  Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.  Logarithmic  Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale. Logarithmic scaling works only for ranges that have only values greater than 0.  ReverseLogarithmic  Hyperparemeter tuning searches the values in the hyperparameter range by using a reverse logarithmic scale. Reverse logarithmic scaling works only for ranges that are entirely within the range 0 &lt;= x &lt; 1.0.  
+     * The scale that hyperparameter tuning uses to search the hyperparameter range. Valid values:  Auto  Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.  Linear  Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.  Logarithmic  Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale. Logarithmic scaling works only for ranges that have values greater than 0.  ReverseLogarithmic  hyperparameter tuning searches the values in the hyperparameter range by using a reverse logarithmic scale. Reverse logarithmic scaling works only for ranges that are entirely within the range 0 &lt;= x &lt; 1.0.   For information about choosing a hyperparameter scale, see Hyperparameter Scaling. One of the following values:
      */
     ScalingType?: ScalingType;
   }
@@ -261,7 +261,7 @@ declare namespace ForecastService {
      */
     DatasetGroupName: Name;
     /**
-     * The domain associated with the dataset group. The Domain and DatasetType that you choose determine the fields that must be present in the training data that you import to the dataset. For example, if you choose the RETAIL domain and TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id, timestamp, and demand fields to be present in your data. For more information, see howitworks-datasets-groups.
+     * The domain associated with the dataset group. When you add a dataset to a dataset group, this value and the value specified for the Domain parameter of the CreateDataset operation must match. The Domain and DatasetType that you choose determine the fields that must be present in training data that you import to a dataset. For example, if you choose the RETAIL domain and TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires that item_id, timestamp, and demand fields are present in your data. For more information, see howitworks-datasets-groups.
      */
     Domain: Domain;
     /**
@@ -277,7 +277,7 @@ declare namespace ForecastService {
   }
   export interface CreateDatasetImportJobRequest {
     /**
-     * The name for the dataset import job. It is recommended to include the current timestamp in the name to guard against getting a ResourceAlreadyExistsException exception, for example, 20190721DatasetImport.
+     * The name for the dataset import job. We recommend including the current timestamp in the name, for example, 20190721DatasetImport. This can help you avoid getting a ResourceAlreadyExistsException exception.
      */
     DatasetImportJobName: Name;
     /**
@@ -285,11 +285,11 @@ declare namespace ForecastService {
      */
     DatasetArn: Arn;
     /**
-     * The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data.
+     * The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. The training data must be stored in an Amazon S3 bucket. If encryption is used, DataSource must include an AWS Key Management Service (KMS) key and the IAM role must allow Amazon Forecast permission to access the key. The KMS key and IAM role must match those specified in the EncryptionConfig parameter of the CreateDataset operation.
      */
     DataSource: DataSource;
     /**
-     * The format of timestamps in the dataset. Two formats are supported, dependent on the DataFrequency specified when the dataset was created.   "yyyy-MM-dd" For data frequencies: Y, M, W, and D   "yyyy-MM-dd HH:mm:ss" For data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D  
+     * The format of timestamps in the dataset. The format that you specify depends on the DataFrequency specified when the dataset was created. The following formats are supported   "yyyy-MM-dd" For the following data frequencies: Y, M, W, and D   "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D   If the format isn't specified, Amazon Forecast expects the format to be "yyyy-MM-dd HH:mm:ss".
      */
     TimestampFormat?: TimestampFormat;
   }
@@ -305,7 +305,7 @@ declare namespace ForecastService {
      */
     DatasetName: Name;
     /**
-     * The domain associated with the dataset. The Domain and DatasetType that you choose determine the fields that must be present in the training data that you import to the dataset. For example, if you choose the RETAIL domain and TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id, timestamp, and demand fields to be present in your data. For more information, see howitworks-datasets-groups.
+     * The domain associated with the dataset. When you add a dataset to a dataset group, this value and the value specified for the Domain parameter of the CreateDatasetGroup operation must match. The Domain and DatasetType that you choose determine the fields that must be present in the training data that you import to the dataset. For example, if you choose the RETAIL domain and TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id, timestamp, and demand fields to be present in your data. For more information, see howitworks-datasets-groups.
      */
     Domain: Domain;
     /**
@@ -313,7 +313,7 @@ declare namespace ForecastService {
      */
     DatasetType: DatasetType;
     /**
-     * The frequency of data collection. Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "D" indicates every day and "15min" indicates every 15 minutes.
+     * The frequency of data collection. This parameter is required for RELATED_TIME_SERIES datasets. Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "D" indicates every day and "15min" indicates every 15 minutes.
      */
     DataFrequency?: Frequency;
     /**
@@ -341,7 +341,7 @@ declare namespace ForecastService {
      */
     ForecastArn: Arn;
     /**
-     * The path to the Amazon S3 bucket where you want to save the forecast and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the bucket.
+     * The location where you want to save the forecast and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the location. The forecast must be exported to an Amazon S3 bucket. If encryption is used, Destination must include an AWS Key Management Service (KMS) key. The IAM role must allow Amazon Forecast permission to access the key.
      */
     Destination: DataDestination;
   }
@@ -353,13 +353,17 @@ declare namespace ForecastService {
   }
   export interface CreateForecastRequest {
     /**
-     * The name for the forecast.
+     * A name for the forecast.
      */
     ForecastName: Name;
     /**
      * The Amazon Resource Name (ARN) of the predictor to use to generate the forecast.
      */
     PredictorArn: Arn;
+    /**
+     * The quantiles at which probabilistic forecasts are generated. You can specify up to 5 quantiles per forecast. Accepted values include 0.01 to 0.99 (increments of .01 only) and mean. The mean forecast is different from the median (0.50) when the distribution is not symmetric (e.g. Beta, Negative Binomial). The default value is ["0.1", "0.5", "0.9"].
+     */
+    ForecastTypes?: ForecastTypes;
   }
   export interface CreateForecastResponse {
     /**
@@ -373,23 +377,23 @@ declare namespace ForecastService {
      */
     PredictorName: Name;
     /**
-     * The Amazon Resource Name (ARN) of the algorithm to use for model training. Required if PerformAutoML is not set to true.  Supported algorithms     arn:aws:forecast:::algorithm/ARIMA     arn:aws:forecast:::algorithm/Deep_AR_Plus   - supports hyperparameter optimization (HPO)     arn:aws:forecast:::algorithm/ETS     arn:aws:forecast:::algorithm/NPTS     arn:aws:forecast:::algorithm/Prophet   
+     * The Amazon Resource Name (ARN) of the algorithm to use for model training. Required if PerformAutoML is not set to true.  Supported algorithms:     arn:aws:forecast:::algorithm/ARIMA     arn:aws:forecast:::algorithm/Deep_AR_Plus  Supports hyperparameter optimization (HPO)    arn:aws:forecast:::algorithm/ETS     arn:aws:forecast:::algorithm/NPTS     arn:aws:forecast:::algorithm/Prophet   
      */
     AlgorithmArn?: Arn;
     /**
-     * Specifies the number of time-steps that the model is trained to predict. The forecast horizon is also called the prediction length. For example, if you configure a dataset for daily data collection (using the DataFrequency parameter of the CreateDataset operation) and set the forecast horizon to 10, the model returns predictions for 10 days.
+     * Specifies the number of time-steps that the model is trained to predict. The forecast horizon is also called the prediction length. For example, if you configure a dataset for daily data collection (using the DataFrequency parameter of the CreateDataset operation) and set the forecast horizon to 10, the model returns predictions for 10 days. The maximum forecast horizon is the lesser of 500 time-steps or 1/3 of the TARGET_TIME_SERIES dataset length.
      */
     ForecastHorizon: Integer;
     /**
-     * Whether to perform AutoML. The default value is false. In this case, you are required to specify an algorithm. If you want Amazon Forecast to evaluate the algorithms it provides and choose the best algorithm and configuration for your training dataset, set PerformAutoML to true. This is a good option if you aren't sure which algorithm is suitable for your application.
+     * Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates the algorithms it provides and chooses the best algorithm and configuration for your training dataset. The default value is false. In this case, you are required to specify an algorithm. Set PerformAutoML to true to have Amazon Forecast perform AutoML. This is a good option if you aren't sure which algorithm is suitable for your training data. In this case, PerformHPO must be false.
      */
     PerformAutoML?: Boolean;
     /**
-     * Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter values for your training data. The process of performing HPO is known as a hyperparameter tuning job. The default value is false. In this case, Amazon Forecast uses default hyperparameter values from the chosen algorithm. To override the default values, set PerformHPO to true and supply the HyperParameterTuningJobConfig object. The tuning job specifies an objective metric, the hyperparameters to optimize, and the valid range for each hyperparameter. The following algorithms support HPO:   DeepAR+  
+     * Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter values for your training data. The process of performing HPO is known as running a hyperparameter tuning job. The default value is false. In this case, Amazon Forecast uses default hyperparameter values from the chosen algorithm. To override the default values, set PerformHPO to true and, optionally, supply the HyperParameterTuningJobConfig object. The tuning job specifies a metric to optimize, which hyperparameters participate in tuning, and the valid range for each tunable hyperparameter. In this case, you are required to specify an algorithm and PerformAutoML must be false. The following algorithm supports HPO:   DeepAR+  
      */
     PerformHPO?: Boolean;
     /**
-     * The training parameters to override for model training. The parameters that you can override are listed in the individual algorithms in aws-forecast-choosing-recipes.
+     * The hyperparameters to override for model training. The hyperparameters that you can override are listed in the individual algorithms. For the list of supported algorithms, see aws-forecast-choosing-recipes.
      */
     TrainingParameters?: TrainingParameters;
     /**
@@ -397,7 +401,7 @@ declare namespace ForecastService {
      */
     EvaluationParameters?: EvaluationParameters;
     /**
-     * Provides hyperparameter override values for the algorithm. If you don't provide this parameter, Amazon Forecast uses default values. The individual algorithms specify which hyperparameters support hyperparameter optimization (HPO). For more information, see aws-forecast-choosing-recipes.
+     * Provides hyperparameter override values for the algorithm. If you don't provide this parameter, Amazon Forecast uses default values. The individual algorithms specify which hyperparameters support hyperparameter optimization (HPO). For more information, see aws-forecast-choosing-recipes. If you included the HPOConfig object, you must set PerformHPO to true.
      */
     HPOConfig?: HyperParameterTuningJobConfig;
     /**
@@ -441,11 +445,11 @@ declare namespace ForecastService {
      */
     DatasetGroupName?: Name;
     /**
-     * When the datase group was created.
+     * When the dataset group was created.
      */
     CreationTime?: Timestamp;
     /**
-     * When the dataset group was created or last updated from a call to the UpdateDatasetGroup operation. While the dataset group is being updated, LastModificationTime is the current query time.
+     * When the dataset group was created or last updated from a call to the UpdateDatasetGroup operation. While the dataset group is being updated, LastModificationTime is the current time of the ListDatasetGroups call.
      */
     LastModificationTime?: Timestamp;
   }
@@ -460,7 +464,7 @@ declare namespace ForecastService {
      */
     DatasetImportJobName?: Name;
     /**
-     * The location of the Amazon S3 bucket that contains the training data.
+     * The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. The training data must be stored in an Amazon S3 bucket. If encryption is used, DataSource includes an AWS Key Management Service (KMS) key.
      */
     DataSource?: DataSource;
     /**
@@ -476,7 +480,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * Dependent on the status as follows:    CREATE_PENDING - same as CreationTime     CREATE_IN_PROGRESS - the current timestamp    ACTIVE or CREATE_FAILED - when the job finished or failed  
+     * The last time that the dataset was modified. The time depends on the status of the job, as follows:    CREATE_PENDING - The same time as CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -503,7 +507,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * When the dataset is created, LastModificationTime is the same as CreationTime. After a CreateDatasetImportJob operation is called, LastModificationTime is when the import job finished or failed. While data is being imported to the dataset, LastModificationTime is the current query time.
+     * When you create a dataset, LastModificationTime is the same as CreationTime. While data is being imported to the dataset, LastModificationTime is the current time of the ListDatasets call. After a CreateDatasetImportJob operation has finished, LastModificationTime is when the import job completed or failed.
      */
     LastModificationTime?: Timestamp;
   }
@@ -565,11 +569,11 @@ declare namespace ForecastService {
      */
     DatasetArns?: ArnList;
     /**
-     * The domain associated with the dataset group. The Domain and DatasetType that you choose determine the fields that must be present in the training data that you import to the dataset. For example, if you choose the RETAIL domain and TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id, timestamp, and demand fields to be present in your data. For more information, see howitworks-datasets-groups.
+     * The domain associated with the dataset group.
      */
     Domain?: Domain;
     /**
-     * The status of the dataset group. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED    The UPDATE states apply when the UpdateDatasetGroup operation is called.  The Status of the dataset group must be ACTIVE before creating a predictor using the dataset group. 
+     * The status of the dataset group. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED    The UPDATE states apply when you call the UpdateDatasetGroup operation.  The Status of the dataset group must be ACTIVE before you can use the dataset group to create a predictor. 
      */
     Status?: Status;
     /**
@@ -577,7 +581,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * When the dataset group was created or last updated from a call to the UpdateDatasetGroup operation. While the dataset group is being updated, LastModificationTime is the current query time.
+     * When the dataset group was created or last updated from a call to the UpdateDatasetGroup operation. While the dataset group is being updated, LastModificationTime is the current time of the DescribeDatasetGroup call.
      */
     LastModificationTime?: Timestamp;
   }
@@ -601,11 +605,11 @@ declare namespace ForecastService {
      */
     DatasetArn?: Arn;
     /**
-     * The format of timestamps in the dataset. Two formats are supported dependent on the DataFrequency specified when the dataset was created.   "yyyy-MM-dd" For data frequencies: Y, M, W, and D   "yyyy-MM-dd HH:mm:ss" For data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D  
+     * The format of timestamps in the dataset. The format that you specify depends on the DataFrequency specified when the dataset was created. The following formats are supported   "yyyy-MM-dd" For the following data frequencies: Y, M, W, and D   "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D  
      */
     TimestampFormat?: TimestampFormat;
     /**
-     * The location of the training data to import. The training data must be stored in an Amazon S3 bucket.
+     * The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. If encryption is used, DataSource includes an AWS Key Management Service (KMS) key.
      */
     DataSource?: DataSource;
     /**
@@ -613,7 +617,7 @@ declare namespace ForecastService {
      */
     FieldStatistics?: FieldStatistics;
     /**
-     * The size of the dataset in gigabytes (GB) after completion of the import job.
+     * The size of the dataset in gigabytes (GB) after the import job has finished.
      */
     DataSize?: Double;
     /**
@@ -629,7 +633,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * Dependent on the status as follows:    CREATE_PENDING - same as CreationTime     CREATE_IN_PROGRESS - the current timestamp    ACTIVE or CREATE_FAILED - when the job finished or failed  
+     * The last time that the dataset was modified. The time depends on the status of the job, as follows:    CREATE_PENDING - The same time as CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
   }
@@ -649,7 +653,7 @@ declare namespace ForecastService {
      */
     DatasetName?: Name;
     /**
-     * The dataset domain.
+     * The domain associated with the dataset.
      */
     Domain?: Domain;
     /**
@@ -665,11 +669,11 @@ declare namespace ForecastService {
      */
     Schema?: Schema;
     /**
-     * An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
+     * The AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
      */
     EncryptionConfig?: EncryptionConfig;
     /**
-     * The status of the dataset. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED    The UPDATE states apply while data is imported to the dataset from a call to the CreateDatasetImportJob operation. During this time, the status reflects the status of the dataset import job. For example, when the import job status is CREATE_IN_PROGRESS, the status of the dataset is UPDATE_IN_PROGRESS.  The Status of the dataset must be ACTIVE before you can import training data. 
+     * The status of the dataset. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED    The UPDATE states apply while data is imported to the dataset from a call to the CreateDatasetImportJob operation and reflect the status of the dataset import job. For example, when the import job status is CREATE_IN_PROGRESS, the status of the dataset is UPDATE_IN_PROGRESS.  The Status of the dataset must be ACTIVE before you can import training data. 
      */
     Status?: Status;
     /**
@@ -677,7 +681,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * When the dataset is created, LastModificationTime is the same as CreationTime. After a CreateDatasetImportJob operation is called, LastModificationTime is when the import job finished or failed. While data is being imported to the dataset, LastModificationTime is the current query time.
+     * When you create a dataset, LastModificationTime is the same as CreationTime. While data is being imported to the dataset, LastModificationTime is the current time of the DescribeDataset call. After a CreateDatasetImportJob operation has finished, LastModificationTime is when the import job completed or failed.
      */
     LastModificationTime?: Timestamp;
   }
@@ -701,7 +705,7 @@ declare namespace ForecastService {
      */
     ForecastArn?: Arn;
     /**
-     * The path to the AWS S3 bucket where the forecast is exported.
+     * The path to the Amazon Simple Storage Service (Amazon S3) bucket where the forecast is exported.
      */
     Destination?: DataDestination;
     /**
@@ -709,7 +713,7 @@ declare namespace ForecastService {
      */
     Message?: Message;
     /**
-     * The status of the forecast export job. One of the following states:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. 
+     * The status of the forecast export job. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast export job must be ACTIVE before you can access the forecast in your S3 bucket. 
      */
     Status?: Status;
     /**
@@ -729,13 +733,17 @@ declare namespace ForecastService {
   }
   export interface DescribeForecastResponse {
     /**
-     * The same forecast ARN as given in the request.
+     * The forecast ARN as specified in the request.
      */
     ForecastArn?: Arn;
     /**
      * The name of the forecast.
      */
     ForecastName?: Name;
+    /**
+     * The quantiles at which proababilistic forecasts were generated.
+     */
+    ForecastTypes?: ForecastTypes;
     /**
      * The ARN of the predictor used to generate the forecast.
      */
@@ -789,11 +797,11 @@ declare namespace ForecastService {
      */
     PerformAutoML?: Boolean;
     /**
-     * Whether the predictor is set to perform HPO.
+     * Whether the predictor is set to perform hyperparameter optimization (HPO).
      */
     PerformHPO?: Boolean;
     /**
-     * The training parameters to override for model training. The parameters that you can override are listed in the individual algorithms in aws-forecast-choosing-recipes.
+     * The default training parameters or overrides selected during model training. If using the AutoML algorithm or if HPO is turned on while using the DeepAR+ algorithms, the optimized values for the chosen hyperparameters are returned. For more information, see aws-forecast-choosing-recipes.
      */
     TrainingParameters?: TrainingParameters;
     /**
@@ -817,7 +825,11 @@ declare namespace ForecastService {
      */
     EncryptionConfig?: EncryptionConfig;
     /**
-     * An array of ARNs of the dataset import jobs used to import training data for the predictor.
+     * Details on the the status and results of the backtests performed to evaluate the accuracy of the predictor. You specify the number of backtests to perform when you call the operation.
+     */
+    PredictorExecutionDetails?: PredictorExecutionDetails;
+    /**
+     * An array of the ARNs of the dataset import jobs used to import training data for the predictor.
      */
     DatasetImportJobArns?: ArnList;
     /**
@@ -825,7 +837,7 @@ declare namespace ForecastService {
      */
     AutoMLAlgorithmArns?: ArnList;
     /**
-     * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED     The Status of the predictor must be ACTIVE before using the predictor to create a forecast. 
+     * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED     The Status of the predictor must be ACTIVE before you can use the predictor to create a forecast. 
      */
     Status?: Status;
     /**
@@ -837,7 +849,7 @@ declare namespace ForecastService {
      */
     CreationTime?: Timestamp;
     /**
-     * Initially, the same as CreationTime (status is CREATE_PENDING). Updated when training starts (status changed to CREATE_IN_PROGRESS), and when training is complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
+     * Initially, the same as CreationTime (when the status is CREATE_PENDING). This value is updated when training starts (when the status changes to CREATE_IN_PROGRESS), and when training has completed (when the status changes to ACTIVE) or fails (when the status changes to CREATE_FAILED).
      */
     LastModificationTime?: Timestamp;
   }
@@ -845,22 +857,22 @@ declare namespace ForecastService {
   export type Double = number;
   export interface EncryptionConfig {
     /**
-     * The ARN of the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the AWS KMS key. Cross-account pass role is not allowed. If you pass a role that doesn't belong to your account, an InvalidInputException is thrown.
+     * The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key. Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your account, you get an InvalidInputException error.
      */
     RoleArn: Arn;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.
+     * The Amazon Resource Name (ARN) of the KMS key.
      */
     KMSKeyArn: KMSKeyArn;
   }
   export type ErrorMessage = string;
   export interface EvaluationParameters {
     /**
-     * The number of times to split the input data. The default is 1. The range is 1 through 5.
+     * The number of times to split the input data. The default is 1. Valid values are 1 through 5.
      */
     NumberOfBacktestWindows?: Integer;
     /**
-     * The point from the end of the dataset where you want to split the data for model training and evaluation. The value is specified as the number of data points.
+     * The point from the end of the dataset where you want to split the data for model training and testing (evaluation). Specify the value as the number of data points. The default is the value of the forecast horizon. BackTestWindowOffset can be used to mimic a past virtual forecast start date. This value must be greater than or equal to the forecast horizon and less than half of the TARGET_TIME_SERIES dataset length.  ForecastHorizon &lt;= BackTestWindowOffset &lt; 1/2 * TARGET_TIME_SERIES dataset length
      */
     BackTestWindowOffset?: Integer;
   }
@@ -877,35 +889,35 @@ declare namespace ForecastService {
   export type EvaluationType = "SUMMARY"|"COMPUTED"|string;
   export interface Featurization {
     /**
-     * The name of the schema attribute specifying the data field to be featurized. In this release, only the target field of the TARGET_TIME_SERIES dataset type is supported. For example, for the RETAIL domain, the target is demand, and for the CUSTOM domain, the target is target_value.
+     * The name of the schema attribute that specifies the data field to be featurized. Only the target field of the TARGET_TIME_SERIES dataset type is supported. For example, for the RETAIL domain, the target is demand, and for the CUSTOM domain, the target is target_value.
      */
     AttributeName: Name;
     /**
-     * An array FeaturizationMethod objects that specifies the feature transformation methods. For this release, the number of methods is limited to one.
+     * An array of one FeaturizationMethod object that specifies the feature transformation method.
      */
     FeaturizationPipeline?: FeaturizationPipeline;
   }
   export interface FeaturizationConfig {
     /**
-     * The frequency of predictions in a forecast. Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y" indicates every year and "5min" indicates every five minutes.
+     * The frequency of predictions in a forecast. Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y" indicates every year and "5min" indicates every five minutes. The frequency must be greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the RELATED_TIME_SERIES dataset frequency.
      */
     ForecastFrequency: Frequency;
     /**
-     * An array of dimension (field) names that specify how to group the generated forecast. For example, suppose that you are generating a forecast for item sales across all of your stores, and your dataset contains a store_id field. If you want the sales forecast for each item by store, you would specify store_id as the dimension.
+     * An array of dimension (field) names that specify how to group the generated forecast. For example, suppose that you are generating a forecast for item sales across all of your stores, and your dataset contains a store_id field. If you want the sales forecast for each item by store, you would specify store_id as the dimension. All forecast dimensions specified in the TARGET_TIME_SERIES dataset don't need to be specified in the CreatePredictor request. All forecast dimensions specified in the RELATED_TIME_SERIES dataset must be specified in the CreatePredictor request.
      */
     ForecastDimensions?: ForecastDimensions;
     /**
-     * An array of featurization (transformation) information for the fields of a dataset. In this release, only a single featurization is supported.
+     * An array of featurization (transformation) information for the fields of a dataset. Only a single featurization is supported.
      */
     Featurizations?: Featurizations;
   }
   export interface FeaturizationMethod {
     /**
-     * The name of the method. In this release, "filling" is the only supported method.
+     * The name of the method. The "filling" method is the only supported method.
      */
     FeaturizationMethodName: FeaturizationMethodName;
     /**
-     * The method parameters (key-value pairs). Specify these to override the default values. The following list shows the parameters and their valid values. Bold signifies the default value.    aggregation: sum, avg, first, min, max     frontfill: none     middlefill: zero, nan (not a number)    backfill: zero, nan   
+     * The method parameters (key-value pairs). Specify these parameters to override the default values. The following list shows the parameters and their valid values. Bold signifies the default value.    aggregation: sum, avg, first, min, max     frontfill: none     middlefill: zero, nan (not a number)    backfill: zero, nan   
      */
     FeaturizationMethodParameters?: FeaturizationMethodParameters;
   }
@@ -920,11 +932,11 @@ declare namespace ForecastService {
      */
     Key: String;
     /**
-     * A valid value for Key.
+     * The value to match.
      */
     Value: Arn;
     /**
-     * The condition to apply.
+     * The condition to apply. To include the objects that match the statement, specify IS. To exclude matching objects, specify IS_NOT.
      */
     Condition: FilterConditionString;
   }
@@ -941,11 +953,11 @@ declare namespace ForecastService {
      */
     ForecastExportJobName?: Name;
     /**
-     * The path to the S3 bucket where the forecast is stored.
+     * The path to the Amazon Simple Storage Service (Amazon S3) bucket where the forecast is exported.
      */
     Destination?: DataDestination;
     /**
-     * The status of the forecast export job. One of the following states:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. 
+     * The status of the forecast export job. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast export job must be ACTIVE before you can access the forecast in your S3 bucket. 
      */
     Status?: Status;
     /**
@@ -996,6 +1008,8 @@ declare namespace ForecastService {
      */
     LastModificationTime?: Timestamp;
   }
+  export type ForecastType = string;
+  export type ForecastTypes = ForecastType[];
   export type Forecasts = ForecastSummary[];
   export type Frequency = string;
   export interface GetAccuracyMetricsRequest {
@@ -1022,7 +1036,7 @@ declare namespace ForecastService {
      */
     DatasetGroupArn: Arn;
     /**
-     * An array of supplementary features. For this release, the only supported feature is a holiday calendar.
+     * An array of supplementary features. The only supported feature is a holiday calendar.
      */
     SupplementaryFeatures?: SupplementaryFeatures;
   }
@@ -1041,7 +1055,7 @@ declare namespace ForecastService {
      */
     MinValue: Integer;
     /**
-     * The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see Hyperparameter Scaling. One of the following values:  Auto  Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.  Linear  Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.  Logarithmic  Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale. Logarithmic scaling works only for ranges that have only values greater than 0.  ReverseLogarithmic  Not supported for IntegerParameterRange. Reverse logarithmic scaling works only for ranges that are entirely within the range 0 &lt;= x &lt; 1.0.  
+     * The scale that hyperparameter tuning uses to search the hyperparameter range. Valid values:  Auto  Amazon Forecast hyperparameter tuning chooses the best scale for the hyperparameter.  Linear  Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.  Logarithmic  Hyperparameter tuning searches the values in the hyperparameter range by using a logarithmic scale. Logarithmic scaling works only for ranges that have values greater than 0.  ReverseLogarithmic  Not supported for IntegerParameterRange. Reverse logarithmic scaling works only for ranges that are entirely within the range 0 &lt;= x &lt; 1.0.   For information about choosing a hyperparameter scale, see Hyperparameter Scaling. One of the following values:
      */
     ScalingType?: ScalingType;
   }
@@ -1077,7 +1091,7 @@ declare namespace ForecastService {
      */
     MaxResults?: MaxResults;
     /**
-     * An array of filters. For each filter, you provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude, respectively, from the list, the predictors that match the statement. The match statement consists of a key and a value. In this release, Name is the only valid key, which filters on the DatasetImportJobName property.    Condition - IS or IS_NOT     Key - Name     Value - the value to match   For example, to list all dataset import jobs named my_dataset_import_job, you would specify:  "Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_dataset_import_job" } ] 
+     * An array of filters. For each filter, you provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude the datasets that match the statement from the list, respectively. The match statement consists of a key and a value.  Filter properties     Condition - The condition to apply. Valid values are IS and IS_NOT. To include the datasets that match the statement, specify IS. To exclude matching datasets, specify IS_NOT.    Key - The name of the parameter to filter on. Valid values are DatasetArn and Status.    Value - The value to match.   For example, to list all dataset import jobs whose status is ACTIVE, you specify the following filter:  "Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ] 
      */
     Filters?: Filters;
   }
@@ -1121,7 +1135,7 @@ declare namespace ForecastService {
      */
     MaxResults?: MaxResults;
     /**
-     * An array of filters. For each filter, you provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude, respectively, from the list, the predictors that match the statement. The match statement consists of a key and a value. In this release, Name is the only valid key, which filters on the ForecastExportJobName property.    Condition - IS or IS_NOT     Key - Name     Value - the value to match   For example, to list all forecast export jobs named my_forecast_export_job, you would specify:  "Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_forecast_export_job" } ] 
+     * An array of filters. For each filter, you provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude the forecast export jobs that match the statement from the list, respectively. The match statement consists of a key and a value.  Filter properties     Condition - The condition to apply. Valid values are IS and IS_NOT. To include the forecast export jobs that match the statement, specify IS. To exclude matching forecast export jobs, specify IS_NOT.    Key - The name of the parameter to filter on. Valid values are ForecastArn and Status.    Value - The value to match.   For example, to list all jobs that export a forecast named electricityforecast, specify the following filter:  "Filters": [ { "Condition": "IS", "Key": "ForecastArn", "Value": "arn:aws:forecast:us-west-2:&lt;acct-id&gt;:forecast/electricityforecast" } ] 
      */
     Filters?: Filters;
   }
@@ -1145,7 +1159,7 @@ declare namespace ForecastService {
      */
     MaxResults?: MaxResults;
     /**
-     * An array of filters. For each filter, you provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude, respectively, from the list, the predictors that match the statement. The match statement consists of a key and a value. In this release, Name is the only valid key, which filters on the ForecastName property.    Condition - IS or IS_NOT     Key - Name     Value - the value to match   For example, to list all forecasts named my_forecast, you would specify:  "Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_forecast" } ] 
+     * An array of filters. For each filter, you provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude the forecasts that match the statement from the list, respectively. The match statement consists of a key and a value.  Filter properties     Condition - The condition to apply. Valid values are IS and IS_NOT. To include the forecasts that match the statement, specify IS. To exclude matching forecasts, specify IS_NOT.    Key - The name of the parameter to filter on. Valid values are DatasetGroupArn, PredictorArn, and Status.    Value - The value to match.   For example, to list all forecasts whose status is not ACTIVE, you would specify:  "Filters": [ { "Condition": "IS_NOT", "Key": "Status", "Value": "ACTIVE" } ] 
      */
     Filters?: Filters;
   }
@@ -1169,7 +1183,7 @@ declare namespace ForecastService {
      */
     MaxResults?: MaxResults;
     /**
-     * An array of filters. For each filter, you provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude, respectively, from the list, the predictors that match the statement. The match statement consists of a key and a value. In this release, Name is the only valid key, which filters on the PredictorName property.    Condition - IS or IS_NOT     Key - Name     Value - the value to match   For example, to list all predictors named my_predictor, you would specify:  "Filters": [ { "Condition": "IS", "Key": "Name", "Value": "my_predictor" } ] 
+     * An array of filters. For each filter, you provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude the predictors that match the statement from the list, respectively. The match statement consists of a key and a value.  Filter properties     Condition - The condition to apply. Valid values are IS and IS_NOT. To include the predictors that match the statement, specify IS. To exclude matching predictors, specify IS_NOT.    Key - The name of the parameter to filter on. Valid values are DatasetGroupArn and Status.    Value - The value to match.   For example, to list all predictors whose status is ACTIVE, you would specify:  "Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ] 
      */
     Filters?: Filters;
   }
@@ -1214,6 +1228,23 @@ declare namespace ForecastService {
   }
   export type ParameterValue = string;
   export type PredictorEvaluationResults = EvaluationResult[];
+  export interface PredictorExecution {
+    /**
+     * The ARN of the algorithm used to test the predictor.
+     */
+    AlgorithmArn?: Arn;
+    /**
+     * An array of test windows used to evaluate the algorithm. The NumberOfBacktestWindows from the object determines the number of windows in the array.
+     */
+    TestWindows?: TestWindowDetails;
+  }
+  export interface PredictorExecutionDetails {
+    /**
+     * An array of the backtests performed to evaluate the accuracy of the predictor against a particular algorithm. The NumberOfBacktestWindows from the object determines the number of windows in the array.
+     */
+    PredictorExecutions?: PredictorExecutions;
+  }
+  export type PredictorExecutions = PredictorExecution[];
   export interface PredictorSummary {
     /**
      * The ARN of the predictor.
@@ -1228,7 +1259,7 @@ declare namespace ForecastService {
      */
     DatasetGroupArn?: Arn;
     /**
-     * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED     The Status of the predictor must be ACTIVE before using the predictor to create a forecast. 
+     * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED     The Status of the predictor must be ACTIVE before you can use the predictor to create a forecast. 
      */
     Status?: Status;
     /**
@@ -1251,7 +1282,7 @@ declare namespace ForecastService {
      */
     Path: S3Path;
     /**
-     * The ARN of the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket or file(s). Cross-account pass role is not allowed. If you pass a role that doesn't belong to your account, an InvalidInputException is thrown.
+     * The ARN of the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket or files. If you provide a value for the KMSKeyArn key, the role must allow access to the key. Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your account, you get an InvalidInputException error.
      */
     RoleArn: Arn;
     /**
@@ -1325,6 +1356,25 @@ declare namespace ForecastService {
     Value: Value;
   }
   export type SupplementaryFeatures = SupplementaryFeature[];
+  export type TestWindowDetails = TestWindowSummary[];
+  export interface TestWindowSummary {
+    /**
+     * The time at which the test began.
+     */
+    TestWindowStart?: Timestamp;
+    /**
+     * The time at which the test ended.
+     */
+    TestWindowEnd?: Timestamp;
+    /**
+     * The status of the test. Possible status values are:    ACTIVE     CREATE_IN_PROGRESS     CREATE_FAILED   
+     */
+    Status?: Status;
+    /**
+     * If the test failed, the reason why it failed.
+     */
+    Message?: ErrorMessage;
+  }
   export type TestWindows = WindowSummary[];
   export type Timestamp = Date;
   export type TimestampFormat = string;
@@ -1335,7 +1385,7 @@ declare namespace ForecastService {
      */
     DatasetGroupArn: Arn;
     /**
-     * An array of Amazon Resource Names (ARNs) of the datasets to add to the dataset group.
+     * An array of the Amazon Resource Names (ARNs) of the datasets to add to the dataset group.
      */
     DatasetArns: ArnList;
   }
@@ -1349,7 +1399,7 @@ declare namespace ForecastService {
      */
     Quantile?: Double;
     /**
-     * The difference between the predicted value and actual value over the quantile, weighted (normalized) by dividing by the sum over all quantiles.
+     * The difference between the predicted value and the actual value over the quantile, weighted (normalized) by dividing by the sum over all quantiles.
      */
     LossValue?: Double;
   }
@@ -1371,6 +1421,9 @@ declare namespace ForecastService {
      * The type of evaluation.    SUMMARY - The average metrics across all windows.    COMPUTED - The metrics for the specified window.  
      */
     EvaluationType?: EvaluationType;
+    /**
+     * Provides metrics used to evaluate the performance of a predictor.
+     */
     Metrics?: Metrics;
   }
   /**

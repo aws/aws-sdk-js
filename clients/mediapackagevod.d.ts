@@ -116,6 +116,10 @@ declare namespace MediaPackageVod {
      */
     Arn?: __string;
     /**
+     * The time the Asset was initially submitted for Ingest.
+     */
+    CreatedAt?: __string;
+    /**
      * The unique identifier for the Asset.
      */
     Id?: __string;
@@ -179,6 +183,10 @@ rounded to the nearest multiple of the source fragment duration.
      * The ARN of the Asset.
      */
     Arn?: __string;
+    /**
+     * The time the Asset was initially submitted for Ingest.
+     */
+    CreatedAt?: __string;
     /**
      * The list of egress endpoints available for the Asset.
      */
@@ -318,6 +326,10 @@ rounded to the nearest multiple of the source segment duration.
      * The ARN of the Asset.
      */
     Arn?: __string;
+    /**
+     * The time the Asset was initially submitted for Ingest.
+     */
+    CreatedAt?: __string;
     /**
      * The list of egress endpoints available for the Asset.
      */

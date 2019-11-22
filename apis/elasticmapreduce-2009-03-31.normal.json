@@ -423,6 +423,28 @@
       ],
       "documentation": "<p>Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the request of filter by <code>StepStates</code>. You can specify a maximum of ten <code>stepIDs</code>.</p>"
     },
+    "ModifyCluster": {
+      "name": "ModifyCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyClusterInput"
+      },
+      "output": {
+        "shape": "ModifyClusterOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.</p>"
+    },
     "ModifyInstanceFleet": {
       "name": "ModifyInstanceFleet",
       "http": {
@@ -960,6 +982,10 @@
     },
     "CancelStepsInput": {
       "type": "structure",
+      "required": [
+        "ClusterId",
+        "StepIds"
+      ],
       "members": {
         "ClusterId": {
           "shape": "XmlStringMaxLen256",
@@ -968,6 +994,10 @@
         "StepIds": {
           "shape": "StepIdsList",
           "documentation": "<p>The list of <code>StepIDs</code> to cancel. Use <a>ListSteps</a> to get steps and their states for the specified cluster.</p>"
+        },
+        "StepCancellationOption": {
+          "shape": "StepCancellationOption",
+          "documentation": "<p>The option to choose for cancelling <code>RUNNING</code> steps. By default, the value is <code>SEND_INTERRUPT</code>.</p>"
         }
       },
       "documentation": "<p>The input argument to the <a>CancelSteps</a> operation.</p>"
@@ -1143,6 +1173,14 @@
         "ClusterArn": {
           "shape": "ArnType",
           "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
+        },
+        "StepConcurrencyLevel": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the number of steps that can be executed concurrently.</p>"
+        },
+        "OutpostArn": {
+          "shape": "OptionalArnType",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. </p>"
         }
       },
       "documentation": "<p>The detailed description of the cluster.</p>"
@@ -1235,6 +1273,10 @@
         "ClusterArn": {
           "shape": "ArnType",
           "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
+        },
+        "OutpostArn": {
+          "shape": "OptionalArnType",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. </p>"
         }
       },
       "documentation": "<p>The summary description of the cluster.</p>"
@@ -3107,6 +3149,31 @@
         "shape": "MetricDimension"
       }
     },
+    "ModifyClusterInput": {
+      "type": "structure",
+      "required": [
+        "ClusterId"
+      ],
+      "members": {
+        "ClusterId": {
+          "shape": "String",
+          "documentation": "<p>The unique identifier of the cluster.</p>"
+        },
+        "StepConcurrencyLevel": {
+          "shape": "Integer",
+          "documentation": "<p>The number of steps that can be executed concurrently. You can specify a maximum of 256 steps. </p>"
+        }
+      }
+    },
+    "ModifyClusterOutput": {
+      "type": "structure",
+      "members": {
+        "StepConcurrencyLevel": {
+          "shape": "Integer",
+          "documentation": "<p>The number of steps that can be executed concurrently.</p>"
+        }
+      }
+    },
     "ModifyInstanceFleetInput": {
       "type": "structure",
       "required": [
@@ -3146,6 +3213,11 @@
     },
     "NonNegativeDouble": {
       "type": "double",
+      "min": 0
+    },
+    "OptionalArnType": {
+      "type": "string",
+      "max": 2048,
       "min": 0
     },
     "PlacementType": {
@@ -3401,6 +3473,10 @@
         "KerberosAttributes": {
           "shape": "KerberosAttributes",
           "documentation": "<p>Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html\">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.</p>"
+        },
+        "StepConcurrencyLevel": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the number of steps that can be executed concurrently. The default value is <code>1</code>. The maximum value is <code>256</code>.</p>"
         }
       },
       "documentation": "<p> Input to the <a>RunJobFlow</a> operation. </p>"
@@ -3685,6 +3761,13 @@
         }
       },
       "documentation": "<p>This represents a step in a cluster.</p>"
+    },
+    "StepCancellationOption": {
+      "type": "string",
+      "enum": [
+        "SEND_INTERRUPT",
+        "TERMINATE_PROCESS"
+      ]
     },
     "StepConfig": {
       "type": "structure",

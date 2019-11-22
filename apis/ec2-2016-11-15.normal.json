@@ -2087,7 +2087,7 @@
       "output": {
         "shape": "DescribeFleetHistoryResult"
       },
-      "documentation": "<p>Describes the events for the specified EC2 Fleet during the specified time.</p>"
+      "documentation": "<p>Describes the events for the specified EC2 Fleet during the specified time.</p> <p>EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours.</p>"
     },
     "DescribeFleetInstances": {
       "name": "DescribeFleetInstances",
@@ -2340,6 +2340,34 @@
         "shape": "DescribeInstanceStatusResult"
       },
       "documentation": "<p>Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances.</p> <p>Instance status includes the following components:</p> <ul> <li> <p> <b>Status checks</b> - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html\">Status Checks for Your Instances</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshooting Instances with Failed Status Checks</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Scheduled events</b> - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html\">Scheduled Events for Your Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Instance state</b> - You can manage your instances from the moment you launch them through their termination. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> </ul>"
+    },
+    "DescribeInstanceTypeOfferings": {
+      "name": "DescribeInstanceTypeOfferings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeInstanceTypeOfferingsRequest"
+      },
+      "output": {
+        "shape": "DescribeInstanceTypeOfferingsResult"
+      },
+      "documentation": "<p>Returns a list of all instance types offered. The results can be filtered by location (Region or Availability Zone). If no location is specified, the instance types offered in the current Region are returned.</p>"
+    },
+    "DescribeInstanceTypes": {
+      "name": "DescribeInstanceTypes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeInstanceTypesRequest"
+      },
+      "output": {
+        "shape": "DescribeInstanceTypesResult"
+      },
+      "documentation": "<p>Returns a list of all instance types offered in your current AWS Region. The results can be filtered by the attributes of the instance types.</p>"
     },
     "DescribeInstances": {
       "name": "DescribeInstances",
@@ -5424,6 +5452,21 @@
         }
       }
     },
+    "ArchitectureType": {
+      "type": "string",
+      "enum": [
+        "i386",
+        "x86_64",
+        "arm64"
+      ]
+    },
+    "ArchitectureTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "ArchitectureType",
+        "locationName": "item"
+      }
+    },
     "ArchitectureValues": {
       "type": "string",
       "enum": [
@@ -6277,6 +6320,9 @@
         "off"
       ]
     },
+    "AutoRecoveryFlag": {
+      "type": "boolean"
+    },
     "AvailabilityZone": {
       "type": "structure",
       "members": {
@@ -6371,6 +6417,9 @@
         "shape": "InstanceCapacity",
         "locationName": "item"
       }
+    },
+    "BareMetalFlag": {
+      "type": "boolean"
     },
     "BatchState": {
       "type": "string",
@@ -6567,6 +6616,9 @@
         "complete",
         "failed"
       ]
+    },
+    "BurstablePerformanceFlag": {
+      "type": "boolean"
     },
     "ByoipCidr": {
       "type": "structure",
@@ -8096,6 +8148,16 @@
       "enum": [
         "volume"
       ]
+    },
+    "CoreCount": {
+      "type": "integer"
+    },
+    "CoreCountList": {
+      "type": "list",
+      "member": {
+        "shape": "CoreCount",
+        "locationName": "item"
+      }
     },
     "CpuOptions": {
       "type": "structure",
@@ -10416,6 +10478,9 @@
         "USD"
       ]
     },
+    "CurrentGenerationFlag": {
+      "type": "boolean"
+    },
     "CustomerGateway": {
       "type": "structure",
       "members": {
@@ -10479,6 +10544,16 @@
         "locationName": "item"
       }
     },
+    "DITMaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 5
+    },
+    "DITOMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DatafeedSubscriptionState": {
       "type": "string",
       "enum": [
@@ -10488,6 +10563,9 @@
     },
     "DateTime": {
       "type": "timestamp"
+    },
+    "DedicatedHostFlag": {
+      "type": "boolean"
     },
     "DefaultRouteTableAssociationValue": {
       "type": "string",
@@ -13492,6 +13570,89 @@
         },
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeInstanceTypeOfferingsRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "LocationType": {
+          "shape": "LocationType",
+          "documentation": "<p>The location type.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p> <ul> <li> <p> <code>location</code> - This depends on the location type. For example, if the location type is <code>region</code> (default), the location is the Region code (for example, <code>us-east-2</code>.)</p> </li> <li> <p> <code>instance-type</code> - The instance type.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "DITOMaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the next token value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeInstanceTypeOfferingsResult": {
+      "type": "structure",
+      "members": {
+        "InstanceTypeOfferings": {
+          "shape": "InstanceTypeOfferingsList",
+          "documentation": "<p>The instance types offered.</p>",
+          "locationName": "instanceTypeOfferingSet"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeInstanceTypesRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "InstanceTypes": {
+          "shape": "RequestInstanceTypeList",
+          "documentation": "<p>The instance types. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "InstanceType"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p> <ul> <li> <p> <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>bare-metal</code> - Indicates whether it is a bare metal instance type. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>burstable-performance-supported</code> - Indicates whether it is a burstable performance instance type. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>current-generation</code> - Indicates whether this instance type is the latest generation instance type of an instance family. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is EBS-optimized. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use in the free tier. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor used. (<code>nitro</code> | <code>xen</code>)</p> </li> <li> <p> <code>instance-storage-info.disk.count</code> - The number of local disks.</p> </li> <li> <p> <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in GB.</p> </li> <li> <p> <code>instance-storage-info.disk.type</code> - The storage technology for the local instance storage disks. (<code>hdd</code> | <code>ssd</code>)</p> </li> <li> <p> <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local instance storage, in GB.</p> </li> <li> <p> <code>instance-storage-supported</code> - Indicates whether the instance type has local instance storage. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>memory-info.size-in-mib</code> - The memory size.</p> </li> <li> <p> <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is supported or required. (<code>required</code> | <code>supported</code> | <code>unsupported</code>)</p> </li> <li> <p> <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per network interface.</p> </li> <li> <p> <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per network interface.</p> </li> <li> <p> <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports IPv6. (<code>true</code> | <code>false</code>)</p> </li> <li> <p> <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p> </li> <li> <p> <code>network-info.network-performance</code> - Describes the network performance.</p> </li> <li> <p> <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p> </li> <li> <p> <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p> </li> <li> <p> <code>vcpu-info.default-threads-per-core</code> - The default number of threads per cores for the instance type.</p> </li> <li> <p> <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "DITMaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the next token value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeInstanceTypesResult": {
+      "type": "structure",
+      "members": {
+        "InstanceTypes": {
+          "shape": "InstanceTypeInfoList",
+          "documentation": "<p>The instance type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "instanceTypeSet"
+        },
+        "NextToken": {
+          "shape": "NextToken",
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
@@ -16878,6 +17039,9 @@
         }
       }
     },
+    "DiskCount": {
+      "type": "integer"
+    },
     "DiskImage": {
       "type": "structure",
       "members": {
@@ -16978,6 +17142,44 @@
       },
       "documentation": "<p>Describes a disk image volume.</p>"
     },
+    "DiskInfo": {
+      "type": "structure",
+      "members": {
+        "SizeInGB": {
+          "shape": "DiskSize",
+          "documentation": "<p>The size of the disk in GiB.</p>",
+          "locationName": "sizeInGB"
+        },
+        "Count": {
+          "shape": "DiskCount",
+          "documentation": "<p>The number of disks with this configuration.</p>",
+          "locationName": "count"
+        },
+        "Type": {
+          "shape": "DiskType",
+          "documentation": "<p>The type of disk.</p>",
+          "locationName": "type"
+        }
+      },
+      "documentation": "<p>Describes the disk.</p>"
+    },
+    "DiskInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "DiskInfo",
+        "locationName": "item"
+      }
+    },
+    "DiskSize": {
+      "type": "long"
+    },
+    "DiskType": {
+      "type": "string",
+      "enum": [
+        "hdd",
+        "ssd"
+      ]
+    },
     "DnsEntry": {
       "type": "structure",
       "members": {
@@ -17072,6 +17274,29 @@
       },
       "documentation": "<p>Describes a block device for an EBS volume.</p>"
     },
+    "EbsEncryptionSupport": {
+      "type": "string",
+      "enum": [
+        "unsupported",
+        "supported"
+      ]
+    },
+    "EbsInfo": {
+      "type": "structure",
+      "members": {
+        "EbsOptimizedSupport": {
+          "shape": "EbsOptimizedSupport",
+          "documentation": "<p>Indicates that the instance type is Amazon EBS-optimized. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon EBS-Optimized Instances</a> in <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
+          "locationName": "ebsOptimizedSupport"
+        },
+        "EncryptionSupport": {
+          "shape": "EbsEncryptionSupport",
+          "documentation": "<p>Indicates whether Amazon EBS encryption is supported.</p>",
+          "locationName": "encryptionSupport"
+        }
+      },
+      "documentation": "<p>Describes the Amazon EBS features supported by the instance type.</p>"
+    },
     "EbsInstanceBlockDevice": {
       "type": "structure",
       "members": {
@@ -17113,6 +17338,14 @@
         }
       },
       "documentation": "<p>Describes information used to set up an EBS volume specified in a block device mapping.</p>"
+    },
+    "EbsOptimizedSupport": {
+      "type": "string",
+      "enum": [
+        "unsupported",
+        "supported",
+        "default"
+      ]
     },
     "EgressOnlyInternetGateway": {
       "type": "structure",
@@ -17351,6 +17584,14 @@
         "shape": "ElasticInferenceAccelerator",
         "locationName": "item"
       }
+    },
+    "EnaSupport": {
+      "type": "string",
+      "enum": [
+        "unsupported",
+        "supported",
+        "required"
+      ]
     },
     "EnableEbsEncryptionByDefaultRequest": {
       "type": "structure",
@@ -18599,6 +18840,62 @@
         "NetworkInterface"
       ]
     },
+    "FpgaDeviceCount": {
+      "type": "integer"
+    },
+    "FpgaDeviceInfo": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "FpgaDeviceName",
+          "documentation": "<p>The name of the FPGA accelerator.</p>",
+          "locationName": "name"
+        },
+        "Manufacturer": {
+          "shape": "FpgaDeviceManufacturerName",
+          "documentation": "<p>The manufacturer of the FPGA accelerator.</p>",
+          "locationName": "manufacturer"
+        },
+        "Count": {
+          "shape": "FpgaDeviceCount",
+          "documentation": "<p>The count of FPGA accelerators for the instance type.</p>",
+          "locationName": "count"
+        },
+        "MemoryInfo": {
+          "shape": "FpgaDeviceMemoryInfo",
+          "documentation": "<p>Describes the memory for the FPGA accelerator for the instance type.</p>",
+          "locationName": "memoryInfo"
+        }
+      },
+      "documentation": "<p>Describes the FPGA accelerator for the instance type.</p>"
+    },
+    "FpgaDeviceInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "FpgaDeviceInfo",
+        "locationName": "item"
+      }
+    },
+    "FpgaDeviceManufacturerName": {
+      "type": "string"
+    },
+    "FpgaDeviceMemoryInfo": {
+      "type": "structure",
+      "members": {
+        "SizeInMiB": {
+          "shape": "FpgaDeviceMemorySize",
+          "documentation": "<p>The size (in MiB) for the memory available to the FPGA accelerator.</p>",
+          "locationName": "sizeInMiB"
+        }
+      },
+      "documentation": "<p>Describes the memory for the FPGA accelerator for the instance type.</p>"
+    },
+    "FpgaDeviceMemorySize": {
+      "type": "integer"
+    },
+    "FpgaDeviceName": {
+      "type": "string"
+    },
     "FpgaImage": {
       "type": "structure",
       "members": {
@@ -18761,6 +19058,25 @@
         "available",
         "unavailable"
       ]
+    },
+    "FpgaInfo": {
+      "type": "structure",
+      "members": {
+        "Fpgas": {
+          "shape": "FpgaDeviceInfoList",
+          "documentation": "<p>Describes the FPGAs for the instance type.</p>",
+          "locationName": "fpgas"
+        },
+        "TotalFpgaMemoryInMiB": {
+          "shape": "totalFpgaMemory",
+          "documentation": "<p>The total memory of all FPGA accelerators for the instance type.</p>",
+          "locationName": "totalFpgaMemoryInMiB"
+        }
+      },
+      "documentation": "<p>Describes the FPGAs for the instance type.</p>"
+    },
+    "FreeTierEligibleFlag": {
+      "type": "boolean"
     },
     "GatewayType": {
       "type": "string",
@@ -19262,6 +19578,78 @@
         }
       }
     },
+    "GpuDeviceCount": {
+      "type": "integer"
+    },
+    "GpuDeviceInfo": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "GpuDeviceName",
+          "documentation": "<p>The name of the GPU accelerator.</p>",
+          "locationName": "name"
+        },
+        "Manufacturer": {
+          "shape": "GpuDeviceManufacturerName",
+          "documentation": "<p>The manufacturer of the GPU accelerator.</p>",
+          "locationName": "manufacturer"
+        },
+        "Count": {
+          "shape": "GpuDeviceCount",
+          "documentation": "<p>The number of GPUs for the instance type.</p>",
+          "locationName": "count"
+        },
+        "MemoryInfo": {
+          "shape": "GpuDeviceMemoryInfo",
+          "documentation": "<p>Describes the memory available to the GPU accelerator.</p>",
+          "locationName": "memoryInfo"
+        }
+      },
+      "documentation": "<p>Describes the GPU accelerators for the instance type.</p>"
+    },
+    "GpuDeviceInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "GpuDeviceInfo",
+        "locationName": "item"
+      }
+    },
+    "GpuDeviceManufacturerName": {
+      "type": "string"
+    },
+    "GpuDeviceMemoryInfo": {
+      "type": "structure",
+      "members": {
+        "SizeInMiB": {
+          "shape": "GpuDeviceMemorySize",
+          "documentation": "<p>The size (in MiB) for the memory available to the GPU accelerator.</p>",
+          "locationName": "sizeInMiB"
+        }
+      },
+      "documentation": "<p>Describes the memory available to the GPU accelerator.</p>"
+    },
+    "GpuDeviceMemorySize": {
+      "type": "integer"
+    },
+    "GpuDeviceName": {
+      "type": "string"
+    },
+    "GpuInfo": {
+      "type": "structure",
+      "members": {
+        "Gpus": {
+          "shape": "GpuDeviceInfoList",
+          "documentation": "<p>Describes the GPU accelerators for the instance type.</p>",
+          "locationName": "gpus"
+        },
+        "TotalGpuMemoryInMiB": {
+          "shape": "totalGpuMemory",
+          "documentation": "<p>The total size of the memory for the GPU accelerators for the instance type.</p>",
+          "locationName": "totalGpuMemoryInMiB"
+        }
+      },
+      "documentation": "<p>Describes the GPU accelerators for the instance type.</p>"
+    },
     "GroupIdStringList": {
       "type": "list",
       "member": {
@@ -19312,6 +19700,9 @@
         "shape": "String",
         "locationName": "GroupName"
       }
+    },
+    "HibernationFlag": {
+      "type": "boolean"
     },
     "HibernationOptions": {
       "type": "structure",
@@ -21949,6 +22340,25 @@
       },
       "documentation": "<p>Describes the status of an instance.</p>"
     },
+    "InstanceStorageFlag": {
+      "type": "boolean"
+    },
+    "InstanceStorageInfo": {
+      "type": "structure",
+      "members": {
+        "TotalSizeInGB": {
+          "shape": "DiskSize",
+          "documentation": "<p>The total size of the disks, in GiB.</p>",
+          "locationName": "totalSizeInGB"
+        },
+        "Disks": {
+          "shape": "DiskInfoList",
+          "documentation": "<p>Array describing the disks that are available for the instance type.</p>",
+          "locationName": "disks"
+        }
+      },
+      "documentation": "<p>Describes the disks that are available for the instance type.</p>"
+    },
     "InstanceType": {
       "type": "string",
       "enum": [
@@ -22092,7 +22502,10 @@
         "c5d.2xlarge",
         "c5d.4xlarge",
         "c5d.9xlarge",
+        "c5d.12xlarge",
         "c5d.18xlarge",
+        "c5d.24xlarge",
+        "c5d.metal",
         "c5n.large",
         "c5n.xlarge",
         "c5n.2xlarge",
@@ -22218,10 +22631,163 @@
         "r5n.24xlarge"
       ]
     },
+    "InstanceTypeHypervisor": {
+      "type": "string",
+      "enum": [
+        "nitro",
+        "xen"
+      ]
+    },
+    "InstanceTypeInfo": {
+      "type": "structure",
+      "members": {
+        "InstanceType": {
+          "shape": "InstanceType",
+          "documentation": "<p>The instance type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "instanceType"
+        },
+        "CurrentGeneration": {
+          "shape": "CurrentGenerationFlag",
+          "documentation": "<p>Indicates whether the instance type is a current generation.</p>",
+          "locationName": "currentGeneration"
+        },
+        "FreeTierEligible": {
+          "shape": "FreeTierEligibleFlag",
+          "documentation": "<p>Indicates whether the instance type is eligible for the free tier.</p>",
+          "locationName": "freeTierEligible"
+        },
+        "SupportedUsageClasses": {
+          "shape": "UsageClassTypeList",
+          "documentation": "<p>Indicates whether the instance type is offered for spot or On-Demand.</p>",
+          "locationName": "supportedUsageClasses"
+        },
+        "SupportedRootDevices": {
+          "shape": "RootDeviceTypeList",
+          "documentation": "<p>Indicates the supported root devices.</p>",
+          "locationName": "supportedRootDevices"
+        },
+        "BareMetal": {
+          "shape": "BareMetalFlag",
+          "documentation": "<p>Indicates whether the instance is bare metal.</p>",
+          "locationName": "bareMetal"
+        },
+        "Hypervisor": {
+          "shape": "InstanceTypeHypervisor",
+          "documentation": "<p>Indicates the hypervisor used for the instance type.</p>",
+          "locationName": "hypervisor"
+        },
+        "ProcessorInfo": {
+          "shape": "ProcessorInfo",
+          "documentation": "<p>Describes the processor.</p>",
+          "locationName": "processorInfo"
+        },
+        "VCpuInfo": {
+          "shape": "VCpuInfo",
+          "documentation": "<p>Describes the vCPU configurations for the instance type.</p>",
+          "locationName": "vCpuInfo"
+        },
+        "MemoryInfo": {
+          "shape": "MemoryInfo",
+          "documentation": "<p>Describes the memory for the instance type.</p>",
+          "locationName": "memoryInfo"
+        },
+        "InstanceStorageSupported": {
+          "shape": "InstanceStorageFlag",
+          "documentation": "<p>Indicates whether instance storage is supported.</p>",
+          "locationName": "instanceStorageSupported"
+        },
+        "InstanceStorageInfo": {
+          "shape": "InstanceStorageInfo",
+          "documentation": "<p>Describes the disks for the instance type.</p>",
+          "locationName": "instanceStorageInfo"
+        },
+        "EbsInfo": {
+          "shape": "EbsInfo",
+          "documentation": "<p>Describes the Amazon EBS settings for the instance type.</p>",
+          "locationName": "ebsInfo"
+        },
+        "NetworkInfo": {
+          "shape": "NetworkInfo",
+          "documentation": "<p>Describes the network settings for the instance type.</p>",
+          "locationName": "networkInfo"
+        },
+        "GpuInfo": {
+          "shape": "GpuInfo",
+          "documentation": "<p>Describes the GPU accelerator settings for the instance type.</p>",
+          "locationName": "gpuInfo"
+        },
+        "FpgaInfo": {
+          "shape": "FpgaInfo",
+          "documentation": "<p>Describes the FPGA accelerator settings for the instance type.</p>",
+          "locationName": "fpgaInfo"
+        },
+        "PlacementGroupInfo": {
+          "shape": "PlacementGroupInfo",
+          "documentation": "<p>Describes the placement group settings for the instance type.</p>",
+          "locationName": "placementGroupInfo"
+        },
+        "HibernationSupported": {
+          "shape": "HibernationFlag",
+          "documentation": "<p>Indicates whether On-Demand hibernation is supported.</p>",
+          "locationName": "hibernationSupported"
+        },
+        "BurstablePerformanceSupported": {
+          "shape": "BurstablePerformanceFlag",
+          "documentation": "<p>Indicates whether the instance type is a burstable performance instance type.</p>",
+          "locationName": "burstablePerformanceSupported"
+        },
+        "DedicatedHostsSupported": {
+          "shape": "DedicatedHostFlag",
+          "documentation": "<p>Indicates whether Dedicated Hosts are supported on the instance type.</p>",
+          "locationName": "dedicatedHostsSupported"
+        },
+        "AutoRecoverySupported": {
+          "shape": "AutoRecoveryFlag",
+          "documentation": "<p>Indicates whether auto recovery is supported.</p>",
+          "locationName": "autoRecoverySupported"
+        }
+      },
+      "documentation": "<p>Describes the instance type.</p>"
+    },
+    "InstanceTypeInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceTypeInfo",
+        "locationName": "item"
+      }
+    },
     "InstanceTypeList": {
       "type": "list",
       "member": {
         "shape": "InstanceType"
+      }
+    },
+    "InstanceTypeOffering": {
+      "type": "structure",
+      "members": {
+        "InstanceType": {
+          "shape": "InstanceType",
+          "documentation": "<p>The instance type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "instanceType"
+        },
+        "LocationType": {
+          "shape": "LocationType",
+          "documentation": "<p>The location type.</p>",
+          "locationName": "locationType"
+        },
+        "Location": {
+          "shape": "Location",
+          "documentation": "<p>The identifier for the location. This depends on the location type. For example, if the location type is <code>region</code>, the location is the Region code (for example, <code>us-east-2</code>.)</p>",
+          "locationName": "location"
+        }
+      },
+      "documentation": "<p>The instance types offered.</p>"
+    },
+    "InstanceTypeOfferingsList": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceTypeOffering",
+        "locationName": "item"
       }
     },
     "InstanceUsage": {
@@ -22421,6 +22987,9 @@
         "shape": "Ipv6CidrBlock",
         "locationName": "item"
       }
+    },
+    "Ipv6Flag": {
+      "type": "boolean"
     },
     "Ipv6Range": {
       "type": "structure",
@@ -23672,6 +24241,17 @@
       },
       "documentation": "<p>Describes a load permission.</p>"
     },
+    "Location": {
+      "type": "string"
+    },
+    "LocationType": {
+      "type": "string",
+      "enum": [
+        "region",
+        "availability-zone",
+        "availability-zone-id"
+      ]
+    },
     "LogDestinationType": {
       "type": "string",
       "enum": [
@@ -23687,6 +24267,29 @@
       "enum": [
         "spot"
       ]
+    },
+    "MaxIpv4AddrPerInterface": {
+      "type": "integer"
+    },
+    "MaxIpv6AddrPerInterface": {
+      "type": "integer"
+    },
+    "MaxNetworkInterfaces": {
+      "type": "integer"
+    },
+    "MemoryInfo": {
+      "type": "structure",
+      "members": {
+        "SizeInMiB": {
+          "shape": "MemorySize",
+          "documentation": "<p>Size of the memory, in MiB.</p>",
+          "locationName": "sizeInMiB"
+        }
+      },
+      "documentation": "<p>Describes the memory for the instance type.</p>"
+    },
+    "MemorySize": {
+      "type": "long"
     },
     "MillisecondDateTime": {
       "type": "timestamp"
@@ -25597,6 +26200,42 @@
         "locationName": "item"
       }
     },
+    "NetworkInfo": {
+      "type": "structure",
+      "members": {
+        "NetworkPerformance": {
+          "shape": "NetworkPerformance",
+          "documentation": "<p>Describes the network performance.</p>",
+          "locationName": "networkPerformance"
+        },
+        "MaximumNetworkInterfaces": {
+          "shape": "MaxNetworkInterfaces",
+          "documentation": "<p>The maximum number of network interfaces for the instance type.</p>",
+          "locationName": "maximumNetworkInterfaces"
+        },
+        "Ipv4AddressesPerInterface": {
+          "shape": "MaxIpv4AddrPerInterface",
+          "documentation": "<p>The maximum number of IPv4 addresses per network interface.</p>",
+          "locationName": "ipv4AddressesPerInterface"
+        },
+        "Ipv6AddressesPerInterface": {
+          "shape": "MaxIpv6AddrPerInterface",
+          "documentation": "<p>The maximum number of IPv6 addresses per network interface.</p>",
+          "locationName": "ipv6AddressesPerInterface"
+        },
+        "Ipv6Supported": {
+          "shape": "Ipv6Flag",
+          "documentation": "<p>Indicates whether IPv6 is supported.</p>",
+          "locationName": "ipv6Supported"
+        },
+        "EnaSupport": {
+          "shape": "EnaSupport",
+          "documentation": "<p>Indicates whether Elastic Network Adapter (ENA) is supported.</p>",
+          "locationName": "enaSupport"
+        }
+      },
+      "documentation": "<p>Describes the networking features of the instance type.</p>"
+    },
     "NetworkInterface": {
       "type": "structure",
       "members": {
@@ -25965,6 +26604,9 @@
         "natGateway",
         "efa"
       ]
+    },
+    "NetworkPerformance": {
+      "type": "string"
     },
     "NewDhcpConfiguration": {
       "type": "structure",
@@ -26454,6 +27096,17 @@
       },
       "documentation": "<p>Describes a placement group.</p>"
     },
+    "PlacementGroupInfo": {
+      "type": "structure",
+      "members": {
+        "SupportedStrategies": {
+          "shape": "PlacementGroupStrategyList",
+          "documentation": "<p>A list of supported placement groups types.</p>",
+          "locationName": "supportedStrategies"
+        }
+      },
+      "documentation": "<p>Describes the placement group support of the instance type.</p>"
+    },
     "PlacementGroupList": {
       "type": "list",
       "member": {
@@ -26472,6 +27125,21 @@
         "deleting",
         "deleted"
       ]
+    },
+    "PlacementGroupStrategy": {
+      "type": "string",
+      "enum": [
+        "cluster",
+        "partition",
+        "spread"
+      ]
+    },
+    "PlacementGroupStrategyList": {
+      "type": "list",
+      "member": {
+        "shape": "PlacementGroupStrategy",
+        "locationName": "item"
+      }
     },
     "PlacementGroupStringList": {
       "type": "list",
@@ -26737,6 +27405,25 @@
         "shape": "String",
         "locationName": "PrivateIpAddress"
       }
+    },
+    "ProcessorInfo": {
+      "type": "structure",
+      "members": {
+        "SupportedArchitectures": {
+          "shape": "ArchitectureTypeList",
+          "documentation": "<p>A list of architectures supported by the instance type.</p>",
+          "locationName": "supportedArchitectures"
+        },
+        "SustainedClockSpeedInGhz": {
+          "shape": "ProcessorSustainedClockSpeed",
+          "documentation": "<p>The speed of the processor, in GHz.</p>",
+          "locationName": "sustainedClockSpeedInGhz"
+        }
+      },
+      "documentation": "<p>Describes the processor used by the instance type.</p>"
+    },
+    "ProcessorSustainedClockSpeed": {
+      "type": "double"
     },
     "ProductCode": {
       "type": "structure",
@@ -27815,6 +28502,14 @@
         "shape": "HostId",
         "locationName": "item"
       }
+    },
+    "RequestInstanceTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceType"
+      },
+      "locationName": "InstanceType",
+      "max": 100
     },
     "RequestLaunchTemplateData": {
       "type": "structure",
@@ -29200,6 +29895,20 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
+      }
+    },
+    "RootDeviceType": {
+      "type": "string",
+      "enum": [
+        "ebs",
+        "instance-store"
+      ]
+    },
+    "RootDeviceTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "RootDeviceType",
+        "locationName": "item"
       }
     },
     "Route": {
@@ -32338,6 +33047,16 @@
         }
       }
     },
+    "ThreadsPerCore": {
+      "type": "integer"
+    },
+    "ThreadsPerCoreList": {
+      "type": "list",
+      "member": {
+        "shape": "ThreadsPerCore",
+        "locationName": "item"
+      }
+    },
     "TrafficDirection": {
       "type": "string",
       "enum": [
@@ -33676,6 +34395,20 @@
         }
       }
     },
+    "UsageClassType": {
+      "type": "string",
+      "enum": [
+        "spot",
+        "on-demand"
+      ]
+    },
+    "UsageClassTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "UsageClassType",
+        "locationName": "item"
+      }
+    },
     "UserBucket": {
       "type": "structure",
       "members": {
@@ -33786,6 +34519,40 @@
         "shape": "String",
         "locationName": "UserId"
       }
+    },
+    "VCpuCount": {
+      "type": "integer"
+    },
+    "VCpuInfo": {
+      "type": "structure",
+      "members": {
+        "DefaultVCpus": {
+          "shape": "VCpuCount",
+          "documentation": "<p>The default number of vCPUs for the instance type.</p>",
+          "locationName": "defaultVCpus"
+        },
+        "DefaultCores": {
+          "shape": "CoreCount",
+          "documentation": "<p>The default number of cores for the instance type.</p>",
+          "locationName": "defaultCores"
+        },
+        "DefaultThreadsPerCore": {
+          "shape": "ThreadsPerCore",
+          "documentation": "<p>The default number of threads per core for the instance type.</p>",
+          "locationName": "defaultThreadsPerCore"
+        },
+        "ValidCores": {
+          "shape": "CoreCountList",
+          "documentation": "<p>List of the valid number of cores that can be configured for the instance type.</p>",
+          "locationName": "validCores"
+        },
+        "ValidThreadsPerCore": {
+          "shape": "ThreadsPerCoreList",
+          "documentation": "<p>List of the valid number of threads per core that can be configured for the instance type. </p>",
+          "locationName": "validThreadsPerCore"
+        }
+      },
+      "documentation": "<p>Describes the vCPU configurations for the instance type.</p>"
     },
     "ValueStringList": {
       "type": "list",
@@ -35162,6 +35929,12 @@
         "Availability Zone",
         "Region"
       ]
+    },
+    "totalFpgaMemory": {
+      "type": "integer"
+    },
+    "totalGpuMemory": {
+      "type": "integer"
     }
   },
   "documentation": "<fullname>Amazon Elastic Compute Cloud</fullname> <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS cloud. Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and deploy applications faster.</p> <p>To learn more, see the following resources:</p> <ul> <li> <p>Amazon EC2: <a href=\"http://aws.amazon.com/ec2\">AmazonEC2 product page</a>, <a href=\"http://aws.amazon.com/documentation/ec2\">Amazon EC2 documentation</a> </p> </li> <li> <p>Amazon EBS: <a href=\"http://aws.amazon.com/ebs\">Amazon EBS product page</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon EBS documentation</a> </p> </li> <li> <p>Amazon VPC: <a href=\"http://aws.amazon.com/vpc\">Amazon VPC product page</a>, <a href=\"http://aws.amazon.com/documentation/vpc\">Amazon VPC documentation</a> </p> </li> <li> <p>AWS VPN: <a href=\"http://aws.amazon.com/vpn\">AWS VPN product page</a>, <a href=\"http://aws.amazon.com/documentation/vpn\">AWS VPN documentation</a> </p> </li> </ul>"

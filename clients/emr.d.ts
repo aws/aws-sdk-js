@@ -165,6 +165,14 @@ declare class EMR extends Service {
    */
   listSteps(callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
+   * Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
+   */
+  modifyCluster(params: EMR.Types.ModifyClusterInput, callback?: (err: AWSError, data: EMR.Types.ModifyClusterOutput) => void): Request<EMR.Types.ModifyClusterOutput, AWSError>;
+  /**
+   * Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
+   */
+  modifyCluster(callback?: (err: AWSError, data: EMR.Types.ModifyClusterOutput) => void): Request<EMR.Types.ModifyClusterOutput, AWSError>;
+  /**
    * Modifies the target On-Demand and target Spot capacities for the instance fleet with the specified InstanceFleetID within the cluster specified using ClusterID. The call either succeeds or fails atomically.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. 
    */
   modifyInstanceFleet(params: EMR.Types.ModifyInstanceFleetInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -473,11 +481,15 @@ declare namespace EMR {
     /**
      * The ClusterID for which specified steps will be canceled. Use RunJobFlow and ListClusters to get ClusterIDs. 
      */
-    ClusterId?: XmlStringMaxLen256;
+    ClusterId: XmlStringMaxLen256;
     /**
      * The list of StepIDs to cancel. Use ListSteps to get steps and their states for the specified cluster.
      */
-    StepIds?: StepIdsList;
+    StepIds: StepIdsList;
+    /**
+     * The option to choose for cancelling RUNNING steps. By default, the value is SEND_INTERRUPT.
+     */
+    StepCancellationOption?: StepCancellationOption;
   }
   export interface CancelStepsOutput {
     /**
@@ -629,6 +641,14 @@ declare namespace EMR {
      * The Amazon Resource Name of the cluster.
      */
     ClusterArn?: ArnType;
+    /**
+     * Specifies the number of steps that can be executed concurrently.
+     */
+    StepConcurrencyLevel?: Integer;
+    /**
+     *  The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. 
+     */
+    OutpostArn?: OptionalArnType;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -679,6 +699,10 @@ declare namespace EMR {
      * The Amazon Resource Name of the cluster.
      */
     ClusterArn?: ArnType;
+    /**
+     *  The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. 
+     */
+    OutpostArn?: OptionalArnType;
   }
   export type ClusterSummaryList = ClusterSummary[];
   export interface ClusterTimeline {
@@ -1947,6 +1971,22 @@ declare namespace EMR {
     Value?: String;
   }
   export type MetricDimensionList = MetricDimension[];
+  export interface ModifyClusterInput {
+    /**
+     * The unique identifier of the cluster.
+     */
+    ClusterId: String;
+    /**
+     * The number of steps that can be executed concurrently. You can specify a maximum of 256 steps. 
+     */
+    StepConcurrencyLevel?: Integer;
+  }
+  export interface ModifyClusterOutput {
+    /**
+     * The number of steps that can be executed concurrently.
+     */
+    StepConcurrencyLevel?: Integer;
+  }
   export interface ModifyInstanceFleetInput {
     /**
      * The unique identifier of the cluster.
@@ -1969,6 +2009,7 @@ declare namespace EMR {
   }
   export type NewSupportedProductsList = SupportedProductConfig[];
   export type NonNegativeDouble = number;
+  export type OptionalArnType = string;
   export interface PlacementType {
     /**
      * The Amazon EC2 Availability Zone for the cluster. AvailabilityZone is used for uniform instance groups, while AvailabilityZones (plural) is used for instance fleets.
@@ -2150,6 +2191,10 @@ declare namespace EMR {
      * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see Use Kerberos Authentication in the EMR Management Guide.
      */
     KerberosAttributes?: KerberosAttributes;
+    /**
+     * Specifies the number of steps that can be executed concurrently. The default value is 1. The maximum value is 256.
+     */
+    StepConcurrencyLevel?: Integer;
   }
   export interface RunJobFlowOutput {
     /**
@@ -2311,6 +2356,7 @@ declare namespace EMR {
      */
     Status?: StepStatus;
   }
+  export type StepCancellationOption = "SEND_INTERRUPT"|"TERMINATE_PROCESS"|string;
   export interface StepConfig {
     /**
      * The name of the step.

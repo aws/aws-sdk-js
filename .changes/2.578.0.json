@@ -1,0 +1,57 @@
+[
+    {
+        "type": "feature",
+        "category": "ACM",
+        "description": "This release adds support for Tag-Based IAM for AWS Certificate Manager and adding tags to certificates upon creation."
+    },
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "Update default endpoint for Application Auto Scaling."
+    },
+    {
+        "type": "feature",
+        "category": "AutoScalingPlans",
+        "description": "Update default endpoint for AWS Auto Scaling."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Add Canonical ARN to LogsLocation."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds two new APIs (DescribeInstanceTypes and DescribeInstanceTypeOfferings) that give customers access to instance type attributes and regional and zonal offerings."
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Amazon EMR adds support for concurrent step execution and cancelling running steps. Amazon EMR has added a new Outpost ARN field in the ListCluster and DescribeCluster API responses that is populated for clusters launched in an AWS Outpost subnet."
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "This release adds two key updates to existing APIs. 1. Amazon Forecast can now generate forecasts in any quantile using the optional parameter forecastTypes in the CreateForecast API and 2. You can get additional details (metrics and relevant error messages) on your AutoML runs using the DescribePredictor and GetAccuracyMetrics APIs."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackageVod",
+        "description": "Includes the submission time of Asset ingestion request in the API response for Create/List/Describe Assets."
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "This release adds enhanced face filtering support to the IndexFaces API operation, and introduces face filtering for CompareFaces and SearchFacesByImage API operations."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Add RebootOption and LastNoRebootInstallOperationTime for DescribeInstancePatchStates and DescribeInstancePatchStatesForPatchGroup API"
+    },
+    {
+        "type": "feature",
+        "category": "STS",
+        "description": "Support tagging for STS sessions and tag based access control for the STS APIs"
+    }
+]
