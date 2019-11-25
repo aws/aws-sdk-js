@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Protocol",
+  "description": "fixes console.log from throwing when passed certain errors on certain versions of node"
+}
