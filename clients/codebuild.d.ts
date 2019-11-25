@@ -36,6 +36,22 @@ declare class CodeBuild extends Service {
    */
   batchGetProjects(callback?: (err: AWSError, data: CodeBuild.Types.BatchGetProjectsOutput) => void): Request<CodeBuild.Types.BatchGetProjectsOutput, AWSError>;
   /**
+   *  Returns an array of report groups. 
+   */
+  batchGetReportGroups(params: CodeBuild.Types.BatchGetReportGroupsInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetReportGroupsOutput) => void): Request<CodeBuild.Types.BatchGetReportGroupsOutput, AWSError>;
+  /**
+   *  Returns an array of report groups. 
+   */
+  batchGetReportGroups(callback?: (err: AWSError, data: CodeBuild.Types.BatchGetReportGroupsOutput) => void): Request<CodeBuild.Types.BatchGetReportGroupsOutput, AWSError>;
+  /**
+   *  Returns an array of reports. 
+   */
+  batchGetReports(params: CodeBuild.Types.BatchGetReportsInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetReportsOutput) => void): Request<CodeBuild.Types.BatchGetReportsOutput, AWSError>;
+  /**
+   *  Returns an array of reports. 
+   */
+  batchGetReports(callback?: (err: AWSError, data: CodeBuild.Types.BatchGetReportsOutput) => void): Request<CodeBuild.Types.BatchGetReportsOutput, AWSError>;
+  /**
    * Creates a build project.
    */
   createProject(params: CodeBuild.Types.CreateProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateProjectOutput) => void): Request<CodeBuild.Types.CreateProjectOutput, AWSError>;
@@ -43,6 +59,14 @@ declare class CodeBuild extends Service {
    * Creates a build project.
    */
   createProject(callback?: (err: AWSError, data: CodeBuild.Types.CreateProjectOutput) => void): Request<CodeBuild.Types.CreateProjectOutput, AWSError>;
+  /**
+   *  Creates a report group. A report group contains a collection of reports. 
+   */
+  createReportGroup(params: CodeBuild.Types.CreateReportGroupInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateReportGroupOutput) => void): Request<CodeBuild.Types.CreateReportGroupOutput, AWSError>;
+  /**
+   *  Creates a report group. A report group contains a collection of reports. 
+   */
+  createReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.CreateReportGroupOutput) => void): Request<CodeBuild.Types.CreateReportGroupOutput, AWSError>;
   /**
    * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
    */
@@ -60,6 +84,22 @@ declare class CodeBuild extends Service {
    */
   deleteProject(callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
   /**
+   *  Deletes a report. 
+   */
+  deleteReport(params: CodeBuild.Types.DeleteReportInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteReportOutput) => void): Request<CodeBuild.Types.DeleteReportOutput, AWSError>;
+  /**
+   *  Deletes a report. 
+   */
+  deleteReport(callback?: (err: AWSError, data: CodeBuild.Types.DeleteReportOutput) => void): Request<CodeBuild.Types.DeleteReportOutput, AWSError>;
+  /**
+   *  DeleteReportGroup: Deletes a report group. Before you delete a report group, you must delete its reports. Use ListReportsForReportGroup to get the reports in a report group. Use DeleteReport to delete the reports. If you call DeleteReportGroup for a report group that contains one or more reports, an exception is thrown. 
+   */
+  deleteReportGroup(params: CodeBuild.Types.DeleteReportGroupInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteReportGroupOutput) => void): Request<CodeBuild.Types.DeleteReportGroupOutput, AWSError>;
+  /**
+   *  DeleteReportGroup: Deletes a report group. Before you delete a report group, you must delete its reports. Use ListReportsForReportGroup to get the reports in a report group. Use DeleteReport to delete the reports. If you call DeleteReportGroup for a report group that contains one or more reports, an exception is thrown. 
+   */
+  deleteReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.DeleteReportGroupOutput) => void): Request<CodeBuild.Types.DeleteReportGroupOutput, AWSError>;
+  /**
    *  Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. 
    */
   deleteSourceCredentials(params: CodeBuild.Types.DeleteSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteSourceCredentialsOutput) => void): Request<CodeBuild.Types.DeleteSourceCredentialsOutput, AWSError>;
@@ -75,6 +115,14 @@ declare class CodeBuild extends Service {
    * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
    */
   deleteWebhook(callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
+  /**
+   *  Returns a list of details about test cases for a report. 
+   */
+  describeTestCases(params: CodeBuild.Types.DescribeTestCasesInput, callback?: (err: AWSError, data: CodeBuild.Types.DescribeTestCasesOutput) => void): Request<CodeBuild.Types.DescribeTestCasesOutput, AWSError>;
+  /**
+   *  Returns a list of details about test cases for a report. 
+   */
+  describeTestCases(callback?: (err: AWSError, data: CodeBuild.Types.DescribeTestCasesOutput) => void): Request<CodeBuild.Types.DescribeTestCasesOutput, AWSError>;
   /**
    *  Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
    */
@@ -124,6 +172,30 @@ declare class CodeBuild extends Service {
    */
   listProjects(callback?: (err: AWSError, data: CodeBuild.Types.ListProjectsOutput) => void): Request<CodeBuild.Types.ListProjectsOutput, AWSError>;
   /**
+   *  Gets a list ARNs for the report groups in the current AWS account. 
+   */
+  listReportGroups(params: CodeBuild.Types.ListReportGroupsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListReportGroupsOutput) => void): Request<CodeBuild.Types.ListReportGroupsOutput, AWSError>;
+  /**
+   *  Gets a list ARNs for the report groups in the current AWS account. 
+   */
+  listReportGroups(callback?: (err: AWSError, data: CodeBuild.Types.ListReportGroupsOutput) => void): Request<CodeBuild.Types.ListReportGroupsOutput, AWSError>;
+  /**
+   *  Returns a list of ARNs for the reports in the current AWS account. 
+   */
+  listReports(params: CodeBuild.Types.ListReportsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListReportsOutput) => void): Request<CodeBuild.Types.ListReportsOutput, AWSError>;
+  /**
+   *  Returns a list of ARNs for the reports in the current AWS account. 
+   */
+  listReports(callback?: (err: AWSError, data: CodeBuild.Types.ListReportsOutput) => void): Request<CodeBuild.Types.ListReportsOutput, AWSError>;
+  /**
+   *  Returns a list of ARNs for the reports that belong to a ReportGroup. 
+   */
+  listReportsForReportGroup(params: CodeBuild.Types.ListReportsForReportGroupInput, callback?: (err: AWSError, data: CodeBuild.Types.ListReportsForReportGroupOutput) => void): Request<CodeBuild.Types.ListReportsForReportGroupOutput, AWSError>;
+  /**
+   *  Returns a list of ARNs for the reports that belong to a ReportGroup. 
+   */
+  listReportsForReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.ListReportsForReportGroupOutput) => void): Request<CodeBuild.Types.ListReportsForReportGroupOutput, AWSError>;
+  /**
    *  Returns a list of SourceCredentialsInfo objects. 
    */
   listSourceCredentials(params: CodeBuild.Types.ListSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListSourceCredentialsOutput) => void): Request<CodeBuild.Types.ListSourceCredentialsOutput, AWSError>;
@@ -155,6 +227,14 @@ declare class CodeBuild extends Service {
    * Changes the settings of a build project.
    */
   updateProject(callback?: (err: AWSError, data: CodeBuild.Types.UpdateProjectOutput) => void): Request<CodeBuild.Types.UpdateProjectOutput, AWSError>;
+  /**
+   *  Updates a report group. 
+   */
+  updateReportGroup(params: CodeBuild.Types.UpdateReportGroupInput, callback?: (err: AWSError, data: CodeBuild.Types.UpdateReportGroupOutput) => void): Request<CodeBuild.Types.UpdateReportGroupOutput, AWSError>;
+  /**
+   *  Updates a report group. 
+   */
+  updateReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.UpdateReportGroupOutput) => void): Request<CodeBuild.Types.UpdateReportGroupOutput, AWSError>;
   /**
    *  Updates the webhook associated with an AWS CodeBuild build project.    If you use Bitbucket for your repository, rotateSecret is ignored.  
    */
@@ -217,6 +297,38 @@ declare namespace CodeBuild {
      */
     projectsNotFound?: ProjectNames;
   }
+  export interface BatchGetReportGroupsInput {
+    /**
+     *  An array of report group ARNs that identify the report groups to return. 
+     */
+    reportGroupArns: ReportGroupArns;
+  }
+  export interface BatchGetReportGroupsOutput {
+    /**
+     *  The array of report groups returned by BatchGetReportGroups. 
+     */
+    reportGroups?: ReportGroups;
+    /**
+     *  An array of ARNs passed to BatchGetReportGroups that are not associated with a ReportGroup. 
+     */
+    reportGroupsNotFound?: ReportGroupArns;
+  }
+  export interface BatchGetReportsInput {
+    /**
+     *  An array of ARNs that identify the Report objects to return. 
+     */
+    reportArns: ReportArns;
+  }
+  export interface BatchGetReportsOutput {
+    /**
+     *  The array of Report objects returned by BatchGetReports. 
+     */
+    reports?: Reports;
+    /**
+     *  An array of ARNs passed to BatchGetReportGroups that are not associated with a Report. 
+     */
+    reportsNotFound?: ReportArns;
+  }
   export type Boolean = boolean;
   export interface Build {
     /**
@@ -272,7 +384,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     *  An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one of:    For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.  
+     *  An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.  
      */
     secondarySourceVersions?: ProjectSecondarySourceVersions;
     /**
@@ -331,6 +443,10 @@ declare namespace CodeBuild {
      *  A list of exported environment variables for this build. 
      */
     exportedEnvironmentVariables?: ExportedEnvironmentVariables;
+    /**
+     *  An array of the ARNs associated with this build's reports. 
+     */
+    reportArns?: BuildReportArns;
   }
   export interface BuildArtifacts {
     /**
@@ -398,6 +514,7 @@ declare namespace CodeBuild {
   }
   export type BuildPhaseType = "SUBMITTED"|"QUEUED"|"PROVISIONING"|"DOWNLOAD_SOURCE"|"INSTALL"|"PRE_BUILD"|"BUILD"|"POST_BUILD"|"UPLOAD_ARTIFACTS"|"FINALIZING"|"COMPLETED"|string;
   export type BuildPhases = BuildPhase[];
+  export type BuildReportArns = String[];
   export type Builds = Build[];
   export type BuildsNotDeleted = BuildNotDeleted[];
   export type CacheMode = "LOCAL_DOCKER_LAYER_CACHE"|"LOCAL_SOURCE_CACHE"|"LOCAL_CUSTOM_CACHE"|string;
@@ -435,7 +552,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -497,6 +614,26 @@ declare namespace CodeBuild {
      */
     project?: Project;
   }
+  export interface CreateReportGroupInput {
+    /**
+     *  The name of the report group. 
+     */
+    name: ReportGroupName;
+    /**
+     *  The type of report group. 
+     */
+    type: ReportType;
+    /**
+     *  A ReportExportConfig object that contains information about where the report group test results are exported. 
+     */
+    exportConfig: ReportExportConfig;
+  }
+  export interface CreateReportGroupOutput {
+    /**
+     *  Information about the report group that was created. 
+     */
+    reportGroup?: ReportGroup;
+  }
   export interface CreateWebhookInput {
     /**
      * The name of the AWS CodeBuild project.
@@ -526,6 +663,22 @@ declare namespace CodeBuild {
   }
   export interface DeleteProjectOutput {
   }
+  export interface DeleteReportGroupInput {
+    /**
+     *  The ARN of the report group to delete. 
+     */
+    arn: NonEmptyString;
+  }
+  export interface DeleteReportGroupOutput {
+  }
+  export interface DeleteReportInput {
+    /**
+     *  The ARN of the report to delete. 
+     */
+    arn: NonEmptyString;
+  }
+  export interface DeleteReportOutput {
+  }
   export interface DeleteSourceCredentialsInput {
     /**
      *  The Amazon Resource Name (ARN) of the token.
@@ -545,6 +698,34 @@ declare namespace CodeBuild {
     projectName: ProjectName;
   }
   export interface DeleteWebhookOutput {
+  }
+  export interface DescribeTestCasesInput {
+    /**
+     *  The ARN of the report for which test cases are returned. 
+     */
+    reportArn: String;
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The maximum number of paginated test cases returned per response. Use nextToken to iterate pages in the list of returned TestCase objects. The default value is 100. 
+     */
+    maxResults?: PageSize;
+    /**
+     *  A TestCaseFilter object used to filter the returned reports. 
+     */
+    filter?: TestCaseFilter;
+  }
+  export interface DescribeTestCasesOutput {
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The returned list of test cases. 
+     */
+    testCases?: TestCases;
   }
   export interface EnvironmentImage {
     /**
@@ -594,7 +775,7 @@ declare namespace CodeBuild {
      */
     value: String;
     /**
-     * The type of environment variable. Valid values include:    PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.    PLAINTEXT: An environment variable in plaintext format.    SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager.  
+     * The type of environment variable. Valid values include:    PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.    PLAINTEXT: An environment variable in plain text format.    SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager.  
      */
     type?: EnvironmentVariableType;
   }
@@ -736,6 +917,94 @@ declare namespace CodeBuild {
      */
     projects?: ProjectNames;
   }
+  export interface ListReportGroupsInput {
+    /**
+     *  Used to specify the order to sort the list of returned report groups. Valid values are ASCENDING and DESCENDING. 
+     */
+    sortOrder?: SortOrderType;
+    /**
+     *  The criterion to be used to list build report groups. Valid values include:     CREATED_TIME: List based on when each report group was created.    LAST_MODIFIED_TIME: List based on when each report group was last changed.    NAME: List based on each report group's name.  
+     */
+    sortBy?: ReportGroupSortByType;
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The maximum number of paginated report groups returned per response. Use nextToken to iterate pages in the list of returned ReportGroup objects. The default value is 100. 
+     */
+    maxResults?: PageSize;
+  }
+  export interface ListReportGroupsOutput {
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The list of ARNs for the report groups in the current AWS account. 
+     */
+    reportGroups?: ReportGroupArns;
+  }
+  export interface ListReportsForReportGroupInput {
+    /**
+     *  The ARN of the report group for which you want to return report ARNs. 
+     */
+    reportGroupArn: String;
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  Use to specify whether the results are returned in ascending or descending order. 
+     */
+    sortOrder?: SortOrderType;
+    /**
+     *  The maximum number of paginated reports in this report group returned per response. Use nextToken to iterate pages in the list of returned Report objects. The default value is 100. 
+     */
+    maxResults?: PageSize;
+    /**
+     *  A ReportFilter object used to filter the returned reports. 
+     */
+    filter?: ReportFilter;
+  }
+  export interface ListReportsForReportGroupOutput {
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The list of returned report group ARNs. 
+     */
+    reports?: ReportArns;
+  }
+  export interface ListReportsInput {
+    /**
+     *  Specifies the sort order for the list of returned reports. Valid values are:     ASCENDING: return reports in chronological order based on their creation date.     DESCENDING: return reports in the reverse chronological order based on their creation date.   
+     */
+    sortOrder?: SortOrderType;
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The maximum number of paginated reports returned per response. Use nextToken to iterate pages in the list of returned Report objects. The default value is 100. 
+     */
+    maxResults?: PageSize;
+    /**
+     *  A ReportFilter object used to filter the returned reports. 
+     */
+    filter?: ReportFilter;
+  }
+  export interface ListReportsOutput {
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The list of returned ARNs for the reports in the current AWS account. 
+     */
+    reports?: ReportArns;
+  }
   export interface ListSourceCredentialsInput {
   }
   export interface ListSourceCredentialsOutput {
@@ -800,6 +1069,7 @@ declare namespace CodeBuild {
     networkInterfaceId?: NonEmptyString;
   }
   export type NonEmptyString = string;
+  export type PageSize = number;
   export interface PhaseContext {
     /**
      * The status code for the context of the build phase.
@@ -834,7 +1104,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:   For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:   For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -961,7 +1231,7 @@ declare namespace CodeBuild {
      */
     location?: String;
     /**
-     *  If you use a LOCAL cache, the local cache mode. You can use one or more local cache modes at the same time.     LOCAL_SOURCE_CACHE mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored.     LOCAL_DOCKER_LAYER_CACHE mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network.      You can use a Docker layer cache in the Linux environment only.     The privileged flag must be set so that your project has the required Docker permissions.     You should consider the security implications before you use a Docker layer cache.          LOCAL_CUSTOM_CACHE mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache:     Only directories can be specified for caching. You cannot specify individual files.     Symlinks are used to reference cached directories.     Cached directories are linked to your build before it downloads its project sources. Cached items are overriden if a source item has the same name. Directories are specified using cache paths in the buildspec file.     
+     *  If you use a LOCAL cache, the local cache mode. You can use one or more local cache modes at the same time.     LOCAL_SOURCE_CACHE mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored.     LOCAL_DOCKER_LAYER_CACHE mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network.      You can use a Docker layer cache in the Linux environment only.     The privileged flag must be set so that your project has the required Docker permissions.     You should consider the security implications before you use a Docker layer cache.          LOCAL_CUSTOM_CACHE mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache:     Only directories can be specified for caching. You cannot specify individual files.     Symlinks are used to reference cached directories.     Cached directories are linked to your build before it downloads its project sources. Cached items are overridden if a source item has the same name. Directories are specified using cache paths in the buildspec file.     
      */
     modes?: ProjectCacheModes;
   }
@@ -1049,7 +1319,7 @@ declare namespace CodeBuild {
      */
     sourceIdentifier: String;
     /**
-     * The source version for the corresponding source identifier. If specified, must be one of:   For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * The source version for the corresponding source identifier. If specified, must be one of:   For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
      */
     sourceVersion: String;
   }
@@ -1065,6 +1335,105 @@ declare namespace CodeBuild {
      */
     credentialProvider: CredentialProviderType;
   }
+  export interface Report {
+    /**
+     *  The ARN of the report run. 
+     */
+    arn?: NonEmptyString;
+    /**
+     *  The type of the report that was run. 
+     */
+    type?: ReportType;
+    /**
+     *  The name of the report that was run. 
+     */
+    name?: String;
+    /**
+     *  The ARN of the report group associated with this report. 
+     */
+    reportGroupArn?: NonEmptyString;
+    /**
+     *  The ARN of the build run that generated this report. 
+     */
+    executionId?: String;
+    /**
+     *  The status of this report. 
+     */
+    status?: ReportStatusType;
+    /**
+     *  The date and time this report run occurred. 
+     */
+    created?: Timestamp;
+    /**
+     *  The date and time a report expires. A report expires 30 days after it is created. An expired report is not available to view in CodeBuild. 
+     */
+    expired?: Timestamp;
+    /**
+     *  Information about where the raw data used to generate this report was exported. 
+     */
+    exportConfig?: ReportExportConfig;
+    /**
+     *  A boolean that specifies if this report run is truncated. The list of test cases is truncated after the maximum number of test cases is reached. 
+     */
+    truncated?: WrapperBoolean;
+    /**
+     *  A TestReportSummary object that contains information about this test report. 
+     */
+    testSummary?: TestReportSummary;
+  }
+  export type ReportArns = NonEmptyString[];
+  export interface ReportExportConfig {
+    /**
+     *  The export configuration type. Valid values are:     S3: The report results are exported to an S3 bucket.     NO_EXPORT: The report results are not exported.   
+     */
+    exportConfigType?: ReportExportConfigType;
+    /**
+     *  A S3ReportExportConfig object that contains information about the S3 bucket where the run of a report is exported. 
+     */
+    s3Destination?: S3ReportExportConfig;
+  }
+  export type ReportExportConfigType = "S3"|"NO_EXPORT"|string;
+  export interface ReportFilter {
+    /**
+     *  The status used to filter reports. You can filter using one status only. 
+     */
+    status?: ReportStatusType;
+  }
+  export interface ReportGroup {
+    /**
+     *  The ARN of a ReportGroup. 
+     */
+    arn?: NonEmptyString;
+    /**
+     *  The name of a ReportGroup. 
+     */
+    name?: ReportGroupName;
+    /**
+     *  The type of the ReportGroup. The one valid value is TEST. 
+     */
+    type?: ReportType;
+    /**
+     *  Information about the destination where the raw data of this ReportGroup is exported. 
+     */
+    exportConfig?: ReportExportConfig;
+    /**
+     *  The date and time this ReportGroup was created. 
+     */
+    created?: Timestamp;
+    /**
+     *  The date and time this ReportGroup was last modified. 
+     */
+    lastModified?: Timestamp;
+  }
+  export type ReportGroupArns = NonEmptyString[];
+  export type ReportGroupName = string;
+  export type ReportGroupSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
+  export type ReportGroups = ReportGroup[];
+  export type ReportPackagingType = "ZIP"|"NONE"|string;
+  export type ReportStatusCounts = {[key: string]: WrapperInt};
+  export type ReportStatusType = "GENERATING"|"SUCCEEDED"|"FAILED"|"INCOMPLETE"|"DELETING"|string;
+  export type ReportType = "TEST"|string;
+  export type Reports = Report[];
   export interface S3LogsConfig {
     /**
      * The current status of the S3 build logs. Valid values are:    ENABLED: S3 build logs are enabled for this build project.    DISABLED: S3 build logs are not enabled for this build project.  
@@ -1076,6 +1445,28 @@ declare namespace CodeBuild {
     location?: String;
     /**
      *  Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. 
+     */
+    encryptionDisabled?: WrapperBoolean;
+  }
+  export interface S3ReportExportConfig {
+    /**
+     *  The name of the S3 bucket where the raw data of a report are exported. 
+     */
+    bucket?: NonEmptyString;
+    /**
+     *  The path to the exported report's raw data results. 
+     */
+    path?: String;
+    /**
+     *  The type of build output artifact to create. Valid values include:     NONE: AWS CodeBuild creates the raw data in the output bucket. This is the default if packaging is not specified.     ZIP: AWS CodeBuild creates a ZIP file with the raw data in the output bucket.   
+     */
+    packaging?: ReportPackagingType;
+    /**
+     *  The encryption key for the report's encrypted raw data. 
+     */
+    encryptionKey?: NonEmptyString;
+    /**
+     *  A boolean value that specifies if the results of a report are encrypted. 
      */
     encryptionDisabled?: WrapperBoolean;
   }
@@ -1124,7 +1515,7 @@ declare namespace CodeBuild {
      */
     secondarySourcesVersionOverride?: ProjectSecondarySourceVersions;
     /**
-     * A version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, must be one of:   For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * A version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, must be one of:   For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -1256,6 +1647,61 @@ declare namespace CodeBuild {
     value?: ValueInput;
   }
   export type TagList = Tag[];
+  export interface TestCase {
+    /**
+     *  The ARN of the report to which the test case belongs. 
+     */
+    reportArn?: NonEmptyString;
+    /**
+     *  The path to the raw data file that contains the test result. 
+     */
+    testRawDataPath?: String;
+    /**
+     *  A string that is applied to a series of related test cases. CodeBuild generates the prefix. The prefix depends on the framework used to generate the tests. 
+     */
+    prefix?: String;
+    /**
+     *  The name of the test case. 
+     */
+    name?: String;
+    /**
+     *  The status returned by the test case after it was run. Valid statuses are SUCCEEDED, FAILED, ERROR, SKIPPED, and UNKNOWN. 
+     */
+    status?: String;
+    /**
+     *  The number of nanoseconds it took to run this test case. 
+     */
+    durationInNanoSeconds?: WrapperLong;
+    /**
+     *  A message associated with a test case. For example, an error message or stack trace. 
+     */
+    message?: String;
+    /**
+     *  The date and time a test case expires. A test case expires 30 days after it is created. An expired test case is not available to view in CodeBuild. 
+     */
+    expired?: Timestamp;
+  }
+  export interface TestCaseFilter {
+    /**
+     *  The status used to filter test cases. Valid statuses are SUCCEEDED, FAILED, ERROR, SKIPPED, and UNKNOWN. A TestCaseFilter can have one status. 
+     */
+    status?: String;
+  }
+  export type TestCases = TestCase[];
+  export interface TestReportSummary {
+    /**
+     *  The number of test cases in this TestReportSummary. The total includes truncated test cases. 
+     */
+    total: WrapperInt;
+    /**
+     *  A map that contains the number of each type of status returned by the test results in this TestReportSummary. 
+     */
+    statusCounts: ReportStatusCounts;
+    /**
+     *  The number of nanoseconds it took to run all of the test cases in this report. 
+     */
+    durationInNanoSeconds: WrapperLong;
+  }
   export type TimeOut = number;
   export type Timestamp = Date;
   export interface UpdateProjectInput {
@@ -1276,7 +1722,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For AWS CodeCommit: the commit ID to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -1338,6 +1784,22 @@ declare namespace CodeBuild {
      */
     project?: Project;
   }
+  export interface UpdateReportGroupInput {
+    /**
+     *  The ARN of the report group to update. 
+     */
+    arn: NonEmptyString;
+    /**
+     *  Used to specify an updated export type. Valid values are:     S3: The report results are exported to an S3 bucket.     NO_EXPORT: The report results are not exported.   
+     */
+    exportConfig?: ReportExportConfig;
+  }
+  export interface UpdateReportGroupOutput {
+    /**
+     *  Information about the updated report group. 
+     */
+    reportGroup?: ReportGroup;
+  }
   export interface UpdateWebhookInput {
     /**
      * The name of the AWS CodeBuild project.
@@ -1352,7 +1814,7 @@ declare namespace CodeBuild {
      */
     rotateSecret?: Boolean;
     /**
-     *  An array of arrays of WebhookFilter objects used to determine if a webhook event can trigger a build. A filter group must pcontain at least one EVENT WebhookFilter. 
+     *  An array of arrays of WebhookFilter objects used to determine if a webhook event can trigger a build. A filter group must contain at least one EVENT WebhookFilter. 
      */
     filterGroups?: FilterGroups;
   }

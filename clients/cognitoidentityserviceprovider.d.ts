@@ -2706,7 +2706,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CreationDate?: DateType;
   }
-  export type IdentityProviderTypeType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"OIDC"|string;
+  export type IdentityProviderTypeType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string;
   export type IdpIdentifierType = string;
   export type IdpIdentifiersListType = IdpIdentifierType[];
   export type ImageFileType = Buffer|Uint8Array|Blob|string;

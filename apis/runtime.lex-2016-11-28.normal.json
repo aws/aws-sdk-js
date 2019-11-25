@@ -653,6 +653,12 @@
         "audioStream": {
           "shape": "BlobStream",
           "documentation": "<p>The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. </p>"
+        },
+        "sessionId": {
+          "shape": "String",
+          "documentation": "<p>The unique identifier for the session.</p>",
+          "location": "header",
+          "locationName": "x-amz-lex-session-id"
         }
       },
       "payload": "audioStream"
@@ -736,6 +742,10 @@
         "responseCard": {
           "shape": "ResponseCard",
           "documentation": "<p>Represents the options that the user has to respond to the current prompt. Response Card can come from the bot configuration (in the Amazon Lex console, choose the settings button next to a slot) or from a code hook (Lambda function). </p>"
+        },
+        "sessionId": {
+          "shape": "String",
+          "documentation": "<p>A unique identifier for the session.</p>"
         }
       }
     },

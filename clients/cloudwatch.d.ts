@@ -37,6 +37,14 @@ declare class CloudWatch extends Service {
    */
   deleteDashboards(callback?: (err: AWSError, data: CloudWatch.Types.DeleteDashboardsOutput) => void): Request<CloudWatch.Types.DeleteDashboardsOutput, AWSError>;
   /**
+   * Permanently deletes the specified Contributor Insights rules. If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created may or may not be available.
+   */
+  deleteInsightRules(params: CloudWatch.Types.DeleteInsightRulesInput, callback?: (err: AWSError, data: CloudWatch.Types.DeleteInsightRulesOutput) => void): Request<CloudWatch.Types.DeleteInsightRulesOutput, AWSError>;
+  /**
+   * Permanently deletes the specified Contributor Insights rules. If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created may or may not be available.
+   */
+  deleteInsightRules(callback?: (err: AWSError, data: CloudWatch.Types.DeleteInsightRulesOutput) => void): Request<CloudWatch.Types.DeleteInsightRulesOutput, AWSError>;
+  /**
    * Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for all alarms are returned. CloudWatch retains the history of an alarm even if you delete the alarm.
    */
   describeAlarmHistory(params: CloudWatch.Types.DescribeAlarmHistoryInput, callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmHistoryOutput) => void): Request<CloudWatch.Types.DescribeAlarmHistoryOutput, AWSError>;
@@ -69,6 +77,14 @@ declare class CloudWatch extends Service {
    */
   describeAnomalyDetectors(callback?: (err: AWSError, data: CloudWatch.Types.DescribeAnomalyDetectorsOutput) => void): Request<CloudWatch.Types.DescribeAnomalyDetectorsOutput, AWSError>;
   /**
+   * Returns a list of all the Contributor Insights rules in your account. All rules in your account are returned with a single operation. For more information about Contributor Insights, see Using Contributor Insights to Analyze High-Cardinality Data.
+   */
+  describeInsightRules(params: CloudWatch.Types.DescribeInsightRulesInput, callback?: (err: AWSError, data: CloudWatch.Types.DescribeInsightRulesOutput) => void): Request<CloudWatch.Types.DescribeInsightRulesOutput, AWSError>;
+  /**
+   * Returns a list of all the Contributor Insights rules in your account. All rules in your account are returned with a single operation. For more information about Contributor Insights, see Using Contributor Insights to Analyze High-Cardinality Data.
+   */
+  describeInsightRules(callback?: (err: AWSError, data: CloudWatch.Types.DescribeInsightRulesOutput) => void): Request<CloudWatch.Types.DescribeInsightRulesOutput, AWSError>;
+  /**
    * Disables the actions for the specified alarms. When an alarm's actions are disabled, the alarm actions do not execute when the alarm state changes.
    */
   disableAlarmActions(params: CloudWatch.Types.DisableAlarmActionsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -76,6 +92,14 @@ declare class CloudWatch extends Service {
    * Disables the actions for the specified alarms. When an alarm's actions are disabled, the alarm actions do not execute when the alarm state changes.
    */
   disableAlarmActions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disables the specified Contributor Insights rules. When rules are disabled, they do not analyze log groups and do not incur costs.
+   */
+  disableInsightRules(params: CloudWatch.Types.DisableInsightRulesInput, callback?: (err: AWSError, data: CloudWatch.Types.DisableInsightRulesOutput) => void): Request<CloudWatch.Types.DisableInsightRulesOutput, AWSError>;
+  /**
+   * Disables the specified Contributor Insights rules. When rules are disabled, they do not analyze log groups and do not incur costs.
+   */
+  disableInsightRules(callback?: (err: AWSError, data: CloudWatch.Types.DisableInsightRulesOutput) => void): Request<CloudWatch.Types.DisableInsightRulesOutput, AWSError>;
   /**
    * Enables the actions for the specified alarms.
    */
@@ -85,6 +109,14 @@ declare class CloudWatch extends Service {
    */
   enableAlarmActions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Enables the specified Contributor Insights rules. When rules are enabled, they immediately begin analyzing log data.
+   */
+  enableInsightRules(params: CloudWatch.Types.EnableInsightRulesInput, callback?: (err: AWSError, data: CloudWatch.Types.EnableInsightRulesOutput) => void): Request<CloudWatch.Types.EnableInsightRulesOutput, AWSError>;
+  /**
+   * Enables the specified Contributor Insights rules. When rules are enabled, they immediately begin analyzing log data.
+   */
+  enableInsightRules(callback?: (err: AWSError, data: CloudWatch.Types.EnableInsightRulesOutput) => void): Request<CloudWatch.Types.EnableInsightRulesOutput, AWSError>;
+  /**
    * Displays the details of the dashboard that you specify. To copy an existing dashboard, use GetDashboard, and then use the data returned within DashboardBody as the template for the new dashboard when you call PutDashboard to create the copy.
    */
   getDashboard(params: CloudWatch.Types.GetDashboardInput, callback?: (err: AWSError, data: CloudWatch.Types.GetDashboardOutput) => void): Request<CloudWatch.Types.GetDashboardOutput, AWSError>;
@@ -93,11 +125,19 @@ declare class CloudWatch extends Service {
    */
   getDashboard(callback?: (err: AWSError, data: CloudWatch.Types.GetDashboardOutput) => void): Request<CloudWatch.Types.GetDashboardOutput, AWSError>;
   /**
-   * You can use the GetMetricData API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing. Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. If you omit Unit in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+   * This operation returns the time series data collected by a Contributor Insights rule. The data includes the identity and number of contributors to the log group. You can also optionally return one or more statistics about each data point in the time series. These statistics can include the following:    UniqueContributors -- the number of unique contributors for each data point.    MaxContributorValue -- the value of the top contributor for each data point. The identity of the contributor may change for each data point in the graph. If this rule aggregates by COUNT, the top contributor for each data point is the contributor with the most occurrences in that period. If the rule aggregates by SUM, the top contributor is the contributor with the highest sum in the log field specified by the rule's Value, during that period.    SampleCount -- the number of data points matched by the rule.    Sum -- the sum of the values from all contributors during the time period represented by that data point.    Minimum -- the minimum value from a single observation during the time period represented by that data point.    Maximum -- the maximum value from a single observation during the time period represented by that data point.    Average -- the average value from all contributors during the time period represented by that data point.  
+   */
+  getInsightRuleReport(params: CloudWatch.Types.GetInsightRuleReportInput, callback?: (err: AWSError, data: CloudWatch.Types.GetInsightRuleReportOutput) => void): Request<CloudWatch.Types.GetInsightRuleReportOutput, AWSError>;
+  /**
+   * This operation returns the time series data collected by a Contributor Insights rule. The data includes the identity and number of contributors to the log group. You can also optionally return one or more statistics about each data point in the time series. These statistics can include the following:    UniqueContributors -- the number of unique contributors for each data point.    MaxContributorValue -- the value of the top contributor for each data point. The identity of the contributor may change for each data point in the graph. If this rule aggregates by COUNT, the top contributor for each data point is the contributor with the most occurrences in that period. If the rule aggregates by SUM, the top contributor is the contributor with the highest sum in the log field specified by the rule's Value, during that period.    SampleCount -- the number of data points matched by the rule.    Sum -- the sum of the values from all contributors during the time period represented by that data point.    Minimum -- the minimum value from a single observation during the time period represented by that data point.    Maximum -- the maximum value from a single observation during the time period represented by that data point.    Average -- the average value from all contributors during the time period represented by that data point.  
+   */
+  getInsightRuleReport(callback?: (err: AWSError, data: CloudWatch.Types.GetInsightRuleReportOutput) => void): Request<CloudWatch.Types.GetInsightRuleReportOutput, AWSError>;
+  /**
+   * You can use the GetMetricData API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing. Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. If you omit Unit in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
    */
   getMetricData(params: CloudWatch.Types.GetMetricDataInput, callback?: (err: AWSError, data: CloudWatch.Types.GetMetricDataOutput) => void): Request<CloudWatch.Types.GetMetricDataOutput, AWSError>;
   /**
-   * You can use the GetMetricData API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing. Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. If you omit Unit in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+   * You can use the GetMetricData API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing. Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. If you omit Unit in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
    */
   getMetricData(callback?: (err: AWSError, data: CloudWatch.Types.GetMetricDataOutput) => void): Request<CloudWatch.Types.GetMetricDataOutput, AWSError>;
   /**
@@ -157,6 +197,14 @@ declare class CloudWatch extends Service {
    */
   putDashboard(callback?: (err: AWSError, data: CloudWatch.Types.PutDashboardOutput) => void): Request<CloudWatch.Types.PutDashboardOutput, AWSError>;
   /**
+   * Creates a Contributor Insights rule. Rules evaluate log events in a CloudWatch Logs log group, enabling you to find contributor data for the log events in that log group. For more information, see Using Contributor Insights to Analyze High-Cardinality Data. If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created may or may not be available.
+   */
+  putInsightRule(params: CloudWatch.Types.PutInsightRuleInput, callback?: (err: AWSError, data: CloudWatch.Types.PutInsightRuleOutput) => void): Request<CloudWatch.Types.PutInsightRuleOutput, AWSError>;
+  /**
+   * Creates a Contributor Insights rule. Rules evaluate log events in a CloudWatch Logs log group, enabling you to find contributor data for the log events in that log group. For more information, see Using Contributor Insights to Analyze High-Cardinality Data. If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created may or may not be available.
+   */
+  putInsightRule(callback?: (err: AWSError, data: CloudWatch.Types.PutInsightRuleOutput) => void): Request<CloudWatch.Types.PutInsightRuleOutput, AWSError>;
+  /**
    * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:    iam:CreateServiceLinkedRole for all alarms with EC2 actions    ec2:DescribeInstanceStatus and ec2:DescribeInstances for all alarms on EC2 instance status metrics    ec2:StopInstances for alarms with stop actions    ec2:TerminateInstances for alarms with terminate actions   No specific permissions are needed for alarms with recover actions   If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed. If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies. If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions. The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked role is called AWSServiceRoleForCloudWatchEvents. For more information, see AWS service-linked role.
    */
   putMetricAlarm(params: CloudWatch.Types.PutMetricAlarmInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -165,11 +213,11 @@ declare class CloudWatch extends Service {
    */
   putMetricAlarm(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to ListMetrics. You can publish either individual data points in the Value field, or arrays of values and the number of times each value occurred during the period by using the Values and Counts fields in the MetricDatum structure. Using the Values and Counts method enables you to publish up to 150 values per metric with one PutMetricData request, and supports retrieving percentile statistics on this data. Each PutMetricData request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics. Although the Value parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported. You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see Publishing Metrics in the Amazon CloudWatch User Guide. Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for GetMetricData or GetMetricStatistics from the time they are submitted. CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:   The SampleCount value of the statistic set is 1 and Min, Max, and Sum are all equal.   The Min and Max are equal, and Sum is equal to Min multiplied by SampleCount.  
+   * Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to ListMetrics. You can publish either individual data points in the Value field, or arrays of values and the number of times each value occurred during the period by using the Values and Counts fields in the MetricDatum structure. Using the Values and Counts method enables you to publish up to 150 values per metric with one PutMetricData request, and supports retrieving percentile statistics on this data. Each PutMetricData request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics. Although the Value parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported. You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see Publishing Metrics in the Amazon CloudWatch User Guide. Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for GetMetricData or GetMetricStatistics from the time they are submitted. CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:   The SampleCount value of the statistic set is 1 and Min, Max, and Sum are all equal.   The Min and Max are equal, and Sum is equal to Min multiplied by SampleCount.  
    */
   putMetricData(params: CloudWatch.Types.PutMetricDataInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to ListMetrics. You can publish either individual data points in the Value field, or arrays of values and the number of times each value occurred during the period by using the Values and Counts fields in the MetricDatum structure. Using the Values and Counts method enables you to publish up to 150 values per metric with one PutMetricData request, and supports retrieving percentile statistics on this data. Each PutMetricData request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics. Although the Value parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported. You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see Publishing Metrics in the Amazon CloudWatch User Guide. Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for GetMetricData or GetMetricStatistics from the time they are submitted. CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:   The SampleCount value of the statistic set is 1 and Min, Max, and Sum are all equal.   The Min and Max are equal, and Sum is equal to Min multiplied by SampleCount.  
+   * Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to ListMetrics. You can publish either individual data points in the Value field, or arrays of values and the number of times each value occurred during the period by using the Values and Counts fields in the MetricDatum structure. Using the Values and Counts method enables you to publish up to 150 values per metric with one PutMetricData request, and supports retrieving percentile statistics on this data. Each PutMetricData request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics. Although the Value parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported. You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see Publishing Metrics in the Amazon CloudWatch User Guide. Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for GetMetricData or GetMetricStatistics from the time they are submitted. CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:   The SampleCount value of the statistic set is 1 and Min, Max, and Sum are all equal.   The Min and Max are equal, and Sum is equal to Min multiplied by SampleCount.  
    */
   putMetricData(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -272,6 +320,7 @@ declare namespace CloudWatch {
   export type AnomalyDetectorExcludedTimeRanges = Range[];
   export type AnomalyDetectorMetricTimezone = string;
   export type AnomalyDetectors = AnomalyDetector[];
+  export type BatchFailures = PartialFailure[];
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|"LessThanLowerOrGreaterThanUpperThreshold"|"LessThanLowerThreshold"|"GreaterThanUpperThreshold"|string;
   export type Counts = DatapointValue[];
   export type DashboardArn = string;
@@ -382,6 +431,18 @@ declare namespace CloudWatch {
     DashboardNames: DashboardNames;
   }
   export interface DeleteDashboardsOutput {
+  }
+  export interface DeleteInsightRulesInput {
+    /**
+     * An array of the rule names to delete. If you need to find out the names of your rules, use DescribeInsightRules.
+     */
+    RuleNames: InsightRuleNames;
+  }
+  export interface DeleteInsightRulesOutput {
+    /**
+     * An array listing the rules that could not be deleted. You cannot delete built-in rules.
+     */
+    Failures?: BatchFailures;
   }
   export interface DescribeAlarmHistoryInput {
     /**
@@ -523,6 +584,26 @@ declare namespace CloudWatch {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeInsightRulesInput {
+    /**
+     * Reserved for future use.
+     */
+    NextToken?: NextToken;
+    /**
+     * This parameter is not currently used. Reserved for future use. If it is used in the future, the maximum value may be different.
+     */
+    MaxResults?: InsightRuleMaxResults;
+  }
+  export interface DescribeInsightRulesOutput {
+    /**
+     * Reserved for future use.
+     */
+    NextToken?: NextToken;
+    /**
+     * The rules returned by the operation.
+     */
+    InsightRules?: InsightRules;
+  }
   export interface Dimension {
     /**
      * The name of the dimension.
@@ -553,16 +634,44 @@ declare namespace CloudWatch {
      */
     AlarmNames: AlarmNames;
   }
+  export interface DisableInsightRulesInput {
+    /**
+     * An array of the rule names to disable. If you need to find out the names of your rules, use DescribeInsightRules.
+     */
+    RuleNames: InsightRuleNames;
+  }
+  export interface DisableInsightRulesOutput {
+    /**
+     * An array listing the rules that could not be disabled. You cannot disable built-in rules.
+     */
+    Failures?: BatchFailures;
+  }
   export interface EnableAlarmActionsInput {
     /**
      * The names of the alarms.
      */
     AlarmNames: AlarmNames;
   }
+  export interface EnableInsightRulesInput {
+    /**
+     * An array of the rule names to enable. If you need to find out the names of your rules, use DescribeInsightRules.
+     */
+    RuleNames: InsightRuleNames;
+  }
+  export interface EnableInsightRulesOutput {
+    /**
+     * An array listing the rules that could not be enabled. You cannot disable or enable built-in rules.
+     */
+    Failures?: BatchFailures;
+  }
   export type EvaluateLowSampleCountPercentile = string;
   export type EvaluationPeriods = number;
+  export type ExceptionType = string;
   export type ExtendedStatistic = string;
   export type ExtendedStatistics = ExtendedStatistic[];
+  export type FailureCode = string;
+  export type FailureDescription = string;
+  export type FailureResource = string;
   export interface GetDashboardInput {
     /**
      * The name of the dashboard to be described.
@@ -582,6 +691,62 @@ declare namespace CloudWatch {
      * The name of the dashboard.
      */
     DashboardName?: DashboardName;
+  }
+  export interface GetInsightRuleReportInput {
+    /**
+     * The name of the rule that you want to see data from.
+     */
+    RuleName: InsightRuleName;
+    /**
+     * The start time of the data to use in the report. When used in a raw HTTP Query API, it is formatted as yyyy-MM-dd'T'HH:mm:ss. For example, 2019-07-01T23:59:59.
+     */
+    StartTime: Timestamp;
+    /**
+     * The end time of the data to use in the report. When used in a raw HTTP Query API, it is formatted as yyyy-MM-dd'T'HH:mm:ss. For example, 2019-07-01T23:59:59.
+     */
+    EndTime: Timestamp;
+    /**
+     * The period, in seconds, to use for the statistics in the InsightRuleMetricDatapoint results.
+     */
+    Period: Period;
+    /**
+     * The maximum number of contributors to include in the report. The range is 1 to 100. If you omit this, the default of 10 is used.
+     */
+    MaxContributorCount?: InsightRuleUnboundInteger;
+    /**
+     * Specifies which metrics to use for aggregation of contributor values for the report. You can specify one or more of the following metrics:    UniqueContributors -- the number of unique contributors for each data point.    MaxContributorValue -- the value of the top contributor for each data point. The identity of the contributor may change for each data point in the graph. If this rule aggregates by COUNT, the top contributor for each data point is the contributor with the most occurrences in that period. If the rule aggregates by SUM, the top contributor is the contributor with the highest sum in the log field specified by the rule's Value, during that period.    SampleCount -- the number of data points matched by the rule.    Sum -- the sum of the values from all contributors during the time period represented by that data point.    Minimum -- the minimum value from a single observation during the time period represented by that data point.    Maximum -- the maximum value from a single observation during the time period represented by that data point.    Average -- the average value from all contributors during the time period represented by that data point.  
+     */
+    Metrics?: InsightRuleMetricList;
+    /**
+     * Determines what statistic to use to rank the contributors. Valid values are SUM and MAXIMUM.
+     */
+    OrderBy?: InsightRuleOrderBy;
+  }
+  export interface GetInsightRuleReportOutput {
+    /**
+     * An array of the strings used as the keys for this rule. The keys are the dimensions used to classify contributors. If the rule contains more than one key, then each unique combination of values for the keys is counted as a unique contributor.
+     */
+    KeyLabels?: InsightRuleContributorKeyLabels;
+    /**
+     * Specifies whether this rule aggregates contributor data by COUNT or SUM.
+     */
+    AggregationStatistic?: InsightRuleAggregationStatistic;
+    /**
+     * The sum of the values from all individual contributors that match the rule.
+     */
+    AggregateValue?: InsightRuleUnboundDouble;
+    /**
+     * An approximate count of the unique contributors found by this rule in this time period.
+     */
+    ApproximateUniqueCount?: InsightRuleUnboundLong;
+    /**
+     * An array of the unique contributors found by this rule in this time period. If the rule contains multiple keys, each combination of values for the keys counts as a unique contributor.
+     */
+    Contributors?: InsightRuleContributors;
+    /**
+     * A time series of metric data points that matches the time period in the rule request.
+     */
+    MetricDatapoints?: InsightRuleMetricDatapoints;
   }
   export interface GetMetricDataInput {
     /**
@@ -638,11 +803,11 @@ declare namespace CloudWatch {
      */
     Dimensions?: Dimensions;
     /**
-     * The time stamp that determines the first data point to return. Start times are evaluated relative to the time that CloudWatch receives the request. The value specified is inclusive; results include data points with the specified time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z). CloudWatch rounds the specified time stamp as follows:   Start time less than 15 days ago - Round down to the nearest whole minute. For example, 12:32:34 is rounded down to 12:32:00.   Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval. For example, 12:32:34 is rounded down to 12:30:00.   Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval. For example, 12:32:34 is rounded down to 12:00:00.   If you set Period to 5, 10, or 30, the start time of your request is rounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a period of 5 seconds, you receive data timestamped between 15:02:15 and 15:07:15. 
+     * The time stamp that determines the first data point to return. Start times are evaluated relative to the time that CloudWatch receives the request. The value specified is inclusive; results include data points with the specified time stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z). CloudWatch rounds the specified time stamp as follows:   Start time less than 15 days ago - Round down to the nearest whole minute. For example, 12:32:34 is rounded down to 12:32:00.   Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval. For example, 12:32:34 is rounded down to 12:30:00.   Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval. For example, 12:32:34 is rounded down to 12:00:00.   If you set Period to 5, 10, or 30, the start time of your request is rounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a period of 5 seconds, you receive data timestamped between 15:02:15 and 15:07:15. 
      */
     StartTime: Timestamp;
     /**
-     * The time stamp that determines the last data point to return. The value specified is exclusive; results include data points up to the specified time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).
+     * The time stamp that determines the last data point to return. The value specified is exclusive; results include data points up to the specified time stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).
      */
     EndTime: Timestamp;
     /**
@@ -691,6 +856,103 @@ declare namespace CloudWatch {
   export type HistoryData = string;
   export type HistoryItemType = "ConfigurationUpdate"|"StateUpdate"|"Action"|string;
   export type HistorySummary = string;
+  export interface InsightRule {
+    /**
+     * The name of the rule.
+     */
+    Name: InsightRuleName;
+    /**
+     * Indicates whether the rule is enabled or disabled.
+     */
+    State: InsightRuleState;
+    /**
+     * For rules that you create, this is always {"Name": "CloudWatchLogRule", "Version": 1}. For built-in rules, this is {"Name": "ServiceLogRule", "Version": 1} 
+     */
+    Schema: InsightRuleSchema;
+    /**
+     * The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors, the value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see Contributor Insights Rule Syntax.
+     */
+    Definition: InsightRuleDefinition;
+  }
+  export type InsightRuleAggregationStatistic = string;
+  export interface InsightRuleContributor {
+    /**
+     * One of the log entry field keywords that is used to define contributors for this rule.
+     */
+    Keys: InsightRuleContributorKeys;
+    /**
+     * An approximation of the aggregate value that comes from this contributor.
+     */
+    ApproximateAggregateValue: InsightRuleUnboundDouble;
+    /**
+     * An array of the data points where this contributor is present. Only the data points when this contributor appeared are included in the array.
+     */
+    Datapoints: InsightRuleContributorDatapoints;
+  }
+  export interface InsightRuleContributorDatapoint {
+    /**
+     * The timestamp of the data point.
+     */
+    Timestamp: Timestamp;
+    /**
+     * The approximate value that this contributor added during this timestamp.
+     */
+    ApproximateValue: InsightRuleUnboundDouble;
+  }
+  export type InsightRuleContributorDatapoints = InsightRuleContributorDatapoint[];
+  export type InsightRuleContributorKey = string;
+  export type InsightRuleContributorKeyLabel = string;
+  export type InsightRuleContributorKeyLabels = InsightRuleContributorKeyLabel[];
+  export type InsightRuleContributorKeys = InsightRuleContributorKey[];
+  export type InsightRuleContributors = InsightRuleContributor[];
+  export type InsightRuleDefinition = string;
+  export type InsightRuleMaxResults = number;
+  export interface InsightRuleMetricDatapoint {
+    /**
+     * The timestamp of the data point.
+     */
+    Timestamp: Timestamp;
+    /**
+     * The number of unique contributors who published data during this timestamp. This statistic is returned only if you included it in the Metrics array in your request.
+     */
+    UniqueContributors?: InsightRuleUnboundDouble;
+    /**
+     * The maximum value provided by one contributor during this timestamp. Each timestamp is evaluated separately, so the identity of the max contributor could be different for each timestamp. This statistic is returned only if you included it in the Metrics array in your request.
+     */
+    MaxContributorValue?: InsightRuleUnboundDouble;
+    /**
+     * The number of occurrences that matched the rule during this data point. This statistic is returned only if you included it in the Metrics array in your request.
+     */
+    SampleCount?: InsightRuleUnboundDouble;
+    /**
+     * The average value from all contributors during the time period represented by that data point. This statistic is returned only if you included it in the Metrics array in your request.
+     */
+    Average?: InsightRuleUnboundDouble;
+    /**
+     * The sum of the values from all contributors during the time period represented by that data point. This statistic is returned only if you included it in the Metrics array in your request.
+     */
+    Sum?: InsightRuleUnboundDouble;
+    /**
+     * The minimum value from a single contributor during the time period represented by that data point. This statistic is returned only if you included it in the Metrics array in your request.
+     */
+    Minimum?: InsightRuleUnboundDouble;
+    /**
+     * The maximum value from a single occurence from a single contributor during the time period represented by that data point. This statistic is returned only if you included it in the Metrics array in your request.
+     */
+    Maximum?: InsightRuleUnboundDouble;
+  }
+  export type InsightRuleMetricDatapoints = InsightRuleMetricDatapoint[];
+  export type InsightRuleMetricList = InsightRuleMetricName[];
+  export type InsightRuleMetricName = string;
+  export type InsightRuleName = string;
+  export type InsightRuleNames = InsightRuleName[];
+  export type InsightRuleOrderBy = string;
+  export type InsightRuleSchema = string;
+  export type InsightRuleState = string;
+  export type InsightRuleUnboundDouble = number;
+  export type InsightRuleUnboundInteger = number;
+  export type InsightRuleUnboundLong = number;
+  export type InsightRules = InsightRule[];
   export type LastModified = Date;
   export interface ListDashboardsInput {
     /**
@@ -863,7 +1125,7 @@ declare namespace CloudWatch {
      */
     EvaluationPeriods?: EvaluationPeriods;
     /**
-     * The number of datapoints that must be breaching to trigger the alarm.
+     * The number of data points that must be breaching to trigger the alarm.
      */
     DatapointsToAlarm?: DatapointsToAlarm;
     /**
@@ -916,7 +1178,7 @@ declare namespace CloudWatch {
      */
     ReturnData?: ReturnData;
     /**
-     * The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a PutMetricData operation that includes a StorageResolution of 1 second. Use this field only when you are performing a GetMetricData operation, and only when you are specifying the Expression field. Do not use this field with a PutMetricAlarm operation or when you are specifying a MetricStat in a GetMetricData operation. 
+     * The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a PutMetricData operation that includes a StorageResolution of 1 second. If you are performing a GetMetricData operation, use this field only if you are specifying an Expression. Do not use this field when you are specifying a MetricStat in a GetMetricData operation.
      */
     Period?: Period;
   }
@@ -962,7 +1224,7 @@ declare namespace CloudWatch {
      */
     Timestamp?: Timestamp;
     /**
-     * The value for the metric. Although the parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.
+     * The value for the metric. Although the parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.
      */
     Value?: DatapointValue;
     /**
@@ -970,7 +1232,7 @@ declare namespace CloudWatch {
      */
     StatisticValues?: StatisticSet;
     /**
-     * Array of numbers representing the values for the metric during the period. Each unique value is listed just once in this array, and the corresponding number in the Counts array specifies the number of times that value occurred during the period. You can include up to 150 unique values in each PutMetricData action that specifies a Values array. Although the Values array accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.
+     * Array of numbers representing the values for the metric during the period. Each unique value is listed just once in this array, and the corresponding number in the Counts array specifies the number of times that value occurred during the period. You can include up to 150 unique values in each PutMetricData action that specifies a Values array. Although the Values array accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.
      */
     Values?: Values;
     /**
@@ -1014,6 +1276,24 @@ declare namespace CloudWatch {
   export type Namespace = string;
   export type NextToken = string;
   export type OutputFormat = string;
+  export interface PartialFailure {
+    /**
+     * The specified rule that could not be deleted.
+     */
+    FailureResource?: FailureResource;
+    /**
+     * The type of error.
+     */
+    ExceptionType?: ExceptionType;
+    /**
+     * The code of the error.
+     */
+    FailureCode?: FailureCode;
+    /**
+     * A description of the error.
+     */
+    FailureDescription?: FailureDescription;
+  }
   export type Period = number;
   export interface PutAnomalyDetectorInput {
     /**
@@ -1054,6 +1334,22 @@ declare namespace CloudWatch {
      * If the input for PutDashboard was correct and the dashboard was successfully created or modified, this result is empty. If this result includes only warning messages, then the input was valid enough for the dashboard to be created or modified, but some elements of the dashboard may not render. If this result includes error messages, the input was not valid and the operation failed.
      */
     DashboardValidationMessages?: DashboardValidationMessages;
+  }
+  export interface PutInsightRuleInput {
+    /**
+     * A unique name for the rule.
+     */
+    RuleName: InsightRuleName;
+    /**
+     * The state of the rule. Valid values are ENABLED and DISABLED.
+     */
+    RuleState?: InsightRuleState;
+    /**
+     * The definition of the rule, as a JSON object. For details on the valid syntax, see Contributor Insights Rule Syntax.
+     */
+    RuleDefinition: InsightRuleDefinition;
+  }
+  export interface PutInsightRuleOutput {
   }
   export interface PutMetricAlarmInput {
     /**
@@ -1113,7 +1409,7 @@ declare namespace CloudWatch {
      */
     EvaluationPeriods: EvaluationPeriods;
     /**
-     * The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an "M out of N" alarm. In that case, this value is the M. For more information, see Evaluating an Alarm in the Amazon CloudWatch User Guide.
+     * The number of data points that must be breaching to trigger the alarm. This is used only if you are setting an "M out of N" alarm. In that case, this value is the M. For more information, see Evaluating an Alarm in the Amazon CloudWatch User Guide.
      */
     DatapointsToAlarm?: DatapointsToAlarm;
     /**

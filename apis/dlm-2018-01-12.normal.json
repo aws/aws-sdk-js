@@ -335,7 +335,6 @@
     "FastRestoreRule": {
       "type": "structure",
       "required": [
-        "Count",
         "AvailabilityZones"
       ],
       "members": {
@@ -343,12 +342,20 @@
           "shape": "Count",
           "documentation": "<p>The number of snapshots to be enabled with fast snapshot restore.</p>"
         },
+        "Interval": {
+          "shape": "Interval",
+          "documentation": "<p>The amount of time to enable fast snapshot restore. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
+        },
+        "IntervalUnit": {
+          "shape": "RetentionIntervalUnitValues",
+          "documentation": "<p>The unit of time for enabling fast snapshot restore.</p>"
+        },
         "AvailabilityZones": {
           "shape": "AvailabilityZoneList",
           "documentation": "<p>The Availability Zones in which to enable fast snapshot restore.</p>"
         }
       },
-      "documentation": "<p>Specifies when to enable fast snapshot restore.</p>"
+      "documentation": "<p>Specifies a rule for enabling fast snapshot restore. You can enable fast snapshot restore based on either a count or a time interval.</p>"
     },
     "GetLifecyclePoliciesRequest": {
       "type": "structure",
@@ -613,16 +620,30 @@
     },
     "RetainRule": {
       "type": "structure",
-      "required": [
-        "Count"
-      ],
       "members": {
         "Count": {
           "shape": "Count",
-          "documentation": "<p>The number of snapshots to keep for each volume, up to a maximum of 1000.</p>"
+          "documentation": "<p>The number of snapshots to retain for each volume, up to a maximum of 1000.</p>"
+        },
+        "Interval": {
+          "shape": "Interval",
+          "documentation": "<p>The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
+        },
+        "IntervalUnit": {
+          "shape": "RetentionIntervalUnitValues",
+          "documentation": "<p>The unit of time for time-based retention.</p>"
         }
       },
-      "documentation": "<p>Specifies the number of snapshots to keep for each EBS volume.</p>"
+      "documentation": "<p>Specifies the retention rule for a lifecycle policy. You can retain snapshots based on either a count or a time interval.</p>"
+    },
+    "RetentionIntervalUnitValues": {
+      "type": "string",
+      "enum": [
+        "DAYS",
+        "WEEKS",
+        "MONTHS",
+        "YEARS"
+      ]
     },
     "Schedule": {
       "type": "structure",
@@ -649,7 +670,7 @@
         },
         "RetainRule": {
           "shape": "RetainRule",
-          "documentation": "<p>The retain rule.</p>"
+          "documentation": "<p>The retention rule.</p>"
         },
         "FastRestoreRule": {
           "shape": "FastRestoreRule",

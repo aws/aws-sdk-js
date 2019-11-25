@@ -84,6 +84,14 @@ declare class SESV2 extends Service {
    */
   deleteEmailIdentity(callback?: (err: AWSError, data: SESV2.Types.DeleteEmailIdentityResponse) => void): Request<SESV2.Types.DeleteEmailIdentityResponse, AWSError>;
   /**
+   * Used to delete a suppressed email destination from your suppression list.
+   */
+  deleteSuppressedDestination(params: SESV2.Types.DeleteSuppressedDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteSuppressedDestinationResponse) => void): Request<SESV2.Types.DeleteSuppressedDestinationResponse, AWSError>;
+  /**
+   * Used to delete a suppressed email destination from your suppression list.
+   */
+  deleteSuppressedDestination(callback?: (err: AWSError, data: SESV2.Types.DeleteSuppressedDestinationResponse) => void): Request<SESV2.Types.DeleteSuppressedDestinationResponse, AWSError>;
+  /**
    * Obtain information about the email-sending status and capabilities of your Amazon SES account in the current AWS Region.
    */
   getAccount(params: SESV2.Types.GetAccountRequest, callback?: (err: AWSError, data: SESV2.Types.GetAccountResponse) => void): Request<SESV2.Types.GetAccountResponse, AWSError>;
@@ -172,6 +180,14 @@ declare class SESV2 extends Service {
    */
   getEmailIdentity(callback?: (err: AWSError, data: SESV2.Types.GetEmailIdentityResponse) => void): Request<SESV2.Types.GetEmailIdentityResponse, AWSError>;
   /**
+   * Used to fetch a single suppressed email destination from your suppression list.
+   */
+  getSuppressedDestination(params: SESV2.Types.GetSuppressedDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.GetSuppressedDestinationResponse) => void): Request<SESV2.Types.GetSuppressedDestinationResponse, AWSError>;
+  /**
+   * Used to fetch a single suppressed email destination from your suppression list.
+   */
+  getSuppressedDestination(callback?: (err: AWSError, data: SESV2.Types.GetSuppressedDestinationResponse) => void): Request<SESV2.Types.GetSuppressedDestinationResponse, AWSError>;
+  /**
    * List all of the configuration sets associated with your account in the current region.  Configuration sets are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.
    */
   listConfigurationSets(params: SESV2.Types.ListConfigurationSetsRequest, callback?: (err: AWSError, data: SESV2.Types.ListConfigurationSetsResponse) => void): Request<SESV2.Types.ListConfigurationSetsResponse, AWSError>;
@@ -212,6 +228,14 @@ declare class SESV2 extends Service {
    */
   listEmailIdentities(callback?: (err: AWSError, data: SESV2.Types.ListEmailIdentitiesResponse) => void): Request<SESV2.Types.ListEmailIdentitiesResponse, AWSError>;
   /**
+   * Used to fetch a list suppressed email destinations from your suppression list.
+   */
+  listSuppressedDestinations(params: SESV2.Types.ListSuppressedDestinationsRequest, callback?: (err: AWSError, data: SESV2.Types.ListSuppressedDestinationsResponse) => void): Request<SESV2.Types.ListSuppressedDestinationsResponse, AWSError>;
+  /**
+   * Used to fetch a list suppressed email destinations from your suppression list.
+   */
+  listSuppressedDestinations(callback?: (err: AWSError, data: SESV2.Types.ListSuppressedDestinationsResponse) => void): Request<SESV2.Types.ListSuppressedDestinationsResponse, AWSError>;
+  /**
    * Retrieve a list of the tags (keys and values) that are associated with a specified resource. A tag is a label that you optionally define and associate with a resource. Each tag consists of a required tag key and an optional associated tag value. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
    */
   listTagsForResource(params: SESV2.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: SESV2.Types.ListTagsForResourceResponse) => void): Request<SESV2.Types.ListTagsForResourceResponse, AWSError>;
@@ -236,6 +260,14 @@ declare class SESV2 extends Service {
    */
   putAccountSendingAttributes(callback?: (err: AWSError, data: SESV2.Types.PutAccountSendingAttributesResponse) => void): Request<SESV2.Types.PutAccountSendingAttributesResponse, AWSError>;
   /**
+   * Change your account's suppression preferences for your account.
+   */
+  putAccountSuppressionAttributes(params: SESV2.Types.PutAccountSuppressionAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutAccountSuppressionAttributesResponse) => void): Request<SESV2.Types.PutAccountSuppressionAttributesResponse, AWSError>;
+  /**
+   * Change your account's suppression preferences for your account.
+   */
+  putAccountSuppressionAttributes(callback?: (err: AWSError, data: SESV2.Types.PutAccountSuppressionAttributesResponse) => void): Request<SESV2.Types.PutAccountSuppressionAttributesResponse, AWSError>;
+  /**
    * Associate a configuration set with a dedicated IP pool. You can use dedicated IP pools to create groups of dedicated IP addresses for sending specific types of email.
    */
   putConfigurationSetDeliveryOptions(params: SESV2.Types.PutConfigurationSetDeliveryOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetDeliveryOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetDeliveryOptionsResponse, AWSError>;
@@ -259,6 +291,14 @@ declare class SESV2 extends Service {
    * Enable or disable email sending for messages that use a particular configuration set in a specific AWS Region.
    */
   putConfigurationSetSendingOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetSendingOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetSendingOptionsResponse, AWSError>;
+  /**
+   * Specify your account's suppression preferences for a configuration set.
+   */
+  putConfigurationSetSuppressionOptions(params: SESV2.Types.PutConfigurationSetSuppressionOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetSuppressionOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetSuppressionOptionsResponse, AWSError>;
+  /**
+   * Specify your account's suppression preferences for a configuration set.
+   */
+  putConfigurationSetSuppressionOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetSuppressionOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetSuppressionOptionsResponse, AWSError>;
   /**
    * Specify a custom domain to use for open and click tracking elements in email that you send.
    */
@@ -315,6 +355,14 @@ declare class SESV2 extends Service {
    * Used to enable or disable the custom Mail-From domain configuration for an email identity.
    */
   putEmailIdentityMailFromAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityMailFromAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityMailFromAttributesResponse, AWSError>;
+  /**
+   * Puts (overwrites) an email destination in your suppression list.
+   */
+  putSuppressedDestination(params: SESV2.Types.PutSuppressedDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.PutSuppressedDestinationResponse) => void): Request<SESV2.Types.PutSuppressedDestinationResponse, AWSError>;
+  /**
+   * Puts (overwrites) an email destination in your suppression list.
+   */
+  putSuppressedDestination(callback?: (err: AWSError, data: SESV2.Types.PutSuppressedDestinationResponse) => void): Request<SESV2.Types.PutSuppressedDestinationResponse, AWSError>;
   /**
    * Sends an email message. You can use the Amazon SES API v2 to send two types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and the Amazon SES API v2 assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.  
    */
@@ -456,6 +504,7 @@ declare namespace SESV2 {
      * An array of objects that define the tags (keys and values) that you want to associate with the configuration set.
      */
     Tags?: TagList;
+    SuppressionOptions?: SuppressionOptions;
   }
   export interface CreateConfigurationSetResponse {
   }
@@ -594,6 +643,14 @@ declare namespace SESV2 {
     EmailIdentity: Identity;
   }
   export interface DeleteEmailIdentityResponse {
+  }
+  export interface DeleteSuppressedDestinationRequest {
+    /**
+     * The suppressed email destination to delete.
+     */
+    EmailAddress: EmailAddress;
+  }
+  export interface DeleteSuppressedDestinationResponse {
   }
   export type DeliverabilityDashboardAccountStatus = "ACTIVE"|"PENDING_EXPIRATION"|"DISABLED"|string;
   export interface DeliverabilityTestReport {
@@ -845,18 +902,11 @@ declare namespace SESV2 {
   export type EventDestinations = EventDestination[];
   export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|string;
   export type EventTypes = EventType[];
+  export type FeedbackId = string;
   export type GeneralEnforcementStatus = string;
   export interface GetAccountRequest {
   }
   export interface GetAccountResponse {
-    /**
-     * An object that contains information about the per-day and per-second sending limits for your Amazon SES account in the current AWS Region.
-     */
-    SendQuota?: SendQuota;
-    /**
-     * Indicates whether or not email sending is enabled for your Amazon SES account in the current AWS Region.
-     */
-    SendingEnabled?: Enabled;
     /**
      * Indicates whether or not the automatic warm-up feature is enabled for dedicated IP addresses that are associated with your account.
      */
@@ -869,6 +919,18 @@ declare namespace SESV2 {
      * Indicates whether or not your account has production access in the current AWS Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1. If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
      */
     ProductionAccessEnabled?: Enabled;
+    /**
+     * An object that contains information about the per-day and per-second sending limits for your Amazon SES account in the current AWS Region.
+     */
+    SendQuota?: SendQuota;
+    /**
+     * Indicates whether or not email sending is enabled for your Amazon SES account in the current AWS Region.
+     */
+    SendingEnabled?: Enabled;
+    /**
+     * An object that contains information about your account's suppression preferences.
+     */
+    SuppressionAttributes?: SuppressionAttributes;
   }
   export interface GetBlacklistReportsRequest {
     /**
@@ -925,6 +987,10 @@ declare namespace SESV2 {
      * An array of objects that define the tags (keys and values) that are associated with the configuration set.
      */
     Tags?: TagList;
+    /**
+     * An object that contains information about your account's suppression preferences.
+     */
+    SuppressionOptions?: SuppressionOptions;
   }
   export interface GetDedicatedIpRequest {
     /**
@@ -1081,6 +1147,18 @@ declare namespace SESV2 {
      * An array of objects that define the tags (keys and values) that are associated with the email identity.
      */
     Tags?: TagList;
+  }
+  export interface GetSuppressedDestinationRequest {
+    /**
+     * Email destination to fetch from the suppression list.
+     */
+    EmailAddress: EmailAddress;
+  }
+  export interface GetSuppressedDestinationResponse {
+    /**
+     * An object containing information about the suppressed email destination.
+     */
+    SuppressedDestination: SuppressedDestination;
   }
   export type Identity = string;
   export interface IdentityInfo {
@@ -1249,6 +1327,38 @@ declare namespace SESV2 {
     NextToken?: NextToken;
   }
   export type ListOfDedicatedIpPools = PoolName[];
+  export interface ListSuppressedDestinationsRequest {
+    /**
+     * Filters email destinations suppressed by the given reasons.
+     */
+    Reasons?: SuppressionListReasons;
+    /**
+     * Filters email destinations suppressed before the given time.
+     */
+    StartDate?: Timestamp;
+    /**
+     * Filters email destinations suppressed after the given time.
+     */
+    EndDate?: Timestamp;
+    /**
+     * A token returned from a previous call to ListSuppressedDestinations to indicate the position in the list of suppressed email destinations.
+     */
+    NextToken?: NextToken;
+    /**
+     * The number of results to show in a single call to ListSuppressedDestinations. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results.
+     */
+    PageSize?: MaxItems;
+  }
+  export interface ListSuppressedDestinationsResponse {
+    /**
+     * A list of summaries, each containing a summary for a suppressed email destination.
+     */
+    SuppressedDestinationSummaries?: SuppressedDestinationSummaries;
+    /**
+     * A token that indicates that there are additional suppressed destinations to list. To view additional suppressed destinations, issue another request to ListSuppressedDestinations, and pass this token in the NextToken parameter.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.
@@ -1368,6 +1478,14 @@ declare namespace SESV2 {
   }
   export interface PutAccountSendingAttributesResponse {
   }
+  export interface PutAccountSuppressionAttributesRequest {
+    /**
+     * A list of reasons to suppress email addresses. The only valid reasons are:    COMPLAINT – Amazon SES will suppress an email address that receives a complaint.    BOUNCE – Amazon SES will suppress an email address that hard bounces.  
+     */
+    SuppressedReasons?: SuppressionListReasons;
+  }
+  export interface PutAccountSuppressionAttributesResponse {
+  }
   export interface PutConfigurationSetDeliveryOptionsRequest {
     /**
      * The name of the configuration set that you want to associate with a dedicated IP pool.
@@ -1407,6 +1525,18 @@ declare namespace SESV2 {
     SendingEnabled?: Enabled;
   }
   export interface PutConfigurationSetSendingOptionsResponse {
+  }
+  export interface PutConfigurationSetSuppressionOptionsRequest {
+    /**
+     * The name of the configuration set that you want to enable or disable email sending for.
+     */
+    ConfigurationSetName: ConfigurationSetName;
+    /**
+     * A list of reasons to suppress email addresses. The only valid reasons are:    COMPLAINT – Amazon SES will suppress an email address that receives a complaint.    BOUNCE – Amazon SES will suppress an email address that hard bounces.  
+     */
+    SuppressedReasons?: SuppressionListReasons;
+  }
+  export interface PutConfigurationSetSuppressionOptionsResponse {
   }
   export interface PutConfigurationSetTrackingOptionsRequest {
     /**
@@ -1496,6 +1626,18 @@ declare namespace SESV2 {
   }
   export interface PutEmailIdentityMailFromAttributesResponse {
   }
+  export interface PutSuppressedDestinationRequest {
+    /**
+     * Email destination to be suppressed.
+     */
+    EmailAddress: EmailAddress;
+    /**
+     * Reason for which the email destination is suppressed.
+     */
+    Reason: SuppressionListReason;
+  }
+  export interface PutSuppressedDestinationResponse {
+  }
   export interface RawMessage {
     /**
      * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES API v2 supports.    The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
@@ -1581,6 +1723,63 @@ declare namespace SESV2 {
     TopicArn: AmazonResourceName;
   }
   export type Subject = string;
+  export interface SuppressedDestination {
+    /**
+     * The suppressed email destination.
+     */
+    EmailAddress: EmailAddress;
+    /**
+     * The reason for which the email destination is suppressed.
+     */
+    Reason: SuppressionListReason;
+    /**
+     * The last time the suppressed destination was updated.
+     */
+    LastUpdateTime: Timestamp;
+    /**
+     *  Optional value with information about the sources of the suppression.
+     */
+    Attributes?: SuppressedDestinationAttributes;
+  }
+  export interface SuppressedDestinationAttributes {
+    /**
+     * A unique identifier of the message that caused the suppression of the email destination.
+     */
+    MessageId?: OutboundMessageId;
+    /**
+     * A unique identifier of the suppression cause.
+     */
+    FeedbackId?: FeedbackId;
+  }
+  export type SuppressedDestinationSummaries = SuppressedDestinationSummary[];
+  export interface SuppressedDestinationSummary {
+    /**
+     * The suppressed email destination.
+     */
+    EmailAddress: EmailAddress;
+    /**
+     * The reason for which the email destination is suppressed.
+     */
+    Reason: SuppressionListReason;
+    /**
+     * The last time the suppressed destination was updated.
+     */
+    LastUpdateTime: Timestamp;
+  }
+  export interface SuppressionAttributes {
+    /**
+     * A list of reasons to suppress email addresses. The only valid reasons are:    COMPLAINT – Amazon SES will suppress an email address that receives a complaint.    BOUNCE – Amazon SES will suppress an email address that hard bounces.  
+     */
+    SuppressedReasons?: SuppressionListReasons;
+  }
+  export type SuppressionListReason = "BOUNCE"|"COMPLAINT"|string;
+  export type SuppressionListReasons = SuppressionListReason[];
+  export interface SuppressionOptions {
+    /**
+     * A list of reasons to suppress email addresses. The only valid reasons are:    COMPLAINT – Amazon SES will suppress an email address that receives a complaint.    BOUNCE – Amazon SES will suppress an email address that hard bounces.  
+     */
+    SuppressedReasons?: SuppressionListReasons;
+  }
   export interface Tag {
     /**
      * One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.

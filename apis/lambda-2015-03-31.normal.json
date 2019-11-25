@@ -84,7 +84,7 @@
           "shape": "PreconditionFailedException"
         }
       ],
-      "documentation": "<p>Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.</p> <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For AWS services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For AWS services, you can also specify the ARN or owning account of the associated resource as the <code>SourceArn</code> or <code>SourceAccount</code>. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function.</p> <p>This action adds a statement to a resource-based permission policy for the function. For more information about function policies, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">Lambda Function Policies</a>. </p>"
+      "documentation": "<p>Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.</p> <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For AWS services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For AWS services, you can also specify the ARN or owning account of the associated resource as the <code>SourceArn</code> or <code>SourceAccount</code>. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function.</p> <p>This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">Lambda Function Policies</a>. </p>"
     },
     "CreateAlias": {
       "name": "CreateAlias",
@@ -148,7 +148,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html\">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html\">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html\">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> </ul>"
+      "documentation": "<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html\">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html\">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html\">Using AWS Lambda with Amazon SQS</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries.</p> </li> </ul>"
     },
     "CreateFunction": {
       "name": "CreateFunction",
@@ -183,7 +183,7 @@
           "shape": "CodeStorageExceededException"
         }
       ],
-      "documentation": "<p>Creates a Lambda function. To create a function, you need a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html\">deployment package</a> and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role\">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-functions.html\">Invoking Functions</a>.</p>"
+      "documentation": "<p>Creates a Lambda function. To create a function, you need a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html\">deployment package</a> and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role\">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html\">Invoking Functions</a>.</p>"
     },
     "DeleteAlias": {
       "name": "DeleteAlias",
@@ -238,7 +238,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Deletes an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html\">event source mapping</a>. You can get the identifier of a mapping from the output of <a>ListEventSourceMappings</a>.</p>"
+      "documentation": "<p>Deletes an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html\">event source mapping</a>. You can get the identifier of a mapping from the output of <a>ListEventSourceMappings</a>.</p> <p>When you delete an event source mapping, it enters a <code>Deleting</code> state and might not be completely deleted for several seconds.</p>"
     },
     "DeleteFunction": {
       "name": "DeleteFunction",
@@ -291,9 +291,38 @@
         },
         {
           "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceConflictException"
         }
       ],
       "documentation": "<p>Removes a concurrent execution limit from a function.</p>"
+    },
+    "DeleteFunctionEventInvokeConfig": {
+      "name": "DeleteFunctionEventInvokeConfig",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteFunctionEventInvokeConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Deletes the configuration for asynchronous invocation for a function, version, or alias.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>"
     },
     "DeleteLayerVersion": {
       "name": "DeleteLayerVersion",
@@ -453,6 +482,35 @@
         }
       ],
       "documentation": "<p>Returns the version-specific settings of a Lambda function or version. The output includes only options that can vary between versions of a function. To modify these settings, use <a>UpdateFunctionConfiguration</a>.</p> <p>To get all of a function's details, including function-level settings, use <a>GetFunction</a>.</p>"
+    },
+    "GetFunctionEventInvokeConfig": {
+      "name": "GetFunctionEventInvokeConfig",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetFunctionEventInvokeConfigRequest"
+      },
+      "output": {
+        "shape": "FunctionEventInvokeConfig"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Retrieves the configuration for asynchronous invocation for a function, version, or alias.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>"
     },
     "GetLayerVersion": {
       "name": "GetLayerVersion",
@@ -642,9 +700,15 @@
         },
         {
           "shape": "InvalidRuntimeException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        },
+        {
+          "shape": "ResourceNotReadyException"
         }
       ],
-      "documentation": "<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>.</p> <p>For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html\">execution log</a> and <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/dlq.html\">trace</a>. To record function errors for asynchronous invocations, configure your function with a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/dlq.html\">dead letter queue</a>.</p> <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html\">Retry Behavior</a>.</p> <p>The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/limits.html\">limit errors</a>, or issues with your function's code and configuration. For example, Lambda returns <code>TooManyRequestsException</code> if executing the function would cause you to exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p> <p>For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings.</p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>"
+      "documentation": "<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>.</p> <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html\">synchronous invocation</a>, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html\">execution log</a> and <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html\">trace</a>.</p> <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html\">Retry Behavior</a>.</p> <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a>, Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple times, even if no error occurs. To retain events that were not processed, configure your function with a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq\">dead-letter queue</a>.</p> <p>The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/limits.html\">limit errors</a>, or issues with your function's code and configuration. For example, Lambda returns <code>TooManyRequestsException</code> if executing the function would cause you to exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p> <p>For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings.</p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>"
     },
     "InvokeAsync": {
       "name": "InvokeAsync",
@@ -671,6 +735,9 @@
         },
         {
           "shape": "InvalidRuntimeException"
+        },
+        {
+          "shape": "ResourceConflictException"
         }
       ],
       "documentation": "<important> <p>For asynchronous function invocation, use <a>Invoke</a>.</p> </important> <p>Invokes a function asynchronously.</p>",
@@ -733,6 +800,35 @@
         }
       ],
       "documentation": "<p>Lists event source mappings. Specify an <code>EventSourceArn</code> to only show event source mappings for a single event source.</p>"
+    },
+    "ListFunctionEventInvokeConfigs": {
+      "name": "ListFunctionEventInvokeConfigs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2019-09-25/functions/{FunctionName}/event-invoke-config/list",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListFunctionEventInvokeConfigsRequest"
+      },
+      "output": {
+        "shape": "ListFunctionEventInvokeConfigsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of configurations for asynchronous invocation for a function.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>"
     },
     "ListFunctions": {
       "name": "ListFunctions",
@@ -902,7 +998,7 @@
           "shape": "CodeStorageExceededException"
         }
       ],
-      "documentation": "<p>Creates an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda layer</a> from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same version name, a new version is created.</p> <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>"
+      "documentation": "<p>Creates an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda layer</a> from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same layer name, a new version is created.</p> <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>"
     },
     "PublishVersion": {
       "name": "PublishVersion",
@@ -935,6 +1031,9 @@
         },
         {
           "shape": "PreconditionFailedException"
+        },
+        {
+          "shape": "ResourceConflictException"
         }
       ],
       "documentation": "<p>Creates a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">version</a> from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn't change.</p> <p>AWS Lambda doesn't publish a version if the function's configuration and code haven't changed since the last version. Use <a>UpdateFunctionCode</a> or <a>UpdateFunctionConfiguration</a> to update the function before publishing a version.</p> <p>Clients can invoke versions directly or with an alias. To create an alias, use <a>CreateAlias</a>.</p>"
@@ -964,9 +1063,41 @@
         },
         {
           "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ResourceConflictException"
         }
       ],
       "documentation": "<p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level.</p> <p>Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use <a>GetFunction</a> to see the current setting for a function.</p> <p>Use <a>GetAccountSettings</a> to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html\">Managing Concurrency</a>.</p>"
+    },
+    "PutFunctionEventInvokeConfig": {
+      "name": "PutFunctionEventInvokeConfig",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutFunctionEventInvokeConfigRequest"
+      },
+      "output": {
+        "shape": "FunctionEventInvokeConfig"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Configures options for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a> on a function, version, or alias.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p>"
     },
     "RemoveLayerVersionPermission": {
       "name": "RemoveLayerVersionPermission",
@@ -1106,6 +1237,9 @@
         },
         {
           "shape": "PreconditionFailedException"
+        },
+        {
+          "shape": "ResourceConflictException"
         }
       ],
       "documentation": "<p>Updates the configuration of a Lambda function <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">alias</a>.</p>"
@@ -1143,7 +1277,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p>"
+      "documentation": "<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries.</p> </li> </ul>"
     },
     "UpdateFunctionCode": {
       "name": "UpdateFunctionCode",
@@ -1176,6 +1310,9 @@
         },
         {
           "shape": "PreconditionFailedException"
+        },
+        {
+          "shape": "ResourceConflictException"
         }
       ],
       "documentation": "<p>Updates a Lambda function's code.</p> <p>The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.</p>"
@@ -1213,7 +1350,36 @@
           "shape": "PreconditionFailedException"
         }
       ],
-      "documentation": "<p>Modify the version-specific settings of a Lambda function.</p> <p>These settings can vary between versions of a function and are locked when you publish a version. You can't modify the configuration of a published version, only the unpublished version.</p> <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions to an account or AWS service, use <a>AddPermission</a>.</p>"
+      "documentation": "<p>Modify the version-specific settings of a Lambda function.</p> <p>When you update a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute. During this time, you can't modify the function, but you can still invoke it. The <code>LastUpdateStatus</code>, <code>LastUpdateStatusReason</code>, and <code>LastUpdateStatusReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the update is complete and the function is processing events with the new configuration. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Function States</a>.</p> <p>These settings can vary between versions of a function and are locked when you publish a version. You can't modify the configuration of a published version, only the unpublished version.</p> <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions to an account or AWS service, use <a>AddPermission</a>.</p>"
+    },
+    "UpdateFunctionEventInvokeConfig": {
+      "name": "UpdateFunctionEventInvokeConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateFunctionEventInvokeConfigRequest"
+      },
+      "output": {
+        "shape": "FunctionEventInvokeConfig"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Updates the configuration for asynchronous invocation for a function, version, or alias.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>"
     }
   },
   "shapes": {
@@ -1226,7 +1392,7 @@
         },
         "CodeSizeUnzipped": {
           "shape": "Long",
-          "documentation": "<p>The maximum size of your function's code and layers when they're extracted.</p>"
+          "documentation": "<p>The maximum size of a function's deployment package and layers when they're extracted.</p>"
         },
         "CodeSizeZipped": {
           "shape": "Long",
@@ -1241,7 +1407,7 @@
           "documentation": "<p>The maximum number of simultaneous function executions, minus the capacity that's reserved for individual functions with <a>PutFunctionConcurrency</a>.</p>"
         }
       },
-      "documentation": "<p>Limits that are related to concurrency and code storage. All file and storage sizes are in bytes.</p>"
+      "documentation": "<p>Limits that are related to concurrency and storage. All file and storage sizes are in bytes.</p>"
     },
     "AccountUsage": {
       "type": "structure",
@@ -1456,6 +1622,9 @@
       "max": 10000,
       "min": 1
     },
+    "BisectBatchOnFunctionError": {
+      "type": "boolean"
+    },
     "Blob": {
       "type": "blob",
       "sensitive": true
@@ -1539,7 +1708,12 @@
           "documentation": "<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>"
         },
         "MaximumBatchingWindowInSeconds": {
-          "shape": "MaximumBatchingWindowInSeconds"
+          "shape": "MaximumBatchingWindowInSeconds",
+          "documentation": "<p>The maximum amount of time to gather records before invoking the function, in seconds.</p>"
+        },
+        "ParallelizationFactor": {
+          "shape": "ParallelizationFactor",
+          "documentation": "<p>(Streams) The number of batches to process from each shard concurrently.</p>"
         },
         "StartingPosition": {
           "shape": "EventSourcePosition",
@@ -1548,6 +1722,22 @@
         "StartingPositionTimestamp": {
           "shape": "Date",
           "documentation": "<p>With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.</p>"
+        },
+        "DestinationConfig": {
+          "shape": "DestinationConfig",
+          "documentation": "<p>(Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+        },
+        "MaximumRecordAgeInSeconds": {
+          "shape": "MaximumRecordAgeInSeconds",
+          "documentation": "<p>(Streams) The maximum age of a record that Lambda sends to a function for processing.</p>"
+        },
+        "BisectBatchOnFunctionError": {
+          "shape": "BisectBatchOnFunctionError",
+          "documentation": "<p>(Streams) If the function returns an error, split the batch in two and retry.</p>"
+        },
+        "MaximumRetryAttempts": {
+          "shape": "MaximumRetryAttemptsEventSourceMapping",
+          "documentation": "<p>(Streams) The maximum number of times to retry when the function returns an error.</p>"
         }
       }
     },
@@ -1599,11 +1789,11 @@
         },
         "VpcConfig": {
           "shape": "VpcConfig",
-          "documentation": "<p>For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/vpc.html\">VPC Settings</a>.</p>"
+          "documentation": "<p>For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
         },
         "DeadLetterConfig": {
           "shape": "DeadLetterConfig",
-          "documentation": "<p>A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/dlq.html\">Dead Letter Queues</a>.</p>"
+          "documentation": "<p>A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq\">Dead Letter Queues</a>.</p>"
         },
         "Environment": {
           "shape": "Environment",
@@ -1638,7 +1828,7 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
         }
       },
-      "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/dlq.html\">dead letter queue</a> for failed asynchronous invocations.</p>"
+      "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq\">dead-letter queue</a> for failed asynchronous invocations.</p>"
     },
     "DeleteAliasRequest": {
       "type": "structure",
@@ -1689,6 +1879,26 @@
         }
       }
     },
+    "DeleteFunctionEventInvokeConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function, version, or alias.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Qualifier": {
+          "shape": "Qualifier",
+          "documentation": "<p>A version number or alias name.</p>",
+          "location": "querystring",
+          "locationName": "Qualifier"
+        }
+      }
+    },
     "DeleteFunctionRequest": {
       "type": "structure",
       "required": [
@@ -1735,6 +1945,26 @@
       "max": 256,
       "min": 0
     },
+    "DestinationArn": {
+      "type": "string",
+      "max": 350,
+      "min": 0,
+      "pattern": "^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"
+    },
+    "DestinationConfig": {
+      "type": "structure",
+      "members": {
+        "OnSuccess": {
+          "shape": "OnSuccess",
+          "documentation": "<p>The destination configuration for successful invocations.</p>"
+        },
+        "OnFailure": {
+          "shape": "OnFailure",
+          "documentation": "<p>The destination configuration for failed invocations.</p>"
+        }
+      },
+      "documentation": "<p>A configuration object that specifies the destination of an event after Lambda processes it.</p>"
+    },
     "Enabled": {
       "type": "boolean"
     },
@@ -1774,7 +2004,7 @@
           "documentation": "<p>Error messages for environment variables that couldn't be applied.</p>"
         }
       },
-      "documentation": "<p>The results of a configuration update that applied environment variables.</p>"
+      "documentation": "<p>The results of an operation to update or read environment variables. If the operation is successful, the response contains the environment variables. If it failed, the response contains details about the error.</p>"
     },
     "EnvironmentVariableName": {
       "type": "string",
@@ -1807,7 +2037,12 @@
           "documentation": "<p>The maximum number of items to retrieve in a single batch.</p>"
         },
         "MaximumBatchingWindowInSeconds": {
-          "shape": "MaximumBatchingWindowInSeconds"
+          "shape": "MaximumBatchingWindowInSeconds",
+          "documentation": "<p>The maximum amount of time to gather records before invoking the function, in seconds.</p>"
+        },
+        "ParallelizationFactor": {
+          "shape": "ParallelizationFactor",
+          "documentation": "<p>(Streams) The number of batches to process from each shard concurrently.</p>"
         },
         "EventSourceArn": {
           "shape": "Arn",
@@ -1819,7 +2054,7 @@
         },
         "LastModified": {
           "shape": "Date",
-          "documentation": "<p>The date that the event source mapping was last updated.</p>"
+          "documentation": "<p>The date that the event source mapping was last updated, or its state changed.</p>"
         },
         "LastProcessingResult": {
           "shape": "String",
@@ -1831,7 +2066,23 @@
         },
         "StateTransitionReason": {
           "shape": "String",
-          "documentation": "<p>The cause of the last state change, either <code>User initiated</code> or <code>Lambda initiated</code>.</p>"
+          "documentation": "<p>Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service.</p>"
+        },
+        "DestinationConfig": {
+          "shape": "DestinationConfig",
+          "documentation": "<p>(Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+        },
+        "MaximumRecordAgeInSeconds": {
+          "shape": "MaximumRecordAgeInSeconds",
+          "documentation": "<p>(Streams) The maximum age of a record that Lambda sends to a function for processing.</p>"
+        },
+        "BisectBatchOnFunctionError": {
+          "shape": "BisectBatchOnFunctionError",
+          "documentation": "<p>(Streams) If the function returns an error, split the batch in two and retry.</p>"
+        },
+        "MaximumRetryAttempts": {
+          "shape": "MaximumRetryAttemptsEventSourceMapping",
+          "documentation": "<p>(Streams) The maximum number of times to retry when the function returns an error.</p>"
         }
       },
       "documentation": "<p>A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.</p>"
@@ -1961,7 +2212,7 @@
         },
         "KMSKeyArn": {
           "shape": "KMSKeyArn",
-          "documentation": "<p>The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer-managed CMK.</p>"
+          "documentation": "<p>The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.</p>"
         },
         "TracingConfig": {
           "shape": "TracingConfigResponse",
@@ -1978,9 +2229,64 @@
         "Layers": {
           "shape": "LayersReferenceList",
           "documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\"> layers</a>.</p>"
+        },
+        "State": {
+          "shape": "State",
+          "documentation": "<p>The current state of the function. When the state is <code>Inactive</code>, you can reactivate the function by invoking it.</p>"
+        },
+        "StateReason": {
+          "shape": "StateReason",
+          "documentation": "<p>The reason for the function's current state.</p>"
+        },
+        "StateReasonCode": {
+          "shape": "StateReasonCode",
+          "documentation": "<p>The reason code for the function's current state. When the code is <code>Creating</code>, you can't invoke or modify the function.</p>"
+        },
+        "LastUpdateStatus": {
+          "shape": "LastUpdateStatus",
+          "documentation": "<p>The status of the last update that was performed on the function.</p>"
+        },
+        "LastUpdateStatusReason": {
+          "shape": "LastUpdateStatusReason",
+          "documentation": "<p>The reason for the last update that was performed on the function.</p>"
+        },
+        "LastUpdateStatusReasonCode": {
+          "shape": "LastUpdateStatusReasonCode",
+          "documentation": "<p>The reason code for the last update that was performed on the function.</p>"
         }
       },
       "documentation": "<p>Details about a function's configuration.</p>"
+    },
+    "FunctionEventInvokeConfig": {
+      "type": "structure",
+      "members": {
+        "LastModified": {
+          "shape": "Date",
+          "documentation": "<p>The date and time that the configuration was last updated.</p>"
+        },
+        "FunctionArn": {
+          "shape": "FunctionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the function.</p>"
+        },
+        "MaximumRetryAttempts": {
+          "shape": "MaximumRetryAttempts",
+          "documentation": "<p>The maximum number of times to retry when the function returns an error.</p>"
+        },
+        "MaximumEventAgeInSeconds": {
+          "shape": "MaximumEventAgeInSeconds",
+          "documentation": "<p>The maximum age of a request that Lambda sends to a function for processing.</p>"
+        },
+        "DestinationConfig": {
+          "shape": "DestinationConfig",
+          "documentation": "<p>A destination for events after they have been sent to a function for processing.</p> <p class=\"title\"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>"
+        }
+      }
+    },
+    "FunctionEventInvokeConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "FunctionEventInvokeConfig"
+      }
     },
     "FunctionList": {
       "type": "list",
@@ -2067,6 +2373,26 @@
         "Qualifier": {
           "shape": "Qualifier",
           "documentation": "<p>Specify a version or alias to get details about a published version of the function.</p>",
+          "location": "querystring",
+          "locationName": "Qualifier"
+        }
+      }
+    },
+    "GetFunctionEventInvokeConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function, version, or alias.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Qualifier": {
+          "shape": "Qualifier",
+          "documentation": "<p>A version number or alias name.</p>",
           "location": "querystring",
           "locationName": "Qualifier"
         }
@@ -2384,6 +2710,26 @@
       "type": "string",
       "pattern": "(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()"
     },
+    "LastUpdateStatus": {
+      "type": "string",
+      "enum": [
+        "Successful",
+        "Failed",
+        "InProgress"
+      ]
+    },
+    "LastUpdateStatusReason": {
+      "type": "string"
+    },
+    "LastUpdateStatusReasonCode": {
+      "type": "string",
+      "enum": [
+        "EniLimitExceeded",
+        "InsufficientRolePermissions",
+        "InvalidConfiguration",
+        "InternalError"
+      ]
+    },
     "Layer": {
       "type": "structure",
       "members": {
@@ -2630,6 +2976,45 @@
         }
       }
     },
+    "ListFunctionEventInvokeConfigsRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "Marker"
+        },
+        "MaxItems": {
+          "shape": "MaxFunctionEventInvokeConfigListItems",
+          "documentation": "<p>The maximum number of configurations to return.</p>",
+          "location": "querystring",
+          "locationName": "MaxItems"
+        }
+      }
+    },
+    "ListFunctionEventInvokeConfigsResponse": {
+      "type": "structure",
+      "members": {
+        "FunctionEventInvokeConfigs": {
+          "shape": "FunctionEventInvokeConfigList",
+          "documentation": "<p>A list of configurations.</p>"
+        },
+        "NextMarker": {
+          "shape": "String",
+          "documentation": "<p>The pagination token that's included if more results are available.</p>"
+        }
+      }
+    },
     "ListFunctionsRequest": {
       "type": "structure",
       "members": {
@@ -2830,6 +3215,11 @@
       "type": "string",
       "pattern": "ALL|[a-z]{2}(-gov)?-[a-z]+-\\d{1}"
     },
+    "MaxFunctionEventInvokeConfigListItems": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
     "MaxLayerListItems": {
       "type": "integer",
       "max": 50,
@@ -2843,6 +3233,26 @@
     "MaximumBatchingWindowInSeconds": {
       "type": "integer",
       "max": 300,
+      "min": 0
+    },
+    "MaximumEventAgeInSeconds": {
+      "type": "integer",
+      "max": 21600,
+      "min": 60
+    },
+    "MaximumRecordAgeInSeconds": {
+      "type": "integer",
+      "max": 604800,
+      "min": 60
+    },
+    "MaximumRetryAttempts": {
+      "type": "integer",
+      "max": 2,
+      "min": 0
+    },
+    "MaximumRetryAttemptsEventSourceMapping": {
+      "type": "integer",
+      "max": 10000,
       "min": 0
     },
     "MemorySize": {
@@ -2866,9 +3276,34 @@
       "min": 1,
       "pattern": "([a-zA-Z0-9-_.]+)"
     },
+    "OnFailure": {
+      "type": "structure",
+      "members": {
+        "Destination": {
+          "shape": "DestinationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination resource.</p>"
+        }
+      },
+      "documentation": "<p>A destination for events that failed processing.</p>"
+    },
+    "OnSuccess": {
+      "type": "structure",
+      "members": {
+        "Destination": {
+          "shape": "DestinationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination resource.</p>"
+        }
+      },
+      "documentation": "<p>A destination for events that were processed successfully.</p>"
+    },
     "OrganizationId": {
       "type": "string",
       "pattern": "o-[a-z0-9]{10,32}"
+    },
+    "ParallelizationFactor": {
+      "type": "integer",
+      "max": 10,
+      "min": 1
     },
     "Principal": {
       "type": "string",
@@ -2984,6 +3419,38 @@
         "ReservedConcurrentExecutions": {
           "shape": "ReservedConcurrentExecutions",
           "documentation": "<p>The number of simultaneous executions to reserve for the function.</p>"
+        }
+      }
+    },
+    "PutFunctionEventInvokeConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function, version, or alias.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Qualifier": {
+          "shape": "Qualifier",
+          "documentation": "<p>A version number or alias name.</p>",
+          "location": "querystring",
+          "locationName": "Qualifier"
+        },
+        "MaximumRetryAttempts": {
+          "shape": "MaximumRetryAttempts",
+          "documentation": "<p>The maximum number of times to retry when the function returns an error.</p>"
+        },
+        "MaximumEventAgeInSeconds": {
+          "shape": "MaximumEventAgeInSeconds",
+          "documentation": "<p>The maximum age of a request that Lambda sends to a function for processing.</p>"
+        },
+        "DestinationConfig": {
+          "shape": "DestinationConfig",
+          "documentation": "<p>A destination for events after they have been sent to a function for processing.</p> <p class=\"title\"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>"
         }
       }
     },
@@ -3129,6 +3596,31 @@
     "SourceOwner": {
       "type": "string",
       "pattern": "\\d{12}"
+    },
+    "State": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Active",
+        "Inactive",
+        "Failed"
+      ]
+    },
+    "StateReason": {
+      "type": "string"
+    },
+    "StateReasonCode": {
+      "type": "string",
+      "enum": [
+        "Idle",
+        "Creating",
+        "Restoring",
+        "EniLimitExceeded",
+        "InsufficientRolePermissions",
+        "InvalidConfiguration",
+        "InternalError",
+        "SubnetOutOfIPAddresses"
+      ]
     },
     "StatementId": {
       "type": "string",
@@ -3310,7 +3802,28 @@
           "documentation": "<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>"
         },
         "MaximumBatchingWindowInSeconds": {
-          "shape": "MaximumBatchingWindowInSeconds"
+          "shape": "MaximumBatchingWindowInSeconds",
+          "documentation": "<p>The maximum amount of time to gather records before invoking the function, in seconds.</p>"
+        },
+        "DestinationConfig": {
+          "shape": "DestinationConfig",
+          "documentation": "<p>(Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+        },
+        "MaximumRecordAgeInSeconds": {
+          "shape": "MaximumRecordAgeInSeconds",
+          "documentation": "<p>(Streams) The maximum age of a record that Lambda sends to a function for processing.</p>"
+        },
+        "BisectBatchOnFunctionError": {
+          "shape": "BisectBatchOnFunctionError",
+          "documentation": "<p>(Streams) If the function returns an error, split the batch in two and retry.</p>"
+        },
+        "MaximumRetryAttempts": {
+          "shape": "MaximumRetryAttemptsEventSourceMapping",
+          "documentation": "<p>(Streams) The maximum number of times to retry when the function returns an error.</p>"
+        },
+        "ParallelizationFactor": {
+          "shape": "ParallelizationFactor",
+          "documentation": "<p>(Streams) The number of batches to process from each shard concurrently.</p>"
         }
       }
     },
@@ -3390,7 +3903,7 @@
         },
         "VpcConfig": {
           "shape": "VpcConfig",
-          "documentation": "<p>For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/vpc.html\">VPC Settings</a>.</p>"
+          "documentation": "<p>For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
         },
         "Environment": {
           "shape": "Environment",
@@ -3402,7 +3915,7 @@
         },
         "DeadLetterConfig": {
           "shape": "DeadLetterConfig",
-          "documentation": "<p>A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/dlq.html\">Dead Letter Queues</a>.</p>"
+          "documentation": "<p>A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq\">Dead Letter Queues</a>.</p>"
         },
         "KMSKeyArn": {
           "shape": "KMSKeyArn",
@@ -3419,6 +3932,38 @@
         "Layers": {
           "shape": "LayerList",
           "documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">function layers</a> to add to the function's execution environment. Specify each layer by its ARN, including the version.</p>"
+        }
+      }
+    },
+    "UpdateFunctionEventInvokeConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function, version, or alias.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code> (name-only), <code>my-function:v1</code> (with alias).</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Qualifier": {
+          "shape": "Qualifier",
+          "documentation": "<p>A version number or alias name.</p>",
+          "location": "querystring",
+          "locationName": "Qualifier"
+        },
+        "MaximumRetryAttempts": {
+          "shape": "MaximumRetryAttempts",
+          "documentation": "<p>The maximum number of times to retry when the function returns an error.</p>"
+        },
+        "MaximumEventAgeInSeconds": {
+          "shape": "MaximumEventAgeInSeconds",
+          "documentation": "<p>The maximum age of a request that Lambda sends to a function for processing.</p>"
+        },
+        "DestinationConfig": {
+          "shape": "DestinationConfig",
+          "documentation": "<p>A destination for events after they have been sent to a function for processing.</p> <p class=\"title\"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>"
         }
       }
     },
@@ -3440,7 +3985,7 @@
           "documentation": "<p>A list of VPC security groups IDs.</p>"
         }
       },
-      "documentation": "<p>The VPC security groups and subnets that are attached to a Lambda function.</p>"
+      "documentation": "<p>The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
     },
     "VpcConfigResponse": {
       "type": "structure",

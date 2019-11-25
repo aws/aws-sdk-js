@@ -201,6 +201,9 @@ export abstract class ConfigurationServicePlaceholders {
   sesv2?: AWS.SESV2.Types.ClientConfiguration;
   migrationhubconfig?: AWS.MigrationHubConfig.Types.ClientConfiguration;
   connectparticipant?: AWS.ConnectParticipant.Types.ClientConfiguration;
+  appconfig?: AWS.AppConfig.Types.ClientConfiguration;
+  iotsecuretunneling?: AWS.IoTSecureTunneling.Types.ClientConfiguration;
+  wafv2?: AWS.WAFV2.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -404,4 +407,7 @@ export interface ConfigurationServiceApiVersions {
   sesv2?: AWS.SESV2.Types.apiVersion;
   migrationhubconfig?: AWS.MigrationHubConfig.Types.apiVersion;
   connectparticipant?: AWS.ConnectParticipant.Types.apiVersion;
+  appconfig?: AWS.AppConfig.Types.apiVersion;
+  iotsecuretunneling?: AWS.IoTSecureTunneling.Types.apiVersion;
+  wafv2?: AWS.WAFV2.Types.apiVersion;
 }

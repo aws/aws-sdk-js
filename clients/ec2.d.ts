@@ -1381,11 +1381,11 @@ declare class EC2 extends Service {
    */
   describeInstanceAttribute(callback?: (err: AWSError, data: EC2.Types.InstanceAttribute) => void): Request<EC2.Types.InstanceAttribute, AWSError>;
   /**
-   * Describes the credit option for CPU usage of the specified T2 or T3 instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns T2 and T3 instances with the unlimited credit option, as well as instances that were previously configured as T2 or T3 with the unlimited credit option. For example, if you resize a T2 instance, while it is configured as unlimited, to an M4 instance, Amazon EC2 returns the M4 instance. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 or T3 instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the unlimited credit option, as well as instances that were previously configured as T2, T3, and T3a with the unlimited credit option. For example, if you resize a T2 instance, while it is configured as unlimited, to an M4 instance, Amazon EC2 returns the M4 instance. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a burstable performance instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   describeInstanceCreditSpecifications(params: EC2.Types.DescribeInstanceCreditSpecificationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceCreditSpecificationsResult) => void): Request<EC2.Types.DescribeInstanceCreditSpecificationsResult, AWSError>;
   /**
-   * Describes the credit option for CPU usage of the specified T2 or T3 instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns T2 and T3 instances with the unlimited credit option, as well as instances that were previously configured as T2 or T3 with the unlimited credit option. For example, if you resize a T2 instance, while it is configured as unlimited, to an M4 instance, Amazon EC2 returns the M4 instance. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 or T3 instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the unlimited credit option, as well as instances that were previously configured as T2, T3, and T3a with the unlimited credit option. For example, if you resize a T2 instance, while it is configured as unlimited, to an M4 instance, Amazon EC2 returns the M4 instance. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a burstable performance instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   describeInstanceCreditSpecifications(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceCreditSpecificationsResult) => void): Request<EC2.Types.DescribeInstanceCreditSpecificationsResult, AWSError>;
   /**
@@ -2149,6 +2149,14 @@ declare class EC2 extends Service {
    */
   getConsoleScreenshot(callback?: (err: AWSError, data: EC2.Types.GetConsoleScreenshotResult) => void): Request<EC2.Types.GetConsoleScreenshotResult, AWSError>;
   /**
+   * Describes the default credit option for CPU usage of a burstable performance instance family. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  getDefaultCreditSpecification(params: EC2.Types.GetDefaultCreditSpecificationRequest, callback?: (err: AWSError, data: EC2.Types.GetDefaultCreditSpecificationResult) => void): Request<EC2.Types.GetDefaultCreditSpecificationResult, AWSError>;
+  /**
+   * Describes the default credit option for CPU usage of a burstable performance instance family. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  getDefaultCreditSpecification(callback?: (err: AWSError, data: EC2.Types.GetDefaultCreditSpecificationResult) => void): Request<EC2.Types.GetDefaultCreditSpecificationResult, AWSError>;
+  /**
    * Describes the default customer master key (CMK) for EBS encryption by default for your account in this Region. You can change the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   getEbsDefaultKmsKeyId(params: EC2.Types.GetEbsDefaultKmsKeyIdRequest, callback?: (err: AWSError, data: EC2.Types.GetEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.GetEbsDefaultKmsKeyIdResult, AWSError>;
@@ -2285,6 +2293,14 @@ declare class EC2 extends Service {
    */
   modifyClientVpnEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyClientVpnEndpointResult) => void): Request<EC2.Types.ModifyClientVpnEndpointResult, AWSError>;
   /**
+   * Modifies the default credit option for CPU usage of burstable performance instances. The default credit option is set at the account level per AWS Region, and is specified per instance family. All new burstable performance instances in the account launch using the default credit option.  ModifyDefaultCreditSpecification is an asynchronous operation, which works at an AWS Region level and modifies the credit option for each Availability Zone. All zones in a Region are updated within five minutes. But if instances are launched during this operation, they might not get the new credit option until the zone is updated. To verify whether the update has occurred, you can call GetDefaultCreditSpecification and check DefaultCreditSpecification for updates. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifyDefaultCreditSpecification(params: EC2.Types.ModifyDefaultCreditSpecificationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyDefaultCreditSpecificationResult) => void): Request<EC2.Types.ModifyDefaultCreditSpecificationResult, AWSError>;
+  /**
+   * Modifies the default credit option for CPU usage of burstable performance instances. The default credit option is set at the account level per AWS Region, and is specified per instance family. All new burstable performance instances in the account launch using the default credit option.  ModifyDefaultCreditSpecification is an asynchronous operation, which works at an AWS Region level and modifies the credit option for each Availability Zone. All zones in a Region are updated within five minutes. But if instances are launched during this operation, they might not get the new credit option until the zone is updated. To verify whether the update has occurred, you can call GetDefaultCreditSpecification and check DefaultCreditSpecification for updates. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifyDefaultCreditSpecification(callback?: (err: AWSError, data: EC2.Types.ModifyDefaultCreditSpecificationResult) => void): Request<EC2.Types.ModifyDefaultCreditSpecificationResult, AWSError>;
+  /**
    * Changes the default customer master key (CMK) for EBS encryption by default for your account in this Region. AWS creates a unique AWS managed CMK in each Region for use with encryption by default. If you change the default CMK to a customer managed CMK, it is used instead of the AWS managed CMK. To reset the default CMK to the AWS managed CMK for EBS, use ResetEbsDefaultKmsKeyId. If you delete or disable the customer managed CMK that you specified for use with encryption by default, your instances will fail to launch. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyEbsDefaultKmsKeyId(params: EC2.Types.ModifyEbsDefaultKmsKeyIdRequest, callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
@@ -2357,11 +2373,11 @@ declare class EC2 extends Service {
    */
   modifyInstanceCapacityReservationAttributes(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCapacityReservationAttributesResult) => void): Request<EC2.Types.ModifyInstanceCapacityReservationAttributesResult, AWSError>;
   /**
-   * Modifies the credit option for CPU usage on a running or stopped T2 or T3 instance. The credit options are standard and unlimited. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Modifies the credit option for CPU usage on a running or stopped burstable performance instance. The credit options are standard and unlimited. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyInstanceCreditSpecification(params: EC2.Types.ModifyInstanceCreditSpecificationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCreditSpecificationResult) => void): Request<EC2.Types.ModifyInstanceCreditSpecificationResult, AWSError>;
   /**
-   * Modifies the credit option for CPU usage on a running or stopped T2 or T3 instance. The credit options are standard and unlimited. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Modifies the credit option for CPU usage on a running or stopped burstable performance instance. The credit options are standard and unlimited. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyInstanceCreditSpecification(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCreditSpecificationResult) => void): Request<EC2.Types.ModifyInstanceCreditSpecificationResult, AWSError>;
   /**
@@ -12263,6 +12279,22 @@ declare namespace EC2 {
      */
     InstanceId?: String;
   }
+  export interface GetDefaultCreditSpecificationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The instance family.
+     */
+    InstanceFamily: UnlimitedSupportedInstanceFamily;
+  }
+  export interface GetDefaultCreditSpecificationResult {
+    /**
+     * The default credit option for CPU usage of the instance family.
+     */
+    InstanceFamilyCreditSpecification?: InstanceFamilyCreditSpecification;
+  }
   export interface GetEbsDefaultKmsKeyIdRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -13852,6 +13884,16 @@ declare namespace EC2 {
      */
     TargetEnvironment?: ExportEnvironment;
   }
+  export interface InstanceFamilyCreditSpecification {
+    /**
+     * The instance family.
+     */
+    InstanceFamily?: UnlimitedSupportedInstanceFamily;
+    /**
+     * The default credit option for CPU usage of the instance family. Valid values are standard and unlimited.
+     */
+    CpuCredits?: String;
+  }
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceId = string;
   export type InstanceIdSet = String[];
@@ -15284,6 +15326,26 @@ declare namespace EC2 {
      * Returns true if the request succeeds; otherwise, it returns an error.
      */
     Return?: Boolean;
+  }
+  export interface ModifyDefaultCreditSpecificationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The instance family.
+     */
+    InstanceFamily: UnlimitedSupportedInstanceFamily;
+    /**
+     * The credit option for CPU usage of the instance family. Valid Values: standard | unlimited 
+     */
+    CpuCredits: String;
+  }
+  export interface ModifyDefaultCreditSpecificationResult {
+    /**
+     * The default credit option for CPU usage of the instance family.
+     */
+    InstanceFamilyCreditSpecification?: InstanceFamilyCreditSpecification;
   }
   export interface ModifyEbsDefaultKmsKeyIdRequest {
     /**
@@ -18934,7 +18996,7 @@ declare namespace EC2 {
      */
     InstanceMarketOptions?: InstanceMarketOptionsRequest;
     /**
-     * The credit option for CPU usage of the T2 or T3 instance. Valid values are standard and unlimited. To change this attribute after launch, use  ModifyInstanceCreditSpecification. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide. Default: standard (T2 instances) or unlimited (T3 instances)
+     * The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited. To change this attribute after launch, use  ModifyInstanceCreditSpecification. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide. Default: standard (T2 instances) or unlimited (T3/T3a instances)
      */
     CreditSpecification?: CreditSpecificationRequest;
     /**
@@ -21363,6 +21425,7 @@ declare namespace EC2 {
      */
     PrivateIpAddresses: PrivateIpAddressStringList;
   }
+  export type UnlimitedSupportedInstanceFamily = "t2"|"t3"|"t3a"|string;
   export interface UnmonitorInstancesRequest {
     /**
      * The IDs of the instances.
@@ -21386,7 +21449,7 @@ declare namespace EC2 {
      */
     InstanceId?: String;
     /**
-     * The applicable error for the T2 or T3 instance whose credit option for CPU usage was not modified.
+     * The applicable error for the burstable performance instance whose credit option for CPU usage was not modified.
      */
     Error?: UnsuccessfulInstanceCreditSpecificationItemError;
   }

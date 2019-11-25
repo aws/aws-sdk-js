@@ -83,6 +83,29 @@
       ],
       "documentation": "<p>Deletes all dashboards that you specify. You may specify up to 100 dashboards to delete. If there is an error during this call, no dashboards are deleted.</p>"
     },
+    "DeleteInsightRules": {
+      "name": "DeleteInsightRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteInsightRulesInput"
+      },
+      "output": {
+        "shape": "DeleteInsightRulesOutput",
+        "resultWrapper": "DeleteInsightRulesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p>Permanently deletes the specified Contributor Insights rules.</p> <p>If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created may or may not be available.</p>"
+    },
     "DescribeAlarmHistory": {
       "name": "DescribeAlarmHistory",
       "http": {
@@ -164,6 +187,26 @@
       ],
       "documentation": "<p>Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.</p>"
     },
+    "DescribeInsightRules": {
+      "name": "DescribeInsightRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeInsightRulesInput"
+      },
+      "output": {
+        "shape": "DescribeInsightRulesOutput",
+        "resultWrapper": "DescribeInsightRulesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidNextToken"
+        }
+      ],
+      "documentation": "<p>Returns a list of all the Contributor Insights rules in your account. All rules in your account are returned with a single operation.</p> <p>For more information about Contributor Insights, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html\">Using Contributor Insights to Analyze High-Cardinality Data</a>.</p>"
+    },
     "DisableAlarmActions": {
       "name": "DisableAlarmActions",
       "http": {
@@ -175,6 +218,29 @@
       },
       "documentation": "<p>Disables the actions for the specified alarms. When an alarm's actions are disabled, the alarm actions do not execute when the alarm state changes.</p>"
     },
+    "DisableInsightRules": {
+      "name": "DisableInsightRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisableInsightRulesInput"
+      },
+      "output": {
+        "shape": "DisableInsightRulesOutput",
+        "resultWrapper": "DisableInsightRulesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p>Disables the specified Contributor Insights rules. When rules are disabled, they do not analyze log groups and do not incur costs.</p>"
+    },
     "EnableAlarmActions": {
       "name": "EnableAlarmActions",
       "http": {
@@ -185,6 +251,32 @@
         "shape": "EnableAlarmActionsInput"
       },
       "documentation": "<p>Enables the actions for the specified alarms.</p>"
+    },
+    "EnableInsightRules": {
+      "name": "EnableInsightRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "EnableInsightRulesInput"
+      },
+      "output": {
+        "shape": "EnableInsightRulesOutput",
+        "resultWrapper": "EnableInsightRulesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Enables the specified Contributor Insights rules. When rules are enabled, they immediately begin analyzing log data.</p>"
     },
     "GetDashboard": {
       "name": "GetDashboard",
@@ -212,6 +304,32 @@
       ],
       "documentation": "<p>Displays the details of the dashboard that you specify.</p> <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code> to create the copy.</p>"
     },
+    "GetInsightRuleReport": {
+      "name": "GetInsightRuleReport",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetInsightRuleReportInput"
+      },
+      "output": {
+        "shape": "GetInsightRuleReportOutput",
+        "resultWrapper": "GetInsightRuleReportResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>This operation returns the time series data collected by a Contributor Insights rule. The data includes the identity and number of contributors to the log group.</p> <p>You can also optionally return one or more statistics about each data point in the time series. These statistics can include the following:</p> <ul> <li> <p> <code>UniqueContributors</code> -- the number of unique contributors for each data point.</p> </li> <li> <p> <code>MaxContributorValue</code> -- the value of the top contributor for each data point. The identity of the contributor may change for each data point in the graph.</p> <p>If this rule aggregates by COUNT, the top contributor for each data point is the contributor with the most occurrences in that period. If the rule aggregates by SUM, the top contributor is the contributor with the highest sum in the log field specified by the rule's <code>Value</code>, during that period.</p> </li> <li> <p> <code>SampleCount</code> -- the number of data points matched by the rule.</p> </li> <li> <p> <code>Sum</code> -- the sum of the values from all contributors during the time period represented by that data point.</p> </li> <li> <p> <code>Minimum</code> -- the minimum value from a single observation during the time period represented by that data point.</p> </li> <li> <p> <code>Maximum</code> -- the maximum value from a single observation during the time period represented by that data point.</p> </li> <li> <p> <code>Average</code> -- the average value from all contributors during the time period represented by that data point.</p> </li> </ul>"
+    },
     "GetMetricData": {
       "name": "GetMetricData",
       "http": {
@@ -230,7 +348,7 @@
           "shape": "InvalidNextToken"
         }
       ],
-      "documentation": "<p>You can use the <code>GetMetricData</code> API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 datapoints. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>If you omit <code>Unit</code> in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p>"
+      "documentation": "<p>You can use the <code>GetMetricData</code> API to retrieve as many as 100 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>If you omit <code>Unit</code> in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p>"
     },
     "GetMetricStatistics": {
       "name": "GetMetricStatistics",
@@ -400,6 +518,32 @@
       ],
       "documentation": "<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>All dashboards in your account are global, not region-specific.</p> <p>A simple way to create a dashboard using <code>PutDashboard</code> is to copy an existing dashboard. To copy an existing dashboard using the console, you can load the dashboard and then use the View/edit source command in the Actions menu to display the JSON block for that dashboard. Another way to copy a dashboard is to use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code>.</p> <p>When you create a dashboard with <code>PutDashboard</code>, a good practice is to add a text widget at the top of the dashboard with a message that the dashboard was created by script and should not be changed in the console. This message could also point console users to the location of the <code>DashboardBody</code> script or the CloudFormation template used to create the dashboard.</p>"
     },
+    "PutInsightRule": {
+      "name": "PutInsightRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutInsightRuleInput"
+      },
+      "output": {
+        "shape": "PutInsightRuleOutput",
+        "resultWrapper": "PutInsightRuleResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Creates a Contributor Insights rule. Rules evaluate log events in a CloudWatch Logs log group, enabling you to find contributor data for the log events in that log group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html\">Using Contributor Insights to Analyze High-Cardinality Data</a>.</p> <p>If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created may or may not be available.</p>"
+    },
     "PutMetricAlarm": {
       "name": "PutMetricAlarm",
       "http": {
@@ -439,7 +583,7 @@
           "shape": "InternalServiceFault"
         }
       ],
-      "documentation": "<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>You can publish either individual data points in the <code>Value</code> field, or arrays of values and the number of times each value occurred during the period by using the <code>Values</code> and <code>Counts</code> fields in the <code>MetricDatum</code> structure. Using the <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric with one <code>PutMetricData</code> request, and supports retrieving percentile statistics on this data.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricData</a> or <a>GetMetricStatistics</a> from the time they are submitted.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>, <code>Max</code>, and <code>Sum</code> are all equal.</p> </li> <li> <p>The <code>Min</code> and <code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> multiplied by <code>SampleCount</code>.</p> </li> </ul>"
+      "documentation": "<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>You can publish either individual data points in the <code>Value</code> field, or arrays of values and the number of times each value occurred during the period by using the <code>Values</code> and <code>Counts</code> fields in the <code>MetricDatum</code> structure. Using the <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric with one <code>PutMetricData</code> request, and supports retrieving percentile statistics on this data.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricData</a> or <a>GetMetricStatistics</a> from the time they are submitted.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>, <code>Max</code>, and <code>Sum</code> are all equal.</p> </li> <li> <p>The <code>Min</code> and <code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> multiplied by <code>SampleCount</code>.</p> </li> </ul>"
     },
     "SetAlarmState": {
       "name": "SetAlarmState",
@@ -616,7 +760,7 @@
           "documentation": "<p>The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model, and the time zone to use for the metric.</p>"
         }
       },
-      "documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric athresnd statistic. You can use the model to display a band of expected normal values when the metric is graphed.</p>"
+      "documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric and statistic. You can use the model to display a band of expected normal values when the metric is graphed.</p>"
     },
     "AnomalyDetectorConfiguration": {
       "type": "structure",
@@ -645,6 +789,12 @@
       "type": "list",
       "member": {
         "shape": "AnomalyDetector"
+      }
+    },
+    "BatchFailures": {
+      "type": "list",
+      "member": {
+        "shape": "PartialFailure"
       }
     },
     "ComparisonOperator": {
@@ -868,6 +1018,27 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteInsightRulesInput": {
+      "type": "structure",
+      "required": [
+        "RuleNames"
+      ],
+      "members": {
+        "RuleNames": {
+          "shape": "InsightRuleNames",
+          "documentation": "<p>An array of the rule names to delete. If you need to find out the names of your rules, use <a>DescribeInsightRules</a>.</p>"
+        }
+      }
+    },
+    "DeleteInsightRulesOutput": {
+      "type": "structure",
+      "members": {
+        "Failures": {
+          "shape": "BatchFailures",
+          "documentation": "<p>An array listing the rules that could not be deleted. You cannot delete built-in rules.</p>"
+        }
+      }
+    },
     "DescribeAlarmHistoryInput": {
       "type": "structure",
       "members": {
@@ -1036,6 +1207,32 @@
         }
       }
     },
+    "DescribeInsightRulesInput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Reserved for future use.</p>"
+        },
+        "MaxResults": {
+          "shape": "InsightRuleMaxResults",
+          "documentation": "<p>This parameter is not currently used. Reserved for future use. If it is used in the future, the maximum value may be different.</p>"
+        }
+      }
+    },
+    "DescribeInsightRulesOutput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Reserved for future use.</p>"
+        },
+        "InsightRules": {
+          "shape": "InsightRules",
+          "documentation": "<p>The rules returned by the operation.</p>"
+        }
+      }
+    },
     "Dimension": {
       "type": "structure",
       "required": [
@@ -1111,6 +1308,27 @@
         }
       }
     },
+    "DisableInsightRulesInput": {
+      "type": "structure",
+      "required": [
+        "RuleNames"
+      ],
+      "members": {
+        "RuleNames": {
+          "shape": "InsightRuleNames",
+          "documentation": "<p>An array of the rule names to disable. If you need to find out the names of your rules, use <a>DescribeInsightRules</a>.</p>"
+        }
+      }
+    },
+    "DisableInsightRulesOutput": {
+      "type": "structure",
+      "members": {
+        "Failures": {
+          "shape": "BatchFailures",
+          "documentation": "<p>An array listing the rules that could not be disabled. You cannot disable built-in rules.</p>"
+        }
+      }
+    },
     "EnableAlarmActionsInput": {
       "type": "structure",
       "required": [
@@ -1123,6 +1341,27 @@
         }
       }
     },
+    "EnableInsightRulesInput": {
+      "type": "structure",
+      "required": [
+        "RuleNames"
+      ],
+      "members": {
+        "RuleNames": {
+          "shape": "InsightRuleNames",
+          "documentation": "<p>An array of the rule names to enable. If you need to find out the names of your rules, use <a>DescribeInsightRules</a>.</p>"
+        }
+      }
+    },
+    "EnableInsightRulesOutput": {
+      "type": "structure",
+      "members": {
+        "Failures": {
+          "shape": "BatchFailures",
+          "documentation": "<p>An array listing the rules that could not be enabled. You cannot disable or enable built-in rules.</p>"
+        }
+      }
+    },
     "EvaluateLowSampleCountPercentile": {
       "type": "string",
       "max": 255,
@@ -1131,6 +1370,9 @@
     "EvaluationPeriods": {
       "type": "integer",
       "min": 1
+    },
+    "ExceptionType": {
+      "type": "string"
     },
     "ExtendedStatistic": {
       "type": "string",
@@ -1143,6 +1385,15 @@
       },
       "max": 10,
       "min": 1
+    },
+    "FailureCode": {
+      "type": "string"
+    },
+    "FailureDescription": {
+      "type": "string"
+    },
+    "FailureResource": {
+      "type": "string"
     },
     "GetDashboardInput": {
       "type": "structure",
@@ -1170,6 +1421,74 @@
         "DashboardName": {
           "shape": "DashboardName",
           "documentation": "<p>The name of the dashboard.</p>"
+        }
+      }
+    },
+    "GetInsightRuleReportInput": {
+      "type": "structure",
+      "required": [
+        "RuleName",
+        "StartTime",
+        "EndTime",
+        "Period"
+      ],
+      "members": {
+        "RuleName": {
+          "shape": "InsightRuleName",
+          "documentation": "<p>The name of the rule that you want to see data from.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The start time of the data to use in the report. When used in a raw HTTP Query API, it is formatted as <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example, <code>2019-07-01T23:59:59</code>.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The end time of the data to use in the report. When used in a raw HTTP Query API, it is formatted as <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example, <code>2019-07-01T23:59:59</code>.</p>"
+        },
+        "Period": {
+          "shape": "Period",
+          "documentation": "<p>The period, in seconds, to use for the statistics in the <code>InsightRuleMetricDatapoint</code> results.</p>"
+        },
+        "MaxContributorCount": {
+          "shape": "InsightRuleUnboundInteger",
+          "documentation": "<p>The maximum number of contributors to include in the report. The range is 1 to 100. If you omit this, the default of 10 is used.</p>"
+        },
+        "Metrics": {
+          "shape": "InsightRuleMetricList",
+          "documentation": "<p>Specifies which metrics to use for aggregation of contributor values for the report. You can specify one or more of the following metrics:</p> <ul> <li> <p> <code>UniqueContributors</code> -- the number of unique contributors for each data point.</p> </li> <li> <p> <code>MaxContributorValue</code> -- the value of the top contributor for each data point. The identity of the contributor may change for each data point in the graph.</p> <p>If this rule aggregates by COUNT, the top contributor for each data point is the contributor with the most occurrences in that period. If the rule aggregates by SUM, the top contributor is the contributor with the highest sum in the log field specified by the rule's <code>Value</code>, during that period.</p> </li> <li> <p> <code>SampleCount</code> -- the number of data points matched by the rule.</p> </li> <li> <p> <code>Sum</code> -- the sum of the values from all contributors during the time period represented by that data point.</p> </li> <li> <p> <code>Minimum</code> -- the minimum value from a single observation during the time period represented by that data point.</p> </li> <li> <p> <code>Maximum</code> -- the maximum value from a single observation during the time period represented by that data point.</p> </li> <li> <p> <code>Average</code> -- the average value from all contributors during the time period represented by that data point.</p> </li> </ul>"
+        },
+        "OrderBy": {
+          "shape": "InsightRuleOrderBy",
+          "documentation": "<p>Determines what statistic to use to rank the contributors. Valid values are SUM and MAXIMUM.</p>"
+        }
+      }
+    },
+    "GetInsightRuleReportOutput": {
+      "type": "structure",
+      "members": {
+        "KeyLabels": {
+          "shape": "InsightRuleContributorKeyLabels",
+          "documentation": "<p>An array of the strings used as the keys for this rule. The keys are the dimensions used to classify contributors. If the rule contains more than one key, then each unique combination of values for the keys is counted as a unique contributor.</p>"
+        },
+        "AggregationStatistic": {
+          "shape": "InsightRuleAggregationStatistic",
+          "documentation": "<p>Specifies whether this rule aggregates contributor data by COUNT or SUM.</p>"
+        },
+        "AggregateValue": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The sum of the values from all individual contributors that match the rule.</p>"
+        },
+        "ApproximateUniqueCount": {
+          "shape": "InsightRuleUnboundLong",
+          "documentation": "<p>An approximate count of the unique contributors found by this rule in this time period.</p>"
+        },
+        "Contributors": {
+          "shape": "InsightRuleContributors",
+          "documentation": "<p>An array of the unique contributors found by this rule in this time period. If the rule contains multiple keys, each combination of values for the keys counts as a unique contributor.</p>"
+        },
+        "MetricDatapoints": {
+          "shape": "InsightRuleMetricDatapoints",
+          "documentation": "<p>A time series of metric data points that matches the time period in the rule request.</p>"
         }
       }
     },
@@ -1251,11 +1570,11 @@
         },
         "StartTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time stamp that determines the first data point to return. Start times are evaluated relative to the time that CloudWatch receives the request.</p> <p>The value specified is inclusive; results include data points with the specified time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).</p> <p>CloudWatch rounds the specified time stamp as follows:</p> <ul> <li> <p>Start time less than 15 days ago - Round down to the nearest whole minute. For example, 12:32:34 is rounded down to 12:32:00.</p> </li> <li> <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval. For example, 12:32:34 is rounded down to 12:30:00.</p> </li> <li> <p>Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p> </li> </ul> <p>If you set <code>Period</code> to 5, 10, or 30, the start time of your request is rounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a period of 5 seconds, you receive data timestamped between 15:02:15 and 15:07:15. </p>"
+          "documentation": "<p>The time stamp that determines the first data point to return. Start times are evaluated relative to the time that CloudWatch receives the request.</p> <p>The value specified is inclusive; results include data points with the specified time stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).</p> <p>CloudWatch rounds the specified time stamp as follows:</p> <ul> <li> <p>Start time less than 15 days ago - Round down to the nearest whole minute. For example, 12:32:34 is rounded down to 12:32:00.</p> </li> <li> <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval. For example, 12:32:34 is rounded down to 12:30:00.</p> </li> <li> <p>Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p> </li> </ul> <p>If you set <code>Period</code> to 5, 10, or 30, the start time of your request is rounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a period of 5 seconds, you receive data timestamped between 15:02:15 and 15:07:15. </p>"
         },
         "EndTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time stamp that determines the last data point to return.</p> <p>The value specified is exclusive; results include data points up to the specified time stamp. The time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).</p>"
+          "documentation": "<p>The time stamp that determines the last data point to return.</p> <p>The value specified is exclusive; results include data points up to the specified time stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).</p>"
         },
         "Period": {
           "shape": "Period",
@@ -1330,6 +1649,220 @@
       "type": "string",
       "max": 255,
       "min": 1
+    },
+    "InsightRule": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "State",
+        "Schema",
+        "Definition"
+      ],
+      "members": {
+        "Name": {
+          "shape": "InsightRuleName",
+          "documentation": "<p>The name of the rule.</p>"
+        },
+        "State": {
+          "shape": "InsightRuleState",
+          "documentation": "<p>Indicates whether the rule is enabled or disabled.</p>"
+        },
+        "Schema": {
+          "shape": "InsightRuleSchema",
+          "documentation": "<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For built-in rules, this is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code> </p>"
+        },
+        "Definition": {
+          "shape": "InsightRuleDefinition",
+          "documentation": "<p>The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors, the value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html\">Contributor Insights Rule Syntax</a>.</p>"
+        }
+      },
+      "documentation": "<p>This structure contains the definition for a Contributor Insights rule.</p>"
+    },
+    "InsightRuleAggregationStatistic": {
+      "type": "string"
+    },
+    "InsightRuleContributor": {
+      "type": "structure",
+      "required": [
+        "Keys",
+        "ApproximateAggregateValue",
+        "Datapoints"
+      ],
+      "members": {
+        "Keys": {
+          "shape": "InsightRuleContributorKeys",
+          "documentation": "<p>One of the log entry field keywords that is used to define contributors for this rule.</p>"
+        },
+        "ApproximateAggregateValue": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>An approximation of the aggregate value that comes from this contributor.</p>"
+        },
+        "Datapoints": {
+          "shape": "InsightRuleContributorDatapoints",
+          "documentation": "<p>An array of the data points where this contributor is present. Only the data points when this contributor appeared are included in the array.</p>"
+        }
+      },
+      "documentation": "<p>One of the unique contributors found by a Contributor Insights rule. If the rule contains multiple keys, then a unique contributor is a unique combination of values from all the keys in the rule.</p> <p>If the rule contains a single key, then each unique contributor is each unique value for this key.</p> <p>For more information, see <a>GetInsightRuleReport</a>.</p>"
+    },
+    "InsightRuleContributorDatapoint": {
+      "type": "structure",
+      "required": [
+        "Timestamp",
+        "ApproximateValue"
+      ],
+      "members": {
+        "Timestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp of the data point.</p>"
+        },
+        "ApproximateValue": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The approximate value that this contributor added during this timestamp.</p>"
+        }
+      },
+      "documentation": "<p>One data point related to one contributor.</p> <p>For more information, see <a>GetInsightRuleReport</a> and <a>InsightRuleContributor</a>.</p>"
+    },
+    "InsightRuleContributorDatapoints": {
+      "type": "list",
+      "member": {
+        "shape": "InsightRuleContributorDatapoint"
+      }
+    },
+    "InsightRuleContributorKey": {
+      "type": "string"
+    },
+    "InsightRuleContributorKeyLabel": {
+      "type": "string"
+    },
+    "InsightRuleContributorKeyLabels": {
+      "type": "list",
+      "member": {
+        "shape": "InsightRuleContributorKeyLabel"
+      }
+    },
+    "InsightRuleContributorKeys": {
+      "type": "list",
+      "member": {
+        "shape": "InsightRuleContributorKey"
+      }
+    },
+    "InsightRuleContributors": {
+      "type": "list",
+      "member": {
+        "shape": "InsightRuleContributor"
+      }
+    },
+    "InsightRuleDefinition": {
+      "type": "string",
+      "max": 8192,
+      "min": 1,
+      "pattern": "[\\x00-\\x7F]+"
+    },
+    "InsightRuleMaxResults": {
+      "type": "integer",
+      "max": 500,
+      "min": 1
+    },
+    "InsightRuleMetricDatapoint": {
+      "type": "structure",
+      "required": [
+        "Timestamp"
+      ],
+      "members": {
+        "Timestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp of the data point.</p>"
+        },
+        "UniqueContributors": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The number of unique contributors who published data during this timestamp.</p> <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>"
+        },
+        "MaxContributorValue": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The maximum value provided by one contributor during this timestamp. Each timestamp is evaluated separately, so the identity of the max contributor could be different for each timestamp.</p> <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>"
+        },
+        "SampleCount": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The number of occurrences that matched the rule during this data point.</p> <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>"
+        },
+        "Average": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The average value from all contributors during the time period represented by that data point.</p> <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>"
+        },
+        "Sum": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The sum of the values from all contributors during the time period represented by that data point.</p> <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>"
+        },
+        "Minimum": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The minimum value from a single contributor during the time period represented by that data point.</p> <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>"
+        },
+        "Maximum": {
+          "shape": "InsightRuleUnboundDouble",
+          "documentation": "<p>The maximum value from a single occurence from a single contributor during the time period represented by that data point.</p> <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>"
+        }
+      },
+      "documentation": "<p>One data point from the metric time series returned in a Contributor Insights rule report.</p> <p>For more information, see <a>GetInsightRuleReport</a>.</p>"
+    },
+    "InsightRuleMetricDatapoints": {
+      "type": "list",
+      "member": {
+        "shape": "InsightRuleMetricDatapoint"
+      }
+    },
+    "InsightRuleMetricList": {
+      "type": "list",
+      "member": {
+        "shape": "InsightRuleMetricName"
+      }
+    },
+    "InsightRuleMetricName": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "[\\x20-\\x7E]+"
+    },
+    "InsightRuleName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\x20-\\x7E]+"
+    },
+    "InsightRuleNames": {
+      "type": "list",
+      "member": {
+        "shape": "InsightRuleName"
+      }
+    },
+    "InsightRuleOrderBy": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "[\\x20-\\x7E]+"
+    },
+    "InsightRuleSchema": {
+      "type": "string"
+    },
+    "InsightRuleState": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "[\\x20-\\x7E]+"
+    },
+    "InsightRuleUnboundDouble": {
+      "type": "double"
+    },
+    "InsightRuleUnboundInteger": {
+      "type": "integer"
+    },
+    "InsightRuleUnboundLong": {
+      "type": "long"
+    },
+    "InsightRules": {
+      "type": "list",
+      "member": {
+        "shape": "InsightRule"
+      }
     },
     "LastModified": {
       "type": "timestamp"
@@ -1559,7 +2092,7 @@
         },
         "DatapointsToAlarm": {
           "shape": "DatapointsToAlarm",
-          "documentation": "<p>The number of datapoints that must be breaching to trigger the alarm.</p>"
+          "documentation": "<p>The number of data points that must be breaching to trigger the alarm.</p>"
         },
         "Threshold": {
           "shape": "Threshold",
@@ -1663,7 +2196,7 @@
         },
         "Period": {
           "shape": "Period",
-          "documentation": "<p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a <code>PutMetricData</code> operation that includes a <code>StorageResolution of 1 second</code>.</p> <p>Use this field only when you are performing a <code>GetMetricData</code> operation, and only when you are specifying the <code>Expression</code> field. Do not use this field with a <code>PutMetricAlarm</code> operation or when you are specifying a <code>MetricStat</code> in a <code>GetMetricData</code> operation.</p> <p/>"
+          "documentation": "<p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a <code>PutMetricData</code> operation that includes a <code>StorageResolution of 1 second</code>.</p> <p>If you are performing a <code>GetMetricData</code> operation, use this field only if you are specifying an <code>Expression</code>. Do not use this field when you are specifying a <code>MetricStat</code> in a <code>GetMetricData</code> operation.</p>"
         }
       },
       "documentation": "<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported use of this structure is different for those two operations.</p> <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data. A single <code>GetMetricData</code> call can include up to 100 <code>MetricDataQuery</code> structures.</p> <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a metric math expression. Each <code>MetricDataQuery</code> in the array specifies either a metric to retrieve, or a math expression to be performed on retrieved metrics. A single <code>PutMetricAlarm</code> call can include up to 20 <code>MetricDataQuery</code> structures in the array. The 20 structures can include as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a metric, and as many as 10 structures that contain the <code>Expression</code> parameter to perform a math expression. Of those <code>Expression</code> structures, one must have <code>True</code> as the value for <code>ReturnData</code>. The result of this expression is the value the alarm watches.</p> <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a single time series. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code> operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>"
@@ -1730,7 +2263,7 @@
         },
         "Value": {
           "shape": "DatapointValue",
-          "documentation": "<p>The value for the metric.</p> <p>Although the parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p>"
+          "documentation": "<p>The value for the metric.</p> <p>Although the parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p>"
         },
         "StatisticValues": {
           "shape": "StatisticSet",
@@ -1738,7 +2271,7 @@
         },
         "Values": {
           "shape": "Values",
-          "documentation": "<p>Array of numbers representing the values for the metric during the period. Each unique value is listed just once in this array, and the corresponding number in the <code>Counts</code> array specifies the number of times that value occurred during the period. You can include up to 150 unique values in each <code>PutMetricData</code> action that specifies a <code>Values</code> array.</p> <p>Although the <code>Values</code> array accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p>"
+          "documentation": "<p>Array of numbers representing the values for the metric during the period. Each unique value is listed just once in this array, and the corresponding number in the <code>Counts</code> array specifies the number of times that value occurred during the period. You can include up to 150 unique values in each <code>PutMetricData</code> action that specifies a <code>Values</code> array.</p> <p>Although the <code>Values</code> array accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p>"
         },
         "Counts": {
           "shape": "Counts",
@@ -1824,6 +2357,28 @@
     "OutputFormat": {
       "type": "string"
     },
+    "PartialFailure": {
+      "type": "structure",
+      "members": {
+        "FailureResource": {
+          "shape": "FailureResource",
+          "documentation": "<p>The specified rule that could not be deleted.</p>"
+        },
+        "ExceptionType": {
+          "shape": "ExceptionType",
+          "documentation": "<p>The type of error.</p>"
+        },
+        "FailureCode": {
+          "shape": "FailureCode",
+          "documentation": "<p>The code of the error.</p>"
+        },
+        "FailureDescription": {
+          "shape": "FailureDescription",
+          "documentation": "<p>A description of the error.</p>"
+        }
+      },
+      "documentation": "<p>This array is empty if the API operation was successful for all the rules specified in the request. If the operation could not process one of the rules, the following data is returned for each of those rules.</p>"
+    },
     "Period": {
       "type": "integer",
       "min": 1
@@ -1887,6 +2442,31 @@
           "documentation": "<p>If the input for <code>PutDashboard</code> was correct and the dashboard was successfully created or modified, this result is empty.</p> <p>If this result includes only warning messages, then the input was valid enough for the dashboard to be created or modified, but some elements of the dashboard may not render.</p> <p>If this result includes error messages, the input was not valid and the operation failed.</p>"
         }
       }
+    },
+    "PutInsightRuleInput": {
+      "type": "structure",
+      "required": [
+        "RuleName",
+        "RuleDefinition"
+      ],
+      "members": {
+        "RuleName": {
+          "shape": "InsightRuleName",
+          "documentation": "<p>A unique name for the rule.</p>"
+        },
+        "RuleState": {
+          "shape": "InsightRuleState",
+          "documentation": "<p>The state of the rule. Valid values are ENABLED and DISABLED.</p>"
+        },
+        "RuleDefinition": {
+          "shape": "InsightRuleDefinition",
+          "documentation": "<p>The definition of the rule, as a JSON object. For details on the valid syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html\">Contributor Insights Rule Syntax</a>.</p>"
+        }
+      }
+    },
+    "PutInsightRuleOutput": {
+      "type": "structure",
+      "members": {}
     },
     "PutMetricAlarmInput": {
       "type": "structure",
@@ -1954,7 +2534,7 @@
         },
         "DatapointsToAlarm": {
           "shape": "DatapointsToAlarm",
-          "documentation": "<p>The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an \"M out of N\" alarm. In that case, this value is the M. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation\">Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+          "documentation": "<p>The number of data points that must be breaching to trigger the alarm. This is used only if you are setting an \"M out of N\" alarm. In that case, this value is the M. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation\">Evaluating an Alarm</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
         },
         "Threshold": {
           "shape": "Threshold",

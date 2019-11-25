@@ -200,5 +200,8 @@ module.exports = {
   DataExchange: require('./dataexchange'),
   SESV2: require('./sesv2'),
   MigrationHubConfig: require('./migrationhubconfig'),
-  ConnectParticipant: require('./connectparticipant')
+  ConnectParticipant: require('./connectparticipant'),
+  AppConfig: require('./appconfig'),
+  IoTSecureTunneling: require('./iotsecuretunneling'),
+  WAFV2: require('./wafv2')
 };

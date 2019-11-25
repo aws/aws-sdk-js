@@ -320,6 +320,7 @@ declare namespace MediaConvert {
      */
     SampleRate?: __integerMin8000Max192000;
   }
+  export type AlphaBehavior = "DISCARD"|"REMAP_TO_LUMA"|string;
   export type AncillaryConvert608To708 = "UPCONVERT"|"DISABLED"|string;
   export interface AncillarySourceSettings {
     /**
@@ -605,7 +606,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     CaptionSelectorName?: __stringMin1;
     /**
-     * Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when  automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
+     * Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
      */
     CustomLanguageCode?: __stringPatternAZaZ23AZaZ;
     /**
@@ -623,7 +624,7 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface CaptionDescriptionPreset {
     /**
-     * Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when  automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
+     * Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
      */
     CustomLanguageCode?: __stringPatternAZaZ23AZaZ;
     /**
@@ -1346,6 +1347,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     ShadowYOffset?: __integerMinNegative2147483648Max2147483647;
     /**
+     * Specify whether your DVB subtitles are standard or for hearing impaired. Choose hearing impaired if your subtitles include audio descriptions and dialogue. Choose standard if your subtitles include only dialogue.
+     */
+    SubtitlingType?: DvbSubtitlingType;
+    /**
      * Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption.
      */
     TeletextSpacing?: DvbSubtitleTeletextSpacing;
@@ -1370,6 +1375,7 @@ All burn-in and DVB-Sub font settings must match.
   export type DvbSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|string;
   export type DvbSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|string;
   export type DvbSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|string;
+  export type DvbSubtitlingType = "HEARING_IMPAIRED"|"STANDARD"|string;
   export interface DvbTdtSettings {
     /**
      * The number of milliseconds between instances of this table in the output transport stream.
@@ -4290,7 +4296,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     /**
      * Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don't provide a value here, the service will use the input height.
      */
-    Height?: __integerMin32Max4096;
+    Height?: __integerMin32Max8192;
     /**
      * Use Selection placement (position) to define the video area in your output frame. The area outside of the rectangle that you specify here is black.
      */
@@ -4318,7 +4324,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     /**
      * Use Width (Width) to define the video resolution width, in pixels, for this output. If you don't provide a value here, the service will use the input width.
      */
-    Width?: __integerMin32Max4096;
+    Width?: __integerMin32Max8192;
   }
   export interface VideoDetail {
     /**
@@ -4357,6 +4363,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     TimecodeBurnin?: TimecodeBurnin;
   }
   export interface VideoSelector {
+    /**
+     * Ignore this setting unless this input is a QuickTime animation. Specify which part of this input MediaConvert uses for your outputs. Leave this setting set to DISCARD in order to delete the alpha channel and preserve the video. Use REMAP_TO_LUMA for this setting to delete the video and map the alpha channel to the luma channel of your outputs.
+     */
+    AlphaBehavior?: AlphaBehavior;
     /**
      * If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value Follow (FOLLOW). The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 (FORCE_HDR10) here and specify correct values in the input HDR 10 metadata (Hdr10Metadata) settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
      */
@@ -4462,8 +4472,8 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin2Max2147483647 = number;
   export type __integerMin32000Max384000 = number;
   export type __integerMin32000Max48000 = number;
-  export type __integerMin32Max4096 = number;
   export type __integerMin32Max8182 = number;
+  export type __integerMin32Max8192 = number;
   export type __integerMin384000Max768000 = number;
   export type __integerMin48000Max48000 = number;
   export type __integerMin6000Max1024000 = number;

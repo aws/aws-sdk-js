@@ -45,6 +45,22 @@ declare class MediaLive extends Service {
    */
   createInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.CreateInputSecurityGroupResponse) => void): Request<MediaLive.Types.CreateInputSecurityGroupResponse, AWSError>;
   /**
+   * Create a new multiplex.
+   */
+  createMultiplex(params: MediaLive.Types.CreateMultiplexRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateMultiplexResponse) => void): Request<MediaLive.Types.CreateMultiplexResponse, AWSError>;
+  /**
+   * Create a new multiplex.
+   */
+  createMultiplex(callback?: (err: AWSError, data: MediaLive.Types.CreateMultiplexResponse) => void): Request<MediaLive.Types.CreateMultiplexResponse, AWSError>;
+  /**
+   * Create a new program in the multiplex.
+   */
+  createMultiplexProgram(params: MediaLive.Types.CreateMultiplexProgramRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateMultiplexProgramResponse) => void): Request<MediaLive.Types.CreateMultiplexProgramResponse, AWSError>;
+  /**
+   * Create a new program in the multiplex.
+   */
+  createMultiplexProgram(callback?: (err: AWSError, data: MediaLive.Types.CreateMultiplexProgramResponse) => void): Request<MediaLive.Types.CreateMultiplexProgramResponse, AWSError>;
+  /**
    * Create tags for a resource
    */
   createTags(params: MediaLive.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -76,6 +92,22 @@ declare class MediaLive extends Service {
    * Deletes an Input Security Group
    */
   deleteInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.DeleteInputSecurityGroupResponse) => void): Request<MediaLive.Types.DeleteInputSecurityGroupResponse, AWSError>;
+  /**
+   * Delete a multiplex. The multiplex must be idle.
+   */
+  deleteMultiplex(params: MediaLive.Types.DeleteMultiplexRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteMultiplexResponse) => void): Request<MediaLive.Types.DeleteMultiplexResponse, AWSError>;
+  /**
+   * Delete a multiplex. The multiplex must be idle.
+   */
+  deleteMultiplex(callback?: (err: AWSError, data: MediaLive.Types.DeleteMultiplexResponse) => void): Request<MediaLive.Types.DeleteMultiplexResponse, AWSError>;
+  /**
+   * Delete a program from a multiplex.
+   */
+  deleteMultiplexProgram(params: MediaLive.Types.DeleteMultiplexProgramRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteMultiplexProgramResponse) => void): Request<MediaLive.Types.DeleteMultiplexProgramResponse, AWSError>;
+  /**
+   * Delete a program from a multiplex.
+   */
+  deleteMultiplexProgram(callback?: (err: AWSError, data: MediaLive.Types.DeleteMultiplexProgramResponse) => void): Request<MediaLive.Types.DeleteMultiplexProgramResponse, AWSError>;
   /**
    * Delete an expired reservation.
    */
@@ -125,6 +157,22 @@ declare class MediaLive extends Service {
    */
   describeInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.DescribeInputSecurityGroupResponse) => void): Request<MediaLive.Types.DescribeInputSecurityGroupResponse, AWSError>;
   /**
+   * Gets details about a multiplex.
+   */
+  describeMultiplex(params: MediaLive.Types.DescribeMultiplexRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Gets details about a multiplex.
+   */
+  describeMultiplex(callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Get the details for a program in a multiplex.
+   */
+  describeMultiplexProgram(params: MediaLive.Types.DescribeMultiplexProgramRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexProgramResponse) => void): Request<MediaLive.Types.DescribeMultiplexProgramResponse, AWSError>;
+  /**
+   * Get the details for a program in a multiplex.
+   */
+  describeMultiplexProgram(callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexProgramResponse) => void): Request<MediaLive.Types.DescribeMultiplexProgramResponse, AWSError>;
+  /**
    * Get details for an offering.
    */
   describeOffering(params: MediaLive.Types.DescribeOfferingRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeOfferingResponse) => void): Request<MediaLive.Types.DescribeOfferingResponse, AWSError>;
@@ -173,6 +221,22 @@ declare class MediaLive extends Service {
    */
   listInputs(callback?: (err: AWSError, data: MediaLive.Types.ListInputsResponse) => void): Request<MediaLive.Types.ListInputsResponse, AWSError>;
   /**
+   * List the programs that currently exist for a specific multiplex.
+   */
+  listMultiplexPrograms(params: MediaLive.Types.ListMultiplexProgramsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListMultiplexProgramsResponse) => void): Request<MediaLive.Types.ListMultiplexProgramsResponse, AWSError>;
+  /**
+   * List the programs that currently exist for a specific multiplex.
+   */
+  listMultiplexPrograms(callback?: (err: AWSError, data: MediaLive.Types.ListMultiplexProgramsResponse) => void): Request<MediaLive.Types.ListMultiplexProgramsResponse, AWSError>;
+  /**
+   * Retrieve a list of the existing multiplexes.
+   */
+  listMultiplexes(params: MediaLive.Types.ListMultiplexesRequest, callback?: (err: AWSError, data: MediaLive.Types.ListMultiplexesResponse) => void): Request<MediaLive.Types.ListMultiplexesResponse, AWSError>;
+  /**
+   * Retrieve a list of the existing multiplexes.
+   */
+  listMultiplexes(callback?: (err: AWSError, data: MediaLive.Types.ListMultiplexesResponse) => void): Request<MediaLive.Types.ListMultiplexesResponse, AWSError>;
+  /**
    * List offerings available for purchase.
    */
   listOfferings(params: MediaLive.Types.ListOfferingsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListOfferingsResponse) => void): Request<MediaLive.Types.ListOfferingsResponse, AWSError>;
@@ -213,6 +277,14 @@ declare class MediaLive extends Service {
    */
   startChannel(callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
   /**
+   * Start (run) the multiplex. Starting the multiplex does not start the channels. You must explicitly start each channel.
+   */
+  startMultiplex(params: MediaLive.Types.StartMultiplexRequest, callback?: (err: AWSError, data: MediaLive.Types.StartMultiplexResponse) => void): Request<MediaLive.Types.StartMultiplexResponse, AWSError>;
+  /**
+   * Start (run) the multiplex. Starting the multiplex does not start the channels. You must explicitly start each channel.
+   */
+  startMultiplex(callback?: (err: AWSError, data: MediaLive.Types.StartMultiplexResponse) => void): Request<MediaLive.Types.StartMultiplexResponse, AWSError>;
+  /**
    * Stops a running channel
    */
   stopChannel(params: MediaLive.Types.StopChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.StopChannelResponse) => void): Request<MediaLive.Types.StopChannelResponse, AWSError>;
@@ -220,6 +292,14 @@ declare class MediaLive extends Service {
    * Stops a running channel
    */
   stopChannel(callback?: (err: AWSError, data: MediaLive.Types.StopChannelResponse) => void): Request<MediaLive.Types.StopChannelResponse, AWSError>;
+  /**
+   * Stops a running multiplex. If the multiplex isn't running, this action has no effect.
+   */
+  stopMultiplex(params: MediaLive.Types.StopMultiplexRequest, callback?: (err: AWSError, data: MediaLive.Types.StopMultiplexResponse) => void): Request<MediaLive.Types.StopMultiplexResponse, AWSError>;
+  /**
+   * Stops a running multiplex. If the multiplex isn't running, this action has no effect.
+   */
+  stopMultiplex(callback?: (err: AWSError, data: MediaLive.Types.StopMultiplexResponse) => void): Request<MediaLive.Types.StopMultiplexResponse, AWSError>;
   /**
    * Updates a channel.
    */
@@ -252,6 +332,22 @@ declare class MediaLive extends Service {
    * Update an Input Security Group's Whilelists.
    */
   updateInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.UpdateInputSecurityGroupResponse) => void): Request<MediaLive.Types.UpdateInputSecurityGroupResponse, AWSError>;
+  /**
+   * Updates a multiplex.
+   */
+  updateMultiplex(params: MediaLive.Types.UpdateMultiplexRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateMultiplexResponse) => void): Request<MediaLive.Types.UpdateMultiplexResponse, AWSError>;
+  /**
+   * Updates a multiplex.
+   */
+  updateMultiplex(callback?: (err: AWSError, data: MediaLive.Types.UpdateMultiplexResponse) => void): Request<MediaLive.Types.UpdateMultiplexResponse, AWSError>;
+  /**
+   * Update a program in a multiplex.
+   */
+  updateMultiplexProgram(params: MediaLive.Types.UpdateMultiplexProgramRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateMultiplexProgramResponse) => void): Request<MediaLive.Types.UpdateMultiplexProgramResponse, AWSError>;
+  /**
+   * Update a program in a multiplex.
+   */
+  updateMultiplexProgram(callback?: (err: AWSError, data: MediaLive.Types.UpdateMultiplexProgramResponse) => void): Request<MediaLive.Types.UpdateMultiplexProgramResponse, AWSError>;
   /**
    * Update reservation.
    */
@@ -292,6 +388,38 @@ declare class MediaLive extends Service {
    * Waits for the channelDeleted state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 20 times). Wait until a channel has been deleted
    */
   waitFor(state: "channelDeleted", callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
+  /**
+   * Waits for the multiplexCreated state by periodically calling the underlying MediaLive.describeMultiplexoperation every 3 seconds (at most 5 times). Wait until a multiplex has been created
+   */
+  waitFor(state: "multiplexCreated", params: MediaLive.Types.DescribeMultiplexRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the multiplexCreated state by periodically calling the underlying MediaLive.describeMultiplexoperation every 3 seconds (at most 5 times). Wait until a multiplex has been created
+   */
+  waitFor(state: "multiplexCreated", callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the multiplexRunning state by periodically calling the underlying MediaLive.describeMultiplexoperation every 5 seconds (at most 120 times). Wait until a multiplex is running
+   */
+  waitFor(state: "multiplexRunning", params: MediaLive.Types.DescribeMultiplexRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the multiplexRunning state by periodically calling the underlying MediaLive.describeMultiplexoperation every 5 seconds (at most 120 times). Wait until a multiplex is running
+   */
+  waitFor(state: "multiplexRunning", callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the multiplexStopped state by periodically calling the underlying MediaLive.describeMultiplexoperation every 5 seconds (at most 28 times). Wait until a multiplex has is stopped
+   */
+  waitFor(state: "multiplexStopped", params: MediaLive.Types.DescribeMultiplexRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the multiplexStopped state by periodically calling the underlying MediaLive.describeMultiplexoperation every 5 seconds (at most 28 times). Wait until a multiplex has is stopped
+   */
+  waitFor(state: "multiplexStopped", callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the multiplexDeleted state by periodically calling the underlying MediaLive.describeMultiplexoperation every 5 seconds (at most 20 times). Wait until a multiplex has been deleted
+   */
+  waitFor(state: "multiplexDeleted", params: MediaLive.Types.DescribeMultiplexRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the multiplexDeleted state by periodically calling the underlying MediaLive.describeMultiplexoperation every 5 seconds (at most 20 times). Wait until a multiplex has been deleted
+   */
+  waitFor(state: "multiplexDeleted", callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
 }
 declare namespace MediaLive {
   export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
@@ -1013,6 +1141,62 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export interface CreateInputSecurityGroupResponse {
     SecurityGroup?: InputSecurityGroup;
   }
+  export interface CreateMultiplexProgramRequest {
+    /**
+     * ID of the multiplex where the program is to be created.
+     */
+    MultiplexId: __string;
+    /**
+     * The settings for this multiplex program.
+     */
+    MultiplexProgramSettings: MultiplexProgramSettings;
+    /**
+     * Name of multiplex program.
+     */
+    ProgramName: __string;
+    /**
+     * Unique request ID. This prevents retries from creating multiple
+resources.
+
+     */
+    RequestId: __string;
+  }
+  export interface CreateMultiplexProgramResponse {
+    /**
+     * The newly created multiplex program.
+     */
+    MultiplexProgram?: MultiplexProgram;
+  }
+  export interface CreateMultiplexRequest {
+    /**
+     * A list of availability zones for the multiplex. You must specify exactly two.
+     */
+    AvailabilityZones: __listOf__string;
+    /**
+     * Configuration for a multiplex event.
+     */
+    MultiplexSettings: MultiplexSettings;
+    /**
+     * Name of multiplex.
+     */
+    Name: __string;
+    /**
+     * Unique request ID. This prevents retries from creating multiple
+resources.
+
+     */
+    RequestId: __string;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateMultiplexResponse {
+    /**
+     * The newly created multiplex.
+     */
+    Multiplex?: Multiplex;
+  }
   export interface CreateTagsRequest {
     ResourceArn: __string;
     Tags?: Tags;
@@ -1094,6 +1278,82 @@ one destination per packager.
     InputSecurityGroupId: __string;
   }
   export interface DeleteInputSecurityGroupResponse {
+  }
+  export interface DeleteMultiplexProgramRequest {
+    /**
+     * The ID of the multiplex that the program belongs to.
+     */
+    MultiplexId: __string;
+    /**
+     * The multiplex program name.
+     */
+    ProgramName: __string;
+  }
+  export interface DeleteMultiplexProgramResponse {
+    /**
+     * The MediaLive channel associated with the program.
+     */
+    ChannelId?: __string;
+    /**
+     * The settings for this multiplex program.
+     */
+    MultiplexProgramSettings?: MultiplexProgramSettings;
+    /**
+     * The packet identifier map for this multiplex program.
+     */
+    PacketIdentifiersMap?: MultiplexProgramPacketIdentifiersMap;
+    /**
+     * The name of the multiplex program.
+     */
+    ProgramName?: __string;
+  }
+  export interface DeleteMultiplexRequest {
+    /**
+     * The ID of the multiplex.
+     */
+    MultiplexId: __string;
+  }
+  export interface DeleteMultiplexResponse {
+    /**
+     * The unique arn of the multiplex.
+     */
+    Arn?: __string;
+    /**
+     * A list of availability zones for the multiplex.
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * A list of the multiplex output destinations.
+     */
+    Destinations?: __listOfMultiplexOutputDestination;
+    /**
+     * The unique id of the multiplex.
+     */
+    Id?: __string;
+    /**
+     * Configuration for a multiplex event.
+     */
+    MultiplexSettings?: MultiplexSettings;
+    /**
+     * The name of the multiplex.
+     */
+    Name?: __string;
+    /**
+     * The number of currently healthy pipelines.
+     */
+    PipelinesRunningCount?: __integer;
+    /**
+     * The number of programs in the multiplex.
+     */
+    ProgramCount?: __integer;
+    /**
+     * The current state of the multiplex.
+     */
+    State?: MultiplexState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface DeleteReservationRequest {
     /**
@@ -1345,6 +1605,82 @@ during input switch actions. Presently, this functionality only works with MP4_F
      * Whitelist rules and their sync status
      */
     WhitelistRules?: __listOfInputWhitelistRule;
+  }
+  export interface DescribeMultiplexProgramRequest {
+    /**
+     * The ID of the multiplex that the program belongs to.
+     */
+    MultiplexId: __string;
+    /**
+     * The name of the program.
+     */
+    ProgramName: __string;
+  }
+  export interface DescribeMultiplexProgramResponse {
+    /**
+     * The MediaLive channel associated with the program.
+     */
+    ChannelId?: __string;
+    /**
+     * The settings for this multiplex program.
+     */
+    MultiplexProgramSettings?: MultiplexProgramSettings;
+    /**
+     * The packet identifier map for this multiplex program.
+     */
+    PacketIdentifiersMap?: MultiplexProgramPacketIdentifiersMap;
+    /**
+     * The name of the multiplex program.
+     */
+    ProgramName?: __string;
+  }
+  export interface DescribeMultiplexRequest {
+    /**
+     * The ID of the multiplex.
+     */
+    MultiplexId: __string;
+  }
+  export interface DescribeMultiplexResponse {
+    /**
+     * The unique arn of the multiplex.
+     */
+    Arn?: __string;
+    /**
+     * A list of availability zones for the multiplex.
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * A list of the multiplex output destinations.
+     */
+    Destinations?: __listOfMultiplexOutputDestination;
+    /**
+     * The unique id of the multiplex.
+     */
+    Id?: __string;
+    /**
+     * Configuration for a multiplex event.
+     */
+    MultiplexSettings?: MultiplexSettings;
+    /**
+     * The name of the multiplex.
+     */
+    Name?: __string;
+    /**
+     * The number of currently healthy pipelines.
+     */
+    PipelinesRunningCount?: __integer;
+    /**
+     * The number of programs in the multiplex.
+     */
+    ProgramCount?: __integer;
+    /**
+     * The current state of the multiplex.
+     */
+    State?: MultiplexState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface DescribeOfferingRequest {
     /**
@@ -1759,6 +2095,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      * Configuration settings that apply to the event as a whole.
      */
     GlobalConfiguration?: GlobalConfiguration;
+    /**
+     * Nielsen configuration settings.
+     */
+    NielsenConfiguration?: NielsenConfiguration;
     OutputGroups: __listOfOutputGroup;
     /**
      * Contains settings used to acquire and adjust timecode information from inputs.
@@ -1813,9 +2153,9 @@ during input switch actions. Presently, this functionality only works with MP4_F
   }
   export interface FrameCaptureSettings {
     /**
-     * The frequency, in seconds, for capturing frames for inclusion in the output.  For example, "10" means capture a frame every 10 seconds.
+     * The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.
      */
-    CaptureInterval: __integerMin1Max3600;
+    CaptureInterval: __integerMin1Max3600000;
   }
   export interface GlobalConfiguration {
     /**
@@ -1935,9 +2275,11 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
      */
     GopNumBFrames?: __integerMin0Max7;
     /**
-     * GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero.
+     * GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
+If gopSizeUnits is frames, gopSize must be an integer and must be greater than or equal to 1.
+If gopSizeUnits is seconds, gopSize must be greater than 0, but need not be an integer.
      */
-    GopSize?: __doubleMin1;
+    GopSize?: __double;
     /**
      * Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time.
      */
@@ -1957,7 +2299,7 @@ For VBR: Set the maximum bitrate in order to accommodate expected spikes in the 
      */
     MaxBitrate?: __integerMin1000;
     /**
-     * Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
+     * Only meaningful if sceneChangeDetect is set to enabled.  Defaults to 5 if multiplex rate control is used.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
      */
     MinIInterval?: __integerMin0Max30;
     /**
@@ -2062,7 +2404,7 @@ This field is optional; when no value is specified the encoder will choose the n
   export type H265Level = "H265_LEVEL_1"|"H265_LEVEL_2"|"H265_LEVEL_2_1"|"H265_LEVEL_3"|"H265_LEVEL_3_1"|"H265_LEVEL_4"|"H265_LEVEL_4_1"|"H265_LEVEL_5"|"H265_LEVEL_5_1"|"H265_LEVEL_5_2"|"H265_LEVEL_6"|"H265_LEVEL_6_1"|"H265_LEVEL_6_2"|"H265_LEVEL_AUTO"|string;
   export type H265LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string;
   export type H265Profile = "MAIN"|"MAIN_10BIT"|string;
-  export type H265RateControlMode = "CBR"|"QVBR"|string;
+  export type H265RateControlMode = "CBR"|"MULTIPLEX"|"QVBR"|string;
   export type H265ScanType = "PROGRESSIVE"|string;
   export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H265Settings {
@@ -2115,9 +2457,11 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     GopClosedCadence?: __integerMin0;
     /**
-     * GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero.
+     * GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
+If gopSizeUnits is frames, gopSize must be an integer and must be greater than or equal to 1.
+If gopSizeUnits is seconds, gopSize must be greater than 0, but need not be an integer.
      */
-    GopSize?: __doubleMin1;
+    GopSize?: __double;
     /**
      * Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time.
      */
@@ -2135,7 +2479,7 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     MaxBitrate?: __integerMin100000Max40000000;
     /**
-     * Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
+     * Only meaningful if sceneChangeDetect is set to enabled.  Defaults to 5 if multiplex rate control is used.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
      */
     MinIInterval?: __integerMin0Max30;
     /**
@@ -2907,6 +3251,50 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     Inputs?: __listOfInput;
     NextToken?: __string;
   }
+  export interface ListMultiplexProgramsRequest {
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The ID of the multiplex that the programs belong to.
+     */
+    MultiplexId: __string;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListMultiplexProgramsResponse {
+    /**
+     * List of multiplex programs.
+     */
+    MultiplexPrograms?: __listOfMultiplexProgramSummary;
+    /**
+     * Token for the next ListMultiplexProgram request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListMultiplexesRequest {
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListMultiplexesResponse {
+    /**
+     * List of multiplexes.
+     */
+    Multiplexes?: __listOfMultiplexSummary;
+    /**
+     * Token for the next ListMultiplexes request.
+     */
+    NextToken?: __string;
+  }
   export interface ListOfferingsRequest {
     /**
      * Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
@@ -2922,6 +3310,10 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
      * Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
      */
     Codec?: __string;
+    /**
+     * Filter by offering duration, e.g. '12'
+     */
+    Duration?: __string;
     MaxResults?: MaxResults;
     /**
      * Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
@@ -2934,11 +3326,11 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     MaximumFramerate?: __string;
     NextToken?: __string;
     /**
-     * Filter by resolution, 'SD', 'HD', or 'UHD'
+     * Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
      */
     Resolution?: __string;
     /**
-     * Filter by resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+     * Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
      */
     ResourceType?: __string;
     /**
@@ -2984,11 +3376,11 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     MaximumFramerate?: __string;
     NextToken?: __string;
     /**
-     * Filter by resolution, 'SD', 'HD', or 'UHD'
+     * Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
      */
     Resolution?: __string;
     /**
-     * Filter by resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+     * Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
      */
     ResourceType?: __string;
     /**
@@ -3031,6 +3423,7 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID"|string;
   export type M2tsEsRateInPes = "EXCLUDE"|"INCLUDE"|string;
   export type M2tsKlv = "NONE"|"PASSTHROUGH"|string;
+  export type M2tsNielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export type M2tsPcrControl = "CONFIGURED_PCR_PERIOD"|"PCR_EVERY_PES_PACKET"|string;
   export type M2tsRateMode = "CBR"|"VBR"|string;
   export type M2tsScte35Control = "NONE"|"PASSTHROUGH"|string;
@@ -3146,6 +3539,10 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
      */
     KlvDataPids?: __string;
     /**
+     * If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
+     */
+    NielsenId3Behavior?: M2tsNielsenId3Behavior;
+    /**
      * Value in bits per second of extra null packets to insert into the transport stream. This can be used if a downstream encryption system requires periodic null packets.
      */
     NullPacketBitrate?: __doubleMin0;
@@ -3227,6 +3624,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     VideoPid?: __string;
   }
   export type M2tsTimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type M3u8NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export type M3u8PcrControl = "CONFIGURED_PCR_PERIOD"|"PCR_EVERY_PES_PACKET"|string;
   export type M3u8Scte35Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export interface M3u8Settings {
@@ -3242,6 +3640,10 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      * This parameter is unused and deprecated.
      */
     EcmPid?: __string;
+    /**
+     * If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
+     */
+    NielsenId3Behavior?: M3u8NielsenId3Behavior;
     /**
      * The number of milliseconds between instances of this table in the output transport stream. A value of \"0\" writes out the PMT once per segment file.
      */
@@ -3437,6 +3839,231 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     NameModifier?: __string;
   }
+  export interface Multiplex {
+    /**
+     * The unique arn of the multiplex.
+     */
+    Arn?: __string;
+    /**
+     * A list of availability zones for the multiplex.
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * A list of the multiplex output destinations.
+     */
+    Destinations?: __listOfMultiplexOutputDestination;
+    /**
+     * The unique id of the multiplex.
+     */
+    Id?: __string;
+    /**
+     * Configuration for a multiplex event.
+     */
+    MultiplexSettings?: MultiplexSettings;
+    /**
+     * The name of the multiplex.
+     */
+    Name?: __string;
+    /**
+     * The number of currently healthy pipelines.
+     */
+    PipelinesRunningCount?: __integer;
+    /**
+     * The number of programs in the multiplex.
+     */
+    ProgramCount?: __integer;
+    /**
+     * The current state of the multiplex.
+     */
+    State?: MultiplexState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+  }
+  export interface MultiplexGroupSettings {
+  }
+  export interface MultiplexMediaConnectOutputDestinationSettings {
+    /**
+     * The MediaConnect entitlement ARN available as a Flow source.
+     */
+    EntitlementArn?: __stringMin1;
+  }
+  export interface MultiplexOutputDestination {
+    /**
+     * Multiplex MediaConnect output destination settings.
+     */
+    MediaConnectSettings?: MultiplexMediaConnectOutputDestinationSettings;
+  }
+  export interface MultiplexOutputSettings {
+    /**
+     * Destination is a Multiplex.
+     */
+    Destination: OutputLocationRef;
+  }
+  export interface MultiplexProgram {
+    /**
+     * The MediaLive channel associated with the program.
+     */
+    ChannelId?: __string;
+    /**
+     * The settings for this multiplex program.
+     */
+    MultiplexProgramSettings?: MultiplexProgramSettings;
+    /**
+     * The packet identifier map for this multiplex program.
+     */
+    PacketIdentifiersMap?: MultiplexProgramPacketIdentifiersMap;
+    /**
+     * The name of the multiplex program.
+     */
+    ProgramName?: __string;
+  }
+  export interface MultiplexProgramChannelDestinationSettings {
+    /**
+     * The ID of the Multiplex that the encoder is providing output to. You do not need to specify the individual inputs to the Multiplex; MediaLive will handle the connection of the two MediaLive pipelines to the two Multiplex instances.
+The Multiplex must be in the same region as the Channel.
+     */
+    MultiplexId?: __stringMin1;
+    /**
+     * The program name of the Multiplex program that the encoder is providing output to.
+     */
+    ProgramName?: __stringMin1;
+  }
+  export interface MultiplexProgramPacketIdentifiersMap {
+    AudioPids?: __listOf__integer;
+    DvbSubPids?: __listOf__integer;
+    DvbTeletextPid?: __integer;
+    EtvPlatformPid?: __integer;
+    EtvSignalPid?: __integer;
+    KlvDataPids?: __listOf__integer;
+    PcrPid?: __integer;
+    PmtPid?: __integer;
+    PrivateMetadataPid?: __integer;
+    Scte27Pids?: __listOf__integer;
+    Scte35Pid?: __integer;
+    TimedMetadataPid?: __integer;
+    VideoPid?: __integer;
+  }
+  export interface MultiplexProgramServiceDescriptor {
+    /**
+     * Name of the provider.
+     */
+    ProviderName: __stringMax256;
+    /**
+     * Name of the service.
+     */
+    ServiceName: __stringMax256;
+  }
+  export interface MultiplexProgramSettings {
+    /**
+     * Unique program number.
+     */
+    ProgramNumber: __integerMin0Max65535;
+    /**
+     * Transport stream service descriptor configuration for the Multiplex program.
+     */
+    ServiceDescriptor?: MultiplexProgramServiceDescriptor;
+    /**
+     * Program video settings configuration.
+     */
+    VideoSettings?: MultiplexVideoSettings;
+  }
+  export interface MultiplexProgramSummary {
+    /**
+     * The MediaLive Channel associated with the program.
+     */
+    ChannelId?: __string;
+    /**
+     * The name of the multiplex program.
+     */
+    ProgramName?: __string;
+  }
+  export interface MultiplexSettings {
+    /**
+     * Maximum video buffer delay in milliseconds.
+     */
+    MaximumVideoBufferDelayMilliseconds?: __integerMin1000Max3000;
+    /**
+     * Transport stream bit rate.
+     */
+    TransportStreamBitrate: __integerMin1000000Max100000000;
+    /**
+     * Transport stream ID.
+     */
+    TransportStreamId: __integerMin0Max65535;
+    /**
+     * Transport stream reserved bit rate.
+     */
+    TransportStreamReservedBitrate?: __integerMin0Max100000000;
+  }
+  export interface MultiplexSettingsSummary {
+    /**
+     * Transport stream bit rate.
+     */
+    TransportStreamBitrate?: __integerMin1000000Max100000000;
+  }
+  export type MultiplexState = "CREATING"|"CREATE_FAILED"|"IDLE"|"STARTING"|"RUNNING"|"RECOVERING"|"STOPPING"|"DELETING"|"DELETED"|string;
+  export interface MultiplexStatmuxVideoSettings {
+    /**
+     * Maximum statmux bitrate.
+     */
+    MaximumBitrate?: __integerMin100000Max100000000;
+    /**
+     * Minimum statmux bitrate.
+     */
+    MinimumBitrate?: __integerMin100000Max100000000;
+  }
+  export interface MultiplexSummary {
+    /**
+     * The unique arn of the multiplex.
+     */
+    Arn?: __string;
+    /**
+     * A list of availability zones for the multiplex.
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * The unique id of the multiplex.
+     */
+    Id?: __string;
+    /**
+     * Configuration for a multiplex event.
+     */
+    MultiplexSettings?: MultiplexSettingsSummary;
+    /**
+     * The name of the multiplex.
+     */
+    Name?: __string;
+    /**
+     * The number of currently healthy pipelines.
+     */
+    PipelinesRunningCount?: __integer;
+    /**
+     * The number of programs in the multiplex.
+     */
+    ProgramCount?: __integer;
+    /**
+     * The current state of the multiplex.
+     */
+    State?: MultiplexState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+  }
+  export interface MultiplexVideoSettings {
+    /**
+     * The constant bitrate configuration for the video encode.
+When this field is defined, StatmuxSettings must be undefined.
+     */
+    ConstantBitrate?: __integerMin100000Max100000000;
+    /**
+     * Statmux rate control settings.
+When this field is defined, ConstantBitrate must be undefined.
+     */
+    StatmuxSettings?: MultiplexStatmuxVideoSettings;
+  }
   export type NetworkInputServerValidation = "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME"|"CHECK_CRYPTOGRAPHY_ONLY"|string;
   export interface NetworkInputSettings {
     /**
@@ -3448,6 +4075,17 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     ServerValidation?: NetworkInputServerValidation;
   }
+  export interface NielsenConfiguration {
+    /**
+     * Enter the Distributor ID assigned to your organization by Nielsen.
+     */
+    DistributorId?: __string;
+    /**
+     * Enables Nielsen PCM to ID3 tagging
+     */
+    NielsenPcmToId3Tagging?: NielsenPcmToId3TaggingState;
+  }
+  export type NielsenPcmToId3TaggingState = "DISABLED"|"ENABLED"|string;
   export interface Offering {
     /**
      * Unique offering ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
@@ -3528,6 +4166,10 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     MediaPackageSettings?: __listOfMediaPackageOutputDestinationSettings;
     /**
+     * Destination settings for a Multiplex output; one destination for both encoders.
+     */
+    MultiplexSettings?: MultiplexProgramChannelDestinationSettings;
+    /**
      * Destination settings for a standard output; one destination for each redundant encoder.
      */
     Settings?: __listOfOutputDestinationSettings;
@@ -3567,6 +4209,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
     HlsGroupSettings?: HlsGroupSettings;
     MediaPackageGroupSettings?: MediaPackageGroupSettings;
     MsSmoothGroupSettings?: MsSmoothGroupSettings;
+    MultiplexGroupSettings?: MultiplexGroupSettings;
     RtmpGroupSettings?: RtmpGroupSettings;
     UdpGroupSettings?: UdpGroupSettings;
   }
@@ -3579,6 +4222,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
     HlsOutputSettings?: HlsOutputSettings;
     MediaPackageOutputSettings?: MediaPackageOutputSettings;
     MsSmoothOutputSettings?: MsSmoothOutputSettings;
+    MultiplexOutputSettings?: MultiplexOutputSettings;
     RtmpOutputSettings?: RtmpOutputSettings;
     UdpOutputSettings?: UdpOutputSettings;
   }
@@ -3733,7 +4377,7 @@ Valid values: 1, 2, 4, 6, 8
   export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|string;
   export type ReservationMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
   export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string;
-  export type ReservationResolution = "SD"|"HD"|"UHD"|string;
+  export type ReservationResolution = "SD"|"HD"|"FHD"|"UHD"|string;
   export interface ReservationResourceSpecification {
     /**
      * Channel class, e.g. 'STANDARD'
@@ -3756,7 +4400,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     Resolution?: ReservationResolution;
     /**
-     * Resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+     * Resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
      */
     ResourceType?: ReservationResourceType;
     /**
@@ -3768,7 +4412,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     VideoQuality?: ReservationVideoQuality;
   }
-  export type ReservationResourceType = "INPUT"|"OUTPUT"|"CHANNEL"|string;
+  export type ReservationResourceType = "INPUT"|"OUTPUT"|"MULTIPLEX"|"CHANNEL"|string;
   export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|string;
   export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
   export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
@@ -4125,6 +4769,54 @@ one destination per packager.
      */
     Tags?: Tags;
   }
+  export interface StartMultiplexRequest {
+    /**
+     * The ID of the multiplex.
+     */
+    MultiplexId: __string;
+  }
+  export interface StartMultiplexResponse {
+    /**
+     * The unique arn of the multiplex.
+     */
+    Arn?: __string;
+    /**
+     * A list of availability zones for the multiplex.
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * A list of the multiplex output destinations.
+     */
+    Destinations?: __listOfMultiplexOutputDestination;
+    /**
+     * The unique id of the multiplex.
+     */
+    Id?: __string;
+    /**
+     * Configuration for a multiplex event.
+     */
+    MultiplexSettings?: MultiplexSettings;
+    /**
+     * The name of the multiplex.
+     */
+    Name?: __string;
+    /**
+     * The number of currently healthy pipelines.
+     */
+    PipelinesRunningCount?: __integer;
+    /**
+     * The number of programs in the multiplex.
+     */
+    ProgramCount?: __integer;
+    /**
+     * The current state of the multiplex.
+     */
+    State?: MultiplexState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+  }
   export interface StartTimecode {
     /**
      * The timecode for the frame where you want to start the clip. Optional; if not specified, the clip starts at first frame in the file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.
@@ -4250,6 +4942,54 @@ one destination per packager.
      */
     RoleArn?: __string;
     State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+  }
+  export interface StopMultiplexRequest {
+    /**
+     * The ID of the multiplex.
+     */
+    MultiplexId: __string;
+  }
+  export interface StopMultiplexResponse {
+    /**
+     * The unique arn of the multiplex.
+     */
+    Arn?: __string;
+    /**
+     * A list of availability zones for the multiplex.
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * A list of the multiplex output destinations.
+     */
+    Destinations?: __listOfMultiplexOutputDestination;
+    /**
+     * The unique id of the multiplex.
+     */
+    Id?: __string;
+    /**
+     * Configuration for a multiplex event.
+     */
+    MultiplexSettings?: MultiplexSettings;
+    /**
+     * The name of the multiplex.
+     */
+    Name?: __string;
+    /**
+     * The number of currently healthy pipelines.
+     */
+    PipelinesRunningCount?: __integer;
+    /**
+     * The number of programs in the multiplex.
+     */
+    ProgramCount?: __integer;
+    /**
+     * The current state of the multiplex.
+     */
+    State?: MultiplexState;
     /**
      * A collection of key-value pairs.
      */
@@ -4435,6 +5175,46 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export interface UpdateInputSecurityGroupResponse {
     SecurityGroup?: InputSecurityGroup;
   }
+  export interface UpdateMultiplexProgramRequest {
+    /**
+     * The ID of the multiplex of the program to update.
+     */
+    MultiplexId: __string;
+    /**
+     * The new settings for a multiplex program.
+     */
+    MultiplexProgramSettings?: MultiplexProgramSettings;
+    /**
+     * The name of the program to update.
+     */
+    ProgramName: __string;
+  }
+  export interface UpdateMultiplexProgramResponse {
+    /**
+     * The updated multiplex program.
+     */
+    MultiplexProgram?: MultiplexProgram;
+  }
+  export interface UpdateMultiplexRequest {
+    /**
+     * ID of the multiplex to update.
+     */
+    MultiplexId: __string;
+    /**
+     * The new settings for a multiplex.
+     */
+    MultiplexSettings?: MultiplexSettings;
+    /**
+     * Name of the multiplex.
+     */
+    Name?: __string;
+  }
+  export interface UpdateMultiplexResponse {
+    /**
+     * The updated multiplex.
+     */
+    Multiplex?: Multiplex;
+  }
   export interface UpdateReservationRequest {
     /**
      * Name of the reservation
@@ -4530,6 +5310,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin0Max1000 = number;
   export type __integerMin0Max10000 = number;
   export type __integerMin0Max1000000 = number;
+  export type __integerMin0Max100000000 = number;
   export type __integerMin0Max128 = number;
   export type __integerMin0Max15 = number;
   export type __integerMin0Max255 = number;
@@ -4544,8 +5325,11 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin0Max8191 = number;
   export type __integerMin1 = number;
   export type __integerMin1000 = number;
+  export type __integerMin1000000Max100000000 = number;
+  export type __integerMin100000Max100000000 = number;
   export type __integerMin100000Max40000000 = number;
   export type __integerMin100000Max80000000 = number;
+  export type __integerMin1000Max3000 = number;
   export type __integerMin1000Max30000 = number;
   export type __integerMin1Max10 = number;
   export type __integerMin1Max1000000 = number;
@@ -4554,7 +5338,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin1Max3003 = number;
   export type __integerMin1Max31 = number;
   export type __integerMin1Max32 = number;
-  export type __integerMin1Max3600 = number;
+  export type __integerMin1Max3600000 = number;
   export type __integerMin1Max4 = number;
   export type __integerMin1Max5 = number;
   export type __integerMin1Max6 = number;
@@ -4590,6 +5374,9 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfMediaConnectFlow = MediaConnectFlow[];
   export type __listOfMediaConnectFlowRequest = MediaConnectFlowRequest[];
   export type __listOfMediaPackageOutputDestinationSettings = MediaPackageOutputDestinationSettings[];
+  export type __listOfMultiplexOutputDestination = MultiplexOutputDestination[];
+  export type __listOfMultiplexProgramSummary = MultiplexProgramSummary[];
+  export type __listOfMultiplexSummary = MultiplexSummary[];
   export type __listOfOffering = Offering[];
   export type __listOfOutput = Output[];
   export type __listOfOutputDestination = OutputDestination[];
@@ -4601,11 +5388,13 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfScheduleAction = ScheduleAction[];
   export type __listOfScte35Descriptor = Scte35Descriptor[];
   export type __listOfVideoDescription = VideoDescription[];
+  export type __listOf__integer = __integer[];
   export type __listOf__string = __string[];
   export type __longMin0Max1099511627775 = number;
   export type __longMin0Max4294967295 = number;
   export type __longMin0Max8589934591 = number;
   export type __string = string;
+  export type __stringMax256 = string;
   export type __stringMax32 = string;
   export type __stringMin1 = string;
   export type __stringMin1Max255 = string;

@@ -133,6 +133,14 @@ declare class Redshift extends Service {
    */
   createHsmConfiguration(callback?: (err: AWSError, data: Redshift.Types.CreateHsmConfigurationResult) => void): Request<Redshift.Types.CreateHsmConfigurationResult, AWSError>;
   /**
+   * Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the ResizeCluster API operation. 
+   */
+  createScheduledAction(params: Redshift.Types.CreateScheduledActionMessage, callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
+  /**
+   * Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the ResizeCluster API operation. 
+   */
+  createScheduledAction(callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
+  /**
    * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   createSnapshotCopyGrant(params: Redshift.Types.CreateSnapshotCopyGrantMessage, callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
@@ -220,6 +228,14 @@ declare class Redshift extends Service {
    * Deletes the specified Amazon Redshift HSM configuration.
    */
   deleteHsmConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a scheduled action. 
+   */
+  deleteScheduledAction(params: Redshift.Types.DeleteScheduledActionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a scheduled action. 
+   */
+  deleteScheduledAction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified snapshot copy grant.
    */
@@ -421,6 +437,14 @@ declare class Redshift extends Service {
    */
   describeResize(callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
   /**
+   * Describes properties of scheduled actions. 
+   */
+  describeScheduledActions(params: Redshift.Types.DescribeScheduledActionsMessage, callback?: (err: AWSError, data: Redshift.Types.ScheduledActionsMessage) => void): Request<Redshift.Types.ScheduledActionsMessage, AWSError>;
+  /**
+   * Describes properties of scheduled actions. 
+   */
+  describeScheduledActions(callback?: (err: AWSError, data: Redshift.Types.ScheduledActionsMessage) => void): Request<Redshift.Types.ScheduledActionsMessage, AWSError>;
+  /**
    * Returns a list of snapshot copy grants owned by the AWS account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   describeSnapshotCopyGrants(params: Redshift.Types.DescribeSnapshotCopyGrantsMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotCopyGrantMessage) => void): Request<Redshift.Types.SnapshotCopyGrantMessage, AWSError>;
@@ -576,6 +600,14 @@ declare class Redshift extends Service {
    * Modifies an existing Amazon Redshift event notification subscription.
    */
   modifyEventSubscription(callback?: (err: AWSError, data: Redshift.Types.ModifyEventSubscriptionResult) => void): Request<Redshift.Types.ModifyEventSubscriptionResult, AWSError>;
+  /**
+   * Modify a scheduled action. 
+   */
+  modifyScheduledAction(params: Redshift.Types.ModifyScheduledActionMessage, callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
+  /**
+   * Modify a scheduled action. 
+   */
+  modifyScheduledAction(callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
   /**
    * Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
    */
@@ -741,7 +773,7 @@ declare namespace Redshift {
     AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
-  export type ActionType = "restore-cluster"|string;
+  export type ActionType = "restore-cluster"|"recommend-node-config"|string;
   export type AssociatedClusterList = ClusterAssociatedToSchedule[];
   export type AttributeList = AccountAttribute[];
   export type AttributeNameList = String[];
@@ -1639,6 +1671,40 @@ declare namespace Redshift {
   export interface CreateHsmConfigurationResult {
     HsmConfiguration?: HsmConfiguration;
   }
+  export interface CreateScheduledActionMessage {
+    /**
+     * The name of the scheduled action. The name must be unique within an account. For more information about this parameter, see ScheduledAction. 
+     */
+    ScheduledActionName: String;
+    /**
+     * A JSON format string of the Amazon Redshift API operation with input parameters. For more information about this parameter, see ScheduledAction. 
+     */
+    TargetAction: ScheduledActionType;
+    /**
+     * The schedule in at( ) or cron( ) format. For more information about this parameter, see ScheduledAction.
+     */
+    Schedule: String;
+    /**
+     * The IAM role to assume to run the target action. For more information about this parameter, see ScheduledAction. 
+     */
+    IamRole: String;
+    /**
+     * The description of the scheduled action. 
+     */
+    ScheduledActionDescription?: String;
+    /**
+     * The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger. For more information about this parameter, see ScheduledAction.
+     */
+    StartTime?: TStamp;
+    /**
+     * The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger. For more information about this parameter, see ScheduledAction. 
+     */
+    EndTime?: TStamp;
+    /**
+     * If true, the schedule is enabled. If false, the scheduled action does not trigger. For more information about state of the scheduled action, see ScheduledAction. 
+     */
+    Enable?: BooleanOptional;
+  }
   export interface CreateSnapshotCopyGrantMessage {
     /**
      * The name of the snapshot copy grant. This name must be unique in the region for the AWS account. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an AWS account.  
@@ -1828,6 +1894,12 @@ declare namespace Redshift {
      * The identifier of the Amazon Redshift HSM configuration to be deleted.
      */
     HsmConfigurationIdentifier: String;
+  }
+  export interface DeleteScheduledActionMessage {
+    /**
+     * The name of the scheduled action to delete. 
+     */
+    ScheduledActionName: String;
   }
   export interface DeleteSnapshotCopyGrantMessage {
     /**
@@ -2186,9 +2258,13 @@ declare namespace Redshift {
   }
   export interface DescribeNodeConfigurationOptionsMessage {
     /**
-     * The action type to evaluate for possible node configurations. Currently, it must be "restore-cluster".
+     * The action type to evaluate for possible node configurations. Specify "restore-cluster" to get configuration combinations based on an existing snapshot. Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. 
      */
     ActionType: ActionType;
+    /**
+     * The identifier of the cluster to evaluate for possible node configurations.
+     */
+    ClusterIdentifier?: String;
     /**
      * The identifier of the snapshot to evaluate for possible node configurations.
      */
@@ -2261,6 +2337,40 @@ declare namespace Redshift {
      * The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive. By default, resize operations for all clusters defined for an AWS account are returned.
      */
     ClusterIdentifier: String;
+  }
+  export interface DescribeScheduledActionsMessage {
+    /**
+     * The name of the scheduled action to retrieve. 
+     */
+    ScheduledActionName?: String;
+    /**
+     * The type of the scheduled actions to retrieve. 
+     */
+    TargetActionType?: ScheduledActionTypeValues;
+    /**
+     * The start time in UTC of the scheduled actions to retrieve. Only active scheduled actions that have invocations after this time are retrieved.
+     */
+    StartTime?: TStamp;
+    /**
+     * The end time in UTC of the scheduled action to retrieve. Only active scheduled actions that have invocations before this time are retrieved.
+     */
+    EndTime?: TStamp;
+    /**
+     * If true, retrieve only active scheduled actions. If false, retrieve only disabled scheduled actions. 
+     */
+    Active?: BooleanOptional;
+    /**
+     * List of scheduled action filters. 
+     */
+    Filters?: ScheduledActionFilterList;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: 100  Constraints: minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
   }
   export interface DescribeSnapshotCopyGrantsMessage {
     /**
@@ -2780,6 +2890,7 @@ declare namespace Redshift {
      */
     UpdateTargets?: EligibleTracksToUpdateList;
   }
+  export type Mode = "standard"|"high-performance"|string;
   export interface ModifyClusterDbRevisionMessage {
     /**
      * The unique identifier of a cluster whose database revision you want to modify.  Example: examplecluster 
@@ -3023,6 +3134,40 @@ declare namespace Redshift {
   export interface ModifyEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface ModifyScheduledActionMessage {
+    /**
+     * The name of the scheduled action to modify. 
+     */
+    ScheduledActionName: String;
+    /**
+     * A modified JSON format of the scheduled action. For more information about this parameter, see ScheduledAction. 
+     */
+    TargetAction?: ScheduledActionType;
+    /**
+     * A modified schedule in either at( ) or cron( ) format. For more information about this parameter, see ScheduledAction.
+     */
+    Schedule?: String;
+    /**
+     * A different IAM role to assume to run the target action. For more information about this parameter, see ScheduledAction.
+     */
+    IamRole?: String;
+    /**
+     * A modified description of the scheduled action. 
+     */
+    ScheduledActionDescription?: String;
+    /**
+     * A modified start time of the scheduled action. For more information about this parameter, see ScheduledAction. 
+     */
+    StartTime?: TStamp;
+    /**
+     * A modified end time of the scheduled action. For more information about this parameter, see ScheduledAction. 
+     */
+    EndTime?: TStamp;
+    /**
+     * A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. 
+     */
+    Enable?: BooleanOptional;
+  }
   export interface ModifySnapshotCopyRetentionPeriodMessage {
     /**
      * The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination AWS Region. Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.
@@ -3063,6 +3208,10 @@ declare namespace Redshift {
      * The estimated disk utilizaton percentage.
      */
     EstimatedDiskUtilizationPercent?: DoubleOptional;
+    /**
+     * The category of the node configuration recommendation.
+     */
+    Mode?: Mode;
   }
   export type NodeConfigurationOptionList = NodeConfigurationOption[];
   export interface NodeConfigurationOptionsFilter {
@@ -3080,7 +3229,7 @@ declare namespace Redshift {
     Values?: ValueStringList;
   }
   export type NodeConfigurationOptionsFilterList = NodeConfigurationOptionsFilter[];
-  export type NodeConfigurationOptionsFilterName = "NodeType"|"NumberOfNodes"|"EstimatedDiskUtilizationPercent"|string;
+  export type NodeConfigurationOptionsFilterName = "NodeType"|"NumberOfNodes"|"EstimatedDiskUtilizationPercent"|"Mode"|string;
   export interface NodeConfigurationOptionsMessage {
     /**
      * A list of valid node configurations.
@@ -3588,23 +3737,23 @@ declare namespace Redshift {
      */
     Status?: String;
     /**
-     * The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.
+     * The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     CurrentRestoreRateInMegaBytesPerSecond?: Double;
     /**
-     * The size of the set of snapshot data used to restore the cluster.
+     * The size of the set of snapshot data used to restore the cluster. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     SnapshotSizeInMegaBytes?: Long;
     /**
-     * The number of megabytes that have been transferred from snapshot storage.
+     * The number of megabytes that have been transferred from snapshot storage. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     ProgressInMegaBytes?: Long;
     /**
-     * The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.
+     * The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     ElapsedTimeInSeconds?: Long;
     /**
-     * The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
+     * The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     EstimatedTimeToCompletionInSeconds?: Long;
   }
@@ -3709,6 +3858,76 @@ declare namespace Redshift {
   }
   export type ScheduleDefinitionList = String[];
   export type ScheduleState = "MODIFYING"|"ACTIVE"|"FAILED"|string;
+  export interface ScheduledAction {
+    /**
+     * The name of the scheduled action. 
+     */
+    ScheduledActionName?: String;
+    /**
+     * A JSON format string of the Amazon Redshift API operation with input parameters.  "{\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}". 
+     */
+    TargetAction?: ScheduledActionType;
+    /**
+     * The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)". Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week Year)". For example, "cron(0, 10, *, *, MON, *)". For more information, see Cron Expressions in the Amazon CloudWatch Events User Guide.
+     */
+    Schedule?: String;
+    /**
+     * The IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Cluster Management Guide. 
+     */
+    IamRole?: String;
+    /**
+     * The description of the scheduled action. 
+     */
+    ScheduledActionDescription?: String;
+    /**
+     * The state of the scheduled action. For example, DISABLED. 
+     */
+    State?: ScheduledActionState;
+    /**
+     * List of times when the scheduled action will run. 
+     */
+    NextInvocations?: ScheduledActionTimeList;
+    /**
+     * The start time in UTC when the schedule is active. Before this time, the scheduled action does not trigger. 
+     */
+    StartTime?: TStamp;
+    /**
+     * The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger. 
+     */
+    EndTime?: TStamp;
+  }
+  export interface ScheduledActionFilter {
+    /**
+     * The type of element to filter. 
+     */
+    Name: ScheduledActionFilterName;
+    /**
+     * List of values. Compare if the value (of type defined by Name) equals an item in the list of scheduled actions. 
+     */
+    Values: ValueStringList;
+  }
+  export type ScheduledActionFilterList = ScheduledActionFilter[];
+  export type ScheduledActionFilterName = "cluster-identifier"|"iam-role"|string;
+  export type ScheduledActionList = ScheduledAction[];
+  export type ScheduledActionState = "ACTIVE"|"DISABLED"|string;
+  export type ScheduledActionTimeList = TStamp[];
+  export interface ScheduledActionType {
+    /**
+     * An action that runs a ResizeCluster API operation. 
+     */
+    ResizeCluster?: ResizeClusterMessage;
+  }
+  export type ScheduledActionTypeValues = "ResizeCluster"|string;
+  export interface ScheduledActionsMessage {
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+    /**
+     * List of retrieved scheduled actions. 
+     */
+    ScheduledActions?: ScheduledActionList;
+  }
   export type ScheduledSnapshotTimeList = TStamp[];
   export type SensitiveString = string;
   export interface Snapshot {
@@ -3945,7 +4164,7 @@ declare namespace Redshift {
   export type SnapshotSortingEntityList = SnapshotSortingEntity[];
   export type SortByOrder = "ASC"|"DESC"|string;
   export type SourceIdsList = String[];
-  export type SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|string;
+  export type SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|"scheduled-action"|string;
   export type String = string;
   export interface Subnet {
     /**

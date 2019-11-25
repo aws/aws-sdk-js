@@ -69,6 +69,44 @@
       ],
       "documentation": "<p>Gets information about one or more build projects.</p>"
     },
+    "BatchGetReportGroups": {
+      "name": "BatchGetReportGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetReportGroupsInput"
+      },
+      "output": {
+        "shape": "BatchGetReportGroupsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p> Returns an array of report groups. </p>"
+    },
+    "BatchGetReports": {
+      "name": "BatchGetReports",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetReportsInput"
+      },
+      "output": {
+        "shape": "BatchGetReportsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p> Returns an array of reports. </p>"
+    },
     "CreateProject": {
       "name": "CreateProject",
       "http": {
@@ -93,6 +131,31 @@
         }
       ],
       "documentation": "<p>Creates a build project.</p>"
+    },
+    "CreateReportGroup": {
+      "name": "CreateReportGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateReportGroupInput"
+      },
+      "output": {
+        "shape": "CreateReportGroupOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "AccountLimitExceededException"
+        }
+      ],
+      "documentation": "<p> Creates a report group. A report group contains a collection of reports. </p>"
     },
     "CreateWebhook": {
       "name": "CreateWebhook",
@@ -141,6 +204,44 @@
       ],
       "documentation": "<p> Deletes a build project. When you delete a project, its builds are not deleted. </p>"
     },
+    "DeleteReport": {
+      "name": "DeleteReport",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteReportInput"
+      },
+      "output": {
+        "shape": "DeleteReportOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p> Deletes a report. </p>"
+    },
+    "DeleteReportGroup": {
+      "name": "DeleteReportGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteReportGroupInput"
+      },
+      "output": {
+        "shape": "DeleteReportGroupOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p> <code>DeleteReportGroup</code>: Deletes a report group. Before you delete a report group, you must delete its reports. Use <a href=\"https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html\">ListReportsForReportGroup</a> to get the reports in a report group. Use <a href=\"https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html\">DeleteReport</a> to delete the reports. If you call <code>DeleteReportGroup</code> for a report group that contains one or more reports, an exception is thrown. </p>"
+    },
     "DeleteSourceCredentials": {
       "name": "DeleteSourceCredentials",
       "http": {
@@ -187,6 +288,28 @@
         }
       ],
       "documentation": "<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.</p>"
+    },
+    "DescribeTestCases": {
+      "name": "DescribeTestCases",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTestCasesInput"
+      },
+      "output": {
+        "shape": "DescribeTestCasesOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p> Returns a list of details about test cases for a report. </p>"
     },
     "ImportSourceCredentials": {
       "name": "ImportSourceCredentials",
@@ -309,6 +432,66 @@
       ],
       "documentation": "<p>Gets a list of build project names, with each build project name representing a single build project.</p>"
     },
+    "ListReportGroups": {
+      "name": "ListReportGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListReportGroupsInput"
+      },
+      "output": {
+        "shape": "ListReportGroupsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p> Gets a list ARNs for the report groups in the current AWS account. </p>"
+    },
+    "ListReports": {
+      "name": "ListReports",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListReportsInput"
+      },
+      "output": {
+        "shape": "ListReportsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p> Returns a list of ARNs for the reports in the current AWS account. </p>"
+    },
+    "ListReportsForReportGroup": {
+      "name": "ListReportsForReportGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListReportsForReportGroupInput"
+      },
+      "output": {
+        "shape": "ListReportsForReportGroupOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p> Returns a list of ARNs for the reports that belong to a <code>ReportGroup</code>. </p>"
+    },
     "ListSourceCredentials": {
       "name": "ListSourceCredentials",
       "http": {
@@ -391,6 +574,28 @@
         }
       ],
       "documentation": "<p>Changes the settings of a build project.</p>"
+    },
+    "UpdateReportGroup": {
+      "name": "UpdateReportGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateReportGroupInput"
+      },
+      "output": {
+        "shape": "UpdateReportGroupOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p> Updates a report group. </p>"
     },
     "UpdateWebhook": {
       "name": "UpdateWebhook",
@@ -524,6 +729,56 @@
         }
       }
     },
+    "BatchGetReportGroupsInput": {
+      "type": "structure",
+      "required": [
+        "reportGroupArns"
+      ],
+      "members": {
+        "reportGroupArns": {
+          "shape": "ReportGroupArns",
+          "documentation": "<p> An array of report group ARNs that identify the report groups to return. </p>"
+        }
+      }
+    },
+    "BatchGetReportGroupsOutput": {
+      "type": "structure",
+      "members": {
+        "reportGroups": {
+          "shape": "ReportGroups",
+          "documentation": "<p> The array of report groups returned by <code>BatchGetReportGroups</code>. </p>"
+        },
+        "reportGroupsNotFound": {
+          "shape": "ReportGroupArns",
+          "documentation": "<p> An array of ARNs passed to <code>BatchGetReportGroups</code> that are not associated with a <code>ReportGroup</code>. </p>"
+        }
+      }
+    },
+    "BatchGetReportsInput": {
+      "type": "structure",
+      "required": [
+        "reportArns"
+      ],
+      "members": {
+        "reportArns": {
+          "shape": "ReportArns",
+          "documentation": "<p> An array of ARNs that identify the <code>Report</code> objects to return. </p>"
+        }
+      }
+    },
+    "BatchGetReportsOutput": {
+      "type": "structure",
+      "members": {
+        "reports": {
+          "shape": "Reports",
+          "documentation": "<p> The array of <code>Report</code> objects returned by <code>BatchGetReports</code>. </p>"
+        },
+        "reportsNotFound": {
+          "shape": "ReportArns",
+          "documentation": "<p> An array of ARNs passed to <code>BatchGetReportGroups</code> that are not associated with a <code>Report</code>. </p>"
+        }
+      }
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -584,7 +839,7 @@
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
-          "documentation": "<p> An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>"
+          "documentation": "<p> An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>"
         },
         "artifacts": {
           "shape": "BuildArtifacts",
@@ -641,6 +896,10 @@
         "exportedEnvironmentVariables": {
           "shape": "ExportedEnvironmentVariables",
           "documentation": "<p> A list of exported environment variables for this build. </p>"
+        },
+        "reportArns": {
+          "shape": "BuildReportArns",
+          "documentation": "<p> An array of the ARNs associated with this build's reports. </p>"
         }
       },
       "documentation": "<p>Information about a build.</p>"
@@ -757,6 +1016,12 @@
         "shape": "BuildPhase"
       }
     },
+    "BuildReportArns": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "Builds": {
       "type": "list",
       "member": {
@@ -843,7 +1108,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p> A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p> A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
@@ -908,6 +1173,37 @@
         }
       }
     },
+    "CreateReportGroupInput": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type",
+        "exportConfig"
+      ],
+      "members": {
+        "name": {
+          "shape": "ReportGroupName",
+          "documentation": "<p> The name of the report group. </p>"
+        },
+        "type": {
+          "shape": "ReportType",
+          "documentation": "<p> The type of report group. </p>"
+        },
+        "exportConfig": {
+          "shape": "ReportExportConfig",
+          "documentation": "<p> A <code>ReportExportConfig</code> object that contains information about where the report group test results are exported. </p>"
+        }
+      }
+    },
+    "CreateReportGroupOutput": {
+      "type": "structure",
+      "members": {
+        "reportGroup": {
+          "shape": "ReportGroup",
+          "documentation": "<p> Information about the report group that was created. </p>"
+        }
+      }
+    },
     "CreateWebhookInput": {
       "type": "structure",
       "required": [
@@ -959,6 +1255,38 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteReportGroupInput": {
+      "type": "structure",
+      "required": [
+        "arn"
+      ],
+      "members": {
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The ARN of the report group to delete. </p>"
+        }
+      }
+    },
+    "DeleteReportGroupOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteReportInput": {
+      "type": "structure",
+      "required": [
+        "arn"
+      ],
+      "members": {
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The ARN of the report to delete. </p>"
+        }
+      }
+    },
+    "DeleteReportOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteSourceCredentialsInput": {
       "type": "structure",
       "required": [
@@ -995,6 +1323,43 @@
     "DeleteWebhookOutput": {
       "type": "structure",
       "members": {}
+    },
+    "DescribeTestCasesInput": {
+      "type": "structure",
+      "required": [
+        "reportArn"
+      ],
+      "members": {
+        "reportArn": {
+          "shape": "String",
+          "documentation": "<p> The ARN of the report for which test cases are returned. </p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p> During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. </p>"
+        },
+        "maxResults": {
+          "shape": "PageSize",
+          "documentation": "<p> The maximum number of paginated test cases returned per response. Use <code>nextToken</code> to iterate pages in the list of returned <code>TestCase</code> objects. The default value is 100. </p>"
+        },
+        "filter": {
+          "shape": "TestCaseFilter",
+          "documentation": "<p> A <code>TestCaseFilter</code> object used to filter the returned reports. </p>"
+        }
+      }
+    },
+    "DescribeTestCasesOutput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p> During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. </p>"
+        },
+        "testCases": {
+          "shape": "TestCases",
+          "documentation": "<p> The returned list of test cases. </p>"
+        }
+      }
     },
     "EnvironmentImage": {
       "type": "structure",
@@ -1086,7 +1451,7 @@
         },
         "type": {
           "shape": "EnvironmentVariableType",
-          "documentation": "<p>The type of environment variable. Valid values include:</p> <ul> <li> <p> <code>PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.</p> </li> <li> <p> <code>PLAINTEXT</code>: An environment variable in plaintext format.</p> </li> <li> <p> <code>SECRETS_MANAGER</code>: An environment variable stored in AWS Secrets Manager.</p> </li> </ul>"
+          "documentation": "<p>The type of environment variable. Valid values include:</p> <ul> <li> <p> <code>PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.</p> </li> <li> <p> <code>PLAINTEXT</code>: An environment variable in plain text format.</p> </li> <li> <p> <code>SECRETS_MANAGER</code>: An environment variable stored in AWS Secrets Manager.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Information about an environment variable for a build project or a build.</p>"
@@ -1345,6 +1710,115 @@
         }
       }
     },
+    "ListReportGroupsInput": {
+      "type": "structure",
+      "members": {
+        "sortOrder": {
+          "shape": "SortOrderType",
+          "documentation": "<p> Used to specify the order to sort the list of returned report groups. Valid values are <code>ASCENDING</code> and <code>DESCENDING</code>. </p>"
+        },
+        "sortBy": {
+          "shape": "ReportGroupSortByType",
+          "documentation": "<p> The criterion to be used to list build report groups. Valid values include: </p> <ul> <li> <p> <code>CREATED_TIME</code>: List based on when each report group was created.</p> </li> <li> <p> <code>LAST_MODIFIED_TIME</code>: List based on when each report group was last changed.</p> </li> <li> <p> <code>NAME</code>: List based on each report group's name.</p> </li> </ul>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p> During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. </p>"
+        },
+        "maxResults": {
+          "shape": "PageSize",
+          "documentation": "<p> The maximum number of paginated report groups returned per response. Use <code>nextToken</code> to iterate pages in the list of returned <code>ReportGroup</code> objects. The default value is 100. </p>"
+        }
+      }
+    },
+    "ListReportGroupsOutput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p> During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. </p>"
+        },
+        "reportGroups": {
+          "shape": "ReportGroupArns",
+          "documentation": "<p> The list of ARNs for the report groups in the current AWS account. </p>"
+        }
+      }
+    },
+    "ListReportsForReportGroupInput": {
+      "type": "structure",
+      "required": [
+        "reportGroupArn"
+      ],
+      "members": {
+        "reportGroupArn": {
+          "shape": "String",
+          "documentation": "<p> The ARN of the report group for which you want to return report ARNs. </p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p> During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. </p>"
+        },
+        "sortOrder": {
+          "shape": "SortOrderType",
+          "documentation": "<p> Use to specify whether the results are returned in ascending or descending order. </p>"
+        },
+        "maxResults": {
+          "shape": "PageSize",
+          "documentation": "<p> The maximum number of paginated reports in this report group returned per response. Use <code>nextToken</code> to iterate pages in the list of returned <code>Report</code> objects. The default value is 100. </p>"
+        },
+        "filter": {
+          "shape": "ReportFilter",
+          "documentation": "<p> A <code>ReportFilter</code> object used to filter the returned reports. </p>"
+        }
+      }
+    },
+    "ListReportsForReportGroupOutput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p> During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. </p>"
+        },
+        "reports": {
+          "shape": "ReportArns",
+          "documentation": "<p> The list of returned report group ARNs. </p>"
+        }
+      }
+    },
+    "ListReportsInput": {
+      "type": "structure",
+      "members": {
+        "sortOrder": {
+          "shape": "SortOrderType",
+          "documentation": "<p> Specifies the sort order for the list of returned reports. Valid values are: </p> <ul> <li> <p> <code>ASCENDING</code>: return reports in chronological order based on their creation date. </p> </li> <li> <p> <code>DESCENDING</code>: return reports in the reverse chronological order based on their creation date. </p> </li> </ul>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p> During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. </p>"
+        },
+        "maxResults": {
+          "shape": "PageSize",
+          "documentation": "<p> The maximum number of paginated reports returned per response. Use <code>nextToken</code> to iterate pages in the list of returned <code>Report</code> objects. The default value is 100. </p>"
+        },
+        "filter": {
+          "shape": "ReportFilter",
+          "documentation": "<p> A <code>ReportFilter</code> object used to filter the returned reports. </p>"
+        }
+      }
+    },
+    "ListReportsOutput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p> During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. </p>"
+        },
+        "reports": {
+          "shape": "ReportArns",
+          "documentation": "<p> The list of returned ARNs for the reports in the current AWS account. </p>"
+        }
+      }
+    },
     "ListSourceCredentialsInput": {
       "type": "structure",
       "members": {}
@@ -1435,6 +1909,11 @@
       "type": "string",
       "min": 1
     },
+    "PageSize": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
     "PhaseContext": {
       "type": "structure",
       "members": {
@@ -1489,7 +1968,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
@@ -1641,7 +2120,7 @@
         },
         "modes": {
           "shape": "ProjectCacheModes",
-          "documentation": "<p> If you use a <code>LOCAL</code> cache, the local cache mode. You can use one or more local cache modes at the same time. </p> <ul> <li> <p> <code>LOCAL_SOURCE_CACHE</code> mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored. </p> </li> <li> <p> <code>LOCAL_DOCKER_LAYER_CACHE</code> mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network. </p> <note> <ul> <li> <p> You can use a Docker layer cache in the Linux environment only. </p> </li> <li> <p> The <code>privileged</code> flag must be set so that your project has the required Docker permissions. </p> </li> <li> <p> You should consider the security implications before you use a Docker layer cache. </p> </li> </ul> </note> </li> </ul> <ul> <li> <p> <code>LOCAL_CUSTOM_CACHE</code> mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache: </p> <ul> <li> <p> Only directories can be specified for caching. You cannot specify individual files. </p> </li> <li> <p> Symlinks are used to reference cached directories. </p> </li> <li> <p> Cached directories are linked to your build before it downloads its project sources. Cached items are overriden if a source item has the same name. Directories are specified using cache paths in the buildspec file. </p> </li> </ul> </li> </ul>"
+          "documentation": "<p> If you use a <code>LOCAL</code> cache, the local cache mode. You can use one or more local cache modes at the same time. </p> <ul> <li> <p> <code>LOCAL_SOURCE_CACHE</code> mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored. </p> </li> <li> <p> <code>LOCAL_DOCKER_LAYER_CACHE</code> mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network. </p> <note> <ul> <li> <p> You can use a Docker layer cache in the Linux environment only. </p> </li> <li> <p> The <code>privileged</code> flag must be set so that your project has the required Docker permissions. </p> </li> <li> <p> You should consider the security implications before you use a Docker layer cache. </p> </li> </ul> </note> </li> </ul> <ul> <li> <p> <code>LOCAL_CUSTOM_CACHE</code> mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache: </p> <ul> <li> <p> Only directories can be specified for caching. You cannot specify individual files. </p> </li> <li> <p> Symlinks are used to reference cached directories. </p> </li> <li> <p> Cached directories are linked to your build before it downloads its project sources. Cached items are overridden if a source item has the same name. Directories are specified using cache paths in the buildspec file. </p> </li> </ul> </li> </ul>"
         }
       },
       "documentation": "<p>Information about the cache for the build project.</p>"
@@ -1788,7 +2267,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p>The source version for the corresponding source identifier. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>The source version for the corresponding source identifier. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
         }
       },
       "documentation": "<p> A source identifier and its corresponding version. </p>"
@@ -1825,6 +2304,194 @@
       },
       "documentation": "<p> Information about credentials that provide access to a private Docker registry. When this is set: </p> <ul> <li> <p> <code>imagePullCredentialsType</code> must be set to <code>SERVICE_ROLE</code>. </p> </li> <li> <p> images cannot be curated or an Amazon ECR image.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html\">Private Registry with AWS Secrets Manager Sample for AWS CodeBuild</a>. </p>"
     },
+    "Report": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The ARN of the report run. </p>"
+        },
+        "type": {
+          "shape": "ReportType",
+          "documentation": "<p> The type of the report that was run. </p>"
+        },
+        "name": {
+          "shape": "String",
+          "documentation": "<p> The name of the report that was run. </p>"
+        },
+        "reportGroupArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The ARN of the report group associated with this report. </p>"
+        },
+        "executionId": {
+          "shape": "String",
+          "documentation": "<p> The ARN of the build run that generated this report. </p>"
+        },
+        "status": {
+          "shape": "ReportStatusType",
+          "documentation": "<p> The status of this report. </p>"
+        },
+        "created": {
+          "shape": "Timestamp",
+          "documentation": "<p> The date and time this report run occurred. </p>"
+        },
+        "expired": {
+          "shape": "Timestamp",
+          "documentation": "<p> The date and time a report expires. A report expires 30 days after it is created. An expired report is not available to view in CodeBuild. </p>"
+        },
+        "exportConfig": {
+          "shape": "ReportExportConfig",
+          "documentation": "<p> Information about where the raw data used to generate this report was exported. </p>"
+        },
+        "truncated": {
+          "shape": "WrapperBoolean",
+          "documentation": "<p> A boolean that specifies if this report run is truncated. The list of test cases is truncated after the maximum number of test cases is reached. </p>"
+        },
+        "testSummary": {
+          "shape": "TestReportSummary",
+          "documentation": "<p> A <code>TestReportSummary</code> object that contains information about this test report. </p>"
+        }
+      },
+      "documentation": "<p> Information about the results from running a series of test cases during the run of a build project. The test cases are specified in the buildspec for the build project using one or more paths to the test case files. You can specify any type of tests you want, such as unit tests, integration tests, and functional tests. </p>"
+    },
+    "ReportArns": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "ReportExportConfig": {
+      "type": "structure",
+      "members": {
+        "exportConfigType": {
+          "shape": "ReportExportConfigType",
+          "documentation": "<p> The export configuration type. Valid values are: </p> <ul> <li> <p> <code>S3</code>: The report results are exported to an S3 bucket. </p> </li> <li> <p> <code>NO_EXPORT</code>: The report results are not exported. </p> </li> </ul>"
+        },
+        "s3Destination": {
+          "shape": "S3ReportExportConfig",
+          "documentation": "<p> A <code>S3ReportExportConfig</code> object that contains information about the S3 bucket where the run of a report is exported. </p>"
+        }
+      },
+      "documentation": "<p> Information about the location where the run of a report is exported. </p>"
+    },
+    "ReportExportConfigType": {
+      "type": "string",
+      "enum": [
+        "S3",
+        "NO_EXPORT"
+      ]
+    },
+    "ReportFilter": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "ReportStatusType",
+          "documentation": "<p> The status used to filter reports. You can filter using one status only. </p>"
+        }
+      },
+      "documentation": "<p> A filter used to return reports with the status specified by the input <code>status</code> parameter. </p>"
+    },
+    "ReportGroup": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The ARN of a <code>ReportGroup</code>. </p>"
+        },
+        "name": {
+          "shape": "ReportGroupName",
+          "documentation": "<p> The name of a <code>ReportGroup</code>. </p>"
+        },
+        "type": {
+          "shape": "ReportType",
+          "documentation": "<p> The type of the <code>ReportGroup</code>. The one valid value is <code>TEST</code>. </p>"
+        },
+        "exportConfig": {
+          "shape": "ReportExportConfig",
+          "documentation": "<p> Information about the destination where the raw data of this <code>ReportGroup</code> is exported. </p>"
+        },
+        "created": {
+          "shape": "Timestamp",
+          "documentation": "<p> The date and time this <code>ReportGroup</code> was created. </p>"
+        },
+        "lastModified": {
+          "shape": "Timestamp",
+          "documentation": "<p> The date and time this <code>ReportGroup</code> was last modified. </p>"
+        }
+      },
+      "documentation": "<p> A series of reports. Each report contains information about the results from running a series of test cases. You specify the test cases for a report group in the buildspec for a build project using one or more paths to the test case files. </p>"
+    },
+    "ReportGroupArns": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "ReportGroupName": {
+      "type": "string",
+      "max": 128,
+      "min": 2
+    },
+    "ReportGroupSortByType": {
+      "type": "string",
+      "enum": [
+        "NAME",
+        "CREATED_TIME",
+        "LAST_MODIFIED_TIME"
+      ]
+    },
+    "ReportGroups": {
+      "type": "list",
+      "member": {
+        "shape": "ReportGroup"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "ReportPackagingType": {
+      "type": "string",
+      "enum": [
+        "ZIP",
+        "NONE"
+      ]
+    },
+    "ReportStatusCounts": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "WrapperInt"
+      }
+    },
+    "ReportStatusType": {
+      "type": "string",
+      "enum": [
+        "GENERATING",
+        "SUCCEEDED",
+        "FAILED",
+        "INCOMPLETE",
+        "DELETING"
+      ]
+    },
+    "ReportType": {
+      "type": "string",
+      "enum": [
+        "TEST"
+      ]
+    },
+    "Reports": {
+      "type": "list",
+      "member": {
+        "shape": "Report"
+      },
+      "max": 100,
+      "min": 1
+    },
     "S3LogsConfig": {
       "type": "structure",
       "required": [
@@ -1845,6 +2512,32 @@
         }
       },
       "documentation": "<p> Information about S3 logs for a build project. </p>"
+    },
+    "S3ReportExportConfig": {
+      "type": "structure",
+      "members": {
+        "bucket": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The name of the S3 bucket where the raw data of a report are exported. </p>"
+        },
+        "path": {
+          "shape": "String",
+          "documentation": "<p> The path to the exported report's raw data results. </p>"
+        },
+        "packaging": {
+          "shape": "ReportPackagingType",
+          "documentation": "<p> The type of build output artifact to create. Valid values include: </p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild creates the raw data in the output bucket. This is the default if packaging is not specified. </p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild creates a ZIP file with the raw data in the output bucket. </p> </li> </ul>"
+        },
+        "encryptionKey": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The encryption key for the report's encrypted raw data. </p>"
+        },
+        "encryptionDisabled": {
+          "shape": "WrapperBoolean",
+          "documentation": "<p> A boolean value that specifies if the results of a report are encrypted. </p>"
+        }
+      },
+      "documentation": "<p> Information about the S3 bucket where the raw data of a report are exported. </p>"
     },
     "SecurityGroupIds": {
       "type": "list",
@@ -1952,7 +2645,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p>A version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>A version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
         },
         "artifactsOverride": {
           "shape": "ProjectArtifacts",
@@ -2125,6 +2818,83 @@
       "max": 50,
       "min": 0
     },
+    "TestCase": {
+      "type": "structure",
+      "members": {
+        "reportArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The ARN of the report to which the test case belongs. </p>"
+        },
+        "testRawDataPath": {
+          "shape": "String",
+          "documentation": "<p> The path to the raw data file that contains the test result. </p>"
+        },
+        "prefix": {
+          "shape": "String",
+          "documentation": "<p> A string that is applied to a series of related test cases. CodeBuild generates the prefix. The prefix depends on the framework used to generate the tests. </p>"
+        },
+        "name": {
+          "shape": "String",
+          "documentation": "<p> The name of the test case. </p>"
+        },
+        "status": {
+          "shape": "String",
+          "documentation": "<p> The status returned by the test case after it was run. Valid statuses are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>ERROR</code>, <code>SKIPPED</code>, and <code>UNKNOWN</code>. </p>"
+        },
+        "durationInNanoSeconds": {
+          "shape": "WrapperLong",
+          "documentation": "<p> The number of nanoseconds it took to run this test case. </p>"
+        },
+        "message": {
+          "shape": "String",
+          "documentation": "<p> A message associated with a test case. For example, an error message or stack trace. </p>"
+        },
+        "expired": {
+          "shape": "Timestamp",
+          "documentation": "<p> The date and time a test case expires. A test case expires 30 days after it is created. An expired test case is not available to view in CodeBuild. </p>"
+        }
+      },
+      "documentation": "<p> Information about a test case created using a framework such as NUnit or Cucumber. A test case might be a unit test or a configuration test. </p>"
+    },
+    "TestCaseFilter": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "String",
+          "documentation": "<p> The status used to filter test cases. Valid statuses are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>ERROR</code>, <code>SKIPPED</code>, and <code>UNKNOWN</code>. A <code>TestCaseFilter</code> can have one status. </p>"
+        }
+      },
+      "documentation": "<p> A filter used to return specific types of test cases. </p>"
+    },
+    "TestCases": {
+      "type": "list",
+      "member": {
+        "shape": "TestCase"
+      }
+    },
+    "TestReportSummary": {
+      "type": "structure",
+      "required": [
+        "total",
+        "statusCounts",
+        "durationInNanoSeconds"
+      ],
+      "members": {
+        "total": {
+          "shape": "WrapperInt",
+          "documentation": "<p> The number of test cases in this <code>TestReportSummary</code>. The total includes truncated test cases. </p>"
+        },
+        "statusCounts": {
+          "shape": "ReportStatusCounts",
+          "documentation": "<p> A map that contains the number of each type of status returned by the test results in this <code>TestReportSummary</code>. </p>"
+        },
+        "durationInNanoSeconds": {
+          "shape": "WrapperLong",
+          "documentation": "<p> The number of nanoseconds it took to run all of the test cases in this report. </p>"
+        }
+      },
+      "documentation": "<p> Information about a test report. </p>"
+    },
     "TimeOut": {
       "type": "integer",
       "max": 480,
@@ -2157,7 +2927,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p> A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p> A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
@@ -2222,6 +2992,31 @@
         }
       }
     },
+    "UpdateReportGroupInput": {
+      "type": "structure",
+      "required": [
+        "arn"
+      ],
+      "members": {
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The ARN of the report group to update. </p>"
+        },
+        "exportConfig": {
+          "shape": "ReportExportConfig",
+          "documentation": "<p> Used to specify an updated export type. Valid values are: </p> <ul> <li> <p> <code>S3</code>: The report results are exported to an S3 bucket. </p> </li> <li> <p> <code>NO_EXPORT</code>: The report results are not exported. </p> </li> </ul>"
+        }
+      }
+    },
+    "UpdateReportGroupOutput": {
+      "type": "structure",
+      "members": {
+        "reportGroup": {
+          "shape": "ReportGroup",
+          "documentation": "<p> Information about the updated report group. </p>"
+        }
+      }
+    },
     "UpdateWebhookInput": {
       "type": "structure",
       "required": [
@@ -2242,7 +3037,7 @@
         },
         "filterGroups": {
           "shape": "FilterGroups",
-          "documentation": "<p> An array of arrays of <code>WebhookFilter</code> objects used to determine if a webhook event can trigger a build. A filter group must pcontain at least one <code>EVENT</code> <code>WebhookFilter</code>. </p>"
+          "documentation": "<p> An array of arrays of <code>WebhookFilter</code> objects used to determine if a webhook event can trigger a build. A filter group must contain at least one <code>EVENT</code> <code>WebhookFilter</code>. </p>"
         }
       }
     },
@@ -2351,5 +3146,5 @@
       "type": "long"
     }
   },
-  "documentation": "<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You pay only for the build time you consume. For more information about AWS CodeBuild, see the <i> <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html\">AWS CodeBuild User Guide</a>.</i> </p> <p>AWS CodeBuild supports these operations:</p> <ul> <li> <p> <code>BatchDeleteBuilds</code>: Deletes one or more builds.</p> </li> <li> <p> <code>BatchGetBuilds</code>: Gets information about one or more builds.</p> </li> <li> <p> <code>BatchGetProjects</code>: Gets information about one or more build projects. A <i>build project</i> defines how AWS CodeBuild runs a build. This includes information such as where to get the source code to build, the build environment to use, the build commands to run, and where to store the build output. A <i>build environment</i> is a representation of operating system, programming language runtime, and tools that AWS CodeBuild uses to run a build. You can add tags to build projects to help manage your resources and costs.</p> </li> <li> <p> <code>BatchGetReportGroups</code>: Returns an array of report groups. </p> </li> <li> <p> <code>BatchGetReports</code>: Returns an array of reports. </p> </li> <li> <p> <code>CreateProject</code>: Creates a build project.</p> </li> <li> <p> <code>CreateWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>DeleteProject</code>: Deletes a build project.</p> </li> <li> <p> <code>DeleteSourceCredentials</code>: Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials.</p> </li> <li> <p> <code>DeleteWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>ImportSourceCredentials</code>: Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.</p> </li> <li> <p> <code>InvalidateProjectCache</code>: Resets the cache for a project.</p> </li> <li> <p> <code>ListBuilds</code>: Gets a list of build IDs, with each build ID representing a single build.</p> </li> <li> <p> <code>ListBuildsForProject</code>: Gets a list of build IDs for the specified build project, with each build ID representing a single build.</p> </li> <li> <p> <code>ListCuratedEnvironmentImages</code>: Gets information about Docker images that are managed by AWS CodeBuild.</p> </li> <li> <p> <code>ListProjects</code>: Gets a list of build project names, with each build project name representing a single build project.</p> </li> <li> <p> <code>ListSourceCredentials</code>: Returns a list of <code>SourceCredentialsInfo</code> objects. Each <code>SourceCredentialsInfo</code> object includes the authentication type, token ARN, and type of source provider for one set of credentials.</p> </li> <li> <p> <code>StartBuild</code>: Starts running a build.</p> </li> <li> <p> <code>StopBuild</code>: Attempts to stop running a build.</p> </li> <li> <p> <code>UpdateProject</code>: Changes the settings of an existing build project.</p> </li> <li> <p> <code>UpdateWebhook</code>: Changes the settings of an existing webhook.</p> </li> <li> <p> <code>StartBuild</code>: Starts running a build.</p> </li> <li> <p> <code>StopBuild</code>: Attempts to stop running a build.</p> </li> <li> <p> <code>UpdateProject</code>: Changes the settings of an existing build project.</p> </li> <li> <p> <code>UpdateWebhook</code>: Changes the settings of an existing webhook.</p> </li> </ul>"
+  "documentation": "<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You pay only for the build time you consume. For more information about AWS CodeBuild, see the <i> <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html\">AWS CodeBuild User Guide</a>.</i> </p> <p>AWS CodeBuild supports these operations:</p> <ul> <li> <p> <code>BatchDeleteBuilds</code>: Deletes one or more builds.</p> </li> <li> <p> <code>BatchGetBuilds</code>: Gets information about one or more builds.</p> </li> <li> <p> <code>BatchGetProjects</code>: Gets information about one or more build projects. A <i>build project</i> defines how AWS CodeBuild runs a build. This includes information such as where to get the source code to build, the build environment to use, the build commands to run, and where to store the build output. A <i>build environment</i> is a representation of operating system, programming language runtime, and tools that AWS CodeBuild uses to run a build. You can add tags to build projects to help manage your resources and costs.</p> </li> <li> <p> <code>BatchGetReportGroups</code>: Returns an array of report groups. </p> </li> <li> <p> <code>BatchGetReports</code>: Returns an array of reports. </p> </li> <li> <p> <code>CreateProject</code>: Creates a build project.</p> </li> <li> <p> <code>CreateReportGroup</code>: Creates a report group. A report group contains a collection of reports. </p> </li> <li> <p> <code>CreateWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>DeleteProject</code>: Deletes a build project.</p> </li> <li> <p> <code>DeleteReport</code>: Deletes a report. </p> </li> <li> <p> <code>DeleteReportGroup</code>: Deletes a report group. </p> </li> <li> <p> <code>DeleteSourceCredentials</code>: Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials.</p> </li> <li> <p> <code>DeleteWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>DescribeTestCases</code>: Returns a list of details about test cases for a report. </p> </li> <li> <p> <code>ImportSourceCredentials</code>: Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.</p> </li> <li> <p> <code>InvalidateProjectCache</code>: Resets the cache for a project.</p> </li> <li> <p> <code>ListBuilds</code>: Gets a list of build IDs, with each build ID representing a single build.</p> </li> <li> <p> <code>ListBuildsForProject</code>: Gets a list of build IDs for the specified build project, with each build ID representing a single build.</p> </li> <li> <p> <code>ListCuratedEnvironmentImages</code>: Gets information about Docker images that are managed by AWS CodeBuild.</p> </li> <li> <p> <code>ListProjects</code>: Gets a list of build project names, with each build project name representing a single build project.</p> </li> <li> <p> <code>ListReportGroups</code>: Gets a list ARNs for the report groups in the current AWS account. </p> </li> <li> <p> <code>ListReports</code>: Gets a list ARNs for the reports in the current AWS account. </p> </li> <li> <p> <code>ListReportsForReportGroup</code>: Returns a list of ARNs for the reports that belong to a <code>ReportGroup</code>. </p> </li> <li> <p> <code>ListSourceCredentials</code>: Returns a list of <code>SourceCredentialsInfo</code> objects. Each <code>SourceCredentialsInfo</code> object includes the authentication type, token ARN, and type of source provider for one set of credentials.</p> </li> <li> <p> <code>StartBuild</code>: Starts running a build.</p> </li> <li> <p> <code>StopBuild</code>: Attempts to stop running a build.</p> </li> <li> <p> <code>UpdateProject</code>: Changes the settings of an existing build project.</p> </li> <li> <p> <code>UpdateReportGroup</code>: Changes a report group.</p> </li> <li> <p> <code>UpdateWebhook</code>: Changes the settings of an existing webhook.</p> </li> </ul>"
 }

@@ -3282,6 +3282,27 @@
       },
       "max": 20
     },
+    "AccountSharingInfo": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID where the current document is shared.</p>"
+        },
+        "SharedDocumentVersion": {
+          "shape": "SharedDocumentVersion",
+          "documentation": "<p>The version of the current document shared with the account.</p>"
+        }
+      },
+      "documentation": "<p>Information includes the AWS account ID where the current document is shared and the version shared with that account.</p>"
+    },
+    "AccountSharingInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "AccountSharingInfo"
+      },
+      "documentation": "<p>A list of of AWS accounts where the current document is shared and the version shared with each account.</p>"
+    },
     "Accounts": {
       "type": "list",
       "member": {
@@ -5318,6 +5339,10 @@
           "shape": "DocumentContent",
           "documentation": "<p>A valid JSON or YAML string.</p>"
         },
+        "Requires": {
+          "shape": "DocumentRequiresList",
+          "documentation": "<p>A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.</p>"
+        },
         "Attachments": {
           "shape": "AttachmentsSourceList",
           "documentation": "<p>A list of key and value pairs that describe attachments to a version of a document.</p>"
@@ -5650,6 +5675,10 @@
         "VersionName": {
           "shape": "DocumentVersionName",
           "documentation": "<p>The version name of the document that you want to delete. If not provided, all versions of the document are deleted.</p>"
+        },
+        "Force": {
+          "shape": "Boolean",
+          "documentation": "<p>Some SSM document types require that you specify a <code>Force</code> flag before you can delete the document. For example, you must specify a <code>Force</code> flag to delete a document of type <code>ApplicationConfigurationSchema</code>. You can restrict access to the <code>Force</code> flag in an AWS Identity and Access Management (IAM) policy.</p>"
         }
       }
     },
@@ -6214,6 +6243,10 @@
         "AccountIds": {
           "shape": "AccountIdList",
           "documentation": "<p>The account IDs that have permission to use this document. The ID can be either an AWS account or <i>All</i>.</p>"
+        },
+        "AccountSharingInfoList": {
+          "shape": "AccountSharingInfoList",
+          "documentation": "<p>A list of of AWS accounts where the current document is shared and the version shared with each account.</p>"
         }
       }
     },
@@ -7211,6 +7244,10 @@
         "AttachmentsInformation": {
           "shape": "AttachmentInformationList",
           "documentation": "<p>Details about the document attachments, including names, locations, sizes, etc.</p>"
+        },
+        "Requires": {
+          "shape": "DocumentRequiresList",
+          "documentation": "<p>A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.</p>"
         }
       },
       "documentation": "<p>Describes a Systems Manager document. </p>"
@@ -7313,6 +7350,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>The tags, or metadata, that have been applied to the document.</p>"
+        },
+        "Requires": {
+          "shape": "DocumentRequiresList",
+          "documentation": "<p>A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.</p>"
         }
       },
       "documentation": "<p>Describes the name of a Systems Manager document.</p>"
@@ -7418,6 +7459,30 @@
         "Share"
       ]
     },
+    "DocumentRequires": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "DocumentARN",
+          "documentation": "<p>The name of the required SSM document. The name can be an Amazon Resource Name (ARN).</p>"
+        },
+        "Version": {
+          "shape": "DocumentVersion",
+          "documentation": "<p>The document version required by the current document.</p>"
+        }
+      },
+      "documentation": "<p>An SSM document required by the current document.</p>"
+    },
+    "DocumentRequiresList": {
+      "type": "list",
+      "member": {
+        "shape": "DocumentRequires"
+      },
+      "min": 1
+    },
     "DocumentSchemaVersion": {
       "type": "string",
       "pattern": "([0-9]+)\\.([0-9]+)"
@@ -7446,7 +7511,10 @@
         "Policy",
         "Automation",
         "Session",
-        "Package"
+        "Package",
+        "ApplicationConfiguration",
+        "ApplicationConfigurationSchema",
+        "DeploymentStrategy"
       ]
     },
     "DocumentVersion": {
@@ -7860,6 +7928,10 @@
         "DocumentFormat": {
           "shape": "DocumentFormat",
           "documentation": "<p>The document format, either JSON or YAML.</p>"
+        },
+        "Requires": {
+          "shape": "DocumentRequiresList",
+          "documentation": "<p>A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.</p>"
         },
         "AttachmentsContent": {
           "shape": "AttachmentContentList",
@@ -9902,8 +9974,8 @@
       ],
       "members": {
         "Name": {
-          "shape": "DocumentName",
-          "documentation": "<p>The name of the document about which you want version information.</p>"
+          "shape": "DocumentARN",
+          "documentation": "<p>The name of the document. You can specify an Amazon Resource Name (ARN).</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -10868,6 +10940,10 @@
         "AccountIdsToRemove": {
           "shape": "AccountIdList",
           "documentation": "<p>The AWS user accounts that should no longer have access to the document. The AWS user account can either be a group of account IDs or <i>All</i>. This action has a higher priority than <i>AccountIdsToAdd</i>. If you specify an account ID to add and the same ID to remove, the system removes access to the document.</p>"
+        },
+        "SharedDocumentVersion": {
+          "shape": "SharedDocumentVersion",
+          "documentation": "<p>(Optional) The version of the document to share. If it's not specified, the system choose the <code>Default</code> version to share.</p>"
         }
       }
     },
@@ -13722,6 +13798,12 @@
         }
       },
       "documentation": "<p>The number of managed instances found for each patch severity level defined in the request filter.</p>"
+    },
+    "SharedDocumentVersion": {
+      "type": "string",
+      "documentation": "<p>The document version shared with other accounts. You can share <code>Latest</code>, <code>Default</code> or <code>All versions</code>.</p>",
+      "max": 8,
+      "pattern": "([$]LATEST|[$]DEFAULT|[$]ALL)"
     },
     "SignalType": {
       "type": "string",

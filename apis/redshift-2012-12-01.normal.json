@@ -545,6 +545,41 @@
       ],
       "documentation": "<p>Creates an HSM configuration that contains the information required by an Amazon Redshift cluster to store and use database encryption keys in a Hardware Security Module (HSM). After creating the HSM configuration, you can specify it as a parameter when creating a cluster. The cluster will then store its encryption keys in the HSM.</p> <p>In addition to creating an HSM configuration, you must also create an HSM client certificate. For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html\">Hardware Security Modules</a> in the Amazon Redshift Cluster Management Guide.</p>"
     },
+    "CreateScheduledAction": {
+      "name": "CreateScheduledAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateScheduledActionMessage"
+      },
+      "output": {
+        "shape": "ScheduledAction",
+        "resultWrapper": "CreateScheduledActionResult"
+      },
+      "errors": [
+        {
+          "shape": "ScheduledActionAlreadyExistsFault"
+        },
+        {
+          "shape": "ScheduledActionQuotaExceededFault"
+        },
+        {
+          "shape": "ScheduledActionTypeUnsupportedFault"
+        },
+        {
+          "shape": "InvalidScheduleFault"
+        },
+        {
+          "shape": "InvalidScheduledActionFault"
+        },
+        {
+          "shape": "UnauthorizedOperation"
+        }
+      ],
+      "documentation": "<p>Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the <code>ResizeCluster</code> API operation. </p>"
+    },
     "CreateSnapshotCopyGrant": {
       "name": "CreateSnapshotCopyGrant",
       "http": {
@@ -805,6 +840,25 @@
         }
       ],
       "documentation": "<p>Deletes the specified Amazon Redshift HSM configuration.</p>"
+    },
+    "DeleteScheduledAction": {
+      "name": "DeleteScheduledAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteScheduledActionMessage"
+      },
+      "errors": [
+        {
+          "shape": "ScheduledActionNotFoundFault"
+        },
+        {
+          "shape": "UnauthorizedOperation"
+        }
+      ],
+      "documentation": "<p>Deletes a scheduled action. </p>"
     },
     "DeleteSnapshotCopyGrant": {
       "name": "DeleteSnapshotCopyGrant",
@@ -1230,6 +1284,12 @@
         },
         {
           "shape": "InvalidClusterSnapshotStateFault"
+        },
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "AccessToSnapshotDeniedFault"
         }
       ],
       "documentation": "<p>Returns properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type.</p>"
@@ -1320,6 +1380,29 @@
         }
       ],
       "documentation": "<p>Returns information about the last resize operation for the specified cluster. If no resize operation has ever been initiated for the specified cluster, a <code>HTTP 404</code> error is returned. If a resize operation was initiated and completed, the status of the resize remains as <code>SUCCEEDED</code> until the next resize. </p> <p>A resize operation can be requested using <a>ModifyCluster</a> and specifying a different number or type of nodes for the cluster. </p>"
+    },
+    "DescribeScheduledActions": {
+      "name": "DescribeScheduledActions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeScheduledActionsMessage"
+      },
+      "output": {
+        "shape": "ScheduledActionsMessage",
+        "resultWrapper": "DescribeScheduledActionsResult"
+      },
+      "errors": [
+        {
+          "shape": "ScheduledActionNotFoundFault"
+        },
+        {
+          "shape": "UnauthorizedOperation"
+        }
+      ],
+      "documentation": "<p>Describes properties of scheduled actions. </p>"
     },
     "DescribeSnapshotCopyGrants": {
       "name": "DescribeSnapshotCopyGrants",
@@ -1899,6 +1982,38 @@
       ],
       "documentation": "<p>Modifies an existing Amazon Redshift event notification subscription.</p>"
     },
+    "ModifyScheduledAction": {
+      "name": "ModifyScheduledAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyScheduledActionMessage"
+      },
+      "output": {
+        "shape": "ScheduledAction",
+        "resultWrapper": "ModifyScheduledActionResult"
+      },
+      "errors": [
+        {
+          "shape": "ScheduledActionNotFoundFault"
+        },
+        {
+          "shape": "ScheduledActionTypeUnsupportedFault"
+        },
+        {
+          "shape": "InvalidScheduleFault"
+        },
+        {
+          "shape": "InvalidScheduledActionFault"
+        },
+        {
+          "shape": "UnauthorizedOperation"
+        }
+      ],
+      "documentation": "<p>Modify a scheduled action. </p>"
+    },
     "ModifySnapshotCopyRetentionPeriod": {
       "name": "ModifySnapshotCopyRetentionPeriod",
       "http": {
@@ -2359,7 +2474,8 @@
     "ActionType": {
       "type": "string",
       "enum": [
-        "restore-cluster"
+        "restore-cluster",
+        "recommend-node-config"
       ]
     },
     "AssociatedClusterList": {
@@ -3642,6 +3758,49 @@
         }
       }
     },
+    "CreateScheduledActionMessage": {
+      "type": "structure",
+      "required": [
+        "ScheduledActionName",
+        "TargetAction",
+        "Schedule",
+        "IamRole"
+      ],
+      "members": {
+        "ScheduledActionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the scheduled action. The name must be unique within an account. For more information about this parameter, see <a>ScheduledAction</a>. </p>"
+        },
+        "TargetAction": {
+          "shape": "ScheduledActionType",
+          "documentation": "<p>A JSON format string of the Amazon Redshift API operation with input parameters. For more information about this parameter, see <a>ScheduledAction</a>. </p>"
+        },
+        "Schedule": {
+          "shape": "String",
+          "documentation": "<p>The schedule in <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.</p>"
+        },
+        "IamRole": {
+          "shape": "String",
+          "documentation": "<p>The IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>. </p>"
+        },
+        "ScheduledActionDescription": {
+          "shape": "String",
+          "documentation": "<p>The description of the scheduled action. </p>"
+        },
+        "StartTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger. For more information about this parameter, see <a>ScheduledAction</a>.</p>"
+        },
+        "EndTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger. For more information about this parameter, see <a>ScheduledAction</a>. </p>"
+        },
+        "Enable": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>If true, the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> of the scheduled action, see <a>ScheduledAction</a>. </p>"
+        }
+      }
+    },
     "CreateSnapshotCopyGrantMessage": {
       "type": "structure",
       "required": [
@@ -3954,6 +4113,18 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DeleteScheduledActionMessage": {
+      "type": "structure",
+      "required": [
+        "ScheduledActionName"
+      ],
+      "members": {
+        "ScheduledActionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the scheduled action to delete. </p>"
+        }
+      }
     },
     "DeleteSnapshotCopyGrantMessage": {
       "type": "structure",
@@ -4418,7 +4589,11 @@
       "members": {
         "ActionType": {
           "shape": "ActionType",
-          "documentation": "<p>The action type to evaluate for possible node configurations. Currently, it must be \"restore-cluster\".</p>"
+          "documentation": "<p>The action type to evaluate for possible node configurations. Specify \"restore-cluster\" to get configuration combinations based on an existing snapshot. Specify \"recommend-node-config\" to get configuration recommendations based on an existing cluster or snapshot. </p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the cluster to evaluate for possible node configurations.</p>"
         },
         "SnapshotIdentifier": {
           "shape": "String",
@@ -4513,6 +4688,43 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DescribeScheduledActionsMessage": {
+      "type": "structure",
+      "members": {
+        "ScheduledActionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the scheduled action to retrieve. </p>"
+        },
+        "TargetActionType": {
+          "shape": "ScheduledActionTypeValues",
+          "documentation": "<p>The type of the scheduled actions to retrieve. </p>"
+        },
+        "StartTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The start time in UTC of the scheduled actions to retrieve. Only active scheduled actions that have invocations after this time are retrieved.</p>"
+        },
+        "EndTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The end time in UTC of the scheduled action to retrieve. Only active scheduled actions that have invocations before this time are retrieved.</p>"
+        },
+        "Active": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>If true, retrieve only active scheduled actions. If false, retrieve only disabled scheduled actions. </p>"
+        },
+        "Filters": {
+          "shape": "ScheduledActionFilterList",
+          "documentation": "<p>List of scheduled action filters. </p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>"
+        }
+      }
     },
     "DescribeSnapshotCopyGrantsMessage": {
       "type": "structure",
@@ -5278,6 +5490,13 @@
       },
       "documentation": "<p>Defines a maintenance track that determines which Amazon Redshift version to apply during a maintenance window. If the value for <code>MaintenanceTrack</code> is <code>current</code>, the cluster is updated to the most recently certified maintenance release. If the value is <code>trailing</code>, the cluster is updated to the previously certified maintenance release. </p>"
     },
+    "Mode": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "high-performance"
+      ]
+    },
     "ModifyClusterDbRevisionMessage": {
       "type": "structure",
       "required": [
@@ -5618,6 +5837,46 @@
         }
       }
     },
+    "ModifyScheduledActionMessage": {
+      "type": "structure",
+      "required": [
+        "ScheduledActionName"
+      ],
+      "members": {
+        "ScheduledActionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the scheduled action to modify. </p>"
+        },
+        "TargetAction": {
+          "shape": "ScheduledActionType",
+          "documentation": "<p>A modified JSON format of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. </p>"
+        },
+        "Schedule": {
+          "shape": "String",
+          "documentation": "<p>A modified schedule in either <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.</p>"
+        },
+        "IamRole": {
+          "shape": "String",
+          "documentation": "<p>A different IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>.</p>"
+        },
+        "ScheduledActionDescription": {
+          "shape": "String",
+          "documentation": "<p>A modified description of the scheduled action. </p>"
+        },
+        "StartTime": {
+          "shape": "TStamp",
+          "documentation": "<p>A modified start time of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. </p>"
+        },
+        "EndTime": {
+          "shape": "TStamp",
+          "documentation": "<p>A modified end time of the scheduled action. For more information about this parameter, see <a>ScheduledAction</a>. </p>"
+        },
+        "Enable": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. </p>"
+        }
+      }
+    },
     "ModifySnapshotCopyRetentionPeriodMessage": {
       "type": "structure",
       "required": [
@@ -5679,6 +5938,10 @@
         "EstimatedDiskUtilizationPercent": {
           "shape": "DoubleOptional",
           "documentation": "<p>The estimated disk utilizaton percentage.</p>"
+        },
+        "Mode": {
+          "shape": "Mode",
+          "documentation": "<p>The category of the node configuration recommendation.</p>"
         }
       },
       "documentation": "<p>A list of node configurations.</p>"
@@ -5721,7 +5984,8 @@
       "enum": [
         "NodeType",
         "NumberOfNodes",
-        "EstimatedDiskUtilizationPercent"
+        "EstimatedDiskUtilizationPercent",
+        "Mode"
       ]
     },
     "NodeConfigurationOptionsMessage": {
@@ -6411,23 +6675,23 @@
         },
         "CurrentRestoreRateInMegaBytesPerSecond": {
           "shape": "Double",
-          "documentation": "<p>The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.</p>"
+          "documentation": "<p>The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. This field is only updated when you restore to DC2 and DS2 node types. </p>"
         },
         "SnapshotSizeInMegaBytes": {
           "shape": "Long",
-          "documentation": "<p>The size of the set of snapshot data used to restore the cluster.</p>"
+          "documentation": "<p>The size of the set of snapshot data used to restore the cluster. This field is only updated when you restore to DC2 and DS2 node types. </p>"
         },
         "ProgressInMegaBytes": {
           "shape": "Long",
-          "documentation": "<p>The number of megabytes that have been transferred from snapshot storage.</p>"
+          "documentation": "<p>The number of megabytes that have been transferred from snapshot storage. This field is only updated when you restore to DC2 and DS2 node types. </p>"
         },
         "ElapsedTimeInSeconds": {
           "shape": "Long",
-          "documentation": "<p>The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.</p>"
+          "documentation": "<p>The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. This field is only updated when you restore to DC2 and DS2 node types. </p>"
         },
         "EstimatedTimeToCompletionInSeconds": {
           "shape": "Long",
-          "documentation": "<p>The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.</p>"
+          "documentation": "<p>The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. This field is only updated when you restore to DC2 and DS2 node types. </p>"
         }
       },
       "documentation": "<p>Describes the status of a cluster restore action. Returns null if the cluster was not created by restoring a snapshot.</p>"
@@ -6608,6 +6872,130 @@
         "ACTIVE",
         "FAILED"
       ]
+    },
+    "ScheduledAction": {
+      "type": "structure",
+      "members": {
+        "ScheduledActionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the scheduled action. </p>"
+        },
+        "TargetAction": {
+          "shape": "ScheduledActionType",
+          "documentation": "<p>A JSON format string of the Amazon Redshift API operation with input parameters. </p> <p>\"<code>{\\\"ResizeCluster\\\":{\\\"NodeType\\\":\\\"ds2.8xlarge\\\",\\\"ClusterIdentifier\\\":\\\"my-test-cluster\\\",\\\"NumberOfNodes\\\":3}}</code>\". </p>"
+        },
+        "Schedule": {
+          "shape": "String",
+          "documentation": "<p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour.</p> <p>Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p> <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0, 10, *, *, MON, *)</code>\". For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
+        },
+        "IamRole": {
+          "shape": "String",
+          "documentation": "<p>The IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
+        },
+        "ScheduledActionDescription": {
+          "shape": "String",
+          "documentation": "<p>The description of the scheduled action. </p>"
+        },
+        "State": {
+          "shape": "ScheduledActionState",
+          "documentation": "<p>The state of the scheduled action. For example, <code>DISABLED</code>. </p>"
+        },
+        "NextInvocations": {
+          "shape": "ScheduledActionTimeList",
+          "documentation": "<p>List of times when the scheduled action will run. </p>"
+        },
+        "StartTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The start time in UTC when the schedule is active. Before this time, the scheduled action does not trigger. </p>"
+        },
+        "EndTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger. </p>"
+        }
+      },
+      "documentation": "<p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule. For information about which API operations can be scheduled, see <a>ScheduledActionType</a>. </p>"
+    },
+    "ScheduledActionFilter": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Values"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ScheduledActionFilterName",
+          "documentation": "<p>The type of element to filter. </p>"
+        },
+        "Values": {
+          "shape": "ValueStringList",
+          "documentation": "<p>List of values. Compare if the value (of type defined by <code>Name</code>) equals an item in the list of scheduled actions. </p>"
+        }
+      },
+      "documentation": "<p>A set of elements to filter the returned scheduled actions. </p>"
+    },
+    "ScheduledActionFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "ScheduledActionFilter",
+        "locationName": "ScheduledActionFilter"
+      }
+    },
+    "ScheduledActionFilterName": {
+      "type": "string",
+      "enum": [
+        "cluster-identifier",
+        "iam-role"
+      ]
+    },
+    "ScheduledActionList": {
+      "type": "list",
+      "member": {
+        "shape": "ScheduledAction",
+        "locationName": "ScheduledAction"
+      }
+    },
+    "ScheduledActionState": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DISABLED"
+      ]
+    },
+    "ScheduledActionTimeList": {
+      "type": "list",
+      "member": {
+        "shape": "TStamp",
+        "locationName": "ScheduledActionTime"
+      }
+    },
+    "ScheduledActionType": {
+      "type": "structure",
+      "members": {
+        "ResizeCluster": {
+          "shape": "ResizeClusterMessage",
+          "documentation": "<p>An action that runs a <code>ResizeCluster</code> API operation. </p>"
+        }
+      },
+      "documentation": "<p>The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. </p>"
+    },
+    "ScheduledActionTypeValues": {
+      "type": "string",
+      "enum": [
+        "ResizeCluster"
+      ]
+    },
+    "ScheduledActionsMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+        },
+        "ScheduledActions": {
+          "shape": "ScheduledActionList",
+          "documentation": "<p>List of retrieved scheduled actions. </p>"
+        }
+      }
     },
     "ScheduledSnapshotTimeList": {
       "type": "list",
@@ -6942,7 +7330,8 @@
         "cluster",
         "cluster-parameter-group",
         "cluster-security-group",
-        "cluster-snapshot"
+        "cluster-snapshot",
+        "scheduled-action"
       ]
     },
     "String": {

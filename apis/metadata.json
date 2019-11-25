@@ -800,5 +800,14 @@
   },
   "connectparticipant": {
     "name": "ConnectParticipant"
+  },
+  "appconfig": {
+    "name": "AppConfig"
+  },
+  "iotsecuretunneling": {
+    "name": "IoTSecureTunneling"
+  },
+  "wafv2": {
+    "name": "WAFV2"
   }
 }

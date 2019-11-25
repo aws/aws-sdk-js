@@ -2325,7 +2325,7 @@
       "output": {
         "shape": "DescribeInstanceCreditSpecificationsResult"
       },
-      "documentation": "<p>Describes the credit option for CPU usage of the specified T2 or T3 instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns T2 and T3 instances with the <code>unlimited</code> credit option, as well as instances that were previously configured as T2 or T3 with the <code>unlimited</code> credit option. For example, if you resize a T2 instance, while it is configured as <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4 instance.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 or T3 instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the <code>unlimited</code> credit option, as well as instances that were previously configured as T2, T3, and T3a with the <code>unlimited</code> credit option. For example, if you resize a T2 instance, while it is configured as <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4 instance.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a burstable performance instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeInstanceStatus": {
       "name": "DescribeInstanceStatus",
@@ -3633,6 +3633,20 @@
       },
       "documentation": "<p>Retrieve a JPG-format screenshot of a running instance to help with troubleshooting.</p> <p>The returned content is Base64-encoded.</p>"
     },
+    "GetDefaultCreditSpecification": {
+      "name": "GetDefaultCreditSpecification",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetDefaultCreditSpecificationRequest"
+      },
+      "output": {
+        "shape": "GetDefaultCreditSpecificationResult"
+      },
+      "documentation": "<p>Describes the default credit option for CPU usage of a burstable performance instance family.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
     "GetEbsDefaultKmsKeyId": {
       "name": "GetEbsDefaultKmsKeyId",
       "http": {
@@ -3871,6 +3885,20 @@
       },
       "documentation": "<p>Modifies the specified Client VPN endpoint. You can only modify an endpoint's server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.</p>"
     },
+    "ModifyDefaultCreditSpecification": {
+      "name": "ModifyDefaultCreditSpecification",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyDefaultCreditSpecificationRequest"
+      },
+      "output": {
+        "shape": "ModifyDefaultCreditSpecificationResult"
+      },
+      "documentation": "<p>Modifies the default credit option for CPU usage of burstable performance instances. The default credit option is set at the account level per AWS Region, and is specified per instance family. All new burstable performance instances in the account launch using the default credit option.</p> <p> <code>ModifyDefaultCreditSpecification</code> is an asynchronous operation, which works at an AWS Region level and modifies the credit option for each Availability Zone. All zones in a Region are updated within five minutes. But if instances are launched during this operation, they might not get the new credit option until the zone is updated. To verify whether the update has occurred, you can call <code>GetDefaultCreditSpecification</code> and check <code>DefaultCreditSpecification</code> for updates.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
     "ModifyEbsDefaultKmsKeyId": {
       "name": "ModifyEbsDefaultKmsKeyId",
       "http": {
@@ -3997,7 +4025,7 @@
       "output": {
         "shape": "ModifyInstanceCreditSpecificationResult"
       },
-      "documentation": "<p>Modifies the credit option for CPU usage on a running or stopped T2 or T3 instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Modifies the credit option for CPU usage on a running or stopped burstable performance instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "ModifyInstanceEventStartTime": {
       "name": "ModifyInstanceEventStartTime",
@@ -19229,6 +19257,32 @@
         }
       }
     },
+    "GetDefaultCreditSpecificationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceFamily"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "InstanceFamily": {
+          "shape": "UnlimitedSupportedInstanceFamily",
+          "documentation": "<p>The instance family.</p>"
+        }
+      }
+    },
+    "GetDefaultCreditSpecificationResult": {
+      "type": "structure",
+      "members": {
+        "InstanceFamilyCreditSpecification": {
+          "shape": "InstanceFamilyCreditSpecification",
+          "documentation": "<p>The default credit option for CPU usage of the instance family.</p>",
+          "locationName": "instanceFamilyCreditSpecification"
+        }
+      }
+    },
     "GetEbsDefaultKmsKeyIdRequest": {
       "type": "structure",
       "members": {
@@ -21638,7 +21692,7 @@
           "locationName": "cpuCredits"
         }
       },
-      "documentation": "<p>Describes the credit option for CPU usage of a T2 or T3 instance. </p>"
+      "documentation": "<p>Describes the credit option for CPU usage of a burstable performance instance. </p>"
     },
     "InstanceCreditSpecificationList": {
       "type": "list",
@@ -21666,7 +21720,7 @@
           "documentation": "<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>"
         }
       },
-      "documentation": "<p>Describes the credit option for CPU usage of a T2 or T3 instance.</p>"
+      "documentation": "<p>Describes the credit option for CPU usage of a burstable performance instance.</p>"
     },
     "InstanceEventId": {
       "type": "string"
@@ -21686,6 +21740,22 @@
         }
       },
       "documentation": "<p>Describes an instance to export.</p>"
+    },
+    "InstanceFamilyCreditSpecification": {
+      "type": "structure",
+      "members": {
+        "InstanceFamily": {
+          "shape": "UnlimitedSupportedInstanceFamily",
+          "documentation": "<p>The instance family.</p>",
+          "locationName": "instanceFamily"
+        },
+        "CpuCredits": {
+          "shape": "String",
+          "documentation": "<p>The default credit option for CPU usage of the instance family. Valid values are <code>standard</code> and <code>unlimited</code>.</p>",
+          "locationName": "cpuCredits"
+        }
+      },
+      "documentation": "<p>Describes the default credit option for CPU usage of a burstable performance instance family.</p>"
     },
     "InstanceHealthStatus": {
       "type": "string",
@@ -24375,6 +24445,37 @@
           "shape": "Boolean",
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName": "return"
+        }
+      }
+    },
+    "ModifyDefaultCreditSpecificationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceFamily",
+        "CpuCredits"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "InstanceFamily": {
+          "shape": "UnlimitedSupportedInstanceFamily",
+          "documentation": "<p>The instance family.</p>"
+        },
+        "CpuCredits": {
+          "shape": "String",
+          "documentation": "<p>The credit option for CPU usage of the instance family.</p> <p>Valid Values: <code>standard</code> | <code>unlimited</code> </p>"
+        }
+      }
+    },
+    "ModifyDefaultCreditSpecificationResult": {
+      "type": "structure",
+      "members": {
+        "InstanceFamilyCreditSpecification": {
+          "shape": "InstanceFamilyCreditSpecification",
+          "documentation": "<p>The default credit option for CPU usage of the instance family.</p>",
+          "locationName": "instanceFamilyCreditSpecification"
         }
       }
     },
@@ -30259,7 +30360,7 @@
         },
         "CreditSpecification": {
           "shape": "CreditSpecificationRequest",
-          "documentation": "<p>The credit option for CPU usage of the T2 or T3 instance. Valid values are <code>standard</code> and <code>unlimited</code>. To change this attribute after launch, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html\"> ModifyInstanceCreditSpecification</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>standard</code> (T2 instances) or <code>unlimited</code> (T3 instances)</p>"
+          "documentation": "<p>The credit option for CPU usage of the burstable performance instance. Valid values are <code>standard</code> and <code>unlimited</code>. To change this attribute after launch, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html\"> ModifyInstanceCreditSpecification</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>standard</code> (T2 instances) or <code>unlimited</code> (T3/T3a instances)</p>"
         },
         "CpuOptions": {
           "shape": "CpuOptionsRequest",
@@ -32628,7 +32729,7 @@
           "locationName": "instanceId"
         }
       },
-      "documentation": "<p>Describes the T2 or T3 instance whose credit option for CPU usage was successfully modified.</p>"
+      "documentation": "<p>Describes the burstable performance instance whose credit option for CPU usage was successfully modified.</p>"
     },
     "SuccessfulInstanceCreditSpecificationSet": {
       "type": "list",
@@ -34205,6 +34306,14 @@
       },
       "documentation": "<p>Contains the parameters for UnassignPrivateIpAddresses.</p>"
     },
+    "UnlimitedSupportedInstanceFamily": {
+      "type": "string",
+      "enum": [
+        "t2",
+        "t3",
+        "t3a"
+      ]
+    },
     "UnmonitorInstancesRequest": {
       "type": "structure",
       "required": [
@@ -34252,11 +34361,11 @@
         },
         "Error": {
           "shape": "UnsuccessfulInstanceCreditSpecificationItemError",
-          "documentation": "<p>The applicable error for the T2 or T3 instance whose credit option for CPU usage was not modified.</p>",
+          "documentation": "<p>The applicable error for the burstable performance instance whose credit option for CPU usage was not modified.</p>",
           "locationName": "error"
         }
       },
-      "documentation": "<p>Describes the T2 or T3 instance whose credit option for CPU usage was not modified.</p>"
+      "documentation": "<p>Describes the burstable performance instance whose credit option for CPU usage was not modified.</p>"
     },
     "UnsuccessfulInstanceCreditSpecificationItemError": {
       "type": "structure",
@@ -34272,7 +34381,7 @@
           "locationName": "message"
         }
       },
-      "documentation": "<p>Information about the error for the T2 or T3 instance whose credit option for CPU usage was not modified.</p>"
+      "documentation": "<p>Information about the error for the burstable performance instance whose credit option for CPU usage was not modified.</p>"
     },
     "UnsuccessfulInstanceCreditSpecificationSet": {
       "type": "list",

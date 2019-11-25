@@ -310,6 +310,10 @@ declare namespace LexRuntime {
      * The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the clarificationPrompt configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the confirmationPrompt. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. 
      */
     audioStream?: BlobStream;
+    /**
+     * The unique identifier for the session.
+     */
+    sessionId?: String;
   }
   export interface PostTextRequest {
     /**
@@ -374,6 +378,10 @@ declare namespace LexRuntime {
      * Represents the options that the user has to respond to the current prompt. Response Card can come from the bot configuration (in the Amazon Lex console, choose the settings button next to a slot) or from a code hook (Lambda function). 
      */
     responseCard?: ResponseCard;
+    /**
+     * A unique identifier for the session.
+     */
+    sessionId?: String;
   }
   export interface PutSessionRequest {
     /**

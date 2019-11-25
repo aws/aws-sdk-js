@@ -137,7 +137,15 @@ declare namespace DLM {
     /**
      * The number of snapshots to be enabled with fast snapshot restore.
      */
-    Count: Count;
+    Count?: Count;
+    /**
+     * The amount of time to enable fast snapshot restore. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+     */
+    Interval?: Interval;
+    /**
+     * The unit of time for enabling fast snapshot restore.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
     /**
      * The Availability Zones in which to enable fast snapshot restore.
      */
@@ -296,10 +304,19 @@ declare namespace DLM {
   export type ResourceTypeValuesList = ResourceTypeValues[];
   export interface RetainRule {
     /**
-     * The number of snapshots to keep for each volume, up to a maximum of 1000.
+     * The number of snapshots to retain for each volume, up to a maximum of 1000.
      */
-    Count: Count;
+    Count?: Count;
+    /**
+     * The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+     */
+    Interval?: Interval;
+    /**
+     * The unit of time for time-based retention.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
   }
+  export type RetentionIntervalUnitValues = "DAYS"|"WEEKS"|"MONTHS"|"YEARS"|string;
   export interface Schedule {
     /**
      * The name of the schedule.
@@ -322,7 +339,7 @@ declare namespace DLM {
      */
     CreateRule?: CreateRule;
     /**
-     * The retain rule.
+     * The retention rule.
      */
     RetainRule?: RetainRule;
     /**

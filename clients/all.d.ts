@@ -199,3 +199,6 @@ export import DataExchange = require('./dataexchange');
 export import SESV2 = require('./sesv2');
 export import MigrationHubConfig = require('./migrationhubconfig');
 export import ConnectParticipant = require('./connectparticipant');
+export import AppConfig = require('./appconfig');
+export import IoTSecureTunneling = require('./iotsecuretunneling');
+export import WAFV2 = require('./wafv2');

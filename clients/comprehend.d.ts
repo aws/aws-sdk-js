@@ -52,6 +52,14 @@ declare class Comprehend extends Service {
    */
   batchDetectSyntax(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
   /**
+   * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.
+   */
+  classifyDocument(params: Comprehend.Types.ClassifyDocumentRequest, callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
+  /**
+   * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.
+   */
+  classifyDocument(callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
+  /**
    * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
    */
   createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
@@ -59,6 +67,14 @@ declare class Comprehend extends Service {
    * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
    */
   createDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
+  /**
+   * Creates a model-specific endpoint for synchronous inference for a previously trained custom model 
+   */
+  createEndpoint(params: Comprehend.Types.CreateEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateEndpointResponse) => void): Request<Comprehend.Types.CreateEndpointResponse, AWSError>;
+  /**
+   * Creates a model-specific endpoint for synchronous inference for a previously trained custom model 
+   */
+  createEndpoint(callback?: (err: AWSError, data: Comprehend.Types.CreateEndpointResponse) => void): Request<Comprehend.Types.CreateEndpointResponse, AWSError>;
   /**
    * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
    */
@@ -75,6 +91,14 @@ declare class Comprehend extends Service {
    * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
    */
   deleteDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
+  /**
+   * Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted.
+   */
+  deleteEndpoint(params: Comprehend.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteEndpointResponse) => void): Request<Comprehend.Types.DeleteEndpointResponse, AWSError>;
+  /**
+   * Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted.
+   */
+  deleteEndpoint(callback?: (err: AWSError, data: Comprehend.Types.DeleteEndpointResponse) => void): Request<Comprehend.Types.DeleteEndpointResponse, AWSError>;
   /**
    * Deletes an entity recognizer. Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the recognizer into a DELETING state, and it is then removed by a background job. Once removed, the recognizer disappears from your account and is no longer available for use. 
    */
@@ -107,6 +131,14 @@ declare class Comprehend extends Service {
    * Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
    */
   describeDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint.
+   */
+  describeEndpoint(params: Comprehend.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEndpointResponse) => void): Request<Comprehend.Types.DescribeEndpointResponse, AWSError>;
+  /**
+   * Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint.
+   */
+  describeEndpoint(callback?: (err: AWSError, data: Comprehend.Types.DescribeEndpointResponse) => void): Request<Comprehend.Types.DescribeEndpointResponse, AWSError>;
   /**
    * Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
    */
@@ -211,6 +243,14 @@ declare class Comprehend extends Service {
    * Gets a list of the dominant language detection jobs that you have submitted.
    */
   listDominantLanguageDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of all existing endpoints that you've created.
+   */
+  listEndpoints(params: Comprehend.Types.ListEndpointsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEndpointsResponse) => void): Request<Comprehend.Types.ListEndpointsResponse, AWSError>;
+  /**
+   * Gets a list of all existing endpoints that you've created.
+   */
+  listEndpoints(callback?: (err: AWSError, data: Comprehend.Types.ListEndpointsResponse) => void): Request<Comprehend.Types.ListEndpointsResponse, AWSError>;
   /**
    * Gets a list of the entity detection jobs that you have submitted.
    */
@@ -371,6 +411,14 @@ declare class Comprehend extends Service {
    * Removes a specific tag associated with an Amazon Comprehend resource. 
    */
   untagResource(callback?: (err: AWSError, data: Comprehend.Types.UntagResourceResponse) => void): Request<Comprehend.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates information about the specified endpoint.
+   */
+  updateEndpoint(params: Comprehend.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.UpdateEndpointResponse) => void): Request<Comprehend.Types.UpdateEndpointResponse, AWSError>;
+  /**
+   * Updates information about the specified endpoint.
+   */
+  updateEndpoint(callback?: (err: AWSError, data: Comprehend.Types.UpdateEndpointResponse) => void): Request<Comprehend.Types.UpdateEndpointResponse, AWSError>;
 }
 declare namespace Comprehend {
   export type AnyLengthString = string;
@@ -416,7 +464,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -446,7 +494,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -480,7 +528,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -510,7 +558,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: SyntaxLanguageCode;
   }
@@ -575,9 +623,28 @@ declare namespace Comprehend {
      */
     EvaluationMetrics?: ClassifierEvaluationMetrics;
   }
+  export interface ClassifyDocumentRequest {
+    /**
+     * The document text to be analyzed.
+     */
+    Text: String;
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint.
+     */
+    EndpointArn: DocumentClassifierEndpointArn;
+  }
+  export interface ClassifyDocumentResponse {
+    /**
+     * The classes used by the document being analyzed. These are used for multi-class trained models. Individual classes are mutually exclusive and each document is expected to have only a single class assigned to it. For example, an animal can be a dog or a cat, but not both at the same time. 
+     */
+    Classes?: ListOfClasses;
+  }
   export type ClientRequestTokenString = string;
   export type ComprehendArn = string;
   export type ComprehendArnName = string;
+  export type ComprehendEndpointArn = string;
+  export type ComprehendEndpointName = string;
+  export type ComprehendModelArn = string;
   export interface CreateDocumentClassifierRequest {
     /**
      * The name of the document classifier.
@@ -604,7 +671,7 @@ declare namespace Comprehend {
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -621,6 +688,34 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that identifies the document classifier.
      */
     DocumentClassifierArn?: DocumentClassifierArn;
+  }
+  export interface CreateEndpointRequest {
+    /**
+     * This is the descriptive suffix that becomes part of the EndpointArn used for all subsequent requests to this resource. 
+     */
+    EndpointName: ComprehendEndpointName;
+    /**
+     * The Amazon Resource Number (ARN) of the model to which the endpoint will be attached.
+     */
+    ModelArn: ComprehendModelArn;
+    /**
+     *  The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
+     */
+    DesiredInferenceUnits: InferenceUnitsInteger;
+    /**
+     * An idempotency token provided by the customer. If this token matches a previous endpoint creation request, Amazon Comprehend will not return a ResourceInUseException. 
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * Tags associated with the endpoint being created. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateEndpointResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint being created.
+     */
+    EndpointArn?: ComprehendEndpointArn;
   }
   export interface CreateEntityRecognizerRequest {
     /**
@@ -670,6 +765,14 @@ declare namespace Comprehend {
   }
   export interface DeleteDocumentClassifierResponse {
   }
+  export interface DeleteEndpointRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint being deleted.
+     */
+    EndpointArn: ComprehendEndpointArn;
+  }
+  export interface DeleteEndpointResponse {
+  }
   export interface DeleteEntityRecognizerRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the entity recognizer.
@@ -713,6 +816,18 @@ declare namespace Comprehend {
      * An object that contains the properties associated with a dominant language detection job.
      */
     DominantLanguageDetectionJobProperties?: DominantLanguageDetectionJobProperties;
+  }
+  export interface DescribeEndpointRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint being described.
+     */
+    EndpointArn: ComprehendEndpointArn;
+  }
+  export interface DescribeEndpointResponse {
+    /**
+     * Describes information associated with the specific endpoint.
+     */
+    EndpointProperties?: EndpointProperties;
   }
   export interface DescribeEntitiesDetectionJobRequest {
     /**
@@ -792,7 +907,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -808,7 +923,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -824,7 +939,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -844,7 +959,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language code of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").
+     * The language code of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").
      */
     LanguageCode: SyntaxLanguageCode;
   }
@@ -853,6 +968,16 @@ declare namespace Comprehend {
      * A collection of syntax tokens describing the text. For each token, the response provides the text, the token type, where the text begins and ends, and the level of confidence that Amazon Comprehend has that the token is correct. For a list of token types, see how-syntax.
      */
     SyntaxTokens?: ListOfSyntaxTokens;
+  }
+  export interface DocumentClass {
+    /**
+     * The name of the class.
+     */
+    Name?: String;
+    /**
+     * The confidence score that Amazon Comprehend has this class correctly attributed.
+     */
+    Score?: Float;
   }
   export interface DocumentClassificationJobFilter {
     /**
@@ -924,6 +1049,7 @@ declare namespace Comprehend {
   }
   export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
   export type DocumentClassifierArn = string;
+  export type DocumentClassifierEndpointArn = string;
   export interface DocumentClassifierFilter {
     /**
      * Filters the list of classifiers based on status. 
@@ -1089,6 +1215,60 @@ declare namespace Comprehend {
   }
   export type DominantLanguageDetectionJobPropertiesList = DominantLanguageDetectionJobProperties[];
   export type Double = number;
+  export interface EndpointFilter {
+    /**
+     * The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+     */
+    ModelArn?: ComprehendModelArn;
+    /**
+     * Specifies the status of the endpoint being returned. Possible values are: Creating, Ready, Updating, Deleting, Failed.
+     */
+    Status?: EndpointStatus;
+    /**
+     * Specifies a date before which the returned endpoint or endpoints were created.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Specifies a date after which the returned endpoint or endpoints were created.
+     */
+    CreationTimeAfter?: Timestamp;
+  }
+  export interface EndpointProperties {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint.
+     */
+    EndpointArn?: ComprehendEndpointArn;
+    /**
+     * Specifies the status of the endpoint. Because the endpoint updates and creation are asynchronous, so customers will need to wait for the endpoint to be Ready status before making inference requests.
+     */
+    Status?: EndpointStatus;
+    /**
+     * Specifies a reason for failure in cases of Failed status.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+     */
+    ModelArn?: ComprehendModelArn;
+    /**
+     * The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
+     */
+    DesiredInferenceUnits?: InferenceUnitsInteger;
+    /**
+     * The number of inference units currently used by the model using this endpoint.
+     */
+    CurrentInferenceUnits?: InferenceUnitsInteger;
+    /**
+     * The creation date and time of the endpoint.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The date and time that the endpoint was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type EndpointPropertiesList = EndpointProperties[];
+  export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
   export interface EntitiesDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -1362,6 +1542,7 @@ declare namespace Comprehend {
   }
   export type Float = number;
   export type IamRoleArn = string;
+  export type InferenceUnitsInteger = number;
   export interface InputDataConfig {
     /**
      * The Amazon S3 URI for the input data. The URI must be in same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of data files.  For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.
@@ -1538,6 +1719,30 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export interface ListEndpointsRequest {
+    /**
+     * Filters the endpoints that are returned. You can filter endpoints on their name, model, status, or the date and time that they were created. You can only set one filter at a time. 
+     */
+    Filter?: EndpointFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEndpointsResponse {
+    /**
+     * Displays a list of endpoint properties being retrieved by the service in response to the request.
+     */
+    EndpointPropertiesList?: EndpointPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListEntitiesDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -1610,6 +1815,7 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export type ListOfClasses = DocumentClass[];
   export type ListOfDetectDominantLanguageResult = BatchDetectDominantLanguageItemResult[];
   export type ListOfDetectEntitiesResult = BatchDetectEntitiesItemResult[];
   export type ListOfDetectKeyPhrasesResult = BatchDetectKeyPhrasesItemResult[];
@@ -1904,7 +2110,7 @@ declare namespace Comprehend {
      */
     EntityRecognizerArn?: EntityRecognizerArn;
     /**
-     * The language of the input documents. All documents must be in the same language. You can specify any of the languages supported by Amazon Comprehend: English ("en"), Spanish ("es"), French ("fr"), German ("de"), Italian ("it"), or Portuguese ("pt"). If custom entities recognition is used, this parameter is ignored and the language used for training the model is used instead.
+     * The language of the input documents. All documents must be in the same language. You can specify any of the languages supported by Amazon Comprehend. If custom entities recognition is used, this parameter is ignored and the language used for training the model is used instead.
      */
     LanguageCode: LanguageCode;
     /**
@@ -1948,7 +2154,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -1992,7 +2198,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -2276,6 +2482,18 @@ declare namespace Comprehend {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateEndpointRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint being updated.
+     */
+    EndpointArn: ComprehendEndpointArn;
+    /**
+     *  The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
+     */
+    DesiredInferenceUnits: InferenceUnitsInteger;
+  }
+  export interface UpdateEndpointResponse {
   }
   export interface VpcConfig {
     /**

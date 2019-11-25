@@ -14037,6 +14037,7 @@ module.exports =
 
 			// property does not exist at all, or exists but is enumerable
 			var V = desc['[[Value]]'];
+			// eslint-disable-next-line no-param-reassign
 			O[P] = V; // will use [[Define]]
 			return ES.SameValue(O[P], V);
 		}
@@ -14379,6 +14380,7 @@ module.exports =
 
 		// https://ecma-international.org/ecma-262/6.0/#sec-completepropertydescriptor
 		CompletePropertyDescriptor: function CompletePropertyDescriptor(Desc) {
+			/* eslint no-param-reassign: 0 */
 			assertRecord(this, 'Property Descriptor', 'Desc', Desc);
 
 			if (this.IsGenericDescriptor(Desc) || this.IsDataDescriptor(Desc)) {
@@ -16093,13 +16095,27 @@ module.exports =
 		SharedArrayBuffer,
 	*/
 
-	var undefined; // eslint-disable-line no-shadow-restricted-names
+	var undefined;
 
 	var $TypeError = TypeError;
 
+	var throwTypeError = function () { throw new $TypeError(); };
 	var ThrowTypeError = Object.getOwnPropertyDescriptor
-		? (function () { return Object.getOwnPropertyDescriptor(arguments, 'callee').get; }())
-		: function () { throw new $TypeError(); };
+		? (function () {
+			try {
+				// eslint-disable-next-line no-unused-expressions, no-caller, no-restricted-properties
+				arguments.callee; // IE 8 does not throw here
+				return throwTypeError;
+			} catch (calleeThrows) {
+				try {
+					// IE 8 throws on Object.getOwnPropertyDescriptor(arguments, '')
+					return Object.getOwnPropertyDescriptor(arguments, 'callee').get;
+				} catch (gOPDthrows) {
+					return throwTypeError;
+				}
+			}
+		}())
+		: throwTypeError;
 
 	var hasSymbols = __webpack_require__(95)();
 
@@ -16166,8 +16182,8 @@ module.exports =
 		'$ %isFinite%': isFinite,
 		'$ %isNaN%': isNaN,
 		'$ %IteratorPrototype%': hasSymbols ? getProto(getProto([][Symbol.iterator]())) : undefined,
-		'$ %JSON%': JSON,
-		'$ %JSONParse%': JSON.parse,
+		'$ %JSON%': typeof JSON === 'object' ? JSON : undefined,
+		'$ %JSONParse%': typeof JSON === 'object' ? JSON.parse : undefined,
 		'$ %Map%': typeof Map === 'undefined' ? undefined : Map,
 		'$ %MapIteratorPrototype%': typeof Map === 'undefined' || !hasSymbols ? undefined : getProto(new Map()[Symbol.iterator]()),
 		'$ %MapPrototype%': typeof Map === 'undefined' ? undefined : Map.prototype,
@@ -16387,6 +16403,7 @@ module.exports =
 		// eslint-disable-next-line no-restricted-syntax
 		for (var key in source) {
 			if (has(source, key)) {
+				// eslint-disable-next-line no-param-reassign
 				target[key] = source[key];
 			}
 		}
@@ -16592,8 +16609,7 @@ module.exports =
 	var callBound = __webpack_require__(112);
 
 	var $iterator = GetIntrinsic('%Symbol.iterator%', true);
-	var $arraySlice = callBound('Array.prototype.slice');
-	var $arrayJoin = callBound('Array.prototype.join');
+	var $stringSlice = callBound('String.prototype.slice');
 
 	module.exports = function getIteratorMethod(ES, iterable) {
 		var usingIterator;
@@ -16619,7 +16635,7 @@ module.exports =
 				return {
 					next: function () {
 						var nextIndex = ES.AdvanceStringIndex(iterable, i, true);
-						var value = $arrayJoin($arraySlice(iterable, i, nextIndex), '');
+						var value = $stringSlice(iterable, i, nextIndex);
 						i = nextIndex;
 						return {
 							done: nextIndex > iterable.length,
@@ -16701,7 +16717,7 @@ module.exports =
 		[].__proto__ !== $ArrayProto
 			? null
 			: function (O, proto) {
-				O.__proto__ = proto; // eslint-disable-line no-proto
+				O.__proto__ = proto; // eslint-disable-line no-proto, no-param-reassign
 				return O;
 			}
 	);

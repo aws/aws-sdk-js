@@ -984,6 +984,17 @@ declare namespace SSM {
   export type Account = string;
   export type AccountId = string;
   export type AccountIdList = AccountId[];
+  export interface AccountSharingInfo {
+    /**
+     * The AWS account ID where the current document is shared.
+     */
+    AccountId?: AccountId;
+    /**
+     * The version of the current document shared with the account.
+     */
+    SharedDocumentVersion?: SharedDocumentVersion;
+  }
+  export type AccountSharingInfoList = AccountSharingInfo[];
   export type Accounts = Account[];
   export interface Activation {
     /**
@@ -2239,6 +2250,10 @@ declare namespace SSM {
      */
     Content: DocumentContent;
     /**
+     * A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.
+     */
+    Requires?: DocumentRequiresList;
+    /**
      * A list of key and value pairs that describe attachments to a version of a document.
      */
     Attachments?: AttachmentsSourceList;
@@ -2494,6 +2509,10 @@ declare namespace SSM {
      * The version name of the document that you want to delete. If not provided, all versions of the document are deleted.
      */
     VersionName?: DocumentVersionName;
+    /**
+     * Some SSM document types require that you specify a Force flag before you can delete the document. For example, you must specify a Force flag to delete a document of type ApplicationConfigurationSchema. You can restrict access to the Force flag in an AWS Identity and Access Management (IAM) policy.
+     */
+    Force?: Boolean;
   }
   export interface DeleteDocumentResult {
   }
@@ -2877,6 +2896,10 @@ declare namespace SSM {
      * The account IDs that have permission to use this document. The ID can be either an AWS account or All.
      */
     AccountIds?: AccountIdList;
+    /**
+     * A list of of AWS accounts where the current document is shared and the version shared with each account.
+     */
+    AccountSharingInfoList?: AccountSharingInfoList;
   }
   export interface DescribeDocumentRequest {
     /**
@@ -3640,6 +3663,10 @@ declare namespace SSM {
      * Details about the document attachments, including names, locations, sizes, etc.
      */
     AttachmentsInformation?: AttachmentInformationList;
+    /**
+     * A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.
+     */
+    Requires?: DocumentRequiresList;
   }
   export interface DocumentFilter {
     /**
@@ -3698,6 +3725,10 @@ declare namespace SSM {
      * The tags, or metadata, that have been applied to the document.
      */
     Tags?: TagList;
+    /**
+     * A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.
+     */
+    Requires?: DocumentRequiresList;
   }
   export type DocumentIdentifierList = DocumentIdentifier[];
   export interface DocumentKeyValuesFilter {
@@ -3740,11 +3771,22 @@ declare namespace SSM {
   export type DocumentParameterName = string;
   export type DocumentParameterType = "String"|"StringList"|string;
   export type DocumentPermissionType = "Share"|string;
+  export interface DocumentRequires {
+    /**
+     * The name of the required SSM document. The name can be an Amazon Resource Name (ARN).
+     */
+    Name: DocumentARN;
+    /**
+     * The document version required by the current document.
+     */
+    Version?: DocumentVersion;
+  }
+  export type DocumentRequiresList = DocumentRequires[];
   export type DocumentSchemaVersion = string;
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
   export type DocumentStatusInformation = string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
@@ -4037,6 +4079,10 @@ declare namespace SSM {
      * The document format, either JSON or YAML.
      */
     DocumentFormat?: DocumentFormat;
+    /**
+     * A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.
+     */
+    Requires?: DocumentRequiresList;
     /**
      * A description of the document attachments, including names, locations, sizes, etc.
      */
@@ -5382,9 +5428,9 @@ declare namespace SSM {
   }
   export interface ListDocumentVersionsRequest {
     /**
-     * The name of the document about which you want version information.
+     * The name of the document. You can specify an Amazon Resource Name (ARN).
      */
-    Name: DocumentName;
+    Name: DocumentARN;
     /**
      * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
      */
@@ -5985,6 +6031,10 @@ declare namespace SSM {
      * The AWS user accounts that should no longer have access to the document. The AWS user account can either be a group of account IDs or All. This action has a higher priority than AccountIdsToAdd. If you specify an account ID to add and the same ID to remove, the system removes access to the document.
      */
     AccountIdsToRemove?: AccountIdList;
+    /**
+     * (Optional) The version of the document to share. If it's not specified, the system choose the Default version to share.
+     */
+    SharedDocumentVersion?: SharedDocumentVersion;
   }
   export interface ModifyDocumentPermissionResponse {
   }
@@ -7494,6 +7544,7 @@ declare namespace SSM {
      */
     UnspecifiedCount?: ComplianceSummaryCount;
   }
+  export type SharedDocumentVersion = string;
   export type SignalType = "Approve"|"Reject"|"StartStep"|"StopStep"|"Resume"|string;
   export type SnapshotDownloadUrl = string;
   export type SnapshotId = string;

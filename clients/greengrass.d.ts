@@ -960,11 +960,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1040,11 +1040,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1152,11 +1152,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1236,11 +1236,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1356,11 +1356,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1436,11 +1436,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1516,11 +1516,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1622,11 +1622,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -3323,11 +3323,22 @@ declare namespace Greengrass {
      */
     Resources?: __listOfResource;
   }
+  export interface ResourceDownloadOwnerSetting {
+    /**
+     * The group owner of the resource. This is the name of an existing Linux OS group on the system or a GID. The group's permissions are added to the Lambda process.
+     */
+    GroupOwner: __string;
+    /**
+     * The permissions that the group owner has to the resource. Valid values are ''rw'' (read/write) or ''ro'' (read-only).
+     */
+    GroupPermission: Permission;
+  }
   export interface S3MachineLearningModelResourceData {
     /**
      * The absolute local path of the resource inside the Lambda environment.
      */
     DestinationPath?: __string;
+    OwnerSetting?: ResourceDownloadOwnerSetting;
     /**
      * The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
      */
@@ -3339,6 +3350,7 @@ declare namespace Greengrass {
      * The absolute local path of the resource inside the Lambda environment.
      */
     DestinationPath?: __string;
+    OwnerSetting?: ResourceDownloadOwnerSetting;
     /**
      * The ARN of the Amazon SageMaker training job that represents the source model.
      */
@@ -3575,8 +3587,8 @@ declare namespace Greengrass {
   export interface UpdateSubscriptionDefinitionResponse {
   }
   export type UpdateTargets = __string[];
-  export type UpdateTargetsArchitecture = "armv6l"|"armv7l"|"x86_64"|"aarch64"|"openwrt"|string;
-  export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|string;
+  export type UpdateTargetsArchitecture = "armv6l"|"armv7l"|"x86_64"|"aarch64"|string;
+  export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|"openwrt"|string;
   export interface VersionInformation {
     /**
      * The ARN of the version.

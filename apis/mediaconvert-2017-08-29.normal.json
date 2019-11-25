@@ -1309,6 +1309,14 @@
       },
       "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AIFF."
     },
+    "AlphaBehavior": {
+      "type": "string",
+      "documentation": "Ignore this setting unless this input is a QuickTime animation. Specify which part of this input MediaConvert uses for your outputs. Leave this setting set to DISCARD in order to delete the alpha channel and preserve the video. Use REMAP_TO_LUMA for this setting to delete the video and map the alpha channel to the luma channel of your outputs.",
+      "enum": [
+        "DISCARD",
+        "REMAP_TO_LUMA"
+      ]
+    },
     "AncillaryConvert608To708": {
       "type": "string",
       "documentation": "Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.",
@@ -1856,7 +1864,7 @@
         "CustomLanguageCode": {
           "shape": "__stringPatternAZaZ23AZaZ",
           "locationName": "customLanguageCode",
-          "documentation": "Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when  automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
+          "documentation": "Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
         },
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
@@ -1882,7 +1890,7 @@
         "CustomLanguageCode": {
           "shape": "__stringPatternAZaZ23AZaZ",
           "locationName": "customLanguageCode",
-          "documentation": "Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when  automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
+          "documentation": "Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
         },
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
@@ -3178,6 +3186,11 @@
           "locationName": "shadowYOffset",
           "documentation": "Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match."
         },
+        "SubtitlingType": {
+          "shape": "DvbSubtitlingType",
+          "locationName": "subtitlingType",
+          "documentation": "Specify whether your DVB subtitles are standard or for hearing impaired. Choose hearing impaired if your subtitles include audio descriptions and dialogue. Choose standard if your subtitles include only dialogue."
+        },
         "TeletextSpacing": {
           "shape": "DvbSubtitleTeletextSpacing",
           "locationName": "teletextSpacing",
@@ -3263,6 +3276,14 @@
       "enum": [
         "FIXED_GRID",
         "PROPORTIONAL"
+      ]
+    },
+    "DvbSubtitlingType": {
+      "type": "string",
+      "documentation": "Specify whether your DVB subtitles are standard or for hearing impaired. Choose hearing impaired if your subtitles include audio descriptions and dialogue. Choose standard if your subtitles include only dialogue.",
+      "enum": [
+        "HEARING_IMPAIRED",
+        "STANDARD"
       ]
     },
     "DvbTdtSettings": {
@@ -8943,7 +8964,7 @@
           "documentation": "Applies only if you set AFD Signaling(AfdSignaling) to Fixed (FIXED). Use Fixed (FixedAfd) to specify a four-bit AFD value which the service will write on all  frames of this video output."
         },
         "Height": {
-          "shape": "__integerMin32Max4096",
+          "shape": "__integerMin32Max8192",
           "locationName": "height",
           "documentation": "Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don't provide a value here, the service will use the input height."
         },
@@ -8978,7 +8999,7 @@
           "documentation": "Find additional transcoding features under Preprocessors (VideoPreprocessors). Enable the features at each output individually. These features are disabled by default."
         },
         "Width": {
-          "shape": "__integerMin32Max4096",
+          "shape": "__integerMin32Max8192",
           "locationName": "width",
           "documentation": "Use Width (Width) to define the video resolution width, in pixels, for this output. If you don't provide a value here, the service will use the input width."
         }
@@ -9040,6 +9061,11 @@
     "VideoSelector": {
       "type": "structure",
       "members": {
+        "AlphaBehavior": {
+          "shape": "AlphaBehavior",
+          "locationName": "alphaBehavior",
+          "documentation": "Ignore this setting unless this input is a QuickTime animation. Specify which part of this input MediaConvert uses for your outputs. Leave this setting set to DISCARD in order to delete the alpha channel and preserve the video. Use REMAP_TO_LUMA for this setting to delete the video and map the alpha channel to the luma channel of your outputs."
+        },
         "ColorSpace": {
           "shape": "ColorSpace",
           "locationName": "colorSpace",
@@ -9401,15 +9427,15 @@
       "min": 32000,
       "max": 48000
     },
-    "__integerMin32Max4096": {
-      "type": "integer",
-      "min": 32,
-      "max": 4096
-    },
     "__integerMin32Max8182": {
       "type": "integer",
       "min": 32,
       "max": 8182
+    },
+    "__integerMin32Max8192": {
+      "type": "integer",
+      "min": 32,
+      "max": 8192
     },
     "__integerMin384000Max768000": {
       "type": "integer",

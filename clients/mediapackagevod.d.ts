@@ -256,6 +256,10 @@ rounded to the nearest multiple of the source fragment duration.
      */
     Arn?: __string;
     /**
+     * The fully qualified domain name for Assets in the PackagingGroup.
+     */
+    DomainName?: __string;
+    /**
      * The ID of the PackagingGroup.
      */
     Id?: __string;
@@ -390,6 +394,10 @@ rounded to the nearest multiple of the source segment duration.
      * The ARN of the PackagingGroup.
      */
     Arn?: __string;
+    /**
+     * The fully qualified domain name for Assets in the PackagingGroup.
+     */
+    DomainName?: __string;
     /**
      * The ID of the PackagingGroup.
      */
@@ -587,6 +595,10 @@ rounded to the nearest multiple of the source fragment duration.
      * The ARN of the PackagingGroup.
      */
     Arn?: __string;
+    /**
+     * The fully qualified domain name for Assets in the PackagingGroup.
+     */
+    DomainName?: __string;
     /**
      * The ID of the PackagingGroup.
      */

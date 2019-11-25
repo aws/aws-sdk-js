@@ -52,6 +52,14 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   addApplicationReferenceDataSource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse, AWSError>;
   /**
+   * Adds a Virtual Private Cloud (VPC) configuration to the application. Applications can use VPCs to store and access resources securely. Note the following about VPC configurations for Kinesis Data Analytics applications:   VPC configurations are not supported for SQL applications.   When a VPC is added to a Kinesis Data Analytics application, the application can no longer be accessed from the Internet directly. To enable Internet access to the application, add an Internet gateway to your VPC.  
+   */
+  addApplicationVpcConfiguration(params: KinesisAnalyticsV2.Types.AddApplicationVpcConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationVpcConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationVpcConfigurationResponse, AWSError>;
+  /**
+   * Adds a Virtual Private Cloud (VPC) configuration to the application. Applications can use VPCs to store and access resources securely. Note the following about VPC configurations for Kinesis Data Analytics applications:   VPC configurations are not supported for SQL applications.   When a VPC is added to a Kinesis Data Analytics application, the application can no longer be accessed from the Internet directly. To enable Internet access to the application, add an Internet gateway to your VPC.  
+   */
+  addApplicationVpcConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationVpcConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationVpcConfigurationResponse, AWSError>;
+  /**
    * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application. 
    */
   createApplication(params: KinesisAnalyticsV2.Types.CreateApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
@@ -116,6 +124,14 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   deleteApplicationSnapshot(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationSnapshotResponse, AWSError>;
   /**
+   * Removes a VPC configuration from a Kinesis Data Analytics application.
+   */
+  deleteApplicationVpcConfiguration(params: KinesisAnalyticsV2.Types.DeleteApplicationVpcConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationVpcConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationVpcConfigurationResponse, AWSError>;
+  /**
+   * Removes a VPC configuration from a Kinesis Data Analytics application.
+   */
+  deleteApplicationVpcConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationVpcConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationVpcConfigurationResponse, AWSError>;
+  /**
    * Returns information about a specific Amazon Kinesis Data Analytics application. If you want to retrieve a list of all applications in your account, use the ListApplications operation.
    */
   describeApplication(params: KinesisAnalyticsV2.Types.DescribeApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationResponse, AWSError>;
@@ -156,11 +172,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   listApplications(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Retrieves the list of key-value tags assigned to the application.
+   * Retrieves the list of key-value tags assigned to the application. For more information, see Using Tagging.
    */
   listTagsForResource(params: KinesisAnalyticsV2.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalyticsV2.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves the list of key-value tags assigned to the application.
+   * Retrieves the list of key-value tags assigned to the application. For more information, see Using Tagging.
    */
   listTagsForResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalyticsV2.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -180,19 +196,19 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   stopApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StopApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StopApplicationResponse, AWSError>;
   /**
-   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.
+   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
    */
   tagResource(params: KinesisAnalyticsV2.Types.TagResourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.TagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.
+   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
    */
   tagResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.TagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from a Kinesis Analytics application.
+   * Removes one or more tags from a Kinesis Analytics application. For more information, see Using Tagging.
    */
   untagResource(params: KinesisAnalyticsV2.Types.UntagResourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UntagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from a Kinesis Analytics application.
+   * Removes one or more tags from a Kinesis Analytics application. For more information, see Using Tagging.
    */
   untagResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UntagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.UntagResourceResponse, AWSError>;
   /**
@@ -353,6 +369,34 @@ declare namespace KinesisAnalyticsV2 {
      */
     ReferenceDataSourceDescriptions?: ReferenceDataSourceDescriptions;
   }
+  export interface AddApplicationVpcConfigurationRequest {
+    /**
+     * The name of an existing application.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The version of the application to which you want to add the input processing configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
+     */
+    CurrentApplicationVersionId: ApplicationVersionId;
+    /**
+     * Description of the VPC to add to the application.
+     */
+    VpcConfiguration: VpcConfiguration;
+  }
+  export interface AddApplicationVpcConfigurationResponse {
+    /**
+     * The ARN of the application.
+     */
+    ApplicationARN?: ResourceARN;
+    /**
+     * Provides the current application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application. 
+     */
+    ApplicationVersionId?: ApplicationVersionId;
+    /**
+     * The parameters of the new VPC configuration.
+     */
+    VpcConfigurationDescription?: VpcConfigurationDescription;
+  }
   export interface ApplicationCodeConfiguration {
     /**
      * The location and type of the application code.
@@ -404,6 +448,10 @@ declare namespace KinesisAnalyticsV2 {
      * Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
      */
     ApplicationSnapshotConfiguration?: ApplicationSnapshotConfiguration;
+    /**
+     * The array of descriptions of VPC configurations available to the application.
+     */
+    VpcConfigurations?: VpcConfigurations;
   }
   export interface ApplicationConfigurationDescription {
     /**
@@ -430,6 +478,10 @@ declare namespace KinesisAnalyticsV2 {
      * Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
      */
     ApplicationSnapshotConfigurationDescription?: ApplicationSnapshotConfigurationDescription;
+    /**
+     * The array of descriptions of VPC configurations available to the application.
+     */
+    VpcConfigurationDescriptions?: VpcConfigurationDescriptions;
   }
   export interface ApplicationConfigurationUpdate {
     /**
@@ -452,6 +504,10 @@ declare namespace KinesisAnalyticsV2 {
      * Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
      */
     ApplicationSnapshotConfigurationUpdate?: ApplicationSnapshotConfigurationUpdate;
+    /**
+     * Updates to the array of descriptions of VPC configurations available to the application.
+     */
+    VpcConfigurationUpdates?: VpcConfigurationUpdates;
   }
   export type ApplicationDescription = string;
   export interface ApplicationDetail {
@@ -569,55 +625,55 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface CheckpointConfiguration {
     /**
-     * Describes whether the application uses Amazon Kinesis Data Analytics' default checkpointing behavior. 
+     * Describes whether the application uses Amazon Kinesis Data Analytics' default checkpointing behavior. You must set this property to CUSTOM in order to set the CheckpointingEnabled, CheckpointInterval, or MinPauseBetweenCheckpoints parameters.  If this value is set to DEFAULT, the application will use the following values, even if they are set to other values using APIs or application code:    CheckpointingEnabled: true    CheckpointInterval: 60000    MinPauseBetweenCheckpoints: 5000   
      */
     ConfigurationType: ConfigurationType;
     /**
-     * Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.
+     * Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointingEnabled value of true, even if this value is set to another value using this API or in application code. 
      */
     CheckpointingEnabled?: BooleanObject;
     /**
-     * Describes the interval in milliseconds between checkpoint operations. 
+     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointInterval?: CheckpointInterval;
     /**
-     * Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the CheckpointInterval, the application otherwise performs continual checkpoint operations. For more information, see  Tuning Checkpointing in the Apache Flink Documentation.
+     * Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the CheckpointInterval, the application otherwise performs continual checkpoint operations. For more information, see  Tuning Checkpointing in the Apache Flink Documentation.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using this API or in application code. 
      */
     MinPauseBetweenCheckpoints?: MinPauseBetweenCheckpoints;
   }
   export interface CheckpointConfigurationDescription {
     /**
-     * Describes whether the application uses the default checkpointing behavior in Kinesis Data Analytics.
+     * Describes whether the application uses the default checkpointing behavior in Kinesis Data Analytics.   If this value is set to DEFAULT, the application will use the following values, even if they are set to other values using APIs or application code:    CheckpointingEnabled: true    CheckpointInterval: 60000    MinPauseBetweenCheckpoints: 5000   
      */
     ConfigurationType?: ConfigurationType;
     /**
-     * Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.
+     * Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointingEnabled value of true, even if this value is set to another value using this API or in application code. 
      */
     CheckpointingEnabled?: BooleanObject;
     /**
-     * Describes the interval in milliseconds between checkpoint operations.
+     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointInterval?: CheckpointInterval;
     /**
-     * Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.
+     * Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using this API or in application code. 
      */
     MinPauseBetweenCheckpoints?: MinPauseBetweenCheckpoints;
   }
   export interface CheckpointConfigurationUpdate {
     /**
-     * Describes updates to whether the application uses the default checkpointing behavior of Kinesis Data Analytics.
+     * Describes updates to whether the application uses the default checkpointing behavior of Kinesis Data Analytics. You must set this property to CUSTOM in order to set the CheckpointingEnabled, CheckpointInterval, or MinPauseBetweenCheckpoints parameters.   If this value is set to DEFAULT, the application will use the following values, even if they are set to other values using APIs or application code:    CheckpointingEnabled: true    CheckpointInterval: 60000    MinPauseBetweenCheckpoints: 5000   
      */
     ConfigurationTypeUpdate?: ConfigurationType;
     /**
-     * Describes updates to whether checkpointing is enabled for an application.
+     * Describes updates to whether checkpointing is enabled for an application.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointingEnabled value of true, even if this value is set to another value using this API or in application code. 
      */
     CheckpointingEnabledUpdate?: BooleanObject;
     /**
-     * Describes updates to the interval in milliseconds between checkpoint operations.
+     * Describes updates to the interval in milliseconds between checkpoint operations.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointIntervalUpdate?: CheckpointInterval;
     /**
-     * Describes updates to the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.
+     * Describes updates to the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using this API or in application code. 
      */
     MinPauseBetweenCheckpointsUpdate?: MinPauseBetweenCheckpoints;
   }
@@ -731,7 +787,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
     /**
-     * A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management Guide.
+     * A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
      */
     Tags?: Tags;
   }
@@ -881,6 +937,30 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface DeleteApplicationSnapshotResponse {
   }
+  export interface DeleteApplicationVpcConfigurationRequest {
+    /**
+     * The name of an existing application.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The current application version ID. You can retrieve the application version ID using DescribeApplication.
+     */
+    CurrentApplicationVersionId: ApplicationVersionId;
+    /**
+     * The ID of the VPC configuration to delete.
+     */
+    VpcConfigurationId: Id;
+  }
+  export interface DeleteApplicationVpcConfigurationResponse {
+    /**
+     * The ARN of the Kinesis Data Analytics application.
+     */
+    ApplicationARN?: ResourceARN;
+    /**
+     * The updated version ID of the application.
+     */
+    ApplicationVersionId?: ApplicationVersionId;
+  }
   export interface DescribeApplicationRequest {
     /**
      * The name of the application.
@@ -1023,6 +1103,12 @@ declare namespace KinesisAnalyticsV2 {
      * Describes updates to the parameters for how an application executes multiple tasks simultaneously.
      */
     ParallelismConfigurationUpdate?: ParallelismConfigurationUpdate;
+  }
+  export interface FlinkRunConfiguration {
+    /**
+     * When restoring from a savepoint, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. This will happen if the program is updated between savepoints to remove stateful parameters, and state data in the savepoint no longer corresponds to valid application data. For more information, see  Allowing Non-Restored State in the Apache Flink documentation.
+     */
+    AllowNonRestoredState?: BooleanObject;
   }
   export type Id = string;
   export type InAppStreamName = string;
@@ -1391,7 +1477,7 @@ declare namespace KinesisAnalyticsV2 {
   export type MinPauseBetweenCheckpoints = number;
   export interface MonitoringConfiguration {
     /**
-     * Describes whether to use the default CloudWatch logging configuration for an application.
+     * Describes whether to use the default CloudWatch logging configuration for an application. You must set this property to CUSTOM in order to set the LogLevel or MetricsLevel parameters.
      */
     ConfigurationType: ConfigurationType;
     /**
@@ -1419,7 +1505,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface MonitoringConfigurationUpdate {
     /**
-     * Describes updates to whether to use the default CloudWatch logging configuration for an application.
+     * Describes updates to whether to use the default CloudWatch logging configuration for an application. You must set this property to CUSTOM in order to set the LogLevel or MetricsLevel parameters.
      */
     ConfigurationTypeUpdate?: ConfigurationType;
     /**
@@ -1513,11 +1599,11 @@ declare namespace KinesisAnalyticsV2 {
   export type Parallelism = number;
   export interface ParallelismConfiguration {
     /**
-     * Describes whether the application uses the default parallelism for the Kinesis Data Analytics service.
+     * Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. You must set this property to CUSTOM in order to change your application's AutoScalingEnabled, Parallelism, or ParallelismPerKPU properties.
      */
     ConfigurationType: ConfigurationType;
     /**
-     * Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if ParallelismConfiguration$AutoScalingEnabled is set to true.
+     * Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, Kinesis Data Analytics increases the CurrentParallelism value in response to application load. The service can increase the CurrentParallelism value up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
      */
     Parallelism?: Parallelism;
     /**
@@ -1535,7 +1621,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ConfigurationType?: ConfigurationType;
     /**
-     * Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. 
+     * Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, then Kinesis Data Analytics can increase the CurrentParallelism value in response to application load. The service can increase CurrentParallelism up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
      */
     Parallelism?: Parallelism;
     /**
@@ -1543,7 +1629,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ParallelismPerKPU?: ParallelismPerKPU;
     /**
-     * Describes the current number of parallel tasks that a Java-based Kinesis Data Analytics application can perform.
+     * Describes the current number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, Kinesis Data Analytics can increase this value in response to application load. The service can increase this value up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
      */
     CurrentParallelism?: Parallelism;
     /**
@@ -1553,11 +1639,11 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface ParallelismConfigurationUpdate {
     /**
-     * Describes updates to whether the application uses the default parallelism for the Kinesis Data Analytics service, or if a custom parallelism is used.
+     * Describes updates to whether the application uses the default parallelism for the Kinesis Data Analytics service, or if a custom parallelism is used. You must set this property to CUSTOM in order to change your application's AutoScalingEnabled, Parallelism, or ParallelismPerKPU properties.
      */
     ConfigurationTypeUpdate?: ConfigurationType;
     /**
-     * Describes updates to the initial number of parallel tasks an application can perform.
+     * Describes updates to the initial number of parallel tasks an application can perform. If AutoScalingEnabled is set to True, then Kinesis Data Analytics can increase the CurrentParallelism value in response to application load. The service can increase CurrentParallelism up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service will reduce CurrentParallelism down to the Parallelism setting.
      */
     ParallelismUpdate?: Parallelism;
     /**
@@ -1681,6 +1767,10 @@ declare namespace KinesisAnalyticsV2 {
   export type RoleARN = string;
   export interface RunConfiguration {
     /**
+     * Describes the starting parameters for an Apache Flink-based Kinesis Data Analytics application.
+     */
+    FlinkRunConfiguration?: FlinkRunConfiguration;
+    /**
      * Describes the starting parameters for an SQL-based Kinesis Data Analytics application.
      */
     SqlRunConfigurations?: SqlRunConfigurations;
@@ -1696,6 +1786,10 @@ declare namespace KinesisAnalyticsV2 {
     ApplicationRestoreConfigurationDescription?: ApplicationRestoreConfiguration;
   }
   export interface RunConfigurationUpdate {
+    /**
+     * Describes the starting parameters for an Apache Flink-based Kinesis Data Analytics application.
+     */
+    FlinkRunConfiguration?: FlinkRunConfiguration;
     /**
      * Describes updates to the restore behavior of a restarting application.
      */
@@ -1788,6 +1882,8 @@ declare namespace KinesisAnalyticsV2 {
      */
     FileKeyUpdate?: FileKey;
   }
+  export type SecurityGroupId = string;
+  export type SecurityGroupIds = SecurityGroupId[];
   export interface SnapshotDetails {
     /**
      * The identifier for the application snapshot.
@@ -1896,6 +1992,8 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface StopApplicationResponse {
   }
+  export type SubnetId = string;
+  export type SubnetIds = SubnetId[];
   export interface Tag {
     /**
      * The key of the key-value tag.
@@ -1968,6 +2066,52 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationDetail: ApplicationDetail;
   }
+  export interface VpcConfiguration {
+    /**
+     * The array of Subnet IDs used by the VPC configuration.
+     */
+    SubnetIds: SubnetIds;
+    /**
+     * The array of SecurityGroup IDs used by the VPC configuration.
+     */
+    SecurityGroupIds: SecurityGroupIds;
+  }
+  export interface VpcConfigurationDescription {
+    /**
+     * The ID of the VPC configuration.
+     */
+    VpcConfigurationId: Id;
+    /**
+     * The ID of the associated VPC.
+     */
+    VpcId: VpcId;
+    /**
+     * The array of Subnet IDs used by the VPC configuration.
+     */
+    SubnetIds: SubnetIds;
+    /**
+     * The array of SecurityGroup IDs used by the VPC configuration.
+     */
+    SecurityGroupIds: SecurityGroupIds;
+  }
+  export type VpcConfigurationDescriptions = VpcConfigurationDescription[];
+  export interface VpcConfigurationUpdate {
+    /**
+     * Describes an update to the ID of the VPC configuration.
+     */
+    VpcConfigurationId: Id;
+    /**
+     * Describes updates to the array of Subnet IDs used by the VPC configuration.
+     */
+    SubnetIdUpdates?: SubnetIds;
+    /**
+     * Describes updates to the array of SecurityGroup IDs used by the VPC configuration.
+     */
+    SecurityGroupIdUpdates?: SecurityGroupIds;
+  }
+  export type VpcConfigurationUpdates = VpcConfigurationUpdate[];
+  export type VpcConfigurations = VpcConfiguration[];
+  export type VpcId = string;
   export type ZipFileContent = Buffer|Uint8Array|Blob|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

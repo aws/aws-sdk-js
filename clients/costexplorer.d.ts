@@ -12,6 +12,30 @@ declare class CostExplorer extends Service {
   constructor(options?: CostExplorer.Types.ClientConfiguration)
   config: Config & CostExplorer.Types.ClientConfiguration;
   /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Creates a new Cost Category with the requested name and rules.
+   */
+  createCostCategoryDefinition(params: CostExplorer.Types.CreateCostCategoryDefinitionRequest, callback?: (err: AWSError, data: CostExplorer.Types.CreateCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.CreateCostCategoryDefinitionResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Creates a new Cost Category with the requested name and rules.
+   */
+  createCostCategoryDefinition(callback?: (err: AWSError, data: CostExplorer.Types.CreateCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.CreateCostCategoryDefinitionResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Deletes a Cost Category. Expenses from this month going forward will no longer be categorized with this Cost Category.
+   */
+  deleteCostCategoryDefinition(params: CostExplorer.Types.DeleteCostCategoryDefinitionRequest, callback?: (err: AWSError, data: CostExplorer.Types.DeleteCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.DeleteCostCategoryDefinitionResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Deletes a Cost Category. Expenses from this month going forward will no longer be categorized with this Cost Category.
+   */
+  deleteCostCategoryDefinition(callback?: (err: AWSError, data: CostExplorer.Types.DeleteCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.DeleteCostCategoryDefinitionResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Returns the name, ARN, rules, definition, and effective dates of a Cost Category that's defined in the account. You have the option to use EffectiveOn to return a Cost Category that is active on a specific date. If there is no EffectiveOn specified, you’ll see a Cost Category that is effective on the current date. If Cost Category is still effective, EffectiveEnd is omitted in the response. 
+   */
+  describeCostCategoryDefinition(params: CostExplorer.Types.DescribeCostCategoryDefinitionRequest, callback?: (err: AWSError, data: CostExplorer.Types.DescribeCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.DescribeCostCategoryDefinitionResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Returns the name, ARN, rules, definition, and effective dates of a Cost Category that's defined in the account. You have the option to use EffectiveOn to return a Cost Category that is active on a specific date. If there is no EffectiveOn specified, you’ll see a Cost Category that is effective on the current date. If Cost Category is still effective, EffectiveEnd is omitted in the response. 
+   */
+  describeCostCategoryDefinition(callback?: (err: AWSError, data: CostExplorer.Types.DescribeCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.DescribeCostCategoryDefinitionResponse, AWSError>;
+  /**
    * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
    */
   getCostAndUsage(params: CostExplorer.Types.GetCostAndUsageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
@@ -123,15 +147,86 @@ declare class CostExplorer extends Service {
    * Retrieves a forecast for how much Amazon Web Services predicts that you will use over the forecast time period that you select, based on your past usage. 
    */
   getUsageForecast(callback?: (err: AWSError, data: CostExplorer.Types.GetUsageForecastResponse) => void): Request<CostExplorer.Types.GetUsageForecastResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Returns the name, ARN and effective dates of all Cost Categories defined in the account. You have the option to use EffectiveOn to return a list of Cost Categories that were active on a specific date. If there is no EffectiveOn specified, you’ll see Cost Categories that are effective on the current date. If Cost Category is still effective, EffectiveEnd is omitted in the response. 
+   */
+  listCostCategoryDefinitions(params: CostExplorer.Types.ListCostCategoryDefinitionsRequest, callback?: (err: AWSError, data: CostExplorer.Types.ListCostCategoryDefinitionsResponse) => void): Request<CostExplorer.Types.ListCostCategoryDefinitionsResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Returns the name, ARN and effective dates of all Cost Categories defined in the account. You have the option to use EffectiveOn to return a list of Cost Categories that were active on a specific date. If there is no EffectiveOn specified, you’ll see Cost Categories that are effective on the current date. If Cost Category is still effective, EffectiveEnd is omitted in the response. 
+   */
+  listCostCategoryDefinitions(callback?: (err: AWSError, data: CostExplorer.Types.ListCostCategoryDefinitionsResponse) => void): Request<CostExplorer.Types.ListCostCategoryDefinitionsResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Updates an existing Cost Category. Changes made to the Cost Category rules will be used to categorize the current month’s expenses and future expenses. This won’t change categorization for the previous months.
+   */
+  updateCostCategoryDefinition(params: CostExplorer.Types.UpdateCostCategoryDefinitionRequest, callback?: (err: AWSError, data: CostExplorer.Types.UpdateCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.UpdateCostCategoryDefinitionResponse, AWSError>;
+  /**
+   *    Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).    Updates an existing Cost Category. Changes made to the Cost Category rules will be used to categorize the current month’s expenses and future expenses. This won’t change categorization for the previous months.
+   */
+  updateCostCategoryDefinition(callback?: (err: AWSError, data: CostExplorer.Types.UpdateCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.UpdateCostCategoryDefinitionResponse, AWSError>;
 }
 declare namespace CostExplorer {
   export type AccountScope = "PAYER"|"LINKED"|string;
   export type AmortizedRecurringFee = string;
   export type AmortizedUpfrontFee = string;
+  export type Arn = string;
   export type AttributeType = string;
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
   export type Context = "COST_AND_USAGE"|"RESERVATIONS"|"SAVINGS_PLANS"|string;
+  export interface CostCategory {
+    /**
+     *  The unique identifier for your Cost Category. 
+     */
+    CostCategoryArn: Arn;
+    /**
+     *  The Cost Category's effective start date.
+     */
+    EffectiveStart: ZonedDateTime;
+    /**
+     *  The Cost Category's effective end date.
+     */
+    EffectiveEnd?: ZonedDateTime;
+    Name: CostCategoryName;
+    RuleVersion: CostCategoryRuleVersion;
+    /**
+     *  Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. 
+     */
+    Rules: CostCategoryRulesList;
+  }
+  export type CostCategoryName = string;
+  export interface CostCategoryReference {
+    /**
+     *  The unique identifier for your Cost Category Reference. 
+     */
+    CostCategoryArn?: Arn;
+    Name?: CostCategoryName;
+    /**
+     *  The Cost Category's effective start date.
+     */
+    EffectiveStart?: ZonedDateTime;
+    /**
+     *  The Cost Category's effective end date.
+     */
+    EffectiveEnd?: ZonedDateTime;
+  }
+  export type CostCategoryReferencesList = CostCategoryReference[];
+  export interface CostCategoryRule {
+    Value: CostCategoryValue;
+    /**
+     * An Expression object used to categorize costs. This supports dimensions, Tags, and nested expressions. Currently the only dimensions supported is LINKED_ACCOUNT. Root level OR is not supported. We recommend you create a separate rule instead.
+     */
+    Rule: Expression;
+  }
+  export type CostCategoryRuleVersion = "CostCategoryExpression.v1"|string;
+  export type CostCategoryRulesList = CostCategoryRule[];
+  export type CostCategoryValue = string;
+  export interface CostCategoryValues {
+    Key?: CostCategoryName;
+    /**
+     * The specific value of the Cost Category.
+     */
+    Values?: Values;
+  }
   export interface Coverage {
     /**
      * The amount of instance usage that the reservation covered, in hours.
@@ -205,6 +300,24 @@ declare namespace CostExplorer {
   }
   export type CoverageNormalizedUnitsPercentage = string;
   export type CoveragesByTime = CoverageByTime[];
+  export interface CreateCostCategoryDefinitionRequest {
+    Name: CostCategoryName;
+    RuleVersion: CostCategoryRuleVersion;
+    /**
+     *  Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. 
+     */
+    Rules: CostCategoryRulesList;
+  }
+  export interface CreateCostCategoryDefinitionResponse {
+    /**
+     *  The unique identifier for your newly created Cost Category. 
+     */
+    CostCategoryArn?: Arn;
+    /**
+     *  The Cost Category's effective start date. 
+     */
+    EffectiveStart?: ZonedDateTime;
+  }
   export interface CurrentInstance {
     /**
      * Resource ID of the current instance.
@@ -256,6 +369,35 @@ declare namespace CostExplorer {
      * The end of the time period that you want the usage and costs for. The end date is exclusive. For example, if end is 2017-05-01, AWS retrieves cost and usage data from the start date up to, but not including, 2017-05-01.
      */
     End: YearMonthDay;
+  }
+  export interface DeleteCostCategoryDefinitionRequest {
+    /**
+     *  The unique identifier for your Cost Category. 
+     */
+    CostCategoryArn: Arn;
+  }
+  export interface DeleteCostCategoryDefinitionResponse {
+    /**
+     *  The unique identifier for your Cost Category. 
+     */
+    CostCategoryArn?: Arn;
+    /**
+     *  The effective end date of the Cost Category as a result of deleting it. No costs after this date will be categorized by the deleted Cost Category. 
+     */
+    EffectiveEnd?: ZonedDateTime;
+  }
+  export interface DescribeCostCategoryDefinitionRequest {
+    /**
+     *  The unique identifier for your Cost Category. 
+     */
+    CostCategoryArn: Arn;
+    /**
+     *  The date when the Cost Category was effective. 
+     */
+    EffectiveOn?: ZonedDateTime;
+  }
+  export interface DescribeCostCategoryDefinitionResponse {
+    CostCategory?: CostCategory;
   }
   export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|string;
   export interface DimensionValues {
@@ -442,6 +584,10 @@ declare namespace CostExplorer {
      * The specific Tag to use for Expression.
      */
     Tags?: TagValues;
+    /**
+     *   Cost Category is in preview release for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the AWS Service Terms (Section 1.10).   The specific CostCategory used for Expression.
+     */
+    CostCategories?: CostCategoryValues;
   }
   export type Expressions = Expression[];
   export interface ForecastResult {
@@ -1005,7 +1151,7 @@ declare namespace CostExplorer {
     Key?: GroupDefinitionKey;
   }
   export type GroupDefinitionKey = string;
-  export type GroupDefinitionType = "DIMENSION"|"TAG"|string;
+  export type GroupDefinitionType = "DIMENSION"|"TAG"|"COST_CATEGORY"|string;
   export type GroupDefinitions = GroupDefinition[];
   export type Groups = Group[];
   export interface InstanceDetails {
@@ -1032,6 +1178,26 @@ declare namespace CostExplorer {
   }
   export type Key = string;
   export type Keys = Key[];
+  export interface ListCostCategoryDefinitionsRequest {
+    /**
+     *  The date when the Cost Category was effective. 
+     */
+    EffectiveOn?: ZonedDateTime;
+    /**
+     *  The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.  You can use this information to retrieve the full Cost Category information using DescribeCostCategory.
+     */
+    NextToken?: NextPageToken;
+  }
+  export interface ListCostCategoryDefinitionsResponse {
+    /**
+     *  A reference to a Cost Category containing enough information to identify the Cost Category. 
+     */
+    CostCategoryReferences?: CostCategoryReferencesList;
+    /**
+     *  The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextToken?: NextPageToken;
+  }
   export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
   export type MaxResults = number;
   export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string;
@@ -1052,7 +1218,7 @@ declare namespace CostExplorer {
   export type Metrics = {[key: string]: MetricValue};
   export interface ModifyRecommendationDetail {
     /**
-     *  Identifies whether this instance type is the Amazon Web Services default recommendation.
+     * Identifies whether this instance type is the Amazon Web Services default recommendation.
      */
     TargetInstances?: TargetInstancesList;
   }
@@ -1798,6 +1964,27 @@ declare namespace CostExplorer {
   export type TotalRunningNormalizedUnits = string;
   export type UnusedHours = string;
   export type UnusedUnits = string;
+  export interface UpdateCostCategoryDefinitionRequest {
+    /**
+     * The unique identifier for your Cost Category.
+     */
+    CostCategoryArn: Arn;
+    RuleVersion: CostCategoryRuleVersion;
+    /**
+     *  Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. 
+     */
+    Rules: CostCategoryRulesList;
+  }
+  export interface UpdateCostCategoryDefinitionResponse {
+    /**
+     *  The unique identifier for your Cost Category. 
+     */
+    CostCategoryArn?: Arn;
+    /**
+     *  The Cost Category's effective start date. 
+     */
+    EffectiveStart?: ZonedDateTime;
+  }
   export interface UtilizationByTime {
     /**
      * The period of time that this utilization was used for.
@@ -1818,6 +2005,7 @@ declare namespace CostExplorer {
   export type Value = string;
   export type Values = Value[];
   export type YearMonthDay = string;
+  export type ZonedDateTime = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

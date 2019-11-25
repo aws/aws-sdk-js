@@ -1092,7 +1092,7 @@
       "output": {
         "shape": "ListBusinessReportSchedulesResponse"
       },
-      "documentation": "<p>Lists the details of the schedules that a user configured.</p>"
+      "documentation": "<p>Lists the details of the schedules that a user configured. A download URL of the report associated with each schedule is returned every time this action is called. A new download URL is returned each time, and is valid for 24 hours.</p>"
     },
     "ListConferenceProviders": {
       "name": "ListConferenceProviders",
@@ -2220,7 +2220,8 @@
       "type": "string",
       "enum": [
         "ONE_DAY",
-        "ONE_WEEK"
+        "ONE_WEEK",
+        "THIRTY_DAYS"
       ]
     },
     "BusinessReportRecurrence": {
@@ -2700,6 +2701,29 @@
         }
       }
     },
+    "CreateEndOfMeetingReminder": {
+      "type": "structure",
+      "required": [
+        "ReminderAtMinutes",
+        "ReminderType",
+        "Enabled"
+      ],
+      "members": {
+        "ReminderAtMinutes": {
+          "shape": "EndOfMeetingReminderMinutesList",
+          "documentation": "<p> A range of 3 to 15 minutes that determines when the reminder begins.</p>"
+        },
+        "ReminderType": {
+          "shape": "EndOfMeetingReminderType",
+          "documentation": "<p>The type of sound that users hear during the end of meeting reminder. </p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether an end of meeting reminder is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Creates settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending.</p>"
+    },
     "CreateGatewayGroupRequest": {
       "type": "structure",
       "required": [
@@ -2730,6 +2754,45 @@
           "documentation": "<p>The ARN of the created gateway group.</p>"
         }
       }
+    },
+    "CreateInstantBooking": {
+      "type": "structure",
+      "required": [
+        "DurationInMinutes",
+        "Enabled"
+      ],
+      "members": {
+        "DurationInMinutes": {
+          "shape": "Minutes",
+          "documentation": "<p>Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether instant booking is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Creates settings for the instant booking feature that are applied to a room profile. When users start their meeting with Alexa, Alexa automatically books the room for the configured duration if the room is available.</p>"
+    },
+    "CreateMeetingRoomConfiguration": {
+      "type": "structure",
+      "members": {
+        "RoomUtilizationMetricsEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether room utilization metrics are enabled or not.</p>"
+        },
+        "EndOfMeetingReminder": {
+          "shape": "CreateEndOfMeetingReminder"
+        },
+        "InstantBooking": {
+          "shape": "CreateInstantBooking",
+          "documentation": "<p>Settings to automatically book a room for a configured duration if it's free when joining a meeting with Alexa.</p>"
+        },
+        "RequireCheckIn": {
+          "shape": "CreateRequireCheckIn",
+          "documentation": "<p>Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.”</p>"
+        }
+      },
+      "documentation": "<p>Creates meeting room settings of a room profile.</p>"
     },
     "CreateNetworkProfileRequest": {
       "type": "structure",
@@ -2828,7 +2891,7 @@
         },
         "Locale": {
           "shape": "DeviceLocale",
-          "documentation": "<p>The locale of the room profile.</p>"
+          "documentation": "<p>The locale of the room profile. (This is currently only available to a limited preview audience.)</p>"
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
@@ -2846,6 +2909,10 @@
         "PSTNEnabled": {
           "shape": "Boolean",
           "documentation": "<p>Whether PSTN calling is enabled.</p>"
+        },
+        "MeetingRoomConfiguration": {
+          "shape": "CreateMeetingRoomConfiguration",
+          "documentation": "<p>The meeting room settings of a room profile.</p>"
         }
       }
     },
@@ -2857,6 +2924,24 @@
           "documentation": "<p>The ARN of the newly created room profile in the response.</p>"
         }
       }
+    },
+    "CreateRequireCheckIn": {
+      "type": "structure",
+      "required": [
+        "ReleaseAfterMinutes",
+        "Enabled"
+      ],
+      "members": {
+        "ReleaseAfterMinutes": {
+          "shape": "Minutes",
+          "documentation": "<p>Duration between 5 and 20 minutes to determine when to release the room if it's not checked into.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether require check in is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Creates settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released.</p>"
     },
     "CreateRoomRequest": {
       "type": "structure",
@@ -3617,6 +3702,41 @@
         "PENDING"
       ]
     },
+    "EndOfMeetingReminder": {
+      "type": "structure",
+      "members": {
+        "ReminderAtMinutes": {
+          "shape": "EndOfMeetingReminderMinutesList",
+          "documentation": "<p>A range of 3 to 15 minutes that determines when the reminder begins.</p>"
+        },
+        "ReminderType": {
+          "shape": "EndOfMeetingReminderType",
+          "documentation": "<p>The type of sound that users hear during the end of meeting reminder. </p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether an end of meeting reminder is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. </p>"
+    },
+    "EndOfMeetingReminderMinutesList": {
+      "type": "list",
+      "member": {
+        "shape": "Minutes"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "EndOfMeetingReminderType": {
+      "type": "string",
+      "enum": [
+        "ANNOUNCEMENT_TIME_CHECK",
+        "ANNOUNCEMENT_VARIABLE_TIME_LEFT",
+        "CHIME",
+        "KNOCK"
+      ]
+    },
     "EndUserLicenseAgreement": {
       "type": "string"
     },
@@ -4136,6 +4256,20 @@
     "IconUrl": {
       "type": "string"
     },
+    "InstantBooking": {
+      "type": "structure",
+      "members": {
+        "DurationInMinutes": {
+          "shape": "Minutes",
+          "documentation": "<p>Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa. </p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether instant booking is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Settings for the instant booking feature that are applied to a room profile. When users start their meeting with Alexa, Alexa automatically books the room for the configured duration if the room is available.</p>"
+    },
     "InvocationPhrase": {
       "type": "string"
     },
@@ -4293,11 +4427,11 @@
       "members": {
         "SkillGroupArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the skill group for which to list enabled skills. Required.</p>"
+          "documentation": "<p>The ARN of the skill group for which to list enabled skills.</p>"
         },
         "EnablementType": {
           "shape": "EnablementTypeFilter",
-          "documentation": "<p>Whether the skill is enabled under the user's account, or if it requires linking to be used.</p>"
+          "documentation": "<p>Whether the skill is enabled under the user's account.</p>"
         },
         "SkillType": {
           "shape": "SkillTypeFilter",
@@ -4305,11 +4439,11 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.</p>"
+          "documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
         },
         "MaxResults": {
           "shape": "SkillListMaxResults",
-          "documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.</p>"
+          "documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>"
         }
       }
     },
@@ -4468,6 +4602,28 @@
     "MaxVolumeLimit": {
       "type": "integer"
     },
+    "MeetingRoomConfiguration": {
+      "type": "structure",
+      "members": {
+        "RoomUtilizationMetricsEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether room utilization metrics are enabled or not.</p>"
+        },
+        "EndOfMeetingReminder": {
+          "shape": "EndOfMeetingReminder",
+          "documentation": "<p>Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. </p>"
+        },
+        "InstantBooking": {
+          "shape": "InstantBooking",
+          "documentation": "<p>Settings to automatically book the room if available for a configured duration when joining a meeting with Alexa. </p>"
+        },
+        "RequireCheckIn": {
+          "shape": "RequireCheckIn",
+          "documentation": "<p>Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into. This makes the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” </p>"
+        }
+      },
+      "documentation": "<p>Meeting room settings of a room profile.</p>"
+    },
     "MeetingSetting": {
       "type": "structure",
       "required": [
@@ -4480,6 +4636,9 @@
         }
       },
       "documentation": "<p>The values that indicate whether a pin is always required (YES), never required (NO), or OPTIONAL.</p> <ul> <li> <p>If YES, Alexa will always ask for a meeting pin.</p> </li> <li> <p>If NO, Alexa will never ask for a meeting pin.</p> </li> <li> <p>If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer responds with yes, it will ask for the meeting pin.</p> </li> </ul>"
+    },
+    "Minutes": {
+      "type": "integer"
     },
     "NetworkEapMethod": {
       "type": "string",
@@ -4749,7 +4908,7 @@
         },
         "Locale": {
           "shape": "DeviceLocale",
-          "documentation": "<p>The locale of a room profile.</p>"
+          "documentation": "<p>The locale of a room profile. (This is currently available only to a limited preview audience.)</p>"
         },
         "SetupModeDisabled": {
           "shape": "Boolean",
@@ -4766,6 +4925,10 @@
         "AddressBookArn": {
           "shape": "Arn",
           "documentation": "<p>The ARN of the address book.</p>"
+        },
+        "MeetingRoomConfiguration": {
+          "shape": "MeetingRoomConfiguration",
+          "documentation": "<p>Meeting room settings of a room profile.</p>"
         }
       },
       "documentation": "<p>A room profile with attributes.</p>"
@@ -4791,7 +4954,7 @@
         },
         "Timezone": {
           "shape": "Timezone",
-          "documentation": "<p>The timezone of a room profile.</p>"
+          "documentation": "<p>The time zone of a room profile.</p>"
         },
         "DistanceUnit": {
           "shape": "DistanceUnit",
@@ -4807,7 +4970,7 @@
         },
         "Locale": {
           "shape": "DeviceLocale",
-          "documentation": "<p>The locale of a room profile.</p>"
+          "documentation": "<p>The locale of a room profile. (This is currently available only to a limited preview audience.)</p>"
         }
       },
       "documentation": "<p>The data of a room profile.</p>"
@@ -4985,6 +5148,20 @@
     },
     "ReleaseDate": {
       "type": "string"
+    },
+    "RequireCheckIn": {
+      "type": "structure",
+      "members": {
+        "ReleaseAfterMinutes": {
+          "shape": "Minutes",
+          "documentation": "<p>Duration between 5 and 20 minutes to determine when to release the room if it's not checked into. </p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether require check in is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released. </p>"
     },
     "RequirePin": {
       "type": "string",
@@ -5946,7 +6123,7 @@
         },
         "Value": {
           "shape": "TagValue",
-          "documentation": "<p>The value of a tag. Tag values are case-sensitive and can be null.</p>"
+          "documentation": "<p>The value of a tag. Tag values are case sensitive and can be null.</p>"
         }
       },
       "documentation": "<p>A key-value pair that can be associated with a resource. </p>"
@@ -6231,6 +6408,24 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateEndOfMeetingReminder": {
+      "type": "structure",
+      "members": {
+        "ReminderAtMinutes": {
+          "shape": "EndOfMeetingReminderMinutesList",
+          "documentation": "<p>Updates settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. </p>"
+        },
+        "ReminderType": {
+          "shape": "EndOfMeetingReminderType",
+          "documentation": "<p>The type of sound that users hear during the end of meeting reminder. </p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether an end of meeting reminder is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. </p>"
+    },
     "UpdateGatewayGroupRequest": {
       "type": "structure",
       "required": [
@@ -6282,6 +6477,42 @@
     "UpdateGatewayResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateInstantBooking": {
+      "type": "structure",
+      "members": {
+        "DurationInMinutes": {
+          "shape": "Minutes",
+          "documentation": "<p>Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether instant booking is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Updates settings for the instant booking feature that are applied to a room profile. If instant booking is enabled, Alexa automatically reserves a room if it is free when a user joins a meeting with Alexa.</p>"
+    },
+    "UpdateMeetingRoomConfiguration": {
+      "type": "structure",
+      "members": {
+        "RoomUtilizationMetricsEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether room utilization metrics are enabled or not.</p>"
+        },
+        "EndOfMeetingReminder": {
+          "shape": "UpdateEndOfMeetingReminder",
+          "documentation": "<p>Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. </p>"
+        },
+        "InstantBooking": {
+          "shape": "UpdateInstantBooking",
+          "documentation": "<p>Settings to automatically book an available room available for a configured duration when joining a meeting with Alexa.</p>"
+        },
+        "RequireCheckIn": {
+          "shape": "UpdateRequireCheckIn",
+          "documentation": "<p>Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” </p>"
+        }
+      },
+      "documentation": "<p>Updates meeting room settings of a room profile.</p>"
     },
     "UpdateNetworkProfileRequest": {
       "type": "structure",
@@ -6360,7 +6591,7 @@
         },
         "Locale": {
           "shape": "DeviceLocale",
-          "documentation": "<p>The updated locale for the room profile.</p>"
+          "documentation": "<p>The updated locale for the room profile. (This is currently only available to a limited preview audience.)</p>"
         },
         "SetupModeDisabled": {
           "shape": "Boolean",
@@ -6373,12 +6604,30 @@
         "PSTNEnabled": {
           "shape": "Boolean",
           "documentation": "<p>Whether the PSTN setting of the room profile is enabled.</p>"
+        },
+        "MeetingRoomConfiguration": {
+          "shape": "UpdateMeetingRoomConfiguration",
+          "documentation": "<p>The updated meeting room settings of a room profile.</p>"
         }
       }
     },
     "UpdateProfileResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateRequireCheckIn": {
+      "type": "structure",
+      "members": {
+        "ReleaseAfterMinutes": {
+          "shape": "Minutes",
+          "documentation": "<p>Duration between 5 and 20 minutes to determine when to release the room if it's not checked into. </p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether require check in is enabled or not.</p>"
+        }
+      },
+      "documentation": "<p>Updates settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released. </p>"
     },
     "UpdateRoomRequest": {
       "type": "structure",

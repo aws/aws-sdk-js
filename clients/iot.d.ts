@@ -156,6 +156,14 @@ declare class Iot extends Service {
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
+   * Creates a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  createDomainConfiguration(params: Iot.Types.CreateDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.CreateDomainConfigurationResponse) => void): Request<Iot.Types.CreateDomainConfigurationResponse, AWSError>;
+  /**
+   * Creates a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  createDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.CreateDomainConfigurationResponse) => void): Request<Iot.Types.CreateDomainConfigurationResponse, AWSError>;
+  /**
    * Creates a dynamic thing group.
    */
   createDynamicThingGroup(params: Iot.Types.CreateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
@@ -172,11 +180,11 @@ declare class Iot extends Service {
    */
   createJob(callback?: (err: AWSError, data: Iot.Types.CreateJobResponse) => void): Request<Iot.Types.CreateJobResponse, AWSError>;
   /**
-   * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
+   * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call CreateKeysAndCertificate over MQTT from a device, for more information, see Provisioning MQTT API.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
    */
   createKeysAndCertificate(params: Iot.Types.CreateKeysAndCertificateRequest, callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
   /**
-   * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
+   * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call CreateKeysAndCertificate over MQTT from a device, for more information, see Provisioning MQTT API.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
    */
   createKeysAndCertificate(callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
   /**
@@ -211,6 +219,30 @@ declare class Iot extends Service {
    * Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use DeletePolicyVersion to delete an existing version before you create a new one. Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).
    */
   createPolicyVersion(callback?: (err: AWSError, data: Iot.Types.CreatePolicyVersionResponse) => void): Request<Iot.Types.CreatePolicyVersionResponse, AWSError>;
+  /**
+   * Creates a provisioning claim.
+   */
+  createProvisioningClaim(params: Iot.Types.CreateProvisioningClaimRequest, callback?: (err: AWSError, data: Iot.Types.CreateProvisioningClaimResponse) => void): Request<Iot.Types.CreateProvisioningClaimResponse, AWSError>;
+  /**
+   * Creates a provisioning claim.
+   */
+  createProvisioningClaim(callback?: (err: AWSError, data: Iot.Types.CreateProvisioningClaimResponse) => void): Request<Iot.Types.CreateProvisioningClaimResponse, AWSError>;
+  /**
+   * Creates a fleet provisioning template.
+   */
+  createProvisioningTemplate(params: Iot.Types.CreateProvisioningTemplateRequest, callback?: (err: AWSError, data: Iot.Types.CreateProvisioningTemplateResponse) => void): Request<Iot.Types.CreateProvisioningTemplateResponse, AWSError>;
+  /**
+   * Creates a fleet provisioning template.
+   */
+  createProvisioningTemplate(callback?: (err: AWSError, data: Iot.Types.CreateProvisioningTemplateResponse) => void): Request<Iot.Types.CreateProvisioningTemplateResponse, AWSError>;
+  /**
+   * Creates a new version of a fleet provisioning template.
+   */
+  createProvisioningTemplateVersion(params: Iot.Types.CreateProvisioningTemplateVersionRequest, callback?: (err: AWSError, data: Iot.Types.CreateProvisioningTemplateVersionResponse) => void): Request<Iot.Types.CreateProvisioningTemplateVersionResponse, AWSError>;
+  /**
+   * Creates a new version of a fleet provisioning template.
+   */
+  createProvisioningTemplateVersion(callback?: (err: AWSError, data: Iot.Types.CreateProvisioningTemplateVersionResponse) => void): Request<Iot.Types.CreateProvisioningTemplateVersionResponse, AWSError>;
   /**
    * Creates a role alias.
    */
@@ -324,6 +356,14 @@ declare class Iot extends Service {
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  deleteDomainConfiguration(params: Iot.Types.DeleteDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDomainConfigurationResponse) => void): Request<Iot.Types.DeleteDomainConfigurationResponse, AWSError>;
+  /**
+   * Deletes the specified domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  deleteDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.DeleteDomainConfigurationResponse) => void): Request<Iot.Types.DeleteDomainConfigurationResponse, AWSError>;
+  /**
    * Deletes a dynamic thing group.
    */
   deleteDynamicThingGroup(params: Iot.Types.DeleteDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
@@ -379,6 +419,22 @@ declare class Iot extends Service {
    * Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this API. To delete the default version of a policy, use DeletePolicy. To find out which version of a policy is marked as the default version, use ListPolicyVersions.
    */
   deletePolicyVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a fleet provisioning template.
+   */
+  deleteProvisioningTemplate(params: Iot.Types.DeleteProvisioningTemplateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteProvisioningTemplateResponse) => void): Request<Iot.Types.DeleteProvisioningTemplateResponse, AWSError>;
+  /**
+   * Deletes a fleet provisioning template.
+   */
+  deleteProvisioningTemplate(callback?: (err: AWSError, data: Iot.Types.DeleteProvisioningTemplateResponse) => void): Request<Iot.Types.DeleteProvisioningTemplateResponse, AWSError>;
+  /**
+   * Deletes a fleet provisioning template version.
+   */
+  deleteProvisioningTemplateVersion(params: Iot.Types.DeleteProvisioningTemplateVersionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteProvisioningTemplateVersionResponse) => void): Request<Iot.Types.DeleteProvisioningTemplateVersionResponse, AWSError>;
+  /**
+   * Deletes a fleet provisioning template version.
+   */
+  deleteProvisioningTemplateVersion(callback?: (err: AWSError, data: Iot.Types.DeleteProvisioningTemplateVersionResponse) => void): Request<Iot.Types.DeleteProvisioningTemplateVersionResponse, AWSError>;
   /**
    * Deletes a CA certificate registration code.
    */
@@ -548,6 +604,14 @@ declare class Iot extends Service {
    */
   describeDefaultAuthorizer(callback?: (err: AWSError, data: Iot.Types.DescribeDefaultAuthorizerResponse) => void): Request<Iot.Types.DescribeDefaultAuthorizerResponse, AWSError>;
   /**
+   * Gets summary information about a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  describeDomainConfiguration(params: Iot.Types.DescribeDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDomainConfigurationResponse) => void): Request<Iot.Types.DescribeDomainConfigurationResponse, AWSError>;
+  /**
+   * Gets summary information about a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  describeDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeDomainConfigurationResponse) => void): Request<Iot.Types.DescribeDomainConfigurationResponse, AWSError>;
+  /**
    * Returns a unique endpoint specific to the AWS account making the call.
    */
   describeEndpoint(params: Iot.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: Iot.Types.DescribeEndpointResponse) => void): Request<Iot.Types.DescribeEndpointResponse, AWSError>;
@@ -595,6 +659,22 @@ declare class Iot extends Service {
    * Gets information about a mitigation action.
    */
   describeMitigationAction(callback?: (err: AWSError, data: Iot.Types.DescribeMitigationActionResponse) => void): Request<Iot.Types.DescribeMitigationActionResponse, AWSError>;
+  /**
+   * Returns information about a fleet provisioning template.
+   */
+  describeProvisioningTemplate(params: Iot.Types.DescribeProvisioningTemplateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeProvisioningTemplateResponse) => void): Request<Iot.Types.DescribeProvisioningTemplateResponse, AWSError>;
+  /**
+   * Returns information about a fleet provisioning template.
+   */
+  describeProvisioningTemplate(callback?: (err: AWSError, data: Iot.Types.DescribeProvisioningTemplateResponse) => void): Request<Iot.Types.DescribeProvisioningTemplateResponse, AWSError>;
+  /**
+   * Returns information about a fleet provisioning template version.
+   */
+  describeProvisioningTemplateVersion(params: Iot.Types.DescribeProvisioningTemplateVersionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeProvisioningTemplateVersionResponse) => void): Request<Iot.Types.DescribeProvisioningTemplateVersionResponse, AWSError>;
+  /**
+   * Returns information about a fleet provisioning template version.
+   */
+  describeProvisioningTemplateVersion(callback?: (err: AWSError, data: Iot.Types.DescribeProvisioningTemplateVersionResponse) => void): Request<Iot.Types.DescribeProvisioningTemplateVersionResponse, AWSError>;
   /**
    * Describes a role alias.
    */
@@ -724,11 +804,11 @@ declare class Iot extends Service {
    */
   getEffectivePolicies(callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
   /**
-   * Gets the search configuration.
+   * Gets the indexing configuration.
    */
   getIndexingConfiguration(params: Iot.Types.GetIndexingConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.GetIndexingConfigurationResponse) => void): Request<Iot.Types.GetIndexingConfigurationResponse, AWSError>;
   /**
-   * Gets the search configuration.
+   * Gets the indexing configuration.
    */
   getIndexingConfiguration(callback?: (err: AWSError, data: Iot.Types.GetIndexingConfigurationResponse) => void): Request<Iot.Types.GetIndexingConfigurationResponse, AWSError>;
   /**
@@ -788,11 +868,11 @@ declare class Iot extends Service {
    */
   getRegistrationCode(callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
   /**
-   * Gets statistics about things that match the specified query.
+   * Returns the count, average, sum, minimum, maximum, sum of squares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.
    */
   getStatistics(params: Iot.Types.GetStatisticsRequest, callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
-   * Gets statistics about things that match the specified query.
+   * Returns the count, average, sum, minimum, maximum, sum of squares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.
    */
   getStatistics(callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
@@ -908,6 +988,14 @@ declare class Iot extends Service {
    */
   listCertificatesByCA(callback?: (err: AWSError, data: Iot.Types.ListCertificatesByCAResponse) => void): Request<Iot.Types.ListCertificatesByCAResponse, AWSError>;
   /**
+   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  listDomainConfigurations(params: Iot.Types.ListDomainConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.ListDomainConfigurationsResponse) => void): Request<Iot.Types.ListDomainConfigurationsResponse, AWSError>;
+  /**
+   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  listDomainConfigurations(callback?: (err: AWSError, data: Iot.Types.ListDomainConfigurationsResponse) => void): Request<Iot.Types.ListDomainConfigurationsResponse, AWSError>;
+  /**
    * Lists the search indices.
    */
   listIndices(params: Iot.Types.ListIndicesRequest, callback?: (err: AWSError, data: Iot.Types.ListIndicesResponse) => void): Request<Iot.Types.ListIndicesResponse, AWSError>;
@@ -1003,6 +1091,22 @@ declare class Iot extends Service {
    * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. 
    */
   listPrincipalThings(callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
+  /**
+   * A list of fleet provisioning template versions.
+   */
+  listProvisioningTemplateVersions(params: Iot.Types.ListProvisioningTemplateVersionsRequest, callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplateVersionsResponse) => void): Request<Iot.Types.ListProvisioningTemplateVersionsResponse, AWSError>;
+  /**
+   * A list of fleet provisioning template versions.
+   */
+  listProvisioningTemplateVersions(callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplateVersionsResponse) => void): Request<Iot.Types.ListProvisioningTemplateVersionsResponse, AWSError>;
+  /**
+   * Lists the fleet provisioning templates in your AWS account.
+   */
+  listProvisioningTemplates(params: Iot.Types.ListProvisioningTemplatesRequest, callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplatesResponse) => void): Request<Iot.Types.ListProvisioningTemplatesResponse, AWSError>;
+  /**
+   * Lists the fleet provisioning templates in your AWS account.
+   */
+  listProvisioningTemplates(callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplatesResponse) => void): Request<Iot.Types.ListProvisioningTemplatesResponse, AWSError>;
   /**
    * Lists the role aliases registered in your account.
    */
@@ -1188,11 +1292,11 @@ declare class Iot extends Service {
    */
   registerCertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
-   * Provisions a thing.
+   * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
    */
   registerThing(params: Iot.Types.RegisterThingRequest, callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
-   * Provisions a thing.
+   * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
    */
   registerThing(callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
@@ -1388,6 +1492,14 @@ declare class Iot extends Service {
    */
   updateCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  updateDomainConfiguration(params: Iot.Types.UpdateDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDomainConfigurationResponse) => void): Request<Iot.Types.UpdateDomainConfigurationResponse, AWSError>;
+  /**
+   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.  The domain configuration feature is in public preview and is subject to change. 
+   */
+  updateDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateDomainConfigurationResponse) => void): Request<Iot.Types.UpdateDomainConfigurationResponse, AWSError>;
+  /**
    * Updates a dynamic thing group.
    */
   updateDynamicThingGroup(params: Iot.Types.UpdateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
@@ -1427,6 +1539,14 @@ declare class Iot extends Service {
    * Updates the definition for the specified mitigation action.
    */
   updateMitigationAction(callback?: (err: AWSError, data: Iot.Types.UpdateMitigationActionResponse) => void): Request<Iot.Types.UpdateMitigationActionResponse, AWSError>;
+  /**
+   * Updates a fleet provisioning template.
+   */
+  updateProvisioningTemplate(params: Iot.Types.UpdateProvisioningTemplateRequest, callback?: (err: AWSError, data: Iot.Types.UpdateProvisioningTemplateResponse) => void): Request<Iot.Types.UpdateProvisioningTemplateResponse, AWSError>;
+  /**
+   * Updates a fleet provisioning template.
+   */
+  updateProvisioningTemplate(callback?: (err: AWSError, data: Iot.Types.UpdateProvisioningTemplateResponse) => void): Request<Iot.Types.UpdateProvisioningTemplateResponse, AWSError>;
   /**
    * Updates a role alias.
    */
@@ -1538,6 +1658,7 @@ declare namespace Iot {
      */
     setAsActive?: SetAsActive;
   }
+  export type AcmCertificateArn = string;
   export interface Action {
     /**
      * Write to a DynamoDB table.
@@ -1599,6 +1720,10 @@ declare namespace Iot {
      * Sends an input to an AWS IoT Events detector.
      */
     iotEvents?: IotEventsAction;
+    /**
+     * Sends data from the MQTT message that triggered the rule to AWS IoT SiteWise asset properties.
+     */
+    iotSiteWise?: IotSiteWiseAction;
     /**
      * Starts execution of a Step Functions state machine.
      */
@@ -1712,6 +1837,7 @@ declare namespace Iot {
   export type AlertTargetArn = string;
   export type AlertTargetType = "SNS"|string;
   export type AlertTargets = {[key: string]: AlertTarget};
+  export type AllowAuthorizerOverride = boolean;
   export type AllowAutoRegistration = boolean;
   export interface Allowed {
     /**
@@ -1721,6 +1847,60 @@ declare namespace Iot {
   }
   export type ApproximateSecondsBeforeTimedOut = number;
   export type AscendingOrder = boolean;
+  export type AssetId = string;
+  export type AssetPropertyAlias = string;
+  export type AssetPropertyBooleanValue = string;
+  export type AssetPropertyDoubleValue = string;
+  export type AssetPropertyEntryId = string;
+  export type AssetPropertyId = string;
+  export type AssetPropertyIntegerValue = string;
+  export type AssetPropertyOffsetInNanos = string;
+  export type AssetPropertyQuality = string;
+  export type AssetPropertyStringValue = string;
+  export type AssetPropertyTimeInSeconds = string;
+  export interface AssetPropertyTimestamp {
+    /**
+     * A string that contains the time in seconds since epoch. Accepts substitution templates.
+     */
+    timeInSeconds: AssetPropertyTimeInSeconds;
+    /**
+     * Optional. A string that contains the nanosecond time offset. Accepts substitution templates.
+     */
+    offsetInNanos?: AssetPropertyOffsetInNanos;
+  }
+  export interface AssetPropertyValue {
+    /**
+     * The value of the asset property.
+     */
+    value: AssetPropertyVariant;
+    /**
+     * The asset property value timestamp.
+     */
+    timestamp: AssetPropertyTimestamp;
+    /**
+     * Optional. A string that describes the quality of the value. Accepts substitution templates. Must be GOOD, BAD, or UNCERTAIN.
+     */
+    quality?: AssetPropertyQuality;
+  }
+  export type AssetPropertyValueList = AssetPropertyValue[];
+  export interface AssetPropertyVariant {
+    /**
+     * Optional. The string value of the value entry. Accepts substitution templates.
+     */
+    stringValue?: AssetPropertyStringValue;
+    /**
+     * Optional. A string that contains the integer value of the value entry. Accepts substitution templates.
+     */
+    integerValue?: AssetPropertyIntegerValue;
+    /**
+     * Optional. A string that contains the double value of the value entry. Accepts substitution templates.
+     */
+    doubleValue?: AssetPropertyDoubleValue;
+    /**
+     * Optional. A string that contains the boolean value (true or false) of the value entry. Accepts substitution templates.
+     */
+    booleanValue?: AssetPropertyBooleanValue;
+  }
   export interface AssociateTargetsWithJobRequest {
     /**
      * A list of thing group ARNs that define the targets of the job.
@@ -2033,6 +2213,16 @@ declare namespace Iot {
   }
   export type AuthResults = AuthResult[];
   export type AuthorizerArn = string;
+  export interface AuthorizerConfig {
+    /**
+     * The name of the authorization service for a domain configuration.
+     */
+    defaultAuthorizerName?: AuthorizerName;
+    /**
+     * A Boolean that specifies whether the domain configuration's authorization service can be overridden.
+     */
+    allowAuthorizerOverride?: AllowAuthorizerOverride;
+  }
   export interface AuthorizerDescription {
     /**
      * The authorizer name.
@@ -2066,6 +2256,10 @@ declare namespace Iot {
      * The UNIX timestamp of when the authorizer was last updated.
      */
     lastModifiedDate?: DateType;
+    /**
+     * Specifies whether AWS IoT validates the token signature in an authorization request.
+     */
+    signingDisabled?: BooleanKey;
   }
   export type AuthorizerFunctionArn = string;
   export type AuthorizerName = string;
@@ -2155,6 +2349,7 @@ declare namespace Iot {
     billingGroupDescription?: BillingGroupDescription;
   }
   export type Boolean = boolean;
+  export type BooleanKey = boolean;
   export type BucketName = string;
   export interface CACertificate {
     /**
@@ -2513,15 +2708,19 @@ declare namespace Iot {
     /**
      * The name of the token key used to extract the token from the HTTP headers.
      */
-    tokenKeyName: TokenKeyName;
+    tokenKeyName?: TokenKeyName;
     /**
      * The public keys used to verify the digital signature returned by your custom authentication service.
      */
-    tokenSigningPublicKeys: PublicKeyMap;
+    tokenSigningPublicKeys?: PublicKeyMap;
     /**
      * The status of the create authorizer request.
      */
     status?: AuthorizerStatus;
+    /**
+     * Specifies whether AWS IoT validates the token signature in an authorization request.
+     */
+    signingDisabled?: BooleanKey;
   }
   export interface CreateAuthorizerResponse {
     /**
@@ -2584,6 +2783,42 @@ declare namespace Iot {
      * The certificate data, in PEM format.
      */
     certificatePem?: CertificatePem;
+  }
+  export interface CreateDomainConfigurationRequest {
+    /**
+     * The name of the domain configuration. This value must be unique to a region.
+     */
+    domainConfigurationName: DomainConfigurationName;
+    /**
+     * The name of the domain.
+     */
+    domainName?: DomainName;
+    /**
+     * The ARNs of the certificates that AWS IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for AWS-managed domains.
+     */
+    serverCertificateArns?: ServerCertificateArns;
+    /**
+     * The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. This value is not required for AWS-managed domains.
+     */
+    validationCertificateArn?: AcmCertificateArn;
+    /**
+     * An object that specifies the authorization service for a domain.
+     */
+    authorizerConfig?: AuthorizerConfig;
+    /**
+     * The type of service delivered by the endpoint.
+     */
+    serviceType?: ServiceType;
+  }
+  export interface CreateDomainConfigurationResponse {
+    /**
+     * The name of the domain configuration.
+     */
+    domainConfigurationName?: DomainConfigurationName;
+    /**
+     * The ARN of the domain configuration.
+     */
+    domainConfigurationArn?: DomainConfigurationArn;
   }
   export interface CreateDynamicThingGroupRequest {
     /**
@@ -2866,6 +3101,102 @@ declare namespace Iot {
     policyVersionId?: PolicyVersionId;
     /**
      * Specifies whether the policy version is the default.
+     */
+    isDefaultVersion?: IsDefaultVersion;
+  }
+  export interface CreateProvisioningClaimRequest {
+    /**
+     * The name of the provisioning template to use.
+     */
+    templateName: TemplateName;
+  }
+  export interface CreateProvisioningClaimResponse {
+    /**
+     * The ID of the certificate.
+     */
+    certificateId?: CertificateId;
+    /**
+     * The provisioning claim certificate.
+     */
+    certificatePem?: CertificatePem;
+    /**
+     * The provisioning claim key pair.
+     */
+    keyPair?: KeyPair;
+    /**
+     * The provisioning claim expiration time.
+     */
+    expiration?: DateType;
+  }
+  export interface CreateProvisioningTemplateRequest {
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName: TemplateName;
+    /**
+     * The description of the fleet provisioning template.
+     */
+    description?: TemplateDescription;
+    /**
+     * The JSON formatted contents of the fleet provisioning template.
+     */
+    templateBody: TemplateBody;
+    /**
+     * True to enable the fleet provisioning template, otherwise false.
+     */
+    enabled?: Enabled;
+    /**
+     * The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
+     */
+    provisioningRoleArn: RoleArn;
+    /**
+     * Metadata which can be used to manage the fleet provisioning template.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
+  }
+  export interface CreateProvisioningTemplateResponse {
+    /**
+     * The ARN that identifies the provisioning template.
+     */
+    templateArn?: TemplateArn;
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName?: TemplateName;
+    /**
+     * The default version of the fleet provisioning template.
+     */
+    defaultVersionId?: TemplateVersionId;
+  }
+  export interface CreateProvisioningTemplateVersionRequest {
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName: TemplateName;
+    /**
+     * The JSON formatted contents of the fleet provisioning template.
+     */
+    templateBody: TemplateBody;
+    /**
+     * Sets a fleet provision template version as the default version.
+     */
+    setAsDefault?: SetAsDefault;
+  }
+  export interface CreateProvisioningTemplateVersionResponse {
+    /**
+     * The ARN that identifies the provisioning template.
+     */
+    templateArn?: TemplateArn;
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName?: TemplateName;
+    /**
+     * The version of the fleet provisioning template.
+     */
+    versionId?: TemplateVersionId;
+    /**
+     * True if the fleet provisioning template version is the default version, otherwise false.
      */
     isDefaultVersion?: IsDefaultVersion;
   }
@@ -3193,6 +3524,14 @@ declare namespace Iot {
      */
     forceDelete?: ForceDelete;
   }
+  export interface DeleteDomainConfigurationRequest {
+    /**
+     * The name of the domain configuration to be deleted.
+     */
+    domainConfigurationName: DomainConfigurationName;
+  }
+  export interface DeleteDomainConfigurationResponse {
+  }
   export interface DeleteDynamicThingGroupRequest {
     /**
      * The name of the dynamic thing group to delete.
@@ -3272,6 +3611,26 @@ declare namespace Iot {
      * The policy version ID.
      */
     policyVersionId: PolicyVersionId;
+  }
+  export interface DeleteProvisioningTemplateRequest {
+    /**
+     * The name of the fleet provision template to delete.
+     */
+    templateName: TemplateName;
+  }
+  export interface DeleteProvisioningTemplateResponse {
+  }
+  export interface DeleteProvisioningTemplateVersionRequest {
+    /**
+     * The name of the fleet provisioning template version to delete.
+     */
+    templateName: TemplateName;
+    /**
+     * The fleet provisioning template version ID to delete.
+     */
+    versionId: TemplateVersionId;
+  }
+  export interface DeleteProvisioningTemplateVersionResponse {
   }
   export interface DeleteRegistrationCodeRequest {
   }
@@ -3568,6 +3927,46 @@ declare namespace Iot {
      */
     authorizerDescription?: AuthorizerDescription;
   }
+  export interface DescribeDomainConfigurationRequest {
+    /**
+     * The name of the domain configuration.
+     */
+    domainConfigurationName: ReservedDomainConfigurationName;
+  }
+  export interface DescribeDomainConfigurationResponse {
+    /**
+     * The name of the domain configuration.
+     */
+    domainConfigurationName?: ReservedDomainConfigurationName;
+    /**
+     * The ARN of the domain configuration.
+     */
+    domainConfigurationArn?: DomainConfigurationArn;
+    /**
+     * The name of the domain.
+     */
+    domainName?: DomainName;
+    /**
+     * A list containing summary information about the server certificate included in the domain configuration.
+     */
+    serverCertificates?: ServerCertificates;
+    /**
+     * An object that specifies the authorization service for a domain.
+     */
+    authorizerConfig?: AuthorizerConfig;
+    /**
+     * A Boolean value that specifies the current state of the domain configuration.
+     */
+    domainConfigurationStatus?: DomainConfigurationStatus;
+    /**
+     * The type of service delivered by the endpoint.
+     */
+    serviceType?: ServiceType;
+    /**
+     * The type of the domain.
+     */
+    domainType?: DomainType;
+  }
   export interface DescribeEndpointRequest {
     /**
      * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an AWS IoT credentials provider API endpoint.      iot:Jobs - Returns an AWS IoT device management Jobs API endpoint.  
@@ -3691,6 +4090,78 @@ declare namespace Iot {
      * The date and time when the mitigation action was last changed.
      */
     lastModifiedDate?: Timestamp;
+  }
+  export interface DescribeProvisioningTemplateRequest {
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName: TemplateName;
+  }
+  export interface DescribeProvisioningTemplateResponse {
+    /**
+     * The ARN of the fleet provisioning template.
+     */
+    templateArn?: TemplateArn;
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName?: TemplateName;
+    /**
+     * The description of the fleet provisioning template.
+     */
+    description?: TemplateDescription;
+    /**
+     * The date when the fleet provisioning template was created.
+     */
+    creationDate?: DateType;
+    /**
+     * The date when the fleet provisioning template was last modified.
+     */
+    lastModifiedDate?: DateType;
+    /**
+     * The default fleet template version ID.
+     */
+    defaultVersionId?: TemplateVersionId;
+    /**
+     * The JSON formatted contents of the fleet provisioning template.
+     */
+    templateBody?: TemplateBody;
+    /**
+     * True if the fleet provisioning template is enabled, otherwise false.
+     */
+    enabled?: Enabled;
+    /**
+     * The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
+     */
+    provisioningRoleArn?: RoleArn;
+  }
+  export interface DescribeProvisioningTemplateVersionRequest {
+    /**
+     * The template name.
+     */
+    templateName: TemplateName;
+    /**
+     * The fleet provisioning template version ID.
+     */
+    versionId: TemplateVersionId;
+  }
+  export interface DescribeProvisioningTemplateVersionResponse {
+    /**
+     * The fleet provisioning template version ID.
+     */
+    versionId?: TemplateVersionId;
+    /**
+     * The date when the fleet provisioning template version was created.
+     */
+    creationDate?: DateType;
+    /**
+     * The JSON formatted contents of the fleet provisioning template version.
+     */
+    templateBody?: TemplateBody;
+    /**
+     * True if the fleet provisioning template version is the default version.
+     */
+    isDefaultVersion?: IsDefaultVersion;
   }
   export interface DescribeRoleAliasRequest {
     /**
@@ -4027,6 +4498,26 @@ declare namespace Iot {
      */
     ruleName: RuleName;
   }
+  export type DomainConfigurationArn = string;
+  export type DomainConfigurationName = string;
+  export type DomainConfigurationStatus = "ENABLED"|"DISABLED"|string;
+  export interface DomainConfigurationSummary {
+    /**
+     * The name of the domain configuration. This value must be unique to a region.
+     */
+    domainConfigurationName?: ReservedDomainConfigurationName;
+    /**
+     * The ARN of the domain configuration.
+     */
+    domainConfigurationArn?: DomainConfigurationArn;
+    /**
+     * The type of service delivered by the endpoint.
+     */
+    serviceType?: ServiceType;
+  }
+  export type DomainConfigurations = DomainConfigurationSummary[];
+  export type DomainName = string;
+  export type DomainType = "ENDPOINT"|"AWS_MANAGED"|"CUSTOMER_MANAGED"|string;
   export type DurationSeconds = number;
   export type DynamicGroupStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
   export interface DynamoDBAction {
@@ -4191,7 +4682,7 @@ declare namespace Iot {
      */
     name?: FieldName;
     /**
-     * The data type of the field.
+     * The datatype of the field.
      */
     type?: FieldType;
   }
@@ -4422,11 +4913,11 @@ declare namespace Iot {
      */
     isDefaultVersion?: IsDefaultVersion;
     /**
-     * The date the policy version was created.
+     * The date the policy was created.
      */
     creationDate?: DateType;
     /**
-     * The date the policy version was last modified.
+     * The date the policy was last modified.
      */
     lastModifiedDate?: DateType;
     /**
@@ -4452,7 +4943,7 @@ declare namespace Iot {
      */
     queryString: QueryString;
     /**
-     * The aggregation field name. Currently not supported.
+     * The aggregation field name.
      */
     aggregationField?: AggregationField;
     /**
@@ -4560,6 +5051,20 @@ declare namespace Iot {
      */
     sigv4?: SigV4Authorization;
   }
+  export interface HttpContext {
+    /**
+     * The header keys and values in an HTTP authorization request.
+     */
+    headers?: HttpHeaders;
+    /**
+     * The query string keys and values in an HTTP authorization request.
+     */
+    queryString?: HttpQueryString;
+  }
+  export type HttpHeaderName = string;
+  export type HttpHeaderValue = string;
+  export type HttpHeaders = {[key: string]: HttpHeaderValue};
+  export type HttpQueryString = string;
   export interface HttpUrlDestinationConfiguration {
     /**
      * The URL AWS IoT uses to confirm ownership of or access to the topic rule destination URL.
@@ -4619,6 +5124,16 @@ declare namespace Iot {
     messageId?: MessageId;
     /**
      * The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").
+     */
+    roleArn: AwsArn;
+  }
+  export interface IotSiteWiseAction {
+    /**
+     * A list of asset property value entries.
+     */
+    putAssetPropertyValueEntries: PutAssetPropertyValueEntryList;
+    /**
+     * The ARN of the role that grants AWS IoT permission to send an asset property value to AWS IoTSiteWise. ("Action": "iotsitewise:BatchPutAssetPropertyValue"). The trust policy can restrict access to specific asset hierarchy paths.
      */
     roleArn: AwsArn;
   }
@@ -5251,6 +5766,30 @@ declare namespace Iot {
      */
     nextMarker?: Marker;
   }
+  export interface ListDomainConfigurationsRequest {
+    /**
+     * The marker for the next set of results.
+     */
+    marker?: Marker;
+    /**
+     * The result page size.
+     */
+    pageSize?: PageSize;
+    /**
+     * The type of service delivered by the endpoint.
+     */
+    serviceType?: ServiceType;
+  }
+  export interface ListDomainConfigurationsResponse {
+    /**
+     * A list of objects that contain summary information about the user's domain configurations.
+     */
+    domainConfigurations?: DomainConfigurations;
+    /**
+     * The marker for the next set of results.
+     */
+    nextMarker?: Marker;
+  }
   export interface ListIndicesRequest {
     /**
      * The token used to get the next set of results, or null if there are no additional results.
@@ -5548,6 +6087,50 @@ declare namespace Iot {
     things?: ThingNameList;
     /**
      * The token used to get the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListProvisioningTemplateVersionsRequest {
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName: TemplateName;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+    /**
+     * A token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListProvisioningTemplateVersionsResponse {
+    /**
+     * The list of fleet provisioning template versions.
+     */
+    versions?: ProvisioningTemplateVersionListing;
+    /**
+     * A token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListProvisioningTemplatesRequest {
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+    /**
+     * A token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListProvisioningTemplatesResponse {
+    /**
+     * A list of fleet provisioning templates
+     */
+    templates?: ProvisioningTemplateListing;
+    /**
+     * A token to retrieve the next set of results.
      */
     nextToken?: NextToken;
   }
@@ -6200,6 +6783,23 @@ declare namespace Iot {
     publishFindingToSnsParams?: PublishFindingToSnsParams;
   }
   export type MitigationActionType = "UPDATE_DEVICE_CERTIFICATE"|"UPDATE_CA_CERTIFICATE"|"ADD_THINGS_TO_THING_GROUP"|"REPLACE_DEFAULT_POLICY_VERSION"|"ENABLE_IOT_LOGGING"|"PUBLISH_FINDING_TO_SNS"|string;
+  export type MqttClientId = string;
+  export interface MqttContext {
+    /**
+     * The value of the username key in an MQTT authorization request.
+     */
+    username?: MqttUsername;
+    /**
+     * The value of the password key in an MQTT authorization request.
+     */
+    password?: MqttPassword;
+    /**
+     * The value of the clientId key in an MQTT authorization request.
+     */
+    clientId?: MqttClientId;
+  }
+  export type MqttPassword = Buffer|Uint8Array|Blob|string;
+  export type MqttUsername = string;
   export type NextToken = string;
   export type NonCompliantChecksCount = number;
   export interface NonCompliantResource {
@@ -6435,6 +7035,48 @@ declare namespace Iot {
   export type PrivateKey = string;
   export type ProcessingTargetName = string;
   export type ProcessingTargetNameList = ProcessingTargetName[];
+  export type ProvisioningTemplateListing = ProvisioningTemplateSummary[];
+  export interface ProvisioningTemplateSummary {
+    /**
+     * The ARN of the fleet provisioning template.
+     */
+    templateArn?: TemplateArn;
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName?: TemplateName;
+    /**
+     * The description of the fleet provisioning template.
+     */
+    description?: TemplateDescription;
+    /**
+     * The date when the fleet provisioning template summary was created.
+     */
+    creationDate?: DateType;
+    /**
+     * The date when the fleet provisioning template summary was last modified.
+     */
+    lastModifiedDate?: DateType;
+    /**
+     * True if the fleet provision template is enabled, otherwise false.
+     */
+    enabled?: Enabled;
+  }
+  export type ProvisioningTemplateVersionListing = ProvisioningTemplateVersionSummary[];
+  export interface ProvisioningTemplateVersionSummary {
+    /**
+     * The ID of the fleet privisioning template version.
+     */
+    versionId?: TemplateVersionId;
+    /**
+     * The date when the fleet provisioning template version was created
+     */
+    creationDate?: DateType;
+    /**
+     * True if the fleet provisioning template version is the default version, otherwise false.
+     */
+    isDefaultVersion?: IsDefaultVersion;
+  }
   export type PublicKey = string;
   export type PublicKeyMap = {[key: string]: KeyValue};
   export interface PublishFindingToSnsParams {
@@ -6443,6 +7085,29 @@ declare namespace Iot {
      */
     topicArn: SnsTopicArn;
   }
+  export interface PutAssetPropertyValueEntry {
+    /**
+     * Optional. A unique identifier for this entry that you can define to better track which message caused an error in case of failure. Accepts substitution templates. Defaults to a new UUID.
+     */
+    entryId?: AssetPropertyEntryId;
+    /**
+     * The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias or both an analiasId and a propertyId. Accepts substitution templates.
+     */
+    assetId?: AssetId;
+    /**
+     * The ID of the asset's property. You must specify either a propertyAlias or both an analiasId and a propertyId. Accepts substitution templates.
+     */
+    propertyId?: AssetPropertyId;
+    /**
+     * The name of the property alias associated with your asset property. You must specify either a propertyAlias or both an aliasId and a propertyId. Accepts substitution templates.
+     */
+    propertyAlias?: AssetPropertyAlias;
+    /**
+     * A list of property values to insert that each contain timestamp, quality, and value (TQV) information.
+     */
+    propertyValues: AssetPropertyValueList;
+  }
+  export type PutAssetPropertyValueEntryList = PutAssetPropertyValueEntry[];
   export interface PutItemInput {
     /**
      * The table where the message data will be written.
@@ -6593,6 +7258,7 @@ declare namespace Iot {
     additionalInfo?: StringMap;
   }
   export type RelatedResources = RelatedResource[];
+  export type RemoveAuthorizerConfig = boolean;
   export type RemoveAutoRegistration = boolean;
   export interface RemoveThingFromBillingGroupRequest {
     /**
@@ -6667,6 +7333,7 @@ declare namespace Iot {
      */
     qos?: Qos;
   }
+  export type ReservedDomainConfigurationName = string;
   export type Resource = string;
   export type ResourceArn = string;
   export type ResourceArns = {[key: string]: ResourceArn};
@@ -6695,9 +7362,17 @@ declare namespace Iot {
      * The account with which the resource is associated.
      */
     account?: AwsAccountId;
+    /**
+     * The ARN of the IAM role that has overly permissive actions.
+     */
+    iamRoleArn?: RoleArn;
+    /**
+     * The ARN of the role alias that has overly permissive actions.
+     */
+    roleAliasArn?: RoleAliasArn;
   }
   export type ResourceLogicalId = string;
-  export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|string;
+  export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|"ROLE_ALIAS"|"IAM_ROLE"|string;
   export type Resources = Resource[];
   export type RoleAlias = string;
   export type RoleAliasArn = string;
@@ -6892,7 +7567,27 @@ declare namespace Iot {
   }
   export type SecurityProfileTargetMappings = SecurityProfileTargetMapping[];
   export type SecurityProfileTargets = SecurityProfileTarget[];
+  export type ServerCertificateArns = AcmCertificateArn[];
+  export type ServerCertificateStatus = "INVALID"|"VALID"|string;
+  export type ServerCertificateStatusDetail = string;
+  export interface ServerCertificateSummary {
+    /**
+     * The ARN of the server certificate.
+     */
+    serverCertificateArn?: AcmCertificateArn;
+    /**
+     * The status of the server certificate.
+     */
+    serverCertificateStatus?: ServerCertificateStatus;
+    /**
+     * Details that explain the status of the server certificate.
+     */
+    serverCertificateStatusDetail?: ServerCertificateStatusDetail;
+  }
+  export type ServerCertificates = ServerCertificateSummary[];
+  export type ServerName = string;
   export type ServiceName = string;
+  export type ServiceType = "DATA"|"CREDENTIAL_PROVIDER"|"JOBS"|string;
   export type SetAsActive = boolean;
   export type SetAsActiveFlag = boolean;
   export type SetAsDefault = boolean;
@@ -7105,19 +7800,19 @@ declare namespace Iot {
      */
     count?: Count;
     /**
-     * The average of the aggregated fields. If the field data type is String this value is indeterminate.
+     * The average of the aggregated field values.
      */
     average?: Average;
     /**
-     * The sum of the aggregated fields. If the field data type is String this value is indeterminate.
+     * The sum of the aggregated field values.
      */
     sum?: Sum;
     /**
-     * The minimum value of the aggregated fields. If the field data type is String this value is indeterminate.
+     * The minimum aggregated field value.
      */
     minimum?: Minimum;
     /**
-     * The maximum value of the aggregated fields. If the field data type is String this value is indeterminate.
+     * The maximum aggregated field value.
      */
     maximum?: Maximum;
     /**
@@ -7328,7 +8023,11 @@ declare namespace Iot {
      */
     canceledFindingsCount?: CanceledFindingsCount;
   }
+  export type TemplateArn = string;
   export type TemplateBody = string;
+  export type TemplateDescription = string;
+  export type TemplateName = string;
+  export type TemplateVersionId = number;
   export interface TestAuthorizationRequest {
     /**
      * The principal.
@@ -7369,11 +8068,23 @@ declare namespace Iot {
     /**
      * The token returned by your custom authentication service.
      */
-    token: Token;
+    token?: Token;
     /**
      * The signature made with the token and your custom authentication service's private key.
      */
-    tokenSignature: TokenSignature;
+    tokenSignature?: TokenSignature;
+    /**
+     * Specifies a test HTTP authorization request.
+     */
+    httpContext?: HttpContext;
+    /**
+     * Specifies a test MQTT authorization request.&gt;
+     */
+    mqttContext?: MqttContext;
+    /**
+     * Specifies a test TLS authorization request.
+     */
+    tlsContext?: TlsContext;
   }
   export interface TestInvokeAuthorizerResponse {
     /**
@@ -7495,11 +8206,11 @@ declare namespace Iot {
      */
     thingGroupIndexingMode: ThingGroupIndexingMode;
     /**
-     * A list of automatically indexed thing group fields.
+     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
      */
     managedFields?: Fields;
     /**
-     * A list of thing group fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.
+     * A list of thing group fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields. Contains custom field names and their data type.
      */
     customFields?: Fields;
   }
@@ -7544,11 +8255,11 @@ declare namespace Iot {
      */
     thingConnectivityIndexingMode?: ThingConnectivityIndexingMode;
     /**
-     * A list of automatically indexed thing fields.
+     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
      */
     managedFields?: Fields;
     /**
-     * A list of thing fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.
+     * Contains custom field names and their data type.
      */
     customFields?: Fields;
   }
@@ -7610,6 +8321,12 @@ declare namespace Iot {
     inProgressTimeoutInMinutes?: InProgressTimeoutInMinutes;
   }
   export type Timestamp = Date;
+  export interface TlsContext {
+    /**
+     * The value of the serverName key in a TLS authorization request.
+     */
+    serverName?: ServerName;
+  }
   export type Token = string;
   export type TokenKeyName = string;
   export type TokenSignature = string;
@@ -7915,6 +8632,34 @@ declare namespace Iot {
      */
     action: DeviceCertificateUpdateAction;
   }
+  export interface UpdateDomainConfigurationRequest {
+    /**
+     * The name of the domain configuration to be updated.
+     */
+    domainConfigurationName: ReservedDomainConfigurationName;
+    /**
+     * An object that specifies the authorization service for a domain.
+     */
+    authorizerConfig?: AuthorizerConfig;
+    /**
+     * The status to which the domain configuration should be updated.
+     */
+    domainConfigurationStatus?: DomainConfigurationStatus;
+    /**
+     * Removes the authorization configuration from a domain.
+     */
+    removeAuthorizerConfig?: RemoveAuthorizerConfig;
+  }
+  export interface UpdateDomainConfigurationResponse {
+    /**
+     * The name of the domain configuration that was updated.
+     */
+    domainConfigurationName?: ReservedDomainConfigurationName;
+    /**
+     * The ARN of the domain configuration that was updated.
+     */
+    domainConfigurationArn?: DomainConfigurationArn;
+  }
   export interface UpdateDynamicThingGroupRequest {
     /**
      * The name of the dynamic thing group to update.
@@ -8016,6 +8761,30 @@ declare namespace Iot {
      * A unique identifier for the mitigation action.
      */
     actionId?: MitigationActionId;
+  }
+  export interface UpdateProvisioningTemplateRequest {
+    /**
+     * The name of the fleet provisioning template.
+     */
+    templateName: TemplateName;
+    /**
+     * The description of the fleet provisioning template.
+     */
+    description?: TemplateDescription;
+    /**
+     * True to enable the fleet provisioning template, otherwise false.
+     */
+    enabled?: Enabled;
+    /**
+     * The ID of the default provisioning template version.
+     */
+    defaultVersionId?: TemplateVersionId;
+    /**
+     * The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
+     */
+    provisioningRoleArn?: RoleArn;
+  }
+  export interface UpdateProvisioningTemplateResponse {
   }
   export interface UpdateRoleAliasRequest {
     /**

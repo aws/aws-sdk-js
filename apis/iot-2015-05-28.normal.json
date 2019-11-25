@@ -579,6 +579,46 @@
       ],
       "documentation": "<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p> <b>Note:</b> The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. </p> <p> <b>Note:</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs.</p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR.</p> <p>The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process:</p> <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}</p> <p>On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
     },
+    "CreateDomainConfiguration": {
+      "name": "CreateDomainConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/domainConfigurations/{domainConfigurationName}"
+      },
+      "input": {
+        "shape": "CreateDomainConfigurationRequest"
+      },
+      "output": {
+        "shape": "CreateDomainConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "CertificateValidationException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Creates a domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+    },
     "CreateDynamicThingGroup": {
       "name": "CreateDynamicThingGroup",
       "http": {
@@ -679,7 +719,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p> <b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>"
+      "documentation": "<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call <code>CreateKeysAndCertificate</code> over MQTT from a device, for more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api\">Provisioning MQTT API</a>.</p> <p> <b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>"
     },
     "CreateMitigationAction": {
       "name": "CreateMitigationAction",
@@ -828,6 +868,111 @@
         }
       ],
       "documentation": "<p>Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use <a>DeletePolicyVersion</a> to delete an existing version before you create a new one.</p> <p>Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).</p>"
+    },
+    "CreateProvisioningClaim": {
+      "name": "CreateProvisioningClaim",
+      "http": {
+        "method": "POST",
+        "requestUri": "/provisioning-templates/{templateName}/provisioning-claim"
+      },
+      "input": {
+        "shape": "CreateProvisioningClaimRequest"
+      },
+      "output": {
+        "shape": "CreateProvisioningClaimResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a provisioning claim.</p>"
+    },
+    "CreateProvisioningTemplate": {
+      "name": "CreateProvisioningTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/provisioning-templates"
+      },
+      "input": {
+        "shape": "CreateProvisioningTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateProvisioningTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        }
+      ],
+      "documentation": "<p>Creates a fleet provisioning template.</p>"
+    },
+    "CreateProvisioningTemplateVersion": {
+      "name": "CreateProvisioningTemplateVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/provisioning-templates/{templateName}/versions"
+      },
+      "input": {
+        "shape": "CreateProvisioningTemplateVersionRequest"
+      },
+      "output": {
+        "shape": "CreateProvisioningTemplateVersionResponse"
+      },
+      "errors": [
+        {
+          "shape": "VersionsLimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ConflictingResourceUpdateException"
+        }
+      ],
+      "documentation": "<p>Creates a new version of a fleet provisioning template.</p>"
     },
     "CreateRoleAlias": {
       "name": "CreateRoleAlias",
@@ -1293,6 +1438,40 @@
       ],
       "documentation": "<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the <a>DetachPrincipalPolicy</a> API to detach all policies. Next, use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>"
     },
+    "DeleteDomainConfiguration": {
+      "name": "DeleteDomainConfiguration",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/domainConfigurations/{domainConfigurationName}"
+      },
+      "input": {
+        "shape": "DeleteDomainConfigurationRequest"
+      },
+      "output": {
+        "shape": "DeleteDomainConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+    },
     "DeleteDynamicThingGroup": {
       "name": "DeleteDynamicThingGroup",
       "http": {
@@ -1509,6 +1688,74 @@
         }
       ],
       "documentation": "<p>Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this API. To delete the default version of a policy, use <a>DeletePolicy</a>. To find out which version of a policy is marked as the default version, use ListPolicyVersions.</p>"
+    },
+    "DeleteProvisioningTemplate": {
+      "name": "DeleteProvisioningTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/provisioning-templates/{templateName}"
+      },
+      "input": {
+        "shape": "DeleteProvisioningTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteProvisioningTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "DeleteConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        }
+      ],
+      "documentation": "<p>Deletes a fleet provisioning template.</p>"
+    },
+    "DeleteProvisioningTemplateVersion": {
+      "name": "DeleteProvisioningTemplateVersion",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/provisioning-templates/{templateName}/versions/{versionId}"
+      },
+      "input": {
+        "shape": "DeleteProvisioningTemplateVersionRequest"
+      },
+      "output": {
+        "shape": "DeleteProvisioningTemplateVersionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "DeleteConflictException"
+        }
+      ],
+      "documentation": "<p>Deletes a fleet provisioning template version.</p>"
     },
     "DeleteRegistrationCode": {
       "name": "DeleteRegistrationCode",
@@ -2155,6 +2402,37 @@
       ],
       "documentation": "<p>Describes the default authorizer.</p>"
     },
+    "DescribeDomainConfiguration": {
+      "name": "DescribeDomainConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/domainConfigurations/{domainConfigurationName}"
+      },
+      "input": {
+        "shape": "DescribeDomainConfigurationRequest"
+      },
+      "output": {
+        "shape": "DescribeDomainConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Gets summary information about a domain configuration.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+    },
     "DescribeEndpoint": {
       "name": "DescribeEndpoint",
       "http": {
@@ -2322,6 +2600,68 @@
         }
       ],
       "documentation": "<p>Gets information about a mitigation action.</p>"
+    },
+    "DescribeProvisioningTemplate": {
+      "name": "DescribeProvisioningTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/provisioning-templates/{templateName}"
+      },
+      "input": {
+        "shape": "DescribeProvisioningTemplateRequest"
+      },
+      "output": {
+        "shape": "DescribeProvisioningTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        }
+      ],
+      "documentation": "<p>Returns information about a fleet provisioning template.</p>"
+    },
+    "DescribeProvisioningTemplateVersion": {
+      "name": "DescribeProvisioningTemplateVersion",
+      "http": {
+        "method": "GET",
+        "requestUri": "/provisioning-templates/{templateName}/versions/{versionId}"
+      },
+      "input": {
+        "shape": "DescribeProvisioningTemplateVersionRequest"
+      },
+      "output": {
+        "shape": "DescribeProvisioningTemplateVersionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        }
+      ],
+      "documentation": "<p>Returns information about a fleet provisioning template version.</p>"
     },
     "DescribeRoleAlias": {
       "name": "DescribeRoleAlias",
@@ -2864,7 +3204,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Gets the search configuration.</p>"
+      "documentation": "<p>Gets the indexing configuration.</p>"
     },
     "GetJobDocument": {
       "name": "GetJobDocument",
@@ -3136,7 +3476,7 @@
           "shape": "IndexNotReadyException"
         }
       ],
-      "documentation": "<p>Gets statistics about things that match the specified query.</p>"
+      "documentation": "<p>Returns the count, average, sum, minimum, maximum, sum of squares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type <code>String</code>, only the count statistic is returned.</p>"
     },
     "GetTopicRule": {
       "name": "GetTopicRule",
@@ -3536,6 +3876,37 @@
       ],
       "documentation": "<p>List the device certificates signed by the specified CA certificate.</p>"
     },
+    "ListDomainConfigurations": {
+      "name": "ListDomainConfigurations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/domainConfigurations"
+      },
+      "input": {
+        "shape": "ListDomainConfigurationsRequest"
+      },
+      "output": {
+        "shape": "ListDomainConfigurationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+    },
     "ListIndices": {
       "name": "ListIndices",
       "http": {
@@ -3906,6 +4277,65 @@
         }
       ],
       "documentation": "<p>Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. </p>"
+    },
+    "ListProvisioningTemplateVersions": {
+      "name": "ListProvisioningTemplateVersions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/provisioning-templates/{templateName}/versions"
+      },
+      "input": {
+        "shape": "ListProvisioningTemplateVersionsRequest"
+      },
+      "output": {
+        "shape": "ListProvisioningTemplateVersionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        }
+      ],
+      "documentation": "<p>A list of fleet provisioning template versions.</p>"
+    },
+    "ListProvisioningTemplates": {
+      "name": "ListProvisioningTemplates",
+      "http": {
+        "method": "GET",
+        "requestUri": "/provisioning-templates"
+      },
+      "input": {
+        "shape": "ListProvisioningTemplatesRequest"
+      },
+      "output": {
+        "shape": "ListProvisioningTemplatesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        }
+      ],
+      "documentation": "<p>Lists the fleet provisioning templates in your AWS account.</p>"
     },
     "ListRoleAliases": {
       "name": "ListRoleAliases",
@@ -4622,7 +5052,7 @@
           "shape": "ResourceRegistrationFailureException"
         }
       ],
-      "documentation": "<p>Provisions a thing.</p>"
+      "documentation": "<p>Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot\"> AWS IoT Throttling Limits</a> and cause throttle errors. Please contact <a href=\"https://console.aws.amazon.com/support/home\">AWS Customer Support</a> to raise your throttling limits if necessary.</p>"
     },
     "RejectCertificateTransfer": {
       "name": "RejectCertificateTransfer",
@@ -5371,6 +5801,43 @@
       ],
       "documentation": "<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>"
     },
+    "UpdateDomainConfiguration": {
+      "name": "UpdateDomainConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/domainConfigurations/{domainConfigurationName}"
+      },
+      "input": {
+        "shape": "UpdateDomainConfigurationRequest"
+      },
+      "output": {
+        "shape": "UpdateDomainConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "CertificateValidationException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.</p> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+    },
     "UpdateDynamicThingGroup": {
       "name": "UpdateDynamicThingGroup",
       "http": {
@@ -5513,6 +5980,37 @@
         }
       ],
       "documentation": "<p>Updates the definition for the specified mitigation action.</p>"
+    },
+    "UpdateProvisioningTemplate": {
+      "name": "UpdateProvisioningTemplate",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/provisioning-templates/{templateName}"
+      },
+      "input": {
+        "shape": "UpdateProvisioningTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateProvisioningTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ConflictingResourceUpdateException"
+        }
+      ],
+      "documentation": "<p>Updates a fleet provisioning template.</p>"
     },
     "UpdateRoleAlias": {
       "name": "UpdateRoleAlias",
@@ -5874,6 +6372,12 @@
       },
       "documentation": "<p>The input for the AcceptCertificateTransfer operation.</p>"
     },
+    "AcmCertificateArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:aws:acm:[a-z]{2}-(gov-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/?[a-zA-Z0-9/-]+"
+    },
     "Action": {
       "type": "structure",
       "members": {
@@ -5936,6 +6440,10 @@
         "iotEvents": {
           "shape": "IotEventsAction",
           "documentation": "<p>Sends an input to an AWS IoT Events detector.</p>"
+        },
+        "iotSiteWise": {
+          "shape": "IotSiteWiseAction",
+          "documentation": "<p>Sends data from the MQTT message that triggered the rule to AWS IoT SiteWise asset properties.</p>"
         },
         "stepFunctions": {
           "shape": "StepFunctionsAction",
@@ -6135,6 +6643,9 @@
         "shape": "AlertTarget"
       }
     },
+    "AllowAuthorizerOverride": {
+      "type": "boolean"
+    },
     "AllowAutoRegistration": {
       "type": "boolean"
     },
@@ -6153,6 +6664,111 @@
     },
     "AscendingOrder": {
       "type": "boolean"
+    },
+    "AssetId": {
+      "type": "string"
+    },
+    "AssetPropertyAlias": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
+    "AssetPropertyBooleanValue": {
+      "type": "string"
+    },
+    "AssetPropertyDoubleValue": {
+      "type": "string"
+    },
+    "AssetPropertyEntryId": {
+      "type": "string"
+    },
+    "AssetPropertyId": {
+      "type": "string"
+    },
+    "AssetPropertyIntegerValue": {
+      "type": "string"
+    },
+    "AssetPropertyOffsetInNanos": {
+      "type": "string"
+    },
+    "AssetPropertyQuality": {
+      "type": "string"
+    },
+    "AssetPropertyStringValue": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "AssetPropertyTimeInSeconds": {
+      "type": "string"
+    },
+    "AssetPropertyTimestamp": {
+      "type": "structure",
+      "required": [
+        "timeInSeconds"
+      ],
+      "members": {
+        "timeInSeconds": {
+          "shape": "AssetPropertyTimeInSeconds",
+          "documentation": "<p>A string that contains the time in seconds since epoch. Accepts substitution templates.</p>"
+        },
+        "offsetInNanos": {
+          "shape": "AssetPropertyOffsetInNanos",
+          "documentation": "<p>Optional. A string that contains the nanosecond time offset. Accepts substitution templates.</p>"
+        }
+      },
+      "documentation": "<p>An asset property timestamp entry containing the following information.</p>"
+    },
+    "AssetPropertyValue": {
+      "type": "structure",
+      "required": [
+        "value",
+        "timestamp"
+      ],
+      "members": {
+        "value": {
+          "shape": "AssetPropertyVariant",
+          "documentation": "<p>The value of the asset property.</p>"
+        },
+        "timestamp": {
+          "shape": "AssetPropertyTimestamp",
+          "documentation": "<p>The asset property value timestamp.</p>"
+        },
+        "quality": {
+          "shape": "AssetPropertyQuality",
+          "documentation": "<p>Optional. A string that describes the quality of the value. Accepts substitution templates. Must be <code>GOOD</code>, <code>BAD</code>, or <code>UNCERTAIN</code>.</p>"
+        }
+      },
+      "documentation": "<p>An asset property value entry containing the following information.</p>"
+    },
+    "AssetPropertyValueList": {
+      "type": "list",
+      "member": {
+        "shape": "AssetPropertyValue"
+      },
+      "min": 1
+    },
+    "AssetPropertyVariant": {
+      "type": "structure",
+      "members": {
+        "stringValue": {
+          "shape": "AssetPropertyStringValue",
+          "documentation": "<p>Optional. The string value of the value entry. Accepts substitution templates.</p>"
+        },
+        "integerValue": {
+          "shape": "AssetPropertyIntegerValue",
+          "documentation": "<p>Optional. A string that contains the integer value of the value entry. Accepts substitution templates.</p>"
+        },
+        "doubleValue": {
+          "shape": "AssetPropertyDoubleValue",
+          "documentation": "<p>Optional. A string that contains the double value of the value entry. Accepts substitution templates.</p>"
+        },
+        "booleanValue": {
+          "shape": "AssetPropertyBooleanValue",
+          "documentation": "<p>Optional. A string that contains the boolean value (<code>true</code> or <code>false</code>) of the value entry. Accepts substitution templates.</p>"
+        }
+      },
+      "documentation": "<p>Contains an asset property value (of a single type).</p>"
     },
     "AssociateTargetsWithJobRequest": {
       "type": "structure",
@@ -6762,6 +7378,21 @@
     "AuthorizerArn": {
       "type": "string"
     },
+    "AuthorizerConfig": {
+      "type": "structure",
+      "members": {
+        "defaultAuthorizerName": {
+          "shape": "AuthorizerName",
+          "documentation": "<p>The name of the authorization service for a domain configuration.</p>"
+        },
+        "allowAuthorizerOverride": {
+          "shape": "AllowAuthorizerOverride",
+          "documentation": "<p>A Boolean that specifies whether the domain configuration's authorization service can be overridden.</p>",
+          "box": true
+        }
+      },
+      "documentation": "<p>An object that specifies the authorization service for a domain.</p>"
+    },
     "AuthorizerDescription": {
       "type": "structure",
       "members": {
@@ -6796,6 +7427,10 @@
         "lastModifiedDate": {
           "shape": "DateType",
           "documentation": "<p>The UNIX timestamp of when the authorizer was last updated.</p>"
+        },
+        "signingDisabled": {
+          "shape": "BooleanKey",
+          "documentation": "<p>Specifies whether AWS IoT validates the token signature in an authorization request.</p>"
         }
       },
       "documentation": "<p>The authorizer description.</p>"
@@ -6988,6 +7623,9 @@
       "documentation": "<p>The properties of a billing group.</p>"
     },
     "Boolean": {
+      "type": "boolean"
+    },
+    "BooleanKey": {
       "type": "boolean"
     },
     "BucketName": {
@@ -7595,9 +8233,7 @@
       "type": "structure",
       "required": [
         "authorizerName",
-        "authorizerFunctionArn",
-        "tokenKeyName",
-        "tokenSigningPublicKeys"
+        "authorizerFunctionArn"
       ],
       "members": {
         "authorizerName": {
@@ -7621,6 +8257,10 @@
         "status": {
           "shape": "AuthorizerStatus",
           "documentation": "<p>The status of the create authorizer request.</p>"
+        },
+        "signingDisabled": {
+          "shape": "BooleanKey",
+          "documentation": "<p>Specifies whether AWS IoT validates the token signature in an authorization request.</p>"
         }
       }
     },
@@ -7712,6 +8352,53 @@
         }
       },
       "documentation": "<p>The output from the CreateCertificateFromCsr operation.</p>"
+    },
+    "CreateDomainConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "domainConfigurationName"
+      ],
+      "members": {
+        "domainConfigurationName": {
+          "shape": "DomainConfigurationName",
+          "documentation": "<p>The name of the domain configuration. This value must be unique to a region.</p>",
+          "location": "uri",
+          "locationName": "domainConfigurationName"
+        },
+        "domainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        },
+        "serverCertificateArns": {
+          "shape": "ServerCertificateArns",
+          "documentation": "<p>The ARNs of the certificates that AWS IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for AWS-managed domains.</p>"
+        },
+        "validationCertificateArn": {
+          "shape": "AcmCertificateArn",
+          "documentation": "<p>The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. This value is not required for AWS-managed domains.</p>"
+        },
+        "authorizerConfig": {
+          "shape": "AuthorizerConfig",
+          "documentation": "<p>An object that specifies the authorization service for a domain.</p>"
+        },
+        "serviceType": {
+          "shape": "ServiceType",
+          "documentation": "<p>The type of service delivered by the endpoint.</p>"
+        }
+      }
+    },
+    "CreateDomainConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "domainConfigurationName": {
+          "shape": "DomainConfigurationName",
+          "documentation": "<p>The name of the domain configuration.</p>"
+        },
+        "domainConfigurationArn": {
+          "shape": "DomainConfigurationArn",
+          "documentation": "<p>The ARN of the domain configuration.</p>"
+        }
+      }
     },
     "CreateDynamicThingGroupRequest": {
       "type": "structure",
@@ -8087,6 +8774,138 @@
         }
       },
       "documentation": "<p>The output of the CreatePolicyVersion operation.</p>"
+    },
+    "CreateProvisioningClaimRequest": {
+      "type": "structure",
+      "required": [
+        "templateName"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the provisioning template to use.</p>",
+          "location": "uri",
+          "locationName": "templateName"
+        }
+      }
+    },
+    "CreateProvisioningClaimResponse": {
+      "type": "structure",
+      "members": {
+        "certificateId": {
+          "shape": "CertificateId",
+          "documentation": "<p>The ID of the certificate.</p>"
+        },
+        "certificatePem": {
+          "shape": "CertificatePem",
+          "documentation": "<p>The provisioning claim certificate.</p>"
+        },
+        "keyPair": {
+          "shape": "KeyPair",
+          "documentation": "<p>The provisioning claim key pair.</p>"
+        },
+        "expiration": {
+          "shape": "DateType",
+          "documentation": "<p>The provisioning claim expiration time.</p>"
+        }
+      }
+    },
+    "CreateProvisioningTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "templateName",
+        "templateBody",
+        "provisioningRoleArn"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>"
+        },
+        "description": {
+          "shape": "TemplateDescription",
+          "documentation": "<p>The description of the fleet provisioning template.</p>"
+        },
+        "templateBody": {
+          "shape": "TemplateBody",
+          "documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>"
+        },
+        "enabled": {
+          "shape": "Enabled",
+          "documentation": "<p>True to enable the fleet provisioning template, otherwise false.</p>"
+        },
+        "provisioningRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
+        }
+      }
+    },
+    "CreateProvisioningTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "templateArn": {
+          "shape": "TemplateArn",
+          "documentation": "<p>The ARN that identifies the provisioning template.</p>"
+        },
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>"
+        },
+        "defaultVersionId": {
+          "shape": "TemplateVersionId",
+          "documentation": "<p>The default version of the fleet provisioning template.</p>"
+        }
+      }
+    },
+    "CreateProvisioningTemplateVersionRequest": {
+      "type": "structure",
+      "required": [
+        "templateName",
+        "templateBody"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>",
+          "location": "uri",
+          "locationName": "templateName"
+        },
+        "templateBody": {
+          "shape": "TemplateBody",
+          "documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>"
+        },
+        "setAsDefault": {
+          "shape": "SetAsDefault",
+          "documentation": "<p>Sets a fleet provision template version as the default version.</p>",
+          "location": "querystring",
+          "locationName": "setAsDefault"
+        }
+      }
+    },
+    "CreateProvisioningTemplateVersionResponse": {
+      "type": "structure",
+      "members": {
+        "templateArn": {
+          "shape": "TemplateArn",
+          "documentation": "<p>The ARN that identifies the provisioning template.</p>"
+        },
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>"
+        },
+        "versionId": {
+          "shape": "TemplateVersionId",
+          "documentation": "<p>The version of the fleet provisioning template.</p>"
+        },
+        "isDefaultVersion": {
+          "shape": "IsDefaultVersion",
+          "documentation": "<p>True if the fleet provisioning template version is the default version, otherwise false.</p>"
+        }
+      }
     },
     "CreateRoleAliasRequest": {
       "type": "structure",
@@ -8609,6 +9428,24 @@
       },
       "documentation": "<p>The input for the DeleteCertificate operation.</p>"
     },
+    "DeleteDomainConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "domainConfigurationName"
+      ],
+      "members": {
+        "domainConfigurationName": {
+          "shape": "DomainConfigurationName",
+          "documentation": "<p>The name of the domain configuration to be deleted.</p>",
+          "location": "uri",
+          "locationName": "domainConfigurationName"
+        }
+      }
+    },
+    "DeleteDomainConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteDynamicThingGroupRequest": {
       "type": "structure",
       "required": [
@@ -8771,6 +9608,49 @@
         }
       },
       "documentation": "<p>The input for the DeletePolicyVersion operation.</p>"
+    },
+    "DeleteProvisioningTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "templateName"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provision template to delete.</p>",
+          "location": "uri",
+          "locationName": "templateName"
+        }
+      }
+    },
+    "DeleteProvisioningTemplateResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteProvisioningTemplateVersionRequest": {
+      "type": "structure",
+      "required": [
+        "templateName",
+        "versionId"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template version to delete.</p>",
+          "location": "uri",
+          "locationName": "templateName"
+        },
+        "versionId": {
+          "shape": "TemplateVersionId",
+          "documentation": "<p>The fleet provisioning template version ID to delete.</p>",
+          "location": "uri",
+          "locationName": "versionId"
+        }
+      }
+    },
+    "DeleteProvisioningTemplateVersionResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteRegistrationCodeRequest": {
       "type": "structure",
@@ -9300,6 +10180,57 @@
         }
       }
     },
+    "DescribeDomainConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "domainConfigurationName"
+      ],
+      "members": {
+        "domainConfigurationName": {
+          "shape": "ReservedDomainConfigurationName",
+          "documentation": "<p>The name of the domain configuration.</p>",
+          "location": "uri",
+          "locationName": "domainConfigurationName"
+        }
+      }
+    },
+    "DescribeDomainConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "domainConfigurationName": {
+          "shape": "ReservedDomainConfigurationName",
+          "documentation": "<p>The name of the domain configuration.</p>"
+        },
+        "domainConfigurationArn": {
+          "shape": "DomainConfigurationArn",
+          "documentation": "<p>The ARN of the domain configuration.</p>"
+        },
+        "domainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        },
+        "serverCertificates": {
+          "shape": "ServerCertificates",
+          "documentation": "<p>A list containing summary information about the server certificate included in the domain configuration.</p>"
+        },
+        "authorizerConfig": {
+          "shape": "AuthorizerConfig",
+          "documentation": "<p>An object that specifies the authorization service for a domain.</p>"
+        },
+        "domainConfigurationStatus": {
+          "shape": "DomainConfigurationStatus",
+          "documentation": "<p>A Boolean value that specifies the current state of the domain configuration.</p>"
+        },
+        "serviceType": {
+          "shape": "ServiceType",
+          "documentation": "<p>The type of service delivered by the endpoint.</p>"
+        },
+        "domainType": {
+          "shape": "DomainType",
+          "documentation": "<p>The type of the domain.</p>"
+        }
+      }
+    },
     "DescribeEndpointRequest": {
       "type": "structure",
       "members": {
@@ -9485,6 +10416,103 @@
         "lastModifiedDate": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time when the mitigation action was last changed.</p>"
+        }
+      }
+    },
+    "DescribeProvisioningTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "templateName"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>",
+          "location": "uri",
+          "locationName": "templateName"
+        }
+      }
+    },
+    "DescribeProvisioningTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "templateArn": {
+          "shape": "TemplateArn",
+          "documentation": "<p>The ARN of the fleet provisioning template.</p>"
+        },
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>"
+        },
+        "description": {
+          "shape": "TemplateDescription",
+          "documentation": "<p>The description of the fleet provisioning template.</p>"
+        },
+        "creationDate": {
+          "shape": "DateType",
+          "documentation": "<p>The date when the fleet provisioning template was created.</p>"
+        },
+        "lastModifiedDate": {
+          "shape": "DateType",
+          "documentation": "<p>The date when the fleet provisioning template was last modified.</p>"
+        },
+        "defaultVersionId": {
+          "shape": "TemplateVersionId",
+          "documentation": "<p>The default fleet template version ID.</p>"
+        },
+        "templateBody": {
+          "shape": "TemplateBody",
+          "documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>"
+        },
+        "enabled": {
+          "shape": "Enabled",
+          "documentation": "<p>True if the fleet provisioning template is enabled, otherwise false.</p>"
+        },
+        "provisioningRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.</p>"
+        }
+      }
+    },
+    "DescribeProvisioningTemplateVersionRequest": {
+      "type": "structure",
+      "required": [
+        "templateName",
+        "versionId"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The template name.</p>",
+          "location": "uri",
+          "locationName": "templateName"
+        },
+        "versionId": {
+          "shape": "TemplateVersionId",
+          "documentation": "<p>The fleet provisioning template version ID.</p>",
+          "location": "uri",
+          "locationName": "versionId"
+        }
+      }
+    },
+    "DescribeProvisioningTemplateVersionResponse": {
+      "type": "structure",
+      "members": {
+        "versionId": {
+          "shape": "TemplateVersionId",
+          "documentation": "<p>The fleet provisioning template version ID.</p>"
+        },
+        "creationDate": {
+          "shape": "DateType",
+          "documentation": "<p>The date when the fleet provisioning template version was created.</p>"
+        },
+        "templateBody": {
+          "shape": "TemplateBody",
+          "documentation": "<p>The JSON formatted contents of the fleet provisioning template version.</p>"
+        },
+        "isDefaultVersion": {
+          "shape": "IsDefaultVersion",
+          "documentation": "<p>True if the fleet provisioning template version is the default version.</p>"
         }
       }
     },
@@ -10008,6 +11036,59 @@
       },
       "documentation": "<p>The input for the DisableTopicRuleRequest operation.</p>"
     },
+    "DomainConfigurationArn": {
+      "type": "string"
+    },
+    "DomainConfigurationName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\w.-]+"
+    },
+    "DomainConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "DomainConfigurationSummary": {
+      "type": "structure",
+      "members": {
+        "domainConfigurationName": {
+          "shape": "ReservedDomainConfigurationName",
+          "documentation": "<p>The name of the domain configuration. This value must be unique to a region.</p>"
+        },
+        "domainConfigurationArn": {
+          "shape": "DomainConfigurationArn",
+          "documentation": "<p>The ARN of the domain configuration.</p>"
+        },
+        "serviceType": {
+          "shape": "ServiceType",
+          "documentation": "<p>The type of service delivered by the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. A domain configuration can be associated with an AWS-managed domain (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p> <ul> <li> <p>Data</p> </li> <li> <p>Jobs</p> </li> <li> <p>CredentialProvider</p> </li> </ul> <note> <p>The domain configuration feature is in public preview and is subject to change.</p> </note>"
+    },
+    "DomainConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "DomainConfigurationSummary"
+      }
+    },
+    "DomainName": {
+      "type": "string",
+      "max": 253,
+      "min": 1
+    },
+    "DomainType": {
+      "type": "string",
+      "enum": [
+        "ENDPOINT",
+        "AWS_MANAGED",
+        "CUSTOMER_MANAGED"
+      ]
+    },
     "DurationSeconds": {
       "type": "integer"
     },
@@ -10209,7 +11290,8 @@
       "type": "string"
     },
     "EndpointType": {
-      "type": "string"
+      "type": "string",
+      "max": 128
     },
     "ErrorCode": {
       "type": "string"
@@ -10326,10 +11408,10 @@
         },
         "type": {
           "shape": "FieldType",
-          "documentation": "<p>The data type of the field.</p>"
+          "documentation": "<p>The datatype of the field.</p>"
         }
       },
-      "documentation": "<p>The field to aggregate.</p>"
+      "documentation": "<p>Describes the name and data type at a field.</p>"
     },
     "FieldName": {
       "type": "string"
@@ -10707,11 +11789,11 @@
         },
         "creationDate": {
           "shape": "DateType",
-          "documentation": "<p>The date the policy version was created.</p>"
+          "documentation": "<p>The date the policy was created.</p>"
         },
         "lastModifiedDate": {
           "shape": "DateType",
-          "documentation": "<p>The date the policy version was last modified.</p>"
+          "documentation": "<p>The date the policy was last modified.</p>"
         },
         "generationId": {
           "shape": "GenerationId",
@@ -10751,7 +11833,7 @@
         },
         "aggregationField": {
           "shape": "AggregationField",
-          "documentation": "<p>The aggregation field name. Currently not supported.</p>"
+          "documentation": "<p>The aggregation field name.</p>"
         },
         "queryVersion": {
           "shape": "QueryVersion",
@@ -10933,6 +12015,44 @@
       },
       "documentation": "<p>The authorization method used to send messages.</p>"
     },
+    "HttpContext": {
+      "type": "structure",
+      "members": {
+        "headers": {
+          "shape": "HttpHeaders",
+          "documentation": "<p>The header keys and values in an HTTP authorization request.</p>"
+        },
+        "queryString": {
+          "shape": "HttpQueryString",
+          "documentation": "<p>The query string keys and values in an HTTP authorization request.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the HTTP context to use for the test authorizer request.</p>"
+    },
+    "HttpHeaderName": {
+      "type": "string",
+      "max": 8192,
+      "min": 1
+    },
+    "HttpHeaderValue": {
+      "type": "string",
+      "max": 8192,
+      "min": 1
+    },
+    "HttpHeaders": {
+      "type": "map",
+      "key": {
+        "shape": "HttpHeaderName"
+      },
+      "value": {
+        "shape": "HttpHeaderValue"
+      }
+    },
+    "HttpQueryString": {
+      "type": "string",
+      "max": 4096,
+      "min": 1
+    },
     "HttpUrlDestinationConfiguration": {
       "type": "structure",
       "required": [
@@ -11060,6 +12180,24 @@
         }
       },
       "documentation": "<p>Sends an input to an AWS IoT Events detector.</p>"
+    },
+    "IotSiteWiseAction": {
+      "type": "structure",
+      "required": [
+        "putAssetPropertyValueEntries",
+        "roleArn"
+      ],
+      "members": {
+        "putAssetPropertyValueEntries": {
+          "shape": "PutAssetPropertyValueEntryList",
+          "documentation": "<p>A list of asset property value entries.</p>"
+        },
+        "roleArn": {
+          "shape": "AwsArn",
+          "documentation": "<p>The ARN of the role that grants AWS IoT permission to send an asset property value to AWS IoTSiteWise. (<code>\"Action\": \"iotsitewise:BatchPutAssetPropertyValue\"</code>). The trust policy can restrict access to specific asset hierarchy paths.</p>"
+        }
+      },
+      "documentation": "<p>Describes an action to send data from an MQTT message that triggered the rule to AWS IoT SiteWise asset properties.</p>"
     },
     "IsAuthenticated": {
       "type": "boolean"
@@ -12012,12 +13150,48 @@
       },
       "documentation": "<p>The output of the ListCertificates operation.</p>"
     },
+    "ListDomainConfigurationsRequest": {
+      "type": "structure",
+      "members": {
+        "marker": {
+          "shape": "Marker",
+          "documentation": "<p>The marker for the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "marker"
+        },
+        "pageSize": {
+          "shape": "PageSize",
+          "documentation": "<p>The result page size.</p>",
+          "location": "querystring",
+          "locationName": "pageSize"
+        },
+        "serviceType": {
+          "shape": "ServiceType",
+          "documentation": "<p>The type of service delivered by the endpoint.</p>",
+          "location": "querystring",
+          "locationName": "serviceType"
+        }
+      }
+    },
+    "ListDomainConfigurationsResponse": {
+      "type": "structure",
+      "members": {
+        "domainConfigurations": {
+          "shape": "DomainConfigurations",
+          "documentation": "<p>A list of objects that contain summary information about the user's domain configurations.</p>"
+        },
+        "nextMarker": {
+          "shape": "Marker",
+          "documentation": "<p>The marker for the next set of results.</p>"
+        }
+      }
+    },
     "ListIndicesRequest": {
       "type": "structure",
       "members": {
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token used to get the next set of results, or null if there are no additional results.</p>",
+          "documentation": "<p>The token used to get the next set of results, or <code>null</code> if there are no additional results.</p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
@@ -12038,7 +13212,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token used to get the next set of results, or null if there are no additional results.</p>"
+          "documentation": "<p>The token used to get the next set of results, or <code>null</code> if there are no additional results.</p>"
         }
       }
     },
@@ -12493,6 +13667,75 @@
         }
       },
       "documentation": "<p>The output from the ListPrincipalThings operation.</p>"
+    },
+    "ListProvisioningTemplateVersionsRequest": {
+      "type": "structure",
+      "required": [
+        "templateName"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>",
+          "location": "uri",
+          "locationName": "templateName"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return at one time.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListProvisioningTemplateVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "versions": {
+          "shape": "ProvisioningTemplateVersionListing",
+          "documentation": "<p>The list of fleet provisioning template versions.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token to retrieve the next set of results.</p>"
+        }
+      }
+    },
+    "ListProvisioningTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return at one time.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListProvisioningTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "templates": {
+          "shape": "ProvisioningTemplateListing",
+          "documentation": "<p>A list of fleet provisioning templates</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token to retrieve the next set of results.</p>"
+        }
+      }
     },
     "ListRoleAliasesRequest": {
       "type": "structure",
@@ -13576,6 +14819,39 @@
         "PUBLISH_FINDING_TO_SNS"
       ]
     },
+    "MqttClientId": {
+      "type": "string",
+      "max": 65535,
+      "min": 1
+    },
+    "MqttContext": {
+      "type": "structure",
+      "members": {
+        "username": {
+          "shape": "MqttUsername",
+          "documentation": "<p>The value of the <code>username</code> key in an MQTT authorization request.</p>"
+        },
+        "password": {
+          "shape": "MqttPassword",
+          "documentation": "<p>The value of the <code>password</code> key in an MQTT authorization request.</p>"
+        },
+        "clientId": {
+          "shape": "MqttClientId",
+          "documentation": "<p>The value of the <code>clientId</code> key in an MQTT authorization request.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the MQTT context to use for the test authorizer request</p>"
+    },
+    "MqttPassword": {
+      "type": "blob",
+      "max": 65535,
+      "min": 1
+    },
+    "MqttUsername": {
+      "type": "string",
+      "max": 65535,
+      "min": 1
+    },
     "NextToken": {
       "type": "string"
     },
@@ -14024,6 +15300,66 @@
         "shape": "ProcessingTargetName"
       }
     },
+    "ProvisioningTemplateListing": {
+      "type": "list",
+      "member": {
+        "shape": "ProvisioningTemplateSummary"
+      }
+    },
+    "ProvisioningTemplateSummary": {
+      "type": "structure",
+      "members": {
+        "templateArn": {
+          "shape": "TemplateArn",
+          "documentation": "<p>The ARN of the fleet provisioning template.</p>"
+        },
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>"
+        },
+        "description": {
+          "shape": "TemplateDescription",
+          "documentation": "<p>The description of the fleet provisioning template.</p>"
+        },
+        "creationDate": {
+          "shape": "DateType",
+          "documentation": "<p>The date when the fleet provisioning template summary was created.</p>"
+        },
+        "lastModifiedDate": {
+          "shape": "DateType",
+          "documentation": "<p>The date when the fleet provisioning template summary was last modified.</p>"
+        },
+        "enabled": {
+          "shape": "Enabled",
+          "documentation": "<p>True if the fleet provision template is enabled, otherwise false.</p>"
+        }
+      },
+      "documentation": "<p>A summary of information about a fleet provisioning template.</p>"
+    },
+    "ProvisioningTemplateVersionListing": {
+      "type": "list",
+      "member": {
+        "shape": "ProvisioningTemplateVersionSummary"
+      }
+    },
+    "ProvisioningTemplateVersionSummary": {
+      "type": "structure",
+      "members": {
+        "versionId": {
+          "shape": "TemplateVersionId",
+          "documentation": "<p>The ID of the fleet privisioning template version.</p>"
+        },
+        "creationDate": {
+          "shape": "DateType",
+          "documentation": "<p>The date when the fleet provisioning template version was created</p>"
+        },
+        "isDefaultVersion": {
+          "shape": "IsDefaultVersion",
+          "documentation": "<p>True if the fleet provisioning template version is the default version, otherwise false.</p>"
+        }
+      },
+      "documentation": "<p>A summary of information about a fleet provision template version.</p>"
+    },
     "PublicKey": {
       "type": "string",
       "min": 1
@@ -14049,6 +15385,42 @@
         }
       },
       "documentation": "<p>Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.</p>"
+    },
+    "PutAssetPropertyValueEntry": {
+      "type": "structure",
+      "required": [
+        "propertyValues"
+      ],
+      "members": {
+        "entryId": {
+          "shape": "AssetPropertyEntryId",
+          "documentation": "<p>Optional. A unique identifier for this entry that you can define to better track which message caused an error in case of failure. Accepts substitution templates. Defaults to a new UUID.</p>"
+        },
+        "assetId": {
+          "shape": "AssetId",
+          "documentation": "<p>The ID of the AWS IoT SiteWise asset. You must specify either a <code>propertyAlias</code> or both an <code>analiasId</code> and a <code>propertyId</code>. Accepts substitution templates.</p>"
+        },
+        "propertyId": {
+          "shape": "AssetPropertyId",
+          "documentation": "<p>The ID of the asset's property. You must specify either a <code>propertyAlias</code> or both an <code>analiasId</code> and a <code>propertyId</code>. Accepts substitution templates.</p>"
+        },
+        "propertyAlias": {
+          "shape": "AssetPropertyAlias",
+          "documentation": "<p>The name of the property alias associated with your asset property. You must specify either a <code>propertyAlias</code> or both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution templates.</p>"
+        },
+        "propertyValues": {
+          "shape": "AssetPropertyValueList",
+          "documentation": "<p>A list of property values to insert that each contain timestamp, quality, and value (TQV) information.</p>"
+        }
+      },
+      "documentation": "<p>An asset property value entry containing the following information.</p>"
+    },
+    "PutAssetPropertyValueEntryList": {
+      "type": "list",
+      "member": {
+        "shape": "PutAssetPropertyValueEntry"
+      },
+      "min": 1
     },
     "PutItemInput": {
       "type": "structure",
@@ -14333,6 +15705,9 @@
         "shape": "RelatedResource"
       }
     },
+    "RemoveAuthorizerConfig": {
+      "type": "boolean"
+    },
     "RemoveAutoRegistration": {
       "type": "boolean"
     },
@@ -14455,6 +15830,12 @@
       },
       "documentation": "<p>Describes an action to republish to another topic.</p>"
     },
+    "ReservedDomainConfigurationName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\w.:-]+"
+    },
     "Resource": {
       "type": "string"
     },
@@ -14496,6 +15877,14 @@
         "account": {
           "shape": "AwsAccountId",
           "documentation": "<p>The account with which the resource is associated.</p>"
+        },
+        "iamRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the IAM role that has overly permissive actions.</p>"
+        },
+        "roleAliasArn": {
+          "shape": "RoleAliasArn",
+          "documentation": "<p>The ARN of the role alias that has overly permissive actions.</p>"
         }
       },
       "documentation": "<p>Information that identifies the noncompliant resource.</p>"
@@ -14511,7 +15900,9 @@
         "IOT_POLICY",
         "COGNITO_IDENTITY_POOL",
         "CLIENT_ID",
-        "ACCOUNT_SETTINGS"
+        "ACCOUNT_SETTINGS",
+        "ROLE_ALIAS",
+        "IAM_ROLE"
       ]
     },
     "Resources": {
@@ -14527,7 +15918,9 @@
       "pattern": "[\\w=,@-]+"
     },
     "RoleAliasArn": {
-      "type": "string"
+      "type": "string",
+      "max": 2048,
+      "min": 1
     },
     "RoleAliasDescription": {
       "type": "structure",
@@ -14755,7 +16148,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token used to get the next set of results, or null if there are no additional results.</p>"
+          "documentation": "<p>The token used to get the next set of results, or <code>null</code> if there are no additional results.</p>"
         },
         "maxResults": {
           "shape": "QueryMaxResults",
@@ -14772,7 +16165,7 @@
       "members": {
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token used to get the next set of results, or null if there are no additional results.</p>"
+          "documentation": "<p>The token used to get the next set of results, or <code>null</code> if there are no additional results.</p>"
         },
         "things": {
           "shape": "ThingDocumentList",
@@ -14873,8 +16266,63 @@
         "shape": "SecurityProfileTarget"
       }
     },
+    "ServerCertificateArns": {
+      "type": "list",
+      "member": {
+        "shape": "AcmCertificateArn"
+      },
+      "max": 1,
+      "min": 0
+    },
+    "ServerCertificateStatus": {
+      "type": "string",
+      "enum": [
+        "INVALID",
+        "VALID"
+      ]
+    },
+    "ServerCertificateStatusDetail": {
+      "type": "string"
+    },
+    "ServerCertificateSummary": {
+      "type": "structure",
+      "members": {
+        "serverCertificateArn": {
+          "shape": "AcmCertificateArn",
+          "documentation": "<p>The ARN of the server certificate.</p>"
+        },
+        "serverCertificateStatus": {
+          "shape": "ServerCertificateStatus",
+          "documentation": "<p>The status of the server certificate.</p>"
+        },
+        "serverCertificateStatusDetail": {
+          "shape": "ServerCertificateStatusDetail",
+          "documentation": "<p>Details that explain the status of the server certificate.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains information about a server certificate.</p>"
+    },
+    "ServerCertificates": {
+      "type": "list",
+      "member": {
+        "shape": "ServerCertificateSummary"
+      }
+    },
+    "ServerName": {
+      "type": "string",
+      "max": 253,
+      "min": 1
+    },
     "ServiceName": {
       "type": "string"
+    },
+    "ServiceType": {
+      "type": "string",
+      "enum": [
+        "DATA",
+        "CREDENTIAL_PROVIDER",
+        "JOBS"
+      ]
     },
     "SetAsActive": {
       "type": "boolean"
@@ -15234,22 +16682,22 @@
         },
         "average": {
           "shape": "Average",
-          "documentation": "<p>The average of the aggregated fields. If the field data type is String this value is indeterminate.</p>",
+          "documentation": "<p>The average of the aggregated field values.</p>",
           "box": true
         },
         "sum": {
           "shape": "Sum",
-          "documentation": "<p>The sum of the aggregated fields. If the field data type is String this value is indeterminate.</p>",
+          "documentation": "<p>The sum of the aggregated field values.</p>",
           "box": true
         },
         "minimum": {
           "shape": "Minimum",
-          "documentation": "<p>The minimum value of the aggregated fields. If the field data type is String this value is indeterminate.</p>",
+          "documentation": "<p>The minimum aggregated field value.</p>",
           "box": true
         },
         "maximum": {
           "shape": "Maximum",
-          "documentation": "<p>The maximum value of the aggregated fields. If the field data type is String this value is indeterminate.</p>",
+          "documentation": "<p>The maximum aggregated field value.</p>",
           "box": true
         },
         "sumOfSquares": {
@@ -15623,8 +17071,26 @@
       },
       "documentation": "<p>Provides summary counts of how many tasks for findings are in a particular state. This information is included in the response from DescribeAuditMitigationActionsTask.</p>"
     },
+    "TemplateArn": {
+      "type": "string"
+    },
     "TemplateBody": {
       "type": "string"
+    },
+    "TemplateDescription": {
+      "type": "string",
+      "max": 500,
+      "min": 0,
+      "pattern": "[^\\p{C}]*"
+    },
+    "TemplateName": {
+      "type": "string",
+      "max": 36,
+      "min": 1,
+      "pattern": "^[0-9A-Za-z_-]+$"
+    },
+    "TemplateVersionId": {
+      "type": "integer"
     },
     "TestAuthorizationRequest": {
       "type": "structure",
@@ -15672,9 +17138,7 @@
     "TestInvokeAuthorizerRequest": {
       "type": "structure",
       "required": [
-        "authorizerName",
-        "token",
-        "tokenSignature"
+        "authorizerName"
       ],
       "members": {
         "authorizerName": {
@@ -15690,6 +17154,18 @@
         "tokenSignature": {
           "shape": "TokenSignature",
           "documentation": "<p>The signature made with the token and your custom authentication service's private key.</p>"
+        },
+        "httpContext": {
+          "shape": "HttpContext",
+          "documentation": "<p>Specifies a test HTTP authorization request.</p>"
+        },
+        "mqttContext": {
+          "shape": "MqttContext",
+          "documentation": "<p>Specifies a test MQTT authorization request.&gt;</p>"
+        },
+        "tlsContext": {
+          "shape": "TlsContext",
+          "documentation": "<p>Specifies a test TLS authorization request.</p>"
         }
       }
     },
@@ -15872,11 +17348,11 @@
         },
         "managedFields": {
           "shape": "Fields",
-          "documentation": "<p>A list of automatically indexed thing group fields.</p>"
+          "documentation": "<p>Contains fields that are indexed and whose types are already known by the Fleet Indexing service.</p>"
         },
         "customFields": {
           "shape": "Fields",
-          "documentation": "<p>A list of thing group fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.</p>"
+          "documentation": "<p>A list of thing group fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.</p> <p>Contains custom field names and their data type.</p>"
         }
       },
       "documentation": "<p>Thing group indexing configuration.</p>"
@@ -15971,11 +17447,11 @@
         },
         "managedFields": {
           "shape": "Fields",
-          "documentation": "<p>A list of automatically indexed thing fields.</p>"
+          "documentation": "<p>Contains fields that are indexed and whose types are already known by the Fleet Indexing service.</p>"
         },
         "customFields": {
           "shape": "Fields",
-          "documentation": "<p>A list of thing fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields.</p>"
+          "documentation": "<p>Contains custom field names and their data type.</p>"
         }
       },
       "documentation": "<p>The thing indexing configuration. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html\">Managing Thing Indexing</a>.</p>"
@@ -16092,6 +17568,16 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TlsContext": {
+      "type": "structure",
+      "members": {
+        "serverName": {
+          "shape": "ServerName",
+          "documentation": "<p>The value of the <code>serverName</code> key in a TLS authorization request.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the TLS context to use for the test authorizer request.</p>"
     },
     "Token": {
       "type": "string",
@@ -16577,6 +18063,45 @@
       },
       "documentation": "<p>Parameters to define a mitigation action that changes the state of the device certificate to inactive.</p>"
     },
+    "UpdateDomainConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "domainConfigurationName"
+      ],
+      "members": {
+        "domainConfigurationName": {
+          "shape": "ReservedDomainConfigurationName",
+          "documentation": "<p>The name of the domain configuration to be updated.</p>",
+          "location": "uri",
+          "locationName": "domainConfigurationName"
+        },
+        "authorizerConfig": {
+          "shape": "AuthorizerConfig",
+          "documentation": "<p>An object that specifies the authorization service for a domain.</p>"
+        },
+        "domainConfigurationStatus": {
+          "shape": "DomainConfigurationStatus",
+          "documentation": "<p>The status to which the domain configuration should be updated.</p>"
+        },
+        "removeAuthorizerConfig": {
+          "shape": "RemoveAuthorizerConfig",
+          "documentation": "<p>Removes the authorization configuration from a domain.</p>"
+        }
+      }
+    },
+    "UpdateDomainConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "domainConfigurationName": {
+          "shape": "ReservedDomainConfigurationName",
+          "documentation": "<p>The name of the domain configuration that was updated.</p>"
+        },
+        "domainConfigurationArn": {
+          "shape": "DomainConfigurationArn",
+          "documentation": "<p>The ARN of the domain configuration that was updated.</p>"
+        }
+      }
+    },
     "UpdateDynamicThingGroupRequest": {
       "type": "structure",
       "required": [
@@ -16719,6 +18244,40 @@
           "documentation": "<p>A unique identifier for the mitigation action.</p>"
         }
       }
+    },
+    "UpdateProvisioningTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "templateName"
+      ],
+      "members": {
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the fleet provisioning template.</p>",
+          "location": "uri",
+          "locationName": "templateName"
+        },
+        "description": {
+          "shape": "TemplateDescription",
+          "documentation": "<p>The description of the fleet provisioning template.</p>"
+        },
+        "enabled": {
+          "shape": "Enabled",
+          "documentation": "<p>True to enable the fleet provisioning template, otherwise false.</p>"
+        },
+        "defaultVersionId": {
+          "shape": "TemplateVersionId",
+          "documentation": "<p>The ID of the default provisioning template version.</p>"
+        },
+        "provisioningRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.</p>"
+        }
+      }
+    },
+    "UpdateProvisioningTemplateResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateRoleAliasRequest": {
       "type": "structure",

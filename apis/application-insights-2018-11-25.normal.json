@@ -38,6 +38,9 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "TagsAlreadyExistException"
         }
       ],
       "documentation": "<p>Adds an application that is created from a resource group.</p>"
@@ -69,6 +72,34 @@
         }
       ],
       "documentation": "<p>Creates a custom component by grouping similar standalone instances to monitor.</p>"
+    },
+    "CreateLogPattern": {
+      "name": "CreateLogPattern",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateLogPatternRequest"
+      },
+      "output": {
+        "shape": "CreateLogPatternResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Adds an log pattern to a <code>LogPatternSet</code>.</p>"
     },
     "DeleteApplication": {
       "name": "DeleteApplication",
@@ -122,6 +153,34 @@
         }
       ],
       "documentation": "<p>Ungroups a custom component. When you ungroup custom components, all applicable monitors that are set up for the component are removed and the instances revert to their standalone status.</p>"
+    },
+    "DeleteLogPattern": {
+      "name": "DeleteLogPattern",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteLogPatternRequest"
+      },
+      "output": {
+        "shape": "DeleteLogPatternResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Removes the specified log pattern from a <code>LogPatternSet</code>.</p>"
     },
     "DescribeApplication": {
       "name": "DescribeApplication",
@@ -222,6 +281,31 @@
         }
       ],
       "documentation": "<p>Describes the recommended monitoring configuration of the component.</p>"
+    },
+    "DescribeLogPattern": {
+      "name": "DescribeLogPattern",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeLogPatternRequest"
+      },
+      "output": {
+        "shape": "DescribeLogPatternResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Describe a specific log pattern from a <code>LogPatternSet</code>.</p>"
     },
     "DescribeObservation": {
       "name": "DescribeObservation",
@@ -345,6 +429,56 @@
       ],
       "documentation": "<p>Lists the auto-grouped, standalone, and custom components of the application.</p>"
     },
+    "ListLogPatternSets": {
+      "name": "ListLogPatternSets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListLogPatternSetsRequest"
+      },
+      "output": {
+        "shape": "ListLogPatternSetsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists the log pattern sets in the specific application.</p>"
+    },
+    "ListLogPatterns": {
+      "name": "ListLogPatterns",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListLogPatternsRequest"
+      },
+      "output": {
+        "shape": "ListLogPatternsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists the log patterns in the specific log <code>LogPatternSet</code>.</p>"
+    },
     "ListProblems": {
       "name": "ListProblems",
       "http": {
@@ -369,6 +503,75 @@
         }
       ],
       "documentation": "<p>Lists the problems with your application.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Retrieve a list of the tags (keys and values) that are associated with a specified application. A <i>tag</i> is a label that you optionally define and associate with an application. Each tag consists of a required <i>tag key</i> and an optional associated <i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Add one or more tags (keys and values) to a specified application. A <i>tag</i> is a label that you optionally define and associate with an application. Tags can help you categorize and manage application in different ways, such as by purpose, owner, environment, or other criteria. </p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Remove one or more tags (keys and values) from a specified application.</p>"
     },
     "UpdateApplication": {
       "name": "UpdateApplication",
@@ -446,12 +649,45 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Updates the monitoring configurations for the component. The configuration input parameter is an escaped JSON of the configuration and should match the schema of what is returned by <code>DescribeComponentConfigurationRecommendation</code>.</p>"
+      "documentation": "<p>Updates the monitoring configurations for the component. The configuration input parameter is an escaped JSON of the configuration and should match the schema of what is returned by <code>DescribeComponentConfigurationRecommendation</code>. </p>"
+    },
+    "UpdateLogPattern": {
+      "name": "UpdateLogPattern",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateLogPatternRequest"
+      },
+      "output": {
+        "shape": "UpdateLogPatternResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Adds a log pattern to a <code>LogPatternSet</code>.</p>"
     }
   },
   "shapes": {
     "AffectedResource": {
       "type": "string"
+    },
+    "AmazonResourceName": {
+      "type": "string",
+      "max": 1011,
+      "min": 1
     },
     "ApplicationComponent": {
       "type": "structure",
@@ -514,7 +750,9 @@
       }
     },
     "ComponentConfiguration": {
-      "type": "string"
+      "type": "string",
+      "max": 10000,
+      "min": 1
     },
     "ComponentName": {
       "type": "string"
@@ -536,6 +774,10 @@
         "OpsItemSNSTopicArn": {
           "shape": "OpsItemSNSTopicArn",
           "documentation": "<p> The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
         }
       }
     },
@@ -574,6 +816,51 @@
       "type": "structure",
       "members": {}
     },
+    "CreateLogPatternRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceGroupName",
+        "PatternSetName",
+        "PatternName",
+        "Pattern",
+        "Rank"
+      ],
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "PatternSetName": {
+          "shape": "LogPatternSetName",
+          "documentation": "<p>The name of the log pattern set.</p>"
+        },
+        "PatternName": {
+          "shape": "LogPatternName",
+          "documentation": "<p>The name of the log pattern.</p>"
+        },
+        "Pattern": {
+          "shape": "LogPatternRegex",
+          "documentation": "<p>The log pattern.</p>"
+        },
+        "Rank": {
+          "shape": "LogPatternRank",
+          "documentation": "<p>Rank of the log pattern.</p>"
+        }
+      }
+    },
+    "CreateLogPatternResponse": {
+      "type": "structure",
+      "members": {
+        "LogPattern": {
+          "shape": "LogPattern",
+          "documentation": "<p>The successfully created log pattern.</p>"
+        },
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        }
+      }
+    },
     "DeleteApplicationRequest": {
       "type": "structure",
       "required": [
@@ -608,6 +895,32 @@
       }
     },
     "DeleteComponentResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteLogPatternRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceGroupName",
+        "PatternSetName",
+        "PatternName"
+      ],
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "PatternSetName": {
+          "shape": "LogPatternSetName",
+          "documentation": "<p>The name of the log pattern set.</p>"
+        },
+        "PatternName": {
+          "shape": "LogPatternName",
+          "documentation": "<p>The name of the log pattern.</p>"
+        }
+      }
+    },
+    "DeleteLogPatternResponse": {
       "type": "structure",
       "members": {}
     },
@@ -650,7 +963,7 @@
         },
         "Tier": {
           "shape": "Tier",
-          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.</p>"
+          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.</p>"
         }
       }
     },
@@ -689,7 +1002,7 @@
         },
         "Tier": {
           "shape": "Tier",
-          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> </p>"
+          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code> </p>"
         },
         "ComponentConfiguration": {
           "shape": "ComponentConfiguration",
@@ -723,6 +1036,41 @@
         "ResourceList": {
           "shape": "ResourceList",
           "documentation": "<p>The list of resource ARNs that belong to the component.</p>"
+        }
+      }
+    },
+    "DescribeLogPatternRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceGroupName",
+        "PatternSetName",
+        "PatternName"
+      ],
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "PatternSetName": {
+          "shape": "LogPatternSetName",
+          "documentation": "<p>The name of the log pattern set.</p>"
+        },
+        "PatternName": {
+          "shape": "LogPatternName",
+          "documentation": "<p>The name of the log pattern.</p>"
+        }
+      }
+    },
+    "DescribeLogPatternResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "LogPattern": {
+          "shape": "LogPattern",
+          "documentation": "<p>The successfully created log pattern.</p>"
         }
       }
     },
@@ -884,6 +1232,84 @@
         }
       }
     },
+    "ListLogPatternSetsRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceGroupName"
+      ],
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxEntities",
+          "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token to request the next page of results.</p>"
+        }
+      }
+    },
+    "ListLogPatternSetsResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "LogPatternSets": {
+          "shape": "LogPatternSetList",
+          "documentation": "<p>The list of log pattern sets.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+        }
+      }
+    },
+    "ListLogPatternsRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceGroupName"
+      ],
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "PatternSetName": {
+          "shape": "LogPatternSetName",
+          "documentation": "<p>The name of the log pattern set.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxEntities",
+          "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token to request the next page of results.</p>"
+        }
+      }
+    },
+    "ListLogPatternsResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "LogPatterns": {
+          "shape": "LogPatternList",
+          "documentation": "<p>The list of log patterns.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+        }
+      }
+    },
     "ListProblemsRequest": {
       "type": "structure",
       "members": {
@@ -922,6 +1348,27 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the application that you want to retrieve tag information for.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array that lists all the tags that are associated with the application. Each tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>).</p>"
+        }
+      }
+    },
     "LogFilter": {
       "type": "string",
       "enum": [
@@ -932,6 +1379,60 @@
     },
     "LogGroup": {
       "type": "string"
+    },
+    "LogPattern": {
+      "type": "structure",
+      "members": {
+        "PatternSetName": {
+          "shape": "LogPatternSetName",
+          "documentation": "<p>The name of the log pattern. A log pattern name can contains at many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.</p>"
+        },
+        "PatternName": {
+          "shape": "LogPatternName",
+          "documentation": "<p>The name of the log pattern. A log pattern name can contains at many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.</p>"
+        },
+        "Pattern": {
+          "shape": "LogPatternRegex",
+          "documentation": "<p>A regular expression that defines the log pattern. A log pattern can contains at many as 50 characters, and it cannot be empty.</p>"
+        },
+        "Rank": {
+          "shape": "LogPatternRank",
+          "documentation": "<p>Rank of the log pattern.</p>"
+        }
+      },
+      "documentation": "<p>An object that defines the log patterns that belongs to a <code>LogPatternSet</code>.</p>"
+    },
+    "LogPatternList": {
+      "type": "list",
+      "member": {
+        "shape": "LogPattern"
+      }
+    },
+    "LogPatternName": {
+      "type": "string",
+      "max": 50,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9\\.\\-_]*"
+    },
+    "LogPatternRank": {
+      "type": "integer"
+    },
+    "LogPatternRegex": {
+      "type": "string",
+      "max": 50,
+      "min": 1
+    },
+    "LogPatternSetList": {
+      "type": "list",
+      "member": {
+        "shape": "LogPatternSetName"
+      }
+    },
+    "LogPatternSetName": {
+      "type": "string",
+      "max": 30,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9\\.\\-_]*"
     },
     "LogText": {
       "type": "string"
@@ -1012,7 +1513,10 @@
       "documentation": "<p>Describes an anomaly or error with the application.</p>"
     },
     "ObservationId": {
-      "type": "string"
+      "type": "string",
+      "max": 38,
+      "min": 38,
+      "pattern": "o-[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
     },
     "ObservationList": {
       "type": "list",
@@ -1024,7 +1528,9 @@
       "type": "boolean"
     },
     "OpsItemSNSTopicArn": {
-      "type": "string"
+      "type": "string",
+      "max": 300,
+      "min": 20
     },
     "PaginationToken": {
       "type": "string"
@@ -1076,7 +1582,10 @@
       "documentation": "<p>Describes a problem that is detected by correlating observations.</p>"
     },
     "ProblemId": {
-      "type": "string"
+      "type": "string",
+      "max": 38,
+      "min": 38,
+      "pattern": "p-[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
     },
     "ProblemList": {
       "type": "list",
@@ -1101,10 +1610,15 @@
       "type": "boolean"
     },
     "ResourceARN": {
-      "type": "string"
+      "type": "string",
+      "max": 1011,
+      "min": 1
     },
     "ResourceGroupName": {
-      "type": "string"
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9\\.\\-_]*"
     },
     "ResourceList": {
       "type": "list",
@@ -1118,9 +1632,9 @@
     "SeverityLevel": {
       "type": "string",
       "enum": [
-        "LOW",
-        "MEDIUM",
-        "HIGH"
+        "Low",
+        "Medium",
+        "High"
       ]
     },
     "SourceARN": {
@@ -1140,14 +1654,109 @@
         "PENDING"
       ]
     },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don't want an application to have a specific tag value, don't specify a value for this parameter.</p>"
+        }
+      },
+      "documentation": "<p>An object that defines the tags associated with an application. A <i>tag</i> is a label that you optionally define and associate with an application. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The <code>aws:</code> prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix. </p> </li> </ul>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "Tags"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the application that you want to add one or more tags to.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags that to add to the application. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "Tier": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "DOT_NET_CORE",
+        "DOT_NET_WORKER",
+        "DOT_NET_WEB",
+        "SQL_SERVER"
+      ],
+      "max": 50,
+      "min": 1
     },
     "Title": {
       "type": "string"
     },
     "Unit": {
       "type": "string"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the application that you want to remove one or more tags from.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The tags (tag keys) that you want to remove from the resource. When you specify a tag key, the action removes both that key and its associated tag value.</p> <p>To remove more than one tag from the application, append the <code>TagKeys</code> parameter and argument for each additional tag to remove, separated by an ampersand. </p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateApplicationRequest": {
       "type": "structure",
@@ -1203,11 +1812,11 @@
         },
         "Tier": {
           "shape": "Tier",
-          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.</p>"
+          "documentation": "<p>The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>DOT_NET_CORE</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.</p>"
         },
         "ComponentConfiguration": {
           "shape": "ComponentConfiguration",
-          "documentation": "<p>The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href=\"https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html\">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component.</p>"
+          "documentation": "<p>The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href=\"https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html\">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component. For the complete format of the component configuration file, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html\">Component Configuration</a>.</p>"
         }
       }
     },
@@ -1243,6 +1852,49 @@
     "UpdateComponentResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateLogPatternRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceGroupName",
+        "PatternSetName",
+        "PatternName"
+      ],
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "PatternSetName": {
+          "shape": "LogPatternSetName",
+          "documentation": "<p>The name of the log pattern set.</p>"
+        },
+        "PatternName": {
+          "shape": "LogPatternName",
+          "documentation": "<p>The name of the log pattern.</p>"
+        },
+        "Pattern": {
+          "shape": "LogPatternRegex",
+          "documentation": "<p>The log pattern.</p>"
+        },
+        "Rank": {
+          "shape": "LogPatternRank",
+          "documentation": "<p>Rank of the log pattern.</p>"
+        }
+      }
+    },
+    "UpdateLogPatternResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>The name of the resource group.</p>"
+        },
+        "LogPattern": {
+          "shape": "LogPattern",
+          "documentation": "<p>The successfully created log pattern.</p>"
+        }
+      }
     },
     "Value": {
       "type": "double"

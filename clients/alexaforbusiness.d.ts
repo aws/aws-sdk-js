@@ -412,11 +412,11 @@ declare class AlexaForBusiness extends Service {
    */
   getSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetSkillGroupResponse) => void): Request<AlexaForBusiness.Types.GetSkillGroupResponse, AWSError>;
   /**
-   * Lists the details of the schedules that a user configured.
+   * Lists the details of the schedules that a user configured. A download URL of the report associated with each schedule is returned every time this action is called. A new download URL is returned each time, and is valid for 24 hours.
    */
   listBusinessReportSchedules(params: AlexaForBusiness.Types.ListBusinessReportSchedulesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListBusinessReportSchedulesResponse) => void): Request<AlexaForBusiness.Types.ListBusinessReportSchedulesResponse, AWSError>;
   /**
-   * Lists the details of the schedules that a user configured.
+   * Lists the details of the schedules that a user configured. A download URL of the report associated with each schedule is returned every time this action is called. A new download URL is returned each time, and is valid for 24 hours.
    */
   listBusinessReportSchedules(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListBusinessReportSchedulesResponse) => void): Request<AlexaForBusiness.Types.ListBusinessReportSchedulesResponse, AWSError>;
   /**
@@ -918,7 +918,7 @@ declare namespace AlexaForBusiness {
   export type BusinessReportDownloadUrl = string;
   export type BusinessReportFailureCode = "ACCESS_DENIED"|"NO_SUCH_BUCKET"|"INTERNAL_FAILURE"|string;
   export type BusinessReportFormat = "CSV"|"CSV_ZIP"|string;
-  export type BusinessReportInterval = "ONE_DAY"|"ONE_WEEK"|string;
+  export type BusinessReportInterval = "ONE_DAY"|"ONE_WEEK"|"THIRTY_DAYS"|string;
   export interface BusinessReportRecurrence {
     /**
      * The start date.
@@ -1227,6 +1227,20 @@ declare namespace AlexaForBusiness {
      */
     ContactArn?: Arn;
   }
+  export interface CreateEndOfMeetingReminder {
+    /**
+     *  A range of 3 to 15 minutes that determines when the reminder begins.
+     */
+    ReminderAtMinutes: EndOfMeetingReminderMinutesList;
+    /**
+     * The type of sound that users hear during the end of meeting reminder. 
+     */
+    ReminderType: EndOfMeetingReminderType;
+    /**
+     * Whether an end of meeting reminder is enabled or not.
+     */
+    Enabled: Boolean;
+  }
   export interface CreateGatewayGroupRequest {
     /**
      * The name of the gateway group.
@@ -1246,6 +1260,31 @@ declare namespace AlexaForBusiness {
      * The ARN of the created gateway group.
      */
     GatewayGroupArn?: Arn;
+  }
+  export interface CreateInstantBooking {
+    /**
+     * Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa.
+     */
+    DurationInMinutes: Minutes;
+    /**
+     * Whether instant booking is enabled or not.
+     */
+    Enabled: Boolean;
+  }
+  export interface CreateMeetingRoomConfiguration {
+    /**
+     * Whether room utilization metrics are enabled or not.
+     */
+    RoomUtilizationMetricsEnabled?: Boolean;
+    EndOfMeetingReminder?: CreateEndOfMeetingReminder;
+    /**
+     * Settings to automatically book a room for a configured duration if it's free when joining a meeting with Alexa.
+     */
+    InstantBooking?: CreateInstantBooking;
+    /**
+     * Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.”
+     */
+    RequireCheckIn?: CreateRequireCheckIn;
   }
   export interface CreateNetworkProfileRequest {
     /**
@@ -1318,7 +1357,7 @@ declare namespace AlexaForBusiness {
      */
     WakeWord: WakeWord;
     /**
-     * The locale of the room profile.
+     * The locale of the room profile. (This is currently only available to a limited preview audience.)
      */
     Locale?: DeviceLocale;
     /**
@@ -1337,12 +1376,26 @@ declare namespace AlexaForBusiness {
      * Whether PSTN calling is enabled.
      */
     PSTNEnabled?: Boolean;
+    /**
+     * The meeting room settings of a room profile.
+     */
+    MeetingRoomConfiguration?: CreateMeetingRoomConfiguration;
   }
   export interface CreateProfileResponse {
     /**
      * The ARN of the newly created room profile in the response.
      */
     ProfileArn?: Arn;
+  }
+  export interface CreateRequireCheckIn {
+    /**
+     * Duration between 5 and 20 minutes to determine when to release the room if it's not checked into.
+     */
+    ReleaseAfterMinutes: Minutes;
+    /**
+     * Whether require check in is enabled or not.
+     */
+    Enabled: Boolean;
   }
   export interface CreateRoomRequest {
     /**
@@ -1792,6 +1845,22 @@ declare namespace AlexaForBusiness {
   export type Email = string;
   export type EnablementType = "ENABLED"|"PENDING"|string;
   export type EnablementTypeFilter = "ENABLED"|"PENDING"|string;
+  export interface EndOfMeetingReminder {
+    /**
+     * A range of 3 to 15 minutes that determines when the reminder begins.
+     */
+    ReminderAtMinutes?: EndOfMeetingReminderMinutesList;
+    /**
+     * The type of sound that users hear during the end of meeting reminder. 
+     */
+    ReminderType?: EndOfMeetingReminderType;
+    /**
+     * Whether an end of meeting reminder is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
+  export type EndOfMeetingReminderMinutesList = Minutes[];
+  export type EndOfMeetingReminderType = "ANNOUNCEMENT_TIME_CHECK"|"ANNOUNCEMENT_VARIABLE_TIME_LEFT"|"CHIME"|"KNOCK"|string;
   export type EndUserLicenseAgreement = string;
   export type Endpoint = string;
   export type EnrollmentId = string;
@@ -2073,6 +2142,16 @@ declare namespace AlexaForBusiness {
     CommsProtocol: CommsProtocol;
   }
   export type IconUrl = string;
+  export interface InstantBooking {
+    /**
+     * Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa. 
+     */
+    DurationInMinutes?: Minutes;
+    /**
+     * Whether instant booking is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
   export type InvocationPhrase = string;
   export type Key = string;
   export interface ListBusinessReportSchedulesRequest {
@@ -2189,11 +2268,11 @@ declare namespace AlexaForBusiness {
   }
   export interface ListSkillsRequest {
     /**
-     * The ARN of the skill group for which to list enabled skills. Required.
+     * The ARN of the skill group for which to list enabled skills.
      */
     SkillGroupArn?: Arn;
     /**
-     * Whether the skill is enabled under the user's account, or if it requires linking to be used.
+     * Whether the skill is enabled under the user's account.
      */
     EnablementType?: EnablementTypeFilter;
     /**
@@ -2201,11 +2280,11 @@ declare namespace AlexaForBusiness {
      */
     SkillType?: SkillTypeFilter;
     /**
-     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults. Required.
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. Required.
+     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     MaxResults?: SkillListMaxResults;
   }
@@ -2315,12 +2394,31 @@ declare namespace AlexaForBusiness {
   export type MacAddress = string;
   export type MaxResults = number;
   export type MaxVolumeLimit = number;
+  export interface MeetingRoomConfiguration {
+    /**
+     * Whether room utilization metrics are enabled or not.
+     */
+    RoomUtilizationMetricsEnabled?: Boolean;
+    /**
+     * Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. 
+     */
+    EndOfMeetingReminder?: EndOfMeetingReminder;
+    /**
+     * Settings to automatically book the room if available for a configured duration when joining a meeting with Alexa. 
+     */
+    InstantBooking?: InstantBooking;
+    /**
+     * Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into. This makes the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” 
+     */
+    RequireCheckIn?: RequireCheckIn;
+  }
   export interface MeetingSetting {
     /**
      * The values that indicate whether the pin is always required.
      */
     RequirePin: RequirePin;
   }
+  export type Minutes = number;
   export type NetworkEapMethod = "EAP_TLS"|string;
   export interface NetworkProfile {
     /**
@@ -2473,7 +2571,7 @@ declare namespace AlexaForBusiness {
      */
     WakeWord?: WakeWord;
     /**
-     * The locale of a room profile.
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
      */
     Locale?: DeviceLocale;
     /**
@@ -2492,6 +2590,10 @@ declare namespace AlexaForBusiness {
      * The ARN of the address book.
      */
     AddressBookArn?: Arn;
+    /**
+     * Meeting room settings of a room profile.
+     */
+    MeetingRoomConfiguration?: MeetingRoomConfiguration;
   }
   export interface ProfileData {
     /**
@@ -2511,7 +2613,7 @@ declare namespace AlexaForBusiness {
      */
     Address?: Address;
     /**
-     * The timezone of a room profile.
+     * The time zone of a room profile.
      */
     Timezone?: Timezone;
     /**
@@ -2527,7 +2629,7 @@ declare namespace AlexaForBusiness {
      */
     WakeWord?: WakeWord;
     /**
-     * The locale of a room profile.
+     * The locale of a room profile. (This is currently available only to a limited preview audience.)
      */
     Locale?: DeviceLocale;
   }
@@ -2628,6 +2730,16 @@ declare namespace AlexaForBusiness {
   export interface RejectSkillResponse {
   }
   export type ReleaseDate = string;
+  export interface RequireCheckIn {
+    /**
+     * Duration between 5 and 20 minutes to determine when to release the room if it's not checked into. 
+     */
+    ReleaseAfterMinutes?: Minutes;
+    /**
+     * Whether require check in is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
   export type RequirePin = "YES"|"NO"|"OPTIONAL"|string;
   export interface ResolveRoomRequest {
     /**
@@ -3242,7 +3354,7 @@ declare namespace AlexaForBusiness {
      */
     Key: TagKey;
     /**
-     * The value of a tag. Tag values are case-sensitive and can be null.
+     * The value of a tag. Tag values are case sensitive and can be null.
      */
     Value: TagValue;
   }
@@ -3404,6 +3516,20 @@ declare namespace AlexaForBusiness {
   }
   export interface UpdateDeviceResponse {
   }
+  export interface UpdateEndOfMeetingReminder {
+    /**
+     * Updates settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. 
+     */
+    ReminderAtMinutes?: EndOfMeetingReminderMinutesList;
+    /**
+     * The type of sound that users hear during the end of meeting reminder. 
+     */
+    ReminderType?: EndOfMeetingReminderType;
+    /**
+     * Whether an end of meeting reminder is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
   export interface UpdateGatewayGroupRequest {
     /**
      * The ARN of the gateway group to update.
@@ -3439,6 +3565,34 @@ declare namespace AlexaForBusiness {
     SoftwareVersion?: GatewayVersion;
   }
   export interface UpdateGatewayResponse {
+  }
+  export interface UpdateInstantBooking {
+    /**
+     * Duration between 15 and 240 minutes at increments of 15 that determines how long to book an available room when a meeting is started with Alexa.
+     */
+    DurationInMinutes?: Minutes;
+    /**
+     * Whether instant booking is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
+  export interface UpdateMeetingRoomConfiguration {
+    /**
+     * Whether room utilization metrics are enabled or not.
+     */
+    RoomUtilizationMetricsEnabled?: Boolean;
+    /**
+     * Settings for the end of meeting reminder feature that are applied to a room profile. The end of meeting reminder enables Alexa to remind users when a meeting is ending. 
+     */
+    EndOfMeetingReminder?: UpdateEndOfMeetingReminder;
+    /**
+     * Settings to automatically book an available room available for a configured duration when joining a meeting with Alexa.
+     */
+    InstantBooking?: UpdateInstantBooking;
+    /**
+     * Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” 
+     */
+    RequireCheckIn?: UpdateRequireCheckIn;
   }
   export interface UpdateNetworkProfileRequest {
     /**
@@ -3506,7 +3660,7 @@ declare namespace AlexaForBusiness {
      */
     WakeWord?: WakeWord;
     /**
-     * The updated locale for the room profile.
+     * The updated locale for the room profile. (This is currently only available to a limited preview audience.)
      */
     Locale?: DeviceLocale;
     /**
@@ -3521,8 +3675,22 @@ declare namespace AlexaForBusiness {
      * Whether the PSTN setting of the room profile is enabled.
      */
     PSTNEnabled?: Boolean;
+    /**
+     * The updated meeting room settings of a room profile.
+     */
+    MeetingRoomConfiguration?: UpdateMeetingRoomConfiguration;
   }
   export interface UpdateProfileResponse {
+  }
+  export interface UpdateRequireCheckIn {
+    /**
+     * Duration between 5 and 20 minutes to determine when to release the room if it's not checked into. 
+     */
+    ReleaseAfterMinutes?: Minutes;
+    /**
+     * Whether require check in is enabled or not.
+     */
+    Enabled?: Boolean;
   }
   export interface UpdateRoomRequest {
     /**
