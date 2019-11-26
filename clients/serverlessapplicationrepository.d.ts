@@ -272,6 +272,10 @@ declare namespace ServerlessApplicationRepository {
      */
     HomePageUrl?: __string;
     /**
+     * Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.
+     */
+    IsVerifiedAuthor?: __boolean;
+    /**
      * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
      */
     Labels?: __listOf__string;
@@ -291,6 +295,10 @@ declare namespace ServerlessApplicationRepository {
      * A valid identifier from https://spdx.org/licenses/.
      */
     SpdxLicenseId?: __string;
+    /**
+     * The URL to the public profile of a verified author. This URL is submitted by the author.
+     */
+    VerifiedAuthorUrl?: __string;
     /**
      * Version information about the application.
      */
@@ -588,6 +596,10 @@ declare namespace ServerlessApplicationRepository {
      */
     HomePageUrl?: __string;
     /**
+     * Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.
+     */
+    IsVerifiedAuthor?: __boolean;
+    /**
      * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
      */
     Labels?: __listOf__string;
@@ -607,6 +619,10 @@ declare namespace ServerlessApplicationRepository {
      * A valid identifier from https://spdx.org/licenses/.
      */
     SpdxLicenseId?: __string;
+    /**
+     * The URL to the public profile of a verified author. This URL is submitted by the author.
+     */
+    VerifiedAuthorUrl?: __string;
     /**
      * Version information about the application.
      */
@@ -919,6 +935,10 @@ declare namespace ServerlessApplicationRepository {
      */
     HomePageUrl?: __string;
     /**
+     * Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.
+     */
+    IsVerifiedAuthor?: __boolean;
+    /**
      * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
      */
     Labels?: __listOf__string;
@@ -938,6 +958,10 @@ declare namespace ServerlessApplicationRepository {
      * A valid identifier from https://spdx.org/licenses/.
      */
     SpdxLicenseId?: __string;
+    /**
+     * The URL to the public profile of a verified author. This URL is submitted by the author.
+     */
+    VerifiedAuthorUrl?: __string;
     /**
      * Version information about the application.
      */

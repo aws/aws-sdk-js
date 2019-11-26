@@ -299,7 +299,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Creates a Simple AD directory.</p> <p>Before you call <code>CreateDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>CreateDirectory</code> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
+      "documentation": "<p>Creates a Simple AD directory. For more information, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html\">Simple Active Directory</a> in the <i>AWS Directory Service Admin Guide</i>.</p> <p>Before you call <code>CreateDirectory</code>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <code>CreateDirectory</code> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "CreateLogSubscription": {
       "name": "CreateLogSubscription",
@@ -333,7 +333,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.</p>"
+      "documentation": "<p>Creates a subscription to forward real-time Directory Service domain controller security logs to the specified Amazon CloudWatch log group in your AWS account.</p>"
     },
     "CreateMicrosoftAD": {
       "name": "CreateMicrosoftAD",
@@ -364,7 +364,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Creates an AWS Managed Microsoft AD directory.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
+      "documentation": "<p>Creates a Microsoft AD directory in the AWS Cloud. For more information, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html\">AWS Managed Microsoft AD</a> in the <i>AWS Directory Service Admin Guide</i>.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html\">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>"
     },
     "CreateSnapshot": {
       "name": "CreateSnapshot",
@@ -577,6 +577,46 @@
       ],
       "documentation": "<p>Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.</p>"
     },
+    "DeregisterCertificate": {
+      "name": "DeregisterCertificate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeregisterCertificateRequest"
+      },
+      "output": {
+        "shape": "DeregisterCertificateResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryUnavailableException"
+        },
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "CertificateDoesNotExistException"
+        },
+        {
+          "shape": "CertificateInUseException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Deletes from the system the certificate that was registered for a secured LDAP connection.</p>"
+    },
     "DeregisterEventTopic": {
       "name": "DeregisterEventTopic",
       "http": {
@@ -604,6 +644,40 @@
         }
       ],
       "documentation": "<p>Removes the specified directory as a publisher to the specified SNS topic.</p>"
+    },
+    "DescribeCertificate": {
+      "name": "DescribeCertificate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeCertificateRequest"
+      },
+      "output": {
+        "shape": "DescribeCertificateResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "CertificateDoesNotExistException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Displays information about the certificate registered for a secured LDAP connection.</p>"
     },
     "DescribeConditionalForwarders": {
       "name": "DescribeConditionalForwarders",
@@ -732,6 +806,40 @@
       ],
       "documentation": "<p>Obtains information about which SNS topics receive status messages from the specified directory.</p> <p>If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.</p>"
     },
+    "DescribeLDAPSSettings": {
+      "name": "DescribeLDAPSSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeLDAPSSettingsRequest"
+      },
+      "output": {
+        "shape": "DescribeLDAPSSettingsResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Describes the status of LDAP security for the specified directory.</p>"
+    },
     "DescribeSharedDirectories": {
       "name": "DescribeSharedDirectories",
       "http": {
@@ -831,6 +939,43 @@
       ],
       "documentation": "<p>Obtains information about the trust relationships for this account.</p> <p>If no input parameters are provided, such as DirectoryId or TrustIds, this request describes all the trust relationships belonging to the account.</p>"
     },
+    "DisableLDAPS": {
+      "name": "DisableLDAPS",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisableLDAPSRequest"
+      },
+      "output": {
+        "shape": "DisableLDAPSResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryUnavailableException"
+        },
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "InvalidLDAPSStatusException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Deactivates LDAP secure calls for the specified directory.</p>"
+    },
     "DisableRadius": {
       "name": "DisableRadius",
       "http": {
@@ -886,6 +1031,46 @@
         }
       ],
       "documentation": "<p>Disables single-sign on for a directory.</p>"
+    },
+    "EnableLDAPS": {
+      "name": "EnableLDAPS",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "EnableLDAPSRequest"
+      },
+      "output": {
+        "shape": "EnableLDAPSResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryUnavailableException"
+        },
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "NoAvailableCertificateException"
+        },
+        {
+          "shape": "InvalidLDAPSStatusException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Activates the switch for the specific directory to always use LDAP secure calls.</p>"
     },
     "EnableRadius": {
       "name": "EnableRadius",
@@ -947,7 +1132,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Enables single sign-on for a directory.</p>"
+      "documentation": "<p>Enables single sign-on for a directory. Single sign-on allows users in your directory to access certain AWS services from a computer joined to the directory without having to enter their credentials separately.</p>"
     },
     "GetDirectoryLimits": {
       "name": "GetDirectoryLimits",
@@ -972,7 +1157,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Obtains directory limit information for the current region.</p>"
+      "documentation": "<p>Obtains directory limit information for the current Region.</p>"
     },
     "GetSnapshotLimits": {
       "name": "GetSnapshotLimits",
@@ -998,6 +1183,40 @@
         }
       ],
       "documentation": "<p>Obtains the manual snapshot limits for a directory.</p>"
+    },
+    "ListCertificates": {
+      "name": "ListCertificates",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListCertificatesRequest"
+      },
+      "output": {
+        "shape": "ListCertificatesResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>For the specified directory, lists all the certificates registered for a secured LDAP connection.</p>"
     },
     "ListIpRoutes": {
       "name": "ListIpRoutes",
@@ -1116,6 +1335,49 @@
         }
       ],
       "documentation": "<p>Lists all tags on a directory.</p>"
+    },
+    "RegisterCertificate": {
+      "name": "RegisterCertificate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RegisterCertificateRequest"
+      },
+      "output": {
+        "shape": "RegisterCertificateResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectoryUnavailableException"
+        },
+        {
+          "shape": "DirectoryDoesNotExistException"
+        },
+        {
+          "shape": "InvalidCertificateException"
+        },
+        {
+          "shape": "CertificateLimitExceededException"
+        },
+        {
+          "shape": "CertificateAlreadyExistsException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Registers a certificate for secured LDAP connection.</p>"
     },
     "RegisterEventTopic": {
       "name": "RegisterEventTopic",
@@ -1270,7 +1532,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.</p>"
+      "documentation": "<p>Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.</p> <p>You can reset the password for any user in your directory with the following exceptions:</p> <ul> <li> <p>For Simple AD, you cannot reset the password for any user that is a member of either the <b>Domain Admins</b> or <b>Enterprise Admins</b> group except for the administrator user.</p> </li> <li> <p>For AWS Managed Microsoft AD, you can only reset the password for a user that is in an OU based off of the NetBIOS name that you typed when you created your directory. For example, you cannot reset the password for a user in the <b>AWS Reserved</b> OU. For more information about the OU structure for an AWS Managed Microsoft AD directory, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html\">What Gets Created</a> in the <i>AWS Directory Service Administration Guide</i>.</p> </li> </ul>"
     },
     "RestoreFromSnapshot": {
       "name": "RestoreFromSnapshot",
@@ -1709,6 +1971,92 @@
       "type": "structure",
       "members": {}
     },
+    "Certificate": {
+      "type": "structure",
+      "members": {
+        "CertificateId": {
+          "shape": "CertificateId",
+          "documentation": "<p>The identifier of the certificate.</p>"
+        },
+        "State": {
+          "shape": "CertificateState",
+          "documentation": "<p>The state of the certificate.</p>"
+        },
+        "StateReason": {
+          "shape": "CertificateStateReason",
+          "documentation": "<p>Describes a state change for the certificate.</p>"
+        },
+        "CommonName": {
+          "shape": "CertificateCN",
+          "documentation": "<p>The common name for the certificate.</p>"
+        },
+        "RegisteredDateTime": {
+          "shape": "CertificateRegisteredDateTime",
+          "documentation": "<p>The date and time that the certificate was registered.</p>"
+        },
+        "ExpiryDateTime": {
+          "shape": "CertificateExpiryDateTime",
+          "documentation": "<p>The date and time when the certificate will expire.</p>"
+        }
+      },
+      "documentation": "<p>Information about the certificate.</p>"
+    },
+    "CertificateCN": {
+      "type": "string"
+    },
+    "CertificateData": {
+      "type": "string",
+      "max": 8192,
+      "min": 1
+    },
+    "CertificateExpiryDateTime": {
+      "type": "timestamp"
+    },
+    "CertificateId": {
+      "type": "string",
+      "pattern": "^c-[0-9a-f]{10}$"
+    },
+    "CertificateInfo": {
+      "type": "structure",
+      "members": {
+        "CertificateId": {
+          "shape": "CertificateId",
+          "documentation": "<p>The identifier of the certificate.</p>"
+        },
+        "CommonName": {
+          "shape": "CertificateCN",
+          "documentation": "<p>The common name for the certificate.</p>"
+        },
+        "State": {
+          "shape": "CertificateState",
+          "documentation": "<p>The state of the certificate.</p>"
+        }
+      },
+      "documentation": "<p>Contains general information about a certificate.</p>"
+    },
+    "CertificateRegisteredDateTime": {
+      "type": "timestamp"
+    },
+    "CertificateState": {
+      "type": "string",
+      "enum": [
+        "Registering",
+        "Registered",
+        "RegisterFailed",
+        "Deregistering",
+        "Deregistered",
+        "DeregisterFailed"
+      ]
+    },
+    "CertificateStateReason": {
+      "type": "string"
+    },
+    "CertificatesInfo": {
+      "type": "list",
+      "member": {
+        "shape": "CertificateInfo"
+      }
+    },
     "CidrIp": {
       "type": "string",
       "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([1-9]|[1-2][0-9]|3[0-2]))$"
@@ -1799,7 +2147,7 @@
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>A textual description for the directory.</p>"
+          "documentation": "<p>A description for the directory.</p>"
         },
         "Size": {
           "shape": "DirectorySize",
@@ -1950,15 +2298,15 @@
         },
         "ShortName": {
           "shape": "DirectoryShortName",
-          "documentation": "<p>The short name of the directory, such as <code>CORP</code>.</p>"
+          "documentation": "<p>The NetBIOS name of the directory, such as <code>CORP</code>.</p>"
         },
         "Password": {
           "shape": "Password",
-          "documentation": "<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p>"
+          "documentation": "<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>"
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>A textual description for the directory.</p>"
+          "documentation": "<p>A description for the directory.</p>"
         },
         "Size": {
           "shape": "DirectorySize",
@@ -1994,7 +2342,7 @@
       "members": {
         "DirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>Identifier (ID) of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.</p>"
+          "documentation": "<p>Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.</p>"
         },
         "LogGroupName": {
           "shape": "LogGroupName",
@@ -2016,19 +2364,19 @@
       "members": {
         "Name": {
           "shape": "DirectoryName",
-          "documentation": "<p>The fully qualified domain name for the directory, such as <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need to be publicly resolvable.</p>"
+          "documentation": "<p>The fully qualified domain name for the AWS Managed Microsoft AD directory, such as <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need to be publicly resolvable.</p>"
         },
         "ShortName": {
           "shape": "DirectoryShortName",
-          "documentation": "<p>The NetBIOS name for your domain. A short identifier for your domain, such as <code>CORP</code>. If you don't specify a NetBIOS name, it will default to the first part of your directory DNS. For example, <code>CORP</code> for the directory DNS <code>corp.example.com</code>. </p>"
+          "documentation": "<p>The NetBIOS name for your domain, such as <code>CORP</code>. If you don't specify a NetBIOS name, it will default to the first part of your directory DNS. For example, <code>CORP</code> for the directory DNS <code>corp.example.com</code>. </p>"
         },
         "Password": {
           "shape": "Password",
-          "documentation": "<p>The password for the default administrative user named <code>Admin</code>.</p>"
+          "documentation": "<p>The password for the default administrative user named <code>Admin</code>.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>"
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>A textual description for the directory. This label will appear on the AWS console <code>Directory Details</code> page after the directory is created.</p>"
+          "documentation": "<p>A description for the directory. This label will appear on the AWS console <code>Directory Details</code> page after the directory is created.</p>"
         },
         "VpcSettings": {
           "shape": "DirectoryVpcSettings",
@@ -2036,7 +2384,7 @@
         },
         "Edition": {
           "shape": "DirectoryEdition",
-          "documentation": "<p>AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.</p>"
+          "documentation": "<p>AWS Managed Microsoft AD is available in two editions: <code>Standard</code> and <code>Enterprise</code>. <code>Enterprise</code> is the default.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -2205,7 +2553,7 @@
       "members": {
         "DirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>Identifier (ID) of the directory whose log subscription you want to delete.</p>"
+          "documentation": "<p>Identifier of the directory whose log subscription you want to delete.</p>"
         }
       }
     },
@@ -2263,6 +2611,27 @@
       },
       "documentation": "<p>The result of a DeleteTrust request.</p>"
     },
+    "DeregisterCertificateRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId",
+        "CertificateId"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "CertificateId": {
+          "shape": "CertificateId",
+          "documentation": "<p>The identifier of the certificate.</p>"
+        }
+      }
+    },
+    "DeregisterCertificateResult": {
+      "type": "structure",
+      "members": {}
+    },
     "DeregisterEventTopicRequest": {
       "type": "structure",
       "required": [
@@ -2285,6 +2654,32 @@
       "type": "structure",
       "members": {},
       "documentation": "<p>The result of a DeregisterEventTopic request.</p>"
+    },
+    "DescribeCertificateRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId",
+        "CertificateId"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "CertificateId": {
+          "shape": "CertificateId",
+          "documentation": "<p>The identifier of the certificate.</p>"
+        }
+      }
+    },
+    "DescribeCertificateResult": {
+      "type": "structure",
+      "members": {
+        "Certificate": {
+          "shape": "Certificate",
+          "documentation": "<p>Information about the certificate, including registered date time, certificate state, the reason for the state, expiration date time, and certificate common name.</p>"
+        }
+      }
     },
     "DescribeConditionalForwardersRequest": {
       "type": "structure",
@@ -2405,6 +2800,43 @@
         }
       },
       "documentation": "<p>The result of a DescribeEventTopic request.</p>"
+    },
+    "DescribeLDAPSSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "Type": {
+          "shape": "LDAPSType",
+          "documentation": "<p>The type of LDAP security the customer wants to enable, either server or client. Currently supports only <code>Client</code>, (the default).</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The type of next token used for pagination.</p>"
+        },
+        "Limit": {
+          "shape": "PageLimit",
+          "documentation": "<p>Specifies the number of items that should be displayed on one page.</p>"
+        }
+      }
+    },
+    "DescribeLDAPSSettingsResult": {
+      "type": "structure",
+      "members": {
+        "LDAPSSettingsInfo": {
+          "shape": "LDAPSSettingsInfo",
+          "documentation": "<p>Information about LDAP security for the specified directory, including status of enablement, state last updated date time, and the reason for the state.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The next token used to retrieve the LDAPS settings if the number of setting types exceeds page limit and there is another page.</p>"
+        }
+      }
     },
     "DescribeSharedDirectoriesRequest": {
       "type": "structure",
@@ -2562,7 +2994,7 @@
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>A list of subnet identifiers in the VPC that the AD connector is in.</p>"
+          "documentation": "<p>A list of subnet identifiers in the VPC that the AD Connector is in.</p>"
         },
         "CustomerUserName": {
           "shape": "UserName",
@@ -2616,7 +3048,7 @@
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The textual description for the directory.</p>"
+          "documentation": "<p>The description for the directory.</p>"
         },
         "DnsIpAddrs": {
           "shape": "DnsIpAddrs",
@@ -2715,11 +3147,11 @@
       "members": {
         "CloudOnlyDirectoriesLimit": {
           "shape": "Limit",
-          "documentation": "<p>The maximum number of cloud directories allowed in the region.</p>"
+          "documentation": "<p>The maximum number of cloud directories allowed in the Region.</p>"
         },
         "CloudOnlyDirectoriesCurrentCount": {
           "shape": "Limit",
-          "documentation": "<p>The current number of cloud directories in the region.</p>"
+          "documentation": "<p>The current number of cloud directories in the Region.</p>"
         },
         "CloudOnlyDirectoriesLimitReached": {
           "shape": "CloudOnlyDirectoriesLimitReached",
@@ -2739,18 +3171,18 @@
         },
         "ConnectedDirectoriesLimit": {
           "shape": "Limit",
-          "documentation": "<p>The maximum number of connected directories allowed in the region.</p>"
+          "documentation": "<p>The maximum number of connected directories allowed in the Region.</p>"
         },
         "ConnectedDirectoriesCurrentCount": {
           "shape": "Limit",
-          "documentation": "<p>The current number of connected directories in the region.</p>"
+          "documentation": "<p>The current number of connected directories in the Region.</p>"
         },
         "ConnectedDirectoriesLimitReached": {
           "shape": "ConnectedDirectoriesLimitReached",
           "documentation": "<p>Indicates if the connected directory limit has been reached.</p>"
         }
       },
-      "documentation": "<p>Contains directory limit information for a region.</p>"
+      "documentation": "<p>Contains directory limit information for a Region.</p>"
     },
     "DirectoryName": {
       "type": "string",
@@ -2831,6 +3263,26 @@
         }
       },
       "documentation": "<p>Contains information about the directory.</p>"
+    },
+    "DisableLDAPSRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "Type": {
+          "shape": "LDAPSType",
+          "documentation": "<p>The type of LDAP security that the customer wants to enable. The security can be either server or client, but currently only the default <code>Client</code> is supported.</p>"
+        }
+      }
+    },
+    "DisableLDAPSResult": {
+      "type": "structure",
+      "members": {}
     },
     "DisableRadiusRequest": {
       "type": "structure",
@@ -2959,6 +3411,26 @@
         "shape": "DomainController"
       }
     },
+    "EnableLDAPSRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "Type": {
+          "shape": "LDAPSType",
+          "documentation": "<p>The type of LDAP security the customer wants to enable. The security can be either server or client, but currently only the default <code>Client</code> is supported.</p>"
+        }
+      }
+    },
+    "EnableLDAPSResult": {
+      "type": "structure",
+      "members": {}
+    },
     "EnableRadiusRequest": {
       "type": "structure",
       "required": [
@@ -3053,7 +3525,7 @@
       "members": {
         "DirectoryLimits": {
           "shape": "DirectoryLimits",
-          "documentation": "<p>A <a>DirectoryLimits</a> object that contains the directory limits for the current region.</p>"
+          "documentation": "<p>A <a>DirectoryLimits</a> object that contains the directory limits for the current rRegion.</p>"
         }
       },
       "documentation": "<p>Contains the results of the <a>GetDirectoryLimits</a> operation.</p>"
@@ -3161,6 +3633,48 @@
         "shape": "IpRouteInfo"
       }
     },
+    "LDAPSSettingInfo": {
+      "type": "structure",
+      "members": {
+        "LDAPSStatus": {
+          "shape": "LDAPSStatus",
+          "documentation": "<p>The state of the LDAPS settings.</p>"
+        },
+        "LDAPSStatusReason": {
+          "shape": "LDAPSStatusReason",
+          "documentation": "<p>Describes a state change for LDAPS.</p>"
+        },
+        "LastUpdatedDateTime": {
+          "shape": "LastUpdatedDateTime",
+          "documentation": "<p>The date and time when the LDAPS settings were last updated.</p>"
+        }
+      },
+      "documentation": "<p>Contains general information about the LDAPS settings.</p>"
+    },
+    "LDAPSSettingsInfo": {
+      "type": "list",
+      "member": {
+        "shape": "LDAPSSettingInfo"
+      }
+    },
+    "LDAPSStatus": {
+      "type": "string",
+      "enum": [
+        "Enabling",
+        "Enabled",
+        "EnableFailed",
+        "Disabled"
+      ]
+    },
+    "LDAPSStatusReason": {
+      "type": "string"
+    },
+    "LDAPSType": {
+      "type": "string",
+      "enum": [
+        "Client"
+      ]
+    },
     "LastUpdatedDateTime": {
       "type": "timestamp"
     },
@@ -3175,6 +3689,39 @@
     "Limit": {
       "type": "integer",
       "min": 0
+    },
+    "ListCertificatesRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token for requesting another page of certificates if the <code>NextToken</code> response element indicates that more certificates are available. Use the value of the returned <code>NextToken</code> element in your request until the token comes back as <code>null</code>. Pass <code>null</code> if this is the first call.</p>"
+        },
+        "Limit": {
+          "shape": "PageLimit",
+          "documentation": "<p>The number of items that should show up on one page</p>"
+        }
+      }
+    },
+    "ListCertificatesResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Indicates whether another page of certificates is available when the number of available certificates exceeds the page limit.</p>"
+        },
+        "CertificatesInfo": {
+          "shape": "CertificatesInfo",
+          "documentation": "<p>A list of certificates with basic details including certificate ID, certificate common name, certificate state.</p>"
+        }
+      }
     },
     "ListIpRoutesRequest": {
       "type": "structure",
@@ -3381,6 +3928,11 @@
       },
       "documentation": "<p>Describes the directory owner account details that have been shared to the directory consumer account.</p>"
     },
+    "PageLimit": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
     "Password": {
       "type": "string",
       "pattern": "(?=^.{8,64}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9\\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\\s]))^.*",
@@ -3466,6 +4018,32 @@
       "type": "integer",
       "max": 20,
       "min": 1
+    },
+    "RegisterCertificateRequest": {
+      "type": "structure",
+      "required": [
+        "DirectoryId",
+        "CertificateData"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The identifier of the directory.</p>"
+        },
+        "CertificateData": {
+          "shape": "CertificateData",
+          "documentation": "<p>The certificate PEM string that needs to be registered.</p>"
+        }
+      }
+    },
+    "RegisterCertificateResult": {
+      "type": "structure",
+      "members": {
+        "CertificateId": {
+          "shape": "CertificateId",
+          "documentation": "<p>The identifier of the certificate.</p>"
+        }
+      }
     },
     "RegisterEventTopicRequest": {
       "type": "structure",

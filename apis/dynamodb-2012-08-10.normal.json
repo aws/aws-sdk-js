@@ -306,6 +306,28 @@
       "documentation": "<p>Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are <code>ENABLED</code> on all tables at table creation. If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p> <p> After continuous backups and point in time recovery are enabled, you can restore to any point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. </p> <p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days. </p> <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per second.</p>",
       "endpointdiscovery": {}
     },
+    "DescribeContributorInsights": {
+      "name": "DescribeContributorInsights",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeContributorInsightsInput"
+      },
+      "output": {
+        "shape": "DescribeContributorInsightsOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Returns information about contributor insights, for a given table or global secondary index.</p>"
+    },
     "DescribeEndpoints": {
       "name": "DescribeEndpoints",
       "http": {
@@ -503,6 +525,28 @@
       ],
       "documentation": "<p>List backups associated with an AWS account. To list backups for a given table, specify <code>TableName</code>. <code>ListBackups</code> returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a limit for the maximum number of entries to be returned in a page. </p> <p>In the request, start time is inclusive, but end time is exclusive. Note that these limits are for the time at which the original backup was requested.</p> <p>You can call <code>ListBackups</code> a maximum of five times per second.</p>",
       "endpointdiscovery": {}
+    },
+    "ListContributorInsights": {
+      "name": "ListContributorInsights",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListContributorInsightsInput"
+      },
+      "output": {
+        "shape": "ListContributorInsightsOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.</p>"
     },
     "ListGlobalTables": {
       "name": "ListGlobalTables",
@@ -884,6 +928,28 @@
       "documentation": "<p> <code>UpdateContinuousBackups</code> enables or disables point in time recovery for the specified table. A successful <code>UpdateContinuousBackups</code> call returns the current <code>ContinuousBackupsDescription</code>. Continuous backups are <code>ENABLED</code> on all tables at table creation. If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p> <p> Once continuous backups and point in time recovery are enabled, you can restore to any point in time within <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>. </p> <p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days. </p>",
       "endpointdiscovery": {}
     },
+    "UpdateContributorInsights": {
+      "name": "UpdateContributorInsights",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateContributorInsightsInput"
+      },
+      "output": {
+        "shape": "UpdateContributorInsightsOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Updates the status for contributor insights for a specific table or index.</p>"
+    },
     "UpdateGlobalTable": {
       "name": "UpdateGlobalTable",
       "http": {
@@ -1077,6 +1143,27 @@
     }
   },
   "shapes": {
+    "ArchivalReason": {
+      "type": "string"
+    },
+    "ArchivalSummary": {
+      "type": "structure",
+      "members": {
+        "ArchivalDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The date and time when table archival was initiated by DynamoDB, in UNIX epoch time format.</p>"
+        },
+        "ArchivalReason": {
+          "shape": "ArchivalReason",
+          "documentation": "<p>The reason DynamoDB archived the table. Currently, the only possible value is:</p> <ul> <li> <p> <code>INACCESSIBLE_ENCRYPTION_CREDENTIALS</code> - The table was archived due to the table's AWS KMS key being inaccessible for more than seven days. An On-Demand backup was created at the archival time.</p> </li> </ul>"
+        },
+        "ArchivalBackupArn": {
+          "shape": "BackupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the backup the table was archived to, when applicable in the archival reason. If you wish to restore this backup to the same table name, you will need to delete the original table.</p>"
+        }
+      },
+      "documentation": "<p>Contains details of a table archival operation.</p>"
+    },
     "AttributeAction": {
       "type": "string",
       "enum": [
@@ -1829,6 +1916,57 @@
         "DISABLED"
       ]
     },
+    "ContributorInsightsAction": {
+      "type": "string",
+      "enum": [
+        "ENABLE",
+        "DISABLE"
+      ]
+    },
+    "ContributorInsightsRule": {
+      "type": "string",
+      "pattern": "[A-Za-z0-9][A-Za-z0-9\\-\\_\\.]{0,126}[A-Za-z0-9]"
+    },
+    "ContributorInsightsRuleList": {
+      "type": "list",
+      "member": {
+        "shape": "ContributorInsightsRule"
+      }
+    },
+    "ContributorInsightsStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLING",
+        "ENABLED",
+        "DISABLING",
+        "DISABLED",
+        "FAILED"
+      ]
+    },
+    "ContributorInsightsSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "ContributorInsightsSummary"
+      }
+    },
+    "ContributorInsightsSummary": {
+      "type": "structure",
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>Name of the table associated with the summary.</p>"
+        },
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>Name of the index associated with the summary, if any.</p>"
+        },
+        "ContributorInsightsStatus": {
+          "shape": "ContributorInsightsStatus",
+          "documentation": "<p>Describes the current status for contributor insights for the given table and index, if applicable.</p>"
+        }
+      },
+      "documentation": "<p>Represents a Contributor Insights summary entry..</p>"
+    },
     "CreateBackupInput": {
       "type": "structure",
       "required": [
@@ -2249,6 +2387,51 @@
         }
       }
     },
+    "DescribeContributorInsightsInput": {
+      "type": "structure",
+      "required": [
+        "TableName"
+      ],
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table to describe.</p>"
+        },
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The name of the global secondary index to describe, if applicable.</p>"
+        }
+      }
+    },
+    "DescribeContributorInsightsOutput": {
+      "type": "structure",
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table being described.</p>"
+        },
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The name of the global secondary index being described.</p>"
+        },
+        "ContributorInsightsRuleList": {
+          "shape": "ContributorInsightsRuleList",
+          "documentation": "<p>List of names of the associated Alpine rules.</p>"
+        },
+        "ContributorInsightsStatus": {
+          "shape": "ContributorInsightsStatus",
+          "documentation": "<p>Current Status contributor insights.</p>"
+        },
+        "LastUpdateDateTime": {
+          "shape": "LastUpdateDateTime",
+          "documentation": "<p>Timestamp of the last time the status was changed.</p>"
+        },
+        "FailureException": {
+          "shape": "FailureException",
+          "documentation": "<p>Returns information about the last failure that encountered.</p> <p>The most common exceptions for a FAILED status are:</p> <ul> <li> <p>LimitExceededException - Per-account Amazon CloudWatch Contributor Insights rule limit reached. Please disable Contributor Insights for other tables/indexes OR disable Contributor Insights rules before retrying.</p> </li> <li> <p>AccessDeniedException - Amazon CloudWatch Contributor Insights rules cannot be modified due to insufficient permissions.</p> </li> <li> <p>AccessDeniedException - Failed to create service-linked role for Contributor Insights due to insufficient permissions.</p> </li> <li> <p>InternalServerError - Failed to create Amazon CloudWatch Contributor Insights rules. Please retry request.</p> </li> </ul>"
+        }
+      }
+    },
     "DescribeEndpointsRequest": {
       "type": "structure",
       "members": {}
@@ -2430,6 +2613,12 @@
         "shape": "Endpoint"
       }
     },
+    "ExceptionDescription": {
+      "type": "string"
+    },
+    "ExceptionName": {
+      "type": "string"
+    },
     "ExpectedAttributeMap": {
       "type": "map",
       "key": {
@@ -2484,6 +2673,20 @@
     },
     "ExpressionAttributeValueVariable": {
       "type": "string"
+    },
+    "FailureException": {
+      "type": "structure",
+      "members": {
+        "ExceptionName": {
+          "shape": "ExceptionName",
+          "documentation": "<p>Exception name.</p>"
+        },
+        "ExceptionDescription": {
+          "shape": "ExceptionDescription",
+          "documentation": "<p>Description of the failure.</p>"
+        }
+      },
+      "documentation": "<p>Represents a failure a contributor insights operation.</p>"
     },
     "FilterConditionMap": {
       "type": "map",
@@ -3009,6 +3212,9 @@
       },
       "documentation": "<p>Represents a set of primary keys and, for each key, the attributes to retrieve from the table.</p> <p>For each primary key, you must provide <i>all</i> of the key attributes. For example, with a simple primary key, you only need to provide the partition key. For a composite primary key, you must provide <i>both</i> the partition key and the sort key.</p>"
     },
+    "LastUpdateDateTime": {
+      "type": "timestamp"
+    },
     "ListAttributeValue": {
       "type": "list",
       "member": {
@@ -3054,6 +3260,40 @@
         "LastEvaluatedBackupArn": {
           "shape": "BackupArn",
           "documentation": "<p> The ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the <code>ExclusiveStartBackupArn</code> of a new <code>ListBackups</code> operation in order to fetch the next page of results. </p> <p> If <code>LastEvaluatedBackupArn</code> is empty, then the last page of results has been processed and there are no more results to be retrieved. </p> <p> If <code>LastEvaluatedBackupArn</code> is not empty, this may or may not indicate that there is more data to be returned. All results are guaranteed to have been returned if and only if no value for <code>LastEvaluatedBackupArn</code> is returned. </p>"
+        }
+      }
+    },
+    "ListContributorInsightsInput": {
+      "type": "structure",
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table.</p>"
+        },
+        "NextToken": {
+          "shape": "NextTokenString",
+          "documentation": "<p>A token to for the desired page, if there is one.</p>"
+        },
+        "MaxResults": {
+          "shape": "ListContributorInsightsLimit",
+          "documentation": "<p>Maximum number of results to return per page.</p>"
+        }
+      }
+    },
+    "ListContributorInsightsLimit": {
+      "type": "integer",
+      "max": 100
+    },
+    "ListContributorInsightsOutput": {
+      "type": "structure",
+      "members": {
+        "ContributorInsightsSummaries": {
+          "shape": "ContributorInsightsSummaries",
+          "documentation": "<p>A list of ContributorInsightsSummary.</p>"
+        },
+        "NextToken": {
+          "shape": "NextTokenString",
+          "documentation": "<p>A token to go to the next page if there is one.</p>"
         }
       }
     },
@@ -4219,6 +4459,10 @@
         "KMSMasterKeyArn": {
           "shape": "KMSMasterKeyArn",
           "documentation": "<p>The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.</p>"
+        },
+        "InaccessibleEncryptionDateTime": {
+          "shape": "Date",
+          "documentation": "<p>Indicates the time, in UNIX epoch date format, when DynamoDB detected that the table's AWS KMS key was inaccessible. This attribute will automatically be cleared when DynamoDB detects that the table's AWS KMS key is accessible again. DynamoDB will initiate the table archival process when table's AWS KMS key remains inaccessible for more than seven days from this date.</p>"
         }
       },
       "documentation": "<p>The description of the server-side encryption status on the specified table.</p>"
@@ -4557,7 +4801,7 @@
         },
         "TableStatus": {
           "shape": "TableStatus",
-          "documentation": "<p>The current state of the table:</p> <ul> <li> <p> <code>CREATING</code> - The table is being created.</p> </li> <li> <p> <code>UPDATING</code> - The table is being updated.</p> </li> <li> <p> <code>DELETING</code> - The table is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The table is ready for use.</p> </li> </ul>"
+          "documentation": "<p>The current state of the table:</p> <ul> <li> <p> <code>CREATING</code> - The table is being created.</p> </li> <li> <p> <code>UPDATING</code> - The table is being updated.</p> </li> <li> <p> <code>DELETING</code> - The table is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The table is ready for use.</p> </li> <li> <p> <code>INACCESSIBLE_ENCRYPTION_CREDENTIALS</code> - The AWS KMS key used to encrypt the table in inaccessible. Table operations may fail due to failure to use the AWS KMS key. DynamoDB will initiate the table archival process when a table's AWS KMS key remains inaccessible for more than seven days. </p> </li> <li> <p> <code>ARCHIVING</code> - The table is being archived. Operations are not allowed until archival is complete. </p> </li> <li> <p> <code>ARCHIVED</code> - The table has been archived. See the ArchivalReason for more information. </p> </li> </ul>"
         },
         "CreationDateTime": {
           "shape": "Date",
@@ -4622,6 +4866,10 @@
         "SSEDescription": {
           "shape": "SSEDescription",
           "documentation": "<p>The description of the server-side encryption status on the specified table.</p>"
+        },
+        "ArchivalSummary": {
+          "shape": "ArchivalSummary",
+          "documentation": "<p>Contains information about the table archive.</p>"
         }
       },
       "documentation": "<p>Represents the properties of a table.</p>"
@@ -4648,7 +4896,10 @@
         "CREATING",
         "UPDATING",
         "DELETING",
-        "ACTIVE"
+        "ACTIVE",
+        "INACCESSIBLE_ENCRYPTION_CREDENTIALS",
+        "ARCHIVING",
+        "ARCHIVED"
       ]
     },
     "Tag": {
@@ -4959,6 +5210,44 @@
         "ContinuousBackupsDescription": {
           "shape": "ContinuousBackupsDescription",
           "documentation": "<p>Represents the continuous backups and point in time recovery settings on the table.</p>"
+        }
+      }
+    },
+    "UpdateContributorInsightsInput": {
+      "type": "structure",
+      "required": [
+        "TableName",
+        "ContributorInsightsAction"
+      ],
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table.</p>"
+        },
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The global secondary index name, if applicable.</p>"
+        },
+        "ContributorInsightsAction": {
+          "shape": "ContributorInsightsAction",
+          "documentation": "<p>Represents the contributor insights action.</p>"
+        }
+      }
+    },
+    "UpdateContributorInsightsOutput": {
+      "type": "structure",
+      "members": {
+        "TableName": {
+          "shape": "TableName",
+          "documentation": "<p>The name of the table.</p>"
+        },
+        "IndexName": {
+          "shape": "IndexName",
+          "documentation": "<p>The name of the global secondary index, if applicable.</p>"
+        },
+        "ContributorInsightsStatus": {
+          "shape": "ContributorInsightsStatus",
+          "documentation": "<p>The status of contributor insights</p>"
         }
       }
     },

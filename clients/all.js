@@ -203,5 +203,6 @@ module.exports = {
   ConnectParticipant: require('./connectparticipant'),
   AppConfig: require('./appconfig'),
   IoTSecureTunneling: require('./iotsecuretunneling'),
-  WAFV2: require('./wafv2')
+  WAFV2: require('./wafv2'),
+  ElasticInference: require('./elasticinference')
 };

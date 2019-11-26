@@ -809,5 +809,9 @@
   },
   "wafv2": {
     "name": "WAFV2"
+  },
+  "elasticinference": {
+    "prefix": "elastic-inference",
+    "name": "ElasticInference"
   }
 }

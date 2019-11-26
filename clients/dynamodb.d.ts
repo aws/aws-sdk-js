@@ -95,6 +95,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContinuousBackupsOutput) => void): Request<DynamoDB.Types.DescribeContinuousBackupsOutput, AWSError>;
   /**
+   * Returns information about contributor insights, for a given table or global secondary index.
+   */
+  describeContributorInsights(params: DynamoDB.Types.DescribeContributorInsightsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeContributorInsightsOutput) => void): Request<DynamoDB.Types.DescribeContributorInsightsOutput, AWSError>;
+  /**
+   * Returns information about contributor insights, for a given table or global secondary index.
+   */
+  describeContributorInsights(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContributorInsightsOutput) => void): Request<DynamoDB.Types.DescribeContributorInsightsOutput, AWSError>;
+  /**
    * Returns the regional endpoint information.
    */
   describeEndpoints(params: DynamoDB.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
@@ -166,6 +174,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a limit for the maximum number of entries to be returned in a page.  In the request, start time is inclusive, but end time is exclusive. Note that these limits are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
    */
   listBackups(callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
+  /**
+   * Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.
+   */
+  listContributorInsights(params: DynamoDB.Types.ListContributorInsightsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListContributorInsightsOutput) => void): Request<DynamoDB.Types.ListContributorInsightsOutput, AWSError>;
+  /**
+   * Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.
+   */
+  listContributorInsights(callback?: (err: AWSError, data: DynamoDB.Types.ListContributorInsightsOutput) => void): Request<DynamoDB.Types.ListContributorInsightsOutput, AWSError>;
   /**
    * Lists all global tables that have a replica in the specified Region.  This method only applies to Version 2017.11.29 of global tables. 
    */
@@ -271,6 +287,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   updateContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.UpdateContinuousBackupsOutput) => void): Request<DynamoDB.Types.UpdateContinuousBackupsOutput, AWSError>;
   /**
+   * Updates the status for contributor insights for a specific table or index.
+   */
+  updateContributorInsights(params: DynamoDB.Types.UpdateContributorInsightsInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateContributorInsightsOutput) => void): Request<DynamoDB.Types.UpdateContributorInsightsOutput, AWSError>;
+  /**
+   * Updates the status for contributor insights for a specific table or index.
+   */
+  updateContributorInsights(callback?: (err: AWSError, data: DynamoDB.Types.UpdateContributorInsightsOutput) => void): Request<DynamoDB.Types.UpdateContributorInsightsOutput, AWSError>;
+  /**
    * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, have the same name as the global table, have the same key schema, have DynamoDB Streams enabled, and have the same provisioned and maximum write capacity units.  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.   If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
    */
   updateGlobalTable(params: DynamoDB.Types.UpdateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
@@ -340,6 +364,21 @@ declare namespace DynamoDB {
   export import Converter = converter;
 }
 declare namespace DynamoDB {
+  export type ArchivalReason = string;
+  export interface ArchivalSummary {
+    /**
+     * The date and time when table archival was initiated by DynamoDB, in UNIX epoch time format.
+     */
+    ArchivalDateTime?: _Date;
+    /**
+     * The reason DynamoDB archived the table. Currently, the only possible value is:    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The table was archived due to the table's AWS KMS key being inaccessible for more than seven days. An On-Demand backup was created at the archival time.  
+     */
+    ArchivalReason?: ArchivalReason;
+    /**
+     * The Amazon Resource Name (ARN) of the backup the table was archived to, when applicable in the archival reason. If you wish to restore this backup to the same table name, you will need to delete the original table.
+     */
+    ArchivalBackupArn?: BackupArn;
+  }
   export type AttributeAction = "ADD"|"PUT"|"DELETE"|string;
   export interface AttributeDefinition {
     /**
@@ -770,6 +809,25 @@ declare namespace DynamoDB {
     PointInTimeRecoveryDescription?: PointInTimeRecoveryDescription;
   }
   export type ContinuousBackupsStatus = "ENABLED"|"DISABLED"|string;
+  export type ContributorInsightsAction = "ENABLE"|"DISABLE"|string;
+  export type ContributorInsightsRule = string;
+  export type ContributorInsightsRuleList = ContributorInsightsRule[];
+  export type ContributorInsightsStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"FAILED"|string;
+  export type ContributorInsightsSummaries = ContributorInsightsSummary[];
+  export interface ContributorInsightsSummary {
+    /**
+     * Name of the table associated with the summary.
+     */
+    TableName?: TableName;
+    /**
+     * Name of the index associated with the summary, if any.
+     */
+    IndexName?: IndexName;
+    /**
+     * Describes the current status for contributor insights for the given table and index, if applicable.
+     */
+    ContributorInsightsStatus?: ContributorInsightsStatus;
+  }
   export interface CreateBackupInput {
     /**
      * The name of the table.
@@ -1044,6 +1102,42 @@ declare namespace DynamoDB {
      */
     ContinuousBackupsDescription?: ContinuousBackupsDescription;
   }
+  export interface DescribeContributorInsightsInput {
+    /**
+     * The name of the table to describe.
+     */
+    TableName: TableName;
+    /**
+     * The name of the global secondary index to describe, if applicable.
+     */
+    IndexName?: IndexName;
+  }
+  export interface DescribeContributorInsightsOutput {
+    /**
+     * The name of the table being described.
+     */
+    TableName?: TableName;
+    /**
+     * The name of the global secondary index being described.
+     */
+    IndexName?: IndexName;
+    /**
+     * List of names of the associated Alpine rules.
+     */
+    ContributorInsightsRuleList?: ContributorInsightsRuleList;
+    /**
+     * Current Status contributor insights.
+     */
+    ContributorInsightsStatus?: ContributorInsightsStatus;
+    /**
+     * Timestamp of the last time the status was changed.
+     */
+    LastUpdateDateTime?: LastUpdateDateTime;
+    /**
+     * Returns information about the last failure that encountered. The most common exceptions for a FAILED status are:   LimitExceededException - Per-account Amazon CloudWatch Contributor Insights rule limit reached. Please disable Contributor Insights for other tables/indexes OR disable Contributor Insights rules before retrying.   AccessDeniedException - Amazon CloudWatch Contributor Insights rules cannot be modified due to insufficient permissions.   AccessDeniedException - Failed to create service-linked role for Contributor Insights due to insufficient permissions.   InternalServerError - Failed to create Amazon CloudWatch Contributor Insights rules. Please retry request.  
+     */
+    FailureException?: FailureException;
+  }
   export interface DescribeEndpointsRequest {
   }
   export interface DescribeEndpointsResponse {
@@ -1148,6 +1242,8 @@ declare namespace DynamoDB {
     CachePeriodInMinutes: Long;
   }
   export type Endpoints = Endpoint[];
+  export type ExceptionDescription = string;
+  export type ExceptionName = string;
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
     /**
@@ -1171,6 +1267,16 @@ declare namespace DynamoDB {
   export type ExpressionAttributeNameVariable = string;
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
   export type ExpressionAttributeValueVariable = string;
+  export interface FailureException {
+    /**
+     * Exception name.
+     */
+    ExceptionName?: ExceptionName;
+    /**
+     * Description of the failure.
+     */
+    ExceptionDescription?: ExceptionDescription;
+  }
   export type FilterConditionMap = {[key: string]: Condition};
   export interface Get {
     /**
@@ -1446,6 +1552,7 @@ declare namespace DynamoDB {
      */
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
   }
+  export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
   export interface ListBackupsInput {
     /**
@@ -1482,6 +1589,31 @@ declare namespace DynamoDB {
      *  The ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch the next page of results.   If LastEvaluatedBackupArn is empty, then the last page of results has been processed and there are no more results to be retrieved.   If LastEvaluatedBackupArn is not empty, this may or may not indicate that there is more data to be returned. All results are guaranteed to have been returned if and only if no value for LastEvaluatedBackupArn is returned. 
      */
     LastEvaluatedBackupArn?: BackupArn;
+  }
+  export interface ListContributorInsightsInput {
+    /**
+     * The name of the table.
+     */
+    TableName?: TableName;
+    /**
+     * A token to for the desired page, if there is one.
+     */
+    NextToken?: NextTokenString;
+    /**
+     * Maximum number of results to return per page.
+     */
+    MaxResults?: ListContributorInsightsLimit;
+  }
+  export type ListContributorInsightsLimit = number;
+  export interface ListContributorInsightsOutput {
+    /**
+     * A list of ContributorInsightsSummary.
+     */
+    ContributorInsightsSummaries?: ContributorInsightsSummaries;
+    /**
+     * A token to go to the next page if there is one.
+     */
+    NextToken?: NextTokenString;
   }
   export interface ListGlobalTablesInput {
     /**
@@ -2207,6 +2339,10 @@ declare namespace DynamoDB {
      * The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
      */
     KMSMasterKeyArn?: KMSMasterKeyArn;
+    /**
+     * Indicates the time, in UNIX epoch date format, when DynamoDB detected that the table's AWS KMS key was inaccessible. This attribute will automatically be cleared when DynamoDB detects that the table's AWS KMS key is accessible again. DynamoDB will initiate the table archival process when table's AWS KMS key remains inaccessible for more than seven days from this date.
+     */
+    InaccessibleEncryptionDateTime?: _Date;
   }
   export type SSEEnabled = boolean;
   export interface SSESpecification {
@@ -2421,7 +2557,7 @@ declare namespace DynamoDB {
      */
     KeySchema?: KeySchema;
     /**
-     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.  
+     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The AWS KMS key used to encrypt the table in inaccessible. Table operations may fail due to failure to use the AWS KMS key. DynamoDB will initiate the table archival process when a table's AWS KMS key remains inaccessible for more than seven days.     ARCHIVING - The table is being archived. Operations are not allowed until archival is complete.     ARCHIVED - The table has been archived. See the ArchivalReason for more information.   
      */
     TableStatus?: TableStatus;
     /**
@@ -2488,11 +2624,15 @@ declare namespace DynamoDB {
      * The description of the server-side encryption status on the specified table.
      */
     SSEDescription?: SSEDescription;
+    /**
+     * Contains information about the table archive.
+     */
+    ArchivalSummary?: ArchivalSummary;
   }
   export type TableId = string;
   export type TableName = string;
   export type TableNameList = TableName[];
-  export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|"ARCHIVING"|"ARCHIVED"|string;
   export interface Tag {
     /**
      * The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value. 
@@ -2668,6 +2808,34 @@ declare namespace DynamoDB {
      * Represents the continuous backups and point in time recovery settings on the table.
      */
     ContinuousBackupsDescription?: ContinuousBackupsDescription;
+  }
+  export interface UpdateContributorInsightsInput {
+    /**
+     * The name of the table.
+     */
+    TableName: TableName;
+    /**
+     * The global secondary index name, if applicable.
+     */
+    IndexName?: IndexName;
+    /**
+     * Represents the contributor insights action.
+     */
+    ContributorInsightsAction: ContributorInsightsAction;
+  }
+  export interface UpdateContributorInsightsOutput {
+    /**
+     * The name of the table.
+     */
+    TableName?: TableName;
+    /**
+     * The name of the global secondary index, if applicable.
+     */
+    IndexName?: IndexName;
+    /**
+     * The status of contributor insights
+     */
+    ContributorInsightsStatus?: ContributorInsightsStatus;
   }
   export type UpdateExpression = string;
   export interface UpdateGlobalSecondaryIndexAction {

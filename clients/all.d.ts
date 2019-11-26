@@ -202,3 +202,4 @@ export import ConnectParticipant = require('./connectparticipant');
 export import AppConfig = require('./appconfig');
 export import IoTSecureTunneling = require('./iotsecuretunneling');
 export import WAFV2 = require('./wafv2');
+export import ElasticInference = require('./elasticinference');

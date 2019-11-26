@@ -76,27 +76,27 @@ declare class DirectoryService extends Service {
    */
   createConditionalForwarder(callback?: (err: AWSError, data: DirectoryService.Types.CreateConditionalForwarderResult) => void): Request<DirectoryService.Types.CreateConditionalForwarderResult, AWSError>;
   /**
-   * Creates a Simple AD directory. Before you call CreateDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
+   * Creates a Simple AD directory. For more information, see Simple Active Directory in the AWS Directory Service Admin Guide. Before you call CreateDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createDirectory(params: DirectoryService.Types.CreateDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateDirectoryResult) => void): Request<DirectoryService.Types.CreateDirectoryResult, AWSError>;
   /**
-   * Creates a Simple AD directory. Before you call CreateDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
+   * Creates a Simple AD directory. For more information, see Simple Active Directory in the AWS Directory Service Admin Guide. Before you call CreateDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createDirectory(callback?: (err: AWSError, data: DirectoryService.Types.CreateDirectoryResult) => void): Request<DirectoryService.Types.CreateDirectoryResult, AWSError>;
   /**
-   * Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
+   * Creates a subscription to forward real-time Directory Service domain controller security logs to the specified Amazon CloudWatch log group in your AWS account.
    */
   createLogSubscription(params: DirectoryService.Types.CreateLogSubscriptionRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateLogSubscriptionResult) => void): Request<DirectoryService.Types.CreateLogSubscriptionResult, AWSError>;
   /**
-   * Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
+   * Creates a subscription to forward real-time Directory Service domain controller security logs to the specified Amazon CloudWatch log group in your AWS account.
    */
   createLogSubscription(callback?: (err: AWSError, data: DirectoryService.Types.CreateLogSubscriptionResult) => void): Request<DirectoryService.Types.CreateLogSubscriptionResult, AWSError>;
   /**
-   * Creates an AWS Managed Microsoft AD directory. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
+   * Creates a Microsoft AD directory in the AWS Cloud. For more information, see AWS Managed Microsoft AD in the AWS Directory Service Admin Guide. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createMicrosoftAD(params: DirectoryService.Types.CreateMicrosoftADRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
   /**
-   * Creates an AWS Managed Microsoft AD directory. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
+   * Creates a Microsoft AD directory in the AWS Cloud. For more information, see AWS Managed Microsoft AD in the AWS Directory Service Admin Guide. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
   createMicrosoftAD(callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
   /**
@@ -156,6 +156,14 @@ declare class DirectoryService extends Service {
    */
   deleteTrust(callback?: (err: AWSError, data: DirectoryService.Types.DeleteTrustResult) => void): Request<DirectoryService.Types.DeleteTrustResult, AWSError>;
   /**
+   * Deletes from the system the certificate that was registered for a secured LDAP connection.
+   */
+  deregisterCertificate(params: DirectoryService.Types.DeregisterCertificateRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeregisterCertificateResult) => void): Request<DirectoryService.Types.DeregisterCertificateResult, AWSError>;
+  /**
+   * Deletes from the system the certificate that was registered for a secured LDAP connection.
+   */
+  deregisterCertificate(callback?: (err: AWSError, data: DirectoryService.Types.DeregisterCertificateResult) => void): Request<DirectoryService.Types.DeregisterCertificateResult, AWSError>;
+  /**
    * Removes the specified directory as a publisher to the specified SNS topic.
    */
   deregisterEventTopic(params: DirectoryService.Types.DeregisterEventTopicRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeregisterEventTopicResult) => void): Request<DirectoryService.Types.DeregisterEventTopicResult, AWSError>;
@@ -163,6 +171,14 @@ declare class DirectoryService extends Service {
    * Removes the specified directory as a publisher to the specified SNS topic.
    */
   deregisterEventTopic(callback?: (err: AWSError, data: DirectoryService.Types.DeregisterEventTopicResult) => void): Request<DirectoryService.Types.DeregisterEventTopicResult, AWSError>;
+  /**
+   * Displays information about the certificate registered for a secured LDAP connection.
+   */
+  describeCertificate(params: DirectoryService.Types.DescribeCertificateRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeCertificateResult) => void): Request<DirectoryService.Types.DescribeCertificateResult, AWSError>;
+  /**
+   * Displays information about the certificate registered for a secured LDAP connection.
+   */
+  describeCertificate(callback?: (err: AWSError, data: DirectoryService.Types.DescribeCertificateResult) => void): Request<DirectoryService.Types.DescribeCertificateResult, AWSError>;
   /**
    * Obtains information about the conditional forwarders for this account. If no input parameters are provided for RemoteDomainNames, this request describes all conditional forwarders for the specified directory ID.
    */
@@ -196,6 +212,14 @@ declare class DirectoryService extends Service {
    */
   describeEventTopics(callback?: (err: AWSError, data: DirectoryService.Types.DescribeEventTopicsResult) => void): Request<DirectoryService.Types.DescribeEventTopicsResult, AWSError>;
   /**
+   * Describes the status of LDAP security for the specified directory.
+   */
+  describeLDAPSSettings(params: DirectoryService.Types.DescribeLDAPSSettingsRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeLDAPSSettingsResult) => void): Request<DirectoryService.Types.DescribeLDAPSSettingsResult, AWSError>;
+  /**
+   * Describes the status of LDAP security for the specified directory.
+   */
+  describeLDAPSSettings(callback?: (err: AWSError, data: DirectoryService.Types.DescribeLDAPSSettingsResult) => void): Request<DirectoryService.Types.DescribeLDAPSSettingsResult, AWSError>;
+  /**
    * Returns the shared directories in your account. 
    */
   describeSharedDirectories(params: DirectoryService.Types.DescribeSharedDirectoriesRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeSharedDirectoriesResult) => void): Request<DirectoryService.Types.DescribeSharedDirectoriesResult, AWSError>;
@@ -220,6 +244,14 @@ declare class DirectoryService extends Service {
    */
   describeTrusts(callback?: (err: AWSError, data: DirectoryService.Types.DescribeTrustsResult) => void): Request<DirectoryService.Types.DescribeTrustsResult, AWSError>;
   /**
+   * Deactivates LDAP secure calls for the specified directory.
+   */
+  disableLDAPS(params: DirectoryService.Types.DisableLDAPSRequest, callback?: (err: AWSError, data: DirectoryService.Types.DisableLDAPSResult) => void): Request<DirectoryService.Types.DisableLDAPSResult, AWSError>;
+  /**
+   * Deactivates LDAP secure calls for the specified directory.
+   */
+  disableLDAPS(callback?: (err: AWSError, data: DirectoryService.Types.DisableLDAPSResult) => void): Request<DirectoryService.Types.DisableLDAPSResult, AWSError>;
+  /**
    * Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
    */
   disableRadius(params: DirectoryService.Types.DisableRadiusRequest, callback?: (err: AWSError, data: DirectoryService.Types.DisableRadiusResult) => void): Request<DirectoryService.Types.DisableRadiusResult, AWSError>;
@@ -236,6 +268,14 @@ declare class DirectoryService extends Service {
    */
   disableSso(callback?: (err: AWSError, data: DirectoryService.Types.DisableSsoResult) => void): Request<DirectoryService.Types.DisableSsoResult, AWSError>;
   /**
+   * Activates the switch for the specific directory to always use LDAP secure calls.
+   */
+  enableLDAPS(params: DirectoryService.Types.EnableLDAPSRequest, callback?: (err: AWSError, data: DirectoryService.Types.EnableLDAPSResult) => void): Request<DirectoryService.Types.EnableLDAPSResult, AWSError>;
+  /**
+   * Activates the switch for the specific directory to always use LDAP secure calls.
+   */
+  enableLDAPS(callback?: (err: AWSError, data: DirectoryService.Types.EnableLDAPSResult) => void): Request<DirectoryService.Types.EnableLDAPSResult, AWSError>;
+  /**
    * Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
    */
   enableRadius(params: DirectoryService.Types.EnableRadiusRequest, callback?: (err: AWSError, data: DirectoryService.Types.EnableRadiusResult) => void): Request<DirectoryService.Types.EnableRadiusResult, AWSError>;
@@ -244,19 +284,19 @@ declare class DirectoryService extends Service {
    */
   enableRadius(callback?: (err: AWSError, data: DirectoryService.Types.EnableRadiusResult) => void): Request<DirectoryService.Types.EnableRadiusResult, AWSError>;
   /**
-   * Enables single sign-on for a directory.
+   * Enables single sign-on for a directory. Single sign-on allows users in your directory to access certain AWS services from a computer joined to the directory without having to enter their credentials separately.
    */
   enableSso(params: DirectoryService.Types.EnableSsoRequest, callback?: (err: AWSError, data: DirectoryService.Types.EnableSsoResult) => void): Request<DirectoryService.Types.EnableSsoResult, AWSError>;
   /**
-   * Enables single sign-on for a directory.
+   * Enables single sign-on for a directory. Single sign-on allows users in your directory to access certain AWS services from a computer joined to the directory without having to enter their credentials separately.
    */
   enableSso(callback?: (err: AWSError, data: DirectoryService.Types.EnableSsoResult) => void): Request<DirectoryService.Types.EnableSsoResult, AWSError>;
   /**
-   * Obtains directory limit information for the current region.
+   * Obtains directory limit information for the current Region.
    */
   getDirectoryLimits(params: DirectoryService.Types.GetDirectoryLimitsRequest, callback?: (err: AWSError, data: DirectoryService.Types.GetDirectoryLimitsResult) => void): Request<DirectoryService.Types.GetDirectoryLimitsResult, AWSError>;
   /**
-   * Obtains directory limit information for the current region.
+   * Obtains directory limit information for the current Region.
    */
   getDirectoryLimits(callback?: (err: AWSError, data: DirectoryService.Types.GetDirectoryLimitsResult) => void): Request<DirectoryService.Types.GetDirectoryLimitsResult, AWSError>;
   /**
@@ -267,6 +307,14 @@ declare class DirectoryService extends Service {
    * Obtains the manual snapshot limits for a directory.
    */
   getSnapshotLimits(callback?: (err: AWSError, data: DirectoryService.Types.GetSnapshotLimitsResult) => void): Request<DirectoryService.Types.GetSnapshotLimitsResult, AWSError>;
+  /**
+   * For the specified directory, lists all the certificates registered for a secured LDAP connection.
+   */
+  listCertificates(params: DirectoryService.Types.ListCertificatesRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListCertificatesResult) => void): Request<DirectoryService.Types.ListCertificatesResult, AWSError>;
+  /**
+   * For the specified directory, lists all the certificates registered for a secured LDAP connection.
+   */
+  listCertificates(callback?: (err: AWSError, data: DirectoryService.Types.ListCertificatesResult) => void): Request<DirectoryService.Types.ListCertificatesResult, AWSError>;
   /**
    * Lists the address blocks that you have added to a directory.
    */
@@ -300,6 +348,14 @@ declare class DirectoryService extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: DirectoryService.Types.ListTagsForResourceResult) => void): Request<DirectoryService.Types.ListTagsForResourceResult, AWSError>;
   /**
+   * Registers a certificate for secured LDAP connection.
+   */
+  registerCertificate(params: DirectoryService.Types.RegisterCertificateRequest, callback?: (err: AWSError, data: DirectoryService.Types.RegisterCertificateResult) => void): Request<DirectoryService.Types.RegisterCertificateResult, AWSError>;
+  /**
+   * Registers a certificate for secured LDAP connection.
+   */
+  registerCertificate(callback?: (err: AWSError, data: DirectoryService.Types.RegisterCertificateResult) => void): Request<DirectoryService.Types.RegisterCertificateResult, AWSError>;
+  /**
    * Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status.
    */
   registerEventTopic(params: DirectoryService.Types.RegisterEventTopicRequest, callback?: (err: AWSError, data: DirectoryService.Types.RegisterEventTopicResult) => void): Request<DirectoryService.Types.RegisterEventTopicResult, AWSError>;
@@ -332,11 +388,11 @@ declare class DirectoryService extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: DirectoryService.Types.RemoveTagsFromResourceResult) => void): Request<DirectoryService.Types.RemoveTagsFromResourceResult, AWSError>;
   /**
-   * Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
+   * Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory. You can reset the password for any user in your directory with the following exceptions:   For Simple AD, you cannot reset the password for any user that is a member of either the Domain Admins or Enterprise Admins group except for the administrator user.   For AWS Managed Microsoft AD, you can only reset the password for a user that is in an OU based off of the NetBIOS name that you typed when you created your directory. For example, you cannot reset the password for a user in the AWS Reserved OU. For more information about the OU structure for an AWS Managed Microsoft AD directory, see What Gets Created in the AWS Directory Service Administration Guide.  
    */
   resetUserPassword(params: DirectoryService.Types.ResetUserPasswordRequest, callback?: (err: AWSError, data: DirectoryService.Types.ResetUserPasswordResult) => void): Request<DirectoryService.Types.ResetUserPasswordResult, AWSError>;
   /**
-   * Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
+   * Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory. You can reset the password for any user in your directory with the following exceptions:   For Simple AD, you cannot reset the password for any user that is a member of either the Domain Admins or Enterprise Admins group except for the administrator user.   For AWS Managed Microsoft AD, you can only reset the password for a user that is in an OU based off of the NetBIOS name that you typed when you created your directory. For example, you cannot reset the password for a user in the AWS Reserved OU. For more information about the OU structure for an AWS Managed Microsoft AD directory, see What Gets Created in the AWS Directory Service Administration Guide.  
    */
   resetUserPassword(callback?: (err: AWSError, data: DirectoryService.Types.ResetUserPasswordResult) => void): Request<DirectoryService.Types.ResetUserPasswordResult, AWSError>;
   /**
@@ -483,6 +539,54 @@ declare namespace DirectoryService {
   }
   export interface CancelSchemaExtensionResult {
   }
+  export interface Certificate {
+    /**
+     * The identifier of the certificate.
+     */
+    CertificateId?: CertificateId;
+    /**
+     * The state of the certificate.
+     */
+    State?: CertificateState;
+    /**
+     * Describes a state change for the certificate.
+     */
+    StateReason?: CertificateStateReason;
+    /**
+     * The common name for the certificate.
+     */
+    CommonName?: CertificateCN;
+    /**
+     * The date and time that the certificate was registered.
+     */
+    RegisteredDateTime?: CertificateRegisteredDateTime;
+    /**
+     * The date and time when the certificate will expire.
+     */
+    ExpiryDateTime?: CertificateExpiryDateTime;
+  }
+  export type CertificateCN = string;
+  export type CertificateData = string;
+  export type CertificateExpiryDateTime = Date;
+  export type CertificateId = string;
+  export interface CertificateInfo {
+    /**
+     * The identifier of the certificate.
+     */
+    CertificateId?: CertificateId;
+    /**
+     * The common name for the certificate.
+     */
+    CommonName?: CertificateCN;
+    /**
+     * The state of the certificate.
+     */
+    State?: CertificateState;
+  }
+  export type CertificateRegisteredDateTime = Date;
+  export type CertificateState = "Registering"|"Registered"|"RegisterFailed"|"Deregistering"|"Deregistered"|"DeregisterFailed"|string;
+  export type CertificateStateReason = string;
+  export type CertificatesInfo = CertificateInfo[];
   export type CidrIp = string;
   export type CidrIps = CidrIp[];
   export type CloudOnlyDirectoriesLimitReached = boolean;
@@ -531,7 +635,7 @@ declare namespace DirectoryService {
      */
     Password: ConnectPassword;
     /**
-     * A textual description for the directory.
+     * A description for the directory.
      */
     Description?: Description;
     /**
@@ -625,15 +729,15 @@ declare namespace DirectoryService {
      */
     Name: DirectoryName;
     /**
-     * The short name of the directory, such as CORP.
+     * The NetBIOS name of the directory, such as CORP.
      */
     ShortName?: DirectoryShortName;
     /**
-     * The password for the directory administrator. The directory creation process creates a directory administrator account with the user name Administrator and this password.
+     * The password for the directory administrator. The directory creation process creates a directory administrator account with the user name Administrator and this password. If you need to change the password for the administrator account, you can use the ResetUserPassword API call.
      */
     Password: Password;
     /**
-     * A textual description for the directory.
+     * A description for the directory.
      */
     Description?: Description;
     /**
@@ -657,7 +761,7 @@ declare namespace DirectoryService {
   }
   export interface CreateLogSubscriptionRequest {
     /**
-     * Identifier (ID) of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
+     * Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
      */
     DirectoryId: DirectoryId;
     /**
@@ -669,19 +773,19 @@ declare namespace DirectoryService {
   }
   export interface CreateMicrosoftADRequest {
     /**
-     * The fully qualified domain name for the directory, such as corp.example.com. This name will resolve inside your VPC only. It does not need to be publicly resolvable.
+     * The fully qualified domain name for the AWS Managed Microsoft AD directory, such as corp.example.com. This name will resolve inside your VPC only. It does not need to be publicly resolvable.
      */
     Name: DirectoryName;
     /**
-     * The NetBIOS name for your domain. A short identifier for your domain, such as CORP. If you don't specify a NetBIOS name, it will default to the first part of your directory DNS. For example, CORP for the directory DNS corp.example.com. 
+     * The NetBIOS name for your domain, such as CORP. If you don't specify a NetBIOS name, it will default to the first part of your directory DNS. For example, CORP for the directory DNS corp.example.com. 
      */
     ShortName?: DirectoryShortName;
     /**
-     * The password for the default administrative user named Admin.
+     * The password for the default administrative user named Admin. If you need to change the password for the administrator account, you can use the ResetUserPassword API call.
      */
     Password: Password;
     /**
-     * A textual description for the directory. This label will appear on the AWS console Directory Details page after the directory is created.
+     * A description for the directory. This label will appear on the AWS console Directory Details page after the directory is created.
      */
     Description?: Description;
     /**
@@ -786,7 +890,7 @@ declare namespace DirectoryService {
   }
   export interface DeleteLogSubscriptionRequest {
     /**
-     * Identifier (ID) of the directory whose log subscription you want to delete.
+     * Identifier of the directory whose log subscription you want to delete.
      */
     DirectoryId: DirectoryId;
   }
@@ -820,6 +924,18 @@ declare namespace DirectoryService {
      */
     TrustId?: TrustId;
   }
+  export interface DeregisterCertificateRequest {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The identifier of the certificate.
+     */
+    CertificateId: CertificateId;
+  }
+  export interface DeregisterCertificateResult {
+  }
   export interface DeregisterEventTopicRequest {
     /**
      * The Directory ID to remove as a publisher. This directory will no longer send messages to the specified SNS topic.
@@ -831,6 +947,22 @@ declare namespace DirectoryService {
     TopicName: TopicName;
   }
   export interface DeregisterEventTopicResult {
+  }
+  export interface DescribeCertificateRequest {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The identifier of the certificate.
+     */
+    CertificateId: CertificateId;
+  }
+  export interface DescribeCertificateResult {
+    /**
+     * Information about the certificate, including registered date time, certificate state, the reason for the state, expiration date time, and certificate common name.
+     */
+    Certificate?: Certificate;
   }
   export interface DescribeConditionalForwardersRequest {
     /**
@@ -915,6 +1047,34 @@ declare namespace DirectoryService {
      * A list of SNS topic names that receive status messages from the specified Directory ID.
      */
     EventTopics?: EventTopics;
+  }
+  export interface DescribeLDAPSSettingsRequest {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The type of LDAP security the customer wants to enable, either server or client. Currently supports only Client, (the default).
+     */
+    Type?: LDAPSType;
+    /**
+     * The type of next token used for pagination.
+     */
+    NextToken?: NextToken;
+    /**
+     * Specifies the number of items that should be displayed on one page.
+     */
+    Limit?: PageLimit;
+  }
+  export interface DescribeLDAPSSettingsResult {
+    /**
+     * Information about LDAP security for the specified directory, including status of enablement, state last updated date time, and the reason for the state.
+     */
+    LDAPSSettingsInfo?: LDAPSSettingsInfo;
+    /**
+     * The next token used to retrieve the LDAPS settings if the number of setting types exceeds page limit and there is another page.
+     */
+    NextToken?: NextToken;
   }
   export interface DescribeSharedDirectoriesRequest {
     /**
@@ -1026,7 +1186,7 @@ declare namespace DirectoryService {
      */
     VpcId?: VpcId;
     /**
-     * A list of subnet identifiers in the VPC that the AD connector is in.
+     * A list of subnet identifiers in the VPC that the AD Connector is in.
      */
     SubnetIds?: SubnetIds;
     /**
@@ -1076,7 +1236,7 @@ declare namespace DirectoryService {
      */
     AccessUrl?: AccessUrl;
     /**
-     * The textual description for the directory.
+     * The description for the directory.
      */
     Description?: Description;
     /**
@@ -1150,11 +1310,11 @@ declare namespace DirectoryService {
   export type DirectoryIds = DirectoryId[];
   export interface DirectoryLimits {
     /**
-     * The maximum number of cloud directories allowed in the region.
+     * The maximum number of cloud directories allowed in the Region.
      */
     CloudOnlyDirectoriesLimit?: Limit;
     /**
-     * The current number of cloud directories in the region.
+     * The current number of cloud directories in the Region.
      */
     CloudOnlyDirectoriesCurrentCount?: Limit;
     /**
@@ -1174,11 +1334,11 @@ declare namespace DirectoryService {
      */
     CloudOnlyMicrosoftADLimitReached?: CloudOnlyDirectoriesLimitReached;
     /**
-     * The maximum number of connected directories allowed in the region.
+     * The maximum number of connected directories allowed in the Region.
      */
     ConnectedDirectoriesLimit?: Limit;
     /**
-     * The current number of connected directories in the region.
+     * The current number of connected directories in the Region.
      */
     ConnectedDirectoriesCurrentCount?: Limit;
     /**
@@ -1218,6 +1378,18 @@ declare namespace DirectoryService {
      * The list of Availability Zones that the directory is in.
      */
     AvailabilityZones?: AvailabilityZones;
+  }
+  export interface DisableLDAPSRequest {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The type of LDAP security that the customer wants to enable. The security can be either server or client, but currently only the default Client is supported.
+     */
+    Type?: LDAPSType;
+  }
+  export interface DisableLDAPSResult {
   }
   export interface DisableRadiusRequest {
     /**
@@ -1291,6 +1463,18 @@ declare namespace DirectoryService {
   export type DomainControllerStatus = "Creating"|"Active"|"Impaired"|"Restoring"|"Deleting"|"Deleted"|"Failed"|string;
   export type DomainControllerStatusReason = string;
   export type DomainControllers = DomainController[];
+  export interface EnableLDAPSRequest {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The type of LDAP security the customer wants to enable. The security can be either server or client, but currently only the default Client is supported.
+     */
+    Type?: LDAPSType;
+  }
+  export interface EnableLDAPSResult {
+  }
   export interface EnableRadiusRequest {
     /**
      * The identifier of the directory for which to enable MFA.
@@ -1347,7 +1531,7 @@ declare namespace DirectoryService {
   }
   export interface GetDirectoryLimitsResult {
     /**
-     * A DirectoryLimits object that contains the directory limits for the current region.
+     * A DirectoryLimits object that contains the directory limits for the current rRegion.
      */
     DirectoryLimits?: DirectoryLimits;
   }
@@ -1405,10 +1589,52 @@ declare namespace DirectoryService {
   export type IpRouteStatusReason = string;
   export type IpRoutes = IpRoute[];
   export type IpRoutesInfo = IpRouteInfo[];
+  export interface LDAPSSettingInfo {
+    /**
+     * The state of the LDAPS settings.
+     */
+    LDAPSStatus?: LDAPSStatus;
+    /**
+     * Describes a state change for LDAPS.
+     */
+    LDAPSStatusReason?: LDAPSStatusReason;
+    /**
+     * The date and time when the LDAPS settings were last updated.
+     */
+    LastUpdatedDateTime?: LastUpdatedDateTime;
+  }
+  export type LDAPSSettingsInfo = LDAPSSettingInfo[];
+  export type LDAPSStatus = "Enabling"|"Enabled"|"EnableFailed"|"Disabled"|string;
+  export type LDAPSStatusReason = string;
+  export type LDAPSType = "Client"|string;
   export type LastUpdatedDateTime = Date;
   export type LaunchTime = Date;
   export type LdifContent = string;
   export type Limit = number;
+  export interface ListCertificatesRequest {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * A token for requesting another page of certificates if the NextToken response element indicates that more certificates are available. Use the value of the returned NextToken element in your request until the token comes back as null. Pass null if this is the first call.
+     */
+    NextToken?: NextToken;
+    /**
+     * The number of items that should show up on one page
+     */
+    Limit?: PageLimit;
+  }
+  export interface ListCertificatesResult {
+    /**
+     * Indicates whether another page of certificates is available when the number of available certificates exceeds the page limit.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of certificates with basic details including certificate ID, certificate common name, certificate state.
+     */
+    CertificatesInfo?: CertificatesInfo;
+  }
   export interface ListIpRoutesRequest {
     /**
      * Identifier (ID) of the directory for which you want to retrieve the IP addresses.
@@ -1551,6 +1777,7 @@ declare namespace DirectoryService {
      */
     RadiusStatus?: RadiusStatus;
   }
+  export type PageLimit = number;
   export type Password = string;
   export type PortNumber = number;
   export type RadiusAuthenticationProtocol = "PAP"|"CHAP"|"MS-CHAPv1"|"MS-CHAPv2"|string;
@@ -1593,6 +1820,22 @@ declare namespace DirectoryService {
   export type RadiusSharedSecret = string;
   export type RadiusStatus = "Creating"|"Completed"|"Failed"|string;
   export type RadiusTimeout = number;
+  export interface RegisterCertificateRequest {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The certificate PEM string that needs to be registered.
+     */
+    CertificateData: CertificateData;
+  }
+  export interface RegisterCertificateResult {
+    /**
+     * The identifier of the certificate.
+     */
+    CertificateId?: CertificateId;
+  }
   export interface RegisterEventTopicRequest {
     /**
      * The Directory ID that will publish status messages to the SNS topic.

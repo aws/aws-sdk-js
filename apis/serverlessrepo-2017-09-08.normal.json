@@ -723,6 +723,11 @@
           "locationName": "homePageUrl",
           "documentation": "<p>A URL with more information about the application, for example the location of your GitHub repository for the application.</p>"
         },
+        "IsVerifiedAuthor": {
+          "shape": "__boolean",
+          "locationName": "isVerifiedAuthor",
+          "documentation": "<p>Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.</p>"
+        },
         "Labels": {
           "shape": "__listOf__string",
           "locationName": "labels",
@@ -747,6 +752,11 @@
           "shape": "__string",
           "locationName": "spdxLicenseId",
           "documentation": "<p>A valid identifier from https://spdx.org/licenses/.</p>"
+        },
+        "VerifiedAuthorUrl": {
+          "shape": "__string",
+          "locationName": "verifiedAuthorUrl",
+          "documentation": "<p>The URL to the public profile of a verified author. This URL is submitted by the author.</p>"
         },
         "Version": {
           "shape": "Version",
@@ -1091,6 +1101,11 @@
           "locationName": "homePageUrl",
           "documentation": "<p>A URL with more information about the application, for example the location of your GitHub repository for the application.</p>"
         },
+        "IsVerifiedAuthor": {
+          "shape": "__boolean",
+          "locationName": "isVerifiedAuthor",
+          "documentation": "<p>Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.</p>"
+        },
         "Labels": {
           "shape": "__listOf__string",
           "locationName": "labels",
@@ -1115,6 +1130,11 @@
           "shape": "__string",
           "locationName": "spdxLicenseId",
           "documentation": "<p>A valid identifier from https://spdx.org/licenses/.</p>"
+        },
+        "VerifiedAuthorUrl": {
+          "shape": "__string",
+          "locationName": "verifiedAuthorUrl",
+          "documentation": "<p>The URL to the public profile of a verified author. This URL is submitted by the author.</p>"
         },
         "Version": {
           "shape": "Version",
@@ -1570,6 +1590,11 @@
           "locationName": "homePageUrl",
           "documentation": "<p>A URL with more information about the application, for example the location of your GitHub repository for the application.</p>"
         },
+        "IsVerifiedAuthor": {
+          "shape": "__boolean",
+          "locationName": "isVerifiedAuthor",
+          "documentation": "<p>Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.</p>"
+        },
         "Labels": {
           "shape": "__listOf__string",
           "locationName": "labels",
@@ -1594,6 +1619,11 @@
           "shape": "__string",
           "locationName": "spdxLicenseId",
           "documentation": "<p>A valid identifier from https://spdx.org/licenses/.</p>"
+        },
+        "VerifiedAuthorUrl": {
+          "shape": "__string",
+          "locationName": "verifiedAuthorUrl",
+          "documentation": "<p>The URL to the public profile of a verified author. This URL is submitted by the author.</p>"
         },
         "Version": {
           "shape": "Version",

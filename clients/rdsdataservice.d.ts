@@ -92,7 +92,7 @@ declare namespace RDSDataService {
      */
     database?: DbName;
     /**
-     * The parameter set for the batch operation.
+     * The parameter set for the batch operation. The maximum number of parameters in a parameter set is 1,000.
      */
     parameterSets?: SqlParameterSets;
     /**
@@ -421,6 +421,10 @@ declare namespace RDSDataService {
      */
     name?: ParameterName;
     /**
+     * A hint that specifies the correct object type for data type mapping.  Values:     DECIMAL - The corresponding String parameter value is sent as an object of DECIMAL type to the database.    TIMESTAMP - The corresponding String parameter value is sent as an object of TIMESTAMP type to the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF].    TIME - The corresponding String parameter value is sent as an object of TIME type to the database. The accepted format is HH:MM:SS[.FFF].    DATE - The corresponding String parameter value is sent as an object of DATE type to the database. The accepted format is YYYY-MM-DD.  
+     */
+    typeHint?: TypeHint;
+    /**
      * The value of the parameter.
      */
     value?: Field;
@@ -449,6 +453,7 @@ declare namespace RDSDataService {
     attributes?: ArrayValueList;
   }
   export type TransactionStatus = string;
+  export type TypeHint = "DATE"|"DECIMAL"|"TIME"|"TIMESTAMP"|string;
   export interface UpdateResult {
     /**
      * Values for fields generated during the request.

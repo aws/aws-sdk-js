@@ -123,6 +123,21 @@ export namespace DocumentClient {
 export namespace DocumentClient {
   //<!--auto-generated start-->
   interface Blob {}
+  export type ArchivalReason = string;
+  export interface ArchivalSummary {
+    /**
+     * The date and time when table archival was initiated by DynamoDB, in UNIX epoch time format.
+     */
+    ArchivalDateTime?: _Date;
+    /**
+     * The reason DynamoDB archived the table. Currently, the only possible value is:    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The table was archived due to the table's AWS KMS key being inaccessible for more than seven days. An On-Demand backup was created at the archival time.  
+     */
+    ArchivalReason?: ArchivalReason;
+    /**
+     * The Amazon Resource Name (ARN) of the backup the table was archived to, when applicable in the archival reason. If you wish to restore this backup to the same table name, you will need to delete the original table.
+     */
+    ArchivalBackupArn?: BackupArn;
+  }
   export type AttributeAction = "ADD"|"PUT"|"DELETE"|string;
   export interface AttributeDefinition {
     /**
@@ -515,6 +530,25 @@ export namespace DocumentClient {
     PointInTimeRecoveryDescription?: PointInTimeRecoveryDescription;
   }
   export type ContinuousBackupsStatus = "ENABLED"|"DISABLED"|string;
+  export type ContributorInsightsAction = "ENABLE"|"DISABLE"|string;
+  export type ContributorInsightsRule = string;
+  export type ContributorInsightsRuleList = ContributorInsightsRule[];
+  export type ContributorInsightsStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"FAILED"|string;
+  export type ContributorInsightsSummaries = ContributorInsightsSummary[];
+  export interface ContributorInsightsSummary {
+    /**
+     * Name of the table associated with the summary.
+     */
+    TableName?: TableName;
+    /**
+     * Name of the index associated with the summary, if any.
+     */
+    IndexName?: IndexName;
+    /**
+     * Describes the current status for contributor insights for the given table and index, if applicable.
+     */
+    ContributorInsightsStatus?: ContributorInsightsStatus;
+  }
   export interface CreateBackupInput {
     /**
      * The name of the table.
@@ -789,6 +823,42 @@ export namespace DocumentClient {
      */
     ContinuousBackupsDescription?: ContinuousBackupsDescription;
   }
+  export interface DescribeContributorInsightsInput {
+    /**
+     * The name of the table to describe.
+     */
+    TableName: TableName;
+    /**
+     * The name of the global secondary index to describe, if applicable.
+     */
+    IndexName?: IndexName;
+  }
+  export interface DescribeContributorInsightsOutput {
+    /**
+     * The name of the table being described.
+     */
+    TableName?: TableName;
+    /**
+     * The name of the global secondary index being described.
+     */
+    IndexName?: IndexName;
+    /**
+     * List of names of the associated Alpine rules.
+     */
+    ContributorInsightsRuleList?: ContributorInsightsRuleList;
+    /**
+     * Current Status contributor insights.
+     */
+    ContributorInsightsStatus?: ContributorInsightsStatus;
+    /**
+     * Timestamp of the last time the status was changed.
+     */
+    LastUpdateDateTime?: LastUpdateDateTime;
+    /**
+     * Returns information about the last failure that encountered. The most common exceptions for a FAILED status are:   LimitExceededException - Per-account Amazon CloudWatch Contributor Insights rule limit reached. Please disable Contributor Insights for other tables/indexes OR disable Contributor Insights rules before retrying.   AccessDeniedException - Amazon CloudWatch Contributor Insights rules cannot be modified due to insufficient permissions.   AccessDeniedException - Failed to create service-linked role for Contributor Insights due to insufficient permissions.   InternalServerError - Failed to create Amazon CloudWatch Contributor Insights rules. Please retry request.  
+     */
+    FailureException?: FailureException;
+  }
   export interface DescribeEndpointsRequest {
   }
   export interface DescribeEndpointsResponse {
@@ -893,6 +963,8 @@ export namespace DocumentClient {
     CachePeriodInMinutes: Long;
   }
   export type Endpoints = Endpoint[];
+  export type ExceptionDescription = string;
+  export type ExceptionName = string;
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
     /**
@@ -916,6 +988,16 @@ export namespace DocumentClient {
   export type ExpressionAttributeNameVariable = string;
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
   export type ExpressionAttributeValueVariable = string;
+  export interface FailureException {
+    /**
+     * Exception name.
+     */
+    ExceptionName?: ExceptionName;
+    /**
+     * Description of the failure.
+     */
+    ExceptionDescription?: ExceptionDescription;
+  }
   export type FilterConditionMap = {[key: string]: Condition};
   export interface Get {
     /**
@@ -1191,6 +1273,7 @@ export namespace DocumentClient {
      */
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
   }
+  export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
   export interface ListBackupsInput {
     /**
@@ -1227,6 +1310,31 @@ export namespace DocumentClient {
      *  The ARN of the backup last evaluated when the current page of results was returned, inclusive of the current page of results. This value may be specified as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch the next page of results.   If LastEvaluatedBackupArn is empty, then the last page of results has been processed and there are no more results to be retrieved.   If LastEvaluatedBackupArn is not empty, this may or may not indicate that there is more data to be returned. All results are guaranteed to have been returned if and only if no value for LastEvaluatedBackupArn is returned. 
      */
     LastEvaluatedBackupArn?: BackupArn;
+  }
+  export interface ListContributorInsightsInput {
+    /**
+     * The name of the table.
+     */
+    TableName?: TableName;
+    /**
+     * A token to for the desired page, if there is one.
+     */
+    NextToken?: NextTokenString;
+    /**
+     * Maximum number of results to return per page.
+     */
+    MaxResults?: ListContributorInsightsLimit;
+  }
+  export type ListContributorInsightsLimit = number;
+  export interface ListContributorInsightsOutput {
+    /**
+     * A list of ContributorInsightsSummary.
+     */
+    ContributorInsightsSummaries?: ContributorInsightsSummaries;
+    /**
+     * A token to go to the next page if there is one.
+     */
+    NextToken?: NextTokenString;
   }
   export interface ListGlobalTablesInput {
     /**
@@ -1952,6 +2060,10 @@ export namespace DocumentClient {
      * The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
      */
     KMSMasterKeyArn?: KMSMasterKeyArn;
+    /**
+     * Indicates the time, in UNIX epoch date format, when DynamoDB detected that the table's AWS KMS key was inaccessible. This attribute will automatically be cleared when DynamoDB detects that the table's AWS KMS key is accessible again. DynamoDB will initiate the table archival process when table's AWS KMS key remains inaccessible for more than seven days from this date.
+     */
+    InaccessibleEncryptionDateTime?: _Date;
   }
   export type SSEEnabled = boolean;
   export interface SSESpecification {
@@ -2166,7 +2278,7 @@ export namespace DocumentClient {
      */
     KeySchema?: KeySchema;
     /**
-     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.  
+     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The AWS KMS key used to encrypt the table in inaccessible. Table operations may fail due to failure to use the AWS KMS key. DynamoDB will initiate the table archival process when a table's AWS KMS key remains inaccessible for more than seven days.     ARCHIVING - The table is being archived. Operations are not allowed until archival is complete.     ARCHIVED - The table has been archived. See the ArchivalReason for more information.   
      */
     TableStatus?: TableStatus;
     /**
@@ -2233,11 +2345,15 @@ export namespace DocumentClient {
      * The description of the server-side encryption status on the specified table.
      */
     SSEDescription?: SSEDescription;
+    /**
+     * Contains information about the table archive.
+     */
+    ArchivalSummary?: ArchivalSummary;
   }
   export type TableId = string;
   export type TableName = string;
   export type TableNameList = TableName[];
-  export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|"ARCHIVING"|"ARCHIVED"|string;
   export interface Tag {
     /**
      * The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value. 
@@ -2413,6 +2529,34 @@ export namespace DocumentClient {
      * Represents the continuous backups and point in time recovery settings on the table.
      */
     ContinuousBackupsDescription?: ContinuousBackupsDescription;
+  }
+  export interface UpdateContributorInsightsInput {
+    /**
+     * The name of the table.
+     */
+    TableName: TableName;
+    /**
+     * The global secondary index name, if applicable.
+     */
+    IndexName?: IndexName;
+    /**
+     * Represents the contributor insights action.
+     */
+    ContributorInsightsAction: ContributorInsightsAction;
+  }
+  export interface UpdateContributorInsightsOutput {
+    /**
+     * The name of the table.
+     */
+    TableName?: TableName;
+    /**
+     * The name of the global secondary index, if applicable.
+     */
+    IndexName?: IndexName;
+    /**
+     * The status of contributor insights
+     */
+    ContributorInsightsStatus?: ContributorInsightsStatus;
   }
   export type UpdateExpression = string;
   export interface UpdateGlobalSecondaryIndexAction {

@@ -135,6 +135,10 @@ declare namespace MediaTailor {
      */
     HlsConfiguration?: HlsConfiguration;
     /**
+     * The configuration for pre-roll ad insertion.
+     */
+    LivePreRollConfiguration?: LivePreRollConfiguration;
+    /**
      * The identifier for the playback configuration.
      */
     Name?: __string;
@@ -261,6 +265,16 @@ declare namespace MediaTailor {
      */
     VideoContentSourceUrl?: __string;
   }
+  export interface LivePreRollConfiguration {
+    /**
+     * The URL for the ad decision server (ADS) for pre-roll ads. This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.
+     */
+    AdDecisionServerUrl?: __string;
+    /**
+     * The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won't play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.
+     */
+    MaxDurationSeconds?: __integer;
+  }
   export interface PutPlaybackConfigurationRequest {
     /**
      * The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.
@@ -274,6 +288,10 @@ declare namespace MediaTailor {
      * The configuration for DASH content. 
      */
     DashConfiguration?: DashConfigurationForPut;
+    /**
+     * The configuration for pre-roll ad insertion.
+     */
+    LivePreRollConfiguration?: LivePreRollConfiguration;
     /**
      * The identifier for the playback configuration.
      */
@@ -312,6 +330,10 @@ declare namespace MediaTailor {
      * The configuration for HLS content. 
      */
     HlsConfiguration?: HlsConfiguration;
+    /**
+     * The configuration for pre-roll ad insertion.
+     */
+    LivePreRollConfiguration?: LivePreRollConfiguration;
     /**
      * The identifier for the playback configuration.
      */
@@ -370,6 +392,7 @@ declare namespace MediaTailor {
      */
     TagKeys: __listOf__string;
   }
+  export type __integer = number;
   export type __integerMin1Max100 = number;
   export type __listOfPlaybackConfigurations = PlaybackConfiguration[];
   export type __listOf__string = __string[];

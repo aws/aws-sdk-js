@@ -220,11 +220,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminUpdateUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse, AWSError>;
   /**
-   * Signs out users from all devices, as an administrator. Calling this action requires developer credentials.
+   * Signs out users from all devices, as an administrator. It also invalidates all refresh tokens issued to a user. The user's current access and Id tokens remain valid until their expiry. Access and Id tokens expire one hour after they are issued. Calling this action requires developer credentials.
    */
   adminUserGlobalSignOut(params: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
-   * Signs out users from all devices, as an administrator. Calling this action requires developer credentials.
+   * Signs out users from all devices, as an administrator. It also invalidates all refresh tokens issued to a user. The user's current access and Id tokens remain valid until their expiry. Access and Id tokens expire one hour after they are issued. Calling this action requires developer credentials.
    */
   adminUserGlobalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
@@ -532,11 +532,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   getUserPoolMfaConfig(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse, AWSError>;
   /**
-   * Signs out users from all devices.
+   * Signs out users from all devices. It also invalidates all refresh tokens issued to a user. The user's current access and Id tokens remain valid until their expiry. Access and Id tokens expire one hour after they are issued.
    */
   globalSignOut(params: CognitoIdentityServiceProvider.Types.GlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.GlobalSignOutResponse, AWSError>;
   /**
-   * Signs out users from all devices.
+   * Signs out users from all devices. It also invalidates all refresh tokens issued to a user. The user's current access and Id tokens remain valid until their expiry. Access and Id tokens expire one hour after they are issued.
    */
   globalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.GlobalSignOutResponse, AWSError>;
   /**
@@ -814,6 +814,12 @@ declare class CognitoIdentityServiceProvider extends Service {
 }
 declare namespace CognitoIdentityServiceProvider {
   export type AWSAccountIdType = string;
+  export interface AccountRecoverySettingType {
+    /**
+     * The list of RecoveryOptionTypes.
+     */
+    RecoveryMechanisms?: RecoveryMechanismsType;
+  }
   export type AccountTakeoverActionNotifyType = boolean;
   export interface AccountTakeoverActionType {
     /**
@@ -2049,6 +2055,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Used to enable advanced security risk detection. Set the key AdvancedSecurityMode to the value "AUDIT".
      */
     UserPoolAddOns?: UserPoolAddOnsType;
+    /**
+     * Use this setting to define which verified available method a user can use to recover their password when they call ForgotPassword. It allows you to define a preferred method when a user has more than one method available. With this setting, SMS does not qualify for a valid password recovery mechanism if the user also has SMS MFA enabled. In the absence of this setting, Cognito uses the legacy behavior to determine the recovery method where SMS is preferred over email.  Starting February 1, 2020, the value of AccountRecoverySetting will default to verified_email first and verified_phone_number as the second option for newly created user pools if no value is provided. 
+     */
+    AccountRecoverySetting?: AccountRecoverySettingType;
   }
   export interface CreateUserPoolResponse {
     /**
@@ -3161,6 +3171,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type PreSignedUrlType = string;
   export type PrecedenceType = number;
   export type PreventUserExistenceErrorTypes = "LEGACY"|"ENABLED"|string;
+  export type PriorityType = number;
   export interface ProviderDescription {
     /**
      * The identity provider name.
@@ -3199,6 +3210,18 @@ declare namespace CognitoIdentityServiceProvider {
   export type ProvidersListType = ProviderDescription[];
   export type QueryLimit = number;
   export type QueryLimitType = number;
+  export type RecoveryMechanismsType = RecoveryOptionType[];
+  export type RecoveryOptionNameType = "verified_email"|"verified_phone_number"|"admin_only"|string;
+  export interface RecoveryOptionType {
+    /**
+     * A positive integer specifying priority of a method with 1 being the highest priority.
+     */
+    Priority: PriorityType;
+    /**
+     * Specifies the recovery method for a user.
+     */
+    Name: RecoveryOptionNameType;
+  }
   export type RedirectUrlType = string;
   export type RefreshTokenValidityType = number;
   export interface ResendConfirmationCodeRequest {
@@ -4006,6 +4029,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Used to enable advanced security risk detection. Set the key AdvancedSecurityMode to the value "AUDIT".
      */
     UserPoolAddOns?: UserPoolAddOnsType;
+    /**
+     * Use this setting to define which verified available method a user can use to recover their password when they call ForgotPassword. It allows you to define a preferred method when a user has more than one method available. With this setting, SMS does not qualify for a valid password recovery mechanism if the user also has SMS MFA enabled. In the absence of this setting, Cognito uses the legacy behavior to determine the recovery method where SMS is preferred over email.
+     */
+    AccountRecoverySetting?: AccountRecoverySettingType;
   }
   export interface UpdateUserPoolResponse {
   }
@@ -4329,6 +4356,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The Amazon Resource Name (ARN) for the user pool.
      */
     Arn?: ArnType;
+    /**
+     * Use this setting to define which verified available method a user can use to recover their password when they call ForgotPassword. It allows you to define a preferred method when a user has more than one method available. With this setting, SMS does not qualify for a valid password recovery mechanism if the user also has SMS MFA enabled. In the absence of this setting, Cognito uses the legacy behavior to determine the recovery method where SMS is preferred over email.
+     */
+    AccountRecoverySetting?: AccountRecoverySettingType;
   }
   export type UserStatusType = "UNCONFIRMED"|"CONFIRMED"|"ARCHIVED"|"COMPROMISED"|"UNKNOWN"|"RESET_REQUIRED"|"FORCE_CHANGE_PASSWORD"|string;
   export interface UserType {
