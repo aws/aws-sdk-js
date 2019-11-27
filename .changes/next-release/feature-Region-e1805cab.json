@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Region",
+  "description": "s3 client now support sending request to us-east-1 regional endpoint with `s3UsEast1RegionalEndpoint` client configuration set to `regional`"
+}

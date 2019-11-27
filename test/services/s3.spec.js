@@ -3202,9 +3202,9 @@ describe('AWS.S3', function() {
       for (var i = 0; i < values.length; i++) {
         var s3 = new AWS.S3({s3UsEast1RegionalEndpoint: values[i]});
         var request = s3.listBuckets().build(function() {});
-        expect(['regional', 'legacy'].indexOf(
-          request.service.config.s3UsEast1RegionalEndpoint
-        ) >= 0).to.equal(true);
+        expect(request.service.config.s3UsEast1RegionalEndpoint).to.equal(
+          values[i].toLowerCase()
+        );
       }
     });
 
