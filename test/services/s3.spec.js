@@ -3194,4 +3194,142 @@ describe('AWS.S3', function() {
       });
     });
   });
+
+  describe('s3UsEast1RegionalEndpoint config', function() {
+    it('should set the config from client', function() {
+      helpers.mockHttpResponse(200, {}, '{}');
+      var values = ['regional', 'RegionaL', 'legacy', 'LegacY'];
+      for (var i = 0; i < values.length; i++) {
+        var s3 = new AWS.S3({s3UsEast1RegionalEndpoint: values[i]});
+        var request = s3.listBuckets().build(function() {});
+        expect(request.service.config.s3UsEast1RegionalEndpoint).to.equal(
+          values[i].toLowerCase()
+        );
+      }
+    });
+
+    it('should throw if the config is set to invalid values', function() {
+      helpers.mockHttpResponse(200, {}, '{}');
+      var values = ['foo', 'bar', 'region'];
+      var errors = [];
+      for (var i = 0; i < values.length; i++) {
+        var s3 = new AWS.S3({s3UsEast1RegionalEndpoint: values[i]});
+        s3.listBuckets().build(function(err) {
+          errors.push(err);
+        });
+      }
+      expect(errors.length).to.equal(values.length);
+      for (var i = 0; i < errors.length; i++) {
+        expect(errors[i].code).to.equal('InvalidConfiguration');
+      }
+    });
+
+    if (AWS.util.isNode()) {
+      describe('should set the config from AWS_S3_US_EAST_1_REGIONAL_ENDPOINT environmental variable', function() {
+        var originalEnv;
+        beforeEach(function() {
+          originalEnv = process.env;
+          process.env = {};
+        });
+        afterEach(function() {
+          process.env = originalEnv;
+        });
+        it('should be used if client config is not set', function() {
+          process.env.AWS_S3_US_EAST_1_REGIONAL_ENDPOINT = 'Regional';
+          var s3 = new AWS.S3();
+          s3.listBuckets().build(function() {});
+          expect(s3.config.s3UsEast1RegionalEndpoint).to.equal('regional');
+          process.env.AWS_S3_US_EAST_1_REGIONAL_ENDPOINT = 'LegacY';
+          s3 = new AWS.S3();
+          s3.listBuckets().build(function() {});
+          expect(s3.config.s3UsEast1RegionalEndpoint).to.equal('legacy');
+        });
+
+        it('should throw if the config is set to invalid values', function() {
+          var values = ['foo', 'bar', 'region'];
+          var errors = [];
+          for (var i = 0; i < values.length; i++) {
+            process.env.AWS_S3_US_EAST_1_REGIONAL_ENDPOINT = values[i];
+            s3 = new AWS.S3();
+            s3.listBuckets().build(function(err) {
+              errors.push(err);
+            });
+          }
+          expect(errors.length).to.equal(values.length);
+          for (var i = 0; i < errors.length; i++) {
+            expect(errors[i].code).to.equal('InvalidEnvironmentalVariable');
+          }
+        });
+      });
+
+      describe('should set config from s3_us_east_1_regional_endpoint config file entry', function() {
+        it('should be used if environmental variable is not set', function() {
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({
+            default: {
+              s3_us_east_1_regional_endpoint: 'RegionaL'
+            }
+          });
+          var s3 = new AWS.S3();
+          s3.listBuckets().build(function() {});
+          expect(s3.config.s3UsEast1RegionalEndpoint).to.equal('regional');
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({
+            default: {
+              s3_us_east_1_regional_endpoint: 'LegaCy'
+            }
+          });
+          var s3 = new AWS.S3();
+          s3.listBuckets().build(function() {});
+          expect(s3.config.s3UsEast1RegionalEndpoint).to.equal('legacy');
+        });
+
+        it('should throw if the config is set to invalid values', function() {
+          var values = ['foo', 'bar', 'region'];
+          var errors = [];
+          for (var i = 0; i < values.length; i++) {
+            helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({
+              default: {
+                s3_us_east_1_regional_endpoint: values[i]
+              }
+            });
+            s3 = new AWS.S3();
+            s3.listBuckets().build(function(err) {
+              errors.push(err);
+            });
+          }
+          expect(errors.length).to.equal(values.length);
+          for (var i = 0; i < errors.length; i++) {
+            expect(errors[i].code).to.equal('InvalidConfiguration');
+          }
+        });
+      });
+
+      describe('should construct regional endpoint correctly', function() {
+        it('according to config settings', function() {
+          var s3 = new AWS.S3({region: 'us-west-2'});
+          var request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('s3.us-west-2.amazonaws.com');
+          s3 = new AWS.S3({region: 'us-east-1'});
+          var request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('s3.amazonaws.com');
+          s3 = new AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'regional'});
+          request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('s3.us-east-1.amazonaws.com');
+        });
+        it('should use global endpoints for when config is set to legacy', function() {
+          s3 = new AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'legacy'});
+          request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('s3.amazonaws.com');
+        });
+        it('should not update endpoint if supplied a custom endpoint', function() {
+          s3 = new AWS.S3({
+            region: 'us-east-1',
+            s3UsEast1RegionalEndpoint: 'regional',
+            endpoint: 's3.amazonaws.com'
+          });
+          request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.contain('s3.amazonaws.com');
+        });
+      });
+    }
+  });
 });
