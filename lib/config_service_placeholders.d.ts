@@ -205,6 +205,8 @@ export abstract class ConfigurationServicePlaceholders {
   iotsecuretunneling?: AWS.IoTSecureTunneling.Types.ClientConfiguration;
   wafv2?: AWS.WAFV2.Types.ClientConfiguration;
   elasticinference?: AWS.ElasticInference.Types.ClientConfiguration;
+  imagebuilder?: AWS.Imagebuilder.Types.ClientConfiguration;
+  schemas?: AWS.Schemas.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -412,4 +414,6 @@ export interface ConfigurationServiceApiVersions {
   iotsecuretunneling?: AWS.IoTSecureTunneling.Types.apiVersion;
   wafv2?: AWS.WAFV2.Types.apiVersion;
   elasticinference?: AWS.ElasticInference.Types.apiVersion;
+  imagebuilder?: AWS.Imagebuilder.Types.apiVersion;
+  schemas?: AWS.Schemas.Types.apiVersion;
 }

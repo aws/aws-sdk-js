@@ -1,0 +1,2289 @@
+{
+  "metadata": {
+    "apiVersion": "2019-12-02",
+    "endpointPrefix": "schemas",
+    "signingName": "schemas",
+    "serviceFullName": "Schemas",
+    "serviceId": "schemas",
+    "protocol": "rest-json",
+    "jsonVersion": "1.1",
+    "uid": "schemas-2019-12-02",
+    "signatureVersion": "v4"
+  },
+  "operations": {
+    "CreateDiscoverer": {
+      "name": "CreateDiscoverer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/discoverers",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateDiscovererRequest"
+      },
+      "output": {
+        "shape": "CreateDiscovererResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Creates a discoverer.</p>"
+    },
+    "CreateRegistry": {
+      "name": "CreateRegistry",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/registries/name/{registryName}",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateRegistryRequest"
+      },
+      "output": {
+        "shape": "CreateRegistryResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Creates a registry.</p>"
+    },
+    "CreateSchema": {
+      "name": "CreateSchema",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateSchemaRequest"
+      },
+      "output": {
+        "shape": "CreateSchemaResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>Creates a schema definition.</p>"
+    },
+    "DeleteDiscoverer": {
+      "name": "DeleteDiscoverer",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/discoverers/id/{discovererId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteDiscovererRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Deletes a discoverer.</p>"
+    },
+    "DeleteRegistry": {
+      "name": "DeleteRegistry",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/registries/name/{registryName}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteRegistryRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Deletes a Registry.</p>"
+    },
+    "DeleteSchema": {
+      "name": "DeleteSchema",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteSchemaRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Delete a schema definition.</p>"
+    },
+    "DeleteSchemaVersion": {
+      "name": "DeleteSchemaVersion",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}/version/{schemaVersion}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteSchemaVersionRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Delete the schema version definition</p>"
+    },
+    "DescribeCodeBinding": {
+      "name": "DescribeCodeBinding",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}/language/{language}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeCodeBindingRequest"
+      },
+      "output": {
+        "shape": "DescribeCodeBindingResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Describe the code binding URI.</p>"
+    },
+    "DescribeDiscoverer": {
+      "name": "DescribeDiscoverer",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/discoverers/id/{discovererId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeDiscovererRequest"
+      },
+      "output": {
+        "shape": "DescribeDiscovererResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Describes the discoverer.</p>"
+    },
+    "DescribeRegistry": {
+      "name": "DescribeRegistry",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries/name/{registryName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeRegistryRequest"
+      },
+      "output": {
+        "shape": "DescribeRegistryResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Describes the registry.</p>"
+    },
+    "DescribeSchema": {
+      "name": "DescribeSchema",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeSchemaRequest"
+      },
+      "output": {
+        "shape": "DescribeSchemaResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Retrieve the schema definition.</p>"
+    },
+    "GetCodeBindingSource": {
+      "name": "GetCodeBindingSource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}/language/{language}/source",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetCodeBindingSourceRequest"
+      },
+      "output": {
+        "shape": "GetCodeBindingSourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Get the code binding source URI.</p>"
+    },
+    "GetDiscoveredSchema": {
+      "name": "GetDiscoveredSchema",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/discover",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetDiscoveredSchemaRequest"
+      },
+      "output": {
+        "shape": "GetDiscoveredSchemaResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>Get the discovered schema that was generated based on sampled events.</p>"
+    },
+    "ListDiscoverers": {
+      "name": "ListDiscoverers",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/discoverers",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListDiscoverersRequest"
+      },
+      "output": {
+        "shape": "ListDiscoverersResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>List the discoverers.</p>"
+    },
+    "ListRegistries": {
+      "name": "ListRegistries",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListRegistriesRequest"
+      },
+      "output": {
+        "shape": "ListRegistriesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>List the registries.</p>"
+    },
+    "ListSchemaVersions": {
+      "name": "ListSchemaVersions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}/versions",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListSchemaVersionsRequest"
+      },
+      "output": {
+        "shape": "ListSchemaVersionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Provides a list of the schema versions and related information.</p>"
+    },
+    "ListSchemas": {
+      "name": "ListSchemas",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries/name/{registryName}/schemas",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListSchemasRequest"
+      },
+      "output": {
+        "shape": "ListSchemasResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>List the schemas.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resource-arn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>Get tags for resource.</p>"
+    },
+    "LockServiceLinkedRole": {
+      "name": "LockServiceLinkedRole",
+      "http": {
+        "method": "POST",
+        "requestUri": "/slr-deletion/lock",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "LockServiceLinkedRoleRequest"
+      },
+      "output": {
+        "shape": "LockServiceLinkedRoleResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "internal": true
+    },
+    "PutCodeBinding": {
+      "name": "PutCodeBinding",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}/language/{language}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "PutCodeBindingRequest"
+      },
+      "output": {
+        "shape": "PutCodeBindingResponse"
+      },
+      "errors": [
+        {
+          "shape": "GoneException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Put code binding URI</p>"
+    },
+    "SearchSchemas": {
+      "name": "SearchSchemas",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/search",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "SearchSchemasRequest"
+      },
+      "output": {
+        "shape": "SearchSchemasResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>Search the schemas</p>"
+    },
+    "StartDiscoverer": {
+      "name": "StartDiscoverer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/discoverers/id/{discovererId}/start",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "StartDiscovererRequest"
+      },
+      "output": {
+        "shape": "StartDiscovererResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Starts the discoverer</p>"
+    },
+    "StopDiscoverer": {
+      "name": "StopDiscoverer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/discoverers/id/{discovererId}/stop",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "StopDiscovererRequest"
+      },
+      "output": {
+        "shape": "StopDiscovererResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Stops the discoverer</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>Add tags to a resource.</p>"
+    },
+    "UnlockServiceLinkedRole": {
+      "name": "UnlockServiceLinkedRole",
+      "http": {
+        "method": "POST",
+        "requestUri": "/slr-deletion/unlock",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UnlockServiceLinkedRoleRequest"
+      },
+      "output": {
+        "shape": "UnlockServiceLinkedRoleResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "internal": true
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        }
+      ],
+      "documentation": "<p>Removes tags from a resource.</p>"
+    },
+    "UpdateDiscoverer": {
+      "name": "UpdateDiscoverer",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/discoverers/id/{discovererId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateDiscovererRequest"
+      },
+      "output": {
+        "shape": "UpdateDiscovererResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates the discoverer</p>"
+    },
+    "UpdateRegistry": {
+      "name": "UpdateRegistry",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/registries/name/{registryName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateRegistryRequest"
+      },
+      "output": {
+        "shape": "UpdateRegistryResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates a registry.</p>"
+    },
+    "UpdateSchema": {
+      "name": "UpdateSchema",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateSchemaRequest"
+      },
+      "output": {
+        "shape": "UpdateSchemaResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates the schema definition</p>"
+    }
+  },
+  "shapes": {
+    "CodeGenerationStatus": {
+      "type": "string",
+      "enum": [
+        "CREATE_IN_PROGRESS",
+        "CREATE_COMPLETE",
+        "CREATE_FAILED"
+      ]
+    },
+    "CreateDiscovererRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__stringMin0Max256",
+          "documentation": "<p>A description for the discoverer.</p>"
+        },
+        "SourceArn": {
+          "shape": "__stringMin20Max1600",
+          "documentation": "<p>The ARN of the event bus.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the resource.</p>"
+        }
+      },
+      "required": [
+        "SourceArn"
+      ]
+    },
+    "CreateDiscovererResponse": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the discoverer.</p>"
+        },
+        "DiscovererArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the discoverer.</p>"
+        },
+        "DiscovererId": {
+          "shape": "__string",
+          "documentation": "<p>The ID of the discoverer.</p>"
+        },
+        "SourceArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the event bus.</p>"
+        },
+        "State": {
+          "shape": "DiscovererState",
+          "documentation": "<p>The state of the discoverer.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the resource.</p>"
+        }
+      }
+    },
+    "CreateRegistryRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__stringMin0Max256",
+          "documentation": "<p>A description of the registry to be created.</p>"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags to associate with the registry.</p>"
+        }
+      },
+      "required": [
+        "RegistryName"
+      ]
+    },
+    "CreateRegistryResponse": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the registry.</p>"
+        },
+        "RegistryArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the registry.</p>"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the registry.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the registry.</p>"
+        }
+      }
+    },
+    "CreateSchemaRequest": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "__stringMin1Max100000"
+        },
+        "Description": {
+          "shape": "__stringMin0Max256",
+          "documentation": "<p>A description of the schema.</p>"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the schema.</p>"
+        },
+        "Type": {
+          "shape": "Type"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName",
+        "Type",
+        "Content"
+      ]
+    },
+    "CreateSchemaResponse": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the schema.</p>"
+        },
+        "LastModified": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date and time that schema was modified.</p>"
+        },
+        "SchemaArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the schema.</p>"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the schema.</p>"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "documentation": "<p>The version number of the schema</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags"
+        },
+        "Type": {
+          "shape": "__string",
+          "documentation": "<p>The type of the schema.</p>"
+        },
+        "VersionCreatedDate": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date the schema version was created.</p>"
+        }
+      }
+    },
+    "DeleteDiscovererRequest": {
+      "type": "structure",
+      "members": {
+        "DiscovererId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "discovererId"
+        }
+      },
+      "required": [
+        "DiscovererId"
+      ]
+    },
+    "DeleteRegistryRequest": {
+      "type": "structure",
+      "members": {
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        }
+      },
+      "required": [
+        "RegistryName"
+      ]
+    },
+    "DeleteSchemaRequest": {
+      "type": "structure",
+      "members": {
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName"
+      ]
+    },
+    "DeleteSchemaVersionRequest": {
+      "type": "structure",
+      "members": {
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaVersion"
+        }
+      },
+      "required": [
+        "SchemaVersion",
+        "RegistryName",
+        "SchemaName"
+      ]
+    },
+    "DescribeCodeBindingRequest": {
+      "type": "structure",
+      "members": {
+        "Language": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "language"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "schemaVersion"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName",
+        "Language"
+      ]
+    },
+    "DescribeCodeBindingResponse": {
+      "type": "structure",
+      "members": {
+        "CreationDate": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The time and date that the code binding was created.</p>"
+        },
+        "LastModified": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date and time that code bindings were modified.</p>"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "documentation": "<p>The version number of the schema.</p>"
+        },
+        "Status": {
+          "shape": "CodeGenerationStatus",
+          "documentation": "<p>The current status of code binding generation.</p>"
+        }
+      }
+    },
+    "DescribeDiscovererRequest": {
+      "type": "structure",
+      "members": {
+        "DiscovererId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "discovererId"
+        }
+      },
+      "required": [
+        "DiscovererId"
+      ]
+    },
+    "DescribeDiscovererResponse": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the discoverer.</p>"
+        },
+        "DiscovererArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the discoverer.</p>"
+        },
+        "DiscovererId": {
+          "shape": "__string",
+          "documentation": "<p>The ID of the discoverer.</p>"
+        },
+        "SourceArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the event bus.</p>"
+        },
+        "State": {
+          "shape": "DiscovererState",
+          "documentation": "<p>The state of the discoverer.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the resource.</p>"
+        }
+      }
+    },
+    "DescribeRegistryRequest": {
+      "type": "structure",
+      "members": {
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        }
+      },
+      "required": [
+        "RegistryName"
+      ]
+    },
+    "DescribeRegistryResponse": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the registry.</p>"
+        },
+        "RegistryArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the registry.</p>"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the registry.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the registry.</p>"
+        }
+      }
+    },
+    "DescribeSchemaRequest": {
+      "type": "structure",
+      "members": {
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "schemaVersion"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName"
+      ]
+    },
+    "DescribeSchemaResponse": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "__string"
+        },
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the schema.</p>"
+        },
+        "LastModified": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date and time that schema was modified.</p>"
+        },
+        "SchemaArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the schema.</p>"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the schema.</p>"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "documentation": "<p>The version number of the schema</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the resource.</p>"
+        },
+        "Type": {
+          "shape": "__string",
+          "documentation": "<p>The type of the schema.</p>"
+        },
+        "VersionCreatedDate": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date the schema version was created.</p>"
+        }
+      }
+    },
+    "DiscovererState": {
+      "type": "string",
+      "enum": [
+        "STARTED",
+        "STOPPED"
+      ]
+    },
+    "DiscovererSummary": {
+      "type": "structure",
+      "members": {
+        "DiscovererArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the discoverer.</p>"
+        },
+        "DiscovererId": {
+          "shape": "__string",
+          "documentation": "<p>The ID of the discoverer.</p>"
+        },
+        "SourceArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the event bus.</p>"
+        },
+        "State": {
+          "shape": "DiscovererState"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the resource.</p>"
+        }
+      }
+    },
+    "GetCodeBindingSourceRequest": {
+      "type": "structure",
+      "members": {
+        "Language": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "language"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "schemaVersion"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName",
+        "Language"
+      ]
+    },
+    "GetCodeBindingSourceResponse": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "Body"
+        }
+      },
+      "payload": "Body"
+    },
+    "GetDiscoveredSchemaRequest": {
+      "type": "structure",
+      "members": {
+        "Events": {
+          "shape": "__listOfGetDiscoveredSchemaVersionItemInput",
+          "documentation": "<p>An array of strings that</p>"
+        },
+        "Type": {
+          "shape": "Type",
+          "documentation": "<p>The type of event.</p>"
+        }
+      },
+      "required": [
+        "Type",
+        "Events"
+      ]
+    },
+    "GetDiscoveredSchemaResponse": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "__string"
+        }
+      }
+    },
+    "GetDiscoveredSchemaVersionItemInput": {
+      "type": "string",
+      "min": 1,
+      "max": 100000
+    },
+    "ListDiscoverersRequest": {
+      "type": "structure",
+      "members": {
+        "DiscovererIdPrefix": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "discovererIdPrefix"
+        },
+        "Limit": {
+          "shape": "__integer",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "SourceArnPrefix": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "sourceArnPrefix"
+        }
+      }
+    },
+    "ListDiscoverersResponse": {
+      "type": "structure",
+      "members": {
+        "Discoverers": {
+          "shape": "__listOfDiscovererSummary",
+          "documentation": "<p>An array of DiscovererSummary information.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>"
+        }
+      }
+    },
+    "ListRegistriesRequest": {
+      "type": "structure",
+      "members": {
+        "Limit": {
+          "shape": "__integer",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "RegistryNamePrefix": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "registryNamePrefix"
+        },
+        "Scope": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "scope"
+        }
+      }
+    },
+    "ListRegistriesResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>"
+        },
+        "Registries": {
+          "shape": "__listOfRegistrySummary",
+          "documentation": "<p>An array of registry summaries.</p>"
+        }
+      }
+    },
+    "ListSchemaVersionsRequest": {
+      "type": "structure",
+      "members": {
+        "Limit": {
+          "shape": "__integer",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName"
+      ]
+    },
+    "ListSchemaVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>"
+        },
+        "SchemaVersions": {
+          "shape": "__listOfSchemaVersionSummary",
+          "documentation": "<p>An array of schema version summaries.</p>"
+        }
+      }
+    },
+    "ListSchemasRequest": {
+      "type": "structure",
+      "members": {
+        "Limit": {
+          "shape": "__integer",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaNamePrefix": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "schemaNamePrefix"
+        }
+      },
+      "required": [
+        "RegistryName"
+      ]
+    },
+    "ListSchemasResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>"
+        },
+        "Schemas": {
+          "shape": "__listOfSchemaSummary",
+          "documentation": "<p>An array of schema summaries.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn"
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ]
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "Tags"
+        }
+      },
+      "required": [
+        "Tags"
+      ]
+    },
+    "LockServiceLinkedRoleRequest": {
+      "type": "structure",
+      "members": {
+        "RoleArn": {
+          "shape": "__stringMin1Max1600"
+        },
+        "Timeout": {
+          "shape": "__integerMin1Max29000"
+        }
+      },
+      "required": [
+        "Timeout",
+        "RoleArn"
+      ]
+    },
+    "LockServiceLinkedRoleResponse": {
+      "type": "structure",
+      "members": {
+        "CanBeDeleted": {
+          "shape": "__boolean"
+        },
+        "ReasonOfFailure": {
+          "shape": "__stringMin1Max1600"
+        },
+        "RelatedResources": {
+          "shape": "__listOfDiscovererSummary"
+        }
+      }
+    },
+    "PutCodeBindingRequest": {
+      "type": "structure",
+      "members": {
+        "Language": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "language"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "schemaVersion"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName",
+        "Language"
+      ]
+    },
+    "PutCodeBindingResponse": {
+      "type": "structure",
+      "members": {
+        "CreationDate": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The time and date that the code binding was created.</p>"
+        },
+        "LastModified": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date and time that code bindings were modified.</p>"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "documentation": "<p>The version number of the schema.</p>"
+        },
+        "Status": {
+          "shape": "CodeGenerationStatus",
+          "documentation": "<p>The current status of code binding generation.</p>"
+        }
+      }
+    },
+    "RegistrySummary": {
+      "type": "structure",
+      "members": {
+        "RegistryArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the registry.</p>"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the registry.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the registry.</p>"
+        }
+      }
+    },
+    "SchemaSummary": {
+      "type": "structure",
+      "members": {
+        "LastModified": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date and time that schema was modified.</p>"
+        },
+        "SchemaArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the schema.</p>"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the schema.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the schema.</p>"
+        },
+        "VersionCount": {
+          "shape": "__long",
+          "documentation": "<p>The number of versions available for the schema.</p>"
+        }
+      },
+      "documentation": "<p>A summary of schema details.</p>"
+    },
+    "SchemaVersionSummary": {
+      "type": "structure",
+      "members": {
+        "SchemaArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the schema version.</p>"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the schema.</p>"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "documentation": "<p>The version number of the schema.</p>"
+        }
+      }
+    },
+    "SearchSchemaSummary": {
+      "type": "structure",
+      "members": {
+        "RegistryName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the registry.</p>"
+        },
+        "SchemaArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the schema.</p>"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the schema.</p>"
+        },
+        "SchemaVersions": {
+          "shape": "__listOfSearchSchemaVersionSummary",
+          "documentation": "<p>An array of schema version summaries.</p>"
+        }
+      }
+    },
+    "SearchSchemaVersionSummary": {
+      "type": "structure",
+      "members": {
+        "CreatedDate": {
+          "shape": "__timestampIso8601"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "documentation": "<p>The version number of the schema</p>"
+        }
+      }
+    },
+    "SearchSchemasRequest": {
+      "type": "structure",
+      "members": {
+        "Keywords": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "keywords"
+        },
+        "Limit": {
+          "shape": "__integer",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "Keywords"
+      ]
+    },
+    "SearchSchemasResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>"
+        },
+        "Schemas": {
+          "shape": "__listOfSearchSchemaSummary",
+          "documentation": "<p>An array of SearchSchemaSummary information.</p>"
+        }
+      }
+    },
+    "StartDiscovererRequest": {
+      "type": "structure",
+      "members": {
+        "DiscovererId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "discovererId"
+        }
+      },
+      "required": [
+        "DiscovererId"
+      ]
+    },
+    "StartDiscovererResponse": {
+      "type": "structure",
+      "members": {
+        "DiscovererId": {
+          "shape": "__string",
+          "documentation": "<p>The ID of the discoverer.</p>"
+        },
+        "State": {
+          "shape": "DiscovererState",
+          "documentation": "<p>The state of the discoverer.</p>"
+        }
+      }
+    },
+    "StopDiscovererRequest": {
+      "type": "structure",
+      "members": {
+        "DiscovererId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "discovererId"
+        }
+      },
+      "required": [
+        "DiscovererId"
+      ]
+    },
+    "StopDiscovererResponse": {
+      "type": "structure",
+      "members": {
+        "DiscovererId": {
+          "shape": "__string",
+          "documentation": "<p>The ID of the discoverer.</p>"
+        },
+        "State": {
+          "shape": "DiscovererState",
+          "documentation": "<p>The state of the discoverer.</p>"
+        }
+      }
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags"
+        }
+      },
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ]
+    },
+    "Tags": {
+      "type": "map",
+      "documentation": "<p>Key-value pairs associated with a resource.</p>",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
+        "shape": "__string"
+      }
+    },
+    "Type": {
+      "type": "string",
+      "enum": [
+        "OpenApi3"
+      ]
+    },
+    "UnlockServiceLinkedRoleRequest": {
+      "type": "structure",
+      "members": {
+        "RoleArn": {
+          "shape": "__stringMin1Max1600"
+        }
+      },
+      "required": [
+        "RoleArn"
+      ]
+    },
+    "UnlockServiceLinkedRoleResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn"
+        },
+        "TagKeys": {
+          "shape": "__listOf__string",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      },
+      "required": [
+        "TagKeys",
+        "ResourceArn"
+      ]
+    },
+    "UpdateDiscovererRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__stringMin0Max256",
+          "documentation": "<p>The description of the discoverer to update.</p>"
+        },
+        "DiscovererId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "discovererId"
+        }
+      },
+      "required": [
+        "DiscovererId"
+      ]
+    },
+    "UpdateDiscovererResponse": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the discoverer.</p>"
+        },
+        "DiscovererArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the discoverer.</p>"
+        },
+        "DiscovererId": {
+          "shape": "__string",
+          "documentation": "<p>The ID of the discoverer.</p>"
+        },
+        "SourceArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the event bus.</p>"
+        },
+        "State": {
+          "shape": "DiscovererState",
+          "documentation": "<p>The state of the discoverer.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the resource.</p>"
+        }
+      }
+    },
+    "UpdateRegistryRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__stringMin0Max256",
+          "documentation": "<p>The description of the registry to update.</p>"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        }
+      },
+      "required": [
+        "RegistryName"
+      ]
+    },
+    "UpdateRegistryResponse": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the registry.</p>"
+        },
+        "RegistryArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the registry.</p>"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the registry.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags associated with the registry.</p>"
+        }
+      }
+    },
+    "UpdateSchemaRequest": {
+      "type": "structure",
+      "members": {
+        "ClientTokenId": {
+          "shape": "__stringMin0Max36",
+          "documentation": "<p>The ID of the client token.</p>",
+          "idempotencyToken": true
+        },
+        "Content": {
+          "shape": "__stringMin1Max100000",
+          "documentation": "<p>The source of the schema definition.</p>"
+        },
+        "Description": {
+          "shape": "__stringMin0Max256",
+          "documentation": "<p>The description of the schema.</p>"
+        },
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName"
+        },
+        "Type": {
+          "shape": "Type",
+          "documentation": "<p>The schema type for the events schema.</p>"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName"
+      ]
+    },
+    "UpdateSchemaResponse": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "__string",
+          "documentation": "<p>The description of the schema.</p>"
+        },
+        "LastModified": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date and time that schema was modified.</p>"
+        },
+        "SchemaArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of the schema.</p>"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the schema.</p>"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "documentation": "<p>The version number of the schema</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags"
+        },
+        "Type": {
+          "shape": "__string",
+          "documentation": "<p>The type of the schema.</p>"
+        },
+        "VersionCreatedDate": {
+          "shape": "__timestampIso8601",
+          "documentation": "<p>The date the schema version was created.</p>"
+        }
+      }
+    },
+    "__boolean": {
+      "type": "boolean"
+    },
+    "__integer": {
+      "type": "integer"
+    },
+    "__integerMin1Max29000": {
+      "type": "integer",
+      "min": 1,
+      "max": 29000
+    },
+    "__listOfDiscovererSummary": {
+      "type": "list",
+      "member": {
+        "shape": "DiscovererSummary"
+      }
+    },
+    "__listOfGetDiscoveredSchemaVersionItemInput": {
+      "type": "list",
+      "min": 1,
+      "max": 10,
+      "member": {
+        "shape": "GetDiscoveredSchemaVersionItemInput"
+      }
+    },
+    "__listOfRegistrySummary": {
+      "type": "list",
+      "member": {
+        "shape": "RegistrySummary"
+      }
+    },
+    "__listOfSchemaSummary": {
+      "type": "list",
+      "member": {
+        "shape": "SchemaSummary"
+      }
+    },
+    "__listOfSchemaVersionSummary": {
+      "type": "list",
+      "member": {
+        "shape": "SchemaVersionSummary"
+      }
+    },
+    "__listOfSearchSchemaSummary": {
+      "type": "list",
+      "member": {
+        "shape": "SearchSchemaSummary"
+      }
+    },
+    "__listOfSearchSchemaVersionSummary": {
+      "type": "list",
+      "member": {
+        "shape": "SearchSchemaVersionSummary"
+      }
+    },
+    "__listOf__string": {
+      "type": "list",
+      "member": {
+        "shape": "__string"
+      }
+    },
+    "__long": {
+      "type": "long"
+    },
+    "__string": {
+      "type": "string"
+    },
+    "__stringMin0Max256": {
+      "type": "string",
+      "min": 0,
+      "max": 256
+    },
+    "__stringMin0Max36": {
+      "type": "string",
+      "min": 0,
+      "max": 36
+    },
+    "__stringMin1Max100000": {
+      "type": "string",
+      "min": 1,
+      "max": 100000
+    },
+    "__stringMin1Max1600": {
+      "type": "string",
+      "min": 1,
+      "max": 1600
+    },
+    "__stringMin20Max1600": {
+      "type": "string",
+      "min": 20,
+      "max": 1600
+    },
+    "__timestampIso8601": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "Body": {
+      "type": "blob"
+    }
+  },
+  "documentation": "<p>AWS EventBridge Schemas</p>"
+}

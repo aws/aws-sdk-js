@@ -44,7 +44,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a new license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.</p>"
+      "documentation": "<p>Creates a license configuration.</p> <p>A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.</p>"
     },
     "DeleteLicenseConfiguration": {
       "name": "DeleteLicenseConfiguration",
@@ -75,7 +75,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Deletes an existing license configuration. This action fails if the configuration is in use.</p>"
+      "documentation": "<p>Deletes the specified license configuration.</p> <p>You cannot delete a license configuration that is in use.</p>"
     },
     "GetLicenseConfiguration": {
       "name": "GetLicenseConfiguration",
@@ -106,7 +106,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Returns a detailed description of a license configuration.</p>"
+      "documentation": "<p>Gets detailed information about the specified license configuration.</p>"
     },
     "GetServiceSettings": {
       "name": "GetServiceSettings",
@@ -134,7 +134,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. </p>"
+      "documentation": "<p>Gets the License Manager settings for the current Region.</p>"
     },
     "ListAssociationsForLicenseConfiguration": {
       "name": "ListAssociationsForLicenseConfiguration",
@@ -168,7 +168,38 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.</p>"
+      "documentation": "<p>Lists the resource associations for the specified license configuration.</p> <p>Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance might not consume a license (depending on the license rules).</p>"
+    },
+    "ListFailuresForLicenseConfigurationOperations": {
+      "name": "ListFailuresForLicenseConfigurationOperations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFailuresForLicenseConfigurationOperationsRequest"
+      },
+      "output": {
+        "shape": "ListFailuresForLicenseConfigurationOperationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ServerInternalException"
+        },
+        {
+          "shape": "AuthorizationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "RateLimitExceededException"
+        }
+      ],
+      "documentation": "<p>Lists the license configuration operations that failed.</p>"
     },
     "ListLicenseConfigurations": {
       "name": "ListLicenseConfigurations",
@@ -202,7 +233,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.</p>"
+      "documentation": "<p>Lists the license configurations for your account.</p>"
     },
     "ListLicenseSpecificationsForResource": {
       "name": "ListLicenseSpecificationsForResource",
@@ -233,7 +264,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Returns the license configuration for a resource.</p>"
+      "documentation": "<p>Describes the license configurations for the specified resource.</p>"
     },
     "ListResourceInventory": {
       "name": "ListResourceInventory",
@@ -270,7 +301,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Returns a detailed list of resources.</p>"
+      "documentation": "<p>Lists resources managed using Systems Manager inventory.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -301,7 +332,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Lists tags attached to a resource.</p>"
+      "documentation": "<p>Lists the tags for the specified license configuration.</p>"
     },
     "ListUsageForLicenseConfiguration": {
       "name": "ListUsageForLicenseConfiguration",
@@ -366,7 +397,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Attach one of more tags to any resource.</p>"
+      "documentation": "<p>Adds the specified tags to the specified license configuration.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -397,7 +428,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Remove tags from a resource.</p>"
+      "documentation": "<p>Removes the specified tags from the specified license configuration.</p>"
     },
     "UpdateLicenseConfiguration": {
       "name": "UpdateLicenseConfiguration",
@@ -428,7 +459,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.</p>"
+      "documentation": "<p>Modifies the attributes of an existing license configuration.</p> <p>A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.</p>"
     },
     "UpdateLicenseSpecificationsForResource": {
       "name": "UpdateLicenseSpecificationsForResource",
@@ -465,7 +496,7 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as <code>RunInstances</code>.</p>"
+      "documentation": "<p>Adds or removes the specified license configurations for the specified AWS resource.</p> <p>You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and AWS CloudFormation templates, as they send license configurations to the operation that creates the resource.</p>"
     },
     "UpdateServiceSettings": {
       "name": "UpdateServiceSettings",
@@ -496,10 +527,20 @@
           "shape": "RateLimitExceededException"
         }
       ],
-      "documentation": "<p>Updates License Manager service settings.</p>"
+      "documentation": "<p>Updates License Manager settings for the current Region.</p>"
     }
   },
   "shapes": {
+    "AutomatedDiscoveryInformation": {
+      "type": "structure",
+      "members": {
+        "LastRunTime": {
+          "shape": "DateTime",
+          "documentation": "<p>Time that automated discovery last ran.</p>"
+        }
+      },
+      "documentation": "<p>Describes automated discovery.</p>"
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -517,11 +558,11 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>Resource type of the resource consuming a license (instance, host, or AMI).</p>"
+          "documentation": "<p>Resource type of the resource consuming a license.</p>"
         },
         "ConsumedLicenses": {
           "shape": "BoxLong",
-          "documentation": "<p>Number of licenses consumed by a resource.</p>"
+          "documentation": "<p>Number of licenses consumed by the resource.</p>"
         }
       },
       "documentation": "<p>Details about license consumption.</p>"
@@ -545,11 +586,11 @@
         },
         "Description": {
           "shape": "String",
-          "documentation": "<p>Human-friendly description of the license configuration.</p>"
+          "documentation": "<p>Description of the license configuration.</p>"
         },
         "LicenseCountingType": {
           "shape": "LicenseCountingType",
-          "documentation": "<p>Dimension to use to track the license inventory.</p>"
+          "documentation": "<p>Dimension used to track the license inventory.</p>"
         },
         "LicenseCount": {
           "shape": "BoxLong",
@@ -557,15 +598,19 @@
         },
         "LicenseCountHardLimit": {
           "shape": "BoxBoolean",
-          "documentation": "<p>Flag indicating whether hard or soft license enforcement is used. Exceeding a hard limit results in the blocked deployment of new instances.</p>"
+          "documentation": "<p>Indicates whether hard or soft license enforcement is used. Exceeding a hard limit blocks the launch of new instances.</p>"
         },
         "LicenseRules": {
           "shape": "StringList",
-          "documentation": "<p>Array of configured License Manager rules.</p>"
+          "documentation": "<p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). Available rules vary by dimension.</p> <ul> <li> <p> <code>Cores</code> dimension: <code>allowedTenancy</code> | <code>maximumCores</code> | <code>minimumCores</code> </p> </li> <li> <p> <code>Instances</code> dimension: <code>allowedTenancy</code> | <code>maximumCores</code> | <code>minimumCores</code> | <code>maximumSockets</code> | <code>minimumSockets</code> | <code>maximumVcpus</code> | <code>minimumVcpus</code> </p> </li> <li> <p> <code>Sockets</code> dimension: <code>allowedTenancy</code> | <code>maximumSockets</code> | <code>minimumSockets</code> </p> </li> <li> <p> <code>vCPUs</code> dimension: <code>allowedTenancy</code> | <code>honorVcpuOptimization</code> | <code>maximumVcpus</code> | <code>minimumVcpus</code> </p> </li> </ul>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>The tags to apply to the resources during launch. You can only tag instances and volumes on launch. The specified tags are applied to all instances or volumes that are created during launch. To tag a resource after it has been created, see CreateTags .</p> <p/>"
+          "documentation": "<p>Tags to add to the license configuration.</p>"
+        },
+        "ProductInformationList": {
+          "shape": "ProductInformationList",
+          "documentation": "<p>Product information.</p>"
         }
       }
     },
@@ -574,7 +619,7 @@
       "members": {
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the license configuration object after its creation.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         }
       }
     },
@@ -589,7 +634,7 @@
       "members": {
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>Unique ID of the configuration object to delete.</p>"
+          "documentation": "<p>ID of the license configuration.</p>"
         }
       }
     },
@@ -606,10 +651,10 @@
         },
         "Values": {
           "shape": "FilterValues",
-          "documentation": "<p>One or more filter values. Filter values are case-sensitive.</p>"
+          "documentation": "<p>Filter values. Filter values are case-sensitive.</p>"
         }
       },
-      "documentation": "<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs. The filters supported by a <code>Describe</code> operation are documented with the <code>Describe</code> operation.</p>"
+      "documentation": "<p>A filter name and value pair that is used to return more specific results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.</p>"
     },
     "FilterName": {
       "type": "string"
@@ -637,7 +682,7 @@
       "members": {
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the license configuration being requested.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         }
       }
     },
@@ -650,7 +695,7 @@
         },
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the license configuration requested.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         },
         "Name": {
           "shape": "String",
@@ -662,11 +707,11 @@
         },
         "LicenseCountingType": {
           "shape": "LicenseCountingType",
-          "documentation": "<p>Dimension on which the licenses are counted (for example, instances, cores, sockets, or VCPUs).</p>"
+          "documentation": "<p>Dimension on which the licenses are counted.</p>"
         },
         "LicenseRules": {
           "shape": "StringList",
-          "documentation": "<p>List of flexible text strings designating license rules.</p>"
+          "documentation": "<p>License rules.</p>"
         },
         "LicenseCount": {
           "shape": "BoxLong",
@@ -682,23 +727,31 @@
         },
         "Status": {
           "shape": "String",
-          "documentation": "<p>License configuration status (active, etc.).</p>"
+          "documentation": "<p>License configuration status.</p>"
         },
         "OwnerAccountId": {
           "shape": "String",
-          "documentation": "<p>Owner account ID for the license configuration.</p>"
+          "documentation": "<p>Account ID of the owner of the license configuration.</p>"
         },
         "ConsumedLicenseSummaryList": {
           "shape": "ConsumedLicenseSummaryList",
-          "documentation": "<p>List of summaries for consumed licenses used by various resources.</p>"
+          "documentation": "<p>Summaries of the licenses consumed by resources.</p>"
         },
         "ManagedResourceSummaryList": {
           "shape": "ManagedResourceSummaryList",
-          "documentation": "<p>List of summaries of managed resources.</p>"
+          "documentation": "<p>Summaries of the managed resources.</p>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>List of tags attached to the license configuration.</p>"
+          "documentation": "<p>Tags for the license configuration.</p>"
+        },
+        "ProductInformationList": {
+          "shape": "ProductInformationList",
+          "documentation": "<p>Product information.</p>"
+        },
+        "AutomatedDiscoveryInformation": {
+          "shape": "AutomatedDiscoveryInformation",
+          "documentation": "<p>Automated discovery information.</p>"
         }
       }
     },
@@ -711,7 +764,7 @@
       "members": {
         "S3BucketArn": {
           "shape": "String",
-          "documentation": "<p>Regional S3 bucket path for storing reports, license trail event data, discovery data, etc.</p>"
+          "documentation": "<p>Regional S3 bucket path for storing reports, license trail event data, discovery data, and so on.</p>"
         },
         "SnsTopicArn": {
           "shape": "String",
@@ -724,6 +777,10 @@
         "EnableCrossAccountsDiscovery": {
           "shape": "BoxBoolean",
           "documentation": "<p>Indicates whether cross-account discovery has been enabled.</p>"
+        },
+        "LicenseManagerResourceShareArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of the AWS resource share. The License Manager master account will provide member accounts with access to this share.</p>"
         }
       }
     },
@@ -736,18 +793,18 @@
       "members": {
         "Name": {
           "shape": "String",
-          "documentation": "<p>The name of the filter.</p>"
+          "documentation": "<p>Name of the filter.</p>"
         },
         "Condition": {
           "shape": "InventoryFilterCondition",
-          "documentation": "<p>The condition of the filter.</p>"
+          "documentation": "<p>Condition of the filter.</p>"
         },
         "Value": {
           "shape": "String",
           "documentation": "<p>Value of the filter.</p>"
         }
       },
-      "documentation": "<p>An inventory filter object.</p>"
+      "documentation": "<p>An inventory filter.</p>"
     },
     "InventoryFilterCondition": {
       "type": "string",
@@ -769,11 +826,11 @@
       "members": {
         "LicenseConfigurationId": {
           "shape": "String",
-          "documentation": "<p>Unique ID of the <code>LicenseConfiguration</code> object.</p>"
+          "documentation": "<p>Unique ID of the license configuration.</p>"
         },
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the <code>LicenseConfiguration</code> object.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         },
         "Name": {
           "shape": "String",
@@ -785,11 +842,11 @@
         },
         "LicenseCountingType": {
           "shape": "LicenseCountingType",
-          "documentation": "<p>Dimension to use to track license inventory.</p>"
+          "documentation": "<p>Dimension to use to track the license inventory.</p>"
         },
         "LicenseRules": {
           "shape": "StringList",
-          "documentation": "<p>Array of configured License Manager rules.</p>"
+          "documentation": "<p>License rules.</p>"
         },
         "LicenseCount": {
           "shape": "BoxLong",
@@ -797,7 +854,7 @@
         },
         "LicenseCountHardLimit": {
           "shape": "BoxBoolean",
-          "documentation": "<p>Sets the number of available licenses as a hard limit.</p>"
+          "documentation": "<p>Number of available licenses as a hard limit.</p>"
         },
         "ConsumedLicenses": {
           "shape": "BoxLong",
@@ -813,21 +870,29 @@
         },
         "ConsumedLicenseSummaryList": {
           "shape": "ConsumedLicenseSummaryList",
-          "documentation": "<p>List of summaries for licenses consumed by various resources.</p>"
+          "documentation": "<p>Summaries for licenses consumed by various resources.</p>"
         },
         "ManagedResourceSummaryList": {
           "shape": "ManagedResourceSummaryList",
-          "documentation": "<p>List of summaries for managed resources.</p>"
+          "documentation": "<p>Summaries for managed resources.</p>"
+        },
+        "ProductInformationList": {
+          "shape": "ProductInformationList",
+          "documentation": "<p>Product information.</p>"
+        },
+        "AutomatedDiscoveryInformation": {
+          "shape": "AutomatedDiscoveryInformation",
+          "documentation": "<p>Automated discovery information.</p>"
         }
       },
-      "documentation": "<p>A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.</p>"
+      "documentation": "<p>A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.</p>"
     },
     "LicenseConfigurationAssociation": {
       "type": "structure",
       "members": {
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the resource associated with the license configuration.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the resource.</p>"
         },
         "ResourceType": {
           "shape": "ResourceType",
@@ -842,7 +907,7 @@
           "documentation": "<p>Time when the license configuration was associated with the resource.</p>"
         }
       },
-      "documentation": "<p>Describes a server resource that is associated with a license configuration.</p>"
+      "documentation": "<p>Describes an association with a license configuration.</p>"
     },
     "LicenseConfigurationAssociations": {
       "type": "list",
@@ -862,30 +927,30 @@
       "members": {
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the resource associated with a license configuration.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the resource.</p>"
         },
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>Type of resource associated with athe license configuration.</p>"
+          "documentation": "<p>Type of resource.</p>"
         },
         "ResourceStatus": {
           "shape": "String",
-          "documentation": "<p>Status of a resource associated with the license configuration.</p>"
+          "documentation": "<p>Status of the resource.</p>"
         },
         "ResourceOwnerId": {
           "shape": "String",
-          "documentation": "<p>ID of the account that owns a resource that is associated with the license configuration.</p>"
+          "documentation": "<p>ID of the account that owns the resource.</p>"
         },
         "AssociationTime": {
           "shape": "DateTime",
-          "documentation": "<p>Time when the license configuration was initially associated with a resource.</p>"
+          "documentation": "<p>Time when the license configuration was initially associated with the resource.</p>"
         },
         "ConsumedLicenses": {
           "shape": "BoxLong",
-          "documentation": "<p>Number of licenses consumed out of the total provisioned in the license configuration.</p>"
+          "documentation": "<p>Number of licenses consumed by the resource.</p>"
         }
       },
-      "documentation": "<p>Contains details of the usage of each resource from the license pool.</p>"
+      "documentation": "<p>Details about the usage of a resource associated with a license configuration.</p>"
     },
     "LicenseConfigurationUsageList": {
       "type": "list",
@@ -908,6 +973,50 @@
         "Socket"
       ]
     },
+    "LicenseOperationFailure": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of the resource.</p>"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>Resource type.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>Error message.</p>"
+        },
+        "FailureTime": {
+          "shape": "DateTime",
+          "documentation": "<p>Failure time.</p>"
+        },
+        "OperationName": {
+          "shape": "String",
+          "documentation": "<p>Name of the operation.</p>"
+        },
+        "ResourceOwnerId": {
+          "shape": "String",
+          "documentation": "<p>ID of the AWS account that owns the resource.</p>"
+        },
+        "OperationRequestedBy": {
+          "shape": "String",
+          "documentation": "<p>The requester is \"License Manager Automated Discovery\".</p>"
+        },
+        "MetadataList": {
+          "shape": "MetadataList",
+          "documentation": "<p>Reserved.</p>"
+        }
+      },
+      "documentation": "<p>Describes the failure of a license operation.</p>"
+    },
+    "LicenseOperationFailureList": {
+      "type": "list",
+      "member": {
+        "shape": "LicenseOperationFailure"
+      }
+    },
     "LicenseSpecification": {
       "type": "structure",
       "required": [
@@ -916,10 +1025,10 @@
       "members": {
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the <code>LicenseConfiguration</code> object.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         }
       },
-      "documentation": "<p>Object used for associating a license configuration with a resource.</p>"
+      "documentation": "<p>Details for associating a license configuration with a resource.</p>"
     },
     "LicenseSpecifications": {
       "type": "list",
@@ -935,11 +1044,11 @@
       "members": {
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>ARN of a <code>LicenseConfiguration</code> object.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of a license configuration.</p>"
         },
         "MaxResults": {
           "shape": "BoxInteger",
-          "documentation": "<p>Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+          "documentation": "<p>Maximum number of results to return in a single call.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -952,7 +1061,40 @@
       "members": {
         "LicenseConfigurationAssociations": {
           "shape": "LicenseConfigurationAssociations",
-          "documentation": "<p>Lists association objects for the license configuration, each containing the association time, number of consumed licenses, resource ARN, resource ID, account ID that owns the resource, resource size, and resource type.</p>"
+          "documentation": "<p>Information about the associations for the license configuration.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Token for the next set of results.</p>"
+        }
+      }
+    },
+    "ListFailuresForLicenseConfigurationOperationsRequest": {
+      "type": "structure",
+      "required": [
+        "LicenseConfigurationArn"
+      ],
+      "members": {
+        "LicenseConfigurationArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name of the license configuration.</p>"
+        },
+        "MaxResults": {
+          "shape": "BoxInteger",
+          "documentation": "<p>Maximum number of results to return in a single call.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Token for the next set of results.</p>"
+        }
+      }
+    },
+    "ListFailuresForLicenseConfigurationOperationsResponse": {
+      "type": "structure",
+      "members": {
+        "LicenseOperationFailureList": {
+          "shape": "LicenseOperationFailureList",
+          "documentation": "<p>License configuration operations that failed.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -965,11 +1107,11 @@
       "members": {
         "LicenseConfigurationArns": {
           "shape": "StringList",
-          "documentation": "<p>An array of ARNs for the calling account’s license configurations.</p>"
+          "documentation": "<p>Amazon Resource Names (ARN) of the license configurations.</p>"
         },
         "MaxResults": {
           "shape": "BoxInteger",
-          "documentation": "<p>Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+          "documentation": "<p>Maximum number of results to return in a single call.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -977,7 +1119,7 @@
         },
         "Filters": {
           "shape": "Filters",
-          "documentation": "<p>One or more filters.</p>"
+          "documentation": "<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>licenseCountingType</code> - The dimension on which licenses are counted (vCPU). Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>enforceLicenseCount</code> - A Boolean value that indicates whether hard license enforcement is used. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>usagelimitExceeded</code> - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>"
         }
       }
     },
@@ -986,7 +1128,7 @@
       "members": {
         "LicenseConfigurations": {
           "shape": "LicenseConfigurations",
-          "documentation": "<p>Array of license configuration objects.</p>"
+          "documentation": "<p>Information about the license configurations.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1002,11 +1144,11 @@
       "members": {
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>ARN of an AMI or Amazon EC2 instance that has an associated license configuration.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of a resource that has an associated license configuration.</p>"
         },
         "MaxResults": {
           "shape": "BoxInteger",
-          "documentation": "<p>Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+          "documentation": "<p>Maximum number of results to return in a single call.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1032,7 +1174,7 @@
       "members": {
         "MaxResults": {
           "shape": "BoxInteger",
-          "documentation": "<p>Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+          "documentation": "<p>Maximum number of results to return in a single call.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1040,7 +1182,7 @@
         },
         "Filters": {
           "shape": "InventoryFilterList",
-          "documentation": "<p>One or more filters.</p>"
+          "documentation": "<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>account_id</code> - The ID of the AWS account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>application_name</code> - The name of the application. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>license_included</code> - The type of license included. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>. Possible values are <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> <li> <p> <code>platform</code> - The platform of the resource. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>resource_id</code> - The ID of the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>"
         }
       }
     },
@@ -1049,7 +1191,7 @@
       "members": {
         "ResourceInventoryList": {
           "shape": "ResourceInventoryList",
-          "documentation": "<p>The detailed list of resources.</p>"
+          "documentation": "<p>Information about the resources.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1065,7 +1207,7 @@
       "members": {
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>ARN for the resource.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         }
       }
     },
@@ -1074,7 +1216,7 @@
       "members": {
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>List of tags attached to the resource.</p>"
+          "documentation": "<p>Information about the tags.</p>"
         }
       }
     },
@@ -1086,11 +1228,11 @@
       "members": {
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the targeted <code>LicenseConfiguration</code> object.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         },
         "MaxResults": {
           "shape": "BoxInteger",
-          "documentation": "<p>Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+          "documentation": "<p>Maximum number of results to return in a single call.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1098,7 +1240,7 @@
         },
         "Filters": {
           "shape": "Filters",
-          "documentation": "<p>List of filters to apply.</p>"
+          "documentation": "<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>resourceArn</code> - The ARN of the license configuration resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceType</code> - The resource type (EC2_INSTANCE | EC2_HOST | EC2_AMI | SYSTEMS_MANAGER_MANAGED_INSTANCE). Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceAccount</code> - The ID of the account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>"
         }
       }
     },
@@ -1107,7 +1249,7 @@
       "members": {
         "LicenseConfigurationUsageList": {
           "shape": "LicenseConfigurationUsageList",
-          "documentation": "<p>An array of <code>LicenseConfigurationUsage</code> objects.</p>"
+          "documentation": "<p>Information about the license configurations.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1120,19 +1262,39 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>Type of resource associated with a license (instance, host, or AMI).</p>"
+          "documentation": "<p>Type of resource associated with a license.</p>"
         },
         "AssociationCount": {
           "shape": "BoxLong",
           "documentation": "<p>Number of resources associated with licenses.</p>"
         }
       },
-      "documentation": "<p>Summary for a resource.</p>"
+      "documentation": "<p>Summary information about a managed resource.</p>"
     },
     "ManagedResourceSummaryList": {
       "type": "list",
       "member": {
         "shape": "ManagedResourceSummary"
+      }
+    },
+    "Metadata": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>Reserved.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>Reserved.</p>"
+        }
+      },
+      "documentation": "<p>Reserved.</p>"
+    },
+    "MetadataList": {
+      "type": "list",
+      "member": {
+        "shape": "Metadata"
       }
     },
     "OrganizationConfiguration": {
@@ -1143,29 +1305,82 @@
       "members": {
         "EnableIntegration": {
           "shape": "Boolean",
-          "documentation": "<p>Flag to activate AWS Organization integration.</p>"
+          "documentation": "<p>Enables AWS Organization integration.</p>"
         }
       },
-      "documentation": "<p>Object containing configuration information for AWS Organizations.</p>"
+      "documentation": "<p>Configuration information for AWS Organizations.</p>"
+    },
+    "ProductInformation": {
+      "type": "structure",
+      "required": [
+        "ResourceType",
+        "ProductInformationFilterList"
+      ],
+      "members": {
+        "ResourceType": {
+          "shape": "String",
+          "documentation": "<p>Resource type. The value is <code>SSM_MANAGED</code>.</p>"
+        },
+        "ProductInformationFilterList": {
+          "shape": "ProductInformationFilterList",
+          "documentation": "<p>Product information filters. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>Application Name</code> - The name of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Publisher</code> - The publisher of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Application Version</code> - The version of the application. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Name</code> - The name of the platform. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>Platform Type</code> - The platform type. Logical operator is <code>EQUALS</code>.</p> </li> <li> <p> <code>License Included</code> - The type of license included. Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>. Possible values are <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Describes product information for a license configuration.</p>"
+    },
+    "ProductInformationFilter": {
+      "type": "structure",
+      "required": [
+        "ProductInformationFilterName",
+        "ProductInformationFilterValue",
+        "ProductInformationFilterComparator"
+      ],
+      "members": {
+        "ProductInformationFilterName": {
+          "shape": "String",
+          "documentation": "<p>Filter name.</p>"
+        },
+        "ProductInformationFilterValue": {
+          "shape": "StringList",
+          "documentation": "<p>Filter value.</p>"
+        },
+        "ProductInformationFilterComparator": {
+          "shape": "String",
+          "documentation": "<p>Logical operator.</p>"
+        }
+      },
+      "documentation": "<p>Describes product information filters.</p>"
+    },
+    "ProductInformationFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "ProductInformationFilter"
+      }
+    },
+    "ProductInformationList": {
+      "type": "list",
+      "member": {
+        "shape": "ProductInformation"
+      }
     },
     "ResourceInventory": {
       "type": "structure",
       "members": {
         "ResourceId": {
           "shape": "String",
-          "documentation": "<p>Unique ID of the resource.</p>"
+          "documentation": "<p>ID of the resource.</p>"
         },
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource.</p>"
+          "documentation": "<p>Type of resource.</p>"
         },
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of the resource.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the resource.</p>"
         },
         "Platform": {
           "shape": "String",
-          "documentation": "<p>The platform of the resource.</p>"
+          "documentation": "<p>Platform of the resource.</p>"
         },
         "PlatformVersion": {
           "shape": "String",
@@ -1173,10 +1388,10 @@
         },
         "ResourceOwningAccountId": {
           "shape": "String",
-          "documentation": "<p>Unique ID of the account that owns the resource.</p>"
+          "documentation": "<p>ID of the account that owns the resource.</p>"
         }
       },
-      "documentation": "<p>A set of attributes that describe a resource.</p>"
+      "documentation": "<p>Details about a resource.</p>"
     },
     "ResourceInventoryList": {
       "type": "list",
@@ -1189,7 +1404,9 @@
       "enum": [
         "EC2_INSTANCE",
         "EC2_HOST",
-        "EC2_AMI"
+        "EC2_AMI",
+        "RDS",
+        "SYSTEMS_MANAGER_MANAGED_INSTANCE"
       ]
     },
     "String": {
@@ -1206,14 +1423,14 @@
       "members": {
         "Key": {
           "shape": "String",
-          "documentation": "<p>Key for the resource tag.</p>"
+          "documentation": "<p>Tag key.</p>"
         },
         "Value": {
           "shape": "String",
-          "documentation": "<p>Value for the resource tag.</p>"
+          "documentation": "<p>Tag value.</p>"
         }
       },
-      "documentation": "<p>Tag for a resource in a key-value format.</p>"
+      "documentation": "<p>Details about a tag for a license configuration.</p>"
     },
     "TagKeyList": {
       "type": "list",
@@ -1236,11 +1453,11 @@
       "members": {
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>Resource of the ARN to be tagged.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>Names of the tags to attach to the resource.</p>"
+          "documentation": "<p>One or more tags.</p>"
         }
       }
     },
@@ -1257,11 +1474,11 @@
       "members": {
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the resource.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
-          "documentation": "<p>List keys identifying tags to remove.</p>"
+          "documentation": "<p>Keys identifying the tags to remove.</p>"
         }
       }
     },
@@ -1277,15 +1494,15 @@
       "members": {
         "LicenseConfigurationArn": {
           "shape": "String",
-          "documentation": "<p>ARN for a license configuration.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
         },
         "LicenseConfigurationStatus": {
           "shape": "LicenseConfigurationStatus",
-          "documentation": "<p>New status of the license configuration (<code>ACTIVE</code> or <code>INACTIVE</code>).</p>"
+          "documentation": "<p>New status of the license configuration.</p>"
         },
         "LicenseRules": {
           "shape": "StringList",
-          "documentation": "<p>List of flexible text strings designating license rules.</p>"
+          "documentation": "<p>New license rules.</p>"
         },
         "LicenseCount": {
           "shape": "BoxLong",
@@ -1293,7 +1510,7 @@
         },
         "LicenseCountHardLimit": {
           "shape": "BoxBoolean",
-          "documentation": "<p>Sets the number of available licenses as a hard limit.</p>"
+          "documentation": "<p>New hard limit of the number of available licenses.</p>"
         },
         "Name": {
           "shape": "String",
@@ -1301,7 +1518,11 @@
         },
         "Description": {
           "shape": "String",
-          "documentation": "<p>New human-friendly description of the license configuration.</p>"
+          "documentation": "<p>New description of the license configuration.</p>"
+        },
+        "ProductInformationList": {
+          "shape": "ProductInformationList",
+          "documentation": "<p>New product information.</p>"
         }
       }
     },
@@ -1317,15 +1538,15 @@
       "members": {
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>ARN for an AWS server resource.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the AWS resource.</p>"
         },
         "AddLicenseSpecifications": {
           "shape": "LicenseSpecifications",
-          "documentation": "<p>License configuration ARNs to be added to a resource.</p>"
+          "documentation": "<p>ARNs of the license configurations to add.</p>"
         },
         "RemoveLicenseSpecifications": {
           "shape": "LicenseSpecifications",
-          "documentation": "<p>License configuration ARNs to be removed from a resource.</p>"
+          "documentation": "<p>ARNs of the license configurations to remove.</p>"
         }
       }
     },
@@ -1338,15 +1559,15 @@
       "members": {
         "S3BucketArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the Amazon S3 bucket where License Manager information is stored.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the Amazon S3 bucket where the License Manager information is stored.</p>"
         },
         "SnsTopicArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the Amazon SNS topic used for License Manager alerts.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the Amazon SNS topic used for License Manager alerts.</p>"
         },
         "OrganizationConfiguration": {
           "shape": "OrganizationConfiguration",
-          "documentation": "<p>Integrates AWS Organizations with License Manager for cross-account discovery.</p>"
+          "documentation": "<p>Enables integration with AWS Organizations for cross-account discovery.</p>"
         },
         "EnableCrossAccountsDiscovery": {
           "shape": "BoxBoolean",
@@ -1359,5 +1580,5 @@
       "members": {}
     }
   },
-  "documentation": "<fullname> AWS License Manager </fullname> <p> <i>This is the AWS License Manager API Reference.</i> It provides descriptions, syntax, and usage examples for each of the actions and data types for License Manager. The topic for each action shows the Query API request parameters and the XML response. You can also view the XML request elements in the WSDL. </p> <p> Alternatively, you can use one of the AWS SDKs to access an API that's tailored to the programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>. </p>"
+  "documentation": "<fullname> AWS License Manager </fullname> <p>AWS License Manager makes it easier to manage licenses from software vendors across multiple AWS accounts and on-premises servers.</p>"
 }

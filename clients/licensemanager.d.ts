@@ -12,75 +12,83 @@ declare class LicenseManager extends Service {
   constructor(options?: LicenseManager.Types.ClientConfiguration)
   config: Config & LicenseManager.Types.ClientConfiguration;
   /**
-   * Creates a new license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.
+   * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.
    */
   createLicenseConfiguration(params: LicenseManager.Types.CreateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
   /**
-   * Creates a new license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.
+   * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.
    */
   createLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
   /**
-   * Deletes an existing license configuration. This action fails if the configuration is in use.
+   * Deletes the specified license configuration. You cannot delete a license configuration that is in use.
    */
   deleteLicenseConfiguration(params: LicenseManager.Types.DeleteLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseConfigurationResponse) => void): Request<LicenseManager.Types.DeleteLicenseConfigurationResponse, AWSError>;
   /**
-   * Deletes an existing license configuration. This action fails if the configuration is in use.
+   * Deletes the specified license configuration. You cannot delete a license configuration that is in use.
    */
   deleteLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseConfigurationResponse) => void): Request<LicenseManager.Types.DeleteLicenseConfigurationResponse, AWSError>;
   /**
-   * Returns a detailed description of a license configuration.
+   * Gets detailed information about the specified license configuration.
    */
   getLicenseConfiguration(params: LicenseManager.Types.GetLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConfigurationResponse) => void): Request<LicenseManager.Types.GetLicenseConfigurationResponse, AWSError>;
   /**
-   * Returns a detailed description of a license configuration.
+   * Gets detailed information about the specified license configuration.
    */
   getLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConfigurationResponse) => void): Request<LicenseManager.Types.GetLicenseConfigurationResponse, AWSError>;
   /**
-   * Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. 
+   * Gets the License Manager settings for the current Region.
    */
   getServiceSettings(params: LicenseManager.Types.GetServiceSettingsRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetServiceSettingsResponse) => void): Request<LicenseManager.Types.GetServiceSettingsResponse, AWSError>;
   /**
-   * Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. 
+   * Gets the License Manager settings for the current Region.
    */
   getServiceSettings(callback?: (err: AWSError, data: LicenseManager.Types.GetServiceSettingsResponse) => void): Request<LicenseManager.Types.GetServiceSettingsResponse, AWSError>;
   /**
-   * Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.
+   * Lists the resource associations for the specified license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance might not consume a license (depending on the license rules).
    */
   listAssociationsForLicenseConfiguration(params: LicenseManager.Types.ListAssociationsForLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse, AWSError>;
   /**
-   * Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.
+   * Lists the resource associations for the specified license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance might not consume a license (depending on the license rules).
    */
   listAssociationsForLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse, AWSError>;
   /**
-   * Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.
+   * Lists the license configuration operations that failed.
+   */
+  listFailuresForLicenseConfigurationOperations(params: LicenseManager.Types.ListFailuresForLicenseConfigurationOperationsRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListFailuresForLicenseConfigurationOperationsResponse) => void): Request<LicenseManager.Types.ListFailuresForLicenseConfigurationOperationsResponse, AWSError>;
+  /**
+   * Lists the license configuration operations that failed.
+   */
+  listFailuresForLicenseConfigurationOperations(callback?: (err: AWSError, data: LicenseManager.Types.ListFailuresForLicenseConfigurationOperationsResponse) => void): Request<LicenseManager.Types.ListFailuresForLicenseConfigurationOperationsResponse, AWSError>;
+  /**
+   * Lists the license configurations for your account.
    */
   listLicenseConfigurations(params: LicenseManager.Types.ListLicenseConfigurationsRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseConfigurationsResponse) => void): Request<LicenseManager.Types.ListLicenseConfigurationsResponse, AWSError>;
   /**
-   * Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.
+   * Lists the license configurations for your account.
    */
   listLicenseConfigurations(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseConfigurationsResponse) => void): Request<LicenseManager.Types.ListLicenseConfigurationsResponse, AWSError>;
   /**
-   * Returns the license configuration for a resource.
+   * Describes the license configurations for the specified resource.
    */
   listLicenseSpecificationsForResource(params: LicenseManager.Types.ListLicenseSpecificationsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.ListLicenseSpecificationsForResourceResponse, AWSError>;
   /**
-   * Returns the license configuration for a resource.
+   * Describes the license configurations for the specified resource.
    */
   listLicenseSpecificationsForResource(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.ListLicenseSpecificationsForResourceResponse, AWSError>;
   /**
-   * Returns a detailed list of resources.
+   * Lists resources managed using Systems Manager inventory.
    */
   listResourceInventory(params: LicenseManager.Types.ListResourceInventoryRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListResourceInventoryResponse) => void): Request<LicenseManager.Types.ListResourceInventoryResponse, AWSError>;
   /**
-   * Returns a detailed list of resources.
+   * Lists resources managed using Systems Manager inventory.
    */
   listResourceInventory(callback?: (err: AWSError, data: LicenseManager.Types.ListResourceInventoryResponse) => void): Request<LicenseManager.Types.ListResourceInventoryResponse, AWSError>;
   /**
-   * Lists tags attached to a resource.
+   * Lists the tags for the specified license configuration.
    */
   listTagsForResource(params: LicenseManager.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListTagsForResourceResponse) => void): Request<LicenseManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists tags attached to a resource.
+   * Lists the tags for the specified license configuration.
    */
   listTagsForResource(callback?: (err: AWSError, data: LicenseManager.Types.ListTagsForResourceResponse) => void): Request<LicenseManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -92,58 +100,64 @@ declare class LicenseManager extends Service {
    */
   listUsageForLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.ListUsageForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListUsageForLicenseConfigurationResponse, AWSError>;
   /**
-   * Attach one of more tags to any resource.
+   * Adds the specified tags to the specified license configuration.
    */
   tagResource(params: LicenseManager.Types.TagResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.TagResourceResponse) => void): Request<LicenseManager.Types.TagResourceResponse, AWSError>;
   /**
-   * Attach one of more tags to any resource.
+   * Adds the specified tags to the specified license configuration.
    */
   tagResource(callback?: (err: AWSError, data: LicenseManager.Types.TagResourceResponse) => void): Request<LicenseManager.Types.TagResourceResponse, AWSError>;
   /**
-   * Remove tags from a resource.
+   * Removes the specified tags from the specified license configuration.
    */
   untagResource(params: LicenseManager.Types.UntagResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.UntagResourceResponse) => void): Request<LicenseManager.Types.UntagResourceResponse, AWSError>;
   /**
-   * Remove tags from a resource.
+   * Removes the specified tags from the specified license configuration.
    */
   untagResource(callback?: (err: AWSError, data: LicenseManager.Types.UntagResourceResponse) => void): Request<LicenseManager.Types.UntagResourceResponse, AWSError>;
   /**
-   * Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.
+   * Modifies the attributes of an existing license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.
    */
   updateLicenseConfiguration(params: LicenseManager.Types.UpdateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.UpdateLicenseConfigurationResponse, AWSError>;
   /**
-   * Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.
+   * Modifies the attributes of an existing license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.
    */
   updateLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.UpdateLicenseConfigurationResponse, AWSError>;
   /**
-   * Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as RunInstances.
+   * Adds or removes the specified license configurations for the specified AWS resource. You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and AWS CloudFormation templates, as they send license configurations to the operation that creates the resource.
    */
   updateLicenseSpecificationsForResource(params: LicenseManager.Types.UpdateLicenseSpecificationsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse, AWSError>;
   /**
-   * Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as RunInstances.
+   * Adds or removes the specified license configurations for the specified AWS resource. You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and AWS CloudFormation templates, as they send license configurations to the operation that creates the resource.
    */
   updateLicenseSpecificationsForResource(callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse, AWSError>;
   /**
-   * Updates License Manager service settings.
+   * Updates License Manager settings for the current Region.
    */
   updateServiceSettings(params: LicenseManager.Types.UpdateServiceSettingsRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateServiceSettingsResponse) => void): Request<LicenseManager.Types.UpdateServiceSettingsResponse, AWSError>;
   /**
-   * Updates License Manager service settings.
+   * Updates License Manager settings for the current Region.
    */
   updateServiceSettings(callback?: (err: AWSError, data: LicenseManager.Types.UpdateServiceSettingsResponse) => void): Request<LicenseManager.Types.UpdateServiceSettingsResponse, AWSError>;
 }
 declare namespace LicenseManager {
+  export interface AutomatedDiscoveryInformation {
+    /**
+     * Time that automated discovery last ran.
+     */
+    LastRunTime?: DateTime;
+  }
   export type Boolean = boolean;
   export type BoxBoolean = boolean;
   export type BoxInteger = number;
   export type BoxLong = number;
   export interface ConsumedLicenseSummary {
     /**
-     * Resource type of the resource consuming a license (instance, host, or AMI).
+     * Resource type of the resource consuming a license.
      */
     ResourceType?: ResourceType;
     /**
-     * Number of licenses consumed by a resource.
+     * Number of licenses consumed by the resource.
      */
     ConsumedLicenses?: BoxLong;
   }
@@ -154,11 +168,11 @@ declare namespace LicenseManager {
      */
     Name: String;
     /**
-     * Human-friendly description of the license configuration.
+     * Description of the license configuration.
      */
     Description?: String;
     /**
-     * Dimension to use to track the license inventory.
+     * Dimension used to track the license inventory.
      */
     LicenseCountingType: LicenseCountingType;
     /**
@@ -166,28 +180,32 @@ declare namespace LicenseManager {
      */
     LicenseCount?: BoxLong;
     /**
-     * Flag indicating whether hard or soft license enforcement is used. Exceeding a hard limit results in the blocked deployment of new instances.
+     * Indicates whether hard or soft license enforcement is used. Exceeding a hard limit blocks the launch of new instances.
      */
     LicenseCountHardLimit?: BoxBoolean;
     /**
-     * Array of configured License Manager rules.
+     * License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). Available rules vary by dimension.    Cores dimension: allowedTenancy | maximumCores | minimumCores     Instances dimension: allowedTenancy | maximumCores | minimumCores | maximumSockets | minimumSockets | maximumVcpus | minimumVcpus     Sockets dimension: allowedTenancy | maximumSockets | minimumSockets     vCPUs dimension: allowedTenancy | honorVcpuOptimization | maximumVcpus | minimumVcpus   
      */
     LicenseRules?: StringList;
     /**
-     * The tags to apply to the resources during launch. You can only tag instances and volumes on launch. The specified tags are applied to all instances or volumes that are created during launch. To tag a resource after it has been created, see CreateTags . 
+     * Tags to add to the license configuration.
      */
     Tags?: TagList;
+    /**
+     * Product information.
+     */
+    ProductInformationList?: ProductInformationList;
   }
   export interface CreateLicenseConfigurationResponse {
     /**
-     * ARN of the license configuration object after its creation.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     LicenseConfigurationArn?: String;
   }
   export type DateTime = Date;
   export interface DeleteLicenseConfigurationRequest {
     /**
-     * Unique ID of the configuration object to delete.
+     * ID of the license configuration.
      */
     LicenseConfigurationArn: String;
   }
@@ -199,7 +217,7 @@ declare namespace LicenseManager {
      */
     Name?: FilterName;
     /**
-     * One or more filter values. Filter values are case-sensitive.
+     * Filter values. Filter values are case-sensitive.
      */
     Values?: FilterValues;
   }
@@ -209,7 +227,7 @@ declare namespace LicenseManager {
   export type Filters = Filter[];
   export interface GetLicenseConfigurationRequest {
     /**
-     * ARN of the license configuration being requested.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     LicenseConfigurationArn: String;
   }
@@ -219,7 +237,7 @@ declare namespace LicenseManager {
      */
     LicenseConfigurationId?: String;
     /**
-     * ARN of the license configuration requested.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     LicenseConfigurationArn?: String;
     /**
@@ -231,11 +249,11 @@ declare namespace LicenseManager {
      */
     Description?: String;
     /**
-     * Dimension on which the licenses are counted (for example, instances, cores, sockets, or VCPUs).
+     * Dimension on which the licenses are counted.
      */
     LicenseCountingType?: LicenseCountingType;
     /**
-     * List of flexible text strings designating license rules.
+     * License rules.
      */
     LicenseRules?: StringList;
     /**
@@ -251,31 +269,39 @@ declare namespace LicenseManager {
      */
     ConsumedLicenses?: BoxLong;
     /**
-     * License configuration status (active, etc.).
+     * License configuration status.
      */
     Status?: String;
     /**
-     * Owner account ID for the license configuration.
+     * Account ID of the owner of the license configuration.
      */
     OwnerAccountId?: String;
     /**
-     * List of summaries for consumed licenses used by various resources.
+     * Summaries of the licenses consumed by resources.
      */
     ConsumedLicenseSummaryList?: ConsumedLicenseSummaryList;
     /**
-     * List of summaries of managed resources.
+     * Summaries of the managed resources.
      */
     ManagedResourceSummaryList?: ManagedResourceSummaryList;
     /**
-     * List of tags attached to the license configuration.
+     * Tags for the license configuration.
      */
     Tags?: TagList;
+    /**
+     * Product information.
+     */
+    ProductInformationList?: ProductInformationList;
+    /**
+     * Automated discovery information.
+     */
+    AutomatedDiscoveryInformation?: AutomatedDiscoveryInformation;
   }
   export interface GetServiceSettingsRequest {
   }
   export interface GetServiceSettingsResponse {
     /**
-     * Regional S3 bucket path for storing reports, license trail event data, discovery data, etc.
+     * Regional S3 bucket path for storing reports, license trail event data, discovery data, and so on.
      */
     S3BucketArn?: String;
     /**
@@ -290,14 +316,18 @@ declare namespace LicenseManager {
      * Indicates whether cross-account discovery has been enabled.
      */
     EnableCrossAccountsDiscovery?: BoxBoolean;
+    /**
+     * Amazon Resource Name (ARN) of the AWS resource share. The License Manager master account will provide member accounts with access to this share.
+     */
+    LicenseManagerResourceShareArn?: String;
   }
   export interface InventoryFilter {
     /**
-     * The name of the filter.
+     * Name of the filter.
      */
     Name: String;
     /**
-     * The condition of the filter.
+     * Condition of the filter.
      */
     Condition: InventoryFilterCondition;
     /**
@@ -309,11 +339,11 @@ declare namespace LicenseManager {
   export type InventoryFilterList = InventoryFilter[];
   export interface LicenseConfiguration {
     /**
-     * Unique ID of the LicenseConfiguration object.
+     * Unique ID of the license configuration.
      */
     LicenseConfigurationId?: String;
     /**
-     * ARN of the LicenseConfiguration object.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     LicenseConfigurationArn?: String;
     /**
@@ -325,11 +355,11 @@ declare namespace LicenseManager {
      */
     Description?: String;
     /**
-     * Dimension to use to track license inventory.
+     * Dimension to use to track the license inventory.
      */
     LicenseCountingType?: LicenseCountingType;
     /**
-     * Array of configured License Manager rules.
+     * License rules.
      */
     LicenseRules?: StringList;
     /**
@@ -337,7 +367,7 @@ declare namespace LicenseManager {
      */
     LicenseCount?: BoxLong;
     /**
-     * Sets the number of available licenses as a hard limit.
+     * Number of available licenses as a hard limit.
      */
     LicenseCountHardLimit?: BoxBoolean;
     /**
@@ -353,17 +383,25 @@ declare namespace LicenseManager {
      */
     OwnerAccountId?: String;
     /**
-     * List of summaries for licenses consumed by various resources.
+     * Summaries for licenses consumed by various resources.
      */
     ConsumedLicenseSummaryList?: ConsumedLicenseSummaryList;
     /**
-     * List of summaries for managed resources.
+     * Summaries for managed resources.
      */
     ManagedResourceSummaryList?: ManagedResourceSummaryList;
+    /**
+     * Product information.
+     */
+    ProductInformationList?: ProductInformationList;
+    /**
+     * Automated discovery information.
+     */
+    AutomatedDiscoveryInformation?: AutomatedDiscoveryInformation;
   }
   export interface LicenseConfigurationAssociation {
     /**
-     * ARN of the resource associated with the license configuration.
+     * Amazon Resource Name (ARN) of the resource.
      */
     ResourceArn?: String;
     /**
@@ -383,47 +421,82 @@ declare namespace LicenseManager {
   export type LicenseConfigurationStatus = "AVAILABLE"|"DISABLED"|string;
   export interface LicenseConfigurationUsage {
     /**
-     * ARN of the resource associated with a license configuration.
+     * Amazon Resource Name (ARN) of the resource.
      */
     ResourceArn?: String;
     /**
-     * Type of resource associated with athe license configuration.
+     * Type of resource.
      */
     ResourceType?: ResourceType;
     /**
-     * Status of a resource associated with the license configuration.
+     * Status of the resource.
      */
     ResourceStatus?: String;
     /**
-     * ID of the account that owns a resource that is associated with the license configuration.
+     * ID of the account that owns the resource.
      */
     ResourceOwnerId?: String;
     /**
-     * Time when the license configuration was initially associated with a resource.
+     * Time when the license configuration was initially associated with the resource.
      */
     AssociationTime?: DateTime;
     /**
-     * Number of licenses consumed out of the total provisioned in the license configuration.
+     * Number of licenses consumed by the resource.
      */
     ConsumedLicenses?: BoxLong;
   }
   export type LicenseConfigurationUsageList = LicenseConfigurationUsage[];
   export type LicenseConfigurations = LicenseConfiguration[];
   export type LicenseCountingType = "vCPU"|"Instance"|"Core"|"Socket"|string;
+  export interface LicenseOperationFailure {
+    /**
+     * Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn?: String;
+    /**
+     * Resource type.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * Error message.
+     */
+    ErrorMessage?: String;
+    /**
+     * Failure time.
+     */
+    FailureTime?: DateTime;
+    /**
+     * Name of the operation.
+     */
+    OperationName?: String;
+    /**
+     * ID of the AWS account that owns the resource.
+     */
+    ResourceOwnerId?: String;
+    /**
+     * The requester is "License Manager Automated Discovery".
+     */
+    OperationRequestedBy?: String;
+    /**
+     * Reserved.
+     */
+    MetadataList?: MetadataList;
+  }
+  export type LicenseOperationFailureList = LicenseOperationFailure[];
   export interface LicenseSpecification {
     /**
-     * ARN of the LicenseConfiguration object.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     LicenseConfigurationArn: String;
   }
   export type LicenseSpecifications = LicenseSpecification[];
   export interface ListAssociationsForLicenseConfigurationRequest {
     /**
-     * ARN of a LicenseConfiguration object.
+     * Amazon Resource Name (ARN) of a license configuration.
      */
     LicenseConfigurationArn: String;
     /**
-     * Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * Maximum number of results to return in a single call.
      */
     MaxResults?: BoxInteger;
     /**
@@ -433,7 +506,7 @@ declare namespace LicenseManager {
   }
   export interface ListAssociationsForLicenseConfigurationResponse {
     /**
-     * Lists association objects for the license configuration, each containing the association time, number of consumed licenses, resource ARN, resource ID, account ID that owns the resource, resource size, and resource type.
+     * Information about the associations for the license configuration.
      */
     LicenseConfigurationAssociations?: LicenseConfigurationAssociations;
     /**
@@ -441,13 +514,37 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
   }
+  export interface ListFailuresForLicenseConfigurationOperationsRequest {
+    /**
+     * Amazon Resource Name of the license configuration.
+     */
+    LicenseConfigurationArn: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: BoxInteger;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListFailuresForLicenseConfigurationOperationsResponse {
+    /**
+     * License configuration operations that failed.
+     */
+    LicenseOperationFailureList?: LicenseOperationFailureList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
   export interface ListLicenseConfigurationsRequest {
     /**
-     * An array of ARNs for the calling account’s license configurations.
+     * Amazon Resource Names (ARN) of the license configurations.
      */
     LicenseConfigurationArns?: StringList;
     /**
-     * Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * Maximum number of results to return in a single call.
      */
     MaxResults?: BoxInteger;
     /**
@@ -455,13 +552,13 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
     /**
-     * One or more filters.
+     * Filters to scope the results. The following filters and logical operators are supported:    licenseCountingType - The dimension on which licenses are counted (vCPU). Logical operators are EQUALS | NOT_EQUALS.    enforceLicenseCount - A Boolean value that indicates whether hard license enforcement is used. Logical operators are EQUALS | NOT_EQUALS.    usagelimitExceeded - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are EQUALS | NOT_EQUALS.  
      */
     Filters?: Filters;
   }
   export interface ListLicenseConfigurationsResponse {
     /**
-     * Array of license configuration objects.
+     * Information about the license configurations.
      */
     LicenseConfigurations?: LicenseConfigurations;
     /**
@@ -471,11 +568,11 @@ declare namespace LicenseManager {
   }
   export interface ListLicenseSpecificationsForResourceRequest {
     /**
-     * ARN of an AMI or Amazon EC2 instance that has an associated license configuration.
+     * Amazon Resource Name (ARN) of a resource that has an associated license configuration.
      */
     ResourceArn: String;
     /**
-     * Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * Maximum number of results to return in a single call.
      */
     MaxResults?: BoxInteger;
     /**
@@ -495,7 +592,7 @@ declare namespace LicenseManager {
   }
   export interface ListResourceInventoryRequest {
     /**
-     * Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * Maximum number of results to return in a single call.
      */
     MaxResults?: BoxInteger;
     /**
@@ -503,13 +600,13 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
     /**
-     * One or more filters.
+     * Filters to scope the results. The following filters and logical operators are supported:    account_id - The ID of the AWS account that owns the resource. Logical operators are EQUALS | NOT_EQUALS.    application_name - The name of the application. Logical operators are EQUALS | BEGINS_WITH.    license_included - The type of license included. Logical operators are EQUALS | NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.    platform - The platform of the resource. Logical operators are EQUALS | BEGINS_WITH.    resource_id - The ID of the resource. Logical operators are EQUALS | NOT_EQUALS.  
      */
     Filters?: InventoryFilterList;
   }
   export interface ListResourceInventoryResponse {
     /**
-     * The detailed list of resources.
+     * Information about the resources.
      */
     ResourceInventoryList?: ResourceInventoryList;
     /**
@@ -519,23 +616,23 @@ declare namespace LicenseManager {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * ARN for the resource.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     ResourceArn: String;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * List of tags attached to the resource.
+     * Information about the tags.
      */
     Tags?: TagList;
   }
   export interface ListUsageForLicenseConfigurationRequest {
     /**
-     * ARN of the targeted LicenseConfiguration object.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     LicenseConfigurationArn: String;
     /**
-     * Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * Maximum number of results to return in a single call.
      */
     MaxResults?: BoxInteger;
     /**
@@ -543,13 +640,13 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
     /**
-     * List of filters to apply.
+     * Filters to scope the results. The following filters and logical operators are supported:    resourceArn - The ARN of the license configuration resource. Logical operators are EQUALS | NOT_EQUALS.    resourceType - The resource type (EC2_INSTANCE | EC2_HOST | EC2_AMI | SYSTEMS_MANAGER_MANAGED_INSTANCE). Logical operators are EQUALS | NOT_EQUALS.    resourceAccount - The ID of the account that owns the resource. Logical operators are EQUALS | NOT_EQUALS.  
      */
     Filters?: Filters;
   }
   export interface ListUsageForLicenseConfigurationResponse {
     /**
-     * An array of LicenseConfigurationUsage objects.
+     * Information about the license configurations.
      */
     LicenseConfigurationUsageList?: LicenseConfigurationUsageList;
     /**
@@ -559,7 +656,7 @@ declare namespace LicenseManager {
   }
   export interface ManagedResourceSummary {
     /**
-     * Type of resource associated with a license (instance, host, or AMI).
+     * Type of resource associated with a license.
      */
     ResourceType?: ResourceType;
     /**
@@ -568,27 +665,64 @@ declare namespace LicenseManager {
     AssociationCount?: BoxLong;
   }
   export type ManagedResourceSummaryList = ManagedResourceSummary[];
+  export interface Metadata {
+    /**
+     * Reserved.
+     */
+    Name?: String;
+    /**
+     * Reserved.
+     */
+    Value?: String;
+  }
+  export type MetadataList = Metadata[];
   export interface OrganizationConfiguration {
     /**
-     * Flag to activate AWS Organization integration.
+     * Enables AWS Organization integration.
      */
     EnableIntegration: Boolean;
   }
+  export interface ProductInformation {
+    /**
+     * Resource type. The value is SSM_MANAGED.
+     */
+    ResourceType: String;
+    /**
+     * Product information filters. The following filters and logical operators are supported:    Application Name - The name of the application. Logical operator is EQUALS.    Application Publisher - The publisher of the application. Logical operator is EQUALS.    Application Version - The version of the application. Logical operator is EQUALS.    Platform Name - The name of the platform. Logical operator is EQUALS.    Platform Type - The platform type. Logical operator is EQUALS.    License Included - The type of license included. Logical operators are EQUALS and NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.  
+     */
+    ProductInformationFilterList: ProductInformationFilterList;
+  }
+  export interface ProductInformationFilter {
+    /**
+     * Filter name.
+     */
+    ProductInformationFilterName: String;
+    /**
+     * Filter value.
+     */
+    ProductInformationFilterValue: StringList;
+    /**
+     * Logical operator.
+     */
+    ProductInformationFilterComparator: String;
+  }
+  export type ProductInformationFilterList = ProductInformationFilter[];
+  export type ProductInformationList = ProductInformation[];
   export interface ResourceInventory {
     /**
-     * Unique ID of the resource.
+     * ID of the resource.
      */
     ResourceId?: String;
     /**
-     * The type of resource.
+     * Type of resource.
      */
     ResourceType?: ResourceType;
     /**
-     * The ARN of the resource.
+     * Amazon Resource Name (ARN) of the resource.
      */
     ResourceArn?: String;
     /**
-     * The platform of the resource.
+     * Platform of the resource.
      */
     Platform?: String;
     /**
@@ -596,21 +730,21 @@ declare namespace LicenseManager {
      */
     PlatformVersion?: String;
     /**
-     * Unique ID of the account that owns the resource.
+     * ID of the account that owns the resource.
      */
     ResourceOwningAccountId?: String;
   }
   export type ResourceInventoryList = ResourceInventory[];
-  export type ResourceType = "EC2_INSTANCE"|"EC2_HOST"|"EC2_AMI"|string;
+  export type ResourceType = "EC2_INSTANCE"|"EC2_HOST"|"EC2_AMI"|"RDS"|"SYSTEMS_MANAGER_MANAGED_INSTANCE"|string;
   export type String = string;
   export type StringList = String[];
   export interface Tag {
     /**
-     * Key for the resource tag.
+     * Tag key.
      */
     Key?: String;
     /**
-     * Value for the resource tag.
+     * Tag value.
      */
     Value?: String;
   }
@@ -618,11 +752,11 @@ declare namespace LicenseManager {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * Resource of the ARN to be tagged.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     ResourceArn: String;
     /**
-     * Names of the tags to attach to the resource.
+     * One or more tags.
      */
     Tags: TagList;
   }
@@ -630,11 +764,11 @@ declare namespace LicenseManager {
   }
   export interface UntagResourceRequest {
     /**
-     * ARN of the resource.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     ResourceArn: String;
     /**
-     * List keys identifying tags to remove.
+     * Keys identifying the tags to remove.
      */
     TagKeys: TagKeyList;
   }
@@ -642,15 +776,15 @@ declare namespace LicenseManager {
   }
   export interface UpdateLicenseConfigurationRequest {
     /**
-     * ARN for a license configuration.
+     * Amazon Resource Name (ARN) of the license configuration.
      */
     LicenseConfigurationArn: String;
     /**
-     * New status of the license configuration (ACTIVE or INACTIVE).
+     * New status of the license configuration.
      */
     LicenseConfigurationStatus?: LicenseConfigurationStatus;
     /**
-     * List of flexible text strings designating license rules.
+     * New license rules.
      */
     LicenseRules?: StringList;
     /**
@@ -658,7 +792,7 @@ declare namespace LicenseManager {
      */
     LicenseCount?: BoxLong;
     /**
-     * Sets the number of available licenses as a hard limit.
+     * New hard limit of the number of available licenses.
      */
     LicenseCountHardLimit?: BoxBoolean;
     /**
@@ -666,23 +800,27 @@ declare namespace LicenseManager {
      */
     Name?: String;
     /**
-     * New human-friendly description of the license configuration.
+     * New description of the license configuration.
      */
     Description?: String;
+    /**
+     * New product information.
+     */
+    ProductInformationList?: ProductInformationList;
   }
   export interface UpdateLicenseConfigurationResponse {
   }
   export interface UpdateLicenseSpecificationsForResourceRequest {
     /**
-     * ARN for an AWS server resource.
+     * Amazon Resource Name (ARN) of the AWS resource.
      */
     ResourceArn: String;
     /**
-     * License configuration ARNs to be added to a resource.
+     * ARNs of the license configurations to add.
      */
     AddLicenseSpecifications?: LicenseSpecifications;
     /**
-     * License configuration ARNs to be removed from a resource.
+     * ARNs of the license configurations to remove.
      */
     RemoveLicenseSpecifications?: LicenseSpecifications;
   }
@@ -690,15 +828,15 @@ declare namespace LicenseManager {
   }
   export interface UpdateServiceSettingsRequest {
     /**
-     * ARN of the Amazon S3 bucket where License Manager information is stored.
+     * Amazon Resource Name (ARN) of the Amazon S3 bucket where the License Manager information is stored.
      */
     S3BucketArn?: String;
     /**
-     * ARN of the Amazon SNS topic used for License Manager alerts.
+     * Amazon Resource Name (ARN) of the Amazon SNS topic used for License Manager alerts.
      */
     SnsTopicArn?: String;
     /**
-     * Integrates AWS Organizations with License Manager for cross-account discovery.
+     * Enables integration with AWS Organizations for cross-account discovery.
      */
     OrganizationConfiguration?: OrganizationConfiguration;
     /**

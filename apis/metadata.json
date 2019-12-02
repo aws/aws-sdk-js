@@ -813,5 +813,11 @@
   "elasticinference": {
     "prefix": "elastic-inference",
     "name": "ElasticInference"
+  },
+  "imagebuilder": {
+    "name": "Imagebuilder"
+  },
+  "schemas": {
+    "name": "Schemas"
   }
 }

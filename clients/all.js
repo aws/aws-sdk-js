@@ -204,5 +204,7 @@ module.exports = {
   AppConfig: require('./appconfig'),
   IoTSecureTunneling: require('./iotsecuretunneling'),
   WAFV2: require('./wafv2'),
-  ElasticInference: require('./elasticinference')
+  ElasticInference: require('./elasticinference'),
+  Imagebuilder: require('./imagebuilder'),
+  Schemas: require('./schemas')
 };

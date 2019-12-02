@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.580.0-->
+<!--LATEST=2.581.0-->
 <!--ENTRYINSERT-->
+
+## 2.581.0
+* feature: EC2: AWS now provides a new BYOL experience for software licenses, such as Windows and SQL Server, that require a dedicated physical server. You can now enjoy the flexibility and cost effectiveness of using your own licenses on Amazon EC2 Dedicated Hosts, but with the simplicity, resiliency, and elasticity of AWS. You can specify your Dedicated Host management preferences, such as host allocation, host capacity utilization, and instance placement in AWS License Manager.  Once set up, AWS takes care of these administrative tasks on your behalf, so that you can seamlessly launch virtual machines (instances) on Dedicated Hosts just like you would launch an EC2 instance with AWS provided licenses.
+* feature: Imagebuilder: This is the first release of EC2 Image Builder, a service that provides a managed experience for automating the creation of EC2 AMIs.
+* feature: LicenseManager: AWS License Manager now automates discovery of bring-your-own-license usage across the customers organization. With few simple settings, customers can add bring your own license product information along with licensing rules, which would enable License Manager to automatically track the instances that have the specified products installed. If License Manager detects any violation of licensing rules, it would notify the customers designated license administrator to take corrective action.
+* feature: Region: s3 client now support sending request to us-east-1 regional endpoint with `s3UsEast1RegionalEndpoint` client configuration set to `regional`
+* feature: Schemas: This release introduces support for Amazon EventBridge schema registry, making it easy to discover and write code for events in EventBridge.
 
 ## 2.580.0
 * feature: CognitoIdentityServiceProvider: This release adds a new setting for a user pool to configure which recovery methods a user can use to recover their account via the forgot password operation.
