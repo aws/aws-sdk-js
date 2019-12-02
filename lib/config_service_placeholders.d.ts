@@ -207,6 +207,7 @@ export abstract class ConfigurationServicePlaceholders {
   elasticinference?: AWS.ElasticInference.Types.ClientConfiguration;
   imagebuilder?: AWS.Imagebuilder.Types.ClientConfiguration;
   schemas?: AWS.Schemas.Types.ClientConfiguration;
+  accessanalyzer?: AWS.AccessAnalyzer.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -416,4 +417,5 @@ export interface ConfigurationServiceApiVersions {
   elasticinference?: AWS.ElasticInference.Types.apiVersion;
   imagebuilder?: AWS.Imagebuilder.Types.apiVersion;
   schemas?: AWS.Schemas.Types.apiVersion;
+  accessanalyzer?: AWS.AccessAnalyzer.Types.apiVersion;
 }

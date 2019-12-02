@@ -206,5 +206,6 @@ module.exports = {
   WAFV2: require('./wafv2'),
   ElasticInference: require('./elasticinference'),
   Imagebuilder: require('./imagebuilder'),
-  Schemas: require('./schemas')
+  Schemas: require('./schemas'),
+  AccessAnalyzer: require('./accessanalyzer')
 };

@@ -819,5 +819,8 @@
   },
   "schemas": {
     "name": "Schemas"
+  },
+  "accessanalyzer": {
+    "name": "AccessAnalyzer"
   }
 }

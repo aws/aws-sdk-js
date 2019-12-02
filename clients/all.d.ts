@@ -205,3 +205,4 @@ export import WAFV2 = require('./wafv2');
 export import ElasticInference = require('./elasticinference');
 export import Imagebuilder = require('./imagebuilder');
 export import Schemas = require('./schemas');
+export import AccessAnalyzer = require('./accessanalyzer');
