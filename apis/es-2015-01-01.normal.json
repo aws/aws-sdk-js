@@ -1287,6 +1287,8 @@
         "c5.4xlarge.elasticsearch",
         "c5.9xlarge.elasticsearch",
         "c5.18xlarge.elasticsearch",
+        "ultrawarm1.medium.elasticsearch",
+        "ultrawarm1.large.elasticsearch",
         "t2.micro.elasticsearch",
         "t2.small.elasticsearch",
         "t2.medium.elasticsearch",
@@ -1320,12 +1322,19 @@
         "i3.16xlarge.elasticsearch"
       ]
     },
+    "ESWarmPartitionInstanceType": {
+      "type": "string",
+      "enum": [
+        "ultrawarm1.medium.elasticsearch",
+        "ultrawarm1.large.elasticsearch"
+      ]
+    },
     "ElasticsearchClusterConfig": {
       "type": "structure",
       "members": {
         "InstanceType": {
           "shape": "ESPartitionInstanceType",
-          "documentation": "<p>The instance type for an Elasticsearch cluster.</p>"
+          "documentation": "<p>The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.</p>"
         },
         "InstanceCount": {
           "shape": "IntegerClass",
@@ -1350,6 +1359,18 @@
         "DedicatedMasterCount": {
           "shape": "IntegerClass",
           "documentation": "<p>Total number of dedicated master nodes, active and on standby, for the cluster.</p>"
+        },
+        "WarmEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True to enable warm storage.</p>"
+        },
+        "WarmType": {
+          "shape": "ESWarmPartitionInstanceType",
+          "documentation": "<p>The instance type for the Elasticsearch cluster's warm nodes.</p>"
+        },
+        "WarmCount": {
+          "shape": "IntegerClass",
+          "documentation": "<p>The number of warm nodes in the cluster.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration for the domain cluster, such as the type and number of instances.</p>"
@@ -1795,7 +1816,7 @@
       "value": {
         "shape": "Limits"
       },
-      "documentation": "<p> Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>Data: If the given InstanceType is used as Data node</li> <li>Master: If the given InstanceType is used as Master node</li> </ul> </p>"
+      "documentation": "<p> Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>data: If the given InstanceType is used as data node</li> <li>master: If the given InstanceType is used as master node</li> <li>ultra_warm: If the given InstanceType is used as warm node</li> </ul> </p>"
     },
     "ListDomainNamesResponse": {
       "type": "structure",

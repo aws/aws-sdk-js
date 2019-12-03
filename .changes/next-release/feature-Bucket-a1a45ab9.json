@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Bucket",
-  "description": "Add support for S3 access point. Access Points provide a customizable way to access the objects in a bucket, with a unique hostname and access policy that enforces the specific permissions and network controls for any request made through the access point."
-}

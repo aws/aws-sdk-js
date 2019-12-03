@@ -1,0 +1,852 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2019-07-18",
+    "endpointPrefix": "codeguru-profiler",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "Amazon CodeGuru Profiler",
+    "serviceId": "CodeGuruProfiler",
+    "signatureVersion": "v4",
+    "signingName": "codeguru-profiler",
+    "uid": "codeguruprofiler-2019-07-18"
+  },
+  "operations": {
+    "ConfigureAgent": {
+      "name": "ConfigureAgent",
+      "http": {
+        "method": "POST",
+        "requestUri": "/profilingGroups/{profilingGroupName}/configureAgent",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ConfigureAgentRequest"
+      },
+      "output": {
+        "shape": "ConfigureAgentResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Provides the configuration to use for an agent of the profiling group.</p>"
+    },
+    "CreateProfilingGroup": {
+      "name": "CreateProfilingGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/profilingGroups",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateProfilingGroupRequest"
+      },
+      "output": {
+        "shape": "CreateProfilingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Create a profiling group.</p>",
+      "idempotent": true
+    },
+    "DeleteProfilingGroup": {
+      "name": "DeleteProfilingGroup",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/profilingGroups/{profilingGroupName}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteProfilingGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteProfilingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Delete a profiling group.</p>",
+      "idempotent": true
+    },
+    "DescribeProfilingGroup": {
+      "name": "DescribeProfilingGroup",
+      "http": {
+        "method": "GET",
+        "requestUri": "/profilingGroups/{profilingGroupName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeProfilingGroupRequest"
+      },
+      "output": {
+        "shape": "DescribeProfilingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Describe a profiling group.</p>"
+    },
+    "GetProfile": {
+      "name": "GetProfile",
+      "http": {
+        "method": "GET",
+        "requestUri": "/profilingGroups/{profilingGroupName}/profile",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetProfileRequest"
+      },
+      "output": {
+        "shape": "GetProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Get the aggregated profile of a profiling group for the specified time range. If the requested time range does not align with the available aggregated profiles, it will be expanded to attain alignment. If aggregated profiles are available only for part of the period requested, the profile is returned from the earliest available to the latest within the requested time range. For instance, if the requested time range is from 00:00 to 00:20 and the available profiles are from 00:15 to 00:25, then the returned profile will be from 00:15 to 00:20.</p>"
+    },
+    "ListProfileTimes": {
+      "name": "ListProfileTimes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/profilingGroups/{profilingGroupName}/profileTimes",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListProfileTimesRequest"
+      },
+      "output": {
+        "shape": "ListProfileTimesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>List the start times of the available aggregated profiles of a profiling group for an aggregation period within the specified time range.</p>"
+    },
+    "ListProfilingGroups": {
+      "name": "ListProfilingGroups",
+      "http": {
+        "method": "GET",
+        "requestUri": "/profilingGroups",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListProfilingGroupsRequest"
+      },
+      "output": {
+        "shape": "ListProfilingGroupsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>List profiling groups in the account.</p>"
+    },
+    "PostAgentProfile": {
+      "name": "PostAgentProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/profilingGroups/{profilingGroupName}/agentProfile",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "PostAgentProfileRequest"
+      },
+      "output": {
+        "shape": "PostAgentProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Submit profile collected by an agent belonging to a profiling group for aggregation.</p>"
+    },
+    "UpdateProfilingGroup": {
+      "name": "UpdateProfilingGroup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/profilingGroups/{profilingGroupName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateProfilingGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateProfilingGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Update a profiling group.</p>",
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "AgentConfiguration": {
+      "type": "structure",
+      "required": [
+        "periodInSeconds",
+        "shouldProfile"
+      ],
+      "members": {
+        "periodInSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the period to follow the configuration (to profile or not) and call back to get a new configuration.</p>"
+        },
+        "shouldProfile": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies if the profiling should be enabled by the agent.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for the agent to use.</p>"
+    },
+    "AgentOrchestrationConfig": {
+      "type": "structure",
+      "required": [
+        "profilingEnabled"
+      ],
+      "members": {
+        "profilingEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>If the agents should be enabled to create and report profiles.</p>"
+        }
+      },
+      "documentation": "<p>Configuration to orchestrate agents to create and report agent profiles of the profiling group. Agents are orchestrated if they follow the agent orchestration protocol.</p>"
+    },
+    "AgentProfile": {
+      "type": "blob",
+      "documentation": "<p>The profile collected by an agent for a time range.</p>"
+    },
+    "AggregatedProfile": {
+      "type": "blob",
+      "documentation": "<p>The profile representing the aggregation of agent profiles of the profiling group for a time range.</p>"
+    },
+    "AggregatedProfileTime": {
+      "type": "structure",
+      "members": {
+        "period": {
+          "shape": "AggregationPeriod",
+          "documentation": "<p>The aggregation period of the aggregated profile.</p>"
+        },
+        "start": {
+          "shape": "Timestamp",
+          "documentation": "<p>The start time of the aggregated profile.</p>"
+        }
+      },
+      "documentation": "<p>The time range of an aggregated profile.</p>"
+    },
+    "AggregationPeriod": {
+      "type": "string",
+      "documentation": "<p>Periods of time used for aggregation of profiles, represented using ISO 8601 format.</p>",
+      "enum": [
+        "P1D",
+        "PT1H",
+        "PT5M"
+      ]
+    },
+    "Boolean": {
+      "type": "boolean",
+      "box": true
+    },
+    "ClientToken": {
+      "type": "string",
+      "documentation": "<p>Client token for the request.</p>",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[\\w-]+$"
+    },
+    "ConfigureAgentRequest": {
+      "type": "structure",
+      "required": [
+        "profilingGroupName"
+      ],
+      "members": {
+        "fleetInstanceId": {
+          "shape": "FleetInstanceId"
+        },
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        }
+      },
+      "documentation": "<p>Request for ConfigureAgent operation.</p>"
+    },
+    "ConfigureAgentResponse": {
+      "type": "structure",
+      "required": [
+        "configuration"
+      ],
+      "members": {
+        "configuration": {
+          "shape": "AgentConfiguration",
+          "documentation": "<p>The configuration for the agent to use.</p>"
+        }
+      },
+      "documentation": "<p>Response for ConfigureAgent operation.</p>",
+      "payload": "configuration"
+    },
+    "CreateProfilingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "clientToken",
+        "profilingGroupName"
+      ],
+      "members": {
+        "agentOrchestrationConfig": {
+          "shape": "AgentOrchestrationConfig"
+        },
+        "clientToken": {
+          "shape": "ClientToken",
+          "idempotencyToken": true,
+          "location": "querystring",
+          "locationName": "clientToken"
+        },
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName"
+        }
+      },
+      "documentation": "<p>Request for CreateProfilingGroup operation.</p>"
+    },
+    "CreateProfilingGroupResponse": {
+      "type": "structure",
+      "required": [
+        "profilingGroup"
+      ],
+      "members": {
+        "profilingGroup": {
+          "shape": "ProfilingGroupDescription"
+        }
+      },
+      "documentation": "<p>Response for CreateProfilingGroup operation.</p>",
+      "payload": "profilingGroup"
+    },
+    "DeleteProfilingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "profilingGroupName"
+      ],
+      "members": {
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        }
+      },
+      "documentation": "<p>Request for DeleteProfilingGroup operation.</p>"
+    },
+    "DeleteProfilingGroupResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>Response for DeleteProfilingGroup operation.</p>"
+    },
+    "DescribeProfilingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "profilingGroupName"
+      ],
+      "members": {
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        }
+      },
+      "documentation": "<p>Request for DescribeProfilingGroup operation.</p>"
+    },
+    "DescribeProfilingGroupResponse": {
+      "type": "structure",
+      "required": [
+        "profilingGroup"
+      ],
+      "members": {
+        "profilingGroup": {
+          "shape": "ProfilingGroupDescription"
+        }
+      },
+      "documentation": "<p>Response for DescribeProfilingGroup operation.</p>",
+      "payload": "profilingGroup"
+    },
+    "FleetInstanceId": {
+      "type": "string",
+      "documentation": "<p>Identifier of the instance of compute fleet being profiled by the agent. For instance, host name in EC2, task id for ECS, function name for AWS Lambda</p>",
+      "max": 255,
+      "min": 1,
+      "pattern": "^[\\w-.:/]+$"
+    },
+    "GetProfileRequest": {
+      "type": "structure",
+      "required": [
+        "profilingGroupName"
+      ],
+      "members": {
+        "accept": {
+          "shape": "String",
+          "documentation": "<p>The format of the profile to return. Supports application/json or application/x-amzn-ion. Defaults to application/x-amzn-ion.</p>",
+          "location": "header",
+          "locationName": "Accept"
+        },
+        "endTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The end time of the profile to get. Either period or endTime must be specified. Must be greater than start and the overall time range to be in the past and not larger than a week.</p>",
+          "location": "querystring",
+          "locationName": "endTime"
+        },
+        "maxDepth": {
+          "shape": "MaxDepth",
+          "location": "querystring",
+          "locationName": "maxDepth"
+        },
+        "period": {
+          "shape": "Period",
+          "documentation": "<p>The period of the profile to get. Exactly two of <code>startTime</code>, <code>period</code> and <code>endTime</code> must be specified. Must be positive and the overall time range to be in the past and not larger than a week.</p>",
+          "location": "querystring",
+          "locationName": "period"
+        },
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        },
+        "startTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The start time of the profile to get.</p>",
+          "location": "querystring",
+          "locationName": "startTime"
+        }
+      },
+      "documentation": "<p>Request for GetProfile operation.</p>"
+    },
+    "GetProfileResponse": {
+      "type": "structure",
+      "required": [
+        "contentType",
+        "profile"
+      ],
+      "members": {
+        "contentEncoding": {
+          "shape": "String",
+          "documentation": "<p>The content encoding of the profile in the payload.</p>",
+          "location": "header",
+          "locationName": "Content-Encoding"
+        },
+        "contentType": {
+          "shape": "String",
+          "documentation": "<p>The content type of the profile in the payload. Will be application/json or application/x-amzn-ion based on Accept header in the request.</p>",
+          "location": "header",
+          "locationName": "Content-Type"
+        },
+        "profile": {
+          "shape": "AggregatedProfile"
+        }
+      },
+      "documentation": "<p>Response for GetProfile operation.</p>",
+      "payload": "profile"
+    },
+    "Integer": {
+      "type": "integer",
+      "box": true
+    },
+    "ListProfileTimesRequest": {
+      "type": "structure",
+      "required": [
+        "endTime",
+        "period",
+        "profilingGroupName",
+        "startTime"
+      ],
+      "members": {
+        "endTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The end time of the time range to list profiles until.</p>",
+          "location": "querystring",
+          "locationName": "endTime"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "orderBy": {
+          "shape": "OrderBy",
+          "documentation": "<p>The order (ascending or descending by start time of the profile) to list the profiles by. Defaults to TIMESTAMP_DESCENDING.</p>",
+          "location": "querystring",
+          "locationName": "orderBy"
+        },
+        "period": {
+          "shape": "AggregationPeriod",
+          "documentation": "<p>The aggregation period to list the profiles for.</p>",
+          "location": "querystring",
+          "locationName": "period"
+        },
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        },
+        "startTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The start time of the time range to list the profiles from.</p>",
+          "location": "querystring",
+          "locationName": "startTime"
+        }
+      },
+      "documentation": "<p>Request for ListProfileTimes operation.</p>"
+    },
+    "ListProfileTimesResponse": {
+      "type": "structure",
+      "required": [
+        "profileTimes"
+      ],
+      "members": {
+        "nextToken": {
+          "shape": "PaginationToken"
+        },
+        "profileTimes": {
+          "shape": "ProfileTimes",
+          "documentation": "<p>List of start times of the available profiles for the aggregation period in the specified time range.</p>"
+        }
+      },
+      "documentation": "<p>Response for ListProfileTimes operation.</p>"
+    },
+    "ListProfilingGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "includeDescription": {
+          "shape": "Boolean",
+          "documentation": "<p>If set to true, returns the full description of the profiling groups instead of the names. Defaults to false.</p>",
+          "location": "querystring",
+          "locationName": "includeDescription"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": "<p>Request for ListProfilingGroups operation.</p>"
+    },
+    "ListProfilingGroupsResponse": {
+      "type": "structure",
+      "required": [
+        "profilingGroupNames"
+      ],
+      "members": {
+        "nextToken": {
+          "shape": "PaginationToken"
+        },
+        "profilingGroupNames": {
+          "shape": "ProfilingGroupNames"
+        },
+        "profilingGroups": {
+          "shape": "ProfilingGroupDescriptions"
+        }
+      },
+      "documentation": "<p>Response for ListProfilingGroups operation.</p>"
+    },
+    "MaxDepth": {
+      "type": "integer",
+      "documentation": "<p>Limit the max depth of the profile.</p>",
+      "box": true,
+      "max": 10000,
+      "min": 1
+    },
+    "MaxResults": {
+      "type": "integer",
+      "documentation": "<p>Upper bound on the number of results to list in a single call.</p>",
+      "box": true,
+      "max": 1000,
+      "min": 1
+    },
+    "OrderBy": {
+      "type": "string",
+      "enum": [
+        "TimestampAscending",
+        "TimestampDescending"
+      ]
+    },
+    "PaginationToken": {
+      "type": "string",
+      "documentation": "<p>Token for paginating results.</p>",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[\\w-]+$"
+    },
+    "Period": {
+      "type": "string",
+      "documentation": "<p>Periods of time represented using <a href=\"https://en.wikipedia.org/wiki/ISO_8601#Durations\">ISO 8601 format</a>.</p>",
+      "max": 64,
+      "min": 1
+    },
+    "PostAgentProfileRequest": {
+      "type": "structure",
+      "required": [
+        "agentProfile",
+        "contentType",
+        "profilingGroupName"
+      ],
+      "members": {
+        "agentProfile": {
+          "shape": "AgentProfile"
+        },
+        "contentType": {
+          "shape": "String",
+          "documentation": "<p>The content type of the agent profile in the payload. Recommended to send the profile gzipped with content-type application/octet-stream. Other accepted values are application/x-amzn-ion and application/json for unzipped Ion and JSON respectively.</p>",
+          "location": "header",
+          "locationName": "Content-Type"
+        },
+        "profileToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>Client generated token to deduplicate the agent profile during aggregation.</p>",
+          "idempotencyToken": true,
+          "location": "querystring",
+          "locationName": "profileToken"
+        },
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        }
+      },
+      "documentation": "<p>Request for PostAgentProfile operation.</p>",
+      "payload": "agentProfile"
+    },
+    "PostAgentProfileResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>Response for PostAgentProfile operation.</p>"
+    },
+    "ProfileTime": {
+      "type": "structure",
+      "members": {
+        "start": {
+          "shape": "Timestamp",
+          "documentation": "<p>The start time of the profile.</p>"
+        }
+      },
+      "documentation": "<p>Periods of time used for aggregation of profiles, represented using ISO 8601 format.</p>"
+    },
+    "ProfileTimes": {
+      "type": "list",
+      "member": {
+        "shape": "ProfileTime"
+      },
+      "documentation": "<p>List of profile times.</p>"
+    },
+    "ProfilingGroupArn": {
+      "type": "string",
+      "documentation": "<p>The ARN of the profiling group.</p>"
+    },
+    "ProfilingGroupDescription": {
+      "type": "structure",
+      "members": {
+        "agentOrchestrationConfig": {
+          "shape": "AgentOrchestrationConfig"
+        },
+        "arn": {
+          "shape": "ProfilingGroupArn"
+        },
+        "createdAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp of when the profiling group was created.</p>"
+        },
+        "name": {
+          "shape": "ProfilingGroupName"
+        },
+        "profilingStatus": {
+          "shape": "ProfilingStatus"
+        },
+        "updatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp of when the profiling group was last updated.</p>"
+        }
+      },
+      "documentation": "<p>The description of a profiling group.</p>"
+    },
+    "ProfilingGroupDescriptions": {
+      "type": "list",
+      "member": {
+        "shape": "ProfilingGroupDescription"
+      },
+      "documentation": "<p>List of profiling group descriptions.</p>"
+    },
+    "ProfilingGroupName": {
+      "type": "string",
+      "documentation": "<p>The name of the profiling group.</p>",
+      "max": 255,
+      "min": 1,
+      "pattern": "^[\\w-]+$"
+    },
+    "ProfilingGroupNames": {
+      "type": "list",
+      "member": {
+        "shape": "ProfilingGroupName"
+      },
+      "documentation": "<p>List of profiling group names.</p>"
+    },
+    "ProfilingStatus": {
+      "type": "structure",
+      "members": {
+        "latestAgentOrchestratedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>Timestamp of when the last interaction of the agent with configureAgent API for orchestration.</p>"
+        },
+        "latestAgentProfileReportedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>Timestamp of when the latest agent profile was successfully reported.</p>"
+        },
+        "latestAggregatedProfile": {
+          "shape": "AggregatedProfileTime",
+          "documentation": "<p>The time range of latest aggregated profile available.</p>"
+        }
+      },
+      "documentation": "<p>The status of profiling of a profiling group.</p>"
+    },
+    "String": {
+      "type": "string"
+    },
+    "Timestamp": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "UpdateProfilingGroupRequest": {
+      "type": "structure",
+      "required": [
+        "agentOrchestrationConfig",
+        "profilingGroupName"
+      ],
+      "members": {
+        "agentOrchestrationConfig": {
+          "shape": "AgentOrchestrationConfig",
+          "documentation": "<p>Remote configuration to configure the agents of the profiling group.</p>"
+        },
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        }
+      },
+      "documentation": "<p>Request for UpdateProfilingGroup operation.</p>"
+    },
+    "UpdateProfilingGroupResponse": {
+      "type": "structure",
+      "required": [
+        "profilingGroup"
+      ],
+      "members": {
+        "profilingGroup": {
+          "shape": "ProfilingGroupDescription"
+        }
+      },
+      "documentation": "<p>Response for UpdateProfilingGroup operation.</p>",
+      "payload": "profilingGroup"
+    }
+  },
+  "documentation": "<p>Example service documentation.</p>"
+}

@@ -822,5 +822,32 @@
   },
   "accessanalyzer": {
     "name": "AccessAnalyzer"
+  },
+  "codegurureviewer": {
+    "prefix": "codeguru-reviewer",
+    "name": "CodeGuruReviewer"
+  },
+  "codeguruprofiler": {
+    "name": "CodeGuruProfiler"
+  },
+  "computeoptimizer": {
+    "prefix": "compute-optimizer",
+    "name": "ComputeOptimizer"
+  },
+  "frauddetector": {
+    "name": "FraudDetector"
+  },
+  "kendra": {
+    "name": "Kendra"
+  },
+  "networkmanager": {
+    "name": "NetworkManager"
+  },
+  "outposts": {
+    "name": "Outposts"
+  },
+  "augmentedairuntime": {
+    "prefix": "sagemaker-a2i-runtime",
+    "name": "AugmentedAIRuntime"
   }
 }

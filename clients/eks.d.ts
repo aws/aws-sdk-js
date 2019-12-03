@@ -21,6 +21,14 @@ declare class EKS extends Service {
    */
   createCluster(callback?: (err: AWSError, data: EKS.Types.CreateClusterResponse) => void): Request<EKS.Types.CreateClusterResponse, AWSError>;
   /**
+   * Creates an AWS Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to schedule pods on Fargate infrastructure. The Fargate profile allows an administrator to declare which pods run on Fargate infrastructure and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate infrastructure. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is scheduled on Fargate infrastructure. When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes Role Based Access Control (RBAC) for authorization so that the kubelet that is running on the Fargate infrastructure can register with your Amazon EKS cluster. This role is what allows Fargate infrastructure to appear in your cluster as nodes. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide. Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating. If any Fargate profiles in a cluster are in the DELETING status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster. For more information, see AWS Fargate Profile in the Amazon EKS User Guide.
+   */
+  createFargateProfile(params: EKS.Types.CreateFargateProfileRequest, callback?: (err: AWSError, data: EKS.Types.CreateFargateProfileResponse) => void): Request<EKS.Types.CreateFargateProfileResponse, AWSError>;
+  /**
+   * Creates an AWS Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to schedule pods on Fargate infrastructure. The Fargate profile allows an administrator to declare which pods run on Fargate infrastructure and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate infrastructure. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is scheduled on Fargate infrastructure. When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes Role Based Access Control (RBAC) for authorization so that the kubelet that is running on the Fargate infrastructure can register with your Amazon EKS cluster. This role is what allows Fargate infrastructure to appear in your cluster as nodes. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide. Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating. If any Fargate profiles in a cluster are in the DELETING status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster. For more information, see AWS Fargate Profile in the Amazon EKS User Guide.
+   */
+  createFargateProfile(callback?: (err: AWSError, data: EKS.Types.CreateFargateProfileResponse) => void): Request<EKS.Types.CreateFargateProfileResponse, AWSError>;
+  /**
    * Creates a managed worker node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. All node groups are created with the latest AMI release version for the respective minor Kubernetes version of the cluster. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by AWS for an Amazon EKS cluster. Each node group uses a version of the Amazon EKS-optimized Amazon Linux 2 AMI. For more information, see Managed Node Groups in the Amazon EKS User Guide. 
    */
   createNodegroup(params: EKS.Types.CreateNodegroupRequest, callback?: (err: AWSError, data: EKS.Types.CreateNodegroupResponse) => void): Request<EKS.Types.CreateNodegroupResponse, AWSError>;
@@ -29,13 +37,21 @@ declare class EKS extends Service {
    */
   createNodegroup(callback?: (err: AWSError, data: EKS.Types.CreateNodegroupResponse) => void): Request<EKS.Types.CreateNodegroupResponse, AWSError>;
   /**
-   * Deletes the Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a Cluster in the Amazon EKS User Guide. If you have managed node groups attached to the cluster, you must delete them first. For more information, see DeleteNodegroup.
+   * Deletes the Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a Cluster in the Amazon EKS User Guide. If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first. For more information, see DeleteNodegroup andDeleteFargateProfile.
    */
   deleteCluster(params: EKS.Types.DeleteClusterRequest, callback?: (err: AWSError, data: EKS.Types.DeleteClusterResponse) => void): Request<EKS.Types.DeleteClusterResponse, AWSError>;
   /**
-   * Deletes the Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a Cluster in the Amazon EKS User Guide. If you have managed node groups attached to the cluster, you must delete them first. For more information, see DeleteNodegroup.
+   * Deletes the Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a Cluster in the Amazon EKS User Guide. If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first. For more information, see DeleteNodegroup andDeleteFargateProfile.
    */
   deleteCluster(callback?: (err: AWSError, data: EKS.Types.DeleteClusterResponse) => void): Request<EKS.Types.DeleteClusterResponse, AWSError>;
+  /**
+   * Deletes an AWS Fargate profile. When you delete a Fargate profile, any pods that were scheduled onto Fargate infrastructure with the profile are deleted. If those pods match another Fargate profile, then they are scheduled on Fargate infrastructure with that profile. If they no longer match any Fargate profiles, then they are not scheduled on Fargate infrastructure. Only one Fargate profile in a cluster can be in the DELETING status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.
+   */
+  deleteFargateProfile(params: EKS.Types.DeleteFargateProfileRequest, callback?: (err: AWSError, data: EKS.Types.DeleteFargateProfileResponse) => void): Request<EKS.Types.DeleteFargateProfileResponse, AWSError>;
+  /**
+   * Deletes an AWS Fargate profile. When you delete a Fargate profile, any pods that were scheduled onto Fargate infrastructure with the profile are deleted. If those pods match another Fargate profile, then they are scheduled on Fargate infrastructure with that profile. If they no longer match any Fargate profiles, then they are not scheduled on Fargate infrastructure. Only one Fargate profile in a cluster can be in the DELETING status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.
+   */
+  deleteFargateProfile(callback?: (err: AWSError, data: EKS.Types.DeleteFargateProfileResponse) => void): Request<EKS.Types.DeleteFargateProfileResponse, AWSError>;
   /**
    * Deletes an Amazon EKS node group for a cluster.
    */
@@ -52,6 +68,14 @@ declare class EKS extends Service {
    * Returns descriptive information about an Amazon EKS cluster. The API server endpoint and certificate authority data returned by this operation are required for kubelet and kubectl to communicate with your Kubernetes API server. For more information, see Create a kubeconfig for Amazon EKS.  The API server endpoint and certificate authority data aren't available until the cluster reaches the ACTIVE state. 
    */
   describeCluster(callback?: (err: AWSError, data: EKS.Types.DescribeClusterResponse) => void): Request<EKS.Types.DescribeClusterResponse, AWSError>;
+  /**
+   * Returns descriptive information about an AWS Fargate profile.
+   */
+  describeFargateProfile(params: EKS.Types.DescribeFargateProfileRequest, callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
+  /**
+   * Returns descriptive information about an AWS Fargate profile.
+   */
+  describeFargateProfile(callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
   /**
    * Returns descriptive information about an Amazon EKS node group.
    */
@@ -76,6 +100,14 @@ declare class EKS extends Service {
    * Lists the Amazon EKS clusters in your AWS account in the specified Region.
    */
   listClusters(callback?: (err: AWSError, data: EKS.Types.ListClustersResponse) => void): Request<EKS.Types.ListClustersResponse, AWSError>;
+  /**
+   * Lists the AWS Fargate profiles associated with the specified cluster in your AWS account in the specified Region.
+   */
+  listFargateProfiles(params: EKS.Types.ListFargateProfilesRequest, callback?: (err: AWSError, data: EKS.Types.ListFargateProfilesResponse) => void): Request<EKS.Types.ListFargateProfilesResponse, AWSError>;
+  /**
+   * Lists the AWS Fargate profiles associated with the specified cluster in your AWS account in the specified Region.
+   */
+  listFargateProfiles(callback?: (err: AWSError, data: EKS.Types.ListFargateProfilesResponse) => void): Request<EKS.Types.ListFargateProfilesResponse, AWSError>;
   /**
    * Lists the Amazon EKS node groups associated with the specified cluster in your AWS account in the specified Region.
    */
@@ -185,7 +217,7 @@ declare namespace EKS {
   export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|string;
   export interface AutoScalingGroup {
     /**
-     * The name of the AutoScaling group associated with an Amazon EKS managed node group.
+     * The name of the Auto Scaling group associated with an Amazon EKS managed node group.
      */
     name?: String;
   }
@@ -296,6 +328,42 @@ declare namespace EKS {
      */
     cluster?: Cluster;
   }
+  export interface CreateFargateProfileRequest {
+    /**
+     * The name of the Fargate profile.
+     */
+    fargateProfileName: String;
+    /**
+     * The name of the Amazon EKS cluster to apply the Fargate profile to.
+     */
+    clusterName: String;
+    /**
+     * The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. The pod execution role allows Fargate infrastructure to register with your cluster as a node, and it provides read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide.
+     */
+    podExecutionRoleArn: String;
+    /**
+     * The IDs of subnets to launch Fargate pods into. At this time, Fargate pods are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.
+     */
+    subnets?: StringList;
+    /**
+     * The selectors to match for pods to use this Fargate profile. Each selector must have an associated namespace. Optionally, you can also specify labels for a namespace. You may specify up to five selectors in a Fargate profile.
+     */
+    selectors?: FargateProfileSelectors;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: String;
+    /**
+     * The metadata to apply to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateFargateProfileResponse {
+    /**
+     * The full description of your new Fargate profile.
+     */
+    fargateProfile?: FargateProfile;
+  }
   export interface CreateNodegroupRequest {
     /**
      * The name of the cluster to create the node group in.
@@ -306,7 +374,7 @@ declare namespace EKS {
      */
     nodegroupName: String;
     /**
-     * The scaling configuration details for the AutoScaling group that is created for your node group.
+     * The scaling configuration details for the Auto Scaling group that is created for your node group.
      */
     scalingConfig?: NodegroupScalingConfig;
     /**
@@ -314,7 +382,7 @@ declare namespace EKS {
      */
     diskSize?: BoxedInteger;
     /**
-     * The subnets to use for the AutoScaling group that is created for your node group. These subnets must have the tag key kubernetes.io/cluster/CLUSTER_NAME with a value of shared, where CLUSTER_NAME is replaced with the name of your cluster.
+     * The subnets to use for the Auto Scaling group that is created for your node group. These subnets must have the tag key kubernetes.io/cluster/CLUSTER_NAME with a value of shared, where CLUSTER_NAME is replaced with the name of your cluster.
      */
     subnets: StringList;
     /**
@@ -322,7 +390,7 @@ declare namespace EKS {
      */
     instanceTypes?: StringList;
     /**
-     * The AMI type for your node group. GPU instance types should use the AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support; non-GPU instances should use the AL2_x86_64 AMI type, which uses the Amazon EKS-optimized Linux AMI.
+     * The AMI type for your node group. GPU instance types should use the AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the AL2_x86_64 AMI type, which uses the Amazon EKS-optimized Linux AMI.
      */
     amiType?: AMITypes;
     /**
@@ -372,6 +440,22 @@ declare namespace EKS {
      */
     cluster?: Cluster;
   }
+  export interface DeleteFargateProfileRequest {
+    /**
+     * The name of the Amazon EKS cluster associated with the Fargate profile to delete.
+     */
+    clusterName: String;
+    /**
+     * The name of the Fargate profile to delete.
+     */
+    fargateProfileName: String;
+  }
+  export interface DeleteFargateProfileResponse {
+    /**
+     * The deleted Fargate profile.
+     */
+    fargateProfile?: FargateProfile;
+  }
   export interface DeleteNodegroupRequest {
     /**
      * The name of the Amazon EKS cluster that is associated with your node group.
@@ -399,6 +483,22 @@ declare namespace EKS {
      * The full description of your specified cluster.
      */
     cluster?: Cluster;
+  }
+  export interface DescribeFargateProfileRequest {
+    /**
+     * The name of the Amazon EKS cluster associated with the Fargate profile.
+     */
+    clusterName: String;
+    /**
+     * The name of the Fargate profile to describe.
+     */
+    fargateProfileName: String;
+  }
+  export interface DescribeFargateProfileResponse {
+    /**
+     * The full description of your Fargate profile.
+     */
+    fargateProfile?: FargateProfile;
   }
   export interface DescribeNodegroupRequest {
     /**
@@ -452,6 +552,58 @@ declare namespace EKS {
     resourceIds?: StringList;
   }
   export type ErrorDetails = ErrorDetail[];
+  export interface FargateProfile {
+    /**
+     * The name of the Fargate profile.
+     */
+    fargateProfileName?: String;
+    /**
+     * The full Amazon Resource Name (ARN) of the Fargate profile.
+     */
+    fargateProfileArn?: String;
+    /**
+     * The name of the Amazon EKS cluster that the Fargate profile belongs to.
+     */
+    clusterName?: String;
+    /**
+     * The Unix epoch timestamp in seconds for when the Fargate profile was created.
+     */
+    createdAt?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. For more information, see Pod Execution Role in the Amazon EKS User Guide.
+     */
+    podExecutionRoleArn?: String;
+    /**
+     * The IDs of subnets to launch Fargate pods into.
+     */
+    subnets?: StringList;
+    /**
+     * The selectors to match for pods to use this Fargate profile.
+     */
+    selectors?: FargateProfileSelectors;
+    /**
+     * The current status of the Fargate profile.
+     */
+    status?: FargateProfileStatus;
+    /**
+     * The metadata applied to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.
+     */
+    tags?: TagMap;
+  }
+  export type FargateProfileLabel = {[key: string]: String};
+  export interface FargateProfileSelector {
+    /**
+     * The Kubernetes namespace that the selector should match.
+     */
+    namespace?: String;
+    /**
+     * The Kubernetes labels that the selector should match. A pod must contain all of the labels that are specified in the selector for it to be considered a match.
+     */
+    labels?: FargateProfileLabel;
+  }
+  export type FargateProfileSelectors = FargateProfileSelector[];
+  export type FargateProfileStatus = "CREATING"|"ACTIVE"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|string;
+  export type FargateProfilesRequestMaxResults = number;
   export interface Identity {
     /**
      * The OpenID Connect identity provider information for the cluster.
@@ -460,7 +612,7 @@ declare namespace EKS {
   }
   export interface Issue {
     /**
-     * A brief description of the error.    AutoScalingGroupNotFound: We couldn't find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.    Ec2SecurityGroupNotFound: We couldn't find the cluster security group for the cluster. You must recreate your cluster.    Ec2SecurityGroupDeletionFailure: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.    Ec2LaunchTemplateNotFound: We couldn't find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.    Ec2LaunchTemplateVersionMismatch: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the Amazon EKS-created version to recover.    IamInstanceProfileNotFound: We couldn't find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.    IamNodeRoleNotFound: We couldn't find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.    AsgInstanceLaunchFailures: Your Auto Scaling group is experiencing failures while attempting to launch instances.    InstanceLimitExceeded: Your AWS account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.    InsufficientFreeAddresses: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.    AccessDenied: Amazon EKS and or one or more of your managed nodes is unable to communicate with your cluster API server.    InternalFailure: These errors are usually caused by an Amazon EKS server-side issue.  
+     * A brief description of the error.    AutoScalingGroupNotFound: We couldn't find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.    Ec2SecurityGroupNotFound: We couldn't find the cluster security group for the cluster. You must recreate your cluster.    Ec2SecurityGroupDeletionFailure: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.    Ec2LaunchTemplateNotFound: We couldn't find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.    Ec2LaunchTemplateVersionMismatch: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.    IamInstanceProfileNotFound: We couldn't find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.    IamNodeRoleNotFound: We couldn't find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.    AsgInstanceLaunchFailures: Your Auto Scaling group is experiencing failures while attempting to launch instances.    NodeCreationFailure: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient worker node IAM role permissions or lack of outbound internet access for the nodes.     InstanceLimitExceeded: Your AWS account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.    InsufficientFreeAddresses: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.    AccessDenied: Amazon EKS or one or more of your managed nodes is unable to communicate with your cluster API server.    InternalFailure: These errors are usually caused by an Amazon EKS server-side issue.  
      */
     code?: NodegroupIssueCode;
     /**
@@ -491,6 +643,30 @@ declare namespace EKS {
     clusters?: StringList;
     /**
      * The nextToken value to include in a future ListClusters request. When the results of a ListClusters request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: String;
+  }
+  export interface ListFargateProfilesRequest {
+    /**
+     * The name of the Amazon EKS cluster that you would like to listFargate profiles in.
+     */
+    clusterName: String;
+    /**
+     * The maximum number of Fargate profile results returned by ListFargateProfiles in paginated output. When you use this parameter, ListFargateProfiles returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListFargateProfiles request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListFargateProfiles returns up to 100 results and a nextToken value if applicable.
+     */
+    maxResults?: FargateProfilesRequestMaxResults;
+    /**
+     * The nextToken value returned from a previous paginated ListFargateProfiles request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.
+     */
+    nextToken?: String;
+  }
+  export interface ListFargateProfilesResponse {
+    /**
+     * A list of all of the Fargate profiles associated with the specified cluster.
+     */
+    fargateProfileNames?: StringList;
+    /**
+     * The nextToken value to include in a future ListFargateProfiles request. When the results of a ListFargateProfiles request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
      */
     nextToken?: String;
   }
@@ -613,7 +789,7 @@ declare namespace EKS {
      */
     status?: NodegroupStatus;
     /**
-     * The scaling configuration details for the AutoScaling group that is associated with your node group.
+     * The scaling configuration details for the Auto Scaling group that is associated with your node group.
      */
     scalingConfig?: NodegroupScalingConfig;
     /**
@@ -621,7 +797,7 @@ declare namespace EKS {
      */
     instanceTypes?: StringList;
     /**
-     * The subnets allowed for the AutoScaling group that is associated with your node group. These subnets must have the following tag: kubernetes.io/cluster/CLUSTER_NAME, where CLUSTER_NAME is replaced with the name of your cluster.
+     * The subnets allowed for the Auto Scaling group that is associated with your node group. These subnets must have the following tag: kubernetes.io/cluster/CLUSTER_NAME, where CLUSTER_NAME is replaced with the name of your cluster.
      */
     subnets?: StringList;
     /**
@@ -629,7 +805,7 @@ declare namespace EKS {
      */
     remoteAccess?: RemoteAccessConfig;
     /**
-     * The AMI type associated with your node group. GPU instance types should use the AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support; non-GPU instances should use the AL2_x86_64 AMI type, which uses the Amazon EKS-optimized Linux AMI.
+     * The AMI type associated with your node group. GPU instance types should use the AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the AL2_x86_64 AMI type, which uses the Amazon EKS-optimized Linux AMI.
      */
     amiType?: AMITypes;
     /**
@@ -641,7 +817,7 @@ declare namespace EKS {
      */
     labels?: labelsMap;
     /**
-     * The resources associated with the nodegroup, such as AutoScaling groups and security groups for remote access.
+     * The resources associated with the node group, such as Auto Scaling groups and security groups for remote access.
      */
     resources?: NodegroupResources;
     /**
@@ -653,7 +829,7 @@ declare namespace EKS {
      */
     health?: NodegroupHealth;
     /**
-     * The metadata applied the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets. 
+     * The metadata applied to the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets. 
      */
     tags?: TagMap;
   }
@@ -666,7 +842,7 @@ declare namespace EKS {
   export type NodegroupIssueCode = "AutoScalingGroupNotFound"|"Ec2SecurityGroupNotFound"|"Ec2SecurityGroupDeletionFailure"|"Ec2LaunchTemplateNotFound"|"Ec2LaunchTemplateVersionMismatch"|"IamInstanceProfileNotFound"|"IamNodeRoleNotFound"|"AsgInstanceLaunchFailures"|"InstanceLimitExceeded"|"InsufficientFreeAddresses"|"AccessDenied"|"InternalFailure"|string;
   export interface NodegroupResources {
     /**
-     * The autoscaling groups associated with the node group.
+     * The Auto Scaling groups associated with the node group.
      */
     autoScalingGroups?: AutoScalingGroupList;
     /**
@@ -701,7 +877,7 @@ declare namespace EKS {
      */
     ec2SshKey?: String;
     /**
-     * The security groups to allow SSH access (port 22) from on the worker nodes. If you specify an Amazon EC2 SSH key, but you do not specify a source security group when you create a managed node group, port 22 on the worker nodes is opened to the internet (0.0.0.0/0). For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.
+     * The security groups that are allowed SSH access (port 22) to the worker nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the worker nodes is opened to the internet (0.0.0.0/0). For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.
      */
     sourceSecurityGroups?: StringList;
   }
@@ -824,7 +1000,7 @@ declare namespace EKS {
      */
     labels?: UpdateLabelsPayload;
     /**
-     * The scaling configuration details for the AutoScaling group after the update.
+     * The scaling configuration details for the Auto Scaling group after the update.
      */
     scalingConfig?: NodegroupScalingConfig;
     /**
@@ -853,7 +1029,7 @@ declare namespace EKS {
      */
     releaseVersion?: String;
     /**
-     * Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue. If a previous update fails because pods could not be drained, you can force the update after it fails to terminate the old node regardless of whether or not any pods are running on the node.
+     * Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue. If an update fails because pods could not be drained, you can force the update after it fails to terminate the old node whether or not any pods are running on the node.
      */
     force?: Boolean;
     /**
@@ -906,7 +1082,7 @@ declare namespace EKS {
      */
     securityGroupIds?: StringList;
     /**
-     * The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.
+     * The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
      */
     clusterSecurityGroupId?: String;
     /**

@@ -11,6 +11,21 @@
     "uid": "s3control-2018-08-20"
   },
   "operations": {
+    "CreateAccessPoint": {
+      "name": "CreateAccessPoint",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20180820/accesspoint/{name}"
+      },
+      "input": {
+        "shape": "CreateAccessPointRequest",
+        "locationName": "CreateAccessPointRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "documentation": "<p>Creates an access point and associates it with the specified bucket.</p>"
+    },
     "CreateJob": {
       "name": "CreateJob",
       "http": {
@@ -43,6 +58,28 @@
       ],
       "documentation": "<p>Creates an Amazon S3 batch operations job.</p>"
     },
+    "DeleteAccessPoint": {
+      "name": "DeleteAccessPoint",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v20180820/accesspoint/{name}"
+      },
+      "input": {
+        "shape": "DeleteAccessPointRequest"
+      },
+      "documentation": "<p>Deletes the specified access point.</p>"
+    },
+    "DeleteAccessPointPolicy": {
+      "name": "DeleteAccessPointPolicy",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v20180820/accesspoint/{name}/policy"
+      },
+      "input": {
+        "shape": "DeleteAccessPointPolicyRequest"
+      },
+      "documentation": "<p>Deletes the access point policy for the specified access point.</p>"
+    },
     "DeletePublicAccessBlock": {
       "name": "DeletePublicAccessBlock",
       "http": {
@@ -52,7 +89,7 @@
       "input": {
         "shape": "DeletePublicAccessBlockRequest"
       },
-      "documentation": "<p>Deletes the block public access configuration for the specified account.</p>"
+      "documentation": "<p>Removes the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account.</p>"
     },
     "DescribeJob": {
       "name": "DescribeJob",
@@ -82,6 +119,48 @@
       ],
       "documentation": "<p>Retrieves the configuration parameters and status for a batch operations job.</p>"
     },
+    "GetAccessPoint": {
+      "name": "GetAccessPoint",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspoint/{name}"
+      },
+      "input": {
+        "shape": "GetAccessPointRequest"
+      },
+      "output": {
+        "shape": "GetAccessPointResult"
+      },
+      "documentation": "<p>Returns configuration information about the specified access point.</p>"
+    },
+    "GetAccessPointPolicy": {
+      "name": "GetAccessPointPolicy",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspoint/{name}/policy"
+      },
+      "input": {
+        "shape": "GetAccessPointPolicyRequest"
+      },
+      "output": {
+        "shape": "GetAccessPointPolicyResult"
+      },
+      "documentation": "<p>Returns the access point policy associated with the specified access point.</p>"
+    },
+    "GetAccessPointPolicyStatus": {
+      "name": "GetAccessPointPolicyStatus",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspoint/{name}/policyStatus"
+      },
+      "input": {
+        "shape": "GetAccessPointPolicyStatusRequest"
+      },
+      "output": {
+        "shape": "GetAccessPointPolicyStatusResult"
+      },
+      "documentation": "<p>Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html\">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+    },
     "GetPublicAccessBlock": {
       "name": "GetPublicAccessBlock",
       "http": {
@@ -99,7 +178,21 @@
           "shape": "NoSuchPublicAccessBlockConfiguration"
         }
       ],
-      "documentation": "<p/>"
+      "documentation": "<p>Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account.</p>"
+    },
+    "ListAccessPoints": {
+      "name": "ListAccessPoints",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/accesspoint"
+      },
+      "input": {
+        "shape": "ListAccessPointsRequest"
+      },
+      "output": {
+        "shape": "ListAccessPointsResult"
+      },
+      "documentation": "<p>Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1000 access points (or the number specified in <code>maxResults</code>, whichever is less), then the response will include a continuation token that you can use to list the additional access points.</p>"
     },
     "ListJobs": {
       "name": "ListJobs",
@@ -126,6 +219,21 @@
       ],
       "documentation": "<p>Lists current jobs and jobs that have ended within the last 30 days for the AWS account making the request.</p>"
     },
+    "PutAccessPointPolicy": {
+      "name": "PutAccessPointPolicy",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20180820/accesspoint/{name}/policy"
+      },
+      "input": {
+        "shape": "PutAccessPointPolicyRequest",
+        "locationName": "PutAccessPointPolicyRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "documentation": "<p>Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.</p>"
+    },
     "PutPublicAccessBlock": {
       "name": "PutPublicAccessBlock",
       "http": {
@@ -135,7 +243,7 @@
       "input": {
         "shape": "PutPublicAccessBlockRequest"
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account.</p>"
     },
     "UpdateJobPriority": {
       "name": "UpdateJobPriority",
@@ -198,6 +306,45 @@
     }
   },
   "shapes": {
+    "AccessPoint": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "NetworkOrigin",
+        "Bucket"
+      ],
+      "members": {
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name of this access point.</p>"
+        },
+        "NetworkOrigin": {
+          "shape": "NetworkOrigin",
+          "documentation": "<p>Indicates whether this access point allows access from the public Internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn't allow access from the public Internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public Internet, subject to the access point and bucket access policies.</p>"
+        },
+        "VpcConfiguration": {
+          "shape": "VpcConfiguration",
+          "documentation": "<p>The Virtual Private Cloud (VPC) configuration for this access point, if one exists.</p>"
+        },
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket associated with this access point.</p>"
+        }
+      },
+      "documentation": "<p>An access point used to access a bucket.</p>"
+    },
+    "AccessPointList": {
+      "type": "list",
+      "member": {
+        "shape": "AccessPoint",
+        "locationName": "AccessPoint"
+      }
+    },
+    "AccessPointName": {
+      "type": "string",
+      "max": 50,
+      "min": 3
+    },
     "AccountId": {
       "type": "string",
       "max": 64
@@ -205,8 +352,46 @@
     "Boolean": {
       "type": "boolean"
     },
+    "BucketName": {
+      "type": "string",
+      "max": 255,
+      "min": 3
+    },
     "ConfirmationRequired": {
       "type": "boolean"
+    },
+    "CreateAccessPointRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name",
+        "Bucket"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID for the owner of the bucket for which you want to create an access point.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name you want to assign to this access point.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket that you want to associate this access point with.</p>"
+        },
+        "VpcConfiguration": {
+          "shape": "VpcConfiguration",
+          "documentation": "<p>If you include this field, Amazon S3 restricts access to this access point to requests from the specified Virtual Private Cloud (VPC).</p>"
+        },
+        "PublicAccessBlockConfiguration": {
+          "shape": "PublicAccessBlockConfiguration"
+        }
+      }
     },
     "CreateJobRequest": {
       "type": "structure",
@@ -272,6 +457,51 @@
         }
       }
     },
+    "CreationDate": {
+      "type": "timestamp"
+    },
+    "DeleteAccessPointPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified access point.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name of the access point whose policy you want to delete.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "DeleteAccessPointRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified access point.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name of the access point you want to delete.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
     "DeletePublicAccessBlockRequest": {
       "type": "structure",
       "required": [
@@ -280,7 +510,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID for the AWS account whose block public access configuration you want to delete.</p>",
+          "documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to remove.</p>",
           "location": "header",
           "locationName": "x-amz-account-id"
         }
@@ -316,12 +546,121 @@
         }
       }
     },
+    "GetAccessPointPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified access point.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name of the access point whose policy you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetAccessPointPolicyResult": {
+      "type": "structure",
+      "members": {
+        "Policy": {
+          "shape": "Policy",
+          "documentation": "<p>The access point policy associated with the specified access point.</p>"
+        }
+      }
+    },
+    "GetAccessPointPolicyStatusRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified access point.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name of the access point whose policy status you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetAccessPointPolicyStatusResult": {
+      "type": "structure",
+      "members": {
+        "PolicyStatus": {
+          "shape": "PolicyStatus",
+          "documentation": "<p>Indicates the current policy status of the specified access point.</p>"
+        }
+      }
+    },
+    "GetAccessPointRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the account that owns the specified access point.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name of the access point whose configuration information you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetAccessPointResult": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name of the specified access point.</p>"
+        },
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket associated with the specified access point.</p>"
+        },
+        "NetworkOrigin": {
+          "shape": "NetworkOrigin",
+          "documentation": "<p>Indicates whether this access point allows access from the public Internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn't allow access from the public Internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public Internet, subject to the access point and bucket access policies.</p>"
+        },
+        "VpcConfiguration": {
+          "shape": "VpcConfiguration",
+          "documentation": "<p>Contains the Virtual Private Cloud (VPC) configuration for the specified access point.</p>"
+        },
+        "PublicAccessBlockConfiguration": {
+          "shape": "PublicAccessBlockConfiguration"
+        },
+        "CreationDate": {
+          "shape": "CreationDate",
+          "documentation": "<p>The date and time when the specified access point was created.</p>"
+        }
+      }
+    },
     "GetPublicAccessBlockOutput": {
       "type": "structure",
       "members": {
         "PublicAccessBlockConfiguration": {
           "shape": "PublicAccessBlockConfiguration",
-          "documentation": "<p/>"
+          "documentation": "<p>The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon Web Services account.</p>"
         }
       },
       "payload": "PublicAccessBlockConfiguration"
@@ -334,7 +673,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to retrieve.</p>",
           "location": "header",
           "locationName": "x-amz-account-id"
         }
@@ -344,6 +683,9 @@
       "type": "string",
       "max": 2048,
       "min": 1
+    },
+    "IsPublic": {
+      "type": "boolean"
     },
     "JobArn": {
       "type": "string",
@@ -673,7 +1015,7 @@
       "members": {
         "Bucket": {
           "shape": "S3BucketArnString",
-          "documentation": "<p>The bucket where specified job-completion report will be stored.</p>",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.</p>",
           "box": true
         },
         "Format": {
@@ -762,6 +1104,51 @@
       },
       "documentation": "<p>Contains the configuration parameters for a <code>Lambda Invoke</code> operation.</p>"
     },
+    "ListAccessPointsRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID for owner of the bucket whose access points you want to list.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket whose associated access points you want to list.</p>",
+          "location": "querystring",
+          "locationName": "bucket"
+        },
+        "NextToken": {
+          "shape": "NonEmptyMaxLength1024String",
+          "documentation": "<p>A continuation token. If a previous call to <code>ListAccessPoints</code> returned a continuation token in the <code>NextToken</code> field, then providing that value here causes Amazon S3 to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of access points that you want to include in the list. If the specified bucket has more than this number of access points, then the response will include a continuation token in the <code>NextToken</code> field that you can use to retrieve the next page of access points.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListAccessPointsResult": {
+      "type": "structure",
+      "members": {
+        "AccessPointList": {
+          "shape": "AccessPointList",
+          "documentation": "<p>Contains identification and configuration information for one or more access points associated with the specified bucket.</p>"
+        },
+        "NextToken": {
+          "shape": "NonEmptyMaxLength1024String",
+          "documentation": "<p>If the specified bucket has more access points than can be returned in one call to this API, then this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.</p>"
+        }
+      }
+    },
     "ListJobsRequest": {
       "type": "structure",
       "required": [
@@ -817,6 +1204,13 @@
       "max": 1000,
       "min": 1
     },
+    "NetworkOrigin": {
+      "type": "string",
+      "enum": [
+        "Internet",
+        "VPC"
+      ]
+    },
     "NonEmptyMaxLength1024String": {
       "type": "string",
       "max": 1024,
@@ -847,31 +1241,71 @@
         "S3InitiateRestoreObject"
       ]
     },
+    "Policy": {
+      "type": "string"
+    },
+    "PolicyStatus": {
+      "type": "structure",
+      "members": {
+        "IsPublic": {
+          "shape": "IsPublic",
+          "documentation": "<p/>",
+          "locationName": "IsPublic"
+        }
+      },
+      "documentation": "<p>Indicates whether this access point policy is public. For more information about how Amazon S3 evaluates policies to determine whether they are public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. </p>"
+    },
     "PublicAccessBlockConfiguration": {
       "type": "structure",
       "members": {
         "BlockPublicAcls": {
           "shape": "Setting",
-          "documentation": "<p/>",
+          "documentation": "<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn't affect existing policies or ACLs.</p>",
           "locationName": "BlockPublicAcls"
         },
         "IgnorePublicAcls": {
           "shape": "Setting",
-          "documentation": "<p/>",
+          "documentation": "<p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>",
           "locationName": "IgnorePublicAcls"
         },
         "BlockPublicPolicy": {
           "shape": "Setting",
-          "documentation": "<p/>",
+          "documentation": "<p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>",
           "locationName": "BlockPublicPolicy"
         },
         "RestrictPublicBuckets": {
           "shape": "Setting",
-          "documentation": "<p/>",
+          "documentation": "<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>",
           "locationName": "RestrictPublicBuckets"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the Amazon Simple Storage Service Developer Guide.</p>"
+    },
+    "PutAccessPointPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name",
+        "Policy"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID for owner of the bucket associated with the specified access point.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "AccessPointName",
+          "documentation": "<p>The name of the access point that you want to associate with the specified policy.</p>",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "Policy": {
+          "shape": "Policy",
+          "documentation": "<p>The policy that you want to apply to the specified access point. For more information about access point policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html\">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+        }
+      }
     },
     "PutPublicAccessBlockRequest": {
       "type": "structure",
@@ -882,7 +1316,7 @@
       "members": {
         "PublicAccessBlockConfiguration": {
           "shape": "PublicAccessBlockConfiguration",
-          "documentation": "<p/>",
+          "documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to the specified Amazon Web Services account.</p>",
           "locationName": "PublicAccessBlockConfiguration",
           "xmlNamespace": {
             "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
@@ -890,7 +1324,7 @@
         },
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p/>",
+          "documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to set.</p>",
           "location": "header",
           "locationName": "x-amz-account-id"
         }
@@ -1017,16 +1451,20 @@
           "documentation": "<p/>"
         },
         "TargetKeyPrefix": {
-          "shape": "NonEmptyMaxLength1024String"
+          "shape": "NonEmptyMaxLength1024String",
+          "documentation": "<p/>"
         },
         "ObjectLockLegalHoldStatus": {
-          "shape": "S3ObjectLockLegalHoldStatus"
+          "shape": "S3ObjectLockLegalHoldStatus",
+          "documentation": "<p/>"
         },
         "ObjectLockMode": {
-          "shape": "S3ObjectLockMode"
+          "shape": "S3ObjectLockMode",
+          "documentation": "<p/>"
         },
         "ObjectLockRetainUntilDate": {
-          "shape": "TimeStamp"
+          "shape": "TimeStamp",
+          "documentation": "<p/>"
         }
       },
       "documentation": "<p>Contains the configuration parameters for a PUT Copy object operation. Amazon S3 batch operations passes each value through to the underlying PUT Copy object API. For more information about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html\">PUT Object - Copy</a>.</p>"
@@ -1390,6 +1828,24 @@
           "documentation": "<p>The reason that the specified job's status was updated.</p>"
         }
       }
+    },
+    "VpcConfiguration": {
+      "type": "structure",
+      "required": [
+        "VpcId"
+      ],
+      "members": {
+        "VpcId": {
+          "shape": "VpcId",
+          "documentation": "<p>If this field is specified, this access point will only allow connections from the specified VPC ID.</p>"
+        }
+      },
+      "documentation": "<p>The Virtual Private Cloud (VPC) configuration for an access point.</p>"
+    },
+    "VpcId": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
     }
   },
   "documentation": "<p> AWS S3 Control provides access to Amazon S3 control plane operations. </p>"

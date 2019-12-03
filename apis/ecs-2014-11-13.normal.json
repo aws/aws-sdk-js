@@ -13,6 +13,34 @@
     "uid": "ecs-2014-11-13"
   },
   "operations": {
+    "CreateCapacityProvider": {
+      "name": "CreateCapacityProvider",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateCapacityProviderRequest"
+      },
+      "output": {
+        "shape": "CreateCapacityProviderResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Creates a new capacity provider. Capacity providers are associated with an Amazon ECS cluster and are used in capacity provider strategies to facilitate cluster auto scaling.</p> <p>Only capacity providers using an Auto Scaling group can be created. Amazon ECS tasks on AWS Fargate use the <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers which are already created and available to all accounts in Regions supported by AWS Fargate.</p>"
+    },
     "CreateCluster": {
       "name": "CreateCluster",
       "http": {
@@ -36,7 +64,7 @@
           "shape": "InvalidParameterException"
         }
       ],
-      "documentation": "<p>Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.</p> <note> <p>When you call the <a>CreateCluster</a> API operation, Amazon ECS attempts to create the service-linked role for your account so that required resources in other AWS services can be managed on your behalf. However, if the IAM user that makes the call does not have permissions to create the service-linked role, it is not created. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using Service-Linked Roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </note>"
+      "documentation": "<p>Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.</p> <note> <p>When you call the <a>CreateCluster</a> API operation, Amazon ECS attempts to create the Amazon ECS service-linked role for your account so that required resources in other AWS services can be managed on your behalf. However, if the IAM user that makes the call does not have permissions to create the service-linked role, it is not created. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using Service-Linked Roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </note>"
     },
     "CreateService": {
       "name": "CreateService",
@@ -207,6 +235,9 @@
         },
         {
           "shape": "ClusterContainsTasksException"
+        },
+        {
+          "shape": "UpdateInProgressException"
         }
       ],
       "documentation": "<p>Deletes the specified cluster. You must deregister all container instances from this cluster before you may delete it. You can list the container instances in a cluster with <a>ListContainerInstances</a> and deregister them with <a>DeregisterContainerInstance</a>.</p>"
@@ -337,6 +368,31 @@
         }
       ],
       "documentation": "<p>Deregisters the specified task definition by family and revision. Upon deregistration, the task definition is marked as <code>INACTIVE</code>. Existing tasks and services that reference an <code>INACTIVE</code> task definition continue to run without disruption. Existing services that reference an <code>INACTIVE</code> task definition can still scale up or down by modifying the service's desired count.</p> <p>You cannot use an <code>INACTIVE</code> task definition to run new tasks or create new services, and you cannot update an existing service to reference an <code>INACTIVE</code> task definition. However, there may be up to a 10-minute window following deregistration where these restrictions have not yet taken effect.</p> <note> <p>At this time, <code>INACTIVE</code> task definitions remain discoverable in your account indefinitely. However, this behavior is subject to change in the future, so you should not rely on <code>INACTIVE</code> task definitions persisting beyond the lifecycle of any associated tasks and services.</p> </note>"
+    },
+    "DescribeCapacityProviders": {
+      "name": "DescribeCapacityProviders",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeCapacityProvidersRequest"
+      },
+      "output": {
+        "shape": "DescribeCapacityProvidersResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Describes one or more of your capacity providers.</p>"
     },
     "DescribeClusters": {
       "name": "DescribeClusters",
@@ -849,6 +905,40 @@
       ],
       "documentation": "<p>Create or update an attribute on an Amazon ECS resource. If the attribute does not exist, it is created. If the attribute exists, its value is replaced with the specified value. To delete an attribute, use <a>DeleteAttributes</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes\">Attributes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
     },
+    "PutClusterCapacityProviders": {
+      "name": "PutClusterCapacityProviders",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutClusterCapacityProvidersRequest"
+      },
+      "output": {
+        "shape": "PutClusterCapacityProvidersResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClusterNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "UpdateInProgressException"
+        }
+      ],
+      "documentation": "<p>Modifies the available capacity providers and the default capacity provider strategy for a cluster.</p> <p>You must specify both the available capacity providers and a default capacity provider strategy for the cluster. If the specified cluster has existing capacity providers associated with it, you must specify all existing capacity providers in addition to any new ones you want to add. Any existing capacity providers associated with a cluster that are omitted from a <a>PutClusterCapacityProviders</a> API call will be disassociated with the cluster. You can only disassociate an existing capacity provider from a cluster if it's not being used by any existing tasks.</p> <p>When creating a service or running a task on a cluster, if no capacity provider or launch type is specified, then the cluster's default capacity provider strategy is used. It is recommended to define a default capacity provider strategy for your cluster, however you may specify an empty array (<code>[]</code>) to bypass defining a default strategy.</p>"
+    },
     "RegisterContainerInstance": {
       "name": "RegisterContainerInstance",
       "http": {
@@ -1306,9 +1396,6 @@
           "shape": "UnsupportedFeatureException"
         },
         {
-          "shape": "AccessDeniedException"
-        },
-        {
           "shape": "ServiceNotFoundException"
         },
         {
@@ -1475,6 +1562,27 @@
         "shape": "Attribute"
       }
     },
+    "AutoScalingGroupProvider": {
+      "type": "structure",
+      "required": [
+        "autoScalingGroupArn"
+      ],
+      "members": {
+        "autoScalingGroupArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the Auto Scaling group.</p>"
+        },
+        "managedScaling": {
+          "shape": "ManagedScaling",
+          "documentation": "<p>The managed scaling settings for the Auto Scaling group capacity provider.</p>"
+        },
+        "managedTerminationProtection": {
+          "shape": "ManagedTerminationProtection",
+          "documentation": "<p>The managed termination protection setting to use for the Auto Scaling group capacity provider. This determines whether the Auto Scaling group has managed termination protection.</p> <p>When managed termination protection is enabled, Amazon ECS prevents the Amazon EC2 instances in an Auto Scaling group that contain tasks from being terminated during a scale-in action. The Auto Scaling group and each instance in the Auto Scaling group must have instance protection from scale-in actions enabled as well. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance Protection</a> in the <i>AWS Auto Scaling User Guide</i>.</p> <p>When managed termination protection is disabled, your Amazon EC2 instances are not protected from termination when the Auto Scaling group scales in.</p>"
+        }
+      },
+      "documentation": "<p>The details of the Auto Scaling group for the capacity provider.</p>"
+    },
     "AwsVpcConfiguration": {
       "type": "structure",
       "required": [
@@ -1506,6 +1614,93 @@
     "BoxedInteger": {
       "type": "integer",
       "box": true
+    },
+    "CapacityProvider": {
+      "type": "structure",
+      "members": {
+        "capacityProviderArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the capacity provider.</p>"
+        },
+        "name": {
+          "shape": "String",
+          "documentation": "<p>The name of the capacity provider.</p>"
+        },
+        "status": {
+          "shape": "CapacityProviderStatus",
+          "documentation": "<p>The current status of the capacity provider. Only capacity providers in an <code>ACTIVE</code> state can be used in a cluster.</p>"
+        },
+        "autoScalingGroupProvider": {
+          "shape": "AutoScalingGroupProvider",
+          "documentation": "<p>The Auto Scaling group settings for the capacity provider.</p>"
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "<p>The metadata that you apply to the capacity provider to help you categorize and organize it. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case-sensitive.</p> </li> <li> <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The details of a capacity provider.</p>"
+    },
+    "CapacityProviderField": {
+      "type": "string",
+      "enum": [
+        "TAGS"
+      ]
+    },
+    "CapacityProviderFieldList": {
+      "type": "list",
+      "member": {
+        "shape": "CapacityProviderField"
+      }
+    },
+    "CapacityProviderStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE"
+      ]
+    },
+    "CapacityProviderStrategy": {
+      "type": "list",
+      "member": {
+        "shape": "CapacityProviderStrategyItem"
+      }
+    },
+    "CapacityProviderStrategyItem": {
+      "type": "structure",
+      "required": [
+        "capacityProvider"
+      ],
+      "members": {
+        "capacityProvider": {
+          "shape": "String",
+          "documentation": "<p>The short name or full Amazon Resource Name (ARN) of the capacity provider.</p>"
+        },
+        "weight": {
+          "shape": "CapacityProviderStrategyItemWeight",
+          "documentation": "<p>The <i>weight</i> value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider.</p> <p>For example, if you have a strategy that contains two capacity providers and both have a weight of <code>1</code>, then when the <code>base</code> is satisfied, the tasks will be split evenly across the two capacity providers. Using that same logic, if you specify a weight of <code>1</code> for <i>capacityProviderA</i> and a weight of <code>4</code> for <i>capacityProviderB</i>, then for every one task that is run using <i>capacityProviderA</i>, four tasks would use <i>capacityProviderB</i>.</p>"
+        },
+        "base": {
+          "shape": "CapacityProviderStrategyItemBase",
+          "documentation": "<p>The <i>base</i> value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a <i>base</i> defined.</p>"
+        }
+      },
+      "documentation": "<p>The details of a capacity provider strategy.</p>"
+    },
+    "CapacityProviderStrategyItemBase": {
+      "type": "integer",
+      "max": 100000,
+      "min": 0
+    },
+    "CapacityProviderStrategyItemWeight": {
+      "type": "integer",
+      "max": 1000,
+      "min": 0
+    },
+    "CapacityProviders": {
+      "type": "list",
+      "member": {
+        "shape": "CapacityProvider"
+      }
     },
     "Cluster": {
       "type": "structure",
@@ -1549,6 +1744,22 @@
         "settings": {
           "shape": "ClusterSettings",
           "documentation": "<p>The settings for the cluster. This parameter indicates whether CloudWatch Container Insights is enabled or disabled for a cluster.</p>"
+        },
+        "capacityProviders": {
+          "shape": "StringList",
+          "documentation": "<p>The capacity providers associated with the cluster.</p>"
+        },
+        "defaultCapacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The default capacity provider strategy for the cluster. When services or tasks are run in the cluster with no launch type or capacity provider strategy specified, the default capacity provider strategy is used.</p>"
+        },
+        "attachments": {
+          "shape": "Attachments",
+          "documentation": "<p>The resources attached to a cluster. When using a capacity provider with a cluster, the Auto Scaling plan that is created will be returned as a cluster attachment.</p>"
+        },
+        "attachmentsStatus": {
+          "shape": "String",
+          "documentation": "<p>The status of the capacity providers associated with the cluster. The following are the states that will be returned:</p> <dl> <dt>UPDATE_IN_PROGRESS</dt> <dd> <p>The available capacity providers for the cluster are updating. This occurs when the Auto Scaling plan is provisioning or deprovisioning.</p> </dd> <dt>UPDATE_COMPLETE</dt> <dd> <p>The capacity providers have successfully updated.</p> </dd> <dt>UPDATE_FAILED</dt> <dd> <p>The capacity provider updates failed.</p> </dd> </dl>"
         }
       },
       "documentation": "<p>A regional grouping of one or more container instances on which you can run task requests. Each account receives a default cluster the first time you use the Amazon ECS service, but you may also create other clusters. Clusters may contain more than one instance type simultaneously.</p>"
@@ -1556,6 +1767,8 @@
     "ClusterField": {
       "type": "string",
       "enum": [
+        "ATTACHMENTS",
+        "SETTINGS",
         "STATISTICS",
         "TAGS"
       ]
@@ -1896,6 +2109,10 @@
           "shape": "String",
           "documentation": "<p>The EC2 instance ID of the container instance.</p>"
         },
+        "capacityProviderName": {
+          "shape": "String",
+          "documentation": "<p>The capacity provider associated with the container instance.</p>"
+        },
         "version": {
           "shape": "Long",
           "documentation": "<p>The version counter for the container instance. Every time a container instance experiences a change that triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS container instance state with CloudWatch Events, you can compare the version of a container instance reported by the Amazon ECS APIs with the version reported in CloudWatch Events for the container instance (inside the <code>detail</code> object) to verify that the version in your event stream is current.</p>"
@@ -2069,6 +2286,36 @@
         "shape": "Container"
       }
     },
+    "CreateCapacityProviderRequest": {
+      "type": "structure",
+      "required": [
+        "name",
+        "autoScalingGroupProvider"
+      ],
+      "members": {
+        "name": {
+          "shape": "String",
+          "documentation": "<p>The name of the capacity provider. Up to 255 characters are allowed, including letters (upper and lowercase), numbers, underscores, and hyphens. The name cannot be prefixed with \"<code>aws</code>\", \"<code>ecs</code>\", or \"<code>fargate</code>\".</p>"
+        },
+        "autoScalingGroupProvider": {
+          "shape": "AutoScalingGroupProvider",
+          "documentation": "<p>The details of the Auto Scaling group for the capacity provider.</p>"
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "<p>The metadata that you apply to the capacity provider to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case-sensitive.</p> </li> <li> <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.</p> </li> </ul>"
+        }
+      }
+    },
+    "CreateCapacityProviderResponse": {
+      "type": "structure",
+      "members": {
+        "capacityProvider": {
+          "shape": "CapacityProvider",
+          "documentation": "<p>The full description of the new capacity provider.</p>"
+        }
+      }
+    },
     "CreateClusterRequest": {
       "type": "structure",
       "members": {
@@ -2083,6 +2330,14 @@
         "settings": {
           "shape": "ClusterSettings",
           "documentation": "<p>The setting to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the <code>containerInsights</code> value set with <a>PutAccountSetting</a> or <a>PutAccountSettingDefault</a>.</p>"
+        },
+        "capacityProviders": {
+          "shape": "StringList",
+          "documentation": "<p>The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the cluster.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created and not already associated with another cluster. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.</p> <p>The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers for a cluster after the cluster is created.</p>"
+        },
+        "defaultCapacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy to use by default for the cluster.</p> <p>When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then the default capacity provider strategy for the cluster is used.</p> <p>A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.</p> <p>If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later with the <a>PutClusterCapacityProviders</a> API operation.</p>"
         }
       }
     },
@@ -2131,7 +2386,11 @@
         },
         "launchType": {
           "shape": "LaunchType",
-          "documentation": "<p>The launch type on which to run your service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+          "documentation": "<p>The launch type on which to run your service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>If a <code>launchType</code> is specified, the <code>capacityProviderStrategy</code> parameter must be omitted.</p>"
+        },
+        "capacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy to use for the service.</p> <p>A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.</p> <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code> parameter must be omitted. If no <code>capacityProviderStrategy</code> or <code>launchType</code> is specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.</p> <p>The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers for a cluster after the cluster is created.</p>"
         },
         "platformVersion": {
           "shape": "String",
@@ -2139,7 +2398,7 @@
         },
         "role": {
           "shape": "String",
-          "documentation": "<p>The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition does not use the <code>awsvpc</code> network mode. If you specify the <code>role</code> parameter, you must also specify a load balancer object with the <code>loadBalancers</code> parameter.</p> <important> <p>If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. The service-linked role is required if your task definition uses the <code>awsvpc</code> network mode or if the service is configured to use service discovery, an external deployment controller, or multiple target groups in which case you should not specify a role here. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using Service-Linked Roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </important> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name <code>bar</code> has a path of <code>/foo/</code> then you would specify <code>/foo/bar</code> as the role name. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names\">Friendly Names and Paths</a> in the <i>IAM User Guide</i>.</p>"
+          "documentation": "<p>The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition does not use the <code>awsvpc</code> network mode. If you specify the <code>role</code> parameter, you must also specify a load balancer object with the <code>loadBalancers</code> parameter.</p> <important> <p>If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. The service-linked role is required if your task definition uses the <code>awsvpc</code> network mode or if the service is configured to use service discovery, an external deployment controller, multiple target groups, or Elastic Inference accelerators in which case you should not specify a role here. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using Service-Linked Roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </important> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name <code>bar</code> has a path of <code>/foo/</code> then you would specify <code>/foo/bar</code> as the role name. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names\">Friendly Names and Paths</a> in the <i>IAM User Guide</i>.</p>"
         },
         "deploymentConfiguration": {
           "shape": "DeploymentConfiguration",
@@ -2229,7 +2488,11 @@
         },
         "launchType": {
           "shape": "LaunchType",
-          "documentation": "<p>The launch type that new tasks in the task set will use. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+          "documentation": "<p>The launch type that new tasks in the task set will use. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>If a <code>launchType</code> is specified, the <code>capacityProviderStrategy</code> parameter must be omitted.</p>"
+        },
+        "capacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy to use for the task set.</p> <p>A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.</p> <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code> parameter must be omitted. If no <code>capacityProviderStrategy</code> or <code>launchType</code> is specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.</p> <p>The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers for a cluster after the cluster is created.</p>"
         },
         "platformVersion": {
           "shape": "String",
@@ -2421,6 +2684,10 @@
           "shape": "Timestamp",
           "documentation": "<p>The Unix timestamp for when the service deployment was last updated.</p>"
         },
+        "capacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy that the deployment is using.</p>"
+        },
         "launchType": {
           "shape": "LaunchType",
           "documentation": "<p>The launch type the tasks in the service are using. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
@@ -2527,6 +2794,44 @@
         }
       }
     },
+    "DescribeCapacityProvidersRequest": {
+      "type": "structure",
+      "members": {
+        "capacityProviders": {
+          "shape": "StringList",
+          "documentation": "<p>The short name or full Amazon Resource Name (ARN) of one or more capacity providers. Up to <code>100</code> capacity providers can be described in an action.</p>"
+        },
+        "include": {
+          "shape": "CapacityProviderFieldList",
+          "documentation": "<p>Specifies whether or not you want to see the resource tags for the capacity provider. If <code>TAGS</code> is specified, the tags are included in the response. If this field is omitted, tags are not included in the response.</p>"
+        },
+        "maxResults": {
+          "shape": "BoxedInteger",
+          "documentation": "<p>The maximum number of account setting results returned by <code>DescribeCapacityProviders</code> in paginated output. When this parameter is used, <code>DescribeCapacityProviders</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeCapacityProviders</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 10. If this parameter is not used, then <code>DescribeCapacityProviders</code> returns up to 10 results and a <code>nextToken</code> value if applicable.</p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeCapacityProviders</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
+        }
+      }
+    },
+    "DescribeCapacityProvidersResponse": {
+      "type": "structure",
+      "members": {
+        "capacityProviders": {
+          "shape": "CapacityProviders",
+          "documentation": "<p>The list of capacity providers.</p>"
+        },
+        "failures": {
+          "shape": "Failures",
+          "documentation": "<p>Any failures associated with the call.</p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>DescribeCapacityProviders</code> request. When the results of a <code>DescribeCapacityProviders</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
     "DescribeClustersRequest": {
       "type": "structure",
       "members": {
@@ -2536,7 +2841,7 @@
         },
         "include": {
           "shape": "ClusterFieldList",
-          "documentation": "<p>Additional information about your clusters to be separated by launch type, including:</p> <ul> <li> <p>runningEC2TasksCount</p> </li> <li> <p>runningFargateTasksCount</p> </li> <li> <p>pendingEC2TasksCount</p> </li> <li> <p>pendingFargateTasksCount</p> </li> <li> <p>activeEC2ServiceCount</p> </li> <li> <p>activeFargateServiceCount</p> </li> <li> <p>drainingEC2ServiceCount</p> </li> <li> <p>drainingFargateServiceCount</p> </li> </ul>"
+          "documentation": "<p>Whether to include additional information about your clusters in the response. If this field is omitted, the attachments, statistics, and tags are not included.</p> <p>If <code>ATTACHMENTS</code> is specified, the attachments for the container instances or tasks within the cluster are included.</p> <p>If <code>SETTINGS</code> is specified, the settings for the cluster are included.</p> <p>If <code>STATISTICS</code> is specified, the following additional information, separated by launch type, is included:</p> <ul> <li> <p>runningEC2TasksCount</p> </li> <li> <p>runningFargateTasksCount</p> </li> <li> <p>pendingEC2TasksCount</p> </li> <li> <p>pendingFargateTasksCount</p> </li> <li> <p>activeEC2ServiceCount</p> </li> <li> <p>activeFargateServiceCount</p> </li> <li> <p>drainingEC2ServiceCount</p> </li> <li> <p>drainingFargateServiceCount</p> </li> </ul> <p>If <code>TAGS</code> is specified, the metadata tags associated with the cluster are included.</p>"
         }
       }
     },
@@ -2870,7 +3175,7 @@
         },
         "options": {
           "shape": "FirelensConfigurationOptionsMap",
-          "documentation": "<p>The options to use when configuring the log router. This field is optional and can be used to add additional metadata, such as the task, task definition, cluster, and container instance details to the log event. If specified, the syntax to use is <code>\"options\":{\"enable-ecs-log-metadata\":\"true|false\"}</code>.</p>"
+          "documentation": "<p>The options to use when configuring the log router. This field is optional and can be used to specify a custom configuration file or to add additional metadata, such as the task, task definition, cluster, and container instance details to the log event. If specified, the syntax to use is <code>\"options\":{\"enable-ecs-log-metadata\":\"true|false\",\"config-file-type:\"s3|file\",\"config-file-value\":\"arn:aws:s3:::mybucket/fluent.conf|filepath\"}</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef\">Creating a Task Definition that Uses a FireLens Configuration</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>The FireLens configuration for the container. This is used to specify and configure a log router for container logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html\">Custom Log Routing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
@@ -3502,6 +3807,52 @@
     "Long": {
       "type": "long"
     },
+    "ManagedScaling": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "ManagedScalingStatus",
+          "documentation": "<p>Whether or not to enable managed scaling for the capacity provider.</p>"
+        },
+        "targetCapacity": {
+          "shape": "ManagedScalingTargetCapacity",
+          "documentation": "<p>The target capacity value for the capacity provider. The specified value must be greater than <code>0</code> and less than or equal to <code>100</code>. A value of <code>100</code> will result in the Amazon EC2 instances in your Auto Scaling group being completely utilized.</p>"
+        },
+        "minimumScalingStepSize": {
+          "shape": "ManagedScalingStepSize",
+          "documentation": "<p>The minimum number of container instances that Amazon ECS will scale in or scale out at one time. If this parameter is omitted, the default value of <code>1</code> is used.</p>"
+        },
+        "maximumScalingStepSize": {
+          "shape": "ManagedScalingStepSize",
+          "documentation": "<p>The maximum number of container instances that Amazon ECS will scale in or scale out at one time. If this parameter is omitted, the default value of <code>10000</code> is used.</p>"
+        }
+      },
+      "documentation": "<p>The managed scaling settings for the Auto Scaling group capacity provider.</p> <p>When managed scaling is enabled, Amazon ECS manages the scale-in and scale-out actions of the Auto Scaling group. Amazon ECS manages a target tracking scaling policy using an Amazon ECS-managed CloudWatch metric with the specified <code>targetCapacity</code> value as the target value for the metric. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling\">Using Managed Scaling</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>If managed scaling is disabled, the user must manage the scaling of the Auto Scaling group.</p>"
+    },
+    "ManagedScalingStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "ManagedScalingStepSize": {
+      "type": "integer",
+      "max": 10000,
+      "min": 1
+    },
+    "ManagedScalingTargetCapacity": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
+    "ManagedTerminationProtection": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "MountPoint": {
       "type": "structure",
       "members": {
@@ -3833,6 +4184,36 @@
         }
       }
     },
+    "PutClusterCapacityProvidersRequest": {
+      "type": "structure",
+      "required": [
+        "cluster",
+        "capacityProviders",
+        "defaultCapacityProviderStrategy"
+      ],
+      "members": {
+        "cluster": {
+          "shape": "String",
+          "documentation": "<p>The short name or full Amazon Resource Name (ARN) of the cluster to modify the capacity provider settings for. If you do not specify a cluster, the default cluster is assumed.</p>"
+        },
+        "capacityProviders": {
+          "shape": "StringList",
+          "documentation": "<p>The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the cluster.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.</p>"
+        },
+        "defaultCapacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy to use by default for the cluster.</p> <p>When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then the default capacity provider strategy for the cluster is used.</p> <p>A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.</p>"
+        }
+      }
+    },
+    "PutClusterCapacityProvidersResponse": {
+      "type": "structure",
+      "members": {
+        "cluster": {
+          "shape": "Cluster"
+        }
+      }
+    },
     "RegisterContainerInstanceRequest": {
       "type": "structure",
       "members": {
@@ -4056,6 +4437,10 @@
         "taskDefinition"
       ],
       "members": {
+        "capacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy to use for the task.</p> <p>A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.</p> <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code> parameter must be omitted. If no <code>capacityProviderStrategy</code> or <code>launchType</code> is specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a AWS Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.</p> <p>The <a>PutClusterCapacityProviders</a> API operation is used to update the list of available capacity providers for a cluster after the cluster is created.</p>"
+        },
         "cluster": {
           "shape": "String",
           "documentation": "<p>The short name or full Amazon Resource Name (ARN) of the cluster on which to run your task. If you do not specify a cluster, the default cluster is assumed.</p>"
@@ -4074,7 +4459,7 @@
         },
         "launchType": {
           "shape": "LaunchType",
-          "documentation": "<p>The launch type on which to run your task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+          "documentation": "<p>The launch type on which to run your task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>If a <code>launchType</code> is specified, the <code>capacityProviderStrategy</code> parameter must be omitted.</p>"
         },
         "networkConfiguration": {
           "shape": "NetworkConfiguration",
@@ -4231,6 +4616,10 @@
         "launchType": {
           "shape": "LaunchType",
           "documentation": "<p>The launch type on which your service is running. If no value is specified, it will default to <code>EC2</code>. Valid values include <code>EC2</code> and <code>FARGATE</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+        },
+        "capacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy associated with the service.</p>"
         },
         "platformVersion": {
           "shape": "String",
@@ -4720,7 +5109,7 @@
       "members": {
         "resourceArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resources are Amazon ECS tasks, services, task definitions, clusters, and container instances.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resources are Amazon ECS capacity providers, tasks, services, task definitions, clusters, and container instances.</p>"
         },
         "tags": {
           "shape": "Tags",
@@ -4766,6 +5155,10 @@
         "availabilityZone": {
           "shape": "String",
           "documentation": "<p>The availability zone of the task.</p>"
+        },
+        "capacityProviderName": {
+          "shape": "String",
+          "documentation": "<p>The capacity provider associated with the task.</p>"
         },
         "clusterArn": {
           "shape": "String",
@@ -5122,6 +5515,10 @@
           "shape": "LaunchType",
           "documentation": "<p>The launch type the tasks in the task set are using. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         },
+        "capacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy associated with the task set.</p>"
+        },
         "platformVersion": {
           "shape": "String",
           "documentation": "<p>The platform version on which the tasks in the task set are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
@@ -5269,7 +5666,7 @@
       "members": {
         "resourceArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resources are Amazon ECS tasks, services, task definitions, clusters, and container instances.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resources are Amazon ECS capacity providers, tasks, services, task definitions, clusters, and container instances.</p>"
         },
         "tagKeys": {
           "shape": "TagKeys",
@@ -5417,17 +5814,20 @@
           "shape": "String",
           "documentation": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full ARN of the task definition to run in your service. If a <code>revision</code> is not specified, the latest <code>ACTIVE</code> revision is used. If you modify the task definition with <code>UpdateService</code>, Amazon ECS spawns a task with the new version of the task definition and then stops an old task after the new version is running.</p>"
         },
+        "capacityProviderStrategy": {
+          "shape": "CapacityProviderStrategy",
+          "documentation": "<p>The capacity provider strategy to update the service to use.</p> <p>If the service is using the default capacity provider strategy for the cluster, the service can be updated to use one or more capacity providers. However, when a service is using a non-default capacity provider strategy, the service cannot be updated to use the cluster's default capacity provider strategy.</p> <p/>"
+        },
         "deploymentConfiguration": {
           "shape": "DeploymentConfiguration",
           "documentation": "<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.</p>"
         },
         "networkConfiguration": {
-          "shape": "NetworkConfiguration",
-          "documentation": "<p>The network configuration for the service. This parameter is required for task definitions that use the <code>awsvpc</code> network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>Updating a service to add a subnet to a list of existing subnets does not trigger a service deployment. For example, if your network configuration change is to keep the existing subnets and simply add another subnet to the network configuration, this does not trigger a new service deployment.</p> </note>"
+          "shape": "NetworkConfiguration"
         },
         "platformVersion": {
           "shape": "String",
-          "documentation": "<p>The platform version on which your tasks in the service are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+          "documentation": "<p>The platform version on which your tasks in the service are running. A platform version is only specified for tasks using the Fargate launch type. If a platform version is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         },
         "forceNewDeployment": {
           "shape": "Boolean",
@@ -5435,7 +5835,7 @@
         },
         "healthCheckGracePeriodSeconds": {
           "shape": "BoxedInteger",
-          "documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds. During that time, the ECS service scheduler ignores the Elastic Load Balancing health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.</p>"
+          "documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds. During that time, the Amazon ECS service scheduler ignores the Elastic Load Balancing health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.</p>"
         }
       }
     },

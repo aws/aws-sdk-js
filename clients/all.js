@@ -207,5 +207,13 @@ module.exports = {
   ElasticInference: require('./elasticinference'),
   Imagebuilder: require('./imagebuilder'),
   Schemas: require('./schemas'),
-  AccessAnalyzer: require('./accessanalyzer')
+  AccessAnalyzer: require('./accessanalyzer'),
+  CodeGuruReviewer: require('./codegurureviewer'),
+  CodeGuruProfiler: require('./codeguruprofiler'),
+  ComputeOptimizer: require('./computeoptimizer'),
+  FraudDetector: require('./frauddetector'),
+  Kendra: require('./kendra'),
+  NetworkManager: require('./networkmanager'),
+  Outposts: require('./outposts'),
+  AugmentedAIRuntime: require('./augmentedairuntime')
 };

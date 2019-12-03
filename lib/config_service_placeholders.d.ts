@@ -208,6 +208,14 @@ export abstract class ConfigurationServicePlaceholders {
   imagebuilder?: AWS.Imagebuilder.Types.ClientConfiguration;
   schemas?: AWS.Schemas.Types.ClientConfiguration;
   accessanalyzer?: AWS.AccessAnalyzer.Types.ClientConfiguration;
+  codegurureviewer?: AWS.CodeGuruReviewer.Types.ClientConfiguration;
+  codeguruprofiler?: AWS.CodeGuruProfiler.Types.ClientConfiguration;
+  computeoptimizer?: AWS.ComputeOptimizer.Types.ClientConfiguration;
+  frauddetector?: AWS.FraudDetector.Types.ClientConfiguration;
+  kendra?: AWS.Kendra.Types.ClientConfiguration;
+  networkmanager?: AWS.NetworkManager.Types.ClientConfiguration;
+  outposts?: AWS.Outposts.Types.ClientConfiguration;
+  augmentedairuntime?: AWS.AugmentedAIRuntime.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -418,4 +426,12 @@ export interface ConfigurationServiceApiVersions {
   imagebuilder?: AWS.Imagebuilder.Types.apiVersion;
   schemas?: AWS.Schemas.Types.apiVersion;
   accessanalyzer?: AWS.AccessAnalyzer.Types.apiVersion;
+  codegurureviewer?: AWS.CodeGuruReviewer.Types.apiVersion;
+  codeguruprofiler?: AWS.CodeGuruProfiler.Types.apiVersion;
+  computeoptimizer?: AWS.ComputeOptimizer.Types.apiVersion;
+  frauddetector?: AWS.FraudDetector.Types.apiVersion;
+  kendra?: AWS.Kendra.Types.apiVersion;
+  networkmanager?: AWS.NetworkManager.Types.apiVersion;
+  outposts?: AWS.Outposts.Types.apiVersion;
+  augmentedairuntime?: AWS.AugmentedAIRuntime.Types.apiVersion;
 }
