@@ -3548,6 +3548,7 @@ describe('AWS.S3', function() {
 
       it('should throw s3_use_arn_region config is invalid', function(done) {
         var mock = '[default]\ns3_use_arn_region = foo';
+        process.env.HOME = 'foo';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         s3 = new AWS.S3({region: 'us-west-2'});
         helpers.mockHttpResponse(200, {}, '');
@@ -3565,6 +3566,7 @@ describe('AWS.S3', function() {
 
       it('should use regions from ARN if s3_use_arn_region config is set', function(done) {
         var mock = '[default]\ns3_use_arn_region = false';
+        process.env.HOME = 'foo';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         s3 = new AWS.S3({region: 'us-west-2'});
         helpers.mockHttpResponse(200, {}, '');
