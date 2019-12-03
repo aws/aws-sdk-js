@@ -1716,4 +1716,72 @@
     });
   }
 
+  describe('AWS.utils.ARN', function() {
+    describe('validate', function() {
+      it('should validate whether input is a qualified resource ARN', function() {
+        expect(AWS.util.ARN.validate('arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint')).to.equal(true);
+        expect(AWS.util.ARN.validate('arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint')).to.equal(true);
+        expect(AWS.util.ARN.validate('arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint')).to.equal(true);
+        expect(AWS.util.ARN.validate('arn:aws:sns:us-west-2:123456789012:myTopic')).to.equal(true);
+      });
+    });
+
+    describe('parser', function() {
+      it('should parse valid resource ARNs', function() {
+        expect(AWS.util.ARN.parse('arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint')).to.contain({
+          partition: 'aws',
+          service: 's3',
+          region: 'us-west-2',
+          accountId: '123456789012',
+          resource: 'accesspoint:myendpoint'
+        });
+        expect(AWS.util.ARN.parse('arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint')).to.contain({
+          partition: 'aws',
+          service: 's3',
+          region: 'us-east-1',
+          accountId: '123456789012',
+          resource: 'accesspoint:myendpoint'
+        });
+        expect(AWS.util.ARN.parse('arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint')).to.contain({
+          partition: 'aws-cn',
+          service: 's3',
+          region: 'cn-north-1',
+          accountId: '123456789012',
+          resource: 'accesspoint:myendpoint'
+        });
+        expect(AWS.util.ARN.parse('arn:aws:sns:us-west-2:123456789012:myTopic')).to.contain({
+          partition: 'aws',
+          service: 'sns',
+          region: 'us-west-2',
+          accountId: '123456789012',
+          resource: 'myTopic'
+        });
+      });
+    });
+
+    describe('builder', function() {
+      it('should build valid ARN object to string', function() {
+        expect(AWS.util.ARN.build({
+          service: 's3',
+          region: 'us-east-1',
+          accountId: '123456789012',
+          resource: 'accesspoint:myendpoint'
+        })).to.equal('arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint');
+      });
+
+      it('should throw if required ARN component is missing', function(done) {
+        try {
+          AWS.util.ARN.build({
+            service: 's3',
+            region: 'us-east-1',
+            resource: 'accesspoint:myendpoint'
+          });
+        } catch (e) {
+          expect(e.message).to.equal('Input ARN object is invalid');
+          done();
+        }
+      });
+    });
+  });
+
 }).call(this);
