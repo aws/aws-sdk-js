@@ -253,33 +253,33 @@
           for (var i = 0; i < regions.length; i++) {
             var sts = new AWS.STS({region: regions[i]});
             var request = sts.getCallerIdentity().build(function() {});
-            expect(request.httpRequest.endpoint.hostname).to.contain('sts.amazonaws.com');
+            expect(request.httpRequest.endpoint.hostname).to.equal('sts.amazonaws.com');
           }
           var sts = new AWS.STS({region: 'cn-north-1'});
           request = sts.getCallerIdentity().build(function() {});
-          expect(request.httpRequest.endpoint.hostname).to.contain('sts.cn-north-1.amazonaws.com.cn');
+          expect(request.httpRequest.endpoint.hostname).to.equal('sts.cn-north-1.amazonaws.com.cn');
         });
         it('should use global endpoints for when config is set to legacy', function() {
           var regions = ['us-west-2', 'ap-east-1'];
           for (var i = 0; i < regions.length; i++) {
             var sts = new AWS.STS({region: regions[i], stsRegionalEndpoints: 'legacy'});
             var request = sts.getCallerIdentity().build(function() {});
-            expect(request.httpRequest.endpoint.hostname).to.contain('sts.amazonaws.com');
+            expect(request.httpRequest.endpoint.hostname).to.equal('sts.amazonaws.com');
           }
           var sts = new AWS.STS({region: 'cn-north-1', stsRegionalEndpoints: 'legacy'});
           request = sts.getCallerIdentity().build(function() {});
-          expect(request.httpRequest.endpoint.hostname).to.contain('sts.cn-north-1.amazonaws.com.cn');
+          expect(request.httpRequest.endpoint.hostname).to.equal('sts.cn-north-1.amazonaws.com.cn');
         });
         it('should use regional endpoints for when config is set to regional', function() {
           var regions = ['us-west-2', 'ap-east-1'];
           for (var i = 0; i < regions.length; i++) {
             var sts = new AWS.STS({region: regions[i], stsRegionalEndpoints: 'regional'});
             var request = sts.getCallerIdentity().build(function() {});
-            expect(request.httpRequest.endpoint.hostname).to.contain('sts.' + regions[i] + '.amazonaws.com');
+            expect(request.httpRequest.endpoint.hostname).to.equal('sts.' + regions[i] + '.amazonaws.com');
           }
           var sts = new AWS.STS({region: 'cn-north-1', stsRegionalEndpoints: 'regional'});
           request = sts.getCallerIdentity().build(function() {});
-          expect(request.httpRequest.endpoint.hostname).to.contain('sts.cn-north-1.amazonaws.com.cn');
+          expect(request.httpRequest.endpoint.hostname).to.equal('sts.cn-north-1.amazonaws.com.cn');
         });
         it('should ask for region if stsRegionalEndpoints is set', function() {
           var error;

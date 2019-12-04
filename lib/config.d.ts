@@ -251,6 +251,18 @@ export abstract class ConfigurationOptions {
      */
     s3ForcePathStyle?: boolean
     /**
+     * when region is set to 'us-east-1', whether to send s3 request to global endpoints
+     * or 'us-east-1' regional endpoints. This config is only applicable to S3 client;
+     * Defaults to 'legacy'
+     */
+    s3UsEast1RegionalEndpoint?: "regional"|"legacy"
+    /**
+     * whether to override the request region with the region inferred
+     * from requested resource's ARN. Only available for S3 buckets
+     * Defaults to `true`
+     */
+    s3UseArnRegion?: boolean
+    /**
      * Whether the signature to sign requests with (overriding the API configuration) is cached.
      */
     signatureCache?: boolean

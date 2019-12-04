@@ -10,6 +10,11 @@ module.exports = function() {
     callback();
   });
 
+  this.Given(/^I am using the S3 us-east-1 regional endpoint$/, function(callback) {
+    this.s3 = new this.AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'regional'});
+    callback();
+  });
+
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(location, callback) {
     var bucket = this.bucket = this.uniqueName('aws-sdk-js-integration');
     var params = {
