@@ -3319,18 +3319,18 @@ describe('AWS.S3', function() {
         it('according to config settings', function() {
           var s3 = new AWS.S3({region: 'us-west-2'});
           var request = s3.listBuckets().build(function() {});
-          expect(request.httpRequest.endpoint.hostname).to.contain('s3.us-west-2.amazonaws.com');
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.us-west-2.amazonaws.com');
           s3 = new AWS.S3({region: 'us-east-1'});
           var request = s3.listBuckets().build(function() {});
-          expect(request.httpRequest.endpoint.hostname).to.contain('s3.amazonaws.com');
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com');
           s3 = new AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'regional'});
           request = s3.listBuckets().build(function() {});
-          expect(request.httpRequest.endpoint.hostname).to.contain('s3.us-east-1.amazonaws.com');
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.us-east-1.amazonaws.com');
         });
         it('should use global endpoints for when config is set to legacy', function() {
           s3 = new AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'legacy'});
           request = s3.listBuckets().build(function() {});
-          expect(request.httpRequest.endpoint.hostname).to.contain('s3.amazonaws.com');
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com');
         });
         it('should not update endpoint if supplied a custom endpoint', function() {
           s3 = new AWS.S3({
@@ -3339,7 +3339,7 @@ describe('AWS.S3', function() {
             endpoint: 's3.amazonaws.com'
           });
           request = s3.listBuckets().build(function() {});
-          expect(request.httpRequest.endpoint.hostname).to.contain('s3.amazonaws.com');
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com');
         });
       });
     }
