@@ -2931,7 +2931,7 @@ describe('AWS.S3', function() {
 
     it('supports access point ARN', function(done) {
       s3.getSignedUrl('getObject', {
-        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
         Key: 'key'
       }, function(err, data) {
         expect(data).to.equal(
@@ -3356,6 +3356,22 @@ describe('AWS.S3', function() {
     it('should correctly generate access point endpoint', function(done) {
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal(
+          'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com'
+        );
+        expect(request.httpRequest.path).to.equal('/key');
+        done();
+      });
+    });
+
+    it('should correctly generate access point endpoint containing \':\'', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
         Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
         Key: 'key'
       });
@@ -3372,7 +3388,7 @@ describe('AWS.S3', function() {
     it('should correctly generate access point endpoint for us-gov partition', function(done) {
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
@@ -3389,7 +3405,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({region: 'cn-north-1'});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
@@ -3404,7 +3420,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({region: 'us-east-1'});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws:s3:s3-external-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:s3-external-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       var built = request.build(function() {});
@@ -3415,7 +3431,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({region: 'us-east-1-fips'});
       helpers.mockHttpResponse(200, {}, '');
       request = s3.getObject({
-        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       var error;
@@ -3430,7 +3446,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({region: 'us-west-2'});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
@@ -3445,7 +3461,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({region: 'us-west-2', s3UseArnRegion: false});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
@@ -3460,7 +3476,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({region: 'us-west-2', endpoint: 'https://bucket.s3.us-west-2.amazonaws.com'});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
@@ -3475,7 +3491,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({s3ForcePathStyle: true});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
@@ -3502,7 +3518,7 @@ describe('AWS.S3', function() {
     it('should throw if cross region enabled but region from different partition', function(done) {
       s3 = new AWS.S3({region: 'us-west-2'});
       var request = s3.getObject({
-        Bucket: 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
@@ -3519,7 +3535,7 @@ describe('AWS.S3', function() {
         s3 = new AWS.S3({region: 'us-west-2'});
         helpers.mockHttpResponse(200, {}, '');
         var request = s3.getObject({
-          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
           Key: 'key'
         });
         request.send(function(err, data) {
@@ -3535,7 +3551,7 @@ describe('AWS.S3', function() {
         s3 = new AWS.S3({region: 'us-west-2'});
         helpers.mockHttpResponse(200, {}, '');
         var request = s3.getObject({
-          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
           Key: 'key'
         });
         request.send(function(err, data) {
@@ -3553,7 +3569,7 @@ describe('AWS.S3', function() {
         s3 = new AWS.S3({region: 'us-west-2'});
         helpers.mockHttpResponse(200, {}, '');
         var request = s3.getObject({
-          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
           Key: 'key'
         });
         request.send(function(err, data) {
@@ -3571,7 +3587,7 @@ describe('AWS.S3', function() {
         s3 = new AWS.S3({region: 'us-west-2'});
         helpers.mockHttpResponse(200, {}, '');
         var request = s3.getObject({
-          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
           Key: 'key'
         });
         request.send(function(err, data) {
@@ -3587,7 +3603,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({region: 'us-west-2', useAccelerateEndpoint: true});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
@@ -3602,7 +3618,7 @@ describe('AWS.S3', function() {
       s3 = new AWS.S3({region: 'us-west-2', useDualstack: true});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
-        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
         Key: 'key'
       });
       request.send(function(err, data) {
