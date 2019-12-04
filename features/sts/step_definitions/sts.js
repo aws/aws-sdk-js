@@ -10,7 +10,7 @@ module.exports = function() {
 
   this.Before('@sts-regional-endpoints', function(callback) {
     this.service = new this.AWS.STS({region: 'us-east-1', stsRegionalEndpoints: 'regional'});
-    callback()
+    callback();
   });
 
   this.After('@sts-regional-endpoints', function(callback) {
