@@ -102,6 +102,14 @@ declare class Lambda extends Service {
    */
   deleteLayerVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the provisioned concurrency configuration for a function.
+   */
+  deleteProvisionedConcurrencyConfig(params: Lambda.Types.DeleteProvisionedConcurrencyConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the provisioned concurrency configuration for a function.
+   */
+  deleteProvisionedConcurrencyConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Retrieves details about your account's limits and usage in an AWS Region.
    */
   getAccountSettings(params: Lambda.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
@@ -133,6 +141,14 @@ declare class Lambda extends Service {
    * Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are returned.
    */
   getFunction(callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
+  /**
+   * Returns details about the concurrency configuration for a function. To set a concurrency limit for a function, use PutFunctionConcurrency.
+   */
+  getFunctionConcurrency(params: Lambda.Types.GetFunctionConcurrencyRequest, callback?: (err: AWSError, data: Lambda.Types.GetFunctionConcurrencyResponse) => void): Request<Lambda.Types.GetFunctionConcurrencyResponse, AWSError>;
+  /**
+   * Returns details about the concurrency configuration for a function. To set a concurrency limit for a function, use PutFunctionConcurrency.
+   */
+  getFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.GetFunctionConcurrencyResponse) => void): Request<Lambda.Types.GetFunctionConcurrencyResponse, AWSError>;
   /**
    * Returns the version-specific settings of a Lambda function or version. The output includes only options that can vary between versions of a function. To modify these settings, use UpdateFunctionConfiguration. To get all of a function's details, including function-level settings, use GetFunction.
    */
@@ -181,6 +197,14 @@ declare class Lambda extends Service {
    * Returns the resource-based IAM policy for a function, version, or alias.
    */
   getPolicy(callback?: (err: AWSError, data: Lambda.Types.GetPolicyResponse) => void): Request<Lambda.Types.GetPolicyResponse, AWSError>;
+  /**
+   * Retrieves the provisioned concurrency configuration for a function's alias or version.
+   */
+  getProvisionedConcurrencyConfig(params: Lambda.Types.GetProvisionedConcurrencyConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetProvisionedConcurrencyConfigResponse) => void): Request<Lambda.Types.GetProvisionedConcurrencyConfigResponse, AWSError>;
+  /**
+   * Retrieves the provisioned concurrency configuration for a function's alias or version.
+   */
+  getProvisionedConcurrencyConfig(callback?: (err: AWSError, data: Lambda.Types.GetProvisionedConcurrencyConfigResponse) => void): Request<Lambda.Types.GetProvisionedConcurrencyConfigResponse, AWSError>;
   /**
    * Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set InvocationType to Event. For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the execution log and trace. When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see Retry Behavior. For asynchronous invocation, Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple times, even if no error occurs. To retain events that were not processed, configure your function with a dead-letter queue. The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, limit errors, or issues with your function's code and configuration. For example, Lambda returns TooManyRequestsException if executing the function would cause you to exceed a concurrency limit at either the account level (ConcurrentInvocationLimitExceeded) or function level (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings. This operation requires permission for the lambda:InvokeFunction action.
    */
@@ -246,6 +270,14 @@ declare class Lambda extends Service {
    */
   listLayers(callback?: (err: AWSError, data: Lambda.Types.ListLayersResponse) => void): Request<Lambda.Types.ListLayersResponse, AWSError>;
   /**
+   * Retrieves a list of provisioned concurrency configurations for a function.
+   */
+  listProvisionedConcurrencyConfigs(params: Lambda.Types.ListProvisionedConcurrencyConfigsRequest, callback?: (err: AWSError, data: Lambda.Types.ListProvisionedConcurrencyConfigsResponse) => void): Request<Lambda.Types.ListProvisionedConcurrencyConfigsResponse, AWSError>;
+  /**
+   * Retrieves a list of provisioned concurrency configurations for a function.
+   */
+  listProvisionedConcurrencyConfigs(callback?: (err: AWSError, data: Lambda.Types.ListProvisionedConcurrencyConfigsResponse) => void): Request<Lambda.Types.ListProvisionedConcurrencyConfigsResponse, AWSError>;
+  /**
    * Returns a function's tags. You can also view tags with GetFunction.
    */
   listTags(params: Lambda.Types.ListTagsRequest, callback?: (err: AWSError, data: Lambda.Types.ListTagsResponse) => void): Request<Lambda.Types.ListTagsResponse, AWSError>;
@@ -278,11 +310,11 @@ declare class Lambda extends Service {
    */
   publishVersion(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
+   * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your Regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
    */
   putFunctionConcurrency(params: Lambda.Types.PutFunctionConcurrencyRequest, callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
-   * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
+   * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your Regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
    */
   putFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
@@ -293,6 +325,14 @@ declare class Lambda extends Service {
    * Configures options for asynchronous invocation on a function, version, or alias. By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with UpdateFunctionConfiguration.
    */
   putFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
+  /**
+   * Adds a provisioned concurrency configuration to a function's alias or version.
+   */
+  putProvisionedConcurrencyConfig(params: Lambda.Types.PutProvisionedConcurrencyConfigRequest, callback?: (err: AWSError, data: Lambda.Types.PutProvisionedConcurrencyConfigResponse) => void): Request<Lambda.Types.PutProvisionedConcurrencyConfigResponse, AWSError>;
+  /**
+   * Adds a provisioned concurrency configuration to a function's alias or version.
+   */
+  putProvisionedConcurrencyConfig(callback?: (err: AWSError, data: Lambda.Types.PutProvisionedConcurrencyConfigResponse) => void): Request<Lambda.Types.PutProvisionedConcurrencyConfigResponse, AWSError>;
   /**
    * Removes a statement from the permissions policy for a version of an AWS Lambda layer. For more information, see AddLayerVersionPermission.
    */
@@ -754,6 +794,16 @@ declare namespace Lambda {
      */
     VersionNumber: LayerVersionNumber;
   }
+  export interface DeleteProvisionedConcurrencyConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The version number or alias name.
+     */
+    Qualifier: Qualifier;
+  }
   export type Description = string;
   export type DestinationArn = string;
   export interface DestinationConfig {
@@ -1046,6 +1096,18 @@ declare namespace Lambda {
      */
     UUID: String;
   }
+  export interface GetFunctionConcurrencyRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+  }
+  export interface GetFunctionConcurrencyResponse {
+    /**
+     * The number of simultaneous executions that are reserved for the function.
+     */
+    ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
+  }
   export interface GetFunctionConfigurationRequest {
     /**
      * The name of the Lambda function, version, or alias.  Name formats     Function name - my-function (name-only), my-function:v1 (with alias).    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -1183,6 +1245,42 @@ declare namespace Lambda {
      * A unique identifier for the current revision of the policy.
      */
     RevisionId?: String;
+  }
+  export interface GetProvisionedConcurrencyConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The version number or alias name.
+     */
+    Qualifier: Qualifier;
+  }
+  export interface GetProvisionedConcurrencyConfigResponse {
+    /**
+     * The amount of provisioned concurrency requested.
+     */
+    RequestedProvisionedConcurrentExecutions?: PositiveInteger;
+    /**
+     * The amount of provisioned concurrency available.
+     */
+    AvailableProvisionedConcurrentExecutions?: NonNegativeInteger;
+    /**
+     * The amount of provisioned concurrency allocated.
+     */
+    AllocatedProvisionedConcurrentExecutions?: NonNegativeInteger;
+    /**
+     * The status of the allocation process.
+     */
+    Status?: ProvisionedConcurrencyStatusEnum;
+    /**
+     * For failed allocations, the reason that provisioned concurrency could not be allocated.
+     */
+    StatusReason?: String;
+    /**
+     * The date and time that a user last updated the configuration, in ISO 8601 format.
+     */
+    LastModified?: Timestamp;
   }
   export type Handler = string;
   export type HttpStatus = number;
@@ -1509,6 +1607,30 @@ declare namespace Lambda {
      */
     Layers?: LayersList;
   }
+  export interface ListProvisionedConcurrencyConfigsRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+     */
+    Marker?: String;
+    /**
+     * Specify a number to limit the number of configurations returned.
+     */
+    MaxItems?: MaxProvisionedConcurrencyConfigListItems;
+  }
+  export interface ListProvisionedConcurrencyConfigsResponse {
+    /**
+     * A list of provisioned concurrency configurations.
+     */
+    ProvisionedConcurrencyConfigs?: ProvisionedConcurrencyConfigList;
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    NextMarker?: String;
+  }
   export interface ListTagsRequest {
     /**
      * The function's Amazon Resource Name (ARN).
@@ -1551,6 +1673,7 @@ declare namespace Lambda {
   export type MaxFunctionEventInvokeConfigListItems = number;
   export type MaxLayerListItems = number;
   export type MaxListItems = number;
+  export type MaxProvisionedConcurrencyConfigListItems = number;
   export type MaximumBatchingWindowInSeconds = number;
   export type MaximumEventAgeInSeconds = number;
   export type MaximumRecordAgeInSeconds = number;
@@ -1560,6 +1683,7 @@ declare namespace Lambda {
   export type NameSpacedFunctionArn = string;
   export type NamespacedFunctionName = string;
   export type NamespacedStatementId = string;
+  export type NonNegativeInteger = number;
   export interface OnFailure {
     /**
      * The Amazon Resource Name (ARN) of the destination resource.
@@ -1574,7 +1698,40 @@ declare namespace Lambda {
   }
   export type OrganizationId = string;
   export type ParallelizationFactor = number;
+  export type PositiveInteger = number;
   export type Principal = string;
+  export type ProvisionedConcurrencyConfigList = ProvisionedConcurrencyConfigListItem[];
+  export interface ProvisionedConcurrencyConfigListItem {
+    /**
+     * The Amazon Resource Name (ARN) of the alias or version.
+     */
+    FunctionArn?: FunctionArn;
+    /**
+     * The amount of provisioned concurrency requested.
+     */
+    RequestedProvisionedConcurrentExecutions?: PositiveInteger;
+    /**
+     * The amount of provisioned concurrency available.
+     */
+    AvailableProvisionedConcurrentExecutions?: NonNegativeInteger;
+    /**
+     * The amount of provisioned concurrency allocated.
+     */
+    AllocatedProvisionedConcurrentExecutions?: NonNegativeInteger;
+    /**
+     * The status of the allocation process.
+     */
+    Status?: ProvisionedConcurrencyStatusEnum;
+    /**
+     * For failed allocations, the reason that provisioned concurrency could not be allocated.
+     */
+    StatusReason?: String;
+    /**
+     * The date and time that a user last updated the configuration, in ISO 8601 format.
+     */
+    LastModified?: Timestamp;
+  }
+  export type ProvisionedConcurrencyStatusEnum = "IN_PROGRESS"|"READY"|"FAILED"|string;
   export interface PublishLayerVersionRequest {
     /**
      * The name or Amazon Resource Name (ARN) of the layer.
@@ -1680,6 +1837,46 @@ declare namespace Lambda {
      * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of an SQS queue.    Topic - The ARN of an SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
      */
     DestinationConfig?: DestinationConfig;
+  }
+  export interface PutProvisionedConcurrencyConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The version number or alias name.
+     */
+    Qualifier: Qualifier;
+    /**
+     * The amount of provisioned concurrency to allocate for the version or alias.
+     */
+    ProvisionedConcurrentExecutions: PositiveInteger;
+  }
+  export interface PutProvisionedConcurrencyConfigResponse {
+    /**
+     * The amount of provisioned concurrency requested.
+     */
+    RequestedProvisionedConcurrentExecutions?: PositiveInteger;
+    /**
+     * The amount of provisioned concurrency available.
+     */
+    AvailableProvisionedConcurrentExecutions?: NonNegativeInteger;
+    /**
+     * The amount of provisioned concurrency allocated.
+     */
+    AllocatedProvisionedConcurrentExecutions?: NonNegativeInteger;
+    /**
+     * The status of the allocation process.
+     */
+    Status?: ProvisionedConcurrencyStatusEnum;
+    /**
+     * For failed allocations, the reason that provisioned concurrency could not be allocated.
+     */
+    StatusReason?: String;
+    /**
+     * The date and time that a user last updated the configuration, in ISO 8601 format.
+     */
+    LastModified?: Timestamp;
   }
   export type Qualifier = string;
   export interface RemoveLayerVersionPermissionRequest {

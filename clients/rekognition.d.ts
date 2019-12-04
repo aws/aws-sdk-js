@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -12,11 +13,11 @@ declare class Rekognition extends Service {
   constructor(options?: Rekognition.Types.ClientConfiguration)
   config: Config & Rekognition.Types.ClientConfiguration;
   /**
-   * Compares a face in the source input image with each of the 100 largest faces detected in the target input image.    If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image.   You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the SimilarityThreshold parameter.   CompareFaces also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, CompareFaces chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   If the image doesn't contain Exif metadata, CompareFaces returns orientation information for the source and target images. Use these values to display the images with the correct image orientation. If no faces are detected in the source or target images, CompareFaces returns an InvalidParameterException error.    This is a stateless API operation. That is, data returned by this operation doesn't persist.  For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide. This operation requires permissions to perform the rekognition:CompareFaces action.
+   * Compares a face in the source input image with each of the 100 largest faces detected in the target input image.    If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image.   You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the SimilarityThreshold parameter.   CompareFaces also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use QualityFilter to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE. The default value is NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   If the image doesn't contain Exif metadata, CompareFaces returns orientation information for the source and target images. Use these values to display the images with the correct image orientation. If no faces are detected in the source or target images, CompareFaces returns an InvalidParameterException error.    This is a stateless API operation. That is, data returned by this operation doesn't persist.  For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide. This operation requires permissions to perform the rekognition:CompareFaces action.
    */
   compareFaces(params: Rekognition.Types.CompareFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.CompareFacesResponse) => void): Request<Rekognition.Types.CompareFacesResponse, AWSError>;
   /**
-   * Compares a face in the source input image with each of the 100 largest faces detected in the target input image.    If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image.   You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the SimilarityThreshold parameter.   CompareFaces also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, CompareFaces chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   If the image doesn't contain Exif metadata, CompareFaces returns orientation information for the source and target images. Use these values to display the images with the correct image orientation. If no faces are detected in the source or target images, CompareFaces returns an InvalidParameterException error.    This is a stateless API operation. That is, data returned by this operation doesn't persist.  For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide. This operation requires permissions to perform the rekognition:CompareFaces action.
+   * Compares a face in the source input image with each of the 100 largest faces detected in the target input image.    If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image.   You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the SimilarityThreshold parameter.   CompareFaces also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use QualityFilter to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE. The default value is NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   If the image doesn't contain Exif metadata, CompareFaces returns orientation information for the source and target images. Use these values to display the images with the correct image orientation. If no faces are detected in the source or target images, CompareFaces returns an InvalidParameterException error.    This is a stateless API operation. That is, data returned by this operation doesn't persist.  For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide. This operation requires permissions to perform the rekognition:CompareFaces action.
    */
   compareFaces(callback?: (err: AWSError, data: Rekognition.Types.CompareFacesResponse) => void): Request<Rekognition.Types.CompareFacesResponse, AWSError>;
   /**
@@ -27,6 +28,22 @@ declare class Rekognition extends Service {
    * Creates a collection in an AWS Region. You can add faces to the collection using the IndexFaces operation.  For example, you might create collections, one for each of your application users. A user can then index faces using the IndexFaces operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container.  When you create a collection, it is associated with the latest version of the face model version.  Collection names are case-sensitive.  This operation requires permissions to perform the rekognition:CreateCollection action.
    */
   createCollection(callback?: (err: AWSError, data: Rekognition.Types.CreateCollectionResponse) => void): Request<Rekognition.Types.CreateCollectionResponse, AWSError>;
+  /**
+   * Creates a new Amazon Rekognition Custom Labels project. A project is a logical grouping of resources (images, Labels, models) and operations (training, evaluation and detection).  This operation requires permissions to perform the rekognition:CreateProject action.
+   */
+  createProject(params: Rekognition.Types.CreateProjectRequest, callback?: (err: AWSError, data: Rekognition.Types.CreateProjectResponse) => void): Request<Rekognition.Types.CreateProjectResponse, AWSError>;
+  /**
+   * Creates a new Amazon Rekognition Custom Labels project. A project is a logical grouping of resources (images, Labels, models) and operations (training, evaluation and detection).  This operation requires permissions to perform the rekognition:CreateProject action.
+   */
+  createProject(callback?: (err: AWSError, data: Rekognition.Types.CreateProjectResponse) => void): Request<Rekognition.Types.CreateProjectResponse, AWSError>;
+  /**
+   * Creates a new version of a model and begins training. Models are managed as part of an Amazon Rekognition Custom Labels project. You can specify one training dataset and one testing dataset. The response from CreateProjectVersion is an Amazon Resource Name (ARN) for the version of the model.  Training takes a while to complete. You can get the current status by calling DescribeProjectVersions. Once training has successfully completed, call DescribeProjectVersions to get the training results and evaluate the model.  After evaluating the model, you start the model by calling StartProjectVersion. This operation requires permissions to perform the rekognition:CreateProjectVersion action.
+   */
+  createProjectVersion(params: Rekognition.Types.CreateProjectVersionRequest, callback?: (err: AWSError, data: Rekognition.Types.CreateProjectVersionResponse) => void): Request<Rekognition.Types.CreateProjectVersionResponse, AWSError>;
+  /**
+   * Creates a new version of a model and begins training. Models are managed as part of an Amazon Rekognition Custom Labels project. You can specify one training dataset and one testing dataset. The response from CreateProjectVersion is an Amazon Resource Name (ARN) for the version of the model.  Training takes a while to complete. You can get the current status by calling DescribeProjectVersions. Once training has successfully completed, call DescribeProjectVersions to get the training results and evaluate the model.  After evaluating the model, you start the model by calling StartProjectVersion. This operation requires permissions to perform the rekognition:CreateProjectVersion action.
+   */
+  createProjectVersion(callback?: (err: AWSError, data: Rekognition.Types.CreateProjectVersionResponse) => void): Request<Rekognition.Types.CreateProjectVersionResponse, AWSError>;
   /**
    * Creates an Amazon Rekognition stream processor that you can use to detect and recognize faces in a streaming video. Amazon Rekognition Video is a consumer of live video from Amazon Kinesis Video Streams. Amazon Rekognition Video sends analysis results to Amazon Kinesis Data Streams. You provide as input a Kinesis video stream (Input) and a Kinesis data stream (Output) stream. You also specify the face recognition criteria in Settings. For example, the collection containing faces that you want to recognize. Use Name to assign an identifier for the stream processor. You use Name to manage the stream processor. For example, you can start processing the source video by calling StartStreamProcessor with the Name field.  After you have finished analyzing a streaming video, use StopStreamProcessor to stop processing. You can delete the stream processor by calling DeleteStreamProcessor.
    */
@@ -68,6 +85,22 @@ declare class Rekognition extends Service {
    */
   describeCollection(callback?: (err: AWSError, data: Rekognition.Types.DescribeCollectionResponse) => void): Request<Rekognition.Types.DescribeCollectionResponse, AWSError>;
   /**
+   * Lists and describes the models in an Amazon Rekognition Custom Labels project. You can specify up to 10 model versions in ProjectVersionArns. If you don't specify a value, descriptions for all models are returned. This operation requires permissions to perform the rekognition:DescribeProjectVersions action.
+   */
+  describeProjectVersions(params: Rekognition.Types.DescribeProjectVersionsRequest, callback?: (err: AWSError, data: Rekognition.Types.DescribeProjectVersionsResponse) => void): Request<Rekognition.Types.DescribeProjectVersionsResponse, AWSError>;
+  /**
+   * Lists and describes the models in an Amazon Rekognition Custom Labels project. You can specify up to 10 model versions in ProjectVersionArns. If you don't specify a value, descriptions for all models are returned. This operation requires permissions to perform the rekognition:DescribeProjectVersions action.
+   */
+  describeProjectVersions(callback?: (err: AWSError, data: Rekognition.Types.DescribeProjectVersionsResponse) => void): Request<Rekognition.Types.DescribeProjectVersionsResponse, AWSError>;
+  /**
+   * Lists and gets information about your Amazon Rekognition Custom Labels projects. This operation requires permissions to perform the rekognition:DescribeProjects action.
+   */
+  describeProjects(params: Rekognition.Types.DescribeProjectsRequest, callback?: (err: AWSError, data: Rekognition.Types.DescribeProjectsResponse) => void): Request<Rekognition.Types.DescribeProjectsResponse, AWSError>;
+  /**
+   * Lists and gets information about your Amazon Rekognition Custom Labels projects. This operation requires permissions to perform the rekognition:DescribeProjects action.
+   */
+  describeProjects(callback?: (err: AWSError, data: Rekognition.Types.DescribeProjectsResponse) => void): Request<Rekognition.Types.DescribeProjectsResponse, AWSError>;
+  /**
    * Provides information about a stream processor created by CreateStreamProcessor. You can get information about the input and output streams, the input parameters for the face recognition being performed, and the current status of the stream processor.
    */
   describeStreamProcessor(params: Rekognition.Types.DescribeStreamProcessorRequest, callback?: (err: AWSError, data: Rekognition.Types.DescribeStreamProcessorResponse) => void): Request<Rekognition.Types.DescribeStreamProcessorResponse, AWSError>;
@@ -75,6 +108,14 @@ declare class Rekognition extends Service {
    * Provides information about a stream processor created by CreateStreamProcessor. You can get information about the input and output streams, the input parameters for the face recognition being performed, and the current status of the stream processor.
    */
   describeStreamProcessor(callback?: (err: AWSError, data: Rekognition.Types.DescribeStreamProcessorResponse) => void): Request<Rekognition.Types.DescribeStreamProcessorResponse, AWSError>;
+  /**
+   * Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model.  You specify which version of a model version to use by using the ProjectVersionArn input parameter.  You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   For each object that the model version detects on an image, the API returns a (CustomLabel) object in an array (CustomLabels). Each CustomLabel object provides the label name (Name), the level of confidence that the image contains the object (Confidence), and object location information, if it exists, for the label on the image (Geometry).  During training model calculates a threshold value that determines if a prediction for a label is true. By default, DetectCustomLabels doesn't return labels whose confidence value is below the model's calculated threshold value. To filter labels that are returned, specify a value for MinConfidence that is higher than the model's calculated threshold. You can get the model's calculated threshold from the model's training results shown in the Amazon Rekognition Custom Labels console. To get all labels, regardless of confidence, specify a MinConfidence value of 0.  You can also add the MaxResults parameter to limit the number of labels returned.  This is a stateless API operation. That is, the operation does not persist any data. This operation requires permissions to perform the rekognition:DetectCustomLabels action. 
+   */
+  detectCustomLabels(params: Rekognition.Types.DetectCustomLabelsRequest, callback?: (err: AWSError, data: Rekognition.Types.DetectCustomLabelsResponse) => void): Request<Rekognition.Types.DetectCustomLabelsResponse, AWSError>;
+  /**
+   * Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model.  You specify which version of a model version to use by using the ProjectVersionArn input parameter.  You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   For each object that the model version detects on an image, the API returns a (CustomLabel) object in an array (CustomLabels). Each CustomLabel object provides the label name (Name), the level of confidence that the image contains the object (Confidence), and object location information, if it exists, for the label on the image (Geometry).  During training model calculates a threshold value that determines if a prediction for a label is true. By default, DetectCustomLabels doesn't return labels whose confidence value is below the model's calculated threshold value. To filter labels that are returned, specify a value for MinConfidence that is higher than the model's calculated threshold. You can get the model's calculated threshold from the model's training results shown in the Amazon Rekognition Custom Labels console. To get all labels, regardless of confidence, specify a MinConfidence value of 0.  You can also add the MaxResults parameter to limit the number of labels returned.  This is a stateless API operation. That is, the operation does not persist any data. This operation requires permissions to perform the rekognition:DetectCustomLabels action. 
+   */
+  detectCustomLabels(callback?: (err: AWSError, data: Rekognition.Types.DetectCustomLabelsResponse) => void): Request<Rekognition.Types.DetectCustomLabelsResponse, AWSError>;
   /**
    * Detects faces within an image that is provided as input.  DetectFaces detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on.  The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence.  You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   This is a stateless API operation. That is, the operation does not persist any data.  This operation requires permissions to perform the rekognition:DetectFaces action. 
    */
@@ -212,11 +253,11 @@ declare class Rekognition extends Service {
    */
   searchFaces(callback?: (err: AWSError, data: Rekognition.Types.SearchFacesResponse) => void): Request<Rekognition.Types.SearchFacesResponse, AWSError>;
   /**
-   * For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection.   To search for all faces in an input image, you might first call the IndexFaces operation, and then use the face IDs returned in subsequent calls to the SearchFaces operation.   You can also call the DetectFaces operation and use the bounding boxes in the response to make face crops, which then you can pass in to the SearchFacesByImage operation.   You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a similarity indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image.  For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, Amazon Rekognition chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar for filtering by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   This operation requires permissions to perform the rekognition:SearchFacesByImage action.
+   * For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection.   To search for all faces in an input image, you might first call the IndexFaces operation, and then use the face IDs returned in subsequent calls to the SearchFaces operation.   You can also call the DetectFaces operation and use the bounding boxes in the response to make face crops, which then you can pass in to the SearchFacesByImage operation.   You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a similarity indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image.  For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use QualityFilter to set the quality bar for filtering by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE. The default value is NONE.  To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   This operation requires permissions to perform the rekognition:SearchFacesByImage action.
    */
   searchFacesByImage(params: Rekognition.Types.SearchFacesByImageRequest, callback?: (err: AWSError, data: Rekognition.Types.SearchFacesByImageResponse) => void): Request<Rekognition.Types.SearchFacesByImageResponse, AWSError>;
   /**
-   * For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection.   To search for all faces in an input image, you might first call the IndexFaces operation, and then use the face IDs returned in subsequent calls to the SearchFaces operation.   You can also call the DetectFaces operation and use the bounding boxes in the response to make face crops, which then you can pass in to the SearchFacesByImage operation.   You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a similarity indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image.  For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, Amazon Rekognition chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar for filtering by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   This operation requires permissions to perform the rekognition:SearchFacesByImage action.
+   * For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection.   To search for all faces in an input image, you might first call the IndexFaces operation, and then use the face IDs returned in subsequent calls to the SearchFaces operation.   You can also call the DetectFaces operation and use the bounding boxes in the response to make face crops, which then you can pass in to the SearchFacesByImage operation.   You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a similarity indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image.  For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use QualityFilter to set the quality bar for filtering by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE. The default value is NONE.  To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   This operation requires permissions to perform the rekognition:SearchFacesByImage action.
    */
   searchFacesByImage(callback?: (err: AWSError, data: Rekognition.Types.SearchFacesByImageResponse) => void): Request<Rekognition.Types.SearchFacesByImageResponse, AWSError>;
   /**
@@ -268,6 +309,14 @@ declare class Rekognition extends Service {
    */
   startPersonTracking(callback?: (err: AWSError, data: Rekognition.Types.StartPersonTrackingResponse) => void): Request<Rekognition.Types.StartPersonTrackingResponse, AWSError>;
   /**
+   * Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use DescribeProjectVersions. Once the model is running, you can detect custom labels in new images by calling DetectCustomLabels.  You are charged for the amount of time that the model is running. To stop a running model, call StopProjectVersion.  This operation requires permissions to perform the rekognition:StartProjectVersion action.
+   */
+  startProjectVersion(params: Rekognition.Types.StartProjectVersionRequest, callback?: (err: AWSError, data: Rekognition.Types.StartProjectVersionResponse) => void): Request<Rekognition.Types.StartProjectVersionResponse, AWSError>;
+  /**
+   * Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use DescribeProjectVersions. Once the model is running, you can detect custom labels in new images by calling DetectCustomLabels.  You are charged for the amount of time that the model is running. To stop a running model, call StopProjectVersion.  This operation requires permissions to perform the rekognition:StartProjectVersion action.
+   */
+  startProjectVersion(callback?: (err: AWSError, data: Rekognition.Types.StartProjectVersionResponse) => void): Request<Rekognition.Types.StartProjectVersionResponse, AWSError>;
+  /**
    * Starts processing a stream processor. You create a stream processor by calling CreateStreamProcessor. To tell StartStreamProcessor which stream processor to start, use the value of the Name field specified in the call to CreateStreamProcessor.
    */
   startStreamProcessor(params: Rekognition.Types.StartStreamProcessorRequest, callback?: (err: AWSError, data: Rekognition.Types.StartStreamProcessorResponse) => void): Request<Rekognition.Types.StartStreamProcessorResponse, AWSError>;
@@ -276,6 +325,14 @@ declare class Rekognition extends Service {
    */
   startStreamProcessor(callback?: (err: AWSError, data: Rekognition.Types.StartStreamProcessorResponse) => void): Request<Rekognition.Types.StartStreamProcessorResponse, AWSError>;
   /**
+   * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeProjectVersions. 
+   */
+  stopProjectVersion(params: Rekognition.Types.StopProjectVersionRequest, callback?: (err: AWSError, data: Rekognition.Types.StopProjectVersionResponse) => void): Request<Rekognition.Types.StopProjectVersionResponse, AWSError>;
+  /**
+   * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeProjectVersions. 
+   */
+  stopProjectVersion(callback?: (err: AWSError, data: Rekognition.Types.StopProjectVersionResponse) => void): Request<Rekognition.Types.StopProjectVersionResponse, AWSError>;
+  /**
    * Stops a running stream processor that was created by CreateStreamProcessor.
    */
   stopStreamProcessor(params: Rekognition.Types.StopStreamProcessorRequest, callback?: (err: AWSError, data: Rekognition.Types.StopStreamProcessorResponse) => void): Request<Rekognition.Types.StopStreamProcessorResponse, AWSError>;
@@ -283,6 +340,22 @@ declare class Rekognition extends Service {
    * Stops a running stream processor that was created by CreateStreamProcessor.
    */
   stopStreamProcessor(callback?: (err: AWSError, data: Rekognition.Types.StopStreamProcessorResponse) => void): Request<Rekognition.Types.StopStreamProcessorResponse, AWSError>;
+  /**
+   * Waits for the projectVersionTrainingCompleted state by periodically calling the underlying Rekognition.describeProjectVersionsoperation every 120 seconds (at most 360 times). Wait until the ProjectVersion training completes.
+   */
+  waitFor(state: "projectVersionTrainingCompleted", params: Rekognition.Types.DescribeProjectVersionsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Rekognition.Types.DescribeProjectVersionsResponse) => void): Request<Rekognition.Types.DescribeProjectVersionsResponse, AWSError>;
+  /**
+   * Waits for the projectVersionTrainingCompleted state by periodically calling the underlying Rekognition.describeProjectVersionsoperation every 120 seconds (at most 360 times). Wait until the ProjectVersion training completes.
+   */
+  waitFor(state: "projectVersionTrainingCompleted", callback?: (err: AWSError, data: Rekognition.Types.DescribeProjectVersionsResponse) => void): Request<Rekognition.Types.DescribeProjectVersionsResponse, AWSError>;
+  /**
+   * Waits for the projectVersionRunning state by periodically calling the underlying Rekognition.describeProjectVersionsoperation every 30 seconds (at most 40 times). Wait until the ProjectVersion is running.
+   */
+  waitFor(state: "projectVersionRunning", params: Rekognition.Types.DescribeProjectVersionsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Rekognition.Types.DescribeProjectVersionsResponse) => void): Request<Rekognition.Types.DescribeProjectVersionsResponse, AWSError>;
+  /**
+   * Waits for the projectVersionRunning state by periodically calling the underlying Rekognition.describeProjectVersionsoperation every 30 seconds (at most 40 times). Wait until the ProjectVersion is running.
+   */
+  waitFor(state: "projectVersionRunning", callback?: (err: AWSError, data: Rekognition.Types.DescribeProjectVersionsResponse) => void): Request<Rekognition.Types.DescribeProjectVersionsResponse, AWSError>;
 }
 declare namespace Rekognition {
   export interface AgeRange {
@@ -295,6 +368,10 @@ declare namespace Rekognition {
      */
     High?: UInteger;
   }
+  export interface Asset {
+    GroundTruthManifest?: GroundTruthManifest;
+  }
+  export type Assets = Asset[];
   export type Attribute = "DEFAULT"|"ALL"|string;
   export type Attributes = Attribute[];
   export interface Beard {
@@ -415,7 +492,7 @@ declare namespace Rekognition {
      */
     SimilarityThreshold?: Percent;
     /**
-     * A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren't compared. If you specify AUTO, Amazon Rekognition chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes all faces that don’t meet the chosen quality bar. The default value is AUTO. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that's misidentified as a face, a face that's too blurry, or a face with a pose that's too extreme to use. If you specify NONE, no filtering is performed.  To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.
+     * A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren't compared. If you specify AUTO, Amazon Rekognition chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes all faces that don’t meet the chosen quality bar. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that's misidentified as a face, a face that's too blurry, or a face with a pose that's too extreme to use. If you specify NONE, no filtering is performed. The default value is NONE.  To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.
      */
     QualityFilter?: QualityFilter;
   }
@@ -475,6 +552,8 @@ declare namespace Rekognition {
      */
     Confidence?: Percent;
   }
+  export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
+  export type ContentClassifiers = ContentClassifier[];
   export interface ContentModerationDetection {
     /**
      * Time, in milliseconds from the beginning of the video, that the unsafe content label was detected.
@@ -507,6 +586,46 @@ declare namespace Rekognition {
      */
     FaceModelVersion?: String;
   }
+  export interface CreateProjectRequest {
+    /**
+     * The name of the project to create.
+     */
+    ProjectName: ProjectName;
+  }
+  export interface CreateProjectResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the new project. You can use the ARN to configure IAM access to the project. 
+     */
+    ProjectArn?: ProjectArn;
+  }
+  export interface CreateProjectVersionRequest {
+    /**
+     * The ARN of the Amazon Rekognition Custom Labels project that manages the model that you want to train.
+     */
+    ProjectArn: ProjectArn;
+    /**
+     * A name for the version of the model. This value must be unique.
+     */
+    VersionName: VersionName;
+    /**
+     * The Amazon S3 location to store the results of training.
+     */
+    OutputConfig: OutputConfig;
+    /**
+     * The dataset to use for training. 
+     */
+    TrainingData: TrainingData;
+    /**
+     * The dataset to use for testing.
+     */
+    TestingData: TestingData;
+  }
+  export interface CreateProjectVersionResponse {
+    /**
+     * The ARN of the model version that was created. Use DescribeProjectVersion to get the current status of the training operation.
+     */
+    ProjectVersionArn?: ProjectVersionArn;
+  }
   export interface CreateStreamProcessorRequest {
     /**
      * Kinesis video stream stream that provides the source streaming video. If you are using the AWS CLI, the parameter name is StreamProcessorInput.
@@ -535,6 +654,21 @@ declare namespace Rekognition {
      */
     StreamProcessorArn?: StreamProcessorArn;
   }
+  export interface CustomLabel {
+    /**
+     * The name of the custom label.
+     */
+    Name?: String;
+    /**
+     * The confidence that the model has in the detection of the custom label. The range is 0-100. A higher value indicates a higher confidence.
+     */
+    Confidence?: Percent;
+    /**
+     * The location of the detected object on the image that corresponds to the custom label. Includes an axis aligned coarse bounding box surrounding the object and a finer grain polygon for more accurate spatial information.
+     */
+    Geometry?: Geometry;
+  }
+  export type CustomLabels = CustomLabel[];
   export type DateTime = Date;
   export type Degree = number;
   export interface DeleteCollectionRequest {
@@ -597,6 +731,54 @@ declare namespace Rekognition {
      */
     CreationTimestamp?: DateTime;
   }
+  export interface DescribeProjectVersionsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the project that contains the models you want to describe.
+     */
+    ProjectArn: ProjectArn;
+    /**
+     * A list of model version names that you want to describe. You can add up to 10 model version names to the list. If you don't specify a value, all model descriptions are returned.
+     */
+    VersionNames?: VersionNames;
+    /**
+     * If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. 
+     */
+    NextToken?: ExtendedPaginationToken;
+    /**
+     * The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100. 
+     */
+    MaxResults?: ProjectVersionsPageSize;
+  }
+  export interface DescribeProjectVersionsResponse {
+    /**
+     * A list of model descriptions. The list is sorted by the creation date and time of the model versions, latest to earliest.
+     */
+    ProjectVersionDescriptions?: ProjectVersionDescriptions;
+    /**
+     * If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. 
+     */
+    NextToken?: ExtendedPaginationToken;
+  }
+  export interface DescribeProjectsRequest {
+    /**
+     * If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. 
+     */
+    NextToken?: ExtendedPaginationToken;
+    /**
+     * The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100. 
+     */
+    MaxResults?: ProjectsPageSize;
+  }
+  export interface DescribeProjectsResponse {
+    /**
+     * A list of project descriptions. The list is sorted by the date and time the projects are created.
+     */
+    ProjectDescriptions?: ProjectDescriptions;
+    /**
+     * If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. 
+     */
+    NextToken?: ExtendedPaginationToken;
+  }
   export interface DescribeStreamProcessorRequest {
     /**
      * Name of the stream processor for which you want information.
@@ -644,6 +826,27 @@ declare namespace Rekognition {
      * Face recognition input parameters that are being used by the stream processor. Includes the collection to use for face recognition and the face attributes to detect.
      */
     Settings?: StreamProcessorSettings;
+  }
+  export interface DetectCustomLabelsRequest {
+    /**
+     * The ARN of the model version that you want to use.
+     */
+    ProjectVersionArn: ProjectVersionArn;
+    Image: Image;
+    /**
+     * Maximum number of results you want the service to return in the response. The service returns the specified number of highest confidence labels ranked from highest confidence to lowest.
+     */
+    MaxResults?: UInteger;
+    /**
+     * Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with a confidence lower than this specified value. If you specify a value of 0, all labels are return, regardless of the default thresholds that the model version applies.
+     */
+    MinConfidence?: Percent;
+  }
+  export interface DetectCustomLabelsResponse {
+    /**
+     * An array of custom labels detected in the input image.
+     */
+    CustomLabels?: CustomLabels;
   }
   export interface DetectFacesRequest {
     /**
@@ -702,6 +905,10 @@ declare namespace Rekognition {
      * Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with a confidence level lower than this specified value. If you don't specify MinConfidence, the operation returns labels with confidence values greater than or equal to 50 percent.
      */
     MinConfidence?: Percent;
+    /**
+     * Sets up the configuration for human evaluation, including the FlowDefinition the image will be sent to.
+     */
+    HumanLoopConfig?: HumanLoopConfig;
   }
   export interface DetectModerationLabelsResponse {
     /**
@@ -712,6 +919,10 @@ declare namespace Rekognition {
      * Version number of the moderation detection model that was used to detect unsafe content.
      */
     ModerationModelVersion?: String;
+    /**
+     * Shows the results of the human in the loop evaluation.
+     */
+    HumanLoopActivationOutput?: HumanLoopActivationOutput;
   }
   export interface DetectTextRequest {
     /**
@@ -737,6 +948,17 @@ declare namespace Rekognition {
   }
   export type EmotionName = "HAPPY"|"SAD"|"ANGRY"|"CONFUSED"|"DISGUSTED"|"SURPRISED"|"CALM"|"UNKNOWN"|"FEAR"|string;
   export type Emotions = Emotion[];
+  export interface EvaluationResult {
+    /**
+     * The F1 score for the evaluation of all labels. The F1 score metric evaluates the overall precision and recall performance of the model as a single value. A higher value indicates better precision and recall performance. A lower score indicates that precision, recall, or both are performing poorly. 
+     */
+    F1Score?: Float;
+    /**
+     * The S3 bucket that contains the training summary.
+     */
+    Summary?: Summary;
+  }
+  export type ExtendedPaginationToken = string;
   export type ExternalImageId = string;
   export interface EyeOpen {
     /**
@@ -893,6 +1115,7 @@ declare namespace Rekognition {
   }
   export type FaceSearchSortBy = "INDEX"|"TIMESTAMP"|string;
   export type Float = number;
+  export type FlowDefinitionArn = string;
   export interface Gender {
     /**
      * The predicted gender of the face.
@@ -906,11 +1129,11 @@ declare namespace Rekognition {
   export type GenderType = "Male"|"Female"|string;
   export interface Geometry {
     /**
-     * An axis-aligned coarse representation of the detected text's location on the image.
+     * An axis-aligned coarse representation of the detected item's location on the image.
      */
     BoundingBox?: BoundingBox;
     /**
-     * Within the bounding box, a fine-grained polygon around the detected text.
+     * Within the bounding box, a fine-grained polygon around the detected item.
      */
     Polygon?: Polygon;
   }
@@ -1174,6 +1397,48 @@ declare namespace Rekognition {
      */
     Persons?: PersonDetections;
   }
+  export interface GroundTruthManifest {
+    S3Object?: S3Object;
+  }
+  export type HumanLoopActivationConditionsEvaluationResults = string;
+  export interface HumanLoopActivationOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the HumanLoop created.
+     */
+    HumanLoopArn?: HumanLoopArn;
+    /**
+     * Shows if and why human review was needed.
+     */
+    HumanLoopActivationReasons?: HumanLoopActivationReasons;
+    /**
+     * Shows the result of condition evaluations, including those conditions which activated a human review.
+     */
+    HumanLoopActivationConditionsEvaluationResults?: HumanLoopActivationConditionsEvaluationResults;
+  }
+  export type HumanLoopActivationReason = string;
+  export type HumanLoopActivationReasons = HumanLoopActivationReason[];
+  export type HumanLoopArn = string;
+  export interface HumanLoopConfig {
+    /**
+     * The name of the human review used for this image. This should be kept unique within a region.
+     */
+    HumanLoopName: HumanLoopName;
+    /**
+     * The Amazon Resource Name (ARN) of the flow definition.
+     */
+    FlowDefinitionArn: FlowDefinitionArn;
+    /**
+     * Sets attributes of the input data.
+     */
+    DataAttributes?: HumanLoopDataAttributes;
+  }
+  export interface HumanLoopDataAttributes {
+    /**
+     * Sets whether the input image is free of personally identifiable information.
+     */
+    ContentClassifiers?: ContentClassifiers;
+  }
+  export type HumanLoopName = string;
   export interface Image {
     /**
      * Blob of image bytes up to 5 MBs.
@@ -1240,6 +1505,7 @@ declare namespace Rekognition {
      */
     UnindexedFaces?: UnindexedFaces;
   }
+  export type InferenceUnits = number;
   export interface Instance {
     /**
      * The position of the label instance on the image.
@@ -1435,6 +1701,16 @@ declare namespace Rekognition {
     RoleArn: RoleArn;
   }
   export type OrientationCorrection = "ROTATE_0"|"ROTATE_90"|"ROTATE_180"|"ROTATE_270"|string;
+  export interface OutputConfig {
+    /**
+     * The S3 bucket where training output is placed.
+     */
+    S3Bucket?: S3Bucket;
+    /**
+     * The prefix applied to the training output files. 
+     */
+    S3KeyPrefix?: S3KeyPrefix;
+  }
   export type PageSize = number;
   export type PaginationToken = string;
   export interface Parent {
@@ -1512,6 +1788,75 @@ declare namespace Rekognition {
      */
     Pitch?: Degree;
   }
+  export type ProjectArn = string;
+  export interface ProjectDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the project.
+     */
+    ProjectArn?: ProjectArn;
+    /**
+     * The Unix timestamp for the date and time that the project was created.
+     */
+    CreationTimestamp?: DateTime;
+    /**
+     * The current status of the project.
+     */
+    Status?: ProjectStatus;
+  }
+  export type ProjectDescriptions = ProjectDescription[];
+  export type ProjectName = string;
+  export type ProjectStatus = "CREATING"|"CREATED"|"DELETING"|string;
+  export type ProjectVersionArn = string;
+  export interface ProjectVersionDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the model version. 
+     */
+    ProjectVersionArn?: ProjectVersionArn;
+    /**
+     * The Unix datetime for the date and time that training started.
+     */
+    CreationTimestamp?: DateTime;
+    /**
+     * The minimum number of inference units used by the model. For more information, see StartProjectVersion.
+     */
+    MinInferenceUnits?: InferenceUnits;
+    /**
+     * The current status of the model version.
+     */
+    Status?: ProjectVersionStatus;
+    /**
+     * A descriptive message for an error or warning that occurred.
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     * The duration, in seconds, that the model version has been billed for training. This value is only returned if the model version has been successfully trained.
+     */
+    BillableTrainingTimeInSeconds?: ULong;
+    /**
+     * The Unix date and time that training of the model ended.
+     */
+    TrainingEndTimestamp?: DateTime;
+    /**
+     * The location where training results are saved.
+     */
+    OutputConfig?: OutputConfig;
+    /**
+     * The manifest file that represents the training results.
+     */
+    TrainingDataResult?: TrainingDataResult;
+    /**
+     * The manifest file that represents the testing results.
+     */
+    TestingDataResult?: TestingDataResult;
+    /**
+     * The training results. EvaluationResult is only returned if training is successful.
+     */
+    EvaluationResult?: EvaluationResult;
+  }
+  export type ProjectVersionDescriptions = ProjectVersionDescription[];
+  export type ProjectVersionStatus = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETED"|"TRAINING_FAILED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"|string;
+  export type ProjectVersionsPageSize = number;
+  export type ProjectsPageSize = number;
   export type QualityFilter = "NONE"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|string;
   export type Reason = "EXCEEDS_MAX_FACES"|"EXTREME_POSE"|"LOW_BRIGHTNESS"|"LOW_SHARPNESS"|"LOW_CONFIDENCE"|"SMALL_BOUNDING_BOX"|"LOW_FACE_QUALITY"|string;
   export type Reasons = Reason[];
@@ -1538,6 +1883,7 @@ declare namespace Rekognition {
   export type RekognitionUniqueId = string;
   export type RoleArn = string;
   export type S3Bucket = string;
+  export type S3KeyPrefix = string;
   export interface S3Object {
     /**
      * Name of the S3 bucket.
@@ -1573,7 +1919,7 @@ declare namespace Rekognition {
      */
     FaceMatchThreshold?: Percent;
     /**
-     * A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren't searched for in the collection. If you specify AUTO, Amazon Rekognition chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes all faces that don’t meet the chosen quality bar. The default value is AUTO. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that's misidentified as a face, a face that's too blurry, or a face with a pose that's too extreme to use. If you specify NONE, no filtering is performed.  To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.
+     * A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren't searched for in the collection. If you specify AUTO, Amazon Rekognition chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes all faces that don’t meet the chosen quality bar. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that's misidentified as a face, a face that's too blurry, or a face with a pose that's too extreme to use. If you specify NONE, no filtering is performed. The default value is NONE.  To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.
      */
     QualityFilter?: QualityFilter;
   }
@@ -1801,6 +2147,22 @@ declare namespace Rekognition {
      */
     JobId?: JobId;
   }
+  export interface StartProjectVersionRequest {
+    /**
+     * The Amazon Resource Name(ARN) of the model version that you want to start.
+     */
+    ProjectVersionArn: ProjectVersionArn;
+    /**
+     * The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. 
+     */
+    MinInferenceUnits: InferenceUnits;
+  }
+  export interface StartProjectVersionResponse {
+    /**
+     * The current running status of the model. 
+     */
+    Status?: ProjectVersionStatus;
+  }
   export interface StartStreamProcessorRequest {
     /**
      * The name of the stream processor to start processing.
@@ -1810,6 +2172,18 @@ declare namespace Rekognition {
   export interface StartStreamProcessorResponse {
   }
   export type StatusMessage = string;
+  export interface StopProjectVersionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model version that you want to delete. This operation requires permissions to perform the rekognition:StopProjectVersion action.
+     */
+    ProjectVersionArn: ProjectVersionArn;
+  }
+  export interface StopProjectVersionResponse {
+    /**
+     * The current status of the stop operation. 
+     */
+    Status?: ProjectVersionStatus;
+  }
   export interface StopStreamProcessorRequest {
     /**
      * The name of a stream processor created by CreateStreamProcessor.
@@ -1851,6 +2225,9 @@ declare namespace Rekognition {
   }
   export type StreamProcessorStatus = "STOPPED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|string;
   export type String = string;
+  export interface Summary {
+    S3Object?: S3Object;
+  }
   export interface Sunglasses {
     /**
      * Boolean value that indicates whether the face is wearing sunglasses or not.
@@ -1860,6 +2237,26 @@ declare namespace Rekognition {
      * Level of confidence in the determination.
      */
     Confidence?: Percent;
+  }
+  export interface TestingData {
+    /**
+     * The assets used for testing.
+     */
+    Assets?: Assets;
+    /**
+     * If specified, Amazon Rekognition Custom Labels creates a testing dataset with an 80/20 split of the training dataset.
+     */
+    AutoCreate?: Boolean;
+  }
+  export interface TestingDataResult {
+    /**
+     * The testing dataset that was supplied for training.
+     */
+    Input?: TestingData;
+    /**
+     * The subset of the dataset that was actually tested. Some images (assets) might not be tested due to file formatting and other issues. 
+     */
+    Output?: TestingData;
   }
   export interface TextDetection {
     /**
@@ -1890,6 +2287,22 @@ declare namespace Rekognition {
   export type TextDetectionList = TextDetection[];
   export type TextTypes = "LINE"|"WORD"|string;
   export type Timestamp = number;
+  export interface TrainingData {
+    /**
+     * A Sagemaker GroundTruth manifest file that contains the training images (assets).
+     */
+    Assets?: Assets;
+  }
+  export interface TrainingDataResult {
+    /**
+     * The training assets that you supplied for training.
+     */
+    Input?: TrainingData;
+    /**
+     * The images (assets) that were actually trained by Amazon Rekognition Custom Labels. 
+     */
+    Output?: TrainingData;
+  }
   export type UInteger = number;
   export type ULong = number;
   export interface UnindexedFace {
@@ -1905,6 +2318,8 @@ declare namespace Rekognition {
   export type UnindexedFaces = UnindexedFace[];
   export type Url = string;
   export type Urls = Url[];
+  export type VersionName = string;
+  export type VersionNames = VersionName[];
   export interface Video {
     /**
      * The Amazon S3 bucket name and file name for the video.

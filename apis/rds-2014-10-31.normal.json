@@ -688,6 +688,32 @@
       ],
       "documentation": "<p>Creates a new DB parameter group.</p> <p> A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using <i>ModifyDBParameterGroup</i>. Once you've created a DB parameter group, you need to associate it with your DB instance using <i>ModifyDBInstance</i>. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect. </p> <important> <p>After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>"
     },
+    "CreateDBProxy": {
+      "name": "CreateDBProxy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDBProxyRequest"
+      },
+      "output": {
+        "shape": "CreateDBProxyResponse",
+        "resultWrapper": "CreateDBProxyResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidSubnet"
+        },
+        {
+          "shape": "DBProxyAlreadyExistsFault"
+        },
+        {
+          "shape": "DBProxyQuotaExceededFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Creates a new DB proxy.</p>"
+    },
     "CreateDBSecurityGroup": {
       "name": "CreateDBSecurityGroup",
       "http": {
@@ -1065,6 +1091,29 @@
       ],
       "documentation": "<p>Deletes a specified DB parameter group. The DB parameter group to be deleted can't be associated with any DB instances.</p>"
     },
+    "DeleteDBProxy": {
+      "name": "DeleteDBProxy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDBProxyRequest"
+      },
+      "output": {
+        "shape": "DeleteDBProxyResponse",
+        "resultWrapper": "DeleteDBProxyResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Deletes an existing proxy.</p>"
+    },
     "DeleteDBSecurityGroup": {
       "name": "DeleteDBSecurityGroup",
       "http": {
@@ -1213,6 +1262,32 @@
         }
       ],
       "documentation": "<p>Deletes an existing option group.</p>"
+    },
+    "DeregisterDBProxyTargets": {
+      "name": "DeregisterDBProxyTargets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeregisterDBProxyTargetsRequest"
+      },
+      "output": {
+        "shape": "DeregisterDBProxyTargetsResponse",
+        "resultWrapper": "DeregisterDBProxyTargetsResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyTargetNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetGroupNotFoundFault"
+        },
+        {
+          "shape": "DBProxyNotFoundFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>"
     },
     "DescribeAccountAttributes": {
       "name": "DescribeAccountAttributes",
@@ -1526,6 +1601,72 @@
         }
       ],
       "documentation": "<p>Returns the detailed parameter list for a particular DB parameter group.</p>"
+    },
+    "DescribeDBProxies": {
+      "name": "DescribeDBProxies",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDBProxiesRequest"
+      },
+      "output": {
+        "shape": "DescribeDBProxiesResponse",
+        "resultWrapper": "DescribeDBProxiesResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyNotFoundFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxies.</p>"
+    },
+    "DescribeDBProxyTargetGroups": {
+      "name": "DescribeDBProxyTargetGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDBProxyTargetGroupsRequest"
+      },
+      "output": {
+        "shape": "DescribeDBProxyTargetGroupsResponse",
+        "resultWrapper": "DescribeDBProxyTargetGroupsResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyTargetGroupNotFoundFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>"
+    },
+    "DescribeDBProxyTargets": {
+      "name": "DescribeDBProxyTargets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDBProxyTargetsRequest"
+      },
+      "output": {
+        "shape": "DescribeDBProxyTargetsResponse",
+        "resultWrapper": "DescribeDBProxyTargetsResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetGroupNotFoundFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>"
     },
     "DescribeDBSecurityGroups": {
       "name": "DescribeDBSecurityGroups",
@@ -2224,6 +2365,55 @@
       ],
       "documentation": "<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.</p> </note> <important> <p>After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>"
     },
+    "ModifyDBProxy": {
+      "name": "ModifyDBProxy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyDBProxyRequest"
+      },
+      "output": {
+        "shape": "ModifyDBProxyResponse",
+        "resultWrapper": "ModifyDBProxyResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyAlreadyExistsFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Changes the settings for an existing DB proxy.</p>"
+    },
+    "ModifyDBProxyTargetGroup": {
+      "name": "ModifyDBProxyTargetGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyDBProxyTargetGroupRequest"
+      },
+      "output": {
+        "shape": "ModifyDBProxyTargetGroupResponse",
+        "resultWrapper": "ModifyDBProxyTargetGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetGroupNotFoundFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>"
+    },
     "ModifyDBSnapshot": {
       "name": "ModifyDBSnapshot",
       "http": {
@@ -2477,6 +2667,44 @@
         }
       ],
       "documentation": "<p>You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. </p> <p>For more information about rebooting, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html\">Rebooting a DB Instance</a> in the <i>Amazon RDS User Guide.</i> </p>"
+    },
+    "RegisterDBProxyTargets": {
+      "name": "RegisterDBProxyTargets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RegisterDBProxyTargetsRequest"
+      },
+      "output": {
+        "shape": "RegisterDBProxyTargetsResponse",
+        "resultWrapper": "RegisterDBProxyTargetsResult"
+      },
+      "errors": [
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetGroupNotFoundFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetAlreadyRegisteredFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        }
+      ],
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>"
     },
     "RemoveFromGlobalCluster": {
       "name": "RemoveFromGlobalCluster",
@@ -3484,6 +3712,12 @@
         "locationName": "AttributeValue"
       }
     },
+    "AuthScheme": {
+      "type": "string",
+      "enum": [
+        "SECRETS"
+      ]
+    },
     "AuthorizeDBSecurityGroupIngressMessage": {
       "type": "structure",
       "required": [
@@ -3682,6 +3916,58 @@
         }
       },
       "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs. The values within these arrays depend on the DB engine being used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon RDS User Guide</i>.</p>"
+    },
+    "ConnectionPoolConfiguration": {
+      "type": "structure",
+      "members": {
+        "MaxConnectionsPercent": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.</p> <p>Default: 100</p> <p>Constraints: between 1 and 100</p>"
+        },
+        "MaxIdleConnectionsPercent": {
+          "shape": "IntegerOptional",
+          "documentation": "<p> Controls how actively the proxy closes idle database connections in the connection pool. A high value enables the proxy to leave a high percentage of idle connections open. A low value causes the proxy to close idle client connections and return the underlying database connections to the connection pool. For Aurora MySQL, it is expressed as a percentage of the <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group. </p> <p>Default: 50</p> <p>Constraints: between 0 and <code>MaxConnectionsPercent</code> </p>"
+        },
+        "ConnectionBorrowTimeout": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.</p> <p>Default: 120</p> <p>Constraints: between 1 and 3600, or 0 representing unlimited</p>"
+        },
+        "SessionPinningFilters": {
+          "shape": "StringList",
+          "documentation": "<p>Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior.</p> <p>Default: no session pinning filters</p>"
+        },
+        "InitQuery": {
+          "shape": "String",
+          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p>Default: no initialization query</p>"
+        }
+      },
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>"
+    },
+    "ConnectionPoolConfigurationInfo": {
+      "type": "structure",
+      "members": {
+        "MaxConnectionsPercent": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.</p>"
+        },
+        "MaxIdleConnectionsPercent": {
+          "shape": "Integer",
+          "documentation": "<p> Controls how actively the proxy closes idle database connections in the connection pool. A high value enables the proxy to leave a high percentage of idle connections open. A low value causes the proxy to close idle client connections and return the underlying database connections to the connection pool. For Aurora MySQL, it is expressed as a percentage of the <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group. </p>"
+        },
+        "ConnectionBorrowTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.</p>"
+        },
+        "SessionPinningFilters": {
+          "shape": "StringList",
+          "documentation": "<p>Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Currently, the only allowed value is <code>EXCLUDE_VARIABLE_SETS</code>.</p>"
+        },
+        "InitQuery": {
+          "shape": "String",
+          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p>"
+        }
+      },
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>"
     },
     "CopyDBClusterParameterGroupMessage": {
       "type": "structure",
@@ -4527,6 +4813,67 @@
       "members": {
         "DBParameterGroup": {
           "shape": "DBParameterGroup"
+        }
+      }
+    },
+    "CreateDBProxyRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyName",
+        "EngineFamily",
+        "Auth",
+        "RoleArn",
+        "VpcSubnetIds"
+      ],
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>"
+        },
+        "EngineFamily": {
+          "shape": "EngineFamily",
+          "documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. Currently, this value is always <code>MYSQL</code>. The engine family applies to both RDS MySQL and Aurora MySQL.</p>"
+        },
+        "Auth": {
+          "shape": "UserAuthConfigList",
+          "documentation": "<p>The authorization mechanism that the proxy uses.</p>"
+        },
+        "RoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.</p>"
+        },
+        "VpcSubnetIds": {
+          "shape": "StringList",
+          "documentation": "<p>One or more VPC subnet IDs to associate with the new proxy.</p>"
+        },
+        "VpcSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>One or more VPC security group IDs to associate with the new proxy.</p>"
+        },
+        "RequireTLS": {
+          "shape": "Boolean",
+          "documentation": "<p>A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.</p>"
+        },
+        "IdleClientTimeout": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.</p>"
+        },
+        "DebugLogging": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.</p>"
+        }
+      }
+    },
+    "CreateDBProxyResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxy": {
+          "shape": "DBProxy",
+          "documentation": "<p>The <code>DBProxy</code> structure corresponding to the new proxy.</p>"
         }
       }
     },
@@ -6064,6 +6411,153 @@
       },
       "documentation": "<p> Contains the result of a successful invocation of the <code>DescribeDBParameterGroups</code> action. </p>"
     },
+    "DBProxy": {
+      "type": "structure",
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.</p>"
+        },
+        "DBProxyArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the proxy.</p>"
+        },
+        "Status": {
+          "shape": "DBProxyStatus",
+          "documentation": "<p>The current status of this proxy. A status of <code>available</code> means the proxy is ready to handle requests. Other values indicate that you must wait for the proxy to be ready, or take some action to resolve an issue.</p>"
+        },
+        "EngineFamily": {
+          "shape": "String",
+          "documentation": "<p>Currently, this value is always <code>MYSQL</code>. The engine family applies to both RDS MySQL and Aurora MySQL.</p>"
+        },
+        "VpcSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>Provides a list of VPC security groups that the proxy belongs to.</p>"
+        },
+        "VpcSubnetIds": {
+          "shape": "StringList",
+          "documentation": "<p>The EC2 subnet IDs for the proxy.</p>"
+        },
+        "Auth": {
+          "shape": "UserAuthConfigInfoList",
+          "documentation": "<p>One or more data structures specifying the authorization mechanism to connect to the associated RDS DB instance or Aurora DB cluster.</p>"
+        },
+        "RoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that the proxy uses to access Amazon Secrets Manager.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.</p>"
+        },
+        "RequireTLS": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether Transport Layer Security (TLS) encryption is required for connections to the proxy.</p>"
+        },
+        "IdleClientTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>The number of seconds a connection to the proxy can have no activity before the proxy drops the client connection. The proxy keeps the underlying database connection open and puts it back into the connection pool for reuse by later connection requests.</p> <p>Default: 1800 (30 minutes)</p> <p>Constraints: 1 to 28,800</p>"
+        },
+        "DebugLogging": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.</p>"
+        },
+        "CreatedDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The date and time when the proxy was first created.</p>"
+        },
+        "UpdatedDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The date and time when the proxy was last updated.</p>"
+        }
+      },
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>The data structure representing a proxy managed by the RDS Proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxies</code> action.</p>"
+    },
+    "DBProxyList": {
+      "type": "list",
+      "member": {
+        "shape": "DBProxy"
+      }
+    },
+    "DBProxyStatus": {
+      "type": "string",
+      "enum": [
+        "available",
+        "modifying",
+        "incompatible-network",
+        "insufficient-resource-limits",
+        "creating",
+        "deleting"
+      ]
+    },
+    "DBProxyTarget": {
+      "type": "structure",
+      "members": {
+        "TargetArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the RDS DB instance or Aurora DB cluster.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The writer endpoint for the RDS DB instance or Aurora DB cluster.</p>"
+        },
+        "TrackedClusterId": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier when the target represents an Aurora DB cluster. This field is blank when the target represents an </p>"
+        },
+        "RdsResourceId": {
+          "shape": "String",
+          "documentation": "<p>The identifier representing the target. It can be the instance identifier for an RDS DB instance, or the cluster identifier for an Aurora DB cluster.</p>"
+        },
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p>The port that the RDS Proxy uses to connect to the target RDS DB instance or Aurora DB cluster.</p>"
+        },
+        "Type": {
+          "shape": "TargetType",
+          "documentation": "<p>Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.</p>"
+        }
+      },
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>"
+    },
+    "DBProxyTargetGroup": {
+      "type": "structure",
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the RDS proxy associated with this target group.</p>"
+        },
+        "TargetGroupName": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the target group. This name must be unique for all target groups owned by your AWS account in the specified AWS Region.</p>"
+        },
+        "TargetGroupArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) representing the target group.</p>"
+        },
+        "IsDefault": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether this target group is the first one used for connection requests by the associated proxy. Because each proxy is currently associated with a single target group, currently this setting is always <code>true</code>.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The current status of this target group. A status of <code>available</code> means the target group is correctly associated with a database. Other values indicate that you must wait for the target group to be ready, or take some action to resolve an issue.</p>"
+        },
+        "ConnectionPoolConfig": {
+          "shape": "ConnectionPoolConfigurationInfo",
+          "documentation": "<p>The settings that determine the size and behavior of the connection pool for the target group.</p>"
+        },
+        "CreatedDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The date and time when the target group was first created.</p>"
+        },
+        "UpdatedDate": {
+          "shape": "TStamp",
+          "documentation": "<p>The date and time when the target group was last updated.</p>"
+        }
+      },
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy can connect to. Currently, each target group is associated with exactly one RDS DB instance or Aurora DB cluster.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargetGroups</code> action.</p>"
+    },
     "DBSecurityGroup": {
       "type": "structure",
       "members": {
@@ -6539,6 +7033,27 @@
       },
       "documentation": "<p/>"
     },
+    "DeleteDBProxyRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyName"
+      ],
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The name of the DB proxy to delete.</p>"
+        }
+      }
+    },
+    "DeleteDBProxyResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxy": {
+          "shape": "DBProxy",
+          "documentation": "<p>The data structure representing the details of the DB proxy that you delete.</p>"
+        }
+      }
+    },
     "DeleteDBSecurityGroupMessage": {
       "type": "structure",
       "required": [
@@ -6651,6 +7166,34 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DeregisterDBProxyTargetsRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyName"
+      ],
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the <code>DBProxy</code> that is associated with the <code>DBProxyTargetGroup</code>.</p>"
+        },
+        "TargetGroupName": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the <code>DBProxyTargetGroup</code>.</p>"
+        },
+        "DBInstanceIdentifiers": {
+          "shape": "StringList",
+          "documentation": "<p>One or more DB instance identifiers.</p>"
+        },
+        "DBClusterIdentifiers": {
+          "shape": "StringList",
+          "documentation": "<p>One or more DB cluster identifiers.</p>"
+        }
+      }
+    },
+    "DeregisterDBProxyTargetsResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DescribeAccountAttributesMessage": {
       "type": "structure",
@@ -7106,6 +7649,122 @@
         "Marker": {
           "shape": "String",
           "documentation": "<p> An optional pagination token provided by a previous <code>DescribeDBParameters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      }
+    },
+    "DescribeDBProxiesRequest": {
+      "type": "structure",
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The name of the DB proxy.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>This parameter is not currently supported.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "MaxRecords": {
+          "shape": "MaxRecords",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        }
+      }
+    },
+    "DescribeDBProxiesResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxies": {
+          "shape": "DBProxyList",
+          "documentation": "<p>A return value representing an arbitrary number of <code>DBProxy</code> data structures.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      }
+    },
+    "DescribeDBProxyTargetGroupsRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyName"
+      ],
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the <code>DBProxy</code> associated with the target group.</p>"
+        },
+        "TargetGroupName": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the <code>DBProxyTargetGroup</code> to describe.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>This parameter is not currently supported.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "MaxRecords": {
+          "shape": "MaxRecords",
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        }
+      }
+    },
+    "DescribeDBProxyTargetGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "TargetGroups": {
+          "shape": "TargetGroupList",
+          "documentation": "<p>An arbitrary number of <code>DBProxyTargetGroup</code> objects, containing details of the corresponding target groups.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      }
+    },
+    "DescribeDBProxyTargetsRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyName"
+      ],
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the <code>DBProxyTarget</code> to describe.</p>"
+        },
+        "TargetGroupName": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the <code>DBProxyTargetGroup</code> to describe.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>This parameter is not currently supported.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "MaxRecords": {
+          "shape": "MaxRecords",
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        }
+      }
+    },
+    "DescribeDBProxyTargetsResponse": {
+      "type": "structure",
+      "members": {
+        "Targets": {
+          "shape": "TargetList",
+          "documentation": "<p>An arbitrary number of <code>DBProxyTarget</code> objects, containing details of the corresponding targets.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
         }
       }
     },
@@ -7826,6 +8485,12 @@
       "documentation": "<p> Contains the result of a successful invocation of the <code>DescribeEngineDefaultParameters</code> action. </p>",
       "wrapper": true
     },
+    "EngineFamily": {
+      "type": "string",
+      "enum": [
+        "MYSQL"
+      ]
+    },
     "EngineModeList": {
       "type": "list",
       "member": {
@@ -8146,6 +8811,13 @@
         }
       }
     },
+    "IAMAuthMode": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "REQUIRED"
+      ]
+    },
     "IPRange": {
       "type": "structure",
       "members": {
@@ -8307,6 +8979,11 @@
     },
     "LongOptional": {
       "type": "long"
+    },
+    "MaxRecords": {
+      "type": "integer",
+      "max": 100,
+      "min": 20
     },
     "MinimumEngineVersionPerAllowedValue": {
       "type": "structure",
@@ -8728,6 +9405,89 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "ModifyDBProxyRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyName"
+      ],
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the <code>DBProxy</code> to modify.</p>"
+        },
+        "NewDBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The new identifier for the <code>DBProxy</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>"
+        },
+        "Auth": {
+          "shape": "UserAuthConfigList",
+          "documentation": "<p>The new authentication settings for the <code>DBProxy</code>.</p>"
+        },
+        "RequireTLS": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy, even if the associated database doesn't use TLS.</p>"
+        },
+        "IdleClientTimeout": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.</p>"
+        },
+        "DebugLogging": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.</p>"
+        },
+        "RoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.</p>"
+        },
+        "SecurityGroups": {
+          "shape": "StringList",
+          "documentation": "<p>The new list of security groups for the <code>DBProxy</code>.</p>"
+        }
+      }
+    },
+    "ModifyDBProxyResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxy": {
+          "shape": "DBProxy",
+          "documentation": "<p>The <code>DBProxy</code> object representing the new settings for the proxy.</p>"
+        }
+      }
+    },
+    "ModifyDBProxyTargetGroupRequest": {
+      "type": "structure",
+      "required": [
+        "TargetGroupName",
+        "DBProxyName"
+      ],
+      "members": {
+        "TargetGroupName": {
+          "shape": "String",
+          "documentation": "<p>The name of the new target group to assign to the proxy.</p>"
+        },
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The name of the new proxy to which to assign the target group.</p>"
+        },
+        "ConnectionPoolConfig": {
+          "shape": "ConnectionPoolConfiguration",
+          "documentation": "<p>The settings that determine the size and behavior of the connection pool for the target group.</p>"
+        },
+        "NewName": {
+          "shape": "String",
+          "documentation": "<p>The new name for the modified <code>DBProxyTarget</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>"
+        }
+      }
+    },
+    "ModifyDBProxyTargetGroupResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxyTargetGroup": {
+          "shape": "DBProxyTargetGroup",
+          "documentation": "<p>The settings of the modified <code>DBProxyTarget</code>.</p>"
+        }
+      }
     },
     "ModifyDBSnapshotAttributeMessage": {
       "type": "structure",
@@ -9837,6 +10597,39 @@
       "member": {
         "shape": "RecurringCharge",
         "locationName": "RecurringCharge"
+      }
+    },
+    "RegisterDBProxyTargetsRequest": {
+      "type": "structure",
+      "required": [
+        "DBProxyName"
+      ],
+      "members": {
+        "DBProxyName": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the <code>DBProxy</code> that is associated with the <code>DBProxyTargetGroup</code>.</p>"
+        },
+        "TargetGroupName": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the <code>DBProxyTargetGroup</code>.</p>"
+        },
+        "DBInstanceIdentifiers": {
+          "shape": "StringList",
+          "documentation": "<p>One or more DB instance identifiers.</p>"
+        },
+        "DBClusterIdentifiers": {
+          "shape": "StringList",
+          "documentation": "<p>One or more DB cluster identifiers.</p>"
+        }
+      }
+    },
+    "RegisterDBProxyTargetsResponse": {
+      "type": "structure",
+      "members": {
+        "DBProxyTargets": {
+          "shape": "TargetList",
+          "documentation": "<p>One or more <code>DBProxyTarget</code> objects that are created when you register targets with a target group.</p>"
+        }
       }
     },
     "RemoveFromGlobalClusterMessage": {
@@ -11370,6 +12163,26 @@
       },
       "documentation": "<p/>"
     },
+    "TargetGroupList": {
+      "type": "list",
+      "member": {
+        "shape": "DBProxyTargetGroup"
+      }
+    },
+    "TargetList": {
+      "type": "list",
+      "member": {
+        "shape": "DBProxyTarget"
+      }
+    },
+    "TargetType": {
+      "type": "string",
+      "enum": [
+        "RDS_INSTANCE",
+        "RDS_SERVERLESS_ENDPOINT",
+        "TRACKED_CLUSTER"
+      ]
+    },
     "Timezone": {
       "type": "structure",
       "members": {
@@ -11405,6 +12218,70 @@
         }
       },
       "documentation": "<p>The version of the database engine that a DB instance can be upgraded to.</p>"
+    },
+    "UserAuthConfig": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A user-specified description about the authentication used by a proxy to log in as a specific database user.</p>"
+        },
+        "UserName": {
+          "shape": "String",
+          "documentation": "<p>The name of the database user to which the proxy connects.</p>"
+        },
+        "AuthScheme": {
+          "shape": "AuthScheme",
+          "documentation": "<p>The type of authentication that the proxy uses for connections from the proxy to the underlying database.</p>"
+        },
+        "SecretArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.</p>"
+        },
+        "IAMAuth": {
+          "shape": "IAMAuthMode",
+          "documentation": "<p>Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.</p>"
+        }
+      },
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the details of authentication used by a proxy to log in as a specific database user.</p>"
+    },
+    "UserAuthConfigInfo": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A user-specified description about the authentication used by a proxy to log in as a specific database user.</p>"
+        },
+        "UserName": {
+          "shape": "String",
+          "documentation": "<p>The name of the database user to which the proxy connects.</p>"
+        },
+        "AuthScheme": {
+          "shape": "AuthScheme",
+          "documentation": "<p>The type of authentication that the proxy uses for connections from the proxy to the underlying database.</p>"
+        },
+        "SecretArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.</p>"
+        },
+        "IAMAuth": {
+          "shape": "IAMAuthMode",
+          "documentation": "<p>Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.</p>"
+        }
+      },
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns the details of authentication used by a proxy to log in as a specific database user.</p>"
+    },
+    "UserAuthConfigInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "UserAuthConfigInfo"
+      }
+    },
+    "UserAuthConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "UserAuthConfig"
+      }
     },
     "ValidDBInstanceModificationsMessage": {
       "type": "structure",

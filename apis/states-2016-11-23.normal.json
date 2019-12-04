@@ -62,6 +62,9 @@
           "shape": "InvalidName"
         },
         {
+          "shape": "InvalidLoggingConfiguration"
+        },
+        {
           "shape": "StateMachineAlreadyExists"
         },
         {
@@ -69,6 +72,9 @@
         },
         {
           "shape": "StateMachineLimitExceeded"
+        },
+        {
+          "shape": "StateMachineTypeNotSupported"
         },
         {
           "shape": "TooManyTags"
@@ -293,6 +299,9 @@
         },
         {
           "shape": "StateMachineDoesNotExist"
+        },
+        {
+          "shape": "StateMachineTypeNotSupported"
         }
       ],
       "documentation": "<p>Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>"
@@ -543,6 +552,9 @@
           "shape": "InvalidDefinition"
         },
         {
+          "shape": "InvalidLoggingConfiguration"
+        },
+        {
           "shape": "MissingRequiredParameter"
         },
         {
@@ -680,6 +692,16 @@
       "max": 256,
       "min": 1
     },
+    "CloudWatchLogsLogGroup": {
+      "type": "structure",
+      "members": {
+        "logGroupArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with <code>:*</code> </p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "ConnectorParameters": {
       "type": "string",
       "max": 32768,
@@ -738,6 +760,14 @@
         "roleArn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to use for this state machine.</p>"
+        },
+        "type": {
+          "shape": "StateMachineType",
+          "documentation": "<p>Determines whether a Standard or Express state machine is created. If not set, Standard is created.</p>"
+        },
+        "loggingConfiguration": {
+          "shape": "LoggingConfiguration",
+          "documentation": "<p>Defines what execution history events are logged and where they are logged.</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -953,6 +983,7 @@
         "name",
         "definition",
         "roleArn",
+        "type",
         "creationDate"
       ],
       "members": {
@@ -976,9 +1007,17 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)</p>"
         },
+        "type": {
+          "shape": "StateMachineType",
+          "documentation": "<p/>"
+        },
         "creationDate": {
           "shape": "Timestamp",
           "documentation": "<p>The date the state machine is created.</p>"
+        },
+        "loggingConfiguration": {
+          "shape": "LoggingConfiguration",
+          "documentation": "<p/>"
         }
       }
     },
@@ -1383,6 +1422,9 @@
       "type": "string",
       "max": 256
     },
+    "IncludeExecutionData": {
+      "type": "boolean"
+    },
     "LambdaFunctionFailedEventDetails": {
       "type": "structure",
       "members": {
@@ -1594,6 +1636,49 @@
         }
       }
     },
+    "LogDestination": {
+      "type": "structure",
+      "members": {
+        "cloudWatchLogsLogGroup": {
+          "shape": "CloudWatchLogsLogGroup",
+          "documentation": "<p>An object describing a CloudWatch log group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html\">AWS::Logs::LogGroup</a> in the AWS CloudFormation User Guide.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "LogDestinationList": {
+      "type": "list",
+      "member": {
+        "shape": "LogDestination"
+      }
+    },
+    "LogLevel": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "ERROR",
+        "FATAL",
+        "OFF"
+      ]
+    },
+    "LoggingConfiguration": {
+      "type": "structure",
+      "members": {
+        "level": {
+          "shape": "LogLevel",
+          "documentation": "<p>Defines which category of execution history events are logged.</p>"
+        },
+        "includeExecutionData": {
+          "shape": "IncludeExecutionData",
+          "documentation": "<p>Determines whether execution history data is included in your log. When set to <code>FALSE</code>, data is excluded.</p>"
+        },
+        "destinations": {
+          "shape": "LogDestinationList",
+          "documentation": "<p>An object that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to <code>OFF</code>.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "MapIterationEventDetails": {
       "type": "structure",
       "members": {
@@ -1801,6 +1886,7 @@
       "required": [
         "stateMachineArn",
         "name",
+        "type",
         "creationDate"
       ],
       "members": {
@@ -1811,6 +1897,10 @@
         "name": {
           "shape": "Name",
           "documentation": "<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+        },
+        "type": {
+          "shape": "StateMachineType",
+          "documentation": "<p/>"
         },
         "creationDate": {
           "shape": "Timestamp",
@@ -1824,6 +1914,13 @@
       "enum": [
         "ACTIVE",
         "DELETING"
+      ]
+    },
+    "StateMachineType": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "EXPRESS"
       ]
     },
     "StopExecutionInput": {
@@ -2167,6 +2264,10 @@
         "roleArn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role of the state machine.</p>"
+        },
+        "loggingConfiguration": {
+          "shape": "LoggingConfiguration",
+          "documentation": "<p/>"
         }
       }
     },

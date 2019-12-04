@@ -214,3 +214,4 @@ export import Kendra = require('./kendra');
 export import NetworkManager = require('./networkmanager');
 export import Outposts = require('./outposts');
 export import AugmentedAIRuntime = require('./augmentedairuntime');
+export import EBS = require('./ebs');

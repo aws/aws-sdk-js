@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "fix issues when SDK populates wrong path if access point arn contains forward slash"
-}

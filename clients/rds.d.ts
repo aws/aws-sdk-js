@@ -174,6 +174,14 @@ declare class RDS extends Service {
    */
   createDBParameterGroup(callback?: (err: AWSError, data: RDS.Types.CreateDBParameterGroupResult) => void): Request<RDS.Types.CreateDBParameterGroupResult, AWSError>;
   /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Creates a new DB proxy.
+   */
+  createDBProxy(params: RDS.Types.CreateDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.CreateDBProxyResponse) => void): Request<RDS.Types.CreateDBProxyResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Creates a new DB proxy.
+   */
+  createDBProxy(callback?: (err: AWSError, data: RDS.Types.CreateDBProxyResponse) => void): Request<RDS.Types.CreateDBProxyResponse, AWSError>;
+  /**
    * Creates a new DB security group. DB security groups control access to a DB instance.  A DB security group controls access to EC2-Classic DB instances that are not in a VPC. 
    */
   createDBSecurityGroup(params: RDS.Types.CreateDBSecurityGroupMessage, callback?: (err: AWSError, data: RDS.Types.CreateDBSecurityGroupResult) => void): Request<RDS.Types.CreateDBSecurityGroupResult, AWSError>;
@@ -286,6 +294,14 @@ declare class RDS extends Service {
    */
   deleteDBParameterGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Deletes an existing proxy.
+   */
+  deleteDBProxy(params: RDS.Types.DeleteDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyResponse) => void): Request<RDS.Types.DeleteDBProxyResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Deletes an existing proxy.
+   */
+  deleteDBProxy(callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyResponse) => void): Request<RDS.Types.DeleteDBProxyResponse, AWSError>;
+  /**
    * Deletes a DB security group.  The specified DB security group must not be associated with any DB instances. 
    */
   deleteDBSecurityGroup(params: RDS.Types.DeleteDBSecurityGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -341,6 +357,14 @@ declare class RDS extends Service {
    * Deletes an existing option group.
    */
   deleteOptionGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
+   */
+  deregisterDBProxyTargets(params: RDS.Types.DeregisterDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.DeregisterDBProxyTargetsResponse) => void): Request<RDS.Types.DeregisterDBProxyTargetsResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
+   */
+  deregisterDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.DeregisterDBProxyTargetsResponse) => void): Request<RDS.Types.DeregisterDBProxyTargetsResponse, AWSError>;
   /**
    * Lists all of the attributes for a customer account. The attributes include Amazon RDS quotas for the account, such as the number of DB instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This command doesn't take any parameters.
    */
@@ -469,6 +493,30 @@ declare class RDS extends Service {
    * Returns the detailed parameter list for a particular DB parameter group.
    */
   describeDBParameters(callback?: (err: AWSError, data: RDS.Types.DBParameterGroupDetails) => void): Request<RDS.Types.DBParameterGroupDetails, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxies.
+   */
+  describeDBProxies(params: RDS.Types.DescribeDBProxiesRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxiesResponse) => void): Request<RDS.Types.DescribeDBProxiesResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxies.
+   */
+  describeDBProxies(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxiesResponse) => void): Request<RDS.Types.DescribeDBProxiesResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
+   */
+  describeDBProxyTargetGroups(params: RDS.Types.DescribeDBProxyTargetGroupsRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetGroupsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetGroupsResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
+   */
+  describeDBProxyTargetGroups(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetGroupsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetGroupsResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DBProxyTarget objects. This API supports pagination.
+   */
+  describeDBProxyTargets(params: RDS.Types.DescribeDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetsResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DBProxyTarget objects. This API supports pagination.
+   */
+  describeDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetsResponse, AWSError>;
   /**
    *  Returns a list of DBSecurityGroup descriptions. If a DBSecurityGroupName is specified, the list will contain only the descriptions of the specified DB security group. 
    */
@@ -710,6 +758,22 @@ declare class RDS extends Service {
    */
   modifyDBParameterGroup(callback?: (err: AWSError, data: RDS.Types.DBParameterGroupNameMessage) => void): Request<RDS.Types.DBParameterGroupNameMessage, AWSError>;
   /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Changes the settings for an existing DB proxy.
+   */
+  modifyDBProxy(params: RDS.Types.ModifyDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyResponse) => void): Request<RDS.Types.ModifyDBProxyResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Changes the settings for an existing DB proxy.
+   */
+  modifyDBProxy(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyResponse) => void): Request<RDS.Types.ModifyDBProxyResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Modifies the properties of a DBProxyTargetGroup.
+   */
+  modifyDBProxyTargetGroup(params: RDS.Types.ModifyDBProxyTargetGroupRequest, callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyTargetGroupResponse) => void): Request<RDS.Types.ModifyDBProxyTargetGroupResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Modifies the properties of a DBProxyTargetGroup.
+   */
+  modifyDBProxyTargetGroup(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyTargetGroupResponse) => void): Request<RDS.Types.ModifyDBProxyTargetGroupResponse, AWSError>;
+  /**
    * Updates a manual DB snapshot, which can be encrypted or not encrypted, with a new engine version.  Amazon RDS supports upgrading DB snapshots for MySQL, Oracle, and PostgreSQL. 
    */
   modifyDBSnapshot(params: RDS.Types.ModifyDBSnapshotMessage, callback?: (err: AWSError, data: RDS.Types.ModifyDBSnapshotResult) => void): Request<RDS.Types.ModifyDBSnapshotResult, AWSError>;
@@ -789,6 +853,14 @@ declare class RDS extends Service {
    * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting.  For more information about rebooting, see Rebooting a DB Instance in the Amazon RDS User Guide. 
    */
   rebootDBInstance(callback?: (err: AWSError, data: RDS.Types.RebootDBInstanceResult) => void): Request<RDS.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
+   */
+  registerDBProxyTargets(params: RDS.Types.RegisterDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.RegisterDBProxyTargetsResponse) => void): Request<RDS.Types.RegisterDBProxyTargetsResponse, AWSError>;
+  /**
+   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
+   */
+  registerDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.RegisterDBProxyTargetsResponse) => void): Request<RDS.Types.RegisterDBProxyTargetsResponse, AWSError>;
   /**
    *  Detaches an Aurora secondary cluster from an Aurora global database cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary cluster in a different region.   This action only applies to Aurora DB clusters. 
    */
@@ -1095,6 +1167,7 @@ declare namespace RDS {
     ResourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
   }
   export type AttributeValueList = String[];
+  export type AuthScheme = "SECRETS"|string;
   export interface AuthorizeDBSecurityGroupIngressMessage {
     /**
      * The name of the DB security group to add authorization to.
@@ -1219,6 +1292,50 @@ declare namespace RDS {
      * The list of log types to disable.
      */
     DisableLogTypes?: LogTypeList;
+  }
+  export interface ConnectionPoolConfiguration {
+    /**
+     * The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group. Default: 100 Constraints: between 1 and 100
+     */
+    MaxConnectionsPercent?: IntegerOptional;
+    /**
+     *  Controls how actively the proxy closes idle database connections in the connection pool. A high value enables the proxy to leave a high percentage of idle connections open. A low value causes the proxy to close idle client connections and return the underlying database connections to the connection pool. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.  Default: 50 Constraints: between 0 and MaxConnectionsPercent 
+     */
+    MaxIdleConnectionsPercent?: IntegerOptional;
+    /**
+     * The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions. Default: 120 Constraints: between 1 and 3600, or 0 representing unlimited
+     */
+    ConnectionBorrowTimeout?: IntegerOptional;
+    /**
+     * Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Default: no session pinning filters
+     */
+    SessionPinningFilters?: StringList;
+    /**
+     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.  Default: no initialization query
+     */
+    InitQuery?: String;
+  }
+  export interface ConnectionPoolConfigurationInfo {
+    /**
+     * The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
+     */
+    MaxConnectionsPercent?: Integer;
+    /**
+     *  Controls how actively the proxy closes idle database connections in the connection pool. A high value enables the proxy to leave a high percentage of idle connections open. A low value causes the proxy to close idle client connections and return the underlying database connections to the connection pool. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group. 
+     */
+    MaxIdleConnectionsPercent?: Integer;
+    /**
+     * The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.
+     */
+    ConnectionBorrowTimeout?: Integer;
+    /**
+     * Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
+     */
+    SessionPinningFilters?: StringList;
+    /**
+     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2. 
+     */
+    InitQuery?: String;
   }
   export interface CopyDBClusterParameterGroupMessage {
     /**
@@ -1887,6 +2004,54 @@ declare namespace RDS {
   }
   export interface CreateDBParameterGroupResult {
     DBParameterGroup?: DBParameterGroup;
+  }
+  export interface CreateDBProxyRequest {
+    /**
+     * The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.
+     */
+    DBProxyName: String;
+    /**
+     * The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. Currently, this value is always MYSQL. The engine family applies to both RDS MySQL and Aurora MySQL.
+     */
+    EngineFamily: EngineFamily;
+    /**
+     * The authorization mechanism that the proxy uses.
+     */
+    Auth: UserAuthConfigList;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
+     */
+    RoleArn: String;
+    /**
+     * One or more VPC subnet IDs to associate with the new proxy.
+     */
+    VpcSubnetIds: StringList;
+    /**
+     * One or more VPC security group IDs to associate with the new proxy.
+     */
+    VpcSecurityGroupIds?: StringList;
+    /**
+     * A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
+     */
+    RequireTLS?: Boolean;
+    /**
+     * The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
+     */
+    IdleClientTimeout?: IntegerOptional;
+    /**
+     * Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.
+     */
+    DebugLogging?: Boolean;
+    /**
+     * An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateDBProxyResponse {
+    /**
+     * The DBProxy structure corresponding to the new proxy.
+     */
+    DBProxy?: DBProxy;
   }
   export interface CreateDBSecurityGroupMessage {
     /**
@@ -3100,6 +3265,126 @@ declare namespace RDS {
      */
     DBParameterGroups?: DBParameterGroupList;
   }
+  export interface DBProxy {
+    /**
+     * The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
+     */
+    DBProxyName?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the proxy.
+     */
+    DBProxyArn?: String;
+    /**
+     * The current status of this proxy. A status of available means the proxy is ready to handle requests. Other values indicate that you must wait for the proxy to be ready, or take some action to resolve an issue.
+     */
+    Status?: DBProxyStatus;
+    /**
+     * Currently, this value is always MYSQL. The engine family applies to both RDS MySQL and Aurora MySQL.
+     */
+    EngineFamily?: String;
+    /**
+     * Provides a list of VPC security groups that the proxy belongs to.
+     */
+    VpcSecurityGroupIds?: StringList;
+    /**
+     * The EC2 subnet IDs for the proxy.
+     */
+    VpcSubnetIds?: StringList;
+    /**
+     * One or more data structures specifying the authorization mechanism to connect to the associated RDS DB instance or Aurora DB cluster.
+     */
+    Auth?: UserAuthConfigInfoList;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that the proxy uses to access Amazon Secrets Manager.
+     */
+    RoleArn?: String;
+    /**
+     * The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
+     */
+    Endpoint?: String;
+    /**
+     * Indicates whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
+     */
+    RequireTLS?: Boolean;
+    /**
+     * The number of seconds a connection to the proxy can have no activity before the proxy drops the client connection. The proxy keeps the underlying database connection open and puts it back into the connection pool for reuse by later connection requests. Default: 1800 (30 minutes) Constraints: 1 to 28,800
+     */
+    IdleClientTimeout?: Integer;
+    /**
+     * Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.
+     */
+    DebugLogging?: Boolean;
+    /**
+     * The date and time when the proxy was first created.
+     */
+    CreatedDate?: TStamp;
+    /**
+     * The date and time when the proxy was last updated.
+     */
+    UpdatedDate?: TStamp;
+  }
+  export type DBProxyList = DBProxy[];
+  export type DBProxyStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting"|string;
+  export interface DBProxyTarget {
+    /**
+     * The Amazon Resource Name (ARN) for the RDS DB instance or Aurora DB cluster.
+     */
+    TargetArn?: String;
+    /**
+     * The writer endpoint for the RDS DB instance or Aurora DB cluster.
+     */
+    Endpoint?: String;
+    /**
+     * The DB cluster identifier when the target represents an Aurora DB cluster. This field is blank when the target represents an 
+     */
+    TrackedClusterId?: String;
+    /**
+     * The identifier representing the target. It can be the instance identifier for an RDS DB instance, or the cluster identifier for an Aurora DB cluster.
+     */
+    RdsResourceId?: String;
+    /**
+     * The port that the RDS Proxy uses to connect to the target RDS DB instance or Aurora DB cluster.
+     */
+    Port?: Integer;
+    /**
+     * Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.
+     */
+    Type?: TargetType;
+  }
+  export interface DBProxyTargetGroup {
+    /**
+     * The identifier for the RDS proxy associated with this target group.
+     */
+    DBProxyName?: String;
+    /**
+     * The identifier for the target group. This name must be unique for all target groups owned by your AWS account in the specified AWS Region.
+     */
+    TargetGroupName?: String;
+    /**
+     * The Amazon Resource Name (ARN) representing the target group.
+     */
+    TargetGroupArn?: String;
+    /**
+     * Whether this target group is the first one used for connection requests by the associated proxy. Because each proxy is currently associated with a single target group, currently this setting is always true.
+     */
+    IsDefault?: Boolean;
+    /**
+     * The current status of this target group. A status of available means the target group is correctly associated with a database. Other values indicate that you must wait for the target group to be ready, or take some action to resolve an issue.
+     */
+    Status?: String;
+    /**
+     * The settings that determine the size and behavior of the connection pool for the target group.
+     */
+    ConnectionPoolConfig?: ConnectionPoolConfigurationInfo;
+    /**
+     * The date and time when the target group was first created.
+     */
+    CreatedDate?: TStamp;
+    /**
+     * The date and time when the target group was last updated.
+     */
+    UpdatedDate?: TStamp;
+  }
   export interface DBSecurityGroup {
     /**
      * Provides the AWS ID of the owner of a specific DB security group.
@@ -3419,6 +3704,18 @@ declare namespace RDS {
      */
     DBParameterGroupName: String;
   }
+  export interface DeleteDBProxyRequest {
+    /**
+     * The name of the DB proxy to delete.
+     */
+    DBProxyName: String;
+  }
+  export interface DeleteDBProxyResponse {
+    /**
+     * The data structure representing the details of the DB proxy that you delete.
+     */
+    DBProxy?: DBProxy;
+  }
   export interface DeleteDBSecurityGroupMessage {
     /**
      * The name of the DB security group to delete.  You can't delete the default DB security group.  Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Must not be "Default"  
@@ -3469,6 +3766,26 @@ declare namespace RDS {
      * The name of the option group to be deleted.  You can't delete default option groups. 
      */
     OptionGroupName: String;
+  }
+  export interface DeregisterDBProxyTargetsRequest {
+    /**
+     * The identifier of the DBProxy that is associated with the DBProxyTargetGroup.
+     */
+    DBProxyName: String;
+    /**
+     * The identifier of the DBProxyTargetGroup.
+     */
+    TargetGroupName?: String;
+    /**
+     * One or more DB instance identifiers.
+     */
+    DBInstanceIdentifiers?: StringList;
+    /**
+     * One or more DB cluster identifiers.
+     */
+    DBClusterIdentifiers?: StringList;
+  }
+  export interface DeregisterDBProxyTargetsResponse {
   }
   export interface DescribeAccountAttributesMessage {
   }
@@ -3831,6 +4148,98 @@ declare namespace RDS {
     MaxRecords?: IntegerOptional;
     /**
      *  An optional pagination token provided by a previous DescribeDBParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDBProxiesRequest {
+    /**
+     * The name of the DB proxy.
+     */
+    DBProxyName?: String;
+    /**
+     * This parameter is not currently supported.
+     */
+    Filters?: FilterList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: MaxRecords;
+  }
+  export interface DescribeDBProxiesResponse {
+    /**
+     * A return value representing an arbitrary number of DBProxy data structures.
+     */
+    DBProxies?: DBProxyList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDBProxyTargetGroupsRequest {
+    /**
+     * The identifier of the DBProxy associated with the target group.
+     */
+    DBProxyName: String;
+    /**
+     * The identifier of the DBProxyTargetGroup to describe.
+     */
+    TargetGroupName?: String;
+    /**
+     * This parameter is not currently supported.
+     */
+    Filters?: FilterList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: MaxRecords;
+  }
+  export interface DescribeDBProxyTargetGroupsResponse {
+    /**
+     * An arbitrary number of DBProxyTargetGroup objects, containing details of the corresponding target groups.
+     */
+    TargetGroups?: TargetGroupList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDBProxyTargetsRequest {
+    /**
+     * The identifier of the DBProxyTarget to describe.
+     */
+    DBProxyName: String;
+    /**
+     * The identifier of the DBProxyTargetGroup to describe.
+     */
+    TargetGroupName?: String;
+    /**
+     * This parameter is not currently supported.
+     */
+    Filters?: FilterList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: MaxRecords;
+  }
+  export interface DescribeDBProxyTargetsResponse {
+    /**
+     * An arbitrary number of DBProxyTarget objects, containing details of the corresponding targets.
+     */
+    Targets?: TargetList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
      */
     Marker?: String;
   }
@@ -4383,6 +4792,7 @@ declare namespace RDS {
      */
     Parameters?: ParametersList;
   }
+  export type EngineFamily = "MYSQL"|string;
   export type EngineModeList = String[];
   export interface Event {
     /**
@@ -4586,6 +4996,7 @@ declare namespace RDS {
      */
     GlobalClusters?: GlobalClusterList;
   }
+  export type IAMAuthMode = "DISABLED"|"REQUIRED"|string;
   export interface IPRange {
     /**
      * Specifies the status of the IP range. Status can be "authorizing", "authorized", "revoking", and "revoked".
@@ -4686,6 +5097,7 @@ declare namespace RDS {
   export type LogTypeList = String[];
   export type Long = number;
   export type LongOptional = number;
+  export type MaxRecords = number;
   export interface MinimumEngineVersionPerAllowedValue {
     /**
      * The allowed value for an option setting.
@@ -5031,6 +5443,70 @@ declare namespace RDS {
      * An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; subsequent arguments are optional. A maximum of 20 parameters can be modified in a single request. Valid Values (for the application method): immediate | pending-reboot   You can use the immediate value with dynamic parameters only. You can use the pending-reboot value for both dynamic and static parameters, and changes are applied when you reboot the DB instance without failover. 
      */
     Parameters: ParametersList;
+  }
+  export interface ModifyDBProxyRequest {
+    /**
+     * The identifier for the DBProxy to modify.
+     */
+    DBProxyName: String;
+    /**
+     * The new identifier for the DBProxy. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.
+     */
+    NewDBProxyName?: String;
+    /**
+     * The new authentication settings for the DBProxy.
+     */
+    Auth?: UserAuthConfigList;
+    /**
+     * Whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy, even if the associated database doesn't use TLS.
+     */
+    RequireTLS?: BooleanOptional;
+    /**
+     * The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
+     */
+    IdleClientTimeout?: IntegerOptional;
+    /**
+     * Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.
+     */
+    DebugLogging?: BooleanOptional;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
+     */
+    RoleArn?: String;
+    /**
+     * The new list of security groups for the DBProxy.
+     */
+    SecurityGroups?: StringList;
+  }
+  export interface ModifyDBProxyResponse {
+    /**
+     * The DBProxy object representing the new settings for the proxy.
+     */
+    DBProxy?: DBProxy;
+  }
+  export interface ModifyDBProxyTargetGroupRequest {
+    /**
+     * The name of the new target group to assign to the proxy.
+     */
+    TargetGroupName: String;
+    /**
+     * The name of the new proxy to which to assign the target group.
+     */
+    DBProxyName: String;
+    /**
+     * The settings that determine the size and behavior of the connection pool for the target group.
+     */
+    ConnectionPoolConfig?: ConnectionPoolConfiguration;
+    /**
+     * The new name for the modified DBProxyTarget. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.
+     */
+    NewName?: String;
+  }
+  export interface ModifyDBProxyTargetGroupResponse {
+    /**
+     * The settings of the modified DBProxyTarget.
+     */
+    DBProxyTargetGroup?: DBProxyTargetGroup;
   }
   export interface ModifyDBSnapshotAttributeMessage {
     /**
@@ -5796,6 +6272,30 @@ declare namespace RDS {
     RecurringChargeFrequency?: String;
   }
   export type RecurringChargeList = RecurringCharge[];
+  export interface RegisterDBProxyTargetsRequest {
+    /**
+     * The identifier of the DBProxy that is associated with the DBProxyTargetGroup.
+     */
+    DBProxyName: String;
+    /**
+     * The identifier of the DBProxyTargetGroup.
+     */
+    TargetGroupName?: String;
+    /**
+     * One or more DB instance identifiers.
+     */
+    DBInstanceIdentifiers?: StringList;
+    /**
+     * One or more DB cluster identifiers.
+     */
+    DBClusterIdentifiers?: StringList;
+  }
+  export interface RegisterDBProxyTargetsResponse {
+    /**
+     * One or more DBProxyTarget objects that are created when you register targets with a target group.
+     */
+    DBProxyTargets?: TargetList;
+  }
   export interface RemoveFromGlobalClusterMessage {
     /**
      *  The cluster identifier to detach from the Aurora global database cluster. 
@@ -6964,6 +7464,9 @@ declare namespace RDS {
      */
     TagList?: TagList;
   }
+  export type TargetGroupList = DBProxyTargetGroup[];
+  export type TargetList = DBProxyTarget[];
+  export type TargetType = "RDS_INSTANCE"|"RDS_SERVERLESS_ENDPOINT"|"TRACKED_CLUSTER"|string;
   export interface Timezone {
     /**
      * The name of the time zone.
@@ -6992,6 +7495,52 @@ declare namespace RDS {
      */
     IsMajorVersionUpgrade?: Boolean;
   }
+  export interface UserAuthConfig {
+    /**
+     * A user-specified description about the authentication used by a proxy to log in as a specific database user.
+     */
+    Description?: String;
+    /**
+     * The name of the database user to which the proxy connects.
+     */
+    UserName?: String;
+    /**
+     * The type of authentication that the proxy uses for connections from the proxy to the underlying database.
+     */
+    AuthScheme?: AuthScheme;
+    /**
+     * The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
+     */
+    SecretArn?: String;
+    /**
+     * Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.
+     */
+    IAMAuth?: IAMAuthMode;
+  }
+  export interface UserAuthConfigInfo {
+    /**
+     * A user-specified description about the authentication used by a proxy to log in as a specific database user.
+     */
+    Description?: String;
+    /**
+     * The name of the database user to which the proxy connects.
+     */
+    UserName?: String;
+    /**
+     * The type of authentication that the proxy uses for connections from the proxy to the underlying database.
+     */
+    AuthScheme?: AuthScheme;
+    /**
+     * The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
+     */
+    SecretArn?: String;
+    /**
+     * Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.
+     */
+    IAMAuth?: IAMAuthMode;
+  }
+  export type UserAuthConfigInfoList = UserAuthConfigInfo[];
+  export type UserAuthConfigList = UserAuthConfig[];
   export interface ValidDBInstanceModificationsMessage {
     /**
      * Valid storage options for your DB instance. 

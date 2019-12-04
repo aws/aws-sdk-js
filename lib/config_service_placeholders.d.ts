@@ -216,6 +216,7 @@ export abstract class ConfigurationServicePlaceholders {
   networkmanager?: AWS.NetworkManager.Types.ClientConfiguration;
   outposts?: AWS.Outposts.Types.ClientConfiguration;
   augmentedairuntime?: AWS.AugmentedAIRuntime.Types.ClientConfiguration;
+  ebs?: AWS.EBS.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -434,4 +435,5 @@ export interface ConfigurationServiceApiVersions {
   networkmanager?: AWS.NetworkManager.Types.apiVersion;
   outposts?: AWS.Outposts.Types.apiVersion;
   augmentedairuntime?: AWS.AugmentedAIRuntime.Types.apiVersion;
+  ebs?: AWS.EBS.Types.apiVersion;
 }

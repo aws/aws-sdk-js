@@ -849,5 +849,8 @@
   "augmentedairuntime": {
     "prefix": "sagemaker-a2i-runtime",
     "name": "AugmentedAIRuntime"
+  },
+  "ebs": {
+    "name": "EBS"
   }
 }

@@ -203,6 +203,9 @@
           "shape": "InvalidParameterValueException"
         },
         {
+          "shape": "ResourceConflictException"
+        },
+        {
           "shape": "TooManyRequestsException"
         }
       ],
@@ -344,6 +347,35 @@
       ],
       "documentation": "<p>Deletes a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda layer</a>. Deleted versions can no longer be viewed or added to functions. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it.</p>"
     },
+    "DeleteProvisionedConcurrencyConfig": {
+      "name": "DeleteProvisionedConcurrencyConfig",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteProvisionedConcurrencyConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Deletes the provisioned concurrency configuration for a function.</p>"
+    },
     "GetAccountSettings": {
       "name": "GetAccountSettings",
       "http": {
@@ -453,6 +485,35 @@
         }
       ],
       "documentation": "<p>Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are returned.</p>"
+    },
+    "GetFunctionConcurrency": {
+      "name": "GetFunctionConcurrency",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2019-09-30/functions/{FunctionName}/concurrency",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetFunctionConcurrencyRequest"
+      },
+      "output": {
+        "shape": "GetFunctionConcurrencyResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Returns details about the concurrency configuration for a function. To set a concurrency limit for a function, use <a>PutFunctionConcurrency</a>.</p>"
     },
     "GetFunctionConfiguration": {
       "name": "GetFunctionConfiguration",
@@ -627,6 +688,38 @@
         }
       ],
       "documentation": "<p>Returns the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based IAM policy</a> for a function, version, or alias.</p>"
+    },
+    "GetProvisionedConcurrencyConfig": {
+      "name": "GetProvisionedConcurrencyConfig",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetProvisionedConcurrencyConfigRequest"
+      },
+      "output": {
+        "shape": "GetProvisionedConcurrencyConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ProvisionedConcurrencyConfigNotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>"
     },
     "Invoke": {
       "name": "Invoke",
@@ -911,6 +1004,35 @@
       ],
       "documentation": "<p>Lists <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda layers</a> and shows information about the latest version of each. Specify a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime identifier</a> to list only layers that indicate that they're compatible with that runtime.</p>"
     },
+    "ListProvisionedConcurrencyConfigs": {
+      "name": "ListProvisionedConcurrencyConfigs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency?List=ALL",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListProvisionedConcurrencyConfigsRequest"
+      },
+      "output": {
+        "shape": "ListProvisionedConcurrencyConfigsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of provisioned concurrency configurations for a function.</p>"
+    },
     "ListTags": {
       "name": "ListTags",
       "http": {
@@ -1068,7 +1190,7 @@
           "shape": "ResourceConflictException"
         }
       ],
-      "documentation": "<p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level.</p> <p>Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use <a>GetFunction</a> to see the current setting for a function.</p> <p>Use <a>GetAccountSettings</a> to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html\">Managing Concurrency</a>.</p>"
+      "documentation": "<p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level.</p> <p>Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use <a>GetFunction</a> to see the current setting for a function.</p> <p>Use <a>GetAccountSettings</a> to see your Regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html\">Managing Concurrency</a>.</p>"
     },
     "PutFunctionEventInvokeConfig": {
       "name": "PutFunctionEventInvokeConfig",
@@ -1098,6 +1220,38 @@
         }
       ],
       "documentation": "<p>Configures options for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a> on a function, version, or alias.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p>"
+    },
+    "PutProvisionedConcurrencyConfig": {
+      "name": "PutProvisionedConcurrencyConfig",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "PutProvisionedConcurrencyConfigRequest"
+      },
+      "output": {
+        "shape": "PutProvisionedConcurrencyConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ServiceException"
+        }
+      ],
+      "documentation": "<p>Adds a provisioned concurrency configuration to a function's alias or version.</p>"
     },
     "RemoveLayerVersionPermission": {
       "name": "RemoveLayerVersionPermission",
@@ -1940,6 +2094,27 @@
         }
       }
     },
+    "DeleteProvisionedConcurrencyConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName",
+        "Qualifier"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Qualifier": {
+          "shape": "Qualifier",
+          "documentation": "<p>The version number or alias name.</p>",
+          "location": "querystring",
+          "locationName": "Qualifier"
+        }
+      }
+    },
     "Description": {
       "type": "string",
       "max": 256,
@@ -2358,6 +2533,29 @@
         }
       }
     },
+    "GetFunctionConcurrencyRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        }
+      }
+    },
+    "GetFunctionConcurrencyResponse": {
+      "type": "structure",
+      "members": {
+        "ReservedConcurrentExecutions": {
+          "shape": "ReservedConcurrentExecutions",
+          "documentation": "<p>The number of simultaneous executions that are reserved for the function.</p>"
+        }
+      }
+    },
     "GetFunctionConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -2575,6 +2773,56 @@
         "RevisionId": {
           "shape": "String",
           "documentation": "<p>A unique identifier for the current revision of the policy.</p>"
+        }
+      }
+    },
+    "GetProvisionedConcurrencyConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName",
+        "Qualifier"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Qualifier": {
+          "shape": "Qualifier",
+          "documentation": "<p>The version number or alias name.</p>",
+          "location": "querystring",
+          "locationName": "Qualifier"
+        }
+      }
+    },
+    "GetProvisionedConcurrencyConfigResponse": {
+      "type": "structure",
+      "members": {
+        "RequestedProvisionedConcurrentExecutions": {
+          "shape": "PositiveInteger",
+          "documentation": "<p>The amount of provisioned concurrency requested.</p>"
+        },
+        "AvailableProvisionedConcurrentExecutions": {
+          "shape": "NonNegativeInteger",
+          "documentation": "<p>The amount of provisioned concurrency available.</p>"
+        },
+        "AllocatedProvisionedConcurrentExecutions": {
+          "shape": "NonNegativeInteger",
+          "documentation": "<p>The amount of provisioned concurrency allocated.</p>"
+        },
+        "Status": {
+          "shape": "ProvisionedConcurrencyStatusEnum",
+          "documentation": "<p>The status of the allocation process.</p>"
+        },
+        "StatusReason": {
+          "shape": "String",
+          "documentation": "<p>For failed allocations, the reason that provisioned concurrency could not be allocated.</p>"
+        },
+        "LastModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>.</p>"
         }
       }
     },
@@ -3139,6 +3387,45 @@
         }
       }
     },
+    "ListProvisionedConcurrencyConfigsRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "Marker"
+        },
+        "MaxItems": {
+          "shape": "MaxProvisionedConcurrencyConfigListItems",
+          "documentation": "<p>Specify a number to limit the number of configurations returned.</p>",
+          "location": "querystring",
+          "locationName": "MaxItems"
+        }
+      }
+    },
+    "ListProvisionedConcurrencyConfigsResponse": {
+      "type": "structure",
+      "members": {
+        "ProvisionedConcurrencyConfigs": {
+          "shape": "ProvisionedConcurrencyConfigList",
+          "documentation": "<p>A list of provisioned concurrency configurations.</p>"
+        },
+        "NextMarker": {
+          "shape": "String",
+          "documentation": "<p>The pagination token that's included if more results are available.</p>"
+        }
+      }
+    },
     "ListTagsRequest": {
       "type": "structure",
       "required": [
@@ -3230,6 +3517,11 @@
       "max": 10000,
       "min": 1
     },
+    "MaxProvisionedConcurrencyConfigListItems": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
     "MaximumBatchingWindowInSeconds": {
       "type": "integer",
       "max": 300,
@@ -3276,6 +3568,10 @@
       "min": 1,
       "pattern": "([a-zA-Z0-9-_.]+)"
     },
+    "NonNegativeInteger": {
+      "type": "integer",
+      "min": 0
+    },
     "OnFailure": {
       "type": "structure",
       "members": {
@@ -3305,9 +3601,61 @@
       "max": 10,
       "min": 1
     },
+    "PositiveInteger": {
+      "type": "integer",
+      "min": 1
+    },
     "Principal": {
       "type": "string",
       "pattern": ".*"
+    },
+    "ProvisionedConcurrencyConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "ProvisionedConcurrencyConfigListItem"
+      }
+    },
+    "ProvisionedConcurrencyConfigListItem": {
+      "type": "structure",
+      "members": {
+        "FunctionArn": {
+          "shape": "FunctionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the alias or version.</p>"
+        },
+        "RequestedProvisionedConcurrentExecutions": {
+          "shape": "PositiveInteger",
+          "documentation": "<p>The amount of provisioned concurrency requested.</p>"
+        },
+        "AvailableProvisionedConcurrentExecutions": {
+          "shape": "NonNegativeInteger",
+          "documentation": "<p>The amount of provisioned concurrency available.</p>"
+        },
+        "AllocatedProvisionedConcurrentExecutions": {
+          "shape": "NonNegativeInteger",
+          "documentation": "<p>The amount of provisioned concurrency allocated.</p>"
+        },
+        "Status": {
+          "shape": "ProvisionedConcurrencyStatusEnum",
+          "documentation": "<p>The status of the allocation process.</p>"
+        },
+        "StatusReason": {
+          "shape": "String",
+          "documentation": "<p>For failed allocations, the reason that provisioned concurrency could not be allocated.</p>"
+        },
+        "LastModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>.</p>"
+        }
+      },
+      "documentation": "<p>Details about the provisioned concurrency configuration for a function alias or version.</p>"
+    },
+    "ProvisionedConcurrencyStatusEnum": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "READY",
+        "FAILED"
+      ]
     },
     "PublishLayerVersionRequest": {
       "type": "structure",
@@ -3451,6 +3799,61 @@
         "DestinationConfig": {
           "shape": "DestinationConfig",
           "documentation": "<p>A destination for events after they have been sent to a function for processing.</p> <p class=\"title\"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>"
+        }
+      }
+    },
+    "PutProvisionedConcurrencyConfigRequest": {
+      "type": "structure",
+      "required": [
+        "FunctionName",
+        "Qualifier",
+        "ProvisionedConcurrentExecutions"
+      ],
+      "members": {
+        "FunctionName": {
+          "shape": "FunctionName",
+          "documentation": "<p>The name of the Lambda function.</p> <p class=\"title\"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>",
+          "location": "uri",
+          "locationName": "FunctionName"
+        },
+        "Qualifier": {
+          "shape": "Qualifier",
+          "documentation": "<p>The version number or alias name.</p>",
+          "location": "querystring",
+          "locationName": "Qualifier"
+        },
+        "ProvisionedConcurrentExecutions": {
+          "shape": "PositiveInteger",
+          "documentation": "<p>The amount of provisioned concurrency to allocate for the version or alias.</p>"
+        }
+      }
+    },
+    "PutProvisionedConcurrencyConfigResponse": {
+      "type": "structure",
+      "members": {
+        "RequestedProvisionedConcurrentExecutions": {
+          "shape": "PositiveInteger",
+          "documentation": "<p>The amount of provisioned concurrency requested.</p>"
+        },
+        "AvailableProvisionedConcurrentExecutions": {
+          "shape": "NonNegativeInteger",
+          "documentation": "<p>The amount of provisioned concurrency available.</p>"
+        },
+        "AllocatedProvisionedConcurrentExecutions": {
+          "shape": "NonNegativeInteger",
+          "documentation": "<p>The amount of provisioned concurrency allocated.</p>"
+        },
+        "Status": {
+          "shape": "ProvisionedConcurrencyStatusEnum",
+          "documentation": "<p>The status of the allocation process.</p>"
+        },
+        "StatusReason": {
+          "shape": "String",
+          "documentation": "<p>For failed allocations, the reason that provisioned concurrency could not be allocated.</p>"
+        },
+        "LastModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>.</p>"
         }
       }
     },

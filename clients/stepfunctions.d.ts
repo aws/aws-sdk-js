@@ -265,6 +265,12 @@ declare namespace StepFunctions {
     cause?: SensitiveCause;
   }
   export type Arn = string;
+  export interface CloudWatchLogsLogGroup {
+    /**
+     * The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with :* 
+     */
+    logGroupArn?: Arn;
+  }
   export type ConnectorParameters = string;
   export interface CreateActivityInput {
     /**
@@ -299,6 +305,14 @@ declare namespace StepFunctions {
      * The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
      */
     roleArn: Arn;
+    /**
+     * Determines whether a Standard or Express state machine is created. If not set, Standard is created.
+     */
+    type?: StateMachineType;
+    /**
+     * Defines what execution history events are logged and where they are logged.
+     */
+    loggingConfiguration?: LoggingConfiguration;
     /**
      * Tags to be added when creating a state machine. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
      */
@@ -447,9 +461,17 @@ declare namespace StepFunctions {
      */
     roleArn: Arn;
     /**
+     * 
+     */
+    type: StateMachineType;
+    /**
      * The date the state machine is created.
      */
     creationDate: Timestamp;
+    /**
+     * 
+     */
+    loggingConfiguration?: LoggingConfiguration;
   }
   export type EventId = number;
   export interface ExecutionAbortedEventDetails {
@@ -675,6 +697,7 @@ declare namespace StepFunctions {
   export type HistoryEventList = HistoryEvent[];
   export type HistoryEventType = "ActivityFailed"|"ActivityScheduled"|"ActivityScheduleFailed"|"ActivityStarted"|"ActivitySucceeded"|"ActivityTimedOut"|"ChoiceStateEntered"|"ChoiceStateExited"|"ExecutionAborted"|"ExecutionFailed"|"ExecutionStarted"|"ExecutionSucceeded"|"ExecutionTimedOut"|"FailStateEntered"|"LambdaFunctionFailed"|"LambdaFunctionScheduled"|"LambdaFunctionScheduleFailed"|"LambdaFunctionStarted"|"LambdaFunctionStartFailed"|"LambdaFunctionSucceeded"|"LambdaFunctionTimedOut"|"MapIterationAborted"|"MapIterationFailed"|"MapIterationStarted"|"MapIterationSucceeded"|"MapStateAborted"|"MapStateEntered"|"MapStateExited"|"MapStateFailed"|"MapStateStarted"|"MapStateSucceeded"|"ParallelStateAborted"|"ParallelStateEntered"|"ParallelStateExited"|"ParallelStateFailed"|"ParallelStateStarted"|"ParallelStateSucceeded"|"PassStateEntered"|"PassStateExited"|"SucceedStateEntered"|"SucceedStateExited"|"TaskFailed"|"TaskScheduled"|"TaskStarted"|"TaskStartFailed"|"TaskStateAborted"|"TaskStateEntered"|"TaskStateExited"|"TaskSubmitFailed"|"TaskSubmitted"|"TaskSucceeded"|"TaskTimedOut"|"WaitStateAborted"|"WaitStateEntered"|"WaitStateExited"|string;
   export type Identity = string;
+  export type IncludeExecutionData = boolean;
   export interface LambdaFunctionFailedEventDetails {
     /**
      * The error code of the failure.
@@ -813,6 +836,28 @@ declare namespace StepFunctions {
      */
     tags?: TagList;
   }
+  export interface LogDestination {
+    /**
+     * An object describing a CloudWatch log group. For more information, see AWS::Logs::LogGroup in the AWS CloudFormation User Guide.
+     */
+    cloudWatchLogsLogGroup?: CloudWatchLogsLogGroup;
+  }
+  export type LogDestinationList = LogDestination[];
+  export type LogLevel = "ALL"|"ERROR"|"FATAL"|"OFF"|string;
+  export interface LoggingConfiguration {
+    /**
+     * Defines which category of execution history events are logged.
+     */
+    level?: LogLevel;
+    /**
+     * Determines whether execution history data is included in your log. When set to FALSE, data is excluded.
+     */
+    includeExecutionData?: IncludeExecutionData;
+    /**
+     * An object that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to OFF.
+     */
+    destinations?: LogDestinationList;
+  }
   export interface MapIterationEventDetails {
     /**
      * The name of the iteration’s parent Map state.
@@ -928,11 +973,16 @@ declare namespace StepFunctions {
      */
     name: Name;
     /**
+     * 
+     */
+    type: StateMachineType;
+    /**
      * The date the state machine is created.
      */
     creationDate: Timestamp;
   }
   export type StateMachineStatus = "ACTIVE"|"DELETING"|string;
+  export type StateMachineType = "STANDARD"|"EXPRESS"|string;
   export interface StopExecutionInput {
     /**
      * The Amazon Resource Name (ARN) of the execution to stop.
@@ -1140,6 +1190,10 @@ declare namespace StepFunctions {
      * The Amazon Resource Name (ARN) of the IAM role of the state machine.
      */
     roleArn?: Arn;
+    /**
+     * 
+     */
+    loggingConfiguration?: LoggingConfiguration;
   }
   export interface UpdateStateMachineOutput {
     /**

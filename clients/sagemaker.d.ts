@@ -21,6 +21,14 @@ declare class SageMaker extends Service {
    */
   addTags(callback?: (err: AWSError, data: SageMaker.Types.AddTagsOutput) => void): Request<SageMaker.Types.AddTagsOutput, AWSError>;
   /**
+   * Associates a trial component with a trial. A trial component can be associated with multiple trials. To disassociate a trial component from a trial, call the DisassociateTrialComponent API.
+   */
+  associateTrialComponent(params: SageMaker.Types.AssociateTrialComponentRequest, callback?: (err: AWSError, data: SageMaker.Types.AssociateTrialComponentResponse) => void): Request<SageMaker.Types.AssociateTrialComponentResponse, AWSError>;
+  /**
+   * Associates a trial component with a trial. A trial component can be associated with multiple trials. To disassociate a trial component from a trial, call the DisassociateTrialComponent API.
+   */
+  associateTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.AssociateTrialComponentResponse) => void): Request<SageMaker.Types.AssociateTrialComponentResponse, AWSError>;
+  /**
    * Create a machine learning algorithm that you can use in Amazon SageMaker and list in the AWS Marketplace.
    */
   createAlgorithm(params: SageMaker.Types.CreateAlgorithmInput, callback?: (err: AWSError, data: SageMaker.Types.CreateAlgorithmOutput) => void): Request<SageMaker.Types.CreateAlgorithmOutput, AWSError>;
@@ -28,6 +36,22 @@ declare class SageMaker extends Service {
    * Create a machine learning algorithm that you can use in Amazon SageMaker and list in the AWS Marketplace.
    */
   createAlgorithm(callback?: (err: AWSError, data: SageMaker.Types.CreateAlgorithmOutput) => void): Request<SageMaker.Types.CreateAlgorithmOutput, AWSError>;
+  /**
+   * Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Amazon SageMaker Studio (Studio) upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.
+   */
+  createApp(params: SageMaker.Types.CreateAppRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
+  /**
+   * Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Amazon SageMaker Studio (Studio) upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.
+   */
+  createApp(callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
+  /**
+   * Creates an AutoPilot job.
+   */
+  createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
+  /**
+   * Creates an AutoPilot job.
+   */
+  createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
    * Creates a Git repository as a resource in your Amazon SageMaker account. You can associate the repository with notebook instances so that you can use Git source control for the notebooks you create. The Git repository is a resource in your Amazon SageMaker account, so it can be associated with more than one notebook instance, and it persists independently from the lifecycle of any notebook instances it is associated with. The repository can be hosted either in AWS CodeCommit or in any other Git repository.
    */
@@ -45,11 +69,19 @@ declare class SageMaker extends Service {
    */
   createCompilationJob(callback?: (err: AWSError, data: SageMaker.Types.CreateCompilationJobResponse) => void): Request<SageMaker.Types.CreateCompilationJobResponse, AWSError>;
   /**
-   * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.    Use this API only for hosting models using Amazon SageMaker hosting services.   You must not delete an EndpointConfig in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker.  If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS i an AWS Region in the AWS Identity and Access Management User Guide.
+   * Creates a Domain for Amazon SageMaker Amazon SageMaker Studio (Studio), which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. 
+   */
+  createDomain(params: SageMaker.Types.CreateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
+  /**
+   * Creates a Domain for Amazon SageMaker Amazon SageMaker Studio (Studio), which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. 
+   */
+  createDomain(callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
+  /**
+   * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.    Use this API only for hosting models using Amazon SageMaker hosting services.   You must not delete an EndpointConfig in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker.  If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.
    */
   createEndpoint(params: SageMaker.Types.CreateEndpointInput, callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointOutput) => void): Request<SageMaker.Types.CreateEndpointOutput, AWSError>;
   /**
-   * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.    Use this API only for hosting models using Amazon SageMaker hosting services.   You must not delete an EndpointConfig in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker.  If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS i an AWS Region in the AWS Identity and Access Management User Guide.
+   * Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.    Use this API only for hosting models using Amazon SageMaker hosting services.   You must not delete an EndpointConfig in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an AWS Region in your AWS account.  When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.  When Amazon SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. For an example, see Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker.  If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.
    */
   createEndpoint(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointOutput) => void): Request<SageMaker.Types.CreateEndpointOutput, AWSError>;
   /**
@@ -60,6 +92,30 @@ declare class SageMaker extends Service {
    * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.   Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define one or more ProductionVariants, each of which identifies a model. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. 
    */
   createEndpointConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointConfigOutput) => void): Request<SageMaker.Types.CreateEndpointConfigOutput, AWSError>;
+  /**
+   * Creates an Amazon SageMaker experiment. An experiment is a collection of trials that are observed, compared and evaluated as a group. A trial is a set of steps, called trial components, that produce a machine learning model. The goal of an experiment is to determine the components that produce the best model. Multiple trials are performed, each one isolating and measuring the impact of a change to one or more inputs, while keeping the remaining inputs constant. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to experiments, trials, trial components and then use the Search API to search for the tags. To add a description to an experiment, specify the optional Description parameter. To add a description later, or to change the description, call the UpdateExperiment API. To get a list of all your experiments, call the ListExperiments API. To view an experiment's properties, call the DescribeExperiment API. To get a list of all the trials associated with an experiment, call the ListTrials API. To create a trial call the CreateTrial API.
+   */
+  createExperiment(params: SageMaker.Types.CreateExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateExperimentResponse) => void): Request<SageMaker.Types.CreateExperimentResponse, AWSError>;
+  /**
+   * Creates an Amazon SageMaker experiment. An experiment is a collection of trials that are observed, compared and evaluated as a group. A trial is a set of steps, called trial components, that produce a machine learning model. The goal of an experiment is to determine the components that produce the best model. Multiple trials are performed, each one isolating and measuring the impact of a change to one or more inputs, while keeping the remaining inputs constant. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to experiments, trials, trial components and then use the Search API to search for the tags. To add a description to an experiment, specify the optional Description parameter. To add a description later, or to change the description, call the UpdateExperiment API. To get a list of all your experiments, call the ListExperiments API. To view an experiment's properties, call the DescribeExperiment API. To get a list of all the trials associated with an experiment, call the ListTrials API. To create a trial call the CreateTrial API.
+   */
+  createExperiment(callback?: (err: AWSError, data: SageMaker.Types.CreateExperimentResponse) => void): Request<SageMaker.Types.CreateExperimentResponse, AWSError>;
+  /**
+   * Creates a flow definition.
+   */
+  createFlowDefinition(params: SageMaker.Types.CreateFlowDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateFlowDefinitionResponse) => void): Request<SageMaker.Types.CreateFlowDefinitionResponse, AWSError>;
+  /**
+   * Creates a flow definition.
+   */
+  createFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateFlowDefinitionResponse) => void): Request<SageMaker.Types.CreateFlowDefinitionResponse, AWSError>;
+  /**
+   * Defines the settings you will use for the human review workflow user interface. Reviewers will see a three-panel interface with an instruction area, the item to review, and an input area.
+   */
+  createHumanTaskUi(params: SageMaker.Types.CreateHumanTaskUiRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateHumanTaskUiResponse) => void): Request<SageMaker.Types.CreateHumanTaskUiResponse, AWSError>;
+  /**
+   * Defines the settings you will use for the human review workflow user interface. Reviewers will see a three-panel interface with an instruction area, the item to review, and an input area.
+   */
+  createHumanTaskUi(callback?: (err: AWSError, data: SageMaker.Types.CreateHumanTaskUiResponse) => void): Request<SageMaker.Types.CreateHumanTaskUiResponse, AWSError>;
   /**
    * Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best version of a model by running many training jobs on your dataset using the algorithm you choose and values for hyperparameters within ranges that you specify. It then chooses the hyperparameter values that result in a model that performs the best, as measured by an objective metric that you choose.
    */
@@ -93,6 +149,14 @@ declare class SageMaker extends Service {
    */
   createModelPackage(callback?: (err: AWSError, data: SageMaker.Types.CreateModelPackageOutput) => void): Request<SageMaker.Types.CreateModelPackageOutput, AWSError>;
   /**
+   * Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endoint.
+   */
+  createMonitoringSchedule(params: SageMaker.Types.CreateMonitoringScheduleRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateMonitoringScheduleResponse) => void): Request<SageMaker.Types.CreateMonitoringScheduleResponse, AWSError>;
+  /**
+   * Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endoint.
+   */
+  createMonitoringSchedule(callback?: (err: AWSError, data: SageMaker.Types.CreateMonitoringScheduleResponse) => void): Request<SageMaker.Types.CreateMonitoringScheduleResponse, AWSError>;
+  /**
    * Creates an Amazon SageMaker notebook instance. A notebook instance is a machine learning (ML) compute instance running on a Jupyter notebook.  In a CreateNotebookInstance request, specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance.  Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific algorithm or with a machine learning framework.  After receiving the request, Amazon SageMaker does the following:   Creates a network interface in the Amazon SageMaker VPC.   (Option) If you specified SubnetId, Amazon SageMaker creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.   Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified SubnetId of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.   After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN). You can't change the name of a notebook instance after you create it. After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models.  For more information, see How It Works. 
    */
   createNotebookInstance(params: SageMaker.Types.CreateNotebookInstanceInput, callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceOutput, AWSError>;
@@ -109,6 +173,14 @@ declare class SageMaker extends Service {
    */
   createNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
+   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Amazon SageMaker Studio (Studio), and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. 
+   */
+  createPresignedDomainUrl(params: SageMaker.Types.CreatePresignedDomainUrlRequest, callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
+  /**
+   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Amazon SageMaker Studio (Studio), and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. 
+   */
+  createPresignedDomainUrl(callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
+  /**
    * Returns a URL that you can use to connect to the Jupyter server from a notebook instance. In the Amazon SageMaker console, when you choose Open next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the notebook instance.For example, you can restrict access to this API and to the URL that it returns to a list of IP addresses that you specify. Use the NotIpAddress condition operator and the aws:SourceIP condition context key to specify the list of IP addresses that you want to have access to the notebook instance. For more information, see Limit Access to a Notebook Instance by IP Address.  The URL that you get from a call to is valid only for 5 minutes. If you try to use the URL after the 5-minute limit expires, you are directed to the AWS console sign-in page. 
    */
   createPresignedNotebookInstanceUrl(params: SageMaker.Types.CreatePresignedNotebookInstanceUrlInput, callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedNotebookInstanceUrlOutput) => void): Request<SageMaker.Types.CreatePresignedNotebookInstanceUrlOutput, AWSError>;
@@ -117,11 +189,19 @@ declare class SageMaker extends Service {
    */
   createPresignedNotebookInstanceUrl(callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedNotebookInstanceUrlOutput) => void): Request<SageMaker.Types.CreatePresignedNotebookInstanceUrlOutput, AWSError>;
   /**
-   * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inferences.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long you are willing to to wait for a managed spot training job to complete.     For more information about Amazon SageMaker, see How It Works. 
+   * Creates a processing job.
+   */
+  createProcessingJob(params: SageMaker.Types.CreateProcessingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateProcessingJobResponse) => void): Request<SageMaker.Types.CreateProcessingJobResponse, AWSError>;
+  /**
+   * Creates a processing job.
+   */
+  createProcessingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateProcessingJobResponse) => void): Request<SageMaker.Types.CreateProcessingJobResponse, AWSError>;
+  /**
+   * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inferences.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long you are willing to wait for a managed spot training job to complete.     For more information about Amazon SageMaker, see How It Works. 
    */
   createTrainingJob(params: SageMaker.Types.CreateTrainingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateTrainingJobResponse) => void): Request<SageMaker.Types.CreateTrainingJobResponse, AWSError>;
   /**
-   * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inferences.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long you are willing to to wait for a managed spot training job to complete.     For more information about Amazon SageMaker, see How It Works. 
+   * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inferences.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.      ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long you are willing to wait for a managed spot training job to complete.     For more information about Amazon SageMaker, see How It Works. 
    */
   createTrainingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateTrainingJobResponse) => void): Request<SageMaker.Types.CreateTrainingJobResponse, AWSError>;
   /**
@@ -132,6 +212,30 @@ declare class SageMaker extends Service {
    * Starts a transform job. A transform job uses a trained model to get inferences on a dataset and saves these results to an Amazon S3 location that you specify. To perform batch transformations, you create a transform job and use the data that you have readily available. In the request body, you provide the following:    TransformJobName - Identifies the transform job. The name must be unique within an AWS Region in an AWS account.    ModelName - Identifies the model to use. ModelName must be the name of an existing Amazon SageMaker model in the same AWS Region and AWS account. For information on creating a model, see CreateModel.    TransformInput - Describes the dataset to be transformed and the Amazon S3 location where it is stored.    TransformOutput - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.    TransformResources - Identifies the ML compute instances for the transform job.   For more information about how batch transformation works, see Batch Transform.
    */
   createTransformJob(callback?: (err: AWSError, data: SageMaker.Types.CreateTransformJobResponse) => void): Request<SageMaker.Types.CreateTransformJobResponse, AWSError>;
+  /**
+   * Creates an Amazon SageMaker trial. A trial is a set of steps called trial components that produce a machine learning model. A trial is part of a single Amazon SageMaker experiment. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to a trial and then use the Search API to search for the tags. To get a list of all your trials, call the ListTrials API. To view a trial's properties, call the DescribeTrial API. To create a trial component, call the CreateTrialComponent API.
+   */
+  createTrial(params: SageMaker.Types.CreateTrialRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateTrialResponse) => void): Request<SageMaker.Types.CreateTrialResponse, AWSError>;
+  /**
+   * Creates an Amazon SageMaker trial. A trial is a set of steps called trial components that produce a machine learning model. A trial is part of a single Amazon SageMaker experiment. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to a trial and then use the Search API to search for the tags. To get a list of all your trials, call the ListTrials API. To view a trial's properties, call the DescribeTrial API. To create a trial component, call the CreateTrialComponent API.
+   */
+  createTrial(callback?: (err: AWSError, data: SageMaker.Types.CreateTrialResponse) => void): Request<SageMaker.Types.CreateTrialResponse, AWSError>;
+  /**
+   * Creates a trial component, which is a stage of a machine learning trial. A trial is composed of one or more trial components. A trial component can be used in multiple trials. Trial components include pre-processing jobs, training jobs, and batch transform jobs. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to a trial component and then use the Search API to search for the tags.  You can create a trial component through a direct call to the CreateTrialComponent API. However, you can't specify the Source property of the component in the request, therefore, the component isn't associated with an Amazon SageMaker job. You must use Amazon SageMaker Studio, the Amazon SageMaker Python SDK, or the AWS SDK for Python (Boto) to create the component with a valid Source property. 
+   */
+  createTrialComponent(params: SageMaker.Types.CreateTrialComponentRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateTrialComponentResponse) => void): Request<SageMaker.Types.CreateTrialComponentResponse, AWSError>;
+  /**
+   * Creates a trial component, which is a stage of a machine learning trial. A trial is composed of one or more trial components. A trial component can be used in multiple trials. Trial components include pre-processing jobs, training jobs, and batch transform jobs. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to a trial component and then use the Search API to search for the tags.  You can create a trial component through a direct call to the CreateTrialComponent API. However, you can't specify the Source property of the component in the request, therefore, the component isn't associated with an Amazon SageMaker job. You must use Amazon SageMaker Studio, the Amazon SageMaker Python SDK, or the AWS SDK for Python (Boto) to create the component with a valid Source property. 
+   */
+  createTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.CreateTrialComponentResponse) => void): Request<SageMaker.Types.CreateTrialComponentResponse, AWSError>;
+  /**
+   * Creates a new user profile. A user profile represents a single user within a Domain, and is the main way to reference a "person" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding. If an administrator invites a person by email or imports them from SSO, a new UserProfile is automatically created. This entity is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
+   */
+  createUserProfile(params: SageMaker.Types.CreateUserProfileRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
+  /**
+   * Creates a new user profile. A user profile represents a single user within a Domain, and is the main way to reference a "person" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding. If an administrator invites a person by email or imports them from SSO, a new UserProfile is automatically created. This entity is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
+   */
+  createUserProfile(callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
   /**
    * Creates a new work team for labeling your data. A work team is defined by one or more Amazon Cognito user pools. You must first create the user pools before you can create a work team. You cannot create more than 25 work teams in an account and region.
    */
@@ -149,6 +253,14 @@ declare class SageMaker extends Service {
    */
   deleteAlgorithm(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Used to stop and delete an app.
+   */
+  deleteApp(params: SageMaker.Types.DeleteAppRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Used to stop and delete an app.
+   */
+  deleteApp(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the specified Git repository from your account.
    */
   deleteCodeRepository(params: SageMaker.Types.DeleteCodeRepositoryInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -156,6 +268,14 @@ declare class SageMaker extends Service {
    * Deletes the specified Git repository from your account.
    */
   deleteCodeRepository(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Used to delete a domain. If you on-boarded with IAM mode, you will need to delete your domain to on-board again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
+   */
+  deleteDomain(params: SageMaker.Types.DeleteDomainRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Used to delete a domain. If you on-boarded with IAM mode, you will need to delete your domain to on-board again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
+   */
+  deleteDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the endpoint was created.  Amazon SageMaker retires any custom KMS key grants associated with the endpoint, meaning you don't need to use the RevokeGrant API call.
    */
@@ -173,6 +293,22 @@ declare class SageMaker extends Service {
    */
   deleteEndpointConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an Amazon SageMaker experiment. All trials associated with the experiment must be deleted first. Use the ListTrials API to get a list of the trials associated with the experiment.
+   */
+  deleteExperiment(params: SageMaker.Types.DeleteExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteExperimentResponse) => void): Request<SageMaker.Types.DeleteExperimentResponse, AWSError>;
+  /**
+   * Deletes an Amazon SageMaker experiment. All trials associated with the experiment must be deleted first. Use the ListTrials API to get a list of the trials associated with the experiment.
+   */
+  deleteExperiment(callback?: (err: AWSError, data: SageMaker.Types.DeleteExperimentResponse) => void): Request<SageMaker.Types.DeleteExperimentResponse, AWSError>;
+  /**
+   * Deletes the specified flow definition.
+   */
+  deleteFlowDefinition(params: SageMaker.Types.DeleteFlowDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteFlowDefinitionResponse) => void): Request<SageMaker.Types.DeleteFlowDefinitionResponse, AWSError>;
+  /**
+   * Deletes the specified flow definition.
+   */
+  deleteFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.DeleteFlowDefinitionResponse) => void): Request<SageMaker.Types.DeleteFlowDefinitionResponse, AWSError>;
+  /**
    * Deletes a model. The DeleteModel API deletes only the model entry that was created in Amazon SageMaker when you called the CreateModel API. It does not delete model artifacts, inference code, or the IAM role that you specified when creating the model. 
    */
   deleteModel(params: SageMaker.Types.DeleteModelInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -188,6 +324,14 @@ declare class SageMaker extends Service {
    * Deletes a model package. A model package is used to create Amazon SageMaker models or list on AWS Marketplace. Buyers can subscribe to model packages listed on AWS Marketplace to create models in Amazon SageMaker.
    */
   deleteModelPackage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a monitoring schedule. Also stops the schedule had not already been stopped. This does not delete the job execution history of the monitoring schedule. 
+   */
+  deleteMonitoringSchedule(params: SageMaker.Types.DeleteMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a monitoring schedule. Also stops the schedule had not already been stopped. This does not delete the job execution history of the monitoring schedule. 
+   */
+  deleteMonitoringSchedule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  Deletes an Amazon SageMaker notebook instance. Before you can delete a notebook instance, you must call the StopNotebookInstance API.   When you delete a notebook instance, you lose all of your data. Amazon SageMaker removes the ML compute instance, and deletes the ML storage volume and the network interface associated with the notebook instance.  
    */
@@ -213,6 +357,30 @@ declare class SageMaker extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: SageMaker.Types.DeleteTagsOutput) => void): Request<SageMaker.Types.DeleteTagsOutput, AWSError>;
   /**
+   * Deletes the specified trial. All trial components that make up the trial must be deleted first. Use the DescribeTrialComponent API to get the list of trial components.
+   */
+  deleteTrial(params: SageMaker.Types.DeleteTrialRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteTrialResponse) => void): Request<SageMaker.Types.DeleteTrialResponse, AWSError>;
+  /**
+   * Deletes the specified trial. All trial components that make up the trial must be deleted first. Use the DescribeTrialComponent API to get the list of trial components.
+   */
+  deleteTrial(callback?: (err: AWSError, data: SageMaker.Types.DeleteTrialResponse) => void): Request<SageMaker.Types.DeleteTrialResponse, AWSError>;
+  /**
+   * Deletes the specified trial component. A trial component must be disassociated from all trials before the trial component can be deleted. To disassociate a trial component from a trial, call the DisassociateTrialComponent API.
+   */
+  deleteTrialComponent(params: SageMaker.Types.DeleteTrialComponentRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteTrialComponentResponse) => void): Request<SageMaker.Types.DeleteTrialComponentResponse, AWSError>;
+  /**
+   * Deletes the specified trial component. A trial component must be disassociated from all trials before the trial component can be deleted. To disassociate a trial component from a trial, call the DisassociateTrialComponent API.
+   */
+  deleteTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.DeleteTrialComponentResponse) => void): Request<SageMaker.Types.DeleteTrialComponentResponse, AWSError>;
+  /**
+   * Deletes a user profile.
+   */
+  deleteUserProfile(params: SageMaker.Types.DeleteUserProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a user profile.
+   */
+  deleteUserProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes an existing work team. This operation can't be undone.
    */
   deleteWorkteam(params: SageMaker.Types.DeleteWorkteamRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteWorkteamResponse) => void): Request<SageMaker.Types.DeleteWorkteamResponse, AWSError>;
@@ -228,6 +396,22 @@ declare class SageMaker extends Service {
    * Returns a description of the specified algorithm that is in your account.
    */
   describeAlgorithm(callback?: (err: AWSError, data: SageMaker.Types.DescribeAlgorithmOutput) => void): Request<SageMaker.Types.DescribeAlgorithmOutput, AWSError>;
+  /**
+   * Describes the app.
+   */
+  describeApp(params: SageMaker.Types.DescribeAppRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeAppResponse) => void): Request<SageMaker.Types.DescribeAppResponse, AWSError>;
+  /**
+   * Describes the app.
+   */
+  describeApp(callback?: (err: AWSError, data: SageMaker.Types.DescribeAppResponse) => void): Request<SageMaker.Types.DescribeAppResponse, AWSError>;
+  /**
+   * Returns information about an Amazon SageMaker job.
+   */
+  describeAutoMLJob(params: SageMaker.Types.DescribeAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
+  /**
+   * Returns information about an Amazon SageMaker job.
+   */
+  describeAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
   /**
    * Gets details about the specified Git repository.
    */
@@ -245,6 +429,14 @@ declare class SageMaker extends Service {
    */
   describeCompilationJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeCompilationJobResponse) => void): Request<SageMaker.Types.DescribeCompilationJobResponse, AWSError>;
   /**
+   * The desciption of the domain.
+   */
+  describeDomain(params: SageMaker.Types.DescribeDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeDomainResponse) => void): Request<SageMaker.Types.DescribeDomainResponse, AWSError>;
+  /**
+   * The desciption of the domain.
+   */
+  describeDomain(callback?: (err: AWSError, data: SageMaker.Types.DescribeDomainResponse) => void): Request<SageMaker.Types.DescribeDomainResponse, AWSError>;
+  /**
    * Returns the description of an endpoint.
    */
   describeEndpoint(params: SageMaker.Types.DescribeEndpointInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeEndpointOutput) => void): Request<SageMaker.Types.DescribeEndpointOutput, AWSError>;
@@ -260,6 +452,30 @@ declare class SageMaker extends Service {
    * Returns the description of an endpoint configuration created using the CreateEndpointConfig API.
    */
   describeEndpointConfig(callback?: (err: AWSError, data: SageMaker.Types.DescribeEndpointConfigOutput) => void): Request<SageMaker.Types.DescribeEndpointConfigOutput, AWSError>;
+  /**
+   * Provides a list of an experiment's properties.
+   */
+  describeExperiment(params: SageMaker.Types.DescribeExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeExperimentResponse) => void): Request<SageMaker.Types.DescribeExperimentResponse, AWSError>;
+  /**
+   * Provides a list of an experiment's properties.
+   */
+  describeExperiment(callback?: (err: AWSError, data: SageMaker.Types.DescribeExperimentResponse) => void): Request<SageMaker.Types.DescribeExperimentResponse, AWSError>;
+  /**
+   * Returns information about the specified flow definition.
+   */
+  describeFlowDefinition(params: SageMaker.Types.DescribeFlowDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeFlowDefinitionResponse) => void): Request<SageMaker.Types.DescribeFlowDefinitionResponse, AWSError>;
+  /**
+   * Returns information about the specified flow definition.
+   */
+  describeFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeFlowDefinitionResponse) => void): Request<SageMaker.Types.DescribeFlowDefinitionResponse, AWSError>;
+  /**
+   * Returns information about the requested human task user interface.
+   */
+  describeHumanTaskUi(params: SageMaker.Types.DescribeHumanTaskUiRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHumanTaskUiResponse) => void): Request<SageMaker.Types.DescribeHumanTaskUiResponse, AWSError>;
+  /**
+   * Returns information about the requested human task user interface.
+   */
+  describeHumanTaskUi(callback?: (err: AWSError, data: SageMaker.Types.DescribeHumanTaskUiResponse) => void): Request<SageMaker.Types.DescribeHumanTaskUiResponse, AWSError>;
   /**
    * Gets a description of a hyperparameter tuning job.
    */
@@ -293,6 +509,14 @@ declare class SageMaker extends Service {
    */
   describeModelPackage(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageOutput) => void): Request<SageMaker.Types.DescribeModelPackageOutput, AWSError>;
   /**
+   * Describes the schedule for a monitoring job.
+   */
+  describeMonitoringSchedule(params: SageMaker.Types.DescribeMonitoringScheduleRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeMonitoringScheduleResponse) => void): Request<SageMaker.Types.DescribeMonitoringScheduleResponse, AWSError>;
+  /**
+   * Describes the schedule for a monitoring job.
+   */
+  describeMonitoringSchedule(callback?: (err: AWSError, data: SageMaker.Types.DescribeMonitoringScheduleResponse) => void): Request<SageMaker.Types.DescribeMonitoringScheduleResponse, AWSError>;
+  /**
    * Returns information about a notebook instance.
    */
   describeNotebookInstance(params: SageMaker.Types.DescribeNotebookInstanceInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
@@ -308,6 +532,14 @@ declare class SageMaker extends Service {
    * Returns a description of a notebook instance lifecycle configuration. For information about notebook instance lifestyle configurations, see Step 2.1: (Optional) Customize a Notebook Instance.
    */
   describeNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
+   * Returns a description of a processing job.
+   */
+  describeProcessingJob(params: SageMaker.Types.DescribeProcessingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeProcessingJobResponse) => void): Request<SageMaker.Types.DescribeProcessingJobResponse, AWSError>;
+  /**
+   * Returns a description of a processing job.
+   */
+  describeProcessingJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeProcessingJobResponse) => void): Request<SageMaker.Types.DescribeProcessingJobResponse, AWSError>;
   /**
    * Gets information about a work team provided by a vendor. It returns details about the subscription with a vendor in the AWS Marketplace.
    */
@@ -333,6 +565,30 @@ declare class SageMaker extends Service {
    */
   describeTransformJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeTransformJobResponse) => void): Request<SageMaker.Types.DescribeTransformJobResponse, AWSError>;
   /**
+   * Provides a list of a trial's properties.
+   */
+  describeTrial(params: SageMaker.Types.DescribeTrialRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeTrialResponse) => void): Request<SageMaker.Types.DescribeTrialResponse, AWSError>;
+  /**
+   * Provides a list of a trial's properties.
+   */
+  describeTrial(callback?: (err: AWSError, data: SageMaker.Types.DescribeTrialResponse) => void): Request<SageMaker.Types.DescribeTrialResponse, AWSError>;
+  /**
+   * Provides a list of a trials component's properties.
+   */
+  describeTrialComponent(params: SageMaker.Types.DescribeTrialComponentRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeTrialComponentResponse) => void): Request<SageMaker.Types.DescribeTrialComponentResponse, AWSError>;
+  /**
+   * Provides a list of a trials component's properties.
+   */
+  describeTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.DescribeTrialComponentResponse) => void): Request<SageMaker.Types.DescribeTrialComponentResponse, AWSError>;
+  /**
+   * Describes the user profile.
+   */
+  describeUserProfile(params: SageMaker.Types.DescribeUserProfileRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeUserProfileResponse) => void): Request<SageMaker.Types.DescribeUserProfileResponse, AWSError>;
+  /**
+   * Describes the user profile.
+   */
+  describeUserProfile(callback?: (err: AWSError, data: SageMaker.Types.DescribeUserProfileResponse) => void): Request<SageMaker.Types.DescribeUserProfileResponse, AWSError>;
+  /**
    * Gets information about a specific work team. You can see information such as the create date, the last updated date, membership information, and the work team's Amazon Resource Name (ARN).
    */
   describeWorkteam(params: SageMaker.Types.DescribeWorkteamRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkteamResponse) => void): Request<SageMaker.Types.DescribeWorkteamResponse, AWSError>;
@@ -340,6 +596,14 @@ declare class SageMaker extends Service {
    * Gets information about a specific work team. You can see information such as the create date, the last updated date, membership information, and the work team's Amazon Resource Name (ARN).
    */
   describeWorkteam(callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkteamResponse) => void): Request<SageMaker.Types.DescribeWorkteamResponse, AWSError>;
+  /**
+   * Disassociates a trial component from a trial. This doesn't effect other trials the component is associated with. Before you can delete a component, you must disassociate the component from all trials it is associated with. To associate a trial component with a trial, call the AssociateTrialComponent API.
+   */
+  disassociateTrialComponent(params: SageMaker.Types.DisassociateTrialComponentRequest, callback?: (err: AWSError, data: SageMaker.Types.DisassociateTrialComponentResponse) => void): Request<SageMaker.Types.DisassociateTrialComponentResponse, AWSError>;
+  /**
+   * Disassociates a trial component from a trial. This doesn't effect other trials the component is associated with. Before you can delete a component, you must disassociate the component from all trials it is associated with. To associate a trial component with a trial, call the AssociateTrialComponent API.
+   */
+  disassociateTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.DisassociateTrialComponentResponse) => void): Request<SageMaker.Types.DisassociateTrialComponentResponse, AWSError>;
   /**
    * An auto-complete API for the search functionality in the Amazon SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
    */
@@ -357,6 +621,30 @@ declare class SageMaker extends Service {
    */
   listAlgorithms(callback?: (err: AWSError, data: SageMaker.Types.ListAlgorithmsOutput) => void): Request<SageMaker.Types.ListAlgorithmsOutput, AWSError>;
   /**
+   * Lists apps.
+   */
+  listApps(params: SageMaker.Types.ListAppsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListAppsResponse) => void): Request<SageMaker.Types.ListAppsResponse, AWSError>;
+  /**
+   * Lists apps.
+   */
+  listApps(callback?: (err: AWSError, data: SageMaker.Types.ListAppsResponse) => void): Request<SageMaker.Types.ListAppsResponse, AWSError>;
+  /**
+   * Request a list of jobs.
+   */
+  listAutoMLJobs(params: SageMaker.Types.ListAutoMLJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListAutoMLJobsResponse) => void): Request<SageMaker.Types.ListAutoMLJobsResponse, AWSError>;
+  /**
+   * Request a list of jobs.
+   */
+  listAutoMLJobs(callback?: (err: AWSError, data: SageMaker.Types.ListAutoMLJobsResponse) => void): Request<SageMaker.Types.ListAutoMLJobsResponse, AWSError>;
+  /**
+   * List the Candidates created for the job.
+   */
+  listCandidatesForAutoMLJob(params: SageMaker.Types.ListCandidatesForAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.ListCandidatesForAutoMLJobResponse) => void): Request<SageMaker.Types.ListCandidatesForAutoMLJobResponse, AWSError>;
+  /**
+   * List the Candidates created for the job.
+   */
+  listCandidatesForAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.ListCandidatesForAutoMLJobResponse) => void): Request<SageMaker.Types.ListCandidatesForAutoMLJobResponse, AWSError>;
+  /**
    * Gets a list of the Git repositories in your account.
    */
   listCodeRepositories(params: SageMaker.Types.ListCodeRepositoriesInput, callback?: (err: AWSError, data: SageMaker.Types.ListCodeRepositoriesOutput) => void): Request<SageMaker.Types.ListCodeRepositoriesOutput, AWSError>;
@@ -373,6 +661,14 @@ declare class SageMaker extends Service {
    */
   listCompilationJobs(callback?: (err: AWSError, data: SageMaker.Types.ListCompilationJobsResponse) => void): Request<SageMaker.Types.ListCompilationJobsResponse, AWSError>;
   /**
+   * Lists the domains.
+   */
+  listDomains(params: SageMaker.Types.ListDomainsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListDomainsResponse) => void): Request<SageMaker.Types.ListDomainsResponse, AWSError>;
+  /**
+   * Lists the domains.
+   */
+  listDomains(callback?: (err: AWSError, data: SageMaker.Types.ListDomainsResponse) => void): Request<SageMaker.Types.ListDomainsResponse, AWSError>;
+  /**
    * Lists endpoint configurations.
    */
   listEndpointConfigs(params: SageMaker.Types.ListEndpointConfigsInput, callback?: (err: AWSError, data: SageMaker.Types.ListEndpointConfigsOutput) => void): Request<SageMaker.Types.ListEndpointConfigsOutput, AWSError>;
@@ -388,6 +684,30 @@ declare class SageMaker extends Service {
    * Lists endpoints.
    */
   listEndpoints(callback?: (err: AWSError, data: SageMaker.Types.ListEndpointsOutput) => void): Request<SageMaker.Types.ListEndpointsOutput, AWSError>;
+  /**
+   * Lists all the experiments in your account. The list can be filtered to show only experiments that were created in a specific time range. The list can be sorted by experiment name or creation time.
+   */
+  listExperiments(params: SageMaker.Types.ListExperimentsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListExperimentsResponse) => void): Request<SageMaker.Types.ListExperimentsResponse, AWSError>;
+  /**
+   * Lists all the experiments in your account. The list can be filtered to show only experiments that were created in a specific time range. The list can be sorted by experiment name or creation time.
+   */
+  listExperiments(callback?: (err: AWSError, data: SageMaker.Types.ListExperimentsResponse) => void): Request<SageMaker.Types.ListExperimentsResponse, AWSError>;
+  /**
+   * Returns information about the flow definitions in your account.
+   */
+  listFlowDefinitions(params: SageMaker.Types.ListFlowDefinitionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListFlowDefinitionsResponse) => void): Request<SageMaker.Types.ListFlowDefinitionsResponse, AWSError>;
+  /**
+   * Returns information about the flow definitions in your account.
+   */
+  listFlowDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListFlowDefinitionsResponse) => void): Request<SageMaker.Types.ListFlowDefinitionsResponse, AWSError>;
+  /**
+   * Returns information about the human task user interfaces in your account.
+   */
+  listHumanTaskUis(params: SageMaker.Types.ListHumanTaskUisRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHumanTaskUisResponse) => void): Request<SageMaker.Types.ListHumanTaskUisResponse, AWSError>;
+  /**
+   * Returns information about the human task user interfaces in your account.
+   */
+  listHumanTaskUis(callback?: (err: AWSError, data: SageMaker.Types.ListHumanTaskUisResponse) => void): Request<SageMaker.Types.ListHumanTaskUisResponse, AWSError>;
   /**
    * Gets a list of HyperParameterTuningJobSummary objects that describe the hyperparameter tuning jobs launched in your account.
    */
@@ -429,6 +749,22 @@ declare class SageMaker extends Service {
    */
   listModels(callback?: (err: AWSError, data: SageMaker.Types.ListModelsOutput) => void): Request<SageMaker.Types.ListModelsOutput, AWSError>;
   /**
+   * Returns list of all monitoring job executions.
+   */
+  listMonitoringExecutions(params: SageMaker.Types.ListMonitoringExecutionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListMonitoringExecutionsResponse) => void): Request<SageMaker.Types.ListMonitoringExecutionsResponse, AWSError>;
+  /**
+   * Returns list of all monitoring job executions.
+   */
+  listMonitoringExecutions(callback?: (err: AWSError, data: SageMaker.Types.ListMonitoringExecutionsResponse) => void): Request<SageMaker.Types.ListMonitoringExecutionsResponse, AWSError>;
+  /**
+   * Returns list of all monitoring schedules.
+   */
+  listMonitoringSchedules(params: SageMaker.Types.ListMonitoringSchedulesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListMonitoringSchedulesResponse) => void): Request<SageMaker.Types.ListMonitoringSchedulesResponse, AWSError>;
+  /**
+   * Returns list of all monitoring schedules.
+   */
+  listMonitoringSchedules(callback?: (err: AWSError, data: SageMaker.Types.ListMonitoringSchedulesResponse) => void): Request<SageMaker.Types.ListMonitoringSchedulesResponse, AWSError>;
+  /**
    * Lists notebook instance lifestyle configurations created with the CreateNotebookInstanceLifecycleConfig API.
    */
   listNotebookInstanceLifecycleConfigs(params: SageMaker.Types.ListNotebookInstanceLifecycleConfigsInput, callback?: (err: AWSError, data: SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput) => void): Request<SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput, AWSError>;
@@ -444,6 +780,14 @@ declare class SageMaker extends Service {
    * Returns a list of the Amazon SageMaker notebook instances in the requester's account in an AWS Region. 
    */
   listNotebookInstances(callback?: (err: AWSError, data: SageMaker.Types.ListNotebookInstancesOutput) => void): Request<SageMaker.Types.ListNotebookInstancesOutput, AWSError>;
+  /**
+   * Lists processing jobs that satisfy various filters.
+   */
+  listProcessingJobs(params: SageMaker.Types.ListProcessingJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListProcessingJobsResponse) => void): Request<SageMaker.Types.ListProcessingJobsResponse, AWSError>;
+  /**
+   * Lists processing jobs that satisfy various filters.
+   */
+  listProcessingJobs(callback?: (err: AWSError, data: SageMaker.Types.ListProcessingJobsResponse) => void): Request<SageMaker.Types.ListProcessingJobsResponse, AWSError>;
   /**
    * Gets a list of the work teams that you are subscribed to in the AWS Marketplace. The list may be empty if no work team satisfies the filter specified in the NameContains parameter.
    */
@@ -485,6 +829,30 @@ declare class SageMaker extends Service {
    */
   listTransformJobs(callback?: (err: AWSError, data: SageMaker.Types.ListTransformJobsResponse) => void): Request<SageMaker.Types.ListTransformJobsResponse, AWSError>;
   /**
+   * Lists the trial components in your account. You can filter the list to show only components that were created in a specific time range. You can sort the list by trial component name or creation time.
+   */
+  listTrialComponents(params: SageMaker.Types.ListTrialComponentsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListTrialComponentsResponse) => void): Request<SageMaker.Types.ListTrialComponentsResponse, AWSError>;
+  /**
+   * Lists the trial components in your account. You can filter the list to show only components that were created in a specific time range. You can sort the list by trial component name or creation time.
+   */
+  listTrialComponents(callback?: (err: AWSError, data: SageMaker.Types.ListTrialComponentsResponse) => void): Request<SageMaker.Types.ListTrialComponentsResponse, AWSError>;
+  /**
+   * Lists the trials in your account. Specify an experiment name to limit the list to the trials that are part of that experiment. The list can be filtered to show only trials that were created in a specific time range. The list can be sorted by trial name or creation time.
+   */
+  listTrials(params: SageMaker.Types.ListTrialsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListTrialsResponse) => void): Request<SageMaker.Types.ListTrialsResponse, AWSError>;
+  /**
+   * Lists the trials in your account. Specify an experiment name to limit the list to the trials that are part of that experiment. The list can be filtered to show only trials that were created in a specific time range. The list can be sorted by trial name or creation time.
+   */
+  listTrials(callback?: (err: AWSError, data: SageMaker.Types.ListTrialsResponse) => void): Request<SageMaker.Types.ListTrialsResponse, AWSError>;
+  /**
+   * Lists user profiles.
+   */
+  listUserProfiles(params: SageMaker.Types.ListUserProfilesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListUserProfilesResponse) => void): Request<SageMaker.Types.ListUserProfilesResponse, AWSError>;
+  /**
+   * Lists user profiles.
+   */
+  listUserProfiles(callback?: (err: AWSError, data: SageMaker.Types.ListUserProfilesResponse) => void): Request<SageMaker.Types.ListUserProfilesResponse, AWSError>;
+  /**
    * Gets a list of work teams that you have defined in a region. The list may be empty if no work team satisfies the filter specified in the NameContains parameter.
    */
   listWorkteams(params: SageMaker.Types.ListWorkteamsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListWorkteamsResponse) => void): Request<SageMaker.Types.ListWorkteamsResponse, AWSError>;
@@ -509,6 +877,14 @@ declare class SageMaker extends Service {
    */
   search(callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
+   * Starts a previously stopped monitoring schedule.  New monitoring schedules are immediately started after creation. 
+   */
+  startMonitoringSchedule(params: SageMaker.Types.StartMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts a previously stopped monitoring schedule.  New monitoring schedules are immediately started after creation. 
+   */
+  startMonitoringSchedule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to InService. A notebook instance's status must be InService before you can connect to your Jupyter notebook. 
    */
   startNotebookInstance(params: SageMaker.Types.StartNotebookInstanceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -516,6 +892,14 @@ declare class SageMaker extends Service {
    * Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to InService. A notebook instance's status must be InService before you can connect to your Jupyter notebook. 
    */
   startNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * A method for forcing the termination of a running job.
+   */
+  stopAutoMLJob(params: SageMaker.Types.StopAutoMLJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * A method for forcing the termination of a running job.
+   */
+  stopAutoMLJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Stops a model compilation job.  To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal. This gracefully shuts the job down. If the job hasn't stopped, it sends the SIGKILL signal. When it receives a StopCompilationJob request, Amazon SageMaker changes the CompilationJobSummary$CompilationJobStatus of the job to Stopping. After Amazon SageMaker stops the job, it sets the CompilationJobSummary$CompilationJobStatus to Stopped. 
    */
@@ -541,6 +925,14 @@ declare class SageMaker extends Service {
    */
   stopLabelingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Stops a previously started monitoring schedule.
+   */
+  stopMonitoringSchedule(params: SageMaker.Types.StopMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a previously started monitoring schedule.
+   */
+  stopMonitoringSchedule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Terminates the ML compute instance. Before terminating the instance, Amazon SageMaker disconnects the ML storage volume from it. Amazon SageMaker preserves the ML storage volume. Amazon SageMaker stops charging you for the ML compute instance when you call StopNotebookInstance. To access data on the ML storage volume for a notebook instance that has been terminated, call the StartNotebookInstance API. StartNotebookInstance launches another ML compute instance, configures it, and attaches the preserved ML storage volume so you can continue your work. 
    */
   stopNotebookInstance(params: SageMaker.Types.StopNotebookInstanceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -548,6 +940,14 @@ declare class SageMaker extends Service {
    * Terminates the ML compute instance. Before terminating the instance, Amazon SageMaker disconnects the ML storage volume from it. Amazon SageMaker preserves the ML storage volume. Amazon SageMaker stops charging you for the ML compute instance when you call StopNotebookInstance. To access data on the ML storage volume for a notebook instance that has been terminated, call the StartNotebookInstance API. StartNotebookInstance launches another ML compute instance, configures it, and attaches the preserved ML storage volume so you can continue your work. 
    */
   stopNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a processing job.
+   */
+  stopProcessingJob(params: SageMaker.Types.StopProcessingJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a processing job.
+   */
+  stopProcessingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Stops a training job. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of the training is not lost.  When it receives a StopTrainingJob request, Amazon SageMaker changes the status of the job to Stopping. After Amazon SageMaker stops the job, it sets the status to Stopped.
    */
@@ -573,6 +973,14 @@ declare class SageMaker extends Service {
    */
   updateCodeRepository(callback?: (err: AWSError, data: SageMaker.Types.UpdateCodeRepositoryOutput) => void): Request<SageMaker.Types.UpdateCodeRepositoryOutput, AWSError>;
   /**
+   * Updates a domain. Changes will impact all of the people in the domain.
+   */
+  updateDomain(params: SageMaker.Types.UpdateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateDomainResponse) => void): Request<SageMaker.Types.UpdateDomainResponse, AWSError>;
+  /**
+   * Updates a domain. Changes will impact all of the people in the domain.
+   */
+  updateDomain(callback?: (err: AWSError, data: SageMaker.Types.UpdateDomainResponse) => void): Request<SageMaker.Types.UpdateDomainResponse, AWSError>;
+  /**
    * Deploys the new EndpointConfig specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous EndpointConfig (there is no availability loss).  When Amazon SageMaker receives the request, it sets the endpoint status to Updating. After updating the endpoint, it sets the status to InService. To check the status of an endpoint, use the DescribeEndpoint API.   You must not delete an EndpointConfig in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig. 
    */
   updateEndpoint(params: SageMaker.Types.UpdateEndpointInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateEndpointOutput) => void): Request<SageMaker.Types.UpdateEndpointOutput, AWSError>;
@@ -589,6 +997,22 @@ declare class SageMaker extends Service {
    */
   updateEndpointWeightsAndCapacities(callback?: (err: AWSError, data: SageMaker.Types.UpdateEndpointWeightsAndCapacitiesOutput) => void): Request<SageMaker.Types.UpdateEndpointWeightsAndCapacitiesOutput, AWSError>;
   /**
+   * Adds, updates, or removes the description of an experiment. Updates the display name of an experiment.
+   */
+  updateExperiment(params: SageMaker.Types.UpdateExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateExperimentResponse) => void): Request<SageMaker.Types.UpdateExperimentResponse, AWSError>;
+  /**
+   * Adds, updates, or removes the description of an experiment. Updates the display name of an experiment.
+   */
+  updateExperiment(callback?: (err: AWSError, data: SageMaker.Types.UpdateExperimentResponse) => void): Request<SageMaker.Types.UpdateExperimentResponse, AWSError>;
+  /**
+   * Updates a previously created schedule.
+   */
+  updateMonitoringSchedule(params: SageMaker.Types.UpdateMonitoringScheduleRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateMonitoringScheduleResponse) => void): Request<SageMaker.Types.UpdateMonitoringScheduleResponse, AWSError>;
+  /**
+   * Updates a previously created schedule.
+   */
+  updateMonitoringSchedule(callback?: (err: AWSError, data: SageMaker.Types.UpdateMonitoringScheduleResponse) => void): Request<SageMaker.Types.UpdateMonitoringScheduleResponse, AWSError>;
+  /**
    * Updates a notebook instance. NotebookInstance updates include upgrading or downgrading the ML compute instance used for your notebook instance to accommodate changes in your workload requirements.
    */
   updateNotebookInstance(params: SageMaker.Types.UpdateNotebookInstanceInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceOutput, AWSError>;
@@ -604,6 +1028,30 @@ declare class SageMaker extends Service {
    * Updates a notebook instance lifecycle configuration created with the CreateNotebookInstanceLifecycleConfig API.
    */
   updateNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
+   * Updates the display name of a trial.
+   */
+  updateTrial(params: SageMaker.Types.UpdateTrialRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateTrialResponse) => void): Request<SageMaker.Types.UpdateTrialResponse, AWSError>;
+  /**
+   * Updates the display name of a trial.
+   */
+  updateTrial(callback?: (err: AWSError, data: SageMaker.Types.UpdateTrialResponse) => void): Request<SageMaker.Types.UpdateTrialResponse, AWSError>;
+  /**
+   * Updates one or more properties of a trial component.
+   */
+  updateTrialComponent(params: SageMaker.Types.UpdateTrialComponentRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateTrialComponentResponse) => void): Request<SageMaker.Types.UpdateTrialComponentResponse, AWSError>;
+  /**
+   * Updates one or more properties of a trial component.
+   */
+  updateTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.UpdateTrialComponentResponse) => void): Request<SageMaker.Types.UpdateTrialComponentResponse, AWSError>;
+  /**
+   * Updates a user profile.
+   */
+  updateUserProfile(params: SageMaker.Types.UpdateUserProfileRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateUserProfileResponse) => void): Request<SageMaker.Types.UpdateUserProfileResponse, AWSError>;
+  /**
+   * Updates a user profile.
+   */
+  updateUserProfile(callback?: (err: AWSError, data: SageMaker.Types.UpdateUserProfileResponse) => void): Request<SageMaker.Types.UpdateUserProfileResponse, AWSError>;
   /**
    * Updates an existing work team with new member definitions or description.
    */
@@ -668,6 +1116,14 @@ declare class SageMaker extends Service {
    * Waits for the transformJobCompletedOrStopped state by periodically calling the underlying SageMaker.describeTransformJoboperation every 60 seconds (at most 60 times).
    */
   waitFor(state: "transformJobCompletedOrStopped", callback?: (err: AWSError, data: SageMaker.Types.DescribeTransformJobResponse) => void): Request<SageMaker.Types.DescribeTransformJobResponse, AWSError>;
+  /**
+   * Waits for the processingJobCompletedOrStopped state by periodically calling the underlying SageMaker.describeProcessingJoboperation every 60 seconds (at most 60 times).
+   */
+  waitFor(state: "processingJobCompletedOrStopped", params: SageMaker.Types.DescribeProcessingJobRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SageMaker.Types.DescribeProcessingJobResponse) => void): Request<SageMaker.Types.DescribeProcessingJobResponse, AWSError>;
+  /**
+   * Waits for the processingJobCompletedOrStopped state by periodically calling the underlying SageMaker.describeProcessingJoboperation every 60 seconds (at most 60 times).
+   */
+  waitFor(state: "processingJobCompletedOrStopped", callback?: (err: AWSError, data: SageMaker.Types.DescribeProcessingJobResponse) => void): Request<SageMaker.Types.DescribeProcessingJobResponse, AWSError>;
 }
 declare namespace SageMaker {
   export type Accept = string;
@@ -709,6 +1165,10 @@ declare namespace SageMaker {
      * A list of metric definition objects. Each object specifies the metric name and regular expressions used to parse algorithm logs. Amazon SageMaker publishes each metric to Amazon CloudWatch.
      */
     MetricDefinitions?: MetricDefinitionList;
+    /**
+     * To generate and save time-series metrics during training, set to true. The default is false and time-series metrics aren't generated except in the following cases:   You use one of the Amazon SageMaker built-in algorithms   You use one of the following prebuilt Amazon SageMaker Docker images:   Tensorflow   MXNet   PyTorch     You specify at least one MetricDefinition   
+     */
+    EnableSageMakerMetricsTimeSeries?: Boolean;
   }
   export type AlgorithmStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|string;
   export interface AlgorithmStatusDetails {
@@ -786,19 +1246,326 @@ declare namespace SageMaker {
   }
   export interface AnnotationConsolidationConfig {
     /**
-     * The Amazon Resource Name (ARN) of a Lambda function implements the logic for annotation consolidation. For the built-in bounding box, image classification, semantic segmentation, and text classification task types, Amazon SageMaker Ground Truth provides the following Lambda functions:    Bounding box - Finds the most similar boxes from different workers based on the Jaccard index of the boxes.  arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox   arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox   arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox   arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox   arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox   arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox   arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox   arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox     Image classification - Uses a variant of the Expectation Maximization approach to estimate the true class of an image based on annotations from individual workers.  arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass   arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass   arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass   arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass   arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass   arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass   arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass   arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass     Semantic segmentation - Treats each pixel in an image as a multi-class classification and treats pixel annotations from workers as "votes" for the correct label.  arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation   arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation   arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation   arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentation   arn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentation   arn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation   arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation     Text classification - Uses a variant of the Expectation Maximization approach to estimate the true class of text based on annotations from individual workers.  arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass   arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass   arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass   arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass   arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass   arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass   arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass   arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass     Named entity eecognition - Groups similar selections and calculates aggregate boundaries, resolving to most-assigned label.  arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition   arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition   arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition   arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition   arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition   arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition   arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition    For more information, see Annotation Consolidation.
+     * The Amazon Resource Name (ARN) of a Lambda function implements the logic for annotation consolidation. For the built-in bounding box, image classification, semantic segmentation, and text classification task types, Amazon SageMaker Ground Truth provides the following Lambda functions:    Bounding box - Finds the most similar boxes from different workers based on the Jaccard index of the boxes.  arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox   arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox   arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox   arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox   arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox   arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox   arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox   arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox     Image classification - Uses a variant of the Expectation Maximization approach to estimate the true class of an image based on annotations from individual workers.  arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass   arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass   arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass   arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass   arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass   arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass   arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass   arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass     Semantic segmentation - Treats each pixel in an image as a multi-class classification and treats pixel annotations from workers as "votes" for the correct label.  arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation   arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation   arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation   arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentation   arn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentation   arn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentation   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation   arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation     Text classification - Uses a variant of the Expectation Maximization approach to estimate the true class of text based on annotations from individual workers.  arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass   arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass   arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass   arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass   arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass   arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass   arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass   arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass     Named entity recognition - Groups similar selections and calculates aggregate boundaries, resolving to most-assigned label.  arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition   arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition   arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition   arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition   arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition   arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition   arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition     Bounding box verification - Uses a variant of the Expectation Maximization approach to estimate the true class of verification judgement for bounding box labels based on annotations from individual workers.  arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox   arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox   arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox   arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox   arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox   arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox   arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox   arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox     Semantic segmentation verification - Uses a variant of the Expectation Maximization approach to estimate the true class of verification judgement for semantic segmentation labels based on annotations from individual workers.  arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation   arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation     Bounding box adjustment - Finds the most similar boxes from different workers based on the Jaccard index of the adjusted annotations.  arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox   arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox     Semantic segmentation adjustment - Treats each pixel in an image as a multi-class classification and treats pixel adjusted annotations from workers as "votes" for the correct label.  arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation   arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation    For more information, see Annotation Consolidation.
      */
     AnnotationConsolidationLambdaArn: LambdaFunctionArn;
   }
+  export type AppArn = string;
+  export interface AppDetails {
+    /**
+     * The domain ID.
+     */
+    DomainId?: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName?: UserProfileName;
+    /**
+     * The type of app.
+     */
+    AppType?: AppType;
+    /**
+     * The name of the app.
+     */
+    AppName?: AppName;
+    /**
+     * The status.
+     */
+    Status?: AppStatus;
+    /**
+     * The creation time.
+     */
+    CreationTime?: CreationTime;
+  }
+  export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|string;
+  export type AppList = AppDetails[];
+  export type AppName = string;
+  export type AppSortKey = "CreationTime"|string;
+  export interface AppSpecification {
+    /**
+     * The container image to be run by the processing job.
+     */
+    ImageUri: ImageUri;
+    /**
+     * The entrypoint for a container used to run a processing job.
+     */
+    ContainerEntrypoint?: ContainerEntrypoint;
+    /**
+     * The arguments for a container used to run a processing job.
+     */
+    ContainerArguments?: ContainerArguments;
+  }
+  export type AppStatus = "Deleted"|"Deleting"|"Failed"|"InService"|"Pending"|string;
+  export type AppType = "JupyterServer"|"KernelGateway"|"TensorBoard"|string;
   export type ArnOrName = string;
   export type AssemblyType = "None"|"Line"|string;
+  export interface AssociateTrialComponentRequest {
+    /**
+     * The name of the component to associated with the trial.
+     */
+    TrialComponentName: ExperimentEntityName;
+    /**
+     * The name of the trial to associate with.
+     */
+    TrialName: ExperimentEntityName;
+  }
+  export interface AssociateTrialComponentResponse {
+    /**
+     * The ARN of the trial component.
+     */
+    TrialComponentArn?: TrialComponentArn;
+    /**
+     * The Amazon Resource Name (ARN) of the trial.
+     */
+    TrialArn?: TrialArn;
+  }
   export type AttributeName = string;
   export type AttributeNames = AttributeName[];
+  export type AuthMode = "SSO"|"IAM"|string;
+  export interface AutoMLCandidate {
+    /**
+     * The candidate name.
+     */
+    CandidateName: CandidateName;
+    FinalAutoMLJobObjectiveMetric?: FinalAutoMLJobObjectiveMetric;
+    /**
+     * The objective status.
+     */
+    ObjectiveStatus: ObjectiveStatus;
+    /**
+     * The candidate's steps.
+     */
+    CandidateSteps: CandidateSteps;
+    /**
+     * The candidate's status.
+     */
+    CandidateStatus: CandidateStatus;
+    /**
+     * The inference containers.
+     */
+    InferenceContainers?: AutoMLContainerDefinitions;
+    /**
+     * The creation time.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The end time.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The last modified time.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The failure reason.
+     */
+    FailureReason?: AutoMLFailureReason;
+  }
+  export interface AutoMLCandidateStep {
+    /**
+     * Whether the Candidate is at the transform, training, or processing step.
+     */
+    CandidateStepType: CandidateStepType;
+    /**
+     * The ARN for the Candidate's step.
+     */
+    CandidateStepArn: CandidateStepArn;
+    /**
+     * The name for the Candidate's step.
+     */
+    CandidateStepName: CandidateStepName;
+  }
+  export type AutoMLCandidates = AutoMLCandidate[];
+  export interface AutoMLChannel {
+    /**
+     * The data source.
+     */
+    DataSource: AutoMLDataSource;
+    /**
+     * You can use Gzip or None. The default value is None.
+     */
+    CompressionType?: CompressionType;
+    /**
+     * The name of the target variable in supervised learning, a.k.a. ‘y’.
+     */
+    TargetAttributeName: TargetAttributeName;
+  }
+  export interface AutoMLContainerDefinition {
+    /**
+     * The ECR path of the container. Refer to ContainerDefinition for more details.
+     */
+    Image: Image;
+    /**
+     * The location of the model artifacts. Refer to ContainerDefinition for more details.
+     */
+    ModelDataUrl: Url;
+    /**
+     * Environment variables to set in the container. Refer to ContainerDefinition for more details.
+     */
+    Environment?: EnvironmentMap;
+  }
+  export type AutoMLContainerDefinitions = AutoMLContainerDefinition[];
+  export interface AutoMLDataSource {
+    /**
+     * The Amazon S3 location of the data.
+     */
+    S3DataSource: AutoMLS3DataSource;
+  }
+  export type AutoMLFailureReason = string;
+  export type AutoMLInputDataConfig = AutoMLChannel[];
+  export type AutoMLJobArn = string;
+  export interface AutoMLJobArtifacts {
+    /**
+     * The URL to the notebook location.
+     */
+    CandidateDefinitionNotebookLocation?: CandidateDefinitionNotebookLocation;
+    /**
+     * The URL to the notebook location.
+     */
+    DataExplorationNotebookLocation?: DataExplorationNotebookLocation;
+  }
+  export interface AutoMLJobCompletionCriteria {
+    /**
+     * The maximum number of times a training job is allowed to run.
+     */
+    MaxCandidates?: MaxCandidates;
+    /**
+     * The maximum time, in seconds, a job is allowed to run.
+     */
+    MaxRuntimePerTrainingJobInSeconds?: MaxRuntimePerTrainingJobInSeconds;
+    /**
+     * The maximum time, in seconds, an AutoML job is allowed to wait for a trial to complete. It must be equal to or greater than MaxRuntimePerTrainingJobInSeconds.
+     */
+    MaxAutoMLJobRuntimeInSeconds?: MaxAutoMLJobRuntimeInSeconds;
+  }
+  export interface AutoMLJobConfig {
+    /**
+     * How long a job is allowed to run, or how many candidates a job is allowed to generate.
+     */
+    CompletionCriteria?: AutoMLJobCompletionCriteria;
+    /**
+     * Security configuration for traffic encryption or Amazon VPC settings.
+     */
+    SecurityConfig?: AutoMLSecurityConfig;
+  }
+  export type AutoMLJobName = string;
+  export interface AutoMLJobObjective {
+    /**
+     * The name of the metric.
+     */
+    MetricName: AutoMLMetricEnum;
+  }
+  export type AutoMLJobObjectiveType = "Maximize"|"Minimize"|string;
+  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|string;
+  export type AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
+  export type AutoMLJobSummaries = AutoMLJobSummary[];
+  export interface AutoMLJobSummary {
+    /**
+     * The name of the object you are requesting.
+     */
+    AutoMLJobName: AutoMLJobName;
+    /**
+     * The ARN of the job.
+     */
+    AutoMLJobArn: AutoMLJobArn;
+    /**
+     * The job's status.
+     */
+    AutoMLJobStatus: AutoMLJobStatus;
+    /**
+     * The job's secondary status.
+     */
+    AutoMLJobSecondaryStatus: AutoMLJobSecondaryStatus;
+    /**
+     * When the job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The end time.
+     */
+    EndTime?: Timestamp;
+    /**
+     * When the job was last modified.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The failure reason.
+     */
+    FailureReason?: AutoMLFailureReason;
+  }
+  export type AutoMLMaxResults = number;
+  export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|string;
+  export type AutoMLNameContains = string;
+  export interface AutoMLOutputDataConfig {
+    /**
+     * The AWS KMS encryption key ID.
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * The Amazon S3 output path. Must be 128 characters or less.
+     */
+    S3OutputPath: S3Uri;
+  }
+  export interface AutoMLS3DataSource {
+    /**
+     * The data type.
+     */
+    S3DataType: AutoMLS3DataType;
+    /**
+     * The URL to the Amazon S3 data source.
+     */
+    S3Uri: S3Uri;
+  }
+  export type AutoMLS3DataType = "ManifestFile"|"S3Prefix"|string;
+  export interface AutoMLSecurityConfig {
+    /**
+     * The key used to encrypt stored data.
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Whether to use traffic encryption between the container layers.
+     */
+    EnableInterContainerTrafficEncryption?: Boolean;
+    /**
+     * VPC configuration.
+     */
+    VpcConfig?: VpcConfig;
+  }
+  export type AutoMLSortBy = "Name"|"CreationTime"|"Status"|string;
+  export type AutoMLSortOrder = "Ascending"|"Descending"|string;
+  export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
   export type BatchStrategy = "MultiRecord"|"SingleRecord"|string;
   export type BillableTimeInSeconds = number;
   export type Boolean = boolean;
   export type BooleanOperator = "And"|"Or"|string;
   export type Branch = string;
+  export type CandidateDefinitionNotebookLocation = string;
+  export type CandidateName = string;
+  export type CandidateSortBy = "CreationTime"|"Status"|"FinalObjectiveMetricValue"|string;
+  export type CandidateStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
+  export type CandidateStepArn = string;
+  export type CandidateStepName = string;
+  export type CandidateStepType = "AWS::SageMaker::TrainingJob"|"AWS::SageMaker::TransformJob"|"AWS::SageMaker::ProcessingJob"|string;
+  export type CandidateSteps = AutoMLCandidateStep[];
+  export interface CaptureContentTypeHeader {
+    /**
+     * 
+     */
+    CsvContentTypes?: CsvContentTypes;
+    /**
+     * 
+     */
+    JsonContentTypes?: JsonContentTypes;
+  }
+  export type CaptureMode = "Input"|"Output"|string;
+  export interface CaptureOption {
+    /**
+     * 
+     */
+    CaptureMode: CaptureMode;
+  }
+  export type CaptureOptionList = CaptureOption[];
+  export type CaptureStatus = "Started"|"Stopped"|string;
   export interface CategoricalParameterRange {
     /**
      * The name of the categorical hyperparameter to tune.
@@ -932,6 +1699,19 @@ declare namespace SageMaker {
   }
   export type CognitoUserGroup = string;
   export type CognitoUserPool = string;
+  export interface CollectionConfiguration {
+    /**
+     * The name of the tensor collection.
+     */
+    CollectionName?: CollectionName;
+    /**
+     * Parameter values for the tensor collection. The allowed parameters are "name", "include_regex", "reduction_config", "save_config", "tensor_names", and "save_histogram".
+     */
+    CollectionParameters?: CollectionParameters;
+  }
+  export type CollectionConfigurations = CollectionConfiguration[];
+  export type CollectionName = string;
+  export type CollectionParameters = {[key: string]: ConfigValue};
   export type CompilationJobArn = string;
   export type CompilationJobStatus = "INPROGRESS"|"COMPLETED"|"FAILED"|"STARTING"|"STOPPING"|"STOPPED"|string;
   export type CompilationJobSummaries = CompilationJobSummary[];
@@ -971,9 +1751,13 @@ declare namespace SageMaker {
   }
   export type CompressionType = "None"|"Gzip"|string;
   export type CompressionTypes = CompressionType[];
+  export type ConfigKey = string;
+  export type ConfigValue = string;
+  export type ContainerArgument = string;
+  export type ContainerArguments = ContainerArgument[];
   export interface ContainerDefinition {
     /**
-     * This parameter is ignored for models that contain only a PrimaryContainer. When a ContainerDefinition is part of an inference pipeline, the value of ths parameter uniquely identifies the container for the purposes of logging and metrics. For information, see Use Logs and Metrics to Monitor an Inference Pipeline. If you don't specify a value for this parameter for a ContainerDefinition that is part of an inference pipeline, a unique name is automatically assigned based on the position of the ContainerDefinition in the pipeline. If you specify a value for the ContainerHostName for any ContainerDefinition that is part of an inference pipeline, you must specify a value for the ContainerHostName parameter of every ContainerDefinition in that pipeline.
+     * This parameter is ignored for models that contain only a PrimaryContainer. When a ContainerDefinition is part of an inference pipeline, the value of the parameter uniquely identifies the container for the purposes of logging and metrics. For information, see Use Logs and Metrics to Monitor an Inference Pipeline. If you don't specify a value for this parameter for a ContainerDefinition that is part of an inference pipeline, a unique name is automatically assigned based on the position of the ContainerDefinition in the pipeline. If you specify a value for the ContainerHostName for any ContainerDefinition that is part of an inference pipeline, you must specify a value for the ContainerHostName parameter of every ContainerDefinition in that pipeline.
      */
     ContainerHostname?: ContainerHostname;
     /**
@@ -981,7 +1765,7 @@ declare namespace SageMaker {
      */
     Image?: Image;
     /**
-     * Specifies whether the container hosts a single model or multiple models.
+     * Whether the container hosts a single model or multiple models.
      */
     Mode?: ContainerMode;
     /**
@@ -998,6 +1782,8 @@ declare namespace SageMaker {
     ModelPackageName?: ArnOrName;
   }
   export type ContainerDefinitionList = ContainerDefinition[];
+  export type ContainerEntrypoint = ContainerEntrypointString[];
+  export type ContainerEntrypointString = string;
   export type ContainerHostname = string;
   export type ContainerMode = "SingleModel"|"MultiModel"|string;
   export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
@@ -1065,6 +1851,82 @@ declare namespace SageMaker {
      */
     AlgorithmArn: AlgorithmArn;
   }
+  export interface CreateAppRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName: UserProfileName;
+    /**
+     * The type of app.
+     */
+    AppType: AppType;
+    /**
+     * The name of the app.
+     */
+    AppName: AppName;
+    /**
+     * Each tag consists of a key and an optional value. Tag keys must be unique per resource.
+     */
+    Tags?: TagList;
+    /**
+     * The instance type and quantity.
+     */
+    ResourceSpec?: ResourceSpec;
+  }
+  export interface CreateAppResponse {
+    /**
+     * The app's Amazon Resource Name (ARN).
+     */
+    AppArn?: AppArn;
+  }
+  export interface CreateAutoMLJobRequest {
+    /**
+     * Identifies an AutoPilot job. Must be unique to your account and is case-insensitive.
+     */
+    AutoMLJobName: AutoMLJobName;
+    /**
+     * Similar to InputDataConfig supported by Tuning. Format(s) supported: CSV.
+     */
+    InputDataConfig: AutoMLInputDataConfig;
+    /**
+     * Similar to OutputDataConfig supported by Tuning. Format(s) supported: CSV.
+     */
+    OutputDataConfig: AutoMLOutputDataConfig;
+    /**
+     * Defines the kind of preprocessing and algorithms intended for the candidates. Options include: BinaryClassification, MulticlassClassification, and Regression.
+     */
+    ProblemType?: ProblemType;
+    /**
+     * Defines the job's objective. You provide a MetricName and AutoML will infer minimize or maximize. If this is not provided, the most commonly used ObjectiveMetric for problem type will be selected.
+     */
+    AutoMLJobObjective?: AutoMLJobObjective;
+    /**
+     * Contains CompletionCriteria and SecurityConfig.
+     */
+    AutoMLJobConfig?: AutoMLJobConfig;
+    /**
+     * The ARN of the role that will be used to access the data.
+     */
+    RoleArn: RoleArn;
+    /**
+     * This will generate possible candidates without training a model. A candidate is a combination of data preprocessors, algorithms, and algorithm parameter settings.
+     */
+    GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
+    /**
+     * Each tag consists of a key and an optional value. Tag keys must be unique per resource.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateAutoMLJobResponse {
+    /**
+     * When a job is created, it is assigned a unique ARN.
+     */
+    AutoMLJobArn: AutoMLJobArn;
+  }
   export interface CreateCodeRepositoryInput {
     /**
      * The name of the Git repository. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
@@ -1109,6 +1971,46 @@ declare namespace SageMaker {
      */
     CompilationJobArn: CompilationJobArn;
   }
+  export interface CreateDomainRequest {
+    /**
+     * A name for the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The mode of authentication that member use to access the domain.
+     */
+    AuthMode: AuthMode;
+    /**
+     * The default user settings.
+     */
+    DefaultUserSettings: UserSettings;
+    /**
+     * Security setting to limit to a set of subnets.
+     */
+    SubnetIds: Subnets;
+    /**
+     * Security setting to limit the domain's communication to a Amazon Virtual Private Cloud.
+     */
+    VpcId: VpcId;
+    /**
+     * Each tag consists of a key and an optional value. Tag keys must be unique per resource.
+     */
+    Tags?: TagList;
+    /**
+     * The AWS Key Management Service encryption key ID.
+     */
+    HomeEfsFileSystemKmsKeyId?: KmsKeyId;
+  }
+  export interface CreateDomainResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the created domain.
+     */
+    DomainArn?: DomainArn;
+    /**
+     * The URL to the created domain.
+     */
+    Url?: String1024;
+  }
   export interface CreateEndpointConfigInput {
     /**
      * The name of the endpoint configuration. You specify this name in a CreateEndpoint request. 
@@ -1118,6 +2020,7 @@ declare namespace SageMaker {
      * An list of ProductionVariant objects, one for each model that you want to host at this endpoint.
      */
     ProductionVariants: ProductionVariantList;
+    DataCaptureConfig?: DataCaptureConfig;
     /**
      * A list of key-value pairs. For more information, see Using Cost Allocation Tags in the  AWS Billing and Cost Management User Guide. 
      */
@@ -1153,6 +2056,79 @@ declare namespace SageMaker {
      */
     EndpointArn: EndpointArn;
   }
+  export interface CreateExperimentRequest {
+    /**
+     * The name of the experiment. The name must be unique in your AWS account and is not case-sensitive.
+     */
+    ExperimentName: ExperimentEntityName;
+    /**
+     * The name of the experiment as displayed. The name doesn't need to be unique. If you don't specify DisplayName, the value in ExperimentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The description of the experiment.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * A list of tags to associate with the experiment. You can use Search API to search on the tags.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateExperimentResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the experiment.
+     */
+    ExperimentArn?: ExperimentArn;
+  }
+  export interface CreateFlowDefinitionRequest {
+    /**
+     * The name of your flow definition.
+     */
+    FlowDefinitionName: FlowDefinitionName;
+    /**
+     * An object containing information about the events that trigger a human workflow.
+     */
+    HumanLoopActivationConfig?: HumanLoopActivationConfig;
+    /**
+     * An object containing information about the tasks the human reviewers will perform.
+     */
+    HumanLoopConfig: HumanLoopConfig;
+    /**
+     * An object containing information about where the human review results will be uploaded.
+     */
+    OutputConfig: FlowDefinitionOutputConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the role needed to call other services on your behalf. For example, arn:aws:iam::1234567890:role/service-role/AmazonSageMaker-ExecutionRole-20180111T151298.
+     */
+    RoleArn: RoleArn;
+    /**
+     * An array of key-value pairs that contain metadata to help you categorize and organize a flow definition. Each tag consists of a key and a value, both of which you define.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateFlowDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow definition you create.
+     */
+    FlowDefinitionArn: FlowDefinitionArn;
+  }
+  export interface CreateHumanTaskUiRequest {
+    /**
+     * The name of the user interface you are creating.
+     */
+    HumanTaskUiName: HumanTaskUiName;
+    UiTemplate: UiTemplate;
+    /**
+     * An array of key-value pairs that contain metadata to help you categorize and organize a human review workflow user interface. Each tag consists of a key and a value, both of which you define.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateHumanTaskUiResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the human review workflow user interface you create.
+     */
+    HumanTaskUiArn: HumanTaskUiArn;
+  }
   export interface CreateHyperParameterTuningJobRequest {
     /**
      * The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have { } to { } characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.
@@ -1166,6 +2142,10 @@ declare namespace SageMaker {
      * The HyperParameterTrainingJobDefinition object that describes the training jobs that this tuning job launches, including static hyperparameters, input data configuration, output data configuration, resource configuration, and stopping condition.
      */
     TrainingJobDefinition?: HyperParameterTrainingJobDefinition;
+    /**
+     * 
+     */
+    TrainingJobDefinitions?: HyperParameterTrainingJobDefinitions;
     /**
      * Specifies the configuration for starting the hyperparameter tuning job using one or more previous tuning jobs as a starting point. The results of previous tuning jobs are used to inform which combinations of hyperparameters to search over in the new tuning job. All training jobs launched by the new hyperparameter tuning job are evaluated by using the objective metric. If you specify IDENTICAL_DATA_AND_ALGORITHM as the WarmStartType value for the warm start configuration, the training job that performs the best in the new tuning job is compared to the best training jobs from the parent tuning jobs. From these, the training job that performs the best as measured by the objective metric is returned as the overall best training job.  All training jobs launched by parent hyperparameter tuning jobs and the new hyperparameter tuning jobs count against the limit of training jobs for the tuning job. 
      */
@@ -1215,7 +2195,7 @@ declare namespace SageMaker {
      */
     LabelingJobAlgorithmsConfig?: LabelingJobAlgorithmsConfig;
     /**
-     * Configures the information required for human workers to complete a labeling task.
+     * Configures the labeling task and how it is presented to workers; including, but not limited to price, keywords, and batch size (task count).
      */
     HumanTaskConfig: HumanTaskConfig;
     /**
@@ -1297,6 +2277,26 @@ declare namespace SageMaker {
      */
     ModelPackageArn: ModelPackageArn;
   }
+  export interface CreateMonitoringScheduleRequest {
+    /**
+     * The name of the monitoring schedule. The name must be unique within an AWS Region within an AWS account.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+    /**
+     * The configuration object that specifies the monitoring schedule and defines the monitoring job.
+     */
+    MonitoringScheduleConfig: MonitoringScheduleConfig;
+    /**
+     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateMonitoringScheduleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the monitoring schedule.
+     */
+    MonitoringScheduleArn: MonitoringScheduleArn;
+  }
   export interface CreateNotebookInstanceInput {
     /**
      * The name of the new notebook instance.
@@ -1315,7 +2315,7 @@ declare namespace SageMaker {
      */
     SecurityGroupIds?: SecurityGroupIds;
     /**
-     *  When you send any requests to AWS resources from the notebook instance, Amazon SageMaker assumes this role to perform tasks on your behalf. You must grant this role necessary permissions so Amazon SageMaker can perform these tasks. The policy must allow the Amazon SageMaker service principal (sagemaker.amazonaws.com) permissionsto to assume this role. For more information, see Amazon SageMaker Roles.   To be able to pass this role to Amazon SageMaker, the caller of this API must have the iam:PassRole permission. 
+     *  When you send any requests to AWS resources from the notebook instance, Amazon SageMaker assumes this role to perform tasks on your behalf. You must grant this role necessary permissions so Amazon SageMaker can perform these tasks. The policy must allow the Amazon SageMaker service principal (sagemaker.amazonaws.com) permissions to assume this role. For more information, see Amazon SageMaker Roles.   To be able to pass this role to Amazon SageMaker, the caller of this API must have the iam:PassRole permission. 
      */
     RoleArn: RoleArn;
     /**
@@ -1381,6 +2381,26 @@ declare namespace SageMaker {
      */
     NotebookInstanceArn?: NotebookInstanceArn;
   }
+  export interface CreatePresignedDomainUrlRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * The name of the UserProfile to sign-in as.
+     */
+    UserProfileName: UserProfileName;
+    /**
+     * The session expiration duration in seconds.
+     */
+    SessionExpirationDurationInSeconds?: SessionExpirationDurationInSeconds;
+  }
+  export interface CreatePresignedDomainUrlResponse {
+    /**
+     * The presigned URL.
+     */
+    AuthorizedUrl?: PresignedDomainUrl;
+  }
   export interface CreatePresignedNotebookInstanceUrlInput {
     /**
      * The name of the notebook instance.
@@ -1396,6 +2416,55 @@ declare namespace SageMaker {
      * A JSON object that contains the URL string. 
      */
     AuthorizedUrl?: NotebookInstanceUrl;
+  }
+  export interface CreateProcessingJobRequest {
+    /**
+     * For each input, data is downloaded from S3 into the processing container before the processing job begins running if "S3InputMode" is set to File.
+     */
+    ProcessingInputs?: ProcessingInputs;
+    /**
+     * Output configuration for the processing job.
+     */
+    ProcessingOutputConfig?: ProcessingOutputConfig;
+    /**
+     *  The name of the processing job. The name must be unique within an AWS Region in the AWS account.
+     */
+    ProcessingJobName: ProcessingJobName;
+    /**
+     * Identifies the resources, ML compute instances, and ML storage volumes to deploy for a processing job. In distributed training, you specify more than one instance.
+     */
+    ProcessingResources: ProcessingResources;
+    /**
+     * The time limit for how long the processing job is allowed to run.
+     */
+    StoppingCondition?: ProcessingStoppingCondition;
+    /**
+     * Configures the processing job to run a specified Docker container image.
+     */
+    AppSpecification: AppSpecification;
+    /**
+     * Sets the environment variables in the Docker container.
+     */
+    Environment?: ProcessingEnvironmentMap;
+    /**
+     * Networking options for a processing job.
+     */
+    NetworkConfig?: NetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    /**
+     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     */
+    Tags?: TagList;
+    ExperimentConfig?: ExperimentConfig;
+  }
+  export interface CreateProcessingJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the processing job.
+     */
+    ProcessingJobArn: ProcessingJobArn;
   }
   export interface CreateTrainingJobRequest {
     /**
@@ -1454,6 +2523,13 @@ declare namespace SageMaker {
      * Contains information about the output location for managed spot training checkpoint data.
      */
     CheckpointConfig?: CheckpointConfig;
+    DebugHookConfig?: DebugHookConfig;
+    /**
+     * Configuration information for debugging rules.
+     */
+    DebugRuleConfigurations?: DebugRuleConfigurations;
+    TensorBoardOutputConfig?: TensorBoardOutputConfig;
+    ExperimentConfig?: ExperimentConfig;
   }
   export interface CreateTrainingJobResponse {
     /**
@@ -1471,7 +2547,7 @@ declare namespace SageMaker {
      */
     ModelName: ModelName;
     /**
-     * The maximum number of parallel requests that can be sent to each instance in a transform job. If MaxConcurrentTransforms is set to 0 or left unset, Amazon SageMaker checks the optional execution-parameters to determine the optimal settings for your chosen algorithm. If the execution-parameters endpoint is not enabled, the default value is 1. For more information on execution-parameters, see How Containers Serve Requests. For built-in algorithms, you don't need to set a value for MaxConcurrentTransforms.
+     * The maximum number of parallel requests that can be sent to each instance in a transform job. If MaxConcurrentTransforms is set to 0 or left unset, Amazon SageMaker checks the optional execution-parameters to determine the settings for your chosen algorithm. If the execution-parameters endpoint is not enabled, the default value is 1. For more information on execution-parameters, see How Containers Serve Requests. For built-in algorithms, you don't need to set a value for MaxConcurrentTransforms.
      */
     MaxConcurrentTransforms?: MaxConcurrentTransforms;
     /**
@@ -1506,12 +2582,113 @@ declare namespace SageMaker {
      * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
      */
     Tags?: TagList;
+    ExperimentConfig?: ExperimentConfig;
   }
   export interface CreateTransformJobResponse {
     /**
      * The Amazon Resource Name (ARN) of the transform job.
      */
     TransformJobArn: TransformJobArn;
+  }
+  export interface CreateTrialComponentRequest {
+    /**
+     * The name of the component. The name must be unique in your AWS account and is not case-sensitive.
+     */
+    TrialComponentName: ExperimentEntityName;
+    /**
+     * The name of the component as displayed. The name doesn't need to be unique. If DisplayName isn't specified, TrialComponentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The status of the component. States include:   InProgress   Completed   Failed  
+     */
+    Status?: TrialComponentStatus;
+    /**
+     * When the component started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * When the component ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The hyperparameters for the component.
+     */
+    Parameters?: TrialComponentParameters;
+    /**
+     * The input artifacts for the component. Examples of input artifacts are datasets, algorithms, hyperparameters, source code, and instance types.
+     */
+    InputArtifacts?: TrialComponentArtifacts;
+    /**
+     * The output artifacts for the component. Examples of output artifacts are metrics, snapshots, logs, and images.
+     */
+    OutputArtifacts?: TrialComponentArtifacts;
+    /**
+     * A list of tags to associate with the component. You can use Search API to search on the tags.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateTrialComponentResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the trial component.
+     */
+    TrialComponentArn?: TrialComponentArn;
+  }
+  export interface CreateTrialRequest {
+    /**
+     * The name of the trial. The name must be unique in your AWS account and is not case-sensitive.
+     */
+    TrialName: ExperimentEntityName;
+    /**
+     * The name of the trial as displayed. The name doesn't need to be unique. If DisplayName isn't specified, TrialName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The name of the experiment to associate the trial with.
+     */
+    ExperimentName: ExperimentEntityName;
+    /**
+     * A list of tags to associate with the trial. You can use Search API to search on the tags.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateTrialResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the trial.
+     */
+    TrialArn?: TrialArn;
+  }
+  export interface CreateUserProfileRequest {
+    /**
+     * The ID of the associated Domain.
+     */
+    DomainId: DomainId;
+    /**
+     * A name for the UserProfile.
+     */
+    UserProfileName: UserProfileName;
+    /**
+     * A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is "UserName". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified. 
+     */
+    SingleSignOnUserIdentifier?: SingleSignOnUserIdentifier;
+    /**
+     * The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified. 
+     */
+    SingleSignOnUserValue?: String256;
+    /**
+     * Each tag consists of a key and an optional value. Tag keys must be unique per resource.
+     */
+    Tags?: TagList;
+    /**
+     * A collection of settings.
+     */
+    UserSettings?: UserSettings;
+  }
+  export interface CreateUserProfileResponse {
+    /**
+     * The user profile Amazon Resource Name (ARN).
+     */
+    UserProfileArn?: UserProfileArn;
   }
   export interface CreateWorkteamRequest {
     /**
@@ -1542,6 +2719,57 @@ declare namespace SageMaker {
     WorkteamArn?: WorkteamArn;
   }
   export type CreationTime = Date;
+  export type CsvContentType = string;
+  export type CsvContentTypes = CsvContentType[];
+  export interface DataCaptureConfig {
+    /**
+     * 
+     */
+    EnableCapture?: EnableCapture;
+    /**
+     * 
+     */
+    InitialSamplingPercentage: SamplingPercentage;
+    /**
+     * 
+     */
+    DestinationS3Uri: DestinationS3Uri;
+    /**
+     * 
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * 
+     */
+    CaptureOptions: CaptureOptionList;
+    /**
+     * 
+     */
+    CaptureContentTypeHeader?: CaptureContentTypeHeader;
+  }
+  export interface DataCaptureConfigSummary {
+    /**
+     * 
+     */
+    EnableCapture: EnableCapture;
+    /**
+     * 
+     */
+    CaptureStatus: CaptureStatus;
+    /**
+     * 
+     */
+    CurrentSamplingPercentage: SamplingPercentage;
+    /**
+     * 
+     */
+    DestinationS3Uri: DestinationS3Uri;
+    /**
+     * 
+     */
+    KmsKeyId: KmsKeyId;
+  }
+  export type DataExplorationNotebookLocation = string;
   export type DataInputConfig = string;
   export interface DataProcessing {
     /**
@@ -1567,17 +2795,117 @@ declare namespace SageMaker {
      */
     FileSystemDataSource?: FileSystemDataSource;
   }
+  export interface DebugHookConfig {
+    /**
+     * Path to local storage location for tensors. Defaults to /opt/ml/output/tensors/.
+     */
+    LocalPath?: DirectoryPath;
+    /**
+     * Path to Amazon S3 storage location for tensors.
+     */
+    S3OutputPath: S3Uri;
+    /**
+     * Configuration information for the debug hook parameters.
+     */
+    HookParameters?: HookParameters;
+    /**
+     * Configuration information for tensor collections.
+     */
+    CollectionConfigurations?: CollectionConfigurations;
+  }
+  export interface DebugRuleConfiguration {
+    /**
+     * The name of the rule configuration. It must be unique relative to other rule configuration names.
+     */
+    RuleConfigurationName: RuleConfigurationName;
+    /**
+     * Path to local storage location for rules. Defaults to /opt/ml/processing/output/rule/.
+     */
+    LocalPath?: DirectoryPath;
+    /**
+     * Path to Amazon S3 storage location for rules.
+     */
+    S3OutputPath?: S3Uri;
+    /**
+     * The Amazon Elastic Container (ECR) Image for the managed rule evaluation.
+     */
+    RuleEvaluatorImage: AlgorithmImage;
+    /**
+     * The instance type to deploy for a training job.
+     */
+    InstanceType?: ProcessingInstanceType;
+    /**
+     * The size, in GB, of the ML storage volume attached to the notebook instance.
+     */
+    VolumeSizeInGB?: OptionalVolumeSizeInGB;
+    /**
+     *  Runtime configuration for rule container.
+     */
+    RuleParameters?: RuleParameters;
+  }
+  export type DebugRuleConfigurations = DebugRuleConfiguration[];
+  export interface DebugRuleEvaluationStatus {
+    /**
+     * The name of the rule configuration
+     */
+    RuleConfigurationName?: RuleConfigurationName;
+    /**
+     * The Amazon Resource Name (ARN) of the rule evaluation job.
+     */
+    RuleEvaluationJobArn?: ProcessingJobArn;
+    /**
+     * Status of the rule evaluation.
+     */
+    RuleEvaluationStatus?: RuleEvaluationStatus;
+    /**
+     * Details from the rule evaluation.
+     */
+    StatusDetails?: StatusDetails;
+    /**
+     * Timestamp when the rule evaluation status was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type DebugRuleEvaluationStatuses = DebugRuleEvaluationStatus[];
   export interface DeleteAlgorithmInput {
     /**
      * The name of the algorithm to delete.
      */
     AlgorithmName: EntityName;
   }
+  export interface DeleteAppRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName: UserProfileName;
+    /**
+     * The type of app.
+     */
+    AppType: AppType;
+    /**
+     * The name of the app.
+     */
+    AppName: AppName;
+  }
   export interface DeleteCodeRepositoryInput {
     /**
      * The name of the Git repository to delete.
      */
     CodeRepositoryName: EntityName;
+  }
+  export interface DeleteDomainRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * The retention policy for this domain, which specifies which resources will be retained after the Domain is deleted. By default, all resources are retained (not automatically deleted). 
+     */
+    RetentionPolicy?: RetentionPolicy;
   }
   export interface DeleteEndpointConfigInput {
     /**
@@ -1591,6 +2919,26 @@ declare namespace SageMaker {
      */
     EndpointName: EndpointName;
   }
+  export interface DeleteExperimentRequest {
+    /**
+     * The name of the experiment to delete.
+     */
+    ExperimentName: ExperimentEntityName;
+  }
+  export interface DeleteExperimentResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the experiment that is being deleted.
+     */
+    ExperimentArn?: ExperimentArn;
+  }
+  export interface DeleteFlowDefinitionRequest {
+    /**
+     * The name of the flow definition you are deleting.
+     */
+    FlowDefinitionName: FlowDefinitionName;
+  }
+  export interface DeleteFlowDefinitionResponse {
+  }
   export interface DeleteModelInput {
     /**
      * The name of the model to delete.
@@ -1602,6 +2950,12 @@ declare namespace SageMaker {
      * The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
      */
     ModelPackageName: EntityName;
+  }
+  export interface DeleteMonitoringScheduleRequest {
+    /**
+     * The name of the monitoring schedule to delete.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
   }
   export interface DeleteNotebookInstanceInput {
     /**
@@ -1626,6 +2980,40 @@ declare namespace SageMaker {
     TagKeys: TagKeyList;
   }
   export interface DeleteTagsOutput {
+  }
+  export interface DeleteTrialComponentRequest {
+    /**
+     * The name of the component to delete.
+     */
+    TrialComponentName: ExperimentEntityName;
+  }
+  export interface DeleteTrialComponentResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the component is being deleted.
+     */
+    TrialComponentArn?: TrialComponentArn;
+  }
+  export interface DeleteTrialRequest {
+    /**
+     * The name of the trial to delete.
+     */
+    TrialName: ExperimentEntityName;
+  }
+  export interface DeleteTrialResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the trial that is being deleted.
+     */
+    TrialArn?: TrialArn;
+  }
+  export interface DeleteUserProfileRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName: UserProfileName;
   }
   export interface DeleteWorkteamRequest {
     /**
@@ -1705,6 +3093,150 @@ declare namespace SageMaker {
      * Whether the algorithm is certified to be listed in AWS Marketplace.
      */
     CertifyForMarketplace?: CertifyForMarketplace;
+  }
+  export interface DescribeAppRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName: UserProfileName;
+    /**
+     * The type of app.
+     */
+    AppType: AppType;
+    /**
+     * The name of the app.
+     */
+    AppName: AppName;
+  }
+  export interface DescribeAppResponse {
+    /**
+     * The app's Amazon Resource Name (ARN).
+     */
+    AppArn?: AppArn;
+    /**
+     * The type of app.
+     */
+    AppType?: AppType;
+    /**
+     * The name of the app.
+     */
+    AppName?: AppName;
+    /**
+     * The domain ID.
+     */
+    DomainId?: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName?: UserProfileName;
+    /**
+     * The status.
+     */
+    Status?: AppStatus;
+    /**
+     * The timestamp of the last health check.
+     */
+    LastHealthCheckTimestamp?: Timestamp;
+    /**
+     * The timestamp of the last user's activity.
+     */
+    LastUserActivityTimestamp?: Timestamp;
+    /**
+     * The creation time.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The failure reason.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The instance type and quantity.
+     */
+    ResourceSpec?: ResourceSpec;
+  }
+  export interface DescribeAutoMLJobRequest {
+    /**
+     * Request information about a job using that job's unique name.
+     */
+    AutoMLJobName: AutoMLJobName;
+  }
+  export interface DescribeAutoMLJobResponse {
+    /**
+     * Returns the name of a job.
+     */
+    AutoMLJobName: AutoMLJobName;
+    /**
+     * Returns the job's ARN.
+     */
+    AutoMLJobArn: AutoMLJobArn;
+    /**
+     * Returns the job's input data config.
+     */
+    InputDataConfig: AutoMLInputDataConfig;
+    /**
+     * Returns the job's output data config.
+     */
+    OutputDataConfig: AutoMLOutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     */
+    RoleArn: RoleArn;
+    /**
+     * Returns the job's objective.
+     */
+    AutoMLJobObjective?: AutoMLJobObjective;
+    /**
+     * Returns the job's problem type.
+     */
+    ProblemType?: ProblemType;
+    /**
+     * Returns the job's config.
+     */
+    AutoMLJobConfig?: AutoMLJobConfig;
+    /**
+     * Returns the job's creation time.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Returns the job's end time.
+     */
+    EndTime?: Timestamp;
+    /**
+     * Returns the job's last modified time.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * Returns the job's FailureReason.
+     */
+    FailureReason?: AutoMLFailureReason;
+    /**
+     * Returns the job's BestCandidate.
+     */
+    BestCandidate?: AutoMLCandidate;
+    /**
+     * Returns the job's AutoMLJobStatus.
+     */
+    AutoMLJobStatus: AutoMLJobStatus;
+    /**
+     * Returns the job's AutoMLJobSecondaryStatus.
+     */
+    AutoMLJobSecondaryStatus: AutoMLJobSecondaryStatus;
+    /**
+     * Returns the job's output from GenerateCandidateDefinitionsOnly.
+     */
+    GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
+    /**
+     * Returns information on the job's artifacts found in AutoMLJobArtifacts.
+     */
+    AutoMLJobArtifacts?: AutoMLJobArtifacts;
+    /**
+     * This contains ProblemType, AutoMLJobObjective and CompletionCriteria. They’re auto-inferred values, if not provided by you. If you do provide them, then they’ll be the same as provided.
+     */
+    ResolvedAttributes?: ResolvedAttributes;
   }
   export interface DescribeCodeRepositoryInput {
     /**
@@ -1794,6 +3326,74 @@ declare namespace SageMaker {
      */
     OutputConfig: OutputConfig;
   }
+  export interface DescribeDomainRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+  }
+  export interface DescribeDomainResponse {
+    /**
+     * The domain's Amazon Resource Name (ARN).
+     */
+    DomainArn?: DomainArn;
+    /**
+     * The domain ID.
+     */
+    DomainId?: DomainId;
+    /**
+     * The domain name.
+     */
+    DomainName?: DomainName;
+    /**
+     * The ID of the Amazon Elastic File System (EFS) managed by this Domain.
+     */
+    HomeEfsFileSystemId?: ResourceId;
+    /**
+     * The SSO managed application instance ID.
+     */
+    SingleSignOnManagedApplicationInstanceId?: String256;
+    /**
+     * The status.
+     */
+    Status?: DomainStatus;
+    /**
+     * The creation time.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The last modified time.
+     */
+    LastModifiedTime?: LastModifiedTime;
+    /**
+     * The failure reason.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The domain's authentication mode.
+     */
+    AuthMode?: AuthMode;
+    /**
+     * Settings which are applied to all UserProfile in this domain, if settings are not explicitly specified in a given UserProfile. 
+     */
+    DefaultUserSettings?: UserSettings;
+    /**
+     * The AWS Key Management Service encryption key ID.
+     */
+    HomeEfsFileSystemKmsKeyId?: KmsKeyId;
+    /**
+     * Security setting to limit to a set of subnets.
+     */
+    SubnetIds?: Subnets;
+    /**
+     * The domain's URL.
+     */
+    Url?: String1024;
+    /**
+     * The ID of the Amazon Virtual Private Cloud.
+     */
+    VpcId?: VpcId;
+  }
   export interface DescribeEndpointConfigInput {
     /**
      * The name of the endpoint configuration.
@@ -1813,6 +3413,7 @@ declare namespace SageMaker {
      * An array of ProductionVariant objects, one for each model that you want to host at this endpoint.
      */
     ProductionVariants: ProductionVariantList;
+    DataCaptureConfig?: DataCaptureConfig;
     /**
      * AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance.
      */
@@ -1845,6 +3446,7 @@ declare namespace SageMaker {
      *  An array of ProductionVariantSummary objects, one for each model hosted behind this endpoint. 
      */
     ProductionVariants?: ProductionVariantSummaryList;
+    DataCaptureConfig?: DataCaptureConfigSummary;
     /**
      * The status of the endpoint.    OutOfService: Endpoint is not available to take incoming requests.    Creating: CreateEndpoint is executing.    Updating: UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.    SystemUpdating: Endpoint is undergoing maintenance and cannot be updated or deleted or re-scaled until it has completed. This maintenance operation does not change any customer-specified values such as VPC config, KMS encryption, model, instance type, or instance count.    RollingBack: Endpoint fails to scale up or down or change its variant weight and is in the process of rolling back to its previous configuration. Once the rollback completes, endpoint returns to an InService status. This transitional status only applies to an endpoint that has autoscaling enabled and is undergoing variant weight or capacity changes as part of an UpdateEndpointWeightsAndCapacities call or when the UpdateEndpointWeightsAndCapacities operation is called explicitly.    InService: Endpoint is available to process incoming requests.    Deleting: DeleteEndpoint is executing.    Failed: Endpoint could not be created, updated, or re-scaled. Use DescribeEndpointOutput$FailureReason for information about the failure. DeleteEndpoint is the only operation that can be performed on a failed endpoint.  
      */
@@ -1861,6 +3463,115 @@ declare namespace SageMaker {
      * A timestamp that shows when the endpoint was last modified.
      */
     LastModifiedTime: Timestamp;
+  }
+  export interface DescribeExperimentRequest {
+    /**
+     * The name of the experiment to describe.
+     */
+    ExperimentName: ExperimentEntityName;
+  }
+  export interface DescribeExperimentResponse {
+    /**
+     * The name of the experiment.
+     */
+    ExperimentName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the experiment.
+     */
+    ExperimentArn?: ExperimentArn;
+    /**
+     * The name of the experiment as displayed. If DisplayName isn't specified, ExperimentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The ARN of the source and, optionally, the type.
+     */
+    Source?: ExperimentSource;
+    /**
+     * The description of the experiment.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * When the experiment was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Who created the experiment.
+     */
+    CreatedBy?: UserContext;
+    /**
+     * When the experiment was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * Who last modified the experiment.
+     */
+    LastModifiedBy?: UserContext;
+  }
+  export interface DescribeFlowDefinitionRequest {
+    /**
+     * The name of the flow definition.
+     */
+    FlowDefinitionName: FlowDefinitionName;
+  }
+  export interface DescribeFlowDefinitionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow defintion.
+     */
+    FlowDefinitionArn: FlowDefinitionArn;
+    /**
+     * The Amazon Resource Name (ARN) of the flow definition.
+     */
+    FlowDefinitionName: FlowDefinitionName;
+    /**
+     * The status of the flow definition. Valid values are listed below.
+     */
+    FlowDefinitionStatus: FlowDefinitionStatus;
+    /**
+     * The timestamp when the flow definition was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * An object containing information about what triggers a human review workflow.
+     */
+    HumanLoopActivationConfig?: HumanLoopActivationConfig;
+    /**
+     * An object containing information about who works on the task, the workforce task price, and other task details.
+     */
+    HumanLoopConfig: HumanLoopConfig;
+    /**
+     * An object containing information about the output file.
+     */
+    OutputConfig: FlowDefinitionOutputConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) execution role for the flow definition.
+     */
+    RoleArn: RoleArn;
+    /**
+     * 
+     */
+    FailureReason?: FailureReason;
+  }
+  export interface DescribeHumanTaskUiRequest {
+    /**
+     * The name of the human task user interface you want information about.
+     */
+    HumanTaskUiName: HumanTaskUiName;
+  }
+  export interface DescribeHumanTaskUiResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the human task user interface.
+     */
+    HumanTaskUiArn: HumanTaskUiArn;
+    /**
+     * The name of the human task user interface.
+     */
+    HumanTaskUiName: HumanTaskUiName;
+    /**
+     * The timestamp when the human task user interface was created.
+     */
+    CreationTime: Timestamp;
+    UiTemplate: UiTemplateInfo;
   }
   export interface DescribeHyperParameterTuningJobRequest {
     /**
@@ -1885,6 +3596,10 @@ declare namespace SageMaker {
      * The HyperParameterTrainingJobDefinition object that specifies the definition of the training jobs that this tuning job launches.
      */
     TrainingJobDefinition?: HyperParameterTrainingJobDefinition;
+    /**
+     * 
+     */
+    TrainingJobDefinitions?: HyperParameterTrainingJobDefinitions;
     /**
      * The status of the tuning job: InProgress, Completed, Failed, Stopping, or Stopped.
      */
@@ -1982,7 +3697,7 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
     /**
-     * The S3 location of the JSON file that defines the categories used to label data objects. The file is a JSON structure in the following format:  {    "document-version": "2018-11-28"    "labels": [    {    "label": "label 1"    },    {    "label": "label 2"    },    ...    {    "label": "label n"    }    ]   } 
+     * The S3 location of the JSON file that defines the categories used to label data objects. Please note the following label-category limits:   Semantic segmentation labeling jobs using automated labeling: 20 labels   Box bounding labeling jobs (all): 10 lables   The file is a JSON structure in the following format:  {    "document-version": "2018-11-28"    "labels": [    {    "label": "label 1"    },    {    "label": "label 2"    },    ...    {    "label": "label n"    }    ]   } 
      */
     LabelCategoryConfigS3Uri?: S3Uri;
     /**
@@ -2093,6 +3808,50 @@ declare namespace SageMaker {
      * Whether the model package is certified for listing on AWS Marketplace.
      */
     CertifyForMarketplace?: CertifyForMarketplace;
+  }
+  export interface DescribeMonitoringScheduleRequest {
+    /**
+     * Name of a previously created monitoring schedule.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+  }
+  export interface DescribeMonitoringScheduleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the monitoring schedule.
+     */
+    MonitoringScheduleArn: MonitoringScheduleArn;
+    /**
+     * Name of the monitoring schedule.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+    /**
+     * The status of an monitoring job.
+     */
+    MonitoringScheduleStatus: ScheduleStatus;
+    /**
+     * A string, up to one KB in size, that contains the reason a monitoring job failed, if it failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The time at which the monitoring job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The time at which the monitoring job was last modified.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The configuration object that specifies the monitoring schedule and defines the monitoring job.
+     */
+    MonitoringScheduleConfig: MonitoringScheduleConfig;
+    /**
+     *  The name of the endpoint for the monitoring job.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * Describes metadata on the last execution to run, if there was one.
+     */
+    LastMonitoringExecutionSummary?: MonitoringExecutionSummary;
   }
   export interface DescribeNotebookInstanceInput {
     /**
@@ -2214,6 +3973,98 @@ declare namespace SageMaker {
      */
     RootAccess?: RootAccess;
   }
+  export interface DescribeProcessingJobRequest {
+    /**
+     * The name of the processing job. The name must be unique within an AWS Region in the AWS account.
+     */
+    ProcessingJobName: ProcessingJobName;
+  }
+  export interface DescribeProcessingJobResponse {
+    /**
+     * The inputs for a processing job.
+     */
+    ProcessingInputs?: ProcessingInputs;
+    /**
+     * Output configuration for the processing job.
+     */
+    ProcessingOutputConfig?: ProcessingOutputConfig;
+    /**
+     * The name of the processing job. The name must be unique within an AWS Region in the AWS account.
+     */
+    ProcessingJobName: ProcessingJobName;
+    /**
+     * Identifies the resources, ML compute instances, and ML storage volumes to deploy for a processing job. In distributed training, you specify more than one instance.
+     */
+    ProcessingResources: ProcessingResources;
+    /**
+     * The time limit for how long the processing job is allowed to run.
+     */
+    StoppingCondition?: ProcessingStoppingCondition;
+    /**
+     * Configures the processing job to run a specified container image.
+     */
+    AppSpecification: AppSpecification;
+    /**
+     * The environment variables set in the Docker container.
+     */
+    Environment?: ProcessingEnvironmentMap;
+    /**
+     * Networking options for a processing job.
+     */
+    NetworkConfig?: NetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The configuration information used to create an experiment.
+     */
+    ExperimentConfig?: ExperimentConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the processing job.
+     */
+    ProcessingJobArn: ProcessingJobArn;
+    /**
+     * Provides the status of a processing job.
+     */
+    ProcessingJobStatus: ProcessingJobStatus;
+    /**
+     * An optional string, up to one KB in size, that contains metadata from the processing container when the processing job exits.
+     */
+    ExitMessage?: ExitMessage;
+    /**
+     * A string, up to one KB in size, that contains the reason a processing job failed, if it failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The time at which the processing job completed.
+     */
+    ProcessingEndTime?: Timestamp;
+    /**
+     * The time at which the processing job started.
+     */
+    ProcessingStartTime?: Timestamp;
+    /**
+     * The time at which the processing job was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The time at which the processing job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The ARN of a monitoring schedule for an endpoint associated with this processing job.
+     */
+    MonitoringScheduleArn?: MonitoringScheduleArn;
+    /**
+     * The ARN of an AutoML job associated with this processing job.
+     */
+    AutoMLJobArn?: AutoMLJobArn;
+    /**
+     * The ARN of a training job associated with this processing job.
+     */
+    TrainingJobArn?: TrainingJobArn;
+  }
   export interface DescribeSubscribedWorkteamRequest {
     /**
      * The Amazon Resource Name (ARN) of the subscribed work team to describe.
@@ -2249,6 +4100,10 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling job that created the transform or training job.
      */
     LabelingJobArn?: LabelingJobArn;
+    /**
+     * 
+     */
+    AutoMLJobArn?: AutoMLJobArn;
     /**
      * Information about the Amazon S3 location that is configured for storing model artifacts. 
      */
@@ -2342,6 +4197,17 @@ declare namespace SageMaker {
      * The billable time in seconds. You can calculate the savings from using managed spot training using the formula (1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100. For example, if BillableTimeInSeconds is 100 and TrainingTimeInSeconds is 500, the savings is 80%.
      */
     BillableTimeInSeconds?: BillableTimeInSeconds;
+    DebugHookConfig?: DebugHookConfig;
+    ExperimentConfig?: ExperimentConfig;
+    /**
+     * Configuration information for debugging rules.
+     */
+    DebugRuleConfigurations?: DebugRuleConfigurations;
+    TensorBoardOutputConfig?: TensorBoardOutputConfig;
+    /**
+     * Status about the debug rule evaluation.
+     */
+    DebugRuleEvaluationStatuses?: DebugRuleEvaluationStatuses;
   }
   export interface DescribeTransformJobRequest {
     /**
@@ -2414,7 +4280,180 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling job that created the transform or training job.
      */
     LabelingJobArn?: LabelingJobArn;
+    /**
+     * 
+     */
+    AutoMLJobArn?: AutoMLJobArn;
     DataProcessing?: DataProcessing;
+    ExperimentConfig?: ExperimentConfig;
+  }
+  export interface DescribeTrialComponentRequest {
+    /**
+     * The name of the trial component to describe.
+     */
+    TrialComponentName: ExperimentEntityName;
+  }
+  export interface DescribeTrialComponentResponse {
+    /**
+     * The name of the trial component.
+     */
+    TrialComponentName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the trial component.
+     */
+    TrialComponentArn?: TrialComponentArn;
+    /**
+     * The name of the component as displayed. If DisplayName isn't specified, TrialComponentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the source and, optionally, the job type.
+     */
+    Source?: TrialComponentSource;
+    /**
+     * The status of the component. States include:   InProgress   Completed   Failed  
+     */
+    Status?: TrialComponentStatus;
+    /**
+     * When the component started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * When the component ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * When the component was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Who created the component.
+     */
+    CreatedBy?: UserContext;
+    /**
+     * When the component was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * Who last modified the component.
+     */
+    LastModifiedBy?: UserContext;
+    /**
+     * The hyperparameters of the component.
+     */
+    Parameters?: TrialComponentParameters;
+    /**
+     * The input artifacts of the component.
+     */
+    InputArtifacts?: TrialComponentArtifacts;
+    /**
+     * The output artifacts of the component.
+     */
+    OutputArtifacts?: TrialComponentArtifacts;
+    /**
+     * The metrics for the component.
+     */
+    Metrics?: TrialComponentMetricSummaries;
+  }
+  export interface DescribeTrialRequest {
+    /**
+     * The name of the trial to describe.
+     */
+    TrialName: ExperimentEntityName;
+  }
+  export interface DescribeTrialResponse {
+    /**
+     * The name of the trial.
+     */
+    TrialName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the trial.
+     */
+    TrialArn?: TrialArn;
+    /**
+     * The name of the trial as displayed. If DisplayName isn't specified, TrialName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The name of the experiment the trial is part of.
+     */
+    ExperimentName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the source and, optionally, the job type.
+     */
+    Source?: TrialSource;
+    /**
+     * When the trial was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Who created the trial.
+     */
+    CreatedBy?: UserContext;
+    /**
+     * When the trial was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * Who last modified the trial.
+     */
+    LastModifiedBy?: UserContext;
+  }
+  export interface DescribeUserProfileRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName: UserProfileName;
+  }
+  export interface DescribeUserProfileResponse {
+    /**
+     * The domain ID.
+     */
+    DomainId?: DomainId;
+    /**
+     * The user profile Amazon Resource Name (ARN).
+     */
+    UserProfileArn?: UserProfileArn;
+    /**
+     * The user profile name.
+     */
+    UserProfileName?: UserProfileName;
+    /**
+     * The homa Amazon Elastic File System (EFS) Uid.
+     */
+    HomeEfsFileSystemUid?: EfsUid;
+    /**
+     * The status.
+     */
+    Status?: UserProfileStatus;
+    /**
+     * The last modified time.
+     */
+    LastModifiedTime?: LastModifiedTime;
+    /**
+     * The creation time.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The failure reason.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The SSO user identifier.
+     */
+    SingleSignOnUserIdentifier?: SingleSignOnUserIdentifier;
+    /**
+     * The SSO user value.
+     */
+    SingleSignOnUserValue?: String256;
+    /**
+     * A collection of settings.
+     */
+    UserSettings?: UserSettings;
   }
   export interface DescribeWorkteamRequest {
     /**
@@ -2443,6 +4482,7 @@ declare namespace SageMaker {
     DesiredInstanceCount?: TaskCount;
   }
   export type DesiredWeightAndCapacityList = DesiredWeightAndCapacity[];
+  export type DestinationS3Uri = string;
   export type DetailedAlgorithmStatus = "NotStarted"|"InProgress"|"Completed"|"Failed"|string;
   export type DetailedModelPackageStatus = "NotStarted"|"InProgress"|"Completed"|"Failed"|string;
   export type DirectInternetAccess = "Enabled"|"Disabled"|string;
@@ -2451,7 +4491,65 @@ declare namespace SageMaker {
   export type DisassociateDefaultCodeRepository = boolean;
   export type DisassociateNotebookInstanceAcceleratorTypes = boolean;
   export type DisassociateNotebookInstanceLifecycleConfig = boolean;
+  export interface DisassociateTrialComponentRequest {
+    /**
+     * The name of the component to disassociate from the trial.
+     */
+    TrialComponentName: ExperimentEntityName;
+    /**
+     * The name of the trial to disassociate from.
+     */
+    TrialName: ExperimentEntityName;
+  }
+  export interface DisassociateTrialComponentResponse {
+    /**
+     * The ARN of the trial component.
+     */
+    TrialComponentArn?: TrialComponentArn;
+    /**
+     * The Amazon Resource Name (ARN) of the trial.
+     */
+    TrialArn?: TrialArn;
+  }
   export type Dollars = number;
+  export type DomainArn = string;
+  export interface DomainDetails {
+    /**
+     * The domain's Amazon Resource Name (ARN).
+     */
+    DomainArn?: DomainArn;
+    /**
+     * The domain ID.
+     */
+    DomainId?: DomainId;
+    /**
+     * The domain name.
+     */
+    DomainName?: DomainName;
+    /**
+     * The status.
+     */
+    Status?: DomainStatus;
+    /**
+     * The creation time.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The last modified time.
+     */
+    LastModifiedTime?: LastModifiedTime;
+    /**
+     * The domain's URL.
+     */
+    Url?: String1024;
+  }
+  export type DomainId = string;
+  export type DomainList = DomainDetails[];
+  export type DomainName = string;
+  export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|string;
+  export type DoubleParameterValue = number;
+  export type EfsUid = string;
+  export type EnableCapture = boolean;
   export type EndpointArn = string;
   export type EndpointConfigArn = string;
   export type EndpointConfigName = string;
@@ -2472,6 +4570,24 @@ declare namespace SageMaker {
     CreationTime: Timestamp;
   }
   export type EndpointConfigSummaryList = EndpointConfigSummary[];
+  export interface EndpointInput {
+    /**
+     * An endpoint in customer's account which has enabled DataCaptureConfig enabled.
+     */
+    EndpointName: EndpointName;
+    /**
+     * Path to the filesystem where the endpoint data is available to the container.
+     */
+    LocalPath: ProcessingLocalPath;
+    /**
+     * Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
+     */
+    S3InputMode?: ProcessingS3InputMode;
+    /**
+     * Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated 
+     */
+    S3DataDistributionType?: ProcessingS3DataDistributionType;
+  }
   export type EndpointName = string;
   export type EndpointNameContains = string;
   export type EndpointSortKey = "Name"|"CreationTime"|"Status"|string;
@@ -2501,9 +4617,98 @@ declare namespace SageMaker {
   export type EndpointSummaryList = EndpointSummary[];
   export type EntityDescription = string;
   export type EntityName = string;
+  export type EnvironmentArn = string;
   export type EnvironmentKey = string;
   export type EnvironmentMap = {[key: string]: EnvironmentValue};
   export type EnvironmentValue = string;
+  export type ExecutionStatus = "Pending"|"Completed"|"CompletedWithViolations"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
+  export type ExitMessage = string;
+  export interface Experiment {
+    /**
+     * The name of the experiment.
+     */
+    ExperimentName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the experiment.
+     */
+    ExperimentArn?: ExperimentArn;
+    /**
+     * The name of the experiment as displayed. If DisplayName isn't specified, ExperimentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    Source?: ExperimentSource;
+    /**
+     * The description of the experiment.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * When the experiment was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * When the experiment was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    /**
+     * The list of tags that are associated with the experiment. You can use Search API to search on the tags.
+     */
+    Tags?: TagList;
+  }
+  export type ExperimentArn = string;
+  export interface ExperimentConfig {
+    /**
+     * The name of the experiment.
+     */
+    ExperimentName?: ExperimentConfigName;
+    /**
+     * The name of the trial.
+     */
+    TrialName?: ExperimentConfigName;
+    /**
+     * Display name for the trial component.
+     */
+    TrialComponentDisplayName?: ExperimentConfigName;
+  }
+  export type ExperimentConfigName = string;
+  export type ExperimentDescription = string;
+  export type ExperimentEntityName = string;
+  export interface ExperimentSource {
+    /**
+     * The Amazon Resource Name (ARN) of the source.
+     */
+    SourceArn: ExperimentSourceArn;
+    /**
+     * The source type.
+     */
+    SourceType?: SourceType;
+  }
+  export type ExperimentSourceArn = string;
+  export type ExperimentSummaries = ExperimentSummary[];
+  export interface ExperimentSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the experiment.
+     */
+    ExperimentArn?: ExperimentArn;
+    /**
+     * The name of the experiment.
+     */
+    ExperimentName?: ExperimentEntityName;
+    /**
+     * The name of the experiment as displayed. If DisplayName isn't specified, ExperimentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    ExperimentSource?: ExperimentSource;
+    /**
+     * When the experiment was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the experiment was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
   export type FailureReason = string;
   export type FileSystemAccessMode = "rw"|"ro"|string;
   export interface FileSystemDataSource {
@@ -2542,6 +4747,20 @@ declare namespace SageMaker {
   }
   export type FilterList = Filter[];
   export type FilterValue = string;
+  export interface FinalAutoMLJobObjectiveMetric {
+    /**
+     * The metric type used.
+     */
+    Type?: AutoMLJobObjectiveType;
+    /**
+     * The name of the metric.
+     */
+    MetricName: AutoMLMetricEnum;
+    /**
+     * The value of the metric.
+     */
+    Value: MetricValue;
+  }
   export interface FinalHyperParameterTuningJobObjectiveMetric {
     /**
      * Whether to minimize or maximize the objective metric. Valid values are Minimize and Maximize.
@@ -2558,7 +4777,51 @@ declare namespace SageMaker {
   }
   export type FinalMetricDataList = MetricData[];
   export type Float = number;
+  export type FlowDefinitionArn = string;
+  export type FlowDefinitionName = string;
+  export interface FlowDefinitionOutputConfig {
+    /**
+     * The Amazon S3 path where the object containing human output will be made available.
+     */
+    S3OutputPath: S3Uri;
+    /**
+     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export type FlowDefinitionStatus = "Initializing"|"Active"|"Failed"|"Deleting"|"Deleted"|string;
+  export type FlowDefinitionSummaries = FlowDefinitionSummary[];
+  export interface FlowDefinitionSummary {
+    /**
+     * The name of the flow definition.
+     */
+    FlowDefinitionName: FlowDefinitionName;
+    /**
+     * The Amazon Resource Name (ARN) of the flow definition.
+     */
+    FlowDefinitionArn: FlowDefinitionArn;
+    /**
+     * The status of the flow definition. Valid values:
+     */
+    FlowDefinitionStatus: FlowDefinitionStatus;
+    /**
+     * The timestamp when SageMaker created the flow definition.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The reason why the flow definition creation failed. A failure reason is returned only when the flow definition status is Failed.
+     */
+    FailureReason?: FailureReason;
+  }
+  export type FlowDefinitionTaskAvailabilityLifetimeInSeconds = number;
+  export type FlowDefinitionTaskCount = number;
+  export type FlowDefinitionTaskDescription = string;
+  export type FlowDefinitionTaskKeyword = string;
+  export type FlowDefinitionTaskKeywords = FlowDefinitionTaskKeyword[];
+  export type FlowDefinitionTaskTimeLimitInSeconds = number;
+  export type FlowDefinitionTaskTitle = string;
   export type Framework = "TENSORFLOW"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|string;
+  export type GenerateCandidateDefinitionsOnly = boolean;
   export interface GetSearchSuggestionsRequest {
     /**
      * The name of the Amazon SageMaker resource to Search for. The only valid Resource value is TrainingJob.
@@ -2596,6 +4859,65 @@ declare namespace SageMaker {
     SecretArn?: SecretArn;
   }
   export type GitConfigUrl = string;
+  export type HookParameters = {[key: string]: ConfigValue};
+  export type HumanLoopActivationConditions = string;
+  export interface HumanLoopActivationConditionsConfig {
+    /**
+     * JSON expressing use-case specific conditions declaratively. If any condition is matched, atomic tasks are created against the configured work team. The set of conditions is different for Rekognition and Textract.
+     */
+    HumanLoopActivationConditions: HumanLoopActivationConditions;
+  }
+  export interface HumanLoopActivationConfig {
+    /**
+     * Container for configuring the source of human task requests.
+     */
+    HumanLoopRequestSource: HumanLoopRequestSource;
+    /**
+     * Container structure for defining under what conditions SageMaker creates a human loop.
+     */
+    HumanLoopActivationConditionsConfig: HumanLoopActivationConditionsConfig;
+  }
+  export interface HumanLoopConfig {
+    /**
+     * Amazon Resource Name (ARN) of a team of workers.
+     */
+    WorkteamArn: WorkteamArn;
+    /**
+     * The Amazon Resource Name (ARN) of the human task user interface.
+     */
+    HumanTaskUiArn: HumanTaskUiArn;
+    /**
+     * A title for the human worker task.
+     */
+    TaskTitle: FlowDefinitionTaskTitle;
+    /**
+     * A description for the human worker task.
+     */
+    TaskDescription: FlowDefinitionTaskDescription;
+    /**
+     * The number of human tasks.
+     */
+    TaskCount: FlowDefinitionTaskCount;
+    /**
+     * The length of time that a task remains available for labeling by human workers.
+     */
+    TaskAvailabilityLifetimeInSeconds?: FlowDefinitionTaskAvailabilityLifetimeInSeconds;
+    /**
+     * The amount of time that a worker has to complete a task.
+     */
+    TaskTimeLimitInSeconds?: FlowDefinitionTaskTimeLimitInSeconds;
+    /**
+     * Keywords used to describe the task so that workers can discover the task.
+     */
+    TaskKeywords?: FlowDefinitionTaskKeywords;
+    PublicWorkforceTaskPrice?: PublicWorkforceTaskPrice;
+  }
+  export interface HumanLoopRequestSource {
+    /**
+     * Specifies whether Amazon Rekognition or Amazon Textract are used as the integration source. The default field settings and JSON parsing rules are different based on the integration source. Valid values:
+     */
+    AwsManagedHumanLoopRequestSource: AwsManagedHumanLoopRequestSource;
+  }
   export interface HumanTaskConfig {
     /**
      * The Amazon Resource Name (ARN) of the work team assigned to complete the tasks.
@@ -2606,7 +4928,7 @@ declare namespace SageMaker {
      */
     UiConfig: UiConfig;
     /**
-     * The Amazon Resource Name (ARN) of a Lambda function that is run before a data object is sent to a human worker. Use this function to provide input to a custom labeling job. For the built-in bounding box, image classification, semantic segmentation, and text classification task types, Amazon SageMaker Ground Truth provides the following Lambda functions:  US East (Northern Virginia) (us-east-1):     arn:aws:lambda:us-east-1:432418664414:function:PRE-BoundingBox     arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass     arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation     arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass     arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition     US East (Ohio) (us-east-2):     arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox     arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass     arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation     arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass     arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition     US West (Oregon) (us-west-2):     arn:aws:lambda:us-west-2:081040173940:function:PRE-BoundingBox     arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass     arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation     arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass     arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition     Canada (Central) (ca-central-1):     arn:awslambda:ca-central-1:918755190332:function:PRE-BoundingBox     arn:awslambda:ca-central-1:918755190332:function:PRE-ImageMultiClass     arn:awslambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation     arn:awslambda:ca-central-1:918755190332:function:PRE-TextMultiClass     arn:awslambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition     EU (Ireland) (eu-west-1):     arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox     arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass     arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation     arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass     arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition     EU (London) (eu-west-2):     arn:awslambda:eu-west-2:487402164563:function:PRE-BoundingBox     arn:awslambda:eu-west-2:487402164563:function:PRE-ImageMultiClass     arn:awslambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation     arn:awslambda:eu-west-2:487402164563:function:PRE-TextMultiClass     arn:awslambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition     EU Frankfurt (eu-central-1):     arn:awslambda:eu-central-1:203001061592:function:PRE-BoundingBox     arn:awslambda:eu-central-1:203001061592:function:PRE-ImageMultiClass     arn:awslambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation     arn:awslambda:eu-central-1:203001061592:function:PRE-TextMultiClass     arn:awslambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition     Asia Pacific (Tokyo) (ap-northeast-1):     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition     Asia Pacific (Seoul) (ap-northeast-2):     arn:awslambda:ap-northeast-2:845288260483:function:PRE-BoundingBox     arn:awslambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass     arn:awslambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation     arn:awslambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass     arn:awslambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition     Asia Pacific (Mumbai) (ap-south-1):     arn:awslambda:ap-south-1:565803892007:function:PRE-BoundingBox     arn:awslambda:ap-south-1:565803892007:function:PRE-ImageMultiClass     arn:awslambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation     arn:awslambda:ap-south-1:565803892007:function:PRE-TextMultiClass     arn:awslambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition     Asia Pacific (Singapore) (ap-southeast-1):     arn:awslambda:ap-southeast-1:377565633583:function:PRE-BoundingBox     arn:awslambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass     arn:awslambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation     arn:awslambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass     arn:awslambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition     Asia Pacific (Sydney) (ap-southeast-2):     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition   
+     * The Amazon Resource Name (ARN) of a Lambda function that is run before a data object is sent to a human worker. Use this function to provide input to a custom labeling job. For the built-in bounding box, image classification, semantic segmentation, and text classification task types, Amazon SageMaker Ground Truth provides the following Lambda functions:  US East (Northern Virginia) (us-east-1):     arn:aws:lambda:us-east-1:432418664414:function:PRE-BoundingBox     arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass     arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation     arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass     arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition     arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox     arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation     US East (Ohio) (us-east-2):     arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox     arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass     arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation     arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass     arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition     arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox     arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation     US West (Oregon) (us-west-2):     arn:aws:lambda:us-west-2:081040173940:function:PRE-BoundingBox     arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass     arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation     arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass     arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition     arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox     arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation     Canada (Central) (ca-central-1):     arn:aws:lambda:ca-central-1:918755190332:function:PRE-BoundingBox     arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass     arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation     arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass     arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition     arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox     arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation     EU (Ireland) (eu-west-1):     arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox     arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass     arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation     arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass     arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition     arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox     arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation     EU (London) (eu-west-2):     arn:aws:lambda:eu-west-2:487402164563:function:PRE-BoundingBox     arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass     arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation     arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass     arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition     arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox     arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation     EU Frankfurt (eu-central-1):     arn:aws:lambda:eu-central-1:203001061592:function:PRE-BoundingBox     arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass     arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation     arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass     arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition     arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox     arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation     Asia Pacific (Tokyo) (ap-northeast-1):     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation     Asia Pacific (Seoul) (ap-northeast-2):     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-BoundingBox     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation     Asia Pacific (Mumbai) (ap-south-1):     arn:aws:lambda:ap-south-1:565803892007:function:PRE-BoundingBox     arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass     arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation     arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass     arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition     arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox     arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation     Asia Pacific (Singapore) (ap-southeast-1):     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-BoundingBox     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation     Asia Pacific (Sydney) (ap-southeast-2):     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationBoundingBox     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentBoundingBox     arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation   
      */
     PreHumanTaskLambdaArn: LambdaFunctionArn;
     /**
@@ -2634,7 +4956,7 @@ declare namespace SageMaker {
      */
     TaskAvailabilityLifetimeInSeconds?: TaskAvailabilityLifetimeInSeconds;
     /**
-     * Defines the maximum number of data objects that can be labeled by human workers at the same time. Each object may have more than one worker at one time.
+     * Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time.
      */
     MaxConcurrentTaskCount?: MaxConcurrentTaskCount;
     /**
@@ -2645,6 +4967,23 @@ declare namespace SageMaker {
      * The price that you pay for each task performed by an Amazon Mechanical Turk worker.
      */
     PublicWorkforceTaskPrice?: PublicWorkforceTaskPrice;
+  }
+  export type HumanTaskUiArn = string;
+  export type HumanTaskUiName = string;
+  export type HumanTaskUiSummaries = HumanTaskUiSummary[];
+  export interface HumanTaskUiSummary {
+    /**
+     * The name of the human task user interface.
+     */
+    HumanTaskUiName: HumanTaskUiName;
+    /**
+     * The Amazon Resource Name (ARN) of the human task user interface.
+     */
+    HumanTaskUiArn: HumanTaskUiArn;
+    /**
+     * A timestamp when SageMaker created the human task user interface.
+     */
+    CreationTime: Timestamp;
   }
   export interface HyperParameterAlgorithmSpecification {
     /**
@@ -2698,6 +5037,12 @@ declare namespace SageMaker {
   export type HyperParameterSpecifications = HyperParameterSpecification[];
   export interface HyperParameterTrainingJobDefinition {
     /**
+     * The job definition name.
+     */
+    DefinitionName?: HyperParameterTrainingJobDefinitionName;
+    TuningObjective?: HyperParameterTuningJobObjective;
+    HyperParameterRanges?: ParameterRanges;
+    /**
      * Specifies the values of hyperparameters that do not change for the tuning job.
      */
     StaticHyperParameters?: HyperParameters;
@@ -2743,8 +5088,14 @@ declare namespace SageMaker {
     EnableManagedSpotTraining?: Boolean;
     CheckpointConfig?: CheckpointConfig;
   }
+  export type HyperParameterTrainingJobDefinitionName = string;
+  export type HyperParameterTrainingJobDefinitions = HyperParameterTrainingJobDefinition[];
   export type HyperParameterTrainingJobSummaries = HyperParameterTrainingJobSummary[];
   export interface HyperParameterTrainingJobSummary {
+    /**
+     * The training job definition name.
+     */
+    TrainingJobDefinitionName?: HyperParameterTrainingJobDefinitionName;
     /**
      * The name of the training job.
      */
@@ -2793,7 +5144,7 @@ declare namespace SageMaker {
   export type HyperParameterTuningJobArn = string;
   export interface HyperParameterTuningJobConfig {
     /**
-     * Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. To use the Bayesian search stategy, set this to Bayesian. To randomly search, set it to Random. For information about search strategies, see How Hyperparameter Tuning Works.
+     * Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. To use the Bayesian search strategy, set this to Bayesian. To randomly search, set it to Random. For information about search strategies, see How Hyperparameter Tuning Works.
      */
     Strategy: HyperParameterTuningJobStrategyType;
     /**
@@ -2812,6 +5163,10 @@ declare namespace SageMaker {
      * Specifies whether to use early stopping for training jobs launched by the hyperparameter tuning job. This can be one of the following values (the default value is OFF):  OFF  Training jobs launched by the hyperparameter tuning job do not use early stopping.  AUTO  Amazon SageMaker stops training jobs launched by the hyperparameter tuning job when they are unlikely to perform better than previously completed training jobs. For more information, see Stop Training Jobs Early.  
      */
     TrainingJobEarlyStoppingType?: TrainingJobEarlyStoppingType;
+    /**
+     * The tuning job's completion criteria.
+     */
+    TuningJobCompletionCriteria?: TuningJobCompletionCriteria;
   }
   export type HyperParameterTuningJobName = string;
   export interface HyperParameterTuningJobObjective {
@@ -2886,6 +5241,7 @@ declare namespace SageMaker {
   export type HyperParameters = {[key: string]: ParameterValue};
   export type Image = string;
   export type ImageDigest = string;
+  export type ImageUri = string;
   export interface InferenceSpecification {
     /**
      * The Amazon ECR registry path of the Docker image that contains the inference code.
@@ -2957,7 +5313,21 @@ declare namespace SageMaker {
   export type JobReferenceCode = string;
   export type JobReferenceCodeContains = string;
   export type JoinSource = "Input"|"None"|string;
+  export type JsonContentType = string;
+  export type JsonContentTypes = JsonContentType[];
   export type JsonPath = string;
+  export interface JupyterServerAppSettings {
+    /**
+     * The instance type and quantity.
+     */
+    DefaultResourceSpec?: ResourceSpec;
+  }
+  export interface KernelGatewayAppSettings {
+    /**
+     * The instance type and quantity.
+     */
+    DefaultResourceSpec?: ResourceSpec;
+  }
   export type KmsKeyId = string;
   export type LabelAttributeName = string;
   export type LabelCounter = number;
@@ -3199,6 +5569,134 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListAppsRequest {
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Returns a list up to a specified limit.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The sort order for the results. The default is Ascending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The parameter by which to sort the results. The default is CreationTime.
+     */
+    SortBy?: AppSortKey;
+    /**
+     * A parameter to search for the domain ID.
+     */
+    DomainIdEquals?: DomainId;
+    /**
+     * A parameter to search by user profile name.
+     */
+    UserProfileNameEquals?: UserProfileName;
+  }
+  export interface ListAppsResponse {
+    /**
+     * The list of apps.
+     */
+    Apps?: AppList;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAutoMLJobsRequest {
+    /**
+     * Request a list of jobs, using a filter for time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Request a list of jobs, using a filter for time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Request a list of jobs, using a filter for time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * Request a list of jobs, using a filter for time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * Request a list of jobs, using a search filter for name.
+     */
+    NameContains?: AutoMLNameContains;
+    /**
+     * Request a list of jobs, using a filter for status.
+     */
+    StatusEquals?: AutoMLJobStatus;
+    /**
+     * The sort order for the results. The default is Descending.
+     */
+    SortOrder?: AutoMLSortOrder;
+    /**
+     * The parameter by which to sort the results. The default is AutoMLJobName.
+     */
+    SortBy?: AutoMLSortBy;
+    /**
+     * Request a list of jobs up to a specified limit.
+     */
+    MaxResults?: AutoMLMaxResults;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAutoMLJobsResponse {
+    /**
+     * Returns a summary list of jobs.
+     */
+    AutoMLJobSummaries: AutoMLJobSummaries;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListCandidatesForAutoMLJobRequest {
+    /**
+     * List the Candidates created for the job by providing the job's name.
+     */
+    AutoMLJobName: AutoMLJobName;
+    /**
+     * List the Candidates for the job and filter by status.
+     */
+    StatusEquals?: CandidateStatus;
+    /**
+     * List the Candidates for the job and filter by candidate name.
+     */
+    CandidateNameEquals?: CandidateName;
+    /**
+     * The sort order for the results. The default is Ascending.
+     */
+    SortOrder?: AutoMLSortOrder;
+    /**
+     * The parameter by which to sort the results. The default is Descending.
+     */
+    SortBy?: CandidateSortBy;
+    /**
+     * List the job's Candidates up to a specified limit.
+     */
+    MaxResults?: AutoMLMaxResults;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListCandidatesForAutoMLJobResponse {
+    /**
+     * Summaries about the Candidates.
+     */
+    Candidates: AutoMLCandidates;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListCodeRepositoriesInput {
     /**
      * A filter that returns only Git repositories that were created after the specified time.
@@ -3300,6 +5798,26 @@ declare namespace SageMaker {
     NextToken?: NextToken;
   }
   export type ListCompilationJobsSortBy = "Name"|"CreationTime"|"Status"|string;
+  export interface ListDomainsRequest {
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Returns a list up to a specified limit.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListDomainsResponse {
+    /**
+     * The list of domains.
+     */
+    Domains?: DomainList;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListEndpointConfigsInput {
     /**
      * The field to sort results by. The default is CreationTime.
@@ -3391,6 +5909,106 @@ declare namespace SageMaker {
      *  If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request. 
      */
     NextToken?: PaginationToken;
+  }
+  export interface ListExperimentsRequest {
+    /**
+     * A filter that returns only experiments created after the specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns only experiments created before the specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: SortExperimentsBy;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the previous call to ListExperiments didn't return the full set of experiments, the call returns a token for getting the next set of experiments.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of experiments to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListExperimentsResponse {
+    /**
+     * A list of the summaries of your experiments.
+     */
+    ExperimentSummaries?: ExperimentSummaries;
+    /**
+     * A token for getting the next set of experiments, if there are any.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFlowDefinitionsRequest {
+    /**
+     * A filter that returns only flow definitions with a creation time greater than or equal to the specified timestamp.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only flow definitions that were created before the specified timestamp.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * An optional value that specifies whether you want the results sorted in Ascending or Descending order.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * A token to resume pagination.
+     */
+    NextToken?: NextToken;
+    /**
+     * The total number of items to return. If the total number of available items is more than the value specified in MaxResults, then a NextToken will be provided in the output that you can use to resume pagination.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListFlowDefinitionsResponse {
+    /**
+     * An array of objects describing the flow definitions.
+     */
+    FlowDefinitionSummaries: FlowDefinitionSummaries;
+    /**
+     * A token to resume pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListHumanTaskUisRequest {
+    /**
+     * A filter that returns only human task user interfaces with a creation time greater than or equal to the specified timestamp.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only human task user interfaces that were created before the specified timestamp.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * An optional value that specifies whether you want the results sorted in Ascending or Descending order.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * A token to resume pagination.
+     */
+    NextToken?: NextToken;
+    /**
+     * The total number of items to return. If the total number of available items is more than the value specified in MaxResults, then a NextToken will be provided in the output that you can use to resume pagination.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListHumanTaskUisResponse {
+    /**
+     * An array of objects describing the human task user interfaces.
+     */
+    HumanTaskUiSummaries: HumanTaskUiSummaries;
+    /**
+     * A token to resume pagination.
+     */
+    NextToken?: NextToken;
   }
   export interface ListHyperParameterTuningJobsRequest {
     /**
@@ -3621,6 +6239,126 @@ declare namespace SageMaker {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListMonitoringExecutionsRequest {
+    /**
+     * Name of a specific schedule to fetch jobs for.
+     */
+    MonitoringScheduleName?: MonitoringScheduleName;
+    /**
+     * Name of a specific endpoint to fetch jobs for.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * Whether to sort results by Status, CreationTime, ScheduledTime field. The default is CreationTime.
+     */
+    SortBy?: MonitoringExecutionSortKey;
+    /**
+     * Whether to sort the results in Ascending or Descending order. The default is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of jobs to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Filter for jobs scheduled before a specified time.
+     */
+    ScheduledTimeBefore?: Timestamp;
+    /**
+     * Filter for jobs scheduled after a specified time.
+     */
+    ScheduledTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only jobs created before a specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only jobs created after a specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only jobs modified after a specified time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only jobs modified before a specified time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * A filter that retrieves only jobs with a specific status.
+     */
+    StatusEquals?: ExecutionStatus;
+  }
+  export interface ListMonitoringExecutionsResponse {
+    /**
+     * A JSON array in which each element is a summary for a monitoring execution.
+     */
+    MonitoringExecutionSummaries: MonitoringExecutionSummaryList;
+    /**
+     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent reques
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMonitoringSchedulesRequest {
+    /**
+     * Name of a specific endpoint to fetch schedules for.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * Whether to sort results by Status, CreationTime, ScheduledTime field. The default is CreationTime.
+     */
+    SortBy?: MonitoringScheduleSortKey;
+    /**
+     * Whether to sort the results in Ascending or Descending order. The default is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of jobs to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Filter for monitoring schedules whose name contains a specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * A filter that returns only monitoring schedules created before a specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only monitoring schedules created after a specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only monitoring schedules modified before a specified time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only monitoring schedules modified after a specified time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only monitoring schedules modified before a specified time.
+     */
+    StatusEquals?: ScheduleStatus;
+  }
+  export interface ListMonitoringSchedulesResponse {
+    /**
+     * A JSON array in which each element is a summary for a monitoring schedule.
+     */
+    MonitoringScheduleSummaries: MonitoringScheduleSummaryList;
+    /**
+     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent reques
+     */
+    NextToken?: NextToken;
+  }
   export interface ListNotebookInstanceLifecycleConfigsInput {
     /**
      * If the result of a ListNotebookInstanceLifecycleConfigs request was truncated, the response includes a NextToken. To get the next set of lifecycle configurations, use the token in the next request.
@@ -3732,6 +6470,58 @@ declare namespace SageMaker {
      * An array of NotebookInstanceSummary objects, one for each notebook instance.
      */
     NotebookInstances?: NotebookInstanceSummaryList;
+  }
+  export interface ListProcessingJobsRequest {
+    /**
+     * A filter that returns only processing jobs created after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only processing jobs created after the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only processing jobs modified after the specified time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only processing jobs modified before the specified time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * A string in the processing job name. This filter returns only processing jobs whose name contains the specified string.
+     */
+    NameContains?: String;
+    /**
+     * A filter that retrieves only processing jobs with a specific status.
+     */
+    StatusEquals?: ProcessingJobStatus;
+    /**
+     * The field to sort results by. The default is CreationTime.
+     */
+    SortBy?: SortBy;
+    /**
+     * The sort order for results. The default is Ascending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the result of the previous ListProcessingJobs request was truncated, the response includes a NextToken. To retrieve the next set of processing jobs, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of processing jobs to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListProcessingJobsResponse {
+    /**
+     * An array of ProcessingJobSummary objects, each listing a processing job.
+     */
+    ProcessingJobSummaries: ProcessingJobSummaries;
+    /**
+     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of processing jobs, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
   }
   export interface ListSubscribedWorkteamsRequest {
     /**
@@ -3922,6 +6712,123 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export type ListTrialComponentKey256 = TrialComponentKey256[];
+  export interface ListTrialComponentsRequest {
+    /**
+     * A filter that returns only components that have the specified source Amazon Resource Name (ARN).
+     */
+    SourceArn?: String256;
+    /**
+     * A filter that returns only components created after the specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns only components created before the specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: SortTrialComponentsBy;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The maximum number of components to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous call to ListTrialComponents didn't return the full set of components, the call returns a token for getting the next set of components.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTrialComponentsResponse {
+    /**
+     * A list of the summaries of your trial components.
+     */
+    TrialComponentSummaries?: TrialComponentSummaries;
+    /**
+     * A token for getting the next set of components, if there are any.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTrialsRequest {
+    /**
+     * A filter that returns only trials that are part of the specified experiment.
+     */
+    ExperimentName?: ExperimentEntityName;
+    /**
+     * A filter that returns only trials created after the specified time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A filter that returns only trials created before the specified time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: SortTrialsBy;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The maximum number of trials to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous call to ListTrials didn't return the full set of trials, the call returns a token for getting the next set of trials.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTrialsResponse {
+    /**
+     * A list of the summaries of your trials.
+     */
+    TrialSummaries?: TrialSummaries;
+    /**
+     * A token for getting the next set of trials, if there are any.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListUserProfilesRequest {
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Returns a list up to a specified limit.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The sort order for the results. The default is Ascending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The parameter by which to sort the results. The default is CreationTime.
+     */
+    SortBy?: UserProfileSortKey;
+    /**
+     * A parameter by which to filter the results.
+     */
+    DomainIdEquals?: DomainId;
+    /**
+     * A parameter by which to filter the results.
+     */
+    UserProfileNameContains?: UserProfileName;
+  }
+  export interface ListUserProfilesResponse {
+    /**
+     * The list of user profiles.
+     */
+    UserProfiles?: UserProfileList;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListWorkteamsRequest {
     /**
      * The field to sort results by. The default is CreationTime.
@@ -3955,6 +6862,8 @@ declare namespace SageMaker {
     NextToken?: NextToken;
   }
   export type ListWorkteamsSortByOptions = "Name"|"CreateDate"|string;
+  export type MaxAutoMLJobRuntimeInSeconds = number;
+  export type MaxCandidates = number;
   export type MaxConcurrentTaskCount = number;
   export type MaxConcurrentTransforms = number;
   export type MaxHumanLabeledObjectCount = number;
@@ -3964,7 +6873,9 @@ declare namespace SageMaker {
   export type MaxPercentageOfInputDatasetLabeled = number;
   export type MaxResults = number;
   export type MaxRuntimeInSeconds = number;
+  export type MaxRuntimePerTrainingJobInSeconds = number;
   export type MaxWaitTimeInSeconds = number;
+  export type MediaType = string;
   export interface MemberDefinition {
     /**
      * The Amazon Cognito user group that is part of the work team.
@@ -4120,6 +7031,236 @@ declare namespace SageMaker {
     CreationTime: Timestamp;
   }
   export type ModelSummaryList = ModelSummary[];
+  export interface MonitoringAppSpecification {
+    /**
+     * The container image to be run by the monitoring job.
+     */
+    ImageUri: ImageUri;
+    /**
+     * Specifies the entrypoint for a container used to run the monitoring job.
+     */
+    ContainerEntrypoint?: ContainerEntrypoint;
+    /**
+     * An array of arguments for the container used to run the monitoring job.
+     */
+    ContainerArguments?: MonitoringContainerArguments;
+    /**
+     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
+     */
+    RecordPreprocessorSourceUri?: S3Uri;
+    /**
+     * An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
+     */
+    PostAnalyticsProcessorSourceUri?: S3Uri;
+  }
+  export interface MonitoringBaselineConfig {
+    /**
+     * The baseline constraint file in Amazon S3 that the current monitoring job should validated against.
+     */
+    ConstraintsResource?: MonitoringConstraintsResource;
+    /**
+     * The baseline statistics file in Amazon S3 that the current monitoring job should be validated against.
+     */
+    StatisticsResource?: MonitoringStatisticsResource;
+  }
+  export interface MonitoringClusterConfig {
+    /**
+     * The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.
+     */
+    InstanceCount: ProcessingInstanceCount;
+    /**
+     * The ML compute instance type for the processing job.
+     */
+    InstanceType: ProcessingInstanceType;
+    /**
+     * The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.
+     */
+    VolumeSizeInGB: ProcessingVolumeSizeInGB;
+    /**
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+  }
+  export interface MonitoringConstraintsResource {
+    /**
+     * The Amazon S3 URI for the constraints resource.
+     */
+    S3Uri?: S3Uri;
+  }
+  export type MonitoringContainerArguments = ContainerArgument[];
+  export type MonitoringEnvironmentMap = {[key: string]: ProcessingEnvironmentValue};
+  export type MonitoringExecutionSortKey = "CreationTime"|"ScheduledTime"|"Status"|string;
+  export interface MonitoringExecutionSummary {
+    /**
+     * The name of the monitoring schedule.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+    /**
+     * The time the monitoring job was scheduled.
+     */
+    ScheduledTime: Timestamp;
+    /**
+     * The time at which the monitoring job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * A timestamp that indicates the last time the monitoring job was modified.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The status of the monitoring job.
+     */
+    MonitoringExecutionStatus: ExecutionStatus;
+    /**
+     * The Amazon Resource Name (ARN) of the monitoring job.
+     */
+    ProcessingJobArn?: ProcessingJobArn;
+    /**
+     * The name of teh endpoint used to run the monitoring job.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * Contains the reason a monitoring job failed, if it failed.
+     */
+    FailureReason?: FailureReason;
+  }
+  export type MonitoringExecutionSummaryList = MonitoringExecutionSummary[];
+  export interface MonitoringInput {
+    /**
+     * The endpoint for a monitoring job.
+     */
+    EndpointInput: EndpointInput;
+  }
+  export type MonitoringInputs = MonitoringInput[];
+  export interface MonitoringJobDefinition {
+    /**
+     * Baseline configuration used to validate that the data conforms to the specified constraints and statistics
+     */
+    BaselineConfig?: MonitoringBaselineConfig;
+    /**
+     * The array of inputs for the monitoring job. Currently we support monitoring an Amazon SageMaker Endpoint.
+     */
+    MonitoringInputs: MonitoringInputs;
+    /**
+     * The array of outputs from the monitoring job to be uploaded to Amazon Simple Storage Service (Amazon S3).
+     */
+    MonitoringOutputConfig: MonitoringOutputConfig;
+    /**
+     * Identifies the resources, ML compute instances, and ML storage volumes to deploy for a monitoring job. In distributed processing, you specify more than one instance.
+     */
+    MonitoringResources: MonitoringResources;
+    /**
+     * Configures the monitoring job to run a specified Docker container image.
+     */
+    MonitoringAppSpecification: MonitoringAppSpecification;
+    /**
+     * Specifies a time limit for how long the monitoring job is allowed to run.
+     */
+    StoppingCondition?: MonitoringStoppingCondition;
+    /**
+     * Sets the environment variables in the Docker container.
+     */
+    Environment?: MonitoringEnvironmentMap;
+    /**
+     * Specifies networking options for an monitoring job.
+     */
+    NetworkConfig?: NetworkConfig;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+  }
+  export type MonitoringMaxRuntimeInSeconds = number;
+  export interface MonitoringOutput {
+    /**
+     * The Amazon S3 storage location where the results of a monitoring job are saved.
+     */
+    S3Output: MonitoringS3Output;
+  }
+  export interface MonitoringOutputConfig {
+    /**
+     * Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.
+     */
+    MonitoringOutputs: MonitoringOutputs;
+    /**
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export type MonitoringOutputs = MonitoringOutput[];
+  export interface MonitoringResources {
+    /**
+     * The configuration for the cluster resources used to run the processing job.
+     */
+    ClusterConfig: MonitoringClusterConfig;
+  }
+  export interface MonitoringS3Output {
+    /**
+     * A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.
+     */
+    S3Uri: MonitoringS3Uri;
+    /**
+     * The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.
+     */
+    LocalPath: ProcessingLocalPath;
+    /**
+     * Whether to upload the results of the monitoring job continuously or after the job completes.
+     */
+    S3UploadMode?: ProcessingS3UploadMode;
+  }
+  export type MonitoringS3Uri = string;
+  export type MonitoringScheduleArn = string;
+  export interface MonitoringScheduleConfig {
+    /**
+     * Configures the monitoring schedule.
+     */
+    ScheduleConfig?: ScheduleConfig;
+    /**
+     * Defines the monitoring job.
+     */
+    MonitoringJobDefinition: MonitoringJobDefinition;
+  }
+  export type MonitoringScheduleName = string;
+  export type MonitoringScheduleSortKey = "Name"|"CreationTime"|"Status"|string;
+  export interface MonitoringScheduleSummary {
+    /**
+     * The name of the monitoring schedule.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+    /**
+     * The Amazon Resource Name (ARN) of the monitoring schedule.
+     */
+    MonitoringScheduleArn: MonitoringScheduleArn;
+    /**
+     * The creation time of the monitoring schedule.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The last time the monitoring schedule was modified.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The status of the monitoring schedule.
+     */
+    MonitoringScheduleStatus: ScheduleStatus;
+    /**
+     * The name of the endpoint using the monitoring schedule.
+     */
+    EndpointName?: EndpointName;
+  }
+  export type MonitoringScheduleSummaryList = MonitoringScheduleSummary[];
+  export interface MonitoringStatisticsResource {
+    /**
+     * The Amazon S3 URI for the statistics resource.
+     */
+    S3Uri?: S3Uri;
+  }
+  export interface MonitoringStoppingCondition {
+    /**
+     * The maximum runtime allowed in seconds.
+     */
+    MaxRuntimeInSeconds: MonitoringMaxRuntimeInSeconds;
+  }
   export type NameContains = string;
   export interface NestedFilters {
     /**
@@ -4132,6 +7273,13 @@ declare namespace SageMaker {
     Filters: FilterList;
   }
   export type NestedFiltersList = NestedFilters[];
+  export interface NetworkConfig {
+    /**
+     * Whether to allow inbound and outbound network calls to and from the containers used for the processing job.
+     */
+    EnableNetworkIsolation?: Boolean;
+    VpcConfig?: VpcConfig;
+  }
   export type NetworkInterfaceId = string;
   export type NextToken = string;
   export type NotebookInstanceAcceleratorType = "ml.eia1.medium"|"ml.eia1.large"|"ml.eia1.xlarge"|"ml.eia2.medium"|"ml.eia2.large"|"ml.eia2.xlarge"|string;
@@ -4219,6 +7367,7 @@ declare namespace SageMaker {
   export type NotebookInstanceSummaryList = NotebookInstanceSummary[];
   export type NotebookInstanceUrl = string;
   export type NotebookInstanceVolumeSizeInGB = number;
+  export type NotebookOutputOption = "Allowed"|"Disabled"|string;
   export interface NotificationConfiguration {
     /**
      * The ARN for the SNS topic to which notifications should be published.
@@ -4243,7 +7392,10 @@ declare namespace SageMaker {
      */
     Failed?: ObjectiveStatusCounter;
   }
-  export type Operator = "Equals"|"NotEquals"|"GreaterThan"|"GreaterThanOrEqualTo"|"LessThan"|"LessThanOrEqualTo"|"Contains"|string;
+  export type Operator = "Equals"|"NotEquals"|"GreaterThan"|"GreaterThanOrEqualTo"|"LessThan"|"LessThanOrEqualTo"|"Contains"|"Exists"|"NotExists"|string;
+  export type OptionalDouble = number;
+  export type OptionalInteger = number;
+  export type OptionalVolumeSizeInGB = number;
   export type OrderKey = "Ascending"|"Descending"|string;
   export interface OutputConfig {
     /**
@@ -4299,6 +7451,16 @@ declare namespace SageMaker {
   export type ParameterType = "Integer"|"Continuous"|"Categorical"|"FreeText"|string;
   export type ParameterValue = string;
   export type ParameterValues = ParameterValue[];
+  export interface Parent {
+    /**
+     * The name of the trial.
+     */
+    TrialName?: ExperimentEntityName;
+    /**
+     * The name of the experiment.
+     */
+    ExperimentName?: ExperimentEntityName;
+  }
   export interface ParentHyperParameterTuningJob {
     /**
      * The name of the hyperparameter tuning job to be used as a starting point for a new hyperparameter tuning job.
@@ -4306,6 +7468,162 @@ declare namespace SageMaker {
     HyperParameterTuningJobName?: HyperParameterTuningJobName;
   }
   export type ParentHyperParameterTuningJobs = ParentHyperParameterTuningJob[];
+  export type Parents = Parent[];
+  export type PresignedDomainUrl = string;
+  export type ProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression"|string;
+  export interface ProcessingClusterConfig {
+    /**
+     * The number of ML compute instances to use in the processing job. For distributed processing jobs, specify a value greater than 1. The default value is 1.
+     */
+    InstanceCount: ProcessingInstanceCount;
+    /**
+     * The ML compute instance type for the processing job.
+     */
+    InstanceType: ProcessingInstanceType;
+    /**
+     * The size of the ML storage volume in gigabytes that you want to provision. You must specify sufficient ML storage for your scenario.
+     */
+    VolumeSizeInGB: ProcessingVolumeSizeInGB;
+    /**
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the processing job. 
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+  }
+  export type ProcessingEnvironmentKey = string;
+  export type ProcessingEnvironmentMap = {[key: string]: ProcessingEnvironmentValue};
+  export type ProcessingEnvironmentValue = string;
+  export interface ProcessingInput {
+    /**
+     * The name of the inputs for the processing job.
+     */
+    InputName: String;
+    /**
+     * The S3 inputs for the processing job. 
+     */
+    S3Input: ProcessingS3Input;
+  }
+  export type ProcessingInputs = ProcessingInput[];
+  export type ProcessingInstanceCount = number;
+  export type ProcessingInstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|string;
+  export type ProcessingJobArn = string;
+  export type ProcessingJobName = string;
+  export type ProcessingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
+  export type ProcessingJobSummaries = ProcessingJobSummary[];
+  export interface ProcessingJobSummary {
+    /**
+     * The name of the processing job.
+     */
+    ProcessingJobName: ProcessingJobName;
+    /**
+     * The Amazon Resource Name (ARN) of the processing job..
+     */
+    ProcessingJobArn: ProcessingJobArn;
+    /**
+     * The time at which the processing job was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The time at which the processing job completed.
+     */
+    ProcessingEndTime?: Timestamp;
+    /**
+     * A timestamp that indicates the last time the processing job was modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The status of the processing job.
+     */
+    ProcessingJobStatus: ProcessingJobStatus;
+    /**
+     * A string, up to one KB in size, that contains the reason a processing job failed, if it failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * An optional string, up to one KB in size, that contains metadata from the processing container when the processing job exits.
+     */
+    ExitMessage?: ExitMessage;
+  }
+  export type ProcessingLocalPath = string;
+  export type ProcessingMaxRuntimeInSeconds = number;
+  export interface ProcessingOutput {
+    /**
+     * The name for the processing job output.
+     */
+    OutputName: String;
+    /**
+     * Configuration for processing job outputs in Amazon S3.
+     */
+    S3Output: ProcessingS3Output;
+  }
+  export interface ProcessingOutputConfig {
+    /**
+     * Output configuration information for a processing job.
+     */
+    Outputs: ProcessingOutputs;
+    /**
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the processing job output. KmsKeyId can be an ID of a KMS key, ARN of a KMS key, alias of a KMS key, or alias of a KMS key. The KmsKeyId is applied to all outputs.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export type ProcessingOutputs = ProcessingOutput[];
+  export interface ProcessingResources {
+    /**
+     * The configuration for the resources in a cluster used to run the processing job.
+     */
+    ClusterConfig: ProcessingClusterConfig;
+  }
+  export type ProcessingS3CompressionType = "None"|"Gzip"|string;
+  export type ProcessingS3DataDistributionType = "FullyReplicated"|"ShardedByS3Key"|string;
+  export type ProcessingS3DataType = "ManifestFile"|"S3Prefix"|string;
+  export interface ProcessingS3Input {
+    /**
+     * The URI for the Amazon S3 storage where you want Amazon SageMaker to download the artifacts needed to run a processing job.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The local path to the Amazon S3 bucket where you want Amazon SageMaker to download the inputs to run a processing job. LocalPath is an absolute path to the input data.
+     */
+    LocalPath: ProcessingLocalPath;
+    /**
+     * Whether you use an S3Prefix or a ManifestFile for the data type. If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for the processing job. If you choose ManifestFile, S3Uri identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for the processing job.
+     */
+    S3DataType: ProcessingS3DataType;
+    /**
+     * Wether to use File or Pipe input mode. In File mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.
+     */
+    S3InputMode: ProcessingS3InputMode;
+    /**
+     * Whether the data stored in Amazon S3 is FullyReplicated or ShardedByS3Key.
+     */
+    S3DataDistributionType?: ProcessingS3DataDistributionType;
+    /**
+     * Whether to use Gzip compresion for Amazon S3 storage.
+     */
+    S3CompressionType?: ProcessingS3CompressionType;
+  }
+  export type ProcessingS3InputMode = "Pipe"|"File"|string;
+  export interface ProcessingS3Output {
+    /**
+     * A URI that identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of a processing job.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The local path to the Amazon S3 bucket where you want Amazon SageMaker to save the results of an processing job. LocalPath is an absolute path to the input data.
+     */
+    LocalPath: ProcessingLocalPath;
+    /**
+     * Whether to upload the results of the processing job continuously or after the job completes.
+     */
+    S3UploadMode: ProcessingS3UploadMode;
+  }
+  export type ProcessingS3UploadMode = "Continuous"|"EndOfJob"|string;
+  export interface ProcessingStoppingCondition {
+    /**
+     * Specifies the maximum runtime in seconds.
+     */
+    MaxRuntimeInSeconds: ProcessingMaxRuntimeInSeconds;
+  }
+  export type ProcessingVolumeSizeInGB = number;
   export type ProductId = string;
   export type ProductListings = String[];
   export interface ProductionVariant {
@@ -4335,7 +7653,7 @@ declare namespace SageMaker {
     AcceleratorType?: ProductionVariantAcceleratorType;
   }
   export type ProductionVariantAcceleratorType = "ml.eia1.medium"|"ml.eia1.large"|"ml.eia1.xlarge"|"ml.eia2.medium"|"ml.eia2.large"|"ml.eia2.xlarge"|string;
-  export type ProductionVariantInstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|string;
+  export type ProductionVariantInstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge"|string;
   export type ProductionVariantList = ProductionVariant[];
   export interface ProductionVariantSummary {
     /**
@@ -4427,6 +7745,14 @@ declare namespace SageMaker {
     Message: String;
   }
   export type RenderingErrorList = RenderingError[];
+  export interface ResolvedAttributes {
+    AutoMLJobObjective?: AutoMLJobObjective;
+    /**
+     * The problem type.
+     */
+    ProblemType?: ProblemType;
+    CompletionCriteria?: AutoMLJobCompletionCriteria;
+  }
   export type ResourceArn = string;
   export interface ResourceConfig {
     /**
@@ -4446,6 +7772,7 @@ declare namespace SageMaker {
      */
     VolumeKmsKeyId?: KmsKeyId;
   }
+  export type ResourceId = string;
   export interface ResourceLimits {
     /**
      * The maximum number of training jobs that a hyperparameter tuning job can launch.
@@ -4457,11 +7784,31 @@ declare namespace SageMaker {
     MaxParallelTrainingJobs: MaxParallelTrainingJobs;
   }
   export type ResourcePropertyName = string;
-  export type ResourceType = "TrainingJob"|string;
+  export interface ResourceSpec {
+    /**
+     * The Amazon Resource Name (ARN) of the environment.
+     */
+    EnvironmentArn?: EnvironmentArn;
+    /**
+     * The instance type.
+     */
+    InstanceType?: AppInstanceType;
+  }
+  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|string;
   export type ResponseMIMEType = string;
   export type ResponseMIMETypes = ResponseMIMEType[];
+  export interface RetentionPolicy {
+    /**
+     * The home Amazon Elastic File System (EFS).
+     */
+    HomeEfsFileSystem?: RetentionType;
+  }
+  export type RetentionType = "Retain"|"Delete"|string;
   export type RoleArn = string;
   export type RootAccess = "Enabled"|"Disabled"|string;
+  export type RuleConfigurationName = string;
+  export type RuleEvaluationStatus = "InProgress"|"NoIssuesFound"|"IssuesFound"|"Error"|"Stopping"|"Stopped"|string;
+  export type RuleParameters = {[key: string]: ConfigValue};
   export type S3DataDistribution = "FullyReplicated"|"ShardedByS3Key"|string;
   export interface S3DataSource {
     /**
@@ -4483,6 +7830,15 @@ declare namespace SageMaker {
   }
   export type S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile"|string;
   export type S3Uri = string;
+  export type SamplingPercentage = number;
+  export interface ScheduleConfig {
+    /**
+     * A cron expression that describes details about the monitoring schedule. Currently the only supported cron expressions are:   If you want to set the job to start every hour, please use the following:  Hourly: cron(0 * ? * * *)    If you want to start the job daily:  cron(0 [00-23] ? * * *)    For example, the following are valid cron expressions:   Daily at noon UTC: cron(0 12 ? * * *)    Daily at midnight UTC: cron(0 0 ? * * *)    To support running every 6, 12 hours, the following are also supported:  cron(0 [00-23]/[01-24] ? * * *)  For example, the following are valid cron expressions:   Every 12 hours, starting at 5pm UTC: cron(0 17/12 ? * * *)    Every two hours starting at midnight: cron(0 0/2 ? * * *)       Even though the cron expression is set to start at 5PM UTC, note that there could be a delay of 0-20 minutes from the actual requested time to run the execution.    We recommend that if you would like a daily schedule, you do not provide this parameter. Amazon SageMaker will pick a time for running every day.   
+     */
+    ScheduleExpression: ScheduleExpression;
+  }
+  export type ScheduleExpression = string;
+  export type ScheduleStatus = "Pending"|"Failed"|"Scheduled"|"Stopped"|string;
   export interface SearchExpression {
     /**
      * A list of filter objects.
@@ -4507,6 +7863,18 @@ declare namespace SageMaker {
      * A TrainingJob object that is returned as part of a Search request.
      */
     TrainingJob?: TrainingJob;
+    /**
+     * A summary of the properties of an experiment.
+     */
+    Experiment?: Experiment;
+    /**
+     * A summary of the properties of a trial.
+     */
+    Trial?: Trial;
+    /**
+     * A summary of the properties of a trial component.
+     */
+    TrialComponent?: TrialComponent;
   }
   export interface SearchRequest {
     /**
@@ -4571,14 +7939,32 @@ declare namespace SageMaker {
   export type SecurityGroupIds = SecurityGroupId[];
   export type Seed = number;
   export type SessionExpirationDurationInSeconds = number;
+  export interface SharingSettings {
+    /**
+     * The notebook output option.
+     */
+    NotebookOutputOption?: NotebookOutputOption;
+    /**
+     * The Amazon S3 output path.
+     */
+    S3OutputPath?: S3Uri;
+    /**
+     * The AWS Key Management Service encryption key ID.
+     */
+    S3KmsKeyId?: KmsKeyId;
+  }
   export interface ShuffleConfig {
     /**
      * Determines the shuffling order in ShuffleConfig value.
      */
     Seed: Seed;
   }
+  export type SingleSignOnUserIdentifier = string;
   export type SortBy = "Name"|"CreationTime"|"Status"|string;
+  export type SortExperimentsBy = "Name"|"CreationTime"|string;
   export type SortOrder = "Ascending"|"Descending"|string;
+  export type SortTrialComponentsBy = "Name"|"CreationTime"|string;
+  export type SortTrialsBy = "Name"|"CreationTime"|string;
   export interface SourceAlgorithm {
     /**
      * The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
@@ -4596,14 +7982,28 @@ declare namespace SageMaker {
      */
     SourceAlgorithms: SourceAlgorithmList;
   }
+  export type SourceType = string;
   export type SplitType = "None"|"Line"|"RecordIO"|"TFRecord"|string;
+  export interface StartMonitoringScheduleRequest {
+    /**
+     * The name of the schedule to start.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+  }
   export interface StartNotebookInstanceInput {
     /**
      * The name of the notebook instance to start.
      */
     NotebookInstanceName: NotebookInstanceName;
   }
+  export type StatusDetails = string;
   export type StatusMessage = string;
+  export interface StopAutoMLJobRequest {
+    /**
+     * The name of the object you are requesting.
+     */
+    AutoMLJobName: AutoMLJobName;
+  }
   export interface StopCompilationJobRequest {
     /**
      * The name of the model compilation job to stop.
@@ -4622,11 +8022,23 @@ declare namespace SageMaker {
      */
     LabelingJobName: LabelingJobName;
   }
+  export interface StopMonitoringScheduleRequest {
+    /**
+     * The name of the schedule to stop.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+  }
   export interface StopNotebookInstanceInput {
     /**
      * The name of the notebook instance to terminate.
      */
     NotebookInstanceName: NotebookInstanceName;
+  }
+  export interface StopProcessingJobRequest {
+    /**
+     * The name of the processing job to stop.
+     */
+    ProcessingJobName: ProcessingJobName;
   }
   export interface StopTrainingJobRequest {
     /**
@@ -4651,7 +8063,10 @@ declare namespace SageMaker {
     MaxWaitTimeInSeconds?: MaxWaitTimeInSeconds;
   }
   export type String = string;
+  export type String1024 = string;
   export type String200 = string;
+  export type String256 = string;
+  export type StringParameterValue = string;
   export type SubnetId = string;
   export type Subnets = SubnetId[];
   export interface SubscribedWorkteam {
@@ -4698,7 +8113,9 @@ declare namespace SageMaker {
   export type TagKeyList = TagKey[];
   export type TagList = Tag[];
   export type TagValue = string;
-  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"rasp3b"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|string;
+  export type TargetAttributeName = string;
+  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_inf1"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"rasp3b"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|string;
+  export type TargetObjectiveMetricValue = number;
   export type TaskAvailabilityLifetimeInSeconds = number;
   export type TaskCount = number;
   export type TaskDescription = string;
@@ -4708,6 +8125,24 @@ declare namespace SageMaker {
   export type TaskTimeLimitInSeconds = number;
   export type TaskTitle = string;
   export type TemplateContent = string;
+  export type TemplateContentSha256 = string;
+  export type TemplateUrl = string;
+  export interface TensorBoardAppSettings {
+    /**
+     * The instance type and quantity.
+     */
+    DefaultResourceSpec?: ResourceSpec;
+  }
+  export interface TensorBoardOutputConfig {
+    /**
+     * Path to local storage location for tensorBoard output. Defaults to /opt/ml/output/tensorboard.
+     */
+    LocalPath?: DirectoryPath;
+    /**
+     * Path to Amazon S3 storage location for TensorBoard output.
+     */
+    S3OutputPath: S3Uri;
+  }
   export type TenthFractionsOfACent = number;
   export type Timestamp = Date;
   export type TrainingInputMode = "Pipe"|"File"|string;
@@ -4731,6 +8166,10 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the labeling job.
      */
     LabelingJobArn?: LabelingJobArn;
+    /**
+     * The Amazon Resource Name (ARN) of the job.
+     */
+    AutoMLJobArn?: AutoMLJobArn;
     /**
      * Information about the Amazon S3 location that is configured for storing model artifacts.
      */
@@ -4811,6 +8250,30 @@ declare namespace SageMaker {
      * To encrypt all communications between ML compute instances in distributed training, choose True. Encryption provides greater security for distributed training, but training might take longer. How long it takes depends on the amount of communication between compute instances, especially if you use a deep learning algorithm in distributed training.
      */
     EnableInterContainerTrafficEncryption?: Boolean;
+    /**
+     * When true, enables managed spot training using Amazon EC2 Spot instances to run training jobs instead of on-demand instances. For more information, see model-managed-spot-training.
+     */
+    EnableManagedSpotTraining?: Boolean;
+    CheckpointConfig?: CheckpointConfig;
+    /**
+     * The training time in seconds.
+     */
+    TrainingTimeInSeconds?: TrainingTimeInSeconds;
+    /**
+     * The billable time in seconds.
+     */
+    BillableTimeInSeconds?: BillableTimeInSeconds;
+    DebugHookConfig?: DebugHookConfig;
+    ExperimentConfig?: ExperimentConfig;
+    /**
+     * Information about the debug rule configuration.
+     */
+    DebugRuleConfigurations?: DebugRuleConfigurations;
+    TensorBoardOutputConfig?: TensorBoardOutputConfig;
+    /**
+     * Information about the evaluation status of the rules for the training job.
+     */
+    DebugRuleEvaluationStatuses?: DebugRuleEvaluationStatuses;
     /**
      * An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
      */
@@ -4915,7 +8378,7 @@ declare namespace SageMaker {
      */
     SupportedTrainingInstanceTypes: TrainingInstanceTypes;
     /**
-     * Indicates whether the algorithm supports distributed training. If set to false, buyers can’t request more than one instance during training.
+     * Indicates whether the algorithm supports distributed training. If set to false, buyers can't request more than one instance during training.
      */
     SupportsDistributedTraining?: Boolean;
     /**
@@ -5054,7 +8517,7 @@ declare namespace SageMaker {
      */
     InstanceCount: TransformInstanceCount;
     /**
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The VolumeKmsKeyId can be any of the following formats:   // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The VolumeKmsKeyId can be any of the following formats:   // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     VolumeKmsKeyId?: KmsKeyId;
   }
@@ -5067,6 +8530,303 @@ declare namespace SageMaker {
      * Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest. For example:    A key name prefix might look like this: s3://bucketname/exampleprefix.     A manifest might look like this: s3://bucketname/example.manifest   The manifest is an S3 object which is a JSON file with the following format:   [ {"prefix": "s3://customer_bucket/some/prefix/"},   "relative/path/to/custdata-1",   "relative/path/custdata-2",   ...   "relative/path/custdata-N"   ]   The preceding JSON matches the following s3Uris:   s3://customer_bucket/some/prefix/relative/path/to/custdata-1   s3://customer_bucket/some/prefix/relative/path/custdata-2   ...   s3://customer_bucket/some/prefix/relative/path/custdata-N   The complete set of S3Uris in this manifest constitutes the input data for the channel for this datasource. The object that each S3Uris points to must be readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.  
      */
     S3Uri: S3Uri;
+  }
+  export interface Trial {
+    /**
+     * The name of the trial.
+     */
+    TrialName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the trial.
+     */
+    TrialArn?: TrialArn;
+    /**
+     * The name of the trial as displayed. If DisplayName isn't specified, TrialName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The name of the experiment the trial is part of.
+     */
+    ExperimentName?: ExperimentEntityName;
+    Source?: TrialSource;
+    /**
+     * When the trial was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * Who last modified the trial.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    /**
+     * The list of tags that are associated with the trial. You can use Search API to search on the tags.
+     */
+    Tags?: TagList;
+    /**
+     * A list of the components associated with the trial. For each component, a summary of the component's properties is included.
+     */
+    TrialComponentSummaries?: TrialComponentSimpleSummaries;
+  }
+  export type TrialArn = string;
+  export interface TrialComponent {
+    /**
+     * The name of the trial component.
+     */
+    TrialComponentName?: ExperimentEntityName;
+    /**
+     * The name of the component as displayed. If DisplayName isn't specified, TrialComponentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the trial component.
+     */
+    TrialComponentArn?: TrialComponentArn;
+    Source?: TrialComponentSource;
+    Status?: TrialComponentStatus;
+    /**
+     * When the component started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * When the component ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * When the component was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * When the component was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    /**
+     * The hyperparameters of the component.
+     */
+    Parameters?: TrialComponentParameters;
+    /**
+     * The input artifacts of the component.
+     */
+    InputArtifacts?: TrialComponentArtifacts;
+    /**
+     * The output artifacts of the component.
+     */
+    OutputArtifacts?: TrialComponentArtifacts;
+    /**
+     * The metrics for the component.
+     */
+    Metrics?: TrialComponentMetricSummaries;
+    /**
+     * The source of the trial component.&gt;
+     */
+    SourceDetail?: TrialComponentSourceDetail;
+    /**
+     * The list of tags that are associated with the component. You can use Search API to search on the tags.
+     */
+    Tags?: TagList;
+    /**
+     * An array of the parents of the component. A parent is a trial the component is associated with and the experiment the trial is part of. A component might not have any parents.
+     */
+    Parents?: Parents;
+  }
+  export type TrialComponentArn = string;
+  export interface TrialComponentArtifact {
+    /**
+     * The media type of the artifact, which indicates the type of data in the artifact file. The media type consists of a type and a subtype concatenated with a slash (/) character, for example, text/csv, image/jpeg, and s3/uri. The type specifies the category of the media. The subtype specifies the kind of data.
+     */
+    MediaType?: MediaType;
+    /**
+     * The location of the artifact.
+     */
+    Value: TrialComponentArtifactValue;
+  }
+  export type TrialComponentArtifactValue = string;
+  export type TrialComponentArtifacts = {[key: string]: TrialComponentArtifact};
+  export type TrialComponentKey256 = string;
+  export type TrialComponentKey64 = string;
+  export type TrialComponentMetricSummaries = TrialComponentMetricSummary[];
+  export interface TrialComponentMetricSummary {
+    /**
+     * The name of the metric.
+     */
+    MetricName?: MetricName;
+    /**
+     * The Amazon Resource Name (ARN) of the source.
+     */
+    SourceArn?: TrialComponentSourceArn;
+    /**
+     * When the metric was last updated.
+     */
+    TimeStamp?: Timestamp;
+    /**
+     * The maximum value of the metric.
+     */
+    Max?: OptionalDouble;
+    /**
+     * The minimum value of the metric.
+     */
+    Min?: OptionalDouble;
+    /**
+     * The most recent value of the metric.
+     */
+    Last?: OptionalDouble;
+    /**
+     * The number of samples used to generate the metric.
+     */
+    Count?: OptionalInteger;
+    /**
+     * The average value of the metric.
+     */
+    Avg?: OptionalDouble;
+    /**
+     * The standard deviation of the metric.
+     */
+    StdDev?: OptionalDouble;
+  }
+  export interface TrialComponentParameterValue {
+    /**
+     * The string value of a categorical hyperparameter. If you specify a value for this parameter, you can't specify the NumberValue parameter.
+     */
+    StringValue?: StringParameterValue;
+    /**
+     * The numeric value of a numeric hyperparameter. If you specify a value for this parameter, you can't specify the StringValue parameter.
+     */
+    NumberValue?: DoubleParameterValue;
+  }
+  export type TrialComponentParameters = {[key: string]: TrialComponentParameterValue};
+  export type TrialComponentPrimaryStatus = "InProgress"|"Completed"|"Failed"|string;
+  export type TrialComponentSimpleSummaries = TrialComponentSimpleSummary[];
+  export interface TrialComponentSimpleSummary {
+    /**
+     * The name of the trial component.
+     */
+    TrialComponentName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the trial component.
+     */
+    TrialComponentArn?: TrialComponentArn;
+    TrialComponentSource?: TrialComponentSource;
+    /**
+     * When the component was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+  }
+  export interface TrialComponentSource {
+    /**
+     * The Amazon Resource Name (ARN) of the source.
+     */
+    SourceArn: TrialComponentSourceArn;
+    /**
+     * The source job type.
+     */
+    SourceType?: SourceType;
+  }
+  export type TrialComponentSourceArn = string;
+  export interface TrialComponentSourceDetail {
+    /**
+     * The Amazon Resource Name (ARN) of the source.
+     */
+    SourceArn?: TrialComponentSourceArn;
+    TrainingJob?: TrainingJob;
+  }
+  export interface TrialComponentStatus {
+    /**
+     * The status of the trial component.
+     */
+    PrimaryStatus?: TrialComponentPrimaryStatus;
+    /**
+     * If the component failed, a message describing why.
+     */
+    Message?: TrialComponentStatusMessage;
+  }
+  export type TrialComponentStatusMessage = string;
+  export type TrialComponentSummaries = TrialComponentSummary[];
+  export interface TrialComponentSummary {
+    /**
+     * The name of the trial component.
+     */
+    TrialComponentName?: ExperimentEntityName;
+    /**
+     * The ARN of the trial component.
+     */
+    TrialComponentArn?: TrialComponentArn;
+    /**
+     * The name of the component as displayed. If DisplayName isn't specified, TrialComponentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    TrialComponentSource?: TrialComponentSource;
+    /**
+     * The status of the component. States include:   InProgress   Completed   Failed  
+     */
+    Status?: TrialComponentStatus;
+    /**
+     * When the component started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * When the component ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * When the component was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Who created the component.
+     */
+    CreatedBy?: UserContext;
+    /**
+     * When the component was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * Who last modified the component.
+     */
+    LastModifiedBy?: UserContext;
+  }
+  export interface TrialSource {
+    /**
+     * The Amazon Resource Name (ARN) of the source.
+     */
+    SourceArn: TrialSourceArn;
+    /**
+     * The source job type.
+     */
+    SourceType?: SourceType;
+  }
+  export type TrialSourceArn = string;
+  export type TrialSummaries = TrialSummary[];
+  export interface TrialSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the trial.
+     */
+    TrialArn?: TrialArn;
+    /**
+     * The name of the trial.
+     */
+    TrialName?: ExperimentEntityName;
+    /**
+     * The name of the trial as displayed. If DisplayName isn't specified, TrialName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    TrialSource?: TrialSource;
+    /**
+     * When the trial was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the trial was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export interface TuningJobCompletionCriteria {
+    /**
+     * The objective metric's value.
+     */
+    TargetObjectiveMetricValue: TargetObjectiveMetricValue;
   }
   export interface USD {
     /**
@@ -5094,6 +8854,16 @@ declare namespace SageMaker {
      */
     Content: TemplateContent;
   }
+  export interface UiTemplateInfo {
+    /**
+     * The URL for the user interface template.
+     */
+    Url?: TemplateUrl;
+    /**
+     * The SHA 256 hash that you used to create the request signature.
+     */
+    ContentSha256?: TemplateContentSha256;
+  }
   export interface UpdateCodeRepositoryInput {
     /**
      * The name of the Git repository to update.
@@ -5109,6 +8879,22 @@ declare namespace SageMaker {
      * The ARN of the Git repository.
      */
     CodeRepositoryArn: CodeRepositoryArn;
+  }
+  export interface UpdateDomainRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * A collection of settings.
+     */
+    DefaultUserSettings?: UserSettings;
+  }
+  export interface UpdateDomainResponse {
+    /**
+     * The domain Amazon Resource Name (ARN).
+     */
+    DomainArn?: DomainArn;
   }
   export interface UpdateEndpointInput {
     /**
@@ -5141,6 +8927,42 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the updated endpoint.
      */
     EndpointArn: EndpointArn;
+  }
+  export interface UpdateExperimentRequest {
+    /**
+     * The name of the experiment to update.
+     */
+    ExperimentName: ExperimentEntityName;
+    /**
+     * The name of the experiment as displayed. The name doesn't need to be unique. If DisplayName isn't specified, ExperimentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The description of the experiment.
+     */
+    Description?: ExperimentDescription;
+  }
+  export interface UpdateExperimentResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the experiment.
+     */
+    ExperimentArn?: ExperimentArn;
+  }
+  export interface UpdateMonitoringScheduleRequest {
+    /**
+     * The name of the monitoring schedule. The name must be unique within an AWS Region within an AWS account.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+    /**
+     * The configuration object that specifies the monitoring schedule and defines the monitoring job.
+     */
+    MonitoringScheduleConfig: MonitoringScheduleConfig;
+  }
+  export interface UpdateMonitoringScheduleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the monitoring schedule.
+     */
+    MonitoringScheduleArn: MonitoringScheduleArn;
   }
   export interface UpdateNotebookInstanceInput {
     /**
@@ -5214,6 +9036,94 @@ declare namespace SageMaker {
   }
   export interface UpdateNotebookInstanceOutput {
   }
+  export interface UpdateTrialComponentRequest {
+    /**
+     * The name of the component to update.
+     */
+    TrialComponentName: ExperimentEntityName;
+    /**
+     * The name of the component as displayed. The name doesn't need to be unique. If DisplayName isn't specified, TrialComponentName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The new status of the component.
+     */
+    Status?: TrialComponentStatus;
+    /**
+     * When the component started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * When the component ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * Replaces all of the component's hyperparameters with the specified hyperparameters.
+     */
+    Parameters?: TrialComponentParameters;
+    /**
+     * The hyperparameters to remove from the component.
+     */
+    ParametersToRemove?: ListTrialComponentKey256;
+    /**
+     * Replaces all of the component's input artifacts with the specified artifacts.
+     */
+    InputArtifacts?: TrialComponentArtifacts;
+    /**
+     * The input artifacts to remove from the component.
+     */
+    InputArtifactsToRemove?: ListTrialComponentKey256;
+    /**
+     * Replaces all of the component's output artifacts with the specified artifacts.
+     */
+    OutputArtifacts?: TrialComponentArtifacts;
+    /**
+     * The output artifacts to remove from the component.
+     */
+    OutputArtifactsToRemove?: ListTrialComponentKey256;
+  }
+  export interface UpdateTrialComponentResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the trial component.
+     */
+    TrialComponentArn?: TrialComponentArn;
+  }
+  export interface UpdateTrialRequest {
+    /**
+     * The name of the trial to update.
+     */
+    TrialName: ExperimentEntityName;
+    /**
+     * The name of the trial as displayed. The name doesn't need to be unique. If DisplayName isn't specified, TrialName is displayed.
+     */
+    DisplayName?: ExperimentEntityName;
+  }
+  export interface UpdateTrialResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the trial.
+     */
+    TrialArn?: TrialArn;
+  }
+  export interface UpdateUserProfileRequest {
+    /**
+     * The domain ID.
+     */
+    DomainId: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName: UserProfileName;
+    /**
+     * A collection of settings.
+     */
+    UserSettings?: UserSettings;
+  }
+  export interface UpdateUserProfileResponse {
+    /**
+     * The user profile Amazon Resource Name (ARN).
+     */
+    UserProfileArn?: UserProfileArn;
+  }
   export interface UpdateWorkteamRequest {
     /**
      * The name of the work team to update.
@@ -5239,6 +9149,73 @@ declare namespace SageMaker {
     Workteam: Workteam;
   }
   export type Url = string;
+  export interface UserContext {
+    /**
+     * The Amazon Resource Name (ARN) of the user's profile.
+     */
+    UserProfileArn?: String;
+    /**
+     * The name of the user's profile.
+     */
+    UserProfileName?: String;
+    /**
+     * The domain associated with the user.
+     */
+    DomainId?: String;
+  }
+  export type UserProfileArn = string;
+  export interface UserProfileDetails {
+    /**
+     * The domain ID.
+     */
+    DomainId?: DomainId;
+    /**
+     * The user profile name.
+     */
+    UserProfileName?: UserProfileName;
+    /**
+     * The status.
+     */
+    Status?: UserProfileStatus;
+    /**
+     * The creation time.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The last modified time.
+     */
+    LastModifiedTime?: LastModifiedTime;
+  }
+  export type UserProfileList = UserProfileDetails[];
+  export type UserProfileName = string;
+  export type UserProfileSortKey = "CreationTime"|"LastModifiedTime"|string;
+  export type UserProfileStatus = "Deleting"|"Failed"|"InService"|"Pending"|string;
+  export interface UserSettings {
+    /**
+     * The execution role for the user.
+     */
+    ExecutionRole?: RoleArn;
+    /**
+     * The security groups.
+     */
+    SecurityGroups?: SecurityGroupIds;
+    /**
+     * The sharing settings.
+     */
+    SharingSettings?: SharingSettings;
+    /**
+     * The Jupyter server's app settings.
+     */
+    JupyterServerAppSettings?: JupyterServerAppSettings;
+    /**
+     * The kernel gateway app settings.
+     */
+    KernelGatewayAppSettings?: KernelGatewayAppSettings;
+    /**
+     * The TensorBoard app settings.
+     */
+    TensorBoardAppSettings?: TensorBoardAppSettings;
+  }
   export type VariantName = string;
   export type VariantWeight = number;
   export type VolumeSizeInGB = number;
@@ -5252,6 +9229,7 @@ declare namespace SageMaker {
      */
     Subnets: Subnets;
   }
+  export type VpcId = string;
   export type VpcSecurityGroupIds = SecurityGroupId[];
   export interface Workteam {
     /**
