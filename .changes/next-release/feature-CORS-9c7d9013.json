@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "CORS",
+  "description": "add CORS support for kinesis-video-signaling service"
+}
