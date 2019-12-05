@@ -8,16 +8,6 @@ module.exports = function() {
     this.request(null, 'getSessionToken', {DurationSeconds: parseInt(duration)}, callback, false);
   });
 
-  this.Before('@sts-regional-endpoints', function(callback) {
-    this.service = new this.AWS.STS({region: 'us-east-1', stsRegionalEndpoints: 'regional'});
-    callback();
-  });
-
-  this.After('@sts-regional-endpoints', function(callback) {
-    this.service = new this.AWS.STS();
-    callback();
-  })
-
   this.Then(/^the result should contain an access key ID and secret access key$/, function(callback) {
     this.assert.compare(this.data.Credentials.AccessKeyId.length, '>', 0);
     this.assert.compare(this.data.Credentials.SecretAccessKey.length, '>', 0);
