@@ -12,8 +12,3 @@ Feature: AWS Security Token Service
   Scenario: Error handling
     Given I get an STS session token with a duration of 60 seconds
     Then the error code should be "ValidationError"
-  
-  @sts-regional-endpoints
-  Scenario: Get a session token from regional endpoint
-    Given I get an STS session token with a duration of 900 seconds
-    Then the result should contain an access key ID and secret access key
