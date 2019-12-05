@@ -83,3 +83,4 @@ export import PersonalizeEvents = require('./personalizeevents');
 export import PersonalizeRuntime = require('./personalizeruntime');
 export import ForecastService = require('./forecastservice');
 export import ForecastQueryService = require('./forecastqueryservice');
+export import KinesisVideoSignalingChannels = require('./kinesisvideosignalingchannels');

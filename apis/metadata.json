@@ -857,5 +857,5 @@
     "prefix": "kinesis-video-signaling",
     "name": "KinesisVideoSignalingChannels",
     "cors": true
-   }
+  }
 }

@@ -84,5 +84,6 @@ module.exports = {
   PersonalizeEvents: require('./personalizeevents'),
   PersonalizeRuntime: require('./personalizeruntime'),
   ForecastService: require('./forecastservice'),
-  ForecastQueryService: require('./forecastqueryservice')
+  ForecastQueryService: require('./forecastqueryservice'),
+  KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels')
 };

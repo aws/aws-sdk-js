@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Endpoint",
-  "description": "fix bug in regional endpoints and add more tests"
-}

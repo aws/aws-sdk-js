@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.584.0-->
+<!--LATEST=2.585.0-->
 <!--ENTRYINSERT-->
+
+## 2.585.0
+* bugfix: Endpoint: fix bug in regional endpoints and add more tests
+* feature: ApiGatewayV2: Amazon API Gateway now supports HTTP APIs (beta), enabling customers to quickly build high performance RESTful APIs that are up to 71% cheaper than REST APIs also available from API Gateway. HTTP APIs are optimized for building APIs that proxy to AWS Lambda functions or HTTP backends, making them ideal for serverless workloads. Using HTTP APIs, you can secure your APIs using OIDC and OAuth 2 out of box, quickly build web applications using a simple CORS experience, and get started immediately with automatic deployment and simple create workflows.
+* feature: CORS: add CORS support for kinesis-video-signaling service
+* feature: KinesisVideo: Introduces management of signaling channels for Kinesis Video Streams.
+* feature: KinesisVideoSignalingChannels: Announcing support for WebRTC in Kinesis Video Streams, as fully managed capability. You can now use simple APIs to enable your connected devices, web, and mobile apps with real-time two-way media streaming capabilities.
 
 ## 2.584.0
 * bugfix: S3: fix issues when SDK populates wrong path if access point arn contains forward slash

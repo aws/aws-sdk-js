@@ -216,5 +216,6 @@ module.exports = {
   NetworkManager: require('./networkmanager'),
   Outposts: require('./outposts'),
   AugmentedAIRuntime: require('./augmentedairuntime'),
-  EBS: require('./ebs')
+  EBS: require('./ebs'),
+  KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels')
 };

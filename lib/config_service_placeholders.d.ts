@@ -217,6 +217,7 @@ export abstract class ConfigurationServicePlaceholders {
   outposts?: AWS.Outposts.Types.ClientConfiguration;
   augmentedairuntime?: AWS.AugmentedAIRuntime.Types.ClientConfiguration;
   ebs?: AWS.EBS.Types.ClientConfiguration;
+  kinesisvideosignalingchannels?: AWS.KinesisVideoSignalingChannels.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -436,4 +437,5 @@ export interface ConfigurationServiceApiVersions {
   outposts?: AWS.Outposts.Types.apiVersion;
   augmentedairuntime?: AWS.AugmentedAIRuntime.Types.apiVersion;
   ebs?: AWS.EBS.Types.apiVersion;
+  kinesisvideosignalingchannels?: AWS.KinesisVideoSignalingChannels.Types.apiVersion;
 }
