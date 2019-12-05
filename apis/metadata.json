@@ -852,5 +852,10 @@
   },
   "ebs": {
     "name": "EBS"
-  }
+  },
+  "kinesisvideosignalingchannels": {
+    "prefix": "kinesis-video-signaling",
+    "name": "KinesisVideoSignalingChannels",
+    "cors": true
+   }
 }
