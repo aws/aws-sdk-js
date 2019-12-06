@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Amazon Personalize",
+  "description": "Fix \"PersonalizeEvents.Types.PutEventsRequest\" type definition\""
+}
