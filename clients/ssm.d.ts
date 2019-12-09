@@ -468,6 +468,14 @@ declare class SSM extends Service {
    */
   getAutomationExecution(callback?: (err: AWSError, data: SSM.Types.GetAutomationExecutionResult) => void): Request<SSM.Types.GetAutomationExecutionResult, AWSError>;
   /**
+   * Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, GetCalendarState returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, GetCalendarState assumes the current time. Change Calendar entries have two possible states: OPEN or CLOSED. For more information about Systems Manager Change Calendar, see AWS Systems Manager Change Calendar in the AWS Systems Manager User Guide.
+   */
+  getCalendarState(params: SSM.Types.GetCalendarStateRequest, callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
+  /**
+   * Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, GetCalendarState returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, GetCalendarState assumes the current time. Change Calendar entries have two possible states: OPEN or CLOSED. For more information about Systems Manager Change Calendar, see AWS Systems Manager Change Calendar in the AWS Systems Manager User Guide.
+   */
+  getCalendarState(callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
+  /**
    * Returns detailed information about command execution for an invocation or plugin. 
    */
   getCommandInvocation(params: SSM.Types.GetCommandInvocationRequest, callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
@@ -1679,6 +1687,9 @@ declare namespace SSM {
   export type BaselineName = string;
   export type BatchErrorMessage = string;
   export type Boolean = boolean;
+  export type CalendarNameOrARN = string;
+  export type CalendarNameOrARNList = CalendarNameOrARN[];
+  export type CalendarState = "OPEN"|"CLOSED"|string;
   export interface CancelCommandRequest {
     /**
      * The ID of the command you want to cancel.
@@ -3453,7 +3464,7 @@ declare namespace SSM {
      */
     InstancesWithInstalledOtherPatches?: Integer;
     /**
-     * The number of instances with patches installed that have not been rebooted after the patch installation. The status of these instances is NON_COMPLIANT.
+     * Reserved for future use. 
      */
     InstancesWithInstalledPendingRebootPatches?: InstancesCount;
     /**
@@ -3681,7 +3692,7 @@ declare namespace SSM {
   export type DocumentFilterKey = "Name"|"Owner"|"PlatformTypes"|"DocumentType"|string;
   export type DocumentFilterList = DocumentFilter[];
   export type DocumentFilterValue = string;
-  export type DocumentFormat = "YAML"|"JSON"|string;
+  export type DocumentFormat = "YAML"|"JSON"|"TEXT"|string;
   export type DocumentHash = string;
   export type DocumentHashType = "Sha256"|"Sha1"|string;
   export interface DocumentIdentifier {
@@ -3786,7 +3797,7 @@ declare namespace SSM {
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
   export type DocumentStatusInformation = string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
@@ -3883,6 +3894,30 @@ declare namespace SSM {
      * Detailed information about the current state of an automation execution.
      */
     AutomationExecution?: AutomationExecution;
+  }
+  export interface GetCalendarStateRequest {
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager documents that represent the calendar entries for which you want to get the state.
+     */
+    CalendarNames: CalendarNameOrARNList;
+    /**
+     * (Optional) The specific time for which you want to get calendar state information, in ISO 8601 format. If you do not add AtTime, the current time is assumed.
+     */
+    AtTime?: ISO8601String;
+  }
+  export interface GetCalendarStateResponse {
+    /**
+     * The state of the calendar. An OPEN calendar indicates that actions are allowed to proceed, and a CLOSED calendar indicates that actions are not allowed to proceed.
+     */
+    State?: CalendarState;
+    /**
+     * The time, as an ISO 8601 string, that you specified in your command. If you did not specify a time, GetCalendarState uses the current time.
+     */
+    AtTime?: ISO8601String;
+    /**
+     * The time, as an ISO 8601 string, that the calendar state will change. If the current calendar state is OPEN, NextTransitionTime indicates when the calendar state changes to CLOSED, and vice-versa.
+     */
+    NextTransitionTime?: ISO8601String;
   }
   export interface GetCommandInvocationRequest {
     /**
@@ -4699,6 +4734,7 @@ declare namespace SSM {
     ServiceSetting?: ServiceSetting;
   }
   export type IPAddress = string;
+  export type ISO8601String = string;
   export type IamRole = string;
   export type IdempotencyToken = string;
   export type InstallOverrideList = string;
@@ -4938,7 +4974,7 @@ declare namespace SSM {
      */
     InstalledOtherCount?: PatchInstalledOtherCount;
     /**
-     * The number of patches installed since the last time the instance was rebooted.
+     * Reserved for future use.
      */
     InstalledPendingRebootCount?: PatchInstalledPendingRebootCount;
     /**
@@ -4974,11 +5010,11 @@ declare namespace SSM {
      */
     Operation: PatchOperationType;
     /**
-     * The time of the last attempt to patch the instance with NoReboot specified as the reboot option.
+     * Reserved for future use. 
      */
     LastNoRebootInstallOperationTime?: DateTime;
     /**
-     * Indicates the reboot option specified in the patch baseline.  Reboot options apply to Install operations only. Reboots are not attempted for Patch Manager Scan operations.     RebootIfNeeded: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of InstalledPendingReboot.    NoReboot: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of InstalledPendingReboot. These patches might not be in effect until a reboot is performed.  
+     * Reserved for future use. 
      */
     RebootOption?: RebootOption;
   }

@@ -20,11 +20,11 @@ declare class QuickSight extends Service {
    */
   cancelIngestion(callback?: (err: AWSError, data: QuickSight.Types.CancelIngestionResponse) => void): Request<QuickSight.Types.CancelIngestionResponse, AWSError>;
   /**
-   * Creates a dashboard from a template. To first create a template, see the CreateTemplate API. A dashboard is an entity in QuickSight which identifies Quicksight reports, created from analyses. QuickSight dashboards are sharable. With the right permissions, you can create scheduled email reports from them. The CreateDashboard, DescribeDashboard and ListDashboardsByUser APIs act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.
+   * Creates a dashboard from a template. To first create a template, see the CreateTemplate API operation. A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The CreateDashboard, DescribeDashboard, and ListDashboardsByUser API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.
    */
   createDashboard(params: QuickSight.Types.CreateDashboardRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateDashboardResponse) => void): Request<QuickSight.Types.CreateDashboardResponse, AWSError>;
   /**
-   * Creates a dashboard from a template. To first create a template, see the CreateTemplate API. A dashboard is an entity in QuickSight which identifies Quicksight reports, created from analyses. QuickSight dashboards are sharable. With the right permissions, you can create scheduled email reports from them. The CreateDashboard, DescribeDashboard and ListDashboardsByUser APIs act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.
+   * Creates a dashboard from a template. To first create a template, see the CreateTemplate API operation. A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The CreateDashboard, DescribeDashboard, and ListDashboardsByUser API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.
    */
   createDashboard(callback?: (err: AWSError, data: QuickSight.Types.CreateDashboardResponse) => void): Request<QuickSight.Types.CreateDashboardResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class QuickSight extends Service {
    */
   createGroupMembership(callback?: (err: AWSError, data: QuickSight.Types.CreateGroupMembershipResponse) => void): Request<QuickSight.Types.CreateGroupMembershipResponse, AWSError>;
   /**
-   * Creates an assignment with one specified IAM policy Amazon Resource Name (ARN) and will assigned to specified groups or users of QuickSight. Users and groups need to be in the same namespace. 
+   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy will be assigned to specified groups or users of Amazon QuickSight. The users and groups need to be in the same namespace. 
    */
   createIAMPolicyAssignment(params: QuickSight.Types.CreateIAMPolicyAssignmentRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.CreateIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Creates an assignment with one specified IAM policy Amazon Resource Name (ARN) and will assigned to specified groups or users of QuickSight. Users and groups need to be in the same namespace. 
+   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy will be assigned to specified groups or users of Amazon QuickSight. The users and groups need to be in the same namespace. 
    */
   createIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.CreateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.CreateIAMPolicyAssignmentResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class QuickSight extends Service {
    */
   createIngestion(callback?: (err: AWSError, data: QuickSight.Types.CreateIngestionResponse) => void): Request<QuickSight.Types.CreateIngestionResponse, AWSError>;
   /**
-   * Creates a template from an existing QuickSight analysis or template. The resulting template can be used to create a dashboard. A template is an entity in QuickSight which encapsulates the metadata required to create an analysis that can be used to create dashboard. It adds a layer of abstraction by use placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets which follow the same schema that was used to create the source analysis and template.
+   * Creates a template from an existing QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(params: QuickSight.Types.CreateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
   /**
-   * Creates a template from an existing QuickSight analysis or template. The resulting template can be used to create a dashboard. A template is an entity in QuickSight which encapsulates the metadata required to create an analysis that can be used to create dashboard. It adds a layer of abstraction by use placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets which follow the same schema that was used to create the source analysis and template.
+   * Creates a template from an existing QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class QuickSight extends Service {
    */
   deleteGroupMembership(callback?: (err: AWSError, data: QuickSight.Types.DeleteGroupMembershipResponse) => void): Request<QuickSight.Types.DeleteGroupMembershipResponse, AWSError>;
   /**
-   * Deletes an existing assignment.
+   * Deletes an existing IAM policy assignment.
    */
   deleteIAMPolicyAssignment(params: QuickSight.Types.DeleteIAMPolicyAssignmentRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.DeleteIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Deletes an existing assignment.
+   * Deletes an existing IAM policy assignment.
    */
   deleteIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.DeleteIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.DeleteIAMPolicyAssignmentResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class QuickSight extends Service {
    */
   deleteTemplate(callback?: (err: AWSError, data: QuickSight.Types.DeleteTemplateResponse) => void): Request<QuickSight.Types.DeleteTemplateResponse, AWSError>;
   /**
-   * Update template alias of given template.
+   * Deletes the item that the specified template alias points to. If you provide a specific alias, you delete the version of the template that the alias points to.
    */
   deleteTemplateAlias(params: QuickSight.Types.DeleteTemplateAliasRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteTemplateAliasResponse) => void): Request<QuickSight.Types.DeleteTemplateAliasResponse, AWSError>;
   /**
-   * Update template alias of given template.
+   * Deletes the item that the specified template alias points to. If you provide a specific alias, you delete the version of the template that the alias points to.
    */
   deleteTemplateAlias(callback?: (err: AWSError, data: QuickSight.Types.DeleteTemplateAliasResponse) => void): Request<QuickSight.Types.DeleteTemplateAliasResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class QuickSight extends Service {
    */
   describeDashboard(callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardResponse) => void): Request<QuickSight.Types.DescribeDashboardResponse, AWSError>;
   /**
-   * Describes read and write permissions on a dashboard.
+   * Describes read and write permissions for a dashboard.
    */
   describeDashboardPermissions(params: QuickSight.Types.DescribeDashboardPermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardPermissionsResponse) => void): Request<QuickSight.Types.DescribeDashboardPermissionsResponse, AWSError>;
   /**
-   * Describes read and write permissions on a dashboard.
+   * Describes read and write permissions for a dashboard.
    */
   describeDashboardPermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardPermissionsResponse) => void): Request<QuickSight.Types.DescribeDashboardPermissionsResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class QuickSight extends Service {
    */
   describeGroup(callback?: (err: AWSError, data: QuickSight.Types.DescribeGroupResponse) => void): Request<QuickSight.Types.DescribeGroupResponse, AWSError>;
   /**
-   * Describes an existing IAMPolicy Assignment by specified assignment name.
+   * Describes an existing IAM policy assignment, as specified by the assignment name.
    */
   describeIAMPolicyAssignment(params: QuickSight.Types.DescribeIAMPolicyAssignmentRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.DescribeIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Describes an existing IAMPolicy Assignment by specified assignment name.
+   * Describes an existing IAM policy assignment, as specified by the assignment name.
    */
   describeIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.DescribeIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.DescribeIAMPolicyAssignmentResponse, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class QuickSight extends Service {
    */
   describeTemplate(callback?: (err: AWSError, data: QuickSight.Types.DescribeTemplateResponse) => void): Request<QuickSight.Types.DescribeTemplateResponse, AWSError>;
   /**
-   * Describes the template aliases of a template.
+   * Describes the template alias for a template.
    */
   describeTemplateAlias(params: QuickSight.Types.DescribeTemplateAliasRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeTemplateAliasResponse) => void): Request<QuickSight.Types.DescribeTemplateAliasResponse, AWSError>;
   /**
-   * Describes the template aliases of a template.
+   * Describes the template alias for a template.
    */
   describeTemplateAlias(callback?: (err: AWSError, data: QuickSight.Types.DescribeTemplateAliasResponse) => void): Request<QuickSight.Types.DescribeTemplateAliasResponse, AWSError>;
   /**
@@ -276,35 +276,35 @@ declare class QuickSight extends Service {
    */
   describeUser(callback?: (err: AWSError, data: QuickSight.Types.DescribeUserResponse) => void): Request<QuickSight.Types.DescribeUserResponse, AWSError>;
   /**
-   * Generates a server-side embeddable URL and authorization code. Before this can work properly, first you need to configure the dashboards and user permissions. For more information, see the Amazon QuickSight User Guide section on Embedding Amazon QuickSight Dashboards or see the Amazon QuickSight API Reference section on Embedding Amazon QuickSight Dashboards . Currently, you can use GetDashboardEmbedURL only from the server, not from the user’s browser.
+   * Generates a server-side embeddable URL and authorization code. For this process to work properly, first configure the dashboards and user permissions. For more information, see Embedding Amazon QuickSight Dashboards in the Amazon QuickSight User Guide or Embedding Amazon QuickSight Dashboards in the Amazon QuickSight API Reference. Currently, you can use GetDashboardEmbedURL only from the server, not from the user’s browser.
    */
   getDashboardEmbedUrl(params: QuickSight.Types.GetDashboardEmbedUrlRequest, callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
   /**
-   * Generates a server-side embeddable URL and authorization code. Before this can work properly, first you need to configure the dashboards and user permissions. For more information, see the Amazon QuickSight User Guide section on Embedding Amazon QuickSight Dashboards or see the Amazon QuickSight API Reference section on Embedding Amazon QuickSight Dashboards . Currently, you can use GetDashboardEmbedURL only from the server, not from the user’s browser.
+   * Generates a server-side embeddable URL and authorization code. For this process to work properly, first configure the dashboards and user permissions. For more information, see Embedding Amazon QuickSight Dashboards in the Amazon QuickSight User Guide or Embedding Amazon QuickSight Dashboards in the Amazon QuickSight API Reference. Currently, you can use GetDashboardEmbedURL only from the server, not from the user’s browser.
    */
   getDashboardEmbedUrl(callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
   /**
-   * Lists all the versions of the dashboards in the Quicksight subscription.
+   * Lists all the versions of the dashboards in the QuickSight subscription.
    */
   listDashboardVersions(params: QuickSight.Types.ListDashboardVersionsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDashboardVersionsResponse) => void): Request<QuickSight.Types.ListDashboardVersionsResponse, AWSError>;
   /**
-   * Lists all the versions of the dashboards in the Quicksight subscription.
+   * Lists all the versions of the dashboards in the QuickSight subscription.
    */
   listDashboardVersions(callback?: (err: AWSError, data: QuickSight.Types.ListDashboardVersionsResponse) => void): Request<QuickSight.Types.ListDashboardVersionsResponse, AWSError>;
   /**
-   * Lists dashboards in the AWS account.
+   * Lists dashboards in an AWS account.
    */
   listDashboards(params: QuickSight.Types.ListDashboardsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDashboardsResponse) => void): Request<QuickSight.Types.ListDashboardsResponse, AWSError>;
   /**
-   * Lists dashboards in the AWS account.
+   * Lists dashboards in an AWS account.
    */
   listDashboards(callback?: (err: AWSError, data: QuickSight.Types.ListDashboardsResponse) => void): Request<QuickSight.Types.ListDashboardsResponse, AWSError>;
   /**
-   * Lists all of the datasets belonging to this account in an AWS region. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
+   * Lists all of the datasets belonging to the current AWS account in an AWS Region. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
    */
   listDataSets(params: QuickSight.Types.ListDataSetsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDataSetsResponse) => void): Request<QuickSight.Types.ListDataSetsResponse, AWSError>;
   /**
-   * Lists all of the datasets belonging to this account in an AWS region. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
+   * Lists all of the datasets belonging to the current AWS account in an AWS Region. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
    */
   listDataSets(callback?: (err: AWSError, data: QuickSight.Types.ListDataSetsResponse) => void): Request<QuickSight.Types.ListDataSetsResponse, AWSError>;
   /**
@@ -332,19 +332,19 @@ declare class QuickSight extends Service {
    */
   listGroups(callback?: (err: AWSError, data: QuickSight.Types.ListGroupsResponse) => void): Request<QuickSight.Types.ListGroupsResponse, AWSError>;
   /**
-   * Lists assignments in current QuickSight account.
+   * Lists IAM policy assignments in the current Amazon QuickSight account.
    */
   listIAMPolicyAssignments(params: QuickSight.Types.ListIAMPolicyAssignmentsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsResponse, AWSError>;
   /**
-   * Lists assignments in current QuickSight account.
+   * Lists IAM policy assignments in the current Amazon QuickSight account.
    */
   listIAMPolicyAssignments(callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsResponse, AWSError>;
   /**
-   * Lists all the assignments and the Amazon Resource Names (ARNs) for the associated IAM policies assigned to the specified user and the group or groups that the user belongs to.
+   * Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs) for the IAM policies assigned to the specified user and group or groups that the user belongs to.
    */
   listIAMPolicyAssignmentsForUser(params: QuickSight.Types.ListIAMPolicyAssignmentsForUserRequest, callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse, AWSError>;
   /**
-   * Lists all the assignments and the Amazon Resource Names (ARNs) for the associated IAM policies assigned to the specified user and the group or groups that the user belongs to.
+   * Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs) for the IAM policies assigned to the specified user and group or groups that the user belongs to.
    */
   listIAMPolicyAssignmentsForUser(callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse, AWSError>;
   /**
@@ -372,19 +372,19 @@ declare class QuickSight extends Service {
    */
   listTemplateAliases(callback?: (err: AWSError, data: QuickSight.Types.ListTemplateAliasesResponse) => void): Request<QuickSight.Types.ListTemplateAliasesResponse, AWSError>;
   /**
-   * Lists all the versions of the templates in the Quicksight account.
+   * Lists all the versions of the templates in the current Amazon QuickSight account.
    */
   listTemplateVersions(params: QuickSight.Types.ListTemplateVersionsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListTemplateVersionsResponse) => void): Request<QuickSight.Types.ListTemplateVersionsResponse, AWSError>;
   /**
-   * Lists all the versions of the templates in the Quicksight account.
+   * Lists all the versions of the templates in the current Amazon QuickSight account.
    */
   listTemplateVersions(callback?: (err: AWSError, data: QuickSight.Types.ListTemplateVersionsResponse) => void): Request<QuickSight.Types.ListTemplateVersionsResponse, AWSError>;
   /**
-   * Lists all the templates in the QuickSight account.
+   * Lists all the templates in the current Amazon QuickSight account.
    */
   listTemplates(params: QuickSight.Types.ListTemplatesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListTemplatesResponse) => void): Request<QuickSight.Types.ListTemplatesResponse, AWSError>;
   /**
-   * Lists all the templates in the QuickSight account.
+   * Lists all the templates in the current Amazon QuickSight account.
    */
   listTemplates(callback?: (err: AWSError, data: QuickSight.Types.ListTemplatesResponse) => void): Request<QuickSight.Types.ListTemplatesResponse, AWSError>;
   /**
@@ -428,11 +428,11 @@ declare class QuickSight extends Service {
    */
   untagResource(callback?: (err: AWSError, data: QuickSight.Types.UntagResourceResponse) => void): Request<QuickSight.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates a dashboard in the AWS account.
+   * Updates a dashboard in an AWS account.
    */
   updateDashboard(params: QuickSight.Types.UpdateDashboardRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateDashboardResponse) => void): Request<QuickSight.Types.UpdateDashboardResponse, AWSError>;
   /**
-   * Updates a dashboard in the AWS account.
+   * Updates a dashboard in an AWS account.
    */
   updateDashboard(callback?: (err: AWSError, data: QuickSight.Types.UpdateDashboardResponse) => void): Request<QuickSight.Types.UpdateDashboardResponse, AWSError>;
   /**
@@ -492,19 +492,19 @@ declare class QuickSight extends Service {
    */
   updateGroup(callback?: (err: AWSError, data: QuickSight.Types.UpdateGroupResponse) => void): Request<QuickSight.Types.UpdateGroupResponse, AWSError>;
   /**
-   * Updates an existing assignment. This operation updates only the optional parameter or parameters that are specified in the request.
+   * Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request.
    */
   updateIAMPolicyAssignment(params: QuickSight.Types.UpdateIAMPolicyAssignmentRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.UpdateIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Updates an existing assignment. This operation updates only the optional parameter or parameters that are specified in the request.
+   * Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request.
    */
   updateIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.UpdateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.UpdateIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Updates a template from an existing QuickSight analysis.
+   * Updates a template from an existing Amazon QuickSight analysis or another template.
    */
   updateTemplate(params: QuickSight.Types.UpdateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplateResponse) => void): Request<QuickSight.Types.UpdateTemplateResponse, AWSError>;
   /**
-   * Updates a template from an existing QuickSight analysis.
+   * Updates a template from an existing Amazon QuickSight analysis or another template.
    */
   updateTemplate(callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplateResponse) => void): Request<QuickSight.Types.UpdateTemplateResponse, AWSError>;
   /**
@@ -516,11 +516,11 @@ declare class QuickSight extends Service {
    */
   updateTemplateAlias(callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplateAliasResponse) => void): Request<QuickSight.Types.UpdateTemplateAliasResponse, AWSError>;
   /**
-   * Updates the permissions on a template.
+   * Updates the resource permissions for a template.
    */
   updateTemplatePermissions(params: QuickSight.Types.UpdateTemplatePermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplatePermissionsResponse) => void): Request<QuickSight.Types.UpdateTemplatePermissionsResponse, AWSError>;
   /**
-   * Updates the permissions on a template.
+   * Updates the resource permissions for a template.
    */
   updateTemplatePermissions(callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplatePermissionsResponse) => void): Request<QuickSight.Types.UpdateTemplatePermissionsResponse, AWSError>;
   /**
@@ -608,7 +608,7 @@ declare namespace QuickSight {
      */
     ColumnName: ColumnName;
     /**
-     * A unique ID to identify a calculated column. During dataset update, if the column ID of a calculated column matches that of an existing calculated column, QuickSight preserves the existing calculated column.
+     * A unique ID to identify a calculated column. During a dataset update, if the column ID of a calculated column matches that of an existing calculated column, Amazon QuickSight preserves the existing calculated column.
      */
     ColumnId: ColumnId;
     /**
@@ -659,7 +659,7 @@ declare namespace QuickSight {
      */
     NewColumnType: ColumnDataType;
     /**
-     * When casting a column from string to datetime type, you can supply a QuickSight supported format string to denote the source data format.
+     * When casting a column from string to datetime type, you can supply a string in a format supported by Amazon QuickSight to denote the source data format.
      */
     Format?: TypeCastFormat;
   }
@@ -687,7 +687,7 @@ declare namespace QuickSight {
      */
     Name?: String;
     /**
-     * A structure containing the list of column group column schemas.
+     * A structure containing the list of schemas for column group columns.
      */
     ColumnGroupColumnSchemaList?: ColumnGroupColumnSchemaList;
   }
@@ -725,11 +725,11 @@ declare namespace QuickSight {
   }
   export interface CreateDashboardRequest {
     /**
-     * AWS account ID where you want to create the dashboard.
+     * The ID of the AWS account where you want to create the dashboard.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dashboard, also added to IAM policy.
+     * The ID for the dashboard, also added to the IAM policy.
      */
     DashboardId: RestrictiveResourceId;
     /**
@@ -737,15 +737,15 @@ declare namespace QuickSight {
      */
     Name: DashboardName;
     /**
-     * A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters and some parameters might accept multiple values. You could use the following structure to override two string parameters that accept multiple values:
+     * A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values. You can use the dashboard permissions structure described following to override two string parameters that accept multiple values. 
      */
     Parameters?: Parameters;
     /**
-     * A structure that contains the permissions of the dashboard. You can use this for granting permissions with principal and action information.
+     * A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.
      */
     Permissions?: ResourcePermissionList;
     /**
-     * Source entity from which the dashboard is created. The souce entity accepts the Amazon Resource Name (ARN) of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.  If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.
+     * The source entity from which the dashboard is created. The source entity accepts the Amazon Resource Name (ARN) of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.  If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.
      */
     SourceEntity: DashboardSourceEntity;
     /**
@@ -757,7 +757,7 @@ declare namespace QuickSight {
      */
     VersionDescription?: VersionDescription;
     /**
-     * Publishing options when creating dashboard.   AvailabilityStatus for AdHocFilteringOption - This can be either ENABLED or DISABLED. When This is set to set to DISABLED, QuickSight disables the left filter pane on the published dashboard, which can be used for AdHoc filtering. Enabled by default.    AvailabilityStatus for ExportToCSVOption - This can be either ENABLED or DISABLED. The visual option to export data to CSV is disabled when this is set to DISABLED. Enabled by default.    VisibilityState for SheetControlsOption - This can be either COLLAPSED or EXPANDED. The sheet controls pane is collapsed by default when set to true. Collapsed by default.   
+     * Options for publishing the dashboard when you create it:    AvailabilityStatus for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When this is set to DISABLED, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is ENABLED by default.     AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED or DISABLED. The visual option to export data to .csv format isn't enabled when this is set to DISABLED. This option is ENABLED by default.     VisibilityState for SheetControlsOption - This visibility state can be either COLLAPSED or EXPANDED. The sheet controls pane is collapsed by default when set to true. This option is COLLAPSED by default.   
      */
     DashboardPublishOptions?: DashboardPublishOptions;
   }
@@ -775,7 +775,7 @@ declare namespace QuickSight {
      */
     DashboardId?: RestrictiveResourceId;
     /**
-     * The creation status of the dashboard create request.
+     * The status of the dashboard creation request.
      */
     CreationStatus?: ResourceStatus;
     /**
@@ -789,7 +789,7 @@ declare namespace QuickSight {
   }
   export interface CreateDataSetRequest {
     /**
-     * The AWS Account ID.
+     * The AWS account ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -809,7 +809,7 @@ declare namespace QuickSight {
      */
     LogicalTableMap?: LogicalTableMap;
     /**
-     * Indicates whether or not you want to import the data into SPICE.
+     * Indicates whether you want to import the data into SPICE.
      */
     ImportMode: DataSetImportMode;
     /**
@@ -821,7 +821,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * Row-level security configuration on the data you want to create.
+     * The row-level security configuration for the data that you want to create.
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
@@ -839,11 +839,11 @@ declare namespace QuickSight {
      */
     DataSetId?: ResourceId;
     /**
-     * The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE
+     * The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.
      */
     IngestionArn?: Arn;
     /**
-     * The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE
+     * The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.
      */
     IngestionId?: ResourceId;
     /**
@@ -985,7 +985,7 @@ declare namespace QuickSight {
   }
   export interface CreateIAMPolicyAssignmentRequest {
     /**
-     * The AWS Account ID where you want to assign QuickSight users or groups to an IAM policy.
+     * The ID of the AWS account where you want to assign an IAM policy to QuickSight users or groups.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -993,15 +993,15 @@ declare namespace QuickSight {
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
-     * The status of an assignment:   ENABLED - Anything specified in this assignment is used while creating the data source.   DISABLED - This assignment isn't used while creating the data source.   DRAFT - Assignment is an unfinished draft and isn't used while creating the data source.  
+     * The status of the assignment. Possible values are as follows:    ENABLED - Anything specified in this assignment is used when creating the data source.    DISABLED - This assignment isn't used when creating the data source.    DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.  
      */
     AssignmentStatus: AssignmentStatus;
     /**
-     * An IAM policy Amazon Resource Name (ARN) that you want to apply to the QuickSight users and groups specified in this assignment.
+     * The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment.
      */
     PolicyArn?: Arn;
     /**
-     * QuickSight users and/or groups that you want to assign the policy to.
+     * The QuickSight users, groups, or both that you want to assign the policy to.
      */
     Identities?: IdentityMap;
     /**
@@ -1011,23 +1011,23 @@ declare namespace QuickSight {
   }
   export interface CreateIAMPolicyAssignmentResponse {
     /**
-     * The name of the assignment. Must be unique within an AWS account.
+     * The name of the assignment. This name must be unique within the AWS account.
      */
     AssignmentName?: IAMPolicyAssignmentName;
     /**
-     * An ID for the assignment.
+     * The ID for the assignment.
      */
     AssignmentId?: String;
     /**
-     * The status of an assignment:   ENABLED - Anything specified in this assignment is used while creating the data source.   DISABLED - This assignment isn't used while creating the data source.   DRAFT - Assignment is an unfinished draft and isn't used while creating the data source.  
+     * The status of the assignment. Possible values are as follows:    ENABLED - Anything specified in this assignment is used when creating the data source.    DISABLED - This assignment isn't used when creating the data source.    DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.  
      */
     AssignmentStatus?: AssignmentStatus;
     /**
-     * An IAM policy Amazon Resource Name (ARN) that is applied to the QuickSight users and groups specified in this assignment.
+     * The ARN for the IAM policy that is applied to the QuickSight users and groups specified in this assignment.
      */
     PolicyArn?: Arn;
     /**
-     * QuickSight users and/or groups that are assigned to the IAM policy.
+     * The QuickSight users, groups, or both that the IAM policy is assigned to.
      */
     Identities?: IdentityMap;
     /**
@@ -1077,7 +1077,7 @@ declare namespace QuickSight {
   }
   export interface CreateTemplateAliasRequest {
     /**
-     * AWS account ID that contains the template you are aliasing.
+     * The ID of the AWS account that contains the template that you creating an alias for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1085,7 +1085,7 @@ declare namespace QuickSight {
      */
     TemplateId: RestrictiveResourceId;
     /**
-     * The name that you want to give to the template alias that you're creating. Aliases that start with $ are reserved by QuickSight. 
+     * The name that you want to give to the template alias that you're creating. Don't start the alias name with the $ character. Alias names that start with $ are reserved by QuickSight. 
      */
     AliasName: AliasName;
     /**
@@ -1095,7 +1095,7 @@ declare namespace QuickSight {
   }
   export interface CreateTemplateAliasResponse {
     /**
-     * Information on the template alias.
+     * Information about the template alias.
      */
     TemplateAlias?: TemplateAlias;
     /**
@@ -1113,7 +1113,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the template you want to create. This is unique per AWS region per AWS account.
+     * An ID for the template that you want to create. This template is unique per AWS Region in each AWS account.
      */
     TemplateId: RestrictiveResourceId;
     /**
@@ -1125,7 +1125,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The Amazon Resource Name (ARN) of the source entity from which this template is being created. Templates can be currently created from an analysis or another template. If the ARN is for an analysis, you must include its dataset references. 
+     * The Amazon Resource Name (ARN) of the source entity from which this template is being created. Currently, you can create a template from an analysis or another template. If the ARN is for an analysis, include its dataset references. 
      */
     SourceEntity: TemplateSourceEntity;
     /**
@@ -1133,13 +1133,13 @@ declare namespace QuickSight {
      */
     Tags?: TagList;
     /**
-     * A description of the current template version being created. This API created the first version of the template. Every time UpdateTemplate is called a new version is created. Each version of the template maintains a description of the version in the VersionDescription field.
+     * A description of the current template version being created. This API operation creates the first version of the template. Every time UpdateTemplate is called, a new version is created. Each version of the template maintains a description of the version in the VersionDescription field.
      */
     VersionDescription?: VersionDescription;
   }
   export interface CreateTemplateResponse {
     /**
-     * The Amazon Resource Name (ARN) for the template.
+     * The ARN for the template.
      */
     Arn?: Arn;
     /**
@@ -1165,7 +1165,7 @@ declare namespace QuickSight {
   }
   export interface CredentialPair {
     /**
-     * Username.
+     * User name.
      */
     Username: Username;
     /**
@@ -1198,7 +1198,7 @@ declare namespace QuickSight {
      */
     DashboardId?: RestrictiveResourceId;
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn?: Arn;
     /**
@@ -1210,15 +1210,15 @@ declare namespace QuickSight {
      */
     Version?: DashboardVersion;
     /**
-     * The time this was created.
+     * The time that this dataset was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The last time this was published.
+     * The last time that this dataset was published.
      */
     LastPublishedTime?: Timestamp;
     /**
-     * The last time this was updated.
+     * The last time that this dataset was updated.
      */
     LastUpdatedTime?: Timestamp;
   }
@@ -1238,11 +1238,11 @@ declare namespace QuickSight {
   export type DashboardName = string;
   export interface DashboardPublishOptions {
     /**
-     * Ad hoc filtering option.
+     * Ad hoc (one-time) filtering option.
      */
     AdHocFilteringOption?: AdHocFilteringOption;
     /**
-     * Export to CSV option.
+     * Export to .csv option.
      */
     ExportToCSVOption?: ExportToCSVOption;
     /**
@@ -1262,13 +1262,13 @@ declare namespace QuickSight {
      */
     DataSetReferences: DataSetReferenceList;
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn: Arn;
   }
   export interface DashboardSummary {
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn?: Arn;
     /**
@@ -1276,15 +1276,15 @@ declare namespace QuickSight {
      */
     DashboardId?: RestrictiveResourceId;
     /**
-     * A display name for the dataset.
+     * A display name for the dashboard.
      */
     Name?: DashboardName;
     /**
-     * The time this was created.
+     * The time that this dashboard was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The last time this was updated.
+     * The last time that this dashboard was updated.
      */
     LastUpdatedTime?: Timestamp;
     /**
@@ -1292,7 +1292,7 @@ declare namespace QuickSight {
      */
     PublishedVersionNumber?: VersionNumber;
     /**
-     * The last time this was published.
+     * The last time that this dashboard was published.
      */
     LastPublishedTime?: Timestamp;
   }
@@ -1300,7 +1300,7 @@ declare namespace QuickSight {
   export type DashboardUIState = "EXPANDED"|"COLLAPSED"|string;
   export interface DashboardVersion {
     /**
-     * The time this was created.
+     * The time that this dashboard version was created.
      */
     CreatedTime?: Timestamp;
     /**
@@ -1316,7 +1316,7 @@ declare namespace QuickSight {
      */
     Status?: ResourceStatus;
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn?: Arn;
     /**
@@ -1330,11 +1330,11 @@ declare namespace QuickSight {
   }
   export interface DashboardVersionSummary {
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn?: Arn;
     /**
-     * The time this was created.
+     * The time that this dashboard version was created.
      */
     CreatedTime?: Timestamp;
     /**
@@ -1357,7 +1357,7 @@ declare namespace QuickSight {
   export type DashboardVersionSummaryList = DashboardVersionSummary[];
   export interface DataSet {
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn?: Arn;
     /**
@@ -1369,11 +1369,11 @@ declare namespace QuickSight {
      */
     Name?: ResourceName;
     /**
-     * The time this was created.
+     * The time that this dataset was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The last time this was updated.
+     * The last time that this dataset was updated.
      */
     LastUpdatedTime?: Timestamp;
     /**
@@ -1389,7 +1389,7 @@ declare namespace QuickSight {
      */
     OutputColumns?: OutputColumnList;
     /**
-     * Indicates whether or not you want to import the data into SPICE.
+     * Indicates whether you want to import the data into SPICE.
      */
     ImportMode?: DataSetImportMode;
     /**
@@ -1397,11 +1397,11 @@ declare namespace QuickSight {
      */
     ConsumedSpiceCapacityInBytes?: Long;
     /**
-     * Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.
+     * Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.
      */
     ColumnGroups?: ColumnGroupList;
     /**
-     * Row-level security configuration on the dataset.
+     * The row-level security configuration for the dataset.
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
   }
@@ -1428,7 +1428,7 @@ declare namespace QuickSight {
      */
     DataSetPlaceholder: NonEmptyString;
     /**
-     * Dataset ARN.
+     * Dataset Amazon Resource Name (ARN).
      */
     DataSetArn: Arn;
   }
@@ -1441,7 +1441,7 @@ declare namespace QuickSight {
   }
   export interface DataSetSummary {
     /**
-     * The Amazon Resource name (ARN) of the dataset.
+     * The Amazon Resource Name (ARN) of the dataset.
      */
     Arn?: Arn;
     /**
@@ -1453,26 +1453,26 @@ declare namespace QuickSight {
      */
     Name?: ResourceName;
     /**
-     * The time this was created.
+     * The time that this dataset was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The last time this was updated.
+     * The last time that this dataset was updated.
      */
     LastUpdatedTime?: Timestamp;
     /**
-     * Indicates whether or not you want to import the data into SPICE.
+     * Indicates whether you want to import the data into SPICE.
      */
     ImportMode?: DataSetImportMode;
     /**
-     * Row-level security configuration on the dataset.
+     * The row-level security configuration for the dataset.
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
   }
   export type DataSetSummaryList = DataSetSummary[];
   export interface DataSource {
     /**
-     * The Amazon Resource name (ARN) of the data source.
+     * The Amazon Resource Name (ARN) of the data source.
      */
     Arn?: Arn;
     /**
@@ -1484,7 +1484,7 @@ declare namespace QuickSight {
      */
     Name?: ResourceName;
     /**
-     * The type of the data source. This indicates which database engine the data source connects to.
+     * The type of the data source. This type indicates which database engine the data source connects to.
      */
     Type?: DataSourceType;
     /**
@@ -1492,15 +1492,15 @@ declare namespace QuickSight {
      */
     Status?: ResourceStatus;
     /**
-     * The time this was created.
+     * The time that this data source was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The last time this was updated.
+     * The last time that this data source was updated.
      */
     LastUpdatedTime?: Timestamp;
     /**
-     * The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.
+     * The parameters that Amazon QuickSight uses to connect to your underlying source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.
      */
     DataSourceParameters?: DataSourceParameters;
     /**
@@ -1536,15 +1536,15 @@ declare namespace QuickSight {
   export type DataSourceList = DataSource[];
   export interface DataSourceParameters {
     /**
-     * Amazon Elasticsearch parameters.
+     * Amazon Elasticsearch Service parameters.
      */
     AmazonElasticsearchParameters?: AmazonElasticsearchParameters;
     /**
-     * Athena parameters.
+     * Amazon Athena parameters.
      */
     AthenaParameters?: AthenaParameters;
     /**
-     * Aurora MySQL parameters.
+     * Amazon Aurora MySQL parameters.
      */
     AuroraParameters?: AuroraParameters;
     /**
@@ -1576,11 +1576,11 @@ declare namespace QuickSight {
      */
     PrestoParameters?: PrestoParameters;
     /**
-     * RDS parameters.
+     * Amazon RDS parameters.
      */
     RdsParameters?: RdsParameters;
     /**
-     * Redshift parameters.
+     * Amazon Redshift parameters.
      */
     RedshiftParameters?: RedshiftParameters;
     /**
@@ -1638,7 +1638,7 @@ declare namespace QuickSight {
   export type DecimalParameterList = DecimalParameter[];
   export interface DeleteDashboardRequest {
     /**
-     * AWS account ID that contains the dashboard you are deleting.
+     * The ID of the AWS account that contains the dashboard that you're deleting.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1646,7 +1646,7 @@ declare namespace QuickSight {
      */
     DashboardId: RestrictiveResourceId;
     /**
-     * The version number of the dashboard. If version number property is provided, only the specified version of the dashboard is deleted.
+     * The version number of the dashboard. If the version number property is provided, only the specified version of the dashboard is deleted.
      */
     VersionNumber?: VersionNumber;
   }
@@ -1656,7 +1656,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The Secure Socket Layer (SSL) properties that apply. of the resource.
+     * The Secure Socket Layer (SSL) properties that apply for the resource.
      */
     Arn?: Arn;
     /**
@@ -1778,7 +1778,7 @@ declare namespace QuickSight {
   }
   export interface DeleteIAMPolicyAssignmentRequest {
     /**
-     * The AWS account ID where you want to delete an IAM policy assignment.
+     * The AWS account ID where you want to delete the IAM policy assignment.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1806,15 +1806,15 @@ declare namespace QuickSight {
   }
   export interface DeleteTemplateAliasRequest {
     /**
-     * AWS account ID that contains the template alias you are deleting.
+     * The ID of the AWS account that contains the item to delete.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the template.
+     * The ID for the template that the specified alias is for.
      */
     TemplateId: RestrictiveResourceId;
     /**
-     * The alias of the template that you want to delete. If you provide a specific alias, you delete the version that the alias points to. You can specify the latest version of the template by providing the keyword $LATEST in the AliasName parameter. 
+     * The name for the template alias. If you name a specific alias, you delete the version that the alias points to. You can specify the latest version of the template by providing the keyword $LATEST in the AliasName parameter. 
      */
     AliasName: AliasName;
   }
@@ -1824,11 +1824,11 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * An ID for the template.
+     * An ID for the template associated with the deletion.
      */
     TemplateId?: RestrictiveResourceId;
     /**
-     * The name of the alias.
+     * The name for the template alias.
      */
     AliasName?: AliasName;
     /**
@@ -1842,7 +1842,7 @@ declare namespace QuickSight {
   }
   export interface DeleteTemplateRequest {
     /**
-     * AWS account ID that contains the template you are deleting.
+     * The ID of the AWS account that contains the template that you're deleting.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1923,11 +1923,11 @@ declare namespace QuickSight {
   export type Delimiter = string;
   export interface DescribeDashboardPermissionsRequest {
     /**
-     * AWS account ID that contains the dashboard you are describing permissions of.
+     * The ID of the AWS account that contains the dashboard that you're describing permissions for.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dashboard, also added to IAM policy.
+     * The ID for the dashboard, also added to the IAM policy.
      */
     DashboardId: RestrictiveResourceId;
   }
@@ -1941,7 +1941,7 @@ declare namespace QuickSight {
      */
     DashboardArn?: Arn;
     /**
-     * A structure that contains the permissions of the dashboard.
+     * A structure that contains the permissions for the dashboard.
      */
     Permissions?: ResourcePermissionList;
     /**
@@ -1955,7 +1955,7 @@ declare namespace QuickSight {
   }
   export interface DescribeDashboardRequest {
     /**
-     * AWS account ID that contains the dashboard you are describing.
+     * The ID of the AWS account that contains the dashboard that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1963,7 +1963,7 @@ declare namespace QuickSight {
      */
     DashboardId: RestrictiveResourceId;
     /**
-     * The version number for the dashboard. If version number isn’t passed the latest published dashboard version is described. 
+     * The version number for the dashboard. If a version number isn't passed, the latest published dashboard version is described. 
      */
     VersionNumber?: VersionNumber;
     /**
@@ -1977,7 +1977,7 @@ declare namespace QuickSight {
      */
     Dashboard?: Dashboard;
     /**
-     * The http status of this request.
+     * The HTTP status of this request.
      */
     Status?: StatusCode;
     /**
@@ -1987,7 +1987,7 @@ declare namespace QuickSight {
   }
   export interface DescribeDataSetPermissionsRequest {
     /**
-     * The AWS Account ID.
+     * The AWS account ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2019,7 +2019,7 @@ declare namespace QuickSight {
   }
   export interface DescribeDataSetRequest {
     /**
-     * The AWS Account ID.
+     * The AWS account ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2127,7 +2127,7 @@ declare namespace QuickSight {
   }
   export interface DescribeIAMPolicyAssignmentRequest {
     /**
-     * The AWS account ID that contains the assignment you want to describe.
+     * The ID of the AWS account that contains the assignment that you want to describe.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2183,15 +2183,15 @@ declare namespace QuickSight {
   }
   export interface DescribeTemplateAliasRequest {
     /**
-     * AWS account ID that contains the template alias you are describing.
+     * The ID of the AWS account that contains the template alias that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the template.
+     * The ID for the template.
      */
     TemplateId: RestrictiveResourceId;
     /**
-     * The alias of the template that you want to describe. If you provide a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword $LATEST in the AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
+     * The name of the template alias that you want to describe. If you name a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword $LATEST in the AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
      */
     AliasName: AliasName;
   }
@@ -2211,7 +2211,7 @@ declare namespace QuickSight {
   }
   export interface DescribeTemplatePermissionsRequest {
     /**
-     * AWS account ID that contains the template you are describing.
+     * The ID of the AWS account that contains the template that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2243,25 +2243,25 @@ declare namespace QuickSight {
   }
   export interface DescribeTemplateRequest {
     /**
-     * AWS account ID that contains the template you are describing.
+     * The ID of the AWS account that contains the template that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the template.
+     * The ID for the template.
      */
     TemplateId: RestrictiveResourceId;
     /**
-     * This is an optional field, when a version number is provided the corresponding version is describe, if it's not provided the latest version of the template is described.
+     * (Optional) The number for the version to describe. If a VersionNumber parameter value isn't provided, the latest version of the template is described.
      */
     VersionNumber?: VersionNumber;
     /**
-     * The alias of the template that you want to describe. If you provide a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword $LATEST in the AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
+     * The alias of the template that you want to describe. If you name a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword $LATEST in the AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
      */
     AliasName?: AliasName;
   }
   export interface DescribeTemplateResponse {
     /**
-     * The template structure of the object you want to describe.
+     * The template structure for the object you want to describe.
      */
     Template?: Template;
     /**
@@ -2307,7 +2307,7 @@ declare namespace QuickSight {
      */
     Type?: IngestionErrorType;
     /**
-     * Error essage.
+     * Error message.
      */
     Message?: string;
   }
@@ -2321,7 +2321,7 @@ declare namespace QuickSight {
   export type FileFormat = "CSV"|"TSV"|"CLF"|"ELF"|"XLSX"|"JSON"|string;
   export interface FilterOperation {
     /**
-     * An expression that must evaluate to a boolean value. Rows for which the expression is evaluated to true are kept in the dataset.
+     * An expression that must evaluate to a Boolean value. Rows for which the expression evaluates to true are kept in the dataset.
      */
     ConditionExpression: Expression;
   }
@@ -2343,37 +2343,37 @@ declare namespace QuickSight {
   export type GeoSpatialDataRole = "COUNTRY"|"STATE"|"COUNTY"|"CITY"|"POSTCODE"|"LONGITUDE"|"LATITUDE"|string;
   export interface GetDashboardEmbedUrlRequest {
     /**
-     * AWS account ID that contains the dashboard you are embedding.
+     * The ID for the AWS account that contains the dashboard that you're embedding.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dashboard, also added to IAM policy
+     * The ID for the dashboard, also added to the IAM policy.
      */
     DashboardId: RestrictiveResourceId;
     /**
-     * The authentication method the user uses to sign in.
+     * The authentication method that the user uses to sign in.
      */
     IdentityType: IdentityType;
     /**
-     * How many minutes the session is valid. The session lifetime must be between 15 and 600 minutes.
+     * How many minutes the session is valid. The session lifetime must be 15-600 minutes.
      */
     SessionLifetimeInMinutes?: SessionLifetimeInMinutes;
     /**
-     * Remove the undo/redo button on embedded dashboard. The default is FALSE, which enables the undo/redo button.
+     * Remove the undo/redo button on the embedded dashboard. The default is FALSE, which enables the undo/redo button.
      */
     UndoRedoDisabled?: boolean;
     /**
-     * Remove the reset button on embedded dashboard. The default is FALSE, which allows the reset button.
+     * Remove the reset button on the embedded dashboard. The default is FALSE, which enables the reset button.
      */
     ResetDisabled?: boolean;
     /**
-     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:   Active Directory (AD) users or group members   Invited non-federated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM Federation  
+     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.  
      */
     UserArn?: Arn;
   }
   export interface GetDashboardEmbedUrlResponse {
     /**
-     * URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an auth_code that enables a single-signon session. 
+     * An URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an auth_code value that enables a single sign-on session. 
      */
     EmbedUrl?: EmbeddingUrl;
     /**
@@ -2387,7 +2387,7 @@ declare namespace QuickSight {
   }
   export interface Group {
     /**
-     * The Amazon Resource name (ARN) for the group.
+     * The Amazon Resource Name (ARN) for the group.
      */
     Arn?: Arn;
     /**
@@ -2407,7 +2407,7 @@ declare namespace QuickSight {
   export type GroupList = Group[];
   export interface GroupMember {
     /**
-     * The Amazon Resource name (ARN) for the group member (user).
+     * The Amazon Resource Name (ARN) for the group member (user).
      */
     Arn?: Arn;
     /**
@@ -2421,7 +2421,7 @@ declare namespace QuickSight {
   export type Host = string;
   export interface IAMPolicyAssignment {
     /**
-     * AWS account ID.
+     * The AWS account ID.
      */
     AwsAccountId?: AwsAccountId;
     /**
@@ -2433,7 +2433,7 @@ declare namespace QuickSight {
      */
     AssignmentName?: IAMPolicyAssignmentName;
     /**
-     * Policy Amazon Resource Name (ARN).
+     * The Amazon Resource Name (ARN) for the IAM policy.
      */
     PolicyArn?: Arn;
     /**
@@ -2463,7 +2463,7 @@ declare namespace QuickSight {
   export type IdentityType = "IAM"|"QUICKSIGHT"|string;
   export interface Ingestion {
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn: Arn;
     /**
@@ -2481,15 +2481,15 @@ declare namespace QuickSight {
     RowInfo?: RowInfo;
     QueueInfo?: QueueInfo;
     /**
-     * The time this ingestion started.
+     * The time that this ingestion started.
      */
     CreatedTime: timestamp;
     /**
-     * The time this ingestion took, measured in seconds.
+     * The time that this ingestion took, measured in seconds.
      */
     IngestionTimeInSeconds?: long;
     /**
-     * Size of the data ingested in bytes.
+     * The size of the data ingested, in bytes.
      */
     IngestionSizeInBytes?: long;
     /**
@@ -2559,7 +2559,7 @@ declare namespace QuickSight {
   export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT"|string;
   export interface ListDashboardVersionsRequest {
     /**
-     * AWS account ID that contains the dashboard you are listing.
+     * The ID of the AWS account that contains the dashboard that you're listing versions for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2595,7 +2595,7 @@ declare namespace QuickSight {
   }
   export interface ListDashboardsRequest {
     /**
-     * AWS account ID that contains the dashboards you are listing.
+     * The ID of the AWS account that contains the dashboards that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2609,7 +2609,7 @@ declare namespace QuickSight {
   }
   export interface ListDashboardsResponse {
     /**
-     * A structure that contains all of the dashboards shared with the user. Provides basic information about the dashboards.
+     * A structure that contains all of the dashboards shared with the user. This structure provides basic information about the dashboards.
      */
     DashboardSummaryList?: DashboardSummaryList;
     /**
@@ -2627,7 +2627,7 @@ declare namespace QuickSight {
   }
   export interface ListDataSetsRequest {
     /**
-     * The AWS Account ID.
+     * The AWS account ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2767,7 +2767,7 @@ declare namespace QuickSight {
   }
   export interface ListIAMPolicyAssignmentsForUserRequest {
     /**
-     * The AWS account ID that contains the assignment.
+     * The ID of the AWS account that contains the assignments.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2789,7 +2789,7 @@ declare namespace QuickSight {
   }
   export interface ListIAMPolicyAssignmentsForUserResponse {
     /**
-     * Active assignments for this user.
+     * The active assignments for this user.
      */
     ActiveAssignments?: ActiveIAMPolicyAssignmentList;
     /**
@@ -2807,15 +2807,15 @@ declare namespace QuickSight {
   }
   export interface ListIAMPolicyAssignmentsRequest {
     /**
-     * The AWS account ID that contains this IAM policy assignment.
+     * The ID of the AWS account that contains these IAM policy assignments.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The status of the assignment.
+     * The status of the assignments.
      */
     AssignmentStatus?: AssignmentStatus;
     /**
-     * The namespace for this assignment.
+     * The namespace for the assignments.
      */
     Namespace: Namespace;
     /**
@@ -2903,7 +2903,7 @@ declare namespace QuickSight {
   }
   export interface ListTemplateAliasesRequest {
     /**
-     * AWS account ID that contains the template aliases you are listing.
+     * The ID of the AWS account that contains the template aliases that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2939,7 +2939,7 @@ declare namespace QuickSight {
   }
   export interface ListTemplateVersionsRequest {
     /**
-     * AWS account ID that contains the templates you are listing.
+     * The ID of the AWS account that contains the templates that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2975,7 +2975,7 @@ declare namespace QuickSight {
   }
   export interface ListTemplatesRequest {
     /**
-     * AWS account ID that contains the templates you are listing.
+     * The ID of the AWS account that contains the templates that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3011,7 +3011,7 @@ declare namespace QuickSight {
      */
     UserName: UserName;
     /**
-     * The AWS Account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The AWS account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3260,11 +3260,11 @@ declare namespace QuickSight {
   }
   export interface RedshiftParameters {
     /**
-     * Host. This can be blank if the ClusterId is provided.
+     * Host. This field can be blank if ClusterId is provided.
      */
     Host?: Host;
     /**
-     * Port. This can be blank if the ClusterId is provided.
+     * Port. This field can be blank if the ClusterId is provided.
      */
     Port?: OptionalPort;
     /**
@@ -3272,7 +3272,7 @@ declare namespace QuickSight {
      */
     Database: Database;
     /**
-     * Cluster ID. This can be blank if the Host and Port are provided.
+     * Cluster ID. This field can be blank if the Host and Port are provided.
      */
     ClusterId?: ClusterId;
   }
@@ -3334,11 +3334,11 @@ declare namespace QuickSight {
      */
     DataSourceArn: Arn;
     /**
-     * The schema name. Applies to certain relational database engines.
+     * The schema name. This name applies to certain relational database engines.
      */
     Schema?: RelationalTableSchema;
     /**
-     * Name of the relational table.
+     * The name of the relational table.
      */
     Name: RelationalTableName;
     /**
@@ -3350,11 +3350,11 @@ declare namespace QuickSight {
   export type RelationalTableSchema = string;
   export interface RenameColumnOperation {
     /**
-     * Name of the column to be renamed.
+     * The name of the column to be renamed.
      */
     ColumnName: ColumnName;
     /**
-     * New name for the column.
+     * The new name for the column.
      */
     NewColumnName: ColumnName;
   }
@@ -3362,11 +3362,11 @@ declare namespace QuickSight {
   export type ResourceName = string;
   export interface ResourcePermission {
     /**
-     * The Amazon Resource Name (ARN) of a QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .
+     * The Amazon Resource Name (ARN) of an Amazon QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .
      */
     Principal: Principal;
     /**
-     * The action to grant or revoke permissions on. For example, "quicksight:DescribeDashboard".
+     * The action to grant or revoke permissions on, for example "quicksight:DescribeDashboard".
      */
     Actions: ActionList;
   }
@@ -3386,7 +3386,7 @@ declare namespace QuickSight {
   }
   export interface RowLevelPermissionDataSet {
     /**
-     * The Amazon Resource name (ARN) of the permission dataset.
+     * The Amazon Resource Name (ARN) of the permission dataset.
      */
     Arn: Arn;
     /**
@@ -3405,11 +3405,11 @@ declare namespace QuickSight {
   }
   export interface S3Source {
     /**
-     * Data source ARN.
+     * The amazon Resource Name (ARN) for the data source.
      */
     DataSourceArn: Arn;
     /**
-     * Information on the S3 source file(s) format.
+     * Information about the format for the S3 source file or files.
      */
     UploadSettings?: UploadSettings;
     /**
@@ -3472,7 +3472,7 @@ declare namespace QuickSight {
   }
   export interface SslProperties {
     /**
-     * A boolean flag to control whether SSL should be disabled.
+     * A Boolean option to control whether SSL should be disabled.
      */
     DisableSsl?: Boolean;
   }
@@ -3566,7 +3566,7 @@ declare namespace QuickSight {
      */
     AliasName?: AliasName;
     /**
-     * The ARN of the template alias.
+     * The Amazon Resource Name (ARN) of the template alias.
      */
     Arn?: Arn;
     /**
@@ -3590,7 +3590,7 @@ declare namespace QuickSight {
   export type TemplateName = string;
   export interface TemplateSourceAnalysis {
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn: Arn;
     /**
@@ -3610,7 +3610,7 @@ declare namespace QuickSight {
   }
   export interface TemplateSourceTemplate {
     /**
-     * The Amazon Resource name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     Arn: Arn;
   }
@@ -3620,7 +3620,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the template. This is unique per AWS Region for each AWS account.
+     * The ID of the template. This ID is unique per AWS Region for each AWS account.
      */
     TemplateId?: RestrictiveResourceId;
     /**
@@ -3632,18 +3632,18 @@ declare namespace QuickSight {
      */
     LatestVersionNumber?: VersionNumber;
     /**
-     * The last time this was created.
+     * The last time that this template was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The last time this was updated.
+     * The last time that this template was updated.
      */
     LastUpdatedTime?: Timestamp;
   }
   export type TemplateSummaryList = TemplateSummary[];
   export interface TemplateVersion {
     /**
-     * The time this was created.
+     * The time that this template version was created.
      */
     CreatedTime?: Timestamp;
     /**
@@ -3681,7 +3681,7 @@ declare namespace QuickSight {
      */
     VersionNumber?: VersionNumber;
     /**
-     * The time this was created.
+     * The time that this template version was created.
      */
     CreatedTime?: Timestamp;
     /**
@@ -3689,7 +3689,7 @@ declare namespace QuickSight {
      */
     Status?: ResourceStatus;
     /**
-     * The desription of the template version.
+     * The description of the template version.
      */
     Description?: VersionDescription;
   }
@@ -3771,7 +3771,7 @@ declare namespace QuickSight {
   }
   export interface UpdateDashboardPermissionsRequest {
     /**
-     * AWS account ID that contains the dashboard you are updating.
+     * The ID of the AWS account that contains the dashboard whose permissions you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3811,7 +3811,7 @@ declare namespace QuickSight {
   }
   export interface UpdateDashboardPublishedVersionRequest {
     /**
-     * AWS account ID that contains the dashboard you are updating.
+     * The ID of the AWS account that contains the dashboard that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3843,7 +3843,7 @@ declare namespace QuickSight {
   }
   export interface UpdateDashboardRequest {
     /**
-     * AWS account ID that contains the dashboard you are updating.
+     * The ID of the AWS account that contains the dashboard that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3855,7 +3855,7 @@ declare namespace QuickSight {
      */
     Name: DashboardName;
     /**
-     * The template or analysis from which the dashboard is created. The SouceTemplate entity accepts the Arn of the template and also references to replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.
+     * The template or analysis from which the dashboard is created. The SouceTemplate entity accepts the Amazon Resource Name (ARN) of the template and also references to replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.
      */
     SourceEntity: DashboardSourceEntity;
     /**
@@ -3867,7 +3867,7 @@ declare namespace QuickSight {
      */
     VersionDescription?: VersionDescription;
     /**
-     * Publishing options when creating a dashboard.   AvailabilityStatus for AdHocFilteringOption - This can be either ENABLED or DISABLED. When This is set to set to DISABLED, QuickSight disables the left filter pane on the published dashboard, which can be used for AdHoc filtering. Enabled by default.    AvailabilityStatus for ExportToCSVOption - This can be either ENABLED or DISABLED. The visual option to export data to CSV is disabled when this is set to DISABLED. Enabled by default.    VisibilityState for SheetControlsOption - This can be either COLLAPSED or EXPANDED. The sheet controls pane is collapsed by default when set to true. Collapsed by default.   
+     * Options for publishing the dashboard when you create it:    AvailabilityStatus for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When this is set to DISABLED, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is ENABLED by default.     AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED or DISABLED. The visual option to export data to .csv format isn't enabled when this is set to DISABLED. This option is ENABLED by default.     VisibilityState for SheetControlsOption - This visibility state can be either COLLAPSED or EXPANDED. The sheet controls pane is collapsed by default when set to true. This option is COLLAPSED by default.   
      */
     DashboardPublishOptions?: DashboardPublishOptions;
   }
@@ -3899,11 +3899,11 @@ declare namespace QuickSight {
   }
   export interface UpdateDataSetPermissionsRequest {
     /**
-     * The AWS Account ID.
+     * The AWS account ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset whose permissions you want to update. This ID is unique per AWS Region for each AWS account.
      */
     DataSetId: ResourceId;
     /**
@@ -3921,7 +3921,7 @@ declare namespace QuickSight {
      */
     DataSetArn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset whose permissions you want to update. This ID is unique per AWS Region for each AWS account.
      */
     DataSetId?: ResourceId;
     /**
@@ -3935,11 +3935,11 @@ declare namespace QuickSight {
   }
   export interface UpdateDataSetRequest {
     /**
-     * The AWS Account ID.
+     * The AWS account ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to update. This ID is unique per AWS Region for each AWS account.
      */
     DataSetId: ResourceId;
     /**
@@ -3955,7 +3955,7 @@ declare namespace QuickSight {
      */
     LogicalTableMap?: LogicalTableMap;
     /**
-     * Indicates whether or not you want to import the data into SPICE.
+     * Indicates whether you want to import the data into SPICE.
      */
     ImportMode: DataSetImportMode;
     /**
@@ -3963,7 +3963,7 @@ declare namespace QuickSight {
      */
     ColumnGroups?: ColumnGroupList;
     /**
-     * Row-level security configuration on the data you want to create.
+     * The row-level security configuration for the data you want to create.
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
   }
@@ -3977,11 +3977,11 @@ declare namespace QuickSight {
      */
     DataSetId?: ResourceId;
     /**
-     * The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE
+     * The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.
      */
     IngestionArn?: Arn;
     /**
-     * The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE
+     * The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.
      */
     IngestionId?: ResourceId;
     /**
@@ -4115,11 +4115,11 @@ declare namespace QuickSight {
   }
   export interface UpdateIAMPolicyAssignmentRequest {
     /**
-     * The AWS account ID that contains the IAM policy assignment.
+     * The ID of the AWS account that contains the IAM policy assignment.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The name of the assignment. It must be unique within an AWS account.
+     * The name of the assignment. This name must be unique within an AWS account.
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
@@ -4127,15 +4127,15 @@ declare namespace QuickSight {
      */
     Namespace: Namespace;
     /**
-     * The status of an assignment:   ENABLED - Anything specified in this assignment is used while creating the data source.   DISABLED - This assignment isn't used while creating the data source.   DRAFT - Assignment is an unfinished draft and isn't used while creating the data source.  
+     * The status of the assignment. Possible values are as follows:    ENABLED - Anything specified in this assignment is used when creating the data source.    DISABLED - This assignment isn't used when creating the data source.    DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.  
      */
     AssignmentStatus?: AssignmentStatus;
     /**
-     * An IAM policy Amazon Resource Name (ARN) that will be applied to specified QuickSight users and groups in this assignment.
+     * The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment.
      */
     PolicyArn?: Arn;
     /**
-     * QuickSight users and/or groups that you want to assign to the specified IAM policy.
+     * The QuickSight users, groups, or both that you want to assign the policy to.
      */
     Identities?: IdentityMap;
   }
@@ -4149,15 +4149,15 @@ declare namespace QuickSight {
      */
     AssignmentId?: String;
     /**
-     * The IAM policy ARN assigned to the QuickSight users and groups specified in this request.
+     * The ARN for the IAM policy applied to the QuickSight users and groups specified in this assignment.
      */
     PolicyArn?: Arn;
     /**
-     * QuickSight users and/or groups that are assigned to this IAM policy.
+     * The QuickSight users, groups, or both that the IAM policy is assigned to.
      */
     Identities?: IdentityMap;
     /**
-     * The status of the assignment:   ENABLED - Anything specified in this assignment is used while creating the data source.   DISABLED - This assignment isn't used while creating the data source.   DRAFT - Assignment is an unfinished draft and isn't used while creating the data source.  
+     * The status of the assignment. Possible values are as follows:    ENABLED - Anything specified in this assignment is used when creating the data source.    DISABLED - This assignment isn't used when creating the data source.    DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.  
      */
     AssignmentStatus?: AssignmentStatus;
     /**
@@ -4172,7 +4172,7 @@ declare namespace QuickSight {
   export type UpdateResourcePermissionList = ResourcePermission[];
   export interface UpdateTemplateAliasRequest {
     /**
-     * AWS account ID that contains the template aliases you are updating.
+     * The ID of the AWS account that contains the template alias that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4180,7 +4180,7 @@ declare namespace QuickSight {
      */
     TemplateId: RestrictiveResourceId;
     /**
-     * The alias of the template that you want to update. If you provide a specific alias, you update the version that the alias points to. You can specify the latest version of the template by providing the keyword $LATEST in the AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
+     * The alias of the template that you want to update. If you name a specific alias, you update the version that the alias points to. You can specify the latest version of the template by providing the keyword $LATEST in the AliasName parameter. The keyword $PUBLISHED doesn't apply to templates.
      */
     AliasName: AliasName;
     /**
@@ -4204,7 +4204,7 @@ declare namespace QuickSight {
   }
   export interface UpdateTemplatePermissionsRequest {
     /**
-     * AWS account ID that contains the template.
+     * The ID of the AWS account that contains the template.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4244,7 +4244,7 @@ declare namespace QuickSight {
   }
   export interface UpdateTemplateRequest {
     /**
-     * AWS account ID that contains the template you are updating.
+     * The ID of the AWS account that contains the template that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4252,11 +4252,11 @@ declare namespace QuickSight {
      */
     TemplateId: RestrictiveResourceId;
     /**
-     * The source QuickSight entity from which this template is being created. Templates can be currently created from an Analysis or another template.
+     * The source QuickSight entity from which this template is being updated. You can currently update templates from an Analysis or another template.
      */
     SourceEntity: TemplateSourceEntity;
     /**
-     * A description of the current template version being updated. Every time you cal UpdateTemplate you create a new version. Each version of the template maintains a description of the version in the VersionDescription field.
+     * A description of the current template version that is being updated. Every time you call UpdateTemplate, you create a new version of the template. Each version of the template maintains a description of the version in the VersionDescription field.
      */
     VersionDescription?: VersionDescription;
     /**
@@ -4274,7 +4274,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The Amazon Resource Name (ARN) for the template, including the version information of the first version.
+     * The ARN for the template, including the version information of the first version.
      */
     VersionArn?: Arn;
     /**
@@ -4336,7 +4336,7 @@ declare namespace QuickSight {
      */
     StartFromRow?: PositiveInteger;
     /**
-     * Whether or not the file(s) has a header row.
+     * Whether the file has a header row, or the files each have a header row.
      */
     ContainsHeader?: Boolean;
     /**
@@ -4350,7 +4350,7 @@ declare namespace QuickSight {
   }
   export interface User {
     /**
-     * The Amazon Resource name (ARN) for the user.
+     * The Amazon Resource Name (ARN) for the user.
      */
     Arn?: Arn;
     /**
@@ -4370,7 +4370,7 @@ declare namespace QuickSight {
      */
     IdentityType?: IdentityType;
     /**
-     * Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password.
+     * The active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a password.
      */
     Active?: Boolean;
     /**

@@ -716,6 +716,44 @@
         }
       ],
       "documentation": "\n            <p>Updates the cluster with the configuration that is specified in the request body.</p>\n         "
+    },
+    "UpdateMonitoring": {
+      "name": "UpdateMonitoring",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/clusters/{clusterArn}/monitoring",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateMonitoringRequest"
+      },
+      "output": {
+        "shape": "UpdateMonitoringResponse",
+        "documentation": "\n            <p>HTTP Status Code 200: OK.</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>HTTP Status Code 503: Service Unavailable. Retrying your request in some time might resolve the issue.</p>\n         "
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it.</p>\n         "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be validated.</p>\n         "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request.</p>\n         "
+        }
+      ],
+      "documentation": "\n            <p>Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.</p>\n         "
     }
   },
   "shapes": {
@@ -910,6 +948,11 @@
           "shape": "EnhancedMonitoring",
           "locationName": "enhancedMonitoring",
           "documentation": "\n            <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>\n         "
+        },
+        "OpenMonitoring": {
+          "shape": "OpenMonitoring",
+          "locationName": "openMonitoring",
+          "documentation": "\n            <p>Settings for open monitoring using Prometheus.</p>\n         "
         },
         "NumberOfBrokerNodes": {
           "shape": "__integer",
@@ -1122,6 +1165,11 @@
           "shape": "EnhancedMonitoring",
           "locationName": "enhancedMonitoring",
           "documentation": "\n            <p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.</p>\n         "
+        },
+        "OpenMonitoring": {
+          "shape": "OpenMonitoringInfo",
+          "locationName": "openMonitoring",
+          "documentation": "\n            <p>The settings for open monitoring.</p>\n         "
         },
         "KafkaVersion": {
           "shape": "__stringMin1Max128",
@@ -1754,9 +1802,135 @@
           "shape": "__integer",
           "locationName": "numberOfBrokerNodes",
           "documentation": "\n            <p>The number of broker nodes in the cluster.</p>\n         "
+        },
+        "EnhancedMonitoring": {
+          "shape": "EnhancedMonitoring",
+          "locationName": "enhancedMonitoring",
+          "documentation": "\n            <p>Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.</p>\n         "
+        },
+        "OpenMonitoring": {
+          "shape": "OpenMonitoring",
+          "locationName": "openMonitoring",
+          "documentation": "\n            <p>The settings for open monitoring.</p>\n         "
         }
       },
       "documentation": "\n            <p>Information about cluster attributes that can be updated via update APIs.</p>\n         "
+    },
+    "NodeExporter": {
+      "type": "structure",
+      "members": {
+        "EnabledInBroker": {
+          "shape": "__boolean",
+          "locationName": "enabledInBroker",
+          "documentation": "\n            <p>Indicates whether you want to enable or disable the Node Exporter.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Indicates whether you want to enable or disable the Node Exporter.</p>\n         ",
+      "required": [
+        "EnabledInBroker"
+      ]
+    },
+    "NodeExporterInfo": {
+      "type": "structure",
+      "members": {
+        "EnabledInBroker": {
+          "shape": "__boolean",
+          "locationName": "enabledInBroker",
+          "documentation": "\n            <p>Indicates whether you want to enable or disable the Node Exporter.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Indicates whether you want to enable or disable the Node Exporter.</p>\n         ",
+      "required": [
+        "EnabledInBroker"
+      ]
+    },
+    "JmxExporter": {
+      "type": "structure",
+      "members": {
+        "EnabledInBroker": {
+          "shape": "__boolean",
+          "locationName": "enabledInBroker",
+          "documentation": "\n            <p>Indicates whether you want to enable or disable the JMX Exporter.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Indicates whether you want to enable or disable the JMX Exporter.</p>\n         ",
+      "required": [
+        "EnabledInBroker"
+      ]
+    },
+    "JmxExporterInfo": {
+      "type": "structure",
+      "members": {
+        "EnabledInBroker": {
+          "shape": "__boolean",
+          "locationName": "enabledInBroker",
+          "documentation": "\n            <p>Indicates whether you want to enable or disable the JMX Exporter.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Indicates whether you want to enable or disable the JMX Exporter.</p>\n         ",
+      "required": [
+        "EnabledInBroker"
+      ]
+    },
+    "OpenMonitoring": {
+      "type": "structure",
+      "members": {
+        "Prometheus": {
+          "shape": "Prometheus",
+          "locationName": "prometheus",
+          "documentation": "\n            <p>Prometheus settings.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>JMX and Node monitoring for the MSK cluster.</p>\n         ",
+      "required": [
+        "Prometheus"
+      ]
+    },
+    "OpenMonitoringInfo": {
+      "type": "structure",
+      "members": {
+        "Prometheus": {
+          "shape": "PrometheusInfo",
+          "locationName": "prometheus",
+          "documentation": "\n            <p>Prometheus settings.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>JMX and Node monitoring for the MSK cluster.</p>\n         ",
+      "required": [
+        "Prometheus"
+      ]
+    },
+    "Prometheus": {
+      "type": "structure",
+      "members": {
+        "JmxExporter": {
+          "shape": "JmxExporter",
+          "locationName": "jmxExporter",
+          "documentation": "\n            <p>Indicates whether you want to enable or disable the JMX Exporter.</p>\n         "
+        },
+        "NodeExporter": {
+          "shape": "NodeExporter",
+          "locationName": "nodeExporter",
+          "documentation": "\n            <p>Indicates whether you want to enable or disable the Node Exporter.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Prometheus settings.</p>\n         "
+    },
+    "PrometheusInfo": {
+      "type": "structure",
+      "members": {
+        "JmxExporter": {
+          "shape": "JmxExporterInfo",
+          "locationName": "jmxExporter",
+          "documentation": "\n            <p>Indicates whether you want to enable or disable the JMX Exporter.</p>\n         "
+        },
+        "NodeExporter": {
+          "shape": "NodeExporterInfo",
+          "locationName": "nodeExporter",
+          "documentation": "\n            <p>Indicates whether you want to enable or disable the Node Exporter.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Prometheus settings.</p>\n         "
     },
     "NodeInfo": {
       "type": "structure",
@@ -1973,6 +2147,52 @@
       ]
     },
     "UpdateClusterConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster.</p>\n         "
+        },
+        "ClusterOperationArn": {
+          "shape": "__string",
+          "locationName": "clusterOperationArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster operation.</p>\n         "
+        }
+      }
+    },
+    "UpdateMonitoringRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>\n         "
+        },
+        "CurrentVersion": {
+          "shape": "__string",
+          "locationName": "currentVersion",
+          "documentation": "\n            <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>\n         "
+        },
+        "EnhancedMonitoring": {
+          "shape": "EnhancedMonitoring",
+          "locationName": "enhancedMonitoring",
+          "documentation": "\n            <p>Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.</p>\n         "
+        },
+        "OpenMonitoring": {
+          "shape": "OpenMonitoringInfo",
+          "locationName": "openMonitoring",
+          "documentation": "\n            <p>The settings for open monitoring.</p>\n         "
+        }
+      },
+      "documentation": "Request body for UpdateMonitoring.",
+      "required": [
+        "ClusterArn",
+        "CurrentVersion"
+      ]
+    },
+    "UpdateMonitoringResponse": {
       "type": "structure",
       "members": {
         "ClusterArn": {

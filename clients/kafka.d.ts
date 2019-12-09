@@ -239,6 +239,18 @@ declare class Kafka extends Service {
          
    */
   updateClusterConfiguration(callback?: (err: AWSError, data: Kafka.Types.UpdateClusterConfigurationResponse) => void): Request<Kafka.Types.UpdateClusterConfigurationResponse, AWSError>;
+  /**
+   * 
+            Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.
+         
+   */
+  updateMonitoring(params: Kafka.Types.UpdateMonitoringRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateMonitoringResponse) => void): Request<Kafka.Types.UpdateMonitoringResponse, AWSError>;
+  /**
+   * 
+            Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.
+         
+   */
+  updateMonitoring(callback?: (err: AWSError, data: Kafka.Types.UpdateMonitoringResponse) => void): Request<Kafka.Types.UpdateMonitoringResponse, AWSError>;
 }
 declare namespace Kafka {
   export type BrokerAZDistribution = "DEFAULT"|string;
@@ -418,6 +430,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     EnhancedMonitoring?: EnhancedMonitoring;
+    /**
+     * 
+            Settings for open monitoring using Prometheus.
+         
+     */
+    OpenMonitoring?: OpenMonitoring;
     /**
      * 
             The number of broker nodes in the cluster.
@@ -615,6 +633,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     EnhancedMonitoring?: EnhancedMonitoring;
+    /**
+     * 
+            The settings for open monitoring.
+         
+     */
+    OpenMonitoring?: OpenMonitoringInfo;
     /**
      * 
             The version of Apache Kafka.
@@ -1157,6 +1181,94 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     NumberOfBrokerNodes?: __integer;
+    /**
+     * 
+            Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.
+         
+     */
+    EnhancedMonitoring?: EnhancedMonitoring;
+    /**
+     * 
+            The settings for open monitoring.
+         
+     */
+    OpenMonitoring?: OpenMonitoring;
+  }
+  export interface NodeExporter {
+    /**
+     * 
+            Indicates whether you want to enable or disable the Node Exporter.
+         
+     */
+    EnabledInBroker: __boolean;
+  }
+  export interface NodeExporterInfo {
+    /**
+     * 
+            Indicates whether you want to enable or disable the Node Exporter.
+         
+     */
+    EnabledInBroker: __boolean;
+  }
+  export interface JmxExporter {
+    /**
+     * 
+            Indicates whether you want to enable or disable the JMX Exporter.
+         
+     */
+    EnabledInBroker: __boolean;
+  }
+  export interface JmxExporterInfo {
+    /**
+     * 
+            Indicates whether you want to enable or disable the JMX Exporter.
+         
+     */
+    EnabledInBroker: __boolean;
+  }
+  export interface OpenMonitoring {
+    /**
+     * 
+            Prometheus settings.
+         
+     */
+    Prometheus: Prometheus;
+  }
+  export interface OpenMonitoringInfo {
+    /**
+     * 
+            Prometheus settings.
+         
+     */
+    Prometheus: PrometheusInfo;
+  }
+  export interface Prometheus {
+    /**
+     * 
+            Indicates whether you want to enable or disable the JMX Exporter.
+         
+     */
+    JmxExporter?: JmxExporter;
+    /**
+     * 
+            Indicates whether you want to enable or disable the Node Exporter.
+         
+     */
+    NodeExporter?: NodeExporter;
+  }
+  export interface PrometheusInfo {
+    /**
+     * 
+            Indicates whether you want to enable or disable the JMX Exporter.
+         
+     */
+    JmxExporter?: JmxExporterInfo;
+    /**
+     * 
+            Indicates whether you want to enable or disable the Node Exporter.
+         
+     */
+    NodeExporter?: NodeExporterInfo;
   }
   export interface NodeInfo {
     /**
@@ -1349,6 +1461,46 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     CurrentVersion: __string;
   }
   export interface UpdateClusterConfigurationResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+         
+     */
+    ClusterOperationArn?: __string;
+  }
+  export interface UpdateMonitoringRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.
+         
+     */
+    CurrentVersion: __string;
+    /**
+     * 
+            Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.
+         
+     */
+    EnhancedMonitoring?: EnhancedMonitoring;
+    /**
+     * 
+            The settings for open monitoring.
+         
+     */
+    OpenMonitoring?: OpenMonitoringInfo;
+  }
+  export interface UpdateMonitoringResponse {
     /**
      * 
             The Amazon Resource Name (ARN) of the cluster.

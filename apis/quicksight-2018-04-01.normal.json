@@ -80,7 +80,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Creates a dashboard from a template. To first create a template, see the CreateTemplate API.</p> <p>A dashboard is an entity in QuickSight which identifies Quicksight reports, created from analyses. QuickSight dashboards are sharable. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code> and <code>ListDashboardsByUser</code> APIs act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>"
+      "documentation": "<p>Creates a dashboard from a template. To first create a template, see the CreateTemplate API operation.</p> <p>A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code>, and <code>ListDashboardsByUser</code> API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>"
     },
     "CreateDataSet": {
       "name": "CreateDataSet",
@@ -280,7 +280,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Creates an assignment with one specified IAM policy Amazon Resource Name (ARN) and will assigned to specified groups or users of QuickSight. Users and groups need to be in the same namespace. </p>"
+      "documentation": "<p>Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy will be assigned to specified groups or users of Amazon QuickSight. The users and groups need to be in the same namespace. </p>"
     },
     "CreateIngestion": {
       "name": "CreateIngestion",
@@ -357,7 +357,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Creates a template from an existing QuickSight analysis or template. The resulting template can be used to create a dashboard.</p> <p>A template is an entity in QuickSight which encapsulates the metadata required to create an analysis that can be used to create dashboard. It adds a layer of abstraction by use placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets which follow the same schema that was used to create the source analysis and template.</p>"
+      "documentation": "<p>Creates a template from an existing QuickSight analysis or template. You can use the resulting template to create a dashboard.</p> <p>A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p>"
     },
     "CreateTemplateAlias": {
       "name": "CreateTemplateAlias",
@@ -601,7 +601,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Deletes an existing assignment.</p>"
+      "documentation": "<p>Deletes an existing IAM policy assignment.</p>"
     },
     "DeleteTemplate": {
       "name": "DeleteTemplate",
@@ -666,7 +666,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Update template alias of given template.</p>"
+      "documentation": "<p>Deletes the item that the specified template alias points to. If you provide a specific alias, you delete the version of the template that the alias points to.</p>"
     },
     "DeleteUser": {
       "name": "DeleteUser",
@@ -799,7 +799,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Describes read and write permissions on a dashboard.</p>"
+      "documentation": "<p>Describes read and write permissions for a dashboard.</p>"
     },
     "DescribeDataSet": {
       "name": "DescribeDataSet",
@@ -994,7 +994,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Describes an existing IAMPolicy Assignment by specified assignment name.</p>"
+      "documentation": "<p>Describes an existing IAM policy assignment, as specified by the assignment name.</p>"
     },
     "DescribeIngestion": {
       "name": "DescribeIngestion",
@@ -1096,7 +1096,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Describes the template aliases of a template.</p>"
+      "documentation": "<p>Describes the template alias for a template.</p>"
     },
     "DescribeTemplatePermissions": {
       "name": "DescribeTemplatePermissions",
@@ -1213,7 +1213,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Generates a server-side embeddable URL and authorization code. Before this can work properly, first you need to configure the dashboards and user permissions. For more information, see the Amazon QuickSight User Guide section on <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html\">Embedding Amazon QuickSight Dashboards</a> or see the Amazon QuickSight API Reference section on <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html\">Embedding Amazon QuickSight Dashboards</a> .</p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user’s browser.</p>"
+      "documentation": "<p>Generates a server-side embeddable URL and authorization code. For this process to work properly, first configure the dashboards and user permissions. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html\">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight User Guide</i> or <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html\">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight API Reference</i>.</p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user’s browser.</p>"
     },
     "ListDashboardVersions": {
       "name": "ListDashboardVersions",
@@ -1247,7 +1247,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists all the versions of the dashboards in the Quicksight subscription.</p>"
+      "documentation": "<p>Lists all the versions of the dashboards in the QuickSight subscription.</p>"
     },
     "ListDashboards": {
       "name": "ListDashboards",
@@ -1275,7 +1275,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists dashboards in the AWS account.</p>"
+      "documentation": "<p>Lists dashboards in an AWS account.</p>"
     },
     "ListDataSets": {
       "name": "ListDataSets",
@@ -1306,7 +1306,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists all of the datasets belonging to this account in an AWS region.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>"
+      "documentation": "<p>Lists all of the datasets belonging to the current AWS account in an AWS Region.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>"
     },
     "ListDataSources": {
       "name": "ListDataSources",
@@ -1451,7 +1451,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists assignments in current QuickSight account.</p>"
+      "documentation": "<p>Lists IAM policy assignments in the current Amazon QuickSight account.</p>"
     },
     "ListIAMPolicyAssignmentsForUser": {
       "name": "ListIAMPolicyAssignmentsForUser",
@@ -1488,7 +1488,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists all the assignments and the Amazon Resource Names (ARNs) for the associated IAM policies assigned to the specified user and the group or groups that the user belongs to.</p>"
+      "documentation": "<p>Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs) for the IAM policies assigned to the specified user and group or groups that the user belongs to.</p>"
     },
     "ListIngestions": {
       "name": "ListIngestions",
@@ -1618,7 +1618,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists all the versions of the templates in the Quicksight account.</p>"
+      "documentation": "<p>Lists all the versions of the templates in the current Amazon QuickSight account.</p>"
     },
     "ListTemplates": {
       "name": "ListTemplates",
@@ -1652,7 +1652,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists all the templates in the QuickSight account.</p>"
+      "documentation": "<p>Lists all the templates in the current Amazon QuickSight account.</p>"
     },
     "ListUserGroups": {
       "name": "ListUserGroups",
@@ -1868,7 +1868,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Updates a dashboard in the AWS account.</p>"
+      "documentation": "<p>Updates a dashboard in an AWS account.</p>"
     },
     "UpdateDashboardPermissions": {
       "name": "UpdateDashboardPermissions",
@@ -2152,7 +2152,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Updates an existing assignment. This operation updates only the optional parameter or parameters that are specified in the request.</p>"
+      "documentation": "<p>Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request.</p>"
     },
     "UpdateTemplate": {
       "name": "UpdateTemplate",
@@ -2192,7 +2192,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Updates a template from an existing QuickSight analysis.</p>"
+      "documentation": "<p>Updates a template from an existing Amazon QuickSight analysis or another template.</p>"
     },
     "UpdateTemplateAlias": {
       "name": "UpdateTemplateAlias",
@@ -2257,7 +2257,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Updates the permissions on a template.</p>"
+      "documentation": "<p>Updates the resource permissions for a template.</p>"
     },
     "UpdateUser": {
       "name": "UpdateUser",
@@ -2455,7 +2455,7 @@
         },
         "ColumnId": {
           "shape": "ColumnId",
-          "documentation": "<p>A unique ID to identify a calculated column. During dataset update, if the column ID of a calculated column matches that of an existing calculated column, QuickSight preserves the existing calculated column.</p>"
+          "documentation": "<p>A unique ID to identify a calculated column. During a dataset update, if the column ID of a calculated column matches that of an existing calculated column, Amazon QuickSight preserves the existing calculated column.</p>"
         },
         "Expression": {
           "shape": "Expression",
@@ -2539,7 +2539,7 @@
         },
         "Format": {
           "shape": "TypeCastFormat",
-          "documentation": "<p>When casting a column from string to datetime type, you can supply a QuickSight supported format string to denote the source data format.</p>"
+          "documentation": "<p>When casting a column from string to datetime type, you can supply a string in a format supported by Amazon QuickSight to denote the source data format.</p>"
         }
       },
       "documentation": "<p>A transform operation that casts a column to a different type.</p>"
@@ -2570,7 +2570,7 @@
           "documentation": "<p>Geospatial column group that denotes a hierarchy.</p>"
         }
       },
-      "documentation": "<p>Groupings of columns that work together in certain QuickSight features. This is a variant type structure. No more than one of the attributes should be non-null for this structure to be valid.</p>"
+      "documentation": "<p>Groupings of columns that work together in certain Amazon QuickSight features. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
     },
     "ColumnGroupColumnSchema": {
       "type": "structure",
@@ -2580,7 +2580,7 @@
           "documentation": "<p>The name of the column group's column schema.</p>"
         }
       },
-      "documentation": "<p>A structure describing the name, datatype, and geographic role of the columns.</p>"
+      "documentation": "<p>A structure describing the name, data type, and geographic role of the columns.</p>"
     },
     "ColumnGroupColumnSchemaList": {
       "type": "list",
@@ -2611,7 +2611,7 @@
         },
         "ColumnGroupColumnSchemaList": {
           "shape": "ColumnGroupColumnSchemaList",
-          "documentation": "<p>A structure containing the list of column group column schemas.</p>"
+          "documentation": "<p>A structure containing the list of schemas for column group columns.</p>"
         }
       },
       "documentation": "<p>The column group schema.</p>"
@@ -2674,7 +2674,7 @@
           "documentation": "<p>A geospatial role for a column.</p>"
         }
       },
-      "documentation": "<p>A tag for a column in a TagColumnOperation. This is a variant type structure. No more than one of the attributes should be non-null for this structure to be valid.</p>"
+      "documentation": "<p>A tag for a column in a <code>TagColumnOperation</code> structure. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
     },
     "ColumnTagList": {
       "type": "list",
@@ -2708,13 +2708,13 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID where you want to create the dashboard.</p>",
+          "documentation": "<p>The ID of the AWS account where you want to create the dashboard.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "DashboardId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>The ID for the dashboard, also added to IAM policy.</p>",
+          "documentation": "<p>The ID for the dashboard, also added to the IAM policy.</p>",
           "location": "uri",
           "locationName": "DashboardId"
         },
@@ -2724,15 +2724,15 @@
         },
         "Parameters": {
           "shape": "Parameters",
-          "documentation": "<p>A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters and some parameters might accept multiple values. You could use the following structure to override two string parameters that accept multiple values:</p>"
+          "documentation": "<p>A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values. You can use the dashboard permissions structure described following to override two string parameters that accept multiple values. </p>"
         },
         "Permissions": {
           "shape": "ResourcePermissionList",
-          "documentation": "<p>A structure that contains the permissions of the dashboard. You can use this for granting permissions with principal and action information.</p>"
+          "documentation": "<p>A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.</p>"
         },
         "SourceEntity": {
           "shape": "DashboardSourceEntity",
-          "documentation": "<p>Source entity from which the dashboard is created. The souce entity accepts the Amazon Resource Name (ARN) of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template. </p> <p>If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.</p>"
+          "documentation": "<p>The source entity from which the dashboard is created. The source entity accepts the Amazon Resource Name (ARN) of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template. </p> <p>If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -2744,7 +2744,7 @@
         },
         "DashboardPublishOptions": {
           "shape": "DashboardPublishOptions",
-          "documentation": "<p>Publishing options when creating dashboard.</p> <ul> <li> <p>AvailabilityStatus for AdHocFilteringOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. When This is set to set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for AdHoc filtering. Enabled by default. </p> </li> <li> <p>AvailabilityStatus for ExportToCSVOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to CSV is disabled when this is set to <code>DISABLED</code>. Enabled by default. </p> </li> <li> <p>VisibilityState for SheetControlsOption - This can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. Collapsed by default. </p> </li> </ul>"
+          "documentation": "<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn't enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>"
         }
       }
     },
@@ -2765,7 +2765,7 @@
         },
         "CreationStatus": {
           "shape": "ResourceStatus",
-          "documentation": "<p>The creation status of the dashboard create request.</p>"
+          "documentation": "<p>The status of the dashboard creation request.</p>"
         },
         "Status": {
           "shape": "StatusCode",
@@ -2790,7 +2790,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS Account ID.</p>",
+          "documentation": "<p>The AWS account ID.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -2812,7 +2812,7 @@
         },
         "ImportMode": {
           "shape": "DataSetImportMode",
-          "documentation": "<p>Indicates whether or not you want to import the data into SPICE.</p>"
+          "documentation": "<p>Indicates whether you want to import the data into SPICE.</p>"
         },
         "ColumnGroups": {
           "shape": "ColumnGroupList",
@@ -2824,7 +2824,7 @@
         },
         "RowLevelPermissionDataSet": {
           "shape": "RowLevelPermissionDataSet",
-          "documentation": "<p>Row-level security configuration on the data you want to create.</p>"
+          "documentation": "<p>The row-level security configuration for the data that you want to create.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -2845,11 +2845,11 @@
         },
         "IngestionArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE</p>"
+          "documentation": "<p>The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.</p>"
         },
         "IngestionId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE</p>"
+          "documentation": "<p>The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -3055,7 +3055,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS Account ID where you want to assign QuickSight users or groups to an IAM policy.</p>",
+          "documentation": "<p>The ID of the AWS account where you want to assign an IAM policy to QuickSight users or groups.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -3065,15 +3065,15 @@
         },
         "AssignmentStatus": {
           "shape": "AssignmentStatus",
-          "documentation": "<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn't used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn't used while creating the data source.</p> </li> </ul>"
+          "documentation": "<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn't used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn't used when creating the data source.</p> </li> </ul>"
         },
         "PolicyArn": {
           "shape": "Arn",
-          "documentation": "<p>An IAM policy Amazon Resource Name (ARN) that you want to apply to the QuickSight users and groups specified in this assignment.</p>"
+          "documentation": "<p>The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment.</p>"
         },
         "Identities": {
           "shape": "IdentityMap",
-          "documentation": "<p>QuickSight users and/or groups that you want to assign the policy to.</p>"
+          "documentation": "<p>The QuickSight users, groups, or both that you want to assign the policy to.</p>"
         },
         "Namespace": {
           "shape": "Namespace",
@@ -3088,23 +3088,23 @@
       "members": {
         "AssignmentName": {
           "shape": "IAMPolicyAssignmentName",
-          "documentation": "<p>The name of the assignment. Must be unique within an AWS account.</p>"
+          "documentation": "<p>The name of the assignment. This name must be unique within the AWS account.</p>"
         },
         "AssignmentId": {
           "shape": "String",
-          "documentation": "<p>An ID for the assignment.</p>"
+          "documentation": "<p>The ID for the assignment.</p>"
         },
         "AssignmentStatus": {
           "shape": "AssignmentStatus",
-          "documentation": "<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn't used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn't used while creating the data source.</p> </li> </ul>"
+          "documentation": "<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn't used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn't used when creating the data source.</p> </li> </ul>"
         },
         "PolicyArn": {
           "shape": "Arn",
-          "documentation": "<p>An IAM policy Amazon Resource Name (ARN) that is applied to the QuickSight users and groups specified in this assignment.</p>"
+          "documentation": "<p>The ARN for the IAM policy that is applied to the QuickSight users and groups specified in this assignment.</p>"
         },
         "Identities": {
           "shape": "IdentityMap",
-          "documentation": "<p>QuickSight users and/or groups that are assigned to the IAM policy.</p>"
+          "documentation": "<p>The QuickSight users, groups, or both that the IAM policy is assigned to.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -3182,7 +3182,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template you are aliasing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template that you creating an alias for.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -3194,7 +3194,7 @@
         },
         "AliasName": {
           "shape": "AliasName",
-          "documentation": "<p>The name that you want to give to the template alias that you're creating. Aliases that start with <code>$</code> are reserved by QuickSight. </p>",
+          "documentation": "<p>The name that you want to give to the template alias that you're creating. Don't start the alias name with the <code>$</code> character. Alias names that start with <code>$</code> are reserved by QuickSight. </p>",
           "location": "uri",
           "locationName": "AliasName"
         },
@@ -3209,7 +3209,7 @@
       "members": {
         "TemplateAlias": {
           "shape": "TemplateAlias",
-          "documentation": "<p>Information on the template alias.</p>"
+          "documentation": "<p>Information about the template alias.</p>"
         },
         "Status": {
           "shape": "StatusCode",
@@ -3238,7 +3238,7 @@
         },
         "TemplateId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>An ID for the template you want to create. This is unique per AWS region per AWS account.</p>",
+          "documentation": "<p>An ID for the template that you want to create. This template is unique per AWS Region in each AWS account.</p>",
           "location": "uri",
           "locationName": "TemplateId"
         },
@@ -3252,7 +3252,7 @@
         },
         "SourceEntity": {
           "shape": "TemplateSourceEntity",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the source entity from which this template is being created. Templates can be currently created from an analysis or another template. If the ARN is for an analysis, you must include its dataset references. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the source entity from which this template is being created. Currently, you can create a template from an analysis or another template. If the ARN is for an analysis, include its dataset references. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -3260,7 +3260,7 @@
         },
         "VersionDescription": {
           "shape": "VersionDescription",
-          "documentation": "<p>A description of the current template version being created. This API created the first version of the template. Every time UpdateTemplate is called a new version is created. Each version of the template maintains a description of the version in the VersionDescription field.</p>"
+          "documentation": "<p>A description of the current template version being created. This API operation creates the first version of the template. Every time <code>UpdateTemplate</code> is called, a new version is created. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.</p>"
         }
       }
     },
@@ -3269,7 +3269,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the template.</p>"
+          "documentation": "<p>The ARN for the template.</p>"
         },
         "VersionArn": {
           "shape": "Arn",
@@ -3303,14 +3303,14 @@
       "members": {
         "Username": {
           "shape": "Username",
-          "documentation": "<p>Username.</p>"
+          "documentation": "<p>User name.</p>"
         },
         "Password": {
           "shape": "Password",
           "documentation": "<p>Password.</p>"
         }
       },
-      "documentation": "<p>The combination of username and password that are used as credentials.</p>"
+      "documentation": "<p>The combination of user name and password that are used as credentials.</p>"
     },
     "CustomSql": {
       "type": "structure",
@@ -3353,7 +3353,7 @@
         },
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         },
         "Name": {
           "shape": "DashboardName",
@@ -3365,15 +3365,15 @@
         },
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this dataset was created.</p>"
         },
         "LastPublishedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was published.</p>"
+          "documentation": "<p>The last time that this dataset was published.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was updated.</p>"
+          "documentation": "<p>The last time that this dataset was updated.</p>"
         }
       },
       "documentation": "<p>Dashboard.</p>"
@@ -3430,11 +3430,11 @@
       "members": {
         "AdHocFilteringOption": {
           "shape": "AdHocFilteringOption",
-          "documentation": "<p>Ad hoc filtering option.</p>"
+          "documentation": "<p>Ad hoc (one-time) filtering option.</p>"
         },
         "ExportToCSVOption": {
           "shape": "ExportToCSVOption",
-          "documentation": "<p>Export to CSV option.</p>"
+          "documentation": "<p>Export to .csv option.</p>"
         },
         "SheetControlsOption": {
           "shape": "SheetControlsOption",
@@ -3466,7 +3466,7 @@
         },
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         }
       },
       "documentation": "<p>Dashboard source template.</p>"
@@ -3476,7 +3476,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         },
         "DashboardId": {
           "shape": "RestrictiveResourceId",
@@ -3484,15 +3484,15 @@
         },
         "Name": {
           "shape": "DashboardName",
-          "documentation": "<p>A display name for the dataset.</p>"
+          "documentation": "<p>A display name for the dashboard.</p>"
         },
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this dashboard was created.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was updated.</p>"
+          "documentation": "<p>The last time that this dashboard was updated.</p>"
         },
         "PublishedVersionNumber": {
           "shape": "VersionNumber",
@@ -3500,7 +3500,7 @@
         },
         "LastPublishedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was published.</p>"
+          "documentation": "<p>The last time that this dashboard was published.</p>"
         }
       },
       "documentation": "<p>Dashboard summary.</p>"
@@ -3524,7 +3524,7 @@
       "members": {
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this dashboard version was created.</p>"
         },
         "Errors": {
           "shape": "DashboardErrorList",
@@ -3540,7 +3540,7 @@
         },
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         },
         "SourceEntityArn": {
           "shape": "Arn",
@@ -3558,11 +3558,11 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         },
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this dashboard version was created.</p>"
         },
         "VersionNumber": {
           "shape": "VersionNumber",
@@ -3595,7 +3595,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         },
         "DataSetId": {
           "shape": "ResourceId",
@@ -3607,11 +3607,11 @@
         },
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this dataset was created.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was updated.</p>"
+          "documentation": "<p>The last time that this dataset was updated.</p>"
         },
         "PhysicalTableMap": {
           "shape": "PhysicalTableMap",
@@ -3627,7 +3627,7 @@
         },
         "ImportMode": {
           "shape": "DataSetImportMode",
-          "documentation": "<p>Indicates whether or not you want to import the data into SPICE.</p>"
+          "documentation": "<p>Indicates whether you want to import the data into SPICE.</p>"
         },
         "ConsumedSpiceCapacityInBytes": {
           "shape": "Long",
@@ -3635,11 +3635,11 @@
         },
         "ColumnGroups": {
           "shape": "ColumnGroupList",
-          "documentation": "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
+          "documentation": "<p>Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
         },
         "RowLevelPermissionDataSet": {
           "shape": "RowLevelPermissionDataSet",
-          "documentation": "<p>Row-level security configuration on the dataset.</p>"
+          "documentation": "<p>The row-level security configuration for the dataset.</p>"
         }
       },
       "documentation": "<p>Dataset.</p>"
@@ -3694,7 +3694,7 @@
         },
         "DataSetArn": {
           "shape": "Arn",
-          "documentation": "<p>Dataset ARN.</p>"
+          "documentation": "<p>Dataset Amazon Resource Name (ARN).</p>"
         }
       },
       "documentation": "<p>Dataset reference.</p>"
@@ -3721,7 +3721,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the dataset.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>"
         },
         "DataSetId": {
           "shape": "ResourceId",
@@ -3733,19 +3733,19 @@
         },
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this dataset was created.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was updated.</p>"
+          "documentation": "<p>The last time that this dataset was updated.</p>"
         },
         "ImportMode": {
           "shape": "DataSetImportMode",
-          "documentation": "<p>Indicates whether or not you want to import the data into SPICE.</p>"
+          "documentation": "<p>Indicates whether you want to import the data into SPICE.</p>"
         },
         "RowLevelPermissionDataSet": {
           "shape": "RowLevelPermissionDataSet",
-          "documentation": "<p>Row-level security configuration on the dataset.</p>"
+          "documentation": "<p>The row-level security configuration for the dataset.</p>"
         }
       },
       "documentation": "<p>Dataset summary.</p>"
@@ -3761,7 +3761,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the data source.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the data source.</p>"
         },
         "DataSourceId": {
           "shape": "ResourceId",
@@ -3773,7 +3773,7 @@
         },
         "Type": {
           "shape": "DataSourceType",
-          "documentation": "<p>The type of the data source. This indicates which database engine the data source connects to.</p>"
+          "documentation": "<p>The type of the data source. This type indicates which database engine the data source connects to.</p>"
         },
         "Status": {
           "shape": "ResourceStatus",
@@ -3781,15 +3781,15 @@
         },
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this data source was created.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was updated.</p>"
+          "documentation": "<p>The last time that this data source was updated.</p>"
         },
         "DataSourceParameters": {
           "shape": "DataSourceParameters",
-          "documentation": "<p>The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.</p>"
+          "documentation": "<p>The parameters that Amazon QuickSight uses to connect to your underlying source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
         },
         "VpcConnectionProperties": {
           "shape": "VpcConnectionProperties",
@@ -3829,7 +3829,7 @@
           "documentation": "<p>Error message.</p>"
         }
       },
-      "documentation": "<p>Error information on data source creation or update.</p>"
+      "documentation": "<p>Error information for the data source creation or update.</p>"
     },
     "DataSourceErrorInfoType": {
       "type": "string",
@@ -3853,15 +3853,15 @@
       "members": {
         "AmazonElasticsearchParameters": {
           "shape": "AmazonElasticsearchParameters",
-          "documentation": "<p>Amazon Elasticsearch parameters.</p>"
+          "documentation": "<p>Amazon Elasticsearch Service parameters.</p>"
         },
         "AthenaParameters": {
           "shape": "AthenaParameters",
-          "documentation": "<p>Athena parameters.</p>"
+          "documentation": "<p>Amazon Athena parameters.</p>"
         },
         "AuroraParameters": {
           "shape": "AuroraParameters",
-          "documentation": "<p>Aurora MySQL parameters.</p>"
+          "documentation": "<p>Amazon Aurora MySQL parameters.</p>"
         },
         "AuroraPostgreSqlParameters": {
           "shape": "AuroraPostgreSqlParameters",
@@ -3893,11 +3893,11 @@
         },
         "RdsParameters": {
           "shape": "RdsParameters",
-          "documentation": "<p>RDS parameters.</p>"
+          "documentation": "<p>Amazon RDS parameters.</p>"
         },
         "RedshiftParameters": {
           "shape": "RedshiftParameters",
-          "documentation": "<p>Redshift parameters.</p>"
+          "documentation": "<p>Amazon Redshift parameters.</p>"
         },
         "S3Parameters": {
           "shape": "S3Parameters",
@@ -3928,7 +3928,7 @@
           "documentation": "<p>Twitter parameters.</p>"
         }
       },
-      "documentation": "<p>The parameters that QuickSight uses to connect to your underlying source. This is a variant type structure. At most one of the attributes should be non-null for this structure to be valid.</p>"
+      "documentation": "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
     },
     "DataSourceType": {
       "type": "string",
@@ -4020,7 +4020,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboard you are deleting.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the dashboard that you're deleting.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -4032,7 +4032,7 @@
         },
         "VersionNumber": {
           "shape": "VersionNumber",
-          "documentation": "<p>The version number of the dashboard. If version number property is provided, only the specified version of the dashboard is deleted.</p>",
+          "documentation": "<p>The version number of the dashboard. If the version number property is provided, only the specified version of the dashboard is deleted.</p>",
           "location": "querystring",
           "locationName": "version-number"
         }
@@ -4048,7 +4048,7 @@
         },
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Secure Socket Layer (SSL) properties that apply. of the resource.</p>"
+          "documentation": "<p>The Secure Socket Layer (SSL) properties that apply for the resource.</p>"
         },
         "DashboardId": {
           "shape": "RestrictiveResourceId",
@@ -4247,7 +4247,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS account ID where you want to delete an IAM policy assignment.</p>",
+          "documentation": "<p>The AWS account ID where you want to delete the IAM policy assignment.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -4293,19 +4293,19 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template alias you are deleting.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the item to delete.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "TemplateId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>An ID for the template.</p>",
+          "documentation": "<p>The ID for the template that the specified alias is for.</p>",
           "location": "uri",
           "locationName": "TemplateId"
         },
         "AliasName": {
           "shape": "AliasName",
-          "documentation": "<p>The alias of the template that you want to delete. If you provide a specific alias, you delete the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. </p>",
+          "documentation": "<p>The name for the template alias. If you name a specific alias, you delete the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. </p>",
           "location": "uri",
           "locationName": "AliasName"
         }
@@ -4321,11 +4321,11 @@
         },
         "TemplateId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>An ID for the template.</p>"
+          "documentation": "<p>An ID for the template associated with the deletion.</p>"
         },
         "AliasName": {
           "shape": "AliasName",
-          "documentation": "<p>The name of the alias.</p>"
+          "documentation": "<p>The name for the template alias.</p>"
         },
         "Arn": {
           "shape": "Arn",
@@ -4346,7 +4346,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template you are deleting.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template that you're deleting.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -4485,13 +4485,13 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboard you are describing permissions of.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the dashboard that you're describing permissions for.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "DashboardId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>The ID for the dashboard, also added to IAM policy.</p>",
+          "documentation": "<p>The ID for the dashboard, also added to the IAM policy.</p>",
           "location": "uri",
           "locationName": "DashboardId"
         }
@@ -4510,7 +4510,7 @@
         },
         "Permissions": {
           "shape": "ResourcePermissionList",
-          "documentation": "<p>A structure that contains the permissions of the dashboard.</p>"
+          "documentation": "<p>A structure that contains the permissions for the dashboard.</p>"
         },
         "Status": {
           "shape": "StatusCode",
@@ -4532,7 +4532,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboard you are describing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the dashboard that you're describing.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -4544,7 +4544,7 @@
         },
         "VersionNumber": {
           "shape": "VersionNumber",
-          "documentation": "<p>The version number for the dashboard. If version number isn’t passed the latest published dashboard version is described. </p>",
+          "documentation": "<p>The version number for the dashboard. If a version number isn't passed, the latest published dashboard version is described. </p>",
           "location": "querystring",
           "locationName": "version-number"
         },
@@ -4565,7 +4565,7 @@
         },
         "Status": {
           "shape": "StatusCode",
-          "documentation": "<p>The http status of this request.</p>",
+          "documentation": "<p>The HTTP status of this request.</p>",
           "location": "statusCode"
         },
         "RequestId": {
@@ -4583,7 +4583,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS Account ID.</p>",
+          "documentation": "<p>The AWS account ID.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -4630,7 +4630,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS Account ID.</p>",
+          "documentation": "<p>The AWS account ID.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -4802,7 +4802,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS account ID that contains the assignment you want to describe.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the assignment that you want to describe.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -4894,19 +4894,19 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template alias you are describing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template alias that you're describing.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "TemplateId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>An ID for the template.</p>",
+          "documentation": "<p>The ID for the template.</p>",
           "location": "uri",
           "locationName": "TemplateId"
         },
         "AliasName": {
           "shape": "AliasName",
-          "documentation": "<p>The alias of the template that you want to describe. If you provide a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>",
+          "documentation": "<p>The name of the template alias that you want to describe. If you name a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>",
           "location": "uri",
           "locationName": "AliasName"
         }
@@ -4939,7 +4939,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template you are describing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template that you're describing.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -4986,25 +4986,25 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template you are describing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template that you're describing.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "TemplateId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>An ID for the template.</p>",
+          "documentation": "<p>The ID for the template.</p>",
           "location": "uri",
           "locationName": "TemplateId"
         },
         "VersionNumber": {
           "shape": "VersionNumber",
-          "documentation": "<p>This is an optional field, when a version number is provided the corresponding version is describe, if it's not provided the latest version of the template is described.</p>",
+          "documentation": "<p>(Optional) The number for the version to describe. If a <code>VersionNumber</code> parameter value isn't provided, the latest version of the template is described.</p>",
           "location": "querystring",
           "locationName": "version-number"
         },
         "AliasName": {
           "shape": "AliasName",
-          "documentation": "<p>The alias of the template that you want to describe. If you provide a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>",
+          "documentation": "<p>The alias of the template that you want to describe. If you name a specific alias, you describe the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>",
           "location": "querystring",
           "locationName": "alias-name"
         }
@@ -5015,7 +5015,7 @@
       "members": {
         "Template": {
           "shape": "Template",
-          "documentation": "<p>The template structure of the object you want to describe.</p>"
+          "documentation": "<p>The template structure for the object you want to describe.</p>"
         },
         "Status": {
           "shape": "StatusCode",
@@ -5097,10 +5097,10 @@
         },
         "Message": {
           "shape": "string",
-          "documentation": "<p>Error essage.</p>"
+          "documentation": "<p>Error message.</p>"
         }
       },
-      "documentation": "<p>Error information on a data set SPICE ingestion.</p>"
+      "documentation": "<p>Error information for the SPICE ingestion of a dataset.</p>"
     },
     "ExportToCSVOption": {
       "type": "structure",
@@ -5110,7 +5110,7 @@
           "documentation": "<p>Availability status.</p>"
         }
       },
-      "documentation": "<p>Export to CSV option.</p>"
+      "documentation": "<p>Export to .csv option.</p>"
     },
     "Expression": {
       "type": "string",
@@ -5136,10 +5136,10 @@
       "members": {
         "ConditionExpression": {
           "shape": "Expression",
-          "documentation": "<p>An expression that must evaluate to a boolean value. Rows for which the expression is evaluated to true are kept in the dataset.</p>"
+          "documentation": "<p>An expression that must evaluate to a Boolean value. Rows for which the expression evaluates to true are kept in the dataset.</p>"
         }
       },
-      "documentation": "<p>A transform operation that filters rows based on some condition.</p>"
+      "documentation": "<p>A transform operation that filters rows based on a condition.</p>"
     },
     "GeoSpatialColumnGroup": {
       "type": "structure",
@@ -5192,43 +5192,43 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboard you are embedding.</p>",
+          "documentation": "<p>The ID for the AWS account that contains the dashboard that you're embedding.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "DashboardId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>The ID for the dashboard, also added to IAM policy</p>",
+          "documentation": "<p>The ID for the dashboard, also added to the IAM policy.</p>",
           "location": "uri",
           "locationName": "DashboardId"
         },
         "IdentityType": {
           "shape": "IdentityType",
-          "documentation": "<p>The authentication method the user uses to sign in.</p>",
+          "documentation": "<p>The authentication method that the user uses to sign in.</p>",
           "location": "querystring",
           "locationName": "creds-type"
         },
         "SessionLifetimeInMinutes": {
           "shape": "SessionLifetimeInMinutes",
-          "documentation": "<p>How many minutes the session is valid. The session lifetime must be between 15 and 600 minutes.</p>",
+          "documentation": "<p>How many minutes the session is valid. The session lifetime must be 15-600 minutes.</p>",
           "location": "querystring",
           "locationName": "session-lifetime"
         },
         "UndoRedoDisabled": {
           "shape": "boolean",
-          "documentation": "<p>Remove the undo/redo button on embedded dashboard. The default is FALSE, which enables the undo/redo button.</p>",
+          "documentation": "<p>Remove the undo/redo button on the embedded dashboard. The default is FALSE, which enables the undo/redo button.</p>",
           "location": "querystring",
           "locationName": "undo-redo-disabled"
         },
         "ResetDisabled": {
           "shape": "boolean",
-          "documentation": "<p>Remove the reset button on embedded dashboard. The default is FALSE, which allows the reset button.</p>",
+          "documentation": "<p>Remove the reset button on the embedded dashboard. The default is FALSE, which enables the reset button.</p>",
           "location": "querystring",
           "locationName": "reset-disabled"
         },
         "UserArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited non-federated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM Federation</p> </li> </ul>",
+          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul>",
           "location": "querystring",
           "locationName": "user-arn"
         }
@@ -5239,7 +5239,7 @@
       "members": {
         "EmbedUrl": {
           "shape": "EmbeddingUrl",
-          "documentation": "<p>URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an auth_code that enables a single-signon session. </p>"
+          "documentation": "<p>An URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an <code>auth_code</code> value that enables a single sign-on session. </p>"
         },
         "Status": {
           "shape": "StatusCode",
@@ -5257,7 +5257,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) for the group.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the group.</p>"
         },
         "GroupName": {
           "shape": "GroupName",
@@ -5290,7 +5290,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) for the group member (user).</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the group member (user).</p>"
         },
         "MemberName": {
           "shape": "GroupMemberName",
@@ -5326,7 +5326,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID.</p>"
+          "documentation": "<p>The AWS account ID.</p>"
         },
         "AssignmentId": {
           "shape": "String",
@@ -5338,7 +5338,7 @@
         },
         "PolicyArn": {
           "shape": "Arn",
-          "documentation": "<p>Policy Amazon Resource Name (ARN).</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM policy.</p>"
         },
         "Identities": {
           "shape": "IdentityMap",
@@ -5349,7 +5349,7 @@
           "documentation": "<p>Assignment status.</p>"
         }
       },
-      "documentation": "<p>IAM policy assignment.</p>"
+      "documentation": "<p>An IAM policy assignment.</p>"
     },
     "IAMPolicyAssignmentName": {
       "type": "string",
@@ -5368,7 +5368,7 @@
           "documentation": "<p>Assignment status.</p>"
         }
       },
-      "documentation": "<p>IAM policy assignment Summary.</p>"
+      "documentation": "<p>IAM policy assignment summary.</p>"
     },
     "IAMPolicyAssignmentSummaryList": {
       "type": "list",
@@ -5413,7 +5413,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         },
         "IngestionId": {
           "shape": "IngestionId",
@@ -5435,16 +5435,16 @@
         },
         "CreatedTime": {
           "shape": "timestamp",
-          "documentation": "<p>The time this ingestion started.</p>"
+          "documentation": "<p>The time that this ingestion started.</p>"
         },
         "IngestionTimeInSeconds": {
           "shape": "long",
-          "documentation": "<p>The time this ingestion took, measured in seconds.</p>",
+          "documentation": "<p>The time that this ingestion took, measured in seconds.</p>",
           "box": true
         },
         "IngestionSizeInBytes": {
           "shape": "long",
-          "documentation": "<p>Size of the data ingested in bytes.</p>",
+          "documentation": "<p>The size of the data ingested, in bytes.</p>",
           "box": true
         },
         "RequestSource": {
@@ -5456,7 +5456,7 @@
           "documentation": "<p>Type of this ingestion.</p>"
         }
       },
-      "documentation": "<p>Information on the SPICE ingestion for a dataset.</p>"
+      "documentation": "<p>Information about the SPICE ingestion for a dataset.</p>"
     },
     "IngestionErrorType": {
       "type": "string",
@@ -5563,7 +5563,7 @@
           "documentation": "<p>The data type of the column.</p>"
         }
       },
-      "documentation": "<p>Metadata on a column that is used as the input of a transform operation.</p>"
+      "documentation": "<p>Metadata for a column that is used as the input of a transform operation.</p>"
     },
     "InputColumnDataType": {
       "type": "string",
@@ -5674,7 +5674,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboard you are listing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the dashboard that you're listing versions for.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -5729,7 +5729,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboards you are listing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the dashboards that you're listing.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -5753,7 +5753,7 @@
       "members": {
         "DashboardSummaryList": {
           "shape": "DashboardSummaryList",
-          "documentation": "<p>A structure that contains all of the dashboards shared with the user. Provides basic information about the dashboards.</p>"
+          "documentation": "<p>A structure that contains all of the dashboards shared with the user. This structure provides basic information about the dashboards.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -5778,7 +5778,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS Account ID.</p>",
+          "documentation": "<p>The AWS account ID.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -5997,7 +5997,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS account ID that contains the assignment.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the assignments.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -6033,7 +6033,7 @@
       "members": {
         "ActiveAssignments": {
           "shape": "ActiveIAMPolicyAssignmentList",
-          "documentation": "<p>Active assignments for this user.</p>"
+          "documentation": "<p>The active assignments for this user.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -6059,17 +6059,17 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS account ID that contains this IAM policy assignment.</p>",
+          "documentation": "<p>The ID of the AWS account that contains these IAM policy assignments.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "AssignmentStatus": {
           "shape": "AssignmentStatus",
-          "documentation": "<p>The status of the assignment.</p>"
+          "documentation": "<p>The status of the assignments.</p>"
         },
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace for this assignment.</p>",
+          "documentation": "<p>The namespace for the assignments.</p>",
           "location": "uri",
           "locationName": "Namespace"
         },
@@ -6207,7 +6207,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template aliases you are listing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template aliases that you're listing.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -6263,7 +6263,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the templates you are listing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the templates that you're listing.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -6318,7 +6318,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the templates you are listing.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the templates that you're listing.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -6375,7 +6375,7 @@
         },
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS Account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.</p>",
+          "documentation": "<p>The AWS account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -6498,7 +6498,7 @@
           "documentation": "<p>Source of this logical table.</p>"
         }
       },
-      "documentation": "<p>A unit that joins and data transformations operate on. A logical table has a source, which can be either a physical table or result of a join. When it points to a physical table, a logical table acts as a mutable copy of that table through transform operations.</p>"
+      "documentation": "<p>A <i>logical table</i> is a unit that joins and that data transformations operate on. A logical table has a source, which can be either a physical table or result of a join. When a logical table points to a physical table, the logical table acts as a mutable copy of that physical table through transform operations.</p>"
     },
     "LogicalTableAlias": {
       "type": "string",
@@ -6534,7 +6534,7 @@
           "documentation": "<p>Physical table ID.</p>"
         }
       },
-      "documentation": "<p>Information on the source of a logical table. This is a variant type structure. No more than one of the attributes should be non-null for this structure to be valid.</p>"
+      "documentation": "<p>Information about the source of a logical table. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
     },
     "Long": {
       "type": "long"
@@ -6696,7 +6696,7 @@
           "documentation": "<p>A physical table type for as S3 data source.</p>"
         }
       },
-      "documentation": "<p>A view of a data source. Contains information on the shape of the data in the underlying source. This is a variant type structure. No more than one of the attributes can be non-null for this structure to be valid.</p>"
+      "documentation": "<p>A view of a data source that contains information about the shape of the data in the underlying source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
     },
     "PhysicalTableId": {
       "type": "string",
@@ -6817,7 +6817,7 @@
           "documentation": "<p>The ID of the ongoing ingestion. The queued ingestion is waiting for the ongoing ingestion to complete.</p>"
         }
       },
-      "documentation": "<p>Information on queued dataset SPICE ingestion.</p>"
+      "documentation": "<p>Information about a queued dataset SPICE ingestion.</p>"
     },
     "RdsParameters": {
       "type": "structure",
@@ -6835,7 +6835,7 @@
           "documentation": "<p>Database.</p>"
         }
       },
-      "documentation": "<p>RDS parameters.</p>"
+      "documentation": "<p>Amazon RDS parameters.</p>"
     },
     "RedshiftParameters": {
       "type": "structure",
@@ -6845,11 +6845,11 @@
       "members": {
         "Host": {
           "shape": "Host",
-          "documentation": "<p>Host. This can be blank if the <code>ClusterId</code> is provided.</p>"
+          "documentation": "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>"
         },
         "Port": {
           "shape": "OptionalPort",
-          "documentation": "<p>Port. This can be blank if the <code>ClusterId</code> is provided.</p>"
+          "documentation": "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>"
         },
         "Database": {
           "shape": "Database",
@@ -6857,10 +6857,10 @@
         },
         "ClusterId": {
           "shape": "ClusterId",
-          "documentation": "<p>Cluster ID. This can be blank if the <code>Host</code> and <code>Port</code> are provided.</p>"
+          "documentation": "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are provided.</p>"
         }
       },
-      "documentation": "<p>Redshift parameters. The <code>ClusterId</code> field can be blank if <code>Host</code> and <code>Port</code> are both set, and the other way around.</p>"
+      "documentation": "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>"
     },
     "RegisterUserRequest": {
       "type": "structure",
@@ -6946,11 +6946,11 @@
         },
         "Schema": {
           "shape": "RelationalTableSchema",
-          "documentation": "<p>The schema name. Applies to certain relational database engines.</p>"
+          "documentation": "<p>The schema name. This name applies to certain relational database engines.</p>"
         },
         "Name": {
           "shape": "RelationalTableName",
-          "documentation": "<p>Name of the relational table.</p>"
+          "documentation": "<p>The name of the relational table.</p>"
         },
         "InputColumns": {
           "shape": "InputColumnList",
@@ -6977,11 +6977,11 @@
       "members": {
         "ColumnName": {
           "shape": "ColumnName",
-          "documentation": "<p>Name of the column to be renamed.</p>"
+          "documentation": "<p>The name of the column to be renamed.</p>"
         },
         "NewColumnName": {
           "shape": "ColumnName",
-          "documentation": "<p>New name for the column.</p>"
+          "documentation": "<p>The new name for the column.</p>"
         }
       },
       "documentation": "<p>A transform operation that renames a column.</p>"
@@ -7003,11 +7003,11 @@
       "members": {
         "Principal": {
           "shape": "Principal",
-          "documentation": "<p>The Amazon Resource Name (ARN) of a QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an Amazon QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .</p>"
         },
         "Actions": {
           "shape": "ActionList",
-          "documentation": "<p>The action to grant or revoke permissions on. For example, \"quicksight:DescribeDashboard\".</p>"
+          "documentation": "<p>The action to grant or revoke permissions on, for example <code>\"quicksight:DescribeDashboard\"</code>.</p>"
         }
       },
       "documentation": "<p>Permission for the resource.</p>"
@@ -7057,7 +7057,7 @@
           "box": true
         }
       },
-      "documentation": "<p>Information on rows during a data set SPICE ingestion.</p>"
+      "documentation": "<p>Information about rows for a data set SPICE ingestion.</p>"
     },
     "RowLevelPermissionDataSet": {
       "type": "structure",
@@ -7068,14 +7068,14 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the permission dataset.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the permission dataset.</p>"
         },
         "PermissionPolicy": {
           "shape": "RowLevelPermissionPolicy",
           "documentation": "<p>Permission policy.</p>"
         }
       },
-      "documentation": "<p>Row-level security configuration on the dataset.</p>"
+      "documentation": "<p>The row-level security configuration for the dataset.</p>"
     },
     "RowLevelPermissionPolicy": {
       "type": "string",
@@ -7116,11 +7116,11 @@
       "members": {
         "DataSourceArn": {
           "shape": "Arn",
-          "documentation": "<p>Data source ARN.</p>"
+          "documentation": "<p>The amazon Resource Name (ARN) for the data source.</p>"
         },
         "UploadSettings": {
           "shape": "UploadSettings",
-          "documentation": "<p>Information on the S3 source file(s) format.</p>"
+          "documentation": "<p>Information about the format for the S3 source file or files.</p>"
         },
         "InputColumns": {
           "shape": "InputColumnList",
@@ -7236,7 +7236,7 @@
       "members": {
         "DisableSsl": {
           "shape": "Boolean",
-          "documentation": "<p>A boolean flag to control whether SSL should be disabled.</p>"
+          "documentation": "<p>A Boolean option to control whether SSL should be disabled.</p>"
         }
       },
       "documentation": "<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying data source.</p>"
@@ -7294,7 +7294,7 @@
           "documentation": "<p>Tag value.</p>"
         }
       },
-      "documentation": "<p>The keys of the key-value pairs for the resource tag or tags assigned to the resource.</p>"
+      "documentation": "<p>The key or keys of the key-value pairs for the resource tag or tags assigned to the resource.</p>"
     },
     "TagColumnOperation": {
       "type": "structure",
@@ -7401,7 +7401,7 @@
           "documentation": "<p>Time when this was created.</p>"
         }
       },
-      "documentation": "<p>A template object. A template is an entity in QuickSight which encapsulates the metadata required to create an analysis that can be used to create dashboard. It adds a layer of abstraction by replacing the dataset associated with the analysis with placeholders. Templates can be used to create dashboards by replacing dataset placeholders with datasets which follow the same schema that was used to create the source analysis and template.</p> <p>You can share templates across AWS accounts by allowing users in other AWS accounts to create a template or a dashboard from an existing template.</p>"
+      "documentation": "<p>A template object. A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create a dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p> <p>You can share templates across AWS accounts by allowing users in other AWS accounts to create a template or a dashboard from an existing template.</p>"
     },
     "TemplateAlias": {
       "type": "structure",
@@ -7412,7 +7412,7 @@
         },
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the template alias.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the template alias.</p>"
         },
         "TemplateVersionNumber": {
           "shape": "VersionNumber",
@@ -7471,7 +7471,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         },
         "DataSetReferences": {
           "shape": "DataSetReferenceList",
@@ -7502,7 +7502,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) of the resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
         }
       },
       "documentation": "<p>The source template of the template.</p>"
@@ -7516,7 +7516,7 @@
         },
         "TemplateId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>The ID of the template. This is unique per AWS Region for each AWS account.</p>"
+          "documentation": "<p>The ID of the template. This ID is unique per AWS Region for each AWS account.</p>"
         },
         "Name": {
           "shape": "TemplateName",
@@ -7528,11 +7528,11 @@
         },
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was created.</p>"
+          "documentation": "<p>The last time that this template was created.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this was updated.</p>"
+          "documentation": "<p>The last time that this template was updated.</p>"
         }
       },
       "documentation": "<p>The template summary.</p>"
@@ -7549,7 +7549,7 @@
       "members": {
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this template version was created.</p>"
         },
         "Errors": {
           "shape": "TemplateErrorList",
@@ -7591,7 +7591,7 @@
         },
         "CreatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this was created.</p>"
+          "documentation": "<p>The time that this template version was created.</p>"
         },
         "Status": {
           "shape": "ResourceStatus",
@@ -7599,7 +7599,7 @@
         },
         "Description": {
           "shape": "VersionDescription",
-          "documentation": "<p>The desription of the template version.</p>"
+          "documentation": "<p>The description of the template version.</p>"
         }
       },
       "documentation": "<p>The template version.</p>"
@@ -7678,7 +7678,7 @@
           "documentation": "<p>An operation that tags a column with additional information.</p>"
         }
       },
-      "documentation": "<p>A data transformation on a logical table. This is a variant type structure. No more than one of the attributes should be non-null for this structure to be valid.</p>"
+      "documentation": "<p>A data transformation on a logical table. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
     },
     "TransformOperationList": {
       "type": "list",
@@ -7754,7 +7754,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboard you are updating.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the dashboard whose permissions you're updating.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -7810,7 +7810,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboard you are updating.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the dashboard that you're updating.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -7861,7 +7861,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the dashboard you are updating.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the dashboard that you're updating.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -7877,7 +7877,7 @@
         },
         "SourceEntity": {
           "shape": "DashboardSourceEntity",
-          "documentation": "<p>The template or analysis from which the dashboard is created. The SouceTemplate entity accepts the Arn of the template and also references to replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.</p>"
+          "documentation": "<p>The template or analysis from which the dashboard is created. The <code>SouceTemplate</code> entity accepts the Amazon Resource Name (ARN) of the template and also references to replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.</p>"
         },
         "Parameters": {
           "shape": "Parameters",
@@ -7889,7 +7889,7 @@
         },
         "DashboardPublishOptions": {
           "shape": "DashboardPublishOptions",
-          "documentation": "<p>Publishing options when creating a dashboard.</p> <ul> <li> <p>AvailabilityStatus for AdHocFilteringOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. When This is set to set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for AdHoc filtering. Enabled by default. </p> </li> <li> <p>AvailabilityStatus for ExportToCSVOption - This can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to CSV is disabled when this is set to <code>DISABLED</code>. Enabled by default. </p> </li> <li> <p>VisibilityState for SheetControlsOption - This can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. Collapsed by default. </p> </li> </ul>"
+          "documentation": "<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn't enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>"
         }
       }
     },
@@ -7931,13 +7931,13 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS Account ID.</p>",
+          "documentation": "<p>The AWS account ID.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>",
+          "documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per AWS Region for each AWS account.</p>",
           "location": "uri",
           "locationName": "DataSetId"
         },
@@ -7960,7 +7960,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+          "documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per AWS Region for each AWS account.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -7985,13 +7985,13 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS Account ID.</p>",
+          "documentation": "<p>The AWS account ID.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>",
+          "documentation": "<p>The ID for the dataset that you want to update. This ID is unique per AWS Region for each AWS account.</p>",
           "location": "uri",
           "locationName": "DataSetId"
         },
@@ -8009,7 +8009,7 @@
         },
         "ImportMode": {
           "shape": "DataSetImportMode",
-          "documentation": "<p>Indicates whether or not you want to import the data into SPICE.</p>"
+          "documentation": "<p>Indicates whether you want to import the data into SPICE.</p>"
         },
         "ColumnGroups": {
           "shape": "ColumnGroupList",
@@ -8017,7 +8017,7 @@
         },
         "RowLevelPermissionDataSet": {
           "shape": "RowLevelPermissionDataSet",
-          "documentation": "<p>Row-level security configuration on the data you want to create.</p>"
+          "documentation": "<p>The row-level security configuration for the data you want to create.</p>"
         }
       }
     },
@@ -8034,11 +8034,11 @@
         },
         "IngestionArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE</p>"
+          "documentation": "<p>The ARN for the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.</p>"
         },
         "IngestionId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE</p>"
+          "documentation": "<p>The ID of the ingestion, which is triggered as a result of dataset creation if the import mode is SPICE.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -8230,13 +8230,13 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The AWS account ID that contains the IAM policy assignment.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the IAM policy assignment.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "AssignmentName": {
           "shape": "IAMPolicyAssignmentName",
-          "documentation": "<p>The name of the assignment. It must be unique within an AWS account.</p>",
+          "documentation": "<p>The name of the assignment. This name must be unique within an AWS account.</p>",
           "location": "uri",
           "locationName": "AssignmentName"
         },
@@ -8248,15 +8248,15 @@
         },
         "AssignmentStatus": {
           "shape": "AssignmentStatus",
-          "documentation": "<p>The status of an assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn't used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn't used while creating the data source.</p> </li> </ul>"
+          "documentation": "<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn't used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn't used when creating the data source.</p> </li> </ul>"
         },
         "PolicyArn": {
           "shape": "Arn",
-          "documentation": "<p>An IAM policy Amazon Resource Name (ARN) that will be applied to specified QuickSight users and groups in this assignment.</p>"
+          "documentation": "<p>The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment.</p>"
         },
         "Identities": {
           "shape": "IdentityMap",
-          "documentation": "<p>QuickSight users and/or groups that you want to assign to the specified IAM policy.</p>"
+          "documentation": "<p>The QuickSight users, groups, or both that you want to assign the policy to.</p>"
         }
       }
     },
@@ -8273,15 +8273,15 @@
         },
         "PolicyArn": {
           "shape": "Arn",
-          "documentation": "<p>The IAM policy ARN assigned to the QuickSight users and groups specified in this request.</p>"
+          "documentation": "<p>The ARN for the IAM policy applied to the QuickSight users and groups specified in this assignment.</p>"
         },
         "Identities": {
           "shape": "IdentityMap",
-          "documentation": "<p>QuickSight users and/or groups that are assigned to this IAM policy.</p>"
+          "documentation": "<p>The QuickSight users, groups, or both that the IAM policy is assigned to.</p>"
         },
         "AssignmentStatus": {
           "shape": "AssignmentStatus",
-          "documentation": "<p>The status of the assignment:</p> <ul> <li> <p>ENABLED - Anything specified in this assignment is used while creating the data source.</p> </li> <li> <p>DISABLED - This assignment isn't used while creating the data source.</p> </li> <li> <p>DRAFT - Assignment is an unfinished draft and isn't used while creating the data source.</p> </li> </ul>"
+          "documentation": "<p>The status of the assignment. Possible values are as follows:</p> <ul> <li> <p> <code>ENABLED</code> - Anything specified in this assignment is used when creating the data source.</p> </li> <li> <p> <code>DISABLED</code> - This assignment isn't used when creating the data source.</p> </li> <li> <p> <code>DRAFT</code> - This assignment is an unfinished draft and isn't used when creating the data source.</p> </li> </ul>"
         },
         "RequestId": {
           "shape": "String",
@@ -8313,7 +8313,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template aliases you are updating.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template alias that you're updating.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -8325,7 +8325,7 @@
         },
         "AliasName": {
           "shape": "AliasName",
-          "documentation": "<p>The alias of the template that you want to update. If you provide a specific alias, you update the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>",
+          "documentation": "<p>The alias of the template that you want to update. If you name a specific alias, you update the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>",
           "location": "uri",
           "locationName": "AliasName"
         },
@@ -8362,7 +8362,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -8418,7 +8418,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>AWS account ID that contains the template you are updating.</p>",
+          "documentation": "<p>The ID of the AWS account that contains the template that you're updating.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -8430,11 +8430,11 @@
         },
         "SourceEntity": {
           "shape": "TemplateSourceEntity",
-          "documentation": "<p>The source QuickSight entity from which this template is being created. Templates can be currently created from an Analysis or another template.</p>"
+          "documentation": "<p>The source QuickSight entity from which this template is being updated. You can currently update templates from an Analysis or another template.</p>"
         },
         "VersionDescription": {
           "shape": "VersionDescription",
-          "documentation": "<p>A description of the current template version being updated. Every time you cal <code>UpdateTemplate</code> you create a new version. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.</p>"
+          "documentation": "<p>A description of the current template version that is being updated. Every time you call <code>UpdateTemplate</code>, you create a new version of the template. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.</p>"
         },
         "Name": {
           "shape": "TemplateName",
@@ -8455,7 +8455,7 @@
         },
         "VersionArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the template, including the version information of the first version.</p>"
+          "documentation": "<p>The ARN for the template, including the version information of the first version.</p>"
         },
         "CreationStatus": {
           "shape": "ResourceStatus",
@@ -8542,7 +8542,7 @@
         },
         "ContainsHeader": {
           "shape": "Boolean",
-          "documentation": "<p>Whether or not the file(s) has a header row.</p>",
+          "documentation": "<p>Whether the file has a header row, or the files each have a header row.</p>",
           "box": true
         },
         "TextQualifier": {
@@ -8554,14 +8554,14 @@
           "documentation": "<p>The delimiter between values in the file.</p>"
         }
       },
-      "documentation": "<p>Information on source file(s) format.</p>"
+      "documentation": "<p>Information about the format for a source file or files.</p>"
     },
     "User": {
       "type": "structure",
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource name (ARN) for the user.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the user.</p>"
         },
         "UserName": {
           "shape": "UserName",
@@ -8581,7 +8581,7 @@
         },
         "Active": {
           "shape": "Boolean",
-          "documentation": "<p>Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password.</p>"
+          "documentation": "<p>The active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a password.</p>"
         },
         "PrincipalId": {
           "shape": "String",

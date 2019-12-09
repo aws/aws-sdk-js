@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.585.0-->
+<!--LATEST=2.586.0-->
 <!--ENTRYINSERT-->
+
+## 2.586.0
+* feature: KMS: The Verify operation now returns KMSInvalidSignatureException on invalid signatures. The Sign and Verify operations now return KMSInvalidStateException when a request is made against a CMK pending deletion.
+* feature: Kafka: AWS MSK has added support for Open Monitoring with Prometheus.
+* feature: SSM: Adds the SSM GetCalendarState API and ChangeCalendar SSM Document type. These features enable the forthcoming Systems Manager Change Calendar feature, which will allow you to schedule events during which actions should (or should not) be performed.
 
 ## 2.585.0
 * bugfix: Endpoint: fix bug in regional endpoints and add more tests
