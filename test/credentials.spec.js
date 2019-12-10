@@ -701,13 +701,23 @@
           done();
         });
       });
-      it('will fail if no source profile is specified', function(done) {
+      it('will fail if no source profile or credential source is specified', function(done) {
         var creds, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         creds = new AWS.SharedIniFileCredentials();
         creds.refresh(function(err) {
-          expect(err.message).to.equal('source_profile is not set using profile default');
+          expect(err.message).to.equal('source_profile or credential_source are not set using profile default');
+          done();
+        });
+      });
+      it('will fail if both source profile and credential source are specified', function(done) {
+        var creds, mock;
+        mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\nsource_profile = profile\ncredential_source = source';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        creds = new AWS.SharedIniFileCredentials();
+        creds.refresh(function(err) {
+          expect(err.message).to.match(/source_profile and credential_source are set using profile default/);
           done();
         });
       });
@@ -733,7 +743,7 @@
       });
       it('will return credentials for assumed role', function(done) {
         var creds, mock;
-        mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\nexternal\nasda\nsource_profile = foo\n[foo]\naws_access_key_id = akid2\naws_secret_access_key = secret2';
+        mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\nsource_profile = foo\n[foo]\naws_access_key_id = akid2\naws_secret_access_key = secret2';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
         creds = new AWS.SharedIniFileCredentials();
@@ -835,6 +845,39 @@
           expect(creds.expireTime).to.eql(new Date(0));
           delete process.env.AWS_SDK_LOAD_CONFIG;
           return done();
+        });
+      });
+      it('will fail if credential source is invalid', function(done) {
+        var creds, mock;
+        mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\ncredential_source = InvalidValue\n';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        creds = new AWS.SharedIniFileCredentials();
+        return creds.refresh(function(err) {
+          expect(err.message).to.match(/credential_source InvalidValue using profile default is not valid/);
+          done();
+        });
+      });
+      it('will return credentials for assumed role with Environment credential source', function(done) {
+        var creds, mock;
+        mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\ncredential_source = Environment\n';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        process.env.AWS_ACCESS_KEY_ID = 'akid';
+        process.env.AWS_SECRET_ACCESS_KEY = 'secret';
+        process.env.AWS_SESSION_TOKEN = 'session';
+        var STSPrototype = (new STS()).constructor.prototype;
+        creds = new AWS.SharedIniFileCredentials();
+        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallThrough();
+        expect(creds.roleArn).to.equal('arn');
+        creds.refresh(function(err) {
+          expect(assumeRoleSpy.calls.length).to.equal(1);
+          expect(assumeRoleSpy.calls[0].object.config.credentials.accessKeyId).to.equal('akid');
+          expect(assumeRoleSpy.calls[0].object.config.credentials.sessionToken).to.equal('session');
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.expireTime).to.eql(new Date(0));
+          done();
         });
       });
       it('should prefer static credentials to role_arn in source profiles', function(done) {

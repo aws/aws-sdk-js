@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Configuration",
+  "description": "Adds support for \"credential_source\" in when loading credentials from the shared ini files. Closes #1916 and #2071."
+}
