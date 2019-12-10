@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.586.0-->
+<!--LATEST=2.587.0-->
 <!--ENTRYINSERT-->
+
+## 2.587.0
+* feature: Kendra: 1. Adding DocumentTitleFieldName as an optional configuration for SharePoint. 2. updating s3 object pattern to  support all s3 keys.
 
 ## 2.586.0
 * feature: KMS: The Verify operation now returns KMSInvalidSignatureException on invalid signatures. The Sign and Verify operations now return KMSInvalidStateException when a request is made against a CMK pending deletion.

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "1. Adding DocumentTitleFieldName as an optional configuration for SharePoint. 2. updating s3 object pattern to  support all s3 keys."
+    }
+]

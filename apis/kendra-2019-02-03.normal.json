@@ -1124,7 +1124,7 @@
         },
         "ServerSideEncryptionConfiguration": {
           "shape": "ServerSideEncryptionConfiguration",
-          "documentation": "<p>The identifier of the KMS key to use to encrypt data indexed by Amazon Kendra. </p>"
+          "documentation": "<p>The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.</p>"
         },
         "Description": {
           "shape": "Description",
@@ -1593,7 +1593,7 @@
         },
         "ServerSideEncryptionConfiguration": {
           "shape": "ServerSideEncryptionConfiguration",
-          "documentation": "<p>The identifier of the KMS key used to encrypt your data. </p>"
+          "documentation": "<p>The identifier of the AWS KMS customer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.</p>"
         },
         "Status": {
           "shape": "IndexStatus",
@@ -2308,7 +2308,7 @@
       "type": "string",
       "max": 200,
       "min": 1,
-      "pattern": "^[^'/\\[\\]:=,;?*\\\\\\u0022\\u003C\\u003E]*$"
+      "pattern": "^\\P{C}*$"
     },
     "PrincipalType": {
       "type": "string",
@@ -2539,7 +2539,7 @@
         },
         "ExclusionPatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
-          "documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"http://wikipedia.org/wiki/Glob_%28programming529\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
+          "documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"http://wikipedia.org/wiki/Glob_%28programming%29\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
         },
         "DocumentsMetadataConfiguration": {
           "shape": "DocumentsMetadataConfiguration"
@@ -2555,7 +2555,7 @@
       "type": "string",
       "max": 1024,
       "min": 1,
-      "pattern": "^\\P{C}*$"
+      "pattern": ".*"
     },
     "S3Path": {
       "type": "structure",
@@ -2615,10 +2615,10 @@
       "members": {
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The identifier of the KMS key.</p>"
+          "documentation": "<p>The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.</p>"
         }
       },
-      "documentation": "<p>Provides the identifier of the KMS key used to encrypt data indexed by Amazon Kendra.</p>"
+      "documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.</p>"
     },
     "SharePointConfiguration": {
       "type": "structure",
@@ -2650,6 +2650,10 @@
         "FieldMappings": {
           "shape": "DataSourceToIndexFieldMappingList",
           "documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping Data Source Fields</a>.</p>"
+        },
+        "DocumentTitleFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The Microsoft SharePoint attribute field that contains the title of the document.</p>"
         }
       },
       "documentation": "<p>Provides configuration information for connecting to a Microsoft SharePoint data source.</p>"

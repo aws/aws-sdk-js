@@ -450,7 +450,7 @@ declare namespace Kendra {
      */
     RoleArn: RoleArn;
     /**
-     * The identifier of the KMS key to use to encrypt data indexed by Amazon Kendra. 
+     * The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -738,7 +738,7 @@ declare namespace Kendra {
      */
     RoleArn?: RoleArn;
     /**
-     * The identifier of the KMS key used to encrypt your data. 
+     * The identifier of the AWS KMS customer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1288,7 +1288,7 @@ declare namespace Kendra {
   export type SecurityGroupIdList = VpcSecurityGroupId[];
   export interface ServerSideEncryptionConfiguration {
     /**
-     * The identifier of the KMS key.
+     * The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -1314,6 +1314,10 @@ declare namespace Kendra {
      * A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see Mapping Data Source Fields.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * The Microsoft SharePoint attribute field that contains the title of the document.
+     */
+    DocumentTitleFieldName?: DataSourceFieldName;
   }
   export type SharePointUrlList = Url[];
   export type SharePointVersion = "SHAREPOINT_ONLINE"|string;
