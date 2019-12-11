@@ -12197,9 +12197,13 @@ declare namespace EC2 {
   }
   export interface ElasticInferenceAccelerator {
     /**
-     *  The type of elastic inference accelerator. The possible values are eia1.small, eia1.medium, and eia1.large. 
+     *  The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge. 
      */
     Type: String;
+    /**
+     *  The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. 
+     */
+    Count?: ElasticInferenceAcceleratorCount;
   }
   export interface ElasticInferenceAcceleratorAssociation {
     /**
@@ -12220,6 +12224,7 @@ declare namespace EC2 {
     ElasticInferenceAcceleratorAssociationTime?: DateTime;
   }
   export type ElasticInferenceAcceleratorAssociationList = ElasticInferenceAcceleratorAssociation[];
+  export type ElasticInferenceAcceleratorCount = number;
   export type ElasticInferenceAccelerators = ElasticInferenceAccelerator[];
   export type EnaSupport = "unsupported"|"supported"|"required"|string;
   export interface EnableEbsEncryptionByDefaultRequest {
@@ -15814,13 +15819,22 @@ declare namespace EC2 {
      *  The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge. 
      */
     Type: String;
+    /**
+     *  The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. 
+     */
+    Count?: LaunchTemplateElasticInferenceAcceleratorCount;
   }
+  export type LaunchTemplateElasticInferenceAcceleratorCount = number;
   export type LaunchTemplateElasticInferenceAcceleratorList = LaunchTemplateElasticInferenceAccelerator[];
   export interface LaunchTemplateElasticInferenceAcceleratorResponse {
     /**
      *  The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge. 
      */
     Type?: String;
+    /**
+     *  The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. 
+     */
+    Count?: Integer;
   }
   export type LaunchTemplateElasticInferenceAcceleratorResponseList = LaunchTemplateElasticInferenceAcceleratorResponse[];
   export type LaunchTemplateErrorCode = "launchTemplateIdDoesNotExist"|"launchTemplateIdMalformed"|"launchTemplateNameDoesNotExist"|"launchTemplateNameMalformed"|"launchTemplateVersionDoesNotExist"|"unexpectedError"|string;

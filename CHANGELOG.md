@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.587.0-->
+<!--LATEST=2.588.0-->
 <!--ENTRYINSERT-->
+
+## 2.588.0
+* feature: EC2: This release allows customers to attach multiple Elastic Inference Accelerators to a single EC2 instance. It adds support for a Count parameter for each Elastic Inference Accelerator type you specify on the RunInstances and LaunchTemplate APIs.
 
 ## 2.587.0
 * feature: Kendra: 1. Adding DocumentTitleFieldName as an optional configuration for SharePoint. 2. updating s3 object pattern to  support all s3 keys.

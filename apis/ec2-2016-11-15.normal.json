@@ -18924,7 +18924,11 @@
       "members": {
         "Type": {
           "shape": "String",
-          "documentation": "<p> The type of elastic inference accelerator. The possible values are <code>eia1.small</code>, <code>eia1.medium</code>, and <code>eia1.large</code>. </p>"
+          "documentation": "<p> The type of elastic inference accelerator. The possible values are <code>eia1.medium</code>, <code>eia1.large</code>, and <code>eia1.xlarge</code>. </p>"
+        },
+        "Count": {
+          "shape": "ElasticInferenceAcceleratorCount",
+          "documentation": "<p> The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. </p>"
         }
       },
       "documentation": "<p> Describes an elastic inference accelerator. </p>"
@@ -18961,6 +18965,10 @@
         "shape": "ElasticInferenceAcceleratorAssociation",
         "locationName": "item"
       }
+    },
+    "ElasticInferenceAcceleratorCount": {
+      "type": "integer",
+      "min": 1
     },
     "ElasticInferenceAccelerators": {
       "type": "list",
@@ -25076,9 +25084,17 @@
         "Type": {
           "shape": "String",
           "documentation": "<p> The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge. </p>"
+        },
+        "Count": {
+          "shape": "LaunchTemplateElasticInferenceAcceleratorCount",
+          "documentation": "<p> The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. </p>"
         }
       },
       "documentation": "<p> Describes an elastic inference accelerator. </p>"
+    },
+    "LaunchTemplateElasticInferenceAcceleratorCount": {
+      "type": "integer",
+      "min": 1
     },
     "LaunchTemplateElasticInferenceAcceleratorList": {
       "type": "list",
@@ -25094,6 +25110,11 @@
           "shape": "String",
           "documentation": "<p> The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge. </p>",
           "locationName": "type"
+        },
+        "Count": {
+          "shape": "Integer",
+          "documentation": "<p> The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. </p>",
+          "locationName": "count"
         }
       },
       "documentation": "<p> Describes an elastic inference accelerator. </p>"
