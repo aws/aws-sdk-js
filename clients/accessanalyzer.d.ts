@@ -12,19 +12,19 @@ declare class AccessAnalyzer extends Service {
   constructor(options?: AccessAnalyzer.Types.ClientConfiguration)
   config: Config & AccessAnalyzer.Types.ClientConfiguration;
   /**
-   * Creates an analyzer with a zone of trust set to your account.
+   * Creates an analyzer for your account.
    */
   createAnalyzer(params: AccessAnalyzer.Types.CreateAnalyzerRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.CreateAnalyzerResponse) => void): Request<AccessAnalyzer.Types.CreateAnalyzerResponse, AWSError>;
   /**
-   * Creates an analyzer with a zone of trust set to your account.
+   * Creates an analyzer for your account.
    */
   createAnalyzer(callback?: (err: AWSError, data: AccessAnalyzer.Types.CreateAnalyzerResponse) => void): Request<AccessAnalyzer.Types.CreateAnalyzerResponse, AWSError>;
   /**
-   * Creates an archive rule for the specified analyzer.
+   * Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.
    */
   createArchiveRule(params: AccessAnalyzer.Types.CreateArchiveRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an archive rule for the specified analyzer.
+   * Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.
    */
   createArchiveRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class AccessAnalyzer extends Service {
    */
   deleteArchiveRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Retrieves information about an analyzed resource.
+   * Retrieves information about a resource that was analyzed.
    */
   getAnalyzedResource(params: AccessAnalyzer.Types.GetAnalyzedResourceRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.GetAnalyzedResourceResponse) => void): Request<AccessAnalyzer.Types.GetAnalyzedResourceResponse, AWSError>;
   /**
-   * Retrieves information about an analyzed resource.
+   * Retrieves information about a resource that was analyzed.
    */
   getAnalyzedResource(callback?: (err: AWSError, data: AccessAnalyzer.Types.GetAnalyzedResourceResponse) => void): Request<AccessAnalyzer.Types.GetAnalyzedResourceResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class AccessAnalyzer extends Service {
    */
   getFinding(callback?: (err: AWSError, data: AccessAnalyzer.Types.GetFindingResponse) => void): Request<AccessAnalyzer.Types.GetFindingResponse, AWSError>;
   /**
-   * Retrieves a list of resources that have been analyzed.
+   * Retrieves a list of resources of the specified type that have been analyzed by the specified analyzer..
    */
   listAnalyzedResources(params: AccessAnalyzer.Types.ListAnalyzedResourcesRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.ListAnalyzedResourcesResponse) => void): Request<AccessAnalyzer.Types.ListAnalyzedResourcesResponse, AWSError>;
   /**
-   * Retrieves a list of resources that have been analyzed.
+   * Retrieves a list of resources of the specified type that have been analyzed by the specified analyzer..
    */
   listAnalyzedResources(callback?: (err: AWSError, data: AccessAnalyzer.Types.ListAnalyzedResourcesResponse) => void): Request<AccessAnalyzer.Types.ListAnalyzedResourcesResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class AccessAnalyzer extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: AccessAnalyzer.Types.ListTagsForResourceResponse) => void): Request<AccessAnalyzer.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Starts a scan of the policies applied to the specified resource.
+   * Immediately starts a scan of the policies applied to the specified resource.
    */
   startResourceScan(params: AccessAnalyzer.Types.StartResourceScanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts a scan of the policies applied to the specified resource.
+   * Immediately starts a scan of the policies applied to the specified resource.
    */
   startResourceScan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -140,19 +140,19 @@ declare class AccessAnalyzer extends Service {
    */
   untagResource(callback?: (err: AWSError, data: AccessAnalyzer.Types.UntagResourceResponse) => void): Request<AccessAnalyzer.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the specified archive rule.
+   * Updates the criteria and values for the specified archive rule.
    */
   updateArchiveRule(params: AccessAnalyzer.Types.UpdateArchiveRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the specified archive rule.
+   * Updates the criteria and values for the specified archive rule.
    */
   updateArchiveRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates findings with the new values provided in the request.
+   * Updates the status for the specified findings.
    */
   updateFindings(params: AccessAnalyzer.Types.UpdateFindingsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates findings with the new values provided in the request.
+   * Updates the status for the specified findings.
    */
   updateFindings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -270,7 +270,7 @@ declare namespace AccessAnalyzer {
      */
     analyzerName: Name;
     /**
-     * Specifies the archive rules to add for the analyzer.
+     * Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
      */
     archiveRules?: InlineArchiveRulesList;
     /**
@@ -282,7 +282,7 @@ declare namespace AccessAnalyzer {
      */
     tags?: TagsMap;
     /**
-     * The zone of trust for the analyzer. You can create only one analyzer per account per Region.
+     * The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create only one analyzer per account per Region.
      */
     type: Type;
   }
@@ -340,7 +340,7 @@ declare namespace AccessAnalyzer {
   }
   export interface DeleteArchiveRuleRequest {
     /**
-     * The name of the analyzer that was deleted.
+     * The name of the analyzer that associated with the archive rule to delete.
      */
     analyzerName: Name;
     /**
@@ -517,7 +517,7 @@ declare namespace AccessAnalyzer {
   }
   export interface InlineArchiveRule {
     /**
-     * The criteria for the rule.
+     * The condition and values for a criterion.
      */
     filter: FilterCriteriaMap;
     /**
@@ -565,7 +565,7 @@ declare namespace AccessAnalyzer {
      */
     nextToken?: Token;
     /**
-     * The type of analyzer, which corresponds to the zone of trust selected when the analyzer was created.
+     * The type of analyzer.
      */
     type?: Type;
   }

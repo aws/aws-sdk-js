@@ -45,7 +45,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Creates an analyzer with a zone of trust set to your account.</p>",
+      "documentation": "<p>Creates an analyzer for your account.</p>",
       "idempotent": true
     },
     "CreateArchiveRule": {
@@ -81,7 +81,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Creates an archive rule for the specified analyzer.</p>",
+      "documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.</p>",
       "idempotent": true
     },
     "DeleteAnalyzer": {
@@ -174,7 +174,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Retrieves information about an analyzed resource.</p>"
+      "documentation": "<p>Retrieves information about a resource that was analyzed.</p>"
     },
     "GetAnalyzer": {
       "name": "GetAnalyzer",
@@ -302,7 +302,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Retrieves a list of resources that have been analyzed.</p>"
+      "documentation": "<p>Retrieves a list of resources of the specified type that have been analyzed by the specified analyzer..</p>"
     },
     "ListAnalyzers": {
       "name": "ListAnalyzers",
@@ -453,7 +453,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Starts a scan of the policies applied to the specified resource.</p>"
+      "documentation": "<p>Immediately starts a scan of the policies applied to the specified resource.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -548,7 +548,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Updates the specified archive rule.</p>",
+      "documentation": "<p>Updates the criteria and values for the specified archive rule.</p>",
       "idempotent": true
     },
     "UpdateFindings": {
@@ -578,7 +578,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Updates findings with the new values provided in the request.</p>",
+      "documentation": "<p>Updates the status for the specified findings.</p>",
       "idempotent": true
     }
   },
@@ -777,7 +777,7 @@
         },
         "archiveRules": {
           "shape": "InlineArchiveRulesList",
-          "documentation": "<p>Specifies the archive rules to add for the analyzer.</p>"
+          "documentation": "<p>Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.</p>"
         },
         "clientToken": {
           "shape": "String",
@@ -790,7 +790,7 @@
         },
         "type": {
           "shape": "Type",
-          "documentation": "<p>The zone of trust for the analyzer. You can create only one analyzer per account per Region.</p>"
+          "documentation": "<p>The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create only one analyzer per account per Region.</p>"
         }
       },
       "documentation": "<p>Creates an analyzer.</p>"
@@ -855,7 +855,7 @@
           "documentation": "<p>A \"not equals\" operator to match for the filter used to create the rule.</p>"
         }
       },
-      "documentation": "<p>The criteria to use in the filter that defines the rule.</p>"
+      "documentation": "<p>The criteria to use in the filter that defines the archive rule.</p>"
     },
     "DeleteAnalyzerRequest": {
       "type": "structure",
@@ -888,7 +888,7 @@
       "members": {
         "analyzerName": {
           "shape": "Name",
-          "documentation": "<p>The name of the analyzer that was deleted.</p>",
+          "documentation": "<p>The name of the analyzer that associated with the archive rule to delete.</p>",
           "location": "uri",
           "locationName": "analyzerName"
         },
@@ -1197,7 +1197,7 @@
           "documentation": "<p>A <code>finding</code> object that contains finding details.</p>"
         }
       },
-      "documentation": "<p>The resposne to the request.</p>"
+      "documentation": "<p>The response to the request.</p>"
     },
     "InlineArchiveRule": {
       "type": "structure",
@@ -1208,14 +1208,14 @@
       "members": {
         "filter": {
           "shape": "FilterCriteriaMap",
-          "documentation": "<p>The criteria for the rule.</p>"
+          "documentation": "<p>The condition and values for a criterion.</p>"
         },
         "ruleName": {
           "shape": "Name",
           "documentation": "<p>The name of the rule.</p>"
         }
       },
-      "documentation": "<p>An inline archive rule.</p>"
+      "documentation": "<p>An criterion statement in an archive rule. Each archive rule may have multiple criteria.</p>"
     },
     "InlineArchiveRulesList": {
       "type": "list",
@@ -1286,7 +1286,7 @@
         },
         "type": {
           "shape": "Type",
-          "documentation": "<p>The type of analyzer, which corresponds to the zone of trust selected when the analyzer was created.</p>",
+          "documentation": "<p>The type of analyzer.</p>",
           "location": "querystring",
           "locationName": "type"
         }
@@ -1398,7 +1398,7 @@
           "documentation": "<p>A token used for pagination of results returned.</p>"
         }
       },
-      "documentation": "<p>The resposne to the request.</p>"
+      "documentation": "<p>The response to the request.</p>"
     },
     "ListTagsForResourceRequest": {
       "type": "structure",
@@ -1480,7 +1480,7 @@
           "documentation": "<p>The sort order, ascending or descending.</p>"
         }
       },
-      "documentation": "<p>The sort criteria.</p>"
+      "documentation": "<p>The criteria used to sort.</p>"
     },
     "StartResourceScanRequest": {
       "type": "structure",
@@ -1544,7 +1544,8 @@
       }
     },
     "Timestamp": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
     },
     "Token": {
       "type": "string"
@@ -1580,7 +1581,7 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>The response tot he request.</p>"
+      "documentation": "<p>The response to the request.</p>"
     },
     "UpdateArchiveRuleRequest": {
       "type": "structure",
@@ -1654,5 +1655,5 @@
       "min": 1
     }
   },
-  "documentation": "<p>AWS IAM Access Analyzer API Reference</p>"
+  "documentation": "<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify any policies that grant access to an external principal. It does this by using logic-based reasoning to analyze resource-based policies in your AWS environment. An external principal can be another AWS account, a root user, an IAM user or role, a federated user, an AWS service, or an anonymous user. This guide describes the AWS IAM Access Analyzer operations that you can call programmatically. For general information about Access Analyzer, see the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">AWS IAM Access Analyzer section of the IAM User Guide</a>.</p> <p>To start using Access Analyzer, you first need to create an analyzer.</p>"
 }

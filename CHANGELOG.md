@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.588.0-->
+<!--LATEST=2.589.0-->
 <!--ENTRYINSERT-->
+
+## 2.589.0
+* feature: AccessAnalyzer: This release includes improvements and fixes bugs for the IAM Access Analyzer feature.
 
 ## 2.588.0
 * feature: EC2: This release allows customers to attach multiple Elastic Inference Accelerators to a single EC2 instance. It adds support for a Count parameter for each Elastic Inference Accelerator type you specify on the RunInstances and LaunchTemplate APIs.
