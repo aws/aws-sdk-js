@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.589.0-->
+<!--LATEST=2.590.0-->
 <!--ENTRYINSERT-->
+
+## 2.590.0
+* feature: CodeBuild: CodeBuild adds support for cross account
+* feature: Detective: This is the initial release of Amazon Detective.
+* feature: SESV2: Added the ability to use your own public-private key pair to configure DKIM authentication for a domain identity.
 
 ## 2.589.0
 * feature: AccessAnalyzer: This release includes improvements and fixes bugs for the IAM Access Analyzer feature.

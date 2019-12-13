@@ -217,5 +217,6 @@ module.exports = {
   Outposts: require('./outposts'),
   AugmentedAIRuntime: require('./augmentedairuntime'),
   EBS: require('./ebs'),
-  KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels')
+  KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels'),
+  Detective: require('./detective')
 };

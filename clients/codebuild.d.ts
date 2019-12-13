@@ -100,6 +100,14 @@ declare class CodeBuild extends Service {
    */
   deleteReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.DeleteReportGroupOutput) => void): Request<CodeBuild.Types.DeleteReportGroupOutput, AWSError>;
   /**
+   *  Deletes a resource policy that is identified by its resource ARN. 
+   */
+  deleteResourcePolicy(params: CodeBuild.Types.DeleteResourcePolicyInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteResourcePolicyOutput) => void): Request<CodeBuild.Types.DeleteResourcePolicyOutput, AWSError>;
+  /**
+   *  Deletes a resource policy that is identified by its resource ARN. 
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: CodeBuild.Types.DeleteResourcePolicyOutput) => void): Request<CodeBuild.Types.DeleteResourcePolicyOutput, AWSError>;
+  /**
    *  Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. 
    */
   deleteSourceCredentials(params: CodeBuild.Types.DeleteSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteSourceCredentialsOutput) => void): Request<CodeBuild.Types.DeleteSourceCredentialsOutput, AWSError>;
@@ -123,6 +131,14 @@ declare class CodeBuild extends Service {
    *  Returns a list of details about test cases for a report. 
    */
   describeTestCases(callback?: (err: AWSError, data: CodeBuild.Types.DescribeTestCasesOutput) => void): Request<CodeBuild.Types.DescribeTestCasesOutput, AWSError>;
+  /**
+   *  Gets a resource policy that is identified by its resource ARN. 
+   */
+  getResourcePolicy(params: CodeBuild.Types.GetResourcePolicyInput, callback?: (err: AWSError, data: CodeBuild.Types.GetResourcePolicyOutput) => void): Request<CodeBuild.Types.GetResourcePolicyOutput, AWSError>;
+  /**
+   *  Gets a resource policy that is identified by its resource ARN. 
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: CodeBuild.Types.GetResourcePolicyOutput) => void): Request<CodeBuild.Types.GetResourcePolicyOutput, AWSError>;
   /**
    *  Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
    */
@@ -196,6 +212,22 @@ declare class CodeBuild extends Service {
    */
   listReportsForReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.ListReportsForReportGroupOutput) => void): Request<CodeBuild.Types.ListReportsForReportGroupOutput, AWSError>;
   /**
+   *  Gets a list of projects that are shared with other AWS accounts or users. 
+   */
+  listSharedProjects(params: CodeBuild.Types.ListSharedProjectsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListSharedProjectsOutput) => void): Request<CodeBuild.Types.ListSharedProjectsOutput, AWSError>;
+  /**
+   *  Gets a list of projects that are shared with other AWS accounts or users. 
+   */
+  listSharedProjects(callback?: (err: AWSError, data: CodeBuild.Types.ListSharedProjectsOutput) => void): Request<CodeBuild.Types.ListSharedProjectsOutput, AWSError>;
+  /**
+   *  Gets a list of report groups that are shared with other AWS accounts or users. 
+   */
+  listSharedReportGroups(params: CodeBuild.Types.ListSharedReportGroupsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListSharedReportGroupsOutput) => void): Request<CodeBuild.Types.ListSharedReportGroupsOutput, AWSError>;
+  /**
+   *  Gets a list of report groups that are shared with other AWS accounts or users. 
+   */
+  listSharedReportGroups(callback?: (err: AWSError, data: CodeBuild.Types.ListSharedReportGroupsOutput) => void): Request<CodeBuild.Types.ListSharedReportGroupsOutput, AWSError>;
+  /**
    *  Returns a list of SourceCredentialsInfo objects. 
    */
   listSourceCredentials(params: CodeBuild.Types.ListSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListSourceCredentialsOutput) => void): Request<CodeBuild.Types.ListSourceCredentialsOutput, AWSError>;
@@ -203,6 +235,14 @@ declare class CodeBuild extends Service {
    *  Returns a list of SourceCredentialsInfo objects. 
    */
   listSourceCredentials(callback?: (err: AWSError, data: CodeBuild.Types.ListSourceCredentialsOutput) => void): Request<CodeBuild.Types.ListSourceCredentialsOutput, AWSError>;
+  /**
+   *  Stores a resource policy for the ARN of a Project or ReportGroup object. 
+   */
+  putResourcePolicy(params: CodeBuild.Types.PutResourcePolicyInput, callback?: (err: AWSError, data: CodeBuild.Types.PutResourcePolicyOutput) => void): Request<CodeBuild.Types.PutResourcePolicyOutput, AWSError>;
+  /**
+   *  Stores a resource policy for the ARN of a Project or ReportGroup object. 
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: CodeBuild.Types.PutResourcePolicyOutput) => void): Request<CodeBuild.Types.PutResourcePolicyOutput, AWSError>;
   /**
    * Starts running a build.
    */
@@ -283,7 +323,7 @@ declare namespace CodeBuild {
   }
   export interface BatchGetProjectsInput {
     /**
-     * The names of the build projects.
+     * The names or ARNs of the build projects. To get information about a project shared with your AWS account, its ARN must be specified. You cannot specify a shared project using its name.
      */
     names: ProjectNames;
   }
@@ -679,6 +719,14 @@ declare namespace CodeBuild {
   }
   export interface DeleteReportOutput {
   }
+  export interface DeleteResourcePolicyInput {
+    /**
+     *  The ARN of the resource that is associated with the resource policy. 
+     */
+    resourceArn: NonEmptyString;
+  }
+  export interface DeleteResourcePolicyOutput {
+  }
   export interface DeleteSourceCredentialsInput {
     /**
      *  The Amazon Resource Name (ARN) of the token.
@@ -794,6 +842,18 @@ declare namespace CodeBuild {
   export type ExportedEnvironmentVariables = ExportedEnvironmentVariable[];
   export type FilterGroup = WebhookFilter[];
   export type FilterGroups = FilterGroup[];
+  export interface GetResourcePolicyInput {
+    /**
+     *  The ARN of the resource that is associated with the resource policy. 
+     */
+    resourceArn: NonEmptyString;
+  }
+  export interface GetResourcePolicyOutput {
+    /**
+     *  The resource policy for the resource identified by the input ARN parameter. 
+     */
+    policy?: NonEmptyString;
+  }
   export type GitCloneDepth = number;
   export interface GitSubmodulesConfig {
     /**
@@ -1005,6 +1065,62 @@ declare namespace CodeBuild {
      */
     reports?: ReportArns;
   }
+  export interface ListSharedProjectsInput {
+    /**
+     *  The criterion to be used to list build projects shared with the current AWS account or user. Valid values include:     ARN: List based on the ARN.     MODIFIED_TIME: List based on when information about the shared project was last changed.   
+     */
+    sortBy?: SharedResourceSortByType;
+    /**
+     * The order in which to list shared build projects. Valid values include:    ASCENDING: List in ascending order.    DESCENDING: List in descending order.  
+     */
+    sortOrder?: SortOrderType;
+    /**
+     *  The maximum number of paginated shared build projects returned per response. Use nextToken to iterate pages in the list of returned Project objects. The default value is 100. 
+     */
+    maxResults?: PageSize;
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: NonEmptyString;
+  }
+  export interface ListSharedProjectsOutput {
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The list of ARNs for the build projects shared with the current AWS account or user. 
+     */
+    projects?: ProjectArns;
+  }
+  export interface ListSharedReportGroupsInput {
+    /**
+     * The order in which to list shared report groups. Valid values include:    ASCENDING: List in ascending order.    DESCENDING: List in descending order.  
+     */
+    sortOrder?: SortOrderType;
+    /**
+     *  The criterion to be used to list report groups shared with the current AWS account or user. Valid values include:     ARN: List based on the ARN.     MODIFIED_TIME: List based on when information about the shared report group was last changed.   
+     */
+    sortBy?: SharedResourceSortByType;
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The maximum number of paginated shared report groups per response. Use nextToken to iterate pages in the list of returned ReportGroup objects. The default value is 100. 
+     */
+    maxResults?: PageSize;
+  }
+  export interface ListSharedReportGroupsOutput {
+    /**
+     *  During a previous call, the maximum number of items that can be returned is the value specified in maxResults. If there more items in the list, then a unique string called a nextToken is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. 
+     */
+    nextToken?: String;
+    /**
+     *  The list of ARNs for the report groups shared with the current AWS account or user. 
+     */
+    reportGroups?: ReportGroupArns;
+  }
   export interface ListSourceCredentialsInput {
   }
   export interface ListSourceCredentialsOutput {
@@ -1172,6 +1288,7 @@ declare namespace CodeBuild {
      */
     logsConfig?: LogsConfig;
   }
+  export type ProjectArns = NonEmptyString[];
   export interface ProjectArtifacts {
     /**
      * The type of build output artifact. Valid values include:    CODEPIPELINE: The build project has build output generated through AWS CodePipeline.   The CODEPIPELINE type is not supported for secondaryArtifacts.     NO_ARTIFACTS: The build project does not produce any build output.    S3: The build project stores build output in Amazon Simple Storage Service (Amazon S3).  
@@ -1325,6 +1442,22 @@ declare namespace CodeBuild {
   }
   export type ProjectSources = ProjectSource[];
   export type Projects = Project[];
+  export interface PutResourcePolicyInput {
+    /**
+     *  A JSON-formatted resource policy. For more information, see Sharing a Project and Sharing a Report Group in the AWS CodeBuild User Guide. 
+     */
+    policy: NonEmptyString;
+    /**
+     *  The ARN of the Project or ReportGroup resource you want to associate with a resource policy. 
+     */
+    resourceArn: NonEmptyString;
+  }
+  export interface PutResourcePolicyOutput {
+    /**
+     *  The ARN of the Project or ReportGroup resource that is associated with a resource policy. 
+     */
+    resourceArn?: NonEmptyString;
+  }
   export interface RegistryCredential {
     /**
      *  The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager.    The credential can use the name of the credentials only if they exist in your current region.  
@@ -1473,6 +1606,7 @@ declare namespace CodeBuild {
   export type SecurityGroupIds = NonEmptyString[];
   export type SensitiveNonEmptyString = string;
   export type ServerType = "GITHUB"|"BITBUCKET"|"GITHUB_ENTERPRISE"|string;
+  export type SharedResourceSortByType = "ARN"|"MODIFIED_TIME"|string;
   export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
   export interface SourceAuth {
     /**

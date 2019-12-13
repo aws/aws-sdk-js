@@ -36,19 +36,19 @@ declare class SESV2 extends Service {
    */
   createDedicatedIpPool(callback?: (err: AWSError, data: SESV2.Types.CreateDedicatedIpPoolResponse) => void): Request<SESV2.Types.CreateDedicatedIpPoolResponse, AWSError>;
   /**
-   * Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon SES API v2 then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport operation to view the results of the test.
+   * Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon SES then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport operation to view the results of the test.
    */
   createDeliverabilityTestReport(params: SESV2.Types.CreateDeliverabilityTestReportRequest, callback?: (err: AWSError, data: SESV2.Types.CreateDeliverabilityTestReportResponse) => void): Request<SESV2.Types.CreateDeliverabilityTestReportResponse, AWSError>;
   /**
-   * Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon SES API v2 then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport operation to view the results of the test.
+   * Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon SES then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport operation to view the results of the test.
    */
   createDeliverabilityTestReport(callback?: (err: AWSError, data: SESV2.Types.CreateDeliverabilityTestReportResponse) => void): Request<SESV2.Types.CreateDeliverabilityTestReportResponse, AWSError>;
   /**
-   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process.
+   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.
    */
   createEmailIdentity(params: SESV2.Types.CreateEmailIdentityRequest, callback?: (err: AWSError, data: SESV2.Types.CreateEmailIdentityResponse) => void): Request<SESV2.Types.CreateEmailIdentityResponse, AWSError>;
   /**
-   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process.
+   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.
    */
   createEmailIdentity(callback?: (err: AWSError, data: SESV2.Types.CreateEmailIdentityResponse) => void): Request<SESV2.Types.CreateEmailIdentityResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class SESV2 extends Service {
    */
   deleteEmailIdentity(callback?: (err: AWSError, data: SESV2.Types.DeleteEmailIdentityResponse) => void): Request<SESV2.Types.DeleteEmailIdentityResponse, AWSError>;
   /**
-   * Used to delete a suppressed email destination from your suppression list.
+   * Removes an email address from the suppression list for your account.
    */
   deleteSuppressedDestination(params: SESV2.Types.DeleteSuppressedDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteSuppressedDestinationResponse) => void): Request<SESV2.Types.DeleteSuppressedDestinationResponse, AWSError>;
   /**
-   * Used to delete a suppressed email destination from your suppression list.
+   * Removes an email address from the suppression list for your account.
    */
   deleteSuppressedDestination(callback?: (err: AWSError, data: SESV2.Types.DeleteSuppressedDestinationResponse) => void): Request<SESV2.Types.DeleteSuppressedDestinationResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class SESV2 extends Service {
    */
   getDedicatedIps(callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpsResponse) => void): Request<SESV2.Types.GetDedicatedIpsResponse, AWSError>;
   /**
-   * Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing.
+   * Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   getDeliverabilityDashboardOptions(params: SESV2.Types.GetDeliverabilityDashboardOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.GetDeliverabilityDashboardOptionsResponse) => void): Request<SESV2.Types.GetDeliverabilityDashboardOptionsResponse, AWSError>;
   /**
-   * Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing.
+   * Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   getDeliverabilityDashboardOptions(callback?: (err: AWSError, data: SESV2.Types.GetDeliverabilityDashboardOptionsResponse) => void): Request<SESV2.Types.GetDeliverabilityDashboardOptionsResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class SESV2 extends Service {
    */
   getEmailIdentity(callback?: (err: AWSError, data: SESV2.Types.GetEmailIdentityResponse) => void): Request<SESV2.Types.GetEmailIdentityResponse, AWSError>;
   /**
-   * Used to fetch a single suppressed email destination from your suppression list.
+   * Retrieves information about a specific email address that's on the suppression list for your account.
    */
   getSuppressedDestination(params: SESV2.Types.GetSuppressedDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.GetSuppressedDestinationResponse) => void): Request<SESV2.Types.GetSuppressedDestinationResponse, AWSError>;
   /**
-   * Used to fetch a single suppressed email destination from your suppression list.
+   * Retrieves information about a specific email address that's on the suppression list for your account.
    */
   getSuppressedDestination(callback?: (err: AWSError, data: SESV2.Types.GetSuppressedDestinationResponse) => void): Request<SESV2.Types.GetSuppressedDestinationResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class SESV2 extends Service {
    */
   listEmailIdentities(callback?: (err: AWSError, data: SESV2.Types.ListEmailIdentitiesResponse) => void): Request<SESV2.Types.ListEmailIdentitiesResponse, AWSError>;
   /**
-   * Used to fetch a list suppressed email destinations from your suppression list.
+   * Retrieves a list of email addresses that are on the suppression list for your account.
    */
   listSuppressedDestinations(params: SESV2.Types.ListSuppressedDestinationsRequest, callback?: (err: AWSError, data: SESV2.Types.ListSuppressedDestinationsResponse) => void): Request<SESV2.Types.ListSuppressedDestinationsResponse, AWSError>;
   /**
-   * Used to fetch a list suppressed email destinations from your suppression list.
+   * Retrieves a list of email addresses that are on the suppression list for your account.
    */
   listSuppressedDestinations(callback?: (err: AWSError, data: SESV2.Types.ListSuppressedDestinationsResponse) => void): Request<SESV2.Types.ListSuppressedDestinationsResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class SESV2 extends Service {
    */
   putAccountSendingAttributes(callback?: (err: AWSError, data: SESV2.Types.PutAccountSendingAttributesResponse) => void): Request<SESV2.Types.PutAccountSendingAttributesResponse, AWSError>;
   /**
-   * Change your account's suppression preferences for your account.
+   * Change the settings for the account-level suppression list.
    */
   putAccountSuppressionAttributes(params: SESV2.Types.PutAccountSuppressionAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutAccountSuppressionAttributesResponse) => void): Request<SESV2.Types.PutAccountSuppressionAttributesResponse, AWSError>;
   /**
-   * Change your account's suppression preferences for your account.
+   * Change the settings for the account-level suppression list.
    */
   putAccountSuppressionAttributes(callback?: (err: AWSError, data: SESV2.Types.PutAccountSuppressionAttributesResponse) => void): Request<SESV2.Types.PutAccountSuppressionAttributesResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class SESV2 extends Service {
    */
   putConfigurationSetSendingOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetSendingOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetSendingOptionsResponse, AWSError>;
   /**
-   * Specify your account's suppression preferences for a configuration set.
+   * Specify the account suppression list preferences for a configuration set.
    */
   putConfigurationSetSuppressionOptions(params: SESV2.Types.PutConfigurationSetSuppressionOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetSuppressionOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetSuppressionOptionsResponse, AWSError>;
   /**
-   * Specify your account's suppression preferences for a configuration set.
+   * Specify the account suppression list preferences for a configuration set.
    */
   putConfigurationSetSuppressionOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetSuppressionOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetSuppressionOptionsResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class SESV2 extends Service {
    */
   putDedicatedIpWarmupAttributes(callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpWarmupAttributesResponse) => void): Request<SESV2.Types.PutDedicatedIpWarmupAttributesResponse, AWSError>;
   /**
-   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing.
+   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   putDeliverabilityDashboardOption(params: SESV2.Types.PutDeliverabilityDashboardOptionRequest, callback?: (err: AWSError, data: SESV2.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<SESV2.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
   /**
-   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing.
+   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   putDeliverabilityDashboardOption(callback?: (err: AWSError, data: SESV2.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<SESV2.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
   /**
@@ -339,6 +339,14 @@ declare class SESV2 extends Service {
    * Used to enable or disable DKIM authentication for an email identity.
    */
   putEmailIdentityDkimAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityDkimAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityDkimAttributesResponse, AWSError>;
+  /**
+   * Used to configure or change the DKIM authentication settings for an email domain identity. You can use this operation to do any of the following:   Update the signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).   Change from using no DKIM authentication to using Easy DKIM.   Change from using no DKIM authentication to using BYODKIM.   Change from using Easy DKIM to using BYODKIM.   Change from using BYODKIM to using Easy DKIM.  
+   */
+  putEmailIdentityDkimSigningAttributes(params: SESV2.Types.PutEmailIdentityDkimSigningAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityDkimSigningAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityDkimSigningAttributesResponse, AWSError>;
+  /**
+   * Used to configure or change the DKIM authentication settings for an email domain identity. You can use this operation to do any of the following:   Update the signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).   Change from using no DKIM authentication to using Easy DKIM.   Change from using no DKIM authentication to using BYODKIM.   Change from using Easy DKIM to using BYODKIM.   Change from using BYODKIM to using Easy DKIM.  
+   */
+  putEmailIdentityDkimSigningAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityDkimSigningAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityDkimSigningAttributesResponse, AWSError>;
   /**
    * Used to enable or disable feedback forwarding for an identity. This setting determines what happens when an identity is used to send an email that results in a bounce or complaint event. If the value is true, you receive email notifications when bounce or complaint events occur. These notifications are sent to the address that you specified in the Return-Path header of the original email. You're required to have a method of tracking bounces and complaints. If you haven't set up another mechanism for receiving bounce or complaint notifications (for example, by setting up an event destination), you receive an email notification when these events occur (even if this setting is disabled).
    */
@@ -356,19 +364,19 @@ declare class SESV2 extends Service {
    */
   putEmailIdentityMailFromAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityMailFromAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityMailFromAttributesResponse, AWSError>;
   /**
-   * Puts (overwrites) an email destination in your suppression list.
+   * Adds an email address to the suppression list for your account.
    */
   putSuppressedDestination(params: SESV2.Types.PutSuppressedDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.PutSuppressedDestinationResponse) => void): Request<SESV2.Types.PutSuppressedDestinationResponse, AWSError>;
   /**
-   * Puts (overwrites) an email destination in your suppression list.
+   * Adds an email address to the suppression list for your account.
    */
   putSuppressedDestination(callback?: (err: AWSError, data: SESV2.Types.PutSuppressedDestinationResponse) => void): Request<SESV2.Types.PutSuppressedDestinationResponse, AWSError>;
   /**
-   * Sends an email message. You can use the Amazon SES API v2 to send two types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and the Amazon SES API v2 assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.  
+   * Sends an email message. You can use the Amazon SES API v2 to send two types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.  
    */
   sendEmail(params: SESV2.Types.SendEmailRequest, callback?: (err: AWSError, data: SESV2.Types.SendEmailResponse) => void): Request<SESV2.Types.SendEmailResponse, AWSError>;
   /**
-   * Sends an email message. You can use the Amazon SES API v2 to send two types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and the Amazon SES API v2 assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.  
+   * Sends an email message. You can use the Amazon SES API v2 to send two types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.  
    */
   sendEmail(callback?: (err: AWSError, data: SESV2.Types.SendEmailResponse) => void): Request<SESV2.Types.SendEmailResponse, AWSError>;
   /**
@@ -459,7 +467,7 @@ declare namespace SESV2 {
      */
     Data: MessageData;
     /**
-     * The character set for the content. Because of the constraints of the SMTP protocol, the Amazon SES API v2 uses 7-bit ASCII by default. If the text includes characters outside of the ASCII range, you have to specify a character set. For example, you could specify UTF-8, ISO-8859-1, or Shift_JIS.
+     * The character set for the content. Because of the constraints of the SMTP protocol, Amazon SES uses 7-bit ASCII by default. If the text includes characters outside of the ASCII range, you have to specify a character set. For example, you could specify UTF-8, ISO-8859-1, or Shift_JIS.
      */
     Charset?: Charset;
   }
@@ -557,6 +565,10 @@ declare namespace SESV2 {
      * An array of objects that define the tags (keys and values) that you want to associate with the email identity.
      */
     Tags?: TagList;
+    /**
+     * If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method, Easy DKIM. You can only specify this object if the email identity is a domain, as opposed to an address.
+     */
+    DkimSigningAttributes?: DkimSigningAttributes;
   }
   export interface CreateEmailIdentityResponse {
     /**
@@ -568,7 +580,7 @@ declare namespace SESV2 {
      */
     VerifiedForSendingStatus?: Enabled;
     /**
-     * An object that contains information about the DKIM attributes for the identity. This object includes the tokens that you use to create the CNAME records that are required to complete the DKIM verification process.
+     * An object that contains information about the DKIM attributes for the identity.
      */
     DkimAttributes?: DkimAttributes;
   }
@@ -646,7 +658,7 @@ declare namespace SESV2 {
   }
   export interface DeleteSuppressedDestinationRequest {
     /**
-     * The suppressed email destination to delete.
+     * The suppressed email destination to remove from the account suppression list.
      */
     EmailAddress: EmailAddress;
   }
@@ -714,14 +726,29 @@ declare namespace SESV2 {
      */
     SigningEnabled?: Enabled;
     /**
-     * Describes whether or not Amazon SES has successfully located the DKIM records in the DNS records for the domain. The status can be one of the following:    PENDING – Amazon SES hasn't yet detected the DKIM records in the DNS configuration for the domain, but will continue to attempt to locate them.    SUCCESS – Amazon SES located the DKIM records in the DNS configuration for the domain and determined that they're correct. You can now send DKIM-signed email from the identity.    FAILED – Amazon SES wasn't able to locate the DKIM records in the DNS settings for the domain, and won't continue to search for them.    TEMPORARY_FAILURE – A temporary issue occurred, which prevented Amazon SES from determining the DKIM status for the domain.    NOT_STARTED – Amazon SES hasn't yet started searching for the DKIM records in the DKIM records for the domain.  
+     * Describes whether or not Amazon SES has successfully located the DKIM records in the DNS records for the domain. The status can be one of the following:    PENDING – The verification process was initiated, but Amazon SES hasn't yet detected the DKIM records in the DNS configuration for the domain.    SUCCESS – The verification process completed successfully.    FAILED – The verification process failed. This typically occurs when Amazon SES fails to find the DKIM records in the DNS configuration of the domain.    TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the DKIM authentication status of the domain.    NOT_STARTED – The DKIM verification process hasn't been initiated for the domain.  
      */
     Status?: DkimStatus;
     /**
-     * A set of unique strings that you use to create a set of CNAME records that you add to the DNS configuration for your domain. When Amazon SES detects these records in the DNS configuration for your domain, the DKIM authentication process is complete. Amazon SES usually detects these records within about 72 hours of adding them to the DNS configuration for your domain.
+     * If you used Easy DKIM to configure DKIM authentication for the domain, then this object contains a set of unique strings that you use to create a set of CNAME records that you add to the DNS configuration for your domain. When Amazon SES detects these records in the DNS configuration for your domain, the DKIM authentication process is complete. If you configured DKIM authentication for the domain by providing your own public-private key pair, then this object contains the selector for the public key. Regardless of the DKIM authentication method you use, Amazon SES searches for the appropriate records in the DNS configuration of the domain for up to 72 hours.
      */
     Tokens?: DnsTokenList;
+    /**
+     * A string that indicates how DKIM was configured for the identity. There are two possible values:    AWS_SES – Indicates that DKIM was configured for the identity by using Easy DKIM.    EXTERNAL – Indicates that DKIM was configured for the identity by using Bring Your Own DKIM (BYODKIM).  
+     */
+    SigningAttributesOrigin?: DkimSigningAttributesOrigin;
   }
+  export interface DkimSigningAttributes {
+    /**
+     * A string that's used to identify a public key in the DNS configuration for a domain.
+     */
+    DomainSigningSelector: Selector;
+    /**
+     * A private key that's used to generate a DKIM signature. The private key must use 1024-bit RSA encryption, and must be encoded using base64 encoding.
+     */
+    DomainSigningPrivateKey: PrivateKey;
+  }
+  export type DkimSigningAttributesOrigin = "AWS_SES"|"EXTERNAL"|string;
   export type DkimStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
   export type DnsToken = string;
   export type DnsTokenList = DnsToken[];
@@ -928,7 +955,7 @@ declare namespace SESV2 {
      */
     SendingEnabled?: Enabled;
     /**
-     * An object that contains information about your account's suppression preferences.
+     * An object that contains information about the email address suppression preferences for your account in the current AWS Region.
      */
     SuppressionAttributes?: SuppressionAttributes;
   }
@@ -988,7 +1015,7 @@ declare namespace SESV2 {
      */
     Tags?: TagList;
     /**
-     * An object that contains information about your account's suppression preferences.
+     * An object that contains information about the suppression list preferences for your account.
      */
     SuppressionOptions?: SuppressionOptions;
   }
@@ -1136,7 +1163,7 @@ declare namespace SESV2 {
      */
     VerifiedForSendingStatus?: Enabled;
     /**
-     * An object that contains information about the DKIM attributes for the identity. This object includes the tokens that you use to create the CNAME records that are required to complete the DKIM verification process.
+     * An object that contains information about the DKIM attributes for the identity.
      */
     DkimAttributes?: DkimAttributes;
     /**
@@ -1150,13 +1177,13 @@ declare namespace SESV2 {
   }
   export interface GetSuppressedDestinationRequest {
     /**
-     * Email destination to fetch from the suppression list.
+     * The email address that's on the account suppression list.
      */
     EmailAddress: EmailAddress;
   }
   export interface GetSuppressedDestinationResponse {
     /**
-     * An object containing information about the suppressed email destination.
+     * An object containing information about the suppressed email address.
      */
     SuppressedDestination: SuppressedDestination;
   }
@@ -1329,19 +1356,19 @@ declare namespace SESV2 {
   export type ListOfDedicatedIpPools = PoolName[];
   export interface ListSuppressedDestinationsRequest {
     /**
-     * Filters email destinations suppressed by the given reasons.
+     * The factors that caused the email address to be added to .
      */
     Reasons?: SuppressionListReasons;
     /**
-     * Filters email destinations suppressed before the given time.
+     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list after a specific date. The date that you specify should be in Unix time format.
      */
     StartDate?: Timestamp;
     /**
-     * Filters email destinations suppressed after the given time.
+     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list before a specific date. The date that you specify should be in Unix time format.
      */
     EndDate?: Timestamp;
     /**
-     * A token returned from a previous call to ListSuppressedDestinations to indicate the position in the list of suppressed email destinations.
+     * A token returned from a previous call to ListSuppressedDestinations to indicate the position in the list of suppressed email addresses.
      */
     NextToken?: NextToken;
     /**
@@ -1355,7 +1382,7 @@ declare namespace SESV2 {
      */
     SuppressedDestinationSummaries?: SuppressedDestinationSummaries;
     /**
-     * A token that indicates that there are additional suppressed destinations to list. To view additional suppressed destinations, issue another request to ListSuppressedDestinations, and pass this token in the NextToken parameter.
+     * A token that indicates that there are additional email addresses on the suppression list for your account. To view additional suppressed addresses, issue another request to ListSuppressedDestinations, and pass this token in the NextToken parameter.
      */
     NextToken?: NextToken;
   }
@@ -1462,6 +1489,7 @@ declare namespace SESV2 {
     DkimPercentage?: Percentage;
   }
   export type PoolName = string;
+  export type PrivateKey = string;
   export interface PutAccountDedicatedIpWarmupAttributesRequest {
     /**
      * Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon SES account in the current AWS Region. Set to true to enable the automatic warm-up feature, or set to false to disable it.
@@ -1480,7 +1508,7 @@ declare namespace SESV2 {
   }
   export interface PutAccountSuppressionAttributesRequest {
     /**
-     * A list of reasons to suppress email addresses. The only valid reasons are:    COMPLAINT – Amazon SES will suppress an email address that receives a complaint.    BOUNCE – Amazon SES will suppress an email address that hard bounces.  
+     * A list that contains the reasons that email addresses will be automatically added to the suppression list for your account. This list can contain any or all of the following:    COMPLAINT – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.    BOUNCE – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.  
      */
     SuppressedReasons?: SuppressionListReasons;
   }
@@ -1528,11 +1556,11 @@ declare namespace SESV2 {
   }
   export interface PutConfigurationSetSuppressionOptionsRequest {
     /**
-     * The name of the configuration set that you want to enable or disable email sending for.
+     * The name of the configuration set that you want to change the suppression list preferences for.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
-     * A list of reasons to suppress email addresses. The only valid reasons are:    COMPLAINT – Amazon SES will suppress an email address that receives a complaint.    BOUNCE – Amazon SES will suppress an email address that hard bounces.  
+     * A list that contains the reasons that email addresses are automatically added to the suppression list for your account. This list can contain any or all of the following:    COMPLAINT – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.    BOUNCE – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.  
      */
     SuppressedReasons?: SuppressionListReasons;
   }
@@ -1598,6 +1626,30 @@ declare namespace SESV2 {
   }
   export interface PutEmailIdentityDkimAttributesResponse {
   }
+  export interface PutEmailIdentityDkimSigningAttributesRequest {
+    /**
+     * The email identity that you want to configure DKIM for.
+     */
+    EmailIdentity: Identity;
+    /**
+     * The method that you want to use to configure DKIM for the identity. There are two possible values:    AWS_SES – Configure DKIM for the identity by using Easy DKIM.    EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM (BYODKIM).  
+     */
+    SigningAttributesOrigin: DkimSigningAttributesOrigin;
+    /**
+     * An object that contains information about the private key and selector that you want to use to configure DKIM for the identity. This object is only required if you want to configure Bring Your Own DKIM (BYODKIM) for the identity.
+     */
+    SigningAttributes?: DkimSigningAttributes;
+  }
+  export interface PutEmailIdentityDkimSigningAttributesResponse {
+    /**
+     * The DKIM authentication status of the identity. Amazon SES determines the authentication status by searching for specific records in the DNS configuration for your domain. If you used Easy DKIM to set up DKIM authentication, Amazon SES tries to find three unique CNAME records in the DNS configuration for your domain. If you provided a public key to perform DKIM authentication, Amazon SES tries to find a TXT record that uses the selector that you specified. The value of the TXT record must be a public key that's paired with the private key that you specified in the process of creating the identity. The status can be one of the following:    PENDING – The verification process was initiated, but Amazon SES hasn't yet detected the DKIM records in the DNS configuration for the domain.    SUCCESS – The verification process completed successfully.    FAILED – The verification process failed. This typically occurs when Amazon SES fails to find the DKIM records in the DNS configuration of the domain.    TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the DKIM authentication status of the domain.    NOT_STARTED – The DKIM verification process hasn't been initiated for the domain.  
+     */
+    DkimStatus?: DkimStatus;
+    /**
+     * If you used Easy DKIM to configure DKIM authentication for the domain, then this object contains a set of unique strings that you use to create a set of CNAME records that you add to the DNS configuration for your domain. When Amazon SES detects these records in the DNS configuration for your domain, the DKIM authentication process is complete. If you configured DKIM authentication for the domain by providing your own public-private key pair, then this object contains the selector that's associated with your public key. Regardless of the DKIM authentication method you use, Amazon SES searches for the appropriate records in the DNS configuration of the domain for up to 72 hours.
+     */
+    DkimTokens?: DnsTokenList;
+  }
   export interface PutEmailIdentityFeedbackAttributesRequest {
     /**
      * The email identity that you want to configure bounce and complaint feedback forwarding for.
@@ -1628,11 +1680,11 @@ declare namespace SESV2 {
   }
   export interface PutSuppressedDestinationRequest {
     /**
-     * Email destination to be suppressed.
+     * The email address that should be added to the suppression list for your account.
      */
     EmailAddress: EmailAddress;
     /**
-     * Reason for which the email destination is suppressed.
+     * The factors that should cause the email address to be added to the suppression list for your account.
      */
     Reason: SuppressionListReason;
   }
@@ -1640,7 +1692,7 @@ declare namespace SESV2 {
   }
   export interface RawMessage {
     /**
-     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES API v2 supports.    The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
+     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES supports.   The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
      */
     Data: RawMessageData;
   }
@@ -1658,6 +1710,7 @@ declare namespace SESV2 {
      */
     LastFreshStart?: LastFreshStart;
   }
+  export type Selector = string;
   export interface SendEmailRequest {
     /**
      * The email address that you want to use as the "From" address for the email. The address that you specify has to be verified. 
@@ -1690,7 +1743,7 @@ declare namespace SESV2 {
   }
   export interface SendEmailResponse {
     /**
-     * A unique identifier for the message that is generated when the message is accepted.  It is possible for the Amazon SES API v2 to accept a message without sending it. This can happen when the message that you're trying to send has an attachment contains a virus, or when you send a templated email that contains invalid personalization content, for example. 
+     * A unique identifier for the message that is generated when the message is accepted.  It's possible for Amazon SES to accept a message without sending it. This can happen when the message that you're trying to send has an attachment contains a virus, or when you send a templated email that contains invalid personalization content, for example. 
      */
     MessageId?: OutboundMessageId;
   }
@@ -1725,50 +1778,50 @@ declare namespace SESV2 {
   export type Subject = string;
   export interface SuppressedDestination {
     /**
-     * The suppressed email destination.
+     * The email address that is on the suppression list for your account.
      */
     EmailAddress: EmailAddress;
     /**
-     * The reason for which the email destination is suppressed.
+     * The reason that the address was added to the suppression list for your account.
      */
     Reason: SuppressionListReason;
     /**
-     * The last time the suppressed destination was updated.
+     * The date and time when the suppressed destination was last updated, shown in Unix time format.
      */
     LastUpdateTime: Timestamp;
     /**
-     *  Optional value with information about the sources of the suppression.
+     * An optional value that can contain additional information about the reasons that the address was added to the suppression list for your account.
      */
     Attributes?: SuppressedDestinationAttributes;
   }
   export interface SuppressedDestinationAttributes {
     /**
-     * A unique identifier of the message that caused the suppression of the email destination.
+     * The unique identifier of the email message that caused the email address to be added to the suppression list for your account.
      */
     MessageId?: OutboundMessageId;
     /**
-     * A unique identifier of the suppression cause.
+     * A unique identifier that's generated when an email address is added to the suppression list for your account.
      */
     FeedbackId?: FeedbackId;
   }
   export type SuppressedDestinationSummaries = SuppressedDestinationSummary[];
   export interface SuppressedDestinationSummary {
     /**
-     * The suppressed email destination.
+     * The email address that's on the suppression list for your account.
      */
     EmailAddress: EmailAddress;
     /**
-     * The reason for which the email destination is suppressed.
+     * The reason that the address was added to the suppression list for your account.
      */
     Reason: SuppressionListReason;
     /**
-     * The last time the suppressed destination was updated.
+     * The date and time when the suppressed destination was last updated, shown in Unix time format.
      */
     LastUpdateTime: Timestamp;
   }
   export interface SuppressionAttributes {
     /**
-     * A list of reasons to suppress email addresses. The only valid reasons are:    COMPLAINT – Amazon SES will suppress an email address that receives a complaint.    BOUNCE – Amazon SES will suppress an email address that hard bounces.  
+     * A list that contains the reasons that email addresses will be automatically added to the suppression list for your account. This list can contain any or all of the following:    COMPLAINT – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.    BOUNCE – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.  
      */
     SuppressedReasons?: SuppressionListReasons;
   }
@@ -1776,7 +1829,7 @@ declare namespace SESV2 {
   export type SuppressionListReasons = SuppressionListReason[];
   export interface SuppressionOptions {
     /**
-     * A list of reasons to suppress email addresses. The only valid reasons are:    COMPLAINT – Amazon SES will suppress an email address that receives a complaint.    BOUNCE – Amazon SES will suppress an email address that hard bounces.  
+     * A list that contains the reasons that email addresses are automatically added to the suppression list for your account. This list can contain any or all of the following:    COMPLAINT – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.    BOUNCE – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.  
      */
     SuppressedReasons?: SuppressionListReasons;
   }

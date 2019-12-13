@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "CodeBuild adds support for cross account"
+    },
+    {
+        "type": "feature",
+        "category": "Detective",
+        "description": "This is the initial release of Amazon Detective."
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "Added the ability to use your own public-private key pair to configure DKIM authentication for a domain identity."
+    }
+]

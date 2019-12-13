@@ -150,7 +150,7 @@
           "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon SES API v2 then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.</p>"
+      "documentation": "<p>Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon SES then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.</p>"
     },
     "CreateEmailIdentity": {
       "name": "CreateEmailIdentity",
@@ -166,6 +166,9 @@
       },
       "errors": [
         {
+          "shape": "AlreadyExistsException"
+        },
+        {
           "shape": "LimitExceededException"
         },
         {
@@ -178,7 +181,7 @@
           "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Starts the process of verifying an email identity. An <i>identity</i> is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity.</p> <p>When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email. </p> <p>When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process.</p>"
+      "documentation": "<p>Starts the process of verifying an email identity. An <i>identity</i> is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity.</p> <p>When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email. </p> <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code> object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p> <p>Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the <code>CreateEmailIdentity</code> operation has to include the <code>DkimSigningAttributes</code> object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.</p>"
     },
     "DeleteConfigurationSet": {
       "name": "DeleteConfigurationSet",
@@ -312,7 +315,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Used to delete a suppressed email destination from your suppression list.</p>"
+      "documentation": "<p>Removes an email address from the suppression list for your account.</p>"
     },
     "GetAccount": {
       "name": "GetAccount",
@@ -484,7 +487,7 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
+      "documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/ses/pricing/\">Amazon SES Pricing</a>.</p>"
     },
     "GetDeliverabilityTestReport": {
       "name": "GetDeliverabilityTestReport",
@@ -609,7 +612,7 @@
           "shape": "NotFoundException"
         }
       ],
-      "documentation": "<p>Used to fetch a single suppressed email destination from your suppression list.</p>"
+      "documentation": "<p>Retrieves information about a specific email address that's on the suppression list for your account.</p>"
     },
     "ListConfigurationSets": {
       "name": "ListConfigurationSets",
@@ -750,7 +753,7 @@
           "shape": "InvalidNextTokenException"
         }
       ],
-      "documentation": "<p>Used to fetch a list suppressed email destinations from your suppression list.</p>"
+      "documentation": "<p>Retrieves a list of email addresses that are on the suppression list for your account.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -841,7 +844,7 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Change your account's suppression preferences for your account.</p>"
+      "documentation": "<p>Change the settings for the account-level suppression list.</p>"
     },
     "PutConfigurationSetDeliveryOptions": {
       "name": "PutConfigurationSetDeliveryOptions",
@@ -941,7 +944,7 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Specify your account's suppression preferences for a configuration set.</p>"
+      "documentation": "<p>Specify the account suppression list preferences for a configuration set.</p>"
     },
     "PutConfigurationSetTrackingOptions": {
       "name": "PutConfigurationSetTrackingOptions",
@@ -1047,7 +1050,7 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
+      "documentation": "<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/ses/pricing/\">Amazon SES Pricing</a>.</p>"
     },
     "PutEmailIdentityDkimAttributes": {
       "name": "PutEmailIdentityDkimAttributes",
@@ -1073,6 +1076,31 @@
         }
       ],
       "documentation": "<p>Used to enable or disable DKIM authentication for an email identity.</p>"
+    },
+    "PutEmailIdentityDkimSigningAttributes": {
+      "name": "PutEmailIdentityDkimSigningAttributes",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/email/identities/{EmailIdentity}/dkim/signing"
+      },
+      "input": {
+        "shape": "PutEmailIdentityDkimSigningAttributesRequest"
+      },
+      "output": {
+        "shape": "PutEmailIdentityDkimSigningAttributesResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Used to configure or change the DKIM authentication settings for an email domain identity. You can use this operation to do any of the following:</p> <ul> <li> <p>Update the signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).</p> </li> <li> <p>Change from using no DKIM authentication to using Easy DKIM.</p> </li> <li> <p>Change from using no DKIM authentication to using BYODKIM.</p> </li> <li> <p>Change from using Easy DKIM to using BYODKIM.</p> </li> <li> <p>Change from using BYODKIM to using Easy DKIM.</p> </li> </ul>"
     },
     "PutEmailIdentityFeedbackAttributes": {
       "name": "PutEmailIdentityFeedbackAttributes",
@@ -1144,7 +1172,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Puts (overwrites) an email destination in your suppression list.</p>"
+      "documentation": "<p>Adds an email address to the suppression list for your account.</p>"
     },
     "SendEmail": {
       "name": "SendEmail",
@@ -1184,7 +1212,7 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Sends an email message. You can use the Amazon SES API v2 to send two types of messages:</p> <ul> <li> <p> <b>Simple</b> – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and the Amazon SES API v2 assembles the message for you.</p> </li> <li> <p> <b>Raw</b> – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.</p> </li> </ul>"
+      "documentation": "<p>Sends an email message. You can use the Amazon SES API v2 to send two types of messages:</p> <ul> <li> <p> <b>Simple</b> – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.</p> </li> <li> <p> <b>Raw</b> – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.</p> </li> </ul>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1411,7 +1439,7 @@
         },
         "Charset": {
           "shape": "Charset",
-          "documentation": "<p>The character set for the content. Because of the constraints of the SMTP protocol, the Amazon SES API v2 uses 7-bit ASCII by default. If the text includes characters outside of the ASCII range, you have to specify a character set. For example, you could specify <code>UTF-8</code>, <code>ISO-8859-1</code>, or <code>Shift_JIS</code>.</p>"
+          "documentation": "<p>The character set for the content. Because of the constraints of the SMTP protocol, Amazon SES uses 7-bit ASCII by default. If the text includes characters outside of the ASCII range, you have to specify a character set. For example, you could specify <code>UTF-8</code>, <code>ISO-8859-1</code>, or <code>Shift_JIS</code>.</p>"
         }
       },
       "documentation": "<p>An object that represents the content of the email, and optionally a character set specification.</p>"
@@ -1566,6 +1594,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>An array of objects that define the tags (keys and values) that you want to associate with the email identity.</p>"
+        },
+        "DkimSigningAttributes": {
+          "shape": "DkimSigningAttributes",
+          "documentation": "<p>If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method, <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p> <p>You can only specify this object if the email identity is a domain, as opposed to an address.</p>"
         }
       },
       "documentation": "<p>A request to begin the verification process for an email identity (an email address or domain).</p>"
@@ -1583,10 +1615,10 @@
         },
         "DkimAttributes": {
           "shape": "DkimAttributes",
-          "documentation": "<p>An object that contains information about the DKIM attributes for the identity. This object includes the tokens that you use to create the CNAME records that are required to complete the DKIM verification process.</p>"
+          "documentation": "<p>An object that contains information about the DKIM attributes for the identity.</p>"
         }
       },
-      "documentation": "<p>If the email identity is a domain, this object contains tokens that you can use to create a set of CNAME records. To sucessfully verify your domain, you have to add these records to the DNS configuration for your domain.</p> <p>If the email identity is an email address, this object is empty. </p>"
+      "documentation": "<p>If the email identity is a domain, this object contains information about the DKIM verification status for the domain.</p> <p>If the email identity is an email address, this object is empty. </p>"
     },
     "CustomRedirectDomain": {
       "type": "string",
@@ -1641,7 +1673,7 @@
           "documentation": "<p>The name of the dedicated IP pool that the IP address is associated with.</p>"
         }
       },
-      "documentation": "<p>Contains information about a dedicated IP address that is associated with your Amazon SES API v2 account.</p> <p>To learn more about requesting dedicated IP addresses, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/dedicated-ip-case.html\">Requesting and Relinquishing Dedicated IP Addresses</a> in the <i>Amazon SES Developer Guide</i>.</p>"
+      "documentation": "<p>Contains information about a dedicated IP address that is associated with your Amazon SES account.</p> <p>To learn more about requesting dedicated IP addresses, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/dedicated-ip-case.html\">Requesting and Relinquishing Dedicated IP Addresses</a> in the <i>Amazon SES Developer Guide</i>.</p>"
     },
     "DedicatedIpList": {
       "type": "list",
@@ -1749,12 +1781,12 @@
       "members": {
         "EmailAddress": {
           "shape": "EmailAddress",
-          "documentation": "<p>The suppressed email destination to delete.</p>",
+          "documentation": "<p>The suppressed email destination to remove from the account suppression list.</p>",
           "location": "uri",
           "locationName": "EmailAddress"
         }
       },
-      "documentation": "<p>A request to delete a suppressed email destination.</p>"
+      "documentation": "<p>A request to remove an email address from the suppression list for your account.</p>"
     },
     "DeleteSuppressedDestinationResponse": {
       "type": "structure",
@@ -1872,18 +1904,47 @@
         },
         "Status": {
           "shape": "DkimStatus",
-          "documentation": "<p>Describes whether or not Amazon SES has successfully located the DKIM records in the DNS records for the domain. The status can be one of the following:</p> <ul> <li> <p> <code>PENDING</code> – Amazon SES hasn't yet detected the DKIM records in the DNS configuration for the domain, but will continue to attempt to locate them.</p> </li> <li> <p> <code>SUCCESS</code> – Amazon SES located the DKIM records in the DNS configuration for the domain and determined that they're correct. You can now send DKIM-signed email from the identity.</p> </li> <li> <p> <code>FAILED</code> – Amazon SES wasn't able to locate the DKIM records in the DNS settings for the domain, and won't continue to search for them.</p> </li> <li> <p> <code>TEMPORARY_FAILURE</code> – A temporary issue occurred, which prevented Amazon SES from determining the DKIM status for the domain.</p> </li> <li> <p> <code>NOT_STARTED</code> – Amazon SES hasn't yet started searching for the DKIM records in the DKIM records for the domain.</p> </li> </ul>"
+          "documentation": "<p>Describes whether or not Amazon SES has successfully located the DKIM records in the DNS records for the domain. The status can be one of the following:</p> <ul> <li> <p> <code>PENDING</code> – The verification process was initiated, but Amazon SES hasn't yet detected the DKIM records in the DNS configuration for the domain.</p> </li> <li> <p> <code>SUCCESS</code> – The verification process completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The verification process failed. This typically occurs when Amazon SES fails to find the DKIM records in the DNS configuration of the domain.</p> </li> <li> <p> <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon SES from determining the DKIM authentication status of the domain.</p> </li> <li> <p> <code>NOT_STARTED</code> – The DKIM verification process hasn't been initiated for the domain.</p> </li> </ul>"
         },
         "Tokens": {
           "shape": "DnsTokenList",
-          "documentation": "<p>A set of unique strings that you use to create a set of CNAME records that you add to the DNS configuration for your domain. When Amazon SES detects these records in the DNS configuration for your domain, the DKIM authentication process is complete. Amazon SES usually detects these records within about 72 hours of adding them to the DNS configuration for your domain.</p>"
+          "documentation": "<p>If you used <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a> to configure DKIM authentication for the domain, then this object contains a set of unique strings that you use to create a set of CNAME records that you add to the DNS configuration for your domain. When Amazon SES detects these records in the DNS configuration for your domain, the DKIM authentication process is complete.</p> <p>If you configured DKIM authentication for the domain by providing your own public-private key pair, then this object contains the selector for the public key.</p> <p>Regardless of the DKIM authentication method you use, Amazon SES searches for the appropriate records in the DNS configuration of the domain for up to 72 hours.</p>"
+        },
+        "SigningAttributesOrigin": {
+          "shape": "DkimSigningAttributesOrigin",
+          "documentation": "<p>A string that indicates how DKIM was configured for the identity. There are two possible values:</p> <ul> <li> <p> <code>AWS_SES</code> – Indicates that DKIM was configured for the identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p> </li> <li> <p> <code>EXTERNAL</code> – Indicates that DKIM was configured for the identity by using Bring Your Own DKIM (BYODKIM).</p> </li> </ul>"
         }
       },
-      "documentation": "<p>An object that contains information about the DKIM configuration for an email identity.</p>"
+      "documentation": "<p>An object that contains information about the DKIM authentication status for an email identity.</p> <p>Amazon SES determines the authentication status by searching for specific records in the DNS configuration for the domain. If you used <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a> to set up DKIM authentication, Amazon SES tries to find three unique CNAME records in the DNS configuration for your domain. If you provided a public key to perform DKIM authentication, Amazon SES tries to find a TXT record that uses the selector that you specified. The value of the TXT record must be a public key that's paired with the private key that you specified in the process of creating the identity</p>"
+    },
+    "DkimSigningAttributes": {
+      "type": "structure",
+      "required": [
+        "DomainSigningSelector",
+        "DomainSigningPrivateKey"
+      ],
+      "members": {
+        "DomainSigningSelector": {
+          "shape": "Selector",
+          "documentation": "<p>A string that's used to identify a public key in the DNS configuration for a domain.</p>"
+        },
+        "DomainSigningPrivateKey": {
+          "shape": "PrivateKey",
+          "documentation": "<p>A private key that's used to generate a DKIM signature.</p> <p>The private key must use 1024-bit RSA encryption, and must be encoded using base64 encoding.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains information about the tokens used for setting up Bring Your Own DKIM (BYODKIM).</p>"
+    },
+    "DkimSigningAttributesOrigin": {
+      "type": "string",
+      "enum": [
+        "AWS_SES",
+        "EXTERNAL"
+      ]
     },
     "DkimStatus": {
       "type": "string",
-      "documentation": "<p>The DKIM authentication status of the identity. The status can be one of the following:</p> <ul> <li> <p> <code>PENDING</code> – The DKIM verification process was initiated, and Amazon SES hasn't yet detected the CNAME records in the DNS configuration for the domain.</p> </li> <li> <p> <code>SUCCESS</code> – The DKIM authentication process completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The DKIM authentication process failed. This can happen when Amazon SES fails to find the required CNAME records in the DNS configuration of the domain.</p> </li> <li> <p> <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon SES from determining the DKIM authentication status of the domain.</p> </li> <li> <p> <code>NOT_STARTED</code> – The DKIM verification process hasn't been initiated for the domain.</p> </li> </ul>",
+      "documentation": "<p>The DKIM authentication status of the identity. The status can be one of the following:</p> <ul> <li> <p> <code>PENDING</code> – The verification process was initiated, but Amazon SES hasn't yet detected the DKIM records in the DNS configuration for the domain.</p> </li> <li> <p> <code>SUCCESS</code> – The verification process completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The verification process failed. This typically occurs when Amazon SES fails to find the DKIM records in the DNS configuration of the domain.</p> </li> <li> <p> <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon SES from determining the DKIM authentication status of the domain.</p> </li> <li> <p> <code>NOT_STARTED</code> – The DKIM verification process hasn't been initiated for the domain.</p> </li> </ul>",
       "enum": [
         "PENDING",
         "SUCCESS",
@@ -2203,7 +2264,7 @@
         },
         "SuppressionAttributes": {
           "shape": "SuppressionAttributes",
-          "documentation": "<p>An object that contains information about your account's suppression preferences.</p>"
+          "documentation": "<p>An object that contains information about the email address suppression preferences for your account in the current AWS Region.</p>"
         }
       },
       "documentation": "<p>A list of details about the email-sending capabilities of your Amazon SES account in the current AWS Region.</p>"
@@ -2305,7 +2366,7 @@
         },
         "SuppressionOptions": {
           "shape": "SuppressionOptions",
-          "documentation": "<p>An object that contains information about your account's suppression preferences.</p>"
+          "documentation": "<p>An object that contains information about the suppression list preferences for your account.</p>"
         }
       },
       "documentation": "<p>Information about a configuration set.</p>"
@@ -2560,7 +2621,7 @@
         },
         "DkimAttributes": {
           "shape": "DkimAttributes",
-          "documentation": "<p>An object that contains information about the DKIM attributes for the identity. This object includes the tokens that you use to create the CNAME records that are required to complete the DKIM verification process.</p>"
+          "documentation": "<p>An object that contains information about the DKIM attributes for the identity.</p>"
         },
         "MailFromAttributes": {
           "shape": "MailFromAttributes",
@@ -2581,12 +2642,12 @@
       "members": {
         "EmailAddress": {
           "shape": "EmailAddress",
-          "documentation": "<p>Email destination to fetch from the suppression list.</p>",
+          "documentation": "<p>The email address that's on the account suppression list.</p>",
           "location": "uri",
           "locationName": "EmailAddress"
         }
       },
-      "documentation": "<p>A request to get a suppressed email destination.</p>"
+      "documentation": "<p>A request to retrieve information about an email address that's on the suppression list for your account.</p>"
     },
     "GetSuppressedDestinationResponse": {
       "type": "structure",
@@ -2596,10 +2657,10 @@
       "members": {
         "SuppressedDestination": {
           "shape": "SuppressedDestination",
-          "documentation": "<p>An object containing information about the suppressed email destination.</p>"
+          "documentation": "<p>An object containing information about the suppressed email address.</p>"
         }
       },
-      "documentation": "<p>Information about the suppressed email destination.</p>"
+      "documentation": "<p>Information about the suppressed email address.</p>"
     },
     "Identity": {
       "type": "string"
@@ -2917,25 +2978,25 @@
       "members": {
         "Reasons": {
           "shape": "SuppressionListReasons",
-          "documentation": "<p>Filters email destinations suppressed by the given reasons.</p>",
+          "documentation": "<p>The factors that caused the email address to be added to .</p>",
           "location": "querystring",
           "locationName": "Reason"
         },
         "StartDate": {
           "shape": "Timestamp",
-          "documentation": "<p>Filters email destinations suppressed before the given time.</p>",
+          "documentation": "<p>Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list after a specific date. The date that you specify should be in Unix time format.</p>",
           "location": "querystring",
           "locationName": "StartDate"
         },
         "EndDate": {
           "shape": "Timestamp",
-          "documentation": "<p>Filters email destinations suppressed after the given time.</p>",
+          "documentation": "<p>Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list before a specific date. The date that you specify should be in Unix time format.</p>",
           "location": "querystring",
           "locationName": "EndDate"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token returned from a previous call to <code>ListSuppressedDestinations</code> to indicate the position in the list of suppressed email destinations.</p>",
+          "documentation": "<p>A token returned from a previous call to <code>ListSuppressedDestinations</code> to indicate the position in the list of suppressed email addresses.</p>",
           "location": "querystring",
           "locationName": "NextToken"
         },
@@ -2946,7 +3007,7 @@
           "locationName": "PageSize"
         }
       },
-      "documentation": "<p>A request to obtain a list of suppressed email destinations.</p>"
+      "documentation": "<p>A request to obtain a list of email destinations that are on the suppression list for your account.</p>"
     },
     "ListSuppressedDestinationsResponse": {
       "type": "structure",
@@ -2957,10 +3018,10 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token that indicates that there are additional suppressed destinations to list. To view additional suppressed destinations, issue another request to <code>ListSuppressedDestinations</code>, and pass this token in the <code>NextToken</code> parameter.</p>"
+          "documentation": "<p>A token that indicates that there are additional email addresses on the suppression list for your account. To view additional suppressed addresses, issue another request to <code>ListSuppressedDestinations</code>, and pass this token in the <code>NextToken</code> parameter.</p>"
         }
       },
-      "documentation": "<p>A list of suppressed email destinations.</p>"
+      "documentation": "<p>A list of suppressed email addresses.</p>"
     },
     "ListTagsForResourceRequest": {
       "type": "structure",
@@ -3163,6 +3224,13 @@
       "type": "string",
       "documentation": "<p>The name of a dedicated IP pool.</p>"
     },
+    "PrivateKey": {
+      "type": "string",
+      "max": 20480,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9+\\/]+={0,2}$",
+      "sensitive": true
+    },
     "PutAccountDedicatedIpWarmupAttributesRequest": {
       "type": "structure",
       "members": {
@@ -3198,7 +3266,7 @@
       "members": {
         "SuppressedReasons": {
           "shape": "SuppressionListReasons",
-          "documentation": "<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>"
+          "documentation": "<p>A list that contains the reasons that email addresses will be automatically added to the suppression list for your account. This list can contain any or all of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.</p> </li> </ul>"
         }
       },
       "documentation": "<p>A request to change your account's suppression preferences.</p>"
@@ -3292,16 +3360,16 @@
       "members": {
         "ConfigurationSetName": {
           "shape": "ConfigurationSetName",
-          "documentation": "<p>The name of the configuration set that you want to enable or disable email sending for.</p>",
+          "documentation": "<p>The name of the configuration set that you want to change the suppression list preferences for.</p>",
           "location": "uri",
           "locationName": "ConfigurationSetName"
         },
         "SuppressedReasons": {
           "shape": "SuppressionListReasons",
-          "documentation": "<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>"
+          "documentation": "<p>A list that contains the reasons that email addresses are automatically added to the suppression list for your account. This list can contain any or all of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>A request to change your account's suppression preferences for an specific configuration set.</p>"
+      "documentation": "<p>A request to change the account suppression list preferences for a specific configuration set.</p>"
     },
     "PutConfigurationSetSuppressionOptionsResponse": {
       "type": "structure",
@@ -3428,6 +3496,44 @@
       "members": {},
       "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
     },
+    "PutEmailIdentityDkimSigningAttributesRequest": {
+      "type": "structure",
+      "required": [
+        "EmailIdentity",
+        "SigningAttributesOrigin"
+      ],
+      "members": {
+        "EmailIdentity": {
+          "shape": "Identity",
+          "documentation": "<p>The email identity that you want to configure DKIM for.</p>",
+          "location": "uri",
+          "locationName": "EmailIdentity"
+        },
+        "SigningAttributesOrigin": {
+          "shape": "DkimSigningAttributesOrigin",
+          "documentation": "<p>The method that you want to use to configure DKIM for the identity. There are two possible values:</p> <ul> <li> <p> <code>AWS_SES</code> – Configure DKIM for the identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p> </li> <li> <p> <code>EXTERNAL</code> – Configure DKIM for the identity by using Bring Your Own DKIM (BYODKIM).</p> </li> </ul>"
+        },
+        "SigningAttributes": {
+          "shape": "DkimSigningAttributes",
+          "documentation": "<p>An object that contains information about the private key and selector that you want to use to configure DKIM for the identity. This object is only required if you want to configure Bring Your Own DKIM (BYODKIM) for the identity.</p>"
+        }
+      },
+      "documentation": "<p>A request to change the DKIM attributes for an email identity.</p>"
+    },
+    "PutEmailIdentityDkimSigningAttributesResponse": {
+      "type": "structure",
+      "members": {
+        "DkimStatus": {
+          "shape": "DkimStatus",
+          "documentation": "<p>The DKIM authentication status of the identity. Amazon SES determines the authentication status by searching for specific records in the DNS configuration for your domain. If you used <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a> to set up DKIM authentication, Amazon SES tries to find three unique CNAME records in the DNS configuration for your domain.</p> <p>If you provided a public key to perform DKIM authentication, Amazon SES tries to find a TXT record that uses the selector that you specified. The value of the TXT record must be a public key that's paired with the private key that you specified in the process of creating the identity.</p> <p>The status can be one of the following:</p> <ul> <li> <p> <code>PENDING</code> – The verification process was initiated, but Amazon SES hasn't yet detected the DKIM records in the DNS configuration for the domain.</p> </li> <li> <p> <code>SUCCESS</code> – The verification process completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The verification process failed. This typically occurs when Amazon SES fails to find the DKIM records in the DNS configuration of the domain.</p> </li> <li> <p> <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon SES from determining the DKIM authentication status of the domain.</p> </li> <li> <p> <code>NOT_STARTED</code> – The DKIM verification process hasn't been initiated for the domain.</p> </li> </ul>"
+        },
+        "DkimTokens": {
+          "shape": "DnsTokenList",
+          "documentation": "<p>If you used <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a> to configure DKIM authentication for the domain, then this object contains a set of unique strings that you use to create a set of CNAME records that you add to the DNS configuration for your domain. When Amazon SES detects these records in the DNS configuration for your domain, the DKIM authentication process is complete.</p> <p>If you configured DKIM authentication for the domain by providing your own public-private key pair, then this object contains the selector that's associated with your public key.</p> <p>Regardless of the DKIM authentication method you use, Amazon SES searches for the appropriate records in the DNS configuration of the domain for up to 72 hours.</p>"
+        }
+      },
+      "documentation": "<p>If the action is successful, the service sends back an HTTP 200 response.</p> <p>The following data is returned in JSON format by the service.</p>"
+    },
     "PutEmailIdentityFeedbackAttributesRequest": {
       "type": "structure",
       "required": [
@@ -3489,14 +3595,14 @@
       "members": {
         "EmailAddress": {
           "shape": "EmailAddress",
-          "documentation": "<p>Email destination to be suppressed.</p>"
+          "documentation": "<p>The email address that should be added to the suppression list for your account.</p>"
         },
         "Reason": {
           "shape": "SuppressionListReason",
-          "documentation": "<p>Reason for which the email destination is suppressed.</p>"
+          "documentation": "<p>The factors that should cause the email address to be added to the suppression list for your account.</p>"
         }
       },
-      "documentation": "<p>A request to suppress an email destination.</p>"
+      "documentation": "<p>A request to add an email destination to the suppression list for your account.</p>"
     },
     "PutSuppressedDestinationResponse": {
       "type": "structure",
@@ -3511,10 +3617,10 @@
       "members": {
         "Data": {
           "shape": "RawMessageData",
-          "documentation": "<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>Attachments must be in a file format that the Amazon SES API v2 supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in <a href=\"https://tools.ietf.org/html/rfc5321\">RFC 5321</a>.</p> </li> </ul>"
+          "documentation": "<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>Attachments must be in a file format that the Amazon SES supports.</p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in <a href=\"https://tools.ietf.org/html/rfc5321\">RFC 5321</a>.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>The raw email message.</p>"
+      "documentation": "<p>Represents the raw content of an email message.</p>"
     },
     "RawMessageData": {
       "type": "blob",
@@ -3545,6 +3651,12 @@
         }
       },
       "documentation": "<p>Enable or disable collection of reputation metrics for emails that you send using this configuration set in the current AWS Region. </p>"
+    },
+    "Selector": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9]))$"
     },
     "SendEmailRequest": {
       "type": "structure",
@@ -3589,7 +3701,7 @@
       "members": {
         "MessageId": {
           "shape": "OutboundMessageId",
-          "documentation": "<p>A unique identifier for the message that is generated when the message is accepted.</p> <note> <p>It is possible for the Amazon SES API v2 to accept a message without sending it. This can happen when the message that you're trying to send has an attachment contains a virus, or when you send a templated email that contains invalid personalization content, for example.</p> </note>"
+          "documentation": "<p>A unique identifier for the message that is generated when the message is accepted.</p> <note> <p>It's possible for Amazon SES to accept a message without sending it. This can happen when the message that you're trying to send has an attachment contains a virus, or when you send a templated email that contains invalid personalization content, for example.</p> </note>"
         }
       },
       "documentation": "<p>A unique message ID that you receive when an email is accepted for sending.</p>"
@@ -3655,36 +3767,36 @@
       "members": {
         "EmailAddress": {
           "shape": "EmailAddress",
-          "documentation": "<p>The suppressed email destination.</p>"
+          "documentation": "<p>The email address that is on the suppression list for your account.</p>"
         },
         "Reason": {
           "shape": "SuppressionListReason",
-          "documentation": "<p>The reason for which the email destination is suppressed.</p>"
+          "documentation": "<p>The reason that the address was added to the suppression list for your account.</p>"
         },
         "LastUpdateTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time the suppressed destination was updated.</p>"
+          "documentation": "<p>The date and time when the suppressed destination was last updated, shown in Unix time format.</p>"
         },
         "Attributes": {
           "shape": "SuppressedDestinationAttributes",
-          "documentation": "<p> <code>Optional</code> value with information about the sources of the suppression.</p>"
+          "documentation": "<p>An optional value that can contain additional information about the reasons that the address was added to the suppression list for your account.</p>"
         }
       },
-      "documentation": "<p>An object containing information about the suppressed email destination.</p>"
+      "documentation": "<p>An object that contains information about an email address that is on the suppression list for your account.</p>"
     },
     "SuppressedDestinationAttributes": {
       "type": "structure",
       "members": {
         "MessageId": {
           "shape": "OutboundMessageId",
-          "documentation": "<p>A unique identifier of the message that caused the suppression of the email destination.</p>"
+          "documentation": "<p>The unique identifier of the email message that caused the email address to be added to the suppression list for your account.</p>"
         },
         "FeedbackId": {
           "shape": "FeedbackId",
-          "documentation": "<p>A unique identifier of the suppression cause.</p>"
+          "documentation": "<p>A unique identifier that's generated when an email address is added to the suppression list for your account.</p>"
         }
       },
-      "documentation": "<p>An object containing additional attributes related to a suppressed destination.</p>"
+      "documentation": "<p>An object that contains additional attributes that are related an email address that is on the suppression list for your account.</p>"
     },
     "SuppressedDestinationSummaries": {
       "type": "list",
@@ -3702,32 +3814,32 @@
       "members": {
         "EmailAddress": {
           "shape": "EmailAddress",
-          "documentation": "<p>The suppressed email destination.</p>"
+          "documentation": "<p>The email address that's on the suppression list for your account.</p>"
         },
         "Reason": {
           "shape": "SuppressionListReason",
-          "documentation": "<p>The reason for which the email destination is suppressed.</p>"
+          "documentation": "<p>The reason that the address was added to the suppression list for your account.</p>"
         },
         "LastUpdateTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time the suppressed destination was updated.</p>"
+          "documentation": "<p>The date and time when the suppressed destination was last updated, shown in Unix time format.</p>"
         }
       },
-      "documentation": "<p>A summary for the suppressed email destination.</p>"
+      "documentation": "<p>A summary that describes the suppressed email address.</p>"
     },
     "SuppressionAttributes": {
       "type": "structure",
       "members": {
         "SuppressedReasons": {
           "shape": "SuppressionListReasons",
-          "documentation": "<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>"
+          "documentation": "<p>A list that contains the reasons that email addresses will be automatically added to the suppression list for your account. This list can contain any or all of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>An object that contains information about your account's suppression preferences.</p>"
+      "documentation": "<p>An object that contains information about the email address suppression preferences for your account in the current AWS Region.</p>"
     },
     "SuppressionListReason": {
       "type": "string",
-      "documentation": "<p>A string representing the cause for suppression for an email destination. It can be one of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receive a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>",
+      "documentation": "<p>The reason that the address was added to the suppression list for your account. The value can be one of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES added an email address to the suppression list for your account because a message sent to that address results in a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES added an email address to the suppression list for your account because a message sent to that address results in a hard bounce.</p> </li> </ul>",
       "enum": [
         "BOUNCE",
         "COMPLAINT"
@@ -3744,10 +3856,10 @@
       "members": {
         "SuppressedReasons": {
           "shape": "SuppressionListReasons",
-          "documentation": "<p>A list of reasons to suppress email addresses. The only valid reasons are:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES will suppress an email address that receives a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES will suppress an email address that hard bounces.</p> </li> </ul>"
+          "documentation": "<p>A list that contains the reasons that email addresses are automatically added to the suppression list for your account. This list can contain any or all of the following:</p> <ul> <li> <p> <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a complaint.</p> </li> <li> <p> <code>BOUNCE</code> – Amazon SES adds an email address to the suppression list for your account when a message sent to that address results in a hard bounce.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>An object that contains information about your account's suppression preferences.</p>"
+      "documentation": "<p>An object that contains information about the suppression list preferences for your account.</p>"
     },
     "Tag": {
       "type": "structure",
