@@ -233,11 +233,20 @@ declare namespace MQ {
      */
     HostInstanceType?: __string;
     /**
+     * The broker's storage type.
+     */
+    StorageType?: BrokerStorageType;
+    /**
+     * The list of supported deployment modes.
+     */
+    SupportedDeploymentModes?: __listOfDeploymentMode;
+    /**
      * The list of supported engine versions.
      */
     SupportedEngineVersions?: __listOf__string;
   }
   export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|string;
+  export type BrokerStorageType = "EBS"|"EFS"|string;
   export interface BrokerSummary {
     /**
      * The Amazon Resource Name (ARN) of the broker.
@@ -395,9 +404,13 @@ declare namespace MQ {
      */
     PubliclyAccessible?: __boolean;
     /**
-     * The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.
+     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
+    /**
+     * The broker's storage type.
+     */
+    StorageType?: BrokerStorageType;
     /**
      * The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
      */
@@ -576,6 +589,10 @@ declare namespace MQ {
      * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
      */
     NextToken?: __string;
+    /**
+     * Filter response by storage type.
+     */
+    StorageType?: __string;
   }
   export interface DescribeBrokerInstanceOptionsResponse {
     /**
@@ -663,21 +680,25 @@ declare namespace MQ {
      */
     PendingEngineVersion?: __string;
     /**
-     * The list of pending security groups to authorize connections to brokers.
-     */
-    PendingSecurityGroups?: __listOf__string;
-    /**
      * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
      */
     PendingHostInstanceType?: __string;
+    /**
+     * The list of pending security groups to authorize connections to brokers.
+     */
+    PendingSecurityGroups?: __listOf__string;
     /**
      * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
      */
     PubliclyAccessible?: __boolean;
     /**
-     * The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.
+     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
+    /**
+     * The broker's storage type.
+     */
+    StorageType?: BrokerStorageType;
     /**
      * The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
      */
@@ -1024,7 +1045,7 @@ declare namespace MQ {
      */
     Logs?: Logs;
     /**
-     * The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.
+     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
   }
@@ -1054,7 +1075,7 @@ declare namespace MQ {
      */
     Logs?: Logs;
     /**
-     * The list of security groups (1 minimum, 5 maximum) that authorize connections to brokers.
+     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
   }
@@ -1189,6 +1210,7 @@ declare namespace MQ {
   export type __listOfConfiguration = Configuration[];
   export type __listOfConfigurationId = ConfigurationId[];
   export type __listOfConfigurationRevision = ConfigurationRevision[];
+  export type __listOfDeploymentMode = DeploymentMode[];
   export type __listOfEngineVersion = EngineVersion[];
   export type __listOfSanitizationWarning = SanitizationWarning[];
   export type __listOfUser = User[];

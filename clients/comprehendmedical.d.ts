@@ -36,11 +36,11 @@ declare class ComprehendMedical extends Service {
    */
   detectEntities(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesResponse) => void): Request<ComprehendMedical.Types.DetectEntitiesResponse, AWSError>;
   /**
-   * Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information. The DetectEntitiesV2 operation replaces the DetectEntities operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the DetectEntitiesV2 operation in all new applications. The DetectEntitiesV2 operation returns the Acuity and Direction entities as attributes instead of types. It does not return the Quality or Quantity entities.
+   * Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information. The DetectEntitiesV2 operation replaces the DetectEntities operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the DetectEntitiesV2 operation in all new applications. The DetectEntitiesV2 operation returns the Acuity and Direction entities as attributes instead of types. 
    */
   detectEntitiesV2(params: ComprehendMedical.Types.DetectEntitiesV2Request, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesV2Response) => void): Request<ComprehendMedical.Types.DetectEntitiesV2Response, AWSError>;
   /**
-   * Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information. The DetectEntitiesV2 operation replaces the DetectEntities operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the DetectEntitiesV2 operation in all new applications. The DetectEntitiesV2 operation returns the Acuity and Direction entities as attributes instead of types. It does not return the Quality or Quantity entities.
+   * Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information. The DetectEntitiesV2 operation replaces the DetectEntities operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the DetectEntitiesV2 operation in all new applications. The DetectEntitiesV2 operation returns the Acuity and Direction entities as attributes instead of types. 
    */
   detectEntitiesV2(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesV2Response) => void): Request<ComprehendMedical.Types.DetectEntitiesV2Response, AWSError>;
   /**
@@ -51,6 +51,22 @@ declare class ComprehendMedical extends Service {
    *  Inspects the clinical text for protected health information (PHI) entities and entity category, location, and confidence score on that information.
    */
   detectPHI(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectPHIResponse) => void): Request<ComprehendMedical.Types.DetectPHIResponse, AWSError>;
+  /**
+   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control.
+   */
+  inferICD10CM(params: ComprehendMedical.Types.InferICD10CMRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.InferICD10CMResponse) => void): Request<ComprehendMedical.Types.InferICD10CMResponse, AWSError>;
+  /**
+   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control.
+   */
+  inferICD10CM(callback?: (err: AWSError, data: ComprehendMedical.Types.InferICD10CMResponse) => void): Request<ComprehendMedical.Types.InferICD10CMResponse, AWSError>;
+  /**
+   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine.
+   */
+  inferRxNorm(params: ComprehendMedical.Types.InferRxNormRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.InferRxNormResponse) => void): Request<ComprehendMedical.Types.InferRxNormResponse, AWSError>;
+  /**
+   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine.
+   */
+  inferRxNorm(callback?: (err: AWSError, data: ComprehendMedical.Types.InferRxNormResponse) => void): Request<ComprehendMedical.Types.InferRxNormResponse, AWSError>;
   /**
    * Gets a list of medical entity detection jobs that you have submitted.
    */
@@ -124,7 +140,7 @@ declare namespace ComprehendMedical {
      */
     BeginOffset?: Integer;
     /**
-     *  The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string. 
+     *  The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.
      */
     EndOffset?: Integer;
     /**
@@ -291,7 +307,7 @@ declare namespace ComprehendMedical {
   }
   export interface DetectPHIRequest {
     /**
-     *  A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters. 
+     *  A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters.
      */
     Text: BoundedLengthString;
   }
@@ -335,11 +351,11 @@ declare namespace ComprehendMedical {
      */
     Category?: EntityType;
     /**
-     *  Describes the specific type of entity with category of entities. 
+     *  Describes the specific type of entity with category of entities.
      */
     Type?: EntitySubType;
     /**
-     * Contextual information for the entity
+     * Contextual information for the entity.
      */
     Traits?: TraitList;
     /**
@@ -351,7 +367,155 @@ declare namespace ComprehendMedical {
   export type EntitySubType = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|string;
   export type EntityType = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|string;
   export type Float = number;
+  export interface ICD10CMAttribute {
+    /**
+     * The type of attribute. InferICD10CM detects entities of the type DX_NAME. 
+     */
+    Type?: ICD10CMAttributeType;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute.
+     */
+    Score?: Float;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity.
+     */
+    RelationshipScore?: Float;
+    /**
+     * The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier.
+     */
+    Id?: Integer;
+    /**
+     * The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string.
+     */
+    BeginOffset?: Integer;
+    /**
+     * The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.
+     */
+    EndOffset?: Integer;
+    /**
+     * The segment of input text which contains the detected attribute.
+     */
+    Text?: String;
+    /**
+     * The contextual information for the attribute. The traits recognized by InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
+     */
+    Traits?: ICD10CMTraitList;
+  }
+  export type ICD10CMAttributeList = ICD10CMAttribute[];
+  export type ICD10CMAttributeType = "ACUITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"QUALITY"|"QUANTITY"|string;
+  export interface ICD10CMConcept {
+    /**
+     * The long description of the ICD-10-CM code in the ontology.
+     */
+    Description?: String;
+    /**
+     * The ICD-10-CM code that identifies the concept found in the knowledge base from the Centers for Disease Control.
+     */
+    Code?: String;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has that the entity is accurately linked to an ICD-10-CM concept.
+     */
+    Score?: Float;
+  }
+  export type ICD10CMConceptList = ICD10CMConcept[];
+  export interface ICD10CMEntity {
+    /**
+     * The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier.
+     */
+    Id?: Integer;
+    /**
+     * The segment of input text that is matched to the detected entity.
+     */
+    Text?: OntologyLinkingBoundedLengthString;
+    /**
+     *  The category of the entity. InferICD10CM detects entities in the MEDICAL_CONDITION category. 
+     */
+    Category?: ICD10CMEntityCategory;
+    /**
+     * Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type DX_NAME.
+     */
+    Type?: ICD10CMEntityType;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.
+     */
+    Score?: Float;
+    /**
+     * The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string.
+     */
+    BeginOffset?: Integer;
+    /**
+     * The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string.
+     */
+    EndOffset?: Integer;
+    /**
+     * The detected attributes that relate to the entity. An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the nature of a medical condition.
+     */
+    Attributes?: ICD10CMAttributeList;
+    /**
+     * Provides Contextual information for the entity. The traits recognized by InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION. 
+     */
+    Traits?: ICD10CMTraitList;
+    /**
+     * The ICD-10-CM concepts that the entity could refer to, along with a score indicating the likelihood of the match.
+     */
+    ICD10CMConcepts?: ICD10CMConceptList;
+  }
+  export type ICD10CMEntityCategory = "MEDICAL_CONDITION"|string;
+  export type ICD10CMEntityList = ICD10CMEntity[];
+  export type ICD10CMEntityType = "DX_NAME"|string;
+  export interface ICD10CMTrait {
+    /**
+     * Provides a name or contextual description about the trait.
+     */
+    Name?: ICD10CMTraitName;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as a trait.
+     */
+    Score?: Float;
+  }
+  export type ICD10CMTraitList = ICD10CMTrait[];
+  export type ICD10CMTraitName = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM"|string;
   export type IamRoleArn = string;
+  export interface InferICD10CMRequest {
+    /**
+     * The input text used for analysis. The input for InferICD10CM is a string from 1 to 10000 characters.
+     */
+    Text: OntologyLinkingBoundedLengthString;
+  }
+  export interface InferICD10CMResponse {
+    /**
+     * The medical conditions detected in the text linked to ICD-10-CM concepts. If the action is successful, the service sends back an HTTP 200 response, as well as the entities detected.
+     */
+    Entities: ICD10CMEntityList;
+    /**
+     * If the result of the previous request to InferICD10CM was truncated, include the PaginationToken to fetch the next page of medical condition entities. 
+     */
+    PaginationToken?: String;
+    /**
+     * The version of the model used to analyze the documents, in the format n.n.n You can use this information to track the model used for a particular batch of documents.
+     */
+    ModelVersion?: String;
+  }
+  export interface InferRxNormRequest {
+    /**
+     * The input text used for analysis. The input for InferRxNorm is a string from 1 to 10000 characters.
+     */
+    Text: OntologyLinkingBoundedLengthString;
+  }
+  export interface InferRxNormResponse {
+    /**
+     * The medication entities detected in the text linked to RxNorm concepts. If the action is successful, the service sends back an HTTP 200 response, as well as the entities detected.
+     */
+    Entities: RxNormEntityList;
+    /**
+     * If the result of the previous request to InferRxNorm was truncated, include the PaginationToken to fetch the next page of medication entities.
+     */
+    PaginationToken?: String;
+    /**
+     * The version of the model used to analyze the documents, in the format n.n.n You can use this information to track the model used for a particular batch of documents.
+     */
+    ModelVersion?: String;
+  }
   export interface InputDataConfig {
     /**
      * The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling. Each file in the document collection must be less than 40 KB. You can store a maximum of 30 GB in the bucket.
@@ -419,6 +583,7 @@ declare namespace ComprehendMedical {
   export type ManifestFilePath = string;
   export type MaxResultsInteger = number;
   export type ModelVersion = string;
+  export type OntologyLinkingBoundedLengthString = string;
   export interface OutputDataConfig {
     /**
      * When you use the OutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output.
@@ -429,6 +594,114 @@ declare namespace ComprehendMedical {
      */
     S3Key?: S3Key;
   }
+  export interface RxNormAttribute {
+    /**
+     * The type of attribute. The types of attributes recognized by InferRxNorm are BRAND_NAME and GENERIC_NAME.
+     */
+    Type?: RxNormAttributeType;
+    /**
+     * The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute.
+     */
+    Score?: Float;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has that the attribute is accurately linked to an entity.
+     */
+    RelationshipScore?: Float;
+    /**
+     * The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier.
+     */
+    Id?: Integer;
+    /**
+     * The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string.
+     */
+    BeginOffset?: Integer;
+    /**
+     * The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.
+     */
+    EndOffset?: Integer;
+    /**
+     * The segment of input text which corresponds to the detected attribute.
+     */
+    Text?: String;
+    /**
+     * Contextual information for the attribute. InferRxNorm recognizes the trait NEGATION for attributes, i.e. that the patient is not taking a specific dose or form of a medication.
+     */
+    Traits?: RxNormTraitList;
+  }
+  export type RxNormAttributeList = RxNormAttribute[];
+  export type RxNormAttributeType = "DOSAGE"|"DURATION"|"FORM"|"FREQUENCY"|"RATE"|"ROUTE_OR_MODE"|"STRENGTH"|string;
+  export interface RxNormConcept {
+    /**
+     * The description of the RxNorm concept.
+     */
+    Description?: String;
+    /**
+     * RxNorm concept ID, also known as the RxCUI.
+     */
+    Code?: String;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has that the entity is accurately linked to the reported RxNorm concept.
+     */
+    Score?: Float;
+  }
+  export type RxNormConceptList = RxNormConcept[];
+  export interface RxNormEntity {
+    /**
+     * The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier.
+     */
+    Id?: Integer;
+    /**
+     * The segment of input text extracted from which the entity was detected.
+     */
+    Text?: OntologyLinkingBoundedLengthString;
+    /**
+     * The category of the entity. The recognized categories are GENERIC or BRAND_NAME.
+     */
+    Category?: RxNormEntityCategory;
+    /**
+     *  Describes the specific type of entity. For InferRxNorm, the recognized entity type is MEDICATION.
+     */
+    Type?: RxNormEntityType;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected entity.
+     */
+    Score?: Float;
+    /**
+     * The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string.
+     */
+    BeginOffset?: Integer;
+    /**
+     * The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string.
+     */
+    EndOffset?: Integer;
+    /**
+     * The extracted attributes that relate to the entity. The attributes recognized by InferRxNorm are DOSAGE, DURATION, FORM, FREQUENCY, RATE, ROUTE_OR_MODE, and STRENGTH.
+     */
+    Attributes?: RxNormAttributeList;
+    /**
+     *  Contextual information for the entity.
+     */
+    Traits?: RxNormTraitList;
+    /**
+     *  The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.
+     */
+    RxNormConcepts?: RxNormConceptList;
+  }
+  export type RxNormEntityCategory = "MEDICATION"|string;
+  export type RxNormEntityList = RxNormEntity[];
+  export type RxNormEntityType = "BRAND_NAME"|"GENERIC_NAME"|string;
+  export interface RxNormTrait {
+    /**
+     * Provides a name or contextual description about the trait.
+     */
+    Name?: RxNormTraitName;
+    /**
+     * The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected trait.
+     */
+    Score?: Float;
+  }
+  export type RxNormTraitList = RxNormTrait[];
+  export type RxNormTraitName = "NEGATION"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export interface StartEntitiesDetectionV2JobRequest {

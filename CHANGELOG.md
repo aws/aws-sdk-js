@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.590.0-->
+<!--LATEST=2.591.0-->
 <!--ENTRYINSERT-->
+
+## 2.591.0
+* feature: ComprehendMedical: New Ontology linking APIs will provides medication concepts normalization and Diagnoses codes from input text. In this release we will provide two APIs -  RxNorm and ICD10-CM. 
+* feature: EC2: You can now configure your EC2 Fleet to preferentially use EC2 Capacity Reservations for launching On-Demand instances, enabling you to fully utilize the available (and unused) Capacity Reservations before launching On-Demand instances on net new capacity.
+* feature: MQ: Amazon MQ now supports throughput-optimized message brokers, backed by Amazon EBS.
 
 ## 2.590.0
 * feature: CodeBuild: CodeBuild adds support for cross account
