@@ -2288,6 +2288,12 @@ declare namespace Iot {
      */
     maximumPerMinute?: MaximumPerMinute;
   }
+  export interface AwsJobPresignedUrlConfig {
+    /**
+     * How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 1800 seconds. Pre-signed URLs are generated when a request for the job document is received.
+     */
+    expiresInSec?: ExpiresInSeconds;
+  }
   export interface Behavior {
     /**
      * The name you have given to the behavior.
@@ -2998,6 +3004,10 @@ declare namespace Iot {
      */
     targets: Targets;
     /**
+     * The protocol used to transfer the OTA update image. Valid values are [HTTP], [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device can choose the protocol.
+     */
+    protocols?: Protocols;
+    /**
      * Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.
      */
     targetSelection?: TargetSelection;
@@ -3005,6 +3015,10 @@ declare namespace Iot {
      * Configuration for the rollout of OTA updates.
      */
     awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig;
+    /**
+     * Configuration information for pre-signed URLs.
+     */
+    awsJobPresignedUrlConfig?: AwsJobPresignedUrlConfig;
     /**
      * The files to be streamed by the OTA update.
      */
@@ -4653,6 +4667,7 @@ declare namespace Iot {
   export type ExecutionNumber = number;
   export type ExpectedVersion = number;
   export type ExpiresInSec = number;
+  export type ExpiresInSeconds = number;
   export interface ExplicitDeny {
     /**
      * The policies that denied the authorization.
@@ -6872,9 +6887,17 @@ declare namespace Iot {
      */
     targets?: Targets;
     /**
+     * The protocol used to transfer the OTA update image. Valid values are [HTTP], [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device can choose the protocol.
+     */
+    protocols?: Protocols;
+    /**
      * Configuration for the rollout of OTA updates.
      */
     awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig;
+    /**
+     * Configuration information for pre-signed URLs. Valid when protocols contains HTTP.
+     */
+    awsJobPresignedUrlConfig?: AwsJobPresignedUrlConfig;
     /**
      * Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. 
      */
@@ -7035,6 +7058,8 @@ declare namespace Iot {
   export type PrivateKey = string;
   export type ProcessingTargetName = string;
   export type ProcessingTargetNameList = ProcessingTargetName[];
+  export type Protocol = "MQTT"|"HTTP"|string;
+  export type Protocols = Protocol[];
   export type ProvisioningTemplateListing = ProvisioningTemplateSummary[];
   export interface ProvisioningTemplateSummary {
     /**
@@ -7091,11 +7116,11 @@ declare namespace Iot {
      */
     entryId?: AssetPropertyEntryId;
     /**
-     * The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias or both an analiasId and a propertyId. Accepts substitution templates.
+     * The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias or both an aliasId and a propertyId. Accepts substitution templates.
      */
     assetId?: AssetId;
     /**
-     * The ID of the asset's property. You must specify either a propertyAlias or both an analiasId and a propertyId. Accepts substitution templates.
+     * The ID of the asset's property. You must specify either a propertyAlias or both an aliasId and a propertyId. Accepts substitution templates.
      */
     propertyId?: AssetPropertyId;
     /**
@@ -8078,7 +8103,7 @@ declare namespace Iot {
      */
     httpContext?: HttpContext;
     /**
-     * Specifies a test MQTT authorization request.&gt;
+     * Specifies a test MQTT authorization request.
      */
     mqttContext?: MqttContext;
     /**

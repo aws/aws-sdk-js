@@ -2451,6 +2451,14 @@
       },
       "documentation": "Audio Normalization Settings"
     },
+    "AudioOnlyHlsSegmentType": {
+      "type": "string",
+      "documentation": "Audio Only Hls Segment Type",
+      "enum": [
+        "AAC",
+        "FMP4"
+      ]
+    },
     "AudioOnlyHlsSettings": {
       "type": "structure",
       "members": {
@@ -2468,6 +2476,11 @@
           "shape": "AudioOnlyHlsTrackType",
           "locationName": "audioTrackType",
           "documentation": "Four types of audio-only tracks are supported:\n\nAudio-Only Variant Stream\nThe client can play back this audio-only stream instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest.\n\nAlternate Audio, Auto Select, Default\nAlternate rendition that the client should try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=YES, AUTOSELECT=YES\n\nAlternate Audio, Auto Select, Not Default\nAlternate rendition that the client may try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES\n\nAlternate Audio, not Auto Select\nAlternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO"
+        },
+        "SegmentType": {
+          "shape": "AudioOnlyHlsSegmentType",
+          "locationName": "segmentType",
+          "documentation": "Specifies the segment type."
         }
       },
       "documentation": "Audio Only Hls Settings"
@@ -5143,6 +5156,17 @@
         "Time"
       ]
     },
+    "Fmp4HlsSettings": {
+      "type": "structure",
+      "members": {
+        "AudioRenditionSets": {
+          "shape": "__string",
+          "locationName": "audioRenditionSets",
+          "documentation": "List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by ','."
+        }
+      },
+      "documentation": "Fmp4 Hls Settings"
+    },
     "FollowModeScheduleActionStartSettings": {
       "type": "structure",
       "members": {
@@ -5185,6 +5209,14 @@
         "Destination"
       ]
     },
+    "FrameCaptureIntervalUnit": {
+      "type": "string",
+      "documentation": "Frame Capture Interval Unit",
+      "enum": [
+        "MILLISECONDS",
+        "SECONDS"
+      ]
+    },
     "FrameCaptureOutputSettings": {
       "type": "structure",
       "members": {
@@ -5203,6 +5235,11 @@
           "shape": "__integerMin1Max3600000",
           "locationName": "captureInterval",
           "documentation": "The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits."
+        },
+        "CaptureIntervalUnits": {
+          "shape": "FrameCaptureIntervalUnit",
+          "locationName": "captureIntervalUnits",
+          "documentation": "Unit for the frame capture interval."
         }
       },
       "documentation": "Frame Capture Settings",
@@ -5580,7 +5617,7 @@
         "RateControlMode": {
           "shape": "H264RateControlMode",
           "locationName": "rateControlMode",
-          "documentation": "Rate control mode.\n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nVBR: Quality and bitrate vary, depending on the video complexity. Recommended instead of QVBR\nif you want to maintain a specific average bitrate over the duration of the channel.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates."
+          "documentation": "Rate control mode.\n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nVBR: Quality and bitrate vary, depending on the video complexity. Recommended instead of QVBR\nif you want to maintain a specific average bitrate over the duration of the channel.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates.\n\nMultiplex: This rate control mode is only supported (and is required) when the video is being\ndelivered to a MediaLive Multiplex in which case the rate control configuration is controlled\nby the properties within the Multiplex Program."
         },
         "ScanType": {
           "shape": "H264ScanType",
@@ -6139,10 +6176,20 @@
           "locationName": "baseUrlContent",
           "documentation": "A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file."
         },
+        "BaseUrlContent1": {
+          "shape": "__string",
+          "locationName": "baseUrlContent1",
+          "documentation": "Optional. One value per output group.\n\nThis field is required only if you are completing Base URL content A, and the downstream system has notified you that the media files for pipeline 1 of all outputs are in a location different from the media files for pipeline 0."
+        },
         "BaseUrlManifest": {
           "shape": "__string",
           "locationName": "baseUrlManifest",
           "documentation": "A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file."
+        },
+        "BaseUrlManifest1": {
+          "shape": "__string",
+          "locationName": "baseUrlManifest1",
+          "documentation": "Optional. One value per output group.\n\nComplete this field only if you are completing Base URL manifest A, and the downstream system has notified you that the child manifest files for pipeline 1 of all outputs are in a location different from the child manifest files for pipeline 0."
         },
         "CaptionLanguageMappings": {
           "shape": "__listOfCaptionLanguageMapping",
@@ -6188,6 +6235,11 @@
           "shape": "HlsCdnSettings",
           "locationName": "hlsCdnSettings",
           "documentation": "Parameters that control interactions with the CDN."
+        },
+        "HlsId3SegmentTagging": {
+          "shape": "HlsId3SegmentTaggingState",
+          "locationName": "hlsId3SegmentTagging",
+          "documentation": "State of HLS ID3 Segment Tagging"
         },
         "IFrameOnlyPlaylists": {
           "shape": "IFrameOnlyPlaylistType",
@@ -6320,6 +6372,36 @@
         "Destination"
       ]
     },
+    "HlsH265PackagingType": {
+      "type": "string",
+      "documentation": "Hls H265 Packaging Type",
+      "enum": [
+        "HEV1",
+        "HVC1"
+      ]
+    },
+    "HlsId3SegmentTaggingScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "Tag": {
+          "shape": "__string",
+          "locationName": "tag",
+          "documentation": "ID3 tag to insert into each segment. Supports special keyword identifiers to substitute in segment-related values.\\nSupported keyword identifiers: https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html"
+        }
+      },
+      "documentation": "Settings for the action to insert a user-defined ID3 tag in each HLS segment",
+      "required": [
+        "Tag"
+      ]
+    },
+    "HlsId3SegmentTaggingState": {
+      "type": "string",
+      "documentation": "State of HLS ID3 Segment Tagging",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
     "HlsInputSettings": {
       "type": "structure",
       "members": {
@@ -6435,6 +6517,11 @@
     "HlsOutputSettings": {
       "type": "structure",
       "members": {
+        "H265PackagingType": {
+          "shape": "HlsH265PackagingType",
+          "locationName": "h265PackagingType",
+          "documentation": "Only applicable when this output is referencing an H.265 video description.\nSpecifies whether MP4 segments should be packaged as HEV1 or HVC1."
+        },
         "HlsSettings": {
           "shape": "HlsSettings",
           "locationName": "hlsSettings",
@@ -6486,6 +6573,10 @@
         "AudioOnlyHlsSettings": {
           "shape": "AudioOnlyHlsSettings",
           "locationName": "audioOnlyHlsSettings"
+        },
+        "Fmp4HlsSettings": {
+          "shape": "Fmp4HlsSettings",
+          "locationName": "fmp4HlsSettings"
         },
         "StandardHlsSettings": {
           "shape": "StandardHlsSettings",
@@ -9532,6 +9623,11 @@
     "ScheduleActionSettings": {
       "type": "structure",
       "members": {
+        "HlsId3SegmentTaggingSettings": {
+          "shape": "HlsId3SegmentTaggingScheduleActionSettings",
+          "locationName": "hlsId3SegmentTaggingSettings",
+          "documentation": "Action to insert HLS ID3 segment tagging"
+        },
         "HlsTimedMetadataSettings": {
           "shape": "HlsTimedMetadataScheduleActionSettings",
           "locationName": "hlsTimedMetadataSettings",

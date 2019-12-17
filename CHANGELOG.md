@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.591.0-->
+<!--LATEST=2.592.0-->
 <!--ENTRYINSERT-->
+
+## 2.592.0
+* feature: Iot: Added a new Over-the-Air (OTA) Update feature that allows you to use different, or multiple, protocols to transfer an image from the AWS cloud to IoT devices.
+* feature: KinesisAnalyticsV2: Kinesis Data Analytics service now supports running Java applications using Flink 1.8.
+* feature: MediaLive: AWS Elemental MediaLive now supports HLS ID3 segment tagging, HLS redundant manifests for CDNs that support different publishing/viewing endpoints, fragmented MP4 (fMP4), and frame capture intervals specified in milliseconds.
+* feature: SSM: Added support for Cloud Watch Output and Document Version to the Run Command tasks in Maintenance Windows.
 
 ## 2.591.0
 * feature: ComprehendMedical: New Ontology linking APIs will provides medication concepts normalization and Diagnoses codes from input text. In this release we will provide two APIs -  RxNorm and ICD10-CM. 

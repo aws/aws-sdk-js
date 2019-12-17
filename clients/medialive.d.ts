@@ -627,6 +627,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     TargetLkfs?: __doubleMinNegative59Max0;
   }
+  export type AudioOnlyHlsSegmentType = "AAC"|"FMP4"|string;
   export interface AudioOnlyHlsSettings {
     /**
      * Specifies the group to which the audio Rendition belongs.
@@ -654,6 +655,10 @@ Alternate Audio, not Auto Select
 Alternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO
      */
     AudioTrackType?: AudioOnlyHlsTrackType;
+    /**
+     * Specifies the segment type.
+     */
+    SegmentType?: AudioOnlyHlsSegmentType;
   }
   export type AudioOnlyHlsTrackType = "ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|"AUDIO_ONLY_VARIANT_STREAM"|string;
   export interface AudioPidSelection {
@@ -2128,6 +2133,12 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     Time: __string;
   }
+  export interface Fmp4HlsSettings {
+    /**
+     * List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by ','.
+     */
+    AudioRenditionSets?: __string;
+  }
   export interface FollowModeScheduleActionStartSettings {
     /**
      * Identifies whether this action starts relative to the start or relative to the end of the reference action.
@@ -2145,6 +2156,7 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     Destination: OutputLocationRef;
   }
+  export type FrameCaptureIntervalUnit = "MILLISECONDS"|"SECONDS"|string;
   export interface FrameCaptureOutputSettings {
     /**
      * Required if the output group contains more than one output. This modifier forms part of the output file name.
@@ -2156,6 +2168,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      * The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.
      */
     CaptureInterval: __integerMin1Max3600000;
+    /**
+     * Unit for the frame capture interval.
+     */
+    CaptureIntervalUnits?: FrameCaptureIntervalUnit;
   }
   export interface GlobalConfiguration {
     /**
@@ -2340,6 +2356,10 @@ if you want to maintain a specific average bitrate over the duration of the chan
 
 CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
 your assets to devices that cannot handle variable bitrates.
+
+Multiplex: This rate control mode is only supported (and is required) when the video is being
+delivered to a MediaLive Multiplex in which case the rate control configuration is controlled
+by the properties within the Multiplex Program.
      */
     RateControlMode?: H264RateControlMode;
     /**
@@ -2622,9 +2642,21 @@ for any single frame within an encoded HDR video stream or file.
      */
     BaseUrlContent?: __string;
     /**
+     * Optional. One value per output group.
+
+This field is required only if you are completing Base URL content A, and the downstream system has notified you that the media files for pipeline 1 of all outputs are in a location different from the media files for pipeline 0.
+     */
+    BaseUrlContent1?: __string;
+    /**
      * A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file.
      */
     BaseUrlManifest?: __string;
+    /**
+     * Optional. One value per output group.
+
+Complete this field only if you are completing Base URL manifest A, and the downstream system has notified you that the child manifest files for pipeline 1 of all outputs are in a location different from the child manifest files for pipeline 0.
+     */
+    BaseUrlManifest1?: __string;
     /**
      * Mapping of up to 4 caption channels to caption languages.  Is only meaningful if captionLanguageSetting is set to "insert".
      */
@@ -2664,6 +2696,10 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      * Parameters that control interactions with the CDN.
      */
     HlsCdnSettings?: HlsCdnSettings;
+    /**
+     * State of HLS ID3 Segment Tagging
+     */
+    HlsId3SegmentTagging?: HlsId3SegmentTaggingState;
     /**
      * DISABLED: Do not create an I-frame-only manifest, but do create the master and media manifests (according to the Output Selection field).
 
@@ -2777,6 +2813,14 @@ SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts 
      */
     TsFileMode?: HlsTsFileMode;
   }
+  export type HlsH265PackagingType = "HEV1"|"HVC1"|string;
+  export interface HlsId3SegmentTaggingScheduleActionSettings {
+    /**
+     * ID3 tag to insert into each segment. Supports special keyword identifiers to substitute in segment-related values.\nSupported keyword identifiers: https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
+     */
+    Tag: __string;
+  }
+  export type HlsId3SegmentTaggingState = "DISABLED"|"ENABLED"|string;
   export interface HlsInputSettings {
     /**
      * When specified the HLS stream with the m3u8 BANDWIDTH that most closely matches this value will be chosen, otherwise the highest bandwidth stream in the m3u8 will be chosen.  The bitrate is specified in bits per second, as in an HLS manifest.
@@ -2826,6 +2870,11 @@ SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts 
   export type HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"|"SEGMENTS_ONLY"|string;
   export interface HlsOutputSettings {
     /**
+     * Only applicable when this output is referencing an H.265 video description.
+Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
+     */
+    H265PackagingType?: HlsH265PackagingType;
+    /**
      * Settings regarding the underlying stream. These settings are different for audio-only outputs.
      */
     HlsSettings: HlsSettings;
@@ -2843,6 +2892,7 @@ SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts 
   export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
+    Fmp4HlsSettings?: Fmp4HlsSettings;
     StandardHlsSettings?: StandardHlsSettings;
   }
   export type HlsStreamInfResolution = "EXCLUDE"|"INCLUDE"|string;
@@ -4483,6 +4533,10 @@ Valid values: 1, 2, 4, 6, 8
     ScheduleActionStartSettings: ScheduleActionStartSettings;
   }
   export interface ScheduleActionSettings {
+    /**
+     * Action to insert HLS ID3 segment tagging
+     */
+    HlsId3SegmentTaggingSettings?: HlsId3SegmentTaggingScheduleActionSettings;
     /**
      * Action to insert HLS metadata
      */

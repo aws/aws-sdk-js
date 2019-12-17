@@ -1173,11 +1173,11 @@ declare class EC2 extends Service {
    */
   deregisterTransitGatewayMulticastGroupSources(callback?: (err: AWSError, data: EC2.Types.DeregisterTransitGatewayMulticastGroupSourcesResult) => void): Request<EC2.Types.DeregisterTransitGatewayMulticastGroupSourcesResult, AWSError>;
   /**
-   * Describes attributes of your AWS account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: The maximum number of On-Demand Instances that you can run.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
+   * Describes attributes of your AWS account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
    */
   describeAccountAttributes(params: EC2.Types.DescribeAccountAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
-   * Describes attributes of your AWS account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: The maximum number of On-Demand Instances that you can run.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
+   * Describes attributes of your AWS account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
    */
   describeAccountAttributes(callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
@@ -1365,11 +1365,11 @@ declare class EC2 extends Service {
    */
   describeFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
   /**
-   * Describes the specified EC2 Fleets or all your EC2 Fleets.
+   * Describes the specified EC2 Fleets or all of your EC2 Fleets.
    */
   describeFleets(params: EC2.Types.DescribeFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
-   * Describes the specified EC2 Fleets or all your EC2 Fleets.
+   * Describes the specified EC2 Fleets or all of your EC2 Fleets.
    */
   describeFleets(callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
@@ -4770,13 +4770,13 @@ declare namespace EC2 {
   export type CapacityReservationInstancePlatform = "Linux/UNIX"|"Red Hat Enterprise Linux"|"SUSE Linux"|"Windows"|"Windows with SQL Server"|"Windows with SQL Server Enterprise"|"Windows with SQL Server Standard"|"Windows with SQL Server Web"|"Linux with SQL Server Standard"|"Linux with SQL Server Web"|"Linux with SQL Server Enterprise"|string;
   export interface CapacityReservationOptions {
     /**
-     * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched as usual. When unused Capacity Reservations are used to fulfil On-Demand capacity, the On-Demand allocation strategy (lowest-price or prioritized) is applied to them. If you do not specify a value, the fleet fulfils the On-Demand capacity as usual.
+     * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (lowest-price or prioritized) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (lowest-price or prioritized). If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.
      */
     UsageStrategy?: FleetCapacityReservationUsageStrategy;
   }
   export interface CapacityReservationOptionsRequest {
     /**
-     * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched as usual. When unused Capacity Reservations are used to fulfil On-Demand capacity, the On-Demand allocation strategy (lowest-price or prioritized) is applied to them. If you do not specify a value, the fleet fulfils the On-Demand capacity as usual.
+     * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (lowest-price or prioritized) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (lowest-price or prioritized). If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.
      */
     UsageStrategy?: FleetCapacityReservationUsageStrategy;
   }
@@ -5707,7 +5707,7 @@ declare namespace EC2 {
   }
   export interface CreateFleetError {
     /**
-     * The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+     * The launch templates and overrides that were used for launching the instances. The values that you specify in the Overrides replace the values in the launch template.
      */
     LaunchTemplateAndOverrides?: LaunchTemplateAndOverridesResponse;
     /**
@@ -5719,14 +5719,14 @@ declare namespace EC2 {
      */
     ErrorCode?: String;
     /**
-     * The error message that describes why the instance could not be launched. For more information about error messages, see ee Error Codes.
+     * The error message that describes why the instance could not be launched. For more information about error messages, see Error Codes.
      */
     ErrorMessage?: String;
   }
   export type CreateFleetErrorsSet = CreateFleetError[];
   export interface CreateFleetInstance {
     /**
-     * The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+     * The launch templates and overrides that were used for launching the instances. The values that you specify in the Overrides replace the values in the launch template.
      */
     LaunchTemplateAndOverrides?: LaunchTemplateAndOverridesResponse;
     /**
@@ -5742,7 +5742,7 @@ declare namespace EC2 {
      */
     InstanceType?: InstanceType;
     /**
-     * The value is Windows for Windows instances; otherwise blank.
+     * The value is Windows for Windows instances. Otherwise, the value is blank.
      */
     Platform?: PlatformValues;
   }
@@ -5753,7 +5753,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
      */
     ClientToken?: String;
     /**
@@ -8723,7 +8723,7 @@ declare namespace EC2 {
   }
   export interface DescribeFleetError {
     /**
-     * The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+     * The launch templates and overrides that were used for launching the instances. The values that you specify in the Overrides replace the values in the launch template.
      */
     LaunchTemplateAndOverrides?: LaunchTemplateAndOverridesResponse;
     /**
@@ -8735,7 +8735,7 @@ declare namespace EC2 {
      */
     ErrorCode?: String;
     /**
-     * The error message that describes why the instance could not be launched. For more information about error messages, see ee Error Codes.
+     * The error message that describes why the instance could not be launched. For more information about error messages, see Error Codes.
      */
     ErrorMessage?: String;
   }
@@ -8826,7 +8826,7 @@ declare namespace EC2 {
   export type DescribeFleetsErrorSet = DescribeFleetError[];
   export interface DescribeFleetsInstances {
     /**
-     * The launch templates and overrides that were used for launching the instances. Any parameters that you specify in the Overrides override the same parameters in the launch template.
+     * The launch templates and overrides that were used for launching the instances. The values that you specify in the Overrides replace the values in the launch template.
      */
     LaunchTemplateAndOverrides?: LaunchTemplateAndOverridesResponse;
     /**
@@ -8842,7 +8842,7 @@ declare namespace EC2 {
      */
     InstanceType?: InstanceType;
     /**
-     * The value is Windows for Windows instances; otherwise blank.
+     * The value is Windows for Windows instances. Otherwise, the value is blank.
      */
     Platform?: PlatformValues;
   }
@@ -12732,7 +12732,7 @@ declare namespace EC2 {
      */
     FleetState?: FleetStateCode;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraints: Maximum 64 ASCII characters
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraints: Maximum 64 ASCII characters
      */
     ClientToken?: String;
     /**
@@ -12760,7 +12760,7 @@ declare namespace EC2 {
      */
     TerminateInstancesWithExpiration?: Boolean;
     /**
-     * The type of request. Indicates whether the EC2 Fleet only requests the target capacity, or also attempts to maintain it. If you request a certain target capacity, EC2 Fleet only places the required requests; it does not attempt to replenish instances if capacity is diminished, and does not submit requests in alternative capacity pools if capacity is unavailable. To maintain a certain target capacity, EC2 Fleet places the required requests to meet this target capacity. It also automatically replenishes any interrupted Spot Instances. Default: maintain.
+     * The type of request. Indicates whether the EC2 Fleet only requests the target capacity, or also attempts to maintain it. If you request a certain target capacity, EC2 Fleet only places the required requests; it does not attempt to replenish instances if capacity is diminished, and it does not submit requests in alternative capacity pools if capacity is unavailable. To maintain a certain target capacity, EC2 Fleet places the required requests to meet this target capacity. It also automatically replenishes any interrupted Spot Instances. Default: maintain.
      */
     Type?: FleetType;
     /**
@@ -18355,7 +18355,7 @@ declare namespace EC2 {
   export type PlacementGroupStringList = String[];
   export interface PlacementResponse {
     /**
-     * The name of the placement group the instance is in.
+     * The name of the placement group that the instance is in.
      */
     GroupName?: String;
   }
@@ -21662,7 +21662,7 @@ declare namespace EC2 {
   }
   export interface SpotOptions {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -21692,7 +21692,7 @@ declare namespace EC2 {
   }
   export interface SpotOptionsRequest {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
+     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
