@@ -18933,6 +18933,11 @@
           "shape": "String",
           "documentation": "<p>The ID of the instance to which the Elastic Graphics accelerator is attached.</p>",
           "locationName": "instanceId"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags assigned to the Elastic Graphics accelerator.</p>",
+          "locationName": "tagSet"
         }
       },
       "documentation": "<p>Describes an Elastic Graphics accelerator.</p>"

@@ -109,11 +109,19 @@ declare class OpsWorksCM extends Service {
    */
   exportServerEngineAttribute(callback?: (err: AWSError, data: OpsWorksCM.Types.ExportServerEngineAttributeResponse) => void): Request<OpsWorksCM.Types.ExportServerEngineAttributeResponse, AWSError>;
   /**
-   *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.   This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
+   * Returns a list of tags that are applied to the specified AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or backups.
+   */
+  listTagsForResource(params: OpsWorksCM.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.ListTagsForResourceResponse) => void): Request<OpsWorksCM.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of tags that are applied to the specified AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or backups.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: OpsWorksCM.Types.ListTagsForResourceResponse) => void): Request<OpsWorksCM.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.  Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a HEALTHY state, AWS OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a Running or Stopped state, but is eventually terminated.  This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   restoreServer(params: OpsWorksCM.Types.RestoreServerRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.RestoreServerResponse) => void): Request<OpsWorksCM.Types.RestoreServerResponse, AWSError>;
   /**
-   *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.   This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
+   *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.  Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a HEALTHY state, AWS OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a Running or Stopped state, but is eventually terminated.  This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   restoreServer(callback?: (err: AWSError, data: OpsWorksCM.Types.RestoreServerResponse) => void): Request<OpsWorksCM.Types.RestoreServerResponse, AWSError>;
   /**
@@ -124,6 +132,22 @@ declare class OpsWorksCM extends Service {
    *  Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying cause of maintenance failure has been resolved. The server is in an UNDER_MAINTENANCE state while maintenance is in progress.   Maintenance can only be started on servers in HEALTHY and UNHEALTHY states. Otherwise, an InvalidStateException is thrown. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   startMaintenance(callback?: (err: AWSError, data: OpsWorksCM.Types.StartMaintenanceResponse) => void): Request<OpsWorksCM.Types.StartMaintenanceResponse, AWSError>;
+  /**
+   * Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.
+   */
+  tagResource(params: OpsWorksCM.Types.TagResourceRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.TagResourceResponse) => void): Request<OpsWorksCM.Types.TagResourceResponse, AWSError>;
+  /**
+   * Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.
+   */
+  tagResource(callback?: (err: AWSError, data: OpsWorksCM.Types.TagResourceResponse) => void): Request<OpsWorksCM.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes specified tags from an AWS OpsWorks-CM server or backup.
+   */
+  untagResource(params: OpsWorksCM.Types.UntagResourceRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.UntagResourceResponse) => void): Request<OpsWorksCM.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes specified tags from an AWS OpsWorks-CM server or backup.
+   */
+  untagResource(callback?: (err: AWSError, data: OpsWorksCM.Types.UntagResourceResponse) => void): Request<OpsWorksCM.Types.UntagResourceResponse, AWSError>;
   /**
    *  Updates settings for a server.   This operation is synchronous. 
    */
@@ -150,6 +174,7 @@ declare class OpsWorksCM extends Service {
   waitFor(state: "nodeAssociated", callback?: (err: AWSError, data: OpsWorksCM.Types.DescribeNodeAssociationStatusResponse) => void): Request<OpsWorksCM.Types.DescribeNodeAssociationStatusResponse, AWSError>;
 }
 declare namespace OpsWorksCM {
+  export type AWSOpsWorksCMResourceArn = string;
   export interface AccountAttribute {
     /**
      *  The attribute name. The following are supported attribute names.     ServerLimit: The number of current servers/maximum number of servers allowed. By default, you can have a maximum of 10 servers.     ManualBackupLimit: The number of current manual backups/maximum number of backups allowed. By default, you can have a maximum of 50 manual backups saved.   
@@ -300,6 +325,10 @@ declare namespace OpsWorksCM {
      *  A user-defined description of the backup. 
      */
     Description?: String;
+    /**
+     * A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM server backup.   The key cannot be empty.   The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    Leading and trailing white spaces are trimmed from both the key and value.   A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.  
+     */
+    Tags?: TagList;
   }
   export interface CreateBackupResponse {
     /**
@@ -313,15 +342,15 @@ declare namespace OpsWorksCM {
      */
     AssociatePublicIpAddress?: Boolean;
     /**
-     * An optional public endpoint of a server, such as https://aws.my-company.com. To access the server, create a CNAME DNS record in your preferred DNS service that points the custom domain to the endpoint that is generated when the server is created (the value of the CreateServer Endpoint attribute). You cannot access the server by using the generated Endpoint value if the server is using a custom domain. If you specify a custom domain, you must also specify values for CustomCertificate and CustomPrivateKey.
+     * Supported on servers running Chef Automate 2. An optional public endpoint of a server, such as https://aws.my-company.com. To access the server, create a CNAME DNS record in your preferred DNS service that points the custom domain to the endpoint that is generated when the server is created (the value of the CreateServer Endpoint attribute). You cannot access the server by using the generated Endpoint value if the server is using a custom domain. If you specify a custom domain, you must also specify values for CustomCertificate and CustomPrivateKey.
      */
     CustomDomain?: CustomDomain;
     /**
-     * A PEM-formatted HTTPS certificate. The value can be be a single, self-signed certificate, or a certificate chain. If you specify a custom certificate, you must also specify values for CustomDomain and CustomPrivateKey. The following are requirements for the CustomCertificate value:   You can provide either a self-signed, custom certificate, or the full certificate chain.   The certificate must be a valid X509 certificate, or a certificate chain in PEM format.   The certificate must be valid at the time of upload. A certificate can't be used before its validity period begins (the certificate's NotBefore date), or after it expires (the certificate's NotAfter date).   The certificate’s common name or subject alternative names (SANs), if present, must match the value of CustomDomain.   The certificate must match the value of CustomPrivateKey.  
+     * Supported on servers running Chef Automate 2. A PEM-formatted HTTPS certificate. The value can be be a single, self-signed certificate, or a certificate chain. If you specify a custom certificate, you must also specify values for CustomDomain and CustomPrivateKey. The following are requirements for the CustomCertificate value:   You can provide either a self-signed, custom certificate, or the full certificate chain.   The certificate must be a valid X509 certificate, or a certificate chain in PEM format.   The certificate must be valid at the time of upload. A certificate can't be used before its validity period begins (the certificate's NotBefore date), or after it expires (the certificate's NotAfter date).   The certificate’s common name or subject alternative names (SANs), if present, must match the value of CustomDomain.   The certificate must match the value of CustomPrivateKey.  
      */
     CustomCertificate?: CustomCertificate;
     /**
-     * A private key in PEM format for connecting to the server by using HTTPS. The private key must not be encrypted; it cannot be protected by a password or passphrase. If you specify a custom private key, you must also specify values for CustomDomain and CustomCertificate.
+     * Supported on servers running Chef Automate 2. A private key in PEM format for connecting to the server by using HTTPS. The private key must not be encrypted; it cannot be protected by a password or passphrase. If you specify a custom private key, you must also specify values for CustomDomain and CustomCertificate.
      */
     CustomPrivateKey?: CustomPrivateKey;
     /**
@@ -384,6 +413,10 @@ declare namespace OpsWorksCM {
      *  The IDs of subnets in which to launch the server EC2 instance.   Amazon EC2-Classic customers: This field is required. All servers must run within a VPC. The VPC must have "Auto Assign Public IP" enabled.   EC2-VPC customers: This field is optional. If you do not specify subnet IDs, your EC2 instances are created in a default subnet that is selected by Amazon EC2. If you specify subnet IDs, the VPC must have "Auto Assign Public IP" enabled.  For more information about supported Amazon EC2 platforms, see Supported Platforms.
      */
     SubnetIds?: Strings;
+    /**
+     * A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server.   The key cannot be empty.   The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    Leading and trailing white spaces are trimmed from both the key and value.   A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server.  
+     */
+    Tags?: TagList;
     /**
      *  If you specify this field, AWS OpsWorks CM creates the server by using the backup represented by BackupId. 
      */
@@ -578,6 +611,30 @@ declare namespace OpsWorksCM {
   export type InstanceProfileArn = string;
   export type Integer = number;
   export type KeyPair = string;
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server for which you want to show applied tags. For example, arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+     */
+    ResourceArn: AWSOpsWorksCMResourceArn;
+    /**
+     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call ListTagsForResource again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur.
+     */
+    NextToken?: NextToken;
+    /**
+     * To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Tags that have been applied to the resource.
+     */
+    Tags?: TagList;
+    /**
+     * A token that you can use as the value of NextToken in subsequent calls to the API to show more results.
+     */
+    NextToken?: NextToken;
+  }
   export type MaintenanceStatus = "SUCCESS"|"FAILED"|string;
   export type MaxResults = number;
   export type NextToken = string;
@@ -731,7 +788,7 @@ declare namespace OpsWorksCM {
      */
     ServerName: ServerName;
     /**
-     * Engine attributes that are specific to the server on which you want to run maintenance. 
+     * Engine attributes that are specific to the server on which you want to run maintenance.
      */
     EngineAttributes?: EngineAttributes;
   }
@@ -743,8 +800,46 @@ declare namespace OpsWorksCM {
   }
   export type String = string;
   export type Strings = String[];
+  export interface Tag {
+    /**
+     * A tag key, such as Stage or Name. A tag key cannot be empty. The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / 
+     */
+    Key: TagKey;
+    /**
+     * An optional tag value, such as Production or test-owcm-server. The value can be a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / 
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of a resource to which you want to apply tags. For example, arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+     */
+    ResourceArn: AWSOpsWorksCMResourceArn;
+    /**
+     * A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers or backups.   The key cannot be empty.   The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    Leading and trailing white spaces are trimmed from both the key and value.   A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or backup.  
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type TimeWindowDefinition = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of a resource from which you want to remove tags. For example, arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+     */
+    ResourceArn: AWSOpsWorksCMResourceArn;
+    /**
+     * The keys of tags that you want to remove.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateServerEngineAttributesRequest {
     /**
      * The name of the server to update. 

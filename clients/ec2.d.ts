@@ -12206,6 +12206,10 @@ declare namespace EC2 {
      * The ID of the instance to which the Elastic Graphics accelerator is attached.
      */
     InstanceId?: String;
+    /**
+     * The tags assigned to the Elastic Graphics accelerator.
+     */
+    Tags?: TagList;
   }
   export interface ElasticInferenceAccelerator {
     /**

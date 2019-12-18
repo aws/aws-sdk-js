@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.592.0-->
+<!--LATEST=2.593.0-->
 <!--ENTRYINSERT-->
+
+## 2.593.0
+* feature: EC2: This release introduces the ability to tag Elastic Graphics accelerators. You can use tags to organize and identify your accelerators for cost allocation.
+* feature: OpsWorksCM: AWS OpsWorks CM now supports tagging, and tag-based access control, of servers and backups.
 
 ## 2.592.0
 * feature: Iot: Added a new Over-the-Air (OTA) Update feature that allows you to use different, or multiple, protocols to transfer an image from the AWS cloud to IoT devices.

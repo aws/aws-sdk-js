@@ -80,11 +80,11 @@ declare namespace ResourceGroupsTaggingAPI {
   export type AmazonResourceType = string;
   export interface ComplianceDetails {
     /**
-     * The tag key is noncompliant with the effective tag policy.
+     * These tag keys on the resource are noncompliant with the effective tag policy.
      */
     NoncompliantKeys?: TagKeyList;
     /**
-     * The tag value is noncompliant with the effective tag policy.
+     * These are keys defined in the effective policy that are on the resource with either incorrect case treatment or noncompliant values. 
      */
     KeysWithNoncompliantValues?: TagKeyList;
     /**

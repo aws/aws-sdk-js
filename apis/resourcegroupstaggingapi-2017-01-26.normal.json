@@ -246,11 +246,11 @@
       "members": {
         "NoncompliantKeys": {
           "shape": "TagKeyList",
-          "documentation": "<p>The tag key is noncompliant with the effective tag policy.</p>"
+          "documentation": "<p>These tag keys on the resource are noncompliant with the effective tag policy.</p>"
         },
         "KeysWithNoncompliantValues": {
           "shape": "TagKeyList",
-          "documentation": "<p>The tag value is noncompliant with the effective tag policy.</p>"
+          "documentation": "<p>These are keys defined in the effective policy that are on the resource with either incorrect case treatment or noncompliant values. </p>"
         },
         "ComplianceStatus": {
           "shape": "ComplianceStatus",
