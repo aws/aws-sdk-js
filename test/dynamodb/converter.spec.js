@@ -57,7 +57,7 @@ describe('AWS.DynamoDB.Converter', function() {
       it('should convert numbers to NumberAttributeValues', function() {
         expect(input(42)).to.deep.equal({N: '42'});
       });
-      it.only('should convert bigint to NumberAttributeValues', function() {
+      it('should convert bigint to NumberAttributeValues', function() {
         try {
           var largeInt = BigInt(1576706763859);
           if (largeInt) {
