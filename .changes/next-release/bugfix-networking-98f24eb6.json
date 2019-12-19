@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "networking",
+  "description": "Pass across the protocol when using the proxy-from-env library to dynamically retrieve proxy information (Fixes #2815)"
+}
