@@ -1579,7 +1579,7 @@ declare namespace SSM {
      */
     Values: AutomationExecutionFilterValueList;
   }
-  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|string;
+  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|"TagKey"|string;
   export type AutomationExecutionFilterList = AutomationExecutionFilter[];
   export type AutomationExecutionFilterValue = string;
   export type AutomationExecutionFilterValueList = AutomationExecutionFilterValue[];
@@ -7644,6 +7644,10 @@ declare namespace SSM {
      * A location is a combination of AWS Regions and/or AWS accounts where you want to run the Automation. Use this action to start an Automation in multiple Regions and multiple accounts. For more information, see Executing Automations in Multiple AWS Regions and Accounts in the AWS Systems Manager User Guide. 
      */
     TargetLocations?: TargetLocations;
+    /**
+     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an automation. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an automation to identify an environment or operating system. In this case, you could specify the following key name/value pairs:    Key=environment,Value=test     Key=OS,Value=Windows     To add tags to an existing patch baseline, use the AddTagsToResource action. 
+     */
+    Tags?: TagList;
   }
   export interface StartAutomationExecutionResult {
     /**

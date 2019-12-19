@@ -65,6 +65,26 @@
       "max": 256,
       "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+"
     },
+    "AttributeName": {
+      "type": "string",
+      "max": 150,
+      "pattern": "[A-Za-z\\d_]+"
+    },
+    "AttributeValue": {
+      "type": "string",
+      "max": 1000,
+      "sensitive": true
+    },
+    "Context": {
+      "type": "map",
+      "key": {
+        "shape": "AttributeName"
+      },
+      "value": {
+        "shape": "AttributeValue"
+      },
+      "max": 150
+    },
     "GetPersonalizedRankingRequest": {
       "type": "structure",
       "required": [
@@ -79,11 +99,15 @@
         },
         "inputList": {
           "shape": "InputList",
-          "documentation": "<p>A list of items (itemId's) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list.</p>"
+          "documentation": "<p>A list of items (itemId's) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.</p>"
         },
         "userId": {
           "shape": "UserID",
           "documentation": "<p>The user for which you want the campaign to provide a personalized ranking.</p>"
+        },
+        "context": {
+          "shape": "Context",
+          "documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type. For more information, see Contextual Metadata.</p>"
         }
       }
     },
@@ -92,7 +116,7 @@
       "members": {
         "personalizedRanking": {
           "shape": "ItemList",
-          "documentation": "<p>A list of items in order of most likely interest to the user.</p>"
+          "documentation": "<p>A list of items in order of most likely interest to the user. The maximum is 500.</p>"
         }
       }
     },
@@ -116,7 +140,11 @@
         },
         "numResults": {
           "shape": "NumResults",
-          "documentation": "<p>The number of results to return. The default is 25. The maximum is 100.</p>"
+          "documentation": "<p>The number of results to return. The default is 25. The maximum is 500.</p>"
+        },
+        "context": {
+          "shape": "Context",
+          "documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type. For more information, see Contextual Metadata.</p>"
         }
       }
     },
@@ -125,7 +153,7 @@
       "members": {
         "itemList": {
           "shape": "ItemList",
-          "documentation": "<p>A list of recommendations.</p>"
+          "documentation": "<p>A list of recommendations sorted in ascending order by prediction score. There can be a maximum of 500 items in the list.</p>"
         }
       }
     },

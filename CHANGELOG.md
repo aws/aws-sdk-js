@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.593.0-->
+<!--LATEST=2.594.0-->
 <!--ENTRYINSERT-->
+
+## 2.594.0
+* feature: CodeStarconnections: Public beta for Bitbucket Cloud support in AWS CodePipeline through integration with AWS CodeStar connections.
+* feature: DLM: You can now copy snapshots across regions using Data Lifecycle Manager (DLM). You can enable policies which, along with create, can now also copy snapshots to one or more AWS region(s). Copies can be scheduled for up to three regions from a single policy and retention periods are set for each region separately. 
+* feature: EC2: We are updating the supportedRootDevices field to supportedRootDeviceTypes for DescribeInstanceTypes API to ensure that the actual value is returned, correcting a previous error in the model.
+* feature: GameLift: Amazon GameLift now supports ARNs for all key GameLift resources, tagging for GameLift resource authorization management, and updated documentation that articulates GameLift's resource authorization strategy.
+* feature: LexModelBuildingService: Amazon Lex now supports conversation logs and slot obfuscation.
+* feature: PersonalizeRuntime: Add context map to get-recommendations and get-personalized-ranking request objects to provide contextual metadata at inference time
+* feature: SSM: This release allows customers to add tags to Automation execution, enabling them to sort and filter executions in different ways, such as by resource, purpose, owner, or environment.
+* feature: TranscribeService: Amazon Transcribe supports job queuing for the StartTranscriptionJob API.
 
 ## 2.593.0
 * feature: EC2: This release introduces the ability to tag Elastic Graphics accelerators. You can use tags to organize and identify your accelerators for cost allocation.

@@ -860,5 +860,9 @@
   },
   "detective": {
     "name": "Detective"
+  },
+  "codestarconnections": {
+    "prefix": "codestar-connections",
+    "name": "CodeStarconnections"
   }
 }

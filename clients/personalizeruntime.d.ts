@@ -30,23 +30,30 @@ declare class PersonalizeRuntime extends Service {
 }
 declare namespace PersonalizeRuntime {
   export type Arn = string;
+  export type AttributeName = string;
+  export type AttributeValue = string;
+  export type Context = {[key: string]: AttributeValue};
   export interface GetPersonalizedRankingRequest {
     /**
      * The Amazon Resource Name (ARN) of the campaign to use for generating the personalized ranking.
      */
     campaignArn: Arn;
     /**
-     * A list of items (itemId's) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list.
+     * A list of items (itemId's) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.
      */
     inputList: InputList;
     /**
      * The user for which you want the campaign to provide a personalized ranking.
      */
     userId: UserID;
+    /**
+     * The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type. For more information, see Contextual Metadata.
+     */
+    context?: Context;
   }
   export interface GetPersonalizedRankingResponse {
     /**
-     * A list of items in order of most likely interest to the user.
+     * A list of items in order of most likely interest to the user. The maximum is 500.
      */
     personalizedRanking?: ItemList;
   }
@@ -64,13 +71,17 @@ declare namespace PersonalizeRuntime {
      */
     userId?: UserID;
     /**
-     * The number of results to return. The default is 25. The maximum is 100.
+     * The number of results to return. The default is 25. The maximum is 500.
      */
     numResults?: NumResults;
+    /**
+     * The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type. For more information, see Contextual Metadata.
+     */
+    context?: Context;
   }
   export interface GetRecommendationsResponse {
     /**
-     * A list of recommendations.
+     * A list of recommendations sorted in ascending order by prediction score. There can be a maximum of 500 items in the list.
      */
     itemList?: ItemList;
   }

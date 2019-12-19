@@ -24284,10 +24284,10 @@
           "documentation": "<p>Indicates whether the instance type is offered for spot or On-Demand.</p>",
           "locationName": "supportedUsageClasses"
         },
-        "SupportedRootDevices": {
+        "SupportedRootDeviceTypes": {
           "shape": "RootDeviceTypeList",
-          "documentation": "<p>Indicates the supported root devices.</p>",
-          "locationName": "supportedRootDevices"
+          "documentation": "<p>Indicates the supported root device types.</p>",
+          "locationName": "supportedRootDeviceTypes"
         },
         "BareMetal": {
           "shape": "BareMetalFlag",

@@ -334,6 +334,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the bot alias.
      */
     checksum?: String;
+    /**
+     * Settings that determine how Amazon Lex uses conversation logs for the alias.
+     */
+    conversationLogs?: ConversationLogsResponse;
   }
   export type BotAliasMetadataList = BotAliasMetadata[];
   export interface BotChannelAssociation {
@@ -451,6 +455,26 @@ declare namespace LexModelBuildingService {
   }
   export type ContentString = string;
   export type ContentType = "PlainText"|"SSML"|"CustomPayload"|string;
+  export interface ConversationLogsRequest {
+    /**
+     * The settings for your conversation logs. You can log the conversation text, conversation audio, or both.
+     */
+    logSettings: LogSettingsRequestList;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role with permission to write to your CloudWatch Logs for text logs and your S3 bucket for audio logs. For more information, see Creating Conversation Logs.
+     */
+    iamRoleArn: IamRoleArn;
+  }
+  export interface ConversationLogsResponse {
+    /**
+     * The settings for your conversation logs.
+     */
+    logSettings?: LogSettingsResponseList;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket.
+     */
+    iamRoleArn?: IamRoleArn;
+  }
   export type Count = number;
   export interface CreateBotVersionRequest {
     /**
@@ -728,6 +752,7 @@ declare namespace LexModelBuildingService {
     userId: UserId;
   }
   export type Description = string;
+  export type Destination = "CLOUDWATCH_LOGS"|"S3"|string;
   export interface EnumerationValue {
     /**
      * The value of the slot type.
@@ -801,6 +826,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the bot alias.
      */
     checksum?: String;
+    /**
+     * The settings that determine how Amazon Lex uses conversation logs for the alias.
+     */
+    conversationLogs?: ConversationLogsResponse;
   }
   export interface GetBotAliasesRequest {
     /**
@@ -1435,6 +1464,7 @@ declare namespace LexModelBuildingService {
     utterances?: ListsOfUtterances;
   }
   export type GroupNumber = number;
+  export type IamRoleArn = string;
   export type ImportStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
   export interface Intent {
     /**
@@ -1472,11 +1502,55 @@ declare namespace LexModelBuildingService {
   export type IntentMetadataList = IntentMetadata[];
   export type IntentName = string;
   export type IntentUtteranceList = Utterance[];
+  export type KmsKeyArn = string;
   export type LambdaARN = string;
   export type ListOfUtterance = UtteranceData[];
   export type ListsOfUtterances = UtteranceList[];
   export type Locale = "en-US"|"en-GB"|"de-DE"|string;
   export type LocaleList = Locale[];
+  export interface LogSettingsRequest {
+    /**
+     * The type of logging to enable. Text logs are delivered to a CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.
+     */
+    logType: LogType;
+    /**
+     * Where the logs will be delivered. Text logs are delivered to a CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.
+     */
+    destination: Destination;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS KMS customer managed key for encrypting audio logs delivered to an S3 bucket. The key does not apply to CloudWatch Logs and is optional for S3 buckets.
+     */
+    kmsKeyArn?: KmsKeyArn;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs should be delivered.
+     */
+    resourceArn: ResourceArn;
+  }
+  export type LogSettingsRequestList = LogSettingsRequest[];
+  export interface LogSettingsResponse {
+    /**
+     * The type of logging that is enabled.
+     */
+    logType?: LogType;
+    /**
+     * The destination where logs are delivered.
+     */
+    destination?: Destination;
+    /**
+     * The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket.
+     */
+    kmsKeyArn?: KmsKeyArn;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered.
+     */
+    resourceArn?: ResourceArn;
+    /**
+     * The resource prefix of the S3 object or CloudWatch Logs log entry where logs are delivered. For both S3 and CloudWatch Logs, the prefix is:  aws/lex/bot-name/bot-alias/bot-version 
+     */
+    resourcePrefix?: ResourcePrefix;
+  }
+  export type LogSettingsResponseList = LogSettingsResponse[];
+  export type LogType = "AUDIO"|"TEXT"|string;
   export type MaxResults = number;
   export type MergeStrategy = "OVERWRITE_LATEST"|"FAIL_ON_CONFLICT"|string;
   export interface Message {
@@ -1498,6 +1572,7 @@ declare namespace LexModelBuildingService {
   export type Name = string;
   export type NextToken = string;
   export type NumericalVersion = string;
+  export type ObfuscationSetting = "NONE"|"DEFAULT_OBFUSCATION"|string;
   export type Priority = number;
   export type ProcessBehavior = "SAVE"|"BUILD"|string;
   export interface Prompt {
@@ -1536,6 +1611,10 @@ declare namespace LexModelBuildingService {
      * Identifies a specific revision of the $LATEST version. When you create a new bot alias, leave the checksum field blank. If you specify a checksum you get a BadRequestException exception. When you want to update a bot alias, set the checksum field to the checksum of the most recent revision of the $LATEST version. If you don't specify the  checksum field, or if the checksum does not match the $LATEST version, you get a PreconditionFailedException exception.
      */
     checksum?: String;
+    /**
+     * Settings that determine how Amazon Lex uses conversation logs for the alias.
+     */
+    conversationLogs?: ConversationLogsRequest;
   }
   export interface PutBotAliasResponse {
     /**
@@ -1566,6 +1645,10 @@ declare namespace LexModelBuildingService {
      * The checksum for the current version of the alias.
      */
     checksum?: String;
+    /**
+     * The settings that determine how Amazon Lex uses conversation logs for the alias.
+     */
+    conversationLogs?: ConversationLogsResponse;
   }
   export interface PutBotRequest {
     /**
@@ -1875,6 +1958,8 @@ declare namespace LexModelBuildingService {
      */
     createVersion?: Boolean;
   }
+  export type ResourceArn = string;
+  export type ResourcePrefix = string;
   export type ResourceType = "BOT"|"INTENT"|"SLOT_TYPE"|string;
   export type ResponseCard = string;
   export type SessionTTL = number;
@@ -1915,6 +2000,10 @@ declare namespace LexModelBuildingService {
      *  A set of possible responses for the slot type used by text-based clients. A user chooses an option from the response card, instead of using text to reply. 
      */
     responseCard?: ResponseCard;
+    /**
+     * Determines whether a slot is obfuscated in conversation logs and stored utterances. When you obfuscate a slot, the value is replaced by the slot name in curly braces ({}). For example, if the slot name is "full_name", obfuscated values are replaced with "{full_name}". For more information, see  Slot Obfuscation . 
+     */
+    obfuscationSetting?: ObfuscationSetting;
   }
   export type SlotConstraint = "Required"|"Optional"|string;
   export type SlotList = Slot[];

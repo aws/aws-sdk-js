@@ -126,6 +126,7 @@ declare namespace TranscribeService {
      */
     FailureReason?: FailureReason;
   }
+  export type DataAccessRoleArn = string;
   export type DateTime = Date;
   export interface DeleteTranscriptionJobRequest {
     /**
@@ -183,6 +184,16 @@ declare namespace TranscribeService {
      * The S3 location where the vocabulary is stored. Use this URI to get the contents of the vocabulary. The URI is available for a limited time.
      */
     DownloadUri?: Uri;
+  }
+  export interface JobExecutionSettings {
+    /**
+     * Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the AllowDeferredExecution field is true, jobs are queued and will be executed when the number of executing jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a LimitExceededException exception. If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn field.
+     */
+    AllowDeferredExecution?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of a role that has access to the S3 bucket that contains the input files. Amazon Transcribe will assume this role to read queued media files. If you have specified an output S3 bucket for the transcription results, this role should have access to the output bucket as well. If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn field.
+     */
+    DataAccessRoleArn?: DataAccessRoleArn;
   }
   export type KMSKeyId = string;
   export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|"es-ES"|"en-IN"|"hi-IN"|"ar-SA"|"ru-RU"|"zh-CN"|"nl-NL"|"id-ID"|"ta-IN"|"fa-IR"|"en-IE"|"en-AB"|"en-WL"|"pt-PT"|"te-IN"|"tr-TR"|"de-CH"|"he-IL"|"ms-MY"|"ja-JP"|"ar-AE"|string;
@@ -325,6 +336,10 @@ declare namespace TranscribeService {
      * A Settings object that provides optional settings for a transcription job.
      */
     Settings?: Settings;
+    /**
+     * Provides information about how a transcription job is executed. Use this field to indicate that the job can be queued for deferred execution if the concurrency limit is reached and there are no slots available to immediately run the job.
+     */
+    JobExecutionSettings?: JobExecutionSettings;
   }
   export interface StartTranscriptionJobResponse {
     /**
@@ -368,6 +383,10 @@ declare namespace TranscribeService {
      */
     Transcript?: Transcript;
     /**
+     * A timestamp that shows with the job was started processing.
+     */
+    StartTime?: DateTime;
+    /**
      * A timestamp that shows when the job was created.
      */
     CreationTime?: DateTime;
@@ -383,9 +402,13 @@ declare namespace TranscribeService {
      * Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.
      */
     Settings?: Settings;
+    /**
+     * Provides information about how a transcription job is executed.
+     */
+    JobExecutionSettings?: JobExecutionSettings;
   }
   export type TranscriptionJobName = string;
-  export type TranscriptionJobStatus = "IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
+  export type TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
   export type TranscriptionJobSummaries = TranscriptionJobSummary[];
   export interface TranscriptionJobSummary {
     /**
@@ -396,6 +419,10 @@ declare namespace TranscribeService {
      * A timestamp that shows when the job was created.
      */
     CreationTime?: DateTime;
+    /**
+     * A timestamp that shows when the job started processing.
+     */
+    StartTime?: DateTime;
     /**
      * A timestamp that shows when the job was completed.
      */

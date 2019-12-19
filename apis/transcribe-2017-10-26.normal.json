@@ -308,6 +308,10 @@
         }
       }
     },
+    "DataAccessRoleArn": {
+      "type": "string",
+      "pattern": "^arn:aws:iam::[0-9]{0,63}:role/[A-Za-z0-9:_/+=,@.-]{0,1023}$"
+    },
     "DateTime": {
       "type": "timestamp"
     },
@@ -399,6 +403,20 @@
           "documentation": "<p>The S3 location where the vocabulary is stored. Use this URI to get the contents of the vocabulary. The URI is available for a limited time.</p>"
         }
       }
+    },
+    "JobExecutionSettings": {
+      "type": "structure",
+      "members": {
+        "AllowDeferredExecution": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the <code>AllowDeferredExecution</code> field is true, jobs are queued and will be executed when the number of executing jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a <code>LimitExceededException</code> exception.</p> <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the <code>DataAccessRoleArn</code> field.</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "DataAccessRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a role that has access to the S3 bucket that contains the input files. Amazon Transcribe will assume this role to read queued media files. If you have specified an output S3 bucket for the transcription results, this role should have access to the output bucket as well.</p> <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the <code>DataAccessRoleArn</code> field.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about when a transcription job should be executed.</p>"
     },
     "KMSKeyId": {
       "type": "string",
@@ -655,6 +673,10 @@
         "Settings": {
           "shape": "Settings",
           "documentation": "<p>A <code>Settings</code> object that provides optional settings for a transcription job.</p>"
+        },
+        "JobExecutionSettings": {
+          "shape": "JobExecutionSettings",
+          "documentation": "<p>Provides information about how a transcription job is executed. Use this field to indicate that the job can be queued for deferred execution if the concurrency limit is reached and there are no slots available to immediately run the job.</p>"
         }
       }
     },
@@ -708,6 +730,10 @@
           "shape": "Transcript",
           "documentation": "<p>An object that describes the output of the transcription job.</p>"
         },
+        "StartTime": {
+          "shape": "DateTime",
+          "documentation": "<p>A timestamp that shows with the job was started processing.</p>"
+        },
         "CreationTime": {
           "shape": "DateTime",
           "documentation": "<p>A timestamp that shows when the job was created.</p>"
@@ -723,6 +749,10 @@
         "Settings": {
           "shape": "Settings",
           "documentation": "<p>Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.</p>"
+        },
+        "JobExecutionSettings": {
+          "shape": "JobExecutionSettings",
+          "documentation": "<p>Provides information about how a transcription job is executed.</p>"
         }
       },
       "documentation": "<p>Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. </p>"
@@ -736,6 +766,7 @@
     "TranscriptionJobStatus": {
       "type": "string",
       "enum": [
+        "QUEUED",
         "IN_PROGRESS",
         "FAILED",
         "COMPLETED"
@@ -757,6 +788,10 @@
         "CreationTime": {
           "shape": "DateTime",
           "documentation": "<p>A timestamp that shows when the job was created.</p>"
+        },
+        "StartTime": {
+          "shape": "DateTime",
+          "documentation": "<p>A timestamp that shows when the job started processing.</p>"
         },
         "CompletionTime": {
           "shape": "DateTime",

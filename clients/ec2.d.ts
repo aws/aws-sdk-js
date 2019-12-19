@@ -15335,9 +15335,9 @@ declare namespace EC2 {
      */
     SupportedUsageClasses?: UsageClassTypeList;
     /**
-     * Indicates the supported root devices.
+     * Indicates the supported root device types.
      */
-    SupportedRootDevices?: RootDeviceTypeList;
+    SupportedRootDeviceTypes?: RootDeviceTypeList;
     /**
      * Indicates whether the instance is bare metal.
      */

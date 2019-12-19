@@ -1136,6 +1136,10 @@
         "checksum": {
           "shape": "String",
           "documentation": "<p>Checksum of the bot alias.</p>"
+        },
+        "conversationLogs": {
+          "shape": "ConversationLogsResponse",
+          "documentation": "<p>Settings that determine how Amazon Lex uses conversation logs for the alias.</p>"
         }
       },
       "documentation": "<p>Provides information about a bot alias.</p>"
@@ -1371,6 +1375,38 @@
         "SSML",
         "CustomPayload"
       ]
+    },
+    "ConversationLogsRequest": {
+      "type": "structure",
+      "required": [
+        "logSettings",
+        "iamRoleArn"
+      ],
+      "members": {
+        "logSettings": {
+          "shape": "LogSettingsRequestList",
+          "documentation": "<p>The settings for your conversation logs. You can log the conversation text, conversation audio, or both.</p>"
+        },
+        "iamRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to write to your CloudWatch Logs for text logs and your S3 bucket for audio logs. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/conversation-logs.html\">Creating Conversation Logs</a>.</p>"
+        }
+      },
+      "documentation": "<p>Provides the settings needed for conversation logs.</p>"
+    },
+    "ConversationLogsResponse": {
+      "type": "structure",
+      "members": {
+        "logSettings": {
+          "shape": "LogSettingsResponseList",
+          "documentation": "<p>The settings for your conversation logs.</p>"
+        },
+        "iamRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about conversation log settings.</p>"
     },
     "Count": {
       "type": "integer"
@@ -1786,6 +1822,13 @@
       "max": 200,
       "min": 0
     },
+    "Destination": {
+      "type": "string",
+      "enum": [
+        "CLOUDWATCH_LOGS",
+        "S3"
+      ]
+    },
     "EnumerationValue": {
       "type": "structure",
       "required": [
@@ -1919,6 +1962,10 @@
         "checksum": {
           "shape": "String",
           "documentation": "<p>Checksum of the bot alias.</p>"
+        },
+        "conversationLogs": {
+          "shape": "ConversationLogsResponse",
+          "documentation": "<p>The settings that determine how Amazon Lex uses conversation logs for the alias.</p>"
         }
       }
     },
@@ -2824,6 +2871,12 @@
       "max": 5,
       "min": 1
     },
+    "IamRoleArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "^arn:[\\w\\-]+:iam::[\\d]{12}:role\\/[\\w+=,\\.@\\-]{1,64}$"
+    },
     "ImportStatus": {
       "type": "string",
       "enum": [
@@ -2902,6 +2955,12 @@
       "max": 1500,
       "min": 0
     },
+    "KmsKeyArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"
+    },
     "LambdaARN": {
       "type": "string",
       "max": 2048,
@@ -2933,6 +2992,78 @@
       "member": {
         "shape": "Locale"
       }
+    },
+    "LogSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "logType",
+        "destination",
+        "resourceArn"
+      ],
+      "members": {
+        "logType": {
+          "shape": "LogType",
+          "documentation": "<p>The type of logging to enable. Text logs are delivered to a CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.</p>"
+        },
+        "destination": {
+          "shape": "Destination",
+          "documentation": "<p>Where the logs will be delivered. Text logs are delivered to a CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.</p>"
+        },
+        "kmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS customer managed key for encrypting audio logs delivered to an S3 bucket. The key does not apply to CloudWatch Logs and is optional for S3 buckets.</p>"
+        },
+        "resourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs should be delivered.</p>"
+        }
+      },
+      "documentation": "<p>Settings used to configure conversation logs.</p>"
+    },
+    "LogSettingsRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "LogSettingsRequest"
+      }
+    },
+    "LogSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "logType": {
+          "shape": "LogType",
+          "documentation": "<p>The type of logging that is enabled.</p>"
+        },
+        "destination": {
+          "shape": "Destination",
+          "documentation": "<p>The destination where logs are delivered.</p>"
+        },
+        "kmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket.</p>"
+        },
+        "resourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered.</p>"
+        },
+        "resourcePrefix": {
+          "shape": "ResourcePrefix",
+          "documentation": "<p>The resource prefix of the S3 object or CloudWatch Logs log entry where logs are delivered. For both S3 and CloudWatch Logs, the prefix is:</p> <p> <code>aws/lex/bot-name/bot-alias/bot-version</code> </p>"
+        }
+      },
+      "documentation": "<p>The settings for conversation logs.</p>"
+    },
+    "LogSettingsResponseList": {
+      "type": "list",
+      "member": {
+        "shape": "LogSettingsResponse"
+      }
+    },
+    "LogType": {
+      "type": "string",
+      "enum": [
+        "AUDIO",
+        "TEXT"
+      ]
     },
     "MaxResults": {
       "type": "integer",
@@ -2996,6 +3127,13 @@
       "max": 64,
       "min": 1,
       "pattern": "[0-9]+"
+    },
+    "ObfuscationSetting": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "DEFAULT_OBFUSCATION"
+      ]
     },
     "Priority": {
       "type": "integer",
@@ -3067,6 +3205,10 @@
         "checksum": {
           "shape": "String",
           "documentation": "<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new bot alias, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a bot alias, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don't specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>"
+        },
+        "conversationLogs": {
+          "shape": "ConversationLogsRequest",
+          "documentation": "<p>Settings that determine how Amazon Lex uses conversation logs for the alias.</p>"
         }
       }
     },
@@ -3100,6 +3242,10 @@
         "checksum": {
           "shape": "String",
           "documentation": "<p>The checksum for the current version of the alias.</p>"
+        },
+        "conversationLogs": {
+          "shape": "ConversationLogsResponse",
+          "documentation": "<p>The settings that determine how Amazon Lex uses conversation logs for the alias.</p>"
         }
       }
     },
@@ -3446,6 +3592,16 @@
         }
       }
     },
+    "ResourceArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^arn:[\\w\\-]+:(?:logs:[\\w\\-]+:[\\d]{12}:log-group:[\\.\\-_/#A-Za-z0-9]{1,512}(?::\\*)?|s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9])$"
+    },
+    "ResourcePrefix": {
+      "type": "string",
+      "max": 1024
+    },
     "ResourceType": {
       "type": "string",
       "enum": [
@@ -3506,6 +3662,10 @@
         "responseCard": {
           "shape": "ResponseCard",
           "documentation": "<p> A set of possible responses for the slot type used by text-based clients. A user chooses an option from the response card, instead of using text to reply. </p>"
+        },
+        "obfuscationSetting": {
+          "shape": "ObfuscationSetting",
+          "documentation": "<p>Determines whether a slot is obfuscated in conversation logs and stored utterances. When you obfuscate a slot, the value is replaced by the slot name in curly braces ({}). For example, if the slot name is \"full_name\", obfuscated values are replaced with \"{full_name}\". For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html\"> Slot Obfuscation </a>. </p>"
         }
       },
       "documentation": "<p>Identifies the version of a specific slot.</p>"
