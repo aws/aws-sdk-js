@@ -41,6 +41,34 @@
       ],
       "documentation": "<p>Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. </p>"
     },
+    "CreateVocabularyFilter": {
+      "name": "CreateVocabularyFilter",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateVocabularyFilterRequest"
+      },
+      "output": {
+        "shape": "CreateVocabularyFilterResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Creates a new vocabulary filter that you can use to filter words, such as profane words, from the output of a transcription job.</p>"
+    },
     "DeleteTranscriptionJob": {
       "name": "DeleteTranscriptionJob",
       "http": {
@@ -87,6 +115,31 @@
         }
       ],
       "documentation": "<p>Deletes a vocabulary from Amazon Transcribe. </p>"
+    },
+    "DeleteVocabularyFilter": {
+      "name": "DeleteVocabularyFilter",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteVocabularyFilterRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Removes a vocabulary filter.</p>"
     },
     "GetTranscriptionJob": {
       "name": "GetTranscriptionJob",
@@ -144,6 +197,34 @@
       ],
       "documentation": "<p>Gets information about a vocabulary. </p>"
     },
+    "GetVocabularyFilter": {
+      "name": "GetVocabularyFilter",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetVocabularyFilterRequest"
+      },
+      "output": {
+        "shape": "GetVocabularyFilterResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Returns information about a vocabulary filter.</p>"
+    },
     "ListTranscriptionJobs": {
       "name": "ListTranscriptionJobs",
       "http": {
@@ -193,6 +274,31 @@
         }
       ],
       "documentation": "<p>Returns a list of vocabularies that match the specified criteria. If no criteria are specified, returns the entire list of vocabularies.</p>"
+    },
+    "ListVocabularyFilters": {
+      "name": "ListVocabularyFilters",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListVocabularyFiltersRequest"
+      },
+      "output": {
+        "shape": "ListVocabularyFiltersResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Gets information about vocabulary filters.</p>"
     },
     "StartTranscriptionJob": {
       "name": "StartTranscriptionJob",
@@ -252,11 +358,81 @@
         }
       ],
       "documentation": "<p>Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request. </p>"
+    },
+    "UpdateVocabularyFilter": {
+      "name": "UpdateVocabularyFilter",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateVocabularyFilterRequest"
+      },
+      "output": {
+        "shape": "UpdateVocabularyFilterResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Updates a vocabulary filter with a new list of filtered words.</p>"
     }
   },
   "shapes": {
     "Boolean": {
       "type": "boolean"
+    },
+    "CreateVocabularyFilterRequest": {
+      "type": "structure",
+      "required": [
+        "VocabularyFilterName",
+        "LanguageCode"
+      ],
+      "members": {
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The vocabulary filter name. The name must be unique within the account that contains it.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the words in the vocabulary filter. All words in the filter must be in the same language. The vocabulary filter can only be used with transcription jobs in the specified language.</p>"
+        },
+        "Words": {
+          "shape": "Words",
+          "documentation": "<p>The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets\">Character Sets for Custom Vocabularies</a>.</p> <p>If you provide a list of words in the <code>Words</code> parameter, you can't use the <code>VocabularyFilterFileUri</code> parameter.</p>"
+        },
+        "VocabularyFilterFileUri": {
+          "shape": "Uri",
+          "documentation": "<p>The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets\">Character Sets for Custom Vocabularies</a>.</p> <p>The specified file must be less than 50 KB of UTF-8 characters.</p> <p>If you provide the location of a list of words in the <code>VocabularyFilterFileUri</code> parameter, you can't use the <code>Words</code> parameter.</p>"
+        }
+      }
+    },
+    "CreateVocabularyFilterResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The name of the vocabulary filter.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the words in the collection.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the vocabulary filter was modified.</p>"
+        }
+      }
     },
     "CreateVocabularyRequest": {
       "type": "structure",
@@ -327,6 +503,18 @@
         }
       }
     },
+    "DeleteVocabularyFilterRequest": {
+      "type": "structure",
+      "required": [
+        "VocabularyFilterName"
+      ],
+      "members": {
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The name of the vocabulary filter to remove.</p>"
+        }
+      }
+    },
     "DeleteVocabularyRequest": {
       "type": "structure",
       "required": [
@@ -360,6 +548,39 @@
         "TranscriptionJob": {
           "shape": "TranscriptionJob",
           "documentation": "<p>An object that contains the results of the transcription job.</p>"
+        }
+      }
+    },
+    "GetVocabularyFilterRequest": {
+      "type": "structure",
+      "required": [
+        "VocabularyFilterName"
+      ],
+      "members": {
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The name of the vocabulary filter for which to return information.</p>"
+        }
+      }
+    },
+    "GetVocabularyFilterResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The name of the vocabulary filter.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the words in the vocabulary filter.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the contents of the vocabulary filter were updated.</p>"
+        },
+        "DownloadUri": {
+          "shape": "Uri",
+          "documentation": "<p>The URI of the list of words in the vocabulary filter. You can use this URI to get the list of words.</p>"
         }
       }
     },
@@ -536,6 +757,36 @@
         }
       }
     },
+    "ListVocabularyFiltersRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the result of the previous request to <code>ListVocabularyFilters</code> was truncated, include the <code>NextToken</code> to fetch the next set of collections.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of filters to return in the response. If there are fewer results in the list, this response contains only the actual results.</p>"
+        },
+        "NameContains": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>Filters the response so that it only contains vocabulary filters whose name contains the specified string.</p>"
+        }
+      }
+    },
+    "ListVocabularyFiltersResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>ListVocabularyFilters</code> operation returns a page of collections at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListVocabularyFilters</code> operation to return in the next page of jobs.</p>"
+        },
+        "VocabularyFilters": {
+          "shape": "VocabularyFilters",
+          "documentation": "<p>The list of vocabulary filters. It will contain at most <code>MaxResults</code> number of filters. If there are more filters, call the <code>ListVocabularyFilters</code> operation again with the <code>NextToken</code> parameter in the request set to the value of the <code>NextToken</code> field in the response.</p>"
+        }
+      }
+    },
     "MaxAlternatives": {
       "type": "integer",
       "max": 10,
@@ -630,6 +881,14 @@
         "MaxAlternatives": {
           "shape": "MaxAlternatives",
           "documentation": "<p>The number of alternative transcriptions that the service should return. If you specify the <code>MaxAlternatives</code> field, you must set the <code>ShowAlternatives</code> field to true.</p>"
+        },
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The name of the vocabulary filter to use when transcribing the audio. The filter that you specify must have the same language code as the transcription job.</p>"
+        },
+        "VocabularyFilterMethod": {
+          "shape": "VocabularyFilterMethod",
+          "documentation": "<p>Set to <code>mask</code> to remove filtered text from the transcript and replace it with three asterisks (\"***\") as placeholder text. Set to <code>remove</code> to remove filtered text from the transcript without using placeholder text.</p>"
         }
       },
       "documentation": "<p>Provides optional settings for the <code>StartTranscriptionJob</code> operation.</p>"
@@ -816,6 +1075,43 @@
       },
       "documentation": "<p>Provides a summary of information about a transcription job.</p>"
     },
+    "UpdateVocabularyFilterRequest": {
+      "type": "structure",
+      "required": [
+        "VocabularyFilterName"
+      ],
+      "members": {
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The name of the vocabulary filter to update.</p>"
+        },
+        "Words": {
+          "shape": "Words",
+          "documentation": "<p>The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets\">Character Sets for Custom Vocabularies</a>.</p> <p>If you provide a list of words in the <code>Words</code> parameter, you can't use the <code>VocabularyFilterFileUri</code> parameter.</p>"
+        },
+        "VocabularyFilterFileUri": {
+          "shape": "Uri",
+          "documentation": "<p>The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets\">Character Sets for Custom Vocabularies</a>.</p> <p>The specified file must be less than 50 KB of UTF-8 characters.</p> <p>If you provide the location of a list of words in the <code>VocabularyFilterFileUri</code> parameter, you can't use the <code>Words</code> parameter.</p>"
+        }
+      }
+    },
+    "UpdateVocabularyFilterResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The name of the updated vocabulary filter.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the words in the vocabulary filter.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the vocabulary filter was updated.</p>"
+        }
+      }
+    },
     "UpdateVocabularyRequest": {
       "type": "structure",
       "required": [
@@ -874,6 +1170,43 @@
         "shape": "VocabularyInfo"
       }
     },
+    "VocabularyFilterInfo": {
+      "type": "structure",
+      "members": {
+        "VocabularyFilterName": {
+          "shape": "VocabularyFilterName",
+          "documentation": "<p>The name of the vocabulary filter. The name must be unique in the account that holds the filter.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the words in the vocabulary filter.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the vocabulary was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a vocabulary filter.</p>"
+    },
+    "VocabularyFilterMethod": {
+      "type": "string",
+      "enum": [
+        "remove",
+        "mask"
+      ]
+    },
+    "VocabularyFilterName": {
+      "type": "string",
+      "max": 200,
+      "min": 1,
+      "pattern": "^[0-9a-zA-Z._-]+"
+    },
+    "VocabularyFilters": {
+      "type": "list",
+      "member": {
+        "shape": "VocabularyFilterInfo"
+      }
+    },
     "VocabularyInfo": {
       "type": "structure",
       "members": {
@@ -909,6 +1242,18 @@
         "READY",
         "FAILED"
       ]
+    },
+    "Word": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "Words": {
+      "type": "list",
+      "member": {
+        "shape": "Word"
+      },
+      "min": 1
     }
   },
   "documentation": "<p>Operations and objects for transcribing speech to text.</p>"

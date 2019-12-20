@@ -28,11 +28,11 @@ declare class Pinpoint extends Service {
    */
   createCampaign(callback?: (err: AWSError, data: Pinpoint.Types.CreateCampaignResponse) => void): Request<Pinpoint.Types.CreateCampaignResponse, AWSError>;
   /**
-   * Creates a message template that you can use in messages that are sent through the email channel.
+   * Creates a message template for messages that are sent through the email channel.
    */
   createEmailTemplate(params: Pinpoint.Types.CreateEmailTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateEmailTemplateResponse) => void): Request<Pinpoint.Types.CreateEmailTemplateResponse, AWSError>;
   /**
-   * Creates a message template that you can use in messages that are sent through the email channel.
+   * Creates a message template for messages that are sent through the email channel.
    */
   createEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateEmailTemplateResponse) => void): Request<Pinpoint.Types.CreateEmailTemplateResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class Pinpoint extends Service {
    */
   createJourney(callback?: (err: AWSError, data: Pinpoint.Types.CreateJourneyResponse) => void): Request<Pinpoint.Types.CreateJourneyResponse, AWSError>;
   /**
-   * Creates a message template that you can use in messages that are sent through a push notification channel.
+   * Creates a message template for messages that are sent through a push notification channel.
    */
   createPushTemplate(params: Pinpoint.Types.CreatePushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreatePushTemplateResponse) => void): Request<Pinpoint.Types.CreatePushTemplateResponse, AWSError>;
   /**
-   * Creates a message template that you can use in messages that are sent through a push notification channel.
+   * Creates a message template for messages that are sent through a push notification channel.
    */
   createPushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreatePushTemplateResponse) => void): Request<Pinpoint.Types.CreatePushTemplateResponse, AWSError>;
   /**
@@ -76,19 +76,19 @@ declare class Pinpoint extends Service {
    */
   createSegment(callback?: (err: AWSError, data: Pinpoint.Types.CreateSegmentResponse) => void): Request<Pinpoint.Types.CreateSegmentResponse, AWSError>;
   /**
-   * Creates a message template that you can use in messages that are sent through the SMS channel.
+   * Creates a message template for messages that are sent through the SMS channel.
    */
   createSmsTemplate(params: Pinpoint.Types.CreateSmsTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateSmsTemplateResponse) => void): Request<Pinpoint.Types.CreateSmsTemplateResponse, AWSError>;
   /**
-   * Creates a message template that you can use in messages that are sent through the SMS channel.
+   * Creates a message template for messages that are sent through the SMS channel.
    */
   createSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateSmsTemplateResponse) => void): Request<Pinpoint.Types.CreateSmsTemplateResponse, AWSError>;
   /**
-   * Creates a message template that you can use in messages that are sent through the voice channel.
+   * Creates a message template for messages that are sent through the voice channel.
    */
   createVoiceTemplate(params: Pinpoint.Types.CreateVoiceTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateVoiceTemplateResponse) => void): Request<Pinpoint.Types.CreateVoiceTemplateResponse, AWSError>;
   /**
-   * Creates a message template that you can use in messages that are sent through the voice channel.
+   * Creates a message template for messages that are sent through the voice channel.
    */
   createVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateVoiceTemplateResponse) => void): Request<Pinpoint.Types.CreateVoiceTemplateResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class Pinpoint extends Service {
    */
   deleteEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
-   * Deletes a message template that was designed for use in messages that were sent through the email channel.
+   * Deletes a message template for messages that were sent through the email channel.
    */
   deleteEmailTemplate(params: Pinpoint.Types.DeleteEmailTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailTemplateResponse) => void): Request<Pinpoint.Types.DeleteEmailTemplateResponse, AWSError>;
   /**
-   * Deletes a message template that was designed for use in messages that were sent through the email channel.
+   * Deletes a message template for messages that were sent through the email channel.
    */
   deleteEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailTemplateResponse) => void): Request<Pinpoint.Types.DeleteEmailTemplateResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Pinpoint extends Service {
    */
   deleteJourney(callback?: (err: AWSError, data: Pinpoint.Types.DeleteJourneyResponse) => void): Request<Pinpoint.Types.DeleteJourneyResponse, AWSError>;
   /**
-   * Deletes a message template that was designed for use in messages that were sent through a push notification channel.
+   * Deletes a message template for messages that were sent through a push notification channel.
    */
   deletePushTemplate(params: Pinpoint.Types.DeletePushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeletePushTemplateResponse) => void): Request<Pinpoint.Types.DeletePushTemplateResponse, AWSError>;
   /**
-   * Deletes a message template that was designed for use in messages that were sent through a push notification channel.
+   * Deletes a message template for messages that were sent through a push notification channel.
    */
   deletePushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeletePushTemplateResponse) => void): Request<Pinpoint.Types.DeletePushTemplateResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class Pinpoint extends Service {
    */
   deleteSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
   /**
-   * Deletes a message template that was designed for use in messages that were sent through the SMS channel.
+   * Deletes a message template for messages that were sent through the SMS channel.
    */
   deleteSmsTemplate(params: Pinpoint.Types.DeleteSmsTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsTemplateResponse) => void): Request<Pinpoint.Types.DeleteSmsTemplateResponse, AWSError>;
   /**
-   * Deletes a message template that was designed for use in messages that were sent through the SMS channel.
+   * Deletes a message template for messages that were sent through the SMS channel.
    */
   deleteSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsTemplateResponse) => void): Request<Pinpoint.Types.DeleteSmsTemplateResponse, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class Pinpoint extends Service {
    */
   deleteVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceChannelResponse) => void): Request<Pinpoint.Types.DeleteVoiceChannelResponse, AWSError>;
   /**
-   * Deletes a message template that was designed for use in messages that were sent through the voice channel.
+   * Deletes a message template for messages that were sent through the voice channel.
    */
   deleteVoiceTemplate(params: Pinpoint.Types.DeleteVoiceTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceTemplateResponse) => void): Request<Pinpoint.Types.DeleteVoiceTemplateResponse, AWSError>;
   /**
-   * Deletes a message template that was designed for use in messages that were sent through the voice channel.
+   * Deletes a message template for messages that were sent through the voice channel.
    */
   deleteVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceTemplateResponse) => void): Request<Pinpoint.Types.DeleteVoiceTemplateResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class Pinpoint extends Service {
    */
   getApplicationSettings(callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationSettingsResponse) => void): Request<Pinpoint.Types.GetApplicationSettingsResponse, AWSError>;
   /**
-   * Retrieves information about all of your applications.
+   * Retrieves information about all the applications that are associated with your Amazon Pinpoint account.
    */
   getApps(params: Pinpoint.Types.GetAppsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
   /**
-   * Retrieves information about all of your applications.
+   * Retrieves information about all the applications that are associated with your Amazon Pinpoint account.
    */
   getApps(callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
   /**
@@ -404,11 +404,11 @@ declare class Pinpoint extends Service {
    */
   getEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
   /**
-   * Retrieves the content and settings for a message template that you can use in messages that are sent through the email channel.
+   * Retrieves the content and settings of a message template for messages that are sent through the email channel.
    */
   getEmailTemplate(params: Pinpoint.Types.GetEmailTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEmailTemplateResponse) => void): Request<Pinpoint.Types.GetEmailTemplateResponse, AWSError>;
   /**
-   * Retrieves the content and settings for a message template that you can use in messages that are sent through the email channel.
+   * Retrieves the content and settings of a message template for messages that are sent through the email channel.
    */
   getEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetEmailTemplateResponse) => void): Request<Pinpoint.Types.GetEmailTemplateResponse, AWSError>;
   /**
@@ -500,11 +500,11 @@ declare class Pinpoint extends Service {
    */
   getJourneyExecutionMetrics(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyExecutionMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyExecutionMetricsResponse, AWSError>;
   /**
-   * Retrieves the content and settings for a message template that you can use in messages that are sent through a push notification channel.
+   * Retrieves the content and settings of a message template for messages that are sent through a push notification channel.
    */
   getPushTemplate(params: Pinpoint.Types.GetPushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetPushTemplateResponse) => void): Request<Pinpoint.Types.GetPushTemplateResponse, AWSError>;
   /**
-   * Retrieves the content and settings for a message template that you can use in messages that are sent through a push notification channel.
+   * Retrieves the content and settings of a message template for messages that are sent through a push notification channel.
    */
   getPushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetPushTemplateResponse) => void): Request<Pinpoint.Types.GetPushTemplateResponse, AWSError>;
   /**
@@ -540,11 +540,11 @@ declare class Pinpoint extends Service {
    */
   getSegmentVersion(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionResponse) => void): Request<Pinpoint.Types.GetSegmentVersionResponse, AWSError>;
   /**
-   * Retrieves information about the configuration, dimension, and other settings for all versions of a specific segment that's associated with an application.
+   * Retrieves information about the configuration, dimension, and other settings for all the versions of a specific segment that's associated with an application.
    */
   getSegmentVersions(params: Pinpoint.Types.GetSegmentVersionsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionsResponse) => void): Request<Pinpoint.Types.GetSegmentVersionsResponse, AWSError>;
   /**
-   * Retrieves information about the configuration, dimension, and other settings for all versions of a specific segment that's associated with an application.
+   * Retrieves information about the configuration, dimension, and other settings for all the versions of a specific segment that's associated with an application.
    */
   getSegmentVersions(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionsResponse) => void): Request<Pinpoint.Types.GetSegmentVersionsResponse, AWSError>;
   /**
@@ -564,11 +564,11 @@ declare class Pinpoint extends Service {
    */
   getSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
   /**
-   * Retrieves the content and settings for a message template that you can use in messages that are sent through the SMS channel.
+   * Retrieves the content and settings of a message template for messages that are sent through the SMS channel.
    */
   getSmsTemplate(params: Pinpoint.Types.GetSmsTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSmsTemplateResponse) => void): Request<Pinpoint.Types.GetSmsTemplateResponse, AWSError>;
   /**
-   * Retrieves the content and settings for a message template that you can use in messages that are sent through the SMS channel.
+   * Retrieves the content and settings of a message template for messages that are sent through the SMS channel.
    */
   getSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetSmsTemplateResponse) => void): Request<Pinpoint.Types.GetSmsTemplateResponse, AWSError>;
   /**
@@ -588,11 +588,11 @@ declare class Pinpoint extends Service {
    */
   getVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
   /**
-   * Retrieves the content and settings for a message template that you can use in messages that are sent through the voice channel.
+   * Retrieves the content and settings of a message template for messages that are sent through the voice channel.
    */
   getVoiceTemplate(params: Pinpoint.Types.GetVoiceTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceTemplateResponse) => void): Request<Pinpoint.Types.GetVoiceTemplateResponse, AWSError>;
   /**
-   * Retrieves the content and settings for a message template that you can use in messages that are sent through the voice channel.
+   * Retrieves the content and settings of a message template for messages that are sent through the voice channel.
    */
   getVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceTemplateResponse) => void): Request<Pinpoint.Types.GetVoiceTemplateResponse, AWSError>;
   /**
@@ -611,6 +611,14 @@ declare class Pinpoint extends Service {
    * Retrieves all the tags (keys and values) that are associated with an application, campaign, journey, message template, or segment.
    */
   listTagsForResource(callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves information about all the versions of a specific message template.
+   */
+  listTemplateVersions(params: Pinpoint.Types.ListTemplateVersionsRequest, callback?: (err: AWSError, data: Pinpoint.Types.ListTemplateVersionsResponse) => void): Request<Pinpoint.Types.ListTemplateVersionsResponse, AWSError>;
+  /**
+   * Retrieves information about all the versions of a specific message template.
+   */
+  listTemplateVersions(callback?: (err: AWSError, data: Pinpoint.Types.ListTemplateVersionsResponse) => void): Request<Pinpoint.Types.ListTemplateVersionsResponse, AWSError>;
   /**
    * Retrieves information about all the message templates that are associated with your Amazon Pinpoint account.
    */
@@ -756,11 +764,11 @@ declare class Pinpoint extends Service {
    */
   updateEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
   /**
-   * Updates an existing message template that you can use in messages that are sent through the email channel.
+   * Updates an existing message template for messages that are sent through the email channel.
    */
   updateEmailTemplate(params: Pinpoint.Types.UpdateEmailTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailTemplateResponse) => void): Request<Pinpoint.Types.UpdateEmailTemplateResponse, AWSError>;
   /**
-   * Updates an existing message template that you can use in messages that are sent through the email channel.
+   * Updates an existing message template for messages that are sent through the email channel.
    */
   updateEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailTemplateResponse) => void): Request<Pinpoint.Types.UpdateEmailTemplateResponse, AWSError>;
   /**
@@ -796,19 +804,19 @@ declare class Pinpoint extends Service {
    */
   updateJourney(callback?: (err: AWSError, data: Pinpoint.Types.UpdateJourneyResponse) => void): Request<Pinpoint.Types.UpdateJourneyResponse, AWSError>;
   /**
-   * Cancels an active journey.
+   * Cancels (stops) an active journey.
    */
   updateJourneyState(params: Pinpoint.Types.UpdateJourneyStateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateJourneyStateResponse) => void): Request<Pinpoint.Types.UpdateJourneyStateResponse, AWSError>;
   /**
-   * Cancels an active journey.
+   * Cancels (stops) an active journey.
    */
   updateJourneyState(callback?: (err: AWSError, data: Pinpoint.Types.UpdateJourneyStateResponse) => void): Request<Pinpoint.Types.UpdateJourneyStateResponse, AWSError>;
   /**
-   * Updates an existing message template that you can use in messages that are sent through a push notification channel.
+   * Updates an existing message template for messages that are sent through a push notification channel.
    */
   updatePushTemplate(params: Pinpoint.Types.UpdatePushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdatePushTemplateResponse) => void): Request<Pinpoint.Types.UpdatePushTemplateResponse, AWSError>;
   /**
-   * Updates an existing message template that you can use in messages that are sent through a push notification channel.
+   * Updates an existing message template for messages that are sent through a push notification channel.
    */
   updatePushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdatePushTemplateResponse) => void): Request<Pinpoint.Types.UpdatePushTemplateResponse, AWSError>;
   /**
@@ -828,13 +836,21 @@ declare class Pinpoint extends Service {
    */
   updateSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
   /**
-   * Updates an existing message template that you can use in messages that are sent through the SMS channel.
+   * Updates an existing message template for messages that are sent through the SMS channel.
    */
   updateSmsTemplate(params: Pinpoint.Types.UpdateSmsTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsTemplateResponse) => void): Request<Pinpoint.Types.UpdateSmsTemplateResponse, AWSError>;
   /**
-   * Updates an existing message template that you can use in messages that are sent through the SMS channel.
+   * Updates an existing message template for messages that are sent through the SMS channel.
    */
   updateSmsTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsTemplateResponse) => void): Request<Pinpoint.Types.UpdateSmsTemplateResponse, AWSError>;
+  /**
+   * Changes the status of a specific version of a message template to active.
+   */
+  updateTemplateActiveVersion(params: Pinpoint.Types.UpdateTemplateActiveVersionRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateTemplateActiveVersionResponse) => void): Request<Pinpoint.Types.UpdateTemplateActiveVersionResponse, AWSError>;
+  /**
+   * Changes the status of a specific version of a message template to active.
+   */
+  updateTemplateActiveVersion(callback?: (err: AWSError, data: Pinpoint.Types.UpdateTemplateActiveVersionResponse) => void): Request<Pinpoint.Types.UpdateTemplateActiveVersionResponse, AWSError>;
   /**
    * Enables the voice channel for an application or updates the status and settings of the voice channel for an application.
    */
@@ -844,11 +860,11 @@ declare class Pinpoint extends Service {
    */
   updateVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
   /**
-   * Updates an existing message template that you can use in messages that are sent through the voice channel.
+   * Updates an existing message template for messages that are sent through the voice channel.
    */
   updateVoiceTemplate(params: Pinpoint.Types.UpdateVoiceTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceTemplateResponse) => void): Request<Pinpoint.Types.UpdateVoiceTemplateResponse, AWSError>;
   /**
-   * Updates an existing message template that you can use in messages that are sent through the voice channel.
+   * Updates an existing message template for messages that are sent through the voice channel.
    */
   updateVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceTemplateResponse) => void): Request<Pinpoint.Types.UpdateVoiceTemplateResponse, AWSError>;
 }
@@ -1444,7 +1460,7 @@ declare namespace Pinpoint {
      */
     Holdout?: HoldoutActivity;
     /**
-     * The settings for a multivariate split activity. This type of activity sends participants down one of as many as five paths in a journey, based on conditions that you specify.
+     * The settings for a multivariate split activity. This type of activity sends participants down one of as many as five paths (including a default Else path) in a journey, based on conditions that you specify.
      */
     MultiCondition?: MultiConditionalSplitActivity;
     /**
@@ -1903,7 +1919,7 @@ declare namespace Pinpoint {
      */
     Arn: __string;
     /**
-     * The date, ISO 8601 format, when the campaign was created.
+     * The date, in ISO 8601 format, when the campaign was created.
      */
     CreationDate: __string;
     /**
@@ -2079,11 +2095,11 @@ declare namespace Pinpoint {
      */
     EvaluationWaitTime?: WaitTime;
     /**
-     * The unique identifier for the activity to perform if the condition isn't met.
+     * The unique identifier for the activity to perform if the conditions aren't met.
      */
     FalseActivity?: __string;
     /**
-     * The unique identifier for the activity to perform if the condition is met.
+     * The unique identifier for the activity to perform if the conditions are met.
      */
     TrueActivity?: __string;
   }
@@ -2114,9 +2130,6 @@ declare namespace Pinpoint {
     CampaignResponse: CampaignResponse;
   }
   export interface CreateEmailTemplateRequest {
-    /**
-     * Creates a new message template that you can use in messages that are sent through the email channel.
-     */
     EmailTemplateRequest: EmailTemplateRequest;
     /**
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
@@ -2157,9 +2170,6 @@ declare namespace Pinpoint {
     JourneyResponse: JourneyResponse;
   }
   export interface CreatePushTemplateRequest {
-    /**
-     * Creates a message template that you can use in messages that are sent through a push notification channel.
-     */
     PushNotificationTemplateRequest: PushNotificationTemplateRequest;
     /**
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
@@ -2180,9 +2190,6 @@ declare namespace Pinpoint {
     SegmentResponse: SegmentResponse;
   }
   export interface CreateSmsTemplateRequest {
-    /**
-     * Creates a message template that you can use in messages that are sent through the SMS channel.
-     */
     SMSTemplateRequest: SMSTemplateRequest;
     /**
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
@@ -2368,6 +2375,10 @@ declare namespace Pinpoint {
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface DeleteEmailTemplateResponse {
     MessageBody: MessageBody;
@@ -2421,6 +2432,10 @@ declare namespace Pinpoint {
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface DeletePushTemplateResponse {
     MessageBody: MessageBody;
@@ -2452,6 +2467,10 @@ declare namespace Pinpoint {
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface DeleteSmsTemplateResponse {
     MessageBody: MessageBody;
@@ -2483,6 +2502,10 @@ declare namespace Pinpoint {
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface DeleteVoiceTemplateResponse {
     MessageBody: MessageBody;
@@ -2655,6 +2678,10 @@ declare namespace Pinpoint {
      * The name of the email template to use for the message.
      */
     TemplateName?: __string;
+    /**
+     * The unique identifier for the version of the email template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource. If you don't specify a value for this property, Amazon Pinpoint uses the active version of the template. The active version is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.
+     */
+    TemplateVersion?: __string;
   }
   export interface EmailTemplateRequest {
     /**
@@ -2688,7 +2715,7 @@ declare namespace Pinpoint {
      */
     Arn?: __string;
     /**
-     * The date when the message template was created.
+     * The date, in ISO 8601 format, when the message template was created.
      */
     CreationDate: __string;
     /**
@@ -2700,7 +2727,7 @@ declare namespace Pinpoint {
      */
     HtmlPart?: __string;
     /**
-     * The date when the message template was last modified.
+     * The date, in ISO 8601 format, when the message template was last modified.
      */
     LastModifiedDate: __string;
     /**
@@ -2727,6 +2754,10 @@ declare namespace Pinpoint {
      * The message body, in plain text format, that's used in email messages that are based on the message template.
      */
     TextPart?: __string;
+    /**
+     * The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.
+     */
+    Version?: __string;
   }
   export interface EndpointBatchItem {
     /**
@@ -2794,11 +2825,11 @@ declare namespace Pinpoint {
      */
     Locale?: __string;
     /**
-     * The manufacturer of the endpoint device, such as Apple or Samsung.
+     * The manufacturer of the endpoint device, such as apple or samsung.
      */
     Make?: __string;
     /**
-     * The model name or number of the endpoint device, such as iPhone.
+     * The model name or number of the endpoint device, such as iPhone or SM-G900F.
      */
     Model?: __string;
     /**
@@ -2806,7 +2837,7 @@ declare namespace Pinpoint {
      */
     ModelVersion?: __string;
     /**
-     * The platform of the endpoint device, such as iOS or Android.
+     * The platform of the endpoint device, such as ios.
      */
     Platform?: __string;
     /**
@@ -3461,7 +3492,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.
+     * The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.
      */
     EndTime?: __timestampIso8601;
     /**
@@ -3477,7 +3508,7 @@ declare namespace Pinpoint {
      */
     PageSize?: __string;
     /**
-     * The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.
+     * The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.
      */
     StartTime?: __timestampIso8601;
   }
@@ -3546,7 +3577,7 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.
+     * The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.
      */
     EndTime?: __timestampIso8601;
     /**
@@ -3562,7 +3593,7 @@ declare namespace Pinpoint {
      */
     PageSize?: __string;
     /**
-     * The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.
+     * The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.
      */
     StartTime?: __timestampIso8601;
   }
@@ -3660,6 +3691,10 @@ declare namespace Pinpoint {
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface GetEmailTemplateResponse {
     EmailTemplateResponse: EmailTemplateResponse;
@@ -3852,6 +3887,10 @@ declare namespace Pinpoint {
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface GetPushTemplateResponse {
     PushNotificationTemplateResponse: PushNotificationTemplateResponse;
@@ -3980,6 +4019,10 @@ declare namespace Pinpoint {
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface GetSmsTemplateResponse {
     SMSTemplateResponse: SMSTemplateResponse;
@@ -4011,6 +4054,10 @@ declare namespace Pinpoint {
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface GetVoiceTemplateResponse {
     VoiceTemplateResponse: VoiceTemplateResponse;
@@ -4021,7 +4068,7 @@ declare namespace Pinpoint {
      */
     NextActivity?: __string;
     /**
-     * The percentage of participants who shouldn't continue the journey.
+     * The percentage of participants who shouldn't continue the journey. To determine which participants are held out, Amazon Pinpoint applies a probability-based algorithm to the percentage that you specify. Therefore, the actual percentage of participants who are held out may not be equal to the percentage that you specify.
      */
     Percentage: __integer;
   }
@@ -4265,7 +4312,7 @@ declare namespace Pinpoint {
   }
   export interface JourneyResponse {
     /**
-     * The configuration and other settings for the activities that comprise the journey.
+     * A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity.
      */
     Activities?: MapOfActivity;
     /**
@@ -4317,7 +4364,7 @@ declare namespace Pinpoint {
      */
     StartCondition?: StartCondition;
     /**
-     * The current status of the journey. Possible values are: DRAFT - The journey is being developed and hasn't been published yet. ACTIVE - The journey has been developed and published. Depending on the journey's schedule, the journey may currently be running or scheduled to start running at a later time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it. COMPLETED - The journey has been published and has finished running. All participants have entered the journey and no participants are waiting to complete the journey or any activities in the journey. CANCELLED - The journey has been stopped. If a journey's status is CANCELLED, you can't add, change, or remove activities or segment settings from the journey. CLOSED - The journey has been published and has started running. It may have also passed its scheduled end time, or passed its scheduled start time and a refresh frequency hasn't been specified for it. If a journey's status is CLOSED, you can't add participants to it, and no existing participants can enter the journey for the first time. However, any existing participants who are currently waiting to start an activity may resume the journey.
+     * The current status of the journey. Possible values are: DRAFT - The journey is being developed and hasn't been published yet. ACTIVE - The journey has been developed and published. Depending on the journey's schedule, the journey may currently be running or scheduled to start running at a later time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it. COMPLETED - The journey has been published and has finished running. All participants have entered the journey and no participants are waiting to complete the journey or any activities in the journey. CANCELLED - The journey has been stopped. If a journey's status is CANCELLED, you can't add, change, or remove activities or segment settings from the journey. CLOSED - The journey has been published and has started running. It may have also passed its scheduled end time, or passed its scheduled start time and a refresh frequency hasn't been specified for it. If a journey's status is CLOSED, you can't add participants to it, and no existing participants can enter the journey for the first time. However, any existing participants who are currently waiting to start an activity may continue the journey.
      */
     State?: State;
     /**
@@ -4386,6 +4433,27 @@ declare namespace Pinpoint {
   export interface ListTagsForResourceResponse {
     TagsModel: TagsModel;
   }
+  export interface ListTemplateVersionsRequest {
+    /**
+     * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     */
+    NextToken?: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     */
+    PageSize?: __string;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    /**
+     * The type of channel that the message template is designed for. Valid values are: EMAIL, PUSH, SMS, and VOICE.
+     */
+    TemplateType: __string;
+  }
+  export interface ListTemplateVersionsResponse {
+    TemplateVersionsResponse: TemplateVersionsResponse;
+  }
   export interface ListTemplatesRequest {
     /**
      * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
@@ -4400,7 +4468,7 @@ declare namespace Pinpoint {
      */
     Prefix?: __string;
     /**
-     * The type of message template to include in the results. Valid values are: EMAIL, SMS, PUSH, and VOICE. To include all types of templates in the results, don't include this parameter in your request.
+     * The type of message template to include in the results. Valid values are: EMAIL, PUSH, SMS, and VOICE. To include all types of templates in the results, don't include this parameter in your request.
      */
     TemplateType?: __string;
   }
@@ -4591,7 +4659,7 @@ declare namespace Pinpoint {
      */
     Branches?: ListOfMultiConditionalBranch;
     /**
-     * The activity to perform by default for any path in the activity.
+     * The unique identifier for the activity to perform for participants who don't meet any of the conditions specified for other paths in the activity.
      */
     DefaultActivity?: __string;
     /**
@@ -4773,7 +4841,7 @@ declare namespace Pinpoint {
      */
     Baidu?: AndroidPushNotificationTemplate;
     /**
-     * The date when the message template was created.
+     * The date, in ISO 8601 format, when the message template was created.
      */
     CreationDate: __string;
     /**
@@ -4789,7 +4857,7 @@ declare namespace Pinpoint {
      */
     GCM?: AndroidPushNotificationTemplate;
     /**
-     * The date when the message template was last modified.
+     * The date, in ISO 8601 format, when the message template was last modified.
      */
     LastModifiedDate: __string;
     /**
@@ -4808,6 +4876,10 @@ declare namespace Pinpoint {
      * The type of channel that the message template is designed for. For a push notification template, this value is PUSH.
      */
     TemplateType: TemplateType;
+    /**
+     * The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.
+     */
+    Version?: __string;
   }
   export interface PutEventStreamRequest {
     /**
@@ -4851,7 +4923,7 @@ declare namespace Pinpoint {
      */
     NextActivity?: __string;
     /**
-     * The percentage of participants to send down the activity path.
+     * The percentage of participants to send down the activity path. To determine which participants are sent down each path, Amazon Pinpoint applies a probability-based algorithm to the percentages that you specify for the paths. Therefore, the actual percentage of participants who are sent down a path may not be equal to the percentage that you specify.
      */
     Percentage?: __integer;
   }
@@ -5037,7 +5109,7 @@ declare namespace Pinpoint {
      */
     Body?: __string;
     /**
-     * The date when the message template was created.
+     * The date, in ISO 8601 format, when the message template was created.
      */
     CreationDate: __string;
     /**
@@ -5045,7 +5117,7 @@ declare namespace Pinpoint {
      */
     DefaultSubstitutions?: __string;
     /**
-     * The date when the message template was last modified.
+     * The date, in ISO 8601 format, when the message template was last modified.
      */
     LastModifiedDate: __string;
     /**
@@ -5064,6 +5136,10 @@ declare namespace Pinpoint {
      * The type of channel that the message template is designed for. For an SMS template, this value is SMS.
      */
     TemplateType: TemplateType;
+    /**
+     * The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.
+     */
+    Version?: __string;
   }
   export interface Schedule {
     /**
@@ -5449,6 +5525,16 @@ declare namespace Pinpoint {
      * The name of the message template to use for the message. If specified, this value must match the name of an existing message template.
      */
     Name?: __string;
+    /**
+     * The unique identifier for the version of the message template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource. If you don't specify a value for this property, Amazon Pinpoint uses the active version of the template. The active version is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.
+     */
+    Version?: __string;
+  }
+  export interface TemplateActiveVersionRequest {
+    /**
+     * The unique identifier for the version of the message template to use as the active version of the template. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource.
+     */
+    Version?: __string;
   }
   export interface TemplateConfiguration {
     /**
@@ -5474,7 +5560,7 @@ declare namespace Pinpoint {
      */
     Arn?: __string;
     /**
-     * The date when the message template was created.
+     * The date, in ISO 8601 format, when the message template was created.
      */
     CreationDate: __string;
     /**
@@ -5482,7 +5568,7 @@ declare namespace Pinpoint {
      */
     DefaultSubstitutions?: __string;
     /**
-     * The date when the message template was last modified.
+     * The date, in ISO 8601 format, when the message template was last modified.
      */
     LastModifiedDate: __string;
     /**
@@ -5498,11 +5584,63 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The type of channel that the message template is designed for.
+     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.
      */
     TemplateType: TemplateType;
+    /**
+     * The unique identifier, as an integer, for the active version of the message template.
+     */
+    Version?: __string;
   }
   export type TemplateType = "EMAIL"|"SMS"|"VOICE"|"PUSH"|string;
+  export interface TemplateVersionResponse {
+    /**
+     * The date, in ISO 8601 format, when the version of the message template was created.
+     */
+    CreationDate: __string;
+    /**
+     * A JSON object that specifies the default values that are used for message variables in the version of the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+     */
+    DefaultSubstitutions?: __string;
+    /**
+     * The date, in ISO 8601 format, when the version of the message template was last modified.
+     */
+    LastModifiedDate: __string;
+    /**
+     * The custom description of the version of the message template.
+     */
+    TemplateDescription?: __string;
+    /**
+     * The name of the message template.
+     */
+    TemplateName: __string;
+    /**
+     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.
+     */
+    TemplateType: __string;
+    /**
+     * The unique identifier for the version of the message template. This value is an integer that Amazon Pinpoint automatically increments and assigns to each new version of a template.
+     */
+    Version?: __string;
+  }
+  export interface TemplateVersionsResponse {
+    /**
+     * An array of responses, one for each version of the message template.
+     */
+    Item: ListOfTemplateVersionResponse;
+    /**
+     * The message that's returned from the API for the request to retrieve information about all the versions of the message template.
+     */
+    Message?: __string;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    NextToken?: __string;
+    /**
+     * The unique identifier for the request to retrieve information about all the versions of the message template.
+     */
+    RequestID?: __string;
+  }
   export interface TemplatesResponse {
     /**
      * An array of responses, one for each message template that's associated with your Amazon Pinpoint account and meets any filter criteria that you specified in the request.
@@ -5659,11 +5797,19 @@ declare namespace Pinpoint {
     EmailChannelResponse: EmailChannelResponse;
   }
   export interface UpdateEmailTemplateRequest {
+    /**
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     */
+    CreateNewVersion?: __boolean;
     EmailTemplateRequest: EmailTemplateRequest;
     /**
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface UpdateEmailTemplateResponse {
     MessageBody: MessageBody;
@@ -5732,13 +5878,18 @@ declare namespace Pinpoint {
   }
   export interface UpdatePushTemplateRequest {
     /**
-     * Updates an existing message template that you can use in messages that are sent through a push notification channel.
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
      */
+    CreateNewVersion?: __boolean;
     PushNotificationTemplateRequest: PushNotificationTemplateRequest;
     /**
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface UpdatePushTemplateResponse {
     MessageBody: MessageBody;
@@ -5768,13 +5919,35 @@ declare namespace Pinpoint {
     SMSChannelResponse: SMSChannelResponse;
   }
   export interface UpdateSmsTemplateRequest {
+    /**
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     */
+    CreateNewVersion?: __boolean;
     SMSTemplateRequest: SMSTemplateRequest;
     /**
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
   }
   export interface UpdateSmsTemplateResponse {
+    MessageBody: MessageBody;
+  }
+  export interface UpdateTemplateActiveVersionRequest {
+    TemplateActiveVersionRequest: TemplateActiveVersionRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    /**
+     * The type of channel that the message template is designed for. Valid values are: EMAIL, PUSH, SMS, and VOICE.
+     */
+    TemplateType: __string;
+  }
+  export interface UpdateTemplateActiveVersionResponse {
     MessageBody: MessageBody;
   }
   export interface UpdateVoiceChannelRequest {
@@ -5789,9 +5962,17 @@ declare namespace Pinpoint {
   }
   export interface UpdateVoiceTemplateRequest {
     /**
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     */
+    CreateNewVersion?: __boolean;
+    /**
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
      */
     TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
     VoiceTemplateRequest: VoiceTemplateRequest;
   }
   export interface UpdateVoiceTemplateResponse {
@@ -5903,7 +6084,7 @@ declare namespace Pinpoint {
      */
     Body?: __string;
     /**
-     * The date when the message template was created.
+     * The date, in ISO 8601 format, when the message template was created.
      */
     CreationDate: __string;
     /**
@@ -5915,7 +6096,7 @@ declare namespace Pinpoint {
      */
     LanguageCode?: __string;
     /**
-     * The date when the message template was last modified.
+     * The date, in ISO 8601 format, when the message template was last modified.
      */
     LastModifiedDate: __string;
     /**
@@ -5934,6 +6115,10 @@ declare namespace Pinpoint {
      * The type of channel that the message template is designed for. For a voice template, this value is VOICE.
      */
     TemplateType: TemplateType;
+    /**
+     * The unique identifier, as an integer, for the active version of the message template, or the version of the template that you specified by using the version parameter in your request.
+     */
+    Version?: __string;
     /**
      * The name of the voice that's used when delivering messages that are based on the message template. For a list of supported voices, see the Amazon Polly Developer Guide.
      */
@@ -6053,7 +6238,7 @@ declare namespace Pinpoint {
   }
   export interface WriteJourneyRequest {
     /**
-     * The configuration and other settings for the activities that comprise the journey.
+     * A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.
      */
     Activities?: MapOfActivity;
     /**
@@ -6089,7 +6274,7 @@ declare namespace Pinpoint {
      */
     Schedule?: JourneySchedule;
     /**
-     * The unique identifier for the first activity in the journey.
+     * The unique identifier for the first activity in the journey. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.
      */
     StartActivity?: __string;
     /**
@@ -6166,6 +6351,7 @@ declare namespace Pinpoint {
   export type ListOfSegmentResponse = SegmentResponse[];
   export type ListOfSimpleCondition = SimpleCondition[];
   export type ListOfTemplateResponse = TemplateResponse[];
+  export type ListOfTemplateVersionResponse = TemplateVersionResponse[];
   export type ListOfTreatmentResource = TreatmentResource[];
   export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
   export type ListOf__string = __string[];

@@ -82,7 +82,7 @@
           "shape": "UnsupportedAvailabilityZoneException"
         }
       ],
-      "documentation": "<p>Creates an AWS Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to schedule pods on Fargate infrastructure.</p> <p>The Fargate profile allows an administrator to declare which pods run on Fargate infrastructure and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate infrastructure. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is scheduled on Fargate infrastructure.</p> <p>When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes <a href=\"https://kubernetes.io/docs/admin/authorization/rbac/\">Role Based Access Control</a> (RBAC) for authorization so that the <code>kubelet</code> that is running on the Fargate infrastructure can register with your Amazon EKS cluster. This role is what allows Fargate infrastructure to appear in your cluster as nodes. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p> <p>Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating.</p> <p>If any Fargate profiles in a cluster are in the <code>DELETING</code> status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html\">AWS Fargate Profile</a> in the <i>Amazon EKS User Guide</i>.</p>"
+      "documentation": "<p>Creates an AWS Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to run pods on Fargate.</p> <p>The Fargate profile allows an administrator to declare which pods run on Fargate and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is run on Fargate.</p> <p>When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes <a href=\"https://kubernetes.io/docs/admin/authorization/rbac/\">Role Based Access Control</a> (RBAC) for authorization so that the <code>kubelet</code> that is running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can appear in your cluster as a node. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p> <p>Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating.</p> <p>If any Fargate profiles in a cluster are in the <code>DELETING</code> status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html\">AWS Fargate Profile</a> in the <i>Amazon EKS User Guide</i>.</p>"
     },
     "CreateNodegroup": {
       "name": "CreateNodegroup",
@@ -178,7 +178,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Deletes an AWS Fargate profile.</p> <p>When you delete a Fargate profile, any pods that were scheduled onto Fargate infrastructure with the profile are deleted. If those pods match another Fargate profile, then they are scheduled on Fargate infrastructure with that profile. If they no longer match any Fargate profiles, then they are not scheduled on Fargate infrastructure.</p> <p>Only one Fargate profile in a cluster can be in the <code>DELETING</code> status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.</p>"
+      "documentation": "<p>Deletes an AWS Fargate profile.</p> <p>When you delete a Fargate profile, any pods running on Fargate that were created with the profile are deleted. If those pods match another Fargate profile, then they are scheduled on Fargate with that profile. If they no longer match any Fargate profiles, then they are not scheduled on Fargate and they may remain in a pending state.</p> <p>Only one Fargate profile in a cluster can be in the <code>DELETING</code> status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.</p>"
     },
     "DeleteNodegroup": {
       "name": "DeleteNodegroup",
@@ -847,7 +847,7 @@
         },
         "subnets": {
           "shape": "StringList",
-          "documentation": "<p>The IDs of subnets to launch Fargate pods into. At this time, Fargate pods are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.</p>"
+          "documentation": "<p>The IDs of subnets to launch your pods into. At this time, pods running on Fargate are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.</p>"
         },
         "selectors": {
           "shape": "FargateProfileSelectors",
@@ -1215,11 +1215,11 @@
         },
         "podExecutionRoleArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. For more information, see <a href=\"eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>"
         },
         "subnets": {
           "shape": "StringList",
-          "documentation": "<p>The IDs of subnets to launch Fargate pods into.</p>"
+          "documentation": "<p>The IDs of subnets to launch pods into.</p>"
         },
         "selectors": {
           "shape": "FargateProfileSelectors",
@@ -2046,7 +2046,8 @@
         "LabelsToRemove",
         "MaxSize",
         "MinSize",
-        "ReleaseVersion"
+        "ReleaseVersion",
+        "PublicAccessCidrs"
       ]
     },
     "UpdateParams": {
@@ -2086,11 +2087,15 @@
         },
         "endpointPublicAccess": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>Set this value to <code>false</code> to disable public access for your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can receive only requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+          "documentation": "<p>Set this value to <code>false</code> to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
         },
         "endpointPrivateAccess": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+          "documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the worker nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "publicAccessCidrs": {
+          "shape": "StringList",
+          "documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
         }
       },
       "documentation": "<p>An object representing the VPC configuration to use for an Amazon EKS cluster.</p>"
@@ -2116,11 +2121,15 @@
         },
         "endpointPublicAccess": {
           "shape": "Boolean",
-          "documentation": "<p>This parameter indicates whether the Amazon EKS public API server endpoint is enabled. If the Amazon EKS public API server endpoint is disabled, your cluster's Kubernetes API server can receive only requests that originate from within the cluster VPC. </p>"
+          "documentation": "<p>This parameter indicates whether the Amazon EKS public API server endpoint is enabled. If the Amazon EKS public API server endpoint is disabled, your cluster's Kubernetes API server can only receive requests that originate from within the cluster VPC.</p>"
         },
         "endpointPrivateAccess": {
           "shape": "Boolean",
-          "documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC use the private VPC endpoint instead of traversing the internet.</p>"
+          "documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have worker nodes or AWS Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the worker nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "publicAccessCidrs": {
+          "shape": "StringList",
+          "documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that the necessary CIDR blocks are listed. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
         }
       },
       "documentation": "<p>An object representing an Amazon EKS cluster VPC configuration response.</p>"

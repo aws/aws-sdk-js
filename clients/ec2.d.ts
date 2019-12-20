@@ -101,11 +101,11 @@ declare class EC2 extends Service {
    */
   assignPrivateIpAddresses(callback?: (err: AWSError, data: EC2.Types.AssignPrivateIpAddressesResult) => void): Request<EC2.Types.AssignPrivateIpAddressesResult, AWSError>;
   /**
-   * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
+   * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(params: EC2.Types.AssociateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
-   * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
+   * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
@@ -2493,11 +2493,11 @@ declare class EC2 extends Service {
    */
   modifyDefaultCreditSpecification(callback?: (err: AWSError, data: EC2.Types.ModifyDefaultCreditSpecificationResult) => void): Request<EC2.Types.ModifyDefaultCreditSpecificationResult, AWSError>;
   /**
-   * Changes the default customer master key (CMK) for EBS encryption by default for your account in this Region. AWS creates a unique AWS managed CMK in each Region for use with encryption by default. If you change the default CMK to a customer managed CMK, it is used instead of the AWS managed CMK. To reset the default CMK to the AWS managed CMK for EBS, use ResetEbsDefaultKmsKeyId. If you delete or disable the customer managed CMK that you specified for use with encryption by default, your instances will fail to launch. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+   * Changes the default customer master key (CMK) for EBS encryption by default for your account in this Region. AWS creates a unique AWS managed CMK in each Region for use with encryption by default. If you change the default CMK to a symmetric customer managed CMK, it is used instead of the AWS managed CMK. To reset the default CMK to the AWS managed CMK for EBS, use ResetEbsDefaultKmsKeyId. Amazon EBS does not support asymmetric CMKs. If you delete or disable the customer managed CMK that you specified for use with encryption by default, your instances will fail to launch. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyEbsDefaultKmsKeyId(params: EC2.Types.ModifyEbsDefaultKmsKeyIdRequest, callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
   /**
-   * Changes the default customer master key (CMK) for EBS encryption by default for your account in this Region. AWS creates a unique AWS managed CMK in each Region for use with encryption by default. If you change the default CMK to a customer managed CMK, it is used instead of the AWS managed CMK. To reset the default CMK to the AWS managed CMK for EBS, use ResetEbsDefaultKmsKeyId. If you delete or disable the customer managed CMK that you specified for use with encryption by default, your instances will fail to launch. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+   * Changes the default customer master key (CMK) for EBS encryption by default for your account in this Region. AWS creates a unique AWS managed CMK in each Region for use with encryption by default. If you change the default CMK to a symmetric customer managed CMK, it is used instead of the AWS managed CMK. To reset the default CMK to the AWS managed CMK for EBS, use ResetEbsDefaultKmsKeyId. Amazon EBS does not support asymmetric CMKs. If you delete or disable the customer managed CMK that you specified for use with encryption by default, your instances will fail to launch. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyEbsDefaultKmsKeyId(callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
   /**
@@ -5352,7 +5352,7 @@ declare namespace EC2 {
      */
     Encrypted?: Boolean;
     /**
-     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with "alias/". For example:   Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to. 
+     * An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with "alias/". For example:   Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to.  Amazon EBS does not support asymmetric CMKs.
      */
     KmsKeyId?: String;
     /**
@@ -7212,6 +7212,7 @@ declare namespace EC2 {
   export type DatafeedSubscriptionState = "Active"|"Inactive"|string;
   export type DateTime = Date;
   export type DedicatedHostFlag = boolean;
+  export type DedicatedHostId = string;
   export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
   export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
@@ -7398,7 +7399,7 @@ declare namespace EC2 {
     /**
      * The name of the key pair.
      */
-    KeyName: String;
+    KeyName: KeyPairName;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -8086,7 +8087,7 @@ declare namespace EC2 {
   }
   export interface DescribeAddressesRequest {
     /**
-     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The AWS account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-border-group - The location from where the IP address is advertised.    network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The AWS account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -8638,6 +8639,7 @@ declare namespace EC2 {
      * The export task IDs.
      */
     ExportTaskIds?: ExportTaskIdStringList;
+    Filters?: FilterList;
   }
   export interface DescribeExportTasksResult {
     /**
@@ -9446,6 +9448,10 @@ declare namespace EC2 {
      */
     KeyNames?: KeyNameStringList;
     /**
+     * The IDs of the key pairs.
+     */
+    KeyPairIds?: KeyPairIdStringList;
+    /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
@@ -9912,7 +9918,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
+     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. You cannot specify this parameter and the network interface IDs parameter in the same request.
      */
     MaxResults?: DescribeNetworkInterfacesMaxResults;
   }
@@ -9939,6 +9945,10 @@ declare namespace EC2 {
      * The names of the placement groups. Default: Describes all your placement groups, or only those otherwise specified.
      */
     GroupNames?: PlacementGroupStringList;
+    /**
+     * The IDs of the placement groups.
+     */
+    GroupIds?: PlacementGroupIdStringList;
   }
   export interface DescribePlacementGroupsResult {
     /**
@@ -12166,7 +12176,7 @@ declare namespace EC2 {
   export type ElasticGpuSet = ElasticGpus[];
   export interface ElasticGpuSpecification {
     /**
-     * The type of Elastic Graphics accelerator.
+     * The type of Elastic Graphics accelerator. For more information about the values to specify for Type, see Elastic Graphics Basics, specifically the Elastic Graphics accelerator column, in the Amazon Elastic Compute Cloud User Guide for Windows Instances.
      */
     Type: String;
   }
@@ -12217,7 +12227,7 @@ declare namespace EC2 {
      */
     Type: String;
     /**
-     *  The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. 
+     *  The number of elastic inference accelerators to attach to the instance.  Default: 1
      */
     Count?: ElasticInferenceAcceleratorCount;
   }
@@ -12608,6 +12618,7 @@ declare namespace EC2 {
      * The status message related to the export task.
      */
     StatusMessage?: String;
+    Tags?: TagList;
   }
   export type ExportTaskId = string;
   export type ExportTaskIdStringList = String[];
@@ -13705,7 +13716,6 @@ declare namespace EC2 {
      */
     MemberOfServiceLinkedResourceGroup?: Boolean;
   }
-  export type HostId = string;
   export interface HostInstance {
     /**
      * The ID of instance that is running on the Dedicated Host.
@@ -14155,7 +14165,7 @@ declare namespace EC2 {
      */
     Hypervisor?: String;
     /**
-     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the AMI is being copied to.
+     * An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the AMI is being copied to. Amazon EBS does not support asymmetric CMKs.
      */
     KmsKeyId?: String;
     /**
@@ -14201,7 +14211,7 @@ declare namespace EC2 {
      */
     ImportTaskId?: String;
     /**
-     * The identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted AMI.
+     * The identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted AMI.
      */
     KmsKeyId?: String;
     /**
@@ -14287,7 +14297,11 @@ declare namespace EC2 {
      */
     StatusMessage?: String;
     /**
-     * The ARNs of the license configurations associated to the import image task.
+     * Any tags applied to the import image task.
+     */
+    Tags?: TagList;
+    /**
+     * The ARNs of the license configurations that are associated with the import image task.
      */
     LicenseSpecifications?: ImportImageLicenseSpecificationListResponse;
   }
@@ -14423,7 +14437,7 @@ declare namespace EC2 {
     /**
      * A unique name for the key pair.
      */
-    KeyName: String;
+    KeyName: KeyPairName;
     /**
      * The public key. For API calls, the text must be base64-encoded. For command line tools, base64 encoding is performed for you.
      */
@@ -14465,7 +14479,7 @@ declare namespace EC2 {
      */
     Encrypted?: Boolean;
     /**
-     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted snapshot. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to.
+     * An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted snapshot. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to. Amazon EBS does not support asymmetric CMKs.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -14500,6 +14514,10 @@ declare namespace EC2 {
      * Describes an import snapshot task.
      */
     SnapshotTaskDetail?: SnapshotTaskDetail;
+    /**
+     * Any tags applied to the import snapshot task.
+     */
+    Tags?: TagList;
   }
   export type ImportSnapshotTaskList = ImportSnapshotTask[];
   export type ImportTaskId = string;
@@ -15505,7 +15523,7 @@ declare namespace EC2 {
      */
     CidrIp?: String;
     /**
-     * A description for the security group rule that references this IPv4 address range. Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
+     * A description for the security group rule that references this IPv4 address range. Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*
      */
     Description?: String;
   }
@@ -15527,7 +15545,7 @@ declare namespace EC2 {
      */
     CidrIpv6?: String;
     /**
-     * A description for the security group rule that references this IPv6 address range. Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
+     * A description for the security group rule that references this IPv6 address range. Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*
      */
     Description?: String;
   }
@@ -15547,8 +15565,17 @@ declare namespace EC2 {
      * The name of the key pair.
      */
     KeyName?: String;
+    /**
+     * The ID of the key pair.
+     */
+    KeyPairId?: String;
   }
+  export type KeyPairIdStringList = String[];
   export interface KeyPairInfo {
+    /**
+     * The ID of the key pair.
+     */
+    KeyPairId?: String;
     /**
      * If you used CreateKeyPair to create the key pair, this is the SHA-1 digest of the DER encoded private key. If you used ImportKeyPair to provide AWS the public key, this is the MD5 public key fingerprint as specified in section 4 of RFC4716.
      */
@@ -15557,6 +15584,10 @@ declare namespace EC2 {
      * The name of the key pair.
      */
     KeyName?: String;
+    /**
+     * Any tags applied to the key pair.
+     */
+    Tags?: TagList;
   }
   export type KeyPairList = KeyPairInfo[];
   export type KeyPairName = string;
@@ -15815,7 +15846,7 @@ declare namespace EC2 {
      */
     Iops?: Integer;
     /**
-     * The ARN of the AWS Key Management Service (AWS KMS) CMK used for encryption.
+     * The ARN of the symmetric AWS Key Management Service (AWS KMS) CMK used for encryption.
      */
     KmsKeyId?: String;
     /**
@@ -15837,7 +15868,7 @@ declare namespace EC2 {
      */
     Type: String;
     /**
-     *  The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. 
+     *  The number of elastic inference accelerators to attach to the instance.  Default: 1
      */
     Count?: LaunchTemplateElasticInferenceAcceleratorCount;
   }
@@ -15849,7 +15880,7 @@ declare namespace EC2 {
      */
     Type?: String;
     /**
-     *  The number of elastic inference accelerators of given type to be attached to the instance. Only positive values allowed. If not specified defaults to 1. 
+     *  The number of elastic inference accelerators to attach to the instance.  Default: 1
      */
     Count?: Integer;
   }
@@ -16573,7 +16604,7 @@ declare namespace EC2 {
   }
   export interface ModifyEbsDefaultKmsKeyIdRequest {
     /**
-     * The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted state must be true. You can specify the CMK using any of the following:   Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias. For example, alias/ExampleAlias.   Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.
+     * The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted state must be true. You can specify the CMK using any of the following:   Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias. For example, alias/ExampleAlias.   Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails. Amazon EBS does not support asymmetric CMKs.
      */
     KmsKeyId: KmsKeyId;
     /**
@@ -16932,7 +16963,7 @@ declare namespace EC2 {
     /**
      * The ID of the Dedicated Host with which to associate the instance.
      */
-    HostId?: HostId;
+    HostId?: DedicatedHostId;
     /**
      * The ID of the instance that you are modifying.
      */
@@ -17236,7 +17267,7 @@ declare namespace EC2 {
      */
     RemoveSubnetIds?: ValueStringList;
     /**
-     * The new VPC attachment options.
+     * The new VPC attachment options.  You cannot modify the IPv6 options. 
      */
     Options?: ModifyTransitGatewayVpcAttachmentRequestOptions;
     /**
@@ -18089,15 +18120,15 @@ declare namespace EC2 {
      */
     AllocationStrategy?: FleetOnDemandAllocationStrategy;
     /**
-     * The strategy for using unused Capacity Reservations for fulfilling On-Demand capacity. Only available for fleets of type instant. 
+     * The strategy for using unused Capacity Reservations for fulfilling On-Demand capacity. Supported only for fleets of type instant.
      */
     CapacityReservationOptions?: CapacityReservationOptions;
     /**
-     * Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.
+     * Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet. Supported only for fleets of type instant.
      */
     SingleInstanceType?: Boolean;
     /**
-     * Indicates that the fleet launches all On-Demand Instances into a single Availability Zone.
+     * Indicates that the fleet launches all On-Demand Instances into a single Availability Zone. Supported only for fleets of type instant.
      */
     SingleAvailabilityZone?: Boolean;
     /**
@@ -18115,15 +18146,15 @@ declare namespace EC2 {
      */
     AllocationStrategy?: FleetOnDemandAllocationStrategy;
     /**
-     * The strategy for using unused Capacity Reservations for fulfilling On-Demand capacity. Only available for fleets of type instant.
+     * The strategy for using unused Capacity Reservations for fulfilling On-Demand capacity. Supported only for fleets of type instant.
      */
     CapacityReservationOptions?: CapacityReservationOptionsRequest;
     /**
-     * Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.
+     * Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet. Supported only for fleets of type instant.
      */
     SingleInstanceType?: Boolean;
     /**
-     * Indicates that the fleet launches all On-Demand Instances into a single Availability Zone.
+     * Indicates that the fleet launches all On-Demand Instances into a single Availability Zone. Supported only for fleets of type instant.
      */
     SingleAvailabilityZone?: Boolean;
     /**
@@ -18344,7 +18375,16 @@ declare namespace EC2 {
      * The number of partitions. Valid only if strategy is set to partition.
      */
     PartitionCount?: Integer;
+    /**
+     * The ID of the placement group.
+     */
+    GroupId?: String;
+    /**
+     * Any tags applied to the placement group.
+     */
+    Tags?: TagList;
   }
+  export type PlacementGroupIdStringList = String[];
   export interface PlacementGroupInfo {
     /**
      * A list of supported placement groups types.
@@ -19200,7 +19240,7 @@ declare namespace EC2 {
   }
   export type ReportStatusType = "ok"|"impaired"|string;
   export type RequestHostIdList = String[];
-  export type RequestHostIdSet = HostId[];
+  export type RequestHostIdSet = DedicatedHostId[];
   export type RequestInstanceTypeList = InstanceType[];
   export interface RequestLaunchTemplateData {
     /**
@@ -19860,7 +19900,7 @@ declare namespace EC2 {
   }
   export type ResourceIdList = String[];
   export type ResourceList = String[];
-  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"fleet"|"fpga-image"|"host-reservation"|"image"|"instance"|"internet-gateway"|"launch-template"|"natgateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|string;
+  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"fleet"|"fpga-image"|"host-reservation"|"image"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"natgateway"|"network-acl"|"network-interface"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -21678,11 +21718,11 @@ declare namespace EC2 {
      */
     InstancePoolsToUseCount?: Integer;
     /**
-     * Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.
+     * Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet. Supported only for fleets of type instant.
      */
     SingleInstanceType?: Boolean;
     /**
-     * Indicates that the fleet launches all Spot Instances into a single Availability Zone.
+     * Indicates that the fleet launches all Spot Instances into a single Availability Zone. Supported only for fleets of type instant.
      */
     SingleAvailabilityZone?: Boolean;
     /**
@@ -21708,11 +21748,11 @@ declare namespace EC2 {
      */
     InstancePoolsToUseCount?: Integer;
     /**
-     * Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.
+     * Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet. Supported only for fleets of type instant.
      */
     SingleInstanceType?: Boolean;
     /**
-     * Indicates that the fleet launches all Spot Instances into a single Availability Zone.
+     * Indicates that the fleet launches all Spot Instances into a single Availability Zone. Supported only for fleets of type instant.
      */
     SingleAvailabilityZone?: Boolean;
     /**
@@ -22040,7 +22080,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | fleet | fpga-image | instance | launch-template | snapshot | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | volume. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | fleet | fpga-image | instance | key-pair | launch-template | placement-group | snapshot | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | volume. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**

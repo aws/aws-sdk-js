@@ -20,6 +20,14 @@ declare class TranscribeService extends Service {
    */
   createVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
+   * Creates a new vocabulary filter that you can use to filter words, such as profane words, from the output of a transcription job.
+   */
+  createVocabularyFilter(params: TranscribeService.Types.CreateVocabularyFilterRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyFilterResponse) => void): Request<TranscribeService.Types.CreateVocabularyFilterResponse, AWSError>;
+  /**
+   * Creates a new vocabulary filter that you can use to filter words, such as profane words, from the output of a transcription job.
+   */
+  createVocabularyFilter(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyFilterResponse) => void): Request<TranscribeService.Types.CreateVocabularyFilterResponse, AWSError>;
+  /**
    * Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
    */
   deleteTranscriptionJob(params: TranscribeService.Types.DeleteTranscriptionJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -35,6 +43,14 @@ declare class TranscribeService extends Service {
    * Deletes a vocabulary from Amazon Transcribe. 
    */
   deleteVocabulary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a vocabulary filter.
+   */
+  deleteVocabularyFilter(params: TranscribeService.Types.DeleteVocabularyFilterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a vocabulary filter.
+   */
+  deleteVocabularyFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Returns information about a transcription job. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptionFileUri field.
    */
@@ -52,6 +68,14 @@ declare class TranscribeService extends Service {
    */
   getVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyResponse) => void): Request<TranscribeService.Types.GetVocabularyResponse, AWSError>;
   /**
+   * Returns information about a vocabulary filter.
+   */
+  getVocabularyFilter(params: TranscribeService.Types.GetVocabularyFilterRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyFilterResponse) => void): Request<TranscribeService.Types.GetVocabularyFilterResponse, AWSError>;
+  /**
+   * Returns information about a vocabulary filter.
+   */
+  getVocabularyFilter(callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyFilterResponse) => void): Request<TranscribeService.Types.GetVocabularyFilterResponse, AWSError>;
+  /**
    * Lists transcription jobs with the specified status.
    */
   listTranscriptionJobs(params: TranscribeService.Types.ListTranscriptionJobsRequest, callback?: (err: AWSError, data: TranscribeService.Types.ListTranscriptionJobsResponse) => void): Request<TranscribeService.Types.ListTranscriptionJobsResponse, AWSError>;
@@ -68,6 +92,14 @@ declare class TranscribeService extends Service {
    */
   listVocabularies(callback?: (err: AWSError, data: TranscribeService.Types.ListVocabulariesResponse) => void): Request<TranscribeService.Types.ListVocabulariesResponse, AWSError>;
   /**
+   * Gets information about vocabulary filters.
+   */
+  listVocabularyFilters(params: TranscribeService.Types.ListVocabularyFiltersRequest, callback?: (err: AWSError, data: TranscribeService.Types.ListVocabularyFiltersResponse) => void): Request<TranscribeService.Types.ListVocabularyFiltersResponse, AWSError>;
+  /**
+   * Gets information about vocabulary filters.
+   */
+  listVocabularyFilters(callback?: (err: AWSError, data: TranscribeService.Types.ListVocabularyFiltersResponse) => void): Request<TranscribeService.Types.ListVocabularyFiltersResponse, AWSError>;
+  /**
    * Starts an asynchronous job to transcribe speech to text. 
    */
   startTranscriptionJob(params: TranscribeService.Types.StartTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.StartTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartTranscriptionJobResponse, AWSError>;
@@ -83,9 +115,49 @@ declare class TranscribeService extends Service {
    * Updates an existing vocabulary with new values. The UpdateVocabulary operation overwrites all of the existing information with the values that you provide in the request. 
    */
   updateVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyResponse) => void): Request<TranscribeService.Types.UpdateVocabularyResponse, AWSError>;
+  /**
+   * Updates a vocabulary filter with a new list of filtered words.
+   */
+  updateVocabularyFilter(params: TranscribeService.Types.UpdateVocabularyFilterRequest, callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyFilterResponse) => void): Request<TranscribeService.Types.UpdateVocabularyFilterResponse, AWSError>;
+  /**
+   * Updates a vocabulary filter with a new list of filtered words.
+   */
+  updateVocabularyFilter(callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyFilterResponse) => void): Request<TranscribeService.Types.UpdateVocabularyFilterResponse, AWSError>;
 }
 declare namespace TranscribeService {
   export type Boolean = boolean;
+  export interface CreateVocabularyFilterRequest {
+    /**
+     * The vocabulary filter name. The name must be unique within the account that contains it.
+     */
+    VocabularyFilterName: VocabularyFilterName;
+    /**
+     * The language code of the words in the vocabulary filter. All words in the filter must be in the same language. The vocabulary filter can only be used with transcription jobs in the specified language.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. If you provide a list of words in the Words parameter, you can't use the VocabularyFilterFileUri parameter.
+     */
+    Words?: Words;
+    /**
+     * The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. The specified file must be less than 50 KB of UTF-8 characters. If you provide the location of a list of words in the VocabularyFilterFileUri parameter, you can't use the Words parameter.
+     */
+    VocabularyFilterFileUri?: Uri;
+  }
+  export interface CreateVocabularyFilterResponse {
+    /**
+     * The name of the vocabulary filter.
+     */
+    VocabularyFilterName?: VocabularyFilterName;
+    /**
+     * The language code of the words in the collection.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The date and time that the vocabulary filter was modified.
+     */
+    LastModifiedTime?: DateTime;
+  }
   export interface CreateVocabularyRequest {
     /**
      * The name of the vocabulary. The name must be unique within an AWS account. The name is case-sensitive.
@@ -134,6 +206,12 @@ declare namespace TranscribeService {
      */
     TranscriptionJobName: TranscriptionJobName;
   }
+  export interface DeleteVocabularyFilterRequest {
+    /**
+     * The name of the vocabulary filter to remove.
+     */
+    VocabularyFilterName: VocabularyFilterName;
+  }
   export interface DeleteVocabularyRequest {
     /**
      * The name of the vocabulary to delete. 
@@ -152,6 +230,30 @@ declare namespace TranscribeService {
      * An object that contains the results of the transcription job.
      */
     TranscriptionJob?: TranscriptionJob;
+  }
+  export interface GetVocabularyFilterRequest {
+    /**
+     * The name of the vocabulary filter for which to return information.
+     */
+    VocabularyFilterName: VocabularyFilterName;
+  }
+  export interface GetVocabularyFilterResponse {
+    /**
+     * The name of the vocabulary filter.
+     */
+    VocabularyFilterName?: VocabularyFilterName;
+    /**
+     * The language code of the words in the vocabulary filter.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The date and time that the contents of the vocabulary filter were updated.
+     */
+    LastModifiedTime?: DateTime;
+    /**
+     * The URI of the list of words in the vocabulary filter. You can use this URI to get the list of words.
+     */
+    DownloadUri?: Uri;
   }
   export interface GetVocabularyRequest {
     /**
@@ -261,6 +363,30 @@ declare namespace TranscribeService {
      */
     Vocabularies?: Vocabularies;
   }
+  export interface ListVocabularyFiltersRequest {
+    /**
+     * If the result of the previous request to ListVocabularyFilters was truncated, include the NextToken to fetch the next set of collections.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of filters to return in the response. If there are fewer results in the list, this response contains only the actual results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Filters the response so that it only contains vocabulary filters whose name contains the specified string.
+     */
+    NameContains?: VocabularyFilterName;
+  }
+  export interface ListVocabularyFiltersResponse {
+    /**
+     * The ListVocabularyFilters operation returns a page of collections at a time. The maximum size of the page is set by the MaxResults parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the NextPage token. Include the token in the next request to the ListVocabularyFilters operation to return in the next page of jobs.
+     */
+    NextToken?: NextToken;
+    /**
+     * The list of vocabulary filters. It will contain at most MaxResults number of filters. If there are more filters, call the ListVocabularyFilters operation again with the NextToken parameter in the request set to the value of the NextToken field in the response.
+     */
+    VocabularyFilters?: VocabularyFilters;
+  }
   export type MaxAlternatives = number;
   export type MaxResults = number;
   export type MaxSpeakers = number;
@@ -302,6 +428,14 @@ declare namespace TranscribeService {
      * The number of alternative transcriptions that the service should return. If you specify the MaxAlternatives field, you must set the ShowAlternatives field to true.
      */
     MaxAlternatives?: MaxAlternatives;
+    /**
+     * The name of the vocabulary filter to use when transcribing the audio. The filter that you specify must have the same language code as the transcription job.
+     */
+    VocabularyFilterName?: VocabularyFilterName;
+    /**
+     * Set to mask to remove filtered text from the transcript and replace it with three asterisks ("***") as placeholder text. Set to remove to remove filtered text from the transcript without using placeholder text.
+     */
+    VocabularyFilterMethod?: VocabularyFilterMethod;
   }
   export interface StartTranscriptionJobRequest {
     /**
@@ -444,6 +578,34 @@ declare namespace TranscribeService {
      */
     OutputLocationType?: OutputLocationType;
   }
+  export interface UpdateVocabularyFilterRequest {
+    /**
+     * The name of the vocabulary filter to update.
+     */
+    VocabularyFilterName: VocabularyFilterName;
+    /**
+     * The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. If you provide a list of words in the Words parameter, you can't use the VocabularyFilterFileUri parameter.
+     */
+    Words?: Words;
+    /**
+     * The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. The specified file must be less than 50 KB of UTF-8 characters. If you provide the location of a list of words in the VocabularyFilterFileUri parameter, you can't use the Words parameter.
+     */
+    VocabularyFilterFileUri?: Uri;
+  }
+  export interface UpdateVocabularyFilterResponse {
+    /**
+     * The name of the updated vocabulary filter.
+     */
+    VocabularyFilterName?: VocabularyFilterName;
+    /**
+     * The language code of the words in the vocabulary filter.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The date and time that the vocabulary filter was updated.
+     */
+    LastModifiedTime?: DateTime;
+  }
   export interface UpdateVocabularyRequest {
     /**
      * The name of the vocabulary to update. The name is case-sensitive.
@@ -482,6 +644,23 @@ declare namespace TranscribeService {
   }
   export type Uri = string;
   export type Vocabularies = VocabularyInfo[];
+  export interface VocabularyFilterInfo {
+    /**
+     * The name of the vocabulary filter. The name must be unique in the account that holds the filter.
+     */
+    VocabularyFilterName?: VocabularyFilterName;
+    /**
+     * The language code of the words in the vocabulary filter.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The date and time that the vocabulary was last updated.
+     */
+    LastModifiedTime?: DateTime;
+  }
+  export type VocabularyFilterMethod = "remove"|"mask"|string;
+  export type VocabularyFilterName = string;
+  export type VocabularyFilters = VocabularyFilterInfo[];
   export interface VocabularyInfo {
     /**
      * The name of the vocabulary.
@@ -502,6 +681,8 @@ declare namespace TranscribeService {
   }
   export type VocabularyName = string;
   export type VocabularyState = "PENDING"|"READY"|"FAILED"|string;
+  export type Word = string;
+  export type Words = Word[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

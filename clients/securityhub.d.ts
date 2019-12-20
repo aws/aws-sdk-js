@@ -172,11 +172,11 @@ declare class SecurityHub extends Service {
    */
   enableImportFindingsForProduct(callback?: (err: AWSError, data: SecurityHub.Types.EnableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.EnableImportFindingsForProductResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting Up AWS Security Hub.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. Enabling Security Hub also enables the CIS AWS Foundations standard. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting Up AWS Security Hub.
    */
   enableSecurityHub(params: SecurityHub.Types.EnableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting Up AWS Security Hub.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. Enabling Security Hub also enables the CIS AWS Foundations standard. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting Up AWS Security Hub.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
@@ -358,6 +358,86 @@ declare namespace SecurityHub {
   }
   export type ActionTargetList = ActionTarget[];
   export type ArnList = NonEmptyString[];
+  export interface AvailabilityZone {
+    /**
+     * The name of the Availability Zone.
+     */
+    ZoneName?: NonEmptyString;
+    /**
+     * The ID of the subnet. You can specify one subnet per Availability Zone.
+     */
+    SubnetId?: NonEmptyString;
+  }
+  export type AvailabilityZones = AvailabilityZone[];
+  export interface AwsCloudFrontDistributionDetails {
+    /**
+     * The domain name corresponding to the distribution.
+     */
+    DomainName?: NonEmptyString;
+    /**
+     * The entity tag is a hash of the object.
+     */
+    ETag?: NonEmptyString;
+    /**
+     * The date and time that the distribution was last modified.
+     */
+    LastModifiedTime?: NonEmptyString;
+    /**
+     * A complex type that controls whether access logs are written for the distribution.
+     */
+    Logging?: AwsCloudFrontDistributionLogging;
+    /**
+     * A complex type that contains information about origins for this distribution.
+     */
+    Origins?: AwsCloudFrontDistributionOrigins;
+    /**
+     * Indicates the current status of the distribution.
+     */
+    Status?: NonEmptyString;
+    /**
+     * A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution.
+     */
+    WebAclId?: NonEmptyString;
+  }
+  export interface AwsCloudFrontDistributionLogging {
+    /**
+     * The Amazon S3 bucket to store the access logs in.
+     */
+    Bucket?: NonEmptyString;
+    /**
+     * With this field, you can enable or disable the selected distribution.
+     */
+    Enabled?: Boolean;
+    /**
+     * Specifies whether you want CloudFront to include cookies in access logs.
+     */
+    IncludeCookies?: Boolean;
+    /**
+     * An optional string that you want CloudFront to prefix to the access log filenames for this distribution.
+     */
+    Prefix?: NonEmptyString;
+  }
+  export interface AwsCloudFrontDistributionOriginItem {
+    /**
+     * Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin.
+     */
+    DomainName?: NonEmptyString;
+    /**
+     * A unique identifier for the origin or origin group.
+     */
+    Id?: NonEmptyString;
+    /**
+     * An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.
+     */
+    OriginPath?: NonEmptyString;
+  }
+  export type AwsCloudFrontDistributionOriginItemList = AwsCloudFrontDistributionOriginItem[];
+  export interface AwsCloudFrontDistributionOrigins {
+    /**
+     * A complex type that contains origins or origin groups for this distribution.
+     */
+    Items?: AwsCloudFrontDistributionOriginItemList;
+  }
   export interface AwsEc2InstanceDetails {
     /**
      * The instance type of the instance. 
@@ -396,9 +476,51 @@ declare namespace SecurityHub {
      */
     LaunchedAt?: NonEmptyString;
   }
+  export interface AwsElbv2LoadBalancerDetails {
+    /**
+     * The Availability Zones for the load balancer.
+     */
+    AvailabilityZones?: AvailabilityZones;
+    /**
+     * The ID of the Amazon Route 53 hosted zone associated with the load balancer.
+     */
+    CanonicalHostedZoneId?: NonEmptyString;
+    /**
+     * The date and time the load balancer was created.
+     */
+    CreatedTime?: NonEmptyString;
+    /**
+     * The public DNS name of the load balancer.
+     */
+    DNSName?: NonEmptyString;
+    /**
+     * The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
+     */
+    IpAddressType?: NonEmptyString;
+    /**
+     * The nodes of an Internet-facing load balancer have public IP addresses.
+     */
+    Scheme?: NonEmptyString;
+    /**
+     * The IDs of the security groups for the load balancer.
+     */
+    SecurityGroups?: SecurityGroups;
+    /**
+     * The state of the load balancer.
+     */
+    State?: LoadBalancerState;
+    /**
+     * The type of load balancer.
+     */
+    Type?: NonEmptyString;
+    /**
+     * The ID of the VPC for the load balancer.
+     */
+    VpcId?: NonEmptyString;
+  }
   export interface AwsIamAccessKeyDetails {
     /**
-     * The user associated with the IAM access key related to a finding.
+     * The user associated with the IAM access key related to a finding. The UserName parameter has been replaced with the PrincipalName parameter because access keys can also be assigned to principals that are not IAM users.
      */
     UserName?: NonEmptyString;
     /**
@@ -409,8 +531,222 @@ declare namespace SecurityHub {
      * The creation date/time of the IAM access key related to a finding.
      */
     CreatedAt?: NonEmptyString;
+    /**
+     * The ID of the principal associated with an access key.
+     */
+    PrincipalId?: NonEmptyString;
+    /**
+     * The type of principal associated with an access key.
+     */
+    PrincipalType?: NonEmptyString;
+    /**
+     * The name of the principal.
+     */
+    PrincipalName?: NonEmptyString;
   }
   export type AwsIamAccessKeyStatus = "Active"|"Inactive"|string;
+  export type AwsIamRoleAssumeRolePolicyDocument = string;
+  export interface AwsIamRoleDetails {
+    /**
+     * The trust policy that grants permission to assume the role.
+     */
+    AssumeRolePolicyDocument?: AwsIamRoleAssumeRolePolicyDocument;
+    /**
+     * The date and time, in ISO 8601 date-time format, when the role was created.
+     */
+    CreateDate?: NonEmptyString;
+    /**
+     * The stable and unique string identifying the role.
+     */
+    RoleId?: NonEmptyString;
+    /**
+     * The friendly name that identifies the role.
+     */
+    RoleName?: NonEmptyString;
+    /**
+     * The maximum session duration (in seconds) that you want to set for the specified role.
+     */
+    MaxSessionDuration?: Integer;
+    /**
+     * The path to the role.
+     */
+    Path?: NonEmptyString;
+  }
+  export interface AwsKmsKeyDetails {
+    /**
+     * The twelve-digit account ID of the AWS account that owns the CMK.
+     */
+    AWSAccountId?: NonEmptyString;
+    /**
+     * The date and time when the CMK was created.
+     */
+    CreationDate?: Double;
+    /**
+     * The globally unique identifier for the CMK.
+     */
+    KeyId?: NonEmptyString;
+    /**
+     * The manager of the CMK. CMKs in your AWS account are either customer managed or AWS managed.
+     */
+    KeyManager?: NonEmptyString;
+    /**
+     * The state of the CMK.
+     */
+    KeyState?: NonEmptyString;
+    /**
+     * The source of the CMK's key material. When this value is AWS_KMS, AWS KMS created the key material. When this value is EXTERNAL, the key material was imported from your existing key management infrastructure or the CMK lacks key material. When this value is AWS_CLOUDHSM, the key material was created in the AWS CloudHSM cluster associated with a custom key store.
+     */
+    Origin?: NonEmptyString;
+  }
+  export interface AwsLambdaFunctionCode {
+    /**
+     * An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+     */
+    S3Bucket?: NonEmptyString;
+    /**
+     * The Amazon S3 key of the deployment package.
+     */
+    S3Key?: NonEmptyString;
+    /**
+     * For versioned objects, the version of the deployment package object to use.
+     */
+    S3ObjectVersion?: NonEmptyString;
+    /**
+     * The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+     */
+    ZipFile?: NonEmptyString;
+  }
+  export interface AwsLambdaFunctionDeadLetterConfig {
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+     */
+    TargetArn?: NonEmptyString;
+  }
+  export interface AwsLambdaFunctionDetails {
+    /**
+     * An AwsLambdaFunctionCode object.
+     */
+    Code?: AwsLambdaFunctionCode;
+    /**
+     * The SHA256 hash of the function's deployment package.
+     */
+    CodeSha256?: NonEmptyString;
+    /**
+     * The function's dead letter queue.
+     */
+    DeadLetterConfig?: AwsLambdaFunctionDeadLetterConfig;
+    /**
+     * The function's environment variables.
+     */
+    Environment?: AwsLambdaFunctionEnvironment;
+    /**
+     * The name of the function.
+     */
+    FunctionName?: NonEmptyString;
+    /**
+     * The function that Lambda calls to begin executing your function.
+     */
+    Handler?: NonEmptyString;
+    /**
+     * The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
+     */
+    KmsKeyArn?: NonEmptyString;
+    /**
+     * The date and time that the function was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModified?: NonEmptyString;
+    /**
+     * The function's layers.
+     */
+    Layers?: AwsLambdaFunctionLayerList;
+    /**
+     * For Lambda@Edge functions, the ARN of the master function.
+     */
+    MasterArn?: NonEmptyString;
+    /**
+     * The memory that's allocated to the function.
+     */
+    MemorySize?: Integer;
+    /**
+     * The latest updated revision of the function or alias.
+     */
+    RevisionId?: NonEmptyString;
+    /**
+     * The function's execution role.
+     */
+    Role?: NonEmptyString;
+    /**
+     * The runtime environment for the Lambda function.
+     */
+    Runtime?: NonEmptyString;
+    /**
+     * The amount of time that Lambda allows a function to run before stopping it.
+     */
+    Timeout?: Integer;
+    /**
+     * The function's AWS X-Ray tracing configuration.
+     */
+    TracingConfig?: AwsLambdaFunctionTracingConfig;
+    /**
+     * The function's networking configuration.
+     */
+    VpcConfig?: AwsLambdaFunctionVpcConfig;
+    /**
+     * The version of the Lambda function.
+     */
+    Version?: NonEmptyString;
+  }
+  export interface AwsLambdaFunctionEnvironment {
+    /**
+     * Environment variable key-value pairs.
+     */
+    Variables?: FieldMap;
+    /**
+     * An AwsLambdaFunctionEnvironmentError object.
+     */
+    Error?: AwsLambdaFunctionEnvironmentError;
+  }
+  export interface AwsLambdaFunctionEnvironmentError {
+    /**
+     * The error code.
+     */
+    ErrorCode?: NonEmptyString;
+    /**
+     * The error message.
+     */
+    Message?: NonEmptyString;
+  }
+  export interface AwsLambdaFunctionLayer {
+    /**
+     * The Amazon Resource Name (ARN) of the function layer.
+     */
+    Arn?: NonEmptyString;
+    /**
+     * The size of the layer archive in bytes.
+     */
+    CodeSize?: Integer;
+  }
+  export type AwsLambdaFunctionLayerList = AwsLambdaFunctionLayer[];
+  export interface AwsLambdaFunctionTracingConfig {
+    /**
+     * The tracing mode.
+     */
+    Mode?: NonEmptyString;
+  }
+  export interface AwsLambdaFunctionVpcConfig {
+    /**
+     * A list of VPC security groups IDs.
+     */
+    SecurityGroupIds?: NonEmptyStringList;
+    /**
+     * A list of VPC subnet IDs.
+     */
+    SubnetIds?: NonEmptyStringList;
+    /**
+     * The ID of the VPC.
+     */
+    VpcId?: NonEmptyString;
+  }
   export interface AwsS3BucketDetails {
     /**
      * The canonical user ID of the owner of the S3 bucket.
@@ -878,6 +1214,53 @@ declare namespace SecurityHub {
     Keyword?: KeywordFilterList;
   }
   export type AwsSecurityFindingList = AwsSecurityFinding[];
+  export interface AwsSnsTopicDetails {
+    /**
+     * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK.
+     */
+    KmsMasterKeyId?: NonEmptyString;
+    /**
+     * Subscription is an embedded property that describes the subscription endpoints of an Amazon SNS topic.
+     */
+    Subscription?: AwsSnsTopicSubscriptionList;
+    /**
+     * The name of the topic.
+     */
+    TopicName?: NonEmptyString;
+    /**
+     * The subscription's owner.
+     */
+    Owner?: NonEmptyString;
+  }
+  export interface AwsSnsTopicSubscription {
+    /**
+     * The subscription's endpoint (format depends on the protocol).
+     */
+    Endpoint?: NonEmptyString;
+    /**
+     * The subscription's protocol.
+     */
+    Protocol?: NonEmptyString;
+  }
+  export type AwsSnsTopicSubscriptionList = AwsSnsTopicSubscription[];
+  export interface AwsSqsQueueDetails {
+    /**
+     * The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again.
+     */
+    KmsDataKeyReusePeriodSeconds?: Integer;
+    /**
+     * The ID of an AWS-managed customer master key (CMK) for Amazon SQS or a custom CMK.
+     */
+    KmsMasterKeyId?: NonEmptyString;
+    /**
+     * The name of the new queue.
+     */
+    QueueName?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the value of maxReceiveCount is exceeded. 
+     */
+    DeadLetterTargetArn?: NonEmptyString;
+  }
   export interface BatchDisableStandardsRequest {
     /**
      * The ARNs of the standards subscriptions to disable.
@@ -904,7 +1287,7 @@ declare namespace SecurityHub {
   }
   export interface BatchImportFindingsRequest {
     /**
-     * A list of findings to import. To successfully import a finding, it must follow the AWS Security Finding Format.
+     * A list of findings to import. To successfully import a finding, it must follow the AWS Security Finding Format. Maximum of 100 findings per request.
      */
     Findings: AwsSecurityFindingList;
   }
@@ -1494,6 +1877,16 @@ declare namespace SecurityHub {
      */
     Tags?: TagMap;
   }
+  export interface LoadBalancerState {
+    /**
+     * The state code. The initial state of the load balancer is provisioning. After the load balancer is fully set up and ready to route traffic, its state is active. If the load balancer could not be set up, its state is failed. 
+     */
+    Code?: NonEmptyString;
+    /**
+     * A description of the state.
+     */
+    Reason?: NonEmptyString;
+  }
   export interface Malware {
     /**
      * The name of the malware that was observed.
@@ -1608,6 +2001,7 @@ declare namespace SecurityHub {
   export type NetworkDirection = "IN"|"OUT"|string;
   export type NextToken = string;
   export type NonEmptyString = string;
+  export type NonEmptyStringList = NonEmptyString[];
   export interface Note {
     /**
      * The text of a note.
@@ -1767,9 +2161,17 @@ declare namespace SecurityHub {
   export type ResourceArn = string;
   export interface ResourceDetails {
     /**
+     * Details about a CloudFront distribution.
+     */
+    AwsCloudFrontDistribution?: AwsCloudFrontDistributionDetails;
+    /**
      * Details about an Amazon EC2 instance related to a finding.
      */
     AwsEc2Instance?: AwsEc2InstanceDetails;
+    /**
+     * Details about a load balancer.
+     */
+    AwsElbv2LoadBalancer?: AwsElbv2LoadBalancerDetails;
     /**
      * Details about an Amazon S3 Bucket related to a finding.
      */
@@ -1778,6 +2180,26 @@ declare namespace SecurityHub {
      * Details about an IAM access key related to a finding.
      */
     AwsIamAccessKey?: AwsIamAccessKeyDetails;
+    /**
+     * Details about an IAM role.
+     */
+    AwsIamRole?: AwsIamRoleDetails;
+    /**
+     * Details about a KMS key.
+     */
+    AwsKmsKey?: AwsKmsKeyDetails;
+    /**
+     * Details about a Lambda function.
+     */
+    AwsLambdaFunction?: AwsLambdaFunctionDetails;
+    /**
+     * Details about an SNS topic.
+     */
+    AwsSnsTopic?: AwsSnsTopicDetails;
+    /**
+     * Details about an SQS queue.
+     */
+    AwsSqsQueue?: AwsSqsQueueDetails;
     /**
      * Details about a container resource related to a finding.
      */
@@ -1799,6 +2221,7 @@ declare namespace SecurityHub {
     ProcessingResult?: NonEmptyString;
   }
   export type ResultList = Result[];
+  export type SecurityGroups = NonEmptyString[];
   export interface Severity {
     /**
      * The native severity as defined by the AWS service or integrated partner product that generated the finding.

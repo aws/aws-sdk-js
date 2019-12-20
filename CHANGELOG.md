@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.594.0-->
+<!--LATEST=2.595.0-->
 <!--ENTRYINSERT-->
+
+## 2.595.0
+* feature: DeviceFarm: Introduced browser testing support through AWS Device Farm
+* feature: EC2: This release introduces the ability to tag key pairs, placement groups, export tasks, import image tasks, import snapshot tasks and export image tasks. You can use tags to organize and identify your resources for cost allocation. 
+* feature: EKS: Amazon EKS now supports restricting access to the API server public endpoint by applying CIDR blocks
+* feature: Pinpoint: This release of the Amazon Pinpoint API introduces versioning support for message templates.
+* feature: RDS: This release adds an operation that enables users to specify whether a database is restarted when its SSL/TLS certificate is rotated. Only customers who do not use SSL/TLS should use this operation.
+* feature: SSM: This release updates the attachments support to include AttachmentReference source for Automation documents.
+* feature: SecurityHub: Additional resource types are now fully supported in the AWS Security Finding Format (ASFF). These resources include AwsElbv2LoadBalancer, AwsKmsKey, AwsIamRole, AwsSqsQueue, AwsLambdaFunction, AwsSnsTopic, and AwsCloudFrontDistribution. Each of these resource types includes an accompanying resource details object with fields for security finding providers to populate. Updates were made to the AwsIamAccessKey resource details object to include information on principal ID and name. To learn more, visit our documentation on the ASFF.
+* feature: TranscribeService: AWS Transcribe now supports vocabulary filtering that allows customers to input words to the service that they don't want to see in the output transcript.
 
 ## 2.594.0
 * feature: CodeStarconnections: Public beta for Bitbucket Cloud support in AWS CodePipeline through integration with AWS CodeStar connections.
