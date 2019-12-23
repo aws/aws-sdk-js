@@ -12,6 +12,38 @@
     "uid": "fsx-2018-03-01"
   },
   "operations": {
+    "CancelDataRepositoryTask": {
+      "name": "CancelDataRepositoryTask",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelDataRepositoryTaskRequest"
+      },
+      "output": {
+        "shape": "CancelDataRepositoryTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "UnsupportedOperation"
+        },
+        {
+          "shape": "DataRepositoryTaskNotFound"
+        },
+        {
+          "shape": "DataRepositoryTaskEnded"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the <code>PENDING</code> or <code>EXECUTING</code> state. When you cancel a task, Amazon FSx does the following.</p> <ul> <li> <p>Any files that FSx has already exported are not reverted.</p> </li> <li> <p>FSx continues to export any files that are \"in-flight\" when the cancel operation is received.</p> </li> <li> <p>FSx does not export any files that have not yet been exported.</p> </li> </ul>",
+      "idempotent": true
+    },
     "CreateBackup": {
       "name": "CreateBackup",
       "http": {
@@ -48,6 +80,44 @@
         }
       ],
       "documentation": "<p>Creates a backup of an existing Amazon FSx for Windows File Server file system. Creating regular backups for your file system is a best practice that complements the replication that Amazon FSx for Windows File Server performs for your file system. It also enables you to restore from user modification of data.</p> <p>If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns <code>IncompatibleParameterError</code>. If a backup with the specified client request token doesn't exist, <code>CreateBackup</code> does the following: </p> <ul> <li> <p>Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of <code>CREATING</code>.</p> </li> <li> <p>Returns the description of the backup.</p> </li> </ul> <p>By using the idempotent operation, you can retry a <code>CreateBackup</code> operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same.</p> <p>The <code>CreateFileSystem</code> operation returns while the backup's lifecycle state is still <code>CREATING</code>. You can check the file system creation status by calling the <a>DescribeBackups</a> operation, which returns the backup state along with other information.</p> <note> <p/> </note>",
+      "idempotent": true
+    },
+    "CreateDataRepositoryTask": {
+      "name": "CreateDataRepositoryTask",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDataRepositoryTaskRequest"
+      },
+      "output": {
+        "shape": "CreateDataRepositoryTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "UnsupportedOperation"
+        },
+        {
+          "shape": "FileSystemNotFound"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "ServiceLimitExceeded"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "DataRepositoryTaskExecuting"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repository. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to its linked data repository. A <code>CreateDataRepositoryTask</code> operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html\">Using Data Repository Tasks</a>. To learn more about linking a data repository to your file system, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/getting-started-step1.html\">Step 1: Create Your Amazon FSx for Lustre File System</a>.</p>",
       "idempotent": true
     },
     "CreateFileSystem": {
@@ -197,7 +267,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Deletes a file system, deleting its contents. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups will also be deleted.</p> <p>By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup is not subject to the file system's retention policy, and must be manually deleted.</p> <p>The <code>DeleteFileSystem</code> action returns while the file system has the <code>DELETING</code> status. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> action, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the <a>DescribeFileSystems</a> returns a <code>FileSystemNotFound</code> error.</p> <important> <p>The data in a deleted file system is also deleted and can't be recovered by any means.</p> </important>",
+      "documentation": "<p>Deletes a file system, deleting its contents. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups will also be deleted.</p> <p>By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup is not subject to the file system's retention policy, and must be manually deleted.</p> <p>The <code>DeleteFileSystem</code> action returns while the file system has the <code>DELETING</code> status. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> action, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the <a>DescribeFileSystems</a> returns a <code>FileSystemNotFound</code> error.</p> <note> <p>Deleting an Amazon FSx for Lustre file system will fail with a 400 BadRequest if a data repository task is in a <code>PENDING</code> or <code>EXECUTING</code> state.</p> </note> <important> <p>The data in a deleted file system is also deleted and can't be recovered by any means.</p> </important>",
       "idempotent": true
     },
     "DescribeBackups": {
@@ -227,6 +297,34 @@
         }
       ],
       "documentation": "<p>Returns the description of specific Amazon FSx for Windows File Server backups, if a <code>BackupIds</code> value is provided for that backup. Otherwise, it returns all backups owned by your AWS account in the AWS Region of the endpoint that you're calling.</p> <p>When retrieving all backups, you can optionally specify the <code>MaxResults</code> parameter to limit the number of backups in a response. If more backups remain, Amazon FSx returns a <code>NextToken</code> value in the response. In this case, send a later request with the <code>NextToken</code> request parameter set to the value of <code>NextToken</code> from the last response.</p> <p>This action is used in an iterative process to retrieve a list of your backups. <code>DescribeBackups</code> is called first without a <code>NextToken</code>value. Then the action continues to be called with the <code>NextToken</code> parameter set to the value of the last <code>NextToken</code> value until a response has no <code>NextToken</code>.</p> <p>When using this action, keep the following in mind:</p> <ul> <li> <p>The implementation might return fewer than <code>MaxResults</code> file system descriptions while still including a <code>NextToken</code> value.</p> </li> <li> <p>The order of backups returned in the response of one <code>DescribeBackups</code> call and the order of backups returned across the responses of a multi-call iteration is unspecified.</p> </li> </ul>"
+    },
+    "DescribeDataRepositoryTasks": {
+      "name": "DescribeDataRepositoryTasks",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDataRepositoryTasksRequest"
+      },
+      "output": {
+        "shape": "DescribeDataRepositoryTasksResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "FileSystemNotFound"
+        },
+        {
+          "shape": "DataRepositoryTaskNotFound"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Returns the description of specific Amazon FSx for Lustre data repository tasks, if one or more <code>TaskIds</code> values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your AWS account in the AWS Region of the endpoint that you're calling.</p> <p>When retrieving all tasks, you can paginate the response by using the optional <code>MaxResults</code> parameter to limit the number of tasks returned in a response. If more tasks remain, Amazon FSx returns a <code>NextToken</code> value in the response. In this case, send a later request with the <code>NextToken</code> request parameter set to the value of <code>NextToken</code> from the last response.</p>"
     },
     "DescribeFileSystems": {
       "name": "DescribeFileSystems",
@@ -406,12 +504,16 @@
       "documentation": "<p>The Microsoft AD attributes of the Amazon FSx for Windows File Server file system.</p>"
     },
     "ActiveDirectoryFullyQualifiedName": {
-      "type": "string"
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^.{1,255}$"
     },
     "ArchivePath": {
       "type": "string",
       "max": 900,
-      "min": 3
+      "min": 3,
+      "pattern": "^.{3,900}$"
     },
     "AutomaticBackupRetentionDays": {
       "type": "integer",
@@ -454,7 +556,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this backup's data.</p>"
+          "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this backup of the Amazon FSx for Windows file system's data at rest. Amazon FSx for Lustre does not support KMS encryption.</p>"
         },
         "ResourceARN": {
           "shape": "ResourceARN",
@@ -526,12 +628,63 @@
       "documentation": "<p>A list of backups.</p>",
       "max": 50
     },
+    "CancelDataRepositoryTaskRequest": {
+      "type": "structure",
+      "required": [
+        "TaskId"
+      ],
+      "members": {
+        "TaskId": {
+          "shape": "TaskId",
+          "documentation": "<p>Specifies the data repository task to cancel.</p>"
+        }
+      },
+      "documentation": "<p>Cancels a data repository task.</p>"
+    },
+    "CancelDataRepositoryTaskResponse": {
+      "type": "structure",
+      "members": {
+        "Lifecycle": {
+          "shape": "DataRepositoryTaskLifecycle",
+          "documentation": "<p>The lifecycle status of the data repository task, as follows:</p> <ul> <li> <p> <code>PENDING</code> - Amazon FSx has not started the task.</p> </li> <li> <p> <code>EXECUTING</code> - Amazon FSx is processing the task.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The <a>DataRepositoryTaskFailureDetails</a> property provides more information about task failures.</p> </li> <li> <p> <code>SUCCEEDED</code> - FSx completed the task successfully.</p> </li> <li> <p> <code>CANCELED</code> - Amazon FSx canceled the task and it did not complete.</p> </li> <li> <p> <code>CANCELING</code> - FSx is in process of canceling the task.</p> </li> </ul>"
+        },
+        "TaskId": {
+          "shape": "TaskId",
+          "documentation": "<p>The ID of the task being canceled.</p>"
+        }
+      }
+    },
     "ClientRequestToken": {
       "type": "string",
       "documentation": "<p>(Optional) An idempotency token for resource creation, in a string of up to 64 ASCII characters. This token is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
-      "max": 255,
+      "max": 63,
       "min": 1,
-      "pattern": "[A-za-z0-9_.-]{0,255}$"
+      "pattern": "[A-za-z0-9_.-]{0,63}$"
+    },
+    "CompletionReport": {
+      "type": "structure",
+      "required": [
+        "Enabled"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "Flag",
+          "documentation": "<p>Set <code>Enabled</code> to <code>True</code> to generate a <code>CompletionReport</code> when the task completes. If set to <code>true</code>, then you need to provide a report <code>Scope</code>, <code>Path</code>, and <code>Format</code>. Set <code>Enabled</code> to <code>False</code> if you do not want a <code>CompletionReport</code> generated when the task completes.</p>"
+        },
+        "Path": {
+          "shape": "ArchivePath",
+          "documentation": "<p>Required if <code>Enabled</code> is set to <code>true</code>. Specifies the location of the report on the file system's linked S3 data repository. An absolute path that defines where the completion report will be stored in the destination location. The <code>Path</code> you provide must be located within the file system’s ExportPath. An example <code>Path</code> value is \"s3://myBucket/myExportPath/optionalPrefix\". The report provides the following information for each file in the report: FilePath, FileStatus, and ErrorCode. To learn more about a file system's <code>ExportPath</code>, see . </p>"
+        },
+        "Format": {
+          "shape": "ReportFormat",
+          "documentation": "<p>Required if <code>Enabled</code> is set to <code>true</code>. Specifies the format of the <code>CompletionReport</code>. <code>REPORT_CSV_20191124</code> is the only format currently supported. When <code>Format</code> is set to <code>REPORT_CSV_20191124</code>, the <code>CompletionReport</code> is provided in CSV format, and is delivered to <code>{path}/task-{id}/failures.csv</code>. </p>"
+        },
+        "Scope": {
+          "shape": "ReportScope",
+          "documentation": "<p>Required if <code>Enabled</code> is set to <code>true</code>. Specifies the scope of the <code>CompletionReport</code>; <code>FAILED_FILES_ONLY</code> is the only scope currently supported. When <code>Scope</code> is set to <code>FAILED_FILES_ONLY</code>, the <code>CompletionReport</code> only contains information about files that the data repository task failed to process.</p>"
+        }
+      },
+      "documentation": "<p>Provides a report detailing the data repository task results of the files processed that match the criteria specified in the report <code>Scope</code> parameter. FSx delivers the report to the file system's linked data repository in Amazon S3, using the path specified in the report <code>Path</code> parameter. You can specify whether or not a report gets generated for a task using the <code>Enabled</code> parameter.</p>"
     },
     "CreateBackupRequest": {
       "type": "structure",
@@ -564,6 +717,47 @@
         }
       },
       "documentation": "<p>The response object for the <code>CreateBackup</code> operation.</p>"
+    },
+    "CreateDataRepositoryTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Type",
+        "FileSystemId",
+        "Report"
+      ],
+      "members": {
+        "Type": {
+          "shape": "DataRepositoryTaskType",
+          "documentation": "<p>Specifies the type of data repository task to create.</p>"
+        },
+        "Paths": {
+          "shape": "DataRepositoryTaskPaths",
+          "documentation": "<p>(Optional) The path or paths on the Amazon FSx file system to use when the data repository task is processed. The default path is the file system root directory.</p>"
+        },
+        "FileSystemId": {
+          "shape": "FileSystemId"
+        },
+        "Report": {
+          "shape": "CompletionReport",
+          "documentation": "<p>Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. A CompletionReport provides a detailed report on the files that Amazon FSx processed that meet the criteria specified by the <code>Scope</code> parameter. </p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "Tags": {
+          "shape": "Tags"
+        }
+      }
+    },
+    "CreateDataRepositoryTaskResponse": {
+      "type": "structure",
+      "members": {
+        "DataRepositoryTask": {
+          "shape": "DataRepositoryTask",
+          "documentation": "<p>The description of the data repository task that you just created.</p>"
+        }
+      }
     },
     "CreateFileSystemFromBackupRequest": {
       "type": "structure",
@@ -767,6 +961,175 @@
       },
       "documentation": "<p>The data repository configuration object for Lustre file systems returned in the response of the <code>CreateFileSystem</code> operation.</p>"
     },
+    "DataRepositoryTask": {
+      "type": "structure",
+      "required": [
+        "TaskId",
+        "Lifecycle",
+        "Type",
+        "CreationTime",
+        "FileSystemId"
+      ],
+      "members": {
+        "TaskId": {
+          "shape": "TaskId",
+          "documentation": "<p>The system-generated, unique 17-digit ID of the data repository task.</p>"
+        },
+        "Lifecycle": {
+          "shape": "DataRepositoryTaskLifecycle",
+          "documentation": "<p>The lifecycle status of the data repository task, as follows:</p> <ul> <li> <p> <code>PENDING</code> - Amazon FSx has not started the task.</p> </li> <li> <p> <code>EXECUTING</code> - Amazon FSx is processing the task.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The <a>DataRepositoryTaskFailureDetails</a> property provides more information about task failures.</p> </li> <li> <p> <code>SUCCEEDED</code> - FSx completed the task successfully.</p> </li> <li> <p> <code>CANCELED</code> - Amazon FSx canceled the task and it did not complete.</p> </li> <li> <p> <code>CANCELING</code> - FSx is in process of canceling the task.</p> </li> </ul> <note> <p>You cannot delete an FSx for Lustre file system if there are data repository tasks for the file system in the <code>PENDING</code> or <code>EXECUTING</code> states. Please retry when the data repository task is finished (with a status of <code>CANCELED</code>, <code>SUCCEEDED</code>, or <code>FAILED</code>). You can use the DescribeDataRepositoryTask action to monitor the task status. Contact the FSx team if you need to delete your file system immediately.</p> </note>"
+        },
+        "Type": {
+          "shape": "DataRepositoryTaskType",
+          "documentation": "<p>The type of data repository task; EXPORT_TO_REPOSITORY is the only type currently supported.</p>"
+        },
+        "CreationTime": {
+          "shape": "CreationTime"
+        },
+        "StartTime": {
+          "shape": "StartTime",
+          "documentation": "<p>The time that Amazon FSx began processing the task.</p>"
+        },
+        "EndTime": {
+          "shape": "EndTime",
+          "documentation": "<p>The time that Amazon FSx completed processing the task, populated after the task is complete.</p>"
+        },
+        "ResourceARN": {
+          "shape": "ResourceARN"
+        },
+        "Tags": {
+          "shape": "Tags"
+        },
+        "FileSystemId": {
+          "shape": "FileSystemId"
+        },
+        "Paths": {
+          "shape": "DataRepositoryTaskPaths",
+          "documentation": "<p>An array of paths on the Amazon FSx for Lustre file system that specify the data for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY task, the paths specify which data to export to the linked data repository.</p> <p>(Default) If <code>Paths</code> is not specified, Amazon FSx uses the file system root directory.</p>"
+        },
+        "FailureDetails": {
+          "shape": "DataRepositoryTaskFailureDetails",
+          "documentation": "<p>Failure message describing why the task failed, it is populated only when <code>Lifecycle</code> is set to <code>FAILED</code>.</p>"
+        },
+        "Status": {
+          "shape": "DataRepositoryTaskStatus",
+          "documentation": "<p>Provides the status of the number of files that the task has processed successfully and failed to process.</p>"
+        },
+        "Report": {
+          "shape": "CompletionReport"
+        }
+      },
+      "documentation": "<p>A description of the data repository task. You use data repository tasks to perform bulk transfer operations between your Amazon FSx file system and its linked data repository.</p>"
+    },
+    "DataRepositoryTaskFailureDetails": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "ErrorMessage"
+        }
+      },
+      "documentation": "<p>Provides information about why a data repository task failed. Only populated when the task <code>Lifecycle</code> is set to <code>FAILED</code>.</p>"
+    },
+    "DataRepositoryTaskFilter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "DataRepositoryTaskFilterName",
+          "documentation": "<p>Name of the task property to use in filtering the tasks returned in the response.</p> <ul> <li> <p>Use <code>file-system-id</code> to retrieve data repository tasks for specific file systems.</p> </li> <li> <p>Use <code>task-lifecycle</code> to retrieve data repository tasks with one or more specific lifecycle states, as follows: CANCELED, EXECUTING, FAILED, PENDING, and SUCCEEDED.</p> </li> </ul>"
+        },
+        "Values": {
+          "shape": "DataRepositoryTaskFilterValues",
+          "documentation": "<p>Use Values to include the specific file system IDs and task lifecycle states for the filters you are using.</p>"
+        }
+      },
+      "documentation": "<p>(Optional) An array of filter objects you can use to filter the response of data repository tasks you will see in the the response. You can filter the tasks returned in the response by one or more file system IDs, task lifecycles, and by task type. A filter object consists of a filter <code>Name</code>, and one or more <code>Values</code> for the filter.</p>"
+    },
+    "DataRepositoryTaskFilterName": {
+      "type": "string",
+      "enum": [
+        "file-system-id",
+        "task-lifecycle"
+      ]
+    },
+    "DataRepositoryTaskFilterValue": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[0-9a-zA-Z\\*\\.\\\\/\\?\\-\\_]*$"
+    },
+    "DataRepositoryTaskFilterValues": {
+      "type": "list",
+      "member": {
+        "shape": "DataRepositoryTaskFilterValue"
+      },
+      "max": 20
+    },
+    "DataRepositoryTaskFilters": {
+      "type": "list",
+      "member": {
+        "shape": "DataRepositoryTaskFilter"
+      },
+      "max": 3
+    },
+    "DataRepositoryTaskLifecycle": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "EXECUTING",
+        "FAILED",
+        "SUCCEEDED",
+        "CANCELED",
+        "CANCELING"
+      ]
+    },
+    "DataRepositoryTaskPath": {
+      "type": "string",
+      "max": 4096,
+      "min": 0,
+      "pattern": "^.{0,4096}$"
+    },
+    "DataRepositoryTaskPaths": {
+      "type": "list",
+      "member": {
+        "shape": "DataRepositoryTaskPath"
+      },
+      "max": 100
+    },
+    "DataRepositoryTaskStatus": {
+      "type": "structure",
+      "members": {
+        "TotalCount": {
+          "shape": "TotalCount",
+          "documentation": "<p>The total number of files that the task will process. While a task is executing, the sum of <code>SucceededCount</code> plus <code>FailedCount</code> may not equal <code>TotalCount</code>. When the task is complete, <code>TotalCount</code> equals the sum of <code>SucceededCount</code> plus <code>FailedCount</code>.</p>"
+        },
+        "SucceededCount": {
+          "shape": "SucceededCount",
+          "documentation": "<p>A running total of the number of files that the task has successfully processed.</p>"
+        },
+        "FailedCount": {
+          "shape": "FailedCount",
+          "documentation": "<p>A running total of the number of files that the task failed to process.</p>"
+        },
+        "LastUpdatedTime": {
+          "shape": "LastUpdatedTime",
+          "documentation": "<p>The time at which the task status was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Provides the task status showing a running total of the total number of files to be processed, the number successfully processed, and the number of files the task failed to process.</p>"
+    },
+    "DataRepositoryTaskType": {
+      "type": "string",
+      "enum": [
+        "EXPORT_TO_REPOSITORY"
+      ]
+    },
+    "DataRepositoryTasks": {
+      "type": "list",
+      "member": {
+        "shape": "DataRepositoryTask"
+      },
+      "max": 50
+    },
     "DeleteBackupRequest": {
       "type": "structure",
       "required": [
@@ -901,6 +1264,37 @@
       },
       "documentation": "<p>Response object for <code>DescribeBackups</code> operation.</p>"
     },
+    "DescribeDataRepositoryTasksRequest": {
+      "type": "structure",
+      "members": {
+        "TaskIds": {
+          "shape": "TaskIds",
+          "documentation": "<p>(Optional) IDs of the tasks whose descriptions you want to retrieve (String).</p>"
+        },
+        "Filters": {
+          "shape": "DataRepositoryTaskFilters",
+          "documentation": "<p>(Optional) You can use filters to narrow the <code>DescribeDataRepositoryTasks</code> response to include just tasks for specific file systems, or tasks in a specific lifecycle state.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults"
+        },
+        "NextToken": {
+          "shape": "NextToken"
+        }
+      }
+    },
+    "DescribeDataRepositoryTasksResponse": {
+      "type": "structure",
+      "members": {
+        "DataRepositoryTasks": {
+          "shape": "DataRepositoryTasks",
+          "documentation": "<p>The collection of data repository task descriptions returned.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken"
+        }
+      }
+    },
     "DescribeFileSystemsRequest": {
       "type": "structure",
       "members": {
@@ -943,12 +1337,14 @@
       "type": "string",
       "max": 256,
       "min": 1,
+      "pattern": "^.{1,256}$",
       "sensitive": true
     },
     "DirectoryUserName": {
       "type": "string",
       "max": 256,
-      "min": 1
+      "min": 1,
+      "pattern": "^.{1,256}$"
     },
     "DnsIps": {
       "type": "list",
@@ -958,11 +1354,17 @@
       "max": 2,
       "min": 1
     },
+    "EndTime": {
+      "type": "timestamp"
+    },
     "ErrorMessage": {
       "type": "string",
       "documentation": "<p>A detailed error message.</p>",
       "max": 256,
       "min": 1
+    },
+    "FailedCount": {
+      "type": "long"
     },
     "FileSystem": {
       "type": "structure",
@@ -1012,7 +1414,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for an Amazon FSx for Windows File Server file system.</p>"
+          "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for an Amazon FSx for Windows File Server file system. Amazon FSx for Lustre does not support KMS encryption. </p>"
         },
         "ResourceARN": {
           "shape": "ResourceARN",
@@ -1035,7 +1437,8 @@
     "FileSystemAdministratorsGroupName": {
       "type": "string",
       "max": 256,
-      "min": 1
+      "min": 1,
+      "pattern": "^.{1,256}$"
     },
     "FileSystemFailureDetails": {
       "type": "structure",
@@ -1156,14 +1559,19 @@
     },
     "IpAddress": {
       "type": "string",
+      "max": 15,
+      "min": 7,
       "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
     },
     "KmsKeyId": {
       "type": "string",
-      "documentation": "<p>The ID of your AWS Key Management Service (AWS KMS) key. This ID is used to encrypt the data in your file system at rest. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html\">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.</p>",
+      "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for an Amazon FSx for Windows File Server file system at rest. Amazon FSx for Lustre does not support KMS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html\">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.</p>",
       "max": 2048,
       "min": 1,
       "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}|arn:aws[a-z-]{0,7}:kms:[a-z]{2}-[a-z-]{4,}-\\d+:\\d{12}:(key|alias)\\/([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}|[a-zA-Z0-9:\\/_-]+)|alias\\/[a-zA-Z0-9:\\/_-]+$"
+    },
+    "LastUpdatedTime": {
+      "type": "timestamp"
     },
     "ListTagsForResourceRequest": {
       "type": "structure",
@@ -1254,13 +1662,26 @@
     "OrganizationalUnitDistinguishedName": {
       "type": "string",
       "max": 2000,
-      "min": 1
+      "min": 1,
+      "pattern": "^.{1,2000}$"
     },
     "ProgressPercent": {
       "type": "integer",
       "documentation": "<p>The current percent of progress of an asynchronous task.</p>",
       "max": 100,
       "min": 0
+    },
+    "ReportFormat": {
+      "type": "string",
+      "enum": [
+        "REPORT_CSV_20191124"
+      ]
+    },
+    "ReportScope": {
+      "type": "string",
+      "enum": [
+        "FAILED_FILES_ONLY"
+      ]
     },
     "ResourceARN": {
       "type": "string",
@@ -1341,7 +1762,7 @@
         },
         "DnsIps": {
           "shape": "DnsIps",
-          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (Iv4) address ranges, as specified in <a href=\"http://www.faqs.org/rfcs/rfc1918.html\">RFC 1918</a>:</p> <ul> <li> <p>10.0.0.0 - 10.255.255.255 (10/8 prefix)</p> </li> <li> <p>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</p> </li> <li> <p>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</p> </li> </ul>"
+          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (IPv4) address ranges, as specified in <a href=\"http://www.faqs.org/rfcs/rfc1918.html\">RFC 1918</a>:</p> <ul> <li> <p>10.0.0.0 - 10.255.255.255 (10/8 prefix)</p> </li> <li> <p>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</p> </li> <li> <p>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</p> </li> </ul>"
         }
       },
       "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory.</p>"
@@ -1364,10 +1785,13 @@
       },
       "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft Active Directory (AD) directory.</p>"
     },
+    "StartTime": {
+      "type": "timestamp"
+    },
     "StorageCapacity": {
       "type": "integer",
       "documentation": "<p>The storage capacity for your Amazon FSx file system, in gibibytes.</p>",
-      "min": 1
+      "min": 0
     },
     "SubnetId": {
       "type": "string",
@@ -1383,6 +1807,9 @@
       },
       "documentation": "<p>A list of subnet IDs. Currently, you can specify only one subnet ID in a call to the <code>CreateFileSystem</code> operation.</p>",
       "max": 50
+    },
+    "SucceededCount": {
+      "type": "long"
     },
     "Tag": {
       "type": "structure",
@@ -1402,7 +1829,8 @@
       "type": "string",
       "documentation": "<p>A string of 1 to 128 characters that specifies the key for a tag. Tag keys must be unique for the resource to which they are attached.</p>",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "TagKeys": {
       "type": "list",
@@ -1440,7 +1868,8 @@
       "type": "string",
       "documentation": "<p>A string of 0 to 256 characters that specifies the value for a tag. Tag values can be null and don't have to be unique in a tag set.</p>",
       "max": 256,
-      "min": 0
+      "min": 0,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "Tags": {
       "type": "list",
@@ -1450,6 +1879,22 @@
       "documentation": "<p>A list of <code>Tag</code> values, with a maximum of 50 elements.</p>",
       "max": 50,
       "min": 1
+    },
+    "TaskId": {
+      "type": "string",
+      "max": 128,
+      "min": 12,
+      "pattern": "^(task-[0-9a-f]{17,})$"
+    },
+    "TaskIds": {
+      "type": "list",
+      "member": {
+        "shape": "TaskId"
+      },
+      "max": 50
+    },
+    "TotalCount": {
+      "type": "long"
     },
     "UntagResourceRequest": {
       "type": "structure",

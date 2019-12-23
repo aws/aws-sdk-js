@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.595.0-->
+<!--LATEST=2.596.0-->
 <!--ENTRYINSERT-->
+
+## 2.596.0
+* feature: FSx: This release adds a new family of APIs (create-data-repository-task, describe-data-repository-task, and cancel-data-repository-task) that allow users to perform operations between their file system and its linked data repository.
+* feature: Health: With this release, you can now centrally aggregate AWS Health events from all accounts in your AWS organization. Visit AWS Health documentation to learn more about enabling and using this feature: https://docs.aws.amazon.com/health/latest/ug/organizational-view-health.html. 
 
 ## 2.595.0
 * feature: DeviceFarm: Introduced browser testing support through AWS Device Farm

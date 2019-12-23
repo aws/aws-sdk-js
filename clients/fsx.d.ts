@@ -12,6 +12,14 @@ declare class FSx extends Service {
   constructor(options?: FSx.Types.ClientConfiguration)
   config: Config & FSx.Types.ClientConfiguration;
   /**
+   * Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the PENDING or EXECUTING state. When you cancel a task, Amazon FSx does the following.   Any files that FSx has already exported are not reverted.   FSx continues to export any files that are "in-flight" when the cancel operation is received.   FSx does not export any files that have not yet been exported.  
+   */
+  cancelDataRepositoryTask(params: FSx.Types.CancelDataRepositoryTaskRequest, callback?: (err: AWSError, data: FSx.Types.CancelDataRepositoryTaskResponse) => void): Request<FSx.Types.CancelDataRepositoryTaskResponse, AWSError>;
+  /**
+   * Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the PENDING or EXECUTING state. When you cancel a task, Amazon FSx does the following.   Any files that FSx has already exported are not reverted.   FSx continues to export any files that are "in-flight" when the cancel operation is received.   FSx does not export any files that have not yet been exported.  
+   */
+  cancelDataRepositoryTask(callback?: (err: AWSError, data: FSx.Types.CancelDataRepositoryTaskResponse) => void): Request<FSx.Types.CancelDataRepositoryTaskResponse, AWSError>;
+  /**
    * Creates a backup of an existing Amazon FSx for Windows File Server file system. Creating regular backups for your file system is a best practice that complements the replication that Amazon FSx for Windows File Server performs for your file system. It also enables you to restore from user modification of data. If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a backup with the specified client request token doesn't exist, CreateBackup does the following:    Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the backup.   By using the idempotent operation, you can retry a CreateBackup operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same. The CreateFileSystem operation returns while the backup's lifecycle state is still CREATING. You can check the file system creation status by calling the DescribeBackups operation, which returns the backup state along with other information.   
    */
   createBackup(params: FSx.Types.CreateBackupRequest, callback?: (err: AWSError, data: FSx.Types.CreateBackupResponse) => void): Request<FSx.Types.CreateBackupResponse, AWSError>;
@@ -19,6 +27,14 @@ declare class FSx extends Service {
    * Creates a backup of an existing Amazon FSx for Windows File Server file system. Creating regular backups for your file system is a best practice that complements the replication that Amazon FSx for Windows File Server performs for your file system. It also enables you to restore from user modification of data. If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a backup with the specified client request token doesn't exist, CreateBackup does the following:    Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the backup.   By using the idempotent operation, you can retry a CreateBackup operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same. The CreateFileSystem operation returns while the backup's lifecycle state is still CREATING. You can check the file system creation status by calling the DescribeBackups operation, which returns the backup state along with other information.   
    */
   createBackup(callback?: (err: AWSError, data: FSx.Types.CreateBackupResponse) => void): Request<FSx.Types.CreateBackupResponse, AWSError>;
+  /**
+   * Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repository. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to its linked data repository. A CreateDataRepositoryTask operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see Using Data Repository Tasks. To learn more about linking a data repository to your file system, see Step 1: Create Your Amazon FSx for Lustre File System.
+   */
+  createDataRepositoryTask(params: FSx.Types.CreateDataRepositoryTaskRequest, callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryTaskResponse) => void): Request<FSx.Types.CreateDataRepositoryTaskResponse, AWSError>;
+  /**
+   * Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repository. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to its linked data repository. A CreateDataRepositoryTask operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see Using Data Repository Tasks. To learn more about linking a data repository to your file system, see Step 1: Create Your Amazon FSx for Lustre File System.
+   */
+  createDataRepositoryTask(callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryTaskResponse) => void): Request<FSx.Types.CreateDataRepositoryTaskResponse, AWSError>;
   /**
    * Creates a new, empty Amazon FSx file system. If a file system with the specified client request token exists and the parameters match, CreateFileSystem returns the description of the existing file system. If a file system specified client request token exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, CreateFileSystem does the following:    Creates a new, empty Amazon FSx file system with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   This operation requires a client request token in the request that Amazon FSx uses to ensure idempotent creation. This means that calling the operation multiple times with the same client request token has no effect. By using the idempotent operation, you can retry a CreateFileSystem operation without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.  The CreateFileSystem call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
    */
@@ -44,11 +60,11 @@ declare class FSx extends Service {
    */
   deleteBackup(callback?: (err: AWSError, data: FSx.Types.DeleteBackupResponse) => void): Request<FSx.Types.DeleteBackupResponse, AWSError>;
   /**
-   * Deletes a file system, deleting its contents. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups will also be deleted. By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup is not subject to the file system's retention policy, and must be manually deleted. The DeleteFileSystem action returns while the file system has the DELETING status. You can check the file system deletion status by calling the DescribeFileSystems action, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the DescribeFileSystems returns a FileSystemNotFound error.  The data in a deleted file system is also deleted and can't be recovered by any means. 
+   * Deletes a file system, deleting its contents. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups will also be deleted. By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup is not subject to the file system's retention policy, and must be manually deleted. The DeleteFileSystem action returns while the file system has the DELETING status. You can check the file system deletion status by calling the DescribeFileSystems action, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the DescribeFileSystems returns a FileSystemNotFound error.  Deleting an Amazon FSx for Lustre file system will fail with a 400 BadRequest if a data repository task is in a PENDING or EXECUTING state.   The data in a deleted file system is also deleted and can't be recovered by any means. 
    */
   deleteFileSystem(params: FSx.Types.DeleteFileSystemRequest, callback?: (err: AWSError, data: FSx.Types.DeleteFileSystemResponse) => void): Request<FSx.Types.DeleteFileSystemResponse, AWSError>;
   /**
-   * Deletes a file system, deleting its contents. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups will also be deleted. By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup is not subject to the file system's retention policy, and must be manually deleted. The DeleteFileSystem action returns while the file system has the DELETING status. You can check the file system deletion status by calling the DescribeFileSystems action, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the DescribeFileSystems returns a FileSystemNotFound error.  The data in a deleted file system is also deleted and can't be recovered by any means. 
+   * Deletes a file system, deleting its contents. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups will also be deleted. By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup is not subject to the file system's retention policy, and must be manually deleted. The DeleteFileSystem action returns while the file system has the DELETING status. You can check the file system deletion status by calling the DescribeFileSystems action, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the DescribeFileSystems returns a FileSystemNotFound error.  Deleting an Amazon FSx for Lustre file system will fail with a 400 BadRequest if a data repository task is in a PENDING or EXECUTING state.   The data in a deleted file system is also deleted and can't be recovered by any means. 
    */
   deleteFileSystem(callback?: (err: AWSError, data: FSx.Types.DeleteFileSystemResponse) => void): Request<FSx.Types.DeleteFileSystemResponse, AWSError>;
   /**
@@ -59,6 +75,14 @@ declare class FSx extends Service {
    * Returns the description of specific Amazon FSx for Windows File Server backups, if a BackupIds value is provided for that backup. Otherwise, it returns all backups owned by your AWS account in the AWS Region of the endpoint that you're calling. When retrieving all backups, you can optionally specify the MaxResults parameter to limit the number of backups in a response. If more backups remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response. This action is used in an iterative process to retrieve a list of your backups. DescribeBackups is called first without a NextTokenvalue. Then the action continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken. When using this action, keep the following in mind:   The implementation might return fewer than MaxResults file system descriptions while still including a NextToken value.   The order of backups returned in the response of one DescribeBackups call and the order of backups returned across the responses of a multi-call iteration is unspecified.  
    */
   describeBackups(callback?: (err: AWSError, data: FSx.Types.DescribeBackupsResponse) => void): Request<FSx.Types.DescribeBackupsResponse, AWSError>;
+  /**
+   * Returns the description of specific Amazon FSx for Lustre data repository tasks, if one or more TaskIds values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your AWS account in the AWS Region of the endpoint that you're calling. When retrieving all tasks, you can paginate the response by using the optional MaxResults parameter to limit the number of tasks returned in a response. If more tasks remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
+   */
+  describeDataRepositoryTasks(params: FSx.Types.DescribeDataRepositoryTasksRequest, callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryTasksResponse) => void): Request<FSx.Types.DescribeDataRepositoryTasksResponse, AWSError>;
+  /**
+   * Returns the description of specific Amazon FSx for Lustre data repository tasks, if one or more TaskIds values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your AWS account in the AWS Region of the endpoint that you're calling. When retrieving all tasks, you can paginate the response by using the optional MaxResults parameter to limit the number of tasks returned in a response. If more tasks remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
+   */
+  describeDataRepositoryTasks(callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryTasksResponse) => void): Request<FSx.Types.DescribeDataRepositoryTasksResponse, AWSError>;
   /**
    * Returns the description of specific Amazon FSx file systems, if a FileSystemIds value is provided for that file system. Otherwise, it returns descriptions of all file systems owned by your AWS account in the AWS Region of the endpoint that you're calling. When retrieving all file system descriptions, you can optionally specify the MaxResults parameter to limit the number of descriptions in a response. If more file system descriptions remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response. This action is used in an iterative process to retrieve a list of your file system descriptions. DescribeFileSystems is called first without a NextTokenvalue. Then the action continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken. When using this action, keep the following in mind:   The implementation might return fewer than MaxResults file system descriptions while still including a NextToken value.   The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multicall iteration is unspecified.  
    */
@@ -138,7 +162,7 @@ declare namespace FSx {
      */
     CreationTime: CreationTime;
     /**
-     * The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this backup's data.
+     * The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this backup of the Amazon FSx for Windows file system's data at rest. Amazon FSx for Lustre does not support KMS encryption.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -169,7 +193,41 @@ declare namespace FSx {
   export type BackupLifecycle = "AVAILABLE"|"CREATING"|"DELETED"|"FAILED"|string;
   export type BackupType = "AUTOMATIC"|"USER_INITIATED"|string;
   export type Backups = Backup[];
+  export interface CancelDataRepositoryTaskRequest {
+    /**
+     * Specifies the data repository task to cancel.
+     */
+    TaskId: TaskId;
+  }
+  export interface CancelDataRepositoryTaskResponse {
+    /**
+     * The lifecycle status of the data repository task, as follows:    PENDING - Amazon FSx has not started the task.    EXECUTING - Amazon FSx is processing the task.    FAILED - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The DataRepositoryTaskFailureDetails property provides more information about task failures.    SUCCEEDED - FSx completed the task successfully.    CANCELED - Amazon FSx canceled the task and it did not complete.    CANCELING - FSx is in process of canceling the task.  
+     */
+    Lifecycle?: DataRepositoryTaskLifecycle;
+    /**
+     * The ID of the task being canceled.
+     */
+    TaskId?: TaskId;
+  }
   export type ClientRequestToken = string;
+  export interface CompletionReport {
+    /**
+     * Set Enabled to True to generate a CompletionReport when the task completes. If set to true, then you need to provide a report Scope, Path, and Format. Set Enabled to False if you do not want a CompletionReport generated when the task completes.
+     */
+    Enabled: Flag;
+    /**
+     * Required if Enabled is set to true. Specifies the location of the report on the file system's linked S3 data repository. An absolute path that defines where the completion report will be stored in the destination location. The Path you provide must be located within the file system’s ExportPath. An example Path value is "s3://myBucket/myExportPath/optionalPrefix". The report provides the following information for each file in the report: FilePath, FileStatus, and ErrorCode. To learn more about a file system's ExportPath, see . 
+     */
+    Path?: ArchivePath;
+    /**
+     * Required if Enabled is set to true. Specifies the format of the CompletionReport. REPORT_CSV_20191124 is the only format currently supported. When Format is set to REPORT_CSV_20191124, the CompletionReport is provided in CSV format, and is delivered to {path}/task-{id}/failures.csv. 
+     */
+    Format?: ReportFormat;
+    /**
+     * Required if Enabled is set to true. Specifies the scope of the CompletionReport; FAILED_FILES_ONLY is the only scope currently supported. When Scope is set to FAILED_FILES_ONLY, the CompletionReport only contains information about files that the data repository task failed to process.
+     */
+    Scope?: ReportScope;
+  }
   export interface CreateBackupRequest {
     /**
      * The ID of the file system to back up.
@@ -189,6 +247,29 @@ declare namespace FSx {
      * A description of the backup.
      */
     Backup?: Backup;
+  }
+  export interface CreateDataRepositoryTaskRequest {
+    /**
+     * Specifies the type of data repository task to create.
+     */
+    Type: DataRepositoryTaskType;
+    /**
+     * (Optional) The path or paths on the Amazon FSx file system to use when the data repository task is processed. The default path is the file system root directory.
+     */
+    Paths?: DataRepositoryTaskPaths;
+    FileSystemId: FileSystemId;
+    /**
+     * Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. A CompletionReport provides a detailed report on the files that Amazon FSx processed that meet the criteria specified by the Scope parameter. 
+     */
+    Report: CompletionReport;
+    ClientRequestToken?: ClientRequestToken;
+    Tags?: Tags;
+  }
+  export interface CreateDataRepositoryTaskResponse {
+    /**
+     * The description of the data repository task that you just created.
+     */
+    DataRepositoryTask?: DataRepositoryTask;
   }
   export interface CreateFileSystemFromBackupRequest {
     BackupId: BackupId;
@@ -327,6 +408,85 @@ declare namespace FSx {
      */
     ImportedFileChunkSize?: Megabytes;
   }
+  export interface DataRepositoryTask {
+    /**
+     * The system-generated, unique 17-digit ID of the data repository task.
+     */
+    TaskId: TaskId;
+    /**
+     * The lifecycle status of the data repository task, as follows:    PENDING - Amazon FSx has not started the task.    EXECUTING - Amazon FSx is processing the task.    FAILED - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The DataRepositoryTaskFailureDetails property provides more information about task failures.    SUCCEEDED - FSx completed the task successfully.    CANCELED - Amazon FSx canceled the task and it did not complete.    CANCELING - FSx is in process of canceling the task.    You cannot delete an FSx for Lustre file system if there are data repository tasks for the file system in the PENDING or EXECUTING states. Please retry when the data repository task is finished (with a status of CANCELED, SUCCEEDED, or FAILED). You can use the DescribeDataRepositoryTask action to monitor the task status. Contact the FSx team if you need to delete your file system immediately. 
+     */
+    Lifecycle: DataRepositoryTaskLifecycle;
+    /**
+     * The type of data repository task; EXPORT_TO_REPOSITORY is the only type currently supported.
+     */
+    Type: DataRepositoryTaskType;
+    CreationTime: CreationTime;
+    /**
+     * The time that Amazon FSx began processing the task.
+     */
+    StartTime?: StartTime;
+    /**
+     * The time that Amazon FSx completed processing the task, populated after the task is complete.
+     */
+    EndTime?: EndTime;
+    ResourceARN?: ResourceARN;
+    Tags?: Tags;
+    FileSystemId: FileSystemId;
+    /**
+     * An array of paths on the Amazon FSx for Lustre file system that specify the data for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY task, the paths specify which data to export to the linked data repository. (Default) If Paths is not specified, Amazon FSx uses the file system root directory.
+     */
+    Paths?: DataRepositoryTaskPaths;
+    /**
+     * Failure message describing why the task failed, it is populated only when Lifecycle is set to FAILED.
+     */
+    FailureDetails?: DataRepositoryTaskFailureDetails;
+    /**
+     * Provides the status of the number of files that the task has processed successfully and failed to process.
+     */
+    Status?: DataRepositoryTaskStatus;
+    Report?: CompletionReport;
+  }
+  export interface DataRepositoryTaskFailureDetails {
+    Message?: ErrorMessage;
+  }
+  export interface DataRepositoryTaskFilter {
+    /**
+     * Name of the task property to use in filtering the tasks returned in the response.   Use file-system-id to retrieve data repository tasks for specific file systems.   Use task-lifecycle to retrieve data repository tasks with one or more specific lifecycle states, as follows: CANCELED, EXECUTING, FAILED, PENDING, and SUCCEEDED.  
+     */
+    Name?: DataRepositoryTaskFilterName;
+    /**
+     * Use Values to include the specific file system IDs and task lifecycle states for the filters you are using.
+     */
+    Values?: DataRepositoryTaskFilterValues;
+  }
+  export type DataRepositoryTaskFilterName = "file-system-id"|"task-lifecycle"|string;
+  export type DataRepositoryTaskFilterValue = string;
+  export type DataRepositoryTaskFilterValues = DataRepositoryTaskFilterValue[];
+  export type DataRepositoryTaskFilters = DataRepositoryTaskFilter[];
+  export type DataRepositoryTaskLifecycle = "PENDING"|"EXECUTING"|"FAILED"|"SUCCEEDED"|"CANCELED"|"CANCELING"|string;
+  export type DataRepositoryTaskPath = string;
+  export type DataRepositoryTaskPaths = DataRepositoryTaskPath[];
+  export interface DataRepositoryTaskStatus {
+    /**
+     * The total number of files that the task will process. While a task is executing, the sum of SucceededCount plus FailedCount may not equal TotalCount. When the task is complete, TotalCount equals the sum of SucceededCount plus FailedCount.
+     */
+    TotalCount?: TotalCount;
+    /**
+     * A running total of the number of files that the task has successfully processed.
+     */
+    SucceededCount?: SucceededCount;
+    /**
+     * A running total of the number of files that the task failed to process.
+     */
+    FailedCount?: FailedCount;
+    /**
+     * The time at which the task status was last updated.
+     */
+    LastUpdatedTime?: LastUpdatedTime;
+  }
+  export type DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"|string;
+  export type DataRepositoryTasks = DataRepositoryTask[];
   export interface DeleteBackupRequest {
     /**
      * The ID of the backup you want to delete.
@@ -417,6 +577,25 @@ declare namespace FSx {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeDataRepositoryTasksRequest {
+    /**
+     * (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
+     */
+    TaskIds?: TaskIds;
+    /**
+     * (Optional) You can use filters to narrow the DescribeDataRepositoryTasks response to include just tasks for specific file systems, or tasks in a specific lifecycle state.
+     */
+    Filters?: DataRepositoryTaskFilters;
+    MaxResults?: MaxResults;
+    NextToken?: NextToken;
+  }
+  export interface DescribeDataRepositoryTasksResponse {
+    /**
+     * The collection of data repository task descriptions returned.
+     */
+    DataRepositoryTasks?: DataRepositoryTasks;
+    NextToken?: NextToken;
+  }
   export interface DescribeFileSystemsRequest {
     /**
      * (Optional) IDs of the file systems whose descriptions you want to retrieve (String).
@@ -445,7 +624,9 @@ declare namespace FSx {
   export type DirectoryPassword = string;
   export type DirectoryUserName = string;
   export type DnsIps = IpAddress[];
+  export type EndTime = Date;
   export type ErrorMessage = string;
+  export type FailedCount = number;
   export interface FileSystem {
     /**
      * The AWS account that created the file system. If the file system was created by an AWS Identity and Access Management (IAM) user, the AWS account to which the IAM user belongs is the owner.
@@ -489,7 +670,7 @@ declare namespace FSx {
      */
     DNSName?: DNSName;
     /**
-     * The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for an Amazon FSx for Windows File Server file system.
+     * The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for an Amazon FSx for Windows File Server file system. Amazon FSx for Lustre does not support KMS encryption. 
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -537,6 +718,7 @@ declare namespace FSx {
   export type Flag = boolean;
   export type IpAddress = string;
   export type KmsKeyId = string;
+  export type LastUpdatedTime = Date;
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the Amazon FSx resource that will have its tags listed.
@@ -576,6 +758,8 @@ declare namespace FSx {
   export type NextToken = string;
   export type OrganizationalUnitDistinguishedName = string;
   export type ProgressPercent = number;
+  export type ReportFormat = "REPORT_CSV_20191124"|string;
+  export type ReportScope = "FAILED_FILES_ONLY"|string;
   export type ResourceARN = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
@@ -623,7 +807,7 @@ declare namespace FSx {
      */
     Password: DirectoryPassword;
     /**
-     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (Iv4) address ranges, as specified in RFC 1918:   10.0.0.0 - 10.255.255.255 (10/8 prefix)   172.16.0.0 - 172.31.255.255 (172.16/12 prefix)   192.168.0.0 - 192.168.255.255 (192.168/16 prefix)  
+     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (IPv4) address ranges, as specified in RFC 1918:   10.0.0.0 - 10.255.255.255 (10/8 prefix)   172.16.0.0 - 172.31.255.255 (172.16/12 prefix)   192.168.0.0 - 192.168.255.255 (192.168/16 prefix)  
      */
     DnsIps: DnsIps;
   }
@@ -641,9 +825,11 @@ declare namespace FSx {
      */
     DnsIps?: DnsIps;
   }
+  export type StartTime = Date;
   export type StorageCapacity = number;
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
+  export type SucceededCount = number;
   export interface Tag {
     /**
      * A value that specifies the TagKey, the name of the tag. Tag keys must be unique for the resource to which they are attached.
@@ -670,6 +856,9 @@ declare namespace FSx {
   }
   export type TagValue = string;
   export type Tags = Tag[];
+  export type TaskId = string;
+  export type TaskIds = TaskId[];
+  export type TotalCount = number;
   export interface UntagResourceRequest {
     /**
      * The ARN of the Amazon FSx resource to untag.
