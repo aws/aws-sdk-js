@@ -461,13 +461,13 @@ declare namespace LexModelBuildingService {
      */
     logSettings: LogSettingsRequestList;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role with permission to write to your CloudWatch Logs for text logs and your S3 bucket for audio logs. For more information, see Creating Conversation Logs.
+     * The Amazon Resource Name (ARN) of an IAM role with permission to write to your CloudWatch Logs for text logs and your S3 bucket for audio logs. If audio encryption is enabled, this role also provides access permission for the AWS KMS key used for encrypting audio logs. For more information, see Creating an IAM Role and Policy for Conversation Logs.
      */
     iamRoleArn: IamRoleArn;
   }
   export interface ConversationLogsResponse {
     /**
-     * The settings for your conversation logs.
+     * The settings for your conversation logs. You can log text, audio, or both.
      */
     logSettings?: LogSettingsResponseList;
     /**
@@ -1545,7 +1545,7 @@ declare namespace LexModelBuildingService {
      */
     resourceArn?: ResourceArn;
     /**
-     * The resource prefix of the S3 object or CloudWatch Logs log entry where logs are delivered. For both S3 and CloudWatch Logs, the prefix is:  aws/lex/bot-name/bot-alias/bot-version 
+     * The resource prefix is the first part of the S3 object key within the S3 bucket that you specified to contain audio logs. For CloudWatch Logs it is the prefix of the log stream name within the log group that you specified. 
      */
     resourcePrefix?: ResourcePrefix;
   }
@@ -1612,7 +1612,7 @@ declare namespace LexModelBuildingService {
      */
     checksum?: String;
     /**
-     * Settings that determine how Amazon Lex uses conversation logs for the alias.
+     * Settings for conversation logs for the alias.
      */
     conversationLogs?: ConversationLogsRequest;
   }

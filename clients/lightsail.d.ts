@@ -60,11 +60,11 @@ declare class Lightsail extends Service {
    */
   closeInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
   /**
-   * Copies a manual instance or disk snapshot as another manual snapshot, or copies an automatic instance or disk snapshot as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.  Database snapshots cannot be copied at this time. 
+   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
    */
   copySnapshot(params: Lightsail.Types.CopySnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
-   * Copies a manual instance or disk snapshot as another manual snapshot, or copies an automatic instance or disk snapshot as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.  Database snapshots cannot be copied at this time. 
+   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
    */
   copySnapshot(callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Lightsail extends Service {
    */
   createRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseSnapshotResult, AWSError>;
   /**
-   * Deletes an automatic snapshot for an instance or disk.
+   * Deletes an automatic snapshot of an instance or disk. For more information, see the Lightsail Dev Guide.
    */
   deleteAutoSnapshot(params: Lightsail.Types.DeleteAutoSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
   /**
-   * Deletes an automatic snapshot for an instance or disk.
+   * Deletes an automatic snapshot of an instance or disk. For more information, see the Lightsail Dev Guide.
    */
   deleteAutoSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
   /**
@@ -356,11 +356,11 @@ declare class Lightsail extends Service {
    */
   getActiveNames(callback?: (err: AWSError, data: Lightsail.Types.GetActiveNamesResult) => void): Request<Lightsail.Types.GetActiveNamesResult, AWSError>;
   /**
-   * Returns the available automatic snapshots for the specified resource name. For more information, see the Lightsail Dev Guide.
+   * Returns the available automatic snapshots for an instance or disk. For more information, see the Lightsail Dev Guide.
    */
   getAutoSnapshots(params: Lightsail.Types.GetAutoSnapshotsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetAutoSnapshotsResult) => void): Request<Lightsail.Types.GetAutoSnapshotsResult, AWSError>;
   /**
-   * Returns the available automatic snapshots for the specified resource name. For more information, see the Lightsail Dev Guide.
+   * Returns the available automatic snapshots for an instance or disk. For more information, see the Lightsail Dev Guide.
    */
   getAutoSnapshots(callback?: (err: AWSError, data: Lightsail.Types.GetAutoSnapshotsResult) => void): Request<Lightsail.Types.GetAutoSnapshotsResult, AWSError>;
   /**
@@ -844,11 +844,11 @@ declare class Lightsail extends Service {
    */
   updateRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseResult, AWSError>;
   /**
-   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which paramater updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation. The update relational database parameters operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation. The update relational database parameters operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
    */
   updateRelationalDatabaseParameters(params: Lightsail.Types.UpdateRelationalDatabaseParametersRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseParametersResult, AWSError>;
   /**
-   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which paramater updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation. The update relational database parameters operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation. The update relational database parameters operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
    */
   updateRelationalDatabaseParameters(callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseParametersResult, AWSError>;
 }
@@ -1184,23 +1184,23 @@ declare namespace Lightsail {
   export type CloudFormationStackRecordSourceType = "ExportSnapshotRecord"|string;
   export interface CopySnapshotRequest {
     /**
-     * The name of the source instance or disk snapshot to be copied.  Define this parameter only when copying a manual snapshot as another manual snapshot. 
+     * The name of the source manual snapshot to copy. Constraint:   Define this parameter only when copying a manual snapshot as another manual snapshot.  
      */
     sourceSnapshotName?: ResourceName;
     /**
-     * The name of the source resource from which the automatic snapshot was created.  Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide. 
+     * The name of the source instance or disk from which the source automatic snapshot was created. Constraint:   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide.  
      */
     sourceResourceName?: string;
     /**
-     * The date of the automatic snapshot to copy for the new manual snapshot. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.    Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide. 
+     * The date of the source automatic snapshot to copy. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide.  
      */
     restoreDate?: string;
     /**
-     * A Boolean value to indicate whether to use the latest available automatic snapshot. This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.  Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide. 
+     * A Boolean value to indicate whether to use the latest available automatic snapshot of the specified source instance or disk. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide.  
      */
     useLatestRestorableAutoSnapshot?: boolean;
     /**
-     * The name of the new instance or disk snapshot to be created as a copy.
+     * The name of the new manual snapshot to be created as a copy.
      */
     targetSnapshotName: ResourceName;
     /**
@@ -1232,7 +1232,7 @@ declare namespace Lightsail {
      */
     diskName: ResourceName;
     /**
-     * The name of the disk snapshot (e.g., my-snapshot) from which to create the new storage disk. This parameter cannot be defined together with the source disk name parameter. The disk snapshot name and source disk name parameters are mutually exclusive.
+     * The name of the disk snapshot (e.g., my-snapshot) from which to create the new storage disk. Constraint:   This parameter cannot be defined together with the source disk name parameter. The disk snapshot name and source disk name parameters are mutually exclusive.  
      */
     diskSnapshotName?: ResourceName;
     /**
@@ -1252,15 +1252,15 @@ declare namespace Lightsail {
      */
     addOns?: AddOnRequestList;
     /**
-     * The name of the source disk from which the source automatic snapshot was created. This parameter cannot be defined together with the disk snapshot name parameter. The source disk name and disk snapshot name parameters are mutually exclusive.  Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     * The name of the source disk from which the source automatic snapshot was created. Constraints:   This parameter cannot be defined together with the disk snapshot name parameter. The source disk name and disk snapshot name parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
      */
     sourceDiskName?: string;
     /**
-     * The date of the automatic snapshot to use for the new disk. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.    Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     * The date of the automatic snapshot to use for the new disk. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
      */
     restoreDate?: string;
     /**
-     * A Boolean value to indicate whether to use the latest available automatic snapshot. This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.  Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     * A Boolean value to indicate whether to use the latest available automatic snapshot. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
      */
     useLatestRestorableAutoSnapshot?: boolean;
   }
@@ -1388,7 +1388,7 @@ declare namespace Lightsail {
      */
     availabilityZone: string;
     /**
-     * The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots. This parameter cannot be defined together with the source instance name parameter. The instance snapshot name and source instance name parameters are mutually exclusive.
+     * The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots. Constraint:   This parameter cannot be defined together with the source instance name parameter. The instance snapshot name and source instance name parameters are mutually exclusive.  
      */
     instanceSnapshotName?: ResourceName;
     /**
@@ -1412,15 +1412,15 @@ declare namespace Lightsail {
      */
     addOns?: AddOnRequestList;
     /**
-     * The name of the source instance from which the source automatic snapshot was created. This parameter cannot be defined together with the instance snapshot name parameter. The source instance name and instance snapshot name parameters are mutually exclusive.  Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     * The name of the source instance from which the source automatic snapshot was created. Constraints:   This parameter cannot be defined together with the instance snapshot name parameter. The source instance name and instance snapshot name parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
      */
     sourceInstanceName?: string;
     /**
-     * The date of the automatic snapshot to use for the new instance. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.    Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     * The date of the automatic snapshot to use for the new instance. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
      */
     restoreDate?: string;
     /**
-     * A Boolean value to indicate whether to use the latest available automatic snapshot. This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.  Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide. 
+     * A Boolean value to indicate whether to use the latest available automatic snapshot. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
      */
     useLatestRestorableAutoSnapshot?: boolean;
   }
@@ -1684,7 +1684,7 @@ declare namespace Lightsail {
   }
   export interface DeleteAutoSnapshotRequest {
     /**
-     * The name of the source resource from which to delete the automatic snapshot.
+     * The name of the source instance or disk from which to delete the automatic snapshot.
      */
     resourceName: ResourceName;
     /**
@@ -1926,7 +1926,7 @@ declare namespace Lightsail {
      */
     addOnType: AddOnType;
     /**
-     * The name of the source resource from which to disable the add-on.
+     * The name of the source resource for which to disable the add-on.
      */
     resourceName: ResourceName;
   }
@@ -2303,13 +2303,13 @@ declare namespace Lightsail {
   }
   export interface GetAutoSnapshotsRequest {
     /**
-     * The name of the source resource from which to get automatic snapshot information.
+     * The name of the source instance or disk from which to get automatic snapshot information.
      */
     resourceName: ResourceName;
   }
   export interface GetAutoSnapshotsResult {
     /**
-     * The name of the source resource for the automatic snapshots.
+     * The name of the source instance or disk for the automatic snapshots.
      */
     resourceName?: ResourceName;
     /**
@@ -2317,7 +2317,7 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * An array of objects that describe the automatic snapshots that are available for the specified source resource.asdf
+     * An array of objects that describe the automatic snapshots that are available for the specified source instance or disk.
      */
     autoSnapshots?: AutoSnapshotDetailsList;
   }
@@ -4084,6 +4084,10 @@ declare namespace Lightsail {
      * Describes the pending maintenance actions for the database.
      */
     pendingMaintenanceActions?: PendingMaintenanceActionList;
+    /**
+     * The certificate associated with the database.
+     */
+    caCertificateIdentifier?: string;
   }
   export interface RelationalDatabaseBlueprint {
     /**
@@ -4572,6 +4576,10 @@ declare namespace Lightsail {
      * When true, applies changes immediately. When false, applies changes during the preferred maintenance window. Some changes may cause an outage. Default: false 
      */
     applyImmediately?: boolean;
+    /**
+     * Indicates the certificate that needs to be associated with the database.
+     */
+    caCertificateIdentifier?: string;
   }
   export interface UpdateRelationalDatabaseResult {
     /**

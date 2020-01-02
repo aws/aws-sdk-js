@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.596.0-->
+<!--LATEST=2.597.0-->
 <!--ENTRYINSERT-->
+
+## 2.597.0
+* feature: ECR: Adds waiters for ImageScanComplete and LifecyclePolicyPreviewComplete
+* feature: Lightsail: This release adds support for Certificate Authority (CA) certificate identifier to managed databases in Amazon Lightsail.
 
 ## 2.596.0
 * feature: FSx: This release adds a new family of APIs (create-data-repository-task, describe-data-repository-task, and cancel-data-repository-task) that allow users to perform operations between their file system and its linked data repository.
