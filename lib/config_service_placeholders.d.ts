@@ -219,6 +219,7 @@ export abstract class ConfigurationServicePlaceholders {
   ebs?: AWS.EBS.Types.ClientConfiguration;
   kinesisvideosignalingchannels?: AWS.KinesisVideoSignalingChannels.Types.ClientConfiguration;
   detective?: AWS.Detective.Types.ClientConfiguration;
+  codestarconnections?: AWS.CodeStarconnections.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -440,4 +441,5 @@ export interface ConfigurationServiceApiVersions {
   ebs?: AWS.EBS.Types.apiVersion;
   kinesisvideosignalingchannels?: AWS.KinesisVideoSignalingChannels.Types.apiVersion;
   detective?: AWS.Detective.Types.apiVersion;
+  codestarconnections?: AWS.CodeStarconnections.Types.apiVersion;
 }

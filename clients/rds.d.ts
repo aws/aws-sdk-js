@@ -3335,7 +3335,7 @@ declare namespace RDS {
      */
     Endpoint?: String;
     /**
-     * The DB cluster identifier when the target represents an Aurora DB cluster. This field is blank when the target represents an 
+     * The DB cluster identifier when the target represents an Aurora DB cluster. This field is blank when the target represents an RDS DB instance.
      */
     TrackedClusterId?: String;
     /**
@@ -5430,6 +5430,10 @@ declare namespace RDS {
      * The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
      */
     MaxAllocatedStorage?: IntegerOptional;
+    /**
+     * A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate. By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.  Set this parameter only if you are not using SSL/TLS to connect to the DB instance.  If you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate:   For more information about rotating your SSL/TLS certificate for RDS DB engines, see  Rotating Your SSL/TLS Certificate. in the Amazon RDS User Guide.    For more information about rotating your SSL/TLS certificate for Aurora DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon Aurora User Guide.   
+     */
+    CertificateRotationRestart?: BooleanOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;

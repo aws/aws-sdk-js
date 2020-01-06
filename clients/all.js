@@ -218,5 +218,6 @@ module.exports = {
   AugmentedAIRuntime: require('./augmentedairuntime'),
   EBS: require('./ebs'),
   KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels'),
-  Detective: require('./detective')
+  Detective: require('./detective'),
+  CodeStarconnections: require('./codestarconnections')
 };

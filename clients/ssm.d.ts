@@ -1452,7 +1452,7 @@ declare namespace SSM {
      */
     Key?: AttachmentsSourceKey;
     /**
-     * The value of a key-value pair that identifies the location of an attachment to a document. The format is the URL of the location of a document attachment, such as the URL of an Amazon S3 bucket.
+     * The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.   For the key SourceUrl, the value is an S3 bucket location. For example:  "Values": [ "s3://my-bucket/my-folder" ]    For the key S3FileUrl, the value is a file in an S3 bucket. For example:  "Values": [ "s3://my-bucket/my-folder/my-file.py" ]    For the key AttachmentReference, the value is constructed from the name of another SSM document in your account, a version number of that document, and a file attached to that document version that you want to reuse. For example:  "Values": [ "MyOtherDocument/3/my-other-file.py" ]  However, if the SSM document is shared with you from another account, the full SSM document ARN must be specified instead of the document name only. For example:  "Values": [ "arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py" ]   
      */
     Values?: AttachmentsSourceValues;
     /**
@@ -1460,7 +1460,7 @@ declare namespace SSM {
      */
     Name?: AttachmentIdentifier;
   }
-  export type AttachmentsSourceKey = "SourceUrl"|"S3FileUrl"|string;
+  export type AttachmentsSourceKey = "SourceUrl"|"S3FileUrl"|"AttachmentReference"|string;
   export type AttachmentsSourceList = AttachmentsSource[];
   export type AttachmentsSourceValue = string;
   export type AttachmentsSourceValues = AttachmentsSourceValue[];
@@ -1579,7 +1579,7 @@ declare namespace SSM {
      */
     Values: AutomationExecutionFilterValueList;
   }
-  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|string;
+  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|"AutomationType"|"TagKey"|string;
   export type AutomationExecutionFilterList = AutomationExecutionFilter[];
   export type AutomationExecutionFilterValue = string;
   export type AutomationExecutionFilterValueList = AutomationExecutionFilterValue[];
@@ -7644,6 +7644,10 @@ declare namespace SSM {
      * A location is a combination of AWS Regions and/or AWS accounts where you want to run the Automation. Use this action to start an Automation in multiple Regions and multiple accounts. For more information, see Executing Automations in Multiple AWS Regions and Accounts in the AWS Systems Manager User Guide. 
      */
     TargetLocations?: TargetLocations;
+    /**
+     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an automation. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an automation to identify an environment or operating system. In this case, you could specify the following key name/value pairs:    Key=environment,Value=test     Key=OS,Value=Windows     To add tags to an existing patch baseline, use the AddTagsToResource action. 
+     */
+    Tags?: TagList;
   }
   export interface StartAutomationExecutionResult {
     /**

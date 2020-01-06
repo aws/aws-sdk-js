@@ -1,6 +1,34 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.593.0-->
+<!--LATEST=2.597.0-->
 <!--ENTRYINSERT-->
+
+## 2.597.0
+* feature: ECR: Adds waiters for ImageScanComplete and LifecyclePolicyPreviewComplete
+* feature: Lightsail: This release adds support for Certificate Authority (CA) certificate identifier to managed databases in Amazon Lightsail.
+
+## 2.596.0
+* feature: FSx: This release adds a new family of APIs (create-data-repository-task, describe-data-repository-task, and cancel-data-repository-task) that allow users to perform operations between their file system and its linked data repository.
+* feature: Health: With this release, you can now centrally aggregate AWS Health events from all accounts in your AWS organization. Visit AWS Health documentation to learn more about enabling and using this feature: https://docs.aws.amazon.com/health/latest/ug/organizational-view-health.html. 
+
+## 2.595.0
+* feature: DeviceFarm: Introduced browser testing support through AWS Device Farm
+* feature: EC2: This release introduces the ability to tag key pairs, placement groups, export tasks, import image tasks, import snapshot tasks and export image tasks. You can use tags to organize and identify your resources for cost allocation. 
+* feature: EKS: Amazon EKS now supports restricting access to the API server public endpoint by applying CIDR blocks
+* feature: Pinpoint: This release of the Amazon Pinpoint API introduces versioning support for message templates.
+* feature: RDS: This release adds an operation that enables users to specify whether a database is restarted when its SSL/TLS certificate is rotated. Only customers who do not use SSL/TLS should use this operation.
+* feature: SSM: This release updates the attachments support to include AttachmentReference source for Automation documents.
+* feature: SecurityHub: Additional resource types are now fully supported in the AWS Security Finding Format (ASFF). These resources include AwsElbv2LoadBalancer, AwsKmsKey, AwsIamRole, AwsSqsQueue, AwsLambdaFunction, AwsSnsTopic, and AwsCloudFrontDistribution. Each of these resource types includes an accompanying resource details object with fields for security finding providers to populate. Updates were made to the AwsIamAccessKey resource details object to include information on principal ID and name. To learn more, visit our documentation on the ASFF.
+* feature: TranscribeService: AWS Transcribe now supports vocabulary filtering that allows customers to input words to the service that they don't want to see in the output transcript.
+
+## 2.594.0
+* feature: CodeStarconnections: Public beta for Bitbucket Cloud support in AWS CodePipeline through integration with AWS CodeStar connections.
+* feature: DLM: You can now copy snapshots across regions using Data Lifecycle Manager (DLM). You can enable policies which, along with create, can now also copy snapshots to one or more AWS region(s). Copies can be scheduled for up to three regions from a single policy and retention periods are set for each region separately. 
+* feature: EC2: We are updating the supportedRootDevices field to supportedRootDeviceTypes for DescribeInstanceTypes API to ensure that the actual value is returned, correcting a previous error in the model.
+* feature: GameLift: Amazon GameLift now supports ARNs for all key GameLift resources, tagging for GameLift resource authorization management, and updated documentation that articulates GameLift's resource authorization strategy.
+* feature: LexModelBuildingService: Amazon Lex now supports conversation logs and slot obfuscation.
+* feature: PersonalizeRuntime: Add context map to get-recommendations and get-personalized-ranking request objects to provide contextual metadata at inference time
+* feature: SSM: This release allows customers to add tags to Automation execution, enabling them to sort and filter executions in different ways, such as by resource, purpose, owner, or environment.
+* feature: TranscribeService: Amazon Transcribe supports job queuing for the StartTranscriptionJob API.
 
 ## 2.593.0
 * feature: EC2: This release introduces the ability to tag Elastic Graphics accelerators. You can use tags to organize and identify your accelerators for cost allocation.

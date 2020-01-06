@@ -1,0 +1,261 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2019-12-01",
+    "endpointPrefix": "codestar-connections",
+    "jsonVersion": "1.0",
+    "protocol": "json",
+    "serviceFullName": "AWS CodeStar connections",
+    "serviceId": "CodeStar connections",
+    "signatureVersion": "v4",
+    "signingName": "codestar-connections",
+    "targetPrefix": "com.amazonaws.codestar.connections.CodeStar_connections_20191201",
+    "uid": "codestar-connections-2019-12-01"
+  },
+  "operations": {
+    "CreateConnection": {
+      "name": "CreateConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateConnectionInput"
+      },
+      "output": {
+        "shape": "CreateConnectionOutput"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Creates a connection that can then be given to other AWS services like CodePipeline so that it can access third-party code repositories. The connection is in pending status until the third-party connection handshake is completed from the console.</p>"
+    },
+    "DeleteConnection": {
+      "name": "DeleteConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteConnectionInput"
+      },
+      "output": {
+        "shape": "DeleteConnectionOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>The connection to be deleted.</p>"
+    },
+    "GetConnection": {
+      "name": "GetConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetConnectionInput"
+      },
+      "output": {
+        "shape": "GetConnectionOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns the connection ARN and details such as status, owner, and provider type.</p>"
+    },
+    "ListConnections": {
+      "name": "ListConnections",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListConnectionsInput"
+      },
+      "output": {
+        "shape": "ListConnectionsOutput"
+      },
+      "documentation": "<p>Lists the connections associated with your account.</p>"
+    }
+  },
+  "shapes": {
+    "AccountId": {
+      "type": "string",
+      "max": 12,
+      "min": 12,
+      "pattern": "[0-9]{12}"
+    },
+    "Connection": {
+      "type": "structure",
+      "members": {
+        "ConnectionName": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection. Connection names must be unique in an AWS user account.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>"
+        },
+        "ProviderType": {
+          "shape": "ProviderType",
+          "documentation": "<p>The name of the external provider where your third-party code repository is configured. Currently, the valid provider type is Bitbucket.</p>"
+        },
+        "OwnerAccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.</p>"
+        },
+        "ConnectionStatus": {
+          "shape": "ConnectionStatus",
+          "documentation": "<p>The current status of the connection. </p>"
+        }
+      },
+      "documentation": "<p>The configuration that allows a service such as CodePipeline to connect to a third-party code repository.</p>"
+    },
+    "ConnectionArn": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
+    },
+    "ConnectionList": {
+      "type": "list",
+      "member": {
+        "shape": "Connection"
+      }
+    },
+    "ConnectionName": {
+      "type": "string",
+      "max": 32,
+      "min": 1
+    },
+    "ConnectionStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "AVAILABLE",
+        "ERROR"
+      ]
+    },
+    "CreateConnectionInput": {
+      "type": "structure",
+      "required": [
+        "ProviderType",
+        "ConnectionName"
+      ],
+      "members": {
+        "ProviderType": {
+          "shape": "ProviderType",
+          "documentation": "<p>The name of the external provider where your third-party code repository is configured. Currently, the valid provider type is Bitbucket.</p>"
+        },
+        "ConnectionName": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection to be created. The name must be unique in the calling AWS account.</p>"
+        }
+      }
+    },
+    "CreateConnectionOutput": {
+      "type": "structure",
+      "required": [
+        "ConnectionArn"
+      ],
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>"
+        }
+      }
+    },
+    "DeleteConnectionInput": {
+      "type": "structure",
+      "required": [
+        "ConnectionArn"
+      ],
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the connection to be deleted.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>"
+        }
+      }
+    },
+    "DeleteConnectionOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetConnectionInput": {
+      "type": "structure",
+      "required": [
+        "ConnectionArn"
+      ],
+      "members": {
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a connection.</p>"
+        }
+      }
+    },
+    "GetConnectionOutput": {
+      "type": "structure",
+      "members": {
+        "Connection": {
+          "shape": "Connection",
+          "documentation": "<p>The connection details, such as status, owner, and provider type.</p>"
+        }
+      }
+    },
+    "ListConnectionsInput": {
+      "type": "structure",
+      "members": {
+        "ProviderTypeFilter": {
+          "shape": "ProviderType",
+          "documentation": "<p>Filters the list of connections to those associated with a specified provider, such as Bitbucket.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that was returned from the previous <code>ListConnections</code> call, which can be used to return the next set of connections in the list.</p>"
+        }
+      }
+    },
+    "ListConnectionsOutput": {
+      "type": "structure",
+      "members": {
+        "Connections": {
+          "shape": "ConnectionList",
+          "documentation": "<p>A list of connections and the details for each connection, such as status, owner, and provider type.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token that can be used in the next <code>ListConnections</code> call. To view all items in the list, continue to call this operation with each subsequent token until no more <code>nextToken</code> values are returned.</p>"
+        }
+      }
+    },
+    "MaxResults": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
+    "NextToken": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9=\\-\\\\/]+"
+    },
+    "ProviderType": {
+      "type": "string",
+      "enum": [
+        "Bitbucket"
+      ]
+    }
+  },
+  "documentation": "<p>This AWS CodeStar Connections API Reference provides descriptions and usage examples of the operations and data types for the AWS CodeStar Connections API. You can use the Connections API to work with connections and installations.</p> <p> <i>Connections</i> are configurations that you use to connect AWS resources to external code repositories. Each connection is a resource that can be given to services such as CodePipeline to connect to a third-party repository such as Bitbucket. For example, you can add the connection in CodePipeline so that it triggers your pipeline when a code change is made to your third-party code repository. Each connection is named and associated with a unique ARN that is used to reference the connection.</p> <p>When you create a connection, the console initiates a third-party connection handshake. <i>Installations</i> are the apps that are used to conduct this handshake. For example, the installation for the Bitbucket provider type is the Bitbucket Cloud app. When you create a connection, you can choose an existing installation or create one.</p> <p>You can work with connections by calling:</p> <ul> <li> <p> <a>CreateConnection</a>, which creates a uniquely named connection that can be referenced by services such as CodePipeline.</p> </li> <li> <p> <a>DeleteConnection</a>, which deletes the specified connection.</p> </li> <li> <p> <a>GetConnection</a>, which returns information about the connection, including the connection status.</p> </li> <li> <p> <a>ListConnections</a>, which lists the connections associated with your account.</p> </li> </ul> <p>For information about how to use AWS CodeStar Connections, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html\">AWS CodePipeline User Guide</a>.</p>"
+}

@@ -40,11 +40,11 @@ declare class Detective extends Service {
    */
   deleteGraph(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Amazon Detective is currently in preview. Deletes one or more member accounts from the master account behavior graph. This operation can only be called by a Detective master account. That account cannot use DeleteMembers to delete their own account from the Morocco graph. To disable a behavior graph, the master account uses the DeleteGraph API method.
+   * Amazon Detective is currently in preview. Deletes one or more member accounts from the master account behavior graph. This operation can only be called by a Detective master account. That account cannot use DeleteMembers to delete their own account from the behavior graph. To disable a behavior graph, the master account uses the DeleteGraph API method.
    */
   deleteMembers(params: Detective.Types.DeleteMembersRequest, callback?: (err: AWSError, data: Detective.Types.DeleteMembersResponse) => void): Request<Detective.Types.DeleteMembersResponse, AWSError>;
   /**
-   * Amazon Detective is currently in preview. Deletes one or more member accounts from the master account behavior graph. This operation can only be called by a Detective master account. That account cannot use DeleteMembers to delete their own account from the Morocco graph. To disable a behavior graph, the master account uses the DeleteGraph API method.
+   * Amazon Detective is currently in preview. Deletes one or more member accounts from the master account behavior graph. This operation can only be called by a Detective master account. That account cannot use DeleteMembers to delete their own account from the behavior graph. To disable a behavior graph, the master account uses the DeleteGraph API method.
    */
   deleteMembers(callback?: (err: AWSError, data: Detective.Types.DeleteMembersResponse) => void): Request<Detective.Types.DeleteMembersResponse, AWSError>;
   /**

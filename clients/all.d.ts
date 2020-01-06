@@ -217,3 +217,4 @@ export import AugmentedAIRuntime = require('./augmentedairuntime');
 export import EBS = require('./ebs');
 export import KinesisVideoSignalingChannels = require('./kinesisvideosignalingchannels');
 export import Detective = require('./detective');
+export import CodeStarconnections = require('./codestarconnections');

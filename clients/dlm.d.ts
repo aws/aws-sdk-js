@@ -79,7 +79,9 @@ declare class DLM extends Service {
 declare namespace DLM {
   export type AvailabilityZone = string;
   export type AvailabilityZoneList = AvailabilityZone[];
+  export type CmkArn = string;
   export type CopyTags = boolean;
+  export type CopyTagsNullable = boolean;
   export type Count = number;
   export interface CreateLifecyclePolicyRequest {
     /**
@@ -123,6 +125,39 @@ declare namespace DLM {
      */
     Times?: TimesList;
   }
+  export interface CrossRegionCopyRetainRule {
+    /**
+     * The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+     */
+    Interval?: Interval;
+    /**
+     * The unit of time for time-based retention.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
+  }
+  export interface CrossRegionCopyRule {
+    /**
+     * The target Region.
+     */
+    TargetRegion: TargetRegion;
+    /**
+     * To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or if encryption by default is not enabled.
+     */
+    Encrypted: Encrypted;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.
+     */
+    CmkArn?: CmkArn;
+    /**
+     * Copy all user-defined tags from the source snapshot to the copied snapshot.
+     */
+    CopyTags?: CopyTagsNullable;
+    /**
+     * The retention rule.
+     */
+    RetainRule?: CrossRegionCopyRetainRule;
+  }
+  export type CrossRegionCopyRules = CrossRegionCopyRule[];
   export interface DeleteLifecyclePolicyRequest {
     /**
      * The identifier of the lifecycle policy.
@@ -131,6 +166,7 @@ declare namespace DLM {
   }
   export interface DeleteLifecyclePolicyResponse {
   }
+  export type Encrypted = boolean;
   export type ExcludeBootVolume = boolean;
   export type ExecutionRoleArn = string;
   export interface FastRestoreRule {
@@ -335,7 +371,7 @@ declare namespace DLM {
      */
     VariableTags?: VariableTagsList;
     /**
-     * The create rule.
+     * The creation rule.
      */
     CreateRule?: CreateRule;
     /**
@@ -343,9 +379,13 @@ declare namespace DLM {
      */
     RetainRule?: RetainRule;
     /**
-     * Enable fast snapshot restore.
+     * The rule for enabling fast snapshot restore.
      */
     FastRestoreRule?: FastRestoreRule;
+    /**
+     * The rule for cross-Region snapshot copies.
+     */
+    CrossRegionCopyRules?: CrossRegionCopyRules;
   }
   export type ScheduleList = Schedule[];
   export type ScheduleName = string;
@@ -381,6 +421,7 @@ declare namespace DLM {
   export type TagValue = string;
   export type TagsToAddFilterList = TagFilter[];
   export type TagsToAddList = Tag[];
+  export type TargetRegion = string;
   export type TargetTagList = Tag[];
   export type TargetTagsFilterList = TagFilter[];
   export type Time = string;

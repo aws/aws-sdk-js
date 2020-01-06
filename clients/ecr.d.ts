@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -243,6 +244,22 @@ declare class ECR extends Service {
    * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   uploadLayerPart(callback?: (err: AWSError, data: ECR.Types.UploadLayerPartResponse) => void): Request<ECR.Types.UploadLayerPartResponse, AWSError>;
+  /**
+   * Waits for the imageScanComplete state by periodically calling the underlying ECR.describeImageScanFindingsoperation every 5 seconds (at most 60 times). Wait until an image scan is complete and findings can be accessed
+   */
+  waitFor(state: "imageScanComplete", params: ECR.Types.DescribeImageScanFindingsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ECR.Types.DescribeImageScanFindingsResponse) => void): Request<ECR.Types.DescribeImageScanFindingsResponse, AWSError>;
+  /**
+   * Waits for the imageScanComplete state by periodically calling the underlying ECR.describeImageScanFindingsoperation every 5 seconds (at most 60 times). Wait until an image scan is complete and findings can be accessed
+   */
+  waitFor(state: "imageScanComplete", callback?: (err: AWSError, data: ECR.Types.DescribeImageScanFindingsResponse) => void): Request<ECR.Types.DescribeImageScanFindingsResponse, AWSError>;
+  /**
+   * Waits for the lifecyclePolicyPreviewComplete state by periodically calling the underlying ECR.getLifecyclePolicyPreviewoperation every 5 seconds (at most 20 times). Wait until a lifecycle policy preview request is complete and results can be accessed
+   */
+  waitFor(state: "lifecyclePolicyPreviewComplete", params: ECR.Types.GetLifecyclePolicyPreviewRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
+  /**
+   * Waits for the lifecyclePolicyPreviewComplete state by periodically calling the underlying ECR.getLifecyclePolicyPreviewoperation every 5 seconds (at most 20 times). Wait until a lifecycle policy preview request is complete and results can be accessed
+   */
+  waitFor(state: "lifecyclePolicyPreviewComplete", callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
 }
 declare namespace ECR {
   export type Arn = string;

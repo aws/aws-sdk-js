@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['ecr'], '2015-09-21', {
   get: function get() {
     var model = require('../apis/ecr-2015-09-21.min.json');
     model.paginators = require('../apis/ecr-2015-09-21.paginators.json').pagination;
+    model.waiters = require('../apis/ecr-2015-09-21.waiters2.json').waiters;
     return model;
   },
   enumerable: true,
