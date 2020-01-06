@@ -709,11 +709,11 @@ declare class EC2 extends Service {
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. Use DescribeVpcEndpointServices to get a list of supported services.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. Use DescribeVpcEndpointServices to get a list of supported services.
    */
   createVpcEndpoint(params: EC2.Types.CreateVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. Use DescribeVpcEndpointServices to get a list of supported services.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. Use DescribeVpcEndpointServices to get a list of supported services.
    */
   createVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
@@ -725,11 +725,11 @@ declare class EC2 extends Service {
    */
   createVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.CreateVpcEndpointConnectionNotificationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service. To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide. 
+   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service. To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   createVpcEndpointServiceConfiguration(params: EC2.Types.CreateVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service. To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide. 
+   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service. To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   createVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
@@ -2717,11 +2717,11 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.ModifyVpcEndpointConnectionNotificationResult, AWSError>;
   /**
-   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.
+   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpointServiceConfiguration(params: EC2.Types.ModifyVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.
+   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
@@ -3108,6 +3108,14 @@ declare class EC2 extends Service {
    * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your Windows instance, Amazon EC2 charges you for a full instance hour. If you stop and restart your Windows instance, a new instance hour begins and Amazon EC2 charges you for another full instance hour even if you are still within the same 60-minute period when it was stopped. Every time you start your Linux instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. For more information, see Stopping Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   startInstances(callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
+  /**
+   * Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service. The service provider must successfully perform the verification before the consumer can use the name to access the service. Before the service provider runs this command, they must add a record to the DNS server. For more information, see Adding a TXT Record to Your Domain's DNS Server  in the Amazon VPC User Guide.
+   */
+  startVpcEndpointServicePrivateDnsVerification(params: EC2.Types.StartVpcEndpointServicePrivateDnsVerificationRequest, callback?: (err: AWSError, data: EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult) => void): Request<EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult, AWSError>;
+  /**
+   * Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service. The service provider must successfully perform the verification before the consumer can use the name to access the service. Before the service provider runs this command, they must add a record to the DNS server. For more information, see Adding a TXT Record to Your Domain's DNS Server  in the Amazon VPC User Guide.
+   */
+  startVpcEndpointServicePrivateDnsVerification(callback?: (err: AWSError, data: EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult) => void): Request<EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult, AWSError>;
   /**
    * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate Your Instance in the Amazon Elastic Compute Cloud User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your Windows instance, Amazon EC2 charges you for a full instance hour. If you stop and restart your Windows instance, a new instance hour begins and Amazon EC2 charges you for another full instance hour even if you are still within the same 60-minute period when it was stopped. Every time you start your Linux instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't start, stop, or hibernate Spot Instances, and you can't stop or hibernate instance store-backed instances. For information about using hibernation for Spot Instances, see Hibernating Interrupted Spot Instances in the Amazon Elastic Compute Cloud User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshooting Stopping Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -3496,7 +3504,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the endpoint service.
+     * The ID of the VPC endpoint service.
      */
     ServiceId: ServiceId;
     /**
@@ -6928,7 +6936,7 @@ declare namespace EC2 {
      */
     ServiceId?: ServiceId;
     /**
-     * The ID of the endpoint. 
+     * The ID of the endpoint.
      */
     VpcEndpointId?: VpcEndpointId;
     /**
@@ -6940,7 +6948,7 @@ declare namespace EC2 {
      */
     ConnectionEvents: ValueStringList;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
   }
@@ -6950,7 +6958,7 @@ declare namespace EC2 {
      */
     ConnectionNotification?: ConnectionNotification;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     ClientToken?: String;
   }
@@ -6988,11 +6996,11 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: ValueStringList;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
     /**
-     * (Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, kinesis.us-east-1.amazonaws.com) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service. To use a private hosted zone, you must set the following VPC attributes to true: enableDnsHostnames and enableDnsSupport. Use ModifyVpcAttribute to set the VPC attributes. Default: true 
+     * (Interface endpoint) Indicates whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, kinesis.us-east-1.amazonaws.com), which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service. To use a private hosted zone, you must set the following VPC attributes to true: enableDnsHostnames and enableDnsSupport. Use ModifyVpcAttribute to set the VPC attributes. Default: true 
      */
     PrivateDnsEnabled?: Boolean;
   }
@@ -7002,7 +7010,7 @@ declare namespace EC2 {
      */
     VpcEndpoint?: VpcEndpoint;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     ClientToken?: String;
   }
@@ -7012,15 +7020,19 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Indicate whether requests from service consumers to create an endpoint to your service must be accepted. To accept a request, use AcceptVpcEndpointConnections.
+     * Indicates whether requests from service consumers to create an endpoint to your service must be accepted. To accept a request, use AcceptVpcEndpointConnections.
      */
     AcceptanceRequired?: Boolean;
+    /**
+     * The private DNS name to assign to the VPC endpoint service.
+     */
+    PrivateDnsName?: String;
     /**
      * The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your service.
      */
     NetworkLoadBalancerArns: ValueStringList;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
   }
@@ -7030,7 +7042,7 @@ declare namespace EC2 {
      */
     ServiceConfiguration?: ServiceConfiguration;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     ClientToken?: String;
   }
@@ -11233,7 +11245,7 @@ declare namespace EC2 {
      */
     ConnectionNotificationId?: String;
     /**
-     * One or more filters.    connection-notification-arn - The ARN of SNS topic for the notification.    connection-notification-id - The ID of the notification.    connection-notification-state - The state of the notification (Enabled | Disabled).    connection-notification-type - The type of notification (Topic).    service-id - The ID of the endpoint service.    vpc-endpoint-id - The ID of the VPC endpoint.  
+     * One or more filters.    connection-notification-arn - The ARN of the SNS topic for the notification.    connection-notification-id - The ID of the notification.    connection-notification-state - The state of the notification (Enabled | Disabled).    connection-notification-type - The type of notification (Topic).    service-id - The ID of the endpoint service.    vpc-endpoint-id - The ID of the VPC endpoint.  
      */
     Filters?: FilterList;
     /**
@@ -11265,7 +11277,7 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned.
+     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1,000; if MaxResults is given a value larger than 1,000, only 1,000 results are returned.
      */
     MaxResults?: Integer;
     /**
@@ -11297,7 +11309,7 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned.
+     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1,000; if MaxResults is given a value larger than 1,000, only 1,000 results are returned.
      */
     MaxResults?: Integer;
     /**
@@ -11329,7 +11341,7 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned.
+     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1,000; if MaxResults is given a value larger than 1,000, only 1,000 results are returned.
      */
     MaxResults?: Integer;
     /**
@@ -11357,11 +11369,11 @@ declare namespace EC2 {
      */
     ServiceNames?: ValueStringList;
     /**
-     * One or more filters.    service-name: The name of the service.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
-     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value is greater than 1000, we return only 1000 items.
+     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value is greater than 1,000, we return only 1,000 items.
      */
     MaxResults?: Integer;
     /**
@@ -11393,11 +11405,11 @@ declare namespace EC2 {
      */
     VpcEndpointIds?: ValueStringList;
     /**
-     * One or more filters.    service-name: The name of the service.    vpc-id: The ID of the VPC in which the endpoint resides.    vpc-endpoint-id: The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
-     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value is greater than 1000, we return only 1000 items.
+     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value is greater than 1,000, we return only 1,000 items.
      */
     MaxResults?: Integer;
     /**
@@ -12051,6 +12063,7 @@ declare namespace EC2 {
     HostedZoneId?: String;
   }
   export type DnsEntrySet = DnsEntry[];
+  export type DnsNameState = "pendingVerification"|"verified"|"failed"|string;
   export interface DnsServersOptionsModifyStructure {
     /**
      * The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values overwrite the existing values.
@@ -15592,6 +15605,16 @@ declare namespace EC2 {
   export type KeyPairList = KeyPairInfo[];
   export type KeyPairName = string;
   export type KmsKeyId = string;
+  export interface LastError {
+    /**
+     * The error message for the VPC endpoint error.
+     */
+    Message?: String;
+    /**
+     * The error code for the VPC endpoint error.
+     */
+    Code?: String;
+  }
   export interface LaunchPermission {
     /**
      * The name of the group.
@@ -17413,7 +17436,7 @@ declare namespace EC2 {
      */
     RemoveSecurityGroupIds?: ValueStringList;
     /**
-     * (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      */
     PrivateDnsEnabled?: Boolean;
   }
@@ -17433,7 +17456,15 @@ declare namespace EC2 {
      */
     ServiceId: ServiceId;
     /**
-     * Indicate whether requests to create an endpoint to your service must be accepted.
+     * The private DNS name to assign to the endpoint service.
+     */
+    PrivateDnsName?: String;
+    /**
+     * Removes the private DNS name of the endpoint service.
+     */
+    RemovePrivateDnsName?: Boolean;
+    /**
+     * Indicates whether requests to create an endpoint to your service must be accepted.
      */
     AcceptanceRequired?: Boolean;
     /**
@@ -18500,6 +18531,24 @@ declare namespace EC2 {
   }
   export type PrincipalIdFormatList = PrincipalIdFormat[];
   export type PrincipalType = "All"|"Service"|"OrganizationUnit"|"Account"|"User"|"Role"|string;
+  export interface PrivateDnsNameConfiguration {
+    /**
+     * The verification state of the VPC endpoint service. &gt;Consumers of the endpoint service can use the private name only when the state is verified.
+     */
+    State?: DnsNameState;
+    /**
+     * The endpoint service verification type, for example TXT.
+     */
+    Type?: String;
+    /**
+     * The value the service provider adds to the private DNS name domain record before verification.
+     */
+    Value?: String;
+    /**
+     * The name of the record subdomain the service provider needs to create. The service provider adds the value text to the name.
+     */
+    Name?: String;
+  }
   export type PrivateIpAddressConfigSet = ScheduledInstancesPrivateIpAddressConfig[];
   export interface PrivateIpAddressSpecification {
     /**
@@ -21027,7 +21076,7 @@ declare namespace EC2 {
      */
     ServiceState?: ServiceState;
     /**
-     * In the Availability Zones in which the service is available.
+     * The Availability Zones in which the service is available.
      */
     AvailabilityZones?: ValueStringList;
     /**
@@ -21035,7 +21084,7 @@ declare namespace EC2 {
      */
     AcceptanceRequired?: Boolean;
     /**
-     * Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
+     * Indicates whether the service manages its VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
      */
     ManagesVpcEndpoints?: Boolean;
     /**
@@ -21050,6 +21099,10 @@ declare namespace EC2 {
      * The private DNS name for the service.
      */
     PrivateDnsName?: String;
+    /**
+     * Information about the endpoint service private DNS name configuration.
+     */
+    PrivateDnsNameConfiguration?: PrivateDnsNameConfiguration;
     /**
      * Any tags assigned to the service.
      */
@@ -21094,13 +21147,17 @@ declare namespace EC2 {
      */
     AcceptanceRequired?: Boolean;
     /**
-     * Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
+     * Indicates whether the service manages its VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
      */
     ManagesVpcEndpoints?: Boolean;
     /**
      * Any tags assigned to the service.
      */
     Tags?: TagList;
+    /**
+     * The verification state of the VPC endpoint service. Consumers of the endpoint service cannot use the private name when the state is not verified.
+     */
+    PrivateDnsNameVerificationState?: DnsNameState;
   }
   export type ServiceDetailSet = ServiceDetail[];
   export type ServiceId = string;
@@ -21874,6 +21931,22 @@ declare namespace EC2 {
      * Information about the started instances.
      */
     StartingInstances?: InstanceStateChangeList;
+  }
+  export interface StartVpcEndpointServicePrivateDnsVerificationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the endpoint service.
+     */
+    ServiceId: ServiceId;
+  }
+  export interface StartVpcEndpointServicePrivateDnsVerificationResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    ReturnValue?: Boolean;
   }
   export type State = "PendingAcceptance"|"Pending"|"Available"|"Deleting"|"Deleted"|"Rejected"|"Failed"|"Expired"|string;
   export interface StateReason {
@@ -23716,7 +23789,7 @@ declare namespace EC2 {
      */
     SubnetIds?: ValueStringList;
     /**
-     * (Interface endpoint) Information about the security groups associated with the network interface.
+     * (Interface endpoint) Information about the security groups that are associated with the network interface.
      */
     Groups?: GroupIdentifierSet;
     /**
@@ -23736,7 +23809,7 @@ declare namespace EC2 {
      */
     DnsEntries?: DnsEntrySet;
     /**
-     * The date and time the VPC endpoint was created.
+     * The date and time that the VPC endpoint was created.
      */
     CreationTimestamp?: MillisecondDateTime;
     /**
@@ -23747,6 +23820,10 @@ declare namespace EC2 {
      * The ID of the AWS account that owns the VPC endpoint.
      */
     OwnerId?: String;
+    /**
+     * The last error that occurred for VPC endpoint.
+     */
+    LastError?: LastError;
   }
   export interface VpcEndpointConnection {
     /**
@@ -23766,7 +23843,7 @@ declare namespace EC2 {
      */
     VpcEndpointState?: State;
     /**
-     * The date and time the VPC endpoint was created.
+     * The date and time that the VPC endpoint was created.
      */
     CreationTimestamp?: MillisecondDateTime;
     /**

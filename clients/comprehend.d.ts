@@ -604,6 +604,22 @@ declare namespace Comprehend {
      * A measure of how accurate the classifier results are for the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
      */
     F1Score?: Double;
+    /**
+     * A measure of the usefulness of the recognizer results in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. Unlike the Precision metric which comes from averaging the precision of all available labels, this is based on the overall score of all precision scores added together.
+     */
+    MicroPrecision?: Double;
+    /**
+     * A measure of how complete the classifier results are for the test data. High recall means that the classifier returned most of the relevant results. Specifically, this indicates how many of the correct categories in the text that the model can predict. It is a percentage of correct categories in the text that can found. Instead of averaging the recall scores of all labels (as with Recall), micro Recall is based on the overall score of all recall scores added together.
+     */
+    MicroRecall?: Double;
+    /**
+     * A measure of how accurate the classifier results are for the test data. It is a combination of the Micro Precision and Micro Recall values. The Micro F1Score is the harmonic mean of the two scores. The highest score is 1, and the worst score is 0.
+     */
+    MicroF1Score?: Double;
+    /**
+     * Indicates the fraction of labels that are incorrectly predicted. Also seen as the fraction of wrong labels compared to the total number of labels. Scores closer to zero are better.
+     */
+    HammingLoss?: Double;
   }
   export interface ClassifierMetadata {
     /**
@@ -638,6 +654,10 @@ declare namespace Comprehend {
      * The classes used by the document being analyzed. These are used for multi-class trained models. Individual classes are mutually exclusive and each document is expected to have only a single class assigned to it. For example, an animal can be a dog or a cat, but not both at the same time. 
      */
     Classes?: ListOfClasses;
+    /**
+     * The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not multually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
+     */
+    Labels?: ListOfLabels;
   }
   export type ClientRequestTokenString = string;
   export type ComprehendArn = string;
@@ -682,6 +702,10 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class mode, which identifies one and only one class for each document, or multi-label mode, which identifies one or more labels for each document. In multi-label mode, multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).
+     */
+    Mode?: DocumentClassifierMode;
   }
   export interface CreateDocumentClassifierResponse {
     /**
@@ -1069,7 +1093,12 @@ declare namespace Comprehend {
      * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.
      */
     S3Uri: S3Uri;
+    /**
+     * Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.
+     */
+    LabelDelimiter?: LabelDelimiter;
   }
+  export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL"|string;
   export interface DocumentClassifierOutputDataConfig {
     /**
      * When you use the OutputDataConfig object while creating a custom classifier, you specify the Amazon S3 location where you want to write the confusion matrix. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of this output file. When the custom classifier job is finished, the service creates the output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the confusion matrix.
@@ -1137,8 +1166,22 @@ declare namespace Comprehend {
      *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Indicates the mode in which the specific classifier was trained. This also indicates the format of input documents and the format of the confusion matrix. Each classifier can only be trained in one mode and this cannot be changed once the classifier is trained.
+     */
+    Mode?: DocumentClassifierMode;
   }
   export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
+  export interface DocumentLabel {
+    /**
+     * The name of the label.
+     */
+    Name?: String;
+    /**
+     * The confidence score that Amazon Comprehend has this label correctly attributed.
+     */
+    Score?: Float;
+  }
   export interface DominantLanguage {
     /**
      * The RFC 5646 language code for the dominant language. For more information about RFC 5646, see Tags for Identifying Languages on the IETF Tools web site.
@@ -1646,6 +1689,7 @@ declare namespace Comprehend {
   }
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
   export type KmsKeyId = string;
+  export type LabelDelimiter = string;
   export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|"ar"|"hi"|"ja"|"ko"|"zh"|"zh-TW"|string;
   export interface ListDocumentClassificationJobsRequest {
     /**
@@ -1824,6 +1868,7 @@ declare namespace Comprehend {
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
   export type ListOfKeyPhrases = KeyPhrase[];
+  export type ListOfLabels = DocumentLabel[];
   export type ListOfSyntaxTokens = SyntaxToken[];
   export interface ListSentimentDetectionJobsRequest {
     /**
