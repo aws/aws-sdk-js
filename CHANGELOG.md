@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.598.0-->
+<!--LATEST=2.599.0-->
 <!--ENTRYINSERT-->
+
+## 2.599.0
+* feature: CodeBuild: Add encryption key override to StartBuild API in AWS CodeBuild.
+* feature: MigrationHub: ListApplicationStates API provides a list of all application migration states
 
 ## 2.598.0
 * feature: Comprehend: Amazon Comprehend now supports Multilabel document classification

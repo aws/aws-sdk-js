@@ -84,6 +84,14 @@ declare class MigrationHub extends Service {
    */
   importMigrationTask(callback?: (err: AWSError, data: MigrationHub.Types.ImportMigrationTaskResult) => void): Request<MigrationHub.Types.ImportMigrationTaskResult, AWSError>;
   /**
+   * Lists all the migration statuses for your applications. If you use the optional ApplicationIds parameter, only the migration statuses for those applications will be returned.
+   */
+  listApplicationStates(params: MigrationHub.Types.ListApplicationStatesRequest, callback?: (err: AWSError, data: MigrationHub.Types.ListApplicationStatesResult) => void): Request<MigrationHub.Types.ListApplicationStatesResult, AWSError>;
+  /**
+   * Lists all the migration statuses for your applications. If you use the optional ApplicationIds parameter, only the migration statuses for those applications will be returned.
+   */
+  listApplicationStates(callback?: (err: AWSError, data: MigrationHub.Types.ListApplicationStatesResult) => void): Request<MigrationHub.Types.ListApplicationStatesResult, AWSError>;
+  /**
    * Lists the created artifacts attached to a given migration task in an update stream. This API has the following traits:   Gets the list of the created artifacts while migration is taking place.   Shows the artifacts created by the migration tool that was associated by the AssociateCreatedArtifact API.    Lists created artifacts in a paginated interface.   
    */
   listCreatedArtifacts(params: MigrationHub.Types.ListCreatedArtifactsRequest, callback?: (err: AWSError, data: MigrationHub.Types.ListCreatedArtifactsResult) => void): Request<MigrationHub.Types.ListCreatedArtifactsResult, AWSError>;
@@ -142,6 +150,22 @@ declare class MigrationHub extends Service {
 }
 declare namespace MigrationHub {
   export type ApplicationId = string;
+  export type ApplicationIds = ApplicationId[];
+  export interface ApplicationState {
+    /**
+     * The configurationId from the Application Discovery Service that uniquely identifies an application.
+     */
+    ApplicationId?: ApplicationId;
+    /**
+     * The current status of an application.
+     */
+    ApplicationStatus?: ApplicationStatus;
+    /**
+     * The timestamp when the application status was last updated.
+     */
+    LastUpdatedTime?: UpdateDateTime;
+  }
+  export type ApplicationStateList = ApplicationState[];
   export type ApplicationStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|string;
   export interface AssociateCreatedArtifactRequest {
     /**
@@ -323,6 +347,30 @@ declare namespace MigrationHub {
   export interface ImportMigrationTaskResult {
   }
   export type LatestResourceAttributeList = ResourceAttribute[];
+  export interface ListApplicationStatesRequest {
+    /**
+     * The configurationIds from the Application Discovery Service that uniquely identifies your applications.
+     */
+    ApplicationIds?: ApplicationIds;
+    /**
+     * If a NextToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in NextToken.
+     */
+    NextToken?: Token;
+    /**
+     * Maximum number of results to be returned per page.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListApplicationStatesResult {
+    /**
+     * A list of Applications that exist in Application Discovery Service.
+     */
+    ApplicationStateList?: ApplicationStateList;
+    /**
+     * If a NextToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in NextToken.
+     */
+    NextToken?: Token;
+  }
   export interface ListCreatedArtifactsRequest {
     /**
      * The name of the ProgressUpdateStream. 
