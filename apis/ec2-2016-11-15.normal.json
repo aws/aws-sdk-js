@@ -1215,7 +1215,7 @@
       "output": {
         "shape": "CreateVpcEndpointResult"
       },
-      "documentation": "<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace partner, or another AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>"
+      "documentation": "<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>"
     },
     "CreateVpcEndpointConnectionNotification": {
       "name": "CreateVpcEndpointConnectionNotification",
@@ -1243,7 +1243,7 @@
       "output": {
         "shape": "CreateVpcEndpointServiceConfigurationResult"
       },
-      "documentation": "<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service.</p> <p>To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p>"
+      "documentation": "<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service.</p> <p>To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p> <p>If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html\">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateVpcPeeringConnection": {
       "name": "CreateVpcPeeringConnection",
@@ -4612,7 +4612,7 @@
       "output": {
         "shape": "ModifyVpcEndpointServiceConfigurationResult"
       },
-      "documentation": "<p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p>"
+      "documentation": "<p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p> <p>If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html\">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "ModifyVpcEndpointServicePermissions": {
       "name": "ModifyVpcEndpointServicePermissions",
@@ -5250,6 +5250,20 @@
       },
       "documentation": "<p>Starts an Amazon EBS-backed instance that you've previously stopped.</p> <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your Windows instance, Amazon EC2 charges you for a full instance hour. If you stop and restart your Windows instance, a new instance hour begins and Amazon EC2 charges you for another full instance hour even if you are still within the same 60-minute period when it was stopped. Every time you start your Linux instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage.</p> <p>Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Performing this operation on an instance that uses an instance store as its root device returns an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html\">Stopping Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
+    "StartVpcEndpointServicePrivateDnsVerification": {
+      "name": "StartVpcEndpointServicePrivateDnsVerification",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartVpcEndpointServicePrivateDnsVerificationRequest"
+      },
+      "output": {
+        "shape": "StartVpcEndpointServicePrivateDnsVerificationResult"
+      },
+      "documentation": "<p>Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service.</p> <p>The service provider must successfully perform the verification before the consumer can use the name to access the service.</p> <p>Before the service provider runs this command, they must add a record to the DNS server. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/ndpoint-services-dns-validation.html#add-dns-txt-record\">Adding a TXT Record to Your Domain's DNS Server </a> in the <i>Amazon VPC User Guide</i>.</p>"
+    },
     "StopInstances": {
       "name": "StopInstances",
       "http": {
@@ -5474,7 +5488,7 @@
         },
         "ServiceId": {
           "shape": "ServiceId",
-          "documentation": "<p>The ID of the endpoint service.</p>"
+          "documentation": "<p>The ID of the VPC endpoint service.</p>"
         },
         "VpcEndpointIds": {
           "shape": "ValueStringList",
@@ -10949,7 +10963,7 @@
         },
         "VpcEndpointId": {
           "shape": "VpcEndpointId",
-          "documentation": "<p>The ID of the endpoint. </p>"
+          "documentation": "<p>The ID of the endpoint.</p>"
         },
         "ConnectionNotificationArn": {
           "shape": "String",
@@ -10961,7 +10975,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
         }
       }
     },
@@ -10975,7 +10989,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
           "locationName": "clientToken"
         }
       }
@@ -11024,11 +11038,11 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
         },
         "PrivateDnsEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>(Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, <code>kinesis.us-east-1.amazonaws.com</code>) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <p>Default: <code>true</code> </p>"
+          "documentation": "<p>(Interface endpoint) Indicates whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, <code>kinesis.us-east-1.amazonaws.com</code>), which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <p>Default: <code>true</code> </p>"
         }
       },
       "documentation": "<p>Contains the parameters for CreateVpcEndpoint.</p>"
@@ -11043,7 +11057,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
           "locationName": "clientToken"
         }
       },
@@ -11061,7 +11075,11 @@
         },
         "AcceptanceRequired": {
           "shape": "Boolean",
-          "documentation": "<p>Indicate whether requests from service consumers to create an endpoint to your service must be accepted. To accept a request, use <a>AcceptVpcEndpointConnections</a>.</p>"
+          "documentation": "<p>Indicates whether requests from service consumers to create an endpoint to your service must be accepted. To accept a request, use <a>AcceptVpcEndpointConnections</a>.</p>"
+        },
+        "PrivateDnsName": {
+          "shape": "String",
+          "documentation": "<p>The private DNS name to assign to the VPC endpoint service.</p>"
         },
         "NetworkLoadBalancerArns": {
           "shape": "ValueStringList",
@@ -11070,7 +11088,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
         }
       }
     },
@@ -11084,7 +11102,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
           "locationName": "clientToken"
         }
       }
@@ -17322,7 +17340,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>connection-notification-arn</code> - The ARN of SNS topic for the notification.</p> </li> <li> <p> <code>connection-notification-id</code> - The ID of the notification.</p> </li> <li> <p> <code>connection-notification-state</code> - The state of the notification (<code>Enabled</code> | <code>Disabled</code>).</p> </li> <li> <p> <code>connection-notification-type</code> - The type of notification (<code>Topic</code>).</p> </li> <li> <p> <code>service-id</code> - The ID of the endpoint service.</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the VPC endpoint.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>connection-notification-arn</code> - The ARN of the SNS topic for the notification.</p> </li> <li> <p> <code>connection-notification-id</code> - The ID of the notification.</p> </li> <li> <p> <code>connection-notification-state</code> - The state of the notification (<code>Enabled</code> | <code>Disabled</code>).</p> </li> <li> <p> <code>connection-notification-type</code> - The type of notification (<code>Topic</code>).</p> </li> <li> <p> <code>service-id</code> - The ID of the endpoint service.</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the VPC endpoint.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -17364,7 +17382,7 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned.</p>"
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1,000; if <code>MaxResults</code> is given a value larger than 1,000, only 1,000 results are returned.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -17406,7 +17424,7 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned.</p>"
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1,000; if <code>MaxResults</code> is given a value larger than 1,000, only 1,000 results are returned.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -17450,7 +17468,7 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned.</p>"
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1,000; if <code>MaxResults</code> is given a value larger than 1,000, only 1,000 results are returned.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -17487,12 +17505,12 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>"
+          "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1,000, we return only 1,000 items.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -17536,12 +17554,12 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>"
+          "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1,000, we return only 1,000 items.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -18624,6 +18642,14 @@
         "shape": "DnsEntry",
         "locationName": "item"
       }
+    },
+    "DnsNameState": {
+      "type": "string",
+      "enum": [
+        "pendingVerification",
+        "verified",
+        "failed"
+      ]
     },
     "DnsServersOptionsModifyStructure": {
       "type": "structure",
@@ -24756,6 +24782,22 @@
     "KmsKeyId": {
       "type": "string"
     },
+    "LastError": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The error message for the VPC endpoint error.</p>",
+          "locationName": "message"
+        },
+        "Code": {
+          "shape": "String",
+          "documentation": "<p>The error code for the VPC endpoint error.</p>",
+          "locationName": "code"
+        }
+      },
+      "documentation": "<p>The last error that occurred for a VPC endpoint.</p>"
+    },
     "LaunchPermission": {
       "type": "structure",
       "members": {
@@ -27571,7 +27613,7 @@
         },
         "PrivateDnsEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>(Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.</p>"
+          "documentation": "<p>(Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.</p>"
         }
       },
       "documentation": "<p>Contains the parameters for ModifyVpcEndpoint.</p>"
@@ -27600,9 +27642,17 @@
           "shape": "ServiceId",
           "documentation": "<p>The ID of the service.</p>"
         },
+        "PrivateDnsName": {
+          "shape": "String",
+          "documentation": "<p>The private DNS name to assign to the endpoint service.</p>"
+        },
+        "RemovePrivateDnsName": {
+          "shape": "Boolean",
+          "documentation": "<p>Removes the private DNS name of the endpoint service.</p>"
+        },
         "AcceptanceRequired": {
           "shape": "Boolean",
-          "documentation": "<p>Indicate whether requests to create an endpoint to your service must be accepted.</p>"
+          "documentation": "<p>Indicates whether requests to create an endpoint to your service must be accepted.</p>"
         },
         "AddNetworkLoadBalancerArns": {
           "shape": "ValueStringList",
@@ -29513,6 +29563,32 @@
         "User",
         "Role"
       ]
+    },
+    "PrivateDnsNameConfiguration": {
+      "type": "structure",
+      "members": {
+        "State": {
+          "shape": "DnsNameState",
+          "documentation": "<p>The verification state of the VPC endpoint service.</p> <p>&gt;Consumers of the endpoint service can use the private name only when the state is <code>verified</code>.</p>",
+          "locationName": "state"
+        },
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>The endpoint service verification type, for example TXT.</p>",
+          "locationName": "type"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value the service provider adds to the private DNS name domain record before verification.</p>",
+          "locationName": "value"
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the record subdomain the service provider needs to create. The service provider adds the <code>value</code> text to the <code>name</code>.</p>",
+          "locationName": "name"
+        }
+      },
+      "documentation": "<p>Information about the private DNS name for the service endpoint. For more information about these parameters, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/ndpoint-services-dns-validation.html\">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "PrivateIpAddressConfigSet": {
       "type": "list",
@@ -33435,7 +33511,7 @@
         },
         "AvailabilityZones": {
           "shape": "ValueStringList",
-          "documentation": "<p>In the Availability Zones in which the service is available.</p>",
+          "documentation": "<p>The Availability Zones in which the service is available.</p>",
           "locationName": "availabilityZoneSet"
         },
         "AcceptanceRequired": {
@@ -33445,7 +33521,7 @@
         },
         "ManagesVpcEndpoints": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.</p>",
+          "documentation": "<p>Indicates whether the service manages its VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.</p>",
           "locationName": "managesVpcEndpoints"
         },
         "NetworkLoadBalancerArns": {
@@ -33462,6 +33538,11 @@
           "shape": "String",
           "documentation": "<p>The private DNS name for the service.</p>",
           "locationName": "privateDnsName"
+        },
+        "PrivateDnsNameConfiguration": {
+          "shape": "PrivateDnsNameConfiguration",
+          "documentation": "<p>Information about the endpoint service private DNS name configuration.</p>",
+          "locationName": "privateDnsNameConfiguration"
         },
         "Tags": {
           "shape": "TagList",
@@ -33528,13 +33609,18 @@
         },
         "ManagesVpcEndpoints": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.</p>",
+          "documentation": "<p>Indicates whether the service manages its VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.</p>",
           "locationName": "managesVpcEndpoints"
         },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>Any tags assigned to the service.</p>",
           "locationName": "tagSet"
+        },
+        "PrivateDnsNameVerificationState": {
+          "shape": "DnsNameState",
+          "documentation": "<p>The verification state of the VPC endpoint service.</p> <p>Consumers of the endpoint service cannot use the private name when the state is not <code>verified</code>.</p>",
+          "locationName": "privateDnsNameVerificationState"
         }
       },
       "documentation": "<p>Describes a VPC endpoint service.</p>"
@@ -34723,6 +34809,32 @@
           "shape": "InstanceStateChangeList",
           "documentation": "<p>Information about the started instances.</p>",
           "locationName": "instancesSet"
+        }
+      }
+    },
+    "StartVpcEndpointServicePrivateDnsVerificationRequest": {
+      "type": "structure",
+      "required": [
+        "ServiceId"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ServiceId": {
+          "shape": "ServiceId",
+          "documentation": "<p>The ID of the endpoint service.</p>"
+        }
+      }
+    },
+    "StartVpcEndpointServicePrivateDnsVerificationResult": {
+      "type": "structure",
+      "members": {
+        "ReturnValue": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName": "return"
         }
       }
     },
@@ -38025,7 +38137,7 @@
         },
         "Groups": {
           "shape": "GroupIdentifierSet",
-          "documentation": "<p>(Interface endpoint) Information about the security groups associated with the network interface.</p>",
+          "documentation": "<p>(Interface endpoint) Information about the security groups that are associated with the network interface.</p>",
           "locationName": "groupSet"
         },
         "PrivateDnsEnabled": {
@@ -38050,7 +38162,7 @@
         },
         "CreationTimestamp": {
           "shape": "MillisecondDateTime",
-          "documentation": "<p>The date and time the VPC endpoint was created.</p>",
+          "documentation": "<p>The date and time that the VPC endpoint was created.</p>",
           "locationName": "creationTimestamp"
         },
         "Tags": {
@@ -38062,6 +38174,11 @@
           "shape": "String",
           "documentation": "<p>The ID of the AWS account that owns the VPC endpoint.</p>",
           "locationName": "ownerId"
+        },
+        "LastError": {
+          "shape": "LastError",
+          "documentation": "<p>The last error that occurred for VPC endpoint.</p>",
+          "locationName": "lastError"
         }
       },
       "documentation": "<p>Describes a VPC endpoint.</p>"
@@ -38091,7 +38208,7 @@
         },
         "CreationTimestamp": {
           "shape": "MillisecondDateTime",
-          "documentation": "<p>The date and time the VPC endpoint was created.</p>",
+          "documentation": "<p>The date and time that the VPC endpoint was created.</p>",
           "locationName": "creationTimestamp"
         },
         "DnsEntries": {

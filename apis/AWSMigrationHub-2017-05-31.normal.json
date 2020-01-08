@@ -363,6 +363,37 @@
       ],
       "documentation": "<p>Registers a new migration task which represents a server, database, etc., being migrated to AWS by a migration tool.</p> <p>This API is a prerequisite to calling the <code>NotifyMigrationTaskState</code> API as the migration tool must first register the migration task with Migration Hub.</p>"
     },
+    "ListApplicationStates": {
+      "name": "ListApplicationStates",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListApplicationStatesRequest"
+      },
+      "output": {
+        "shape": "ListApplicationStatesResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "HomeRegionNotSetException"
+        }
+      ],
+      "documentation": "<p>Lists all the migration statuses for your applications. If you use the optional <code>ApplicationIds</code> parameter, only the migration statuses for those applications will be returned.</p>"
+    },
     "ListCreatedArtifacts": {
       "name": "ListCreatedArtifacts",
       "http": {
@@ -628,6 +659,40 @@
       "type": "string",
       "max": 1600,
       "min": 1
+    },
+    "ApplicationIds": {
+      "type": "list",
+      "member": {
+        "shape": "ApplicationId"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "ApplicationState": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "ApplicationId",
+          "documentation": "<p>The configurationId from the Application Discovery Service that uniquely identifies an application.</p>"
+        },
+        "ApplicationStatus": {
+          "shape": "ApplicationStatus",
+          "documentation": "<p>The current status of an application.</p>"
+        },
+        "LastUpdatedTime": {
+          "shape": "UpdateDateTime",
+          "documentation": "<p>The timestamp when the application status was last updated.</p>"
+        }
+      },
+      "documentation": "<p>The state of an application discovered through Migration Hub import, the AWS Agentless Discovery Connector, or the AWS Application Discovery Agent.</p>"
+    },
+    "ApplicationStateList": {
+      "type": "list",
+      "member": {
+        "shape": "ApplicationState"
+      },
+      "max": 1000,
+      "min": 0
     },
     "ApplicationStatus": {
       "type": "string",
@@ -949,6 +1014,36 @@
       },
       "max": 100,
       "min": 0
+    },
+    "ListApplicationStatesRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationIds": {
+          "shape": "ApplicationIds",
+          "documentation": "<p>The configurationIds from the Application Discovery Service that uniquely identifies your applications.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Maximum number of results to be returned per page.</p>"
+        }
+      }
+    },
+    "ListApplicationStatesResult": {
+      "type": "structure",
+      "members": {
+        "ApplicationStateList": {
+          "shape": "ApplicationStateList",
+          "documentation": "<p>A list of Applications that exist in Application Discovery Service.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.</p>"
+        }
+      }
     },
     "ListCreatedArtifactsRequest": {
       "type": "structure",

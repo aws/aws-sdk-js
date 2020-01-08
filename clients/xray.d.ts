@@ -124,11 +124,11 @@ declare class XRay extends Service {
    */
   getTraceGraph(callback?: (err: AWSError, data: XRay.Types.GetTraceGraphResult) => void): Request<XRay.Types.GetTraceGraphResult, AWSError>;
   /**
-   * Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
+   * Retrieves IDs and annotations for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
    */
   getTraceSummaries(params: XRay.Types.GetTraceSummariesRequest, callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
   /**
-   * Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
+   * Retrieves IDs and annotations for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
    */
   getTraceSummaries(callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
   /**
@@ -246,7 +246,7 @@ declare namespace XRay {
      */
     TraceIds: TraceIdList;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -260,7 +260,7 @@ declare namespace XRay {
      */
     UnprocessedTraceIds?: UnprocessedTraceIdList;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -543,7 +543,7 @@ declare namespace XRay {
   export type GetGroupsNextToken = string;
   export interface GetGroupsRequest {
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: GetGroupsNextToken;
   }
@@ -553,13 +553,13 @@ declare namespace XRay {
      */
     Groups?: GroupSummaryList;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
   export interface GetSamplingRulesRequest {
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -569,13 +569,13 @@ declare namespace XRay {
      */
     SamplingRuleRecords?: SamplingRuleRecordList;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
   export interface GetSamplingStatisticSummariesRequest {
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -585,7 +585,7 @@ declare namespace XRay {
      */
     SamplingStatisticSummaries?: SamplingStatisticSummaryList;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -627,7 +627,7 @@ declare namespace XRay {
      */
     GroupARN?: GroupARN;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -649,7 +649,7 @@ declare namespace XRay {
      */
     ContainsOldGroupVersions?: Boolean;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -679,7 +679,7 @@ declare namespace XRay {
      */
     Period?: NullableInteger;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -693,7 +693,7 @@ declare namespace XRay {
      */
     ContainsOldGroupVersions?: Boolean;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -703,7 +703,7 @@ declare namespace XRay {
      */
     TraceIds: TraceIdList;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -713,7 +713,7 @@ declare namespace XRay {
      */
     Services?: ServiceList;
     /**
-     * Pagination token. Not used.
+     * Pagination token.
      */
     NextToken?: String;
   }
@@ -749,7 +749,7 @@ declare namespace XRay {
   }
   export interface GetTraceSummariesResult {
     /**
-     * Trace IDs and metadata for traces that were found in the specified time frame.
+     * Trace IDs and annotations for traces that were found in the specified time frame.
      */
     TraceSummaries?: TraceSummaryList;
     /**
@@ -846,7 +846,7 @@ declare namespace XRay {
   export type Priority = number;
   export interface PutEncryptionConfigRequest {
     /**
-     * An AWS KMS customer master key (CMK) in one of the following formats:    Alias - The name of the key. For example, alias/MyKey.    Key ID - The KMS key ID of the key. For example, ae4aa6d49-a4d8-9df9-a475-4ff6d7898456.    ARN - The full Amazon Resource Name of the key ID or alias. For example, arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. Use this format to specify a key in a different account.   Omit this key if you set Type to NONE.
+     * An AWS KMS customer master key (CMK) in one of the following formats:    Alias - The name of the key. For example, alias/MyKey.    Key ID - The KMS key ID of the key. For example, ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. AWS X-Ray does not support asymmetric CMKs.    ARN - The full Amazon Resource Name of the key ID or alias. For example, arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. Use this format to specify a key in a different account.   Omit this key if you set Type to NONE.
      */
     KeyId?: EncryptionKeyId;
     /**
@@ -1357,11 +1357,11 @@ declare namespace XRay {
      */
     ResponseTime?: NullableDouble;
     /**
-     * One or more of the segment documents has a 500 series error.
+     * The root segment document has a 500 series error.
      */
     HasFault?: NullableBoolean;
     /**
-     * One or more of the segment documents has a 400 series error.
+     * The root segment document has a 400 series error.
      */
     HasError?: NullableBoolean;
     /**

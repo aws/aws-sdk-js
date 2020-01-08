@@ -1796,6 +1796,22 @@
         "F1Score": {
           "shape": "Double",
           "documentation": "<p>A measure of how accurate the classifier results are for the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. </p>"
+        },
+        "MicroPrecision": {
+          "shape": "Double",
+          "documentation": "<p>A measure of the usefulness of the recognizer results in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. Unlike the Precision metric which comes from averaging the precision of all available labels, this is based on the overall score of all precision scores added together.</p>"
+        },
+        "MicroRecall": {
+          "shape": "Double",
+          "documentation": "<p>A measure of how complete the classifier results are for the test data. High recall means that the classifier returned most of the relevant results. Specifically, this indicates how many of the correct categories in the text that the model can predict. It is a percentage of correct categories in the text that can found. Instead of averaging the recall scores of all labels (as with Recall), micro Recall is based on the overall score of all recall scores added together.</p>"
+        },
+        "MicroF1Score": {
+          "shape": "Double",
+          "documentation": "<p>A measure of how accurate the classifier results are for the test data. It is a combination of the <code>Micro Precision</code> and <code>Micro Recall</code> values. The <code>Micro F1Score</code> is the harmonic mean of the two scores. The highest score is 1, and the worst score is 0.</p>"
+        },
+        "HammingLoss": {
+          "shape": "Double",
+          "documentation": "<p>Indicates the fraction of labels that are incorrectly predicted. Also seen as the fraction of wrong labels compared to the total number of labels. Scores closer to zero are better.</p>"
         }
       },
       "documentation": "<p>Describes the result metrics for the test data associated with an documentation classifier.</p>"
@@ -1845,6 +1861,10 @@
         "Classes": {
           "shape": "ListOfClasses",
           "documentation": "<p>The classes used by the document being analyzed. These are used for multi-class trained models. Individual classes are mutually exclusive and each document is expected to have only a single class assigned to it. For example, an animal can be a dog or a cat, but not both at the same time. </p>"
+        },
+        "Labels": {
+          "shape": "ListOfLabels",
+          "documentation": "<p>The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not multually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. </p>"
         }
       }
     },
@@ -1924,6 +1944,10 @@
         "VpcConfig": {
           "shape": "VpcConfig",
           "documentation": "<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon VPC</a>. </p>"
+        },
+        "Mode": {
+          "shape": "DocumentClassifierMode",
+          "documentation": "<p>Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class mode, which identifies one and only one class for each document, or multi-label mode, which identifies one or more labels for each document. In multi-label mode, multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).</p>"
         }
       }
     },
@@ -2528,9 +2552,20 @@
         "S3Uri": {
           "shape": "S3Uri",
           "documentation": "<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p>"
+        },
+        "LabelDelimiter": {
+          "shape": "LabelDelimiter",
+          "documentation": "<p>Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.</p>"
         }
       },
       "documentation": "<p>The input properties for training a document classifier. </p> <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>"
+    },
+    "DocumentClassifierMode": {
+      "type": "string",
+      "enum": [
+        "MULTI_CLASS",
+        "MULTI_LABEL"
+      ]
     },
     "DocumentClassifierOutputDataConfig": {
       "type": "structure",
@@ -2604,6 +2639,10 @@
         "VpcConfig": {
           "shape": "VpcConfig",
           "documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon VPC</a>. </p>"
+        },
+        "Mode": {
+          "shape": "DocumentClassifierMode",
+          "documentation": "<p>Indicates the mode in which the specific classifier was trained. This also indicates the format of input documents and the format of the confusion matrix. Each classifier can only be trained in one mode and this cannot be changed once the classifier is trained.</p>"
         }
       },
       "documentation": "<p>Provides information about a document classifier.</p>"
@@ -2613,6 +2652,20 @@
       "member": {
         "shape": "DocumentClassifierProperties"
       }
+    },
+    "DocumentLabel": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the label.</p>"
+        },
+        "Score": {
+          "shape": "Float",
+          "documentation": "<p>The confidence score that Amazon Comprehend has this label correctly attributed.</p>"
+        }
+      },
+      "documentation": "<p>Specifies one of the label or labels that categorize the document being analyzed.</p>"
     },
     "DominantLanguage": {
       "type": "structure",
@@ -3340,6 +3393,12 @@
       "type": "string",
       "max": 2048
     },
+    "LabelDelimiter": {
+      "type": "string",
+      "max": 1,
+      "min": 1,
+      "pattern": "^[ ~!@#$%^*\\-_+=|\\\\:;\\t>?/]$"
+    },
     "LanguageCode": {
       "type": "string",
       "enum": [
@@ -3619,6 +3678,12 @@
       "type": "list",
       "member": {
         "shape": "KeyPhrase"
+      }
+    },
+    "ListOfLabels": {
+      "type": "list",
+      "member": {
+        "shape": "DocumentLabel"
       }
     },
     "ListOfSyntaxTokens": {

@@ -7496,7 +7496,7 @@ module.exports =
 	/*</replacement>*/
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 
@@ -9106,7 +9106,7 @@ module.exports =
 	module.exports = Duplex;
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 
@@ -9263,7 +9263,7 @@ module.exports =
 	Writable.WritableState = WritableState;
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 
@@ -10598,7 +10598,7 @@ module.exports =
 	var Duplex = __webpack_require__(46);
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 
@@ -10779,7 +10779,7 @@ module.exports =
 	var Transform = __webpack_require__(52);
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 

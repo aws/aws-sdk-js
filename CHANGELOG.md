@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.597.0-->
+<!--LATEST=2.599.0-->
 <!--ENTRYINSERT-->
+
+## 2.599.0
+* feature: CodeBuild: Add encryption key override to StartBuild API in AWS CodeBuild.
+* feature: MigrationHub: ListApplicationStates API provides a list of all application migration states
+
+## 2.598.0
+* feature: Comprehend: Amazon Comprehend now supports Multilabel document classification
+* feature: EC2: This release supports service providers configuring a private DNS name for services other than AWS services and services available in the AWS marketplace. This feature allows consumers to access the service using an existing DNS name without making changes to their applications.
+* feature: MediaPackage: You can now restrict direct access to AWS Elemental MediaPackage by securing requests for live content using CDN authorization. With CDN authorization, content requests require a specific HTTP header and authorization code.
 
 ## 2.597.0
 * feature: ECR: Adds waiters for ImageScanComplete and LifecyclePolicyPreviewComplete

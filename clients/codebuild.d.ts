@@ -823,7 +823,7 @@ declare namespace CodeBuild {
      */
     value: String;
     /**
-     * The type of environment variable. Valid values include:    PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.    PLAINTEXT: An environment variable in plain text format.    SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager.  
+     * The type of environment variable. Valid values include:    PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.    PLAINTEXT: An environment variable in plain text format. This is the default value.    SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager.  
      */
     type?: EnvironmentVariableType;
   }
@@ -1732,6 +1732,10 @@ declare namespace CodeBuild {
      *  The number of minutes a build is allowed to be queued before it times out. 
      */
     queuedTimeoutInMinutesOverride?: TimeOut;
+    /**
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the build project. The CMK key encrypts the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
+     */
+    encryptionKeyOverride?: NonEmptyString;
     /**
      * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 12 hours. If you repeat the StartBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error. 
      */

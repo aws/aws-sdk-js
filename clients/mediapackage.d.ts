@@ -160,6 +160,18 @@ declare namespace MediaPackage {
   export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|string;
   export type AdTriggers = __AdTriggersElement[];
   export type AdsOnDeliveryRestrictions = "NONE"|"RESTRICTED"|"UNRESTRICTED"|"BOTH"|string;
+  export interface Authorization {
+    /**
+     * The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.
+
+     */
+    CdnIdentifierSecret: __string;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+
+     */
+    SecretsRoleArn: __string;
+  }
   export interface Channel {
     /**
      * The Amazon Resource Name (ARN) assigned to the Channel.
@@ -321,6 +333,7 @@ include an explanation of why the HarvestJob failed.
     Status?: Status;
   }
   export interface CreateOriginEndpointRequest {
+    Authorization?: Authorization;
     /**
      * The ID of the Channel that the OriginEndpoint will be associated with.
 This cannot be changed after the OriginEndpoint is created.
@@ -375,6 +388,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The ID of the Channel the OriginEndpoint is associated with.
      */
@@ -581,6 +595,7 @@ include an explanation of why the HarvestJob failed.
      * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The ID of the Channel the OriginEndpoint is associated with.
      */
@@ -979,6 +994,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The ID of the Channel the OriginEndpoint is associated with.
      */
@@ -1179,6 +1195,7 @@ MediaPackage will assume when accessing the key provider service.
     Tags?: Tags;
   }
   export interface UpdateOriginEndpointRequest {
+    Authorization?: Authorization;
     CmafPackage?: CmafPackageCreateOrUpdateParameters;
     DashPackage?: DashPackage;
     /**
@@ -1224,6 +1241,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The ID of the Channel the OriginEndpoint is associated with.
      */
