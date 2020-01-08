@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.599.0-->
+<!--LATEST=2.600.0-->
 <!--ENTRYINSERT-->
+
+## 2.600.0
+* feature: FMS: AWS Firewall Manager now supports tagging, and tag-based access control, of policies.
+* feature: Translate: This release adds a new family of APIs for asynchronous batch translation service that provides option to translate large collection of text or HTML documents stored in Amazon S3 folder. This service accepts a batch of up to 5 GB in size per API call with each document not exceeding 1 MB size and the number of documents not exceeding 1 million per batch. See documentation for more information. 
 
 ## 2.599.0
 * feature: CodeBuild: Add encryption key override to StartBuild API in AWS CodeBuild.
