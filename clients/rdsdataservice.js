@@ -5,6 +5,7 @@ var apiLoader = AWS.apiLoader;
 
 apiLoader.services['rdsdataservice'] = {};
 AWS.RDSDataService = Service.defineService('rdsdataservice', ['2018-08-01']);
+require('../lib/services/rdsdataservice');
 Object.defineProperty(apiLoader.services['rdsdataservice'], '2018-08-01', {
   get: function get() {
     var model = require('../apis/rds-data-2018-08-01.min.json');
