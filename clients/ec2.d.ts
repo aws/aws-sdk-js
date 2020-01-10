@@ -8565,6 +8565,10 @@ declare namespace EC2 {
      * The token for the next page of results.
      */
     NextToken?: String;
+    /**
+     * One or more filters.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     */
+    Filters?: FilterList;
   }
   export interface DescribeEgressOnlyInternetGatewaysResult {
     /**
@@ -12156,6 +12160,10 @@ declare namespace EC2 {
      * The ID of the egress-only internet gateway.
      */
     EgressOnlyInternetGatewayId?: EgressOnlyInternetGatewayId;
+    /**
+     * The tags assigned to the egress-only internet gateway.
+     */
+    Tags?: TagList;
   }
   export type EgressOnlyInternetGatewayId = string;
   export type EgressOnlyInternetGatewayIdList = EgressOnlyInternetGatewayId[];
@@ -16378,6 +16386,10 @@ declare namespace EC2 {
      * The state of the local gateway.
      */
     State?: String;
+    /**
+     * The tags assigned to the local gateway.
+     */
+    Tags?: TagList;
   }
   export type LocalGatewayIdSet = String[];
   export type LocalGatewayMaxResults = number;
@@ -16422,6 +16434,10 @@ declare namespace EC2 {
      * The state of the local gateway route table.
      */
     State?: String;
+    /**
+     * The tags assigned to the local gateway route table.
+     */
+    Tags?: TagList;
   }
   export type LocalGatewayRouteTableIdSet = String[];
   export type LocalGatewayRouteTableSet = LocalGatewayRouteTable[];
@@ -16446,6 +16462,10 @@ declare namespace EC2 {
      * The state of the association.
      */
     State?: String;
+    /**
+     * The tags assigned to the association.
+     */
+    Tags?: TagList;
   }
   export type LocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet = String[];
   export type LocalGatewayRouteTableVirtualInterfaceGroupAssociationSet = LocalGatewayRouteTableVirtualInterfaceGroupAssociation[];
@@ -16470,6 +16490,10 @@ declare namespace EC2 {
      * The state of the association.
      */
     State?: String;
+    /**
+     * The tags assigned to the association.
+     */
+    Tags?: TagList;
   }
   export type LocalGatewayRouteTableVpcAssociationIdSet = String[];
   export type LocalGatewayRouteTableVpcAssociationSet = LocalGatewayRouteTableVpcAssociation[];
@@ -16504,6 +16528,10 @@ declare namespace EC2 {
      * The peer BGP ASN.
      */
     PeerBgpAsn?: Integer;
+    /**
+     * The tags assigned to the virtual interface.
+     */
+    Tags?: TagList;
   }
   export interface LocalGatewayVirtualInterfaceGroup {
     /**
@@ -16518,6 +16546,10 @@ declare namespace EC2 {
      * The ID of the local gateway.
      */
     LocalGatewayId?: String;
+    /**
+     * The tags assigned to the virtual interface group.
+     */
+    Tags?: TagList;
   }
   export type LocalGatewayVirtualInterfaceGroupIdSet = String[];
   export type LocalGatewayVirtualInterfaceGroupSet = LocalGatewayVirtualInterfaceGroup[];

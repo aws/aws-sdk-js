@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.600.0-->
+<!--LATEST=2.601.0-->
 <!--ENTRYINSERT-->
+
+## 2.601.0
+* feature: Chime: Add shared profile support to new and existing users
+* feature: EC2: This release introduces the ability to tag egress only internet gateways, local gateways, local gateway route tables, local gateway virtual interfaces, local gateway virtual interface groups, local gateway route table VPC association and local gateway route table virtual interface group association. You can use tags to organize and identify your resources for cost allocation. 
+* feature: RDS: This release adds an operation that enables users to override the system-default SSL/TLS certificate for new Amazon RDS DB instances temporarily, or remove the customer override.
+* feature: RDSDataService: Retry on Serverless Aurora "Communications link failure"
+* feature: SageMaker: SageMaker ListTrialComponents API filter by TrialName and ExperimentName.
+* feature: Transfer: This release introduces a new endpoint type that allows you to attach Elastic IP addresses from your AWS account with your server's endpoint directly and whitelist access to your server by client's internet IP address(es) using VPC Security Groups.
+* feature: WorkSpaces: Added the migrate feature to Amazon WorkSpaces.
 
 ## 2.600.0
 * feature: FMS: AWS Firewall Manager now supports tagging, and tag-based access control, of policies.

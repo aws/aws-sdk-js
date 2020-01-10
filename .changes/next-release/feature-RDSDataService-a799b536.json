@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "RDSDataService",
-  "description": "Retry on Serverless Aurora \"Communications link failure\""
-}

@@ -221,11 +221,11 @@ declare class SageMaker extends Service {
    */
   createTrial(callback?: (err: AWSError, data: SageMaker.Types.CreateTrialResponse) => void): Request<SageMaker.Types.CreateTrialResponse, AWSError>;
   /**
-   * Creates a trial component, which is a stage of a machine learning trial. A trial is composed of one or more trial components. A trial component can be used in multiple trials. Trial components include pre-processing jobs, training jobs, and batch transform jobs. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to a trial component and then use the Search API to search for the tags.  You can create a trial component through a direct call to the CreateTrialComponent API. However, you can't specify the Source property of the component in the request, therefore, the component isn't associated with an Amazon SageMaker job. You must use Amazon SageMaker Studio, the Amazon SageMaker Python SDK, or the AWS SDK for Python (Boto) to create the component with a valid Source property. 
+   * Creates a trial component, which is a stage of a machine learning trial. A trial is composed of one or more trial components. A trial component can be used in multiple trials. Trial components include pre-processing jobs, training jobs, and batch transform jobs. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to a trial component and then use the Search API to search for the tags.   CreateTrialComponent can only be invoked from within an Amazon SageMaker managed environment. This includes Amazon SageMaker training jobs, processing jobs, transform jobs, and Amazon SageMaker notebooks. A call to CreateTrialComponent from outside one of these environments results in an error. 
    */
   createTrialComponent(params: SageMaker.Types.CreateTrialComponentRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateTrialComponentResponse) => void): Request<SageMaker.Types.CreateTrialComponentResponse, AWSError>;
   /**
-   * Creates a trial component, which is a stage of a machine learning trial. A trial is composed of one or more trial components. A trial component can be used in multiple trials. Trial components include pre-processing jobs, training jobs, and batch transform jobs. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to a trial component and then use the Search API to search for the tags.  You can create a trial component through a direct call to the CreateTrialComponent API. However, you can't specify the Source property of the component in the request, therefore, the component isn't associated with an Amazon SageMaker job. You must use Amazon SageMaker Studio, the Amazon SageMaker Python SDK, or the AWS SDK for Python (Boto) to create the component with a valid Source property. 
+   * Creates a trial component, which is a stage of a machine learning trial. A trial is composed of one or more trial components. A trial component can be used in multiple trials. Trial components include pre-processing jobs, training jobs, and batch transform jobs. When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you must use the logging APIs provided by the SDK. You can add tags to a trial component and then use the Search API to search for the tags.   CreateTrialComponent can only be invoked from within an Amazon SageMaker managed environment. This includes Amazon SageMaker training jobs, processing jobs, transform jobs, and Amazon SageMaker notebooks. A call to CreateTrialComponent from outside one of these environments results in an error. 
    */
   createTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.CreateTrialComponentResponse) => void): Request<SageMaker.Types.CreateTrialComponentResponse, AWSError>;
   /**
@@ -869,11 +869,11 @@ declare class SageMaker extends Service {
    */
   renderUiTemplate(callback?: (err: AWSError, data: SageMaker.Types.RenderUiTemplateResponse) => void): Request<SageMaker.Types.RenderUiTemplateResponse, AWSError>;
   /**
-   * Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of SearchResult objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numerical, text, Booleans, and timestamps.
+   * Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of SearchResult objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
    */
   search(params: SageMaker.Types.SearchRequest, callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
-   * Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of SearchResult objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numerical, text, Booleans, and timestamps.
+   * Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of SearchResult objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
    */
   search(callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
@@ -1166,7 +1166,7 @@ declare namespace SageMaker {
      */
     MetricDefinitions?: MetricDefinitionList;
     /**
-     * To generate and save time-series metrics during training, set to true. The default is false and time-series metrics aren't generated except in the following cases:   You use one of the Amazon SageMaker built-in algorithms   You use one of the following prebuilt Amazon SageMaker Docker images:   Tensorflow   MXNet   PyTorch     You specify at least one MetricDefinition   
+     * To generate and save time-series metrics during training, set to true. The default is false and time-series metrics aren't generated except in the following cases:   You use one of the Amazon SageMaker built-in algorithms   You use one of the following Prebuilt Amazon SageMaker Docker Images:   Tensorflow (version &gt;= 1.15)   MXNet (version &gt;= 1.6)   PyTorch (version &gt;= 1.3)     You specify at least one MetricDefinition   
      */
     EnableSageMakerMetricsTimeSeries?: Boolean;
   }
@@ -1701,7 +1701,7 @@ declare namespace SageMaker {
   export type CognitoUserPool = string;
   export interface CollectionConfiguration {
     /**
-     * The name of the tensor collection.
+     * The name of the tensor collection. The name must be unique relative to other rule configuration names.
      */
     CollectionName?: CollectionName;
     /**
@@ -2026,7 +2026,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.  Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a KmsKeyId when using an instance type with local storage. If any of the models that you specify in the ProductionVariants parameter use nitro-based instances with local storage, do not specify a value for the KmsKeyId parameter. If you specify a value for KmsKeyId when using any nitro-based instances with local storage, the call to CreateEndpointConfig fails. For a list of instance types that support local instance storage, see Instance Store Volumes. For more information about local instance storage encryption, see SSD Instance Store Volumes. 
+     * The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. The KmsKeyId can be any of the following formats:    // KMS Key ID   "1234abcd-12ab-34cd-56ef-1234567890ab"     // Amazon Resource Name (ARN) (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   // KMS Key Alias "alias/ExampleAlias"    // Amazon Resource Name (ARN) of a KMS Key Alias   "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"     The KMS key policy must grant permission to the IAM role that you specify in your CreateEndpoint, UpdateEndpoint requests. For more information, refer to the AWS Key Management Service section Using Key Policies in AWS KMS    Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a KmsKeyId when using an instance type with local storage. If any of the models that you specify in the ProductionVariants parameter use nitro-based instances with local storage, do not specify a value for the KmsKeyId parameter. If you specify a value for KmsKeyId when using any nitro-based instances with local storage, the call to CreateEndpointConfig fails. For a list of instance types that support local instance storage, see Instance Store Volumes. For more information about local instance storage encryption, see SSD Instance Store Volumes. 
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -2235,7 +2235,7 @@ declare namespace SageMaker {
      */
     VpcConfig?: VpcConfig;
     /**
-     * Isolates the model container. No inbound or outbound network calls can be made to or from the model container.  The Semantic Segmentation built-in algorithm does not support network isolation. 
+     * Isolates the model container. No inbound or outbound network calls can be made to or from the model container.
      */
     EnableNetworkIsolation?: Boolean;
   }
@@ -2508,7 +2508,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * Isolates the training container. No inbound or outbound network calls can be made, except for calls between peers within a training cluster for distributed training. If you enable network isolation for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.  The Semantic Segmentation built-in algorithm does not support network isolation. 
+     * Isolates the training container. No inbound or outbound network calls can be made, except for calls between peers within a training cluster for distributed training. If you enable network isolation for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.
      */
     EnableNetworkIsolation?: Boolean;
     /**
@@ -2819,7 +2819,7 @@ declare namespace SageMaker {
      */
     RuleConfigurationName: RuleConfigurationName;
     /**
-     * Path to local storage location for rules. Defaults to /opt/ml/processing/output/rule/.
+     * Path to local storage location for output of rules. Defaults to /opt/ml/processing/output/rule/.
      */
     LocalPath?: DirectoryPath;
     /**
@@ -2835,7 +2835,7 @@ declare namespace SageMaker {
      */
     InstanceType?: ProcessingInstanceType;
     /**
-     * The size, in GB, of the ML storage volume attached to the notebook instance.
+     * The size, in GB, of the ML storage volume attached to the processing instance.
      */
     VolumeSizeInGB?: OptionalVolumeSizeInGB;
     /**
@@ -3757,7 +3757,7 @@ declare namespace SageMaker {
      */
     ModelArn: ModelArn;
     /**
-     * If True, no inbound or outbound network calls can be made to or from the model container.  The Semantic Segmentation built-in algorithm does not support network isolation. 
+     * If True, no inbound or outbound network calls can be made to or from the model container.
      */
     EnableNetworkIsolation?: Boolean;
   }
@@ -4177,7 +4177,7 @@ declare namespace SageMaker {
      */
     FinalMetricDataList?: FinalMetricDataList;
     /**
-     * If you want to allow inbound or outbound network calls, except for calls between peers within a training cluster for distributed training, choose True. If you enable network isolation for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.  The Semantic Segmentation built-in algorithm does not support network isolation. 
+     * If you want to allow inbound or outbound network calls, except for calls between peers within a training cluster for distributed training, choose True. If you enable network isolation for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.
      */
     EnableNetworkIsolation?: Boolean;
     /**
@@ -4820,11 +4820,11 @@ declare namespace SageMaker {
   export type FlowDefinitionTaskKeywords = FlowDefinitionTaskKeyword[];
   export type FlowDefinitionTaskTimeLimitInSeconds = number;
   export type FlowDefinitionTaskTitle = string;
-  export type Framework = "TENSORFLOW"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|string;
+  export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|string;
   export type GenerateCandidateDefinitionsOnly = boolean;
   export interface GetSearchSuggestionsRequest {
     /**
-     * The name of the Amazon SageMaker resource to Search for. The only valid Resource value is TrainingJob.
+     * The name of the Amazon SageMaker resource to Search for.
      */
     Resource: ResourceType;
     /**
@@ -4952,11 +4952,11 @@ declare namespace SageMaker {
      */
     TaskTimeLimitInSeconds: TaskTimeLimitInSeconds;
     /**
-     * The length of time that a task remains available for labeling by human workers. If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43200). For private and vendor workforces, the maximum is as listed.
+     * The length of time that a task remains available for labeling by human workers. If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43200). The default value is 864000 seconds (1 day). For private and vendor workforces, the maximum is as listed.
      */
     TaskAvailabilityLifetimeInSeconds?: TaskAvailabilityLifetimeInSeconds;
     /**
-     * Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time.
+     * Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time. The default value is 1000 objects.
      */
     MaxConcurrentTaskCount?: MaxConcurrentTaskCount;
     /**
@@ -5075,7 +5075,7 @@ declare namespace SageMaker {
      */
     StoppingCondition: StoppingCondition;
     /**
-     * Isolates the training container. No inbound or outbound network calls can be made, except for calls between peers within a training cluster for distributed training. If network isolation is used for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.  The Semantic Segmentation built-in algorithm does not support network isolation. 
+     * Isolates the training container. No inbound or outbound network calls can be made, except for calls between peers within a training cluster for distributed training. If network isolation is used for training jobs that are configured to use a VPC, Amazon SageMaker downloads and uploads customer data and model artifacts through the specified VPC, but the training container does not have network access.
      */
     EnableNetworkIsolation?: Boolean;
     /**
@@ -5932,7 +5932,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of experiments to return in the response.
+     * The maximum number of experiments to return in the response. The default value is 10.
      */
     MaxResults?: MaxResults;
   }
@@ -6715,6 +6715,14 @@ declare namespace SageMaker {
   export type ListTrialComponentKey256 = TrialComponentKey256[];
   export interface ListTrialComponentsRequest {
     /**
+     * A filter that returns only components that are part of the specified experiment. If you specify ExperimentName, you can't specify TrialName.
+     */
+    ExperimentName?: ExperimentEntityName;
+    /**
+     * A filter that returns only components that are part of the specified trial. If you specify TrialName, you can't specify ExperimentName.
+     */
+    TrialName?: ExperimentEntityName;
+    /**
      * A filter that returns only components that have the specified source Amazon Resource Name (ARN).
      */
     SourceArn?: String256;
@@ -6735,7 +6743,7 @@ declare namespace SageMaker {
      */
     SortOrder?: SortOrder;
     /**
-     * The maximum number of components to return in the response.
+     * The maximum number of components to return in the response. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -6775,7 +6783,7 @@ declare namespace SageMaker {
      */
     SortOrder?: SortOrder;
     /**
-     * The maximum number of trials to return in the response.
+     * The maximum number of trials to return in the response. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -7264,7 +7272,7 @@ declare namespace SageMaker {
   export type NameContains = string;
   export interface NestedFilters {
     /**
-     * The name of the property to use in the nested filters. The value must match a listed property name, such as InputDataConfig .
+     * The name of the property to use in the nested filters. The value must match a listed property name, such as InputDataConfig.
      */
     NestedPropertyName: ResourcePropertyName;
     /**
@@ -7685,7 +7693,7 @@ declare namespace SageMaker {
   export type PropertyNameHint = string;
   export interface PropertyNameQuery {
     /**
-     * Text that is part of a property's name. The property names of hyperparameter, metric, and tag key names that begin with the specified text in the PropertyNameHint.
+     * Text that begins a property's name.
      */
     PropertyNameHint: PropertyNameHint;
   }
@@ -7878,7 +7886,7 @@ declare namespace SageMaker {
   }
   export interface SearchRequest {
     /**
-     * The name of the Amazon SageMaker resource to search for. Currently, the only valid Resource value is TrainingJob.
+     * The name of the Amazon SageMaker resource to search for.
      */
     Resource: ResourceType;
     /**
@@ -8095,7 +8103,7 @@ declare namespace SageMaker {
   export type Success = boolean;
   export interface SuggestionQuery {
     /**
-     * A type of SuggestionQuery. Defines a property name hint. Only property names that match the specified hint are included in the response.
+     * Defines a property name hint. Only property names that begin with the specified hint are included in the response.
      */
     PropertyNameQuery?: PropertyNameQuery;
   }
@@ -8517,7 +8525,7 @@ declare namespace SageMaker {
      */
     InstanceCount: TransformInstanceCount;
     /**
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The VolumeKmsKeyId can be any of the following formats:   // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The VolumeKmsKeyId can be any of the following formats:   // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"     // KMS Key Alias    "alias/ExampleAlias"     // Amazon Resource Name (ARN) (ARN) of a KMS Key Alias   "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"   
      */
     VolumeKmsKeyId?: KmsKeyId;
   }

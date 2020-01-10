@@ -133,6 +133,44 @@
       ],
       "documentation": "<p>Associates phone numbers with the specified Amazon Chime Voice Connector group.</p>"
     },
+    "AssociateSigninDelegateGroupsWithAccount": {
+      "name": "AssociateSigninDelegateGroupsWithAccount",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}?operation=associate-signin-delegate-groups",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "AssociateSigninDelegateGroupsWithAccountRequest"
+      },
+      "output": {
+        "shape": "AssociateSigninDelegateGroupsWithAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Associates the specified sign-in delegate groups with the specified Amazon Chime account.</p>"
+    },
     "BatchCreateAttendee": {
       "name": "BatchCreateAttendee",
       "http": {
@@ -199,6 +237,9 @@
         },
         {
           "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
         },
         {
           "shape": "ServiceUnavailableException"
@@ -283,7 +324,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are dissasociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>"
+      "documentation": "<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are disassociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>"
     },
     "BatchUnsuspendUser": {
       "name": "BatchUnsuspendUser",
@@ -512,6 +553,9 @@
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "ThrottledClientException"
         }
       ],
       "documentation": "<p>Creates a bot for an Amazon Chime Enterprise account.</p>"
@@ -625,6 +669,9 @@
           "shape": "ResourceLimitExceededException"
         },
         {
+          "shape": "ThrottledClientException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -666,6 +713,9 @@
           "shape": "ResourceLimitExceededException"
         },
         {
+          "shape": "ThrottledClientException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -673,6 +723,47 @@
         }
       ],
       "documentation": "<p>Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.</p>"
+    },
+    "CreateUser": {
+      "name": "CreateUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}/users?operation=create",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateUserRequest"
+      },
+      "output": {
+        "shape": "CreateUserResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a user under the specified Amazon Chime account.</p>"
     },
     "CreateVoiceConnector": {
       "name": "CreateVoiceConnector",
@@ -958,6 +1049,9 @@
           "shape": "UnauthorizedClientException"
         },
         {
+          "shape": "ThrottledClientException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -988,6 +1082,9 @@
         },
         {
           "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
         },
         {
           "shape": "ServiceUnavailableException"
@@ -1328,6 +1425,44 @@
       ],
       "documentation": "<p>Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.</p>"
     },
+    "DisassociateSigninDelegateGroupsFromAccount": {
+      "name": "DisassociateSigninDelegateGroupsFromAccount",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}?operation=disassociate-signin-delegate-groups",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DisassociateSigninDelegateGroupsFromAccountRequest"
+      },
+      "output": {
+        "shape": "DisassociateSigninDelegateGroupsFromAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Disassociates the specified sign-in delegate groups from the specified Amazon Chime account.</p>"
+    },
     "GetAccount": {
       "name": "GetAccount",
       "http": {
@@ -1471,6 +1606,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
         }
       ],
       "documentation": "<p>Retrieves details for the specified bot, such as bot email address, bot type, status, and display name.</p>"
@@ -1717,13 +1855,16 @@
           "shape": "UnauthorizedClientException"
         },
         {
+          "shape": "ThrottledClientException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Retrieves room details, such as name.</p>"
+      "documentation": "<p>Retrieves room details, such as the room name.</p>"
     },
     "GetUser": {
       "name": "GetUser",
@@ -2211,6 +2352,9 @@
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "ThrottledClientException"
         }
       ],
       "documentation": "<p>Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.</p>"
@@ -2346,13 +2490,16 @@
           "shape": "UnauthorizedClientException"
         },
         {
+          "shape": "ThrottledClientException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Lists the membership details for the specified room, such as member IDs, member email addresses, and member names.</p>"
+      "documentation": "<p>Lists the membership details for the specified room, such as the members' IDs, email addresses, and names.</p>"
     },
     "ListRooms": {
       "name": "ListRooms",
@@ -2379,6 +2526,9 @@
         },
         {
           "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
         },
         {
           "shape": "ServiceUnavailableException"
@@ -2832,6 +2982,9 @@
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "ThrottledClientException"
         }
       ],
       "documentation": "<p>Regenerates the security token for a bot.</p>"
@@ -3062,6 +3215,9 @@
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "ThrottledClientException"
         }
       ],
       "documentation": "<p>Updates the status of the specified bot, such as starting or stopping the bot from running in your Amazon Chime Enterprise account.</p>"
@@ -3195,6 +3351,9 @@
           "shape": "UnauthorizedClientException"
         },
         {
+          "shape": "ThrottledClientException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -3230,13 +3389,16 @@
           "shape": "ForbiddenException"
         },
         {
+          "shape": "ThrottledClientException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates room membership details, such as member role. The member role designates whether the member is a chat room administrator or a general chat room member. Member role can only be updated for user IDs.</p>"
+      "documentation": "<p>Updates room membership details, such as the member role. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.</p>"
     },
     "UpdateUser": {
       "name": "UpdateUser",
@@ -3427,6 +3589,10 @@
         "SupportedLicenses": {
           "shape": "LicenseList",
           "documentation": "<p>Supported licenses for the Amazon Chime account.</p>"
+        },
+        "SigninDelegateGroups": {
+          "shape": "SigninDelegateGroupList",
+          "documentation": "<p>The sign-in delegate groups associated with the account.</p>"
         }
       },
       "documentation": "<p>The Amazon Chime account details. An AWS account can have multiple Amazon Chime accounts.</p>"
@@ -3465,6 +3631,20 @@
         "EnterpriseLWA",
         "EnterpriseOIDC"
       ]
+    },
+    "AlexaForBusinessMetadata": {
+      "type": "structure",
+      "members": {
+        "IsAlexaForBusinessEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Starts or stops Alexa for Business.</p>"
+        },
+        "AlexaForBusinessRoomArn": {
+          "shape": "SensitiveString",
+          "documentation": "<p>The ARN of the room resource.</p>"
+        }
+      },
+      "documentation": "<p>The Alexa for Business metadata associated with an Amazon Chime user, used to integrate Alexa for Business with a device.</p>"
     },
     "Arn": {
       "type": "string",
@@ -3564,6 +3744,29 @@
           "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
         }
       }
+    },
+    "AssociateSigninDelegateGroupsWithAccountRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "SigninDelegateGroups"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "SigninDelegateGroups": {
+          "shape": "SigninDelegateGroupList",
+          "documentation": "<p>The sign-in delegate groups.</p>"
+        }
+      }
+    },
+    "AssociateSigninDelegateGroupsWithAccountResponse": {
+      "type": "structure",
+      "members": {}
     },
     "Attendee": {
       "type": "structure",
@@ -4025,7 +4228,7 @@
         },
         "MediaRegion": {
           "shape": "String",
-          "documentation": "<p>The Region in which to create the meeting. Available values: <code>us-east-1</code>, <code>us-west-2</code>.</p>"
+          "documentation": "<p>The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>"
         },
         "NotificationsConfiguration": {
           "shape": "MeetingNotificationConfiguration",
@@ -4137,6 +4340,40 @@
         "Room": {
           "shape": "Room",
           "documentation": "<p>The room details.</p>"
+        }
+      }
+    },
+    "CreateUserRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>The user name.</p>"
+        },
+        "Email": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The user's email address.</p>"
+        },
+        "UserType": {
+          "shape": "UserType",
+          "documentation": "<p>The user type.</p>"
+        }
+      }
+    },
+    "CreateUserResponse": {
+      "type": "structure",
+      "members": {
+        "User": {
+          "shape": "User"
         }
       }
     },
@@ -4522,6 +4759,29 @@
           "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
         }
       }
+    },
+    "DisassociateSigninDelegateGroupsFromAccountRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "GroupNames"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "GroupNames": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The sign-in delegate group names.</p>"
+        }
+      }
+    },
+    "DisassociateSigninDelegateGroupsFromAccountResponse": {
+      "type": "structure",
+      "members": {}
     },
     "E164PhoneNumber": {
       "type": "string",
@@ -5128,6 +5388,10 @@
         "UserEmailList": {
           "shape": "UserEmailList",
           "documentation": "<p>The user email addresses to which to send the email invitation.</p>"
+        },
+        "UserType": {
+          "shape": "UserType",
+          "documentation": "<p>The user type.</p>"
         }
       }
     },
@@ -5508,6 +5772,12 @@
           "location": "querystring",
           "locationName": "user-email"
         },
+        "UserType": {
+          "shape": "UserType",
+          "documentation": "<p>The user type.</p>",
+          "location": "querystring",
+          "locationName": "user-type"
+        },
         "MaxResults": {
           "shape": "ProfileServiceMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. Defaults to 100.</p>",
@@ -5696,7 +5966,7 @@
         },
         "MediaRegion": {
           "shape": "String",
-          "documentation": "<p>The Region in which to create the meeting. Available values: <code>us-east-1</code>, <code>us-west-2</code>.</p>"
+          "documentation": "<p>The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>"
         }
       },
       "documentation": "<p>A meeting created using the Amazon Chime SDK.</p>"
@@ -6541,6 +6811,22 @@
         "shape": "SensitiveString"
       }
     },
+    "SigninDelegateGroup": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The group name.</p>"
+        }
+      },
+      "documentation": "<p>An Active Directory (AD) group whose members are granted permission to act as delegates.</p>"
+    },
+    "SigninDelegateGroupList": {
+      "type": "list",
+      "member": {
+        "shape": "SigninDelegateGroup"
+      }
+    },
     "StreamingConfiguration": {
       "type": "structure",
       "required": [
@@ -6904,6 +7190,14 @@
         "LicenseType": {
           "shape": "License",
           "documentation": "<p>The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.</p>"
+        },
+        "UserType": {
+          "shape": "UserType",
+          "documentation": "<p>The user type.</p>"
+        },
+        "AlexaForBusinessMetadata": {
+          "shape": "AlexaForBusinessMetadata",
+          "documentation": "<p>The Alexa for Business metadata.</p>"
         }
       }
     },
@@ -6920,6 +7214,14 @@
         "LicenseType": {
           "shape": "License",
           "documentation": "<p>The user license type.</p>"
+        },
+        "UserType": {
+          "shape": "UserType",
+          "documentation": "<p>The user type.</p>"
+        },
+        "AlexaForBusinessMetadata": {
+          "shape": "AlexaForBusinessMetadata",
+          "documentation": "<p>The Alexa for Business metadata.</p>"
         }
       },
       "documentation": "<p>The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.</p>"
@@ -7066,6 +7368,10 @@
           "shape": "License",
           "documentation": "<p>The license type for the user.</p>"
         },
+        "UserType": {
+          "shape": "UserType",
+          "documentation": "<p>The user type.</p>"
+        },
         "UserRegistrationStatus": {
           "shape": "RegistrationStatus",
           "documentation": "<p>The user registration status.</p>"
@@ -7081,6 +7387,10 @@
         "InvitedOn": {
           "shape": "Iso8601Timestamp",
           "documentation": "<p>Date and time when the user is invited to the Amazon Chime account, in ISO 8601 format.</p>"
+        },
+        "AlexaForBusinessMetadata": {
+          "shape": "AlexaForBusinessMetadata",
+          "documentation": "<p>The Alexa for Business metadata.</p>"
         },
         "PersonalPIN": {
           "shape": "String",
@@ -7145,6 +7455,13 @@
         }
       },
       "documentation": "<p>Settings associated with an Amazon Chime user, including inbound and outbound calling and text messaging.</p>"
+    },
+    "UserType": {
+      "type": "string",
+      "enum": [
+        "PrivateUser",
+        "SharedDevice"
+      ]
     },
     "VoiceConnector": {
       "type": "structure",

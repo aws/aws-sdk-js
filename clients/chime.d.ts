@@ -36,6 +36,14 @@ declare class Chime extends Service {
    */
   associatePhoneNumbersWithVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse) => void): Request<Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse, AWSError>;
   /**
+   * Associates the specified sign-in delegate groups with the specified Amazon Chime account.
+   */
+  associateSigninDelegateGroupsWithAccount(params: Chime.Types.AssociateSigninDelegateGroupsWithAccountRequest, callback?: (err: AWSError, data: Chime.Types.AssociateSigninDelegateGroupsWithAccountResponse) => void): Request<Chime.Types.AssociateSigninDelegateGroupsWithAccountResponse, AWSError>;
+  /**
+   * Associates the specified sign-in delegate groups with the specified Amazon Chime account.
+   */
+  associateSigninDelegateGroupsWithAccount(callback?: (err: AWSError, data: Chime.Types.AssociateSigninDelegateGroupsWithAccountResponse) => void): Request<Chime.Types.AssociateSigninDelegateGroupsWithAccountResponse, AWSError>;
+  /**
    * Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   batchCreateAttendee(params: Chime.Types.BatchCreateAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
@@ -60,11 +68,11 @@ declare class Chime extends Service {
    */
   batchDeletePhoneNumber(callback?: (err: AWSError, data: Chime.Types.BatchDeletePhoneNumberResponse) => void): Request<Chime.Types.BatchDeletePhoneNumberResponse, AWSError>;
   /**
-   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are dissasociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
+   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
    */
   batchSuspendUser(params: Chime.Types.BatchSuspendUserRequest, callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
-   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are dissasociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
+   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
    */
   batchSuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
@@ -147,6 +155,14 @@ declare class Chime extends Service {
    * Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   createRoomMembership(callback?: (err: AWSError, data: Chime.Types.CreateRoomMembershipResponse) => void): Request<Chime.Types.CreateRoomMembershipResponse, AWSError>;
+  /**
+   * Creates a user under the specified Amazon Chime account.
+   */
+  createUser(params: Chime.Types.CreateUserRequest, callback?: (err: AWSError, data: Chime.Types.CreateUserResponse) => void): Request<Chime.Types.CreateUserResponse, AWSError>;
+  /**
+   * Creates a user under the specified Amazon Chime account.
+   */
+  createUser(callback?: (err: AWSError, data: Chime.Types.CreateUserResponse) => void): Request<Chime.Types.CreateUserResponse, AWSError>;
   /**
    * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region. Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.
    */
@@ -292,6 +308,14 @@ declare class Chime extends Service {
    */
   disassociatePhoneNumbersFromVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse) => void): Request<Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse, AWSError>;
   /**
+   * Disassociates the specified sign-in delegate groups from the specified Amazon Chime account.
+   */
+  disassociateSigninDelegateGroupsFromAccount(params: Chime.Types.DisassociateSigninDelegateGroupsFromAccountRequest, callback?: (err: AWSError, data: Chime.Types.DisassociateSigninDelegateGroupsFromAccountResponse) => void): Request<Chime.Types.DisassociateSigninDelegateGroupsFromAccountResponse, AWSError>;
+  /**
+   * Disassociates the specified sign-in delegate groups from the specified Amazon Chime account.
+   */
+  disassociateSigninDelegateGroupsFromAccount(callback?: (err: AWSError, data: Chime.Types.DisassociateSigninDelegateGroupsFromAccountResponse) => void): Request<Chime.Types.DisassociateSigninDelegateGroupsFromAccountResponse, AWSError>;
+  /**
    * Retrieves details for the specified Amazon Chime account, such as account type and supported licenses.
    */
   getAccount(params: Chime.Types.GetAccountRequest, callback?: (err: AWSError, data: Chime.Types.GetAccountResponse) => void): Request<Chime.Types.GetAccountResponse, AWSError>;
@@ -364,11 +388,11 @@ declare class Chime extends Service {
    */
   getPhoneNumberSettings(callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberSettingsResponse) => void): Request<Chime.Types.GetPhoneNumberSettingsResponse, AWSError>;
   /**
-   * Retrieves room details, such as name.
+   * Retrieves room details, such as the room name.
    */
   getRoom(params: Chime.Types.GetRoomRequest, callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
   /**
-   * Retrieves room details, such as name.
+   * Retrieves room details, such as the room name.
    */
   getRoom(callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
   /**
@@ -500,11 +524,11 @@ declare class Chime extends Service {
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Chime.Types.ListPhoneNumbersResponse) => void): Request<Chime.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Lists the membership details for the specified room, such as member IDs, member email addresses, and member names.
+   * Lists the membership details for the specified room, such as the members' IDs, email addresses, and names.
    */
   listRoomMemberships(params: Chime.Types.ListRoomMembershipsRequest, callback?: (err: AWSError, data: Chime.Types.ListRoomMembershipsResponse) => void): Request<Chime.Types.ListRoomMembershipsResponse, AWSError>;
   /**
-   * Lists the membership details for the specified room, such as member IDs, member email addresses, and member names.
+   * Lists the membership details for the specified room, such as the members' IDs, email addresses, and names.
    */
   listRoomMemberships(callback?: (err: AWSError, data: Chime.Types.ListRoomMembershipsResponse) => void): Request<Chime.Types.ListRoomMembershipsResponse, AWSError>;
   /**
@@ -692,11 +716,11 @@ declare class Chime extends Service {
    */
   updateRoom(callback?: (err: AWSError, data: Chime.Types.UpdateRoomResponse) => void): Request<Chime.Types.UpdateRoomResponse, AWSError>;
   /**
-   * Updates room membership details, such as member role. The member role designates whether the member is a chat room administrator or a general chat room member. Member role can only be updated for user IDs.
+   * Updates room membership details, such as the member role. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.
    */
   updateRoomMembership(params: Chime.Types.UpdateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
   /**
-   * Updates room membership details, such as member role. The member role designates whether the member is a chat room administrator or a general chat room member. Member role can only be updated for user IDs.
+   * Updates room membership details, such as the member role. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.
    */
   updateRoomMembership(callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
   /**
@@ -762,6 +786,10 @@ declare namespace Chime {
      * Supported licenses for the Amazon Chime account.
      */
     SupportedLicenses?: LicenseList;
+    /**
+     * The sign-in delegate groups associated with the account.
+     */
+    SigninDelegateGroups?: SigninDelegateGroupList;
   }
   export type AccountList = Account[];
   export type AccountName = string;
@@ -776,6 +804,16 @@ declare namespace Chime {
     EnableDialOut?: Boolean;
   }
   export type AccountType = "Team"|"EnterpriseDirectory"|"EnterpriseLWA"|"EnterpriseOIDC"|string;
+  export interface AlexaForBusinessMetadata {
+    /**
+     * Starts or stops Alexa for Business.
+     */
+    IsAlexaForBusinessEnabled?: Boolean;
+    /**
+     * The ARN of the room resource.
+     */
+    AlexaForBusinessRoomArn?: SensitiveString;
+  }
   export type Arn = string;
   export interface AssociatePhoneNumberWithUserRequest {
     /**
@@ -832,6 +870,18 @@ declare namespace Chime {
      * If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.
      */
     PhoneNumberErrors?: PhoneNumberErrorList;
+  }
+  export interface AssociateSigninDelegateGroupsWithAccountRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The sign-in delegate groups.
+     */
+    SigninDelegateGroups: SigninDelegateGroupList;
+  }
+  export interface AssociateSigninDelegateGroupsWithAccountResponse {
   }
   export interface Attendee {
     /**
@@ -1093,7 +1143,7 @@ declare namespace Chime {
      */
     MeetingHostId?: ExternalUserIdType;
     /**
-     * The Region in which to create the meeting. Available values: us-east-1, us-west-2.
+     * The Region in which to create the meeting. Available values: ap-northeast-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
      */
     MediaRegion?: String;
     /**
@@ -1166,6 +1216,27 @@ declare namespace Chime {
      * The room details.
      */
     Room?: Room;
+  }
+  export interface CreateUserRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The user name.
+     */
+    Username?: String;
+    /**
+     * The user's email address.
+     */
+    Email?: EmailAddress;
+    /**
+     * The user type.
+     */
+    UserType?: UserType;
+  }
+  export interface CreateUserResponse {
+    User?: User;
   }
   export interface CreateVoiceConnectorGroupRequest {
     /**
@@ -1362,6 +1433,18 @@ declare namespace Chime {
      * If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.
      */
     PhoneNumberErrors?: PhoneNumberErrorList;
+  }
+  export interface DisassociateSigninDelegateGroupsFromAccountRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The sign-in delegate group names.
+     */
+    GroupNames: NonEmptyStringList;
+  }
+  export interface DisassociateSigninDelegateGroupsFromAccountResponse {
   }
   export type E164PhoneNumber = string;
   export type E164PhoneNumberList = E164PhoneNumber[];
@@ -1673,6 +1756,10 @@ declare namespace Chime {
      * The user email addresses to which to send the email invitation.
      */
     UserEmailList: UserEmailList;
+    /**
+     * The user type.
+     */
+    UserType?: UserType;
   }
   export interface InviteUsersResponse {
     /**
@@ -1902,6 +1989,10 @@ declare namespace Chime {
      */
     UserEmail?: EmailAddress;
     /**
+     * The user type.
+     */
+    UserType?: UserType;
+    /**
      * The maximum number of results to return in a single call. Defaults to 100.
      */
     MaxResults?: ProfileServiceMaxResults;
@@ -2026,7 +2117,7 @@ declare namespace Chime {
      */
     MediaPlacement?: MediaPlacement;
     /**
-     * The Region in which to create the meeting. Available values: us-east-1, us-west-2.
+     * The Region in which to create the meeting. Available values: ap-northeast-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
      */
     MediaRegion?: String;
   }
@@ -2507,6 +2598,13 @@ declare namespace Chime {
   }
   export type SensitiveString = string;
   export type SensitiveStringList = SensitiveString[];
+  export interface SigninDelegateGroup {
+    /**
+     * The group name.
+     */
+    GroupName?: NonEmptyString;
+  }
+  export type SigninDelegateGroupList = SigninDelegateGroup[];
   export interface StreamingConfiguration {
     /**
      * The retention period, in hours, for the Amazon Kinesis data.
@@ -2722,6 +2820,14 @@ declare namespace Chime {
      * The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
      */
     LicenseType?: License;
+    /**
+     * The user type.
+     */
+    UserType?: UserType;
+    /**
+     * The Alexa for Business metadata.
+     */
+    AlexaForBusinessMetadata?: AlexaForBusinessMetadata;
   }
   export interface UpdateUserRequestItem {
     /**
@@ -2732,6 +2838,14 @@ declare namespace Chime {
      * The user license type.
      */
     LicenseType?: License;
+    /**
+     * The user type.
+     */
+    UserType?: UserType;
+    /**
+     * The Alexa for Business metadata.
+     */
+    AlexaForBusinessMetadata?: AlexaForBusinessMetadata;
   }
   export type UpdateUserRequestItemList = UpdateUserRequestItem[];
   export interface UpdateUserResponse {
@@ -2821,6 +2935,10 @@ declare namespace Chime {
      */
     LicenseType?: License;
     /**
+     * The user type.
+     */
+    UserType?: UserType;
+    /**
      * The user registration status.
      */
     UserRegistrationStatus?: RegistrationStatus;
@@ -2836,6 +2954,10 @@ declare namespace Chime {
      * Date and time when the user is invited to the Amazon Chime account, in ISO 8601 format.
      */
     InvitedOn?: Iso8601Timestamp;
+    /**
+     * The Alexa for Business metadata.
+     */
+    AlexaForBusinessMetadata?: AlexaForBusinessMetadata;
     /**
      * The user's personal meeting PIN.
      */
@@ -2865,6 +2987,7 @@ declare namespace Chime {
      */
     Telephony: TelephonySettings;
   }
+  export type UserType = "PrivateUser"|"SharedDevice"|string;
   export interface VoiceConnector {
     /**
      * The Amazon Chime Voice Connector ID.
