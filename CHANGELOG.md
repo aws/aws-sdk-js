@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.601.0-->
+<!--LATEST=2.602.0-->
 <!--ENTRYINSERT-->
+
+## 2.602.0
+* bugfix: util: Fix `name.endsWith is not a function` exception when inspecting some generated errors with some versions of nodejs
+* feature: Backup: Cross-region backup is a new AWS Backup feature that allows enterprises to copy backups across multiple AWS services to different regions. 
+* feature: EFS: This release adds support for managing EFS file system policies and EFS Access Points.
 
 ## 2.601.0
 * feature: Chime: Add shared profile support to new and existing users

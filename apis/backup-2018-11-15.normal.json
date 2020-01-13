@@ -40,7 +40,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources.</p> <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, the existing <code>backupPlanId</code> is returned.</p>",
+      "documentation": "<p>Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources.</p> <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, an <code>AlreadyExistsException</code> is returned.</p>",
       "idempotent": true
     },
     "CreateBackupSelection": {
@@ -72,7 +72,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected <code>Resources</code>. </p> <p>For example, consider the following patterns:</p> <ul> <li> <p> <code>Resources: \"arn:aws:ec2:region:account-id:volume/volume-id\"</code> </p> </li> <li> <p> <code>ConditionKey:\"department\"</code> </p> <p> <code>ConditionValue:\"finance\"</code> </p> <p> <code>ConditionType:\"StringEquals\"</code> </p> </li> <li> <p> <code>ConditionKey:\"importance\"</code> </p> <p> <code>ConditionValue:\"critical\"</code> </p> <p> <code>ConditionType:\"StringEquals\"</code> </p> </li> </ul> <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as <code>\"department=finance\"</code>, <code>\"importance=critical\"</code>, in addition to an EBS volume with the specified volume Id.</p> <p>Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.</p>",
+      "documentation": "<p>Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected <code>Resources</code>. </p> <p>For example, consider the following patterns:</p> <ul> <li> <p> <code>Resources: \"arn:aws:ec2:region:account-id:volume/volume-id\"</code> </p> </li> <li> <p> <code>ConditionKey:\"department\"</code> </p> <p> <code>ConditionValue:\"finance\"</code> </p> <p> <code>ConditionType:\"STRINGEQUALS\"</code> </p> </li> <li> <p> <code>ConditionKey:\"importance\"</code> </p> <p> <code>ConditionValue:\"critical\"</code> </p> <p> <code>ConditionType:\"STRINGEQUALS\"</code> </p> </li> </ul> <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as <code>\"department=finance\"</code>, <code>\"importance=critical\"</code>, in addition to an EBS volume with the specified volume Id.</p> <p>Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.</p>",
       "idempotent": true
     },
     "CreateBackupVault": {
@@ -331,6 +331,35 @@
         }
       ],
       "documentation": "<p>Returns metadata about a backup vault specified by its name.</p>",
+      "idempotent": true
+    },
+    "DescribeCopyJob": {
+      "name": "DescribeCopyJob",
+      "http": {
+        "method": "GET",
+        "requestUri": "/copy-jobs/{copyJobId}"
+      },
+      "input": {
+        "shape": "DescribeCopyJobInput"
+      },
+      "output": {
+        "shape": "DescribeCopyJobOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingParameterValueException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Returns metadata associated with creating a copy of a resource.</p>",
       "idempotent": true
     },
     "DescribeProtectedResource": {
@@ -652,7 +681,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Returns two sets of metadata key-value pairs. The first set lists the metadata that the recovery point was created with. The second set lists the metadata key-value pairs that are required to restore the recovery point.</p> <p>These sets can be the same, or the restore metadata set can contain different values if the target service to be restored has changed since the recovery point was created and now requires additional or different information in order to be restored.</p>",
+      "documentation": "<p>Returns a set of metadata key-value pairs that were used to create the backup.</p>",
       "idempotent": true
     },
     "GetSupportedResourceTypes": {
@@ -686,6 +715,9 @@
       "errors": [
         {
           "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidRequestException"
         },
         {
           "shape": "ServiceUnavailableException"
@@ -837,6 +869,28 @@
       ],
       "documentation": "<p>Returns a list of recovery point storage containers along with information about them.</p>",
       "idempotent": true
+    },
+    "ListCopyJobs": {
+      "name": "ListCopyJobs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/copy-jobs/"
+      },
+      "input": {
+        "shape": "ListCopyJobsInput"
+      },
+      "output": {
+        "shape": "ListCopyJobsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Returns metadata about your copy jobs.</p>"
     },
     "ListProtectedResources": {
       "name": "ListProtectedResources",
@@ -1059,6 +1113,38 @@
         }
       ],
       "documentation": "<p>Starts a job to create a one-time backup of the specified resource.</p>",
+      "idempotent": true
+    },
+    "StartCopyJob": {
+      "name": "StartCopyJob",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/copy-jobs"
+      },
+      "input": {
+        "shape": "StartCopyJobInput"
+      },
+      "output": {
+        "shape": "StartCopyJobOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingParameterValueException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Starts a job to create a one-time copy of the specified resource.</p>",
       "idempotent": true
     },
     "StartRestoreJob": {
@@ -1476,6 +1562,10 @@
         "RuleId": {
           "shape": "string",
           "documentation": "<p>Uniquely identifies a rule that is used to schedule the backup of a selection of resources.</p>"
+        },
+        "CopyActions": {
+          "shape": "CopyActions",
+          "documentation": "<p>An array of <code>CopyAction</code> objects, which contains the details of the copy operation.</p>"
         }
       },
       "documentation": "<p>Specifies a scheduled task used to back up a selection of resources.</p>"
@@ -1514,6 +1604,10 @@
         "RecoveryPointTags": {
           "shape": "Tags",
           "documentation": "<p>To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.</p>"
+        },
+        "CopyActions": {
+          "shape": "CopyActions",
+          "documentation": "<p>An array of <code>CopyAction</code> objects, which contains the details of the copy operation.</p>"
         }
       },
       "documentation": "<p>Specifies a scheduled task used to back up a selection of resources.</p>"
@@ -1551,11 +1645,11 @@
         },
         "Resources": {
           "shape": "ResourceArns",
-          "documentation": "<p>An array of strings that either contain Amazon Resource Names (ARNs) or match patterns such as \"<code>arn:aws:ec2:us-east-1:123456789012:volume/*</code>\" of resources to assign to a backup plan.</p>"
+          "documentation": "<p>An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.</p>"
         },
         "ListOfTags": {
           "shape": "ListOfTags",
-          "documentation": "<p>An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>\"StringEquals\": {\"ec2:ResourceTag/Department\": \"accounting\"</code>.</p>"
+          "documentation": "<p>An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>\"STRINGEQUALS\": {\"ec2:ResourceTag/Department\": \"accounting\"</code>.</p>"
         }
       },
       "documentation": "<p>Used to specify a set of resources to a backup plan.</p>"
@@ -1605,8 +1699,16 @@
       "enum": [
         "BACKUP_JOB_STARTED",
         "BACKUP_JOB_COMPLETED",
+        "BACKUP_JOB_SUCCESSFUL",
+        "BACKUP_JOB_FAILED",
+        "BACKUP_JOB_EXPIRED",
         "RESTORE_JOB_STARTED",
         "RESTORE_JOB_COMPLETED",
+        "RESTORE_JOB_SUCCESSFUL",
+        "RESTORE_JOB_FAILED",
+        "COPY_JOB_STARTED",
+        "COPY_JOB_SUCCESSFUL",
+        "COPY_JOB_FAILED",
         "RECOVERY_POINT_MODIFIED",
         "BACKUP_PLAN_CREATED",
         "BACKUP_PLAN_MODIFIED"
@@ -1685,7 +1787,7 @@
       "members": {
         "ConditionType": {
           "shape": "ConditionType",
-          "documentation": "<p>An operation, such as <code>StringEquals</code>, that is applied to a key-value pair used to filter resources in a selection.</p>"
+          "documentation": "<p>An operation, such as <code>STRINGEQUALS</code>, that is applied to a key-value pair used to filter resources in a selection.</p>"
         },
         "ConditionKey": {
           "shape": "ConditionKey",
@@ -1696,7 +1798,7 @@
           "documentation": "<p>The value in a key-value pair. For example, in <code>\"ec2:ResourceTag/Department\": \"accounting\"</code>, <code>\"accounting\"</code> is the value.</p>"
         }
       },
-      "documentation": "<p>Contains an array of triplets made up of a condition type (such as <code>StringEquals</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.</p>"
+      "documentation": "<p>Contains an array of triplets made up of a condition type (such as <code>STRINGEQUALS</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.</p>"
     },
     "ConditionKey": {
       "type": "string"
@@ -1709,6 +1811,104 @@
     },
     "ConditionValue": {
       "type": "string"
+    },
+    "CopyAction": {
+      "type": "structure",
+      "required": [
+        "DestinationBackupVaultArn"
+      ],
+      "members": {
+        "Lifecycle": {
+          "shape": "Lifecycle"
+        },
+        "DestinationBackupVaultArn": {
+          "shape": "ARN",
+          "documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup. For example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.</p>"
+        }
+      },
+      "documentation": "<p>The details of the copy operation.</p>"
+    },
+    "CopyActions": {
+      "type": "list",
+      "member": {
+        "shape": "CopyAction"
+      }
+    },
+    "CopyJob": {
+      "type": "structure",
+      "members": {
+        "CopyJobId": {
+          "shape": "string",
+          "documentation": "<p>Uniquely identifies a request to AWS Backup to copy a resource.</p>"
+        },
+        "SourceBackupVaultArn": {
+          "shape": "ARN",
+          "documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a source copy vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. </p>"
+        },
+        "SourceRecoveryPointArn": {
+          "shape": "ARN",
+          "documentation": "<p>An ARN that uniquely identifies a source recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. </p>"
+        },
+        "DestinationBackupVaultArn": {
+          "shape": "ARN",
+          "documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a destination copy vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.</p>"
+        },
+        "DestinationRecoveryPointArn": {
+          "shape": "ARN",
+          "documentation": "<p>An ARN that uniquely identifies a destination recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. </p>"
+        },
+        "ResourceArn": {
+          "shape": "ARN",
+          "documentation": "<p>The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. </p>"
+        },
+        "CreationDate": {
+          "shape": "timestamp",
+          "documentation": "<p>The date and time a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. </p>"
+        },
+        "CompletionDate": {
+          "shape": "timestamp",
+          "documentation": "<p>The date and time a job to create a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. </p>"
+        },
+        "State": {
+          "shape": "CopyJobState",
+          "documentation": "<p>The current state of a resource recovery point.</p>"
+        },
+        "StatusMessage": {
+          "shape": "string",
+          "documentation": "<p>A detailed message explaining the status of the job that to copy a resource.</p>"
+        },
+        "BackupSizeInBytes": {
+          "shape": "Long",
+          "documentation": "<p>The size, in bytes, of a copy job.</p>"
+        },
+        "IamRoleArn": {
+          "shape": "IAMRoleArn",
+          "documentation": "<p>Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.</p>"
+        },
+        "CreatedBy": {
+          "shape": "RecoveryPointCreator"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. </p>"
+        }
+      },
+      "documentation": "<p>Contains detailed information about a copy job.</p>"
+    },
+    "CopyJobState": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "RUNNING",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    "CopyJobsList": {
+      "type": "list",
+      "member": {
+        "shape": "CopyJob"
+      }
     },
     "CreateBackupPlanInput": {
       "type": "structure",
@@ -1766,7 +1966,7 @@
         },
         "BackupSelection": {
           "shape": "BackupSelection",
-          "documentation": "<p>Specifies the body of a request to assign a set of resources to a backup plan.</p> <p>It includes an array of resources, an optional array of patterns to exclude resources, an optional role to provide access to the AWS service the resource belongs to, and an optional array of tags used to identify a set of resources.</p>"
+          "documentation": "<p>Specifies the body of a request to assign a set of resources to a backup plan.</p>"
         },
         "CreatorRequestId": {
           "shape": "string",
@@ -2083,6 +2283,29 @@
         "NumberOfRecoveryPoints": {
           "shape": "long",
           "documentation": "<p>The number of recovery points that are stored in a backup vault.</p>"
+        }
+      }
+    },
+    "DescribeCopyJobInput": {
+      "type": "structure",
+      "required": [
+        "CopyJobId"
+      ],
+      "members": {
+        "CopyJobId": {
+          "shape": "string",
+          "documentation": "<p>Uniquely identifies a request to AWS Backup to copy a resource.</p>",
+          "location": "uri",
+          "locationName": "copyJobId"
+        }
+      }
+    },
+    "DescribeCopyJobOutput": {
+      "type": "structure",
+      "members": {
+        "CopyJob": {
+          "shape": "CopyJob",
+          "documentation": "<p>Contains detailed information about a copy job.</p>"
         }
       }
     },
@@ -2424,7 +2647,7 @@
       "members": {
         "BackupSelection": {
           "shape": "BackupSelection",
-          "documentation": "<p>Specifies the body of a request to assign a set of resources to a backup plan.</p> <p>It includes an array of resources, an optional array of patterns to exclude resources, an optional role to provide access to the AWS service that the resource belongs to, and an optional array of tags used to identify a set of resources.</p>"
+          "documentation": "<p>Specifies the body of a request to assign a set of resources to a backup plan.</p>"
         },
         "SelectionId": {
           "shape": "string",
@@ -2544,7 +2767,7 @@
         },
         "RestoreMetadata": {
           "shape": "Metadata",
-          "documentation": "<p>A set of metadata key-value pairs that lists the metadata key-value pairs that are required to restore the recovery point.</p>"
+          "documentation": "<p>The set of metadata key-value pairs that describes the original configuration of the backed-up resource. These values vary depending on the service that is being restored.</p>"
         }
       }
     },
@@ -2553,7 +2776,7 @@
       "members": {
         "ResourceTypes": {
           "shape": "ResourceTypes",
-          "documentation": "<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>"
+          "documentation": "<p>Contains a string with the supported AWS resource types:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>"
         }
       }
     },
@@ -2572,10 +2795,10 @@
         },
         "DeleteAfterDays": {
           "shape": "Long",
-          "documentation": "<p>Specifies the number of days after creation that a recovery point is deleted. Must be greater than <code>MoveToColdStorageAfterDays</code>.</p>"
+          "documentation": "<p>Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.</p>"
         }
       },
-      "documentation": "<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p>"
+      "documentation": "<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>"
     },
     "ListBackupJobsInput": {
       "type": "structure",
@@ -2624,7 +2847,7 @@
         },
         "ByResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>",
+          "documentation": "<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>",
           "location": "querystring",
           "locationName": "resourceType"
         }
@@ -2814,6 +3037,72 @@
         "NextToken": {
           "shape": "string",
           "documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
+        }
+      }
+    },
+    "ListCopyJobsInput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "string",
+          "documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. </p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of items to be returned.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "ByResourceArn": {
+          "shape": "ARN",
+          "documentation": "<p>Returns only copy jobs that match the specified resource Amazon Resource Name (ARN). </p>",
+          "location": "querystring",
+          "locationName": "resourceArn"
+        },
+        "ByState": {
+          "shape": "CopyJobState",
+          "documentation": "<p>Returns only copy jobs that are in the specified state.</p>",
+          "location": "querystring",
+          "locationName": "state"
+        },
+        "ByCreatedBefore": {
+          "shape": "timestamp",
+          "documentation": "<p>Returns only copy jobs that were created before the specified date.</p>",
+          "location": "querystring",
+          "locationName": "createdBefore"
+        },
+        "ByCreatedAfter": {
+          "shape": "timestamp",
+          "documentation": "<p>Returns only copy jobs that were created after the specified date.</p>",
+          "location": "querystring",
+          "locationName": "createdAfter"
+        },
+        "ByResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        },
+        "ByDestinationVaultArn": {
+          "shape": "string",
+          "documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to copy from; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. </p>",
+          "location": "querystring",
+          "locationName": "destinationVaultArn"
+        }
+      }
+    },
+    "ListCopyJobsOutput": {
+      "type": "structure",
+      "members": {
+        "CopyJobs": {
+          "shape": "CopyJobsList",
+          "documentation": "<p>An array of structures containing metadata about your copy jobs returned in JSON format. </p>"
+        },
+        "NextToken": {
+          "shape": "string",
+          "documentation": "<p>The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. </p>"
         }
       }
     },
@@ -3045,7 +3334,8 @@
       },
       "value": {
         "shape": "MetadataValue"
-      }
+      },
+      "sensitive": true
     },
     "MetadataKey": {
       "type": "string"
@@ -3369,7 +3659,7 @@
         },
         "IdempotencyToken": {
           "shape": "string",
-          "documentation": "<p>A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartBackupJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one backup job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple backups.</p>"
+          "documentation": "<p>A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.</p>"
         },
         "StartWindowMinutes": {
           "shape": "WindowMinutes",
@@ -3406,6 +3696,53 @@
         }
       }
     },
+    "StartCopyJobInput": {
+      "type": "structure",
+      "required": [
+        "RecoveryPointArn",
+        "SourceBackupVaultName",
+        "DestinationBackupVaultArn",
+        "IamRoleArn"
+      ],
+      "members": {
+        "RecoveryPointArn": {
+          "shape": "ARN",
+          "documentation": "<p>An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. </p>"
+        },
+        "SourceBackupVaultName": {
+          "shape": "BackupVaultName",
+          "documentation": "<p>The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens. &gt;</p>"
+        },
+        "DestinationBackupVaultArn": {
+          "shape": "ARN",
+          "documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.</p>"
+        },
+        "IamRoleArn": {
+          "shape": "IAMRoleArn",
+          "documentation": "<p>Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.</p>"
+        },
+        "IdempotencyToken": {
+          "shape": "string",
+          "documentation": "<p>A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.</p>"
+        },
+        "Lifecycle": {
+          "shape": "Lifecycle"
+        }
+      }
+    },
+    "StartCopyJobOutput": {
+      "type": "structure",
+      "members": {
+        "CopyJobId": {
+          "shape": "string",
+          "documentation": "<p>Uniquely identifies a request to AWS Backup to copy a resource.</p>"
+        },
+        "CreationDate": {
+          "shape": "timestamp",
+          "documentation": "<p>The date and time that a backup job is started, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. &gt;</p>"
+        }
+      }
+    },
     "StartRestoreJobInput": {
       "type": "structure",
       "required": [
@@ -3420,7 +3757,7 @@
         },
         "Metadata": {
           "shape": "Metadata",
-          "documentation": "<p>A set of metadata key-value pairs. Lists the metadata that the recovery point was created with.</p>"
+          "documentation": "<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed-up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>"
         },
         "IamRoleArn": {
           "shape": "IAMRoleArn",
@@ -3428,11 +3765,11 @@
         },
         "IdempotencyToken": {
           "shape": "string",
-          "documentation": "<p>A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>StartRestoreJob</code> multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one restore job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple restores. </p>"
+          "documentation": "<p>A customer chosen string that can be used to distinguish between calls to <code>StartRestoreJob</code>.</p>"
         },
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>SGW</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>"
+          "documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>DDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> </ul>"
         }
       }
     },

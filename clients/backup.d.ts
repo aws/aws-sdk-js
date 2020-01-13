@@ -12,19 +12,19 @@ declare class Backup extends Service {
   constructor(options?: Backup.Types.ClientConfiguration)
   config: Config & Backup.Types.ClientConfiguration;
   /**
-   * Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources. If you call CreateBackupPlan with a plan that already exists, the existing backupPlanId is returned.
+   * Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources. If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException is returned.
    */
   createBackupPlan(params: Backup.Types.CreateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
-   * Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources. If you call CreateBackupPlan with a plan that already exists, the existing backupPlanId is returned.
+   * Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources. If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException is returned.
    */
   createBackupPlan(callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
-   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
+   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"STRINGEQUALS"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"STRINGEQUALS"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
    */
   createBackupSelection(params: Backup.Types.CreateBackupSelectionInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
-   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
+   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"STRINGEQUALS"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"STRINGEQUALS"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
    */
   createBackupSelection(callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
@@ -99,6 +99,14 @@ declare class Backup extends Service {
    * Returns metadata about a backup vault specified by its name.
    */
   describeBackupVault(callback?: (err: AWSError, data: Backup.Types.DescribeBackupVaultOutput) => void): Request<Backup.Types.DescribeBackupVaultOutput, AWSError>;
+  /**
+   * Returns metadata associated with creating a copy of a resource.
+   */
+  describeCopyJob(params: Backup.Types.DescribeCopyJobInput, callback?: (err: AWSError, data: Backup.Types.DescribeCopyJobOutput) => void): Request<Backup.Types.DescribeCopyJobOutput, AWSError>;
+  /**
+   * Returns metadata associated with creating a copy of a resource.
+   */
+  describeCopyJob(callback?: (err: AWSError, data: Backup.Types.DescribeCopyJobOutput) => void): Request<Backup.Types.DescribeCopyJobOutput, AWSError>;
   /**
    * Returns information about a saved resource, including the last time it was backed-up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.
    */
@@ -180,11 +188,11 @@ declare class Backup extends Service {
    */
   getBackupVaultNotifications(callback?: (err: AWSError, data: Backup.Types.GetBackupVaultNotificationsOutput) => void): Request<Backup.Types.GetBackupVaultNotificationsOutput, AWSError>;
   /**
-   * Returns two sets of metadata key-value pairs. The first set lists the metadata that the recovery point was created with. The second set lists the metadata key-value pairs that are required to restore the recovery point. These sets can be the same, or the restore metadata set can contain different values if the target service to be restored has changed since the recovery point was created and now requires additional or different information in order to be restored.
+   * Returns a set of metadata key-value pairs that were used to create the backup.
    */
   getRecoveryPointRestoreMetadata(params: Backup.Types.GetRecoveryPointRestoreMetadataInput, callback?: (err: AWSError, data: Backup.Types.GetRecoveryPointRestoreMetadataOutput) => void): Request<Backup.Types.GetRecoveryPointRestoreMetadataOutput, AWSError>;
   /**
-   * Returns two sets of metadata key-value pairs. The first set lists the metadata that the recovery point was created with. The second set lists the metadata key-value pairs that are required to restore the recovery point. These sets can be the same, or the restore metadata set can contain different values if the target service to be restored has changed since the recovery point was created and now requires additional or different information in order to be restored.
+   * Returns a set of metadata key-value pairs that were used to create the backup.
    */
   getRecoveryPointRestoreMetadata(callback?: (err: AWSError, data: Backup.Types.GetRecoveryPointRestoreMetadataOutput) => void): Request<Backup.Types.GetRecoveryPointRestoreMetadataOutput, AWSError>;
   /**
@@ -239,6 +247,14 @@ declare class Backup extends Service {
    * Returns a list of recovery point storage containers along with information about them.
    */
   listBackupVaults(callback?: (err: AWSError, data: Backup.Types.ListBackupVaultsOutput) => void): Request<Backup.Types.ListBackupVaultsOutput, AWSError>;
+  /**
+   * Returns metadata about your copy jobs.
+   */
+  listCopyJobs(params: Backup.Types.ListCopyJobsInput, callback?: (err: AWSError, data: Backup.Types.ListCopyJobsOutput) => void): Request<Backup.Types.ListCopyJobsOutput, AWSError>;
+  /**
+   * Returns metadata about your copy jobs.
+   */
+  listCopyJobs(callback?: (err: AWSError, data: Backup.Types.ListCopyJobsOutput) => void): Request<Backup.Types.ListCopyJobsOutput, AWSError>;
   /**
    * Returns an array of resources successfully backed up by AWS Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
    */
@@ -303,6 +319,14 @@ declare class Backup extends Service {
    * Starts a job to create a one-time backup of the specified resource.
    */
   startBackupJob(callback?: (err: AWSError, data: Backup.Types.StartBackupJobOutput) => void): Request<Backup.Types.StartBackupJobOutput, AWSError>;
+  /**
+   * Starts a job to create a one-time copy of the specified resource.
+   */
+  startCopyJob(params: Backup.Types.StartCopyJobInput, callback?: (err: AWSError, data: Backup.Types.StartCopyJobOutput) => void): Request<Backup.Types.StartCopyJobOutput, AWSError>;
+  /**
+   * Starts a job to create a one-time copy of the specified resource.
+   */
+  startCopyJob(callback?: (err: AWSError, data: Backup.Types.StartCopyJobOutput) => void): Request<Backup.Types.StartCopyJobOutput, AWSError>;
   /**
    * Recovers the saved resource identified by an Amazon Resource Name (ARN).  If the resource ARN is included in the request, then the last complete backup of that resource is recovered. If the ARN of a recovery point is supplied, then that recovery point is restored.
    */
@@ -527,6 +551,10 @@ declare namespace Backup {
      * Uniquely identifies a rule that is used to schedule the backup of a selection of resources.
      */
     RuleId?: string;
+    /**
+     * An array of CopyAction objects, which contains the details of the copy operation.
+     */
+    CopyActions?: CopyActions;
   }
   export interface BackupRuleInput {
     /**
@@ -557,6 +585,10 @@ declare namespace Backup {
      * To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.
      */
     RecoveryPointTags?: Tags;
+    /**
+     * An array of CopyAction objects, which contains the details of the copy operation.
+     */
+    CopyActions?: CopyActions;
   }
   export type BackupRuleName = string;
   export type BackupRules = BackupRule[];
@@ -571,11 +603,11 @@ declare namespace Backup {
      */
     IamRoleArn: IAMRoleArn;
     /**
-     * An array of strings that either contain Amazon Resource Names (ARNs) or match patterns such as "arn:aws:ec2:us-east-1:123456789012:volume/*" of resources to assign to a backup plan.
+     * An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
      */
     Resources?: ResourceArns;
     /**
-     * An array of conditions used to specify a set of resources to assign to a backup plan; for example, "StringEquals": {"ec2:ResourceTag/Department": "accounting".
+     * An array of conditions used to specify a set of resources to assign to a backup plan; for example, "STRINGEQUALS": {"ec2:ResourceTag/Department": "accounting".
      */
     ListOfTags?: ListOfTags;
   }
@@ -607,7 +639,7 @@ declare namespace Backup {
      */
     IamRoleArn?: IAMRoleArn;
   }
-  export type BackupVaultEvent = "BACKUP_JOB_STARTED"|"BACKUP_JOB_COMPLETED"|"RESTORE_JOB_STARTED"|"RESTORE_JOB_COMPLETED"|"RECOVERY_POINT_MODIFIED"|"BACKUP_PLAN_CREATED"|"BACKUP_PLAN_MODIFIED"|string;
+  export type BackupVaultEvent = "BACKUP_JOB_STARTED"|"BACKUP_JOB_COMPLETED"|"BACKUP_JOB_SUCCESSFUL"|"BACKUP_JOB_FAILED"|"BACKUP_JOB_EXPIRED"|"RESTORE_JOB_STARTED"|"RESTORE_JOB_COMPLETED"|"RESTORE_JOB_SUCCESSFUL"|"RESTORE_JOB_FAILED"|"COPY_JOB_STARTED"|"COPY_JOB_SUCCESSFUL"|"COPY_JOB_FAILED"|"RECOVERY_POINT_MODIFIED"|"BACKUP_PLAN_CREATED"|"BACKUP_PLAN_MODIFIED"|string;
   export type BackupVaultEvents = BackupVaultEvent[];
   export type BackupVaultList = BackupVaultListMember[];
   export interface BackupVaultListMember {
@@ -650,7 +682,7 @@ declare namespace Backup {
   }
   export interface Condition {
     /**
-     * An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
+     * An operation, such as STRINGEQUALS, that is applied to a key-value pair used to filter resources in a selection.
      */
     ConditionType: ConditionType;
     /**
@@ -665,6 +697,71 @@ declare namespace Backup {
   export type ConditionKey = string;
   export type ConditionType = "STRINGEQUALS"|string;
   export type ConditionValue = string;
+  export interface CopyAction {
+    Lifecycle?: Lifecycle;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup. For example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+     */
+    DestinationBackupVaultArn: ARN;
+  }
+  export type CopyActions = CopyAction[];
+  export interface CopyJob {
+    /**
+     * Uniquely identifies a request to AWS Backup to copy a resource.
+     */
+    CopyJobId?: string;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a source copy vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. 
+     */
+    SourceBackupVaultArn?: ARN;
+    /**
+     * An ARN that uniquely identifies a source recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. 
+     */
+    SourceRecoveryPointArn?: ARN;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a destination copy vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+     */
+    DestinationBackupVaultArn?: ARN;
+    /**
+     * An ARN that uniquely identifies a destination recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. 
+     */
+    DestinationRecoveryPointArn?: ARN;
+    /**
+     * The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. 
+     */
+    ResourceArn?: ARN;
+    /**
+     * The date and time a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. 
+     */
+    CreationDate?: timestamp;
+    /**
+     * The date and time a job to create a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. 
+     */
+    CompletionDate?: timestamp;
+    /**
+     * The current state of a resource recovery point.
+     */
+    State?: CopyJobState;
+    /**
+     * A detailed message explaining the status of the job that to copy a resource.
+     */
+    StatusMessage?: string;
+    /**
+     * The size, in bytes, of a copy job.
+     */
+    BackupSizeInBytes?: Long;
+    /**
+     * Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
+     */
+    IamRoleArn?: IAMRoleArn;
+    CreatedBy?: RecoveryPointCreator;
+    /**
+     * The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. 
+     */
+    ResourceType?: ResourceType;
+  }
+  export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type CopyJobsList = CopyJob[];
   export interface CreateBackupPlanInput {
     /**
      * Specifies the body of a backup plan. Includes a BackupPlanName and one or more sets of Rules.
@@ -703,7 +800,7 @@ declare namespace Backup {
      */
     BackupPlanId: string;
     /**
-     * Specifies the body of a request to assign a set of resources to a backup plan. It includes an array of resources, an optional array of patterns to exclude resources, an optional role to provide access to the AWS service the resource belongs to, and an optional array of tags used to identify a set of resources.
+     * Specifies the body of a request to assign a set of resources to a backup plan.
      */
     BackupSelection: BackupSelection;
     /**
@@ -927,6 +1024,18 @@ declare namespace Backup {
      * The number of recovery points that are stored in a backup vault.
      */
     NumberOfRecoveryPoints?: long;
+  }
+  export interface DescribeCopyJobInput {
+    /**
+     * Uniquely identifies a request to AWS Backup to copy a resource.
+     */
+    CopyJobId: string;
+  }
+  export interface DescribeCopyJobOutput {
+    /**
+     * Contains detailed information about a copy job.
+     */
+    CopyJob?: CopyJob;
   }
   export interface DescribeProtectedResourceInput {
     /**
@@ -1172,7 +1281,7 @@ declare namespace Backup {
   }
   export interface GetBackupSelectionOutput {
     /**
-     * Specifies the body of a request to assign a set of resources to a backup plan. It includes an array of resources, an optional array of patterns to exclude resources, an optional role to provide access to the AWS service that the resource belongs to, and an optional array of tags used to identify a set of resources.
+     * Specifies the body of a request to assign a set of resources to a backup plan.
      */
     BackupSelection?: BackupSelection;
     /**
@@ -1256,13 +1365,13 @@ declare namespace Backup {
      */
     RecoveryPointArn?: ARN;
     /**
-     * A set of metadata key-value pairs that lists the metadata key-value pairs that are required to restore the recovery point.
+     * The set of metadata key-value pairs that describes the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
      */
     RestoreMetadata?: Metadata;
   }
   export interface GetSupportedResourceTypesOutput {
     /**
-     * Contains a string with the supported AWS resource types:    EBS for Amazon Elastic Block Store    SGW for AWS Storage Gateway    RDS for Amazon Relational Database Service    DDB for Amazon DynamoDB    EFS for Amazon Elastic File System  
+     * Contains a string with the supported AWS resource types:    EBS for Amazon Elastic Block Store    Storage Gateway for AWS Storage Gateway    RDS for Amazon Relational Database Service    DDB for Amazon DynamoDB    EFS for Amazon Elastic File System  
      */
     ResourceTypes?: ResourceTypes;
   }
@@ -1274,7 +1383,7 @@ declare namespace Backup {
      */
     MoveToColdStorageAfterDays?: Long;
     /**
-     * Specifies the number of days after creation that a recovery point is deleted. Must be greater than MoveToColdStorageAfterDays.
+     * Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus MoveToColdStorageAfterDays.
      */
     DeleteAfterDays?: Long;
   }
@@ -1308,7 +1417,7 @@ declare namespace Backup {
      */
     ByCreatedAfter?: timestamp;
     /**
-     * Returns only backup jobs for the specified resources:    EBS for Amazon Elastic Block Store    SGW for AWS Storage Gateway    RDS for Amazon Relational Database Service    DDB for Amazon DynamoDB    EFS for Amazon Elastic File System  
+     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Storage Gateway for AWS Storage Gateway  
      */
     ByResourceType?: ResourceType;
   }
@@ -1431,6 +1540,50 @@ declare namespace Backup {
     BackupVaultList?: BackupVaultList;
     /**
      * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
+  export interface ListCopyJobsInput {
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. 
+     */
+    NextToken?: string;
+    /**
+     * The maximum number of items to be returned.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Returns only copy jobs that match the specified resource Amazon Resource Name (ARN). 
+     */
+    ByResourceArn?: ARN;
+    /**
+     * Returns only copy jobs that are in the specified state.
+     */
+    ByState?: CopyJobState;
+    /**
+     * Returns only copy jobs that were created before the specified date.
+     */
+    ByCreatedBefore?: timestamp;
+    /**
+     * Returns only copy jobs that were created after the specified date.
+     */
+    ByCreatedAfter?: timestamp;
+    /**
+     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Storage Gateway for AWS Storage Gateway  
+     */
+    ByResourceType?: ResourceType;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to copy from; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. 
+     */
+    ByDestinationVaultArn?: string;
+  }
+  export interface ListCopyJobsOutput {
+    /**
+     * An array of structures containing metadata about your copy jobs returned in JSON format. 
+     */
+    CopyJobs?: CopyJobsList;
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. 
      */
     NextToken?: string;
   }
@@ -1790,7 +1943,7 @@ declare namespace Backup {
      */
     IamRoleArn: IAMRoleArn;
     /**
-     * A customer chosen string that can be used to distinguish between calls to StartBackupJob. Idempotency tokens time out after one hour. Therefore, if you call StartBackupJob multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one backup job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple backups.
+     * A customer chosen string that can be used to distinguish between calls to StartBackupJob.
      */
     IdempotencyToken?: string;
     /**
@@ -1824,13 +1977,46 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
   }
+  export interface StartCopyJobInput {
+    /**
+     * An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. 
+     */
+    RecoveryPointArn: ARN;
+    /**
+     * The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens. &gt;
+     */
+    SourceBackupVaultName: BackupVaultName;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+     */
+    DestinationBackupVaultArn: ARN;
+    /**
+     * Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
+     */
+    IamRoleArn: IAMRoleArn;
+    /**
+     * A customer chosen string that can be used to distinguish between calls to StartCopyJob.
+     */
+    IdempotencyToken?: string;
+    Lifecycle?: Lifecycle;
+  }
+  export interface StartCopyJobOutput {
+    /**
+     * Uniquely identifies a request to AWS Backup to copy a resource.
+     */
+    CopyJobId?: string;
+    /**
+     * The date and time that a backup job is started, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. &gt;
+     */
+    CreationDate?: timestamp;
+  }
   export interface StartRestoreJobInput {
     /**
      * An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
      */
     RecoveryPointArn: ARN;
     /**
-     * A set of metadata key-value pairs. Lists the metadata that the recovery point was created with.
+     * A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.  You can get configuration metadata about a resource at the time it was backed-up by calling GetRecoveryPointRestoreMetadata. However, values in addition to those provided by GetRecoveryPointRestoreMetadata might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists. You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:    file-system-id: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in GetRecoveryPointRestoreMetadata.    Encrypted: A Boolean value that, if true, specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted must be set to true.    KmsKeyId: Specifies the AWS KMS key that is used to encrypt the restored file system.    PerformanceMode: Specifies the throughput mode of the file system.    CreationToken: A user-supplied value that ensures the uniqueness (idempotency) of the request.    newFileSystem: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.  
      */
     Metadata: Metadata;
     /**
@@ -1838,11 +2024,11 @@ declare namespace Backup {
      */
     IamRoleArn: IAMRoleArn;
     /**
-     * A customer chosen string that can be used to distinguish between calls to StartRestoreJob. Idempotency tokens time out after one hour. Therefore, if you call StartRestoreJob multiple times with the same idempotency token within one hour, AWS Backup recognizes that you are requesting only one restore job and initiates only one. If you change the idempotency token for each call, AWS Backup recognizes that you are requesting to start multiple restores. 
+     * A customer chosen string that can be used to distinguish between calls to StartRestoreJob.
      */
     IdempotencyToken?: string;
     /**
-     * Starts a job to restore a recovery point for one of the following resources:    EBS for Amazon Elastic Block Store    SGW for AWS Storage Gateway    RDS for Amazon Relational Database Service    DDB for Amazon DynamoDB    EFS for Amazon Elastic File System  
+     * Starts a job to restore a recovery point for one of the following resources:    EBS for Amazon Elastic Block Store    Storage Gateway for AWS Storage Gateway    RDS for Amazon Relational Database Service    DDB for Amazon DynamoDB    EFS for Amazon Elastic File System  
      */
     ResourceType?: ResourceType;
   }

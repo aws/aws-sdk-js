@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.601.0',
+	  VERSION: '2.602.0',
 
 	  /**
 	   * @api private
@@ -772,7 +772,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      Object.defineProperty(err, 'message', {enumerable: true});
 	    }
 
-	    err.name = options && options.name || err.name || err.code || 'Error';
+	    err.name = String(options && options.name || err.name || err.code || 'Error');
 	    err.time = new Date();
 
 	    if (originalError) err.originalError = originalError;
