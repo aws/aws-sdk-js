@@ -108,6 +108,14 @@ declare class FMS extends Service {
    */
   listPolicies(callback?: (err: AWSError, data: FMS.Types.ListPoliciesResponse) => void): Request<FMS.Types.ListPoliciesResponse, AWSError>;
   /**
+   * Retrieves the list of tags for the specified AWS resource. 
+   */
+  listTagsForResource(params: FMS.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: FMS.Types.ListTagsForResourceResponse) => void): Request<FMS.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves the list of tags for the specified AWS resource. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: FMS.Types.ListTagsForResourceResponse) => void): Request<FMS.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Designates the IAM role and Amazon Simple Notification Service (SNS) topic that AWS Firewall Manager uses to record SNS logs.
    */
   putNotificationChannel(params: FMS.Types.PutNotificationChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -123,6 +131,22 @@ declare class FMS extends Service {
    * Creates an AWS Firewall Manager policy. Firewall Manager provides the following types of policies:    A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources   An AWS WAF policy, which contains a rule group and defines which resources are to be protected by that rule group   A security group policy, which manages VPC security groups across your AWS organization.    Each policy is specific to one of the three types. If you want to enforce more than one policy type across accounts, you can create multiple policies. You can create multiple policies for each type. You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information about subscribing to Shield Advanced, see CreateSubscription.
    */
   putPolicy(callback?: (err: AWSError, data: FMS.Types.PutPolicyResponse) => void): Request<FMS.Types.PutPolicyResponse, AWSError>;
+  /**
+   * Adds one or more tags to an AWS resource.
+   */
+  tagResource(params: FMS.Types.TagResourceRequest, callback?: (err: AWSError, data: FMS.Types.TagResourceResponse) => void): Request<FMS.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds one or more tags to an AWS resource.
+   */
+  tagResource(callback?: (err: AWSError, data: FMS.Types.TagResourceResponse) => void): Request<FMS.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from an AWS resource.
+   */
+  untagResource(params: FMS.Types.UntagResourceRequest, callback?: (err: AWSError, data: FMS.Types.UntagResourceResponse) => void): Request<FMS.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from an AWS resource.
+   */
+  untagResource(callback?: (err: AWSError, data: FMS.Types.UntagResourceResponse) => void): Request<FMS.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace FMS {
   export type AWSAccountId = string;
@@ -349,6 +373,18 @@ declare namespace FMS {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN..
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags associated with the resource.
+     */
+    TagList?: TagList;
+  }
   export type ManagedServiceData = string;
   export type MemberAccounts = AWSAccountId[];
   export type PaginationMaxResults = number;
@@ -506,6 +542,10 @@ declare namespace FMS {
      * The details of the AWS Firewall Manager policy to be created.
      */
     Policy: Policy;
+    /**
+     * The tags to add to the AWS resource.
+     */
+    TagList?: TagList;
   }
   export interface PutPolicyResponse {
     /**
@@ -525,12 +565,14 @@ declare namespace FMS {
     /**
      * The resource tag key.
      */
-    Key: TagKey;
+    Key: ResourceTagKey;
     /**
      * The resource tag value.
      */
-    Value?: TagValue;
+    Value?: ResourceTagValue;
   }
+  export type ResourceTagKey = string;
+  export type ResourceTagValue = string;
   export type ResourceTags = ResourceTag[];
   export type ResourceType = string;
   export type ResourceTypeList = ResourceType[];
@@ -545,9 +587,45 @@ declare namespace FMS {
     ManagedServiceData?: ManagedServiceData;
   }
   export type SecurityServiceType = "WAF"|"SHIELD_ADVANCED"|"SECURITY_GROUPS_COMMON"|"SECURITY_GROUPS_CONTENT_AUDIT"|"SECURITY_GROUPS_USAGE_AUDIT"|string;
+  export interface Tag {
+    /**
+     * Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.
+     */
+    Key: TagKey;
+    /**
+     * Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive. 
+     */
+    Value: TagValue;
+  }
   export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The tags to add to the resource.
+     */
+    TagList: TagList;
+  }
+  export interface TagResourceResponse {
+  }
   export type TagValue = string;
   export type TimeStamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The keys of the tags to remove from the resource. 
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"|"RESOURCE_MISSING_WEB_ACL"|"RESOURCE_INCORRECT_WEB_ACL"|"RESOURCE_MISSING_SHIELD_PROTECTION"|"RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"|"RESOURCE_MISSING_SECURITY_GROUP"|"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"|"SECURITY_GROUP_UNUSED"|"SECURITY_GROUP_REDUNDANT"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

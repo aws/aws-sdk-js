@@ -12,6 +12,14 @@ declare class EFS extends Service {
   constructor(options?: EFS.Types.ClientConfiguration)
   config: Config & EFS.Types.ClientConfiguration;
   /**
+   * Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and group, and a file system path, to any file system request made through the access point. The operating system user and group override any identity information provided by the NFS client. The file system path is exposed as the access point's root directory. Applications using the access point can only access data in its own directory and below. To learn more, see Mounting a File System Using EFS Access Points. This operation requires permissions for the elasticfilesystem:CreateAccessPoint action.
+   */
+  createAccessPoint(params: EFS.Types.CreateAccessPointRequest, callback?: (err: AWSError, data: EFS.Types.AccessPointDescription) => void): Request<EFS.Types.AccessPointDescription, AWSError>;
+  /**
+   * Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and group, and a file system path, to any file system request made through the access point. The operating system user and group override any identity information provided by the NFS client. The file system path is exposed as the access point's root directory. Applications using the access point can only access data in its own directory and below. To learn more, see Mounting a File System Using EFS Access Points. This operation requires permissions for the elasticfilesystem:CreateAccessPoint action.
+   */
+  createAccessPoint(callback?: (err: AWSError, data: EFS.Types.AccessPointDescription) => void): Request<EFS.Types.AccessPointDescription, AWSError>;
+  /**
    * Creates a new, empty file system. The operation requires a creation token in the request that Amazon EFS uses to ensure idempotent creation (calling the operation with same creation token has no effect). If a file system does not currently exist that is owned by the caller's AWS account with the specified creation token, this operation does the following:   Creates a new, empty file system. The file system will have an Amazon EFS assigned ID, and an initial lifecycle state creating.   Returns with the description of the created file system.   Otherwise, this operation returns a FileSystemAlreadyExists error with the ID of the existing file system.  For basic use cases, you can use a randomly generated UUID for the creation token.   The idempotent operation allows you to retry a CreateFileSystem call without risk of creating an extra file system. This can happen when an initial call fails in a way that leaves it uncertain whether or not a file system was actually created. An example might be that a transport level timeout occurred or your connection was reset. As long as you use the same creation token, if the initial call had succeeded in creating a file system, the client can learn of its existence from the FileSystemAlreadyExists error.  The CreateFileSystem call returns while the file system's lifecycle state is still creating. You can check the file system creation status by calling the DescribeFileSystems operation, which among other things returns the file system state.  This operation also takes an optional PerformanceMode parameter that you choose for your file system. We recommend generalPurpose performance mode for most file systems. File systems using the maxIO performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. For more information, see Amazon EFS: Performance Modes. After the file system is fully created, Amazon EFS sets its lifecycle state to available, at which point you can create one or more mount targets for the file system in your VPC. For more information, see CreateMountTarget. You mount your Amazon EFS file system on an EC2 instances in your VPC by using the mount target. For more information, see Amazon EFS: How it Works.   This operation requires permissions for the elasticfilesystem:CreateFileSystem action. 
    */
   createFileSystem(params: EFS.Types.CreateFileSystemRequest, callback?: (err: AWSError, data: EFS.Types.FileSystemDescription) => void): Request<EFS.Types.FileSystemDescription, AWSError>;
@@ -36,6 +44,14 @@ declare class EFS extends Service {
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified access point. After deletion is complete, new clients can no longer connect to the access points. Clients connected to the access point at the time of deletion will continue to function until they terminate their connection. This operation requires permissions for the elasticfilesystem:DeleteAccessPoint action.
+   */
+  deleteAccessPoint(params: EFS.Types.DeleteAccessPointRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified access point. After deletion is complete, new clients can no longer connect to the access points. Clients connected to the access point at the time of deletion will continue to function until they terminate their connection. This operation requires permissions for the elasticfilesystem:DeleteAccessPoint action.
+   */
+  deleteAccessPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a file system, permanently severing access to its contents. Upon return, the file system no longer exists and you can't access any contents of the deleted file system.  You can't delete a file system that is in use. That is, if the file system has any mount targets, you must first delete them. For more information, see DescribeMountTargets and DeleteMountTarget.   The DeleteFileSystem call returns while the file system state is still deleting. You can check the file system deletion status by calling the DescribeFileSystems operation, which returns a list of file systems in your account. If you pass file system ID or creation token for the deleted file system, the DescribeFileSystems returns a 404 FileSystemNotFound error.  This operation requires permissions for the elasticfilesystem:DeleteFileSystem action.
    */
   deleteFileSystem(params: EFS.Types.DeleteFileSystemRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -43,6 +59,14 @@ declare class EFS extends Service {
    * Deletes a file system, permanently severing access to its contents. Upon return, the file system no longer exists and you can't access any contents of the deleted file system.  You can't delete a file system that is in use. That is, if the file system has any mount targets, you must first delete them. For more information, see DescribeMountTargets and DeleteMountTarget.   The DeleteFileSystem call returns while the file system state is still deleting. You can check the file system deletion status by calling the DescribeFileSystems operation, which returns a list of file systems in your account. If you pass file system ID or creation token for the deleted file system, the DescribeFileSystems returns a 404 FileSystemNotFound error.  This operation requires permissions for the elasticfilesystem:DeleteFileSystem action.
    */
   deleteFileSystem(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the FileSystemPolicy for the specified file system. The default FileSystemPolicy goes into effect once the existing policy is deleted. For more information about the default file system policy, see Using Resource-based Policies with EFS. This operation requires permissions for the elasticfilesystem:DeleteFileSystemPolicy action.
+   */
+  deleteFileSystemPolicy(params: EFS.Types.DeleteFileSystemPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the FileSystemPolicy for the specified file system. The default FileSystemPolicy goes into effect once the existing policy is deleted. For more information about the default file system policy, see Using Resource-based Policies with EFS. This operation requires permissions for the elasticfilesystem:DeleteFileSystemPolicy action.
+   */
+  deleteFileSystemPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified mount target. This operation forcibly breaks any mounts of the file system by using the mount target that is being deleted, which might disrupt instances or applications using those mounts. To avoid applications getting cut off abruptly, you might consider unmounting any mounts of the mount target, if feasible. The operation also deletes the associated network interface. Uncommitted writes might be lost, but breaking a mount target using this operation does not corrupt the file system itself. The file system you created remains. You can mount an EC2 instance in your VPC by using another mount target. This operation requires permissions for the following action on the file system:    elasticfilesystem:DeleteMountTarget     The DeleteMountTarget call returns while the mount target state is still deleting. You can check the mount target deletion by calling the DescribeMountTargets operation, which returns a list of mount target descriptions for the given file system.   The operation also requires permissions for the following Amazon EC2 action on the mount target's network interface:    ec2:DeleteNetworkInterface   
    */
@@ -59,6 +83,22 @@ declare class EFS extends Service {
    * Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag Restrictions in the AWS Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Returns the description of a specific Amazon EFS access point if the AccessPointId is provided. If you provide an EFS FileSystemId, it returns descriptions of all access points for that file system. You can provide either an AccessPointId or a FileSystemId in the request, but not both.  This operation requires permissions for the elasticfilesystem:DescribeAccessPoints action.
+   */
+  describeAccessPoints(params: EFS.Types.DescribeAccessPointsRequest, callback?: (err: AWSError, data: EFS.Types.DescribeAccessPointsResponse) => void): Request<EFS.Types.DescribeAccessPointsResponse, AWSError>;
+  /**
+   * Returns the description of a specific Amazon EFS access point if the AccessPointId is provided. If you provide an EFS FileSystemId, it returns descriptions of all access points for that file system. You can provide either an AccessPointId or a FileSystemId in the request, but not both.  This operation requires permissions for the elasticfilesystem:DescribeAccessPoints action.
+   */
+  describeAccessPoints(callback?: (err: AWSError, data: EFS.Types.DescribeAccessPointsResponse) => void): Request<EFS.Types.DescribeAccessPointsResponse, AWSError>;
+  /**
+   * Returns the FileSystemPolicy for the specified EFS file system. This operation requires permissions for the elasticfilesystem:DescribeFileSystemPolicy action.
+   */
+  describeFileSystemPolicy(params: EFS.Types.DescribeFileSystemPolicyRequest, callback?: (err: AWSError, data: EFS.Types.FileSystemPolicyDescription) => void): Request<EFS.Types.FileSystemPolicyDescription, AWSError>;
+  /**
+   * Returns the FileSystemPolicy for the specified EFS file system. This operation requires permissions for the elasticfilesystem:DescribeFileSystemPolicy action.
+   */
+  describeFileSystemPolicy(callback?: (err: AWSError, data: EFS.Types.FileSystemPolicyDescription) => void): Request<EFS.Types.FileSystemPolicyDescription, AWSError>;
   /**
    * Returns the description of a specific Amazon EFS file system if either the file system CreationToken or the FileSystemId is provided. Otherwise, it returns descriptions of all file systems owned by the caller's AWS account in the AWS Region of the endpoint that you're calling. When retrieving all file system descriptions, you can optionally specify the MaxItems parameter to limit the number of descriptions in a response. Currently, this number is automatically set to 10. If more file system descriptions remain, Amazon EFS returns a NextMarker, an opaque token, in the response. In this case, you should send a subsequent request with the Marker request parameter set to the value of NextMarker.  To retrieve a list of your file system descriptions, this operation is used in an iterative process, where DescribeFileSystems is called first without the Marker and then the operation continues to call it with the Marker parameter set to the value of the NextMarker from the previous response until the response has no NextMarker.   The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multi-call iteration is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeFileSystems action. 
    */
@@ -100,6 +140,14 @@ declare class EFS extends Service {
    */
   describeTags(callback?: (err: AWSError, data: EFS.Types.DescribeTagsResponse) => void): Request<EFS.Types.DescribeTagsResponse, AWSError>;
   /**
+   * Lists all tags for a top-level EFS resource. You must provide the ID of the resource that you want to retrieve the tags for. This operation requires permissions for the elasticfilesystem:DescribeAccessPoints action.
+   */
+  listTagsForResource(params: EFS.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: EFS.Types.ListTagsForResourceResponse) => void): Request<EFS.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all tags for a top-level EFS resource. You must provide the ID of the resource that you want to retrieve the tags for. This operation requires permissions for the elasticfilesystem:DescribeAccessPoints action.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: EFS.Types.ListTagsForResourceResponse) => void): Request<EFS.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Modifies the set of security groups in effect for a mount target. When you create a mount target, Amazon EFS also creates a new network interface. For more information, see CreateMountTarget. This operation replaces the security groups in effect for the network interface associated with a mount target, with the SecurityGroups provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not deleted.  The operation requires permissions for the following actions:    elasticfilesystem:ModifyMountTargetSecurityGroups action on the mount target's file system.     ec2:ModifyNetworkInterfaceAttribute action on the mount target's network interface.   
    */
   modifyMountTargetSecurityGroups(params: EFS.Types.ModifyMountTargetSecurityGroupsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -108,6 +156,14 @@ declare class EFS extends Service {
    */
   modifyMountTargetSecurityGroups(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Applies an Amazon EFS FileSystemPolicy to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see Using Resource-based Policies with EFS.  This operation requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
+   */
+  putFileSystemPolicy(params: EFS.Types.PutFileSystemPolicyRequest, callback?: (err: AWSError, data: EFS.Types.FileSystemPolicyDescription) => void): Request<EFS.Types.FileSystemPolicyDescription, AWSError>;
+  /**
+   * Applies an Amazon EFS FileSystemPolicy to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see Using Resource-based Policies with EFS.  This operation requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
+   */
+  putFileSystemPolicy(callback?: (err: AWSError, data: EFS.Types.FileSystemPolicyDescription) => void): Request<EFS.Types.FileSystemPolicyDescription, AWSError>;
+  /**
    * Enables lifecycle management by creating a new LifecycleConfiguration object. A LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A LifecycleConfiguration applies to all files in a file system. Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a LifecycleConfiguration object already exists for the specified file system, a PutLifecycleConfiguration call modifies the existing configuration. A PutLifecycleConfiguration call with an empty LifecyclePolicies array in the request body deletes any existing LifecycleConfiguration and disables lifecycle management. In the request, specify the following:    The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.   A LifecyclePolicies array of LifecyclePolicy objects that define when files are moved to the IA storage class. The array can contain only one LifecyclePolicy item.   This operation requires permissions for the elasticfilesystem:PutLifecycleConfiguration operation. To apply a LifecycleConfiguration object to an encrypted file system, you need the same AWS Key Management Service (AWS KMS) permissions as when you created the encrypted file system. 
    */
   putLifecycleConfiguration(params: EFS.Types.PutLifecycleConfigurationRequest, callback?: (err: AWSError, data: EFS.Types.LifecycleConfigurationDescription) => void): Request<EFS.Types.LifecycleConfigurationDescription, AWSError>;
@@ -115,6 +171,22 @@ declare class EFS extends Service {
    * Enables lifecycle management by creating a new LifecycleConfiguration object. A LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A LifecycleConfiguration applies to all files in a file system. Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a LifecycleConfiguration object already exists for the specified file system, a PutLifecycleConfiguration call modifies the existing configuration. A PutLifecycleConfiguration call with an empty LifecyclePolicies array in the request body deletes any existing LifecycleConfiguration and disables lifecycle management. In the request, specify the following:    The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.   A LifecyclePolicies array of LifecyclePolicy objects that define when files are moved to the IA storage class. The array can contain only one LifecyclePolicy item.   This operation requires permissions for the elasticfilesystem:PutLifecycleConfiguration operation. To apply a LifecycleConfiguration object to an encrypted file system, you need the same AWS Key Management Service (AWS KMS) permissions as when you created the encrypted file system. 
    */
   putLifecycleConfiguration(callback?: (err: AWSError, data: EFS.Types.LifecycleConfigurationDescription) => void): Request<EFS.Types.LifecycleConfigurationDescription, AWSError>;
+  /**
+   * Creates a tag for an EFS resource. You can create tags for EFS file systems and access points using this API operation. This operation requires permissions for the elasticfilesystem:TagResource action.
+   */
+  tagResource(params: EFS.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates a tag for an EFS resource. You can create tags for EFS file systems and access points using this API operation. This operation requires permissions for the elasticfilesystem:TagResource action.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes tags from an EFS resource. You can remove tags from EFS file systems and access points using this API operation. This operation requires permissions for the elasticfilesystem:UntagResource action.
+   */
+  untagResource(params: EFS.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes tags from an EFS resource. You can remove tags from EFS file systems and access points using this API operation. This operation requires permissions for the elasticfilesystem:UntagResource action.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the throughput mode or the amount of provisioned throughput of an existing file system.
    */
@@ -125,7 +197,78 @@ declare class EFS extends Service {
   updateFileSystem(callback?: (err: AWSError, data: EFS.Types.FileSystemDescription) => void): Request<EFS.Types.FileSystemDescription, AWSError>;
 }
 declare namespace EFS {
+  export type AccessPointArn = string;
+  export interface AccessPointDescription {
+    /**
+     * The opaque string specified in the request to ensure idempotent creation.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The name of the access point. This is the value of the Name tag.
+     */
+    Name?: Name;
+    /**
+     * The tags associated with the access point, presented as an array of Tag objects.
+     */
+    Tags?: Tags;
+    /**
+     * The ID of the access point, assigned by Amazon EFS.
+     */
+    AccessPointId?: AccessPointId;
+    /**
+     * The unique Amazon Resource Name (ARN) associated with the access point.
+     */
+    AccessPointArn?: AccessPointArn;
+    /**
+     * The ID of the EFS file system that the access point applies to.
+     */
+    FileSystemId?: FileSystemId;
+    /**
+     * The full POSIX identity, including the user ID, group ID, and secondary group IDs on the access point that is used for all file operations by NFS clients using the access point.
+     */
+    PosixUser?: PosixUser;
+    /**
+     * The directory on the Amazon EFS file system that the access point exposes as the root directory to NFS clients using the access point.
+     */
+    RootDirectory?: RootDirectory;
+    /**
+     * Identified the AWS account that owns the access point resource.
+     */
+    OwnerId?: AwsAccountId;
+    /**
+     * Identifies the lifecycle phase of the access point.
+     */
+    LifeCycleState?: LifeCycleState;
+  }
+  export type AccessPointDescriptions = AccessPointDescription[];
+  export type AccessPointId = string;
+  export type AvailabilityZoneId = string;
+  export type AvailabilityZoneName = string;
   export type AwsAccountId = string;
+  export type BypassPolicyLockoutSafetyCheck = boolean;
+  export type ClientToken = string;
+  export interface CreateAccessPointRequest {
+    /**
+     * A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+     */
+    ClientToken: ClientToken;
+    /**
+     * Creates tags associated with the access point. Each tag is a key-value pair.
+     */
+    Tags?: Tags;
+    /**
+     * The ID of the EFS file system that the access point provides access to.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * The operating system user and group applied to all file system requests made using the access point.
+     */
+    PosixUser?: PosixUser;
+    /**
+     * Specifies the directory on the Amazon EFS file system that the access point exposes as the root directory of your file system to NFS clients using the access point. The clients using the access point can only access the root directory and below. If the RootDirectory &gt; Path specified does not exist, EFS creates it and applies the CreationInfo settings when a client connects to an access point. When specifying a RootDirectory, you need to provide the Path, and the CreationInfo is optional.
+     */
+    RootDirectory?: RootDirectory;
+  }
   export interface CreateFileSystemRequest {
     /**
      * A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
@@ -184,7 +327,33 @@ declare namespace EFS {
      */
     Tags: Tags;
   }
+  export interface CreationInfo {
+    /**
+     * Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).
+     */
+    OwnerUid: OwnerUid;
+    /**
+     * Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).
+     */
+    OwnerGid: OwnerGid;
+    /**
+     * Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.
+     */
+    Permissions: Permissions;
+  }
   export type CreationToken = string;
+  export interface DeleteAccessPointRequest {
+    /**
+     * The ID of the access point that you want to delete.
+     */
+    AccessPointId: AccessPointId;
+  }
+  export interface DeleteFileSystemPolicyRequest {
+    /**
+     * Specifies the EFS file system for which to delete the FileSystemPolicy.
+     */
+    FileSystemId: FileSystemId;
+  }
   export interface DeleteFileSystemRequest {
     /**
      * The ID of the file system you want to delete.
@@ -207,9 +376,43 @@ declare namespace EFS {
      */
     TagKeys: TagKeys;
   }
+  export interface DescribeAccessPointsRequest {
+    /**
+     * (Optional) When retrieving all access points for a file system, you can optionally specify the MaxItems parameter to limit the number of objects returned in a response. The default value is 100. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  NextToken is present if the response is paginated. You can use NextMarker in the subsequent request to fetch the next page of access point descriptions.
+     */
+    NextToken?: Token;
+    /**
+     * (Optional) Specifies an EFS access point to describe in the response; mutually exclusive with FileSystemId.
+     */
+    AccessPointId?: AccessPointId;
+    /**
+     * (Optional) If you provide a FileSystemId, EFS returns all access points for that file system; mutually exclusive with AccessPointId.
+     */
+    FileSystemId?: FileSystemId;
+  }
+  export interface DescribeAccessPointsResponse {
+    /**
+     * An array of access point descriptions.
+     */
+    AccessPoints?: AccessPointDescriptions;
+    /**
+     * Present if there are more access points than returned in the response. You can use the NextMarker in the subsequent request to fetch the additional descriptions.
+     */
+    NextToken?: Token;
+  }
+  export interface DescribeFileSystemPolicyRequest {
+    /**
+     * Specifies which EFS file system to retrieve the FileSystemPolicy for.
+     */
+    FileSystemId: FileSystemId;
+  }
   export interface DescribeFileSystemsRequest {
     /**
-     * (Optional) Specifies the maximum number of file systems to return in the response (integer). Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 file systems. 
+     * (Optional) Specifies the maximum number of file systems to return in the response (integer). This number is automatically set to 100. The response is paginated at 100 per page if you have more than 100 file systems. 
      */
     MaxItems?: MaxItems;
     /**
@@ -259,7 +462,7 @@ declare namespace EFS {
   }
   export interface DescribeMountTargetsRequest {
     /**
-     * (Optional) Maximum number of mount targets to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 mount targets.
+     * (Optional) Maximum number of mount targets to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 100 per page if you have more than 100 mount targets.
      */
     MaxItems?: MaxItems;
     /**
@@ -267,13 +470,17 @@ declare namespace EFS {
      */
     Marker?: Marker;
     /**
-     * (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if MountTargetId is not included.
+     * (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if an AccessPointId or MountTargetId is not included. Accepts either a file system ID or ARN as input.
      */
     FileSystemId?: FileSystemId;
     /**
-     * (Optional) ID of the mount target that you want to have described (String). It must be included in your request if FileSystemId is not included.
+     * (Optional) ID of the mount target that you want to have described (String). It must be included in your request if FileSystemId is not included. Accepts either a mount target ID or ARN as input.
      */
     MountTargetId?: MountTargetId;
+    /**
+     * (Optional) The ID of the access point whose mount targets that you want to list. It must be included in your request if a FileSystemId or MountTargetId is not included in your request. Accepts either an access point ID or ARN as input.
+     */
+    AccessPointId?: AccessPointId;
   }
   export interface DescribeMountTargetsResponse {
     /**
@@ -291,7 +498,7 @@ declare namespace EFS {
   }
   export interface DescribeTagsRequest {
     /**
-     * (Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 10 per page if you have more than 10 tags.
+     * (Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 100, and other values are ignored. The response is paginated at 100 per page if you have more than 100 tags.
      */
     MaxItems?: MaxItems;
     /**
@@ -379,6 +586,16 @@ declare namespace EFS {
   export type FileSystemDescriptions = FileSystemDescription[];
   export type FileSystemId = string;
   export type FileSystemNullableSizeValue = number;
+  export interface FileSystemPolicyDescription {
+    /**
+     * Specifies the EFS file system to which the FileSystemPolicy applies.
+     */
+    FileSystemId?: FileSystemId;
+    /**
+     * The JSON formatted FileSystemPolicy for the EFS file system.
+     */
+    Policy?: Policy;
+  }
   export interface FileSystemSize {
     /**
      * The latest known metered size (in bytes) of data stored in the file system.
@@ -398,6 +615,7 @@ declare namespace EFS {
     ValueInStandard?: FileSystemNullableSizeValue;
   }
   export type FileSystemSizeValue = number;
+  export type Gid = number;
   export type IpAddress = string;
   export type KmsKeyId = string;
   export type LifeCycleState = "creating"|"available"|"updating"|"deleting"|"deleted"|string;
@@ -414,8 +632,33 @@ declare namespace EFS {
      */
     TransitionToIA?: TransitionToIARules;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * Specifies the EFS resource you want to retrieve tags for. You can retrieve tags for EFS file systems and access points using this API endpoint.
+     */
+    ResourceId: ResourceId;
+    /**
+     * (Optional) Specifies the maximum number of tag objects to return in the response. The default value is 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * You can use NextToken in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.
+     */
+    NextToken?: Token;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * An array of the tags for the specified EFS resource.
+     */
+    Tags?: Tags;
+    /**
+     *  NextToken is present if the response payload is paginated. You can use NextToken in a subsequent request to fetch the next page of access point descriptions.
+     */
+    NextToken?: Token;
+  }
   export type Marker = string;
   export type MaxItems = number;
+  export type MaxResults = number;
   export interface ModifyMountTargetSecurityGroupsRequest {
     /**
      * The ID of the mount target whose security groups you want to modify.
@@ -456,12 +699,54 @@ declare namespace EFS {
      * The ID of the network interface that Amazon EFS created when it created the mount target.
      */
     NetworkInterfaceId?: NetworkInterfaceId;
+    /**
+     * The unique and consistent identifier of the Availability Zone (AZ) that the mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.
+     */
+    AvailabilityZoneId?: AvailabilityZoneId;
+    /**
+     * The name of the Availability Zone (AZ) that the mount target resides in. AZs are independently mapped to names for each AWS account. For example, the Availability Zone us-east-1a for your AWS account might not be the same location as us-east-1a for another AWS account.
+     */
+    AvailabilityZoneName?: AvailabilityZoneName;
   }
   export type MountTargetDescriptions = MountTargetDescription[];
   export type MountTargetId = string;
+  export type Name = string;
   export type NetworkInterfaceId = string;
+  export type OwnerGid = number;
+  export type OwnerUid = number;
+  export type Path = string;
   export type PerformanceMode = "generalPurpose"|"maxIO"|string;
+  export type Permissions = string;
+  export type Policy = string;
+  export interface PosixUser {
+    /**
+     * The POSIX user ID used for all file system operations using this access point.
+     */
+    Uid: Uid;
+    /**
+     * The POSIX group ID used for all file system operations using this access point.
+     */
+    Gid: Gid;
+    /**
+     * Secondary POSIX group IDs used for all file system operations using this access point.
+     */
+    SecondaryGids?: SecondaryGids;
+  }
   export type ProvisionedThroughputInMibps = number;
+  export interface PutFileSystemPolicyRequest {
+    /**
+     * The ID of the EFS file system that you want to create or update the FileSystemPolicy for.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * The FileSystemPolicy that you're creating. Accepts a JSON formatted policy definition. To find out more about the elements that make up a file system policy, see EFS Resource-based Policies. 
+     */
+    Policy: Policy;
+    /**
+     * (Optional) A flag to indicate whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request will be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. The default value is False. 
+     */
+    BypassPolicyLockoutSafetyCheck?: BypassPolicyLockoutSafetyCheck;
+  }
   export interface PutLifecycleConfigurationRequest {
     /**
      * The ID of the file system for which you are creating the LifecycleConfiguration object (String).
@@ -472,6 +757,18 @@ declare namespace EFS {
      */
     LifecyclePolicies: LifecyclePolicies;
   }
+  export type ResourceId = string;
+  export interface RootDirectory {
+    /**
+     * Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.
+     */
+    Path?: Path;
+    /**
+     * (Optional) Specifies the POSIX IDs and permissions to apply to the access point's RootDirectory. If the RootDirectory &gt; Path specified does not exist, EFS creates the root directory using the CreationInfo settings when a client connects to an access point. When specifying the CreationInfo, you must provide values for all properties.   If you do not provide CreationInfo and the specified RootDirectory &gt; Path does not exist, attempts to mount the file system using the access point will fail. 
+     */
+    CreationInfo?: CreationInfo;
+  }
+  export type SecondaryGids = Gid[];
   export type SecurityGroup = string;
   export type SecurityGroups = SecurityGroup[];
   export type SubnetId = string;
@@ -487,11 +784,33 @@ declare namespace EFS {
   }
   export type TagKey = string;
   export type TagKeys = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The ID specifying the EFS resource that you want to create a tag for. 
+     */
+    ResourceId: ResourceId;
+    /**
+     * 
+     */
+    Tags: Tags;
+  }
   export type TagValue = string;
   export type Tags = Tag[];
   export type ThroughputMode = "bursting"|"provisioned"|string;
   export type Timestamp = Date;
+  export type Token = string;
   export type TransitionToIARules = "AFTER_7_DAYS"|"AFTER_14_DAYS"|"AFTER_30_DAYS"|"AFTER_60_DAYS"|"AFTER_90_DAYS"|string;
+  export type Uid = number;
+  export interface UntagResourceRequest {
+    /**
+     * Specifies the EFS resource that you want to remove tags from.
+     */
+    ResourceId: ResourceId;
+    /**
+     * The keys of the key:value tag pairs that you want to remove from the specified EFS resource.
+     */
+    TagKeys?: TagKeys;
+  }
   export interface UpdateFileSystemRequest {
     /**
      * The ID of the file system that you want to update.

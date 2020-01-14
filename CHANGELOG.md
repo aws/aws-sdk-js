@@ -1,6 +1,24 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.599.0-->
+<!--LATEST=2.602.0-->
 <!--ENTRYINSERT-->
+
+## 2.602.0
+* bugfix: util: Fix `name.endsWith is not a function` exception when inspecting some generated errors with some versions of nodejs
+* feature: Backup: Cross-region backup is a new AWS Backup feature that allows enterprises to copy backups across multiple AWS services to different regions. 
+* feature: EFS: This release adds support for managing EFS file system policies and EFS Access Points.
+
+## 2.601.0
+* feature: Chime: Add shared profile support to new and existing users
+* feature: EC2: This release introduces the ability to tag egress only internet gateways, local gateways, local gateway route tables, local gateway virtual interfaces, local gateway virtual interface groups, local gateway route table VPC association and local gateway route table virtual interface group association. You can use tags to organize and identify your resources for cost allocation. 
+* feature: RDS: This release adds an operation that enables users to override the system-default SSL/TLS certificate for new Amazon RDS DB instances temporarily, or remove the customer override.
+* feature: RDSDataService: Retry on Serverless Aurora "Communications link failure"
+* feature: SageMaker: SageMaker ListTrialComponents API filter by TrialName and ExperimentName.
+* feature: Transfer: This release introduces a new endpoint type that allows you to attach Elastic IP addresses from your AWS account with your server's endpoint directly and whitelist access to your server by client's internet IP address(es) using VPC Security Groups.
+* feature: WorkSpaces: Added the migrate feature to Amazon WorkSpaces.
+
+## 2.600.0
+* feature: FMS: AWS Firewall Manager now supports tagging, and tag-based access control, of policies.
+* feature: Translate: This release adds a new family of APIs for asynchronous batch translation service that provides option to translate large collection of text or HTML documents stored in Amazon S3 folder. This service accepts a batch of up to 5 GB in size per API call with each document not exceeding 1 MB size and the number of documents not exceeding 1 million per batch. See documentation for more information. 
 
 ## 2.599.0
 * feature: CodeBuild: Add encryption key override to StartBuild API in AWS CodeBuild.
