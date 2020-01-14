@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.602.0-->
+<!--LATEST=2.603.0-->
 <!--ENTRYINSERT-->
+
+## 2.603.0
+* feature: EC2: This release adds support for partition placement groups and instance metadata option in Launch Templates
 
 ## 2.602.0
 * bugfix: util: Fix `name.endsWith is not a function` exception when inspecting some generated errors with some versions of nodejs
