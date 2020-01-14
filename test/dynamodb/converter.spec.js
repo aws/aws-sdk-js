@@ -386,6 +386,21 @@ describe('AWS.DynamoDB.Converter', function() {
           expect(converted.toString()).to.equal(unsafeInteger);
         }
       );
+
+      it('should convert NumberAttributeValues to NumberValues of BigInt',
+        function() {
+          var unsafeInteger = '9007199254740991000';
+          try {
+            var largeInt = BigInt(unsafeInteger);
+            var converted = output({N: unsafeInteger});
+            expect(converted).to.equal(largeInt);
+            expect(typeof converted).to.equal('bigint');
+          } catch (err) {
+            expect(err.message).to.equal('BigInt is not defined');
+            expect(output({N: unsafeInteger}).toString()).to.equal(unsafeInteger);
+          }
+        }
+      );
     });
 
     describe('null', function() {
