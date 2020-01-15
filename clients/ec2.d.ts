@@ -3912,7 +3912,7 @@ declare namespace EC2 {
     /**
      * The ID of the DHCP options set, or default to associate no DHCP options with the VPC.
      */
-    DhcpOptionsId: DhcpOptionsId;
+    DhcpOptionsId: DefaultingDhcpOptionsId;
     /**
      * The ID of the VPC.
      */
@@ -3974,7 +3974,7 @@ declare namespace EC2 {
     /**
      * The ID of your subnet.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
   }
   export interface AssociateSubnetCidrBlockResult {
     /**
@@ -4186,7 +4186,6 @@ declare namespace EC2 {
      */
     VpcAttachment?: VpcAttachment;
   }
-  export type AttachmentId = string;
   export type AttachmentStatus = "attaching"|"attached"|"detaching"|"detached"|string;
   export interface AttributeBooleanValue {
     /**
@@ -4430,6 +4429,7 @@ declare namespace EC2 {
   export type BlockDeviceMappingList = BlockDeviceMapping[];
   export type BlockDeviceMappingRequestList = BlockDeviceMapping[];
   export type Boolean = boolean;
+  export type BundleId = string;
   export type BundleIdStringList = String[];
   export interface BundleInstanceRequest {
     /**
@@ -4523,7 +4523,7 @@ declare namespace EC2 {
     /**
      * The ID of the bundle task.
      */
-    BundleId: String;
+    BundleId: BundleId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -5362,7 +5362,7 @@ declare namespace EC2 {
     /**
      * An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with "alias/". For example:   Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to.  Amazon EBS does not support asymmetric CMKs.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKeyId;
     /**
      * The name of the new AMI in the destination Region.
      */
@@ -5935,7 +5935,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId: String;
+    InstanceId: InstanceId;
     /**
      * A name for the new image. Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)
      */
@@ -6495,7 +6495,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC.
      */
-    VpcId: String;
+    VpcId: VpcId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7228,6 +7228,7 @@ declare namespace EC2 {
   export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
   export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
+  export type DefaultingDhcpOptionsId = string;
   export interface DeleteClientVpnEndpointRequest {
     /**
      * The ID of the Client VPN to be deleted.
@@ -7709,7 +7710,7 @@ declare namespace EC2 {
     /**
      * The ID of the subnet.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -8027,7 +8028,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: String;
+    ImageId: ImageId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -8291,7 +8292,7 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
     /**
-     * One or more filters. Filter names and values are case-sensitive.
+     * One or more filters. Filter names and values are case-sensitive.    description - The description of the authorization rule.    destination-cidr - The CIDR of the network to which the authorization rule applies.    group-id - The ID of the Active Directory group to which the authorization rule grants access.  
      */
     Filters?: FilterList;
     /**
@@ -8316,7 +8317,7 @@ declare namespace EC2 {
      */
     ClientVpnEndpointId: String;
     /**
-     * One or more filters. Filter names and values are case-sensitive.
+     * One or more filters. Filter names and values are case-sensitive.    connection-id - The ID of the connection.    username - For Active Directory client authentication, the user name of the client who established the client connection.  
      */
     Filters?: FilterList;
     /**
@@ -8357,7 +8358,7 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
     /**
-     * One or more filters. Filter names and values are case-sensitive.
+     * One or more filters. Filter names and values are case-sensitive.    endpoint-id - The ID of the Client VPN endpoint.    transport-protocol - The transport protocol (tcp | udp).  
      */
     Filters?: FilterList;
     /**
@@ -8382,7 +8383,7 @@ declare namespace EC2 {
      */
     ClientVpnEndpointId: String;
     /**
-     * One or more filters. Filter names and values are case-sensitive.
+     * One or more filters. Filter names and values are case-sensitive.    destination-cidr - The CIDR of the route destination.    origin - How the route was associated with the Client VPN endpoint (associate | add-route).    target-subnet - The ID of the subnet through which traffic is routed.  
      */
     Filters?: FilterList;
     /**
@@ -8427,7 +8428,7 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
     /**
-     * One or more filters. Filter names and values are case-sensitive.
+     * One or more filters. Filter names and values are case-sensitive.    association-id - The ID of the association.    target-network-id - The ID of the subnet specified as the target network.    vpc-id - The ID of the VPC in which the target network is located.  
      */
     Filters?: FilterList;
     /**
@@ -8655,6 +8656,9 @@ declare namespace EC2 {
      * The export task IDs.
      */
     ExportTaskIds?: ExportTaskIdStringList;
+    /**
+     * the filters for the export tasks.
+     */
     Filters?: FilterList;
   }
   export interface DescribeExportTasksResult {
@@ -9367,7 +9371,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: RequestInstanceTypeList;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported. (true | false)    bare-metal - Indicates whether it is a bare metal instance type. (true | false)    burstable-performance-supported - Indicates whether it is a burstable performance instance type. (true | false)    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family. (true | false)    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized. (true | false)    ebs-info.encryption-support - Indicates whether EBS encryption is supported. (true | false)    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier. (true | false)    hibernation-supported - Indicates whether On-Demand hibernation is supported. (true | false)    hypervisor - The hypervisor used. (nitro | xen)    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks. (hdd | ssd)    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage. (true | false)    memory-info.size-in-mib - The memory size.    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required. (required | supported | unsupported)    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6. (true | false)    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - Describes the network performance.    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per cores for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.  
+     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported. (true | false)    bare-metal - Indicates whether it is a bare metal instance type. (true | false)    burstable-performance-supported - Indicates whether it is a burstable performance instance type. (true | false)    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family. (true | false)    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized. (true | false)    ebs-info.encryption-support - Indicates whether EBS encryption is supported. (true | false)    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier. (true | false)    hibernation-supported - Indicates whether On-Demand hibernation is supported. (true | false)    hypervisor - The hypervisor used. (nitro | xen)    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks. (hdd | ssd)    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage. (true | false)    memory-info.size-in-mib - The memory size.    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required. (required | supported | unsupported)    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6. (true | false)    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - Describes the network performance.    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.  
      */
     Filters?: FilterList;
     /**
@@ -11575,7 +11579,7 @@ declare namespace EC2 {
     /**
      * The ID of the attachment.
      */
-    AttachmentId: AttachmentId;
+    AttachmentId: NetworkInterfaceAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -11844,7 +11848,7 @@ declare namespace EC2 {
     /**
      * [EC2-VPC] The association ID. Required for EC2-VPC.
      */
-    AssociationId?: String;
+    AssociationId?: ElasticIpAssociationId;
     /**
      * [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
      */
@@ -11904,7 +11908,7 @@ declare namespace EC2 {
     /**
      * The association ID for the CIDR block.
      */
-    AssociationId: String;
+    AssociationId: SubnetCidrAssociationId;
   }
   export interface DisassociateSubnetCidrBlockResult {
     /**
@@ -12103,13 +12107,13 @@ declare namespace EC2 {
      */
     VolumeType?: VolumeType;
     /**
-     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
-     */
-    Encrypted?: Boolean;
-    /**
      * Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed CMK under which the EBS volume is encrypted. This parameter is only supported on BlockDeviceMapping objects called by RunInstances, RequestSpotFleet, and RequestSpotInstances.
      */
     KmsKeyId?: String;
+    /**
+     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
+     */
+    Encrypted?: Boolean;
   }
   export type EbsEncryptionSupport = "unsupported"|"supported"|string;
   export interface EbsInfo {
@@ -12148,7 +12152,7 @@ declare namespace EC2 {
     /**
      * The ID of the EBS volume.
      */
-    VolumeId?: String;
+    VolumeId?: VolumeId;
   }
   export type EbsOptimizedSupport = "unsupported"|"supported"|"default"|string;
   export interface EgressOnlyInternetGateway {
@@ -12273,6 +12277,7 @@ declare namespace EC2 {
   export type ElasticInferenceAcceleratorAssociationList = ElasticInferenceAcceleratorAssociation[];
   export type ElasticInferenceAcceleratorCount = number;
   export type ElasticInferenceAccelerators = ElasticInferenceAccelerator[];
+  export type ElasticIpAssociationId = string;
   export type EnaSupport = "unsupported"|"supported"|"required"|string;
   export interface EnableEbsEncryptionByDefaultRequest {
     /**
@@ -12639,6 +12644,9 @@ declare namespace EC2 {
      * The status message related to the export task.
      */
     StatusMessage?: String;
+    /**
+     * The tags for the export task.
+     */
     Tags?: TagList;
   }
   export type ExportTaskId = string;
@@ -14188,7 +14196,7 @@ declare namespace EC2 {
     /**
      * An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the AMI is being copied to. Amazon EBS does not support asymmetric CMKs.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKeyId;
     /**
      * The license type to be used for the Amazon Machine Image (AMI) after importing. By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify AWS to replace the source-system license with an AWS license, if appropriate. Specify BYOL to retain the source-system license, if appropriate. To use BYOL, you must have existing licenses with rights to use these licenses in a third party cloud, such as AWS. For more information, see Prerequisites in the VM Import/Export User Guide.
      */
@@ -14318,7 +14326,7 @@ declare namespace EC2 {
      */
     StatusMessage?: String;
     /**
-     * Any tags applied to the import image task.
+     * The tags for the import image task.
      */
     Tags?: TagList;
     /**
@@ -14536,7 +14544,7 @@ declare namespace EC2 {
      */
     SnapshotTaskDetail?: SnapshotTaskDetail;
     /**
-     * Any tags applied to the import snapshot task.
+     * The tags for the import snapshot task.
      */
     Tags?: TagList;
   }
@@ -15572,6 +15580,7 @@ declare namespace EC2 {
   }
   export type Ipv6RangeList = Ipv6Range[];
   export type Ipv6SupportValue = "enable"|"disable"|string;
+  export type KernelId = string;
   export type KeyNameStringList = String[];
   export interface KeyPair {
     /**
@@ -16856,7 +16865,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: String;
+    ImageId: ImageId;
     /**
      * A new launch permission for the AMI.
      */
@@ -17225,7 +17234,7 @@ declare namespace EC2 {
     /**
      * The ID of the subnet.
      */
-    SubnetId: String;
+    SubnetId: SubnetId;
   }
   export interface ModifyTrafficMirrorFilterNetworkServicesRequest {
     /**
@@ -18135,6 +18144,7 @@ declare namespace EC2 {
      */
     DeleteOnTermination?: Boolean;
   }
+  export type NetworkInterfaceAttachmentId = string;
   export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|string;
   export type NetworkInterfaceCreationType = "efa"|string;
   export type NetworkInterfaceId = string;
@@ -18898,6 +18908,7 @@ declare namespace EC2 {
   export type PurchaseSet = Purchase[];
   export type PurchasedScheduledInstanceSet = ScheduledInstance[];
   export type RIProductDescription = "Linux/UNIX"|"Linux/UNIX (Amazon VPC)"|"Windows"|"Windows (Amazon VPC)"|string;
+  export type RamdiskId = string;
   export type ReasonCodesList = ReportInstanceReasonCodes[];
   export interface RebootInstancesRequest {
     /**
@@ -18965,7 +18976,7 @@ declare namespace EC2 {
     /**
      * The ID of the kernel.
      */
-    KernelId?: String;
+    KernelId?: KernelId;
     /**
      * A name for your AMI. Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)
      */
@@ -18977,7 +18988,7 @@ declare namespace EC2 {
     /**
      * The ID of the RAM disk.
      */
-    RamdiskId?: String;
+    RamdiskId?: RamdiskId;
     /**
      * The device name of the root device volume (for example, /dev/sda1).
      */
@@ -19117,7 +19128,7 @@ declare namespace EC2 {
     /**
      * [EC2-VPC] The allocation ID. Required for EC2-VPC.
      */
-    AllocationId?: String;
+    AllocationId?: AllocationId;
     /**
      * [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
      */
@@ -19380,7 +19391,7 @@ declare namespace EC2 {
      */
     IamInstanceProfile?: LaunchTemplateIamInstanceProfileSpecificationRequest;
     /**
-     * The block device mapping.  Supplying both a snapshot ID and an encryption value as arguments for block-device mapping results in an error. This is because only blank volumes can be encrypted on start, and these are not created from a snapshot. If a snapshot is the basis for the volume, it contains data by definition and its encryption status cannot be changed using this action. 
+     * The block device mapping.
      */
     BlockDeviceMappings?: LaunchTemplateBlockDeviceMappingRequestList;
     /**
@@ -19978,7 +19989,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI.
      */
-    ImageId: String;
+    ImageId: ImageId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -22159,6 +22170,7 @@ declare namespace EC2 {
     State?: TransitGatewayMulitcastDomainAssociationState;
   }
   export type SubnetAssociationList = SubnetAssociation[];
+  export type SubnetCidrAssociationId = string;
   export interface SubnetCidrBlockState {
     /**
      * The state of a CIDR block.

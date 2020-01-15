@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.603.0-->
+<!--LATEST=2.604.0-->
 <!--ENTRYINSERT-->
+
+## 2.604.0
+* feature: EC2: General Update to EC2 Docs and SDKs
+* feature: SecurityHub: Add support for DescribeStandardsControls and UpdateStandardsControl. These new Security Hub API operations are used to track and manage whether a compliance standards control is enabled.
 
 ## 2.603.0
 * feature: EC2: This release adds support for partition placement groups and instance metadata option in Launch Templates

@@ -456,6 +456,34 @@
       ],
       "documentation": "<p>Returns information about the products available that you can subscribe to and integrate with Security Hub to consolidate findings.</p>"
     },
+    "DescribeStandardsControls": {
+      "name": "DescribeStandardsControls",
+      "http": {
+        "method": "GET",
+        "requestUri": "/standards/controls/{StandardsSubscriptionArn+}"
+      },
+      "input": {
+        "shape": "DescribeStandardsControlsRequest"
+      },
+      "output": {
+        "shape": "DescribeStandardsControlsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns a list of compliance standards controls.</p> <p>For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.</p>"
+    },
     "DisableImportFindingsForProduct": {
       "name": "DisableImportFindingsForProduct",
       "http": {
@@ -1126,6 +1154,34 @@
         }
       ],
       "documentation": "<p>Updates the Security Hub insight that the insight ARN specifies.</p>"
+    },
+    "UpdateStandardsControl": {
+      "name": "UpdateStandardsControl",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/standards/control/{StandardsControlArn+}"
+      },
+      "input": {
+        "shape": "UpdateStandardsControlRequest"
+      },
+      "output": {
+        "shape": "UpdateStandardsControlResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Used to control whether an individual compliance standard control is enabled or disabled.</p>"
     }
   },
   "shapes": {
@@ -2390,6 +2446,13 @@
       },
       "documentation": "<p>Container details related to a finding.</p>"
     },
+    "ControlStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "CreateActionTargetRequest": {
       "type": "structure",
       "required": [
@@ -2719,6 +2782,45 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token that is required for pagination.</p>"
+        }
+      }
+    },
+    "DescribeStandardsControlsRequest": {
+      "type": "structure",
+      "required": [
+        "StandardsSubscriptionArn"
+      ],
+      "members": {
+        "StandardsSubscriptionArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of a resource that represents your subscription to a supported standard.</p>",
+          "location": "uri",
+          "locationName": "StandardsSubscriptionArn"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of compliance standard controls to return.</p>",
+          "location": "querystring",
+          "locationName": "MaxResults"
+        }
+      }
+    },
+    "DescribeStandardsControlsResponse": {
+      "type": "structure",
+      "members": {
+        "Controls": {
+          "shape": "StandardsControls",
+          "documentation": "<p>A list of compliance standards controls.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If there are more compliance standards control remaining in the results, then this is the pagination token to use to request the next page of compliance standard controls.</p>"
         }
       }
     },
@@ -3868,6 +3970,15 @@
       },
       "documentation": "<p>The severity of the finding.</p>"
     },
+    "SeverityRating": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
     "SortCriteria": {
       "type": "list",
       "member": {
@@ -3894,6 +4005,54 @@
         "asc",
         "desc"
       ]
+    },
+    "StandardsControl": {
+      "type": "structure",
+      "members": {
+        "StandardsControlArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the compliance standard control.</p>"
+        },
+        "ControlStatus": {
+          "shape": "ControlStatus",
+          "documentation": "<p>The current status of the compliance standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.</p>"
+        },
+        "DisabledReason": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The reason provided for the most recent change in status for the control.</p>"
+        },
+        "ControlStatusUpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the status of the compliance standard control was most recently updated.</p>"
+        },
+        "ControlId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the compliance standard control.</p>"
+        },
+        "Title": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The title of the compliance standard control.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The longer description of the compliance standard control. Provides information about what the control is checking for.</p>"
+        },
+        "RemediationUrl": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A link to remediation information for the control in the Security Hub user documentation</p>"
+        },
+        "SeverityRating": {
+          "shape": "SeverityRating",
+          "documentation": "<p>The severity of findings generated from this compliance standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.</p>"
+        }
+      },
+      "documentation": "<p>Details for an individual compliance standard control.</p>"
+    },
+    "StandardsControls": {
+      "type": "list",
+      "member": {
+        "shape": "StandardsControl"
+      }
     },
     "StandardsInputParameterMap": {
       "type": "map",
@@ -4241,6 +4400,32 @@
       }
     },
     "UpdateInsightResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateStandardsControlRequest": {
+      "type": "structure",
+      "required": [
+        "StandardsControlArn"
+      ],
+      "members": {
+        "StandardsControlArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the compliance standard control to enable or disable.</p>",
+          "location": "uri",
+          "locationName": "StandardsControlArn"
+        },
+        "ControlStatus": {
+          "shape": "ControlStatus",
+          "documentation": "<p>The updated status of the compliance standard control.</p>"
+        },
+        "DisabledReason": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A description of the reason why you are disabling a compliance standard control.</p>"
+        }
+      }
+    },
+    "UpdateStandardsControlResponse": {
       "type": "structure",
       "members": {}
     },

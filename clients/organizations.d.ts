@@ -428,7 +428,7 @@ declare namespace Organizations {
   export type ActionType = "INVITE"|"ENABLE_ALL_FEATURES"|"APPROVE_ALL_FEATURES"|"ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"|string;
   export interface AttachPolicyRequest {
     /**
-     * The unique identifier (ID) of the policy that you want to attach to the target. You can get the ID for the policy by calling the ListPolicies operation. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase letters or digits.
+     * The unique identifier (ID) of the policy that you want to attach to the target. You can get the ID for the policy by calling the ListPolicies operation. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
      */
     PolicyId: PolicyId;
     /**
@@ -618,7 +618,7 @@ declare namespace Organizations {
   }
   export interface DeletePolicyRequest {
     /**
-     * The unique identifier (ID) of the policy that you want to delete. You can get the ID from the ListPolicies or ListPoliciesForTarget operations. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase letters or digits.
+     * The unique identifier (ID) of the policy that you want to delete. You can get the ID from the ListPolicies or ListPoliciesForTarget operations. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
      */
     PolicyId: PolicyId;
   }
@@ -694,7 +694,7 @@ declare namespace Organizations {
   }
   export interface DescribePolicyRequest {
     /**
-     * The unique identifier (ID) of the policy that you want details about. You can get the ID from the ListPolicies or ListPoliciesForTarget operations. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase letters or digits.
+     * The unique identifier (ID) of the policy that you want details about. You can get the ID from the ListPolicies or ListPoliciesForTarget operations. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
      */
     PolicyId: PolicyId;
   }
@@ -706,7 +706,7 @@ declare namespace Organizations {
   }
   export interface DetachPolicyRequest {
     /**
-     * The unique identifier (ID) of the policy you want to detach. You can get the ID from the ListPolicies or ListPoliciesForTarget operations. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase letters or digits.
+     * The unique identifier (ID) of the policy you want to detach. You can get the ID from the ListPolicies or ListPoliciesForTarget operations. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
      */
     PolicyId: PolicyId;
     /**
@@ -1200,7 +1200,7 @@ declare namespace Organizations {
   }
   export interface ListTargetsForPolicyRequest {
     /**
-     * The unique identifier (ID) of the policy whose attachments you want to know. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase letters or digits.
+     * The unique identifier (ID) of the policy whose attachments you want to know. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
      */
     PolicyId: PolicyId;
     /**
@@ -1463,7 +1463,7 @@ declare namespace Organizations {
   }
   export interface UpdatePolicyRequest {
     /**
-     * The unique identifier (ID) of the policy that you want to update. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase letters or digits.
+     * The unique identifier (ID) of the policy that you want to update. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
      */
     PolicyId: PolicyId;
     /**

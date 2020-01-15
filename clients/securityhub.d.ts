@@ -132,6 +132,14 @@ declare class SecurityHub extends Service {
    */
   describeProducts(callback?: (err: AWSError, data: SecurityHub.Types.DescribeProductsResponse) => void): Request<SecurityHub.Types.DescribeProductsResponse, AWSError>;
   /**
+   * Returns a list of compliance standards controls. For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.
+   */
+  describeStandardsControls(params: SecurityHub.Types.DescribeStandardsControlsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsControlsResponse) => void): Request<SecurityHub.Types.DescribeStandardsControlsResponse, AWSError>;
+  /**
+   * Returns a list of compliance standards controls. For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.
+   */
+  describeStandardsControls(callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsControlsResponse) => void): Request<SecurityHub.Types.DescribeStandardsControlsResponse, AWSError>;
+  /**
    * Disables the integration of the specified product with Security Hub. Findings from that product are no longer sent to Security Hub after the integration is disabled.
    */
   disableImportFindingsForProduct(params: SecurityHub.Types.DisableImportFindingsForProductRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.DisableImportFindingsForProductResponse, AWSError>;
@@ -315,6 +323,14 @@ declare class SecurityHub extends Service {
    * Updates the Security Hub insight that the insight ARN specifies.
    */
   updateInsight(callback?: (err: AWSError, data: SecurityHub.Types.UpdateInsightResponse) => void): Request<SecurityHub.Types.UpdateInsightResponse, AWSError>;
+  /**
+   * Used to control whether an individual compliance standard control is enabled or disabled.
+   */
+  updateStandardsControl(params: SecurityHub.Types.UpdateStandardsControlRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateStandardsControlResponse) => void): Request<SecurityHub.Types.UpdateStandardsControlResponse, AWSError>;
+  /**
+   * Used to control whether an individual compliance standard control is enabled or disabled.
+   */
+  updateStandardsControl(callback?: (err: AWSError, data: SecurityHub.Types.UpdateStandardsControlResponse) => void): Request<SecurityHub.Types.UpdateStandardsControlResponse, AWSError>;
 }
 declare namespace SecurityHub {
   export interface AcceptInvitationRequest {
@@ -1332,6 +1348,7 @@ declare namespace SecurityHub {
      */
     LaunchedAt?: NonEmptyString;
   }
+  export type ControlStatus = "ENABLED"|"DISABLED"|string;
   export interface CreateActionTargetRequest {
     /**
      * The name of the custom action target.
@@ -1527,6 +1544,30 @@ declare namespace SecurityHub {
     Products: ProductsList;
     /**
      * The token that is required for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeStandardsControlsRequest {
+    /**
+     * The ARN of a resource that represents your subscription to a supported standard.
+     */
+    StandardsSubscriptionArn: NonEmptyString;
+    /**
+     * For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of compliance standard controls to return.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeStandardsControlsResponse {
+    /**
+     * A list of compliance standards controls.
+     */
+    Controls?: StandardsControls;
+    /**
+     * If there are more compliance standards control remaining in the results, then this is the pagination token to use to request the next page of compliance standard controls.
      */
     NextToken?: NextToken;
   }
@@ -2232,6 +2273,7 @@ declare namespace SecurityHub {
      */
     Normalized: Integer;
   }
+  export type SeverityRating = "LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|string;
   export type SortCriteria = SortCriterion[];
   export interface SortCriterion {
     /**
@@ -2244,6 +2286,45 @@ declare namespace SecurityHub {
     SortOrder?: SortOrder;
   }
   export type SortOrder = "asc"|"desc"|string;
+  export interface StandardsControl {
+    /**
+     * The ARN of the compliance standard control.
+     */
+    StandardsControlArn?: NonEmptyString;
+    /**
+     * The current status of the compliance standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.
+     */
+    ControlStatus?: ControlStatus;
+    /**
+     * The reason provided for the most recent change in status for the control.
+     */
+    DisabledReason?: NonEmptyString;
+    /**
+     * The date and time that the status of the compliance standard control was most recently updated.
+     */
+    ControlStatusUpdatedAt?: Timestamp;
+    /**
+     * The identifier of the compliance standard control.
+     */
+    ControlId?: NonEmptyString;
+    /**
+     * The title of the compliance standard control.
+     */
+    Title?: NonEmptyString;
+    /**
+     * The longer description of the compliance standard control. Provides information about what the control is checking for.
+     */
+    Description?: NonEmptyString;
+    /**
+     * A link to remediation information for the control in the Security Hub user documentation
+     */
+    RemediationUrl?: NonEmptyString;
+    /**
+     * The severity of findings generated from this compliance standard control. The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.
+     */
+    SeverityRating?: SeverityRating;
+  }
+  export type StandardsControls = StandardsControl[];
   export type StandardsInputParameterMap = {[key: string]: NonEmptyString};
   export type StandardsStatus = "PENDING"|"READY"|"FAILED"|"DELETING"|"INCOMPLETE"|string;
   export interface StandardsSubscription {
@@ -2400,6 +2481,22 @@ declare namespace SecurityHub {
     GroupByAttribute?: NonEmptyString;
   }
   export interface UpdateInsightResponse {
+  }
+  export interface UpdateStandardsControlRequest {
+    /**
+     * The ARN of the compliance standard control to enable or disable.
+     */
+    StandardsControlArn: NonEmptyString;
+    /**
+     * The updated status of the compliance standard control.
+     */
+    ControlStatus?: ControlStatus;
+    /**
+     * A description of the reason why you are disabling a compliance standard control.
+     */
+    DisabledReason?: NonEmptyString;
+  }
+  export interface UpdateStandardsControlResponse {
   }
   export type VerificationState = "UNKNOWN"|"TRUE_POSITIVE"|"FALSE_POSITIVE"|"BENIGN_POSITIVE"|string;
   export type WorkflowState = "NEW"|"ASSIGNED"|"IN_PROGRESS"|"DEFERRED"|"RESOLVED"|string;
