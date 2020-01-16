@@ -5079,6 +5079,10 @@ declare namespace EC2 {
      */
     TransportProtocol?: TransportProtocol;
     /**
+     * The port number for the Client VPN endpoint.
+     */
+    VpnPort?: Integer;
+    /**
      * Information about the associated target networks. A target network is a subnet in a VPC.
      */
     AssociatedTargetNetworks?: AssociatedTargetNetworkSet;
@@ -5547,6 +5551,10 @@ declare namespace EC2 {
      */
     TransportProtocol?: TransportProtocol;
     /**
+     * The port number to assign to the Client VPN endpoint for TCP and UDP traffic. Valid Values: 443 | 1194  Default Value: 443 
+     */
+    VpnPort?: Integer;
+    /**
      * A brief description of the Client VPN endpoint.
      */
     Description?: String;
@@ -5593,7 +5601,7 @@ declare namespace EC2 {
     /**
      * The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.
      */
-    TargetVpcSubnetId: String;
+    TargetVpcSubnetId: SubnetId;
     /**
      * A brief description of the route.
      */
@@ -7253,7 +7261,7 @@ declare namespace EC2 {
     /**
      * The ID of the target subnet used by the route.
      */
-    TargetVpcSubnetId?: String;
+    TargetVpcSubnetId?: SubnetId;
     /**
      * The IPv4 address range, in CIDR notation, of the route to be deleted.
      */
@@ -16670,6 +16678,10 @@ declare namespace EC2 {
      * Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have up to two DNS servers.
      */
     DnsServers?: DnsServersOptionsModifyStructure;
+    /**
+     * The port number to assign to the Client VPN endpoint for TCP and UDP traffic. Valid Values: 443 | 1194  Default Value: 443 
+     */
+    VpnPort?: Integer;
     /**
      * A brief description of the Client VPN endpoint.
      */

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.604.0-->
+<!--LATEST=2.605.0-->
 <!--ENTRYINSERT-->
+
+## 2.605.0
+* feature: DirectoryService: To reduce the number of errors our customers are facing, we have modified the requirements of input parameters for two of Directory Service APIs.
+* feature: EC2: Client VPN now supports Port Configuration for VPN Endpoints, allowing usage of either port 443 or port 1194.
+* feature: SageMaker: This release adds two new APIs (UpdateWorkforce and DescribeWorkforce) to SageMaker Ground Truth service for workforce IP whitelisting.
 
 ## 2.604.0
 * feature: EC2: General Update to EC2 Docs and SDKs

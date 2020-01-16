@@ -1297,6 +1297,20 @@
       ],
       "documentation": "<p>Describes the user profile.</p>"
     },
+    "DescribeWorkforce": {
+      "name": "DescribeWorkforce",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeWorkforceRequest"
+      },
+      "output": {
+        "shape": "DescribeWorkforceResponse"
+      },
+      "documentation": "<p>Lists private workforce information, including workforce name, Amazon Resource Name (ARN), and, if applicable, allowed IP address ranges (<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>). Allowable IP address ranges are the IP addresses that workers can use to access tasks. </p> <important> <p>This operation applies only to private workforces.</p> </important>"
+    },
     "DescribeWorkteam": {
       "name": "DescribeWorkteam",
       "http": {
@@ -1754,7 +1768,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Lists the trial components in your account. You can filter the list to show only components that were created in a specific time range. You can sort the list by trial component name or creation time.</p>"
+      "documentation": "<p>Lists the trial components in your account. You can sort the list by trial component name or creation time. You can filter the list to show only components that were created in a specific time range. You can also filter on one of the following:</p> <ul> <li> <p> <code>ExperimentName</code> </p> </li> <li> <p> <code>SourceArn</code> </p> </li> <li> <p> <code>TrialName</code> </p> </li> </ul>"
     },
     "ListTrials": {
       "name": "ListTrials",
@@ -2229,6 +2243,20 @@
         }
       ],
       "documentation": "<p>Updates a user profile.</p>"
+    },
+    "UpdateWorkforce": {
+      "name": "UpdateWorkforce",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateWorkforceRequest"
+      },
+      "output": {
+        "shape": "UpdateWorkforceResponse"
+      },
+      "documentation": "<p>Restricts access to tasks assigned to workers in the specified workforce to those within specific ranges of IP addresses. You specify allowed IP addresses by creating a list of up to four <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>.</p> <p>By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied access and get a <code>Not Found</code> error message on the worker portal. After restricting access with this operation, you can see the allowed IP values for a private workforce with the operation.</p> <important> <p>This operation applies only to private workforces.</p> </important>"
     },
     "UpdateWorkteam": {
       "name": "UpdateWorkteam",
@@ -3375,6 +3403,18 @@
       },
       "documentation": "<p>Contains information about the output location for managed spot training checkpoint data. </p>"
     },
+    "Cidr": {
+      "type": "string",
+      "max": 64,
+      "min": 4,
+      "pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(3[0-2]|[1-2][0-9]|[0-9]))$)|(^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9]))$)"
+    },
+    "Cidrs": {
+      "type": "list",
+      "member": {
+        "shape": "Cidr"
+      }
+    },
     "CodeRepositoryArn": {
       "type": "string",
       "max": 2048,
@@ -4072,7 +4112,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID </p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\" </code> </p> </li> <li> <p>// Amazon Resource Name (ARN) (ARN) of a KMS Key </p> <p>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p> </li> <li> <p>// KMS Key Alias</p> <p>\"alias/ExampleAlias\" </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias </p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\" </code> </p> </li> </ul> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more information, refer to the AWS Key Management Service section<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\"> Using Key Policies in AWS KMS </a> </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>KmsKeyId</code> when using an instance type with local storage. If any of the models that you specify in the <code>ProductionVariants</code> parameter use nitro-based instances with local storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you specify a value for <code>KmsKeyId</code> when using any nitro-based instances with local storage, the call to <code>CreateEndpointConfig</code> fails.</p> <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD Instance Store Volumes</a>.</p> </note>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more information, refer to the AWS Key Management Service section<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\"> Using Key Policies in AWS KMS </a> </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>KmsKeyId</code> when using an instance type with local storage. If any of the models that you specify in the <code>ProductionVariants</code> parameter use nitro-based instances with local storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you specify a value for <code>KmsKeyId</code> when using any nitro-based instances with local storage, the call to <code>CreateEndpointConfig</code> fails.</p> <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD Instance Store Volumes</a>.</p> </note>"
         }
       }
     },
@@ -7375,6 +7415,30 @@
         }
       }
     },
+    "DescribeWorkforceRequest": {
+      "type": "structure",
+      "required": [
+        "WorkforceName"
+      ],
+      "members": {
+        "WorkforceName": {
+          "shape": "WorkforceName",
+          "documentation": "<p>The name of the private workforce whose access you want to restrict. <code>WorkforceName</code> is automatically set to <code>\"default\"</code> when a workforce is created and cannot be modified. </p>"
+        }
+      }
+    },
+    "DescribeWorkforceResponse": {
+      "type": "structure",
+      "required": [
+        "Workforce"
+      ],
+      "members": {
+        "Workforce": {
+          "shape": "Workforce",
+          "documentation": "<p>A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each AWS Region. By default, any workforce related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html\">Create a Private Workforce</a>.</p>"
+        }
+      }
+    },
     "DescribeWorkteamRequest": {
       "type": "structure",
       "required": [
@@ -8289,7 +8353,7 @@
           "jsonvalue": true
         }
       },
-      "documentation": "<p>Defines under what conditions SageMaker creates a human loop.</p>"
+      "documentation": "<p>Defines under what conditions SageMaker creates a human loop. Used within .</p>"
     },
     "HumanLoopActivationConfig": {
       "type": "structure",
@@ -8966,7 +9030,7 @@
         },
         "DataInputConfig": {
           "shape": "DataInputConfig",
-          "documentation": "<p>Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. The data inputs are <a>InputConfig$Framework</a> specific. </p> <ul> <li> <p> <code>TensorFlow</code>: You must specify the name and shape (NHWC format) of the expected data inputs using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"input\":[1,1024,1024,3]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input\\\":[1,1024,1024,3]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"data1\\\": [1,28,28,1], \\\"data2\\\":[1,28,28,1]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>MXNET/ONNX</code>: You must specify the name and shape (NCHW format) of the expected data inputs in order using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"data\":[1,3,1024,1024]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"data\\\":[1,3,1024,1024]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"var1\": [1,1,28,28], \"var2\":[1,1,28,28]} </code> </p> </li> <li> <p>If using the CLI, <code>{\\\"var1\\\": [1,1,28,28], \\\"var2\\\":[1,1,28,28]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>PyTorch</code>: You can either specify the name and shape (NCHW format) of expected data inputs in order using a dictionary format for your trained model or you can specify the shape only using a list format. The dictionary formats required for the console and CLI are different. The list formats for the console and CLI are the same.</p> <ul> <li> <p>Examples for one input in dictionary format:</p> <ul> <li> <p>If using the console, <code>{\"input0\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input0\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> <li> <p>Example for one input in list format: <code>[[1,3,224,224]]</code> </p> </li> <li> <p>Examples for two inputs in dictionary format:</p> <ul> <li> <p>If using the console, <code>{\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input0\\\":[1,3,224,224], \\\"input1\\\":[1,3,224,224]} </code> </p> </li> </ul> </li> <li> <p>Example for two inputs in list format: <code>[[1,3,224,224], [1,3,224,224]]</code> </p> </li> </ul> </li> <li> <p> <code>XGBOOST</code>: input data name and shape are not needed.</p> </li> </ul>"
+          "documentation": "<p>Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. The data inputs are <a>InputConfig$Framework</a> specific. </p> <ul> <li> <p> <code>TensorFlow</code>: You must specify the name and shape (NHWC format) of the expected data inputs using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"input\":[1,1024,1024,3]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input\\\":[1,1024,1024,3]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"data1\\\": [1,28,28,1], \\\"data2\\\":[1,28,28,1]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>KERAS</code>: You must specify the name and shape (NCHW format) of expected data inputs using a dictionary format for your trained model. Note that while Keras model artifacts should be uploaded in NHWC (channel-last) format, <code>DataInputConfig</code> should be specified in NCHW (channel-first) format. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"input_1\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input_1\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"input_1\": [1,3,224,224], \"input_2\":[1,3,224,224]} </code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input_1\\\": [1,3,224,224], \\\"input_2\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>MXNET/ONNX</code>: You must specify the name and shape (NCHW format) of the expected data inputs in order using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.</p> <ul> <li> <p>Examples for one input:</p> <ul> <li> <p>If using the console, <code>{\"data\":[1,3,1024,1024]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"data\\\":[1,3,1024,1024]}</code> </p> </li> </ul> </li> <li> <p>Examples for two inputs:</p> <ul> <li> <p>If using the console, <code>{\"var1\": [1,1,28,28], \"var2\":[1,1,28,28]} </code> </p> </li> <li> <p>If using the CLI, <code>{\\\"var1\\\": [1,1,28,28], \\\"var2\\\":[1,1,28,28]}</code> </p> </li> </ul> </li> </ul> </li> <li> <p> <code>PyTorch</code>: You can either specify the name and shape (NCHW format) of expected data inputs in order using a dictionary format for your trained model or you can specify the shape only using a list format. The dictionary formats required for the console and CLI are different. The list formats for the console and CLI are the same.</p> <ul> <li> <p>Examples for one input in dictionary format:</p> <ul> <li> <p>If using the console, <code>{\"input0\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input0\\\":[1,3,224,224]}</code> </p> </li> </ul> </li> <li> <p>Example for one input in list format: <code>[[1,3,224,224]]</code> </p> </li> <li> <p>Examples for two inputs in dictionary format:</p> <ul> <li> <p>If using the console, <code>{\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}</code> </p> </li> <li> <p>If using the CLI, <code>{\\\"input0\\\":[1,3,224,224], \\\"input1\\\":[1,3,224,224]} </code> </p> </li> </ul> </li> <li> <p>Example for two inputs in list format: <code>[[1,3,224,224], [1,3,224,224]]</code> </p> </li> </ul> </li> <li> <p> <code>XGBOOST</code>: input data name and shape are not needed.</p> </li> </ul>"
         },
         "Framework": {
           "shape": "Framework",
@@ -10931,15 +10995,15 @@
       "members": {
         "ExperimentName": {
           "shape": "ExperimentEntityName",
-          "documentation": "<p>A filter that returns only components that are part of the specified experiment. If you specify <code>ExperimentName</code>, you can't specify <code>TrialName</code>.</p>"
+          "documentation": "<p>A filter that returns only components that are part of the specified experiment. If you specify <code>ExperimentName</code>, you can't filter by <code>SourceArn</code> or <code>TrialName</code>.</p>"
         },
         "TrialName": {
           "shape": "ExperimentEntityName",
-          "documentation": "<p>A filter that returns only components that are part of the specified trial. If you specify <code>TrialName</code>, you can't specify <code>ExperimentName</code>.</p>"
+          "documentation": "<p>A filter that returns only components that are part of the specified trial. If you specify <code>TrialName</code>, you can't filter by <code>ExperimentName</code> or <code>SourceArn</code>.</p>"
         },
         "SourceArn": {
           "shape": "String256",
-          "documentation": "<p>A filter that returns only components that have the specified source Amazon Resource Name (ARN).</p>"
+          "documentation": "<p>A filter that returns only components that have the specified source Amazon Resource Name (ARN). If you specify <code>SourceArn</code>, you can't filter by <code>ExperimentName</code> or <code>TrialName</code>.</p>"
         },
         "CreatedAfter": {
           "shape": "Timestamp",
@@ -13564,7 +13628,7 @@
           "documentation": "<p>Determines the shuffling order in <code>ShuffleConfig</code> value.</p>"
         }
       },
-      "documentation": "<p>A configuration for a shuffle option for input data in a channel. If you use <code>S3Prefix</code> for <code>S3DataType</code>, the results of the S3 key prefix matches are shuffled. If you use <code>ManifestFile</code>, the order of the S3 object references in the <code>ManifestFile</code> is shuffled. If you use <code>AugmentedManifestFile</code>, the order of the JSON lines in the <code>AugmentedManifestFile</code> is shuffled. The shuffling order is determined using the <code>Seed</code> value.</p> <p>For Pipe input mode, shuffling is done at the start of every epoch. With large datasets, this ensures that the order of the training data is different for each epoch, and it helps reduce bias and possible overfitting. In a multi-node training job when <code>ShuffleConfig</code> is combined with <code>S3DataDistributionType</code> of <code>ShardedByS3Key</code>, the data is shuffled across nodes so that the content sent to a particular node on the first epoch might be sent to a different node on the second epoch.</p>"
+      "documentation": "<p>A configuration for a shuffle option for input data in a channel. If you use <code>S3Prefix</code> for <code>S3DataType</code>, the results of the S3 key prefix matches are shuffled. If you use <code>ManifestFile</code>, the order of the S3 object references in the <code>ManifestFile</code> is shuffled. If you use <code>AugmentedManifestFile</code>, the order of the JSON lines in the <code>AugmentedManifestFile</code> is shuffled. The shuffling order is determined using the <code>Seed</code> value.</p> <p>For Pipe input mode, when <code>ShuffleConfig</code> is specified shuffling is done at the start of every epoch. With large datasets, this ensures that the order of the training data is different for each epoch, and it helps reduce bias and possible overfitting. In a multi-node training job when <code>ShuffleConfig</code> is combined with <code>S3DataDistributionType</code> of <code>ShardedByS3Key</code>, the data is shuffled across nodes so that the content sent to a particular node on the first epoch might be sent to a different node on the second epoch.</p>"
     },
     "SingleSignOnUserIdentifier": {
       "type": "string",
@@ -13643,6 +13707,19 @@
         }
       },
       "documentation": "<p>A list of algorithms that were used to create a model package.</p>"
+    },
+    "SourceIpConfig": {
+      "type": "structure",
+      "required": [
+        "Cidrs"
+      ],
+      "members": {
+        "Cidrs": {
+          "shape": "Cidrs",
+          "documentation": "<p>A list of one to four <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">Classless Inter-Domain Routing</a> (CIDR) values.</p> <p>Maximum: 4 CIDR values</p> <note> <p>The following Length Constraints apply to individual CIDR values in the CIDR value list.</p> </note>"
+        }
+      },
+      "documentation": "<p>A list of IP address ranges (<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>). Used to create an allow list of IP addresses for a private workforce. For more information, see .</p>"
     },
     "SourceType": {
       "type": "string",
@@ -14087,6 +14164,12 @@
         "ml.m4.4xlarge",
         "ml.m4.10xlarge",
         "ml.m4.16xlarge",
+        "ml.g4dn.xlarge",
+        "ml.g4dn.2xlarge",
+        "ml.g4dn.4xlarge",
+        "ml.g4dn.8xlarge",
+        "ml.g4dn.12xlarge",
+        "ml.g4dn.16xlarge",
         "ml.m5.large",
         "ml.m5.xlarge",
         "ml.m5.2xlarge",
@@ -14678,7 +14761,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID</p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// KMS Key Alias</p> <p> <code>\"alias/ExampleAlias\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code> </p> </li> </ul> <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <a>CreateModel</a> request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <a>CreateModel</a> request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>Describes the results of a transform job.</p>"
@@ -14700,7 +14783,7 @@
         },
         "VolumeKmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code> can be any of the following formats:</p> <ul> <li> <p>// KMS Key ID</p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p> // KMS Key Alias </p> <p> <code> \"alias/ExampleAlias\"</code> </p> </li> <li> <p> // Amazon Resource Name (ARN) (ARN) of a KMS Key Alias</p> <p> <code> \"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code> </p> </li> </ul>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The <code>VolumeKmsKeyId</code> can be any of the following formats:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>Describes the resources, including ML instance types and ML instance count, to use for transform job.</p>"
@@ -15616,6 +15699,34 @@
         }
       }
     },
+    "UpdateWorkforceRequest": {
+      "type": "structure",
+      "required": [
+        "WorkforceName"
+      ],
+      "members": {
+        "WorkforceName": {
+          "shape": "WorkforceName",
+          "documentation": "<p>The name of the private workforce whose access you want to restrict. <code>WorkforceName</code> is automatically set to <code>\"default\"</code> when a workforce is created and cannot be modified. </p>"
+        },
+        "SourceIpConfig": {
+          "shape": "SourceIpConfig",
+          "documentation": "<p>A list of one to four worker IP address ranges (<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>) that can be used to access tasks assigned to this workforce.</p> <p>Maximum: 4 CIDR values</p>"
+        }
+      }
+    },
+    "UpdateWorkforceResponse": {
+      "type": "structure",
+      "required": [
+        "Workforce"
+      ],
+      "members": {
+        "Workforce": {
+          "shape": "Workforce",
+          "documentation": "<p>A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each AWS Region. By default, any workforce related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html\">Create a Private Workforce</a>.</p>"
+        }
+      }
+    },
     "UpdateWorkteamRequest": {
       "type": "structure",
       "required": [
@@ -15806,6 +15917,43 @@
       },
       "max": 5,
       "min": 1
+    },
+    "Workforce": {
+      "type": "structure",
+      "required": [
+        "WorkforceName",
+        "WorkforceArn"
+      ],
+      "members": {
+        "WorkforceName": {
+          "shape": "WorkforceName",
+          "documentation": "<p>The name of the private workforce whose access you want to restrict. <code>WorkforceName</code> is automatically set to <code>\"default\"</code> when a workforce is created and cannot be modified. </p>"
+        },
+        "WorkforceArn": {
+          "shape": "WorkforceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the private workforce.</p>"
+        },
+        "LastUpdatedDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The most recent date that was used to successfully add one or more IP address ranges (<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>) to a private workforce's allow list.</p>"
+        },
+        "SourceIpConfig": {
+          "shape": "SourceIpConfig",
+          "documentation": "<p>A list of one to four IP address ranges (<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>) to be added to the workforce allow list.</p>"
+        }
+      },
+      "documentation": "<p>A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each AWS Region. By default, any workforce related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html\">Create a Private Workforce</a>.</p>"
+    },
+    "WorkforceArn": {
+      "type": "string",
+      "max": 256,
+      "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:workforce/.*"
+    },
+    "WorkforceName": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-])*$"
     },
     "Workteam": {
       "type": "structure",

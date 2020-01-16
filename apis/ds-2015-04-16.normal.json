@@ -3267,7 +3267,8 @@
     "DisableLDAPSRequest": {
       "type": "structure",
       "required": [
-        "DirectoryId"
+        "DirectoryId",
+        "Type"
       ],
       "members": {
         "DirectoryId": {
@@ -3414,7 +3415,8 @@
     "EnableLDAPSRequest": {
       "type": "structure",
       "required": [
-        "DirectoryId"
+        "DirectoryId",
+        "Type"
       ],
       "members": {
         "DirectoryId": {

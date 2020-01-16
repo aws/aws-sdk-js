@@ -589,6 +589,14 @@ declare class SageMaker extends Service {
    */
   describeUserProfile(callback?: (err: AWSError, data: SageMaker.Types.DescribeUserProfileResponse) => void): Request<SageMaker.Types.DescribeUserProfileResponse, AWSError>;
   /**
+   * Lists private workforce information, including workforce name, Amazon Resource Name (ARN), and, if applicable, allowed IP address ranges (CIDRs). Allowable IP address ranges are the IP addresses that workers can use to access tasks.   This operation applies only to private workforces. 
+   */
+  describeWorkforce(params: SageMaker.Types.DescribeWorkforceRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkforceResponse) => void): Request<SageMaker.Types.DescribeWorkforceResponse, AWSError>;
+  /**
+   * Lists private workforce information, including workforce name, Amazon Resource Name (ARN), and, if applicable, allowed IP address ranges (CIDRs). Allowable IP address ranges are the IP addresses that workers can use to access tasks.   This operation applies only to private workforces. 
+   */
+  describeWorkforce(callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkforceResponse) => void): Request<SageMaker.Types.DescribeWorkforceResponse, AWSError>;
+  /**
    * Gets information about a specific work team. You can see information such as the create date, the last updated date, membership information, and the work team's Amazon Resource Name (ARN).
    */
   describeWorkteam(params: SageMaker.Types.DescribeWorkteamRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkteamResponse) => void): Request<SageMaker.Types.DescribeWorkteamResponse, AWSError>;
@@ -829,11 +837,11 @@ declare class SageMaker extends Service {
    */
   listTransformJobs(callback?: (err: AWSError, data: SageMaker.Types.ListTransformJobsResponse) => void): Request<SageMaker.Types.ListTransformJobsResponse, AWSError>;
   /**
-   * Lists the trial components in your account. You can filter the list to show only components that were created in a specific time range. You can sort the list by trial component name or creation time.
+   * Lists the trial components in your account. You can sort the list by trial component name or creation time. You can filter the list to show only components that were created in a specific time range. You can also filter on one of the following:    ExperimentName     SourceArn     TrialName   
    */
   listTrialComponents(params: SageMaker.Types.ListTrialComponentsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListTrialComponentsResponse) => void): Request<SageMaker.Types.ListTrialComponentsResponse, AWSError>;
   /**
-   * Lists the trial components in your account. You can filter the list to show only components that were created in a specific time range. You can sort the list by trial component name or creation time.
+   * Lists the trial components in your account. You can sort the list by trial component name or creation time. You can filter the list to show only components that were created in a specific time range. You can also filter on one of the following:    ExperimentName     SourceArn     TrialName   
    */
   listTrialComponents(callback?: (err: AWSError, data: SageMaker.Types.ListTrialComponentsResponse) => void): Request<SageMaker.Types.ListTrialComponentsResponse, AWSError>;
   /**
@@ -1052,6 +1060,14 @@ declare class SageMaker extends Service {
    * Updates a user profile.
    */
   updateUserProfile(callback?: (err: AWSError, data: SageMaker.Types.UpdateUserProfileResponse) => void): Request<SageMaker.Types.UpdateUserProfileResponse, AWSError>;
+  /**
+   * Restricts access to tasks assigned to workers in the specified workforce to those within specific ranges of IP addresses. You specify allowed IP addresses by creating a list of up to four CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied access and get a Not Found error message on the worker portal. After restricting access with this operation, you can see the allowed IP values for a private workforce with the operation.  This operation applies only to private workforces. 
+   */
+  updateWorkforce(params: SageMaker.Types.UpdateWorkforceRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateWorkforceResponse) => void): Request<SageMaker.Types.UpdateWorkforceResponse, AWSError>;
+  /**
+   * Restricts access to tasks assigned to workers in the specified workforce to those within specific ranges of IP addresses. You specify allowed IP addresses by creating a list of up to four CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied access and get a Not Found error message on the worker portal. After restricting access with this operation, you can see the allowed IP values for a private workforce with the operation.  This operation applies only to private workforces. 
+   */
+  updateWorkforce(callback?: (err: AWSError, data: SageMaker.Types.UpdateWorkforceResponse) => void): Request<SageMaker.Types.UpdateWorkforceResponse, AWSError>;
   /**
    * Updates an existing work team with new member definitions or description.
    */
@@ -1653,6 +1669,8 @@ declare namespace SageMaker {
      */
     LocalPath?: DirectoryPath;
   }
+  export type Cidr = string;
+  export type Cidrs = Cidr[];
   export type CodeRepositoryArn = string;
   export type CodeRepositoryContains = string;
   export type CodeRepositoryNameContains = string;
@@ -2026,7 +2044,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. The KmsKeyId can be any of the following formats:    // KMS Key ID   "1234abcd-12ab-34cd-56ef-1234567890ab"     // Amazon Resource Name (ARN) (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   // KMS Key Alias "alias/ExampleAlias"    // Amazon Resource Name (ARN) of a KMS Key Alias   "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"     The KMS key policy must grant permission to the IAM role that you specify in your CreateEndpoint, UpdateEndpoint requests. For more information, refer to the AWS Key Management Service section Using Key Policies in AWS KMS    Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a KmsKeyId when using an instance type with local storage. If any of the models that you specify in the ProductionVariants parameter use nitro-based instances with local storage, do not specify a value for the KmsKeyId parameter. If you specify a value for KmsKeyId when using any nitro-based instances with local storage, the call to CreateEndpointConfig fails. For a list of instance types that support local instance storage, see Instance Store Volumes. For more information about local instance storage encryption, see SSD Instance Store Volumes. 
+     * The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias    The KMS key policy must grant permission to the IAM role that you specify in your CreateEndpoint, UpdateEndpoint requests. For more information, refer to the AWS Key Management Service section Using Key Policies in AWS KMS    Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a KmsKeyId when using an instance type with local storage. If any of the models that you specify in the ProductionVariants parameter use nitro-based instances with local storage, do not specify a value for the KmsKeyId parameter. If you specify a value for KmsKeyId when using any nitro-based instances with local storage, the call to CreateEndpointConfig fails. For a list of instance types that support local instance storage, see Instance Store Volumes. For more information about local instance storage encryption, see SSD Instance Store Volumes. 
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -4455,6 +4473,18 @@ declare namespace SageMaker {
      */
     UserSettings?: UserSettings;
   }
+  export interface DescribeWorkforceRequest {
+    /**
+     * The name of the private workforce whose access you want to restrict. WorkforceName is automatically set to "default" when a workforce is created and cannot be modified. 
+     */
+    WorkforceName: WorkforceName;
+  }
+  export interface DescribeWorkforceResponse {
+    /**
+     * A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each AWS Region. By default, any workforce related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see Create a Private Workforce.
+     */
+    Workforce: Workforce;
+  }
   export interface DescribeWorkteamRequest {
     /**
      * The name of the work team to return a description of.
@@ -5270,7 +5300,7 @@ declare namespace SageMaker {
      */
     S3Uri: S3Uri;
     /**
-     * Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. The data inputs are InputConfig$Framework specific.     TensorFlow: You must specify the name and shape (NHWC format) of the expected data inputs using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.   Examples for one input:   If using the console, {"input":[1,1024,1024,3]}    If using the CLI, {\"input\":[1,1024,1024,3]}      Examples for two inputs:   If using the console, {"data1": [1,28,28,1], "data2":[1,28,28,1]}    If using the CLI, {\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}         MXNET/ONNX: You must specify the name and shape (NCHW format) of the expected data inputs in order using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.   Examples for one input:   If using the console, {"data":[1,3,1024,1024]}    If using the CLI, {\"data\":[1,3,1024,1024]}      Examples for two inputs:   If using the console, {"var1": [1,1,28,28], "var2":[1,1,28,28]}     If using the CLI, {\"var1\": [1,1,28,28], \"var2\":[1,1,28,28]}         PyTorch: You can either specify the name and shape (NCHW format) of expected data inputs in order using a dictionary format for your trained model or you can specify the shape only using a list format. The dictionary formats required for the console and CLI are different. The list formats for the console and CLI are the same.   Examples for one input in dictionary format:   If using the console, {"input0":[1,3,224,224]}    If using the CLI, {\"input0\":[1,3,224,224]}      Example for one input in list format: [[1,3,224,224]]    Examples for two inputs in dictionary format:   If using the console, {"input0":[1,3,224,224], "input1":[1,3,224,224]}    If using the CLI, {\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}       Example for two inputs in list format: [[1,3,224,224], [1,3,224,224]]       XGBOOST: input data name and shape are not needed.  
+     * Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. The data inputs are InputConfig$Framework specific.     TensorFlow: You must specify the name and shape (NHWC format) of the expected data inputs using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.   Examples for one input:   If using the console, {"input":[1,1024,1024,3]}    If using the CLI, {\"input\":[1,1024,1024,3]}      Examples for two inputs:   If using the console, {"data1": [1,28,28,1], "data2":[1,28,28,1]}    If using the CLI, {\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}         KERAS: You must specify the name and shape (NCHW format) of expected data inputs using a dictionary format for your trained model. Note that while Keras model artifacts should be uploaded in NHWC (channel-last) format, DataInputConfig should be specified in NCHW (channel-first) format. The dictionary formats required for the console and CLI are different.   Examples for one input:   If using the console, {"input_1":[1,3,224,224]}    If using the CLI, {\"input_1\":[1,3,224,224]}      Examples for two inputs:   If using the console, {"input_1": [1,3,224,224], "input_2":[1,3,224,224]}     If using the CLI, {\"input_1\": [1,3,224,224], \"input_2\":[1,3,224,224]}         MXNET/ONNX: You must specify the name and shape (NCHW format) of the expected data inputs in order using a dictionary format for your trained model. The dictionary formats required for the console and CLI are different.   Examples for one input:   If using the console, {"data":[1,3,1024,1024]}    If using the CLI, {\"data\":[1,3,1024,1024]}      Examples for two inputs:   If using the console, {"var1": [1,1,28,28], "var2":[1,1,28,28]}     If using the CLI, {\"var1\": [1,1,28,28], \"var2\":[1,1,28,28]}         PyTorch: You can either specify the name and shape (NCHW format) of expected data inputs in order using a dictionary format for your trained model or you can specify the shape only using a list format. The dictionary formats required for the console and CLI are different. The list formats for the console and CLI are the same.   Examples for one input in dictionary format:   If using the console, {"input0":[1,3,224,224]}    If using the CLI, {\"input0\":[1,3,224,224]}      Example for one input in list format: [[1,3,224,224]]    Examples for two inputs in dictionary format:   If using the console, {"input0":[1,3,224,224], "input1":[1,3,224,224]}    If using the CLI, {\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}       Example for two inputs in list format: [[1,3,224,224], [1,3,224,224]]       XGBOOST: input data name and shape are not needed.  
      */
     DataInputConfig: DataInputConfig;
     /**
@@ -6715,15 +6745,15 @@ declare namespace SageMaker {
   export type ListTrialComponentKey256 = TrialComponentKey256[];
   export interface ListTrialComponentsRequest {
     /**
-     * A filter that returns only components that are part of the specified experiment. If you specify ExperimentName, you can't specify TrialName.
+     * A filter that returns only components that are part of the specified experiment. If you specify ExperimentName, you can't filter by SourceArn or TrialName.
      */
     ExperimentName?: ExperimentEntityName;
     /**
-     * A filter that returns only components that are part of the specified trial. If you specify TrialName, you can't specify ExperimentName.
+     * A filter that returns only components that are part of the specified trial. If you specify TrialName, you can't filter by ExperimentName or SourceArn.
      */
     TrialName?: ExperimentEntityName;
     /**
-     * A filter that returns only components that have the specified source Amazon Resource Name (ARN).
+     * A filter that returns only components that have the specified source Amazon Resource Name (ARN). If you specify SourceArn, you can't filter by ExperimentName or TrialName.
      */
     SourceArn?: String256;
     /**
@@ -7990,6 +8020,12 @@ declare namespace SageMaker {
      */
     SourceAlgorithms: SourceAlgorithmList;
   }
+  export interface SourceIpConfig {
+    /**
+     * A list of one to four Classless Inter-Domain Routing (CIDR) values. Maximum: 4 CIDR values  The following Length Constraints apply to individual CIDR values in the CIDR value list. 
+     */
+    Cidrs: Cidrs;
+  }
   export type SourceType = string;
   export type SplitType = "None"|"Line"|"RecordIO"|"TFRecord"|string;
   export interface StartMonitoringScheduleRequest {
@@ -8155,7 +8191,7 @@ declare namespace SageMaker {
   export type Timestamp = Date;
   export type TrainingInputMode = "Pipe"|"File"|string;
   export type TrainingInstanceCount = number;
-  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|string;
+  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|string;
   export type TrainingInstanceTypes = TrainingInstanceType[];
   export interface TrainingJob {
     /**
@@ -8511,7 +8547,7 @@ declare namespace SageMaker {
      */
     AssembleWith?: AssemblyType;
     /**
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The KmsKeyId can be any of the following formats:    // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    // KMS Key Alias  "alias/ExampleAlias"    // Amazon Resource Name (ARN) of a KMS Key Alias  "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"    If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see KMS-Managed Encryption Keys in the Amazon Simple Storage Service Developer Guide.  The KMS key policy must grant permission to the IAM role that you specify in your CreateModel request. For more information, see Using Key Policies in AWS KMS in the AWS Key Management Service Developer Guide.
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias    If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see KMS-Managed Encryption Keys in the Amazon Simple Storage Service Developer Guide.  The KMS key policy must grant permission to the IAM role that you specify in your CreateModel request. For more information, see Using Key Policies in AWS KMS in the AWS Key Management Service Developer Guide.
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -8525,7 +8561,7 @@ declare namespace SageMaker {
      */
     InstanceCount: TransformInstanceCount;
     /**
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The VolumeKmsKeyId can be any of the following formats:   // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"     // KMS Key Alias    "alias/ExampleAlias"     // Amazon Resource Name (ARN) (ARN) of a KMS Key Alias   "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"   
+     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job. The VolumeKmsKeyId can be any of the following formats:   Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
      */
     VolumeKmsKeyId?: KmsKeyId;
   }
@@ -9132,6 +9168,22 @@ declare namespace SageMaker {
      */
     UserProfileArn?: UserProfileArn;
   }
+  export interface UpdateWorkforceRequest {
+    /**
+     * The name of the private workforce whose access you want to restrict. WorkforceName is automatically set to "default" when a workforce is created and cannot be modified. 
+     */
+    WorkforceName: WorkforceName;
+    /**
+     * A list of one to four worker IP address ranges (CIDRs) that can be used to access tasks assigned to this workforce. Maximum: 4 CIDR values
+     */
+    SourceIpConfig?: SourceIpConfig;
+  }
+  export interface UpdateWorkforceResponse {
+    /**
+     * A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each AWS Region. By default, any workforce related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see Create a Private Workforce.
+     */
+    Workforce: Workforce;
+  }
   export interface UpdateWorkteamRequest {
     /**
      * The name of the work team to update.
@@ -9239,6 +9291,26 @@ declare namespace SageMaker {
   }
   export type VpcId = string;
   export type VpcSecurityGroupIds = SecurityGroupId[];
+  export interface Workforce {
+    /**
+     * The name of the private workforce whose access you want to restrict. WorkforceName is automatically set to "default" when a workforce is created and cannot be modified. 
+     */
+    WorkforceName: WorkforceName;
+    /**
+     * The Amazon Resource Name (ARN) of the private workforce.
+     */
+    WorkforceArn: WorkforceArn;
+    /**
+     * The most recent date that was used to successfully add one or more IP address ranges (CIDRs) to a private workforce's allow list.
+     */
+    LastUpdatedDate?: Timestamp;
+    /**
+     * A list of one to four IP address ranges (CIDRs) to be added to the workforce allow list.
+     */
+    SourceIpConfig?: SourceIpConfig;
+  }
+  export type WorkforceArn = string;
+  export type WorkforceName = string;
   export interface Workteam {
     /**
      * The name of the work team.

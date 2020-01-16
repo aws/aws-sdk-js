@@ -8235,6 +8235,11 @@
           "documentation": "<p>The transport protocol used by the Client VPN endpoint.</p>",
           "locationName": "transportProtocol"
         },
+        "VpnPort": {
+          "shape": "Integer",
+          "documentation": "<p>The port number for the Client VPN endpoint.</p>",
+          "locationName": "vpnPort"
+        },
         "AssociatedTargetNetworks": {
           "shape": "AssociatedTargetNetworkSet",
           "documentation": "<p>Information about the associated target networks. A target network is a subnet in a VPC.</p>",
@@ -8976,6 +8981,10 @@
           "shape": "TransportProtocol",
           "documentation": "<p>The transport protocol to be used by the VPN session.</p> <p>Default value: <code>udp</code> </p>"
         },
+        "VpnPort": {
+          "shape": "Integer",
+          "documentation": "<p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p> <p>Valid Values: <code>443</code> | <code>1194</code> </p> <p>Default Value: <code>443</code> </p>"
+        },
         "Description": {
           "shape": "String",
           "documentation": "<p>A brief description of the Client VPN endpoint.</p>"
@@ -9037,7 +9046,7 @@
           "documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p> <ul> <li> <p>To add a route for Internet access, enter <code>0.0.0.0/0</code> </p> </li> <li> <p>To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range</p> </li> <li> <p>To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range</p> </li> </ul> <p>Route address ranges cannot overlap with the CIDR range specified for client allocation.</p>"
         },
         "TargetVpcSubnetId": {
-          "shape": "String",
+          "shape": "SubnetId",
           "documentation": "<p>The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.</p>"
         },
         "Description": {
@@ -11473,7 +11482,7 @@
           "documentation": "<p>The ID of the Client VPN endpoint from which the route is to be deleted.</p>"
         },
         "TargetVpcSubnetId": {
-          "shape": "String",
+          "shape": "SubnetId",
           "documentation": "<p>The ID of the target subnet used by the route.</p>"
         },
         "DestinationCidrBlock": {
@@ -26550,6 +26559,10 @@
         "DnsServers": {
           "shape": "DnsServersOptionsModifyStructure",
           "documentation": "<p>Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have up to two DNS servers.</p>"
+        },
+        "VpnPort": {
+          "shape": "Integer",
+          "documentation": "<p>The port number to assign to the Client VPN endpoint for TCP and UDP traffic.</p> <p>Valid Values: <code>443</code> | <code>1194</code> </p> <p>Default Value: <code>443</code> </p>"
         },
         "Description": {
           "shape": "String",

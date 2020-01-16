@@ -1387,7 +1387,7 @@ declare namespace DirectoryService {
     /**
      * The type of LDAP security that the customer wants to enable. The security can be either server or client, but currently only the default Client is supported.
      */
-    Type?: LDAPSType;
+    Type: LDAPSType;
   }
   export interface DisableLDAPSResult {
   }
@@ -1471,7 +1471,7 @@ declare namespace DirectoryService {
     /**
      * The type of LDAP security the customer wants to enable. The security can be either server or client, but currently only the default Client is supported.
      */
-    Type?: LDAPSType;
+    Type: LDAPSType;
   }
   export interface EnableLDAPSResult {
   }
