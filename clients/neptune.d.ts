@@ -599,7 +599,7 @@ declare namespace Neptune {
      */
     TargetDBClusterSnapshotIdentifier: String;
     /**
-     * The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. If you copy an unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter, Amazon Neptune encrypts the target DB cluster snapshot using the specified KMS encryption key. If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS encryption key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot. If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for KmsKeyId.  KMS encryption keys are specific to the AWS Region that they are created in, and you can't use encryption keys from one AWS Region in another AWS Region.
+     * The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS encryption key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot. If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for KmsKeyId.  KMS encryption keys are specific to the AWS Region that they are created in, and you can't use encryption keys from one AWS Region in another AWS Region. You cannot encrypt an unencrypted DB cluster snapshot when you copy it. If you try to copy an unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter, an error is returned.
      */
     KmsKeyId?: String;
     /**
@@ -649,7 +649,7 @@ declare namespace Neptune {
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
-     * A value that indicates that the DB cluster should be associated with the specified CharacterSet.
+     *  (Not supported by Neptune) 
      */
     CharacterSetName?: String;
     /**
@@ -677,7 +677,7 @@ declare namespace Neptune {
      */
     Engine: String;
     /**
-     * The version number of the database engine to use. Example: 1.0.1 
+     * The version number of the database engine to use. Currently, setting this parameter has no effect. Example: 1.0.1 
      */
     EngineVersion?: String;
     /**
@@ -693,7 +693,7 @@ declare namespace Neptune {
      */
     MasterUserPassword?: String;
     /**
-     * A value that indicates that the DB cluster should be associated with the specified option group. Permanent options can't be removed from an option group. The option group can't be removed from a DB cluster once it is associated with a DB cluster.
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
@@ -732,6 +732,10 @@ declare namespace Neptune {
      * The list of log types that need to be enabled for exporting to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -844,7 +848,7 @@ declare namespace Neptune {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * The version number of the database engine to use.
+     * The version number of the database engine to use. Currently, setting this parameter has no effect.
      */
     EngineVersion?: String;
     /**
@@ -860,11 +864,11 @@ declare namespace Neptune {
      */
     Iops?: IntegerOptional;
     /**
-     * Indicates that the DB instance should be associated with the specified option group. Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group, and that option group can't be removed from a DB instance once it is associated with a DB instance
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
-     * Indicates that the DB instance should be associated with the specified CharacterSet. Not applicable. The character set is managed by the DB cluster. For more information, see CreateDBCluster.
+     *  (Not supported by Neptune) 
      */
     CharacterSetName?: String;
     /**
@@ -932,17 +936,21 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * True to enable Performance Insights for the DB instance, and otherwise false.
+     *  (Not supported by Neptune) 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
+     *  (Not supported by Neptune) 
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
      * The list of log types that need to be enabled for exporting to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.  You can enable or disable deletion protection for the DB cluster. For more information, see CreateDBCluster. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface CreateDBInstanceResult {
     DBInstance?: DBInstance;
@@ -1036,7 +1044,7 @@ declare namespace Neptune {
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
-     * If present, specifies the name of the character set that this cluster is associated with.
+     *  (Not supported by Neptune) 
      */
     CharacterSetName?: String;
     /**
@@ -1100,7 +1108,7 @@ declare namespace Neptune {
      */
     MasterUsername?: String;
     /**
-     * Provides the list of option group memberships for this DB cluster.
+     *  (Not supported by Neptune) 
      */
     DBClusterOptionGroupMemberships?: DBClusterOptionGroupMemberships;
     /**
@@ -1167,6 +1175,10 @@ declare namespace Neptune {
      * A list of log types that this DB cluster is configured to export to CloudWatch Logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
@@ -1401,11 +1413,11 @@ declare namespace Neptune {
      */
     DBEngineVersionDescription?: String;
     /**
-     *  The default character set for new instances of this engine version, if the CharacterSetName parameter of the CreateDBInstance API is not specified.
+     *  (Not supported by Neptune) 
      */
     DefaultCharacterSet?: CharacterSet;
     /**
-     *  A list of the character sets supported by this engine for the CharacterSetName parameter of the CreateDBInstance action.
+     *  (Not supported by Neptune) 
      */
     SupportedCharacterSets?: SupportedCharacterSetsList;
     /**
@@ -1550,11 +1562,11 @@ declare namespace Neptune {
      */
     Iops?: IntegerOptional;
     /**
-     * Provides the list of option group memberships for this DB instance.
+     *  (Not supported by Neptune) 
      */
     OptionGroupMemberships?: OptionGroupMembershipList;
     /**
-     * If present, specifies the name of the character set that this instance is associated with.
+     *  (Not supported by Neptune) 
      */
     CharacterSetName?: String;
     /**
@@ -1638,17 +1650,21 @@ declare namespace Neptune {
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     /**
-     * True if Performance Insights is enabled for the DB instance, and otherwise false.
+     *  (Not supported by Neptune) 
      */
     PerformanceInsightsEnabled?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
+     *  (Not supported by Neptune) 
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
      * A list of log types that this DB instance is configured to export to CloudWatch Logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Indicates if the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {
@@ -2480,7 +2496,7 @@ declare namespace Neptune {
      */
     MasterUserPassword?: String;
     /**
-     * A value that indicates that the DB cluster should be associated with the specified option group. Changing this parameter doesn't result in an outage except in the following case, and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. If the parameter change results in an option group that enables OEM, this change can cause a brief (sub-second) period during which new connections are rejected but existing connections are not interrupted. Permanent options can't be removed from an option group. The option group can't be removed from a DB cluster once it is associated with a DB cluster.
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
@@ -2500,9 +2516,13 @@ declare namespace Neptune {
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
-     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true. For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
+     * The version number of the database engine. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the ApplyPendingMaintenanceAction API. For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
      */
     EngineVersion?: String;
+    /**
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -2592,11 +2612,11 @@ declare namespace Neptune {
      */
     MultiAZ?: BooleanOptional;
     /**
-     *  The version number of the database engine to upgrade to. Changing this parameter results in an outage and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. For major version upgrades, if a nondefault DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family.
+     * The version number of the database engine to upgrade to. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the ApplyPendingMaintenanceAction API.
      */
     EngineVersion?: String;
     /**
-     * Indicates that major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. Constraints: This parameter must be set to true when specifying a value for the EngineVersion parameter that is a different major version than the DB instance's current version.
+     * Indicates that major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.
      */
     AllowMajorVersionUpgrade?: Boolean;
     /**
@@ -2612,7 +2632,7 @@ declare namespace Neptune {
      */
     Iops?: IntegerOptional;
     /**
-     *  Indicates that the DB instance should be associated with the specified option group. Changing this parameter doesn't result in an outage except in the following case and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. If the parameter change results in an option group that enables OEM, this change can cause a brief (sub-second) period during which new connections are rejected but existing connections are not interrupted. Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group, and that option group can't be removed from a DB instance once it is associated with a DB instance
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
@@ -2672,17 +2692,21 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * Not supported.
+     *  (Not supported by Neptune) 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**
-     * Not supported.
+     *  (Not supported by Neptune) 
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
      * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
+    /**
+     * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -2804,7 +2828,7 @@ declare namespace Neptune {
      */
     SupportsIAMDatabaseAuthentication?: Boolean;
     /**
-     * True if a DB instance supports Performance Insights, otherwise false.
+     *  (Not supported by Neptune) 
      */
     SupportsPerformanceInsights?: Boolean;
     /**
@@ -2988,7 +3012,7 @@ declare namespace Neptune {
      */
     DBSubnetGroupName?: String;
     /**
-     * Specifies the CloudWatch logs to be exported.
+     * This PendingCloudwatchLogsExports structure specifies pending changes to which CloudWatch logs are enabled and which are disabled.
      */
     PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
   }
@@ -3137,7 +3161,7 @@ declare namespace Neptune {
      */
     DatabaseName?: String;
     /**
-     * The name of the option group to use for the restored DB cluster.
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
@@ -3164,6 +3188,10 @@ declare namespace Neptune {
      * The name of the DB cluster parameter group to associate with the new DB cluster. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
      */
     DBClusterParameterGroupName?: String;
+    /**
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -3198,7 +3226,7 @@ declare namespace Neptune {
      */
     DBSubnetGroupName?: String;
     /**
-     * The name of the option group for the new DB cluster.
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
@@ -3225,6 +3253,10 @@ declare namespace Neptune {
      * The name of the DB cluster parameter group to associate with the new DB cluster. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
      */
     DBClusterParameterGroupName?: String;
+    /**
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;

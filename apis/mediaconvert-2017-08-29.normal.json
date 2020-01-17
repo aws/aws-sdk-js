@@ -1311,7 +1311,7 @@
     },
     "AlphaBehavior": {
       "type": "string",
-      "documentation": "Ignore this setting unless this input is a QuickTime animation. Specify which part of this input MediaConvert uses for your outputs. Leave this setting set to DISCARD in order to delete the alpha channel and preserve the video. Use REMAP_TO_LUMA for this setting to delete the video and map the alpha channel to the luma channel of your outputs.",
+      "documentation": "Ignore this setting unless this input is a QuickTime animation with an alpha channel. Use this setting to create separate Key and Fill outputs. In each output, specify which part of the input MediaConvert uses. Leave this setting at the default value DISCARD to delete the alpha channel and preserve the video. Set it to REMAP_TO_LUMA to delete the video and map the alpha channel to the luma channel of your outputs.",
       "enum": [
         "DISCARD",
         "REMAP_TO_LUMA"
@@ -1385,6 +1385,7 @@
       "enum": [
         "AAC",
         "MP2",
+        "MP3",
         "WAV",
         "AIFF",
         "AC3",
@@ -1431,13 +1432,18 @@
           "locationName": "mp2Settings",
           "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value MP2."
         },
+        "Mp3Settings": {
+          "shape": "Mp3Settings",
+          "locationName": "mp3Settings",
+          "documentation": "Required when you set Codec, under AudioDescriptions>CodecSettings, to the value MP3."
+        },
         "WavSettings": {
           "shape": "WavSettings",
           "locationName": "wavSettings",
           "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV."
         }
       },
-      "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings"
+      "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings"
     },
     "AudioDefaultSelection": {
       "type": "string",
@@ -1473,7 +1479,7 @@
         "CodecSettings": {
           "shape": "AudioCodecSettings",
           "locationName": "codecSettings",
-          "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings"
+          "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings"
         },
         "CustomLanguageCode": {
           "shape": "__stringPatternAZaZ23AZaZ",
@@ -2233,6 +2239,11 @@
           "shape": "CmafWriteHLSManifest",
           "locationName": "writeHlsManifest",
           "documentation": "When set to ENABLED, an Apple HLS manifest will be generated for this output."
+        },
+        "WriteSegmentTimelineInRepresentation": {
+          "shape": "CmafWriteSegmentTimelineInRepresentation",
+          "locationName": "writeSegmentTimelineInRepresentation",
+          "documentation": "When you enable Precise segment duration in DASH manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn't enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element."
         }
       },
       "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output."
@@ -2308,6 +2319,46 @@
         "DISABLED",
         "ENABLED"
       ]
+    },
+    "CmafWriteSegmentTimelineInRepresentation": {
+      "type": "string",
+      "documentation": "When you enable Precise segment duration in DASH manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn't enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "CmfcScte35Esam": {
+      "type": "string",
+      "documentation": "Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).",
+      "enum": [
+        "INSERT",
+        "NONE"
+      ]
+    },
+    "CmfcScte35Source": {
+      "type": "string",
+      "documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.",
+      "enum": [
+        "PASSTHROUGH",
+        "NONE"
+      ]
+    },
+    "CmfcSettings": {
+      "type": "structure",
+      "members": {
+        "Scte35Esam": {
+          "shape": "CmfcScte35Esam",
+          "locationName": "scte35Esam",
+          "documentation": "Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml)."
+        },
+        "Scte35Source": {
+          "shape": "CmfcScte35Source",
+          "locationName": "scte35Source",
+          "documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output."
+        }
+      },
+      "documentation": "Settings for MP4 segments in CMAF"
     },
     "ColorCorrector": {
       "type": "structure",
@@ -2393,6 +2444,11 @@
     "ContainerSettings": {
       "type": "structure",
       "members": {
+        "CmfcSettings": {
+          "shape": "CmfcSettings",
+          "locationName": "cmfcSettings",
+          "documentation": "Settings for MP4 segments in CMAF"
+        },
         "Container": {
           "shape": "ContainerType",
           "locationName": "container",
@@ -7070,6 +7126,45 @@
       },
       "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value MP2."
     },
+    "Mp3RateControlMode": {
+      "type": "string",
+      "documentation": "Specify whether the service encodes this MP3 audio output with a constant bitrate (CBR) or a variable bitrate (VBR).",
+      "enum": [
+        "CBR",
+        "VBR"
+      ]
+    },
+    "Mp3Settings": {
+      "type": "structure",
+      "members": {
+        "Bitrate": {
+          "shape": "__integerMin16000Max320000",
+          "locationName": "bitrate",
+          "documentation": "Specify the average bitrate in bits per second."
+        },
+        "Channels": {
+          "shape": "__integerMin1Max2",
+          "locationName": "channels",
+          "documentation": "Specify the number of channels in this output audio track. Choosing Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In the API, valid values are 1 and 2."
+        },
+        "RateControlMode": {
+          "shape": "Mp3RateControlMode",
+          "locationName": "rateControlMode",
+          "documentation": "Specify whether the service encodes this MP3 audio output with a constant bitrate (CBR) or a variable bitrate (VBR)."
+        },
+        "SampleRate": {
+          "shape": "__integerMin22050Max48000",
+          "locationName": "sampleRate",
+          "documentation": "Sample rate in hz."
+        },
+        "VbrQuality": {
+          "shape": "__integerMin0Max9",
+          "locationName": "vbrQuality",
+          "documentation": "Required when you set Bitrate control mode (rateControlMode) to VBR. Specify the audio quality of this MP3 output from 0 (highest quality) to 9 (lowest quality)."
+        }
+      },
+      "documentation": "Required when you set Codec, under AudioDescriptions>CodecSettings, to the value MP3."
+    },
     "Mp4CslgAtom": {
       "type": "string",
       "documentation": "When enabled, file composition times will start at zero, composition times in the 'ctts' (composition time to sample) box for B-frames will be negative, and a 'cslg' (composition shift least greatest) box will be included per 14496-1 amendment 1. This improves compatibility with Apple players and tools.",
@@ -7101,6 +7196,11 @@
           "shape": "Mp4CslgAtom",
           "locationName": "cslgAtom",
           "documentation": "When enabled, file composition times will start at zero, composition times in the 'ctts' (composition time to sample) box for B-frames will be negative, and a 'cslg' (composition shift least greatest) box will be included per 14496-1 amendment 1. This improves compatibility with Apple players and tools."
+        },
+        "CttsVersion": {
+          "shape": "__integerMin0Max1",
+          "locationName": "cttsVersion",
+          "documentation": "Ignore this setting unless compliance to the CTTS box version specification matters in your workflow. Specify a value of 1 to set your CTTS box version to 1 and make your output compliant with the specification. When you specify a value of 1, you must also set CSLG atom (cslgAtom) to the value INCLUDE. Keep the default value 0 to set your CTTS box version to 0. This can provide backward compatibility for some players and packagers."
         },
         "FreeSpaceBox": {
           "shape": "Mp4FreeSpaceBox",
@@ -8923,7 +9023,7 @@
           "documentation": "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES."
         }
       },
-      "documentation": "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings"
+      "documentation": "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings"
     },
     "VideoDescription": {
       "type": "structure",
@@ -8941,7 +9041,7 @@
         "CodecSettings": {
           "shape": "VideoCodecSettings",
           "locationName": "codecSettings",
-          "documentation": "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings"
+          "documentation": "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings"
         },
         "ColorMetadata": {
           "shape": "ColorMetadata",
@@ -9064,7 +9164,7 @@
         "AlphaBehavior": {
           "shape": "AlphaBehavior",
           "locationName": "alphaBehavior",
-          "documentation": "Ignore this setting unless this input is a QuickTime animation. Specify which part of this input MediaConvert uses for your outputs. Leave this setting set to DISCARD in order to delete the alpha channel and preserve the video. Use REMAP_TO_LUMA for this setting to delete the video and map the alpha channel to the luma channel of your outputs."
+          "documentation": "Ignore this setting unless this input is a QuickTime animation with an alpha channel. Use this setting to create separate Key and Fill outputs. In each output, specify which part of the input MediaConvert uses. Leave this setting at the default value DISCARD to delete the alpha channel and preserve the video. Set it to REMAP_TO_LUMA to delete the video and map the alpha channel to the luma channel of your outputs."
         },
         "ColorSpace": {
           "shape": "ColorSpace",
@@ -9166,6 +9266,11 @@
       "type": "integer",
       "min": 0,
       "max": 0
+    },
+    "__integerMin0Max1": {
+      "type": "integer",
+      "min": 0,
+      "max": 1
     },
     "__integerMin0Max10": {
       "type": "integer",
@@ -9277,6 +9382,11 @@
       "min": 0,
       "max": 8
     },
+    "__integerMin0Max9": {
+      "type": "integer",
+      "min": 0,
+      "max": 9
+    },
     "__integerMin0Max96": {
       "type": "integer",
       "min": 0,
@@ -9316,6 +9426,11 @@
       "type": "integer",
       "min": 10,
       "max": 48
+    },
+    "__integerMin16000Max320000": {
+      "type": "integer",
+      "min": 16000,
+      "max": 320000
     },
     "__integerMin16Max24": {
       "type": "integer",
@@ -9396,6 +9511,11 @@
       "type": "integer",
       "min": 1,
       "max": 64
+    },
+    "__integerMin22050Max48000": {
+      "type": "integer",
+      "min": 22050,
+      "max": 48000
     },
     "__integerMin24Max60000": {
       "type": "integer",

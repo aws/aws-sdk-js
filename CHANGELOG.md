@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.605.0-->
+<!--LATEST=2.606.0-->
 <!--ENTRYINSERT-->
+
+## 2.606.0
+* bugfix: iam: add IAM endpoint for us-isob-*
+* feature: Batch: This release ensures INACTIVE job definitions are permanently deleted after 180 days.
+* feature: CloudHSMV2: This release introduces resource-level and tag-based access control for AWS CloudHSM resources. You can now tag CloudHSM backups, tag CloudHSM clusters on creation, and tag a backup as you copy it to another region.
+* feature: ECS: This release provides a public preview for specifying Amazon EFS file systems as volumes in your Amazon ECS task definitions.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for MP3 audio only outputs.
+* feature: Neptune: This release includes Deletion Protection for Amazon Neptune databases.
 
 ## 2.605.0
 * feature: DirectoryService: To reduce the number of errors our customers are facing, we have modified the requirements of input parameters for two of Directory Service APIs.

@@ -346,7 +346,7 @@ declare namespace MediaConvert {
   }
   export interface AssociateCertificateResponse {
   }
-  export type AudioCodec = "AAC"|"MP2"|"WAV"|"AIFF"|"AC3"|"EAC3"|"EAC3_ATMOS"|"PASSTHROUGH"|string;
+  export type AudioCodec = "AAC"|"MP2"|"MP3"|"WAV"|"AIFF"|"AC3"|"EAC3"|"EAC3_ATMOS"|"PASSTHROUGH"|string;
   export interface AudioCodecSettings {
     /**
      * Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AAC. The service accepts one of two mutually exclusive groups of AAC settings--VBR and CBR. To select one of these modes, set the value of Bitrate control mode (rateControlMode) to "VBR" or "CBR".  In VBR mode, you control the audio quality with the setting VBR quality (vbrQuality). In CBR mode, you use the setting Bitrate (bitrate). Defaults and valid values depend on the rate control mode.
@@ -377,6 +377,10 @@ declare namespace MediaConvert {
      */
     Mp2Settings?: Mp2Settings;
     /**
+     * Required when you set Codec, under AudioDescriptions>CodecSettings, to the value MP3.
+     */
+    Mp3Settings?: Mp3Settings;
+    /**
      * Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV.
      */
     WavSettings?: WavSettings;
@@ -400,7 +404,7 @@ declare namespace MediaConvert {
      */
     AudioTypeControl?: AudioTypeControl;
     /**
-     * Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
+     * Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
      */
     CodecSettings?: AudioCodecSettings;
     /**
@@ -838,6 +842,10 @@ All burn-in and DVB-Sub font settings must match.
      * When set to ENABLED, an Apple HLS manifest will be generated for this output.
      */
     WriteHlsManifest?: CmafWriteHLSManifest;
+    /**
+     * When you enable Precise segment duration in DASH manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn't enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element.
+     */
+    WriteSegmentTimelineInRepresentation?: CmafWriteSegmentTimelineInRepresentation;
   }
   export type CmafInitializationVectorInManifest = "INCLUDE"|"EXCLUDE"|string;
   export type CmafKeyProviderType = "SPEKE"|"STATIC_KEY"|string;
@@ -848,6 +856,19 @@ All burn-in and DVB-Sub font settings must match.
   export type CmafStreamInfResolution = "INCLUDE"|"EXCLUDE"|string;
   export type CmafWriteDASHManifest = "DISABLED"|"ENABLED"|string;
   export type CmafWriteHLSManifest = "DISABLED"|"ENABLED"|string;
+  export type CmafWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
+  export type CmfcScte35Esam = "INSERT"|"NONE"|string;
+  export type CmfcScte35Source = "PASSTHROUGH"|"NONE"|string;
+  export interface CmfcSettings {
+    /**
+     * Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
+     */
+    Scte35Esam?: CmfcScte35Esam;
+    /**
+     * Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.
+     */
+    Scte35Source?: CmfcScte35Source;
+  }
   export interface ColorCorrector {
     /**
      * Brightness level.
@@ -880,6 +901,10 @@ All burn-in and DVB-Sub font settings must match.
   export type ColorSpaceUsage = "FORCE"|"FALLBACK"|string;
   export type Commitment = "ONE_YEAR"|string;
   export interface ContainerSettings {
+    /**
+     * Settings for MP4 segments in CMAF
+     */
+    CmfcSettings?: CmfcSettings;
     /**
      * Container for this output. Some containers require a container settings object. If not specified, the default object will be created.
      */
@@ -3296,6 +3321,29 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     SampleRate?: __integerMin32000Max48000;
   }
+  export type Mp3RateControlMode = "CBR"|"VBR"|string;
+  export interface Mp3Settings {
+    /**
+     * Specify the average bitrate in bits per second.
+     */
+    Bitrate?: __integerMin16000Max320000;
+    /**
+     * Specify the number of channels in this output audio track. Choosing Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In the API, valid values are 1 and 2.
+     */
+    Channels?: __integerMin1Max2;
+    /**
+     * Specify whether the service encodes this MP3 audio output with a constant bitrate (CBR) or a variable bitrate (VBR).
+     */
+    RateControlMode?: Mp3RateControlMode;
+    /**
+     * Sample rate in hz.
+     */
+    SampleRate?: __integerMin22050Max48000;
+    /**
+     * Required when you set Bitrate control mode (rateControlMode) to VBR. Specify the audio quality of this MP3 output from 0 (highest quality) to 9 (lowest quality).
+     */
+    VbrQuality?: __integerMin0Max9;
+  }
   export type Mp4CslgAtom = "INCLUDE"|"EXCLUDE"|string;
   export type Mp4FreeSpaceBox = "INCLUDE"|"EXCLUDE"|string;
   export type Mp4MoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL"|string;
@@ -3304,6 +3352,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * When enabled, file composition times will start at zero, composition times in the 'ctts' (composition time to sample) box for B-frames will be negative, and a 'cslg' (composition shift least greatest) box will be included per 14496-1 amendment 1. This improves compatibility with Apple players and tools.
      */
     CslgAtom?: Mp4CslgAtom;
+    /**
+     * Ignore this setting unless compliance to the CTTS box version specification matters in your workflow. Specify a value of 1 to set your CTTS box version to 1 and make your output compliant with the specification. When you specify a value of 1, you must also set CSLG atom (cslgAtom) to the value INCLUDE. Keep the default value 0 to set your CTTS box version to 0. This can provide backward compatibility for some players and packagers.
+     */
+    CttsVersion?: __integerMin0Max1;
     /**
      * Inserts a free-space box immediately after the moov box.
      */
@@ -4274,7 +4326,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     AntiAlias?: AntiAlias;
     /**
-     * Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings
+     * Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings
      */
     CodecSettings?: VideoCodecSettings;
     /**
@@ -4364,7 +4416,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   }
   export interface VideoSelector {
     /**
-     * Ignore this setting unless this input is a QuickTime animation. Specify which part of this input MediaConvert uses for your outputs. Leave this setting set to DISCARD in order to delete the alpha channel and preserve the video. Use REMAP_TO_LUMA for this setting to delete the video and map the alpha channel to the luma channel of your outputs.
+     * Ignore this setting unless this input is a QuickTime animation with an alpha channel. Use this setting to create separate Key and Fill outputs. In each output, specify which part of the input MediaConvert uses. Leave this setting at the default value DISCARD to delete the alpha channel and preserve the video. Set it to REMAP_TO_LUMA to delete the video and map the alpha channel to the luma channel of your outputs.
      */
     AlphaBehavior?: AlphaBehavior;
     /**
@@ -4420,6 +4472,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __doubleMinNegative6Max3 = number;
   export type __integer = number;
   export type __integerMin0Max0 = number;
+  export type __integerMin0Max1 = number;
   export type __integerMin0Max10 = number;
   export type __integerMin0Max100 = number;
   export type __integerMin0Max1000 = number;
@@ -4442,6 +4495,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin0Max65535 = number;
   export type __integerMin0Max7 = number;
   export type __integerMin0Max8 = number;
+  export type __integerMin0Max9 = number;
   export type __integerMin0Max96 = number;
   export type __integerMin0Max99 = number;
   export type __integerMin1000Max1152000000 = number;
@@ -4450,6 +4504,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin1000Max30000 = number;
   export type __integerMin1000Max300000000 = number;
   export type __integerMin10Max48 = number;
+  export type __integerMin16000Max320000 = number;
   export type __integerMin16Max24 = number;
   export type __integerMin1Max1 = number;
   export type __integerMin1Max10 = number;
@@ -4466,6 +4521,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin1Max4 = number;
   export type __integerMin1Max6 = number;
   export type __integerMin1Max64 = number;
+  export type __integerMin22050Max48000 = number;
   export type __integerMin24Max60000 = number;
   export type __integerMin25Max10000 = number;
   export type __integerMin25Max2000 = number;

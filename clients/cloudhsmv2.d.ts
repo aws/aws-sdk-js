@@ -36,11 +36,11 @@ declare class CloudHSMV2 extends Service {
    */
   createHsm(callback?: (err: AWSError, data: CloudHSMV2.Types.CreateHsmResponse) => void): Request<CloudHSMV2.Types.CreateHsmResponse, AWSError>;
   /**
-   * Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request. For more information on restoring a backup, see RestoreBackup 
+   * Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request is made. For more information on restoring a backup, see RestoreBackup.
    */
   deleteBackup(params: CloudHSMV2.Types.DeleteBackupRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteBackupResponse) => void): Request<CloudHSMV2.Types.DeleteBackupResponse, AWSError>;
   /**
-   * Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request. For more information on restoring a backup, see RestoreBackup 
+   * Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request is made. For more information on restoring a backup, see RestoreBackup.
    */
   deleteBackup(callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteBackupResponse) => void): Request<CloudHSMV2.Types.DeleteBackupResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class CloudHSMV2 extends Service {
    */
   listTags(callback?: (err: AWSError, data: CloudHSMV2.Types.ListTagsResponse) => void): Request<CloudHSMV2.Types.ListTagsResponse, AWSError>;
   /**
-   * Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state. For more information on deleting a backup, see DeleteBackup.
+   * Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state. For mor information on deleting a backup, see DeleteBackup.
    */
   restoreBackup(params: CloudHSMV2.Types.RestoreBackupRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.RestoreBackupResponse) => void): Request<CloudHSMV2.Types.RestoreBackupResponse, AWSError>;
   /**
-   * Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state. For more information on deleting a backup, see DeleteBackup.
+   * Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state. For mor information on deleting a backup, see DeleteBackup.
    */
   restoreBackup(callback?: (err: AWSError, data: CloudHSMV2.Types.RestoreBackupResponse) => void): Request<CloudHSMV2.Types.RestoreBackupResponse, AWSError>;
   /**
@@ -134,14 +134,27 @@ declare namespace CloudHSMV2 {
      * The date and time when the backup was created.
      */
     CreateTimestamp?: Timestamp;
+    /**
+     * The date and time when the backup was copied from a source backup.
+     */
     CopyTimestamp?: Timestamp;
+    /**
+     * The AWS region that contains the source backup from which the new backup was copied.
+     */
     SourceRegion?: Region;
+    /**
+     * The identifier (ID) of the source backup from which the new backup was copied.
+     */
     SourceBackup?: BackupId;
+    /**
+     * The identifier (ID) of the cluster containing the source backup from which the new backup was copied. .
+     */
     SourceCluster?: ClusterId;
     /**
      * The date and time when the backup will be permanently deleted.
      */
     DeleteTimestamp?: Timestamp;
+    TagList?: TagList;
   }
   export type BackupId = string;
   export type BackupPolicy = "DEFAULT"|string;
@@ -213,7 +226,7 @@ declare namespace CloudHSMV2 {
      */
     StateMessage?: StateMessage;
     /**
-     * A map of the cluster's subnets and their corresponding Availability Zones.
+     * A map from availability zone to the cluster’s subnet in that availability zone.
      */
     SubnetMapping?: ExternalSubnetMapping;
     /**
@@ -224,6 +237,7 @@ declare namespace CloudHSMV2 {
      * Contains one or more certificates or a certificate signing request (CSR).
      */
     Certificates?: Certificates;
+    TagList?: TagList;
   }
   export type ClusterId = string;
   export type ClusterState = "CREATE_IN_PROGRESS"|"UNINITIALIZED"|"INITIALIZE_IN_PROGRESS"|"INITIALIZED"|"ACTIVE"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DEGRADED"|string;
@@ -237,6 +251,7 @@ declare namespace CloudHSMV2 {
      * The ID of the backup that will be copied to the destination region. 
      */
     BackupId: BackupId;
+    TagList?: TagList;
   }
   export interface CopyBackupToRegionResponse {
     /**
@@ -257,6 +272,7 @@ declare namespace CloudHSMV2 {
      * The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use DescribeBackups.
      */
     SourceBackupId?: BackupId;
+    TagList?: TagList;
   }
   export interface CreateClusterResponse {
     /**
@@ -345,6 +361,9 @@ declare namespace CloudHSMV2 {
      * One or more filters to limit the items returned in the response. Use the backupIds filter to return only the specified backups. Specify backups by their backup identifier (ID). Use the sourceBackupIds filter to return only the backups created from a source backup. The sourceBackupID of a source backup is returned by the CopyBackupToRegion operation. Use the clusterIds filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID). Use the states filter to return only backups that match the specified state.
      */
     Filters?: Filters;
+    /**
+     * Designates whether or not to sort the return backups by ascending chronological order of generation.
+     */
     SortAscending?: Boolean;
   }
   export interface DescribeBackupsResponse {
@@ -382,9 +401,21 @@ declare namespace CloudHSMV2 {
     NextToken?: NextToken;
   }
   export interface DestinationBackup {
+    /**
+     * The date and time when both the source backup was created.
+     */
     CreateTimestamp?: Timestamp;
+    /**
+     * The AWS region that contains the source backup from which the new backup was copied.
+     */
     SourceRegion?: Region;
+    /**
+     * The identifier (ID) of the source backup from which the new backup was copied.
+     */
     SourceBackup?: BackupId;
+    /**
+     * The identifier (ID) of the cluster containing the source backup from which the new backup was copied.
+     */
     SourceCluster?: ClusterId;
   }
   export type EniId = string;
@@ -440,7 +471,7 @@ declare namespace CloudHSMV2 {
      */
     SignedCert: Cert;
     /**
-     * The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. This can be a root (self-signed) certificate or a certificate chain that begins with the certificate that issued the cluster certificate and ends with a root certificate. The certificate or certificate chain must be in PEM format and can contain a maximum of 5000 characters.
+     * The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. You must use a self-signed certificate. The certificate used to sign the HSM CSR must be directly available, and thus must be the root certificate. The certificate must be in PEM format and can contain a maximum of 5000 characters.
      */
     TrustAnchor: Cert;
   }
@@ -459,7 +490,7 @@ declare namespace CloudHSMV2 {
     /**
      * The cluster identifier (ID) for the cluster whose tags you are getting. To find the cluster ID, use DescribeClusters.
      */
-    ResourceId: ClusterId;
+    ResourceId: ResourceId;
     /**
      * The NextToken value that you received in the previous response. Use this value to get more tags.
      */
@@ -483,6 +514,7 @@ declare namespace CloudHSMV2 {
   export type NextToken = string;
   export type PreCoPassword = string;
   export type Region = string;
+  export type ResourceId = string;
   export interface RestoreBackupRequest {
     /**
      * The ID of the backup to be restored. To find the ID of a backup, use the DescribeBackups operation.
@@ -518,7 +550,7 @@ declare namespace CloudHSMV2 {
     /**
      * The cluster identifier (ID) for the cluster that you are tagging. To find the cluster ID, use DescribeClusters.
      */
-    ResourceId: ClusterId;
+    ResourceId: ResourceId;
     /**
      * A list of one or more tags.
      */
@@ -532,7 +564,7 @@ declare namespace CloudHSMV2 {
     /**
      * The cluster identifier (ID) for the cluster whose tags you are removing. To find the cluster ID, use DescribeClusters.
      */
-    ResourceId: ClusterId;
+    ResourceId: ResourceId;
     /**
      * A list of one or more tag keys for the tags that you are removing. Specify only the tag keys, not the tag values.
      */
