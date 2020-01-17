@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "iam",
+  "description": "add IAM endpoint for us-isob-*"
+}
