@@ -3,6 +3,9 @@
     "*/*": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
+    "us-isob-*/iam": {
+      "endpoint": "iam.{region}.sc2s.sgov.gov"
+    },
     "cn-*/*": {
       "endpoint": "{service}.{region}.amazonaws.com.cn"
     },
