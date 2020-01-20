@@ -1026,6 +1026,7 @@ declare namespace AlexaForBusiness {
   export type ConferenceProviderType = "CHIME"|"BLUEJEANS"|"FUZE"|"GOOGLE_HANGOUTS"|"POLYCOM"|"RINGCENTRAL"|"SKYPE_FOR_BUSINESS"|"WEBEX"|"ZOOM"|"CUSTOM"|string;
   export type ConferenceProvidersList = ConferenceProvider[];
   export type ConnectionStatus = "ONLINE"|"OFFLINE"|string;
+  export type ConnectionStatusUpdatedTime = Date;
   export interface Contact {
     /**
      * The ARN of the contact.
@@ -1726,7 +1727,12 @@ declare namespace AlexaForBusiness {
      * Detailed information about a device's status.
      */
     DeviceStatusInfo?: DeviceStatusInfo;
+    /**
+     * The time (in epoch) when the device data was created.
+     */
+    CreatedTime?: DeviceDataCreatedTime;
   }
+  export type DeviceDataCreatedTime = Date;
   export type DeviceDataList = DeviceData[];
   export interface DeviceEvent {
     /**
@@ -1786,6 +1792,10 @@ declare namespace AlexaForBusiness {
      * The latest available information about the connection status of a device. 
      */
     ConnectionStatus?: ConnectionStatus;
+    /**
+     * The time (in epoch) when the device connection status changed.
+     */
+    ConnectionStatusUpdatedTime?: ConnectionStatusUpdatedTime;
   }
   export type DeviceType = string;
   export type DeviceUsageType = "VOICE"|string;

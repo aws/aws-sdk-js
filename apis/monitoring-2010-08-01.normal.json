@@ -758,6 +758,10 @@
         "Configuration": {
           "shape": "AnomalyDetectorConfiguration",
           "documentation": "<p>The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model, and the time zone to use for the metric.</p>"
+        },
+        "StateValue": {
+          "shape": "AnomalyDetectorStateValue",
+          "documentation": "<p>The current status of the anomaly detector's training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code> </p>"
         }
       },
       "documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric and statistic. You can use the model to display a band of expected normal values when the metric is graphed.</p>"
@@ -784,6 +788,14 @@
     },
     "AnomalyDetectorMetricTimezone": {
       "type": "string"
+    },
+    "AnomalyDetectorStateValue": {
+      "type": "string",
+      "enum": [
+        "PENDING_TRAINING",
+        "TRAINED_INSUFFICIENT_DATA",
+        "TRAINED"
+      ]
     },
     "AnomalyDetectors": {
       "type": "list",

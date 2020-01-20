@@ -94,7 +94,7 @@
       "output": {
         "shape": "AdvertiseByoipCidrResult"
       },
-      "documentation": "<p>Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>"
+      "documentation": "<p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from AWS. To minimize down time, you can configure your AWS resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through AWS.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>"
     },
     "AllocateAddress": {
       "name": "AllocateAddress",
@@ -287,7 +287,7 @@
       "output": {
         "shape": "AssociateVpcCidrBlockResult"
       },
-      "documentation": "<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR block. The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing\">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing\">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "AttachClassicLinkVpc": {
       "name": "AttachClassicLinkVpc",
@@ -1201,7 +1201,7 @@
       "output": {
         "shape": "CreateVpcResult"
       },
-      "documentation": "<p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC.</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">BYOIP</a>).</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateVpcEndpoint": {
       "name": "CreateVpcEndpoint",
@@ -2031,7 +2031,7 @@
       "output": {
         "shape": "DescribeByoipCidrsResult"
       },
-      "documentation": "<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a>.</p>"
+      "documentation": "<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a> or <a>DescribeIpv6Pools</a>.</p>"
     },
     "DescribeCapacityReservations": {
       "name": "DescribeCapacityReservations",
@@ -2578,6 +2578,20 @@
         "shape": "DescribeInternetGatewaysResult"
       },
       "documentation": "<p>Describes one or more of your internet gateways.</p>"
+    },
+    "DescribeIpv6Pools": {
+      "name": "DescribeIpv6Pools",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeIpv6PoolsRequest"
+      },
+      "output": {
+        "shape": "DescribeIpv6PoolsResult"
+      },
+      "documentation": "<p>Describes your IPv6 address pools.</p>"
     },
     "DescribeKeyPairs": {
       "name": "DescribeKeyPairs",
@@ -3899,6 +3913,20 @@
       },
       "documentation": "<p>Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range.</p>"
     },
+    "GetAssociatedIpv6PoolCidrs": {
+      "name": "GetAssociatedIpv6PoolCidrs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetAssociatedIpv6PoolCidrsRequest"
+      },
+      "output": {
+        "shape": "GetAssociatedIpv6PoolCidrsResult"
+      },
+      "documentation": "<p>Gets information about the IPv6 CIDR block associations for a specified IPv6 address pool.</p>"
+    },
     "GetCapacityReservationUsage": {
       "name": "GetCapacityReservationUsage",
       "http": {
@@ -4738,7 +4766,7 @@
       "output": {
         "shape": "ProvisionByoipCidrResult"
       },
-      "documentation": "<p>Provisions an address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>"
+      "documentation": "<p>Provisions an IPv4 or IPv6 address range for use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>AWS verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>"
     },
     "PurchaseHostReservation": {
       "name": "PurchaseHostReservation",
@@ -5385,7 +5413,7 @@
       "output": {
         "shape": "WithdrawByoipCidrResult"
       },
-      "documentation": "<p>Stops advertising an IPv4 address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>"
+      "documentation": "<p>Stops advertising an address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of BGP propagation delays.</p>"
     }
   },
   "shapes": {
@@ -5715,7 +5743,7 @@
       "members": {
         "Cidr": {
           "shape": "String",
-          "documentation": "<p>The IPv4 address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.</p>"
+          "documentation": "<p>The address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -6381,6 +6409,14 @@
           "shape": "VpcId",
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
+        },
+        "Ipv6Pool": {
+          "shape": "String",
+          "documentation": "<p>The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.</p>"
+        },
+        "Ipv6CidrBlock": {
+          "shape": "String",
+          "documentation": "<p>An IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>"
         },
         "Ipv6CidrBlockNetworkBorderGroup": {
           "shape": "String",
@@ -7203,7 +7239,7 @@
       "members": {
         "Cidr": {
           "shape": "String",
-          "documentation": "<p>The public IPv4 address range, in CIDR notation.</p>",
+          "documentation": "<p>The address range, in CIDR notation.</p>",
           "locationName": "cidr"
         },
         "Description": {
@@ -11170,6 +11206,14 @@
           "documentation": "<p>Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.</p>",
           "locationName": "amazonProvidedIpv6CidrBlock"
         },
+        "Ipv6Pool": {
+          "shape": "String",
+          "documentation": "<p>The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.</p>"
+        },
+        "Ipv6CidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The IPv6 CIDR block from the IPv6 address pool. You must also specify <code>Ipv6Pool</code> in the request.</p> <p>To let Amazon choose the IPv6 CIDR block for you, omit this parameter.</p>"
+        },
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
@@ -12760,7 +12804,7 @@
       "members": {
         "Cidr": {
           "shape": "String",
-          "documentation": "<p>The public IPv4 address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.</p>"
+          "documentation": "<p>The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -14829,6 +14873,48 @@
         },
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeIpv6PoolsRequest": {
+      "type": "structure",
+      "members": {
+        "PoolIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The IDs of the IPv6 address pools.</p>",
+          "locationName": "PoolId"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "Ipv6PoolMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
+          "locationName": "Filter"
+        }
+      }
+    },
+    "DescribeIpv6PoolsResult": {
+      "type": "structure",
+      "members": {
+        "Ipv6Pools": {
+          "shape": "Ipv6PoolSet",
+          "documentation": "<p>Information about the IPv6 address pools.</p>",
+          "locationName": "ipv6PoolSet"
+        },
+        "NextToken": {
+          "shape": "NextToken",
           "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
@@ -17660,7 +17746,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC's CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC's CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-pool</code> - The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "VpcIds": {
@@ -20581,6 +20667,45 @@
       "enum": [
         "ipsec.1"
       ]
+    },
+    "GetAssociatedIpv6PoolCidrsRequest": {
+      "type": "structure",
+      "required": [
+        "PoolId"
+      ],
+      "members": {
+        "PoolId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the IPv6 address pool.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "Ipv6PoolMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "GetAssociatedIpv6PoolCidrsResult": {
+      "type": "structure",
+      "members": {
+        "Ipv6CidrAssociations": {
+          "shape": "Ipv6CidrAssociationSet",
+          "documentation": "<p>Information about the IPv6 CIDR block associations.</p>",
+          "locationName": "ipv6CidrAssociationSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
     },
     "GetCapacityReservationUsageRequest": {
       "type": "structure",
@@ -24679,6 +24804,29 @@
         "locationName": "item"
       }
     },
+    "Ipv6CidrAssociation": {
+      "type": "structure",
+      "members": {
+        "Ipv6Cidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv6 CIDR block.</p>",
+          "locationName": "ipv6Cidr"
+        },
+        "AssociatedResource": {
+          "shape": "String",
+          "documentation": "<p>The resource that's associated with the IPv6 CIDR block.</p>",
+          "locationName": "associatedResource"
+        }
+      },
+      "documentation": "<p>Describes an IPv6 CIDR block association.</p>"
+    },
+    "Ipv6CidrAssociationSet": {
+      "type": "list",
+      "member": {
+        "shape": "Ipv6CidrAssociation",
+        "locationName": "item"
+      }
+    },
     "Ipv6CidrBlock": {
       "type": "structure",
       "members": {
@@ -24699,6 +24847,44 @@
     },
     "Ipv6Flag": {
       "type": "boolean"
+    },
+    "Ipv6Pool": {
+      "type": "structure",
+      "members": {
+        "PoolId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the address pool.</p>",
+          "locationName": "poolId"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description for the address pool.</p>",
+          "locationName": "description"
+        },
+        "PoolCidrBlocks": {
+          "shape": "PoolCidrBlocksSet",
+          "documentation": "<p>The CIDR blocks for the address pool.</p>",
+          "locationName": "poolCidrBlockSet"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags for the address pool.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes an IPv6 address pool.</p>"
+    },
+    "Ipv6PoolMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
+    "Ipv6PoolSet": {
+      "type": "list",
+      "member": {
+        "shape": "Ipv6Pool",
+        "locationName": "item"
+      }
     },
     "Ipv6Range": {
       "type": "structure",
@@ -29508,6 +29694,24 @@
         "Windows"
       ]
     },
+    "PoolCidrBlock": {
+      "type": "structure",
+      "members": {
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The CIDR block.</p>",
+          "locationName": "poolCidrBlock"
+        }
+      },
+      "documentation": "<p>Describes a CIDR block for an address pool.</p>"
+    },
+    "PoolCidrBlocksSet": {
+      "type": "list",
+      "member": {
+        "shape": "PoolCidrBlock",
+        "locationName": "item"
+      }
+    },
     "PoolMaxResults": {
       "type": "integer",
       "max": 10,
@@ -29856,11 +30060,15 @@
       "members": {
         "Cidr": {
           "shape": "String",
-          "documentation": "<p>The public IPv4 address range, in CIDR notation. The most specific prefix that you can specify is /24. The address range cannot overlap with another address range that you've brought to this or another Region.</p>"
+          "documentation": "<p>The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can specify is /24. The most specific IPv6 prefix you can specify is /56. The address range cannot overlap with another address range that you've brought to this or another Region.</p>"
         },
         "CidrAuthorizationContext": {
           "shape": "CidrAuthorizationContext",
           "documentation": "<p>A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP.</p>"
+        },
+        "PubliclyAdvertisable": {
+          "shape": "Boolean",
+          "documentation": "<p>(IPv6 only) Indicate whether the address range will be publicly advertised to the internet.</p> <p>Default: true</p>"
         },
         "Description": {
           "shape": "String",
@@ -29877,7 +30085,7 @@
       "members": {
         "ByoipCidr": {
           "shape": "ByoipCidr",
-          "documentation": "<p>Information about the address pool.</p>",
+          "documentation": "<p>Information about the address range.</p>",
           "locationName": "byoipCidr"
         }
       }
@@ -29925,7 +30133,7 @@
       "members": {
         "PoolId": {
           "shape": "String",
-          "documentation": "<p>The ID of the IPv4 address pool.</p>",
+          "documentation": "<p>The ID of the address pool.</p>",
           "locationName": "poolId"
         },
         "Description": {
@@ -29949,7 +30157,7 @@
           "locationName": "totalAvailableAddressCount"
         }
       },
-      "documentation": "<p>Describes an address pool.</p>"
+      "documentation": "<p>Describes an IPv4 address pool.</p>"
     },
     "PublicIpv4PoolRange": {
       "type": "structure",
@@ -38432,6 +38640,11 @@
           "documentation": "<p>Information about the state of the CIDR block.</p>",
           "locationName": "ipv6CidrBlockState"
         },
+        "Ipv6Pool": {
+          "shape": "String",
+          "documentation": "<p>The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.</p>",
+          "locationName": "ipv6Pool"
+        },
         "NetworkBorderGroup": {
           "shape": "String",
           "documentation": "<p>The name of the location from which we advertise the IPV6 CIDR block.</p>",
@@ -38929,7 +39142,7 @@
       "members": {
         "Cidr": {
           "shape": "String",
-          "documentation": "<p>The public IPv4 address range, in CIDR notation.</p>"
+          "documentation": "<p>The address range, in CIDR notation.</p>"
         },
         "DryRun": {
           "shape": "Boolean",

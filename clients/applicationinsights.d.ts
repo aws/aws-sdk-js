@@ -140,6 +140,14 @@ declare class ApplicationInsights extends Service {
    */
   listComponents(callback?: (err: AWSError, data: ApplicationInsights.Types.ListComponentsResponse) => void): Request<ApplicationInsights.Types.ListComponentsResponse, AWSError>;
   /**
+   *  Lists the INFO, WARN, and ERROR events for periodic configuration updates performed by Application Insights. Examples of events represented are:    INFO: creating a new alarm or updating an alarm threshold.   WARN: alarm not created due to insufficient data points used to predict thresholds.   ERROR: alarm not created due to permission errors or exceeding quotas.   
+   */
+  listConfigurationHistory(params: ApplicationInsights.Types.ListConfigurationHistoryRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.ListConfigurationHistoryResponse) => void): Request<ApplicationInsights.Types.ListConfigurationHistoryResponse, AWSError>;
+  /**
+   *  Lists the INFO, WARN, and ERROR events for periodic configuration updates performed by Application Insights. Examples of events represented are:    INFO: creating a new alarm or updating an alarm threshold.   WARN: alarm not created due to insufficient data points used to predict thresholds.   ERROR: alarm not created due to permission errors or exceeding quotas.   
+   */
+  listConfigurationHistory(callback?: (err: AWSError, data: ApplicationInsights.Types.ListConfigurationHistoryResponse) => void): Request<ApplicationInsights.Types.ListConfigurationHistoryResponse, AWSError>;
+  /**
    * Lists the log pattern sets in the specific application.
    */
   listLogPatternSets(params: ApplicationInsights.Types.ListLogPatternSetsRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.ListLogPatternSetsResponse) => void): Request<ApplicationInsights.Types.ListLogPatternSetsResponse, AWSError>;
@@ -260,13 +268,46 @@ declare namespace ApplicationInsights {
      */
     OpsCenterEnabled?: OpsCenterEnabled;
     /**
-     * The issues on the user side that block Application Insights from successfully monitoring an application.
+     * The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:   “Configuring application, detected 1 Errors, 3 Warnings”   “Configuring application, detected 1 Unconfigured Components”  
      */
     Remarks?: Remarks;
   }
   export type ApplicationInfoList = ApplicationInfo[];
   export type ComponentConfiguration = string;
   export type ComponentName = string;
+  export interface ConfigurationEvent {
+    /**
+     *  The resource monitored by Application Insights. 
+     */
+    MonitoredResourceARN?: ConfigurationEventMonitoredResourceARN;
+    /**
+     *  The status of the configuration update event. Possible values include INFO, WARN, and ERROR. 
+     */
+    EventStatus?: ConfigurationEventStatus;
+    /**
+     *  The resource type that Application Insights attempted to configure, for example, CLOUDWATCH_ALARM. 
+     */
+    EventResourceType?: ConfigurationEventResourceType;
+    /**
+     *  The timestamp of the event. 
+     */
+    EventTime?: ConfigurationEventTime;
+    /**
+     *  The details of the event in plain text. 
+     */
+    EventDetail?: ConfigurationEventDetail;
+    /**
+     *  The name of the resource Application Insights attempted to configure. 
+     */
+    EventResourceName?: ConfigurationEventResourceName;
+  }
+  export type ConfigurationEventDetail = string;
+  export type ConfigurationEventList = ConfigurationEvent[];
+  export type ConfigurationEventMonitoredResourceARN = string;
+  export type ConfigurationEventResourceName = string;
+  export type ConfigurationEventResourceType = "CLOUDWATCH_ALARM"|"CLOUDFORMATION"|"SSM_ASSOCIATION"|string;
+  export type ConfigurationEventStatus = "INFO"|"WARN"|"ERROR"|string;
+  export type ConfigurationEventTime = Date;
   export interface CreateApplicationRequest {
     /**
      * The name of the resource group.
@@ -556,6 +597,42 @@ declare namespace ApplicationInsights {
     ApplicationComponentList?: ApplicationComponentList;
     /**
      * The token to request the next page of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListConfigurationHistoryRequest {
+    /**
+     * Resource group to which the application belongs. 
+     */
+    ResourceGroupName?: ResourceGroupName;
+    /**
+     * The start time of the event. 
+     */
+    StartTime?: StartTime;
+    /**
+     * The end time of the event.
+     */
+    EndTime?: EndTime;
+    /**
+     * The status of the configuration update event. Possible values include INFO, WARN, and ERROR.
+     */
+    EventStatus?: ConfigurationEventStatus;
+    /**
+     *  The maximum number of results returned by ListConfigurationHistory in paginated output. When this parameter is used, ListConfigurationHistory returns only MaxResults in a single page along with a NextToken response element. The remaining results of the initial request can be seen by sending another ListConfigurationHistory request with the returned NextToken value. If this parameter is not used, then ListConfigurationHistory returns all results. 
+     */
+    MaxResults?: MaxEntities;
+    /**
+     * The NextToken value returned from a previous paginated ListConfigurationHistory request where MaxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the NextToken value. This value is null when there are no more results to return.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListConfigurationHistoryResponse {
+    /**
+     *  The list of configuration events and their corresponding details. 
+     */
+    EventList?: ConfigurationEventList;
+    /**
+     * The NextToken value to include in a future ListConfigurationHistory request. When the results of a ListConfigurationHistory request exceed MaxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: PaginationToken;
   }

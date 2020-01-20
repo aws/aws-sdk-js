@@ -429,6 +429,31 @@
       ],
       "documentation": "<p>Lists the auto-grouped, standalone, and custom components of the application.</p>"
     },
+    "ListConfigurationHistory": {
+      "name": "ListConfigurationHistory",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListConfigurationHistoryRequest"
+      },
+      "output": {
+        "shape": "ListConfigurationHistoryResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p> Lists the INFO, WARN, and ERROR events for periodic configuration updates performed by Application Insights. Examples of events represented are: </p> <ul> <li> <p>INFO: creating a new alarm or updating an alarm threshold.</p> </li> <li> <p>WARN: alarm not created due to insufficient data points used to predict thresholds.</p> </li> <li> <p>ERROR: alarm not created due to permission errors or exceeding quotas. </p> </li> </ul>"
+    },
     "ListLogPatternSets": {
       "name": "ListLogPatternSets",
       "http": {
@@ -738,7 +763,7 @@
         },
         "Remarks": {
           "shape": "Remarks",
-          "documentation": "<p>The issues on the user side that block Application Insights from successfully monitoring an application.</p>"
+          "documentation": "<p>The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:</p> <ul> <li> <p>“Configuring application, detected 1 Errors, 3 Warnings”</p> </li> <li> <p>“Configuring application, detected 1 Unconfigured Components”</p> </li> </ul>"
         }
       },
       "documentation": "<p>Describes the status of the application.</p>"
@@ -756,6 +781,70 @@
     },
     "ComponentName": {
       "type": "string"
+    },
+    "ConfigurationEvent": {
+      "type": "structure",
+      "members": {
+        "MonitoredResourceARN": {
+          "shape": "ConfigurationEventMonitoredResourceARN",
+          "documentation": "<p> The resource monitored by Application Insights. </p>"
+        },
+        "EventStatus": {
+          "shape": "ConfigurationEventStatus",
+          "documentation": "<p> The status of the configuration update event. Possible values include INFO, WARN, and ERROR. </p>"
+        },
+        "EventResourceType": {
+          "shape": "ConfigurationEventResourceType",
+          "documentation": "<p> The resource type that Application Insights attempted to configure, for example, CLOUDWATCH_ALARM. </p>"
+        },
+        "EventTime": {
+          "shape": "ConfigurationEventTime",
+          "documentation": "<p> The timestamp of the event. </p>"
+        },
+        "EventDetail": {
+          "shape": "ConfigurationEventDetail",
+          "documentation": "<p> The details of the event in plain text. </p>"
+        },
+        "EventResourceName": {
+          "shape": "ConfigurationEventResourceName",
+          "documentation": "<p> The name of the resource Application Insights attempted to configure. </p>"
+        }
+      },
+      "documentation": "<p> The event information. </p>"
+    },
+    "ConfigurationEventDetail": {
+      "type": "string"
+    },
+    "ConfigurationEventList": {
+      "type": "list",
+      "member": {
+        "shape": "ConfigurationEvent"
+      }
+    },
+    "ConfigurationEventMonitoredResourceARN": {
+      "type": "string"
+    },
+    "ConfigurationEventResourceName": {
+      "type": "string"
+    },
+    "ConfigurationEventResourceType": {
+      "type": "string",
+      "enum": [
+        "CLOUDWATCH_ALARM",
+        "CLOUDFORMATION",
+        "SSM_ASSOCIATION"
+      ]
+    },
+    "ConfigurationEventStatus": {
+      "type": "string",
+      "enum": [
+        "INFO",
+        "WARN",
+        "ERROR"
+      ]
+    },
+    "ConfigurationEventTime": {
+      "type": "timestamp"
     },
     "CreateApplicationRequest": {
       "type": "structure",
@@ -1229,6 +1318,48 @@
         "NextToken": {
           "shape": "PaginationToken",
           "documentation": "<p>The token to request the next page of results.</p>"
+        }
+      }
+    },
+    "ListConfigurationHistoryRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceGroupName": {
+          "shape": "ResourceGroupName",
+          "documentation": "<p>Resource group to which the application belongs. </p>"
+        },
+        "StartTime": {
+          "shape": "StartTime",
+          "documentation": "<p>The start time of the event. </p>"
+        },
+        "EndTime": {
+          "shape": "EndTime",
+          "documentation": "<p>The end time of the event.</p>"
+        },
+        "EventStatus": {
+          "shape": "ConfigurationEventStatus",
+          "documentation": "<p>The status of the configuration update event. Possible values include INFO, WARN, and ERROR.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxEntities",
+          "documentation": "<p> The maximum number of results returned by <code>ListConfigurationHistory</code> in paginated output. When this parameter is used, <code>ListConfigurationHistory</code> returns only <code>MaxResults</code> in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListConfigurationHistory</code> request with the returned <code>NextToken</code> value. If this parameter is not used, then <code>ListConfigurationHistory</code> returns all results. </p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The <code>NextToken</code> value returned from a previous paginated <code>ListConfigurationHistory</code> request where <code>MaxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>NextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
+    "ListConfigurationHistoryResponse": {
+      "type": "structure",
+      "members": {
+        "EventList": {
+          "shape": "ConfigurationEventList",
+          "documentation": "<p> The list of configuration events and their corresponding details. </p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The <code>NextToken</code> value to include in a future <code>ListConfigurationHistory</code> request. When the results of a <code>ListConfigurationHistory</code> request exceed <code>MaxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
         }
       }
     },

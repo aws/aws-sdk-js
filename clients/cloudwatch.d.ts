@@ -306,6 +306,10 @@ declare namespace CloudWatch {
      * The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model, and the time zone to use for the metric.
      */
     Configuration?: AnomalyDetectorConfiguration;
+    /**
+     * The current status of the anomaly detector's training. The possible values are TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA 
+     */
+    StateValue?: AnomalyDetectorStateValue;
   }
   export interface AnomalyDetectorConfiguration {
     /**
@@ -319,6 +323,7 @@ declare namespace CloudWatch {
   }
   export type AnomalyDetectorExcludedTimeRanges = Range[];
   export type AnomalyDetectorMetricTimezone = string;
+  export type AnomalyDetectorStateValue = "PENDING_TRAINING"|"TRAINED_INSUFFICIENT_DATA"|"TRAINED"|string;
   export type AnomalyDetectors = AnomalyDetector[];
   export type BatchFailures = PartialFailure[];
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|"LessThanLowerOrGreaterThanUpperThreshold"|"LessThanLowerThreshold"|"GreaterThanUpperThreshold"|string;

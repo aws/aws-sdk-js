@@ -2432,6 +2432,9 @@
         "OFFLINE"
       ]
     },
+    "ConnectionStatusUpdatedTime": {
+      "type": "timestamp"
+    },
     "Contact": {
       "type": "structure",
       "members": {
@@ -3430,9 +3433,16 @@
         "DeviceStatusInfo": {
           "shape": "DeviceStatusInfo",
           "documentation": "<p>Detailed information about a device's status.</p>"
+        },
+        "CreatedTime": {
+          "shape": "DeviceDataCreatedTime",
+          "documentation": "<p>The time (in epoch) when the device data was created.</p>"
         }
       },
       "documentation": "<p>Device attributes.</p>"
+    },
+    "DeviceDataCreatedTime": {
+      "type": "timestamp"
     },
     "DeviceDataList": {
       "type": "list",
@@ -3574,6 +3584,10 @@
         "ConnectionStatus": {
           "shape": "ConnectionStatus",
           "documentation": "<p>The latest available information about the connection status of a device. </p>"
+        },
+        "ConnectionStatusUpdatedTime": {
+          "shape": "ConnectionStatusUpdatedTime",
+          "documentation": "<p>The time (in epoch) when the device connection status changed.</p>"
         }
       },
       "documentation": "<p>Detailed information about a device's status.</p>"

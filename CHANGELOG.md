@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.606.0-->
+<!--LATEST=2.607.0-->
 <!--ENTRYINSERT-->
+
+## 2.607.0
+* feature: AlexaForBusiness: Add support for CreatedTime and ConnectionStatusUpdatedTime in response of SearchDevices API.
+* feature: ApplicationInsights: This release adds support for a list API to retrieve the configuration events logged during periodic updates to an application by Amazon CloudWatch Application Insights. 
+* feature: CloudWatch: Updating DescribeAnomalyDetectors API to return AnomalyDetector Status value in response.
+* feature: EC2: This release provides support for a preview of bringing your own IPv6 addresses (BYOIP for IPv6) for use in AWS.
+* feature: KMS: The ConnectCustomKeyStore operation now provides new error codes (USER_LOGGED_IN and USER_NOT_FOUND) for customers to better troubleshoot if their connect custom key store operation fails. Password length validation during CreateCustomKeyStore now also occurs on the client side. 
+* feature: Lambda: Added reason codes to StateReasonCode (InvalidSubnet, InvalidSecurityGroup) and LastUpdateStatusReasonCode (SubnetOutOfIPAddresses, InvalidSubnet, InvalidSecurityGroup) for functions that connect to a VPC.
 
 ## 2.606.0
 * bugfix: iam: add IAM endpoint for us-isob-*
