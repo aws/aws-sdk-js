@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.607.0-->
+<!--LATEST=2.608.0-->
 <!--ENTRYINSERT-->
+
+## 2.608.0
+* feature: CodePipeline: AWS CodePipeline enables an ability to stop pipeline executions.
+* feature: EC2: Add an enum value to the result of DescribeByoipCidrs to support CIDRs that are not publicly advertisable.
+* feature: MarketplaceCommerceAnalytics: Remove 4 deprecated data sets, change some data sets available dates to 2017-09-15
 
 ## 2.607.0
 * feature: AlexaForBusiness: Add support for CreatedTime and ConnectionStatusUpdatedTime in response of SearchDevices API.

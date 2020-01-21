@@ -92,11 +92,11 @@ declare class CodePipeline extends Service {
    */
   enableStageTransition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns information about a job. Used for custom actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Returns information about a job. Used for custom actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   getJobDetails(params: CodePipeline.Types.GetJobDetailsInput, callback?: (err: AWSError, data: CodePipeline.Types.GetJobDetailsOutput) => void): Request<CodePipeline.Types.GetJobDetailsOutput, AWSError>;
   /**
-   * Returns information about a job. Used for custom actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Returns information about a job. Used for custom actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   getJobDetails(callback?: (err: AWSError, data: CodePipeline.Types.GetJobDetailsOutput) => void): Request<CodePipeline.Types.GetJobDetailsOutput, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class CodePipeline extends Service {
    */
   getPipelineState(callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineStateOutput) => void): Request<CodePipeline.Types.GetPipelineStateOutput, AWSError>;
   /**
-   * Requests the details of a job for a third party action. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Requests the details of a job for a third party action. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   getThirdPartyJobDetails(params: CodePipeline.Types.GetThirdPartyJobDetailsInput, callback?: (err: AWSError, data: CodePipeline.Types.GetThirdPartyJobDetailsOutput) => void): Request<CodePipeline.Types.GetThirdPartyJobDetailsOutput, AWSError>;
   /**
-   * Requests the details of a job for a third party action. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Requests the details of a job for a third party action. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   getThirdPartyJobDetails(callback?: (err: AWSError, data: CodePipeline.Types.GetThirdPartyJobDetailsOutput) => void): Request<CodePipeline.Types.GetThirdPartyJobDetailsOutput, AWSError>;
   /**
@@ -180,19 +180,19 @@ declare class CodePipeline extends Service {
    */
   listWebhooks(callback?: (err: AWSError, data: CodePipeline.Types.ListWebhooksOutput) => void): Request<CodePipeline.Types.ListWebhooksOutput, AWSError>;
   /**
-   * Returns information about any jobs for AWS CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Returns information about any jobs for AWS CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   pollForJobs(params: CodePipeline.Types.PollForJobsInput, callback?: (err: AWSError, data: CodePipeline.Types.PollForJobsOutput) => void): Request<CodePipeline.Types.PollForJobsOutput, AWSError>;
   /**
-   * Returns information about any jobs for AWS CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Returns information about any jobs for AWS CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   pollForJobs(callback?: (err: AWSError, data: CodePipeline.Types.PollForJobsOutput) => void): Request<CodePipeline.Types.PollForJobsOutput, AWSError>;
   /**
-   * Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. 
+   * Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. 
    */
   pollForThirdPartyJobs(params: CodePipeline.Types.PollForThirdPartyJobsInput, callback?: (err: AWSError, data: CodePipeline.Types.PollForThirdPartyJobsOutput) => void): Request<CodePipeline.Types.PollForThirdPartyJobsOutput, AWSError>;
   /**
-   * Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. 
+   * Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. 
    */
   pollForThirdPartyJobs(callback?: (err: AWSError, data: CodePipeline.Types.PollForThirdPartyJobsOutput) => void): Request<CodePipeline.Types.PollForThirdPartyJobsOutput, AWSError>;
   /**
@@ -275,6 +275,14 @@ declare class CodePipeline extends Service {
    * Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.
    */
   startPipelineExecution(callback?: (err: AWSError, data: CodePipeline.Types.StartPipelineExecutionOutput) => void): Request<CodePipeline.Types.StartPipelineExecutionOutput, AWSError>;
+  /**
+   * Stops the specified pipeline execution. You choose to either stop the pipeline execution by completing in-progress actions without starting subsequent actions, or by abandoning in-progress actions. While completing or abandoning in-progress actions, the pipeline execution is in a Stopping state. After all in-progress actions are completed or abandoned, the pipeline execution is in a Stopped state.
+   */
+  stopPipelineExecution(params: CodePipeline.Types.StopPipelineExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.StopPipelineExecutionOutput) => void): Request<CodePipeline.Types.StopPipelineExecutionOutput, AWSError>;
+  /**
+   * Stops the specified pipeline execution. You choose to either stop the pipeline execution by completing in-progress actions without starting subsequent actions, or by abandoning in-progress actions. While completing or abandoning in-progress actions, the pipeline execution is in a Stopping state. After all in-progress actions are completed or abandoned, the pipeline execution is in a Stopped state.
+   */
+  stopPipelineExecution(callback?: (err: AWSError, data: CodePipeline.Types.StopPipelineExecutionOutput) => void): Request<CodePipeline.Types.StopPipelineExecutionOutput, AWSError>;
   /**
    * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource. 
    */
@@ -588,7 +596,7 @@ declare namespace CodePipeline {
      */
     externalExecutionUrl?: Url;
   }
-  export type ActionExecutionStatus = "InProgress"|"Succeeded"|"Failed"|string;
+  export type ActionExecutionStatus = "InProgress"|"Abandoned"|"Succeeded"|"Failed"|string;
   export type ActionExecutionToken = string;
   export type ActionName = string;
   export type ActionNamespace = string;
@@ -746,7 +754,7 @@ declare namespace CodePipeline {
      */
     type?: ArtifactLocationType;
     /**
-     * The Amazon S3 bucket that contains the artifact.
+     * The S3 bucket that contains the artifact.
      */
     s3Location?: S3ArtifactLocation;
   }
@@ -785,7 +793,7 @@ declare namespace CodePipeline {
      */
     type: ArtifactStoreType;
     /**
-     * The Amazon S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any Amazon S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
+     * The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
      */
     location: ArtifactStoreLocation;
     /**
@@ -1171,7 +1179,7 @@ declare namespace CodePipeline {
      */
     outputArtifacts?: ArtifactList;
     /**
-     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifacts for the pipeline in AWS CodePipeline.
+     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifacts for the pipeline in AWS CodePipeline.
      */
     artifactCredentials?: AWSSessionCredentials;
     /**
@@ -1418,7 +1426,7 @@ declare namespace CodePipeline {
      */
     roleArn: RoleArn;
     /**
-     * Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.  You must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores. 
+     * Represents information about the S3 bucket where artifacts are stored for the pipeline.  You must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores. 
      */
     artifactStore?: ArtifactStore;
     /**
@@ -1436,11 +1444,11 @@ declare namespace CodePipeline {
   }
   export interface PipelineExecution {
     /**
-     * The name of the pipeline that was executed.
+     * The name of the pipeline with the specified pipeline execution.
      */
     pipelineName?: PipelineName;
     /**
-     * The version number of the pipeline that was executed.
+     * The version number of the pipeline with the specified pipeline execution.
      */
     pipelineVersion?: PipelineVersion;
     /**
@@ -1448,7 +1456,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
     /**
-     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead.    Failed: The pipeline execution was not completed successfully.  
+     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Stopped: The pipeline execution was manually stopped. For more information, see Stopped Executions.   Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see Stopped Executions.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see Superseded Executions.   Failed: The pipeline execution was not completed successfully.  
      */
     status?: PipelineExecutionStatus;
     /**
@@ -1457,14 +1465,14 @@ declare namespace CodePipeline {
     artifactRevisions?: ArtifactRevisionList;
   }
   export type PipelineExecutionId = string;
-  export type PipelineExecutionStatus = "InProgress"|"Succeeded"|"Superseded"|"Failed"|string;
+  export type PipelineExecutionStatus = "InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string;
   export interface PipelineExecutionSummary {
     /**
      * The ID of the pipeline execution.
      */
     pipelineExecutionId?: PipelineExecutionId;
     /**
-     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead.    Failed: The pipeline execution was not completed successfully.  
+     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Stopped: The pipeline execution was manually stopped. For more information, see Stopped Executions.   Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see Stopped Executions.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see Superseded Executions.   Failed: The pipeline execution was not completed successfully.  
      */
     status?: PipelineExecutionStatus;
     /**
@@ -1483,6 +1491,10 @@ declare namespace CodePipeline {
      * The interaction or event that started a pipeline execution, such as automated change detection or a StartPipelineExecution API call.
      */
     trigger?: ExecutionTrigger;
+    /**
+     * The interaction that stopped a pipeline execution.
+     */
+    stopTrigger?: StopExecutionTrigger;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export type PipelineList = PipelineSummary[];
@@ -1738,11 +1750,11 @@ declare namespace CodePipeline {
   export type RoleArn = string;
   export interface S3ArtifactLocation {
     /**
-     * The name of the Amazon S3 bucket.
+     * The name of the S3 bucket.
      */
     bucketName: S3BucketName;
     /**
-     * The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket.
+     * The key of the object in the S3 bucket, which uniquely identifies the object in the bucket.
      */
     objectKey: S3ObjectKey;
   }
@@ -1813,7 +1825,7 @@ declare namespace CodePipeline {
      */
     status: StageExecutionStatus;
   }
-  export type StageExecutionStatus = "InProgress"|"Failed"|"Succeeded"|string;
+  export type StageExecutionStatus = "InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string;
   export type StageName = string;
   export type StageRetryMode = "FAILED_ACTIONS"|string;
   export interface StageState {
@@ -1852,6 +1864,37 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
   }
+  export interface StopExecutionTrigger {
+    /**
+     * The user-specified reason the pipeline was stopped.
+     */
+    reason?: StopPipelineExecutionReason;
+  }
+  export interface StopPipelineExecutionInput {
+    /**
+     * The name of the pipeline to stop.
+     */
+    pipelineName: PipelineName;
+    /**
+     * The ID of the pipeline execution to be stopped in the current stage. Use the GetPipelineState action to retrieve the current pipelineExecutionId.
+     */
+    pipelineExecutionId: PipelineExecutionId;
+    /**
+     * Use this option to stop the pipeline execution by abandoning, rather than finishing, in-progress actions.  This option can lead to failed or out-of-sequence tasks. 
+     */
+    abandon?: Boolean;
+    /**
+     * Use this option to enter comments, such as the reason the pipeline was stopped.
+     */
+    reason?: StopPipelineExecutionReason;
+  }
+  export interface StopPipelineExecutionOutput {
+    /**
+     * The unique system-generated ID of the pipeline execution that was stopped.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
+  }
+  export type StopPipelineExecutionReason = string;
   export type String = string;
   export interface Tag {
     /**
@@ -1911,7 +1954,7 @@ declare namespace CodePipeline {
      */
     outputArtifacts?: ArtifactList;
     /**
-     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline. 
+     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifact for the pipeline in AWS CodePipeline. 
      */
     artifactCredentials?: AWSSessionCredentials;
     /**

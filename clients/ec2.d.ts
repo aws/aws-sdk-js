@@ -4541,7 +4541,7 @@ declare namespace EC2 {
     State?: ByoipCidrState;
   }
   export type ByoipCidrSet = ByoipCidr[];
-  export type ByoipCidrState = "advertised"|"deprovisioned"|"failed-deprovision"|"failed-provision"|"pending-deprovision"|"pending-provision"|"provisioned"|string;
+  export type ByoipCidrState = "advertised"|"deprovisioned"|"failed-deprovision"|"failed-provision"|"pending-deprovision"|"pending-provision"|"provisioned"|"provisioned-not-publicly-advertisable"|string;
   export type CancelBatchErrorCode = "fleetRequestIdDoesNotExist"|"fleetRequestIdMalformed"|"fleetRequestNotInCancellableState"|"unexpectedError"|string;
   export interface CancelBundleTaskRequest {
     /**

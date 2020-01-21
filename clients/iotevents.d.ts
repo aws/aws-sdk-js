@@ -167,19 +167,19 @@ declare namespace IoTEvents {
      */
     resetTimer?: ResetTimerAction;
     /**
-     * Calls an AWS Lambda function, passing in information about the detector model instance and the event which triggered the action.
+     * Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.
      */
     lambda?: LambdaAction;
     /**
-     * Sends an IoT Events input, passing in information about the detector model instance and the event which triggered the action.
+     * Sends an IoT Events input, passing in information about the detector model instance and the event that triggered the action.
      */
     iotEvents?: IotEventsAction;
     /**
-     * Sends information about the detector model instance and the event which triggered the action to an Amazon SQS queue.
+     * Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
      */
     sqs?: SqsAction;
     /**
-     * Sends information about the detector model instance and the event which triggered the action to a Kinesis Data Firehose delivery stream.
+     * Sends information about the detector model instance and the event that triggered the action to a Kinesis Data Firehose delivery stream.
      */
     firehose?: FirehoseAction;
   }
@@ -214,7 +214,7 @@ declare namespace IoTEvents {
      */
     detectorModelDescription?: DetectorModelDescription;
     /**
-     * The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
+     * The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
      */
     key?: AttributeJsonPath;
     /**
@@ -226,7 +226,7 @@ declare namespace IoTEvents {
      */
     tags?: Tags;
     /**
-     * When set to SERIAL, variables are updated and event conditions evaluated in the order that the events are defined. When set to BATCH, variables are updated and events performed only after all event conditions are evaluated.
+     * Information about the order in which events are evaluated and how actions are executed. 
      */
     evaluationMethod?: EvaluationMethod;
   }
@@ -369,11 +369,11 @@ declare namespace IoTEvents {
      */
     status?: DetectorModelVersionStatus;
     /**
-     * The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
+     * The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.
      */
     key?: AttributeJsonPath;
     /**
-     * When set to SERIAL, variables are updated and event conditions evaluated in the order that the events are defined. When set to BATCH, variables are updated and events performed only after all event conditions are evaluated.
+     * Information about the order in which events are evaluated and how actions are executed. 
      */
     evaluationMethod?: EvaluationMethod;
   }
@@ -437,7 +437,7 @@ declare namespace IoTEvents {
      */
     status?: DetectorModelVersionStatus;
     /**
-     * When set to SERIAL, variables are updated and event conditions evaluated in the order that the events are defined. When set to BATCH, variables are updated and events performed only after all event conditions are evaluated.
+     * Information about the order in which events are evaluated and how actions are executed. 
      */
     evaluationMethod?: EvaluationMethod;
   }
@@ -557,7 +557,7 @@ declare namespace IoTEvents {
   export type KeyValue = string;
   export interface LambdaAction {
     /**
-     * The ARN of the AWS Lambda function which is executed.
+     * The ARN of the Lambda function that is executed.
      */
     functionArn: AmazonResourceName;
   }
@@ -724,7 +724,7 @@ declare namespace IoTEvents {
   }
   export interface SqsAction {
     /**
-     * The URL of the Amazon SQS queue where the data is written.
+     * The URL of the SQS queue where the data is written.
      */
     queueUrl: QueueUrl;
     /**
@@ -829,7 +829,7 @@ declare namespace IoTEvents {
      */
     roleArn: AmazonResourceName;
     /**
-     * When set to SERIAL, variables are updated and event conditions evaluated in the order that the events are defined. When set to BATCH, variables are updated and events performed only after all event conditions are evaluated.
+     * Information about the order in which events are evaluated and how actions are executed. 
      */
     evaluationMethod?: EvaluationMethod;
   }

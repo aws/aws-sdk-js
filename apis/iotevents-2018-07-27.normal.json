@@ -558,19 +558,19 @@
         },
         "lambda": {
           "shape": "LambdaAction",
-          "documentation": "<p>Calls an AWS Lambda function, passing in information about the detector model instance and the event which triggered the action.</p>"
+          "documentation": "<p>Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.</p>"
         },
         "iotEvents": {
           "shape": "IotEventsAction",
-          "documentation": "<p>Sends an IoT Events input, passing in information about the detector model instance and the event which triggered the action.</p>"
+          "documentation": "<p>Sends an IoT Events input, passing in information about the detector model instance and the event that triggered the action.</p>"
         },
         "sqs": {
           "shape": "SqsAction",
-          "documentation": "<p>Sends information about the detector model instance and the event which triggered the action to an Amazon SQS queue.</p>"
+          "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.</p>"
         },
         "firehose": {
           "shape": "FirehoseAction",
-          "documentation": "<p>Sends information about the detector model instance and the event which triggered the action to a Kinesis Data Firehose delivery stream.</p>"
+          "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to a Kinesis Data Firehose delivery stream.</p>"
         }
       },
       "documentation": "<p>An action to be performed when the <code>\"condition\"</code> is TRUE.</p>"
@@ -652,7 +652,7 @@
         },
         "key": {
           "shape": "AttributeJsonPath",
-          "documentation": "<p>The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.</p>"
+          "documentation": "<p>The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.</p>"
         },
         "roleArn": {
           "shape": "AmazonResourceName",
@@ -664,7 +664,7 @@
         },
         "evaluationMethod": {
           "shape": "EvaluationMethod",
-          "documentation": "<p>When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.</p>"
+          "documentation": "<p>Information about the order in which events are evaluated and how actions are executed. </p>"
         }
       }
     },
@@ -893,11 +893,11 @@
         },
         "key": {
           "shape": "AttributeJsonPath",
-          "documentation": "<p>The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.</p>"
+          "documentation": "<p>The input attribute key used to identify a device or system in order to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression to specify the attribute-value pair in the message payload of each input that is used to identify the device associated with the input.</p>"
         },
         "evaluationMethod": {
           "shape": "EvaluationMethod",
-          "documentation": "<p>When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.</p>"
+          "documentation": "<p>Information about the order in which events are evaluated and how actions are executed. </p>"
         }
       },
       "documentation": "<p>Information about how the detector model is configured.</p>"
@@ -1010,7 +1010,7 @@
         },
         "evaluationMethod": {
           "shape": "EvaluationMethod",
-          "documentation": "<p>When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.</p>"
+          "documentation": "<p>Information about the order in which events are evaluated and how actions are executed. </p>"
         }
       },
       "documentation": "<p>Information about the detector model version.</p>"
@@ -1068,7 +1068,7 @@
           "documentation": "<p>A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).</p>"
         }
       },
-      "documentation": "<p>Sends information about the detector model instance and the event which triggered the action to a Kinesis Data Firehose delivery stream.</p>"
+      "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to a Kinesis Data Firehose delivery stream.</p>"
     },
     "FirehoseSeparator": {
       "type": "string",
@@ -1207,7 +1207,7 @@
           "documentation": "<p>The name of the AWS IoT Events input where the data is sent.</p>"
         }
       },
-      "documentation": "<p>Sends an IoT Events input, passing in information about the detector model instance and the event which triggered the action.</p>"
+      "documentation": "<p>Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.</p>"
     },
     "IotTopicPublishAction": {
       "type": "structure",
@@ -1236,10 +1236,10 @@
       "members": {
         "functionArn": {
           "shape": "AmazonResourceName",
-          "documentation": "<p>The ARN of the AWS Lambda function which is executed.</p>"
+          "documentation": "<p>The ARN of the Lambda function that is executed.</p>"
         }
       },
-      "documentation": "<p>Calls an AWS Lambda function, passing in information about the detector model instance and the event which triggered the action.</p>"
+      "documentation": "<p>Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.</p>"
     },
     "ListDetectorModelVersionsRequest": {
       "type": "structure",
@@ -1536,14 +1536,14 @@
       "members": {
         "queueUrl": {
           "shape": "QueueUrl",
-          "documentation": "<p>The URL of the Amazon SQS queue where the data is written.</p>"
+          "documentation": "<p>The URL of the SQS queue where the data is written.</p>"
         },
         "useBase64": {
           "shape": "UseBase64",
           "documentation": "<p>Set this to TRUE if you want the data to be Base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.</p>"
         }
       },
-      "documentation": "<p>Sends information about the detector model instance and the event which triggered the action to an Amazon SQS queue.</p>"
+      "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.</p>"
     },
     "State": {
       "type": "structure",
@@ -1739,7 +1739,7 @@
         },
         "evaluationMethod": {
           "shape": "EvaluationMethod",
-          "documentation": "<p>When set to <code>SERIAL</code>, variables are updated and event conditions evaluated in the order that the events are defined. When set to <code>BATCH</code>, variables are updated and events performed only after all event conditions are evaluated.</p>"
+          "documentation": "<p>Information about the order in which events are evaluated and how actions are executed. </p>"
         }
       }
     },
