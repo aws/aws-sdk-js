@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.608.0-->
+<!--LATEST=2.609.0-->
 <!--ENTRYINSERT-->
+
+## 2.609.0
+* feature: IAM: This release enables the Identity and Access Management policy simulator to simulate permissions boundary policies.
+* feature: RDS: This SDK release introduces APIs that automate the export of Amazon RDS snapshot data to Amazon S3. The new APIs include: StartExportTask, CancelExportTask, DescribeExportTasks. These APIs automate the extraction of data from an RDS snapshot and export it to an Amazon S3 bucket. The data is stored in a compressed, consistent, and query-able format. After the data is exported, you can query it directly using tools such as Amazon Athena or Redshift Spectrum. You can also consume the data as part of a data lake solution. If you archive the data in S3 Infrequent Access or Glacier, you can reduce long term data storage costs by applying data lifecycle policies.
 
 ## 2.608.0
 * feature: CodePipeline: AWS CodePipeline enables an ability to stop pipeline executions.
