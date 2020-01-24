@@ -1185,6 +1185,10 @@ declare namespace ECS {
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Up to 32 ASCII characters are allowed.
      */
     clientToken?: String;
+    /**
+     * The metadata that you apply to the task set to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. When a service is deleted, the tags are deleted as well. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  
+     */
+    tags?: Tags;
   }
   export interface CreateTaskSetResponse {
     taskSet?: TaskSet;
@@ -1507,6 +1511,10 @@ declare namespace ECS {
      * The ID or full Amazon Resource Name (ARN) of task sets to describe.
      */
     taskSets?: StringList;
+    /**
+     * Specifies whether to see the resource tags for the task set. If TAGS is specified, the tags are included in the response. If this field is omitted, tags are not included in the response.
+     */
+    include?: TaskSetFieldList;
   }
   export interface DescribeTaskSetsResponse {
     /**
@@ -3077,7 +3085,7 @@ declare namespace ECS {
      */
     containerDefinitions?: ContainerDefinitions;
     /**
-     * The name of a family that this task definition is registered to. A family groups multiple versions of a task definition. Amazon ECS gives the first task definition that you registered to a family a revision number of 1. Amazon ECS gives sequential revision numbers to each task definition that you add.
+     * The name of a family that this task definition is registered to. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. A family groups multiple versions of a task definition. Amazon ECS gives the first task definition that you registered to a family a revision number of 1. Amazon ECS gives sequential revision numbers to each task definition that you add.
      */
     family?: String;
     /**
@@ -3278,7 +3286,13 @@ declare namespace ECS {
      * The Unix timestamp for when the task set stability status was retrieved.
      */
     stabilityStatusAt?: Timestamp;
+    /**
+     * The metadata that you apply to the task set to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  
+     */
+    tags?: Tags;
   }
+  export type TaskSetField = "TAGS"|string;
+  export type TaskSetFieldList = TaskSetField[];
   export type TaskSets = TaskSet[];
   export type TaskStopCode = "TaskFailedToStart"|"EssentialContainerExited"|"UserInitiated"|string;
   export type Tasks = Task[];

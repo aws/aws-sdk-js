@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "BigInt Support for DynamoDB Convert",
-  "description": "Adding support for BigInt data type for DocumentDB Dynamo Client converter."
-}

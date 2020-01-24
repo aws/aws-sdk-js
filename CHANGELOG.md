@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.609.0-->
+<!--LATEST=2.610.0-->
 <!--ENTRYINSERT-->
+
+## 2.610.0
+* feature: BigInt Support for DynamoDB Convert: Adding support for BigInt data type for DocumentDB Dynamo Client converter.
+* bugfix: endpoint: add endpoint for us-iso-*
+* bugfix: endpoint: add endpoint for us-isob-*
+* feature: DataSync: AWS DataSync now supports FSx for Windows File Server Locations
+* feature: ECS: This release provides support for tagging Amazon ECS task sets for services using external deployment controllers.
+* feature: EKS: Adding new error codes for Nodegroups in EKS
+* feature: OpsWorksCM: AWS OpsWorks for Chef Automate now supports in-place upgrade to Chef Automate 2. Eligible servers can be updated through the management console, CLI and APIs.
 
 ## 2.609.0
 * feature: IAM: This release enables the Identity and Access Management policy simulator to simulate permissions boundary policies.

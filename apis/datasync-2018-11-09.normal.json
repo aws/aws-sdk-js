@@ -80,6 +80,28 @@
       ],
       "documentation": "<p>Creates an endpoint for an Amazon EFS file system.</p>"
     },
+    "CreateLocationFsxWindows": {
+      "name": "CreateLocationFsxWindows",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateLocationFsxWindowsRequest"
+      },
+      "output": {
+        "shape": "CreateLocationFsxWindowsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Creates an endpoint for an Amazon FSx for Windows file system.</p>"
+    },
     "CreateLocationNfs": {
       "name": "CreateLocationNfs",
       "http": {
@@ -277,6 +299,28 @@
         }
       ],
       "documentation": "<p>Returns metadata, such as the path information about an Amazon EFS location.</p>"
+    },
+    "DescribeLocationFsxWindows": {
+      "name": "DescribeLocationFsxWindows",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeLocationFsxWindowsRequest"
+      },
+      "output": {
+        "shape": "DescribeLocationFsxWindowsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Windows location.</p>"
     },
     "DescribeLocationNfs": {
       "name": "DescribeLocationNfs",
@@ -738,7 +782,7 @@
       ],
       "members": {
         "Subdirectory": {
-          "shape": "Subdirectory",
+          "shape": "EfsSubdirectory",
           "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note>"
         },
         "EfsFilesystemArn": {
@@ -766,6 +810,54 @@
       },
       "documentation": "<p>CreateLocationEfs</p>"
     },
+    "CreateLocationFsxWindowsRequest": {
+      "type": "structure",
+      "required": [
+        "FsxFilesystemArn",
+        "SecurityGroupArns",
+        "User",
+        "Password"
+      ],
+      "members": {
+        "Subdirectory": {
+          "shape": "FsxWindowsSubdirectory",
+          "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows file system is used to read data from the Amazon FSx for Windows source location or write data to the FSx for Windows destination.</p>"
+        },
+        "FsxFilesystemArn": {
+          "shape": "FsxFilesystemArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Windows file system.</p>"
+        },
+        "SecurityGroupArns": {
+          "shape": "Ec2SecurityGroupArnList",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows file system.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.</p>"
+        },
+        "User": {
+          "shape": "SmbUser",
+          "documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows file system.</p>"
+        },
+        "Domain": {
+          "shape": "SmbDomain",
+          "documentation": "<p>The name of the Windows domain that the FSx for Windows server belongs to.</p>"
+        },
+        "Password": {
+          "shape": "SmbPassword",
+          "documentation": "<p>The password of the user who has the permissions to access files and folders in the FSx for Windows file system.</p>"
+        }
+      }
+    },
+    "CreateLocationFsxWindowsResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows file system location that is created.</p>"
+        }
+      }
+    },
     "CreateLocationNfsRequest": {
       "type": "structure",
       "required": [
@@ -775,7 +867,7 @@
       ],
       "members": {
         "Subdirectory": {
-          "shape": "NonEmptySubdirectory",
+          "shape": "NfsSubdirectory",
           "documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>"
         },
         "ServerHostname": {
@@ -815,7 +907,7 @@
       ],
       "members": {
         "Subdirectory": {
-          "shape": "Subdirectory",
+          "shape": "S3Subdirectory",
           "documentation": "<p>A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.</p>"
         },
         "S3BucketArn": {
@@ -857,7 +949,7 @@
       ],
       "members": {
         "Subdirectory": {
-          "shape": "NonEmptySubdirectory",
+          "shape": "SmbSubdirectory",
           "documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>"
         },
         "ServerHostname": {
@@ -1084,6 +1176,47 @@
         }
       },
       "documentation": "<p>DescribeLocationEfsResponse</p>"
+    },
+    "DescribeLocationFsxWindowsRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows location to describe.</p>"
+        }
+      }
+    },
+    "DescribeLocationFsxWindowsResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon resource Name (ARN) of the FSx for Windows location that was described.</p>"
+        },
+        "LocationUri": {
+          "shape": "LocationUri",
+          "documentation": "<p>The URL of the FSx for Windows location that was described.</p>"
+        },
+        "SecurityGroupArns": {
+          "shape": "Ec2SecurityGroupArnList",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the for the FSx for Windows file system.</p>"
+        },
+        "CreationTime": {
+          "shape": "Time",
+          "documentation": "<p>The time that the FSx for Windows location was created.</p>"
+        },
+        "User": {
+          "shape": "SmbUser",
+          "documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows file system.</p>"
+        },
+        "Domain": {
+          "shape": "SmbDomain",
+          "documentation": "<p>The name of the Windows domain that the FSx for Windows server belongs to.</p>"
+        }
+      }
     },
     "DescribeLocationNfsRequest": {
       "type": "structure",
@@ -1404,6 +1537,11 @@
       "max": 128,
       "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
     },
+    "EfsSubdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"
+    },
     "Endpoint": {
       "type": "string",
       "max": 15,
@@ -1452,6 +1590,16 @@
       "type": "string",
       "max": 409600,
       "pattern": "^[^\\x00]+$"
+    },
+    "FsxFilesystemArn": {
+      "type": "string",
+      "max": 128,
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+    },
+    "FsxWindowsSubdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
     },
     "Gid": {
       "type": "string",
@@ -1645,13 +1793,21 @@
     },
     "LocationUri": {
       "type": "string",
-      "max": 4355,
-      "pattern": "^(efs|nfs|s3|smb)://[a-zA-Z0-9.\\-]+$"
+      "max": 4356,
+      "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-]+$"
     },
     "LogGroupArn": {
       "type": "string",
       "max": 562,
       "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)$"
+    },
+    "LogLevel": {
+      "type": "string",
+      "enum": [
+        "OFF",
+        "BASIC",
+        "TRANSFER"
+      ]
     },
     "MaxResults": {
       "type": "integer",
@@ -1685,6 +1841,11 @@
       },
       "documentation": "<p>Represents the mount options that are available for DataSync to access an NFS location.</p>"
     },
+    "NfsSubdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]+$"
+    },
     "NfsVersion": {
       "type": "string",
       "enum": [
@@ -1693,11 +1854,6 @@
         "NFS4_0",
         "NFS4_1"
       ]
-    },
-    "NonEmptySubdirectory": {
-      "type": "string",
-      "max": 4096,
-      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]+$"
     },
     "OnPremConfig": {
       "type": "structure",
@@ -1758,6 +1914,10 @@
         "TaskQueueing": {
           "shape": "TaskQueueing",
           "documentation": "<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p> <p>If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see <a>queue-task-execution</a>.</p>"
+        },
+        "LogLevel": {
+          "shape": "LogLevel",
+          "documentation": "<p>A value that determines the type of logs DataSync will deliver to your AWS CloudWatch Logs file. If set to <code>OFF</code>, no logs will be delivered. <code>BASIC</code> will deliver a few logs per transfer operation and <code>TRANSFER</code> will deliver a verbose log that contains logs for every file that is transferred.</p>"
         }
       },
       "documentation": "<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don't specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>"
@@ -1865,6 +2025,11 @@
         "DEEP_ARCHIVE"
       ]
     },
+    "S3Subdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"
+    },
     "ScheduleExpressionCron": {
       "type": "string",
       "max": 256,
@@ -1895,6 +2060,11 @@
       "max": 104,
       "pattern": "^.{0,104}$",
       "sensitive": true
+    },
+    "SmbSubdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
     },
     "SmbUser": {
       "type": "string",
@@ -1944,11 +2114,6 @@
         }
       },
       "documentation": "<p>StartTaskExecutionResponse</p>"
-    },
-    "Subdirectory": {
-      "type": "string",
-      "max": 4096,
-      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"
     },
     "TagKey": {
       "type": "string",
@@ -2015,7 +2180,7 @@
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$"
+      "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$"
     },
     "TaggableResourceArn": {
       "type": "string",

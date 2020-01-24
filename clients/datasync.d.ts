@@ -36,6 +36,14 @@ declare class DataSync extends Service {
    */
   createLocationEfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationEfsResponse) => void): Request<DataSync.Types.CreateLocationEfsResponse, AWSError>;
   /**
+   * Creates an endpoint for an Amazon FSx for Windows file system.
+   */
+  createLocationFsxWindows(params: DataSync.Types.CreateLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
+  /**
+   * Creates an endpoint for an Amazon FSx for Windows file system.
+   */
+  createLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
+  /**
    * Defines a file system on a Network File System (NFS) server that can be read from or written to
    */
   createLocationNfs(params: DataSync.Types.CreateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
@@ -107,6 +115,14 @@ declare class DataSync extends Service {
    * Returns metadata, such as the path information about an Amazon EFS location.
    */
   describeLocationEfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationEfsResponse) => void): Request<DataSync.Types.DescribeLocationEfsResponse, AWSError>;
+  /**
+   * Returns metadata, such as the path information about an Amazon FSx for Windows location.
+   */
+  describeLocationFsxWindows(params: DataSync.Types.DescribeLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
+  /**
+   * Returns metadata, such as the path information about an Amazon FSx for Windows location.
+   */
+  describeLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
    * Returns metadata, such as the path information, about a NFS location.
    */
@@ -294,7 +310,7 @@ declare namespace DataSync {
     /**
      * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.   Subdirectory must be specified with forward slashes. For example /path/to/folder. 
      */
-    Subdirectory?: Subdirectory;
+    Subdirectory?: EfsSubdirectory;
     /**
      * The Amazon Resource Name (ARN) for the Amazon EFS file system.
      */
@@ -314,11 +330,47 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
   }
+  export interface CreateLocationFsxWindowsRequest {
+    /**
+     * A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows file system is used to read data from the Amazon FSx for Windows source location or write data to the FSx for Windows destination.
+     */
+    Subdirectory?: FsxWindowsSubdirectory;
+    /**
+     * The Amazon Resource Name (ARN) for the FSx for Windows file system.
+     */
+    FsxFilesystemArn: FsxFilesystemArn;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows file system.
+     */
+    SecurityGroupArns: Ec2SecurityGroupArnList;
+    /**
+     * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     */
+    Tags?: TagList;
+    /**
+     * The user who has the permissions to access files and folders in the FSx for Windows file system.
+     */
+    User: SmbUser;
+    /**
+     * The name of the Windows domain that the FSx for Windows server belongs to.
+     */
+    Domain?: SmbDomain;
+    /**
+     * The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
+     */
+    Password: SmbPassword;
+  }
+  export interface CreateLocationFsxWindowsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Windows file system location that is created.
+     */
+    LocationArn?: LocationArn;
+  }
   export interface CreateLocationNfsRequest {
     /**
      * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server. run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.
      */
-    Subdirectory: NonEmptySubdirectory;
+    Subdirectory: NfsSubdirectory;
     /**
      * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network.   This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
      */
@@ -346,7 +398,7 @@ declare namespace DataSync {
     /**
      * A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.
      */
-    Subdirectory?: Subdirectory;
+    Subdirectory?: S3Subdirectory;
     /**
      * The Amazon Resource Name (ARN) of the Amazon S3 bucket.
      */
@@ -371,7 +423,7 @@ declare namespace DataSync {
     /**
      * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example /path/to/folder.  To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.
      */
-    Subdirectory: NonEmptySubdirectory;
+    Subdirectory: SmbSubdirectory;
     /**
      * The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this hostname to mount the SMB server in a network.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
      */
@@ -527,6 +579,38 @@ declare namespace DataSync {
      * The time that the EFS location was created.
      */
     CreationTime?: Time;
+  }
+  export interface DescribeLocationFsxWindowsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Windows location to describe.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationFsxWindowsResponse {
+    /**
+     * The Amazon resource Name (ARN) of the FSx for Windows location that was described.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URL of the FSx for Windows location that was described.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are configured for the for the FSx for Windows file system.
+     */
+    SecurityGroupArns?: Ec2SecurityGroupArnList;
+    /**
+     * The time that the FSx for Windows location was created.
+     */
+    CreationTime?: Time;
+    /**
+     * The user who has the permissions to access files and folders in the FSx for Windows file system.
+     */
+    User?: SmbUser;
+    /**
+     * The name of the Windows domain that the FSx for Windows server belongs to.
+     */
+    Domain?: SmbDomain;
   }
   export interface DescribeLocationNfsRequest {
     /**
@@ -751,6 +835,7 @@ declare namespace DataSync {
   export type Ec2SecurityGroupArnList = Ec2SecurityGroupArn[];
   export type Ec2SubnetArn = string;
   export type EfsFilesystemArn = string;
+  export type EfsSubdirectory = string;
   export type Endpoint = string;
   export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|"FIPS"|string;
   export type FilterList = FilterRule[];
@@ -766,6 +851,8 @@ declare namespace DataSync {
   }
   export type FilterType = "SIMPLE_PATTERN"|string;
   export type FilterValue = string;
+  export type FsxFilesystemArn = string;
+  export type FsxWindowsSubdirectory = string;
   export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export type IamRoleArn = string;
   export interface ListAgentsRequest {
@@ -890,6 +977,7 @@ declare namespace DataSync {
   }
   export type LocationUri = string;
   export type LogGroupArn = string;
+  export type LogLevel = "OFF"|"BASIC"|"TRANSFER"|string;
   export type MaxResults = number;
   export type Mtime = "NONE"|"PRESERVE"|string;
   export type NetworkInterfaceArn = string;
@@ -900,8 +988,8 @@ declare namespace DataSync {
      */
     Version?: NfsVersion;
   }
+  export type NfsSubdirectory = string;
   export type NfsVersion = "AUTOMATIC"|"NFS3"|"NFS4_0"|"NFS4_1"|string;
-  export type NonEmptySubdirectory = string;
   export interface OnPremConfig {
     /**
      * ARNs)of the agents to use for an NFS location.
@@ -953,6 +1041,10 @@ declare namespace DataSync {
      * A value that determines whether tasks should be queued before executing the tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see queue-task-execution.
      */
     TaskQueueing?: TaskQueueing;
+    /**
+     * A value that determines the type of logs DataSync will deliver to your AWS CloudWatch Logs file. If set to OFF, no logs will be delivered. BASIC will deliver a few logs per transfer operation and TRANSFER will deliver a verbose log that contains logs for every file that is transferred.
+     */
+    LogLevel?: LogLevel;
   }
   export type OverwriteMode = "ALWAYS"|"NEVER"|string;
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
@@ -987,6 +1079,7 @@ declare namespace DataSync {
     BucketAccessRoleArn: IamRoleArn;
   }
   export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
+  export type S3Subdirectory = string;
   export type ScheduleExpressionCron = string;
   export type ServerHostname = string;
   export type SmbDomain = string;
@@ -997,6 +1090,7 @@ declare namespace DataSync {
     Version?: SmbVersion;
   }
   export type SmbPassword = string;
+  export type SmbSubdirectory = string;
   export type SmbUser = string;
   export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|string;
   export type SourceNetworkInterfaceArns = NetworkInterfaceArn[];
@@ -1017,7 +1111,6 @@ declare namespace DataSync {
      */
     TaskExecutionArn?: TaskExecutionArn;
   }
-  export type Subdirectory = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = TagListEntry[];
