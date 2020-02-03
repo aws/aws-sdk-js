@@ -213,7 +213,7 @@
           });
         });
       });
-      it('return empty string for missing list hen xmlNoDefaultLists is set', function() {
+      it('return empty string for missing list when xmlNoDefaultLists is set', function() {
         xml = '<xml></xml>';
         rules = {
           type: 'structure',
