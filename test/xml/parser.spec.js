@@ -213,6 +213,28 @@
           });
         });
       });
+      it('return empty string for missing list hen xmlNoDefaultLists is set', function() {
+        xml = '<xml></xml>';
+        rules = {
+          type: 'structure',
+          members: {
+            items: {
+              type: 'list',
+              member: {
+                type: 'string'
+              }
+            }
+          }
+        };
+        var shape = AWS.Model.Shape.create(rules, {
+          api: {
+            protocol: 'rest-xml',
+            xmlNoDefaultLists: true
+          }
+        });
+        var data = new AWS.XML.Parser().parse(xml, shape);
+        expect(data).to.eql({});
+      });
       it('Converts xml lists of strings into arrays of strings', function() {
         var rules, xml;
         xml = '<xml>\n  <items>\n    <member>abc</member>\n    <member>xyz</member>\n  </items>\n</xml>';
