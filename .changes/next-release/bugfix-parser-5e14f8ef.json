@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "parser",
+  "description": "Now we can disable inserting empty array in xml parser if the member doesn't exist in response."
+}
