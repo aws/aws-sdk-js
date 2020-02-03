@@ -360,7 +360,8 @@
   },
   "s3control": {
     "name": "S3Control",
-    "dualstackAvailable": true
+    "dualstackAvailable": true,
+    "xmlNoDefaultLists": true
   },
   "servicecatalog": {
     "name": "ServiceCatalog",
