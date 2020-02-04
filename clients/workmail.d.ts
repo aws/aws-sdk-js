@@ -220,6 +220,14 @@ declare class WorkMail extends Service {
    */
   listResources(callback?: (err: AWSError, data: WorkMail.Types.ListResourcesResponse) => void): Request<WorkMail.Types.ListResourcesResponse, AWSError>;
   /**
+   * Lists the tags applied to an Amazon WorkMail organization resource.
+   */
+  listTagsForResource(params: WorkMail.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.ListTagsForResourceResponse) => void): Request<WorkMail.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon WorkMail organization resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: WorkMail.Types.ListTagsForResourceResponse) => void): Request<WorkMail.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Returns summaries of the organization's users.
    */
   listUsers(params: WorkMail.Types.ListUsersRequest, callback?: (err: AWSError, data: WorkMail.Types.ListUsersResponse) => void): Request<WorkMail.Types.ListUsersResponse, AWSError>;
@@ -252,6 +260,22 @@ declare class WorkMail extends Service {
    */
   resetPassword(callback?: (err: AWSError, data: WorkMail.Types.ResetPasswordResponse) => void): Request<WorkMail.Types.ResetPasswordResponse, AWSError>;
   /**
+   * Applies the specified tags to the specified Amazon WorkMail organization resource.
+   */
+  tagResource(params: WorkMail.Types.TagResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.TagResourceResponse) => void): Request<WorkMail.Types.TagResourceResponse, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon WorkMail organization resource.
+   */
+  tagResource(callback?: (err: AWSError, data: WorkMail.Types.TagResourceResponse) => void): Request<WorkMail.Types.TagResourceResponse, AWSError>;
+  /**
+   * Untags the specified tags from the specified Amazon WorkMail organization resource.
+   */
+  untagResource(params: WorkMail.Types.UntagResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.UntagResourceResponse) => void): Request<WorkMail.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Untags the specified tags from the specified Amazon WorkMail organization resource.
+   */
+  untagResource(callback?: (err: AWSError, data: WorkMail.Types.UntagResourceResponse) => void): Request<WorkMail.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates a user's current mailbox quota for a specified organization and user.
    */
   updateMailboxQuota(params: WorkMail.Types.UpdateMailboxQuotaRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateMailboxQuotaResponse) => void): Request<WorkMail.Types.UpdateMailboxQuotaResponse, AWSError>;
@@ -278,6 +302,7 @@ declare class WorkMail extends Service {
 }
 declare namespace WorkMail {
   export type Aliases = EmailAddress[];
+  export type AmazonResourceName = string;
   export interface AssociateDelegateToResourceRequest {
     /**
      * The organization under which the resource exists.
@@ -566,6 +591,10 @@ declare namespace WorkMail {
      * (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
      */
     ErrorMessage?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the organization.
+     */
+    ARN?: AmazonResourceName;
   }
   export interface DescribeResourceRequest {
     /**
@@ -599,7 +628,7 @@ declare namespace WorkMail {
      */
     BookingOptions?: BookingOptions;
     /**
-     * The state of the resource: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).
+     * The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.
      */
     State?: EntityState;
     /**
@@ -917,6 +946,18 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tag key-value pairs.
+     */
+    Tags?: TagList;
+  }
   export interface ListUsersRequest {
     /**
      * The identifier for the organization under which the users exist.
@@ -1100,7 +1141,45 @@ declare namespace WorkMail {
   export type ResourceType = "ROOM"|"EQUIPMENT"|string;
   export type Resources = Resource[];
   export type String = string;
+  export interface Tag {
+    /**
+     * The key of the tag.
+     */
+    Key: TagKey;
+    /**
+     * The value of the tag.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateMailboxQuotaRequest {
     /**
      * The identifier for the organization that contains the user for whom to update the mailbox quota.

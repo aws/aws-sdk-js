@@ -627,21 +627,21 @@ declare namespace CloudFront {
   export type CookieNameList = string[];
   export interface CookieNames {
     /**
-     * The number of different cookies that you want CloudFront to forward to the origin for this cache behavior.
+     * The number of different cookies that you want CloudFront to forward to the origin for this cache behavior. The value must equal the number of items that are in the Items field. When you set Forward = whitelist (in the CookiePreferences object), this value must be 1 or higher.
      */
     Quantity: integer;
     /**
-     * A complex type that contains one Name element for each cookie that you want CloudFront to forward to the origin for this cache behavior.
+     * A complex type that contains one Name element for each cookie that you want CloudFront to forward to the origin for this cache behavior. It must contain the same number of items that is specified in the Quantity field. When you set Forward = whitelist (in the CookiePreferences object), this field must contain at least one item.
      */
     Items?: CookieNameList;
   }
   export interface CookiePreference {
     /**
-     * Specifies which cookies to forward to the origin for this cache behavior: all, none, or the list of cookies specified in the WhitelistedNames complex type. Amazon S3 doesn't process cookies. When the cache behavior is forwarding requests to an Amazon S3 origin, specify none for the Forward element. 
+     * Specifies which cookies to forward to the origin for this cache behavior: all, none, or the list of cookies specified in the WhitelistedNames complex type. Amazon S3 doesn't process cookies. When the cache behavior is forwarding requests to an Amazon S3 origin, specify none for the Forward element.
      */
     Forward: ItemSelection;
     /**
-     * Required if you specify whitelist for the value of Forward:. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies. If you specify all or none for the value of Forward, omit WhitelistedNames. If you change the value of Forward from whitelist to all or none and you don't delete the WhitelistedNames element and its child elements, CloudFront deletes them automatically. For the current limit on the number of cookie names that you can whitelist for each cache behavior, see  CloudFront Limits in the AWS General Reference.
+     * Required if you specify whitelist for the value of Forward. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies. If you specify all or none for the value of Forward, omit WhitelistedNames. If you change the value of Forward from whitelist to all or none and you don't delete the WhitelistedNames element and its child elements, CloudFront deletes them automatically. For the current limit on the number of cookie names that you can whitelist for each cache behavior, see  CloudFront Limits in the AWS General Reference.
      */
     WhitelistedNames?: CookieNames;
   }
@@ -1085,7 +1085,7 @@ declare namespace CloudFront {
      */
     Enabled: boolean;
     /**
-     * A complex type that specifies whether you want viewers to use HTTP or HTTPS to request your objects, whether you're using an alternate domain name with HTTPS, and if so, if you're using AWS Certificate Manager (ACM) or a third-party certificate authority.
+     * A complex type that determines the distribution’s SSL/TLS configuration for communicating with viewers.
      */
     ViewerCertificate?: ViewerCertificate;
     /**
@@ -1199,7 +1199,7 @@ declare namespace CloudFront {
      */
     Enabled: boolean;
     /**
-     * A complex type that specifies whether you want viewers to use HTTP or HTTPS to request your objects, whether you're using an alternate domain name with HTTPS, and if so, if you're using AWS Certificate Manager (ACM) or a third-party certificate authority.
+     * A complex type that determines the distribution’s SSL/TLS configuration for communicating with viewers.
      */
     ViewerCertificate: ViewerCertificate;
     /**
@@ -2588,31 +2588,31 @@ declare namespace CloudFront {
   }
   export interface ViewerCertificate {
     /**
-     * If you're using the CloudFront domain name for your distribution, such as d111111abcdef8.cloudfront.net, specify this value as true.
+     * If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net, set this field to true. If the distribution uses Aliases (alternate domain names or CNAMEs), set this field to false and specify values for the following fields:    ACMCertificateArn or IAMCertificateId (specify a value for one, not both)    MinimumProtocolVersion     SSLSupportMethod   
      */
     CloudFrontDefaultCertificate?: boolean;
     /**
-     * If you want viewers to use HTTPS to request your objects and you're using an alternate domain name, you must choose the type of certificate that you want to use. If you purchased your certificate from a third-party certificate authority and uploaded it to the IAM certificate store, specify the certificate ID that you want to use for this distribution. If you specify a certificate ID, you must also specify an SSL support method (sni-only or vip).
+     * If the distribution uses Aliases (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in AWS Identity and Access Management (AWS IAM), provide the ID of the IAM certificate. If you specify an IAM certificate ID, you must also specify values for MinimumProtocolVerison and SSLSupportMethod. 
      */
     IAMCertificateId?: string;
     /**
-     * If you want viewers to use HTTPS to request your objects and you're using an alternate domain name, you must choose the type of certificate that you want to use. If ACM provided your certificate, specify the Amazon Resource Name (ARN) for the ACM certificate that you want to use for this distribution. CloudFront only supports ACM certificates in the US East (N. Virginia) Region (us-east-1). If you specify an ACM certificate ARN, you must also specify an SSL support method (sni-only or vip).
+     * If the distribution uses Aliases (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in AWS Certificate Manager (ACM), provide the Amazon Resource Name (ARN) of the ACM certificate. CloudFront only supports ACM certificates in the US East (N. Virginia) Region (us-east-1). If you specify an ACM certificate ARN, you must also specify values for MinimumProtocolVerison and SSLSupportMethod. 
      */
     ACMCertificateArn?: string;
     /**
-     * If you specify a value for ACMCertificateArn or for IAMCertificateId, you must also specify how you want CloudFront to serve HTTPS requests: using a method that works for browsers and clients released after 2010, or one that works for all clients.    sni-only: CloudFront can respond to HTTPS requests from viewers that support Server Name Indication (SNI). All modern browsers support SNI, but there are a few that don't. For a current list of the browsers that support SNI, see the Wikipedia entry Server Name Indication. To learn about options to explore if you have viewers with browsers that don't include SNI support, see Choosing How CloudFront Serves HTTPS Requests in the Amazon CloudFront Developer Guide.    vip: CloudFront uses dedicated IP addresses for your content and can respond to HTTPS requests from any viewer. However, there are additional monthly charges. For details, including specific pricing information, see Custom SSL options for Amazon CloudFront on the AWS marketing site.   Don't specify a value here if you specified CloudFrontDefaultCertificate as true. For more information, see Choosing How CloudFront Serves HTTPS Requests in the Amazon CloudFront Developer Guide.
+     * If the distribution uses Aliases (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.    sni-only – The distribution accepts HTTPS connections from only viewers that support server name indication (SNI). This is recommended. Most browsers and clients released after 2010 support SNI.    vip – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.   If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net, don’t set a value for this field.
      */
     SSLSupportMethod?: SSLSupportMethod;
     /**
-     * Specify the security policy that you want CloudFront to use for HTTPS connections. A security policy determines two settings:   The minimum SSL/TLS protocol that CloudFront uses to communicate with viewers.   The cipher that CloudFront uses to encrypt the content that it returns to viewers.    On the CloudFront console, this setting is called Security Policy.  We recommend that you specify TLSv1.1_2016 unless your viewers are using browsers or devices that do not support TLSv1.1 or later. When both of the following are true, you must specify TLSv1 or later for the security policy:    You're using a custom certificate; that is, you specified a value for ACMCertificateArn or for IAMCertificateId.   You're using SNI; that is, you specified sni-only for SSLSupportMethod.   If you specify true for CloudFrontDefaultCertificate, CloudFront automatically sets the security policy to TLSv1 regardless of the value that you specify here. For information about the relationship between the security policy that you choose and the protocols and ciphers that CloudFront uses to communicate with viewers, see  Supported SSL/TLS Protocols and Ciphers for Communication Between Viewers and CloudFront in the Amazon CloudFront Developer Guide.
+     * If the distribution uses Aliases (alternate domain names or CNAMEs), specify the security policy that you want CloudFront to use for HTTPS connections with viewers. The security policy determines two settings:   The minimum SSL/TLS protocol that CloudFront can use to communicate with viewers.   The ciphers that CloudFront can use to encrypt the content that it returns to viewers.   For more information, see Security Policy and Supported Protocols and Ciphers Between Viewers and CloudFront in the Amazon CloudFront Developer Guide.  On the CloudFront console, this setting is called Security Policy.  We recommend that you specify TLSv1.2_2018 unless your viewers are using browsers or devices that don’t support TLSv1.2. When you’re using SNI only (you set SSLSupportMethod to sni-only), you must specify TLSv1 or higher.  If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net (you set CloudFrontDefaultCertificate to true), CloudFront automatically sets the security policy to TLSv1 regardless of the value that you set here.
      */
     MinimumProtocolVersion?: MinimumProtocolVersion;
     /**
-     * This field is no longer used. Use one of the following fields instead:    ACMCertificateArn     IAMCertificateId     CloudFrontDefaultCertificate   
+     * This field is deprecated. Use one of the following fields instead:    ACMCertificateArn     IAMCertificateId     CloudFrontDefaultCertificate   
      */
     Certificate?: string;
     /**
-     * This field is no longer used. Use one of the following fields instead:    ACMCertificateArn     IAMCertificateId     CloudFrontDefaultCertificate   
+     * This field is deprecated. Use one of the following fields instead:    ACMCertificateArn     IAMCertificateId     CloudFrontDefaultCertificate   
      */
     CertificateSource?: CertificateSource;
   }

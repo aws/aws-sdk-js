@@ -5896,6 +5896,10 @@ declare namespace EC2 {
      * The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see Flow Log Records. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field. Specify the fields using the ${field-id} format, separated by spaces. For the AWS CLI, use single quotation marks (' ') to surround the parameter value. Only applicable to flow logs that are published to an Amazon S3 bucket.
      */
     LogFormat?: String;
+    /**
+     * The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes). For network interfaces attached to Nitro-based instances, the aggregation interval is always 60 seconds, regardless of the value that you specify. Default: 600
+     */
+    MaxAggregationInterval?: Integer;
   }
   export interface CreateFlowLogsResult {
     /**
@@ -13082,6 +13086,10 @@ declare namespace EC2 {
      * The format of the flow log record.
      */
     LogFormat?: String;
+    /**
+     * The maximum interval of time, in seconds, during which a flow of packets is captured and aggregated into a flow log record. For network interfaces attached to Nitro-based instances, the aggregation interval is always 60 seconds (1 minute), regardless of the specified value.
+     */
+    MaxAggregationInterval?: Integer;
   }
   export type FlowLogSet = FlowLog[];
   export type FlowLogsResourceType = "VPC"|"Subnet"|"NetworkInterface"|string;

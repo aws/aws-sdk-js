@@ -483,6 +483,39 @@
       ],
       "documentation": "\n            <p>Returns a list of all the MSK configurations in this Region.</p>\n         "
     },
+    "ListKafkaVersions": {
+      "name": "ListKafkaVersions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/kafka-versions",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListKafkaVersionsRequest"
+      },
+      "output": {
+        "shape": "ListKafkaVersionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n         "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n         "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n         "
+        }
+      ],
+      "documentation": "\n            <p>Returns a list of Kafka versions.</p>\n         "
+    },
     "ListNodes": {
       "name": "ListNodes",
       "http": {
@@ -963,6 +996,10 @@
           "shape": "ClusterState",
           "locationName": "state",
           "documentation": "\n            <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>\n         "
+        },
+        "StateInfo": {
+          "shape": "StateInfo",
+          "locationName": "stateInfo"
         },
         "Tags": {
           "shape": "__mapOf__string",
@@ -1563,6 +1600,26 @@
         }
       }
     },
+    "KafkaVersion": {
+      "type": "structure",
+      "members": {
+        "Version": {
+          "shape": "__string",
+          "locationName": "version"
+        },
+        "Status": {
+          "shape": "KafkaVersionStatus",
+          "locationName": "status"
+        }
+      }
+    },
+    "KafkaVersionStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DEPRECATED"
+      ]
+    },
     "ListClusterOperationsRequest": {
       "type": "structure",
       "members": {
@@ -1712,6 +1769,36 @@
           "shape": "__string",
           "locationName": "nextToken",
           "documentation": "\n            <p>The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response. \n               To get another batch of configurations, provide this token in your next request.</p>\n         "
+        }
+      }
+    },
+    "ListKafkaVersionsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "\n            <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "\n            <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. To get the next batch, provide this token in your next request.</p>"
+        }
+      }
+    },
+    "ListKafkaVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "KafkaVersions": {
+          "shape": "__listOfKafkaVersion",
+          "locationName": "kafkaVersions"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken"
         }
       }
     },
@@ -1974,6 +2061,19 @@
       "enum": [
         "BROKER"
       ]
+    },
+    "StateInfo": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "__string",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "__string",
+          "locationName": "message"
+        }
+      }
     },
     "StorageInfo": {
       "type": "structure",
@@ -2288,6 +2388,12 @@
       "type": "list",
       "member": {
         "shape": "ConfigurationRevision"
+      }
+    },
+    "__listOfKafkaVersion": {
+      "type": "list",
+      "member": {
+        "shape": "KafkaVersion"
       }
     },
     "__listOfNodeInfo": {

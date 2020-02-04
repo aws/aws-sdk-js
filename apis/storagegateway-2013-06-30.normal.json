@@ -3792,6 +3792,7 @@
         "VMWARE",
         "HYPER-V",
         "EC2",
+        "KVM",
         "OTHER"
       ]
     },

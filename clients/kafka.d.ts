@@ -157,6 +157,18 @@ declare class Kafka extends Service {
   listConfigurations(callback?: (err: AWSError, data: Kafka.Types.ListConfigurationsResponse) => void): Request<Kafka.Types.ListConfigurationsResponse, AWSError>;
   /**
    * 
+            Returns a list of Kafka versions.
+         
+   */
+  listKafkaVersions(params: Kafka.Types.ListKafkaVersionsRequest, callback?: (err: AWSError, data: Kafka.Types.ListKafkaVersionsResponse) => void): Request<Kafka.Types.ListKafkaVersionsResponse, AWSError>;
+  /**
+   * 
+            Returns a list of Kafka versions.
+         
+   */
+  listKafkaVersions(callback?: (err: AWSError, data: Kafka.Types.ListKafkaVersionsResponse) => void): Request<Kafka.Types.ListKafkaVersionsResponse, AWSError>;
+  /**
+   * 
             Returns a list of the broker nodes in the cluster.
          
    */
@@ -448,6 +460,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     State?: ClusterState;
+    StateInfo?: StateInfo;
     /**
      * 
             Tags attached to the cluster.
@@ -973,6 +986,11 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     BootstrapBrokerStringTls?: __string;
   }
+  export interface KafkaVersion {
+    Version?: __string;
+    Status?: KafkaVersionStatus;
+  }
+  export type KafkaVersionStatus = "ACTIVE"|"DEPRECATED"|string;
   export interface ListClusterOperationsRequest {
     /**
      * 
@@ -1107,6 +1125,22 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
                To get another batch of configurations, provide this token in your next request.
          
      */
+    NextToken?: __string;
+  }
+  export interface ListKafkaVersionsRequest {
+    /**
+     * 
+            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * 
+            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. To get the next batch, provide this token in your next request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListKafkaVersionsResponse {
+    KafkaVersions?: __listOfKafkaVersion;
     NextToken?: __string;
   }
   export interface ListNodesRequest {
@@ -1309,6 +1343,10 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     ZookeeperNodeInfo?: ZookeeperNodeInfo;
   }
   export type NodeType = "BROKER"|string;
+  export interface StateInfo {
+    Code?: __string;
+    Message?: __string;
+  }
   export interface StorageInfo {
     /**
      * 
@@ -1557,6 +1595,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfClusterOperationInfo = ClusterOperationInfo[];
   export type __listOfConfiguration = Configuration[];
   export type __listOfConfigurationRevision = ConfigurationRevision[];
+  export type __listOfKafkaVersion = KafkaVersion[];
   export type __listOfNodeInfo = NodeInfo[];
   export type __listOf__string = __string[];
   export type __long = number;

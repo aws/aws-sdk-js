@@ -1869,7 +1869,7 @@ declare namespace StorageGateway {
   export type GatewayType = string;
   export type Gateways = GatewayInfo[];
   export type Host = string;
-  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"OTHER"|string;
+  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"KVM"|"OTHER"|string;
   export type Hosts = Host[];
   export type HourOfDay = number;
   export type IPV4AddressCIDR = string;

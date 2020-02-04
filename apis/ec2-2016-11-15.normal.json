@@ -9467,6 +9467,10 @@
         "LogFormat": {
           "shape": "String",
           "documentation": "<p>The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records\">Flow Log Records</a>. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field.</p> <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For the AWS CLI, use single quotation marks (' ') to surround the parameter value.</p> <p>Only applicable to flow logs that are published to an Amazon S3 bucket.</p>"
+        },
+        "MaxAggregationInterval": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).</p> <p>For network interfaces attached to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>, the aggregation interval is always 60 seconds, regardless of the value that you specify.</p> <p>Default: 600</p>"
         }
       }
     },
@@ -20406,6 +20410,11 @@
           "shape": "String",
           "documentation": "<p>The format of the flow log record.</p>",
           "locationName": "logFormat"
+        },
+        "MaxAggregationInterval": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum interval of time, in seconds, during which a flow of packets is captured and aggregated into a flow log record.</p> <p>For network interfaces attached to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>, the aggregation interval is always 60 seconds (1 minute), regardless of the specified value.</p>",
+          "locationName": "maxAggregationInterval"
         }
       },
       "documentation": "<p>Describes a flow log.</p>"

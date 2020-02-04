@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.610.0-->
+<!--LATEST=2.611.0-->
 <!--ENTRYINSERT-->
+
+## 2.611.0
+* bugfix: node-s3-sqs: Respect the NODE_TLS_REJECT_UNAUTHORIZED environment under node when instantiating an http client sslAgent
+* bugfix: parser: Now we can disable inserting empty array in xml parser if the member doesn't exist in response.
+* feature: EC2: Amazon VPC Flow Logs adds support for 1-minute aggregation intervals.
+* feature: Kafka: This release enables AWS MSK customers to list Apache Kafka versions that are supported on AWS MSK clusters. Also includes changes to expose additional details of a cluster's state in DescribeCluster and ListClusters APIs.
+* feature: SSM: This feature ensures that an instance is patched up to the available patches on a particular date. It can be enabled by selecting the 'ApproveUntilDate' option as the auto-approval rule while creating the patch baseline. ApproveUntilDate - The cutoff date for auto approval of released patches. Any patches released on or before this date will be installed automatically.
+* feature: StorageGateway: Adding KVM as a support hypervisor
+* feature: WorkMail: This release adds support for tagging Amazon WorkMail organizations.
 
 ## 2.610.0
 * feature: BigInt Support for DynamoDB Convert: Adding support for BigInt data type for DocumentDB Dynamo Client converter.
