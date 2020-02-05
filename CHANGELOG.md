@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.611.0-->
+<!--LATEST=2.612.0-->
 <!--ENTRYINSERT-->
+
+## 2.612.0
+* feature: DLM: Updated the maximum number of tags that can be added to a snapshot using DLM to 45.
+* feature: EC2: This release provides support for tagging when you create a VPC endpoint, or VPC endpoint service.
+* feature: GroundStation: Adds dataflowEndpointRegion property to DataflowEndpointConfig. The dateCreated, lastUpdated, and tags properties on GetSatellite have been deprecated.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for fine-tuned QVBR quality level.
+* feature: SecurityHub: Additional resource types are now supported in the AWS Security Finding Format (ASFF). The following new resource types are added, each having an accompanying resource details object with fields for security finding providers to populate: AwsCodeBuildProject, AwsEc2NetworkInterface, AwsEc2SecurityGroup, AwsElasticsearchDomain, AwsLambdaLayerVersion, AwsRdsDbInstance, and AwsWafWebAcl. The following resource types are added without an accompanying details object: AutoscalingAutoscalingGroup, AwsDynamoDbTable, AwsEc2Eip, AwsEc2Snapshot, AwsEc2Volume, AwsRdsDbSnapshot, AwsRedshiftCluster, and AwsS3Object. The number of allowed resources per finding is increased from 10 to 32. A new field is added in the Compliance object, RelatedRequirements. To learn more, visit our documentation on the ASFF.
 
 ## 2.611.0
 * bugfix: node-s3-sqs: Respect the NODE_TLS_REJECT_UNAUTHORIZED environment under node when instantiating an http client sslAgent

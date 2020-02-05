@@ -20,43 +20,27 @@ declare class GroundStation extends Service {
    */
   cancelContact(callback?: (err: AWSError, data: GroundStation.Types.ContactIdResponse) => void): Request<GroundStation.Types.ContactIdResponse, AWSError>;
   /**
-   * Creates a Config with the specified configData parameters.
-         Only one type of configData can be specified.
+   * Creates a Config with the specified configData parameters. Only one type of configData can be specified.
    */
   createConfig(params: GroundStation.Types.CreateConfigRequest, callback?: (err: AWSError, data: GroundStation.Types.ConfigIdResponse) => void): Request<GroundStation.Types.ConfigIdResponse, AWSError>;
   /**
-   * Creates a Config with the specified configData parameters.
-         Only one type of configData can be specified.
+   * Creates a Config with the specified configData parameters. Only one type of configData can be specified.
    */
   createConfig(callback?: (err: AWSError, data: GroundStation.Types.ConfigIdResponse) => void): Request<GroundStation.Types.ConfigIdResponse, AWSError>;
   /**
-   * Creates a DataflowEndpoint group containing the specified list of DataflowEndpoint objects.
-         The name field in each endpoint is used in your mission profile DataflowEndpointConfig 
-         to specify which endpoints to use during a contact. 
-         When a contact uses multiple DataflowEndpointConfig objects, each Config 
-         must match a DataflowEndpoint in the same group.
+   * Creates a DataflowEndpoint group containing the specified list of DataflowEndpoint objects. The name field in each endpoint is used in your mission profile DataflowEndpointConfig to specify which endpoints to use during a contact. When a contact uses multiple DataflowEndpointConfig objects, each Config must match a DataflowEndpoint in the same group.
    */
   createDataflowEndpointGroup(params: GroundStation.Types.CreateDataflowEndpointGroupRequest, callback?: (err: AWSError, data: GroundStation.Types.DataflowEndpointGroupIdResponse) => void): Request<GroundStation.Types.DataflowEndpointGroupIdResponse, AWSError>;
   /**
-   * Creates a DataflowEndpoint group containing the specified list of DataflowEndpoint objects.
-         The name field in each endpoint is used in your mission profile DataflowEndpointConfig 
-         to specify which endpoints to use during a contact. 
-         When a contact uses multiple DataflowEndpointConfig objects, each Config 
-         must match a DataflowEndpoint in the same group.
+   * Creates a DataflowEndpoint group containing the specified list of DataflowEndpoint objects. The name field in each endpoint is used in your mission profile DataflowEndpointConfig to specify which endpoints to use during a contact. When a contact uses multiple DataflowEndpointConfig objects, each Config must match a DataflowEndpoint in the same group.
    */
   createDataflowEndpointGroup(callback?: (err: AWSError, data: GroundStation.Types.DataflowEndpointGroupIdResponse) => void): Request<GroundStation.Types.DataflowEndpointGroupIdResponse, AWSError>;
   /**
-   * Creates a mission profile.
-         
-            dataflowEdges is a list of lists of strings. Each lower level list of strings
-         has two elements: a from ARN and a to ARN.
+   * Creates a mission profile.  dataflowEdges is a list of lists of strings. Each lower level list of strings has two elements: a from ARN and a to ARN.
    */
   createMissionProfile(params: GroundStation.Types.CreateMissionProfileRequest, callback?: (err: AWSError, data: GroundStation.Types.MissionProfileIdResponse) => void): Request<GroundStation.Types.MissionProfileIdResponse, AWSError>;
   /**
-   * Creates a mission profile.
-         
-            dataflowEdges is a list of lists of strings. Each lower level list of strings
-         has two elements: a from ARN and a to ARN.
+   * Creates a mission profile.  dataflowEdges is a list of lists of strings. Each lower level list of strings has two elements: a from ARN and a to ARN.
    */
   createMissionProfile(callback?: (err: AWSError, data: GroundStation.Types.MissionProfileIdResponse) => void): Request<GroundStation.Types.MissionProfileIdResponse, AWSError>;
   /**
@@ -92,13 +76,11 @@ declare class GroundStation extends Service {
    */
   describeContact(callback?: (err: AWSError, data: GroundStation.Types.DescribeContactResponse) => void): Request<GroundStation.Types.DescribeContactResponse, AWSError>;
   /**
-   * Returns Config information.
-         Only one Config response can be returned.
+   * Returns Config information. Only one Config response can be returned.
    */
   getConfig(params: GroundStation.Types.GetConfigRequest, callback?: (err: AWSError, data: GroundStation.Types.GetConfigResponse) => void): Request<GroundStation.Types.GetConfigResponse, AWSError>;
   /**
-   * Returns Config information.
-         Only one Config response can be returned.
+   * Returns Config information. Only one Config response can be returned.
    */
   getConfig(callback?: (err: AWSError, data: GroundStation.Types.GetConfigResponse) => void): Request<GroundStation.Types.GetConfigResponse, AWSError>;
   /**
@@ -110,6 +92,14 @@ declare class GroundStation extends Service {
    */
   getDataflowEndpointGroup(callback?: (err: AWSError, data: GroundStation.Types.GetDataflowEndpointGroupResponse) => void): Request<GroundStation.Types.GetDataflowEndpointGroupResponse, AWSError>;
   /**
+   * Returns the number of minutes used by account.
+   */
+  getMinuteUsage(params: GroundStation.Types.GetMinuteUsageRequest, callback?: (err: AWSError, data: GroundStation.Types.GetMinuteUsageResponse) => void): Request<GroundStation.Types.GetMinuteUsageResponse, AWSError>;
+  /**
+   * Returns the number of minutes used by account.
+   */
+  getMinuteUsage(callback?: (err: AWSError, data: GroundStation.Types.GetMinuteUsageResponse) => void): Request<GroundStation.Types.GetMinuteUsageResponse, AWSError>;
+  /**
    * Returns a mission profile.
    */
   getMissionProfile(params: GroundStation.Types.GetMissionProfileRequest, callback?: (err: AWSError, data: GroundStation.Types.GetMissionProfileResponse) => void): Request<GroundStation.Types.GetMissionProfileResponse, AWSError>;
@@ -117,6 +107,14 @@ declare class GroundStation extends Service {
    * Returns a mission profile.
    */
   getMissionProfile(callback?: (err: AWSError, data: GroundStation.Types.GetMissionProfileResponse) => void): Request<GroundStation.Types.GetMissionProfileResponse, AWSError>;
+  /**
+   * Returns a satellite.
+   */
+  getSatellite(params: GroundStation.Types.GetSatelliteRequest, callback?: (err: AWSError, data: GroundStation.Types.GetSatelliteResponse) => void): Request<GroundStation.Types.GetSatelliteResponse, AWSError>;
+  /**
+   * Returns a satellite.
+   */
+  getSatellite(callback?: (err: AWSError, data: GroundStation.Types.GetSatelliteResponse) => void): Request<GroundStation.Types.GetSatelliteResponse, AWSError>;
   /**
    * Returns a list of Config objects.
    */
@@ -126,17 +124,11 @@ declare class GroundStation extends Service {
    */
   listConfigs(callback?: (err: AWSError, data: GroundStation.Types.ListConfigsResponse) => void): Request<GroundStation.Types.ListConfigsResponse, AWSError>;
   /**
-   * Returns a list of contacts.
-         If statusList contains AVAILABLE, the request must include
-      groundstation, missionprofileArn, and satelliteArn.
-      
+   * Returns a list of contacts. If statusList contains AVAILABLE, the request must include groundStation, missionprofileArn, and satelliteArn. 
    */
   listContacts(params: GroundStation.Types.ListContactsRequest, callback?: (err: AWSError, data: GroundStation.Types.ListContactsResponse) => void): Request<GroundStation.Types.ListContactsResponse, AWSError>;
   /**
-   * Returns a list of contacts.
-         If statusList contains AVAILABLE, the request must include
-      groundstation, missionprofileArn, and satelliteArn.
-      
+   * Returns a list of contacts. If statusList contains AVAILABLE, the request must include groundStation, missionprofileArn, and satelliteArn. 
    */
   listContacts(callback?: (err: AWSError, data: GroundStation.Types.ListContactsResponse) => void): Request<GroundStation.Types.ListContactsResponse, AWSError>;
   /**
@@ -148,62 +140,6 @@ declare class GroundStation extends Service {
    */
   listDataflowEndpointGroups(callback?: (err: AWSError, data: GroundStation.Types.ListDataflowEndpointGroupsResponse) => void): Request<GroundStation.Types.ListDataflowEndpointGroupsResponse, AWSError>;
   /**
-   * Returns a list of mission profiles.
-   */
-  listMissionProfiles(params: GroundStation.Types.ListMissionProfilesRequest, callback?: (err: AWSError, data: GroundStation.Types.ListMissionProfilesResponse) => void): Request<GroundStation.Types.ListMissionProfilesResponse, AWSError>;
-  /**
-   * Returns a list of mission profiles.
-   */
-  listMissionProfiles(callback?: (err: AWSError, data: GroundStation.Types.ListMissionProfilesResponse) => void): Request<GroundStation.Types.ListMissionProfilesResponse, AWSError>;
-  /**
-   * Reserves a contact using specified parameters.
-   */
-  reserveContact(params: GroundStation.Types.ReserveContactRequest, callback?: (err: AWSError, data: GroundStation.Types.ContactIdResponse) => void): Request<GroundStation.Types.ContactIdResponse, AWSError>;
-  /**
-   * Reserves a contact using specified parameters.
-   */
-  reserveContact(callback?: (err: AWSError, data: GroundStation.Types.ContactIdResponse) => void): Request<GroundStation.Types.ContactIdResponse, AWSError>;
-  /**
-   * Updates the Config used when scheduling contacts.
-         Updating a Config will not update the execution parameters
-         for existing future contacts scheduled with this Config.
-   */
-  updateConfig(params: GroundStation.Types.UpdateConfigRequest, callback?: (err: AWSError, data: GroundStation.Types.ConfigIdResponse) => void): Request<GroundStation.Types.ConfigIdResponse, AWSError>;
-  /**
-   * Updates the Config used when scheduling contacts.
-         Updating a Config will not update the execution parameters
-         for existing future contacts scheduled with this Config.
-   */
-  updateConfig(callback?: (err: AWSError, data: GroundStation.Types.ConfigIdResponse) => void): Request<GroundStation.Types.ConfigIdResponse, AWSError>;
-  /**
-   * Updates a mission profile.
-         Updating a mission profile will not update the execution parameters
-         for existing future contacts.
-   */
-  updateMissionProfile(params: GroundStation.Types.UpdateMissionProfileRequest, callback?: (err: AWSError, data: GroundStation.Types.MissionProfileIdResponse) => void): Request<GroundStation.Types.MissionProfileIdResponse, AWSError>;
-  /**
-   * Updates a mission profile.
-         Updating a mission profile will not update the execution parameters
-         for existing future contacts.
-   */
-  updateMissionProfile(callback?: (err: AWSError, data: GroundStation.Types.MissionProfileIdResponse) => void): Request<GroundStation.Types.MissionProfileIdResponse, AWSError>;
-  /**
-   * Returns the number of minutes used by account.
-   */
-  getMinuteUsage(params: GroundStation.Types.GetMinuteUsageRequest, callback?: (err: AWSError, data: GroundStation.Types.GetMinuteUsageResponse) => void): Request<GroundStation.Types.GetMinuteUsageResponse, AWSError>;
-  /**
-   * Returns the number of minutes used by account.
-   */
-  getMinuteUsage(callback?: (err: AWSError, data: GroundStation.Types.GetMinuteUsageResponse) => void): Request<GroundStation.Types.GetMinuteUsageResponse, AWSError>;
-  /**
-   * Returns a satellite.
-   */
-  getSatellite(params: GroundStation.Types.GetSatelliteRequest, callback?: (err: AWSError, data: GroundStation.Types.GetSatelliteResponse) => void): Request<GroundStation.Types.GetSatelliteResponse, AWSError>;
-  /**
-   * Returns a satellite.
-   */
-  getSatellite(callback?: (err: AWSError, data: GroundStation.Types.GetSatelliteResponse) => void): Request<GroundStation.Types.GetSatelliteResponse, AWSError>;
-  /**
    * Returns a list of ground stations. 
    */
   listGroundStations(params: GroundStation.Types.ListGroundStationsRequest, callback?: (err: AWSError, data: GroundStation.Types.ListGroundStationsResponse) => void): Request<GroundStation.Types.ListGroundStationsResponse, AWSError>;
@@ -211,6 +147,14 @@ declare class GroundStation extends Service {
    * Returns a list of ground stations. 
    */
   listGroundStations(callback?: (err: AWSError, data: GroundStation.Types.ListGroundStationsResponse) => void): Request<GroundStation.Types.ListGroundStationsResponse, AWSError>;
+  /**
+   * Returns a list of mission profiles.
+   */
+  listMissionProfiles(params: GroundStation.Types.ListMissionProfilesRequest, callback?: (err: AWSError, data: GroundStation.Types.ListMissionProfilesResponse) => void): Request<GroundStation.Types.ListMissionProfilesResponse, AWSError>;
+  /**
+   * Returns a list of mission profiles.
+   */
+  listMissionProfiles(callback?: (err: AWSError, data: GroundStation.Types.ListMissionProfilesResponse) => void): Request<GroundStation.Types.ListMissionProfilesResponse, AWSError>;
   /**
    * Returns a list of satellites.
    */
@@ -220,13 +164,21 @@ declare class GroundStation extends Service {
    */
   listSatellites(callback?: (err: AWSError, data: GroundStation.Types.ListSatellitesResponse) => void): Request<GroundStation.Types.ListSatellitesResponse, AWSError>;
   /**
-   * Returns a list of tags or a specified resource.
+   * Returns a list of tags for a specified resource.
    */
   listTagsForResource(params: GroundStation.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: GroundStation.Types.ListTagsForResourceResponse) => void): Request<GroundStation.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns a list of tags or a specified resource.
+   * Returns a list of tags for a specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: GroundStation.Types.ListTagsForResourceResponse) => void): Request<GroundStation.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Reserves a contact using specified parameters.
+   */
+  reserveContact(params: GroundStation.Types.ReserveContactRequest, callback?: (err: AWSError, data: GroundStation.Types.ContactIdResponse) => void): Request<GroundStation.Types.ContactIdResponse, AWSError>;
+  /**
+   * Reserves a contact using specified parameters.
+   */
+  reserveContact(callback?: (err: AWSError, data: GroundStation.Types.ContactIdResponse) => void): Request<GroundStation.Types.ContactIdResponse, AWSError>;
   /**
    * Assigns a tag to a resource.
    */
@@ -243,25 +195,97 @@ declare class GroundStation extends Service {
    * Deassigns a resource tag.
    */
   untagResource(callback?: (err: AWSError, data: GroundStation.Types.UntagResourceResponse) => void): Request<GroundStation.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates the Config used when scheduling contacts. Updating a Config will not update the execution parameters for existing future contacts scheduled with this Config.
+   */
+  updateConfig(params: GroundStation.Types.UpdateConfigRequest, callback?: (err: AWSError, data: GroundStation.Types.ConfigIdResponse) => void): Request<GroundStation.Types.ConfigIdResponse, AWSError>;
+  /**
+   * Updates the Config used when scheduling contacts. Updating a Config will not update the execution parameters for existing future contacts scheduled with this Config.
+   */
+  updateConfig(callback?: (err: AWSError, data: GroundStation.Types.ConfigIdResponse) => void): Request<GroundStation.Types.ConfigIdResponse, AWSError>;
+  /**
+   * Updates a mission profile. Updating a mission profile will not update the execution parameters for existing future contacts.
+   */
+  updateMissionProfile(params: GroundStation.Types.UpdateMissionProfileRequest, callback?: (err: AWSError, data: GroundStation.Types.MissionProfileIdResponse) => void): Request<GroundStation.Types.MissionProfileIdResponse, AWSError>;
+  /**
+   * Updates a mission profile. Updating a mission profile will not update the execution parameters for existing future contacts.
+   */
+  updateMissionProfile(callback?: (err: AWSError, data: GroundStation.Types.MissionProfileIdResponse) => void): Request<GroundStation.Types.MissionProfileIdResponse, AWSError>;
 }
 declare namespace GroundStation {
-  export interface UpdateConfigRequest {
+  export type AngleUnits = "DEGREE_ANGLE"|"RADIAN"|string;
+  export interface AntennaDownlinkConfig {
     /**
-     * Parameters for a Config.
+     * Object that describes a spectral Config.
      */
-    configData: ConfigTypeData;
+    spectrumConfig: SpectrumConfig;
+  }
+  export interface AntennaDownlinkDemodDecodeConfig {
+    /**
+     * Information about the decode Config.
+     */
+    decodeConfig: DecodeConfig;
+    /**
+     * Information about the demodulation Config.
+     */
+    demodulationConfig: DemodulationConfig;
+    /**
+     * Information about the spectral Config.
+     */
+    spectrumConfig: SpectrumConfig;
+  }
+  export interface AntennaUplinkConfig {
+    /**
+     * Information about the uplink spectral Config.
+     */
+    spectrumConfig: UplinkSpectrumConfig;
+    /**
+     * EIRP of the target.
+     */
+    targetEirp: Eirp;
+  }
+  export type BandwidthUnits = "GHz"|"MHz"|"kHz"|string;
+  export type Boolean = boolean;
+  export interface CancelContactRequest {
+    /**
+     * UUID of a contact.
+     */
+    contactId: String;
+  }
+  export type ConfigArn = string;
+  export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|string;
+  export interface ConfigIdResponse {
+    /**
+     * ARN of a Config.
+     */
+    configArn?: ConfigArn;
     /**
      * UUID of a Config.
      */
-    configId: String;
+    configId?: String;
     /**
      * Type of a Config.
      */
-    configType: ConfigCapabilityType;
+    configType?: ConfigCapabilityType;
+  }
+  export type ConfigList = ConfigListItem[];
+  export interface ConfigListItem {
+    /**
+     * ARN of a Config.
+     */
+    configArn?: ConfigArn;
+    /**
+     * UUID of a Config.
+     */
+    configId?: String;
+    /**
+     * Type of a Config.
+     */
+    configType?: ConfigCapabilityType;
     /**
      * Name of a Config.
      */
-    name: SafeName;
+    name?: String;
   }
   export interface ConfigTypeData {
     /**
@@ -285,481 +309,9 @@ declare namespace GroundStation {
      */
     trackingConfig?: TrackingConfig;
     /**
-     * Information about an uplink echo Config.
-         Parameters from the AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn, are used when this UplinkEchoConfig is used in a contact.
+     * Information about an uplink echo Config. Parameters from the AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn, are used when this UplinkEchoConfig is used in a contact.
      */
     uplinkEchoConfig?: UplinkEchoConfig;
-  }
-  export type noradSatelliteID = number;
-  export interface GroundStationData {
-    /**
-     * ID of a ground station.
-     */
-    groundStationId?: String;
-    /**
-     * Name of a ground station.
-     */
-    groundStationName?: String;
-    /**
-     * Ground station Region.
-     */
-    region?: String;
-  }
-  export interface GetConfigRequest {
-    /**
-     * UUID of a Config.
-     */
-    configId: String;
-    /**
-     * Type of a Config.
-     */
-    configType: ConfigCapabilityType;
-  }
-  export type GroundStationList = GroundStationData[];
-  export type SecurityGroupIdList = String[];
-  export interface EndpointDetails {
-    /**
-     * A dataflow endpoint.
-     */
-    endpoint?: DataflowEndpoint;
-    /**
-     * Endpoint security details.
-     */
-    securityDetails?: SecurityDetails;
-  }
-  export type DataflowEndpointGroupArn = string;
-  export interface GetMinuteUsageResponse {
-    /**
-     * Estimated number of minutes remaining for an account, specific to the month being requested.
-     */
-    estimatedMinutesRemaining?: Integer;
-    /**
-     * Returns whether or not an account has signed up for the reserved minutes pricing plan, specific to the month being requested.
-     */
-    isReservedMinutesCustomer?: Boolean;
-    /**
-     * Total number of reserved minutes allocated, specific to the month being requested.
-     */
-    totalReservedMinuteAllocation?: Integer;
-    /**
-     * Total scheduled minutes for an account, specific to the month being requested.
-     */
-    totalScheduledMinutes?: Integer;
-    /**
-     * Upcoming minutes scheduled for an account, specific to the month being requested.
-     */
-    upcomingMinutesScheduled?: Integer;
-  }
-  export interface MissionProfileListItem {
-    /**
-     * ARN of a mission profile.
-     */
-    missionProfileArn?: MissionProfileArn;
-    /**
-     * ID of a mission profile.
-     */
-    missionProfileId?: String;
-    /**
-     * Name of a mission profile.
-     */
-    name?: String;
-    /**
-     * Region of a mission profile.
-     */
-    region?: String;
-  }
-  export type SatelliteList = SatelliteListItem[];
-  export interface ListDataflowEndpointGroupsResponse {
-    /**
-     * A list of dataflow endpoint groups.
-     */
-    dataflowEndpointGroupList?: DataflowEndpointGroupList;
-    /**
-     * Next token returned in the response of a previous ListDataflowEndpointGroups call. Used to get the next page of results.
-     */
-    nextToken?: String;
-  }
-  export interface AntennaDownlinkDemodDecodeConfig {
-    /**
-     * Information about the decode Config.
-     */
-    decodeConfig: DecodeConfig;
-    /**
-     * Information about the demodulation Config.
-     */
-    demodulationConfig: DemodulationConfig;
-    /**
-     * Information about the spectral Config.
-     */
-    spectrumConfig: SpectrumConfig;
-  }
-  export interface MissionProfileIdResponse {
-    /**
-     * ID of a mission profile.
-     */
-    missionProfileId?: String;
-  }
-  export type SubnetList = String[];
-  export type Polarization = "LEFT_HAND"|"NONE"|"RIGHT_HAND"|string;
-  export type ConfigList = ConfigListItem[];
-  export interface AntennaUplinkConfig {
-    /**
-     * Information about the uplink spectral Config.
-     */
-    spectrumConfig: UplinkSpectrumConfig;
-    /**
-     * EIRP of the target.
-     */
-    targetEirp: Eirp;
-  }
-  export type Integer = number;
-  export interface AntennaDownlinkConfig {
-    /**
-     * Object that describes a spectral Config.
-     */
-    spectrumConfig: SpectrumConfig;
-  }
-  export type Boolean = boolean;
-  export type EndpointStatus = "created"|"creating"|"deleted"|"deleting"|"failed"|string;
-  export interface UplinkEchoConfig {
-    /**
-     * ARN of an uplink Config.
-     */
-    antennaUplinkConfigArn: ConfigArn;
-    /**
-     * Whether or not an uplink Config is enabled.
-     */
-    enabled: Boolean;
-  }
-  export interface DecodeConfig {
-    /**
-     * Unvalidated JSON of a decode Config.
-     */
-    unvalidatedJSON: JsonString;
-  }
-  export interface DeleteDataflowEndpointGroupRequest {
-    /**
-     * ID of a dataflow endpoint group.
-     */
-    dataflowEndpointGroupId: String;
-  }
-  export type ContactStatus = "AVAILABLE"|"AWS_CANCELLED"|"CANCELLED"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|"PASS"|"POSTPASS"|"PREPASS"|"SCHEDULED"|"SCHEDULING"|string;
-  export type MissionProfileList = MissionProfileListItem[];
-  export interface CreateConfigRequest {
-    /**
-     * Parameters of a Config.
-     */
-    configData: ConfigTypeData;
-    /**
-     * Name of a Config.
-     */
-    name: SafeName;
-    /**
-     * Tags assigned to a Config.
-     */
-    tags?: TagsMap;
-  }
-  export interface Frequency {
-    /**
-     * Frequency units.
-     */
-    units: FrequencyUnits;
-    /**
-     * Frequency value.
-     */
-    value: Double;
-  }
-  export interface UntagResourceResponse {
-  }
-  export interface ConfigIdResponse {
-    /**
-     * ARN of a Config.
-     */
-    configArn?: ConfigArn;
-    /**
-     * UUID of a Config.
-     */
-    configId?: String;
-    /**
-     * Type of a Config.
-     */
-    configType?: ConfigCapabilityType;
-  }
-  export interface SecurityDetails {
-    /**
-     * ARN to a role needed for connecting streams to your instances. 
-     */
-    roleArn: RoleArn;
-    /**
-     * The security groups to attach to the elastic network interfaces.
-     */
-    securityGroupIds: SecurityGroupIdList;
-    /**
-     * A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
-     */
-    subnetIds: SubnetList;
-  }
-  export interface TrackingConfig {
-    /**
-     * Current setting for autotrack.
-     */
-    autotrack: Criticality;
-  }
-  export interface CreateDataflowEndpointGroupRequest {
-    /**
-     * Endpoint details of each endpoint in the dataflow endpoint group.
-     */
-    endpointDetails: EndpointDetailsList;
-    /**
-     * Tags of a dataflow endpoint group.
-     */
-    tags?: TagsMap;
-  }
-  export interface Elevation {
-    /**
-     * Elevation angle units.
-     */
-    unit: AngleUnits;
-    /**
-     * Elevation angle value.
-     */
-    value: Double;
-  }
-  export type JsonString = string;
-  export interface GetSatelliteRequest {
-    /**
-     * UUID of a satellite.
-     */
-    satelliteId: String;
-  }
-  export interface CancelContactRequest {
-    /**
-     * UUID of a contact.
-     */
-    contactId: String;
-  }
-  export interface UplinkSpectrumConfig {
-    /**
-     * Center frequency of an uplink spectral Config.
-     */
-    centerFrequency: Frequency;
-    /**
-     * Polarization of an uplink spectral Config.
-     */
-    polarization?: Polarization;
-  }
-  export interface UntagResourceRequest {
-    /**
-     * ARN of a resource.
-     */
-    resourceArn: String;
-    /**
-     * Keys of a resource tag.
-     */
-    tagKeys: TagKeys;
-  }
-  export type satelliteArn = string;
-  export interface GetMissionProfileResponse {
-    /**
-     * Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
-     */
-    contactPostPassDurationSeconds?: DurationInSeconds;
-    /**
-     * Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
-     */
-    contactPrePassDurationSeconds?: DurationInSeconds;
-    /**
-     * A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a to 
-         Config.
-     */
-    dataflowEdges?: DataflowEdgeList;
-    /**
-     * Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
-     */
-    minimumViableContactDurationSeconds?: DurationInSeconds;
-    /**
-     * ARN of a mission profile.
-     */
-    missionProfileArn?: MissionProfileArn;
-    /**
-     * ID of a mission profile.
-     */
-    missionProfileId?: String;
-    /**
-     * Name of a mission profile.
-     */
-    name?: String;
-    /**
-     * Region of a mission profile.
-     */
-    region?: String;
-    /**
-     * Tags assigned to a mission profile.
-     */
-    tags?: TagsMap;
-    /**
-     * ARN of a tracking Config.
-     */
-    trackingConfigArn?: ConfigArn;
-  }
-  export interface ContactIdResponse {
-    /**
-     * UUID of a contact.
-     */
-    contactId?: String;
-  }
-  export type EndpointDetailsList = EndpointDetails[];
-  export interface ListGroundStationsRequest {
-    /**
-     * Maximum number of ground stations returned.
-     */
-    maxResults?: Integer;
-    /**
-     * Next token that can be supplied in the next call to get the next page of ground stations.
-     */
-    nextToken?: String;
-  }
-  export interface DescribeContactRequest {
-    /**
-     * UUID of a contact.
-     */
-    contactId: String;
-  }
-  export type Timestamp = Date;
-  export interface DeleteConfigRequest {
-    /**
-     * UUID of a Config.
-     */
-    configId: String;
-    /**
-     * Type of a Config.
-     */
-    configType: ConfigCapabilityType;
-  }
-  export type BandwidthUnits = "GHz"|"MHz"|"kHz"|string;
-  export interface SpectrumConfig {
-    /**
-     * Bandwidth of a spectral Config.
-     */
-    bandwidth: FrequencyBandwidth;
-    /**
-     * Center frequency of a spectral Config.
-     */
-    centerFrequency: Frequency;
-    /**
-     * Polarization of a spectral Config.
-     */
-    polarization?: Polarization;
-  }
-  export interface DemodulationConfig {
-    /**
-     * Unvalidated JSON of a demodulation Config.
-     */
-    unvalidatedJSON: JsonString;
-  }
-  export interface ListMissionProfilesResponse {
-    /**
-     * List of mission profiles
-     */
-    missionProfileList?: MissionProfileList;
-    /**
-     * Next token returned in the response of a previous ListMissionProfiles call. Used to get the next page of results.
-     */
-    nextToken?: String;
-  }
-  export interface ListConfigsResponse {
-    /**
-     * List of Config items.
-     */
-    configList?: ConfigList;
-    /**
-     * Next token returned in the response of a previous ListConfigs call. Used to get the next page of results.
-     */
-    nextToken?: String;
-  }
-  export type DataflowEdge = ConfigArn[];
-  export type SafeName = string;
-  export interface Eirp {
-    /**
-     * Units of an EIRP.
-     */
-    units: EirpUnits;
-    /**
-     * Value of an EIRP.
-     */
-    value: Double;
-  }
-  export type RoleArn = string;
-  export interface ListMissionProfilesRequest {
-    /**
-     * Maximum number of mission profiles returned.
-     */
-    maxResults?: Integer;
-    /**
-     * Next token returned in the request of a previous ListMissionProfiles call. Used to get the next page of results.
-     */
-    nextToken?: String;
-  }
-  export interface GetSatelliteResponse {
-    /**
-     * When a satellite was created.
-     */
-    dateCreated?: Timestamp;
-    /**
-     * When a satellite was last updated.
-     */
-    lastUpdated?: Timestamp;
-    /**
-     * NORAD satellite ID number.
-     */
-    noradSatelliteID?: noradSatelliteID;
-    /**
-     * ARN of a satellite.
-     */
-    satelliteArn?: satelliteArn;
-    /**
-     * UUID of a satellite.
-     */
-    satelliteId?: Uuid;
-    /**
-     * Tags assigned to a satellite.
-     */
-    tags?: TagsMap;
-  }
-  export type StatusList = ContactStatus[];
-  export interface ListContactsRequest {
-    /**
-     * End time of a contact.
-     */
-    endTime: Timestamp;
-    /**
-     * Name of a ground station.
-     */
-    groundStation?: String;
-    /**
-     * Maximum number of contacts returned.
-     */
-    maxResults?: Integer;
-    /**
-     * ARN of a mission profile.
-     */
-    missionProfileArn?: MissionProfileArn;
-    /**
-     * Next token returned in the request of a previous ListContacts call. Used to get the next page of results.
-     */
-    nextToken?: String;
-    /**
-     * ARN of a satellite.
-     */
-    satelliteArn?: satelliteArn;
-    /**
-     * Start time of a contact.
-     */
-    startTime: Timestamp;
-    /**
-     * Status of a contact reservation.
-     */
-    statusList: StatusList;
   }
   export interface ContactData {
     /**
@@ -799,6 +351,10 @@ declare namespace GroundStation {
      */
     prePassStartTime?: Timestamp;
     /**
+     * Region of a contact.
+     */
+    region?: String;
+    /**
      * ARN of a satellite.
      */
     satelliteArn?: satelliteArn;
@@ -811,119 +367,37 @@ declare namespace GroundStation {
      */
     tags?: TagsMap;
   }
-  export interface ListGroundStationsResponse {
+  export interface ContactIdResponse {
     /**
-     * List of ground stations.
+     * UUID of a contact.
      */
-    groundStationList?: GroundStationList;
-    /**
-     * Next token that can be supplied in the next call to get the next page of ground stations.
-     */
-    nextToken?: String;
+    contactId?: String;
   }
-  export interface DataflowEndpoint {
+  export type ContactList = ContactData[];
+  export type ContactStatus = "AVAILABLE"|"AWS_CANCELLED"|"CANCELLED"|"CANCELLING"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|"PASS"|"POSTPASS"|"PREPASS"|"SCHEDULED"|"SCHEDULING"|string;
+  export interface CreateConfigRequest {
     /**
-     * Socket address of a dataflow endpoint.
-     */
-    address?: SocketAddress;
-    /**
-     * Name of a dataflow endpoint.
-     */
-    name?: SafeName;
-    /**
-     * Status of a dataflow endpoint.
-     */
-    status?: EndpointStatus;
-  }
-  export interface ListConfigsRequest {
-    /**
-     * Maximum number of Configs returned.
-     */
-    maxResults?: Integer;
-    /**
-     * Next token returned in the request of a previous ListConfigs call. Used to get the next page of results.
-     */
-    nextToken?: String;
-  }
-  export interface SocketAddress {
-    /**
-     * Name of a socket address.
-     */
-    name: String;
-    /**
-     * Port of a socket address.
-     */
-    port: Integer;
-  }
-  export interface GetConfigResponse {
-    /**
-     * ARN of a Config
-         
-     */
-    configArn: ConfigArn;
-    /**
-     * Data elements in a Config.
+     * Parameters of a Config.
      */
     configData: ConfigTypeData;
     /**
-     * UUID of a Config.
-     */
-    configId: String;
-    /**
-     * Type of a Config.
-     */
-    configType?: ConfigCapabilityType;
-    /**
      * Name of a Config.
      */
-    name: String;
+    name: SafeName;
     /**
      * Tags assigned to a Config.
      */
     tags?: TagsMap;
   }
-  export type TagsMap = {[key: string]: String};
-  export interface TagResourceResponse {
-  }
-  export interface DeleteMissionProfileRequest {
+  export interface CreateDataflowEndpointGroupRequest {
     /**
-     * UUID of a mission profile.
+     * Endpoint details of each endpoint in the dataflow endpoint group.
      */
-    missionProfileId: String;
-  }
-  export type DataflowEndpointGroupList = DataflowEndpointListItem[];
-  export type ContactList = ContactData[];
-  export type DurationInSeconds = number;
-  export interface SatelliteListItem {
+    endpointDetails: EndpointDetailsList;
     /**
-     * NORAD satellite ID number.
+     * Tags of a dataflow endpoint group.
      */
-    noradSatelliteID?: noradSatelliteID;
-    /**
-     * ARN of a satellite.
-     */
-    satelliteArn?: satelliteArn;
-    /**
-     * ID of a satellite.
-     */
-    satelliteId?: Uuid;
-  }
-  export interface GetMissionProfileRequest {
-    /**
-     * UUID of a mission profile.
-     */
-    missionProfileId: String;
-  }
-  export type Double = number;
-  export interface ListSatellitesResponse {
-    /**
-     * Next token that can be supplied in the next call to get the next page of satellites.
-     */
-    nextToken?: String;
-    /**
-     * List of satellites.
-     */
-    satellites?: SatelliteList;
+    tags?: TagsMap;
   }
   export interface CreateMissionProfileRequest {
     /**
@@ -935,8 +409,7 @@ declare namespace GroundStation {
      */
     contactPrePassDurationSeconds?: DurationInSeconds;
     /**
-     * A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a to 
-         Config.
+     * A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a to Config.
      */
     dataflowEdges: DataflowEdgeList;
     /**
@@ -956,57 +429,91 @@ declare namespace GroundStation {
      */
     trackingConfigArn: ConfigArn;
   }
-  export interface ReserveContactRequest {
+  export type Criticality = "PREFERRED"|"REMOVED"|"REQUIRED"|string;
+  export type DataflowEdge = ConfigArn[];
+  export type DataflowEdgeList = DataflowEdge[];
+  export interface DataflowEndpoint {
     /**
-     * End time of a contact.
+     * Socket address of a dataflow endpoint.
      */
-    endTime: Timestamp;
+    address?: SocketAddress;
     /**
-     * Name of a ground station.
+     * Name of a dataflow endpoint.
      */
-    groundStation: String;
+    name?: SafeName;
     /**
-     * ARN of a mission profile.
+     * Status of a dataflow endpoint.
      */
-    missionProfileArn: MissionProfileArn;
-    /**
-     * ARN of a satellite
-     */
-    satelliteArn: satelliteArn;
-    /**
-     * Start time of a contact.
-     */
-    startTime: Timestamp;
-    /**
-     * Tags assigned to a contact.
-     */
-    tags?: TagsMap;
+    status?: EndpointStatus;
   }
   export interface DataflowEndpointConfig {
     /**
      * Name of a dataflow endpoint.
      */
     dataflowEndpointName: String;
-  }
-  export type Uuid = string;
-  export interface ListTagsForResourceResponse {
     /**
-     * Tags assigned to a resource.
+     * Region of a dataflow endpoint.
      */
-    tags?: TagsMap;
+    dataflowEndpointRegion?: String;
   }
-  export type MissionProfileArn = string;
-  export interface ListContactsResponse {
+  export type DataflowEndpointGroupArn = string;
+  export interface DataflowEndpointGroupIdResponse {
     /**
-     * List of contacts.
+     * UUID of a dataflow endpoint group.
      */
-    contactList?: ContactList;
-    /**
-     * Next token returned in the response of a previous ListContacts call. Used to get the next page of results.
-     */
-    nextToken?: String;
+    dataflowEndpointGroupId?: String;
   }
-  export type DataflowEdgeList = DataflowEdge[];
+  export type DataflowEndpointGroupList = DataflowEndpointListItem[];
+  export interface DataflowEndpointListItem {
+    /**
+     * ARN of a dataflow endpoint group.
+     */
+    dataflowEndpointGroupArn?: DataflowEndpointGroupArn;
+    /**
+     * UUID of a dataflow endpoint group.
+     */
+    dataflowEndpointGroupId?: String;
+  }
+  export interface DecodeConfig {
+    /**
+     * Unvalidated JSON of a decode Config.
+     */
+    unvalidatedJSON: JsonString;
+  }
+  export interface DeleteConfigRequest {
+    /**
+     * UUID of a Config.
+     */
+    configId: String;
+    /**
+     * Type of a Config.
+     */
+    configType: ConfigCapabilityType;
+  }
+  export interface DeleteDataflowEndpointGroupRequest {
+    /**
+     * UUID of a dataflow endpoint group.
+     */
+    dataflowEndpointGroupId: String;
+  }
+  export interface DeleteMissionProfileRequest {
+    /**
+     * UUID of a mission profile.
+     */
+    missionProfileId: String;
+  }
+  export interface DemodulationConfig {
+    /**
+     * Unvalidated JSON of a demodulation Config.
+     */
+    unvalidatedJSON: JsonString;
+  }
+  export interface DescribeContactRequest {
+    /**
+     * UUID of a contact.
+     */
+    contactId: String;
+  }
   export interface DescribeContactResponse {
     /**
      * UUID of a contact.
@@ -1045,6 +552,10 @@ declare namespace GroundStation {
      */
     prePassStartTime?: Timestamp;
     /**
+     * Region of a contact.
+     */
+    region?: String;
+    /**
      * ARN of a satellite.
      */
     satelliteArn?: satelliteArn;
@@ -1057,39 +568,50 @@ declare namespace GroundStation {
      */
     tags?: TagsMap;
   }
-  export interface ConfigListItem {
+  export type Double = number;
+  export type DurationInSeconds = number;
+  export interface Eirp {
     /**
-     * ARN of a Config.
+     * Units of an EIRP.
      */
-    configArn?: ConfigArn;
+    units: EirpUnits;
     /**
-     * UUID of a Config.
+     * Value of an EIRP.
      */
-    configId?: String;
-    /**
-     * Type of a Config.
-     */
-    configType?: ConfigCapabilityType;
-    /**
-     * Name of a Config.
-     */
-    name?: String;
+    value: Double;
   }
-  export interface ListTagsForResourceRequest {
+  export type EirpUnits = "dBW"|string;
+  export interface Elevation {
     /**
-     * ARN of a resource.
+     * Elevation angle units.
      */
-    resourceArn: String;
+    unit: AngleUnits;
+    /**
+     * Elevation angle value.
+     */
+    value: Double;
   }
-  export interface ListDataflowEndpointGroupsRequest {
+  export interface EndpointDetails {
     /**
-     * Maximum number of dataflow endpoint groups returned.
+     * A dataflow endpoint.
      */
-    maxResults?: Integer;
+    endpoint?: DataflowEndpoint;
     /**
-     * Next token returned in the request of a previous ListDataflowEndpointGroups call. Used to get the next page of results.
+     * Endpoint security details.
      */
-    nextToken?: String;
+    securityDetails?: SecurityDetails;
+  }
+  export type EndpointDetailsList = EndpointDetails[];
+  export type EndpointStatus = "created"|"creating"|"deleted"|"deleting"|"failed"|string;
+  export interface Frequency {
+    /**
+     * Frequency units.
+     */
+    units: FrequencyUnits;
+    /**
+     * Frequency value.
+     */
+    value: Double;
   }
   export interface FrequencyBandwidth {
     /**
@@ -1101,72 +623,48 @@ declare namespace GroundStation {
      */
     value: Double;
   }
-  export type String = string;
-  export interface ListSatellitesRequest {
-    /**
-     * Maximum number of satellites returned.
-     */
-    maxResults?: Integer;
-    /**
-     * Next token that can be supplied in the next call to get the next page of satellites.
-     */
-    nextToken?: String;
-  }
-  export interface UpdateMissionProfileRequest {
-    /**
-     * Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
-     */
-    contactPostPassDurationSeconds?: DurationInSeconds;
-    /**
-     * Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
-     */
-    contactPrePassDurationSeconds?: DurationInSeconds;
-    /**
-     * A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a to 
-         Config.
-     */
-    dataflowEdges?: DataflowEdgeList;
-    /**
-     * Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
-     */
-    minimumViableContactDurationSeconds?: DurationInSeconds;
-    /**
-     * ID of a mission profile.
-     */
-    missionProfileId: String;
-    /**
-     * Name of a mission profile.
-     */
-    name?: SafeName;
-    /**
-     * ARN of a tracking Config.
-     */
-    trackingConfigArn?: ConfigArn;
-  }
   export type FrequencyUnits = "GHz"|"MHz"|"kHz"|string;
-  export interface TagResourceRequest {
+  export interface GetConfigRequest {
     /**
-     * ARN of a resource tag.
+     * UUID of a Config.
      */
-    resourceArn: String;
+    configId: String;
     /**
-     * Tags assigned to a resource.
+     * Type of a Config.
+     */
+    configType: ConfigCapabilityType;
+  }
+  export interface GetConfigResponse {
+    /**
+     * ARN of a Config 
+     */
+    configArn: ConfigArn;
+    /**
+     * Data elements in a Config.
+     */
+    configData: ConfigTypeData;
+    /**
+     * UUID of a Config.
+     */
+    configId: String;
+    /**
+     * Type of a Config.
+     */
+    configType?: ConfigCapabilityType;
+    /**
+     * Name of a Config.
+     */
+    name: String;
+    /**
+     * Tags assigned to a Config.
      */
     tags?: TagsMap;
   }
-  export type Criticality = "PREFERRED"|"REMOVED"|"REQUIRED"|string;
-  export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|string;
-  export type TagKeys = String[];
-  export type AngleUnits = "DEGREE_ANGLE"|"RADIAN"|string;
-  export interface DataflowEndpointListItem {
-    /**
-     * ARN of a dataflow endpoint group.
-     */
-    dataflowEndpointGroupArn?: DataflowEndpointGroupArn;
+  export interface GetDataflowEndpointGroupRequest {
     /**
      * UUID of a dataflow endpoint group.
      */
-    dataflowEndpointGroupId?: String;
+    dataflowEndpointGroupId: String;
   }
   export interface GetDataflowEndpointGroupResponse {
     /**
@@ -1186,13 +684,6 @@ declare namespace GroundStation {
      */
     tags?: TagsMap;
   }
-  export interface GetDataflowEndpointGroupRequest {
-    /**
-     * UUID of a dataflow endpoint group.
-     */
-    dataflowEndpointGroupId: String;
-  }
-  export type ConfigArn = string;
   export interface GetMinuteUsageRequest {
     /**
      * The month being requested, with a value of 1-12.
@@ -1203,13 +694,498 @@ declare namespace GroundStation {
      */
     year: Integer;
   }
-  export interface DataflowEndpointGroupIdResponse {
+  export interface GetMinuteUsageResponse {
     /**
-     * ID of a dataflow endpoint group.
+     * Estimated number of minutes remaining for an account, specific to the month being requested.
      */
-    dataflowEndpointGroupId?: String;
+    estimatedMinutesRemaining?: Integer;
+    /**
+     * Returns whether or not an account has signed up for the reserved minutes pricing plan, specific to the month being requested.
+     */
+    isReservedMinutesCustomer?: Boolean;
+    /**
+     * Total number of reserved minutes allocated, specific to the month being requested.
+     */
+    totalReservedMinuteAllocation?: Integer;
+    /**
+     * Total scheduled minutes for an account, specific to the month being requested.
+     */
+    totalScheduledMinutes?: Integer;
+    /**
+     * Upcoming minutes scheduled for an account, specific to the month being requested.
+     */
+    upcomingMinutesScheduled?: Integer;
   }
-  export type EirpUnits = "dBW"|string;
+  export interface GetMissionProfileRequest {
+    /**
+     * UUID of a mission profile.
+     */
+    missionProfileId: String;
+  }
+  export interface GetMissionProfileResponse {
+    /**
+     * Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+     */
+    contactPostPassDurationSeconds?: DurationInSeconds;
+    /**
+     * Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+     */
+    contactPrePassDurationSeconds?: DurationInSeconds;
+    /**
+     * A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a to Config.
+     */
+    dataflowEdges?: DataflowEdgeList;
+    /**
+     * Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+     */
+    minimumViableContactDurationSeconds?: DurationInSeconds;
+    /**
+     * ARN of a mission profile.
+     */
+    missionProfileArn?: MissionProfileArn;
+    /**
+     * UUID of a mission profile.
+     */
+    missionProfileId?: String;
+    /**
+     * Name of a mission profile.
+     */
+    name?: String;
+    /**
+     * Region of a mission profile.
+     */
+    region?: String;
+    /**
+     * Tags assigned to a mission profile.
+     */
+    tags?: TagsMap;
+    /**
+     * ARN of a tracking Config.
+     */
+    trackingConfigArn?: ConfigArn;
+  }
+  export interface GetSatelliteRequest {
+    /**
+     * UUID of a satellite.
+     */
+    satelliteId: String;
+  }
+  export interface GetSatelliteResponse {
+    /**
+     * A list of ground stations to which the satellite is on-boarded.
+     */
+    groundStations?: GroundStationIdList;
+    /**
+     * NORAD satellite ID number.
+     */
+    noradSatelliteID?: noradSatelliteID;
+    /**
+     * ARN of a satellite.
+     */
+    satelliteArn?: satelliteArn;
+    /**
+     * UUID of a satellite.
+     */
+    satelliteId?: Uuid;
+  }
+  export interface GroundStationData {
+    /**
+     * UUID of a ground station.
+     */
+    groundStationId?: String;
+    /**
+     * Name of a ground station.
+     */
+    groundStationName?: String;
+    /**
+     * Ground station Region.
+     */
+    region?: String;
+  }
+  export type GroundStationIdList = String[];
+  export type GroundStationList = GroundStationData[];
+  export type Integer = number;
+  export type JsonString = string;
+  export interface ListConfigsRequest {
+    /**
+     * Maximum number of Configs returned.
+     */
+    maxResults?: Integer;
+    /**
+     * Next token returned in the request of a previous ListConfigs call. Used to get the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListConfigsResponse {
+    /**
+     * List of Config items.
+     */
+    configList?: ConfigList;
+    /**
+     * Next token returned in the response of a previous ListConfigs call. Used to get the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListContactsRequest {
+    /**
+     * End time of a contact.
+     */
+    endTime: Timestamp;
+    /**
+     * Name of a ground station.
+     */
+    groundStation?: String;
+    /**
+     * Maximum number of contacts returned.
+     */
+    maxResults?: Integer;
+    /**
+     * ARN of a mission profile.
+     */
+    missionProfileArn?: MissionProfileArn;
+    /**
+     * Next token returned in the request of a previous ListContacts call. Used to get the next page of results.
+     */
+    nextToken?: String;
+    /**
+     * ARN of a satellite.
+     */
+    satelliteArn?: satelliteArn;
+    /**
+     * Start time of a contact.
+     */
+    startTime: Timestamp;
+    /**
+     * Status of a contact reservation.
+     */
+    statusList: StatusList;
+  }
+  export interface ListContactsResponse {
+    /**
+     * List of contacts.
+     */
+    contactList?: ContactList;
+    /**
+     * Next token returned in the response of a previous ListContacts call. Used to get the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListDataflowEndpointGroupsRequest {
+    /**
+     * Maximum number of dataflow endpoint groups returned.
+     */
+    maxResults?: Integer;
+    /**
+     * Next token returned in the request of a previous ListDataflowEndpointGroups call. Used to get the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListDataflowEndpointGroupsResponse {
+    /**
+     * A list of dataflow endpoint groups.
+     */
+    dataflowEndpointGroupList?: DataflowEndpointGroupList;
+    /**
+     * Next token returned in the response of a previous ListDataflowEndpointGroups call. Used to get the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListGroundStationsRequest {
+    /**
+     * Maximum number of ground stations returned.
+     */
+    maxResults?: Integer;
+    /**
+     * Next token that can be supplied in the next call to get the next page of ground stations.
+     */
+    nextToken?: String;
+    /**
+     * Satellite ID to retrieve on-boarded ground stations.
+     */
+    satelliteId?: String;
+  }
+  export interface ListGroundStationsResponse {
+    /**
+     * List of ground stations.
+     */
+    groundStationList?: GroundStationList;
+    /**
+     * Next token that can be supplied in the next call to get the next page of ground stations.
+     */
+    nextToken?: String;
+  }
+  export interface ListMissionProfilesRequest {
+    /**
+     * Maximum number of mission profiles returned.
+     */
+    maxResults?: Integer;
+    /**
+     * Next token returned in the request of a previous ListMissionProfiles call. Used to get the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListMissionProfilesResponse {
+    /**
+     * List of mission profiles.
+     */
+    missionProfileList?: MissionProfileList;
+    /**
+     * Next token returned in the response of a previous ListMissionProfiles call. Used to get the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListSatellitesRequest {
+    /**
+     * Maximum number of satellites returned.
+     */
+    maxResults?: Integer;
+    /**
+     * Next token that can be supplied in the next call to get the next page of satellites.
+     */
+    nextToken?: String;
+  }
+  export interface ListSatellitesResponse {
+    /**
+     * Next token that can be supplied in the next call to get the next page of satellites.
+     */
+    nextToken?: String;
+    /**
+     * List of satellites.
+     */
+    satellites?: SatelliteList;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * ARN of a resource.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Tags assigned to a resource.
+     */
+    tags?: TagsMap;
+  }
+  export type MissionProfileArn = string;
+  export interface MissionProfileIdResponse {
+    /**
+     * UUID of a mission profile.
+     */
+    missionProfileId?: String;
+  }
+  export type MissionProfileList = MissionProfileListItem[];
+  export interface MissionProfileListItem {
+    /**
+     * ARN of a mission profile.
+     */
+    missionProfileArn?: MissionProfileArn;
+    /**
+     * UUID of a mission profile.
+     */
+    missionProfileId?: String;
+    /**
+     * Name of a mission profile.
+     */
+    name?: String;
+    /**
+     * Region of a mission profile.
+     */
+    region?: String;
+  }
+  export type Polarization = "LEFT_HAND"|"NONE"|"RIGHT_HAND"|string;
+  export interface ReserveContactRequest {
+    /**
+     * End time of a contact.
+     */
+    endTime: Timestamp;
+    /**
+     * Name of a ground station.
+     */
+    groundStation: String;
+    /**
+     * ARN of a mission profile.
+     */
+    missionProfileArn: MissionProfileArn;
+    /**
+     * ARN of a satellite
+     */
+    satelliteArn: satelliteArn;
+    /**
+     * Start time of a contact.
+     */
+    startTime: Timestamp;
+    /**
+     * Tags assigned to a contact.
+     */
+    tags?: TagsMap;
+  }
+  export type RoleArn = string;
+  export type SafeName = string;
+  export type SatelliteList = SatelliteListItem[];
+  export interface SatelliteListItem {
+    /**
+     * A list of ground stations to which the satellite is on-boarded.
+     */
+    groundStations?: GroundStationIdList;
+    /**
+     * NORAD satellite ID number.
+     */
+    noradSatelliteID?: noradSatelliteID;
+    /**
+     * ARN of a satellite.
+     */
+    satelliteArn?: satelliteArn;
+    /**
+     * UUID of a satellite.
+     */
+    satelliteId?: Uuid;
+  }
+  export interface SecurityDetails {
+    /**
+     * ARN to a role needed for connecting streams to your instances. 
+     */
+    roleArn: RoleArn;
+    /**
+     * The security groups to attach to the elastic network interfaces.
+     */
+    securityGroupIds: SecurityGroupIdList;
+    /**
+     * A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
+     */
+    subnetIds: SubnetList;
+  }
+  export type SecurityGroupIdList = String[];
+  export interface SocketAddress {
+    /**
+     * Name of a socket address.
+     */
+    name: String;
+    /**
+     * Port of a socket address.
+     */
+    port: Integer;
+  }
+  export interface SpectrumConfig {
+    /**
+     * Bandwidth of a spectral Config.
+     */
+    bandwidth: FrequencyBandwidth;
+    /**
+     * Center frequency of a spectral Config.
+     */
+    centerFrequency: Frequency;
+    /**
+     * Polarization of a spectral Config.
+     */
+    polarization?: Polarization;
+  }
+  export type StatusList = ContactStatus[];
+  export type String = string;
+  export type SubnetList = String[];
+  export type TagKeys = String[];
+  export interface TagResourceRequest {
+    /**
+     * ARN of a resource tag.
+     */
+    resourceArn: String;
+    /**
+     * Tags assigned to a resource.
+     */
+    tags: TagsMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagsMap = {[key: string]: String};
+  export type Timestamp = Date;
+  export interface TrackingConfig {
+    /**
+     * Current setting for autotrack.
+     */
+    autotrack: Criticality;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * ARN of a resource.
+     */
+    resourceArn: String;
+    /**
+     * Keys of a resource tag.
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
+  export interface UpdateConfigRequest {
+    /**
+     * Parameters of a Config.
+     */
+    configData: ConfigTypeData;
+    /**
+     * UUID of a Config.
+     */
+    configId: String;
+    /**
+     * Type of a Config.
+     */
+    configType: ConfigCapabilityType;
+    /**
+     * Name of a Config.
+     */
+    name: SafeName;
+  }
+  export interface UpdateMissionProfileRequest {
+    /**
+     * Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+     */
+    contactPostPassDurationSeconds?: DurationInSeconds;
+    /**
+     * Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+     */
+    contactPrePassDurationSeconds?: DurationInSeconds;
+    /**
+     * A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a to Config.
+     */
+    dataflowEdges?: DataflowEdgeList;
+    /**
+     * Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+     */
+    minimumViableContactDurationSeconds?: DurationInSeconds;
+    /**
+     * UUID of a mission profile.
+     */
+    missionProfileId: String;
+    /**
+     * Name of a mission profile.
+     */
+    name?: SafeName;
+    /**
+     * ARN of a tracking Config.
+     */
+    trackingConfigArn?: ConfigArn;
+  }
+  export interface UplinkEchoConfig {
+    /**
+     * ARN of an uplink Config.
+     */
+    antennaUplinkConfigArn: ConfigArn;
+    /**
+     * Whether or not an uplink Config is enabled.
+     */
+    enabled: Boolean;
+  }
+  export interface UplinkSpectrumConfig {
+    /**
+     * Center frequency of an uplink spectral Config.
+     */
+    centerFrequency: Frequency;
+    /**
+     * Polarization of an uplink spectral Config.
+     */
+    polarization?: Polarization;
+  }
+  export type Uuid = string;
+  export type noradSatelliteID = number;
+  export type satelliteArn = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

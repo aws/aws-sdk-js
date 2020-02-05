@@ -305,7 +305,7 @@ declare namespace DLM {
   }
   export interface Parameters {
     /**
-     * When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the excludeBootVolume set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.
+     * [EBS Snapshot Management – Instance policies only] Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
      */
     ExcludeBootVolume?: ExcludeBootVolume;
   }
@@ -313,7 +313,7 @@ declare namespace DLM {
   export type PolicyDescription = string;
   export interface PolicyDetails {
     /**
-     * This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+     * The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
      */
     PolicyType?: PolicyTypeValues;
     /**
@@ -329,7 +329,7 @@ declare namespace DLM {
      */
     Schedules?: ScheduleList;
     /**
-     * A set of optional parameters that can be provided by the policy. 
+     * A set of optional parameters for the policy. 
      */
     Parameters?: Parameters;
   }

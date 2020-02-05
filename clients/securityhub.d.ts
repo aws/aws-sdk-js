@@ -52,19 +52,19 @@ declare class SecurityHub extends Service {
    */
   createActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.CreateActionTargetResponse) => void): Request<SecurityHub.Types.CreateActionTargetResponse, AWSError>;
   /**
-   * Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate to a security issue that requires attention or remediation. Use the GroupByAttribute to group the related findings in the insight.
+   * Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate to a security issue that requires attention or remediation. To group the related findings in the insight, use the GroupByAttribute.
    */
   createInsight(params: SecurityHub.Types.CreateInsightRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate to a security issue that requires attention or remediation. Use the GroupByAttribute to group the related findings in the insight.
+   * Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate to a security issue that requires attention or remediation. To group the related findings in the insight, use the GroupByAttribute.
    */
   createInsight(callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. You can use the EnableSecurityHub to enable Security Hub. After you use CreateMembers to create member account associations in Security Hub, you need to use the InviteMembers action, which invites the accounts to enable Security Hub and become member accounts in Security Hub. If the invitation is accepted by the account owner, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start being sent to both the member and master accounts. You can remove the association between the master and member accounts by using the DisassociateFromMasterAccount or DisassociateMembers operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. After you use CreateMembers to create member account associations in Security Hub, you must use the InviteMembers operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
    */
   createMembers(params: SecurityHub.Types.CreateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. You can use the EnableSecurityHub to enable Security Hub. After you use CreateMembers to create member account associations in Security Hub, you need to use the InviteMembers action, which invites the accounts to enable Security Hub and become member accounts in Security Hub. If the invitation is accepted by the account owner, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start being sent to both the member and master accounts. You can remove the association between the master and member accounts by using the DisassociateFromMasterAccount or DisassociateMembers operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. After you use CreateMembers to create member account associations in Security Hub, you must use the InviteMembers operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
    */
   createMembers(callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class SecurityHub extends Service {
    */
   declineInvitations(callback?: (err: AWSError, data: SecurityHub.Types.DeclineInvitationsResponse) => void): Request<SecurityHub.Types.DeclineInvitationsResponse, AWSError>;
   /**
-   * Deletes a custom action target from Security Hub. Deleting a custom action target doesn't affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
+   * Deletes a custom action target from Security Hub. Deleting a custom action target does not affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
    */
   deleteActionTarget(params: SecurityHub.Types.DeleteActionTargetRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteActionTargetResponse) => void): Request<SecurityHub.Types.DeleteActionTargetResponse, AWSError>;
   /**
-   * Deletes a custom action target from Security Hub. Deleting a custom action target doesn't affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
+   * Deletes a custom action target from Security Hub. Deleting a custom action target does not affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
    */
   deleteActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.DeleteActionTargetResponse) => void): Request<SecurityHub.Types.DeleteActionTargetResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class SecurityHub extends Service {
    */
   describeHub(callback?: (err: AWSError, data: SecurityHub.Types.DescribeHubResponse) => void): Request<SecurityHub.Types.DescribeHubResponse, AWSError>;
   /**
-   * Returns information about the products available that you can subscribe to and integrate with Security Hub to consolidate findings.
+   * Returns information about the available products that you can subscribe to and integrate with Security Hub in order to consolidate findings.
    */
   describeProducts(params: SecurityHub.Types.DescribeProductsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeProductsResponse) => void): Request<SecurityHub.Types.DescribeProductsResponse, AWSError>;
   /**
-   * Returns information about the products available that you can subscribe to and integrate with Security Hub to consolidate findings.
+   * Returns information about the available products that you can subscribe to and integrate with Security Hub in order to consolidate findings.
    */
   describeProducts(callback?: (err: AWSError, data: SecurityHub.Types.DescribeProductsResponse) => void): Request<SecurityHub.Types.DescribeProductsResponse, AWSError>;
   /**
@@ -140,19 +140,19 @@ declare class SecurityHub extends Service {
    */
   describeStandardsControls(callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsControlsResponse) => void): Request<SecurityHub.Types.DescribeStandardsControlsResponse, AWSError>;
   /**
-   * Disables the integration of the specified product with Security Hub. Findings from that product are no longer sent to Security Hub after the integration is disabled.
+   * Disables the integration of the specified product with Security Hub. After the integration is disabled, findings from that product are no longer sent to Security Hub.
    */
   disableImportFindingsForProduct(params: SecurityHub.Types.DisableImportFindingsForProductRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.DisableImportFindingsForProductResponse, AWSError>;
   /**
-   * Disables the integration of the specified product with Security Hub. Findings from that product are no longer sent to Security Hub after the integration is disabled.
+   * Disables the integration of the specified product with Security Hub. After the integration is disabled, findings from that product are no longer sent to Security Hub.
    */
   disableImportFindingsForProduct(callback?: (err: AWSError, data: SecurityHub.Types.DisableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.DisableImportFindingsForProductResponse, AWSError>;
   /**
-   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for a master account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and can't be recovered. Any standards that were enabled are disabled, and your master and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
+   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for a master account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your master and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
    */
   disableSecurityHub(params: SecurityHub.Types.DisableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisableSecurityHubResponse) => void): Request<SecurityHub.Types.DisableSecurityHubResponse, AWSError>;
   /**
-   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for a master account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and can't be recovered. Any standards that were enabled are disabled, and your master and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
+   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for a master account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your master and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
    */
   disableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.DisableSecurityHubResponse) => void): Request<SecurityHub.Types.DisableSecurityHubResponse, AWSError>;
   /**
@@ -204,19 +204,19 @@ declare class SecurityHub extends Service {
    */
   getFindings(callback?: (err: AWSError, data: SecurityHub.Types.GetFindingsResponse) => void): Request<SecurityHub.Types.GetFindingsResponse, AWSError>;
   /**
-   * Lists the results of the Security Hub insight that the insight ARN specifies.
+   * Lists the results of the Security Hub insight specified by the insight ARN.
    */
   getInsightResults(params: SecurityHub.Types.GetInsightResultsRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetInsightResultsResponse) => void): Request<SecurityHub.Types.GetInsightResultsResponse, AWSError>;
   /**
-   * Lists the results of the Security Hub insight that the insight ARN specifies.
+   * Lists the results of the Security Hub insight specified by the insight ARN.
    */
   getInsightResults(callback?: (err: AWSError, data: SecurityHub.Types.GetInsightResultsResponse) => void): Request<SecurityHub.Types.GetInsightResultsResponse, AWSError>;
   /**
-   * Lists and describes insights that insight ARNs specify.
+   * Lists and describes insights for the specified insight ARNs.
    */
   getInsights(params: SecurityHub.Types.GetInsightsRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetInsightsResponse) => void): Request<SecurityHub.Types.GetInsightsResponse, AWSError>;
   /**
-   * Lists and describes insights that insight ARNs specify.
+   * Lists and describes insights for the specified insight ARNs.
    */
   getInsights(callback?: (err: AWSError, data: SecurityHub.Types.GetInsightsResponse) => void): Request<SecurityHub.Types.GetInsightsResponse, AWSError>;
   /**
@@ -228,35 +228,35 @@ declare class SecurityHub extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: SecurityHub.Types.GetInvitationsCountResponse) => void): Request<SecurityHub.Types.GetInvitationsCountResponse, AWSError>;
   /**
-   * Provides the details for the Security Hub master account to the current member account. 
+   * Provides the details for the Security Hub master account for the current member account. 
    */
   getMasterAccount(params: SecurityHub.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetMasterAccountResponse) => void): Request<SecurityHub.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * Provides the details for the Security Hub master account to the current member account. 
+   * Provides the details for the Security Hub master account for the current member account. 
    */
   getMasterAccount(callback?: (err: AWSError, data: SecurityHub.Types.GetMasterAccountResponse) => void): Request<SecurityHub.Types.GetMasterAccountResponse, AWSError>;
   /**
-   * Returns the details on the Security Hub member accounts that the account IDs specify.
+   * Returns the details for the Security Hub member accounts for the specified account IDs.
    */
   getMembers(params: SecurityHub.Types.GetMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetMembersResponse) => void): Request<SecurityHub.Types.GetMembersResponse, AWSError>;
   /**
-   * Returns the details on the Security Hub member accounts that the account IDs specify.
+   * Returns the details for the Security Hub member accounts for the specified account IDs.
    */
   getMembers(callback?: (err: AWSError, data: SecurityHub.Types.GetMembersResponse) => void): Request<SecurityHub.Types.GetMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first create the member account in Security Hub by using the CreateMembers action. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from member account.
+   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first use the CreateMembers action to create the member account in Security Hub. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.
    */
   inviteMembers(params: SecurityHub.Types.InviteMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first create the member account in Security Hub by using the CreateMembers action. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from member account.
+   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first use the CreateMembers action to create the member account in Security Hub. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.
    */
   inviteMembers(callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
-   * Lists all findings-generating solutions (products) whose findings you have subscribed to receive in Security Hub.
+   * Lists all findings-generating solutions (products) that you are subscribed to receive findings from in Security Hub.
    */
   listEnabledProductsForImport(params: SecurityHub.Types.ListEnabledProductsForImportRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListEnabledProductsForImportResponse) => void): Request<SecurityHub.Types.ListEnabledProductsForImportResponse, AWSError>;
   /**
-   * Lists all findings-generating solutions (products) whose findings you have subscribed to receive in Security Hub.
+   * Lists all findings-generating solutions (products) that you are subscribed to receive findings from in Security Hub.
    */
   listEnabledProductsForImport(callback?: (err: AWSError, data: SecurityHub.Types.ListEnabledProductsForImportResponse) => void): Request<SecurityHub.Types.ListEnabledProductsForImportResponse, AWSError>;
   /**
@@ -316,11 +316,11 @@ declare class SecurityHub extends Service {
    */
   updateFindings(callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingsResponse) => void): Request<SecurityHub.Types.UpdateFindingsResponse, AWSError>;
   /**
-   * Updates the Security Hub insight that the insight ARN specifies.
+   * Updates the Security Hub insight identified by the specified insight ARN.
    */
   updateInsight(params: SecurityHub.Types.UpdateInsightRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateInsightResponse) => void): Request<SecurityHub.Types.UpdateInsightResponse, AWSError>;
   /**
-   * Updates the Security Hub insight that the insight ARN specifies.
+   * Updates the Security Hub insight identified by the specified insight ARN.
    */
   updateInsight(callback?: (err: AWSError, data: SecurityHub.Types.UpdateInsightResponse) => void): Request<SecurityHub.Types.UpdateInsightResponse, AWSError>;
   /**
@@ -429,7 +429,7 @@ declare namespace SecurityHub {
      */
     IncludeCookies?: Boolean;
     /**
-     * An optional string that you want CloudFront to prefix to the access log filenames for this distribution.
+     * An optional string that you want CloudFront to use as a prefix to the access log filenames for this distribution.
      */
     Prefix?: NonEmptyString;
   }
@@ -453,6 +453,92 @@ declare namespace SecurityHub {
      * A complex type that contains origins or origin groups for this distribution.
      */
     Items?: AwsCloudFrontDistributionOriginItemList;
+  }
+  export interface AwsCodeBuildProjectDetails {
+    /**
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts. You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK alias (using the format alias/alias-name). 
+     */
+    EncryptionKey?: NonEmptyString;
+    /**
+     * Information about the build environment for this build project.
+     */
+    Environment?: AwsCodeBuildProjectEnvironment;
+    /**
+     * The name of the build project.
+     */
+    Name?: NonEmptyString;
+    /**
+     * Information about the build input source code for this build project.
+     */
+    Source?: AwsCodeBuildProjectSource;
+    /**
+     * The ARN of the IAM role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+     */
+    ServiceRole?: NonEmptyString;
+    /**
+     * Information about the VPC configuration that AWS CodeBuild accesses.
+     */
+    VpcConfig?: AwsCodeBuildProjectVpcConfig;
+  }
+  export interface AwsCodeBuildProjectEnvironment {
+    /**
+     * The certificate to use with this build project.
+     */
+    Certificate?: NonEmptyString;
+    /**
+     * The type of credentials AWS CodeBuild uses to pull images in your build. Valid values:    CODEBUILD specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust the AWS CodeBuild service principal.    SERVICE_ROLE specifies that AWS CodeBuild uses your build project's service role.   When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials.
+     */
+    ImagePullCredentialsType?: NonEmptyString;
+    /**
+     * The credentials for access to a private registry.
+     */
+    RegistryCredential?: AwsCodeBuildProjectEnvironmentRegistryCredential;
+    /**
+     * The type of build environment to use for related builds. The environment type ARM_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt). The environment type LINUX_CONTAINER with compute type build.general1.2xlarge is available only in regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia). The environment type LINUX_GPU_CONTAINER is available only in regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia). Valid values: WINDOWS_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER | ARM_CONTAINER 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsCodeBuildProjectEnvironmentRegistryCredential {
+    /**
+     * The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager.  The credential can use the name of the credentials only if they exist in your current AWS Region.  
+     */
+    Credential?: NonEmptyString;
+    /**
+     * The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for AWS Secrets Manager.
+     */
+    CredentialProvider?: NonEmptyString;
+  }
+  export interface AwsCodeBuildProjectSource {
+    /**
+     * The type of repository that contains the source code to be built. Valid values are:    BITBUCKET - The source code is in a Bitbucket repository.    CODECOMMIT - The source code is in an AWS CodeCommit repository.    CODEPIPELINE - The source code settings are specified in the source action of a pipeline in AWS CodePipeline.    GITHUB - The source code is in a GitHub repository.    GITHUB_ENTERPRISE - The source code is in a GitHub Enterprise repository.    NO_SOURCE - The project does not have input source code.    S3 - The source code is in an S3 input bucket.   
+     */
+    Type?: NonEmptyString;
+    /**
+     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).   For source code in an S3 input bucket, one of the following.   The path to the ZIP file that contains the source code (for example, bucket-name/path/to/object-name.zip).    The path to the folder that contains the source code (for example, bucket-name/path/to/source-code/folder/).     For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file.   
+     */
+    Location?: NonEmptyString;
+    /**
+     * Information about the Git clone depth for the build project.
+     */
+    GitCloneDepth?: Integer;
+    /**
+     * Whether to ignore SSL warnings while connecting to the project source code.
+     */
+    InsecureSsl?: Boolean;
+  }
+  export interface AwsCodeBuildProjectVpcConfig {
+    /**
+     * The ID of the VPC.
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * A list of one or more subnet IDs in your Amazon VPC.
+     */
+    Subnets?: NonEmptyStringList;
+    /**
+     * A list of one or more security group IDs in your Amazon VPC.
+     */
+    SecurityGroupIds?: NonEmptyStringList;
   }
   export interface AwsEc2InstanceDetails {
     /**
@@ -491,6 +577,256 @@ declare namespace SecurityHub {
      * The date/time the instance was launched.
      */
     LaunchedAt?: NonEmptyString;
+  }
+  export interface AwsEc2NetworkInterfaceAttachment {
+    /**
+     * The timestamp indicating when the attachment initiated.
+     */
+    AttachTime?: NonEmptyString;
+    /**
+     * The identifier of the network interface attachment
+     */
+    AttachmentId?: NonEmptyString;
+    /**
+     * Indicates whether the network interface is deleted when the instance is terminated.
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     * The device index of the network interface attachment on the instance.
+     */
+    DeviceIndex?: Integer;
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: NonEmptyString;
+    /**
+     * The AWS account ID of the owner of the instance.
+     */
+    InstanceOwnerId?: NonEmptyString;
+    /**
+     * The attachment state. Valid values: attaching | attached | detaching | detached 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsEc2NetworkInterfaceDetails {
+    /**
+     * The network interface attachment.
+     */
+    Attachment?: AwsEc2NetworkInterfaceAttachment;
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: NonEmptyString;
+    /**
+     * Security groups for the network interface.
+     */
+    SecurityGroups?: AwsEc2NetworkInterfaceSecurityGroupList;
+    /**
+     * Indicates whether traffic to or from the instance is validated.
+     */
+    SourceDestCheck?: Boolean;
+  }
+  export interface AwsEc2NetworkInterfaceSecurityGroup {
+    /**
+     * The name of the security group.
+     */
+    GroupName?: NonEmptyString;
+    /**
+     * The ID of the security group.
+     */
+    GroupId?: NonEmptyString;
+  }
+  export type AwsEc2NetworkInterfaceSecurityGroupList = AwsEc2NetworkInterfaceSecurityGroup[];
+  export interface AwsEc2SecurityGroupDetails {
+    /**
+     * The name of the security group.
+     */
+    GroupName?: NonEmptyString;
+    /**
+     * The ID of the security group.
+     */
+    GroupId?: NonEmptyString;
+    /**
+     * The AWS account ID of the owner of the security group.
+     */
+    OwnerId?: NonEmptyString;
+    /**
+     * [VPC only] The ID of the VPC for the security group.
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * The inbound rules associated with the security group.
+     */
+    IpPermissions?: AwsEc2SecurityGroupIpPermissionList;
+    /**
+     * [VPC only] The outbound rules associated with the security group.
+     */
+    IpPermissionsEgress?: AwsEc2SecurityGroupIpPermissionList;
+  }
+  export interface AwsEc2SecurityGroupIpPermission {
+    /**
+     * The IP protocol name (tcp, udp, icmp, icmpv6) or number. [VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional. If you omit the port range, traffic for all types and codes is allowed. 
+     */
+    IpProtocol?: NonEmptyString;
+    /**
+     * The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes. 
+     */
+    FromPort?: Integer;
+    /**
+     * The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     */
+    ToPort?: Integer;
+    /**
+     * The security group and AWS account ID pairs.
+     */
+    UserIdGroupPairs?: AwsEc2SecurityGroupUserIdGroupPairList;
+    /**
+     * The IPv4 ranges.
+     */
+    IpRanges?: AwsEc2SecurityGroupIpRangeList;
+    /**
+     * The IPv6 ranges.
+     */
+    Ipv6Ranges?: AwsEc2SecurityGroupIpv6RangeList;
+    /**
+     * [VPC only] The prefix list IDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group.
+     */
+    PrefixListIds?: AwsEc2SecurityGroupPrefixListIdList;
+  }
+  export type AwsEc2SecurityGroupIpPermissionList = AwsEc2SecurityGroupIpPermission[];
+  export interface AwsEc2SecurityGroupIpRange {
+    /**
+     * The IPv4 CIDR range. You can either specify either a CIDR range or a source security group, but not both. To specify a single IPv4 address, use the /32 prefix length.
+     */
+    CidrIp?: NonEmptyString;
+  }
+  export type AwsEc2SecurityGroupIpRangeList = AwsEc2SecurityGroupIpRange[];
+  export interface AwsEc2SecurityGroupIpv6Range {
+    /**
+     * The IPv6 CIDR range. You can either specify either a CIDR range or a source security group, but not both. To specify a single IPv6 address, use the /128 prefix length.
+     */
+    CidrIpv6?: NonEmptyString;
+  }
+  export type AwsEc2SecurityGroupIpv6RangeList = AwsEc2SecurityGroupIpv6Range[];
+  export interface AwsEc2SecurityGroupPrefixListId {
+    /**
+     * The ID of the prefix.
+     */
+    PrefixListId?: NonEmptyString;
+  }
+  export type AwsEc2SecurityGroupPrefixListIdList = AwsEc2SecurityGroupPrefixListId[];
+  export interface AwsEc2SecurityGroupUserIdGroupPair {
+    /**
+     * The ID of the security group.
+     */
+    GroupId?: NonEmptyString;
+    /**
+     * The name of the security group.
+     */
+    GroupName?: NonEmptyString;
+    /**
+     * The status of a VPC peering connection, if applicable.
+     */
+    PeeringStatus?: NonEmptyString;
+    /**
+     * The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned. [EC2-Classic] Required when adding or removing rules that reference a security group in another AWS. 
+     */
+    UserId?: NonEmptyString;
+    /**
+     * The ID of the VPC for the referenced security group, if applicable.
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * The ID of the VPC peering connection, if applicable.
+     */
+    VpcPeeringConnectionId?: NonEmptyString;
+  }
+  export type AwsEc2SecurityGroupUserIdGroupPairList = AwsEc2SecurityGroupUserIdGroupPair[];
+  export interface AwsElasticsearchDomainDetails {
+    /**
+     * IAM policy document specifying the access policies for the new Amazon ES domain.
+     */
+    AccessPolicies?: NonEmptyString;
+    /**
+     * Additional options for the domain endpoint.
+     */
+    DomainEndpointOptions?: AwsElasticsearchDomainDomainEndpointOptions;
+    /**
+     * Unique identifier for an Amazon ES domain.
+     */
+    DomainId?: NonEmptyString;
+    /**
+     * Name of an Amazon ES domain. Domain names are unique across all domains owned by the same account within an AWS Region. Domain names must start with a lowercase letter and must be between 3 and 28 characters. Valid characters are a-z (lowercase only), 0-9, and – (hyphen). 
+     */
+    DomainName?: NonEmptyString;
+    /**
+     * Domain-specific endpoint used to submit index, search, and data upload requests to an Amazon ES domain. The endpoint is a service URL. 
+     */
+    Endpoint?: NonEmptyString;
+    /**
+     * The key-value pair that exists if the Amazon ES domain uses VPC endpoints.
+     */
+    Endpoints?: FieldMap;
+    /**
+     * Elasticsearch version.
+     */
+    ElasticsearchVersion?: NonEmptyString;
+    /**
+     * Details about the configuration for encryption at rest.
+     */
+    EncryptionAtRestOptions?: AwsElasticsearchDomainEncryptionAtRestOptions;
+    /**
+     * Details about the configuration for node-to-node encryption.
+     */
+    NodeToNodeEncryptionOptions?: AwsElasticsearchDomainNodeToNodeEncryptionOptions;
+    /**
+     * Information that Amazon ES derives based on VPCOptions for the domain.
+     */
+    VPCOptions?: AwsElasticsearchDomainVPCOptions;
+  }
+  export interface AwsElasticsearchDomainDomainEndpointOptions {
+    /**
+     * Whether to require that all traffic to the domain arrive over HTTPS.
+     */
+    EnforceHTTPS?: Boolean;
+    /**
+     * The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch domain. Valid values:    Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and higher    Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2  
+     */
+    TLSSecurityPolicy?: NonEmptyString;
+  }
+  export interface AwsElasticsearchDomainEncryptionAtRestOptions {
+    /**
+     * Whether encryption at rest is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
+     */
+    KmsKeyId?: NonEmptyString;
+  }
+  export interface AwsElasticsearchDomainNodeToNodeEncryptionOptions {
+    /**
+     * Whether node-to-node encryption is enabled.
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsElasticsearchDomainVPCOptions {
+    /**
+     * The list of Availability Zones associated with the VPC subnets.
+     */
+    AvailabilityZones?: NonEmptyStringList;
+    /**
+     * The list of security group IDs associated with the VPC endpoints for the domain.
+     */
+    SecurityGroupIds?: NonEmptyStringList;
+    /**
+     * A list of subnet IDs associated with the VPC endpoints for the domain.
+     */
+    SubnetIds?: NonEmptyStringList;
+    /**
+     * ID for the VPC.
+     */
+    VPCId?: NonEmptyString;
   }
   export interface AwsElbv2LoadBalancerDetails {
     /**
@@ -763,6 +1099,139 @@ declare namespace SecurityHub {
      */
     VpcId?: NonEmptyString;
   }
+  export interface AwsLambdaLayerVersionDetails {
+    /**
+     * The version number.
+     */
+    Version?: AwsLambdaLayerVersionNumber;
+    /**
+     * The layer's compatible runtimes. Maximum number of 5 items. Valid values: nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided 
+     */
+    CompatibleRuntimes?: NonEmptyStringList;
+    /**
+     * The date that the version was created, in ISO 8601 format. For example, 2018-11-27T15:10:45.123+0000. 
+     */
+    CreatedDate?: NonEmptyString;
+  }
+  export type AwsLambdaLayerVersionNumber = number;
+  export interface AwsRdsDbInstanceAssociatedRole {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.
+     */
+    RoleArn?: NonEmptyString;
+    /**
+     * The name of the feature associated with the IAM)role.
+     */
+    FeatureName?: NonEmptyString;
+    /**
+     * Describes the state of the association between the IAM role and the DB instance. The Status property returns one of the following values:    ACTIVE - the IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.    PENDING - the IAM role ARN is being associated with the DB instance.    INVALID - the IAM role ARN is associated with the DB instance, but the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf.   
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsRdsDbInstanceAssociatedRoles = AwsRdsDbInstanceAssociatedRole[];
+  export interface AwsRdsDbInstanceDetails {
+    /**
+     * The AWS Identity and Access Management (IAM) roles associated with the DB instance.
+     */
+    AssociatedRoles?: AwsRdsDbInstanceAssociatedRoles;
+    /**
+     * The identifier of the CA certificate for this DB instance.
+     */
+    CACertificateIdentifier?: NonEmptyString;
+    /**
+     * If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of.
+     */
+    DBClusterIdentifier?: NonEmptyString;
+    /**
+     * Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance.
+     */
+    DBInstanceIdentifier?: NonEmptyString;
+    /**
+     * Contains the name of the compute and memory capacity class of the DB instance.
+     */
+    DBInstanceClass?: NonEmptyString;
+    /**
+     * Specifies the port that the DB instance listens on. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port.
+     */
+    DbInstancePort?: Integer;
+    /**
+     * The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed. 
+     */
+    DbiResourceId?: NonEmptyString;
+    /**
+     * The meaning of this parameter differs according to the database engine you use.  MySQL, MariaDB, SQL Server, PostgreSQL  Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance.  Oracle  Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance. 
+     */
+    DBName?: NonEmptyString;
+    /**
+     * Indicates whether the DB instance has deletion protection enabled. When deletion protection is enabled, the database cannot be deleted.
+     */
+    DeletionProtection?: Boolean;
+    /**
+     * Specifies the connection endpoint.
+     */
+    Endpoint?: AwsRdsDbInstanceEndpoint;
+    /**
+     * Provides the name of the database engine to use for this DB instance.
+     */
+    Engine?: NonEmptyString;
+    /**
+     * Indicates the database engine version.
+     */
+    EngineVersion?: NonEmptyString;
+    /**
+     * True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false. IAM database authentication can be enabled for the following database engines.   For MySQL 5.6, minor version 5.6.34 or higher   For MySQL 5.7, minor version 5.7.16 or higher   Aurora 5.6 or higher  
+     */
+    IAMDatabaseAuthenticationEnabled?: Boolean;
+    /**
+     * Provides the date and time the DB instance was created.
+     */
+    InstanceCreateTime?: NonEmptyString;
+    /**
+     * If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB instance.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. 
+     */
+    PubliclyAccessible?: Boolean;
+    /**
+     * Specifies whether the DB instance is encrypted.
+     */
+    StorageEncrypted?: Boolean;
+    /**
+     * The ARN from the key store with which the instance is associated for TDE encryption.
+     */
+    TdeCredentialArn?: NonEmptyString;
+    /**
+     * A list of VPC security groups that the DB instance belongs to.
+     */
+    VpcSecurityGroups?: AwsRdsDbInstanceVpcSecurityGroups;
+  }
+  export interface AwsRdsDbInstanceEndpoint {
+    /**
+     * Specifies the DNS address of the DB instance.
+     */
+    Address?: NonEmptyString;
+    /**
+     * Specifies the port that the database engine is listening on.
+     */
+    Port?: Integer;
+    /**
+     * Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+     */
+    HostedZoneId?: NonEmptyString;
+  }
+  export interface AwsRdsDbInstanceVpcSecurityGroup {
+    /**
+     * The name of the VPC security group.
+     */
+    VpcSecurityGroupId?: NonEmptyString;
+    /**
+     * The status of the VPC security group.
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsRdsDbInstanceVpcSecurityGroups = AwsRdsDbInstanceVpcSecurityGroup[];
   export interface AwsS3BucketDetails {
     /**
      * The canonical user ID of the owner of the S3 bucket.
@@ -863,7 +1332,7 @@ declare namespace SecurityHub {
      */
     Process?: ProcessDetails;
     /**
-     * Threat intel details related to a finding.
+     * Threat intelligence details related to a finding.
      */
     ThreatIntelIndicators?: ThreatIntelIndicatorList;
     /**
@@ -1069,27 +1538,27 @@ declare namespace SecurityHub {
      */
     ProcessTerminatedAt?: DateFilterList;
     /**
-     * The type of a threat intel indicator.
+     * The type of a threat intelligence indicator.
      */
     ThreatIntelIndicatorType?: StringFilterList;
     /**
-     * The value of a threat intel indicator.
+     * The value of a threat intelligence indicator.
      */
     ThreatIntelIndicatorValue?: StringFilterList;
     /**
-     * The category of a threat intel indicator.
+     * The category of a threat intelligence indicator.
      */
     ThreatIntelIndicatorCategory?: StringFilterList;
     /**
-     * The date/time of the last observation of a threat intel indicator.
+     * The date/time of the last observation of a threat intelligence indicator.
      */
     ThreatIntelIndicatorLastObservedAt?: DateFilterList;
     /**
-     * The source of the threat intel.
+     * The source of the threat intelligence.
      */
     ThreatIntelIndicatorSource?: StringFilterList;
     /**
-     * The URL for more details from the source of the threat intel.
+     * The URL for more details from the source of the threat intelligence.
      */
     ThreatIntelIndicatorSourceUrl?: StringFilterList;
     /**
@@ -1145,7 +1614,7 @@ declare namespace SecurityHub {
      */
     ResourceAwsEc2InstanceSubnetId?: StringFilterList;
     /**
-     * The date/time the instance was launched.
+     * The date and time the instance was launched.
      */
     ResourceAwsEc2InstanceLaunchedAt?: DateFilterList;
     /**
@@ -1277,6 +1746,51 @@ declare namespace SecurityHub {
      */
     DeadLetterTargetArn?: NonEmptyString;
   }
+  export interface AwsWafWebAclDetails {
+    /**
+     * A friendly name or description of the WebACL. You can't change the name of a WebACL after you create it.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The action to perform if none of the Rules contained in the WebACL match.
+     */
+    DefaultAction?: NonEmptyString;
+    /**
+     * An array that contains the action for each rule in a WebACL, the priority of the rule, and the ID of the rule.
+     */
+    Rules?: AwsWafWebAclRuleList;
+    /**
+     * A unique identifier for a WebACL.
+     */
+    WebAclId?: NonEmptyString;
+  }
+  export interface AwsWafWebAclRule {
+    /**
+     * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. 
+     */
+    Action?: WafAction;
+    /**
+     * Rules to exclude from a rule group.
+     */
+    ExcludedRules?: WafExcludedRuleList;
+    /**
+     * Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can potentially block a request. If you set the OverrideAction to None, the RuleGroup blocks a request if any individual rule in the RuleGroup matches the request and is configured to block that request. However, if you first want to test the RuleGroup, set the OverrideAction to Count. The RuleGroup then overrides any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests are counted.  ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to a WebACL. In this case you do not use ActivatedRule|Action. For all other update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction. 
+     */
+    OverrideAction?: WafOverrideAction;
+    /**
+     * Specifies the order in which the Rules in a WebACL are evaluated. Rules with a lower value for Priority are evaluated before Rules with a higher value. The value must be a unique integer. If you add multiple Rules to a WebACL, the values do not need to be consecutive.
+     */
+    Priority?: Integer;
+    /**
+     * The identifier for a Rule.
+     */
+    RuleId?: NonEmptyString;
+    /**
+     * The rule type. Valid values: REGULAR | RATE_BASED | GROUP  The default is REGULAR.
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsWafWebAclRuleList = AwsWafWebAclRule[];
   export interface BatchDisableStandardsRequest {
     /**
      * The ARNs of the standards subscriptions to disable.
@@ -1317,7 +1831,7 @@ declare namespace SecurityHub {
      */
     SuccessCount: Integer;
     /**
-     * The list of the findings that failed to import.
+     * The list of findings that failed to import.
      */
     FailedFindings?: ImportFindingsErrorList;
   }
@@ -1328,6 +1842,10 @@ declare namespace SecurityHub {
      * The result of a compliance check.
      */
     Status?: ComplianceStatus;
+    /**
+     * List of requirements that are related to a standards control.
+     */
+    RelatedRequirements?: RelatedRequirementsList;
   }
   export type ComplianceStatus = "PASSED"|"WARNING"|"FAILED"|"NOT_AVAILABLE"|string;
   export interface ContainerDetails {
@@ -1375,7 +1893,7 @@ declare namespace SecurityHub {
      */
     Name: NonEmptyString;
     /**
-     * One or more attributes used to filter the findings included in the insight. Only findings that match the criteria defined in the filters are included in the insight.
+     * One or more attributes used to filter the findings included in the insight. The insight only includes findings that match the criteria defined in the filters.
      */
     Filters: AwsSecurityFindingFilters;
     /**
@@ -1391,13 +1909,13 @@ declare namespace SecurityHub {
   }
   export interface CreateMembersRequest {
     /**
-     * A list of account ID and email address pairs of the accounts to associate with the Security Hub master account.
+     * The list of accounts to associate with the Security Hub master account. For each account, the list includes the account ID and the email address.
      */
     AccountDetails?: AccountDetailsList;
   }
   export interface CreateMembersResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that weren't processed.
+     * The list of AWS accounts that were not processed. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -1429,13 +1947,13 @@ declare namespace SecurityHub {
   export type DateRangeUnit = "DAYS"|string;
   export interface DeclineInvitationsRequest {
     /**
-     * A list of account IDs that specify the accounts that invitations to Security Hub are declined from.
+     * The list of account IDs for the accounts from which to decline the invitations to Security Hub.
      */
     AccountIds: AccountIdList;
   }
   export interface DeclineInvitationsResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that weren't processed.
+     * The list of AWS accounts that were not processed. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -1465,25 +1983,25 @@ declare namespace SecurityHub {
   }
   export interface DeleteInvitationsRequest {
     /**
-     * A list of the account IDs that sent the invitations to delete.
+     * The list of the account IDs that sent the invitations to delete.
      */
     AccountIds: AccountIdList;
   }
   export interface DeleteInvitationsResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that invitations weren't deleted for.
+     * The list of AWS accounts for which the invitations were not deleted. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
   export interface DeleteMembersRequest {
     /**
-     * A list of account IDs of the member accounts to delete.
+     * The list of account IDs for the member accounts to delete.
      */
     AccountIds?: AccountIdList;
   }
   export interface DeleteMembersResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that weren't deleted.
+     * The list of AWS accounts that were not deleted. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -1519,7 +2037,7 @@ declare namespace SecurityHub {
   }
   export interface DescribeHubResponse {
     /**
-     * The ARN of the Hub resource retrieved.
+     * The ARN of the Hub resource that was retrieved.
      */
     HubArn?: NonEmptyString;
     /**
@@ -1619,11 +2137,11 @@ declare namespace SecurityHub {
   export type FieldMap = {[key: string]: NonEmptyString};
   export interface GetEnabledStandardsRequest {
     /**
-     * A list of the standards subscription ARNs for the standards to retrieve.
+     * The list of the standards subscription ARNs for the standards to retrieve.
      */
     StandardsSubscriptionArns?: StandardsSubscriptionArns;
     /**
-     * Paginates results. On your first call to the GetEnabledStandards operation, set the value of this parameter to NULL. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+     * Paginates results. On your first call to the GetEnabledStandards operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of nextToken from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -1633,7 +2151,7 @@ declare namespace SecurityHub {
   }
   export interface GetEnabledStandardsResponse {
     /**
-     * A list of StandardsSubscriptions objects that include information about the enabled standards.
+     * The list of StandardsSubscriptions objects that include information about the enabled standards.
      */
     StandardsSubscriptions?: StandardsSubscriptions;
     /**
@@ -1643,15 +2161,15 @@ declare namespace SecurityHub {
   }
   export interface GetFindingsRequest {
     /**
-     * The findings attributes used to define a condition to filter the findings returned.
+     * The finding attributes used to define a condition to filter the returned findings.
      */
     Filters?: AwsSecurityFindingFilters;
     /**
-     * Findings attributes used to sort the list of findings returned.
+     * The finding attributes used to sort the list of returned findings.
      */
     SortCriteria?: SortCriteria;
     /**
-     * Paginates results. On your first call to the GetFindings operation, set the value of this parameter to NULL. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+     * Paginates results. On your first call to the GetFindings operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of nextToken from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -1671,7 +2189,7 @@ declare namespace SecurityHub {
   }
   export interface GetInsightResultsRequest {
     /**
-     * The ARN of the insight whose results you want to see.
+     * The ARN of the insight for which to return results.
      */
     InsightArn: NonEmptyString;
   }
@@ -1683,15 +2201,15 @@ declare namespace SecurityHub {
   }
   export interface GetInsightsRequest {
     /**
-     * The ARNs of the insights that you want to describe.
+     * The ARNs of the insights to describe.
      */
     InsightArns?: ArnList;
     /**
-     * Paginates results. On your first call to the GetInsights operation, set the value of this parameter to NULL. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+     * Paginates results. On your first call to the GetInsights operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of nextToken from the previous response.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of items that you want in the response.
+     * The maximum number of items to return in the response.
      */
     MaxResults?: MaxResults;
   }
@@ -1709,7 +2227,7 @@ declare namespace SecurityHub {
   }
   export interface GetInvitationsCountResponse {
     /**
-     * The number of all membership invitations sent to this Security Hub member account, not including the currently accepted invitation. 
+     * The number of all membership invitations sent to this Security Hub member account, not including the currently accepted invitation.
      */
     InvitationsCount?: Integer;
   }
@@ -1723,17 +2241,17 @@ declare namespace SecurityHub {
   }
   export interface GetMembersRequest {
     /**
-     * A list of account IDs for the Security Hub member accounts that you want to return the details for. 
+     * The list of account IDs for the Security Hub member accounts to return the details for. 
      */
     AccountIds: AccountIdList;
   }
   export interface GetMembersResponse {
     /**
-     * A list of details about the Security Hub member accounts.
+     * The list of details about the Security Hub member accounts.
      */
     Members?: MemberList;
     /**
-     * A list of account ID and email address pairs of the AWS accounts that couldn't be processed.
+     * The list of AWS accounts that could not be processed. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -1762,7 +2280,7 @@ declare namespace SecurityHub {
      */
     Name: NonEmptyString;
     /**
-     * One or more attributes used to filter the findings included in the insight. Only findings that match the criteria defined in the filters are included in the insight.
+     * One or more attributes used to filter the findings included in the insight. The insight only includes findings that match the criteria defined in the filters.
      */
     Filters: AwsSecurityFindingFilters;
     /**
@@ -1811,20 +2329,20 @@ declare namespace SecurityHub {
      */
     InvitedAt?: Timestamp;
     /**
-     * The current status of the association between member and master accounts.
+     * The current status of the association between the member and master accounts.
      */
     MemberStatus?: NonEmptyString;
   }
   export type InvitationList = Invitation[];
   export interface InviteMembersRequest {
     /**
-     * A list of IDs of the AWS accounts that you want to invite to Security Hub as members. 
+     * The list of account IDs of the AWS accounts to invite to Security Hub as members. 
      */
     AccountIds?: AccountIdList;
   }
   export interface InviteMembersResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that couldn't be processed. 
+     * The list of AWS accounts that could not be processed. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -1844,17 +2362,17 @@ declare namespace SecurityHub {
   export type KeywordFilterList = KeywordFilter[];
   export interface ListEnabledProductsForImportRequest {
     /**
-     * Paginates results. On your first call to the ListEnabledProductsForImport operation, set the value of this parameter to NULL. For subsequent calls to the operation, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     * Paginates results. On your first call to the ListEnabledProductsForImport operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of NextToken from the previous response.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of items that you want in the response.
+     * The maximum number of items to return in the response.
      */
     MaxResults?: MaxResults;
   }
   export interface ListEnabledProductsForImportResponse {
     /**
-     * A list of ARNs for the resources that represent your subscriptions to products. 
+     * The list of ARNs for the resources that represent your subscriptions to products. 
      */
     ProductSubscriptions?: ProductSubscriptionArnList;
     /**
@@ -1864,11 +2382,11 @@ declare namespace SecurityHub {
   }
   export interface ListInvitationsRequest {
     /**
-     * The maximum number of items that you want in the response. 
+     * The maximum number of items to return in the response. 
      */
     MaxResults?: MaxResults;
     /**
-     * Paginates results. On your first call to the ListInvitations operation, set the value of this parameter to NULL. For subsequent calls to the operation, fill nextToken in the request with the value of NextToken from the previous response to continue listing data. 
+     * Paginates results. On your first call to the ListInvitations operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of NextToken from the previous response. 
      */
     NextToken?: NextToken;
   }
@@ -1884,15 +2402,15 @@ declare namespace SecurityHub {
   }
   export interface ListMembersRequest {
     /**
-     * Specifies which member accounts the response includes based on their relationship status with the master account. The default value is TRUE. If onlyAssociated is set to TRUE, the response includes member accounts whose relationship status with the master is set to ENABLED or DISABLED. If onlyAssociated is set to FALSE, the response includes all existing member accounts. 
+     * Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is TRUE. If onlyAssociated is set to TRUE, the response includes member accounts whose relationship status with the master is set to ENABLED or DISABLED. If onlyAssociated is set to FALSE, the response includes all existing member accounts. 
      */
     OnlyAssociated?: Boolean;
     /**
-     * The maximum number of items that you want in the response. 
+     * The maximum number of items to return in the response. 
      */
     MaxResults?: MaxResults;
     /**
-     * Paginates results. Set the value of this parameter to NULL on your first call to the ListMembers operation. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data. 
+     * Paginates results. On your first call to the ListMembers operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of nextToken from the previous response.
      */
     NextToken?: NextToken;
   }
@@ -2167,6 +2685,7 @@ declare namespace SecurityHub {
     Id: NonEmptyString;
   }
   export type RelatedFindingList = RelatedFinding[];
+  export type RelatedRequirementsList = NonEmptyString[];
   export interface Remediation {
     /**
      * A recommendation on the steps to take to remediate the issue identified by a finding.
@@ -2175,7 +2694,7 @@ declare namespace SecurityHub {
   }
   export interface Resource {
     /**
-     * The type of the resource that details are provided for.
+     * The type of the resource that details are provided for. If possible, set Type to one of the supported resource types. For example, if the resource is an EC2 instance, then set Type to AwsEc2Instance. If the resource does not match any of the provided types, then set Type to Other. 
      */
     Type: NonEmptyString;
     /**
@@ -2202,6 +2721,10 @@ declare namespace SecurityHub {
   export type ResourceArn = string;
   export interface ResourceDetails {
     /**
+     * Details for an AWS CodeBuild project.
+     */
+    AwsCodeBuildProject?: AwsCodeBuildProjectDetails;
+    /**
      * Details about a CloudFront distribution.
      */
     AwsCloudFrontDistribution?: AwsCloudFrontDistributionDetails;
@@ -2210,9 +2733,21 @@ declare namespace SecurityHub {
      */
     AwsEc2Instance?: AwsEc2InstanceDetails;
     /**
+     * Details for an AWS EC2 network interface.
+     */
+    AwsEc2NetworkInterface?: AwsEc2NetworkInterfaceDetails;
+    /**
+     * Details for an EC2 security group.
+     */
+    AwsEc2SecurityGroup?: AwsEc2SecurityGroupDetails;
+    /**
      * Details about a load balancer.
      */
     AwsElbv2LoadBalancer?: AwsElbv2LoadBalancerDetails;
+    /**
+     * Details for an Elasticsearch domain.
+     */
+    AwsElasticsearchDomain?: AwsElasticsearchDomainDetails;
     /**
      * Details about an Amazon S3 Bucket related to a finding.
      */
@@ -2234,6 +2769,14 @@ declare namespace SecurityHub {
      */
     AwsLambdaFunction?: AwsLambdaFunctionDetails;
     /**
+     * Details for a Lambda layer version.
+     */
+    AwsLambdaLayerVersion?: AwsLambdaLayerVersionDetails;
+    /**
+     * Details for an RDS database instance.
+     */
+    AwsRdsDbInstance?: AwsRdsDbInstanceDetails;
+    /**
      * Details about an SNS topic.
      */
     AwsSnsTopic?: AwsSnsTopicDetails;
@@ -2242,22 +2785,26 @@ declare namespace SecurityHub {
      */
     AwsSqsQueue?: AwsSqsQueueDetails;
     /**
+     * Details for a WAF WebACL.
+     */
+    AwsWafWebAcl?: AwsWafWebAclDetails;
+    /**
      * Details about a container resource related to a finding.
      */
     Container?: ContainerDetails;
     /**
-     * Details about a resource that doesn't have a specific type defined.
+     * Details about a resource that are not available in a type-specific details object. Use the Other object in the following cases.   The type-specific object does not contain all of the fields that you want to populate. In this case, first use the type-specific object to populate those fields. Use the Other object to populate the fields that are missing from the type-specific object.   The resource type does not have a corresponding object. This includes resources for which the type is Other.   
      */
     Other?: FieldMap;
   }
   export type ResourceList = Resource[];
   export interface Result {
     /**
-     * An AWS account ID of the account that wasn't be processed.
+     * An AWS account ID of the account that was not processed.
      */
     AccountId?: AccountId;
     /**
-     * The reason that the account wasn't be processed.
+     * The reason that the account was not processed.
      */
     ProcessingResult?: NonEmptyString;
   }
@@ -2389,27 +2936,27 @@ declare namespace SecurityHub {
   export type TagValue = string;
   export interface ThreatIntelIndicator {
     /**
-     * The type of a threat intel indicator.
+     * The type of threat intelligence indicator.
      */
     Type?: ThreatIntelIndicatorType;
     /**
-     * The value of a threat intel indicator.
+     * The value of a threat intelligence indicator.
      */
     Value?: NonEmptyString;
     /**
-     * The category of a threat intel indicator.
+     * The category of a threat intelligence indicator.
      */
     Category?: ThreatIntelIndicatorCategory;
     /**
-     * The date and time when the most recent instance of a threat intel indicator was observed.
+     * The date and time when the most recent instance of a threat intelligence indicator was observed.
      */
     LastObservedAt?: NonEmptyString;
     /**
-     * The source of the threat intel indicator.
+     * The source of the threat intelligence indicator.
      */
     Source?: NonEmptyString;
     /**
-     * The URL to the page or site where you can get more information about the threat intel indicator.
+     * The URL to the page or site where you can get more information about the threat intelligence indicator.
      */
     SourceUrl?: NonEmptyString;
   }
@@ -2499,6 +3046,25 @@ declare namespace SecurityHub {
   export interface UpdateStandardsControlResponse {
   }
   export type VerificationState = "UNKNOWN"|"TRUE_POSITIVE"|"FALSE_POSITIVE"|"BENIGN_POSITIVE"|string;
+  export interface WafAction {
+    /**
+     * Specifies how you want AWS WAF to respond to requests that match the settings in a Rule. Valid settings include the following:    ALLOW - AWS WAF allows requests    BLOCK - AWS WAF blocks requests    COUNT - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify COUNT for the default action for a WebACL.  
+     */
+    Type?: NonEmptyString;
+  }
+  export interface WafExcludedRule {
+    /**
+     * The unique identifier for the rule to exclude from the rule group.
+     */
+    RuleId?: NonEmptyString;
+  }
+  export type WafExcludedRuleList = WafExcludedRule[];
+  export interface WafOverrideAction {
+    /**
+     *  COUNT overrides the action specified by the individual rule within a RuleGroup . If set to NONE, the rule's action takes place.
+     */
+    Type?: NonEmptyString;
+  }
   export type WorkflowState = "NEW"|"ASSIGNED"|"IN_PROGRESS"|"DEFERRED"|"RESOLVED"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
