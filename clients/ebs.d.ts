@@ -59,11 +59,11 @@ declare namespace EBS {
      */
     BlockIndex?: BlockIndex;
     /**
-     * The block token for the block index of the first snapshot ID specified in the list changed blocks operation. This value is absent if the first snapshot does not have the changed block that is on the second snapshot.
+     * The block token for the block index of the FirstSnapshotId specified in the ListChangedBlocks operation. This value is absent if the first snapshot does not have the changed block that is on the second snapshot.
      */
     FirstBlockToken?: BlockToken;
     /**
-     * The block token for the block index of the second snapshot ID specified in the list changed blocks operation.
+     * The block token for the block index of the SecondSnapshotId specified in the ListChangedBlocks operation.
      */
     SecondBlockToken?: BlockToken;
   }
@@ -77,11 +77,11 @@ declare namespace EBS {
      */
     SnapshotId: SnapshotId;
     /**
-     * The block index of the block from which to get data. Obtain the block index by running the list changed blocks or list snapshot blocks operations.
+     * The block index of the block from which to get data. Obtain the BlockIndex by running the ListChangedBlocks or ListSnapshotBlocks operations.
      */
     BlockIndex: BlockIndex;
     /**
-     * The block token of the block from which to get data. Obtain the block token by running the list changed blocks or list snapshot blocks operations.
+     * The block token of the block from which to get data. Obtain the BlockToken by running the ListChangedBlocks or ListSnapshotBlocks operations.
      */
     BlockToken: BlockToken;
   }
@@ -95,7 +95,7 @@ declare namespace EBS {
      */
     BlockData?: BlockData;
     /**
-     * The checksum generated for the block.
+     * The checksum generated for the block, which is Base64 encoded.
      */
     Checksum?: Checksum;
     /**
@@ -105,11 +105,11 @@ declare namespace EBS {
   }
   export interface ListChangedBlocksRequest {
     /**
-     * The ID of the first snapshot to use for the comparison.
+     * The ID of the first snapshot to use for the comparison.  The FirstSnapshotID parameter must be specified with a SecondSnapshotId parameter; otherwise, an error occurs. 
      */
     FirstSnapshotId?: SnapshotId;
     /**
-     * The ID of the second snapshot to use for the comparison.
+     * The ID of the second snapshot to use for the comparison.  The SecondSnapshotId parameter must be specified with a FirstSnapshotID parameter; otherwise, an error occurs. 
      */
     SecondSnapshotId: SnapshotId;
     /**
@@ -131,7 +131,7 @@ declare namespace EBS {
      */
     ChangedBlocks?: ChangedBlocks;
     /**
-     * The time when the block token expires.
+     * The time when the BlockToken expires.
      */
     ExpiryTime?: TimeStamp;
     /**
@@ -171,7 +171,7 @@ declare namespace EBS {
      */
     Blocks?: Blocks;
     /**
-     * The time when the block token expires.
+     * The time when the BlockToken expires.
      */
     ExpiryTime?: TimeStamp;
     /**

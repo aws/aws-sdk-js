@@ -617,6 +617,10 @@ declare namespace AppSync {
      * A list of additional authentication providers for the GraphqlApi API.
      */
     additionalAuthenticationProviders?: AdditionalAuthenticationProviders;
+    /**
+     * A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
+     */
+    xrayEnabled?: Boolean;
   }
   export interface CreateGraphqlApiResponse {
     /**
@@ -915,6 +919,9 @@ declare namespace AppSync {
     apiId: String;
   }
   export interface GetApiCacheResponse {
+    /**
+     * The ApiCache object.
+     */
     apiCache?: ApiCache;
   }
   export interface GetDataSourceRequest {
@@ -1078,6 +1085,10 @@ declare namespace AppSync {
      * A list of additional authentication providers for the GraphqlApi API.
      */
     additionalAuthenticationProviders?: AdditionalAuthenticationProviders;
+    /**
+     * A flag representing whether X-Ray tracing is enabled for this GraphqlApi.
+     */
+    xrayEnabled?: Boolean;
   }
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {
@@ -1662,6 +1673,10 @@ declare namespace AppSync {
      * A list of additional authentication providers for the GraphqlApi API.
      */
     additionalAuthenticationProviders?: AdditionalAuthenticationProviders;
+    /**
+     * A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
+     */
+    xrayEnabled?: Boolean;
   }
   export interface UpdateGraphqlApiResponse {
     /**

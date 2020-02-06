@@ -1307,7 +1307,8 @@
           "shape": "ApiCacheStatus",
           "documentation": "<p>The cache instance status.</p> <ul> <li> <p> <b>AVAILABLE</b>: The instance is available for use.</p> </li> <li> <p> <b>CREATING</b>: The instance is currently creating.</p> </li> <li> <p> <b>DELETING</b>: The instance is currently deleting.</p> </li> <li> <p> <b>MODIFYING</b>: The instance is currently modifying.</p> </li> <li> <p> <b>FAILED</b>: The instance has failed creation.</p> </li> </ul>"
         }
-      }
+      },
+      "documentation": "<p>The <code>ApiCache</code> object.</p>"
     },
     "ApiCacheStatus": {
       "type": "string",
@@ -1700,6 +1701,10 @@
         "additionalAuthenticationProviders": {
           "shape": "AdditionalAuthenticationProviders",
           "documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>"
+        },
+        "xrayEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.</p>"
         }
       }
     },
@@ -2212,7 +2217,8 @@
       "type": "structure",
       "members": {
         "apiCache": {
-          "shape": "ApiCache"
+          "shape": "ApiCache",
+          "documentation": "<p>The <code>ApiCache</code> object.</p>"
         }
       },
       "documentation": "<p>Represents the output of a <code>GetApiCache</code> operation.</p>"
@@ -2480,6 +2486,10 @@
         "additionalAuthenticationProviders": {
           "shape": "AdditionalAuthenticationProviders",
           "documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>"
+        },
+        "xrayEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>A flag representing whether X-Ray tracing is enabled for this <code>GraphqlApi</code>.</p>"
         }
       },
       "documentation": "<p>Describes a GraphQL API.</p>"
@@ -2511,7 +2521,8 @@
           "shape": "String",
           "documentation": "<p>The Arn for the Lambda function to use as the Conflict Handler.</p>"
         }
-      }
+      },
+      "documentation": "<p>The <code>LambdaConflictHandlerConfig</code> object when configuring LAMBDA as the Conflict Handler.</p>"
     },
     "LambdaDataSourceConfig": {
       "type": "structure",
@@ -3457,6 +3468,10 @@
         "additionalAuthenticationProviders": {
           "shape": "AdditionalAuthenticationProviders",
           "documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>"
+        },
+        "xrayEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.</p>"
         }
       }
     },

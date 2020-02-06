@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.612.0-->
+<!--LATEST=2.613.0-->
 <!--ENTRYINSERT-->
+
+## 2.613.0
+* feature: AppSync: AWS AppSync now supports X-Ray
+* feature: CodeBuild: AWS CodeBuild adds support for Amazon Elastic File Systems
+* feature: EC2: This release adds platform details and billing info to the DescribeImages API.
+* feature: LexModelBuildingService: Amazon Lex now supports AMAZON.AlphaNumeric with regular expressions.
 
 ## 2.612.0
 * feature: DLM: Updated the maximum number of tags that can be added to a snapshot using DLM to 45.

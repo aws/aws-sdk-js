@@ -1633,6 +1633,14 @@
         "valueSelectionStrategy": {
           "shape": "SlotValueSelectionStrategy",
           "documentation": "<p>The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.</p>"
+        },
+        "parentSlotTypeSignature": {
+          "shape": "CustomOrBuiltinSlotTypeName",
+          "documentation": "<p>The built-in slot type used a the parent of the slot type.</p>"
+        },
+        "slotTypeConfigurations": {
+          "shape": "SlotTypeConfigurations",
+          "documentation": "<p>Configuration information that extends the parent built-in slot type.</p>"
         }
       }
     },
@@ -1852,7 +1860,7 @@
         "shape": "EnumerationValue"
       },
       "max": 10000,
-      "min": 1
+      "min": 0
     },
     "ExportStatus": {
       "type": "string",
@@ -2746,6 +2754,14 @@
         "valueSelectionStrategy": {
           "shape": "SlotValueSelectionStrategy",
           "documentation": "<p>The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.</p>"
+        },
+        "parentSlotTypeSignature": {
+          "shape": "CustomOrBuiltinSlotTypeName",
+          "documentation": "<p>The built-in slot type used as a parent for the slot type.</p>"
+        },
+        "slotTypeConfigurations": {
+          "shape": "SlotTypeConfigurations",
+          "documentation": "<p>Configuration information that extends the parent built-in slot type.</p>"
         }
       }
     },
@@ -3548,6 +3564,14 @@
         "createVersion": {
           "shape": "Boolean",
           "documentation": "<p>When set to <code>true</code> a new numbered version of the slot type is created. This is the same as calling the <code>CreateSlotTypeVersion</code> operation. If you do not specify <code>createVersion</code>, the default is <code>false</code>.</p>"
+        },
+        "parentSlotTypeSignature": {
+          "shape": "CustomOrBuiltinSlotTypeName",
+          "documentation": "<p>The built-in slot type used as the parent of the slot type. When you define a parent slot type, the new slot type has all of the same configuration as the parent.</p> <p>Only <code>AMAZON.AlphaNumeric</code> is supported.</p>"
+        },
+        "slotTypeConfigurations": {
+          "shape": "SlotTypeConfigurations",
+          "documentation": "<p>Configuration information that extends the parent built-in slot type. The configuration is added to the settings for the parent slot type.</p>"
         }
       }
     },
@@ -3589,8 +3613,21 @@
         "createVersion": {
           "shape": "Boolean",
           "documentation": "<p> <code>True</code> if a new version of the slot type was created. If the <code>createVersion</code> field was not specified in the request, the <code>createVersion</code> field is set to false in the response.</p>"
+        },
+        "parentSlotTypeSignature": {
+          "shape": "CustomOrBuiltinSlotTypeName",
+          "documentation": "<p>The built-in slot type used as the parent of the slot type.</p>"
+        },
+        "slotTypeConfigurations": {
+          "shape": "SlotTypeConfigurations",
+          "documentation": "<p>Configuration information that extends the parent built-in slot type.</p>"
         }
       }
+    },
+    "RegexPattern": {
+      "type": "string",
+      "max": 100,
+      "min": 1
     },
     "ResourceArn": {
       "type": "string",
@@ -3691,6 +3728,24 @@
       "min": 1,
       "pattern": "^([A-Za-z](-|_|.)?)+$"
     },
+    "SlotTypeConfiguration": {
+      "type": "structure",
+      "members": {
+        "regexConfiguration": {
+          "shape": "SlotTypeRegexConfiguration",
+          "documentation": "<p>A regular expression used to validate the value of a slot.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for a slot type.</p>"
+    },
+    "SlotTypeConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "SlotTypeConfiguration"
+      },
+      "max": 10,
+      "min": 0
+    },
     "SlotTypeMetadata": {
       "type": "structure",
       "members": {
@@ -3728,6 +3783,19 @@
       "max": 100,
       "min": 1,
       "pattern": "^([A-Za-z]_?)+$"
+    },
+    "SlotTypeRegexConfiguration": {
+      "type": "structure",
+      "required": [
+        "pattern"
+      ],
+      "members": {
+        "pattern": {
+          "shape": "RegexPattern",
+          "documentation": "<p>A regular expression used to validate the value of a slot. </p> <p>Use a standard regular expression. Amazon Lex supports the following characters in the regular expression:</p> <ul> <li> <p>A-Z, a-z</p> </li> <li> <p>0-9</p> </li> <li> <p>Unicode characters (\"\\ u&lt;Unicode&gt;\")</p> </li> </ul> <p>Represent Unicode characters with four digits, for example \"\\u0041\" or \"\\u005A\".</p> <p>The following regular expression operators are not supported:</p> <ul> <li> <p>Infinite repeaters: *, +, or {x,} with no upper bound.</p> </li> <li> <p>Wild card (.)</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Provides a regular expression used to validate the value of a slot.</p>"
     },
     "SlotUtteranceList": {
       "type": "list",

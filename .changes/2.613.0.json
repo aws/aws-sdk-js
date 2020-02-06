@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "AWS AppSync now supports X-Ray"
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "AWS CodeBuild adds support for Amazon Elastic File Systems"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds platform details and billing info to the DescribeImages API."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "Amazon Lex now supports AMAZON.AlphaNumeric with regular expressions."
+    }
+]

@@ -667,6 +667,14 @@ declare namespace LexModelBuildingService {
      * The strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
      */
     valueSelectionStrategy?: SlotValueSelectionStrategy;
+    /**
+     * The built-in slot type used a the parent of the slot type.
+     */
+    parentSlotTypeSignature?: CustomOrBuiltinSlotTypeName;
+    /**
+     * Configuration information that extends the parent built-in slot type.
+     */
+    slotTypeConfigurations?: SlotTypeConfigurations;
   }
   export type CustomOrBuiltinSlotTypeName = string;
   export interface DeleteBotAliasRequest {
@@ -1390,6 +1398,14 @@ declare namespace LexModelBuildingService {
      * The strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
      */
     valueSelectionStrategy?: SlotValueSelectionStrategy;
+    /**
+     * The built-in slot type used as a parent for the slot type.
+     */
+    parentSlotTypeSignature?: CustomOrBuiltinSlotTypeName;
+    /**
+     * Configuration information that extends the parent built-in slot type.
+     */
+    slotTypeConfigurations?: SlotTypeConfigurations;
   }
   export interface GetSlotTypeVersionsRequest {
     /**
@@ -1919,6 +1935,14 @@ declare namespace LexModelBuildingService {
      * When set to true a new numbered version of the slot type is created. This is the same as calling the CreateSlotTypeVersion operation. If you do not specify createVersion, the default is false.
      */
     createVersion?: Boolean;
+    /**
+     * The built-in slot type used as the parent of the slot type. When you define a parent slot type, the new slot type has all of the same configuration as the parent. Only AMAZON.AlphaNumeric is supported.
+     */
+    parentSlotTypeSignature?: CustomOrBuiltinSlotTypeName;
+    /**
+     * Configuration information that extends the parent built-in slot type. The configuration is added to the settings for the parent slot type.
+     */
+    slotTypeConfigurations?: SlotTypeConfigurations;
   }
   export interface PutSlotTypeResponse {
     /**
@@ -1957,7 +1981,16 @@ declare namespace LexModelBuildingService {
      *  True if a new version of the slot type was created. If the createVersion field was not specified in the request, the createVersion field is set to false in the response.
      */
     createVersion?: Boolean;
+    /**
+     * The built-in slot type used as the parent of the slot type.
+     */
+    parentSlotTypeSignature?: CustomOrBuiltinSlotTypeName;
+    /**
+     * Configuration information that extends the parent built-in slot type.
+     */
+    slotTypeConfigurations?: SlotTypeConfigurations;
   }
+  export type RegexPattern = string;
   export type ResourceArn = string;
   export type ResourcePrefix = string;
   export type ResourceType = "BOT"|"INTENT"|"SLOT_TYPE"|string;
@@ -2008,6 +2041,13 @@ declare namespace LexModelBuildingService {
   export type SlotConstraint = "Required"|"Optional"|string;
   export type SlotList = Slot[];
   export type SlotName = string;
+  export interface SlotTypeConfiguration {
+    /**
+     * A regular expression used to validate the value of a slot.
+     */
+    regexConfiguration?: SlotTypeRegexConfiguration;
+  }
+  export type SlotTypeConfigurations = SlotTypeConfiguration[];
   export interface SlotTypeMetadata {
     /**
      * The name of the slot type.
@@ -2032,6 +2072,12 @@ declare namespace LexModelBuildingService {
   }
   export type SlotTypeMetadataList = SlotTypeMetadata[];
   export type SlotTypeName = string;
+  export interface SlotTypeRegexConfiguration {
+    /**
+     * A regular expression used to validate the value of a slot.  Use a standard regular expression. Amazon Lex supports the following characters in the regular expression:   A-Z, a-z   0-9   Unicode characters ("\ u&lt;Unicode&gt;")   Represent Unicode characters with four digits, for example "\u0041" or "\u005A". The following regular expression operators are not supported:   Infinite repeaters: *, +, or {x,} with no upper bound.   Wild card (.)  
+     */
+    pattern: RegexPattern;
+  }
   export type SlotUtteranceList = Utterance[];
   export type SlotValueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION"|string;
   export interface StartImportRequest {
