@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.613.0-->
+<!--LATEST=2.614.0-->
 <!--ENTRYINSERT-->
+
+## 2.614.0
+* feature: Imagebuilder: This version of the SDK includes bug fixes and documentation updates.
+* feature: RoboMaker: This release adds support for simulation job batches
 
 ## 2.613.0
 * feature: AppSync: AWS AppSync now supports X-Ray

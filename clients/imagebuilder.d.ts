@@ -12,27 +12,27 @@ declare class Imagebuilder extends Service {
   constructor(options?: Imagebuilder.Types.ClientConfiguration)
   config: Config & Imagebuilder.Types.ClientConfiguration;
   /**
-   * CancelImageCreation cancels the creation of Image. This operation may only be used on images in a non-terminal state.
+   * CancelImageCreation cancels the creation of Image. This operation can only be used on images in a non-terminal state.
    */
   cancelImageCreation(params: Imagebuilder.Types.CancelImageCreationRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CancelImageCreationResponse) => void): Request<Imagebuilder.Types.CancelImageCreationResponse, AWSError>;
   /**
-   * CancelImageCreation cancels the creation of Image. This operation may only be used on images in a non-terminal state.
+   * CancelImageCreation cancels the creation of Image. This operation can only be used on images in a non-terminal state.
    */
   cancelImageCreation(callback?: (err: AWSError, data: Imagebuilder.Types.CancelImageCreationResponse) => void): Request<Imagebuilder.Types.CancelImageCreationResponse, AWSError>;
   /**
-   * Creates a new component that can be used to build, validate, test and assess your image.
+   * Creates a new component that can be used to build, validate, test, and assess your image.
    */
   createComponent(params: Imagebuilder.Types.CreateComponentRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateComponentResponse) => void): Request<Imagebuilder.Types.CreateComponentResponse, AWSError>;
   /**
-   * Creates a new component that can be used to build, validate, test and assess your image.
+   * Creates a new component that can be used to build, validate, test, and assess your image.
    */
   createComponent(callback?: (err: AWSError, data: Imagebuilder.Types.CreateComponentResponse) => void): Request<Imagebuilder.Types.CreateComponentResponse, AWSError>;
   /**
-   *  Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. 
+   * Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. 
    */
   createDistributionConfiguration(params: Imagebuilder.Types.CreateDistributionConfigurationRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateDistributionConfigurationResponse) => void): Request<Imagebuilder.Types.CreateDistributionConfigurationResponse, AWSError>;
   /**
-   *  Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. 
+   * Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. 
    */
   createDistributionConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.CreateDistributionConfigurationResponse) => void): Request<Imagebuilder.Types.CreateDistributionConfigurationResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class Imagebuilder extends Service {
    */
   createImagePipeline(callback?: (err: AWSError, data: Imagebuilder.Types.CreateImagePipelineResponse) => void): Request<Imagebuilder.Types.CreateImagePipelineResponse, AWSError>;
   /**
-   *  Creates a new image recipe. Image Recipes defines how images are configured, tested and assessed. 
+   *  Creates a new image recipe. Image recipes define how images are configured, tested, and assessed. 
    */
   createImageRecipe(params: Imagebuilder.Types.CreateImageRecipeRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateImageRecipeResponse) => void): Request<Imagebuilder.Types.CreateImageRecipeResponse, AWSError>;
   /**
-   *  Creates a new image recipe. Image Recipes defines how images are configured, tested and assessed. 
+   *  Creates a new image recipe. Image recipes define how images are configured, tested, and assessed. 
    */
   createImageRecipe(callback?: (err: AWSError, data: Imagebuilder.Types.CreateImageRecipeResponse) => void): Request<Imagebuilder.Types.CreateImageRecipeResponse, AWSError>;
   /**
@@ -180,19 +180,19 @@ declare class Imagebuilder extends Service {
    */
   getImageRecipePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.GetImageRecipePolicyResponse) => void): Request<Imagebuilder.Types.GetImageRecipePolicyResponse, AWSError>;
   /**
-   *  Gets a infrastructure configuration. 
+   *  Gets an infrastructure configuration. 
    */
   getInfrastructureConfiguration(params: Imagebuilder.Types.GetInfrastructureConfigurationRequest, callback?: (err: AWSError, data: Imagebuilder.Types.GetInfrastructureConfigurationResponse) => void): Request<Imagebuilder.Types.GetInfrastructureConfigurationResponse, AWSError>;
   /**
-   *  Gets a infrastructure configuration. 
+   *  Gets an infrastructure configuration. 
    */
   getInfrastructureConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.GetInfrastructureConfigurationResponse) => void): Request<Imagebuilder.Types.GetInfrastructureConfigurationResponse, AWSError>;
   /**
-   *  Imports a component and transforms its data into a component document. 
+   * Imports a component and transforms its data into a component document. 
    */
   importComponent(params: Imagebuilder.Types.ImportComponentRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ImportComponentResponse) => void): Request<Imagebuilder.Types.ImportComponentResponse, AWSError>;
   /**
-   *  Imports a component and transforms its data into a component document. 
+   * Imports a component and transforms its data into a component document. 
    */
   importComponent(callback?: (err: AWSError, data: Imagebuilder.Types.ImportComponentResponse) => void): Request<Imagebuilder.Types.ImportComponentResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Imagebuilder extends Service {
    */
   listComponentBuildVersions(callback?: (err: AWSError, data: Imagebuilder.Types.ListComponentBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListComponentBuildVersionsResponse, AWSError>;
   /**
-   *  Returns the list of component build versions for the specified semantic version. 
+   * Returns the list of component build versions for the specified semantic version. 
    */
   listComponents(params: Imagebuilder.Types.ListComponentsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListComponentsResponse) => void): Request<Imagebuilder.Types.ListComponentsResponse, AWSError>;
   /**
-   *  Returns the list of component build versions for the specified semantic version. 
+   * Returns the list of component build versions for the specified semantic version. 
    */
   listComponents(callback?: (err: AWSError, data: Imagebuilder.Types.ListComponentsResponse) => void): Request<Imagebuilder.Types.ListComponentsResponse, AWSError>;
   /**
@@ -352,7 +352,7 @@ declare namespace Imagebuilder {
   export type AccountList = NonEmptyString[];
   export interface Ami {
     /**
-     *  The region of the EC2 AMI. 
+     *  The AWS Region of the EC2 AMI. 
      */
     region?: NonEmptyString;
     /**
@@ -373,13 +373,13 @@ declare namespace Imagebuilder {
     /**
      *  The name of the distribution configuration. 
      */
-    name?: NonEmptyString;
+    name?: AmiNameString;
     /**
      *  The description of the distribution configuration. 
      */
     description?: NonEmptyString;
     /**
-     *  The tags to apply to AMIs distributed to this region. 
+     *  The tags to apply to AMIs distributed to this Region. 
      */
     amiTags?: TagMap;
     /**
@@ -388,11 +388,12 @@ declare namespace Imagebuilder {
     launchPermission?: LaunchPermissionConfiguration;
   }
   export type AmiList = Ami[];
+  export type AmiNameString = string;
   export type Arn = string;
   export type ArnList = Arn[];
   export interface CancelImageCreationRequest {
     /**
-     * The Amazon Resource Name (ARN) of the image whose creation you wish to cancel.
+     * The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
      */
     imageBuildVersionArn: ImageBuildVersionArn;
     /**
@@ -474,7 +475,7 @@ declare namespace Imagebuilder {
     /**
      *  The Amazon Resource Name (ARN) of the component. 
      */
-    componentArn: ComponentBuildVersionArn;
+    componentArn: ComponentVersionArnOrBuildVersionArn;
   }
   export type ComponentConfigurationList = ComponentConfiguration[];
   export type ComponentData = string;
@@ -558,6 +559,7 @@ declare namespace Imagebuilder {
     dateCreated?: DateTime;
   }
   export type ComponentVersionArn = string;
+  export type ComponentVersionArnOrBuildVersionArn = string;
   export type ComponentVersionList = ComponentVersion[];
   export interface CreateComponentRequest {
     /**
@@ -565,27 +567,27 @@ declare namespace Imagebuilder {
      */
     name: ResourceName;
     /**
-     * The semantic version of the component. This version to follow the semantic version syntax. i.e. major.minor.patch. This could be versioned like software 2.0.1 or date like 2019.12.01.
+     * The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).
      */
     semanticVersion: VersionNumber;
     /**
-     * CThe description of the component. Describes the contents of the component.
+     * The description of the component. Describes the contents of the component.
      */
     description?: NonEmptyString;
     /**
-     * CThe change description of the component. Describes what change has been made in this version. In other words what makes this version different from other versions of this component.
+     * The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component.
      */
     changeDescription?: NonEmptyString;
     /**
-     * CThe platform of the component.
+     * The platform of the component.
      */
     platform: Platform;
     /**
-     * CThe data of the component.
+     * The data of the component. Used to specify the data inline. Either data or uri can be used to specify the data within the component.
      */
     data?: InlineComponentData;
     /**
-     * CThe uri of the component.
+     * The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component.
      */
     uri?: Uri;
     /**
@@ -593,25 +595,25 @@ declare namespace Imagebuilder {
      */
     kmsKeyId?: NonEmptyString;
     /**
-     * CThe tags of the component.
+     * The tags of the component.
      */
     tags?: TagMap;
     /**
-     * CThe idempotency token of the component.
+     * The idempotency token of the component.
      */
     clientToken: ClientToken;
   }
   export interface CreateComponentResponse {
     /**
-     * CThe request ID that uniquely identifies this request.
+     * The request ID that uniquely identifies this request.
      */
     requestId?: NonEmptyString;
     /**
-     * CThe idempotency token used to make this request idempotent.
+     * The idempotency token used to make this request idempotent.
      */
     clientToken?: ClientToken;
     /**
-     * CThe Amazon Resource Name (ARN) of the component that was created by this request.
+     * The Amazon Resource Name (ARN) of the component that was created by this request.
      */
     componentBuildVersionArn?: ComponentBuildVersionArn;
   }
@@ -757,7 +759,7 @@ declare namespace Imagebuilder {
   }
   export interface CreateImageRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested and assessed. 
+     *  The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. 
      */
     imageRecipeArn: ImageRecipeArn;
     /**
@@ -805,7 +807,7 @@ declare namespace Imagebuilder {
      */
     description?: NonEmptyString;
     /**
-     *  The instance types of the infrastructure configuration. You may specify one or more instance types to use for this build, the service will pick one of these instance types based on availability. 
+     *  The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability. 
      */
     instanceTypes?: InstanceTypeList;
     /**
@@ -817,7 +819,7 @@ declare namespace Imagebuilder {
      */
     securityGroupIds?: SecurityGroupIds;
     /**
-     *  The subnet ID to place the instance used to customize your EC2 AMI in. 
+     *  The subnet ID in which to place the instance used to customize your EC2 AMI. 
      */
     subnetId?: NonEmptyString;
     /**
@@ -825,17 +827,17 @@ declare namespace Imagebuilder {
      */
     logging?: Logging;
     /**
-     *  The key pair of the infrastructure configuration. This can be used to log onto and debug the instance used to create your image. 
+     *  The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image. 
      */
     keyPair?: NonEmptyString;
     /**
-     *  The terminate instance on failure setting of the infrastructure configuration. Set to false if you wish for Image Builder to retain the instance used to configure your AMI in the event that the build or test phase of your workflow failed. 
+     *  The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails. 
      */
     terminateInstanceOnFailure?: NullableBoolean;
     /**
      *  The SNS topic on which to send image build events. 
      */
-    snsTopicArn?: NonEmptyString;
+    snsTopicArn?: SnsTopicArn;
     /**
      *  The tags of the infrastructure configuration. 
      */
@@ -958,15 +960,15 @@ declare namespace Imagebuilder {
   }
   export interface Distribution {
     /**
-     *  
+     *  The target Region. 
      */
     region: NonEmptyString;
     /**
-     *  
+     *  The specific AMI settings (for example, launch permissions, AMI tags). 
      */
     amiDistributionConfiguration?: AmiDistributionConfiguration;
     /**
-     *  
+     *  The License Manager Configuration to associate with the AMI in the specified Region.
      */
     licenseConfigurationArns?: ArnList;
   }
@@ -1067,13 +1069,14 @@ declare namespace Imagebuilder {
   export type EbsIopsInteger = number;
   export type EbsVolumeSizeInteger = number;
   export type EbsVolumeType = "standard"|"io1"|"gp2"|"sc1"|"st1"|string;
+  export type EmptyString = string;
   export interface Filter {
     /**
-     *  
+     *  The name of the filter. Filter names are case-sensitive. 
      */
     name?: FilterName;
     /**
-     *  
+     *  The filter values. Filter values are case-sensitive. 
      */
     values?: FilterValues;
   }
@@ -1083,7 +1086,7 @@ declare namespace Imagebuilder {
   export type FilterValues = FilterValue[];
   export interface GetComponentPolicyRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the component whose policy you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the component whose policy you want to retrieve. 
      */
     componentArn: ComponentBuildVersionArn;
   }
@@ -1099,7 +1102,7 @@ declare namespace Imagebuilder {
   }
   export interface GetComponentRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the component that you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the component that you want to retrieve. Regex requires "/\d+$" suffix.
      */
     componentBuildVersionArn: ComponentBuildVersionArn;
   }
@@ -1115,7 +1118,7 @@ declare namespace Imagebuilder {
   }
   export interface GetDistributionConfigurationRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the distribution configuration that you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the distribution configuration that you want to retrieve. 
      */
     distributionConfigurationArn: DistributionConfigurationArn;
   }
@@ -1131,7 +1134,7 @@ declare namespace Imagebuilder {
   }
   export interface GetImagePipelineRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image pipeline that you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve. 
      */
     imagePipelineArn: ImagePipelineArn;
   }
@@ -1147,7 +1150,7 @@ declare namespace Imagebuilder {
   }
   export interface GetImagePolicyRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image whose policy you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the image whose policy you want to retrieve. 
      */
     imageArn: ImageBuildVersionArn;
   }
@@ -1163,7 +1166,7 @@ declare namespace Imagebuilder {
   }
   export interface GetImageRecipePolicyRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image recipe whose policy you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the image recipe whose policy you want to retrieve. 
      */
     imageRecipeArn: ImageRecipeArn;
   }
@@ -1179,7 +1182,7 @@ declare namespace Imagebuilder {
   }
   export interface GetImageRecipeRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image recipe that you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the image recipe that you want to retrieve. 
      */
     imageRecipeArn: ImageRecipeArn;
   }
@@ -1195,7 +1198,7 @@ declare namespace Imagebuilder {
   }
   export interface GetImageRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image that you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the image that you want to retrieve. 
      */
     imageBuildVersionArn: ImageBuildVersionArn;
   }
@@ -1211,7 +1214,7 @@ declare namespace Imagebuilder {
   }
   export interface GetInfrastructureConfigurationRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the infrastructure configuration that you wish to retrieve. 
+     * The Amazon Resource Name (ARN) of the infrastructure configuration that you want to retrieve. 
      */
     infrastructureConfigurationArn: InfrastructureConfigurationArn;
   }
@@ -1307,7 +1310,7 @@ declare namespace Imagebuilder {
      */
     imageRecipeArn?: Arn;
     /**
-     * The Amazon Resource Name (ARN) of the infrastruction configuration associated with this image pipeline.
+     * The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.
      */
     infrastructureConfigurationArn?: Arn;
     /**
@@ -1483,14 +1486,14 @@ declare namespace Imagebuilder {
      */
     imageTestsEnabled?: NullableBoolean;
     /**
-     * The maximum time in minutes that tests are permitted to run for.
+     * The maximum time in minutes that tests are permitted to run.
      */
     timeoutMinutes?: ImageTestsTimeoutMinutes;
   }
   export type ImageTestsTimeoutMinutes = number;
   export interface ImageVersion {
     /**
-     * The Amazon Resource Name (ARN) of the image semantic verion.
+     * The Amazon Resource Name (ARN) of the image semantic version.
      */
     arn?: ImageBuilderArn;
     /**
@@ -1522,23 +1525,23 @@ declare namespace Imagebuilder {
      */
     name: ResourceName;
     /**
-     *  The semantic version of the component. This version to follow the semantic version syntax. i.e. major.minor.patch. This could be versioned like software 2.0.1 or date like 2019.12.01. 
+     * The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).
      */
     semanticVersion: VersionNumber;
     /**
-     *  The description of the component. Describes the contents of the component. 
+     * The description of the component. Describes the contents of the component. 
      */
     description?: NonEmptyString;
     /**
-     *  The change description of the component. Describes what change has been made in this version. In other words what makes this version different from other versions of this component. 
+     *  The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component. 
      */
     changeDescription?: NonEmptyString;
     /**
-     *  The type of the component denotes whether the component is used to build the image or only to test it. 
+     * The type of the component denotes whether the component is used to build the image or only to test it. 
      */
     type: ComponentType;
     /**
-     *  The format of the resource that you wish to import as a component. 
+     *  The format of the resource that you want to import as a component. 
      */
     format: ComponentFormat;
     /**
@@ -1546,11 +1549,11 @@ declare namespace Imagebuilder {
      */
     platform: Platform;
     /**
-     *  The data of the component. 
+     * The data of the component. Used to specify the data inline. Either data or uri can be used to specify the data within the component.
      */
     data?: NonEmptyString;
     /**
-     *  The uri of the component. 
+     * The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component. 
      */
     uri?: Uri;
     /**
@@ -1582,47 +1585,47 @@ declare namespace Imagebuilder {
   }
   export interface InfrastructureConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the infrastruction configuration.
+     * The Amazon Resource Name (ARN) of the infrastructure configuration.
      */
     arn?: ImageBuilderArn;
     /**
-     * The name of the infrastruction configuration.
+     * The name of the infrastructure configuration.
      */
     name?: ResourceName;
     /**
-     * The description of the infrastruction configuration.
+     * The description of the infrastructure configuration.
      */
     description?: NonEmptyString;
     /**
-     * The instance types of the infrastruction configuration.
+     * The instance types of the infrastructure configuration.
      */
     instanceTypes?: InstanceTypeList;
     /**
-     * The instance profile of the infrastruction configuration.
+     * The instance profile of the infrastructure configuration.
      */
     instanceProfileName?: NonEmptyString;
     /**
-     * The security group IDs of the infrastruction configuration.
+     * The security group IDs of the infrastructure configuration.
      */
     securityGroupIds?: SecurityGroupIds;
     /**
-     * The subnet ID of the infrastruction configuration.
+     * The subnet ID of the infrastructure configuration.
      */
     subnetId?: NonEmptyString;
     /**
-     * The logging configuration of the infrastruction configuration.
+     * The logging configuration of the infrastructure configuration.
      */
     logging?: Logging;
     /**
-     * The EC2 key pair of the infrastruction configuration.
+     * The EC2 key pair of the infrastructure configuration.
      */
     keyPair?: NonEmptyString;
     /**
-     * The terminate instance on failure configuration of the infrastruction configuration.
+     * The terminate instance on failure configuration of the infrastructure configuration.
      */
     terminateInstanceOnFailure?: NullableBoolean;
     /**
-     * The SNS Topic Amazon Resource Name (ARN) of the infrastruction configuration.
+     * The SNS topic Amazon Resource Name (ARN) of the infrastructure configuration.
      */
     snsTopicArn?: NonEmptyString;
     /**
@@ -1634,7 +1637,7 @@ declare namespace Imagebuilder {
      */
     dateUpdated?: DateTime;
     /**
-     * The tags of the infrastruction configuration.
+     * The tags of the infrastructure configuration.
      */
     tags?: TagMap;
   }
@@ -1673,7 +1676,7 @@ declare namespace Imagebuilder {
      */
     deviceName?: NonEmptyString;
     /**
-     * Use to manage EBS specific configuration for this mapping.
+     * Use to manage Amazon EBS-specific configuration for this mapping.
      */
     ebs?: EbsInstanceBlockDeviceSpecification;
     /**
@@ -1683,24 +1686,24 @@ declare namespace Imagebuilder {
     /**
      * Use to remove a mapping from the parent image.
      */
-    noDevice?: NonEmptyString;
+    noDevice?: EmptyString;
   }
   export type InstanceBlockDeviceMappings = InstanceBlockDeviceMapping[];
   export type InstanceType = string;
   export type InstanceTypeList = InstanceType[];
   export interface LaunchPermissionConfiguration {
     /**
-     *  
+     *  The AWS account ID. 
      */
     userIds?: AccountList;
     /**
-     *  
+     * The name of the group. 
      */
     userGroups?: StringList;
   }
   export interface ListComponentBuildVersionsRequest {
     /**
-     *  The component version arn whose versions you wish to list. 
+     *  The component version Amazon Resource Name (ARN) whose versions you want to list. 
      */
     componentVersionArn: ComponentVersionArn;
     /**
@@ -1722,17 +1725,17 @@ declare namespace Imagebuilder {
      */
     componentSummaryList?: ComponentSummaryList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object. 
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: NonEmptyString;
   }
   export interface ListComponentsRequest {
     /**
-     *  The owner defines whose components you wish to list. By default this request will only show components owned by your account. You may use this field to specify if you wish to view components owned by yourself, Amazon, or those components that have been shared with you by other customers. 
+     *  The owner defines which components you want to list. By default, this request will only show components owned by your account. You can use this field to specify if you want to view components owned by yourself, by Amazon, or those components that have been shared with you by other customers. 
      */
     owner?: Ownership;
     /**
-     *  
+     *  The filters. 
      */
     filters?: FilterList;
     /**
@@ -1754,13 +1757,13 @@ declare namespace Imagebuilder {
      */
     componentVersionList?: ComponentVersionList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object. 
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: NonEmptyString;
   }
   export interface ListDistributionConfigurationsRequest {
     /**
-     *  
+     *  The filters. 
      */
     filters?: FilterList;
     /**
@@ -1782,17 +1785,17 @@ declare namespace Imagebuilder {
      */
     distributionConfigurationSummaryList?: DistributionConfigurationSummaryList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object. 
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: NonEmptyString;
   }
   export interface ListImageBuildVersionsRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image whose build versions you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve. 
      */
     imageVersionArn: ImageVersionArn;
     /**
-     *  
+     *  The filters. 
      */
     filters?: FilterList;
     /**
@@ -1814,17 +1817,17 @@ declare namespace Imagebuilder {
      */
     imageSummaryList?: ImageSummaryList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object. 
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: NonEmptyString;
   }
   export interface ListImagePipelineImagesRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image pipeline whose images you wish to view. 
+     *  The Amazon Resource Name (ARN) of the image pipeline whose images you want to view. 
      */
-    imagePipelineArn?: ImagePipelineArn;
+    imagePipelineArn: ImagePipelineArn;
     /**
-     *  
+     *  The filters. 
      */
     filters?: FilterList;
     /**
@@ -1846,13 +1849,13 @@ declare namespace Imagebuilder {
      */
     imageSummaryList?: ImageSummaryList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object. 
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: NonEmptyString;
   }
   export interface ListImagePipelinesRequest {
     /**
-     *  
+     *  The filters. 
      */
     filters?: FilterList;
     /**
@@ -1874,17 +1877,17 @@ declare namespace Imagebuilder {
      */
     imagePipelineList?: ImagePipelineList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object. 
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: NonEmptyString;
   }
   export interface ListImageRecipesRequest {
     /**
-     *  The owner defines whose image recipes you wish to list. By default this request will only show image recipes owned by your account. You may use this field to specify if you wish to view image recipes owned by yourself, Amazon, or those image recipes that have been shared with you by other customers. 
+     *  The owner defines which image recipes you want to list. By default, this request will only show image recipes owned by your account. You can use this field to specify if you want to view image recipes owned by yourself, by Amazon, or those image recipes that have been shared with you by other customers. 
      */
     owner?: Ownership;
     /**
-     *  
+     *  The filters. 
      */
     filters?: FilterList;
     /**
@@ -1906,17 +1909,17 @@ declare namespace Imagebuilder {
      */
     imageRecipeSummaryList?: ImageRecipeSummaryList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object. 
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: NonEmptyString;
   }
   export interface ListImagesRequest {
     /**
-     *  The owner defines whose images you wish to list. By default this request will only show images owned by your account. You may use this field to specify if you wish to view images owned by yourself, Amazon, or those images that have been shared with you by other customers. 
+     *  The owner defines which images you want to list. By default, this request will only show images owned by your account. You can use this field to specify if you want to view images owned by yourself, by Amazon, or those images that have been shared with you by other customers. 
      */
     owner?: Ownership;
     /**
-     *  
+     *  The filters. 
      */
     filters?: FilterList;
     /**
@@ -1938,13 +1941,13 @@ declare namespace Imagebuilder {
      */
     imageVersionList?: ImageVersionList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object. 
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. 
      */
     nextToken?: NonEmptyString;
   }
   export interface ListInfrastructureConfigurationsRequest {
     /**
-     *  
+     *  The filters. 
      */
     filters?: FilterList;
     /**
@@ -1966,13 +1969,13 @@ declare namespace Imagebuilder {
      */
     infrastructureConfigurationSummaryList?: InfrastructureConfigurationSummaryList;
     /**
-     *  The next token used for paginated responses. When this is not empty then there are additional elements that the service that not include in this request. Use this token with the next request to retrieve additional object.
+     *  The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: NonEmptyString;
   }
   export interface ListTagsForResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the resource whose tags you wish to retrieve. 
+     *  The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve. 
      */
     resourceArn: ImageBuilderArn;
   }
@@ -1984,7 +1987,7 @@ declare namespace Imagebuilder {
   }
   export interface Logging {
     /**
-     * The S3 logging configuration.
+     * The Amazon S3 logging configuration.
      */
     s3Logs?: S3Logs;
   }
@@ -1992,7 +1995,7 @@ declare namespace Imagebuilder {
   export type NullableBoolean = boolean;
   export interface OutputResources {
     /**
-     *  The EC2 AMIs created by this image. 
+     * The EC2 AMIs created by this image. 
      */
     amis?: AmiList;
   }
@@ -2064,28 +2067,29 @@ declare namespace Imagebuilder {
   export type RestrictedInteger = number;
   export interface S3Logs {
     /**
-     * The S3 bucket in which to store the logs.
+     * The Amazon S3 bucket in which to store the logs.
      */
     s3BucketName?: NonEmptyString;
     /**
-     * The S3 path in which to store the logs.
+     * The Amazon S3 path in which to store the logs.
      */
     s3KeyPrefix?: NonEmptyString;
   }
   export interface Schedule {
     /**
-     *  The expression determines how often a pipeline starts the creation of new images. 
+     *  The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
      */
     scheduleExpression?: NonEmptyString;
     /**
-     *  The condition configures when the pipeline should trigger a new image build. 
+     *  The condition configures when the pipeline should trigger a new image build. When the pipelineExecutionStartCondition is set to EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, EC2 Image Builder will build a new image only when there are known changes pending. When it is set to EXPRESSION_MATCH_ONLY, it will build a new image every time the CRON expression matches the current time.
      */
     pipelineExecutionStartCondition?: PipelineExecutionStartCondition;
   }
   export type SecurityGroupIds = NonEmptyString[];
+  export type SnsTopicArn = string;
   export interface StartImagePipelineExecutionRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image pipeline that you wish to manually invoke. 
+     *  The Amazon Resource Name (ARN) of the image pipeline that you want to manually invoke. 
      */
     imagePipelineArn: ImagePipelineArn;
     /**
@@ -2113,7 +2117,7 @@ declare namespace Imagebuilder {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the resource that you wish to tag. 
+     *  The Amazon Resource Name (ARN) of the resource that you want to tag. 
      */
     resourceArn: ImageBuilderArn;
     /**
@@ -2126,7 +2130,7 @@ declare namespace Imagebuilder {
   export type TagValue = string;
   export interface UntagResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the resource that you wish to untag. 
+     *  The Amazon Resource Name (ARN) of the resource that you want to untag. 
      */
     resourceArn: ImageBuilderArn;
     /**
@@ -2138,7 +2142,7 @@ declare namespace Imagebuilder {
   }
   export interface UpdateDistributionConfigurationRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the distribution configuration that you wish to update. 
+     *  The Amazon Resource Name (ARN) of the distribution configuration that you want to update. 
      */
     distributionConfigurationArn: DistributionConfigurationArn;
     /**
@@ -2148,7 +2152,7 @@ declare namespace Imagebuilder {
     /**
      *  The distributions of the distribution configuration. 
      */
-    distributions?: DistributionList;
+    distributions: DistributionList;
     /**
      *  The idempotency token of the distribution configuration. 
      */
@@ -2170,7 +2174,7 @@ declare namespace Imagebuilder {
   }
   export interface UpdateImagePipelineRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the image pipeline that you wish to update. 
+     *  The Amazon Resource Name (ARN) of the image pipeline that you want to update. 
      */
     imagePipelineArn: ImagePipelineArn;
     /**
@@ -2180,11 +2184,11 @@ declare namespace Imagebuilder {
     /**
      *  The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. 
      */
-    imageRecipeArn?: ImageRecipeArn;
+    imageRecipeArn: ImageRecipeArn;
     /**
      *  The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline. 
      */
-    infrastructureConfigurationArn?: InfrastructureConfigurationArn;
+    infrastructureConfigurationArn: InfrastructureConfigurationArn;
     /**
      *  The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images updated by this image pipeline. 
      */
@@ -2222,7 +2226,7 @@ declare namespace Imagebuilder {
   }
   export interface UpdateInfrastructureConfigurationRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the infrastructure configuration that you wish to update. 
+     *  The Amazon Resource Name (ARN) of the infrastructure configuration that you want to update. 
      */
     infrastructureConfigurationArn: InfrastructureConfigurationArn;
     /**
@@ -2230,13 +2234,13 @@ declare namespace Imagebuilder {
      */
     description?: NonEmptyString;
     /**
-     *  The instance types of the infrastructure configuration. You may specify one or more instance types to use for this build, the service will pick one of these instance types based on availability. 
+     *  The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability. 
      */
     instanceTypes?: InstanceTypeList;
     /**
      *  The instance profile to associate with the instance used to customize your EC2 AMI. 
      */
-    instanceProfileName?: NonEmptyString;
+    instanceProfileName: NonEmptyString;
     /**
      *  The security group IDs to associate with the instance used to customize your EC2 AMI. 
      */
@@ -2250,17 +2254,17 @@ declare namespace Imagebuilder {
      */
     logging?: Logging;
     /**
-     *  The key pair of the infrastructure configuration. This can be used to log onto and debug the instance used to create your image. 
+     *  The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image. 
      */
     keyPair?: NonEmptyString;
     /**
-     *  The terminate instance on failure setting of the infrastructure configuration. Set to false if you wish for Image Builder to retain the instance used to configure your AMI in the event that the build or test phase of your workflow failed. 
+     *  The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails. 
      */
     terminateInstanceOnFailure?: NullableBoolean;
     /**
      *  The SNS topic on which to send image build events. 
      */
-    snsTopicArn?: NonEmptyString;
+    snsTopicArn?: SnsTopicArn;
     /**
      *  The idempotency token used to make this request idempotent. 
      */

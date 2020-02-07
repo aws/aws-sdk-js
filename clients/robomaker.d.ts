@@ -36,6 +36,14 @@ declare class RoboMaker extends Service {
    */
   cancelSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobResponse) => void): Request<RoboMaker.Types.CancelSimulationJobResponse, AWSError>;
   /**
+   * Cancels a simulation job batch. When you cancel a simulation job batch, you are also cancelling all of the active simulation jobs created as part of the batch. 
+   */
+  cancelSimulationJobBatch(params: RoboMaker.Types.CancelSimulationJobBatchRequest, callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobBatchResponse) => void): Request<RoboMaker.Types.CancelSimulationJobBatchResponse, AWSError>;
+  /**
+   * Cancels a simulation job batch. When you cancel a simulation job batch, you are also cancelling all of the active simulation jobs created as part of the batch. 
+   */
+  cancelSimulationJobBatch(callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobBatchResponse) => void): Request<RoboMaker.Types.CancelSimulationJobBatchResponse, AWSError>;
+  /**
    * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
    */
   createDeploymentJob(params: RoboMaker.Types.CreateDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
@@ -188,11 +196,19 @@ declare class RoboMaker extends Service {
    */
   describeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.     
+   * Describes a simulation job batch.
+   */
+  describeSimulationJobBatch(params: RoboMaker.Types.DescribeSimulationJobBatchRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobBatchResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobBatchResponse, AWSError>;
+  /**
+   * Describes a simulation job batch.
+   */
+  describeSimulationJobBatch(callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobBatchResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobBatchResponse, AWSError>;
+  /**
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
    */
   listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.     
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
    */
   listDeploymentJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
@@ -228,6 +244,14 @@ declare class RoboMaker extends Service {
    */
   listSimulationApplications(callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationApplicationsResponse) => void): Request<RoboMaker.Types.ListSimulationApplicationsResponse, AWSError>;
   /**
+   * Returns a list simulation job batches. You can optionally provide filters to retrieve specific simulation batch jobs. 
+   */
+  listSimulationJobBatches(params: RoboMaker.Types.ListSimulationJobBatchesRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobBatchesResponse) => void): Request<RoboMaker.Types.ListSimulationJobBatchesResponse, AWSError>;
+  /**
+   * Returns a list simulation job batches. You can optionally provide filters to retrieve specific simulation batch jobs. 
+   */
+  listSimulationJobBatches(callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobBatchesResponse) => void): Request<RoboMaker.Types.ListSimulationJobBatchesResponse, AWSError>;
+  /**
    * Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs. 
    */
   listSimulationJobs(params: RoboMaker.Types.ListSimulationJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobsResponse) => void): Request<RoboMaker.Types.ListSimulationJobsResponse, AWSError>;
@@ -259,6 +283,14 @@ declare class RoboMaker extends Service {
    * Restarts a running simulation job.
    */
   restartSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.RestartSimulationJobResponse) => void): Request<RoboMaker.Types.RestartSimulationJobResponse, AWSError>;
+  /**
+   * Starts a new simulation job batch. The batch is defined using one or more SimulationJobRequest objects. 
+   */
+  startSimulationJobBatch(params: RoboMaker.Types.StartSimulationJobBatchRequest, callback?: (err: AWSError, data: RoboMaker.Types.StartSimulationJobBatchResponse) => void): Request<RoboMaker.Types.StartSimulationJobBatchResponse, AWSError>;
+  /**
+   * Starts a new simulation job batch. The batch is defined using one or more SimulationJobRequest objects. 
+   */
+  startSimulationJobBatch(callback?: (err: AWSError, data: RoboMaker.Types.StartSimulationJobBatchResponse) => void): Request<RoboMaker.Types.StartSimulationJobBatchResponse, AWSError>;
   /**
    * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
    */
@@ -320,6 +352,17 @@ declare namespace RoboMaker {
      */
     unprocessedJobs?: Arns;
   }
+  export interface BatchPolicy {
+    /**
+     * The amount of time, in seconds, to wait for the batch to complete.  If a batch times out, and there are pending requests that were failing due to an internal failure (like InternalServiceError), they will be moved to the failed list and the batch status will be Failed. If the pending requests were failing for any other reason, the failed pending requests will be moved to the failed list and the batch status will be TimedOut. 
+     */
+    timeoutInSeconds?: BatchTimeoutInSeconds;
+    /**
+     * The number of active simulation jobs create as part of the batch that can be in an active state at the same time.  Active states include: Pending,Preparing, Running, Restarting, RunningFailed and Terminating. All other states are terminal states. 
+     */
+    maxConcurrency?: MaxConcurrency;
+  }
+  export type BatchTimeoutInSeconds = number;
   export type Boolean = boolean;
   export type BoxedBoolean = boolean;
   export interface CancelDeploymentJobRequest {
@@ -329,6 +372,14 @@ declare namespace RoboMaker {
     job: Arn;
   }
   export interface CancelDeploymentJobResponse {
+  }
+  export interface CancelSimulationJobBatchRequest {
+    /**
+     * The id of the batch to cancel.
+     */
+    batch: Arn;
+  }
+  export interface CancelSimulationJobBatchResponse {
   }
   export interface CancelSimulationJobRequest {
     /**
@@ -438,7 +489,7 @@ declare namespace RoboMaker {
      */
     sources: SourceConfigs;
     /**
-     * The robot software suite used by the robot application.
+     * The robot software suite (ROS distribuition) used by the robot application.
      */
     robotSoftwareSuite: RobotSoftwareSuite;
     /**
@@ -464,7 +515,7 @@ declare namespace RoboMaker {
      */
     sources?: Sources;
     /**
-     * The robot software suite used by the robot application.
+     * The robot software suite (ROS distribution) used by the robot application.
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
@@ -508,7 +559,7 @@ declare namespace RoboMaker {
      */
     sources?: Sources;
     /**
-     * The robot software suite used by the robot application.
+     * The robot software suite (ROS distribution) used by the robot application.
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
@@ -578,7 +629,7 @@ declare namespace RoboMaker {
      */
     simulationSoftwareSuite: SimulationSoftwareSuite;
     /**
-     * The robot software suite of the simulation application.
+     * The robot software suite (ROS distribution) used by the simulation application.
      */
     robotSoftwareSuite: RobotSoftwareSuite;
     /**
@@ -612,7 +663,7 @@ declare namespace RoboMaker {
      */
     simulationSoftwareSuite?: SimulationSoftwareSuite;
     /**
-     * Information about the robot software suite.
+     * Information about the robot software suite (ROS distribution).
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
@@ -664,7 +715,7 @@ declare namespace RoboMaker {
      */
     simulationSoftwareSuite?: SimulationSoftwareSuite;
     /**
-     * Information about the robot software suite.
+     * Information about the robot software suite (ROS distribution).
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
@@ -714,7 +765,7 @@ declare namespace RoboMaker {
      */
     simulationApplications?: SimulationApplicationConfigs;
     /**
-     * The data sources for the simulation job.  There is a limit of 100 files and a combined size of 25GB for all DataSourceConfig objects.  
+     * Specify data sources to mount read-only files from S3 into your simulation. These files are available under /opt/robomaker/datasources/data_source_name.   There is a limit of 100 files and a combined size of 25GB for all DataSourceConfig objects.  
      */
     dataSources?: DataSourceConfigs;
     /**
@@ -726,6 +777,7 @@ declare namespace RoboMaker {
      */
     vpcConfig?: VPCConfig;
   }
+  export type CreateSimulationJobRequests = SimulationJobRequest[];
   export interface CreateSimulationJobResponse {
     /**
      * The Amazon Resource Name (ARN) of the simulation job.
@@ -1098,7 +1150,7 @@ declare namespace RoboMaker {
      */
     sources?: Sources;
     /**
-     * The robot software suite used by the robot application.
+     * The robot software suite (ROS distribution) used by the robot application.
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
@@ -1194,7 +1246,7 @@ declare namespace RoboMaker {
      */
     simulationSoftwareSuite?: SimulationSoftwareSuite;
     /**
-     * Information about the robot software suite.
+     * Information about the robot software suite (ROS distribution).
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
@@ -1211,6 +1263,62 @@ declare namespace RoboMaker {
     lastUpdatedAt?: LastUpdatedAt;
     /**
      * The list of all tags added to the specified simulation application.
+     */
+    tags?: TagMap;
+  }
+  export interface DescribeSimulationJobBatchRequest {
+    /**
+     * The id of the batch to describe.
+     */
+    batch: Arn;
+  }
+  export interface DescribeSimulationJobBatchResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the batch.
+     */
+    arn?: Arn;
+    /**
+     * The status of the batch.  Pending  The simulation job batch request is pending.  InProgress  The simulation job batch is in progress.   Failed  The simulation job batch failed. One or more simulation job requests could not be completed due to an internal failure (like InternalServiceError). See failureCode and failureReason for more information.  Completed  The simulation batch job completed. A batch is complete when (1) there are no pending simulation job requests in the batch and none of the failed simulation job requests are due to InternalServiceError and (2) when all created simulation jobs have reached a terminal state (for example, Completed or Failed).   Canceled  The simulation batch job was cancelled.  Canceling  The simulation batch job is being cancelled.  Completing  The simulation batch job is completing.  TimingOut  The simulation job batch is timing out. If a batch timing out, and there are pending requests that were failing due to an internal failure (like InternalServiceError), the batch status will be Failed. If there are no such failing request, the batch status will be TimedOut.   TimedOut  The simulation batch job timed out.  
+     */
+    status?: SimulationJobBatchStatus;
+    /**
+     * The time, in milliseconds since the epoch, when the simulation job batch was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAt;
+    /**
+     * The time, in milliseconds since the epoch, when the simulation job batch was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The batch policy.
+     */
+    batchPolicy?: BatchPolicy;
+    /**
+     * The failure code of the simulation job batch.
+     */
+    failureCode?: SimulationJobBatchErrorCode;
+    /**
+     * The reason the simulation job batch failed.
+     */
+    failureReason?: GenericString;
+    /**
+     * A list of failed create simulation job requests. The request failed to be created into a simulation job. Failed requests do not have a simulation job ID. 
+     */
+    failedRequests?: FailedCreateSimulationJobRequests;
+    /**
+     * A list of pending simulation job requests. These requests have not yet been created into simulation jobs.
+     */
+    pendingRequests?: CreateSimulationJobRequests;
+    /**
+     * A list of created simulation job summaries.
+     */
+    createdRequests?: SimulationJobSummaries;
+    /**
+     * A map that contains tag keys and tag values that are attached to the simulation job batch.
      */
     tags?: TagMap;
   }
@@ -1305,6 +1413,26 @@ declare namespace RoboMaker {
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
   export type EnvironmentVariableValue = string;
+  export type FailedAt = Date;
+  export interface FailedCreateSimulationJobRequest {
+    /**
+     * The simulation job request.
+     */
+    request?: SimulationJobRequest;
+    /**
+     * The failure reason of the simulation job request.
+     */
+    failureReason?: GenericString;
+    /**
+     * The failure code.
+     */
+    failureCode?: SimulationJobErrorCode;
+    /**
+     * The time, in milliseconds since the epoch, when the simulation job batch failed.
+     */
+    failedAt?: FailedAt;
+  }
+  export type FailedCreateSimulationJobRequests = FailedCreateSimulationJobRequest[];
   export type FailureBehavior = "Fail"|"Continue"|string;
   export interface Filter {
     /**
@@ -1349,6 +1477,7 @@ declare namespace RoboMaker {
   export type GenericString = string;
   export type IamRole = string;
   export type Id = string;
+  export type Integer = number;
   export type JobDuration = number;
   export type LastStartedAt = Date;
   export type LastUpdatedAt = Date;
@@ -1376,11 +1505,11 @@ declare namespace RoboMaker {
      */
     filters?: Filters;
     /**
-     * The nextToken value returned from a previous paginated ListDeploymentJobs request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated ListDeploymentJobs request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListDeploymentJobs in paginated output. When this parameter is used, ListDeploymentJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListDeploymentJobs request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListDeploymentJobs returns up to 100 results and a nextToken value if applicable. 
+     * When this parameter is used, ListDeploymentJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListDeploymentJobs request with the returned nextToken value. This value can be between 1 and 200. If this parameter is not used, then ListDeploymentJobs returns up to 200 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
   }
@@ -1400,7 +1529,7 @@ declare namespace RoboMaker {
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListFleets in paginated output. When this parameter is used, ListFleets only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListFleets request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListFleets returns up to 100 results and a nextToken value if applicable. 
+     * When this parameter is used, ListFleets only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListFleets request with the returned nextToken value. This value can be between 1 and 200. If this parameter is not used, then ListFleets returns up to 200 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
@@ -1424,11 +1553,11 @@ declare namespace RoboMaker {
      */
     versionQualifier?: VersionQualifier;
     /**
-     * The nextToken value returned from a previous paginated ListRobotApplications request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated ListRobotApplications request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListRobotApplications in paginated output. When this parameter is used, ListRobotApplications only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListRobotApplications request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListRobotApplications returns up to 100 results and a nextToken value if applicable. 
+     * When this parameter is used, ListRobotApplications only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListRobotApplications request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListRobotApplications returns up to 100 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
@@ -1448,11 +1577,11 @@ declare namespace RoboMaker {
   }
   export interface ListRobotsRequest {
     /**
-     * The nextToken value returned from a previous paginated ListRobots request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated ListRobots request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListRobots in paginated output. When this parameter is used, ListRobots only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListRobots request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListRobots returns up to 100 results and a nextToken value if applicable. 
+     * When this parameter is used, ListRobots only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListRobots request with the returned nextToken value. This value can be between 1 and 200. If this parameter is not used, then ListRobots returns up to 200 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
@@ -1476,11 +1605,11 @@ declare namespace RoboMaker {
      */
     versionQualifier?: VersionQualifier;
     /**
-     * The nextToken value returned from a previous paginated ListSimulationApplications request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated ListSimulationApplications request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListSimulationApplications in paginated output. When this parameter is used, ListSimulationApplications only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListSimulationApplications request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListSimulationApplications returns up to 100 results and a nextToken value if applicable. 
+     * When this parameter is used, ListSimulationApplications only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListSimulationApplications request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListSimulationApplications returns up to 100 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
@@ -1498,13 +1627,37 @@ declare namespace RoboMaker {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListSimulationJobBatchesRequest {
+    /**
+     * The nextToken value returned from a previous paginated ListSimulationJobBatches request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
+     */
+    nextToken?: PaginationToken;
+    /**
+     * When this parameter is used, ListSimulationJobBatches only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListSimulationJobBatches request with the returned nextToken value. 
+     */
+    maxResults?: MaxResults;
+    /**
+     * Optional filters to limit results.
+     */
+    filters?: Filters;
+  }
+  export interface ListSimulationJobBatchesResponse {
+    /**
+     * A list of simulation job batch summaries.
+     */
+    simulationJobBatchSummaries?: SimulationJobBatchSummaries;
+    /**
+     * The nextToken value to include in a future ListSimulationJobBatches request. When the results of a ListSimulationJobBatches request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListSimulationJobsRequest {
     /**
      * The nextToken value returned from a previous paginated ListSimulationJobs request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListSimulationJobs in paginated output. When this parameter is used, ListSimulationJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListSimulationJobs request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListSimulationJobs returns up to 100 results and a nextToken value if applicable. 
+     * When this parameter is used, ListSimulationJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListSimulationJobs request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then ListSimulationJobs returns up to 1000 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
@@ -1540,6 +1693,7 @@ declare namespace RoboMaker {
      */
     recordAllRosTopics: BoxedBoolean;
   }
+  export type MaxConcurrency = number;
   export type MaxResults = number;
   export type Name = string;
   export interface NetworkInterface {
@@ -1726,7 +1880,7 @@ declare namespace RoboMaker {
      */
     lastUpdatedAt?: LastUpdatedAt;
     /**
-     * Information about a robot software suite.
+     * Information about a robot software suite (ROS distribution).
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
   }
@@ -1764,11 +1918,11 @@ declare namespace RoboMaker {
   export type RobotDeploymentSummary = RobotDeployment[];
   export interface RobotSoftwareSuite {
     /**
-     * The name of the robot software suite.
+     * The name of the robot software suite (ROS distribution).
      */
     name?: RobotSoftwareSuiteType;
     /**
-     * The version of the robot software suite.
+     * The version of the robot software suite (ROS distribution).
      */
     version?: RobotSoftwareSuiteVersionType;
   }
@@ -1841,7 +1995,7 @@ declare namespace RoboMaker {
      */
     lastUpdatedAt?: LastUpdatedAt;
     /**
-     * Information about a robot software suite.
+     * Information about a robot software suite (ROS distribution).
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
@@ -1931,7 +2085,77 @@ declare namespace RoboMaker {
      */
     networkInterface?: NetworkInterface;
   }
-  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|string;
+  export type SimulationJobBatchErrorCode = "InternalServiceError"|string;
+  export type SimulationJobBatchStatus = "Pending"|"InProgress"|"Failed"|"Completed"|"Canceled"|"Canceling"|"Completing"|"TimingOut"|"TimedOut"|string;
+  export type SimulationJobBatchSummaries = SimulationJobBatchSummary[];
+  export interface SimulationJobBatchSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the batch.
+     */
+    arn?: Arn;
+    /**
+     * The time, in milliseconds since the epoch, when the simulation job batch was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAt;
+    /**
+     * The time, in milliseconds since the epoch, when the simulation job batch was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The status of the simulation job batch.  Pending  The simulation job batch request is pending.  InProgress  The simulation job batch is in progress.   Failed  The simulation job batch failed. One or more simulation job requests could not be completed due to an internal failure (like InternalServiceError). See failureCode and failureReason for more information.  Completed  The simulation batch job completed. A batch is complete when (1) there are no pending simulation job requests in the batch and none of the failed simulation job requests are due to InternalServiceError and (2) when all created simulation jobs have reached a terminal state (for example, Completed or Failed).   Canceled  The simulation batch job was cancelled.  Canceling  The simulation batch job is being cancelled.  Completing  The simulation batch job is completing.  TimingOut  The simulation job batch is timing out. If a batch timing out, and there are pending requests that were failing due to an internal failure (like InternalServiceError), the batch status will be Failed. If there are no such failing request, the batch status will be TimedOut.   TimedOut  The simulation batch job timed out.  
+     */
+    status?: SimulationJobBatchStatus;
+    /**
+     * The number of failed simulation job requests.
+     */
+    failedRequestCount?: Integer;
+    /**
+     * The number of pending simulation job requests.
+     */
+    pendingRequestCount?: Integer;
+    /**
+     * The number of created simulation job requests.
+     */
+    createdRequestCount?: Integer;
+  }
+  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"LimitExceeded"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"RequestThrottled"|"BatchTimedOut"|"BatchCanceled"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|string;
+  export interface SimulationJobRequest {
+    outputLocation?: OutputLocation;
+    loggingConfig?: LoggingConfig;
+    /**
+     * The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.
+     */
+    maxJobDurationInSeconds: JobDuration;
+    /**
+     * The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. 
+     */
+    iamRole?: IamRole;
+    /**
+     * The failure behavior the simulation job.  Continue  Restart the simulation job in the same host instance.  Fail  Stop the simulation job and terminate the instance.  
+     */
+    failureBehavior?: FailureBehavior;
+    /**
+     * Boolean indicating whether to use default simulation tool applications.
+     */
+    useDefaultApplications?: BoxedBoolean;
+    /**
+     * The robot applications to use in the simulation job.
+     */
+    robotApplications?: RobotApplicationConfigs;
+    /**
+     * The simulation applications to use in the simulation job.
+     */
+    simulationApplications?: SimulationApplicationConfigs;
+    /**
+     * Specify data sources to mount read-only files from S3 into your simulation. These files are available under /opt/robomaker/datasources/data_source_name.   There is a limit of 100 files and a combined size of 25GB for all DataSourceConfig objects.  
+     */
+    dataSources?: DataSourceConfigs;
+    vpcConfig?: VPCConfig;
+    /**
+     * A map that contains tag keys and tag values that are attached to the simulation job request.
+     */
+    tags?: TagMap;
+  }
   export type SimulationJobStatus = "Pending"|"Preparing"|"Running"|"Restarting"|"Completed"|"Failed"|"RunningFailed"|"Terminating"|"Terminated"|"Canceled"|string;
   export type SimulationJobSummaries = SimulationJobSummary[];
   export interface SimulationJobSummary {
@@ -2012,6 +2236,70 @@ declare namespace RoboMaker {
   }
   export type SourceConfigs = SourceConfig[];
   export type Sources = Source[];
+  export interface StartSimulationJobBatchRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The batch policy.
+     */
+    batchPolicy?: BatchPolicy;
+    /**
+     * A list of simulation job requests to create in the batch.
+     */
+    createSimulationJobRequests: CreateSimulationJobRequests;
+    /**
+     * A map that contains tag keys and tag values that are attached to the deployment job batch.
+     */
+    tags?: TagMap;
+  }
+  export interface StartSimulationJobBatchResponse {
+    /**
+     * The Amazon Resource Name (arn) of the batch.
+     */
+    arn?: Arn;
+    /**
+     * The status of the simulation job batch.  Pending  The simulation job batch request is pending.  InProgress  The simulation job batch is in progress.   Failed  The simulation job batch failed. One or more simulation job requests could not be completed due to an internal failure (like InternalServiceError). See failureCode and failureReason for more information.  Completed  The simulation batch job completed. A batch is complete when (1) there are no pending simulation job requests in the batch and none of the failed simulation job requests are due to InternalServiceError and (2) when all created simulation jobs have reached a terminal state (for example, Completed or Failed).   Canceled  The simulation batch job was cancelled.  Canceling  The simulation batch job is being cancelled.  Completing  The simulation batch job is completing.  TimingOut  The simulation job batch is timing out. If a batch timing out, and there are pending requests that were failing due to an internal failure (like InternalServiceError), the batch status will be Failed. If there are no such failing request, the batch status will be TimedOut.   TimedOut  The simulation batch job timed out.  
+     */
+    status?: SimulationJobBatchStatus;
+    /**
+     * The time, in milliseconds since the epoch, when the simulation job batch was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The batch policy.
+     */
+    batchPolicy?: BatchPolicy;
+    /**
+     * The failure code if the simulation job batch failed.
+     */
+    failureCode?: SimulationJobBatchErrorCode;
+    /**
+     * The reason the simulation job batch failed.
+     */
+    failureReason?: GenericString;
+    /**
+     * A list of failed simulation job requests. The request failed to be created into a simulation job. Failed requests do not have a simulation job ID. 
+     */
+    failedRequests?: FailedCreateSimulationJobRequests;
+    /**
+     * A list of pending simulation job requests. These requests have not yet been created into simulation jobs.
+     */
+    pendingRequests?: CreateSimulationJobRequests;
+    /**
+     * A list of created simulation job request summaries.
+     */
+    createdRequests?: SimulationJobSummaries;
+    /**
+     * A map that contains tag keys and tag values that are attached to the deployment job batch.
+     */
+    tags?: TagMap;
+  }
   export type Subnets = NonEmptyString[];
   export interface SyncDeploymentJobRequest {
     /**
@@ -2095,7 +2383,7 @@ declare namespace RoboMaker {
      */
     sources: SourceConfigs;
     /**
-     * The robot software suite used by the robot application.
+     * The robot software suite (ROS distribution) used by the robot application.
      */
     robotSoftwareSuite: RobotSoftwareSuite;
     /**
@@ -2121,7 +2409,7 @@ declare namespace RoboMaker {
      */
     sources?: Sources;
     /**
-     * The robot software suite used by the robot application.
+     * The robot software suite (ROS distribution) used by the robot application.
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
@@ -2147,7 +2435,7 @@ declare namespace RoboMaker {
      */
     simulationSoftwareSuite: SimulationSoftwareSuite;
     /**
-     * Information about the robot software suite.
+     * Information about the robot software suite (ROS distribution).
      */
     robotSoftwareSuite: RobotSoftwareSuite;
     /**
@@ -2181,7 +2469,7 @@ declare namespace RoboMaker {
      */
     simulationSoftwareSuite?: SimulationSoftwareSuite;
     /**
-     * Information about the robot software suite.
+     * Information about the robot software suite (ROS distribution).
      */
     robotSoftwareSuite?: RobotSoftwareSuite;
     /**
