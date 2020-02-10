@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.614.0-->
+<!--LATEST=2.615.0-->
 <!--ENTRYINSERT-->
+
+## 2.615.0
+* feature: KMS: The ConnectCustomKeyStore API now provides a new error code (SUBNET_NOT_FOUND) for customers to better troubleshoot if their "connect-custom-key-store" operation fails.
 
 ## 2.614.0
 * feature: Imagebuilder: This version of the SDK includes bug fixes and documentation updates.
