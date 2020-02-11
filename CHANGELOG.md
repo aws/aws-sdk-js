@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.615.0-->
+<!--LATEST=2.616.0-->
 <!--ENTRYINSERT-->
+
+## 2.616.0
+* feature: CloudFormation: This release of AWS CloudFormation StackSets allows you to centrally manage deployments to all the accounts in your organization or specific organizational units (OUs) in AWS Organizations. You will also be able to enable automatic deployments to any new accounts added to your organization or OUs. The permissions needed to deploy across accounts will automatically be taken care of by the StackSets service.
+* feature: CognitoIdentityServiceProvider: Features:This release adds a new setting for a user pool to allow if customer wants their user signup/signin with case insensitive username. The current default setting is case sensitive, and for our next release we will change it to case insensitive.
+* feature: EC2: Amazon EC2 Now Supports Tagging Spot Fleet.
 
 ## 2.615.0
 * feature: KMS: The ConnectCustomKeyStore API now provides a new error code (SUBNET_NOT_FOUND) for customers to better troubleshoot if their "connect-custom-key-store" operation fails.

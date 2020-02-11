@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "This release of AWS CloudFormation StackSets allows you to centrally manage deployments to all the accounts in your organization or specific organizational units (OUs) in AWS Organizations. You will also be able to enable automatic deployments to any new accounts added to your organization or OUs. The permissions needed to deploy across accounts will automatically be taken care of by the StackSets service."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Features:This release adds a new setting for a user pool to allow if customer wants their user signup/signin with case insensitive username. The current default setting is case sensitive, and for our next release we will change it to case insensitive."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon EC2 Now Supports Tagging Spot Fleet."
+    }
+]

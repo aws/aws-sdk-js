@@ -135,7 +135,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. <code>Accounts</code> and <code>Regions</code> are required parameters—you must specify at least one account and one region. </p>"
+      "documentation": "<p>Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. You must specify at least one value for either <code>Accounts</code> or <code>DeploymentTargets</code>, and you must specify at least one value for <code>Regions</code>.</p>"
     },
     "CreateStackSet": {
       "name": "CreateStackSet",
@@ -840,7 +840,7 @@
           "shape": "CFNRegistryException"
         }
       ],
-      "documentation": "<p>Returns a list of registration tokens for the specified type.</p>",
+      "documentation": "<p>Returns a list of registration tokens for the specified type(s).</p>",
       "idempotent": true
     },
     "ListTypeVersions": {
@@ -927,7 +927,7 @@
           "shape": "CFNRegistryException"
         }
       ],
-      "documentation": "<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href=\"cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>",
+      "documentation": "<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>",
       "idempotent": true
     },
     "SetStackPolicy": {
@@ -1129,7 +1129,7 @@
   "shapes": {
     "Account": {
       "type": "string",
-      "pattern": "[0-9]{12}"
+      "pattern": "^[0-9]{12}$"
     },
     "AccountGateResult": {
       "type": "structure",
@@ -1193,6 +1193,23 @@
     },
     "Arn": {
       "type": "string"
+    },
+    "AutoDeployment": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "AutoDeploymentNullable",
+          "documentation": "<p>If set to <code>true</code>, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.</p>"
+        },
+        "RetainStacksOnAccountRemoval": {
+          "shape": "RetainStacksOnAccountRemovalNullable",
+          "documentation": "<p>If set to <code>true</code>, stack resources are retained when an account is removed from a target organization or OU. If set to <code>false</code>, stack resources are deleted. Specify only if <code>Enabled</code> is set to <code>True</code>.</p>"
+        }
+      },
+      "documentation": "<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p>"
+    },
+    "AutoDeploymentNullable": {
+      "type": "boolean"
     },
     "BoxedInteger": {
       "type": "integer",
@@ -1582,7 +1599,6 @@
       "type": "structure",
       "required": [
         "StackSetName",
-        "Accounts",
         "Regions"
       ],
       "members": {
@@ -1592,7 +1608,11 @@
         },
         "Accounts": {
           "shape": "AccountList",
-          "documentation": "<p>The names of one or more AWS accounts that you want to create stack instances in the specified region(s) for.</p>"
+          "documentation": "<p>[Self-managed permissions] The names of one or more AWS accounts that you want to create stack instances in the specified region(s) for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+        },
+        "DeploymentTargets": {
+          "shape": "DeploymentTargets",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts for which to create stack instances in the specified Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
         },
         "Regions": {
           "shape": "RegionList",
@@ -1674,6 +1694,14 @@
           "shape": "ExecutionRoleName",
           "documentation": "<p>The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the <code>AWSCloudFormationStackSetExecutionRole</code> role for the stack set operation.</p> <p>Specify an IAM role only if you are using customized execution roles to control which stack resources users and groups can include in their stack sets. </p>"
         },
+        "PermissionModel": {
+          "shape": "PermissionModels",
+          "documentation": "<p>Describes how the IAM roles required for stack set operations are created. By default, <code>SELF-MANAGED</code> is specified.</p> <ul> <li> <p>With <code>self-managed</code> permissions, you must create the administrator and execution roles required to deploy to target accounts. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html\">Grant Self-Managed Stack Set Permissions</a>.</p> </li> <li> <p>With <code>service-managed</code> permissions, StackSets automatically creates the IAM roles required to deploy to accounts managed by AWS Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html\">Grant Service-Managed Stack Set Permissions</a>.</p> </li> </ul>"
+        },
+        "AutoDeployment": {
+          "shape": "AutoDeployment",
+          "documentation": "<p>Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if <code>PermissionModel</code> is <code>SERVICE_MANAGED</code>.</p> <p>If you specify <code>AutoDeployment</code>, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>"
+        },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
           "documentation": "<p>A unique identifier for this <code>CreateStackSet</code> request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to create another stack set with the same name. You might retry <code>CreateStackSet</code> requests to ensure that AWS CloudFormation successfully received them.</p> <p>If you don't specify an operation ID, the SDK generates one automatically. </p>",
@@ -1744,7 +1772,6 @@
       "type": "structure",
       "required": [
         "StackSetName",
-        "Accounts",
         "Regions",
         "RetainStacks"
       ],
@@ -1755,7 +1782,11 @@
         },
         "Accounts": {
           "shape": "AccountList",
-          "documentation": "<p>The names of the AWS accounts that you want to delete stack instances for.</p>"
+          "documentation": "<p>[Self-managed permissions] The names of the AWS accounts that you want to delete stack instances for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+        },
+        "DeploymentTargets": {
+          "shape": "DeploymentTargets",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts from which to delete stack instances.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
         },
         "Regions": {
           "shape": "RegionList",
@@ -1804,6 +1835,20 @@
     "DeletionTime": {
       "type": "timestamp"
     },
+    "DeploymentTargets": {
+      "type": "structure",
+      "members": {
+        "Accounts": {
+          "shape": "AccountList",
+          "documentation": "<p>The names of one or more AWS accounts for which you want to deploy stack set updates.</p>"
+        },
+        "OrganizationalUnitIds": {
+          "shape": "OrganizationalUnitIdList",
+          "documentation": "<p>The organization root ID or organizational unit (OUs) IDs to which StackSets deploys.</p>"
+        }
+      },
+      "documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>"
+    },
     "DeprecatedStatus": {
       "type": "string",
       "enum": [
@@ -1816,15 +1861,15 @@
       "members": {
         "Arn": {
           "shape": "PrivateTypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "Type": {
           "shape": "RegistryType",
-          "documentation": "<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+          "documentation": "<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "VersionId": {
           "shape": "TypeVersionId",
@@ -2237,15 +2282,15 @@
       "members": {
         "Type": {
           "shape": "RegistryType",
-          "documentation": "<p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+          "documentation": "<p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "Arn": {
           "shape": "TypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "VersionId": {
           "shape": "TypeVersionId",
@@ -3036,19 +3081,19 @@
       "members": {
         "Type": {
           "shape": "RegistryType",
-          "documentation": "<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+          "documentation": "<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "TypeArn": {
           "shape": "TypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "RegistrationStatusFilter": {
           "shape": "RegistrationStatus",
-          "documentation": "<p>The current status of the type registration request.</p>"
+          "documentation": "<p>The current status of the type registration request.</p> <p>The default is <code>IN_PROGRESS</code>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3078,15 +3123,15 @@
       "members": {
         "Type": {
           "shape": "RegistryType",
-          "documentation": "<p>The kind of the type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+          "documentation": "<p>The kind of the type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "Arn": {
           "shape": "PrivateTypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3098,7 +3143,7 @@
         },
         "DeprecatedStatus": {
           "shape": "DeprecatedStatus",
-          "documentation": "<p>The deprecation status of the type versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>"
+          "documentation": "<p>The deprecation status of the type versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul> <p>The default is <code>LIVE</code>.</p>"
         }
       }
     },
@@ -3120,7 +3165,7 @@
       "members": {
         "Visibility": {
           "shape": "Visibility",
-          "documentation": "<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul>"
+          "documentation": "<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>"
         },
         "ProvisioningType": {
           "shape": "ProvisioningType",
@@ -3249,6 +3294,16 @@
       "type": "string",
       "max": 4096
     },
+    "OrganizationalUnitId": {
+      "type": "string",
+      "pattern": "^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}|r-[a-z0-9]{4,32})$"
+    },
+    "OrganizationalUnitIdList": {
+      "type": "list",
+      "member": {
+        "shape": "OrganizationalUnitId"
+      }
+    },
     "Output": {
       "type": "structure",
       "members": {
@@ -3365,6 +3420,13 @@
       "member": {
         "shape": "Parameter"
       }
+    },
+    "PermissionModels": {
+      "type": "string",
+      "enum": [
+        "SERVICE_MANAGED",
+        "SELF_MANAGED"
+      ]
     },
     "PhysicalResourceId": {
       "type": "string"
@@ -3498,7 +3560,8 @@
       "members": {}
     },
     "Region": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{1,128}$"
     },
     "RegionList": {
       "type": "list",
@@ -3523,7 +3586,7 @@
         },
         "SchemaHandlerPackage": {
           "shape": "S3Url",
-          "documentation": "<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p> <p>For information on generating a schema handler package for the type you want to register, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html\">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
+          "documentation": "<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p> <p>For information on generating a schema handler package for the type you want to register, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html\">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p> <note> <p>As part of registering a resource provider type, CloudFormation must be able to access the S3 bucket which contains the schema handler package for that resource provider. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions\">IAM Permissions for Registering a Resource Provider</a> in the <i>AWS CloudFormation User Guide</i>.</p> </note>"
         },
         "LoggingConfig": {
           "shape": "LoggingConfig",
@@ -3845,6 +3908,9 @@
     "RetainStacksNullable": {
       "type": "boolean"
     },
+    "RetainStacksOnAccountRemovalNullable": {
+      "type": "boolean"
+    },
     "RoleARN": {
       "type": "string",
       "max": 2048,
@@ -3932,15 +3998,15 @@
       "members": {
         "Arn": {
           "shape": "PrivateTypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "Type": {
           "shape": "RegistryType",
-          "documentation": "<p>The kind of type.</p>"
+          "documentation": "<p>The kind of type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify <code>TypeName</code> or <code>Arn</code>.</p>"
+          "documentation": "<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "VersionId": {
           "shape": "TypeVersionId",
@@ -4216,7 +4282,7 @@
         },
         "Account": {
           "shape": "Account",
-          "documentation": "<p>The name of the AWS account that the stack instance is associated with.</p>"
+          "documentation": "<p>[Self-managed permissions] The name of the AWS account that the stack instance is associated with.</p>"
         },
         "StackId": {
           "shape": "StackId",
@@ -4233,6 +4299,10 @@
         "StatusReason": {
           "shape": "Reason",
           "documentation": "<p>The explanation for the specific status code that is assigned to this stack instance.</p>"
+        },
+        "OrganizationalUnitId": {
+          "shape": "OrganizationalUnitId",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) ID that the stack instance is associated with.</p>"
         },
         "DriftStatus": {
           "shape": "StackDriftStatus",
@@ -4272,7 +4342,7 @@
         },
         "Account": {
           "shape": "Account",
-          "documentation": "<p>The name of the AWS account that the stack instance is associated with.</p>"
+          "documentation": "<p>[Self-managed permissions] The name of the AWS account that the stack instance is associated with.</p>"
         },
         "StackId": {
           "shape": "StackId",
@@ -4285,6 +4355,10 @@
         "StatusReason": {
           "shape": "Reason",
           "documentation": "<p>The explanation for the specific status code assigned to this stack instance.</p>"
+        },
+        "OrganizationalUnitId": {
+          "shape": "OrganizationalUnitId",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) ID that the stack instance is associated with.</p>"
         },
         "DriftStatus": {
           "shape": "StackDriftStatus",
@@ -4645,6 +4719,18 @@
         "StackSetDriftDetectionDetails": {
           "shape": "StackSetDriftDetectionDetails",
           "documentation": "<p>Detailed information about the drift status of the stack set.</p> <p>For stack sets, contains information about the last <i>completed</i> drift operation performed on the stack set. Information about drift operations currently in progress is not included.</p>"
+        },
+        "AutoDeployment": {
+          "shape": "AutoDeployment",
+          "documentation": "<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p>"
+        },
+        "PermissionModel": {
+          "shape": "PermissionModels",
+          "documentation": "<p>Describes how the IAM roles required for stack set operations are created.</p> <ul> <li> <p>With <code>self-managed</code> permissions, you must create the administrator and execution roles required to deploy to target accounts. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html\">Grant Self-Managed Stack Set Permissions</a>.</p> </li> <li> <p>With <code>service-managed</code> permissions, StackSets automatically creates the IAM roles required to deploy to accounts managed by AWS Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html\">Grant Service-Managed Stack Set Permissions</a>.</p> </li> </ul>"
+        },
+        "OrganizationalUnitIds": {
+          "shape": "OrganizationalUnitIdList",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OUs) IDs to which stacks in your stack set have been deployed.</p>"
         }
       },
       "documentation": "<p>A structure that contains information about a stack set. A stack set enables you to provision stacks into AWS accounts and across regions by using a single CloudFormation template. In the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires. </p>"
@@ -4735,7 +4821,7 @@
         },
         "Status": {
           "shape": "StackSetOperationStatus",
-          "documentation": "<p>The status of the operation. </p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining regions.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>"
+          "documentation": "<p>The status of the operation. </p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining regions.</p> </li> <li> <p> <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that require a sequence of operations. The operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>"
         },
         "OperationPreferences": {
           "shape": "StackSetOperationPreferences",
@@ -4760,6 +4846,10 @@
         "EndTimestamp": {
           "shape": "Timestamp",
           "documentation": "<p>The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or region.</p>"
+        },
+        "DeploymentTargets": {
+          "shape": "DeploymentTargets",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts affected by the stack operation.</p>"
         },
         "StackSetDriftDetectionDetails": {
           "shape": "StackSetDriftDetectionDetails",
@@ -4824,7 +4914,7 @@
       "members": {
         "Account": {
           "shape": "Account",
-          "documentation": "<p>The name of the AWS account for this operation result.</p>"
+          "documentation": "<p>[Self-managed permissions] The name of the AWS account for this operation result.</p>"
         },
         "Region": {
           "shape": "Region",
@@ -4841,6 +4931,10 @@
         "AccountGateResult": {
           "shape": "AccountGateResult",
           "documentation": "<p>The results of the account gate function AWS CloudFormation invokes, if present, before proceeding with stack set operations in an account</p>"
+        },
+        "OrganizationalUnitId": {
+          "shape": "OrganizationalUnitId",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) ID for this operation result.</p>"
         }
       },
       "documentation": "<p>The structure that contains information about a specified operation's results for a given account in a given region.</p>"
@@ -4852,7 +4946,8 @@
         "SUCCEEDED",
         "FAILED",
         "STOPPING",
-        "STOPPED"
+        "STOPPED",
+        "QUEUED"
       ]
     },
     "StackSetOperationSummaries": {
@@ -4874,7 +4969,7 @@
         },
         "Status": {
           "shape": "StackSetOperationStatus",
-          "documentation": "<p>The overall status of the operation.</p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining regions.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>"
+          "documentation": "<p>The overall status of the operation.</p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining regions.</p> </li> <li> <p> <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that require a sequence of operations. The operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>"
         },
         "CreationTimestamp": {
           "shape": "Timestamp",
@@ -4918,6 +5013,14 @@
         "Status": {
           "shape": "StackSetStatus",
           "documentation": "<p>The status of the stack set.</p>"
+        },
+        "AutoDeployment": {
+          "shape": "AutoDeployment",
+          "documentation": "<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organizational unit (OU).</p>"
+        },
+        "PermissionModel": {
+          "shape": "PermissionModels",
+          "documentation": "<p>Describes how the IAM roles required for stack set operations are created.</p> <ul> <li> <p>With <code>self-managed</code> permissions, you must create the administrator and execution roles required to deploy to target accounts. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html\">Grant Self-Managed Stack Set Permissions</a>.</p> </li> <li> <p>With <code>service-managed</code> permissions, StackSets automatically creates the IAM roles required to deploy to accounts managed by AWS Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html\">Grant Service-Managed Stack Set Permissions</a>.</p> </li> </ul>"
         },
         "DriftStatus": {
           "shape": "StackDriftStatus",
@@ -5340,7 +5443,6 @@
       "type": "structure",
       "required": [
         "StackSetName",
-        "Accounts",
         "Regions"
       ],
       "members": {
@@ -5350,7 +5452,11 @@
         },
         "Accounts": {
           "shape": "AccountList",
-          "documentation": "<p>The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.</p>"
+          "documentation": "<p>[Self-managed permissions] The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+        },
+        "DeploymentTargets": {
+          "shape": "DeploymentTargets",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts for which you want to update parameter values for stack instances. If your update targets OUs, the overridden parameter values only apply to the accounts that are currently in the target OUs and their child OUs. Accounts added to the target OUs and their child OUs in the future won't use the overridden values.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
         },
         "Regions": {
           "shape": "RegionList",
@@ -5440,6 +5546,18 @@
           "shape": "ExecutionRoleName",
           "documentation": "<p>The name of the IAM execution role to use to update the stack set. If you do not specify an execution role, AWS CloudFormation uses the <code>AWSCloudFormationStackSetExecutionRole</code> role for the stack set operation.</p> <p>Specify an IAM role only if you are using customized execution roles to control which stack resources users and groups can include in their stack sets. </p> <p> If you specify a customized execution role, AWS CloudFormation uses that role to update the stack. If you do not specify a customized execution role, AWS CloudFormation performs the update using the role previously associated with the stack set, so long as you have permissions to perform operations on the stack set.</p>"
         },
+        "DeploymentTargets": {
+          "shape": "DeploymentTargets",
+          "documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts in which to update associated stack instances.</p> <p>To update all the stack instances associated with this stack set, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p> <p>If the stack set update includes changes to the template (that is, if <code>TemplateBody</code> or <code>TemplateURL</code> is specified), or the <code>Parameters</code>, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status.</p>"
+        },
+        "PermissionModel": {
+          "shape": "PermissionModels",
+          "documentation": "<p>Describes how the IAM roles required for stack set operations are created. You cannot modify <code>PermissionModel</code> if there are stack instances associated with your stack set.</p> <ul> <li> <p>With <code>self-managed</code> permissions, you must create the administrator and execution roles required to deploy to target accounts. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html\">Grant Self-Managed Stack Set Permissions</a>.</p> </li> <li> <p>With <code>service-managed</code> permissions, StackSets automatically creates the IAM roles required to deploy to accounts managed by AWS Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html\">Grant Service-Managed Stack Set Permissions</a>.</p> </li> </ul>"
+        },
+        "AutoDeployment": {
+          "shape": "AutoDeployment",
+          "documentation": "<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p> <p>If you specify <code>AutoDeployment</code>, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>"
+        },
         "OperationId": {
           "shape": "ClientRequestToken",
           "documentation": "<p>The unique ID for this stack set operation. </p> <p>The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You might retry stack set operation requests to ensure that AWS CloudFormation successfully received them.</p> <p>If you don't specify an operation ID, AWS CloudFormation generates one automatically.</p> <p>Repeating this stack set operation with a new operation ID retries all stack instances whose status is <code>OUTDATED</code>. </p>",
@@ -5447,7 +5565,7 @@
         },
         "Accounts": {
           "shape": "AccountList",
-          "documentation": "<p>The accounts in which to update associated stack instances. If you specify accounts, you must also specify the regions in which to update stack set instances.</p> <p>To update <i>all</i> the stack instances associated with this stack set, do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p> <p>If the stack set update includes changes to the template (that is, if the <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and regions, while leaving all other stack instances with their existing stack instance status. </p>"
+          "documentation": "<p>[Self-managed permissions] The accounts in which to update associated stack instances. If you specify accounts, you must also specify the regions in which to update stack set instances.</p> <p>To update <i>all</i> the stack instances associated with this stack set, do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p> <p>If the stack set update includes changes to the template (that is, if the <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and regions, while leaving all other stack instances with their existing stack instance status. </p>"
         },
         "Regions": {
           "shape": "RegionList",

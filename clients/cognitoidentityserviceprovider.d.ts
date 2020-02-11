@@ -1560,7 +1560,8 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type AuthEventsType = AuthEventType[];
   export type AuthFlowType = "USER_SRP_AUTH"|"REFRESH_TOKEN_AUTH"|"REFRESH_TOKEN"|"CUSTOM_AUTH"|"ADMIN_NO_SRP_AUTH"|"USER_PASSWORD_AUTH"|"ADMIN_USER_PASSWORD_AUTH"|string;
-  export type AuthParametersType = {[key: string]: StringType};
+  export type AuthParametersType = {[key: string]: AuthParametersValueType};
+  export type AuthParametersValueType = string;
   export interface AuthenticationResultType {
     /**
      * The access token.
@@ -1824,7 +1825,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ProviderType: IdentityProviderTypeType;
     /**
-     * The identity provider details, such as MetadataURL and MetadataFile.
+     * The identity provider details. The following list describes the provider detail keys for each identity provider type.   For Google, Facebook and Login with Amazon:   client_id   client_secret   authorize_scopes     For Sign in with Apple:   client_id   team_id   key_id   private_key   authorize_scopes     For OIDC providers:   client_id   client_secret   attributes_request_method   oidc_issuer   authorize_scopes   authorize_url if not available from discovery URL specified by oidc_issuer key    token_url if not available from discovery URL specified by oidc_issuer key    attributes_url if not available from discovery URL specified by oidc_issuer key    jwks_uri if not available from discovery URL specified by oidc_issuer key    authorize_scopes     For SAML providers:   MetadataFile OR MetadataURL   IDPSignOut optional     
      */
     ProviderDetails: ProviderDetailsType;
     /**
@@ -1932,15 +1933,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     DefaultRedirectURI?: RedirectUrlType;
     /**
-     * Set to code to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint. Set to token to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.
+     * The allowed OAuth flows. Set to code to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint. Set to implicit to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly. Set to client_credentials to specify that the client should get the access token (and, optionally, ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
      */
     AllowedOAuthFlows?: OAuthFlowsType;
     /**
-     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito". In addition to these values, custom scopes created in Resource Servers are also supported.
+     * The allowed OAuth scopes. Possible values provided by OAuth are: phone, email, openid, and profile. Possible values provided by AWS are: aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are also supported.
      */
     AllowedOAuthScopes?: ScopeListType;
     /**
-     * Set to True if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+     * Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      */
     AllowedOAuthFlowsUserPoolClient?: BooleanType;
     /**
@@ -1948,7 +1949,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AnalyticsConfiguration?: AnalyticsConfigurationType;
     /**
-     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the old behavior of Cognito where user existence related errors are not prevented.   This setting affects the behavior of following APIs:    AdminInitiateAuth     AdminRespondToAuthChallenge     InitiateAuth     RespondToAuthChallenge     ForgotPassword     ConfirmForgotPassword     ConfirmSignUp     ResendConfirmationCode     After January 1st 2020, the value of PreventUserExistenceErrors will default to ENABLED for newly created user pool clients if no value is provided. 
+     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the old behavior of Cognito where user existence related errors are not prevented.   This setting affects the behavior of following APIs:    AdminInitiateAuth     AdminRespondToAuthChallenge     InitiateAuth     RespondToAuthChallenge     ForgotPassword     ConfirmForgotPassword     ConfirmSignUp     ResendConfirmationCode     After February 15th 2020, the value of PreventUserExistenceErrors will default to ENABLED for newly created user pool clients if no value is provided. 
      */
     PreventUserExistenceErrors?: PreventUserExistenceErrorTypes;
   }
@@ -2055,6 +2056,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Used to enable advanced security risk detection. Set the key AdvancedSecurityMode to the value "AUDIT".
      */
     UserPoolAddOns?: UserPoolAddOnsType;
+    /**
+     * You can choose to set case sensitivity on the username input for the selected sign-in option. For example, when this is set to False, users will be able to sign in using either "username" or "Username". This configuration is immutable once it has been set. For more information, see .
+     */
+    UsernameConfiguration?: UsernameConfigurationType;
     /**
      * Use this setting to define which verified available method a user can use to recover their password when they call ForgotPassword. It allows you to define a preferred method when a user has more than one method available. With this setting, SMS does not qualify for a valid password recovery mechanism if the user also has SMS MFA enabled. In the absence of this setting, Cognito uses the legacy behavior to determine the recovery method where SMS is preferred over email.  Starting February 1, 2020, the value of AccountRecoverySetting will default to verified_email first and verified_phone_number as the second option for newly created user pools if no value is provided. 
      */
@@ -2696,7 +2701,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ProviderType?: IdentityProviderTypeType;
     /**
-     * The identity provider details, such as MetadataURL and MetadataFile.
+     * The identity provider details. The following list describes the provider detail keys for each identity provider type.   For Google, Facebook and Login with Amazon:   client_id   client_secret   authorize_scopes     For Sign in with Apple:   client_id   team_id   key_id   private_key   authorize_scopes     For OIDC providers:   client_id   client_secret   attributes_request_method   oidc_issuer   authorize_scopes   authorize_url if not available from discovery URL specified by oidc_issuer key    token_url if not available from discovery URL specified by oidc_issuer key    attributes_url if not available from discovery URL specified by oidc_issuer key    jwks_uri if not available from discovery URL specified by oidc_issuer key    authorize_scopes     For SAML providers:   MetadataFile OR MetadataURL   IDPSignOut optional     
      */
     ProviderDetails?: ProviderDetailsType;
     /**
@@ -3398,7 +3403,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AttributeDataType?: AttributeDataType;
     /**
-     * Specifies whether the attribute type is developer only.
+     *  We recommend that you use WriteAttributes in the user pool client to control how attributes can be mutated for new use cases instead of using DeveloperOnlyAttribute.  Specifies whether the attribute type is developer only. This attribute can only be modified by an administrator. Users will not be able to modify this attribute using their access token. For example, DeveloperOnlyAttribute can be modified using the API but cannot be updated using the API.
      */
     DeveloperOnlyAttribute?: BooleanType;
     /**
@@ -3918,15 +3923,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     DefaultRedirectURI?: RedirectUrlType;
     /**
-     * Set to code to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint.
+     * The allowed OAuth flows. Set to code to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint. Set to implicit to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly. Set to client_credentials to specify that the client should get the access token (and, optionally, ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
      */
     AllowedOAuthFlows?: OAuthFlowsType;
     /**
-     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito". In addition to these values, custom scopes created in Resource Servers are also supported.
+     * The allowed OAuth scopes. Possible values provided by OAuth are: phone, email, openid, and profile. Possible values provided by AWS are: aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are also supported.
      */
     AllowedOAuthScopes?: ScopeListType;
     /**
-     * Set to TRUE if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+     * Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      */
     AllowedOAuthFlowsUserPoolClient?: BooleanType;
     /**
@@ -3934,7 +3939,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AnalyticsConfiguration?: AnalyticsConfigurationType;
     /**
-     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the old behavior of Cognito where user existence related errors are not prevented.   This setting affects the behavior of following APIs:    AdminInitiateAuth     AdminRespondToAuthChallenge     InitiateAuth     RespondToAuthChallenge     ForgotPassword     ConfirmForgotPassword     ConfirmSignUp     ResendConfirmationCode     After January 1st 2020, the value of PreventUserExistenceErrors will default to ENABLED for newly created user pool clients if no value is provided. 
+     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the old behavior of Cognito where user existence related errors are not prevented.   This setting affects the behavior of following APIs:    AdminInitiateAuth     AdminRespondToAuthChallenge     InitiateAuth     RespondToAuthChallenge     ForgotPassword     ConfirmForgotPassword     ConfirmSignUp     ResendConfirmationCode     After February 15th 2020, the value of PreventUserExistenceErrors will default to ENABLED for newly created user pool clients if no value is provided. 
      */
     PreventUserExistenceErrors?: PreventUserExistenceErrorTypes;
   }
@@ -4181,15 +4186,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     DefaultRedirectURI?: RedirectUrlType;
     /**
-     * Set to code to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint. Set to token to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly.
+     * The allowed OAuth flows. Set to code to initiate a code grant flow, which provides an authorization code as the response. This code can be exchanged for access tokens with the token endpoint. Set to implicit to specify that the client should get the access token (and, optionally, ID token, based on scopes) directly. Set to client_credentials to specify that the client should get the access token (and, optionally, ID token, based on scopes) from the token endpoint using a combination of client and client_secret.
      */
     AllowedOAuthFlows?: OAuthFlowsType;
     /**
-     * A list of allowed OAuth scopes. Currently supported values are "phone", "email", "openid", and "Cognito". In addition to these values, custom scopes created in Resource Servers are also supported.
+     * The allowed OAuth scopes. Possible values provided by OAuth are: phone, email, openid, and profile. Possible values provided by AWS are: aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are also supported.
      */
     AllowedOAuthScopes?: ScopeListType;
     /**
-     * Set to TRUE if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+     * Set to true if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      */
     AllowedOAuthFlowsUserPoolClient?: BooleanType;
     /**
@@ -4197,7 +4202,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AnalyticsConfiguration?: AnalyticsConfigurationType;
     /**
-     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the old behavior of Cognito where user existence related errors are not prevented.   This setting affects the behavior of following APIs:    AdminInitiateAuth     AdminRespondToAuthChallenge     InitiateAuth     RespondToAuthChallenge     ForgotPassword     ConfirmForgotPassword     ConfirmSignUp     ResendConfirmationCode     After January 1st 2020, the value of PreventUserExistenceErrors will default to ENABLED for newly created user pool clients if no value is provided. 
+     * Use this setting to choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the old behavior of Cognito where user existence related errors are not prevented.   This setting affects the behavior of following APIs:    AdminInitiateAuth     AdminRespondToAuthChallenge     InitiateAuth     RespondToAuthChallenge     ForgotPassword     ConfirmForgotPassword     ConfirmSignUp     ResendConfirmationCode     After February 15th 2020, the value of PreventUserExistenceErrors will default to ENABLED for newly created user pool clients if no value is provided. 
      */
     PreventUserExistenceErrors?: PreventUserExistenceErrorTypes;
   }
@@ -4353,6 +4358,10 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolAddOns?: UserPoolAddOnsType;
     /**
+     * You can choose to enable case sensitivity on the username input for the selected sign-in option. For example, when this is set to False, users will be able to sign in using either "username" or "Username". This configuration is immutable once it has been set. For more information, see .
+     */
+    UsernameConfiguration?: UsernameConfigurationType;
+    /**
      * The Amazon Resource Name (ARN) for the user pool.
      */
     Arn?: ArnType;
@@ -4394,6 +4403,12 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type UsernameAttributeType = "phone_number"|"email"|string;
   export type UsernameAttributesListType = UsernameAttributeType[];
+  export interface UsernameConfigurationType {
+    /**
+     * Specifies whether username case sensitivity will be applied for all users in the user pool through Cognito APIs. Valid values include:     True : Enables case sensitivity for all username input. When this option is set to True, users must sign in using the exact capitalization of their given username. For example, “UserName”. This is the default value.     False : Enables case insensitivity for all username input. For example, when this option is set to False, users will be able to sign in using either "username" or "Username". This option also enables both preferred_username and email alias to be case insensitive, in addition to the username attribute.  
+     */
+    CaseSensitive: WrappedBooleanType;
+  }
   export type UsernameType = string;
   export type UsersListType = UserType[];
   export interface VerificationMessageTemplateType {
@@ -4469,6 +4484,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface VerifyUserAttributeResponse {
   }
+  export type WrappedBooleanType = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -45,11 +45,11 @@ declare class CloudFormation extends Service {
    */
   createStack(callback?: (err: AWSError, data: CloudFormation.Types.CreateStackOutput) => void): Request<CloudFormation.Types.CreateStackOutput, AWSError>;
   /**
-   * Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. Accounts and Regions are required parameters—you must specify at least one account and one region. 
+   * Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. You must specify at least one value for either Accounts or DeploymentTargets, and you must specify at least one value for Regions.
    */
   createStackInstances(params: CloudFormation.Types.CreateStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.CreateStackInstancesOutput) => void): Request<CloudFormation.Types.CreateStackInstancesOutput, AWSError>;
   /**
-   * Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. Accounts and Regions are required parameters—you must specify at least one account and one region. 
+   * Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. You must specify at least one value for either Accounts or DeploymentTargets, and you must specify at least one value for Regions.
    */
   createStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.CreateStackInstancesOutput) => void): Request<CloudFormation.Types.CreateStackInstancesOutput, AWSError>;
   /**
@@ -341,11 +341,11 @@ declare class CloudFormation extends Service {
    */
   listStacks(callback?: (err: AWSError, data: CloudFormation.Types.ListStacksOutput) => void): Request<CloudFormation.Types.ListStacksOutput, AWSError>;
   /**
-   * Returns a list of registration tokens for the specified type.
+   * Returns a list of registration tokens for the specified type(s).
    */
   listTypeRegistrations(params: CloudFormation.Types.ListTypeRegistrationsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListTypeRegistrationsOutput) => void): Request<CloudFormation.Types.ListTypeRegistrationsOutput, AWSError>;
   /**
-   * Returns a list of registration tokens for the specified type.
+   * Returns a list of registration tokens for the specified type(s).
    */
   listTypeRegistrations(callback?: (err: AWSError, data: CloudFormation.Types.ListTypeRegistrationsOutput) => void): Request<CloudFormation.Types.ListTypeRegistrationsOutput, AWSError>;
   /**
@@ -538,6 +538,17 @@ declare namespace CloudFormation {
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
   export type Arn = string;
+  export interface AutoDeployment {
+    /**
+     * If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.
+     */
+    Enabled?: AutoDeploymentNullable;
+    /**
+     * If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.
+     */
+    RetainStacksOnAccountRemoval?: RetainStacksOnAccountRemovalNullable;
+  }
+  export type AutoDeploymentNullable = boolean;
   export type BoxedInteger = number;
   export type BoxedMaxResults = number;
   export interface CancelUpdateStackInput {
@@ -787,9 +798,13 @@ declare namespace CloudFormation {
      */
     StackSetName: StackSetName;
     /**
-     * The names of one or more AWS accounts that you want to create stack instances in the specified region(s) for.
+     * [Self-managed permissions] The names of one or more AWS accounts that you want to create stack instances in the specified region(s) for. You can specify Accounts or DeploymentTargets, but not both.
      */
-    Accounts: AccountList;
+    Accounts?: AccountList;
+    /**
+     * [Service-managed permissions] The AWS Organizations accounts for which to create stack instances in the specified Regions. You can specify Accounts or DeploymentTargets, but not both.
+     */
+    DeploymentTargets?: DeploymentTargets;
     /**
      * The names of one or more regions where you want to create stack instances using the specified AWS account(s). 
      */
@@ -857,6 +872,14 @@ declare namespace CloudFormation {
      */
     ExecutionRoleName?: ExecutionRoleName;
     /**
+     * Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.   With self-managed permissions, you must create the administrator and execution roles required to deploy to target accounts. For more information, see Grant Self-Managed Stack Set Permissions.   With service-managed permissions, StackSets automatically creates the IAM roles required to deploy to accounts managed by AWS Organizations. For more information, see Grant Service-Managed Stack Set Permissions.  
+     */
+    PermissionModel?: PermissionModels;
+    /**
+     * Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED. If you specify AutoDeployment, do not specify DeploymentTargets or Regions.
+     */
+    AutoDeployment?: AutoDeployment;
+    /**
      * A unique identifier for this CreateStackSet request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to create another stack set with the same name. You might retry CreateStackSet requests to ensure that AWS CloudFormation successfully received them. If you don't specify an operation ID, the SDK generates one automatically. 
      */
     ClientRequestToken?: ClientRequestToken;
@@ -904,9 +927,13 @@ declare namespace CloudFormation {
      */
     StackSetName: StackSetName;
     /**
-     * The names of the AWS accounts that you want to delete stack instances for.
+     * [Self-managed permissions] The names of the AWS accounts that you want to delete stack instances for. You can specify Accounts or DeploymentTargets, but not both.
      */
-    Accounts: AccountList;
+    Accounts?: AccountList;
+    /**
+     * [Service-managed permissions] The AWS Organizations accounts from which to delete stack instances. You can specify Accounts or DeploymentTargets, but not both.
+     */
+    DeploymentTargets?: DeploymentTargets;
     /**
      * The regions where you want to delete stack set instances. 
      */
@@ -939,18 +966,28 @@ declare namespace CloudFormation {
   export interface DeleteStackSetOutput {
   }
   export type DeletionTime = Date;
+  export interface DeploymentTargets {
+    /**
+     * The names of one or more AWS accounts for which you want to deploy stack set updates.
+     */
+    Accounts?: AccountList;
+    /**
+     * The organization root ID or organizational unit (OUs) IDs to which StackSets deploys.
+     */
+    OrganizationalUnitIds?: OrganizationalUnitIdList;
+  }
   export type DeprecatedStatus = "LIVE"|"DEPRECATED"|string;
   export interface DeregisterTypeInput {
     /**
-     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify TypeName or Arn.
+     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Arn?: PrivateTypeArn;
     /**
-     * The kind of type. Currently the only valid value is RESOURCE.
+     * The kind of type. Currently the only valid value is RESOURCE. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Type?: RegistryType;
     /**
-     * The name of the type. Conditional: You must specify TypeName or Arn.
+     * The name of the type. Conditional: You must specify either TypeName and Type, or Arn.
      */
     TypeName?: TypeName;
     /**
@@ -1246,15 +1283,15 @@ declare namespace CloudFormation {
   }
   export interface DescribeTypeInput {
     /**
-     * The kind of type.  Currently the only valid value is RESOURCE.
+     * The kind of type.  Currently the only valid value is RESOURCE. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Type?: RegistryType;
     /**
-     * The name of the type. Conditional: You must specify TypeName or Arn.
+     * The name of the type. Conditional: You must specify either TypeName and Type, or Arn.
      */
     TypeName?: TypeName;
     /**
-     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify TypeName or Arn.
+     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Arn?: TypeArn;
     /**
@@ -1768,19 +1805,19 @@ declare namespace CloudFormation {
   }
   export interface ListTypeRegistrationsInput {
     /**
-     * The kind of type. Currently the only valid value is RESOURCE.
+     * The kind of type. Currently the only valid value is RESOURCE. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Type?: RegistryType;
     /**
-     * The name of the type. Conditional: You must specify TypeName or Arn.
+     * The name of the type. Conditional: You must specify either TypeName and Type, or Arn.
      */
     TypeName?: TypeName;
     /**
-     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify TypeName or Arn.
+     * The Amazon Resource Name (ARN) of the type. Conditional: You must specify either TypeName and Type, or Arn.
      */
     TypeArn?: TypeArn;
     /**
-     * The current status of the type registration request.
+     * The current status of the type registration request. The default is IN_PROGRESS.
      */
     RegistrationStatusFilter?: RegistrationStatus;
     /**
@@ -1804,15 +1841,15 @@ declare namespace CloudFormation {
   }
   export interface ListTypeVersionsInput {
     /**
-     * The kind of the type. Currently the only valid value is RESOURCE.
+     * The kind of the type. Currently the only valid value is RESOURCE. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Type?: RegistryType;
     /**
-     * The name of the type for which you want version summary information. Conditional: You must specify TypeName or Arn.
+     * The name of the type for which you want version summary information. Conditional: You must specify either TypeName and Type, or Arn.
      */
     TypeName?: TypeName;
     /**
-     * The Amazon Resource Name (ARN) of the type for which you want version summary information. Conditional: You must specify TypeName or Arn.
+     * The Amazon Resource Name (ARN) of the type for which you want version summary information. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Arn?: PrivateTypeArn;
     /**
@@ -1824,7 +1861,7 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
     /**
-     * The deprecation status of the type versions that you want to get summary information about. Valid values include:    LIVE: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.    DEPRECATED: The type version has been deregistered and can no longer be used in CloudFormation operations.   
+     * The deprecation status of the type versions that you want to get summary information about. Valid values include:    LIVE: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.    DEPRECATED: The type version has been deregistered and can no longer be used in CloudFormation operations.    The default is LIVE.
      */
     DeprecatedStatus?: DeprecatedStatus;
   }
@@ -1840,7 +1877,7 @@ declare namespace CloudFormation {
   }
   export interface ListTypesInput {
     /**
-     * The scope at which the type is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as PRIVATE.    PUBLIC: The type is publically visible and usable within any Amazon account.  
+     * The scope at which the type is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as PRIVATE.    PUBLIC: The type is publically visible and usable within any Amazon account.   The default is PRIVATE.
      */
     Visibility?: Visibility;
     /**
@@ -1895,6 +1932,8 @@ declare namespace CloudFormation {
   export type OnFailure = "DO_NOTHING"|"ROLLBACK"|"DELETE"|string;
   export type OperationStatus = "PENDING"|"IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
   export type OptionalSecureUrl = string;
+  export type OrganizationalUnitId = string;
+  export type OrganizationalUnitIdList = OrganizationalUnitId[];
   export interface Output {
     /**
      * The key associated with the output.
@@ -1971,6 +2010,7 @@ declare namespace CloudFormation {
   export type ParameterType = string;
   export type ParameterValue = string;
   export type Parameters = Parameter[];
+  export type PermissionModels = "SERVICE_MANAGED"|"SELF_MANAGED"|string;
   export type PhysicalResourceId = string;
   export type PhysicalResourceIdContext = PhysicalResourceIdContextKeyValuePair[];
   export interface PhysicalResourceIdContextKeyValuePair {
@@ -2053,7 +2093,7 @@ declare namespace CloudFormation {
      */
     TypeName: TypeName;
     /**
-     * A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register. For information on generating a schema handler package for the type you want to register, see submit in the CloudFormation CLI User Guide.
+     * A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register. For information on generating a schema handler package for the type you want to register, see submit in the CloudFormation CLI User Guide.  As part of registering a resource provider type, CloudFormation must be able to access the S3 bucket which contains the schema handler package for that resource provider. For more information, see IAM Permissions for Registering a Resource Provider in the AWS CloudFormation User Guide. 
      */
     SchemaHandlerPackage: S3Url;
     /**
@@ -2193,6 +2233,7 @@ declare namespace CloudFormation {
   export type RetainResources = LogicalResourceId[];
   export type RetainStacks = boolean;
   export type RetainStacksNullable = boolean;
+  export type RetainStacksOnAccountRemovalNullable = boolean;
   export type RoleARN = string;
   export type RoleArn = string;
   export interface RollbackConfiguration {
@@ -2234,15 +2275,15 @@ declare namespace CloudFormation {
   }
   export interface SetTypeDefaultVersionInput {
     /**
-     * The Amazon Resource Name (ARN) of the type for which you want version summary information. Conditional: You must specify TypeName or Arn.
+     * The Amazon Resource Name (ARN) of the type for which you want version summary information. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Arn?: PrivateTypeArn;
     /**
-     * The kind of type.
+     * The kind of type. Conditional: You must specify either TypeName and Type, or Arn.
      */
     Type?: RegistryType;
     /**
-     * The name of the type. Conditional: You must specify TypeName or Arn.
+     * The name of the type. Conditional: You must specify either TypeName and Type, or Arn.
      */
     TypeName?: TypeName;
     /**
@@ -2442,7 +2483,7 @@ declare namespace CloudFormation {
      */
     Region?: Region;
     /**
-     * The name of the AWS account that the stack instance is associated with.
+     * [Self-managed permissions] The name of the AWS account that the stack instance is associated with.
      */
     Account?: Account;
     /**
@@ -2461,6 +2502,10 @@ declare namespace CloudFormation {
      * The explanation for the specific status code that is assigned to this stack instance.
      */
     StatusReason?: Reason;
+    /**
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) ID that the stack instance is associated with.
+     */
+    OrganizationalUnitId?: OrganizationalUnitId;
     /**
      * Status of the stack instance's actual configuration compared to the expected template and parameter configuration of the stack set to which it belongs.     DRIFTED: The stack differs from the expected template and parameter configuration of the stack set to which it belongs. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.    NOT_CHECKED: AWS CloudFormation has not checked if the stack instance differs from its expected stack set configuration.    IN_SYNC: The stack instance's actual configuration matches its expected stack set configuration.    UNKNOWN: This value is reserved for future use.  
      */
@@ -2482,7 +2527,7 @@ declare namespace CloudFormation {
      */
     Region?: Region;
     /**
-     * The name of the AWS account that the stack instance is associated with.
+     * [Self-managed permissions] The name of the AWS account that the stack instance is associated with.
      */
     Account?: Account;
     /**
@@ -2497,6 +2542,10 @@ declare namespace CloudFormation {
      * The explanation for the specific status code assigned to this stack instance.
      */
     StatusReason?: Reason;
+    /**
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) ID that the stack instance is associated with.
+     */
+    OrganizationalUnitId?: OrganizationalUnitId;
     /**
      * Status of the stack instance's actual configuration compared to the expected template and parameter configuration of the stack set to which it belongs.     DRIFTED: The stack differs from the expected template and parameter configuration of the stack set to which it belongs. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.    NOT_CHECKED: AWS CloudFormation has not checked if the stack instance differs from its expected stack set configuration.    IN_SYNC: The stack instance's actual configuration matches its expected stack set configuration.    UNKNOWN: This value is reserved for future use.  
      */
@@ -2746,6 +2795,18 @@ declare namespace CloudFormation {
      * Detailed information about the drift status of the stack set. For stack sets, contains information about the last completed drift operation performed on the stack set. Information about drift operations currently in progress is not included.
      */
     StackSetDriftDetectionDetails?: StackSetDriftDetectionDetails;
+    /**
+     * [Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).
+     */
+    AutoDeployment?: AutoDeployment;
+    /**
+     * Describes how the IAM roles required for stack set operations are created.   With self-managed permissions, you must create the administrator and execution roles required to deploy to target accounts. For more information, see Grant Self-Managed Stack Set Permissions.   With service-managed permissions, StackSets automatically creates the IAM roles required to deploy to accounts managed by AWS Organizations. For more information, see Grant Service-Managed Stack Set Permissions.  
+     */
+    PermissionModel?: PermissionModels;
+    /**
+     * [Service-managed permissions] The organization root ID or organizational unit (OUs) IDs to which stacks in your stack set have been deployed.
+     */
+    OrganizationalUnitIds?: OrganizationalUnitIdList;
   }
   export type StackSetARN = string;
   export interface StackSetDriftDetectionDetails {
@@ -2801,7 +2862,7 @@ declare namespace CloudFormation {
      */
     Action?: StackSetOperationAction;
     /**
-     * The status of the operation.     FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining regions.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
+     * The status of the operation.     FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining regions.    QUEUED: [Service-managed permissions] For automatic deployments that require a sequence of operations. The operation is queued to be performed. For more information, see the stack set operation status codes in the AWS CloudFormation User Guide.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
      */
     Status?: StackSetOperationStatus;
     /**
@@ -2828,6 +2889,10 @@ declare namespace CloudFormation {
      * The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or region.
      */
     EndTimestamp?: Timestamp;
+    /**
+     * [Service-managed permissions] The AWS Organizations accounts affected by the stack operation.
+     */
+    DeploymentTargets?: DeploymentTargets;
     /**
      * Detailed information about the drift status of the stack set. This includes information about drift operations currently being performed on the stack set. this information will only be present for stack set operations whose Action type is DETECT_DRIFT. For more information, see Detecting Unmanaged Changes in Stack Sets in the AWS CloudFormation User Guide.
      */
@@ -2860,7 +2925,7 @@ declare namespace CloudFormation {
   export type StackSetOperationResultSummaries = StackSetOperationResultSummary[];
   export interface StackSetOperationResultSummary {
     /**
-     * The name of the AWS account for this operation result.
+     * [Self-managed permissions] The name of the AWS account for this operation result.
      */
     Account?: Account;
     /**
@@ -2879,8 +2944,12 @@ declare namespace CloudFormation {
      * The results of the account gate function AWS CloudFormation invokes, if present, before proceeding with stack set operations in an account
      */
     AccountGateResult?: AccountGateResult;
+    /**
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) ID for this operation result.
+     */
+    OrganizationalUnitId?: OrganizationalUnitId;
   }
-  export type StackSetOperationStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"STOPPING"|"STOPPED"|string;
+  export type StackSetOperationStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"STOPPING"|"STOPPED"|"QUEUED"|string;
   export type StackSetOperationSummaries = StackSetOperationSummary[];
   export interface StackSetOperationSummary {
     /**
@@ -2892,7 +2961,7 @@ declare namespace CloudFormation {
      */
     Action?: StackSetOperationAction;
     /**
-     * The overall status of the operation.    FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining regions.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
+     * The overall status of the operation.    FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining regions.    QUEUED: [Service-managed permissions] For automatic deployments that require a sequence of operations. The operation is queued to be performed. For more information, see the stack set operation status codes in the AWS CloudFormation User Guide.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
      */
     Status?: StackSetOperationStatus;
     /**
@@ -2923,6 +2992,14 @@ declare namespace CloudFormation {
      * The status of the stack set.
      */
     Status?: StackSetStatus;
+    /**
+     * [Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organizational unit (OU).
+     */
+    AutoDeployment?: AutoDeployment;
+    /**
+     * Describes how the IAM roles required for stack set operations are created.   With self-managed permissions, you must create the administrator and execution roles required to deploy to target accounts. For more information, see Grant Self-Managed Stack Set Permissions.   With service-managed permissions, StackSets automatically creates the IAM roles required to deploy to accounts managed by AWS Organizations. For more information, see Grant Service-Managed Stack Set Permissions.  
+     */
+    PermissionModel?: PermissionModels;
     /**
      * Status of the stack set's actual configuration compared to its expected template and parameter configuration. A stack set is considered to have drifted if one or more of its stack instances have drifted from their expected template and parameter configuration.    DRIFTED: One or more of the stack instances belonging to the stack set stack differs from the expected template and parameter configuration. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.    NOT_CHECKED: AWS CloudFormation has not checked the stack set for drift.    IN_SYNC: All of the stack instances belonging to the stack set stack match from the expected template and parameter configuration.    UNKNOWN: This value is reserved for future use.  
      */
@@ -3169,9 +3246,13 @@ declare namespace CloudFormation {
      */
     StackSetName: StackSetNameOrId;
     /**
-     * The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.
+     * [Self-managed permissions] The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions. You can specify Accounts or DeploymentTargets, but not both.
      */
-    Accounts: AccountList;
+    Accounts?: AccountList;
+    /**
+     * [Service-managed permissions] The AWS Organizations accounts for which you want to update parameter values for stack instances. If your update targets OUs, the overridden parameter values only apply to the accounts that are currently in the target OUs and their child OUs. Accounts added to the target OUs and their child OUs in the future won't use the overridden values. You can specify Accounts or DeploymentTargets, but not both.
+     */
+    DeploymentTargets?: DeploymentTargets;
     /**
      * The names of one or more regions in which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.
      */
@@ -3247,11 +3328,23 @@ declare namespace CloudFormation {
      */
     ExecutionRoleName?: ExecutionRoleName;
     /**
+     * [Service-managed permissions] The AWS Organizations accounts in which to update associated stack instances. To update all the stack instances associated with this stack set, do not specify DeploymentTargets or Regions. If the stack set update includes changes to the template (that is, if TemplateBody or TemplateURL is specified), or the Parameters, AWS CloudFormation marks all stack instances with a status of OUTDATED prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status.
+     */
+    DeploymentTargets?: DeploymentTargets;
+    /**
+     * Describes how the IAM roles required for stack set operations are created. You cannot modify PermissionModel if there are stack instances associated with your stack set.   With self-managed permissions, you must create the administrator and execution roles required to deploy to target accounts. For more information, see Grant Self-Managed Stack Set Permissions.   With service-managed permissions, StackSets automatically creates the IAM roles required to deploy to accounts managed by AWS Organizations. For more information, see Grant Service-Managed Stack Set Permissions.  
+     */
+    PermissionModel?: PermissionModels;
+    /**
+     * [Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU). If you specify AutoDeployment, do not specify DeploymentTargets or Regions.
+     */
+    AutoDeployment?: AutoDeployment;
+    /**
      * The unique ID for this stack set operation.  The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You might retry stack set operation requests to ensure that AWS CloudFormation successfully received them. If you don't specify an operation ID, AWS CloudFormation generates one automatically. Repeating this stack set operation with a new operation ID retries all stack instances whose status is OUTDATED. 
      */
     OperationId?: ClientRequestToken;
     /**
-     * The accounts in which to update associated stack instances. If you specify accounts, you must also specify the regions in which to update stack set instances. To update all the stack instances associated with this stack set, do not specify the Accounts or Regions properties. If the stack set update includes changes to the template (that is, if the TemplateBody or TemplateURL properties are specified), or the Parameters property, AWS CloudFormation marks all stack instances with a status of OUTDATED prior to updating the stack instances in the specified accounts and regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and regions, while leaving all other stack instances with their existing stack instance status. 
+     * [Self-managed permissions] The accounts in which to update associated stack instances. If you specify accounts, you must also specify the regions in which to update stack set instances. To update all the stack instances associated with this stack set, do not specify the Accounts or Regions properties. If the stack set update includes changes to the template (that is, if the TemplateBody or TemplateURL properties are specified), or the Parameters property, AWS CloudFormation marks all stack instances with a status of OUTDATED prior to updating the stack instances in the specified accounts and regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and regions, while leaving all other stack instances with their existing stack instance status. 
      */
     Accounts?: AccountList;
     /**
