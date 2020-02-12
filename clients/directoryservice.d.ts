@@ -582,6 +582,10 @@ declare namespace DirectoryService {
      * The state of the certificate.
      */
     State?: CertificateState;
+    /**
+     * The date and time when the certificate will expire.
+     */
+    ExpiryDateTime?: CertificateExpiryDateTime;
   }
   export type CertificateRegisteredDateTime = Date;
   export type CertificateState = "Registering"|"Registered"|"RegisterFailed"|"Deregistering"|"Deregistered"|"DeregisterFailed"|string;
@@ -1054,7 +1058,7 @@ declare namespace DirectoryService {
      */
     DirectoryId: DirectoryId;
     /**
-     * The type of LDAP security the customer wants to enable, either server or client. Currently supports only Client, (the default).
+     * The type of LDAP security to enable. Currently only the value Client is supported.
      */
     Type?: LDAPSType;
     /**
@@ -1385,7 +1389,7 @@ declare namespace DirectoryService {
      */
     DirectoryId: DirectoryId;
     /**
-     * The type of LDAP security that the customer wants to enable. The security can be either server or client, but currently only the default Client is supported.
+     * The type of LDAP security to enable. Currently only the value Client is supported.
      */
     Type: LDAPSType;
   }
@@ -1469,7 +1473,7 @@ declare namespace DirectoryService {
      */
     DirectoryId: DirectoryId;
     /**
-     * The type of LDAP security the customer wants to enable. The security can be either server or client, but currently only the default Client is supported.
+     * The type of LDAP security to enable. Currently only the value Client is supported.
      */
     Type: LDAPSType;
   }

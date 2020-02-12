@@ -52,11 +52,11 @@ declare class Chime extends Service {
    */
   batchCreateAttendee(callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
-   * Adds up to 50 members to a chat room. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+   * Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   batchCreateRoomMembership(params: Chime.Types.BatchCreateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateRoomMembershipResponse) => void): Request<Chime.Types.BatchCreateRoomMembershipResponse, AWSError>;
   /**
-   * Adds up to 50 members to a chat room. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+   * Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   batchCreateRoomMembership(callback?: (err: AWSError, data: Chime.Types.BatchCreateRoomMembershipResponse) => void): Request<Chime.Types.BatchCreateRoomMembershipResponse, AWSError>;
   /**
@@ -140,19 +140,19 @@ declare class Chime extends Service {
    */
   createPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
-   * Creates a chat room for the specified Amazon Chime account.
+   * Creates a chat room for the specified Amazon Chime Enterprise account.
    */
   createRoom(params: Chime.Types.CreateRoomRequest, callback?: (err: AWSError, data: Chime.Types.CreateRoomResponse) => void): Request<Chime.Types.CreateRoomResponse, AWSError>;
   /**
-   * Creates a chat room for the specified Amazon Chime account.
+   * Creates a chat room for the specified Amazon Chime Enterprise account.
    */
   createRoom(callback?: (err: AWSError, data: Chime.Types.CreateRoomResponse) => void): Request<Chime.Types.CreateRoomResponse, AWSError>;
   /**
-   * Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
+   * Adds a member to a chat room in an Amazon Chime Enterprise account. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   createRoomMembership(params: Chime.Types.CreateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.CreateRoomMembershipResponse) => void): Request<Chime.Types.CreateRoomMembershipResponse, AWSError>;
   /**
-   * Adds a member to a chat room. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
+   * Adds a member to a chat room in an Amazon Chime Enterprise account. A member can be either a user or a bot. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   createRoomMembership(callback?: (err: AWSError, data: Chime.Types.CreateRoomMembershipResponse) => void): Request<Chime.Types.CreateRoomMembershipResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class Chime extends Service {
    */
   createVoiceConnector(callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorResponse) => void): Request<Chime.Types.CreateVoiceConnectorResponse, AWSError>;
   /**
-   * Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate up to three existing Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including VoiceConnectorItems in the request. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.
+   * Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including VoiceConnectorItems in the request. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.
    */
   createVoiceConnectorGroup(params: Chime.Types.CreateVoiceConnectorGroupRequest, callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorGroupResponse) => void): Request<Chime.Types.CreateVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate up to three existing Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including VoiceConnectorItems in the request. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.
+   * Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including VoiceConnectorItems in the request. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.
    */
   createVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorGroupResponse) => void): Request<Chime.Types.CreateVoiceConnectorGroupResponse, AWSError>;
   /**
@@ -220,19 +220,19 @@ declare class Chime extends Service {
    */
   deletePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a chat room.
+   * Deletes a chat room in an Amazon Chime Enterprise account.
    */
   deleteRoom(params: Chime.Types.DeleteRoomRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a chat room.
+   * Deletes a chat room in an Amazon Chime Enterprise account.
    */
   deleteRoom(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a member from a chat room.
+   * Removes a member from a chat room in an Amazon Chime Enterprise account.
    */
   deleteRoomMembership(params: Chime.Types.DeleteRoomMembershipRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a member from a chat room.
+   * Removes a member from a chat room in an Amazon Chime Enterprise account.
    */
   deleteRoomMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -388,11 +388,11 @@ declare class Chime extends Service {
    */
   getPhoneNumberSettings(callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberSettingsResponse) => void): Request<Chime.Types.GetPhoneNumberSettingsResponse, AWSError>;
   /**
-   * Retrieves room details, such as the room name.
+   * Retrieves room details, such as the room name, for a room in an Amazon Chime Enterprise account.
    */
   getRoom(params: Chime.Types.GetRoomRequest, callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
   /**
-   * Retrieves room details, such as the room name.
+   * Retrieves room details, such as the room name, for a room in an Amazon Chime Enterprise account.
    */
   getRoom(callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
   /**
@@ -524,19 +524,19 @@ declare class Chime extends Service {
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Chime.Types.ListPhoneNumbersResponse) => void): Request<Chime.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Lists the membership details for the specified room, such as the members' IDs, email addresses, and names.
+   * Lists the membership details for the specified room in an Amazon Chime Enterprise account, such as the members' IDs, email addresses, and names.
    */
   listRoomMemberships(params: Chime.Types.ListRoomMembershipsRequest, callback?: (err: AWSError, data: Chime.Types.ListRoomMembershipsResponse) => void): Request<Chime.Types.ListRoomMembershipsResponse, AWSError>;
   /**
-   * Lists the membership details for the specified room, such as the members' IDs, email addresses, and names.
+   * Lists the membership details for the specified room in an Amazon Chime Enterprise account, such as the members' IDs, email addresses, and names.
    */
   listRoomMemberships(callback?: (err: AWSError, data: Chime.Types.ListRoomMembershipsResponse) => void): Request<Chime.Types.ListRoomMembershipsResponse, AWSError>;
   /**
-   * Lists the room details for the specified Amazon Chime account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.
+   * Lists the room details for the specified Amazon Chime Enterprise account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.
    */
   listRooms(params: Chime.Types.ListRoomsRequest, callback?: (err: AWSError, data: Chime.Types.ListRoomsResponse) => void): Request<Chime.Types.ListRoomsResponse, AWSError>;
   /**
-   * Lists the room details for the specified Amazon Chime account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.
+   * Lists the room details for the specified Amazon Chime Enterprise account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.
    */
   listRooms(callback?: (err: AWSError, data: Chime.Types.ListRoomsResponse) => void): Request<Chime.Types.ListRoomsResponse, AWSError>;
   /**
@@ -708,19 +708,19 @@ declare class Chime extends Service {
    */
   updatePhoneNumberSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates room details, such as the room name.
+   * Updates room details, such as the room name, for a room in an Amazon Chime Enterprise account.
    */
   updateRoom(params: Chime.Types.UpdateRoomRequest, callback?: (err: AWSError, data: Chime.Types.UpdateRoomResponse) => void): Request<Chime.Types.UpdateRoomResponse, AWSError>;
   /**
-   * Updates room details, such as the room name.
+   * Updates room details, such as the room name, for a room in an Amazon Chime Enterprise account.
    */
   updateRoom(callback?: (err: AWSError, data: Chime.Types.UpdateRoomResponse) => void): Request<Chime.Types.UpdateRoomResponse, AWSError>;
   /**
-   * Updates room membership details, such as the member role. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.
+   * Updates room membership details, such as the member role, for a room in an Amazon Chime Enterprise account. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.
    */
   updateRoomMembership(params: Chime.Types.UpdateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
   /**
-   * Updates room membership details, such as the member role. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.
+   * Updates room membership details, such as the member role, for a room in an Amazon Chime Enterprise account. The member role designates whether the member is a chat room administrator or a general chat room member. The member role can be updated only for user IDs.
    */
   updateRoomMembership(callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
   /**
@@ -2633,7 +2633,7 @@ declare namespace Chime {
   }
   export interface Termination {
     /**
-     * The limit on calls per second. Max value based on account service limit. Default value of 1.
+     * The limit on calls per second. Max value based on account service quota. Default value of 1.
      */
     CpsLimit?: CpsLimit;
     /**

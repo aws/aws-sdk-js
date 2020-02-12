@@ -162,7 +162,7 @@
           "shape": "KMSKeyNotAccessibleFault"
         }
       ],
-      "documentation": "<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can't copy from one AWS Region to another.</p>"
+      "documentation": "<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p>"
     },
     "CopyDBParameterGroup": {
       "name": "CopyDBParameterGroup",
@@ -250,7 +250,7 @@
           "shape": "DBSubnetGroupDoesNotCoverEnoughAZs"
         }
       ],
-      "documentation": "<p>Creates a new Amazon Neptune DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.</p>"
+      "documentation": "<p>Creates a new Amazon Neptune DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.</p> <p>Note that when you create a new cluster using <code>CreateDBCluster</code> directly, deletion protection is disabled by default (when you create a new production cluster in the console, deletion protection is enabled by default). You can only delete a DB cluster if its <code>DeletionProtection</code> field is set to <code>false</code>.</p>"
     },
     "CreateDBClusterParameterGroup": {
       "name": "CreateDBClusterParameterGroup",
@@ -501,7 +501,7 @@
           "shape": "InvalidDBClusterSnapshotStateFault"
         }
       ],
-      "documentation": "<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p>"
+      "documentation": "<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p>Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its <code>DeletionProtection</code> field to <code>False</code>.</p>"
     },
     "DeleteDBClusterParameterGroup": {
       "name": "DeleteDBClusterParameterGroup",
@@ -575,7 +575,7 @@
           "shape": "InvalidDBClusterStateFault"
         }
       ],
-      "documentation": "<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon Neptune DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.</p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>You can't delete a DB instance if it is the only instance in the DB cluster.</p>"
+      "documentation": "<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon Neptune DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.</p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>You can't delete a DB instance if it is the only instance in the DB cluster, or if it has deletion protection enabled.</p>"
     },
     "DeleteDBParameterGroup": {
       "name": "DeleteDBParameterGroup",
@@ -739,7 +739,7 @@
           "shape": "DBClusterNotFoundFault"
         }
       ],
-      "documentation": "<p>Returns information about provisioned DB clusters. This API supports pagination.</p>"
+      "documentation": "<p>Returns information about provisioned DB clusters, and supports pagination.</p> <note> <p>This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters.</p> </note>"
     },
     "DescribeDBEngineVersions": {
       "name": "DescribeDBEngineVersions",
@@ -774,7 +774,7 @@
           "shape": "DBInstanceNotFoundFault"
         }
       ],
-      "documentation": "<p>Returns information about provisioned instances. This API supports pagination.</p>"
+      "documentation": "<p>Returns information about provisioned instances, and supports pagination.</p> <note> <p>This operation can also return information for Amazon RDS instances and Amazon DocDB instances.</p> </note>"
     },
     "DescribeDBParameterGroups": {
       "name": "DescribeDBParameterGroups",
@@ -1577,6 +1577,58 @@
         }
       ],
       "documentation": "<p>Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.</p> <note> <p>This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <a>CreateDBInstance</a> action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterToPointInTime</code> action has completed and the DB cluster is available.</p> </note>"
+    },
+    "StartDBCluster": {
+      "name": "StartDBCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartDBClusterMessage"
+      },
+      "output": {
+        "shape": "StartDBClusterResult",
+        "resultWrapper": "StartDBClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.</p>"
+    },
+    "StopDBCluster": {
+      "name": "StopDBCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopDBClusterMessage"
+      },
+      "output": {
+        "shape": "StopDBClusterResult",
+        "resultWrapper": "StopDBClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Stops an Amazon Neptune DB cluster. When you stop a DB cluster, Neptune retains the DB cluster's metadata, including its endpoints and DB parameter groups.</p> <p>Neptune also retains the transaction logs so you can do a point-in-time restore if necessary.</p>"
     }
   },
   "shapes": {
@@ -1952,7 +2004,7 @@
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. </p>"
+          "documentation": "<p>A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is enabled.</p>"
         }
       }
     },
@@ -2206,7 +2258,7 @@
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. </p> <p>You can enable or disable deletion protection for the DB cluster. For more information, see <a>CreateDBCluster</a>. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster. </p>"
+          "documentation": "<p>A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html\">Deleting a DB Instance</a>.</p> <p>DB instances in a DB cluster can be deleted even when deletion protection is enabled in their parent DB cluster.</p>"
         }
       }
     },
@@ -2480,7 +2532,7 @@
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. </p>"
+          "documentation": "<p>Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon Neptune DB cluster.</p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action.</p>",
@@ -2652,7 +2704,7 @@
         },
         "DBClusterSnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>Specifies the identifier for the DB cluster snapshot.</p>"
+          "documentation": "<p>Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.</p> <p>After you restore a DB cluster using a <code>DBClusterSnapshotIdentifier</code>, you must specify the same <code>DBClusterSnapshotIdentifier</code> for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.</p> <p>However, if you don't specify the <code>DBClusterSnapshotIdentifier</code>, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the <code>DBClusterSnapshotIdentifier</code>, and the original DB cluster is deleted.</p>"
         },
         "DBClusterIdentifier": {
           "shape": "String",
@@ -3074,7 +3126,7 @@
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates if the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. </p>"
+          "documentation": "<p>Indicates whether or not the DB instance has deletion protection enabled. The instance can't be deleted when deletion protection is enabled. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html\">Deleting a DB Instance</a>.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon Neptune DB instance.</p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
@@ -3541,7 +3593,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>"
+          "documentation": "<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>engine</code> - Accepts an engine name (such as <code>neptune</code>), and restricts the results list to DB clusters created by that engine.</p> </li> </ul> <p>For example, to invoke this API from the AWS CLI and filter so that only Neptune DB clusters are returned, you could use the following command:</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -3603,7 +3655,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.</p> </li> </ul>"
+          "documentation": "<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>engine</code> - Accepts an engine name (such as <code>neptune</code>), and restricts the results list to DB instances created by that engine.</p> </li> </ul> <p>For example, to invoke this API from the AWS CLI and filter so that only Neptune DB instances are returned, you could use the following command:</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -4304,7 +4356,7 @@
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. </p>"
+          "documentation": "<p>A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.</p>"
         }
       }
     },
@@ -4519,7 +4571,7 @@
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. </p>"
+          "documentation": "<p>A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html\">Deleting a DB Instance</a>.</p>"
         }
       }
     },
@@ -5307,6 +5359,46 @@
         "db-cluster",
         "db-cluster-snapshot"
       ]
+    },
+    "StartDBClusterMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterIdentifier"
+      ],
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the Neptune DB cluster to be started. This parameter is stored as a lowercase string.</p>"
+        }
+      }
+    },
+    "StartDBClusterResult": {
+      "type": "structure",
+      "members": {
+        "DBCluster": {
+          "shape": "DBCluster"
+        }
+      }
+    },
+    "StopDBClusterMessage": {
+      "type": "structure",
+      "required": [
+        "DBClusterIdentifier"
+      ],
+      "members": {
+        "DBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The DB cluster identifier of the Neptune DB cluster to be stopped. This parameter is stored as a lowercase string.</p>"
+        }
+      }
+    },
+    "StopDBClusterResult": {
+      "type": "structure",
+      "members": {
+        "DBCluster": {
+          "shape": "DBCluster"
+        }
+      }
     },
     "String": {
       "type": "string"

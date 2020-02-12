@@ -2077,6 +2077,10 @@ declare namespace Glue {
      */
     DefaultArguments?: GenericMap;
     /**
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     */
+    NonOverridableArguments?: GenericMap;
+    /**
      * The connections used for this job.
      */
     Connections?: ConnectionsList;
@@ -4056,6 +4060,10 @@ declare namespace Glue {
      */
     DefaultArguments?: GenericMap;
     /**
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     */
+    NonOverridableArguments?: GenericMap;
+    /**
      * The connections used for this job.
      */
     Connections?: ConnectionsList;
@@ -4277,6 +4285,10 @@ declare namespace Glue {
      * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
+    /**
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     */
+    NonOverridableArguments?: GenericMap;
     /**
      * The connections used for this job.
      */

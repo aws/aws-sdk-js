@@ -60,6 +60,14 @@ declare class WorkMail extends Service {
    */
   createUser(callback?: (err: AWSError, data: WorkMail.Types.CreateUserResponse) => void): Request<WorkMail.Types.CreateUserResponse, AWSError>;
   /**
+   * Deletes an access control rule for the specified WorkMail organization.
+   */
+  deleteAccessControlRule(params: WorkMail.Types.DeleteAccessControlRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteAccessControlRuleResponse) => void): Request<WorkMail.Types.DeleteAccessControlRuleResponse, AWSError>;
+  /**
+   * Deletes an access control rule for the specified WorkMail organization.
+   */
+  deleteAccessControlRule(callback?: (err: AWSError, data: WorkMail.Types.DeleteAccessControlRuleResponse) => void): Request<WorkMail.Types.DeleteAccessControlRuleResponse, AWSError>;
+  /**
    * Remove one or more specified aliases from a set of aliases for a given user.
    */
   deleteAlias(params: WorkMail.Types.DeleteAliasRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteAliasResponse) => void): Request<WorkMail.Types.DeleteAliasResponse, AWSError>;
@@ -156,6 +164,14 @@ declare class WorkMail extends Service {
    */
   disassociateMemberFromGroup(callback?: (err: AWSError, data: WorkMail.Types.DisassociateMemberFromGroupResponse) => void): Request<WorkMail.Types.DisassociateMemberFromGroupResponse, AWSError>;
   /**
+   * Gets the effects of an organization's access control rules as they apply to a specified IPv4 address, access protocol action, or user ID. 
+   */
+  getAccessControlEffect(params: WorkMail.Types.GetAccessControlEffectRequest, callback?: (err: AWSError, data: WorkMail.Types.GetAccessControlEffectResponse) => void): Request<WorkMail.Types.GetAccessControlEffectResponse, AWSError>;
+  /**
+   * Gets the effects of an organization's access control rules as they apply to a specified IPv4 address, access protocol action, or user ID. 
+   */
+  getAccessControlEffect(callback?: (err: AWSError, data: WorkMail.Types.GetAccessControlEffectResponse) => void): Request<WorkMail.Types.GetAccessControlEffectResponse, AWSError>;
+  /**
    * Requests a user's mailbox details for a specified organization and user.
    */
   getMailboxDetails(params: WorkMail.Types.GetMailboxDetailsRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMailboxDetailsResponse) => void): Request<WorkMail.Types.GetMailboxDetailsResponse, AWSError>;
@@ -163,6 +179,14 @@ declare class WorkMail extends Service {
    * Requests a user's mailbox details for a specified organization and user.
    */
   getMailboxDetails(callback?: (err: AWSError, data: WorkMail.Types.GetMailboxDetailsResponse) => void): Request<WorkMail.Types.GetMailboxDetailsResponse, AWSError>;
+  /**
+   * Lists the access control rules for the specified organization.
+   */
+  listAccessControlRules(params: WorkMail.Types.ListAccessControlRulesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListAccessControlRulesResponse) => void): Request<WorkMail.Types.ListAccessControlRulesResponse, AWSError>;
+  /**
+   * Lists the access control rules for the specified organization.
+   */
+  listAccessControlRules(callback?: (err: AWSError, data: WorkMail.Types.ListAccessControlRulesResponse) => void): Request<WorkMail.Types.ListAccessControlRulesResponse, AWSError>;
   /**
    * Creates a paginated call to list the aliases associated with a given entity.
    */
@@ -236,6 +260,14 @@ declare class WorkMail extends Service {
    */
   listUsers(callback?: (err: AWSError, data: WorkMail.Types.ListUsersResponse) => void): Request<WorkMail.Types.ListUsersResponse, AWSError>;
   /**
+   * Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.
+   */
+  putAccessControlRule(params: WorkMail.Types.PutAccessControlRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.PutAccessControlRuleResponse) => void): Request<WorkMail.Types.PutAccessControlRuleResponse, AWSError>;
+  /**
+   * Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.
+   */
+  putAccessControlRule(callback?: (err: AWSError, data: WorkMail.Types.PutAccessControlRuleResponse) => void): Request<WorkMail.Types.PutAccessControlRuleResponse, AWSError>;
+  /**
    * Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.
    */
   putMailboxPermissions(params: WorkMail.Types.PutMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
@@ -301,6 +333,59 @@ declare class WorkMail extends Service {
   updateResource(callback?: (err: AWSError, data: WorkMail.Types.UpdateResourceResponse) => void): Request<WorkMail.Types.UpdateResourceResponse, AWSError>;
 }
 declare namespace WorkMail {
+  export interface AccessControlRule {
+    /**
+     * The rule name.
+     */
+    Name?: AccessControlRuleName;
+    /**
+     * The rule effect.
+     */
+    Effect?: AccessControlRuleEffect;
+    /**
+     * The rule description.
+     */
+    Description?: AccessControlRuleDescription;
+    /**
+     * IPv4 CIDR ranges to include in the rule.
+     */
+    IpRanges?: IpRangeList;
+    /**
+     * IPv4 CIDR ranges to exclude from the rule.
+     */
+    NotIpRanges?: IpRangeList;
+    /**
+     * Access protocol actions to include in the rule. Valid values include ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+     */
+    Actions?: ActionsList;
+    /**
+     * Access protocol actions to exclude from the rule. Valid values include ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+     */
+    NotActions?: ActionsList;
+    /**
+     * User IDs to include in the rule.
+     */
+    UserIds?: UserIdList;
+    /**
+     * User IDs to exclude from the rule.
+     */
+    NotUserIds?: UserIdList;
+    /**
+     * The date that the rule was created.
+     */
+    DateCreated?: Timestamp;
+    /**
+     * The date that the rule was modified.
+     */
+    DateModified?: Timestamp;
+  }
+  export type AccessControlRuleAction = string;
+  export type AccessControlRuleDescription = string;
+  export type AccessControlRuleEffect = "ALLOW"|"DENY"|string;
+  export type AccessControlRuleName = string;
+  export type AccessControlRuleNameList = AccessControlRuleName[];
+  export type AccessControlRulesList = AccessControlRule[];
+  export type ActionsList = AccessControlRuleAction[];
   export type Aliases = EmailAddress[];
   export type AmazonResourceName = string;
   export interface AssociateDelegateToResourceRequest {
@@ -435,6 +520,18 @@ declare namespace WorkMail {
      * The type of the delegate: user or group.
      */
     Type: MemberType;
+  }
+  export interface DeleteAccessControlRuleRequest {
+    /**
+     * The identifier for the organization.
+     */
+    OrganizationId?: OrganizationId;
+    /**
+     * The name of the access control rule.
+     */
+    Name: AccessControlRuleName;
+  }
+  export interface DeleteAccessControlRuleResponse {
   }
   export interface DeleteAliasRequest {
     /**
@@ -718,6 +815,34 @@ declare namespace WorkMail {
   }
   export type EmailAddress = string;
   export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
+  export interface GetAccessControlEffectRequest {
+    /**
+     * The identifier for the organization.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The IPv4 address.
+     */
+    IpAddress: IpAddress;
+    /**
+     * The access protocol action. Valid values include ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+     */
+    Action: AccessControlRuleAction;
+    /**
+     * The user ID.
+     */
+    UserId: WorkMailIdentifier;
+  }
+  export interface GetAccessControlEffectResponse {
+    /**
+     * The rule effect.
+     */
+    Effect?: AccessControlRuleEffect;
+    /**
+     * The rules that match the given parameters, resulting in an effect.
+     */
+    MatchedRules?: AccessControlRuleNameList;
+  }
   export interface GetMailboxDetailsRequest {
     /**
      * The identifier for the organization that contains the user whose mailbox details are being requested.
@@ -766,6 +891,21 @@ declare namespace WorkMail {
   }
   export type GroupName = string;
   export type Groups = Group[];
+  export type IpAddress = string;
+  export type IpRange = string;
+  export type IpRangeList = IpRange[];
+  export interface ListAccessControlRulesRequest {
+    /**
+     * The identifier for the organization.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface ListAccessControlRulesResponse {
+    /**
+     * The access control rules.
+     */
+    Rules?: AccessControlRulesList;
+  }
   export interface ListAliasesRequest {
     /**
      * The identifier for the organization under which the entity exists.
@@ -1053,6 +1193,50 @@ declare namespace WorkMail {
   export type PermissionType = "FULL_ACCESS"|"SEND_AS"|"SEND_ON_BEHALF"|string;
   export type PermissionValues = PermissionType[];
   export type Permissions = Permission[];
+  export interface PutAccessControlRuleRequest {
+    /**
+     * The rule name.
+     */
+    Name: AccessControlRuleName;
+    /**
+     * The rule effect.
+     */
+    Effect: AccessControlRuleEffect;
+    /**
+     * The rule description.
+     */
+    Description: AccessControlRuleDescription;
+    /**
+     * IPv4 CIDR ranges to include in the rule.
+     */
+    IpRanges?: IpRangeList;
+    /**
+     * IPv4 CIDR ranges to exclude from the rule.
+     */
+    NotIpRanges?: IpRangeList;
+    /**
+     * Access protocol actions to include in the rule. Valid values include ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+     */
+    Actions?: ActionsList;
+    /**
+     * Access protocol actions to exclude from the rule. Valid values include ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+     */
+    NotActions?: ActionsList;
+    /**
+     * User IDs to include in the rule.
+     */
+    UserIds?: UserIdList;
+    /**
+     * User IDs to exclude from the rule.
+     */
+    NotUserIds?: UserIdList;
+    /**
+     * The identifier of the organization.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface PutAccessControlRuleResponse {
+  }
   export interface PutMailboxPermissionsRequest {
     /**
      * The identifier of the organization under which the user, group, or resource exists.
@@ -1266,6 +1450,7 @@ declare namespace WorkMail {
      */
     DisabledDate?: Timestamp;
   }
+  export type UserIdList = WorkMailIdentifier[];
   export type UserName = string;
   export type UserRole = "USER"|"RESOURCE"|"SYSTEM_USER"|string;
   export type Users = User[];

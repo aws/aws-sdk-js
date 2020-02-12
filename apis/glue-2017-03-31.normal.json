@@ -5204,6 +5204,10 @@
           "shape": "GenericMap",
           "documentation": "<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
+        "NonOverridableArguments": {
+          "shape": "GenericMap",
+          "documentation": "<p>Non-overridable arguments for this job, specified as name-value pairs.</p>"
+        },
         "Connections": {
           "shape": "ConnectionsList",
           "documentation": "<p>The connections used for this job.</p>"
@@ -8093,6 +8097,10 @@
           "shape": "GenericMap",
           "documentation": "<p>The default arguments for this job, specified as name-value pairs.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
+        "NonOverridableArguments": {
+          "shape": "GenericMap",
+          "documentation": "<p>Non-overridable arguments for this job, specified as name-value pairs.</p>"
+        },
         "Connections": {
           "shape": "ConnectionsList",
           "documentation": "<p>The connections used for this job.</p>"
@@ -8376,6 +8384,10 @@
         "DefaultArguments": {
           "shape": "GenericMap",
           "documentation": "<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+        },
+        "NonOverridableArguments": {
+          "shape": "GenericMap",
+          "documentation": "<p>Non-overridable arguments for this job, specified as name-value pairs.</p>"
         },
         "Connections": {
           "shape": "ConnectionsList",

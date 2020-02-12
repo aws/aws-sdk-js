@@ -53,11 +53,11 @@ declare class Neptune extends Service {
    */
   copyDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterParameterGroupResult) => void): Request<Neptune.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
-   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. You can't copy from one AWS Region to another.
+   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.
    */
   copyDBClusterSnapshot(params: Neptune.Types.CopyDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterSnapshotResult) => void): Request<Neptune.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
-   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. You can't copy from one AWS Region to another.
+   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.
    */
   copyDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterSnapshotResult) => void): Request<Neptune.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
@@ -69,11 +69,11 @@ declare class Neptune extends Service {
    */
   copyDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CopyDBParameterGroupResult) => void): Request<Neptune.Types.CopyDBParameterGroupResult, AWSError>;
   /**
-   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.
+   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. Note that when you create a new cluster using CreateDBCluster directly, deletion protection is disabled by default (when you create a new production cluster in the console, deletion protection is enabled by default). You can only delete a DB cluster if its DeletionProtection field is set to false.
    */
   createDBCluster(params: Neptune.Types.CreateDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterResult) => void): Request<Neptune.Types.CreateDBClusterResult, AWSError>;
   /**
-   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance.
+   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. Note that when you create a new cluster using CreateDBCluster directly, deletion protection is disabled by default (when you create a new production cluster in the console, deletion protection is enabled by default). You can only delete a DB cluster if its DeletionProtection field is set to false.
    */
   createDBCluster(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterResult) => void): Request<Neptune.Types.CreateDBClusterResult, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class Neptune extends Service {
    */
   createEventSubscription(callback?: (err: AWSError, data: Neptune.Types.CreateEventSubscriptionResult) => void): Request<Neptune.Types.CreateEventSubscriptionResult, AWSError>;
   /**
-   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.
+   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its DeletionProtection field to False.
    */
   deleteDBCluster(params: Neptune.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
   /**
-   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.
+   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its DeletionProtection field to False.
    */
   deleteDBCluster(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class Neptune extends Service {
    */
   deleteDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterSnapshotResult) => void): Request<Neptune.Types.DeleteDBClusterSnapshotResult, AWSError>;
   /**
-   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. You can't delete a DB instance if it is the only instance in the DB cluster.
+   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. You can't delete a DB instance if it is the only instance in the DB cluster, or if it has deletion protection enabled.
    */
   deleteDBInstance(params: Neptune.Types.DeleteDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
   /**
-   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. You can't delete a DB instance if it is the only instance in the DB cluster.
+   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. You can't delete a DB instance if it is the only instance in the DB cluster, or if it has deletion protection enabled.
    */
   deleteDBInstance(callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
   /**
@@ -213,11 +213,11 @@ declare class Neptune extends Service {
    */
   describeDBClusterSnapshots(callback?: (err: AWSError, data: Neptune.Types.DBClusterSnapshotMessage) => void): Request<Neptune.Types.DBClusterSnapshotMessage, AWSError>;
   /**
-   * Returns information about provisioned DB clusters. This API supports pagination.
+   * Returns information about provisioned DB clusters, and supports pagination.  This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters. 
    */
   describeDBClusters(params: Neptune.Types.DescribeDBClustersMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterMessage) => void): Request<Neptune.Types.DBClusterMessage, AWSError>;
   /**
-   * Returns information about provisioned DB clusters. This API supports pagination.
+   * Returns information about provisioned DB clusters, and supports pagination.  This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters. 
    */
   describeDBClusters(callback?: (err: AWSError, data: Neptune.Types.DBClusterMessage) => void): Request<Neptune.Types.DBClusterMessage, AWSError>;
   /**
@@ -229,11 +229,11 @@ declare class Neptune extends Service {
    */
   describeDBEngineVersions(callback?: (err: AWSError, data: Neptune.Types.DBEngineVersionMessage) => void): Request<Neptune.Types.DBEngineVersionMessage, AWSError>;
   /**
-   * Returns information about provisioned instances. This API supports pagination.
+   * Returns information about provisioned instances, and supports pagination.  This operation can also return information for Amazon RDS instances and Amazon DocDB instances. 
    */
   describeDBInstances(params: Neptune.Types.DescribeDBInstancesMessage, callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
   /**
-   * Returns information about provisioned instances. This API supports pagination.
+   * Returns information about provisioned instances, and supports pagination.  This operation can also return information for Amazon RDS instances and Amazon DocDB instances. 
    */
   describeDBInstances(callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
   /**
@@ -468,6 +468,22 @@ declare class Neptune extends Service {
    * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.  This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterToPointInTime action has completed and the DB cluster is available. 
    */
   restoreDBClusterToPointInTime(callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterToPointInTimeResult) => void): Request<Neptune.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
+  /**
+   * Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.
+   */
+  startDBCluster(params: Neptune.Types.StartDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.StartDBClusterResult) => void): Request<Neptune.Types.StartDBClusterResult, AWSError>;
+  /**
+   * Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.
+   */
+  startDBCluster(callback?: (err: AWSError, data: Neptune.Types.StartDBClusterResult) => void): Request<Neptune.Types.StartDBClusterResult, AWSError>;
+  /**
+   * Stops an Amazon Neptune DB cluster. When you stop a DB cluster, Neptune retains the DB cluster's metadata, including its endpoints and DB parameter groups. Neptune also retains the transaction logs so you can do a point-in-time restore if necessary.
+   */
+  stopDBCluster(params: Neptune.Types.StopDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.StopDBClusterResult) => void): Request<Neptune.Types.StopDBClusterResult, AWSError>;
+  /**
+   * Stops an Amazon Neptune DB cluster. When you stop a DB cluster, Neptune retains the DB cluster's metadata, including its endpoints and DB parameter groups. Neptune also retains the transaction logs so you can do a point-in-time restore if necessary.
+   */
+  stopDBCluster(callback?: (err: AWSError, data: Neptune.Types.StopDBClusterResult) => void): Request<Neptune.Types.StopDBClusterResult, AWSError>;
   /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying Neptune.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */
@@ -733,7 +749,7 @@ declare namespace Neptune {
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
-     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
   }
@@ -948,7 +964,7 @@ declare namespace Neptune {
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
-     * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.  You can enable or disable deletion protection for the DB cluster. For more information, see CreateDBCluster. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster. 
+     * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. See Deleting a DB Instance. DB instances in a DB cluster can be deleted even when deletion protection is enabled in their parent DB cluster.
      */
     DeletionProtection?: BooleanOptional;
   }
@@ -1176,7 +1192,7 @@ declare namespace Neptune {
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
     /**
-     * Indicates if the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. 
+     * Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
   }
@@ -1283,7 +1299,7 @@ declare namespace Neptune {
      */
     AvailabilityZones?: AvailabilityZones;
     /**
-     * Specifies the identifier for the DB cluster snapshot.
+     * Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot. After you restore a DB cluster using a DBClusterSnapshotIdentifier, you must specify the same DBClusterSnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the DBClusterSnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the DBClusterSnapshotIdentifier, and the original DB cluster is deleted.
      */
     DBClusterSnapshotIdentifier?: String;
     /**
@@ -1662,7 +1678,7 @@ declare namespace Neptune {
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
     /**
-     * Indicates if the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. 
+     * Indicates whether or not the DB instance has deletion protection enabled. The instance can't be deleted when deletion protection is enabled. See Deleting a DB Instance.
      */
     DeletionProtection?: BooleanOptional;
   }
@@ -1960,7 +1976,7 @@ declare namespace Neptune {
      */
     DBClusterIdentifier?: String;
     /**
-     * A filter that specifies one or more DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.  
+     * A filter that specifies one or more DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.    engine - Accepts an engine name (such as neptune), and restricts the results list to DB clusters created by that engine.   For example, to invoke this API from the AWS CLI and filter so that only Neptune DB clusters are returned, you could use the following command:
      */
     Filters?: FilterList;
     /**
@@ -2016,7 +2032,7 @@ declare namespace Neptune {
      */
     DBInstanceIdentifier?: String;
     /**
-     * A filter that specifies one or more DB instances to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.    db-instance-id - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.  
+     * A filter that specifies one or more DB instances to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.    engine - Accepts an engine name (such as neptune), and restricts the results list to DB instances created by that engine.   For example, to invoke this API from the AWS CLI and filter so that only Neptune DB instances are returned, you could use the following command:
      */
     Filters?: FilterList;
     /**
@@ -2520,7 +2536,7 @@ declare namespace Neptune {
      */
     EngineVersion?: String;
     /**
-     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
      */
     DeletionProtection?: BooleanOptional;
   }
@@ -2704,7 +2720,7 @@ declare namespace Neptune {
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
-     * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. See Deleting a DB Instance.
      */
     DeletionProtection?: BooleanOptional;
   }
@@ -3263,6 +3279,24 @@ declare namespace Neptune {
   }
   export type SourceIdsList = String[];
   export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;
+  export interface StartDBClusterMessage {
+    /**
+     * The DB cluster identifier of the Neptune DB cluster to be started. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier: String;
+  }
+  export interface StartDBClusterResult {
+    DBCluster?: DBCluster;
+  }
+  export interface StopDBClusterMessage {
+    /**
+     * The DB cluster identifier of the Neptune DB cluster to be stopped. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier: String;
+  }
+  export interface StopDBClusterResult {
+    DBCluster?: DBCluster;
+  }
   export type String = string;
   export interface Subnet {
     /**

@@ -756,6 +756,56 @@
       },
       "documentation": "<p> Status of the advanced options for the specified Elasticsearch domain. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\">Configuring Advanced Options</a>.</p>"
     },
+    "AdvancedSecurityOptions": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if advanced security is enabled.</p>"
+        },
+        "InternalUserDatabaseEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if the internal user database is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.</p>"
+    },
+    "AdvancedSecurityOptionsInput": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if advanced security is enabled.</p>"
+        },
+        "InternalUserDatabaseEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if the internal user database is enabled.</p>"
+        },
+        "MasterUserOptions": {
+          "shape": "MasterUserOptions",
+          "documentation": "<p>Credentials for the master user: username and password, ARN, or both.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).</p>"
+    },
+    "AdvancedSecurityOptionsStatus": {
+      "type": "structure",
+      "required": [
+        "Options",
+        "Status"
+      ],
+      "members": {
+        "Options": {
+          "shape": "AdvancedSecurityOptions",
+          "documentation": "<p> Specifies advanced security options for the specified Elasticsearch domain.</p>"
+        },
+        "Status": {
+          "shape": "OptionStatus",
+          "documentation": "<p> Status of the advanced security options for the specified Elasticsearch domain.</p>"
+        }
+      },
+      "documentation": "<p> Specifies the status of advanced security options for the specified Elasticsearch domain.</p>"
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -902,6 +952,10 @@
         "DomainEndpointOptions": {
           "shape": "DomainEndpointOptions",
           "documentation": "<p>Options to specify configuration that will be applied to the domain endpoint.</p>"
+        },
+        "AdvancedSecurityOptions": {
+          "shape": "AdvancedSecurityOptionsInput",
+          "documentation": "<p>Specifies advanced security options.</p>"
         }
       }
     },
@@ -1443,6 +1497,10 @@
         "DomainEndpointOptions": {
           "shape": "DomainEndpointOptionsStatus",
           "documentation": "<p>Specifies the <code>DomainEndpointOptions</code> for the Elasticsearch domain.</p>"
+        },
+        "AdvancedSecurityOptions": {
+          "shape": "AdvancedSecurityOptionsStatus",
+          "documentation": "<p>Specifies <code>AdvancedSecurityOptions</code> for the domain. </p>"
         }
       },
       "documentation": "<p>The configuration of an Elasticsearch domain.</p>"
@@ -1542,6 +1600,10 @@
         "DomainEndpointOptions": {
           "shape": "DomainEndpointOptions",
           "documentation": "<p>The current status of the Elasticsearch domain's endpoint options.</p>"
+        },
+        "AdvancedSecurityOptions": {
+          "shape": "AdvancedSecurityOptions",
+          "documentation": "<p>The current status of the Elasticsearch domain's advanced security options.</p>"
         }
       },
       "documentation": "<p>The current status of an Elasticsearch domain.</p>"
@@ -1974,6 +2036,24 @@
         "ES_APPLICATION_LOGS"
       ]
     },
+    "MasterUserOptions": {
+      "type": "structure",
+      "members": {
+        "MasterUserARN": {
+          "shape": "ARN",
+          "documentation": "<p>ARN for the master user (if IAM is enabled).</p>"
+        },
+        "MasterUserName": {
+          "shape": "Username",
+          "documentation": "<p>The master user's username, which is stored in the Amazon Elasticsearch Service domain's internal database.</p>"
+        },
+        "MasterUserPassword": {
+          "shape": "Password",
+          "documentation": "<p>The master user's password, which is stored in the Amazon Elasticsearch Service domain's internal database.</p>"
+        }
+      },
+      "documentation": "<p>Credentials for the master user: username and password, ARN, or both.</p>"
+    },
     "MaxResults": {
       "type": "integer",
       "documentation": "<p> Set this value to limit the number of results returned. </p>",
@@ -2058,6 +2138,11 @@
         }
       },
       "documentation": "<p>Provides the current status of the entity.</p>"
+    },
+    "Password": {
+      "type": "string",
+      "min": 8,
+      "sensitive": true
     },
     "PolicyDocument": {
       "type": "string",
@@ -2509,6 +2594,10 @@
         "DomainEndpointOptions": {
           "shape": "DomainEndpointOptions",
           "documentation": "<p>Options to specify configuration that will be applied to the domain endpoint.</p>"
+        },
+        "AdvancedSecurityOptions": {
+          "shape": "AdvancedSecurityOptionsInput",
+          "documentation": "<p>Specifies advanced security options.</p>"
         }
       },
       "documentation": "<p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>"
@@ -2648,6 +2737,11 @@
       "max": 55,
       "min": 1,
       "pattern": "[\\w-]+_[0-9a-zA-Z]+"
+    },
+    "Username": {
+      "type": "string",
+      "min": 1,
+      "sensitive": true
     },
     "VPCDerivedInfo": {
       "type": "structure",

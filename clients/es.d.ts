@@ -232,6 +232,40 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export interface AdvancedSecurityOptions {
+    /**
+     * True if advanced security is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * True if the internal user database is enabled.
+     */
+    InternalUserDatabaseEnabled?: Boolean;
+  }
+  export interface AdvancedSecurityOptionsInput {
+    /**
+     * True if advanced security is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * True if the internal user database is enabled.
+     */
+    InternalUserDatabaseEnabled?: Boolean;
+    /**
+     * Credentials for the master user: username and password, ARN, or both.
+     */
+    MasterUserOptions?: MasterUserOptions;
+  }
+  export interface AdvancedSecurityOptionsStatus {
+    /**
+     *  Specifies advanced security options for the specified Elasticsearch domain.
+     */
+    Options: AdvancedSecurityOptions;
+    /**
+     *  Status of the advanced security options for the specified Elasticsearch domain.
+     */
+    Status: OptionStatus;
+  }
   export type Boolean = boolean;
   export interface CancelElasticsearchServiceSoftwareUpdateRequest {
     /**
@@ -335,6 +369,10 @@ declare namespace ES {
      * Options to specify configuration that will be applied to the domain endpoint.
      */
     DomainEndpointOptions?: DomainEndpointOptions;
+    /**
+     * Specifies advanced security options.
+     */
+    AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
   }
   export interface CreateElasticsearchDomainResponse {
     /**
@@ -619,6 +657,10 @@ declare namespace ES {
      * Specifies the DomainEndpointOptions for the Elasticsearch domain.
      */
     DomainEndpointOptions?: DomainEndpointOptionsStatus;
+    /**
+     * Specifies AdvancedSecurityOptions for the domain. 
+     */
+    AdvancedSecurityOptions?: AdvancedSecurityOptionsStatus;
   }
   export interface ElasticsearchDomainStatus {
     /**
@@ -706,6 +748,10 @@ declare namespace ES {
      * The current status of the Elasticsearch domain's endpoint options.
      */
     DomainEndpointOptions?: DomainEndpointOptions;
+    /**
+     * The current status of the Elasticsearch domain's advanced security options.
+     */
+    AdvancedSecurityOptions?: AdvancedSecurityOptions;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
   export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
@@ -890,6 +936,20 @@ declare namespace ES {
     Status?: OptionStatus;
   }
   export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|string;
+  export interface MasterUserOptions {
+    /**
+     * ARN for the master user (if IAM is enabled).
+     */
+    MasterUserARN?: ARN;
+    /**
+     * The master user's username, which is stored in the Amazon Elasticsearch Service domain's internal database.
+     */
+    MasterUserName?: Username;
+    /**
+     * The master user's password, which is stored in the Amazon Elasticsearch Service domain's internal database.
+     */
+    MasterUserPassword?: Password;
+  }
   export type MaxResults = number;
   export type MaximumInstanceCount = number;
   export type MinimumInstanceCount = number;
@@ -933,6 +993,7 @@ declare namespace ES {
      */
     PendingDeletion?: Boolean;
   }
+  export type Password = string;
   export type PolicyDocument = string;
   export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
     /**
@@ -1212,6 +1273,10 @@ declare namespace ES {
      * Options to specify configuration that will be applied to the domain endpoint.
      */
     DomainEndpointOptions?: DomainEndpointOptions;
+    /**
+     * Specifies advanced security options.
+     */
+    AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
   }
   export interface UpdateElasticsearchDomainConfigResponse {
     /**
@@ -1284,6 +1349,7 @@ declare namespace ES {
   }
   export type UpgradeStepsList = UpgradeStepItem[];
   export type UserPoolId = string;
+  export type Username = string;
   export interface VPCDerivedInfo {
     /**
      * The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
