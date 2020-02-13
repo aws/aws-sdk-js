@@ -269,6 +269,10 @@ rounded to the nearest multiple of the source fragment duration.
   }
   export interface DashManifest {
     /**
+     * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+     */
+    ManifestLayout?: ManifestLayout;
+    /**
      * An optional string to include in the name of the manifest.
      */
     ManifestName?: __string;
@@ -289,11 +293,23 @@ rounded to the nearest multiple of the source fragment duration.
     DashManifests: __listOfDashManifest;
     Encryption?: DashEncryption;
     /**
+     * A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+the Asset contains SCTE-35 ad markers.
+
+     */
+    PeriodTriggers?: __listOf__PeriodTriggersElement;
+    /**
      * Duration (in seconds) of each segment. Actual segments will be
 rounded to the nearest multiple of the source segment duration.
 
      */
     SegmentDurationSeconds?: __integer;
+    /**
+     * Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
+     */
+    SegmentTemplateFormat?: SegmentTemplateFormat;
   }
   export interface DeleteAssetRequest {
     /**
@@ -550,6 +566,7 @@ rounded to the nearest multiple of the source fragment duration.
      */
     PackagingGroups?: __listOfPackagingGroup;
   }
+  export type ManifestLayout = "FULL"|"COMPACT"|string;
   export type MaxResults = number;
   export interface MssEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -605,6 +622,7 @@ rounded to the nearest multiple of the source fragment duration.
     Id?: __string;
   }
   export type Profile = "NONE"|"HBBTV_1_5"|string;
+  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
   export interface SpekeKeyProvider {
     /**
      * An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
@@ -636,6 +654,7 @@ MediaPackage will assume when accessing the key provider service.
      */
     StreamOrder?: StreamOrder;
   }
+  export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;
   export type __integer = number;
   export type __listOfAssetShallow = AssetShallow[];
@@ -645,6 +664,7 @@ MediaPackage will assume when accessing the key provider service.
   export type __listOfMssManifest = MssManifest[];
   export type __listOfPackagingConfiguration = PackagingConfiguration[];
   export type __listOfPackagingGroup = PackagingGroup[];
+  export type __listOf__PeriodTriggersElement = __PeriodTriggersElement[];
   export type __listOf__string = __string[];
   export type __string = string;
   /**

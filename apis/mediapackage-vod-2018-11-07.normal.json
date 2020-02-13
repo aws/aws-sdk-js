@@ -736,6 +736,11 @@
     "DashManifest": {
       "documentation": "A DASH manifest configuration.",
       "members": {
+        "ManifestLayout": {
+          "documentation": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
+          "locationName": "manifestLayout",
+          "shape": "ManifestLayout"
+        },
         "ManifestName": {
           "documentation": "An optional string to include in the name of the manifest.",
           "locationName": "manifestName",
@@ -770,10 +775,20 @@
           "locationName": "encryption",
           "shape": "DashEncryption"
         },
+        "PeriodTriggers": {
+          "documentation": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)\nMedia Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not\nbe partitioned into more than one period. If the list contains \"ADS\", new periods will be created where\nthe Asset contains SCTE-35 ad markers.\n",
+          "locationName": "periodTriggers",
+          "shape": "__listOf__PeriodTriggersElement"
+        },
         "SegmentDurationSeconds": {
           "documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.\n",
           "locationName": "segmentDurationSeconds",
           "shape": "__integer"
+        },
+        "SegmentTemplateFormat": {
+          "documentation": "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
+          "locationName": "segmentTemplateFormat",
+          "shape": "SegmentTemplateFormat"
         }
       },
       "required": [
@@ -1195,6 +1210,13 @@
       },
       "type": "structure"
     },
+    "ManifestLayout": {
+      "enum": [
+        "FULL",
+        "COMPACT"
+      ],
+      "type": "string"
+    },
     "MaxResults": {
       "max": 1000,
       "min": 1,
@@ -1316,6 +1338,14 @@
       ],
       "type": "string"
     },
+    "SegmentTemplateFormat": {
+      "enum": [
+        "NUMBER_WITH_TIMELINE",
+        "TIME_WITH_TIMELINE",
+        "NUMBER_WITH_DURATION"
+      ],
+      "type": "string"
+    },
     "SpekeKeyProvider": {
       "documentation": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
       "members": {
@@ -1371,6 +1401,12 @@
       },
       "type": "structure"
     },
+    "__PeriodTriggersElement": {
+      "enum": [
+        "ADS"
+      ],
+      "type": "string"
+    },
     "__boolean": {
       "type": "boolean"
     },
@@ -1416,6 +1452,12 @@
     "__listOfPackagingGroup": {
       "member": {
         "shape": "PackagingGroup"
+      },
+      "type": "list"
+    },
+    "__listOf__PeriodTriggersElement": {
+      "member": {
+        "shape": "__PeriodTriggersElement"
       },
       "type": "list"
     },
