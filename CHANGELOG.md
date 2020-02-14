@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.618.0-->
+<!--LATEST=2.619.0-->
 <!--ENTRYINSERT-->
+
+## 2.619.0
+* feature: EC2: You can now enable Multi-Attach on Provisioned IOPS io1 volumes through the create-volume API.
+* feature: MediaTailor: AWS Elemental MediaTailor SDK now allows configuration of Personalization Threshold for HLS and DASH streams.
+* feature: SecurityHub: Security Hub has released a new DescribeStandards API action. This API action allows a customer to list all of the standards available in an account. For each standard, the list provides the customer with the standard name, description, and ARN. Customers can use the ARN as an input to the BatchEnableStandards API action.  To learn more, visit our API documentation.
+* feature: Shield: This release adds support for associating Amazon Route 53 health checks to AWS Shield Advanced protected resources.
 
 ## 2.618.0
 * feature: MediaPackageVod: Adds support for DASH with multiple media presentation description periods triggered by presence of SCTE-35 ad markers in the manifest.Also adds optional configuration for DASH SegmentTemplateFormat to refer to segments by Number with Duration, Number with Timeline or Time with Timeline and compact the manifest by combining duplicate SegmentTemplate tags.

@@ -69,7 +69,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Standards Supported in AWS Security Hub</a>.</p>"
+      "documentation": "<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Compliance Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>"
     },
     "BatchEnableStandards": {
       "name": "BatchEnableStandards",
@@ -97,7 +97,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Enables the standards specified by the provided <code>standardsArn</code>.</p> <p>In this release, only CIS AWS Foundations standards are supported.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Standards Supported in AWS Security Hub</a>.</p>"
+      "documentation": "<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the ARN for a standard, use the <code> <a>DescribeStandards</a> </code> operation.</p> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Compliance Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>"
     },
     "BatchImportFindings": {
       "name": "BatchImportFindings",
@@ -218,7 +218,7 @@
           "shape": "ResourceConflictException"
         }
       ],
-      "documentation": "<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <a>EnableSecurityHub</a> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <a>InviteMembers</a> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <a>DisassociateFromMasterAccount</a> or <a>DisassociateMembers</a> operation.</p>"
+      "documentation": "<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <code> <a>InviteMembers</a> </code> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>"
     },
     "DeclineInvitations": {
       "name": "DeclineInvitations",
@@ -456,6 +456,31 @@
       ],
       "documentation": "<p>Returns information about the available products that you can subscribe to and integrate with Security Hub in order to consolidate findings.</p>"
     },
+    "DescribeStandards": {
+      "name": "DescribeStandards",
+      "http": {
+        "method": "GET",
+        "requestUri": "/standards"
+      },
+      "input": {
+        "shape": "DescribeStandardsRequest"
+      },
+      "output": {
+        "shape": "DescribeStandardsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        }
+      ],
+      "documentation": "<p>Returns a list of the available standards in Security Hub.</p> <p>For each standard, the results include the standard ARN, the name, and a description. </p>"
+    },
     "DescribeStandardsControls": {
       "name": "DescribeStandardsControls",
       "http": {
@@ -665,7 +690,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>Enabling Security Hub also enables the CIS AWS Foundations standard.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html\">Setting Up AWS Security Hub</a>.</p>"
+      "documentation": "<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable a standard, use the <code> <a>BatchEnableStandards</a> </code> operation. To disable a standard, use the <code> <a>BatchDisableStandards</a> </code> operation.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html\">Setting Up AWS Security Hub</a> in the <i>AWS Security Hub User Guide</i>.</p>"
     },
     "GetEnabledStandards": {
       "name": "GetEnabledStandards",
@@ -904,7 +929,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from.</p> <p>Before you can use this action to invite a member, you must first use the <a>CreateMembers</a> action to create the member account in Security Hub.</p> <p>When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.</p>"
+      "documentation": "<p>Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from.</p> <p>Before you can use this action to invite a member, you must first use the <code> <a>CreateMembers</a> </code> action to create the member account in Security Hub.</p> <p>When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.</p>"
     },
     "ListEnabledProductsForImport": {
       "name": "ListEnabledProductsForImport",
@@ -2495,7 +2520,7 @@
         },
         "Compliance": {
           "shape": "Compliance",
-          "documentation": "<p>This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.</p>"
+          "documentation": "<p>This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.</p>"
         },
         "VerificationState": {
           "shape": "VerificationState",
@@ -2817,7 +2842,7 @@
         },
         "ComplianceStatus": {
           "shape": "StringFilterList",
-          "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.</p>"
+          "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.</p>"
         },
         "VerificationState": {
           "shape": "StringFilterList",
@@ -3015,7 +3040,7 @@
       "members": {
         "StandardsSubscriptionRequests": {
           "shape": "StandardsSubscriptionRequests",
-          "documentation": "<p>The list of standards compliance checks to enable.</p> <important> <p>In this release, Security Hub supports only the CIS AWS Foundations standard.</p> <p>The ARN for the standard is <code>arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0</code>.</p> </important>"
+          "documentation": "<p>The list of standards compliance checks to enable.</p>"
         }
       }
     },
@@ -3082,7 +3107,7 @@
           "documentation": "<p>List of requirements that are related to a standards control.</p>"
         }
       },
-      "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Compliance check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Compliance check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>"
+      "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Compliance check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Compliance check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>"
     },
     "ComplianceStatus": {
       "type": "string",
@@ -3373,7 +3398,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>DescribeActionTargets</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3393,7 +3418,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -3426,7 +3451,7 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token that is required for pagination.</p>",
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>DescribeProducts</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>",
           "location": "querystring",
           "locationName": "NextToken"
         },
@@ -3450,7 +3475,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -3468,7 +3493,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.</p>",
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>DescribeStandardsControls</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>",
           "location": "querystring",
           "locationName": "NextToken"
         },
@@ -3489,7 +3514,37 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If there are more compliance standards control remaining in the results, then this is the pagination token to use to request the next page of compliance standard controls.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeStandardsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>DescribeStandards</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of standards to return.</p>",
+          "location": "querystring",
+          "locationName": "MaxResults"
+        }
+      }
+    },
+    "DescribeStandardsResponse": {
+      "type": "structure",
+      "members": {
+        "Standards": {
+          "shape": "Standards",
+          "documentation": "<p>A list of available standards.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -3595,7 +3650,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>Paginates results. On your first call to the <code>GetEnabledStandards</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.</p>"
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>GetEnabledStandards</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3612,7 +3667,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -3629,7 +3684,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>Paginates results. On your first call to the <code>GetFindings</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.</p>"
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>GetFindings</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3649,7 +3704,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -3688,7 +3743,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>Paginates results. On your first call to the <code>GetInsights</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.</p>"
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>GetInsights</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3708,7 +3763,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -3959,7 +4014,7 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>Paginates results. On your first call to the <code>ListEnabledProductsForImport</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>NextToken</code> from the previous response.</p>",
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>ListEnabledProductsForImport</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>",
           "location": "querystring",
           "locationName": "NextToken"
         },
@@ -3980,7 +4035,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -3995,7 +4050,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>Paginates results. On your first call to the <code>ListInvitations</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>NextToken</code> from the previous response. </p>",
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>ListInvitations</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>",
           "location": "querystring",
           "locationName": "NextToken"
         }
@@ -4010,7 +4065,7 @@
         },
         "NextToken": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -4019,7 +4074,7 @@
       "members": {
         "OnlyAssociated": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is <code>TRUE</code>.</p> <p>If <code>onlyAssociated</code> is set to <code>TRUE</code>, the response includes member accounts whose relationship status with the master is set to <code>ENABLED</code> or <code>DISABLED</code>.</p> <p>If <code>onlyAssociated</code> is set to <code>FALSE</code>, the response includes all existing member accounts. </p>",
+          "documentation": "<p>Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is <code>TRUE</code>.</p> <p>If <code>OnlyAssociated</code> is set to <code>TRUE</code>, the response includes member accounts whose relationship status with the master is set to <code>ENABLED</code> or <code>DISABLED</code>.</p> <p>If <code>OnlyAssociated</code> is set to <code>FALSE</code>, the response includes all existing member accounts. </p>",
           "location": "querystring",
           "locationName": "OnlyAssociated"
         },
@@ -4031,7 +4086,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>Paginates results. On your first call to the <code>ListMembers</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set <code>nextToken</code> in the request to the value of <code>nextToken</code> from the previous response.</p>",
+          "documentation": "<p>The token that is required for pagination. On your first call to the <code>ListMembers</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>",
           "location": "querystring",
           "locationName": "NextToken"
         }
@@ -4046,7 +4101,7 @@
         },
         "NextToken": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The token that is required for pagination.</p>"
+          "documentation": "<p>The pagination token to use to request the next page of results.</p>"
         }
       }
     },
@@ -4709,6 +4764,30 @@
         "desc"
       ]
     },
+    "Standard": {
+      "type": "structure",
+      "members": {
+        "StandardsArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of a standard.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the standard.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A description of the standard.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a specific standard.</p>"
+    },
+    "Standards": {
+      "type": "list",
+      "member": {
+        "shape": "Standard"
+      }
+    },
     "StandardsControl": {
       "type": "structure",
       "members": {
@@ -4742,11 +4821,15 @@
         },
         "RemediationUrl": {
           "shape": "NonEmptyString",
-          "documentation": "<p>A link to remediation information for the control in the Security Hub user documentation</p>"
+          "documentation": "<p>A link to remediation information for the control in the Security Hub user documentation.</p>"
         },
         "SeverityRating": {
           "shape": "SeverityRating",
           "documentation": "<p>The severity of findings generated from this compliance standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.</p>"
+        },
+        "RelatedRequirements": {
+          "shape": "RelatedRequirementsList",
+          "documentation": "<p>The list of requirements that are related to this control.</p>"
         }
       },
       "documentation": "<p>Details for an individual compliance standard control.</p>"
@@ -4791,7 +4874,7 @@
         },
         "StandardsArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ARN of a standard.</p> <p>In this release, Security Hub supports only the CIS AWS Foundations standard, which uses the following ARN: <code>arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.</code> </p>"
+          "documentation": "<p>The ARN of a standard.</p>"
         },
         "StandardsInput": {
           "shape": "StandardsInputParameterMap",
@@ -4820,7 +4903,7 @@
       "members": {
         "StandardsArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ARN of the standard that you want to enable.</p> <important> <p>In this release, Security Hub only supports the CIS AWS Foundations standard. </p> <p>Its ARN is <code>arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0</code>.</p> </important>"
+          "documentation": "<p>The ARN of the standard that you want to enable. To view the list of available standards and their ARNs, use the <code> <a>DescribeStandards</a> </code> operation.</p>"
         },
         "StandardsInput": {
           "shape": "StandardsInputParameterMap",
@@ -5188,5 +5271,5 @@
       ]
     }
   },
-  "documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the compliance status of your environment based on CIS AWS Foundations compliance checks. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code>UpdateFindings</code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 request per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>"
+  "documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the compliance status of your environment based on controls from supported standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>"
 }

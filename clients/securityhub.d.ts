@@ -20,19 +20,19 @@ declare class SecurityHub extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Standards Supported in AWS Security Hub.
+   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Compliance Standards section of the AWS Security Hub User Guide.
    */
   batchDisableStandards(params: SecurityHub.Types.BatchDisableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
   /**
-   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Standards Supported in AWS Security Hub.
+   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Compliance Standards section of the AWS Security Hub User Guide.
    */
   batchDisableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
   /**
-   * Enables the standards specified by the provided standardsArn. In this release, only CIS AWS Foundations standards are supported. For more information, see Standards Supported in AWS Security Hub.
+   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the  DescribeStandards  operation. For more information, see the Compliance Standards section of the AWS Security Hub User Guide.
    */
   batchEnableStandards(params: SecurityHub.Types.BatchEnableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
-   * Enables the standards specified by the provided standardsArn. In this release, only CIS AWS Foundations standards are supported. For more information, see Standards Supported in AWS Security Hub.
+   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the  DescribeStandards  operation. For more information, see the Compliance Standards section of the AWS Security Hub User Guide.
    */
   batchEnableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class SecurityHub extends Service {
    */
   createInsight(callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. After you use CreateMembers to create member account associations in Security Hub, you must use the InviteMembers operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. After you use CreateMembers to create member account associations in Security Hub, you must use the  InviteMembers  operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
    */
   createMembers(params: SecurityHub.Types.CreateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. After you use CreateMembers to create member account associations in Security Hub, you must use the InviteMembers operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. After you use CreateMembers to create member account associations in Security Hub, you must use the  InviteMembers  operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
    */
   createMembers(callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
@@ -132,6 +132,14 @@ declare class SecurityHub extends Service {
    */
   describeProducts(callback?: (err: AWSError, data: SecurityHub.Types.DescribeProductsResponse) => void): Request<SecurityHub.Types.DescribeProductsResponse, AWSError>;
   /**
+   * Returns a list of the available standards in Security Hub. For each standard, the results include the standard ARN, the name, and a description. 
+   */
+  describeStandards(params: SecurityHub.Types.DescribeStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsResponse) => void): Request<SecurityHub.Types.DescribeStandardsResponse, AWSError>;
+  /**
+   * Returns a list of the available standards in Security Hub. For each standard, the results include the standard ARN, the name, and a description. 
+   */
+  describeStandards(callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsResponse) => void): Request<SecurityHub.Types.DescribeStandardsResponse, AWSError>;
+  /**
    * Returns a list of compliance standards controls. For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.
    */
   describeStandardsControls(params: SecurityHub.Types.DescribeStandardsControlsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsControlsResponse) => void): Request<SecurityHub.Types.DescribeStandardsControlsResponse, AWSError>;
@@ -180,11 +188,11 @@ declare class SecurityHub extends Service {
    */
   enableImportFindingsForProduct(callback?: (err: AWSError, data: SecurityHub.Types.EnableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.EnableImportFindingsForProductResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. Enabling Security Hub also enables the CIS AWS Foundations standard. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting Up AWS Security Hub.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(params: SecurityHub.Types.EnableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. Enabling Security Hub also enables the CIS AWS Foundations standard. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting Up AWS Security Hub.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
@@ -244,11 +252,11 @@ declare class SecurityHub extends Service {
    */
   getMembers(callback?: (err: AWSError, data: SecurityHub.Types.GetMembersResponse) => void): Request<SecurityHub.Types.GetMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first use the CreateMembers action to create the member account in Security Hub. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.
+   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first use the  CreateMembers  action to create the member account in Security Hub. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.
    */
   inviteMembers(params: SecurityHub.Types.InviteMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first use the CreateMembers action to create the member account in Security Hub. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.
+   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first use the  CreateMembers  action to create the member account in Security Hub. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.
    */
   inviteMembers(callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
@@ -1340,7 +1348,7 @@ declare namespace SecurityHub {
      */
     Resources: ResourceList;
     /**
-     * This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     * This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.
      */
     Compliance?: Compliance;
     /**
@@ -1658,7 +1666,7 @@ declare namespace SecurityHub {
      */
     ResourceDetailsOther?: MapFilterList;
     /**
-     * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, CIS AWS Foundations). Contains compliance-related finding details.
+     * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.
      */
     ComplianceStatus?: StringFilterList;
     /**
@@ -1805,7 +1813,7 @@ declare namespace SecurityHub {
   }
   export interface BatchEnableStandardsRequest {
     /**
-     * The list of standards compliance checks to enable.  In this release, Security Hub supports only the CIS AWS Foundations standard. The ARN for the standard is arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0. 
+     * The list of standards compliance checks to enable.
      */
     StandardsSubscriptionRequests: StandardsSubscriptionRequests;
   }
@@ -2011,7 +2019,7 @@ declare namespace SecurityHub {
      */
     ActionTargetArns?: ArnList;
     /**
-     * The token that is required for pagination.
+     * The token that is required for pagination. On your first call to the DescribeActionTargets operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -2025,7 +2033,7 @@ declare namespace SecurityHub {
      */
     ActionTargets: ActionTargetList;
     /**
-     * The token that is required for pagination.
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -2047,7 +2055,7 @@ declare namespace SecurityHub {
   }
   export interface DescribeProductsRequest {
     /**
-     * The token that is required for pagination.
+     * The token that is required for pagination. On your first call to the DescribeProducts operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -2061,7 +2069,7 @@ declare namespace SecurityHub {
      */
     Products: ProductsList;
     /**
-     * The token that is required for pagination.
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -2071,7 +2079,7 @@ declare namespace SecurityHub {
      */
     StandardsSubscriptionArn: NonEmptyString;
     /**
-     * For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.
+     * The token that is required for pagination. On your first call to the DescribeStandardsControls operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -2085,7 +2093,27 @@ declare namespace SecurityHub {
      */
     Controls?: StandardsControls;
     /**
-     * If there are more compliance standards control remaining in the results, then this is the pagination token to use to request the next page of compliance standard controls.
+     * The pagination token to use to request the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeStandardsRequest {
+    /**
+     * The token that is required for pagination. On your first call to the DescribeStandards operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of standards to return.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeStandardsResponse {
+    /**
+     * A list of available standards.
+     */
+    Standards?: Standards;
+    /**
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -2141,7 +2169,7 @@ declare namespace SecurityHub {
      */
     StandardsSubscriptionArns?: StandardsSubscriptionArns;
     /**
-     * Paginates results. On your first call to the GetEnabledStandards operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of nextToken from the previous response.
+     * The token that is required for pagination. On your first call to the GetEnabledStandards operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -2155,7 +2183,7 @@ declare namespace SecurityHub {
      */
     StandardsSubscriptions?: StandardsSubscriptions;
     /**
-     * The token that is required for pagination.
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -2169,7 +2197,7 @@ declare namespace SecurityHub {
      */
     SortCriteria?: SortCriteria;
     /**
-     * Paginates results. On your first call to the GetFindings operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of nextToken from the previous response.
+     * The token that is required for pagination. On your first call to the GetFindings operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -2183,7 +2211,7 @@ declare namespace SecurityHub {
      */
     Findings: AwsSecurityFindingList;
     /**
-     * The token that is required for pagination.
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -2205,7 +2233,7 @@ declare namespace SecurityHub {
      */
     InsightArns?: ArnList;
     /**
-     * Paginates results. On your first call to the GetInsights operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of nextToken from the previous response.
+     * The token that is required for pagination. On your first call to the GetInsights operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -2219,7 +2247,7 @@ declare namespace SecurityHub {
      */
     Insights: InsightList;
     /**
-     * The token that is required for pagination.
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -2362,7 +2390,7 @@ declare namespace SecurityHub {
   export type KeywordFilterList = KeywordFilter[];
   export interface ListEnabledProductsForImportRequest {
     /**
-     * Paginates results. On your first call to the ListEnabledProductsForImport operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of NextToken from the previous response.
+     * The token that is required for pagination. On your first call to the ListEnabledProductsForImport operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
     /**
@@ -2376,7 +2404,7 @@ declare namespace SecurityHub {
      */
     ProductSubscriptions?: ProductSubscriptionArnList;
     /**
-     * The token that is required for pagination.
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -2386,7 +2414,7 @@ declare namespace SecurityHub {
      */
     MaxResults?: MaxResults;
     /**
-     * Paginates results. On your first call to the ListInvitations operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of NextToken from the previous response. 
+     * The token that is required for pagination. On your first call to the ListInvitations operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
   }
@@ -2396,13 +2424,13 @@ declare namespace SecurityHub {
      */
     Invitations?: InvitationList;
     /**
-     * The token that is required for pagination.
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NonEmptyString;
   }
   export interface ListMembersRequest {
     /**
-     * Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is TRUE. If onlyAssociated is set to TRUE, the response includes member accounts whose relationship status with the master is set to ENABLED or DISABLED. If onlyAssociated is set to FALSE, the response includes all existing member accounts. 
+     * Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is TRUE. If OnlyAssociated is set to TRUE, the response includes member accounts whose relationship status with the master is set to ENABLED or DISABLED. If OnlyAssociated is set to FALSE, the response includes all existing member accounts. 
      */
     OnlyAssociated?: Boolean;
     /**
@@ -2410,7 +2438,7 @@ declare namespace SecurityHub {
      */
     MaxResults?: MaxResults;
     /**
-     * Paginates results. On your first call to the ListMembers operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set nextToken in the request to the value of nextToken from the previous response.
+     * The token that is required for pagination. On your first call to the ListMembers operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
      */
     NextToken?: NextToken;
   }
@@ -2420,7 +2448,7 @@ declare namespace SecurityHub {
      */
     Members?: MemberList;
     /**
-     * The token that is required for pagination.
+     * The pagination token to use to request the next page of results.
      */
     NextToken?: NonEmptyString;
   }
@@ -2833,6 +2861,21 @@ declare namespace SecurityHub {
     SortOrder?: SortOrder;
   }
   export type SortOrder = "asc"|"desc"|string;
+  export interface Standard {
+    /**
+     * The ARN of a standard.
+     */
+    StandardsArn?: NonEmptyString;
+    /**
+     * The name of the standard.
+     */
+    Name?: NonEmptyString;
+    /**
+     * A description of the standard.
+     */
+    Description?: NonEmptyString;
+  }
+  export type Standards = Standard[];
   export interface StandardsControl {
     /**
      * The ARN of the compliance standard control.
@@ -2863,13 +2906,17 @@ declare namespace SecurityHub {
      */
     Description?: NonEmptyString;
     /**
-     * A link to remediation information for the control in the Security Hub user documentation
+     * A link to remediation information for the control in the Security Hub user documentation.
      */
     RemediationUrl?: NonEmptyString;
     /**
      * The severity of findings generated from this compliance standard control. The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.
      */
     SeverityRating?: SeverityRating;
+    /**
+     * The list of requirements that are related to this control.
+     */
+    RelatedRequirements?: RelatedRequirementsList;
   }
   export type StandardsControls = StandardsControl[];
   export type StandardsInputParameterMap = {[key: string]: NonEmptyString};
@@ -2880,7 +2927,7 @@ declare namespace SecurityHub {
      */
     StandardsSubscriptionArn: NonEmptyString;
     /**
-     * The ARN of a standard. In this release, Security Hub supports only the CIS AWS Foundations standard, which uses the following ARN: arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0. 
+     * The ARN of a standard.
      */
     StandardsArn: NonEmptyString;
     /**
@@ -2895,7 +2942,7 @@ declare namespace SecurityHub {
   export type StandardsSubscriptionArns = NonEmptyString[];
   export interface StandardsSubscriptionRequest {
     /**
-     * The ARN of the standard that you want to enable.  In this release, Security Hub only supports the CIS AWS Foundations standard.  Its ARN is arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0. 
+     * The ARN of the standard that you want to enable. To view the list of available standards and their ARNs, use the  DescribeStandards  operation.
      */
     StandardsArn: NonEmptyString;
     /**

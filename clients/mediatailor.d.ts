@@ -143,6 +143,10 @@ declare namespace MediaTailor {
      */
     Name?: __string;
     /**
+     * The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+     */
+    PersonalizationThresholdSeconds?: __integerMin1;
+    /**
      * The Amazon Resource Name (ARN) for the playback configuration. 
      */
     PlaybackConfigurationArn?: __string;
@@ -261,6 +265,10 @@ declare namespace MediaTailor {
      */
     TranscodeProfileName?: __string;
     /**
+     * The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+     */
+    PersonalizationThresholdSeconds?: __integerMin1;
+    /**
      * The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.
      */
     VideoContentSourceUrl?: __string;
@@ -296,6 +304,10 @@ declare namespace MediaTailor {
      * The identifier for the playback configuration.
      */
     Name?: __string;
+    /**
+     * The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+     */
+    PersonalizationThresholdSeconds?: __integerMin1;
     /**
      * The URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. 
      */
@@ -338,6 +350,10 @@ declare namespace MediaTailor {
      * The identifier for the playback configuration.
      */
     Name?: __string;
+    /**
+     * The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+     */
+    PersonalizationThresholdSeconds?: __integerMin1;
     /**
      * The Amazon Resource Name (ARN) for the playback configuration. 
      */
@@ -393,6 +409,7 @@ declare namespace MediaTailor {
     TagKeys: __listOf__string;
   }
   export type __integer = number;
+  export type __integerMin1 = number;
   export type __integerMin1Max100 = number;
   export type __listOfPlaybackConfigurations = PlaybackConfiguration[];
   export type __listOf__string = __string[];

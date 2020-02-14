@@ -28,6 +28,14 @@ declare class Shield extends Service {
    */
   associateDRTRole(callback?: (err: AWSError, data: Shield.Types.AssociateDRTRoleResponse) => void): Request<Shield.Types.AssociateDRTRoleResponse, AWSError>;
   /**
+   * Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the AWS WAF and AWS Shield Developer Guide. 
+   */
+  associateHealthCheck(params: Shield.Types.AssociateHealthCheckRequest, callback?: (err: AWSError, data: Shield.Types.AssociateHealthCheckResponse) => void): Request<Shield.Types.AssociateHealthCheckResponse, AWSError>;
+  /**
+   * Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the AWS WAF and AWS Shield Developer Guide. 
+   */
+  associateHealthCheck(callback?: (err: AWSError, data: Shield.Types.AssociateHealthCheckResponse) => void): Request<Shield.Types.AssociateHealthCheckResponse, AWSError>;
+  /**
    * Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone. You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the AWS WAF console. For more information see Getting Started with AWS Shield Advanced and Add AWS Shield Advanced Protection to more AWS Resources.
    */
   createProtection(params: Shield.Types.CreateProtectionRequest, callback?: (err: AWSError, data: Shield.Types.CreateProtectionResponse) => void): Request<Shield.Types.CreateProtectionResponse, AWSError>;
@@ -116,6 +124,14 @@ declare class Shield extends Service {
    */
   disassociateDRTRole(callback?: (err: AWSError, data: Shield.Types.DisassociateDRTRoleResponse) => void): Request<Shield.Types.DisassociateDRTRoleResponse, AWSError>;
   /**
+   * Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the AWS WAF and AWS Shield Developer Guide. 
+   */
+  disassociateHealthCheck(params: Shield.Types.DisassociateHealthCheckRequest, callback?: (err: AWSError, data: Shield.Types.DisassociateHealthCheckResponse) => void): Request<Shield.Types.DisassociateHealthCheckResponse, AWSError>;
+  /**
+   * Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the AWS WAF and AWS Shield Developer Guide. 
+   */
+  disassociateHealthCheck(callback?: (err: AWSError, data: Shield.Types.DisassociateHealthCheckResponse) => void): Request<Shield.Types.DisassociateHealthCheckResponse, AWSError>;
+  /**
    * Returns the SubscriptionState, either Active or Inactive.
    */
   getSubscriptionState(params: Shield.Types.GetSubscriptionStateRequest, callback?: (err: AWSError, data: Shield.Types.GetSubscriptionStateResponse) => void): Request<Shield.Types.GetSubscriptionStateResponse, AWSError>;
@@ -172,6 +188,18 @@ declare namespace Shield {
     RoleArn: RoleArn;
   }
   export interface AssociateDRTRoleResponse {
+  }
+  export interface AssociateHealthCheckRequest {
+    /**
+     * The unique identifier (ID) for the Protection object to add the health check association to. 
+     */
+    ProtectionId: ProtectionId;
+    /**
+     * The Amazon Resource Name (ARN) of the health check to associate with the protection.
+     */
+    HealthCheckArn: HealthCheckArn;
+  }
+  export interface AssociateHealthCheckResponse {
   }
   export interface AttackDetail {
     /**
@@ -375,6 +403,18 @@ declare namespace Shield {
   }
   export interface DisassociateDRTRoleResponse {
   }
+  export interface DisassociateHealthCheckRequest {
+    /**
+     * The unique identifier (ID) for the Protection object to remove the health check association from. 
+     */
+    ProtectionId: ProtectionId;
+    /**
+     * The Amazon Resource Name (ARN) of the health check that is associated with the protection.
+     */
+    HealthCheckArn: HealthCheckArn;
+  }
+  export interface DisassociateHealthCheckResponse {
+  }
   export type Double = number;
   export type DurationInSeconds = number;
   export type EmailAddress = string;
@@ -393,6 +433,9 @@ declare namespace Shield {
      */
     SubscriptionState: SubscriptionState;
   }
+  export type HealthCheckArn = string;
+  export type HealthCheckId = string;
+  export type HealthCheckIds = HealthCheckId[];
   export type Integer = number;
   export interface Limit {
     /**
@@ -481,6 +524,10 @@ declare namespace Shield {
      * The ARN (Amazon Resource Name) of the AWS resource that is protected.
      */
     ResourceArn?: ResourceArn;
+    /**
+     * The unique identifier (ID) for the Route 53 health check that's associated with the protection. 
+     */
+    HealthCheckIds?: HealthCheckIds;
   }
   export type ProtectionId = string;
   export type ProtectionName = string;
