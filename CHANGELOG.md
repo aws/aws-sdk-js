@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.619.0-->
+<!--LATEST=2.620.0-->
 <!--ENTRYINSERT-->
+
+## 2.620.0
+* feature: Cloud9: AWS Cloud9 now supports the ability to tag Cloud9 development environments. 
+* feature: DynamoDB: Amazon DynamoDB enables you to restore your DynamoDB backup or table data across AWS Regions such that the restored table is created in a different AWS Region from where the source table or backup resides. You can do cross-region restores between AWS commercial Regions, AWS China Regions, and AWS GovCloud (US) Regions. 
+* feature: EC2: Documentation updates for EC2
+* feature: Rekognition: This update adds the ability to detect text in videos and adds filters to image and video text detection.
 
 ## 2.619.0
 * feature: EC2: You can now enable Multi-Attach on Provisioned IOPS io1 volumes through the create-volume API.

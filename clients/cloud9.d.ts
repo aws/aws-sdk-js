@@ -76,6 +76,30 @@ declare class Cloud9 extends Service {
    */
   listEnvironments(callback?: (err: AWSError, data: Cloud9.Types.ListEnvironmentsResult) => void): Request<Cloud9.Types.ListEnvironmentsResult, AWSError>;
   /**
+   * Gets a list of the tags associated with an AWS Cloud9 development environment.
+   */
+  listTagsForResource(params: Cloud9.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Cloud9.Types.ListTagsForResourceResponse) => void): Request<Cloud9.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Gets a list of the tags associated with an AWS Cloud9 development environment.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Cloud9.Types.ListTagsForResourceResponse) => void): Request<Cloud9.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds tags to an AWS Cloud9 development environment.  Tags that you add to an AWS Cloud9 environment by using this method will NOT be automatically propagated to underlying resources. 
+   */
+  tagResource(params: Cloud9.Types.TagResourceRequest, callback?: (err: AWSError, data: Cloud9.Types.TagResourceResponse) => void): Request<Cloud9.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds tags to an AWS Cloud9 development environment.  Tags that you add to an AWS Cloud9 environment by using this method will NOT be automatically propagated to underlying resources. 
+   */
+  tagResource(callback?: (err: AWSError, data: Cloud9.Types.TagResourceResponse) => void): Request<Cloud9.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from an AWS Cloud9 development environment.
+   */
+  untagResource(params: Cloud9.Types.UntagResourceRequest, callback?: (err: AWSError, data: Cloud9.Types.UntagResourceResponse) => void): Request<Cloud9.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from an AWS Cloud9 development environment.
+   */
+  untagResource(callback?: (err: AWSError, data: Cloud9.Types.UntagResourceResponse) => void): Request<Cloud9.Types.UntagResourceResponse, AWSError>;
+  /**
    * Changes the settings of an existing AWS Cloud9 development environment.
    */
   updateEnvironment(params: Cloud9.Types.UpdateEnvironmentRequest, callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentResult) => void): Request<Cloud9.Types.UpdateEnvironmentResult, AWSError>;
@@ -125,6 +149,10 @@ declare namespace Cloud9 {
      * The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of any AWS IAM principal. If this value is not specified, the ARN defaults to this environment's creator.
      */
     ownerArn?: UserArn;
+    /**
+     * An array of key-value pairs that will be associated with the new AWS Cloud9 development environment.
+     */
+    tags?: TagList;
   }
   export interface CreateEnvironmentEC2Result {
     /**
@@ -262,6 +290,7 @@ declare namespace Cloud9 {
      */
     lifecycle?: EnvironmentLifecycle;
   }
+  export type EnvironmentArn = string;
   export type EnvironmentDescription = string;
   export type EnvironmentId = string;
   export type EnvironmentIdList = EnvironmentId[];
@@ -328,13 +357,63 @@ declare namespace Cloud9 {
      */
     environmentIds?: EnvironmentIdList;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to get the tags for.
+     */
+    ResourceARN: EnvironmentArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The list of tags associated with the AWS Cloud9 development environment.
+     */
+    Tags?: TagList;
+  }
   export type MaxResults = number;
   export type MemberPermissions = "read-write"|"read-only"|string;
   export type Permissions = "owner"|"read-write"|"read-only"|string;
   export type PermissionsList = Permissions[];
   export type String = string;
   export type SubnetId = string;
+  export interface Tag {
+    /**
+     * The name part of a tag.
+     */
+    Key: TagKey;
+    /**
+     * The value part of a tag.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to add tags to.
+     */
+    ResourceARN: EnvironmentArn;
+    /**
+     * The list of tags to add to the given AWS Cloud9 development environment.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to remove tags from.
+     */
+    ResourceARN: EnvironmentArn;
+    /**
+     * The tag names of the tags to remove from the given AWS Cloud9 development environment.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateEnvironmentMembershipRequest {
     /**
      * The ID of the environment for the environment member whose settings you want to change.

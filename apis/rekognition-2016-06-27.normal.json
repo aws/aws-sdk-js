@@ -531,7 +531,7 @@
           "shape": "InvalidImageFormatException"
         }
       ],
-      "documentation": "<p>Detects faces within an image that is provided as input.</p> <p> <code>DetectFaces</code> detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on. </p> <p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence. </p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> </note> <p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p>"
+      "documentation": "<p>Detects faces within an image that is provided as input.</p> <p> <code>DetectFaces</code> detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on. </p> <p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence. </p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> </note> <p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p>"
     },
     "DetectLabels": {
       "name": "DetectLabels",
@@ -911,6 +911,43 @@
         }
       ],
       "documentation": "<p>Gets the path tracking results of a Amazon Rekognition Video analysis started by <a>StartPersonTracking</a>.</p> <p>The person path tracking operation is started by a call to <code>StartPersonTracking</code> which returns a job identifier (<code>JobId</code>). When the operation finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartPersonTracking</code>.</p> <p>To get the results of the person path tracking operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <a>GetPersonTracking</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartPersonTracking</code>.</p> <p> <code>GetPersonTracking</code> returns an array, <code>Persons</code>, of tracked persons and the time(s) their paths were tracked in the video. </p> <note> <p> <code>GetPersonTracking</code> only returns the default facial attributes (<code>BoundingBox</code>, <code>Confidence</code>, <code>Landmarks</code>, <code>Pose</code>, and <code>Quality</code>). The other facial attributes listed in the <code>Face</code> object of the following response syntax are not returned. </p> <p>For more information, see FaceDetail in the Amazon Rekognition Developer Guide.</p> </note> <p>By default, the array is sorted by the time(s) a person's path is tracked in the video. You can sort by tracked persons by specifying <code>INDEX</code> for the <code>SortBy</code> input parameter.</p> <p>Use the <code>MaxResults</code> parameter to limit the number of items returned. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetPersonTracking</code> and populate the <code>NextToken</code> request parameter with the token value returned from the previous call to <code>GetPersonTracking</code>.</p>"
+    },
+    "GetTextDetection": {
+      "name": "GetTextDetection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetTextDetectionRequest"
+      },
+      "output": {
+        "shape": "GetTextDetectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InvalidPaginationTokenException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Gets the text detection results of a Amazon Rekognition Video analysis started by <a>StartTextDetection</a>.</p> <p>Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by calling <a>StartTextDetection</a> which returns a job identifier (<code>JobId</code>) When the text detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartTextDetection</code>. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. if so, call <code>GetTextDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call of <code>StartLabelDetection</code>.</p> <p> <code>GetTextDetection</code> returns an array of detected text (<code>TextDetections</code>) sorted by the time the text was detected, up to 50 words per frame of video.</p> <p>Each element of the array includes the detected text, the precentage confidence in the acuracy of the detected text, the time the text was detected, bounding box information for where the text was located, and unique identifiers for words and their lines.</p> <p>Use MaxResults parameter to limit the number of text detections returned. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetTextDetection</code> and populate the <code>NextToken</code> request parameter with the token value returned from the previous call to <code>GetTextDetection</code>.</p>"
     },
     "IndexFaces": {
       "name": "IndexFaces",
@@ -1527,6 +1564,50 @@
       ],
       "documentation": "<p>Starts processing a stream processor. You create a stream processor by calling <a>CreateStreamProcessor</a>. To tell <code>StartStreamProcessor</code> which stream processor to start, use the value of the <code>Name</code> field specified in the call to <code>CreateStreamProcessor</code>.</p>"
     },
+    "StartTextDetection": {
+      "name": "StartTextDetection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartTextDetectionRequest"
+      },
+      "output": {
+        "shape": "StartTextDetectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "IdempotentParameterMismatchException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InvalidS3ObjectException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "VideoTooLargeException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Starts asynchronous detection of text in a stored video.</p> <p>Amazon Rekognition Video can detect text in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and the filename of the video. <code>StartTextDetection</code> returns a job identifier (<code>JobId</code>) which you use to get the results of the operation. When text detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p> <p>To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. if so, call <a>GetTextDetection</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartTextDetection</code>. </p>",
+      "idempotent": true
+    },
     "StopProjectVersion": {
       "name": "StopProjectVersion",
       "http": {
@@ -1683,6 +1764,16 @@
         }
       },
       "documentation": "<p>Identifies the bounding box around the label, face, or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>"
+    },
+    "BoundingBoxHeight": {
+      "type": "float",
+      "max": 1,
+      "min": 0
+    },
+    "BoundingBoxWidth": {
+      "type": "float",
+      "max": 1,
+      "min": 0
     },
     "Celebrity": {
       "type": "structure",
@@ -2470,6 +2561,19 @@
         }
       }
     },
+    "DetectTextFilters": {
+      "type": "structure",
+      "members": {
+        "WordFilter": {
+          "shape": "DetectionFilter"
+        },
+        "RegionsOfInterest": {
+          "shape": "RegionsOfInterest",
+          "documentation": "<p> A Filter focusing on a certain area of the image. Uses a <code>BoundingBox</code> object to set the region of the image.</p>"
+        }
+      },
+      "documentation": "<p>A set of optional parameters that you can use to set the criteria that the text must meet to be included in your response. <code>WordFilter</code> looks at a word’s height, width, and minimum confidence. <code>RegionOfInterest</code> lets you set a specific region of the image to look for text in. </p>"
+    },
     "DetectTextRequest": {
       "type": "structure",
       "required": [
@@ -2479,6 +2583,10 @@
         "Image": {
           "shape": "Image",
           "documentation": "<p>The input image as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI to call Amazon Rekognition operations, you can't pass image bytes. </p> <p>If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the <code>Bytes</code> field. For more information, see Images in the Amazon Rekognition developer guide.</p>"
+        },
+        "Filters": {
+          "shape": "DetectTextFilters",
+          "documentation": "<p>Optional parameters that let you set the criteria that the text must meet to be included in your response.</p>"
         }
       }
     },
@@ -2488,8 +2596,30 @@
         "TextDetections": {
           "shape": "TextDetectionList",
           "documentation": "<p>An array of text that was detected in the input image.</p>"
+        },
+        "TextModelVersion": {
+          "shape": "String",
+          "documentation": "<p>The model version used to detect text.</p>"
         }
       }
+    },
+    "DetectionFilter": {
+      "type": "structure",
+      "members": {
+        "MinConfidence": {
+          "shape": "Percent",
+          "documentation": "<p>Sets confidence of word detection. Words with detection confidence below this will be excluded from the result. Values should be between 0.5 and 1 as Text in Video will not return any result below 0.5.</p>"
+        },
+        "MinBoundingBoxHeight": {
+          "shape": "BoundingBoxHeight",
+          "documentation": "<p>Sets the minimum height of the word bounding box. Words with bounding box heights lesser than this value will be excluded from the result. Value is relative to the video frame height.</p>"
+        },
+        "MinBoundingBoxWidth": {
+          "shape": "BoundingBoxWidth",
+          "documentation": "<p>Sets the minimum width of the word bounding box. Words with bounding boxes widths lesser than this value will be excluded from the result. Value is relative to the video frame width.</p>"
+        }
+      },
+      "documentation": "<p>A set of parameters that allow you to filter out certain results from your returned results.</p>"
     },
     "Emotion": {
       "type": "structure",
@@ -2775,7 +2905,7 @@
         },
         "FaceMatchThreshold": {
           "shape": "Percent",
-          "documentation": "<p>Minimum face match confidence score that must be met to return a result for a recognized face. Default is 70. 0 is the lowest confidence. 100 is the highest confidence.</p>"
+          "documentation": "<p>Minimum face match confidence score that must be met to return a result for a recognized face. Default is 80. 0 is the lowest confidence. 100 is the highest confidence.</p>"
         }
       },
       "documentation": "<p>Input face recognition parameters for an Amazon Rekognition stream processor. <code>FaceRecognitionSettings</code> is a request parameter for <a>CreateStreamProcessor</a>.</p>"
@@ -3149,6 +3279,54 @@
         "Persons": {
           "shape": "PersonDetections",
           "documentation": "<p>An array of the persons detected in the video and the time(s) their path was tracked throughout the video. An array element will exist for each time a person's path is tracked. </p>"
+        }
+      }
+    },
+    "GetTextDetectionRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>Job identifier for the label detection operation for which you want results returned. You get the job identifer from an initial call to <code>StartTextDetection</code>.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns a pagination token in the response. You can use this pagination token to retrieve the next set of text.</p>"
+        }
+      }
+    },
+    "GetTextDetectionResponse": {
+      "type": "structure",
+      "members": {
+        "JobStatus": {
+          "shape": "VideoJobStatus",
+          "documentation": "<p>Current status of the text detection job.</p>"
+        },
+        "StatusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>If the job fails, <code>StatusMessage</code> provides a descriptive error message.</p>"
+        },
+        "VideoMetadata": {
+          "shape": "VideoMetadata"
+        },
+        "TextDetections": {
+          "shape": "TextDetectionResults",
+          "documentation": "<p>An array of text detected in the video. Each element contains the detected text, the time in milliseconds from the start of the video that the text was detected, and where it was detected on the screen.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of text.</p>"
+        },
+        "TextModelVersion": {
+          "shape": "String",
+          "documentation": "<p>Version number of the text detection model that was used to detect text.</p>"
         }
       }
     },
@@ -4031,6 +4209,24 @@
         }
       }
     },
+    "RegionOfInterest": {
+      "type": "structure",
+      "members": {
+        "BoundingBox": {
+          "shape": "BoundingBox",
+          "documentation": "<p>The box representing a region of interest on screen.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a location within the frame that Rekognition checks for text. Uses a <code>BoundingBox</code> object to set a region of the screen.</p> <p>A word is included in the region if the word is more than half in that region. If there is more than one region, the word will be compared with all regions of the screen. Any word more than half in a region is kept in the results.</p>"
+    },
+    "RegionsOfInterest": {
+      "type": "list",
+      "member": {
+        "shape": "RegionOfInterest"
+      },
+      "max": 10,
+      "min": 0
+    },
     "RekognitionUniqueId": {
       "type": "string",
       "pattern": "[0-9A-Za-z]*"
@@ -4448,6 +4644,55 @@
       "type": "structure",
       "members": {}
     },
+    "StartTextDetectionFilters": {
+      "type": "structure",
+      "members": {
+        "WordFilter": {
+          "shape": "DetectionFilter",
+          "documentation": "<p>Filters focusing on qualities of the text, such as confidence or size.</p>"
+        },
+        "RegionsOfInterest": {
+          "shape": "RegionsOfInterest",
+          "documentation": "<p>Filter focusing on a certain area of the frame. Uses a <code>BoundingBox</code> object to set the region of the screen.</p>"
+        }
+      },
+      "documentation": "<p>Set of optional parameters that let you set the criteria text must meet to be included in your response. <code>WordFilter</code> looks at a word's height, width and minimum confidence. <code>RegionOfInterest</code> lets you set a specific region of the screen to look for text in.</p>"
+    },
+    "StartTextDetectionRequest": {
+      "type": "structure",
+      "required": [
+        "Video"
+      ],
+      "members": {
+        "Video": {
+          "shape": "Video"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Idempotent token used to identify the start request. If you use the same token with multiple <code>StartTextDetection</code> requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job from being accidentaly started more than once.</p>"
+        },
+        "NotificationChannel": {
+          "shape": "NotificationChannel"
+        },
+        "JobTag": {
+          "shape": "JobTag",
+          "documentation": "<p>An identifier returned in the completion status published by your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.</p>"
+        },
+        "Filters": {
+          "shape": "StartTextDetectionFilters",
+          "documentation": "<p>Optional parameters that let you set criteria the text must meet to be included in your response.</p>"
+        }
+      }
+    },
+    "StartTextDetectionResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>Identifier for the text detection job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetTextDetection</code>.</p>"
+        }
+      }
+    },
     "StatusMessage": {
       "type": "string"
     },
@@ -4646,6 +4891,26 @@
       "type": "list",
       "member": {
         "shape": "TextDetection"
+      }
+    },
+    "TextDetectionResult": {
+      "type": "structure",
+      "members": {
+        "Timestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time, in milliseconds from the start of the video, that the text was detected.</p>"
+        },
+        "TextDetection": {
+          "shape": "TextDetection",
+          "documentation": "<p>Details about text detected in a video.</p>"
+        }
+      },
+      "documentation": "<p>Information about text detected in a video. Incudes the detected text, the time in milliseconds from the start of the video that the text was detected, and where it was detected on the screen.</p>"
+    },
+    "TextDetectionResults": {
+      "type": "list",
+      "member": {
+        "shape": "TextDetectionResult"
       }
     },
     "TextTypes": {

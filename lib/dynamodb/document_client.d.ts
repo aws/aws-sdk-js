@@ -1342,7 +1342,7 @@ export namespace DocumentClient {
      */
     ExclusiveStartGlobalTableName?: TableName;
     /**
-     * The maximum number of table names to return.
+     * The maximum number of table names to return, if the parameter is not specified DynamoDB defaults to 100. If the number of global tables DynamoDB finds reaches this limit, it stops the operation and returns the table names collected up to that point, with a table name in the LastEvaluatedGlobalTableName to apply in a subsequent operation to the ExclusiveStartGlobalTableName parameter.
      */
     Limit?: PositiveIntegerObject;
     /**
@@ -1996,6 +1996,10 @@ export namespace DocumentClient {
      * Provisioned throughput settings for the restored table.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughput;
+    /**
+     * The new server-side encryption settings for the restored table.
+     */
+    SSESpecificationOverride?: SSESpecification;
   }
   export interface RestoreTableFromBackupOutput {
     /**
@@ -2005,9 +2009,13 @@ export namespace DocumentClient {
   }
   export interface RestoreTableToPointInTimeInput {
     /**
+     * The DynamoDB table that will be restored. This value is an Amazon Resource Name (ARN).
+     */
+    SourceTableArn?: TableArn;
+    /**
      * Name of the source table that is being restored.
      */
-    SourceTableName: TableName;
+    SourceTableName?: TableName;
     /**
      * The name of the new table to which it must be restored to.
      */
@@ -2036,6 +2044,10 @@ export namespace DocumentClient {
      * Provisioned throughput settings for the restored table.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughput;
+    /**
+     * The new server-side encryption settings for the restored table.
+     */
+    SSESpecificationOverride?: SSESpecification;
   }
   export interface RestoreTableToPointInTimeOutput {
     /**

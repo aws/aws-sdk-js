@@ -117,11 +117,11 @@ declare class Rekognition extends Service {
    */
   detectCustomLabels(callback?: (err: AWSError, data: Rekognition.Types.DetectCustomLabelsResponse) => void): Request<Rekognition.Types.DetectCustomLabelsResponse, AWSError>;
   /**
-   * Detects faces within an image that is provided as input.  DetectFaces detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on.  The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence.  You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   This is a stateless API operation. That is, the operation does not persist any data.  This operation requires permissions to perform the rekognition:DetectFaces action. 
+   * Detects faces within an image that is provided as input.  DetectFaces detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on.  The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence.  You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   This is a stateless API operation. That is, the operation does not persist any data.  This operation requires permissions to perform the rekognition:DetectFaces action. 
    */
   detectFaces(params: Rekognition.Types.DetectFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.DetectFacesResponse) => void): Request<Rekognition.Types.DetectFacesResponse, AWSError>;
   /**
-   * Detects faces within an image that is provided as input.  DetectFaces detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on.  The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence.  You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   This is a stateless API operation. That is, the operation does not persist any data.  This operation requires permissions to perform the rekognition:DetectFaces action. 
+   * Detects faces within an image that is provided as input.  DetectFaces detects the 100 largest faces in the image. For each face detected, the operation returns face details. These details include a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), presence of beard, sunglasses, and so on.  The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm might not detect the faces or might detect faces with lower confidence.  You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   This is a stateless API operation. That is, the operation does not persist any data.  This operation requires permissions to perform the rekognition:DetectFaces action. 
    */
   detectFaces(callback?: (err: AWSError, data: Rekognition.Types.DetectFacesResponse) => void): Request<Rekognition.Types.DetectFacesResponse, AWSError>;
   /**
@@ -204,6 +204,14 @@ declare class Rekognition extends Service {
    * Gets the path tracking results of a Amazon Rekognition Video analysis started by StartPersonTracking. The person path tracking operation is started by a call to StartPersonTracking which returns a job identifier (JobId). When the operation finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartPersonTracking. To get the results of the person path tracking operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetPersonTracking and pass the job identifier (JobId) from the initial call to StartPersonTracking.  GetPersonTracking returns an array, Persons, of tracked persons and the time(s) their paths were tracked in the video.    GetPersonTracking only returns the default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned.  For more information, see FaceDetail in the Amazon Rekognition Developer Guide.  By default, the array is sorted by the time(s) a person's path is tracked in the video. You can sort by tracked persons by specifying INDEX for the SortBy input parameter. Use the MaxResults parameter to limit the number of items returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetPersonTracking and populate the NextToken request parameter with the token value returned from the previous call to GetPersonTracking.
    */
   getPersonTracking(callback?: (err: AWSError, data: Rekognition.Types.GetPersonTrackingResponse) => void): Request<Rekognition.Types.GetPersonTrackingResponse, AWSError>;
+  /**
+   * Gets the text detection results of a Amazon Rekognition Video analysis started by StartTextDetection. Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by calling StartTextDetection which returns a job identifier (JobId) When the text detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartTextDetection. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetTextDetection and pass the job identifier (JobId) from the initial call of StartLabelDetection.  GetTextDetection returns an array of detected text (TextDetections) sorted by the time the text was detected, up to 50 words per frame of video. Each element of the array includes the detected text, the precentage confidence in the acuracy of the detected text, the time the text was detected, bounding box information for where the text was located, and unique identifiers for words and their lines. Use MaxResults parameter to limit the number of text detections returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetTextDetection and populate the NextToken request parameter with the token value returned from the previous call to GetTextDetection.
+   */
+  getTextDetection(params: Rekognition.Types.GetTextDetectionRequest, callback?: (err: AWSError, data: Rekognition.Types.GetTextDetectionResponse) => void): Request<Rekognition.Types.GetTextDetectionResponse, AWSError>;
+  /**
+   * Gets the text detection results of a Amazon Rekognition Video analysis started by StartTextDetection. Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by calling StartTextDetection which returns a job identifier (JobId) When the text detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartTextDetection. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetTextDetection and pass the job identifier (JobId) from the initial call of StartLabelDetection.  GetTextDetection returns an array of detected text (TextDetections) sorted by the time the text was detected, up to 50 words per frame of video. Each element of the array includes the detected text, the precentage confidence in the acuracy of the detected text, the time the text was detected, bounding box information for where the text was located, and unique identifiers for words and their lines. Use MaxResults parameter to limit the number of text detections returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetTextDetection and populate the NextToken request parameter with the token value returned from the previous call to GetTextDetection.
+   */
+  getTextDetection(callback?: (err: AWSError, data: Rekognition.Types.GetTextDetectionResponse) => void): Request<Rekognition.Types.GetTextDetectionResponse, AWSError>;
   /**
    * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the SearchFaces and SearchFacesByImage operations. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. To get the number of faces in a collection, call DescribeCollection.  If you're using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image.  If you're using version 4 or later of the face model, image orientation information is not returned in the OrientationCorrection field.  To determine which version of the model you're using, call DescribeCollection and supply the collection ID. You can also get the model version from the value of FaceModelVersion in the response from IndexFaces  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageID for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the ListFaces operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. You can specify the maximum number of faces to index with the MaxFaces input parameter. This is useful when you want to index the largest faces in an image and don't want to index smaller faces, such as those belonging to people standing in the background. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, IndexFaces chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   Information about faces detected in an image, but not indexed, is returned in an array of UnindexedFace objects, UnindexedFaces. Faces aren't indexed for reasons such as:   The number of faces detected exceeds the value of the MaxFaces request parameter.   The face is too small compared to the image dimensions.   The face is too blurry.   The image is too dark.   The face has an extreme pose.   The face doesn’t have enough detail to be suitable for face search.   In response, the IndexFaces operation returns an array of metadata for all detected faces, FaceRecords. This includes:    The bounding box, BoundingBox, of the detected face.    A confidence value, Confidence, which indicates the confidence that the bounding box contains a face.   A face ID, FaceId, assigned by the service for each face that's detected and stored.   An image ID, ImageId, assigned by the service for the input image.   If you request all facial attributes (by using the detectionAttributes parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata.  The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  This operation requires permissions to perform the rekognition:IndexFaces action.
    */
@@ -325,6 +333,14 @@ declare class Rekognition extends Service {
    */
   startStreamProcessor(callback?: (err: AWSError, data: Rekognition.Types.StartStreamProcessorResponse) => void): Request<Rekognition.Types.StartStreamProcessorResponse, AWSError>;
   /**
+   * Starts asynchronous detection of text in a stored video. Amazon Rekognition Video can detect text in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartTextDetection returns a job identifier (JobId) which you use to get the results of the operation. When text detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetTextDetection and pass the job identifier (JobId) from the initial call to StartTextDetection. 
+   */
+  startTextDetection(params: Rekognition.Types.StartTextDetectionRequest, callback?: (err: AWSError, data: Rekognition.Types.StartTextDetectionResponse) => void): Request<Rekognition.Types.StartTextDetectionResponse, AWSError>;
+  /**
+   * Starts asynchronous detection of text in a stored video. Amazon Rekognition Video can detect text in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartTextDetection returns a job identifier (JobId) which you use to get the results of the operation. When text detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetTextDetection and pass the job identifier (JobId) from the initial call to StartTextDetection. 
+   */
+  startTextDetection(callback?: (err: AWSError, data: Rekognition.Types.StartTextDetectionResponse) => void): Request<Rekognition.Types.StartTextDetectionResponse, AWSError>;
+  /**
    * Stops a running model. The operation might take a while to complete. To check the current status, call DescribeProjectVersions. 
    */
   stopProjectVersion(params: Rekognition.Types.StopProjectVersionRequest, callback?: (err: AWSError, data: Rekognition.Types.StopProjectVersionResponse) => void): Request<Rekognition.Types.StopProjectVersionResponse, AWSError>;
@@ -403,6 +419,8 @@ declare namespace Rekognition {
      */
     Top?: Float;
   }
+  export type BoundingBoxHeight = number;
+  export type BoundingBoxWidth = number;
   export interface Celebrity {
     /**
      * An array of URLs pointing to additional information about the celebrity. If there is no additional information about the celebrity, this list is empty.
@@ -924,17 +942,46 @@ declare namespace Rekognition {
      */
     HumanLoopActivationOutput?: HumanLoopActivationOutput;
   }
+  export interface DetectTextFilters {
+    WordFilter?: DetectionFilter;
+    /**
+     *  A Filter focusing on a certain area of the image. Uses a BoundingBox object to set the region of the image.
+     */
+    RegionsOfInterest?: RegionsOfInterest;
+  }
   export interface DetectTextRequest {
     /**
      * The input image as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI to call Amazon Rekognition operations, you can't pass image bytes.  If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the Bytes field. For more information, see Images in the Amazon Rekognition developer guide.
      */
     Image: Image;
+    /**
+     * Optional parameters that let you set the criteria that the text must meet to be included in your response.
+     */
+    Filters?: DetectTextFilters;
   }
   export interface DetectTextResponse {
     /**
      * An array of text that was detected in the input image.
      */
     TextDetections?: TextDetectionList;
+    /**
+     * The model version used to detect text.
+     */
+    TextModelVersion?: String;
+  }
+  export interface DetectionFilter {
+    /**
+     * Sets confidence of word detection. Words with detection confidence below this will be excluded from the result. Values should be between 0.5 and 1 as Text in Video will not return any result below 0.5.
+     */
+    MinConfidence?: Percent;
+    /**
+     * Sets the minimum height of the word bounding box. Words with bounding box heights lesser than this value will be excluded from the result. Value is relative to the video frame height.
+     */
+    MinBoundingBoxHeight?: BoundingBoxHeight;
+    /**
+     * Sets the minimum width of the word bounding box. Words with bounding boxes widths lesser than this value will be excluded from the result. Value is relative to the video frame width.
+     */
+    MinBoundingBoxWidth?: BoundingBoxWidth;
   }
   export interface Emotion {
     /**
@@ -1109,7 +1156,7 @@ declare namespace Rekognition {
      */
     CollectionId?: CollectionId;
     /**
-     * Minimum face match confidence score that must be met to return a result for a recognized face. Default is 70. 0 is the lowest confidence. 100 is the highest confidence.
+     * Minimum face match confidence score that must be met to return a result for a recognized face. Default is 80. 0 is the lowest confidence. 100 is the highest confidence.
      */
     FaceMatchThreshold?: Percent;
   }
@@ -1396,6 +1443,43 @@ declare namespace Rekognition {
      * An array of the persons detected in the video and the time(s) their path was tracked throughout the video. An array element will exist for each time a person's path is tracked. 
      */
     Persons?: PersonDetections;
+  }
+  export interface GetTextDetectionRequest {
+    /**
+     * Job identifier for the label detection operation for which you want results returned. You get the job identifer from an initial call to StartTextDetection.
+     */
+    JobId: JobId;
+    /**
+     * Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns a pagination token in the response. You can use this pagination token to retrieve the next set of text.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface GetTextDetectionResponse {
+    /**
+     * Current status of the text detection job.
+     */
+    JobStatus?: VideoJobStatus;
+    /**
+     * If the job fails, StatusMessage provides a descriptive error message.
+     */
+    StatusMessage?: StatusMessage;
+    VideoMetadata?: VideoMetadata;
+    /**
+     * An array of text detected in the video. Each element contains the detected text, the time in milliseconds from the start of the video that the text was detected, and where it was detected on the screen.
+     */
+    TextDetections?: TextDetectionResults;
+    /**
+     * If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of text.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Version number of the text detection model that was used to detect text.
+     */
+    TextModelVersion?: String;
   }
   export interface GroundTruthManifest {
     S3Object?: S3Object;
@@ -1880,6 +1964,13 @@ declare namespace Rekognition {
      */
     OrientationCorrection?: OrientationCorrection;
   }
+  export interface RegionOfInterest {
+    /**
+     * The box representing a region of interest on screen.
+     */
+    BoundingBox?: BoundingBox;
+  }
+  export type RegionsOfInterest = RegionOfInterest[];
   export type RekognitionUniqueId = string;
   export type RoleArn = string;
   export type S3Bucket = string;
@@ -2171,6 +2262,38 @@ declare namespace Rekognition {
   }
   export interface StartStreamProcessorResponse {
   }
+  export interface StartTextDetectionFilters {
+    /**
+     * Filters focusing on qualities of the text, such as confidence or size.
+     */
+    WordFilter?: DetectionFilter;
+    /**
+     * Filter focusing on a certain area of the frame. Uses a BoundingBox object to set the region of the screen.
+     */
+    RegionsOfInterest?: RegionsOfInterest;
+  }
+  export interface StartTextDetectionRequest {
+    Video: Video;
+    /**
+     * Idempotent token used to identify the start request. If you use the same token with multiple StartTextDetection requests, the same JobId is returned. Use ClientRequestToken to prevent the same job from being accidentaly started more than once.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    NotificationChannel?: NotificationChannel;
+    /**
+     * An identifier returned in the completion status published by your Amazon Simple Notification Service topic. For example, you can use JobTag to group related jobs and identify them in the completion notification.
+     */
+    JobTag?: JobTag;
+    /**
+     * Optional parameters that let you set criteria the text must meet to be included in your response.
+     */
+    Filters?: StartTextDetectionFilters;
+  }
+  export interface StartTextDetectionResponse {
+    /**
+     * Identifier for the text detection job. Use JobId to identify the job in a subsequent call to GetTextDetection.
+     */
+    JobId?: JobId;
+  }
   export type StatusMessage = string;
   export interface StopProjectVersionRequest {
     /**
@@ -2285,6 +2408,17 @@ declare namespace Rekognition {
     Geometry?: Geometry;
   }
   export type TextDetectionList = TextDetection[];
+  export interface TextDetectionResult {
+    /**
+     * The time, in milliseconds from the start of the video, that the text was detected.
+     */
+    Timestamp?: Timestamp;
+    /**
+     * Details about text detected in a video.
+     */
+    TextDetection?: TextDetection;
+  }
+  export type TextDetectionResults = TextDetectionResult[];
   export type TextTypes = "LINE"|"WORD"|string;
   export type Timestamp = number;
   export interface TrainingData {
