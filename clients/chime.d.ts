@@ -2087,6 +2087,10 @@ declare namespace Chime {
      */
     AudioHostUrl?: UriType;
     /**
+     * The audio fallback URL.
+     */
+    AudioFallbackUrl?: UriType;
+    /**
      * The screen data URL.
      */
     ScreenDataUrl?: UriType;

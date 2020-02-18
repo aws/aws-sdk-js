@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.620.0-->
+<!--LATEST=2.621.0-->
 <!--ENTRYINSERT-->
+
+## 2.621.0
+* feature: AutoScaling: Amazon EC2 Auto Scaling now supports the ability to enable/disable target tracking, step scaling, and simple scaling policies.
+* feature: Chime: Added AudioFallbackUrl to support Chime SDK client.
+* feature: RDS: This release supports Microsoft Active Directory authentication for Amazon Aurora.
 
 ## 2.620.0
 * feature: Cloud9: AWS Cloud9 now supports the ability to tag Cloud9 development environments. 

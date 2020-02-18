@@ -950,11 +950,11 @@ declare class RDS extends Service {
    */
   restoreDBClusterFromS3(callback?: (err: AWSError, data: RDS.Types.RestoreDBClusterFromS3Result) => void): Request<RDS.Types.RestoreDBClusterFromS3Result, AWSError>;
   /**
-   * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. This action only applies to Aurora DB clusters. The target DB cluster is created from the source snapshot with a default configuration. If you don't specify a security group, the new DB cluster is associated with the default security group.  This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterFromSnapshot action has completed and the DB cluster is available.  For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
+   * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group. If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster. If you don't specify a security group, the new DB cluster is associated with the default security group. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide.   This action only applies to Aurora DB clusters. 
    */
   restoreDBClusterFromSnapshot(params: RDS.Types.RestoreDBClusterFromSnapshotMessage, callback?: (err: AWSError, data: RDS.Types.RestoreDBClusterFromSnapshotResult) => void): Request<RDS.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
   /**
-   * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. This action only applies to Aurora DB clusters. The target DB cluster is created from the source snapshot with a default configuration. If you don't specify a security group, the new DB cluster is associated with the default security group.  This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterFromSnapshot action has completed and the DB cluster is available.  For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide. 
+   * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group. If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster. If you don't specify a security group, the new DB cluster is associated with the default security group. For more information on Amazon Aurora, see  What Is Amazon Aurora? in the Amazon Aurora User Guide.   This action only applies to Aurora DB clusters. 
    */
   restoreDBClusterFromSnapshot(callback?: (err: AWSError, data: RDS.Types.RestoreDBClusterFromSnapshotResult) => void): Request<RDS.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
   /**
@@ -1669,6 +1669,14 @@ declare namespace RDS {
      * A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.
      */
     CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * The Active Directory directory ID to create the DB cluster in.  For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB cluster. For more information, see Using Kerberos Authentication for Aurora MySQL in the Amazon Aurora User Guide. 
+     */
+    Domain?: String;
+    /**
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     */
+    DomainIAMRoleName?: String;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -2470,6 +2478,10 @@ declare namespace RDS {
      * Specifies whether the DB cluster is a clone of a DB cluster owned by a different AWS account.
      */
     CrossAccountClone?: BooleanOptional;
+    /**
+     * The Active Directory Domain membership records associated with the DB cluster.
+     */
+    DomainMemberships?: DomainMembershipList;
   }
   export interface DBClusterBacktrack {
     /**
@@ -4755,7 +4767,7 @@ declare namespace RDS {
      */
     Domain?: String;
     /**
-     * The status of the DB instance's Active Directory Domain membership, such as joined, pending-join, failed etc).
+     * The status of the Active Directory Domain membership for the DB instance or cluster. Values include joined, pending-join, failed, and so on.
      */
     Status?: String;
     /**
@@ -5368,6 +5380,14 @@ declare namespace RDS {
      * The name of the DB parameter group to apply to all instances of the DB cluster.   When you apply a parameter group using the DBInstanceParameterGroupName parameter, the DB cluster isn't rebooted automatically. Also, parameter changes aren't applied during the next maintenance window but instead are applied immediately.  Default: The existing name setting Constraints:   The DB parameter group must be in the same DB parameter group family as this DB cluster.   The DBInstanceParameterGroupName parameter is only valid in combination with the AllowMajorVersionUpgrade parameter.  
      */
     DBInstanceParameterGroupName?: String;
+    /**
+     * The Active Directory directory ID to move the DB cluster to. Specify none to remove the cluster from its current domain. The domain must be created prior to this operation. 
+     */
+    Domain?: String;
+    /**
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     */
+    DomainIAMRoleName?: String;
     /**
      * The scaling properties of the DB cluster. You can only modify scaling properties for DB clusters in serverless DB engine mode.
      */
@@ -6800,6 +6820,14 @@ declare namespace RDS {
      * A value that indicates whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.
      */
     CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this operation.   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB cluster. For more information, see Using Kerberos Authentication for Aurora MySQL in the Amazon Aurora User Guide. 
+     */
+    Domain?: String;
+    /**
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     */
+    DomainIAMRoleName?: String;
   }
   export interface RestoreDBClusterFromS3Result {
     DBCluster?: DBCluster;
@@ -6885,6 +6913,14 @@ declare namespace RDS {
      * A value that indicates whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.
      */
     CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this operation. 
+     */
+    Domain?: String;
+    /**
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     */
+    DomainIAMRoleName?: String;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -6955,6 +6991,14 @@ declare namespace RDS {
      * A value that indicates whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.
      */
     CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this operation.   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB cluster. For more information, see Using Kerberos Authentication for Aurora MySQL in the Amazon Aurora User Guide. 
+     */
+    Domain?: String;
+    /**
+     * Specify the name of the IAM role to be used when making API calls to the Directory Service.
+     */
+    DomainIAMRoleName?: String;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;

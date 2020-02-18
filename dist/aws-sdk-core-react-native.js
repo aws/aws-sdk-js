@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.620.0',
+	  VERSION: '2.621.0',
 
 	  /**
 	   * @api private
@@ -3510,7 +3510,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'abbreviation', api.metadata.serviceAbbreviation);
 	  property(this, 'fullName', api.metadata.serviceFullName);
 	  property(this, 'serviceId', api.metadata.serviceId);
-	  if (serviceIdentifier) {
+	  if (serviceIdentifier && metadata[serviceIdentifier]) {
 	      property(this, 'xmlNoDefaultLists', metadata[serviceIdentifier].xmlNoDefaultLists, false);
 	  }
 

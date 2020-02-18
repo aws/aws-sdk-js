@@ -1812,7 +1812,7 @@
         },
         "MaxInstanceLifetime": {
           "shape": "MaxInstanceLifetime",
-          "documentation": "<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>Valid Range: Minimum value of 604800.</p>"
+          "documentation": "<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html\">Replacing Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 604800.</p>"
         }
       }
     },
@@ -2932,7 +2932,7 @@
         },
         "WeightedCapacity": {
           "shape": "XmlStringMaxLen32",
-          "documentation": "<p>The number of capacity units, which gives the instance type a proportional weight to other instance types. For example, larger instance types are generally weighted more than smaller instance types. These are the same units that you chose to set the desired capacity in terms of instances, or a performance attribute such as vCPUs, memory, or I/O.</p> <p>Valid Range: Minimum value of 1. Maximum value of 999.</p>"
+          "documentation": "<p>The number of capacity units, which gives the instance type a proportional weight to other instance types. For example, larger instance types are generally weighted more than smaller instance types. These are the same units that you chose to set the desired capacity in terms of instances, or a performance attribute such as vCPUs, memory, or I/O.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html\">Instance Weighting for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 1. Maximum value of 999.</p>"
         }
       },
       "documentation": "<p>Describes an override for a launch template.</p>"
@@ -3543,6 +3543,9 @@
         "TargetTrackingConfiguration": {
           "shape": "TargetTrackingConfiguration",
           "documentation": "<p>A target tracking scaling policy. Includes support for predefined or customized metrics.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html\">TargetTrackingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Conditional: If you specify <code>TargetTrackingScaling</code> for the policy type, you must specify this parameter. (Not used with any other policy type.) </p>"
+        },
+        "Enabled": {
+          "shape": "ScalingPolicyEnabled"
         }
       }
     },
@@ -3707,9 +3710,15 @@
         "TargetTrackingConfiguration": {
           "shape": "TargetTrackingConfiguration",
           "documentation": "<p>A target tracking scaling policy.</p>"
+        },
+        "Enabled": {
+          "shape": "ScalingPolicyEnabled"
         }
       },
       "documentation": "<p>Describes a scaling policy.</p>"
+    },
+    "ScalingPolicyEnabled": {
+      "type": "boolean"
     },
     "ScalingProcessQuery": {
       "type": "structure",
@@ -4197,7 +4206,7 @@
         },
         "MaxInstanceLifetime": {
           "shape": "MaxInstanceLifetime",
-          "documentation": "<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>Valid Range: Minimum value of 604800.</p>"
+          "documentation": "<p>The maximum amount of time, in seconds, that an instance can be in service.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html\">Replacing Auto Scaling Instances Based on Maximum Instance Lifetime</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>Valid Range: Minimum value of 604800.</p>"
         }
       }
     },

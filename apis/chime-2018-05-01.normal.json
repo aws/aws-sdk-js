@@ -5930,6 +5930,10 @@
           "shape": "UriType",
           "documentation": "<p>The audio host URL.</p>"
         },
+        "AudioFallbackUrl": {
+          "shape": "UriType",
+          "documentation": "<p>The audio fallback URL.</p>"
+        },
         "ScreenDataUrl": {
           "shape": "UriType",
           "documentation": "<p>The screen data URL.</p>"

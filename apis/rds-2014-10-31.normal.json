@@ -1308,6 +1308,9 @@
         },
         {
           "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
         }
       ],
       "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>"
@@ -1660,7 +1663,13 @@
       },
       "errors": [
         {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
           "shape": "DBProxyTargetGroupNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
         }
       ],
       "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>"
@@ -1687,6 +1696,9 @@
         },
         {
           "shape": "DBProxyTargetGroupNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
         }
       ],
       "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>"
@@ -2473,6 +2485,9 @@
         },
         {
           "shape": "DBProxyTargetGroupNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
         }
       ],
       "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>"
@@ -2765,6 +2780,9 @@
         },
         {
           "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "InvalidDBProxyStateFault"
         }
       ],
       "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>"
@@ -3061,7 +3079,7 @@
           "shape": "DBClusterParameterGroupNotFoundFault"
         }
       ],
-      "documentation": "<p>Creates a new DB cluster from a DB snapshot or DB cluster snapshot. This action only applies to Aurora DB clusters.</p> <p>The target DB cluster is created from the source snapshot with a default configuration. If you don't specify a security group, the new DB cluster is associated with the default security group.</p> <note> <p>This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <code>CreateDBInstance</code> action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterFromSnapshot</code> action has completed and the DB cluster is available.</p> </note> <p>For more information on Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>"
+      "documentation": "<p>Creates a new DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.</p> <p>If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster. If you don't specify a security group, the new DB cluster is associated with the default security group.</p> <p>For more information on Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>"
     },
     "RestoreDBClusterToPointInTime": {
       "name": "RestoreDBClusterToPointInTime",
@@ -4485,6 +4503,14 @@
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>"
         },
+        "Domain": {
+          "shape": "String",
+          "documentation": "<p>The Active Directory directory ID to create the DB cluster in.</p> <p> For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB cluster. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html\">Using Kerberos Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>. </p>"
+        },
+        "DomainIAMRoleName": {
+          "shape": "String",
+          "documentation": "<p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>"
+        },
         "SourceRegion": {
           "shape": "String",
           "documentation": "<p>The ID of the region that contains the source for the read replica.</p>"
@@ -5472,6 +5498,10 @@
         "CrossAccountClone": {
           "shape": "BooleanOptional",
           "documentation": "<p>Specifies whether the DB cluster is a clone of a DB cluster owned by a different AWS account.</p>"
+        },
+        "DomainMemberships": {
+          "shape": "DomainMembershipList",
+          "documentation": "<p>The Active Directory Domain membership records associated with the DB cluster.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <code>DescribeDBClusters</code>, <code>StopDBCluster</code>, and <code>StartDBCluster</code> actions. </p>",
@@ -8479,7 +8509,7 @@
         },
         "Status": {
           "shape": "String",
-          "documentation": "<p>The status of the DB instance's Active Directory Domain membership, such as joined, pending-join, failed etc).</p>"
+          "documentation": "<p>The status of the Active Directory Domain membership for the DB instance or cluster. Values include joined, pending-join, failed, and so on.</p>"
         },
         "FQDN": {
           "shape": "String",
@@ -8490,7 +8520,7 @@
           "documentation": "<p>The name of the IAM role to be used when making API calls to the Directory Service.</p>"
         }
       },
-      "documentation": "<p>An Active Directory Domain membership record associated with the DB instance.</p>"
+      "documentation": "<p>An Active Directory Domain membership record associated with the DB instance or cluster.</p>"
     },
     "DomainMembershipList": {
       "type": "list",
@@ -8498,7 +8528,7 @@
         "shape": "DomainMembership",
         "locationName": "DomainMembership"
       },
-      "documentation": "<p>List of Active Directory Domain membership records associated with a DB instance.</p>"
+      "documentation": "<p>List of Active Directory Domain membership records associated with a DB instance or cluster.</p>"
     },
     "Double": {
       "type": "double"
@@ -9386,6 +9416,14 @@
         "DBInstanceParameterGroupName": {
           "shape": "String",
           "documentation": "<p>The name of the DB parameter group to apply to all instances of the DB cluster. </p> <note> <p>When you apply a parameter group using the <code>DBInstanceParameterGroupName</code> parameter, the DB cluster isn't rebooted automatically. Also, parameter changes aren't applied during the next maintenance window but instead are applied immediately.</p> </note> <p>Default: The existing name setting</p> <p>Constraints:</p> <ul> <li> <p>The DB parameter group must be in the same DB parameter group family as this DB cluster.</p> </li> <li> <p>The <code>DBInstanceParameterGroupName</code> parameter is only valid in combination with the <code>AllowMajorVersionUpgrade</code> parameter.</p> </li> </ul>"
+        },
+        "Domain": {
+          "shape": "String",
+          "documentation": "<p>The Active Directory directory ID to move the DB cluster to. Specify <code>none</code> to remove the cluster from its current domain. The domain must be created prior to this operation. </p>"
+        },
+        "DomainIAMRoleName": {
+          "shape": "String",
+          "documentation": "<p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>"
         },
         "ScalingConfiguration": {
           "shape": "ScalingConfiguration",
@@ -11347,6 +11385,14 @@
         "CopyTagsToSnapshot": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>"
+        },
+        "Domain": {
+          "shape": "String",
+          "documentation": "<p>Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this operation. </p> <p> For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB cluster. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html\">Using Kerberos Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>. </p>"
+        },
+        "DomainIAMRoleName": {
+          "shape": "String",
+          "documentation": "<p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>"
         }
       }
     },
@@ -11445,6 +11491,14 @@
         "CopyTagsToSnapshot": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>"
+        },
+        "Domain": {
+          "shape": "String",
+          "documentation": "<p>Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this operation. </p>"
+        },
+        "DomainIAMRoleName": {
+          "shape": "String",
+          "documentation": "<p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>"
         }
       },
       "documentation": "<p/>"
@@ -11530,6 +11584,14 @@
         "CopyTagsToSnapshot": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>"
+        },
+        "Domain": {
+          "shape": "String",
+          "documentation": "<p>Specify the Active Directory directory ID to restore the DB cluster in. The domain must be created prior to this operation. </p> <p> For Amazon Aurora DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB cluster. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html\">Using Kerberos Authentication for Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>. </p>"
+        },
+        "DomainIAMRoleName": {
+          "shape": "String",
+          "documentation": "<p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>"
         }
       },
       "documentation": "<p/>"

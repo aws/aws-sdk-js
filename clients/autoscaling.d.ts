@@ -889,7 +889,7 @@ declare namespace AutoScaling {
      */
     ServiceLinkedRoleARN?: ResourceName;
     /**
-     * The maximum amount of time, in seconds, that an instance can be in service. Valid Range: Minimum value of 604800.
+     * The maximum amount of time, in seconds, that an instance can be in service. For more information, see Replacing Auto Scaling Instances Based on Maximum Instance Lifetime in the Amazon EC2 Auto Scaling User Guide. Valid Range: Minimum value of 604800.
      */
     MaxInstanceLifetime?: MaxInstanceLifetime;
   }
@@ -1684,7 +1684,7 @@ declare namespace AutoScaling {
      */
     InstanceType?: XmlStringMaxLen255;
     /**
-     * The number of capacity units, which gives the instance type a proportional weight to other instance types. For example, larger instance types are generally weighted more than smaller instance types. These are the same units that you chose to set the desired capacity in terms of instances, or a performance attribute such as vCPUs, memory, or I/O. Valid Range: Minimum value of 1. Maximum value of 999.
+     * The number of capacity units, which gives the instance type a proportional weight to other instance types. For example, larger instance types are generally weighted more than smaller instance types. These are the same units that you chose to set the desired capacity in terms of instances, or a performance attribute such as vCPUs, memory, or I/O. For more information, see Instance Weighting for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. Valid Range: Minimum value of 1. Maximum value of 999.
      */
     WeightedCapacity?: XmlStringMaxLen32;
   }
@@ -2023,6 +2023,7 @@ declare namespace AutoScaling {
      * A target tracking scaling policy. Includes support for predefined or customized metrics. For more information, see TargetTrackingConfiguration in the Amazon EC2 Auto Scaling API Reference. Conditional: If you specify TargetTrackingScaling for the policy type, you must specify this parameter. (Not used with any other policy type.) 
      */
     TargetTrackingConfiguration?: TargetTrackingConfiguration;
+    Enabled?: ScalingPolicyEnabled;
   }
   export interface PutScheduledUpdateGroupActionType {
     /**
@@ -2142,7 +2143,9 @@ declare namespace AutoScaling {
      * A target tracking scaling policy.
      */
     TargetTrackingConfiguration?: TargetTrackingConfiguration;
+    Enabled?: ScalingPolicyEnabled;
   }
+  export type ScalingPolicyEnabled = boolean;
   export interface ScalingProcessQuery {
     /**
      * The name of the Auto Scaling group.
@@ -2468,7 +2471,7 @@ declare namespace AutoScaling {
      */
     ServiceLinkedRoleARN?: ResourceName;
     /**
-     * The maximum amount of time, in seconds, that an instance can be in service. Valid Range: Minimum value of 604800.
+     * The maximum amount of time, in seconds, that an instance can be in service. For more information, see Replacing Auto Scaling Instances Based on Maximum Instance Lifetime in the Amazon EC2 Auto Scaling User Guide. Valid Range: Minimum value of 604800.
      */
     MaxInstanceLifetime?: MaxInstanceLifetime;
   }
