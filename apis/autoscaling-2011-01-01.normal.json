@@ -165,7 +165,7 @@
           "shape": "ServiceLinkedRoleFailure"
         }
       ],
-      "documentation": "<p>Creates an Auto Scaling group with the specified name and attributes.</p> <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Creates an Auto Scaling group with the specified name and attributes.</p> <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "CreateLaunchConfiguration": {
       "name": "CreateLaunchConfiguration",
@@ -187,7 +187,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Creates a launch configuration.</p> <p>If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html\">Launch Configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Creates a launch configuration.</p> <p>If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html\">Launch Configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "CreateOrUpdateTags": {
       "name": "CreateOrUpdateTags",
@@ -360,7 +360,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Describes the current Amazon EC2 Auto Scaling resource limits for your AWS account.</p> <p>For information about requesting an increase in these limits, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling Limits</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Describes the current Amazon EC2 Auto Scaling resource quotas for your AWS account.</p> <p>For information about requesting an increase, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "DescribeAdjustmentTypes": {
       "name": "DescribeAdjustmentTypes",
@@ -931,7 +931,7 @@
           "shape": "ServiceLinkedRoleFailure"
         }
       ],
-      "documentation": "<p>Creates or updates a scaling policy for an Auto Scaling group. To update an existing scaling policy, use the existing policy name and set the parameters to change. Any existing parameter not changed in an update to an existing policy is not changed in this update request.</p> <p>For more information about using scaling policies to scale your Auto Scaling group automatically, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html\">Dynamic Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+      "documentation": "<p>Creates or updates a scaling policy for an Auto Scaling group.</p> <p>For more information about using scaling policies to scale your Auto Scaling group automatically, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html\">Dynamic Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "PutScheduledUpdateGroupAction": {
       "name": "PutScheduledUpdateGroupAction",
@@ -1092,7 +1092,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size.</p> <p>This call simply makes a termination request. The instance is not terminated immediately.</p>"
+      "documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. This call simply makes a termination request. The instance is not terminated immediately. When an instance is terminated, the instance status changes to <code>terminated</code>. You can't connect to or start an instance after you've terminated it.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are terminated. </p> <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you decrement the desired capacity, your Auto Scaling group can become unbalanced between Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage\">Rebalancing Activities</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "UpdateAutoScalingGroup": {
       "name": "UpdateAutoScalingGroup",
@@ -2043,11 +2043,11 @@
       "members": {
         "MaxNumberOfAutoScalingGroups": {
           "shape": "MaxNumberOfAutoScalingGroups",
-          "documentation": "<p>The maximum number of groups allowed for your AWS account. The default limit is 200 per AWS Region.</p>"
+          "documentation": "<p>The maximum number of groups allowed for your AWS account. The default is 200 groups per AWS Region.</p>"
         },
         "MaxNumberOfLaunchConfigurations": {
           "shape": "MaxNumberOfLaunchConfigurations",
-          "documentation": "<p>The maximum number of launch configurations allowed for your AWS account. The default limit is 200 per AWS Region.</p>"
+          "documentation": "<p>The maximum number of launch configurations allowed for your AWS account. The default is 200 launch configurations per AWS Region.</p>"
         },
         "NumberOfAutoScalingGroups": {
           "shape": "NumberOfAutoScalingGroups",
@@ -3545,7 +3545,8 @@
           "documentation": "<p>A target tracking scaling policy. Includes support for predefined or customized metrics.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html\">TargetTrackingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p> <p>Conditional: If you specify <code>TargetTrackingScaling</code> for the policy type, you must specify this parameter. (Not used with any other policy type.) </p>"
         },
         "Enabled": {
-          "shape": "ScalingPolicyEnabled"
+          "shape": "ScalingPolicyEnabled",
+          "documentation": "<p>Indicates whether the scaling policy is enabled or disabled. The default is enabled. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html\">Disabling a Scaling Policy for an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
         }
       }
     },
@@ -3712,7 +3713,8 @@
           "documentation": "<p>A target tracking scaling policy.</p>"
         },
         "Enabled": {
-          "shape": "ScalingPolicyEnabled"
+          "shape": "ScalingPolicyEnabled",
+          "documentation": "<p>Indicates whether the policy is enabled (<code>true</code>) or disabled (<code>false</code>).</p>"
         }
       },
       "documentation": "<p>Describes a scaling policy.</p>"

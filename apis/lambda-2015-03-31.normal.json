@@ -513,7 +513,7 @@
           "shape": "ServiceException"
         }
       ],
-      "documentation": "<p>Returns details about the concurrency configuration for a function. To set a concurrency limit for a function, use <a>PutFunctionConcurrency</a>.</p>"
+      "documentation": "<p>Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a function, use <a>PutFunctionConcurrency</a>.</p>"
     },
     "GetFunctionConfiguration": {
       "name": "GetFunctionConfiguration",
@@ -947,7 +947,7 @@
           "shape": "InvalidParameterValueException"
         }
       ],
-      "documentation": "<p>Returns a list of Lambda functions, with the version-specific configuration of each.</p> <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in addition to the unpublished version. To get more information about a function or version, use <a>GetFunction</a>.</p>"
+      "documentation": "<p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call.</p> <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in addition to the unpublished version. To get more information about a function or version, use <a>GetFunction</a>.</p>"
     },
     "ListLayerVersions": {
       "name": "ListLayerVersions",
@@ -1088,7 +1088,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Returns a list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">versions</a>, with the version-specific configuration of each. </p>"
+      "documentation": "<p>Returns a list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">versions</a>, with the version-specific configuration of each. Lambda returns up to 50 versions per call.</p>"
     },
     "PublishLayerVersion": {
       "name": "PublishLayerVersion",
@@ -1219,7 +1219,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Configures options for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a> on a function, version, or alias.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p>"
+      "documentation": "<p>Configures options for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a> on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use <a>PutFunctionEventInvokeConfig</a>.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p> <p>To send an invocation record to a queue, topic, function, or event bus, specify a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations\">destination</a>. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.</p>"
     },
     "PutProvisionedConcurrencyConfig": {
       "name": "PutProvisionedConcurrencyConfig",
@@ -3295,7 +3295,7 @@
         },
         "MaxItems": {
           "shape": "MaxListItems",
-          "documentation": "<p>Specify a value between 1 and 50 to limit the number of functions in the response.</p>",
+          "documentation": "<p>The maximum number of functions to return.</p>",
           "location": "querystring",
           "locationName": "MaxItems"
         }
@@ -3478,7 +3478,7 @@
         },
         "MaxItems": {
           "shape": "MaxListItems",
-          "documentation": "<p>Limit the number of versions that are returned.</p>",
+          "documentation": "<p>The maximum number of versions to return.</p>",
           "location": "querystring",
           "locationName": "MaxItems"
         }
@@ -3972,6 +3972,7 @@
         "nodejs4.3-edge",
         "go1.x",
         "ruby2.5",
+        "ruby2.7",
         "provided"
       ]
     },

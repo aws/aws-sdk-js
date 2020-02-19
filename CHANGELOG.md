@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.621.0-->
+<!--LATEST=2.622.0-->
 <!--ENTRYINSERT-->
+
+## 2.622.0
+* feature: Lambda: AWS Lambda now supports Ruby 2.7
+* feature: ServiceCatalog: "ListPortfolioAccess" API now has a new optional parameter "OrganizationParentId". When it is provided and if the portfolio with the "PortfolioId" given was shared with an organization or organizational unit with "OrganizationParentId", all accounts in the organization sub-tree under parent which inherit an organizational portfolio share will be listed, rather than all accounts with external shares. To accommodate long lists returned from the new option, the API now supports pagination.
 
 ## 2.621.0
 * feature: AutoScaling: Amazon EC2 Auto Scaling now supports the ability to enable/disable target tracking, step scaling, and simple scaling policies.
