@@ -16,7 +16,7 @@
     "@types/node": "6.0.92",
     "browserify": "13.1.0",
     "chai": "^3.0",
-    "codecov": "^1.0.1",
+    "codecov": "^3.6.5",
     "coffeeify": "*",
     "coffeescript": "^1.12.7",
     "cucumber": "0.5.x",
