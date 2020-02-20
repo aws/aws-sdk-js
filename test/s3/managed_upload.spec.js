@@ -1176,7 +1176,7 @@
           });
         });
       }
-      return describe('tagging', function() {
+      describe('tagging', function() {
         it('should embed tags in PutObject request for single part uploads', function(done) {
           var reqs;
           reqs = helpers.mockResponses([
@@ -1366,6 +1366,52 @@
             e = error;
             return done();
           }
+        });
+      });
+
+      describe('accesspoint', function() {
+        it('should make subsequent calls with accesspoint', function(done) {
+          var reqs = helpers.mockResponses([
+            {
+              data: {
+                UploadId: 'uploadId'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG1'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG2'
+              }
+            }, {
+              data: {
+                ETag: 'FINAL_ETAG',
+                Location: 'FINAL_LOCATION'
+              }
+            }
+          ]);
+          var size = 18;
+          var opts = {
+            partSize: size,
+            queueSize: 1,
+            service: s3,
+            params: {
+              Body: bigbody,
+              Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint'
+            }
+          };
+          var endpoint = 'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com';
+          upload = new AWS.S3.ManagedUpload(opts);
+          return send({}, function() {
+            expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.completeMultipartUpload']);
+            expect(err).not.to.exist;
+            expect(reqs[0].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[1].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[2].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[3].httpRequest.endpoint.hostname).to.equal(endpoint);
+            return done();
+          });
         });
       });
     });
