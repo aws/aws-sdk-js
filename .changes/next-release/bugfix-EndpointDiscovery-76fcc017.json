@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "EndpointDiscovery",
-  "description": "Update host header in requests when new endpoint is found; Throw error when endpoint discovery is required but not enabled"
-}

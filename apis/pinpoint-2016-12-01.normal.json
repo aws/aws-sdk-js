@@ -5599,10 +5599,7 @@
           "documentation": "<p>The subject line, or title, of the email.</p>"
         }
       },
-      "documentation": "<p>Specifies the content and \"From\" address for an email message that's sent to recipients of a campaign.</p>",
-      "required": [
-        "Title"
-      ]
+      "documentation": "<p>Specifies the content and \"From\" address for an email message that's sent to recipients of a campaign.</p>"
     },
     "CampaignEventFilter": {
       "type": "structure",

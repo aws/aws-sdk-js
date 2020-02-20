@@ -932,7 +932,8 @@
       "type": "string",
       "enum": [
         "EC2",
-        "Fargate"
+        "Fargate",
+        "Lambda"
       ]
     },
     "SavingsPlanProductTypeList": {
@@ -1077,7 +1078,8 @@
       "type": "string",
       "enum": [
         "AmazonEC2",
-        "AmazonECS"
+        "AmazonECS",
+        "AWSLambda"
       ]
     },
     "SavingsPlanRateServiceCodeList": {
@@ -1089,7 +1091,9 @@
     "SavingsPlanRateUnit": {
       "type": "string",
       "enum": [
-        "Hrs"
+        "Hrs",
+        "Lambda-GB-Second",
+        "Request"
       ]
     },
     "SavingsPlanRateUsageType": {

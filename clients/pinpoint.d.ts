@@ -1861,7 +1861,7 @@ declare namespace Pinpoint {
     /**
      * The subject line, or title, of the email.
      */
-    Title: __string;
+    Title?: __string;
   }
   export interface CampaignEventFilter {
     /**

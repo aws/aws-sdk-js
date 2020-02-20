@@ -565,7 +565,7 @@ declare namespace SavingsPlans {
   export type SavingsPlanOperationList = SavingsPlanOperation[];
   export type SavingsPlanPaymentOption = "All Upfront"|"Partial Upfront"|"No Upfront"|string;
   export type SavingsPlanPaymentOptionList = SavingsPlanPaymentOption[];
-  export type SavingsPlanProductType = "EC2"|"Fargate"|string;
+  export type SavingsPlanProductType = "EC2"|"Fargate"|"Lambda"|string;
   export type SavingsPlanProductTypeList = SavingsPlanProductType[];
   export interface SavingsPlanRate {
     /**
@@ -630,9 +630,9 @@ declare namespace SavingsPlans {
   }
   export type SavingsPlanRatePropertyKey = "region"|"instanceType"|"instanceFamily"|"productDescription"|"tenancy"|string;
   export type SavingsPlanRatePropertyList = SavingsPlanRateProperty[];
-  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|string;
+  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AWSLambda"|string;
   export type SavingsPlanRateServiceCodeList = SavingsPlanRateServiceCode[];
-  export type SavingsPlanRateUnit = "Hrs"|string;
+  export type SavingsPlanRateUnit = "Hrs"|"Lambda-GB-Second"|"Request"|string;
   export type SavingsPlanRateUsageType = string;
   export type SavingsPlanRateUsageTypeList = SavingsPlanRateUsageType[];
   export type SavingsPlanServiceCode = string;

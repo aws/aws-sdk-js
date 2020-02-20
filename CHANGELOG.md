@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.622.0-->
+<!--LATEST=2.623.0-->
 <!--ENTRYINSERT-->
+
+## 2.623.0
+* bugfix: EndpointDiscovery: Update host header in requests when new endpoint is found; Throw error when endpoint discovery is required but not enabled
+* feature: AppConfig: This release adds exponential growth type support for deployment strategies.
+* feature: Pinpoint: As of this release of the Amazon Pinpoint API, the Title property is optional for the CampaignEmailMessage object. 
+* feature: SavingsPlans: Added support for AWS Lambda in Compute Savings Plans
 
 ## 2.622.0
 * feature: Lambda: AWS Lambda now supports Ruby 2.7

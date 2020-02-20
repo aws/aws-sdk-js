@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.622.0',
+	  VERSION: '2.623.0',
 
 	  /**
 	   * @api private
@@ -6342,6 +6342,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var newEndpoint = new AWS.Endpoint(endpointStr);
 	    this.endpoint = newEndpoint;
 	    this.path = newEndpoint.path || '/';
+	    if (this.headers['Host']) {
+	      this.headers['Host'] = newEndpoint.host;
+	    }
 	  }
 	});
 
@@ -7317,7 +7320,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param [object] request request object.
 	 * @api private
 	 */
-	function isEndpointDiscoveryApplicable(request) {
+	function isEndpointDiscoveryEnabled(request) {
 	  var service = request.service || {};
 	  if (service.config.endpointDiscoveryEnabled === true) return true;
 
@@ -7369,13 +7372,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var service = request.service || {};
 	  if (hasCustomEndpoint(service) || request.isPresigned()) return done();
 
-	  if (!isEndpointDiscoveryApplicable(request)) return done();
-
-	  request.httpRequest.appendToUserAgent('endpoint-discovery');
-
 	  var operations = service.api.operations || {};
 	  var operationModel = operations[request.operation];
 	  var isEndpointDiscoveryRequired = operationModel ? operationModel.endpointDiscoveryRequired : 'NULL';
+	  var isEnabled = isEndpointDiscoveryEnabled(request);
+
+	  if (!isEnabled) {
+	    // Unless endpoint discovery is required, SDK will fallback to normal regional endpoints.
+	    if (isEndpointDiscoveryRequired === 'REQUIRED') {
+	      throw util.error(new Error(), {
+	        code: 'ConfigurationException',
+	        message: 'Endpoint Discovery is not enabled but this operation requires it.'
+	      });
+	    }
+	    return done();
+	  }
+
+	  request.httpRequest.appendToUserAgent('endpoint-discovery');
 	  switch (isEndpointDiscoveryRequired) {
 	    case 'OPTIONAL':
 	      optionalDiscoverEndpoint(request);
