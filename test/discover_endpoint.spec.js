@@ -454,6 +454,19 @@ describe('endpoint discovery', function() {
       expect(spy.calls[0].arguments[0].httpRequest.headers['x-amz-api-version']).to.eql('2018-09-19');
     });
 
+    it('update "Host" header with newly discovered endpoint', function() {
+      var client = new AWS.Service({
+        endpointDiscoveryEnabled: true,
+        apiConfig: new AWS.Model.Api(api),
+      });
+      var https = require('https');
+      helpers.spyOn(https, 'request').andCallThrough();
+      var request = client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'});
+      helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
+      request.send();
+      expect(request.httpRequest.headers.Host).to.eql('cell1.fakeservice.amazonaws.com');
+    });
+
     if (AWS.util.isNode()) {
       describe('not make more endpoint operation requests if there is an in-flight request', function() {
         var port;
@@ -664,27 +677,6 @@ describe('endpoint discovery', function() {
       expect(getFromCacheSpy.calls.length).to.eql(0);
     });
 
-    it('if endpoint specified in global config, custom endpoint should be preferred', function() {
-      AWS.config.update({endpoint: 'custom-endpoint.amazonaws.com/fake-region'});
-      client = new AWS.Service({
-        apiConfig: new AWS.Model.Api(api),
-      });
-      var getFromCacheSpy = helpers.spyOn(AWS.endpointCache, 'get').andCallThrough();
-      client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'}).send();
-      expect(getFromCacheSpy.calls.length).to.eql(0);
-      delete AWS.config.endpoint;
-    });
-
-    it('if endpoint specified in global config, custom endpoint should be preferred', function() {
-      AWS.config.update({mock: {endpoint: 'custom-endpoint.amazonaws.com/fake-region'}});
-      var MockService = helpers.MockServiceFromApi(api);
-      var client = new MockService({});
-      var getFromCacheSpy = helpers.spyOn(AWS.endpointCache, 'get').andCallThrough();
-      client.makeRequest('requiredEDOperation', {Query: 'query', Record: 'record'}).send();
-      expect(getFromCacheSpy.calls.length).to.eql(0);
-      delete AWS.config.mock;
-    });
-
     it('append "endpoint-discovery" to user-agent on all requests', function() {
       var client = new AWS.Service({
         endpointDiscoveryEnabled: true,
@@ -733,12 +725,22 @@ describe('endpoint discovery', function() {
       });
       helpers.mockHttpResponse(200, {}, '{"Endpoints": [{"Address": "https://cell1.fakeservice.amazonaws.com/fakeregion", "CachePeriodInMinutes": 1}]}');
       client.makeRequest('optionalEDOperation', {Query: 'query'}).send();
-      client.makeRequest('requiredEDOperation',  {Query: 'query', Record: 'record'}).send();
       expect(spy.calls.length).to.eql(0);
+      // Throw if operation requires endpoint discovery but the feature is disabled.
+      var request = client.makeRequest('requiredEDOperation',  {Query: 'query', Record: 'record'});
+      var error;
+      try {
+        request.send();
+      } catch (e) {
+        error = e;
+      }
+      expect(spy.calls.length).to.eql(0);
+      expect(error).not.to.eql(undefined);
+      expect(error.name).to.eql('ConfigurationException');
+      expect(error.message).to.eql('Endpoint Discovery is not enabled but this operation requires it.');
     });
 
     it('turn on endpoint discovery in client config', function() {
-
       client = new AWS.Service({
         endpointDiscoveryEnabled: true,
         apiConfig: new AWS.Model.Api(api),
