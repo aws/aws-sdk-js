@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.623.0-->
+<!--LATEST=2.624.0-->
 <!--ENTRYINSERT-->
+
+## 2.624.0
+* feature: Imagebuilder: This release of EC2 Image Builder increases the maximum policy document size for Image Builder resource-based policy APIs.
+* feature: Redshift: Extend elastic resize to support resizing clusters to different instance types.
 
 ## 2.623.0
 * bugfix: EndpointDiscovery: Update host header in requests when new endpoint is found; Throw error when endpoint discovery is required but not enabled

@@ -2679,7 +2679,7 @@
           "documentation": "<p> The request ID that uniquely identifies this request. </p>"
         },
         "policy": {
-          "shape": "NonEmptyString",
+          "shape": "ResourcePolicyDocument",
           "documentation": "<p> The component policy. </p>"
         }
       }
@@ -2787,7 +2787,7 @@
           "documentation": "<p> The request ID that uniquely identifies this request. </p>"
         },
         "policy": {
-          "shape": "NonEmptyString",
+          "shape": "ResourcePolicyDocument",
           "documentation": "<p> The image policy object. </p>"
         }
       }
@@ -2814,7 +2814,7 @@
           "documentation": "<p> The request ID that uniquely identifies this request. </p>"
         },
         "policy": {
-          "shape": "NonEmptyString",
+          "shape": "ResourcePolicyDocument",
           "documentation": "<p> The image recipe policy object. </p>"
         }
       }
@@ -3952,7 +3952,7 @@
           "documentation": "<p> The Amazon Resource Name (ARN) of the component that this policy should be applied to. </p>"
         },
         "policy": {
-          "shape": "NonEmptyString",
+          "shape": "ResourcePolicyDocument",
           "documentation": "<p> The policy to apply. </p>"
         }
       }
@@ -3982,7 +3982,7 @@
           "documentation": "<p> The Amazon Resource Name (ARN) of the image that this policy should be applied to. </p>"
         },
         "policy": {
-          "shape": "NonEmptyString",
+          "shape": "ResourcePolicyDocument",
           "documentation": "<p> The policy to apply. </p>"
         }
       }
@@ -4012,7 +4012,7 @@
           "documentation": "<p> The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to. </p>"
         },
         "policy": {
-          "shape": "NonEmptyString",
+          "shape": "ResourcePolicyDocument",
           "documentation": "<p> The policy to apply. </p>"
         }
       }
@@ -4033,6 +4033,11 @@
     "ResourceName": {
       "type": "string",
       "pattern": "^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$"
+    },
+    "ResourcePolicyDocument": {
+      "type": "string",
+      "max": 30000,
+      "min": 1
     },
     "RestrictedInteger": {
       "type": "integer",

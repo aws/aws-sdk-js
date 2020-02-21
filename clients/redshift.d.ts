@@ -773,7 +773,7 @@ declare namespace Redshift {
     AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
-  export type ActionType = "restore-cluster"|"recommend-node-config"|string;
+  export type ActionType = "restore-cluster"|"recommend-node-config"|"resize-cluster"|string;
   export type AssociatedClusterList = ClusterAssociatedToSchedule[];
   export type AttributeList = AccountAttribute[];
   export type AttributeNameList = String[];
@@ -2258,7 +2258,7 @@ declare namespace Redshift {
   }
   export interface DescribeNodeConfigurationOptionsMessage {
     /**
-     * The action type to evaluate for possible node configurations. Specify "restore-cluster" to get configuration combinations based on an existing snapshot. Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. 
+     * The action type to evaluate for possible node configurations. Specify "restore-cluster" to get configuration combinations based on an existing snapshot. Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. Specify "resize-cluster" to get configuration combinations for elastic resize based on an existing cluster. 
      */
     ActionType: ActionType;
     /**
@@ -3536,7 +3536,7 @@ declare namespace Redshift {
     /**
      * The new number of nodes for the cluster.
      */
-    NumberOfNodes: Integer;
+    NumberOfNodes?: Integer;
     /**
      * A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false, the resize type is elastic. 
      */
@@ -3868,7 +3868,7 @@ declare namespace Redshift {
      */
     TargetAction?: ScheduledActionType;
     /**
-     * The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)". Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week Year)". For example, "cron(0, 10, *, *, MON, *)". For more information, see Cron Expressions in the Amazon CloudWatch Events User Guide.
+     * The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)". Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week Year)". For example, "cron(0 10 ? * MON *)". For more information, see Cron Expressions in the Amazon CloudWatch Events User Guide.
      */
     Schedule?: String;
     /**

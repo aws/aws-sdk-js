@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "This release of EC2 Image Builder increases the maximum policy document size for Image Builder resource-based policy APIs."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Extend elastic resize to support resizing clusters to different instance types."
+    }
+]

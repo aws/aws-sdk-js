@@ -1098,7 +1098,7 @@ declare namespace Imagebuilder {
     /**
      *  The component policy. 
      */
-    policy?: NonEmptyString;
+    policy?: ResourcePolicyDocument;
   }
   export interface GetComponentRequest {
     /**
@@ -1162,7 +1162,7 @@ declare namespace Imagebuilder {
     /**
      *  The image policy object. 
      */
-    policy?: NonEmptyString;
+    policy?: ResourcePolicyDocument;
   }
   export interface GetImageRecipePolicyRequest {
     /**
@@ -1178,7 +1178,7 @@ declare namespace Imagebuilder {
     /**
      *  The image recipe policy object. 
      */
-    policy?: NonEmptyString;
+    policy?: ResourcePolicyDocument;
   }
   export interface GetImageRecipeRequest {
     /**
@@ -2011,7 +2011,7 @@ declare namespace Imagebuilder {
     /**
      *  The policy to apply. 
      */
-    policy: NonEmptyString;
+    policy: ResourcePolicyDocument;
   }
   export interface PutComponentPolicyResponse {
     /**
@@ -2031,7 +2031,7 @@ declare namespace Imagebuilder {
     /**
      *  The policy to apply. 
      */
-    policy: NonEmptyString;
+    policy: ResourcePolicyDocument;
   }
   export interface PutImagePolicyResponse {
     /**
@@ -2051,7 +2051,7 @@ declare namespace Imagebuilder {
     /**
      *  The policy to apply. 
      */
-    policy: NonEmptyString;
+    policy: ResourcePolicyDocument;
   }
   export interface PutImageRecipePolicyResponse {
     /**
@@ -2064,6 +2064,7 @@ declare namespace Imagebuilder {
     imageRecipeArn?: ImageRecipeArn;
   }
   export type ResourceName = string;
+  export type ResourcePolicyDocument = string;
   export type RestrictedInteger = number;
   export interface S3Logs {
     /**
