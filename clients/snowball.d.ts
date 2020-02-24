@@ -289,7 +289,7 @@ declare namespace Snowball {
      */
     JobType?: JobType;
     /**
-     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide.
      */
     SnowballType?: SnowballType;
     /**
@@ -316,6 +316,10 @@ declare namespace Snowball {
      * The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.
      */
     ForwardingAddressId?: AddressId;
+    /**
+     * The tax documents required in your AWS Region.
+     */
+    TaxDocuments?: TaxDocuments;
   }
   export type ClusterState = "AwaitingQuorum"|"Pending"|"InUse"|"Complete"|"Cancelled"|string;
   export interface CompatibleImage {
@@ -367,7 +371,7 @@ declare namespace Snowball {
      */
     RoleARN: RoleARN;
     /**
-     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide.
      */
     SnowballType?: SnowballType;
     /**
@@ -382,6 +386,10 @@ declare namespace Snowball {
      * The forwarding address ID for a cluster. This field is not supported in most regions.
      */
     ForwardingAddressId?: AddressId;
+    /**
+     * The tax documents required in your AWS Region.
+     */
+    TaxDocuments?: TaxDocuments;
   }
   export interface CreateClusterResult {
     /**
@@ -431,13 +439,17 @@ declare namespace Snowball {
      */
     ClusterId?: ClusterId;
     /**
-     * The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is EDGE.
+     * The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide.
      */
     SnowballType?: SnowballType;
     /**
      * The forwarding address ID for a job. This field is not supported in most regions.
      */
     ForwardingAddressId?: AddressId;
+    /**
+     * The tax documents required in your AWS Region.
+     */
+    TaxDocuments?: TaxDocuments;
   }
   export interface CreateJobResult {
     /**
@@ -541,6 +553,7 @@ declare namespace Snowball {
     EventResourceARN?: ResourceARN;
   }
   export type EventTriggerDefinitionList = EventTriggerDefinition[];
+  export type GSTIN = string;
   export interface GetJobManifestRequest {
     /**
      * The ID for a job that you want to get the manifest file for, for example JID123e4567-e89b-12d3-a456-426655440000.
@@ -588,6 +601,12 @@ declare namespace Snowball {
      * The Amazon S3 presigned URL for the update file associated with the specified JobId value. The software update will be available for 2 days after this request is made. To access an update after the 2 days have passed, you'll have to make another call to GetSoftwareUpdates.
      */
     UpdatesURI?: String;
+  }
+  export interface INDTaxDocuments {
+    /**
+     * The Goods and Services Tax (GST) documents required in AWS Regions in India.
+     */
+    GSTIN?: GSTIN;
   }
   export type Integer = number;
   export type JobId = string;
@@ -705,6 +724,10 @@ declare namespace Snowball {
      * The ID of the address that you want a job shipped to, after it will be shipped to its primary address. This field is not supported in most regions.
      */
     ForwardingAddressId?: AddressId;
+    /**
+     * The metadata associated with the tax documents required in your AWS Region.
+     */
+    TaxDocuments?: TaxDocuments;
   }
   export type JobMetadataList = JobMetadata[];
   export interface JobResource {
@@ -888,6 +911,12 @@ declare namespace Snowball {
   export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|string;
   export type SnsTopicARN = string;
   export type String = string;
+  export interface TaxDocuments {
+    /**
+     * The tax documents required in AWS Regions in India.
+     */
+    IND?: INDTaxDocuments;
+  }
   export type Timestamp = Date;
   export interface UpdateClusterRequest {
     /**

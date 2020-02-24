@@ -125,11 +125,11 @@ declare class DocDB extends Service {
    */
   deleteDBSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the filterName=engine,Values=docdb filter parameter to return only Amazon DocumentDB clusters.
+   * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
    */
   describeCertificates(params: DocDB.Types.DescribeCertificatesMessage, callback?: (err: AWSError, data: DocDB.Types.CertificateMessage) => void): Request<DocDB.Types.CertificateMessage, AWSError>;
   /**
-   * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the filterName=engine,Values=docdb filter parameter to return only Amazon DocumentDB clusters.
+   * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
    */
   describeCertificates(callback?: (err: AWSError, data: DocDB.Types.CertificateMessage) => void): Request<DocDB.Types.CertificateMessage, AWSError>;
   /**
@@ -165,11 +165,11 @@ declare class DocDB extends Service {
    */
   describeDBClusterSnapshots(callback?: (err: AWSError, data: DocDB.Types.DBClusterSnapshotMessage) => void): Request<DocDB.Types.DBClusterSnapshotMessage, AWSError>;
   /**
-   * Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination.
+   * Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the filterName=engine,Values=docdb filter parameter to return only Amazon DocumentDB clusters.
    */
   describeDBClusters(params: DocDB.Types.DescribeDBClustersMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterMessage) => void): Request<DocDB.Types.DBClusterMessage, AWSError>;
   /**
-   * Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination.
+   * Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the filterName=engine,Values=docdb filter parameter to return only Amazon DocumentDB clusters.
    */
   describeDBClusters(callback?: (err: AWSError, data: DocDB.Types.DBClusterMessage) => void): Request<DocDB.Types.DBClusterMessage, AWSError>;
   /**
@@ -578,7 +578,7 @@ declare namespace DocDB {
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
-     * The name of the cluster parameter group. Constraints:   Must match the name of an existing DBClusterParameterGroup.    This value is stored as a lowercase string. 
+     * The name of the cluster parameter group. Constraints:   Must not match the name of an existing DBClusterParameterGroup.    This value is stored as a lowercase string. 
      */
     DBClusterParameterGroupName: String;
     /**

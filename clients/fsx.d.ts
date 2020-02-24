@@ -314,9 +314,17 @@ declare namespace FSx {
      */
     ExportPath?: ArchivePath;
     /**
-     * (Optional) For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system. The chunk size default is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
+     * (Optional) For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system. The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
      */
     ImportedFileChunkSize?: Megabytes;
+    /**
+     * (Optional) Choose SCRATCH_1 and SCRATCH_2 deployment types when you need temporary storage and shorter-term processing of data. The SCRATCH_2 deployment type provides in-transit encryption of data and higher burst throughput capacity than SCRATCH_1. Choose PERSISTENT_1 deployment type for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see  FSx for Lustre Deployment Options. Encryption of data in-transit is automatically enabled when you access a SCRATCH_2 or PERSISTENT_1 file system from Amazon EC2 instances that support this feature. (Default = SCRATCH_1)  Encryption of data in-transit for SCRATCH_2 and PERSISTENT_1 deployment types is supported when accessed from supported instance types in supported AWS Regions. To learn more, Encrypting Data in Transit.
+     */
+    DeploymentType?: LustreDeploymentType;
+    /**
+     *  (Optional) For the PERSISTENT_1 deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 120 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision. (Default = 200 MB/s/TiB)  Valid values are 50, 100, 200.
+     */
+    PerUnitStorageThroughput?: PerUnitStorageThroughput;
   }
   export interface CreateFileSystemRequest {
     /**
@@ -324,15 +332,15 @@ declare namespace FSx {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The type of Amazon FSx file system to create.
+     * The type of Amazon FSx file system to create, either WINDOWS or LUSTRE.
      */
     FileSystemType: FileSystemType;
     /**
-     * The storage capacity of the file system being created. For Windows file systems, valid values are 32 GiB - 65,536 GiB. For Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing in increments of 3600 GiB.
+     * The storage capacity of the file system being created. For Windows file systems, valid values are 32 GiB - 65,536 GiB. For SCRATCH_1 Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing in increments of 3600 GiB. For SCRATCH_2 and PERSISTENT_1 file systems, valid values are 1200, 2400, then continuing in increments of 2400 GiB.
      */
     StorageCapacity: StorageCapacity;
     /**
-     * Specifies the IDs of the subnets that the file system will be accessible from. For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standy file server. You specify one of these subnets as the preferred subnet using the WindowsConfiguration &gt; PreferredSubnetID property. For Windows SINGLE_AZ_1 file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.
+     * Specifies the IDs of the subnets that the file system will be accessible from. For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the WindowsConfiguration &gt; PreferredSubnetID property. For Windows SINGLE_AZ_1 file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.
      */
     SubnetIds: SubnetIds;
     /**
@@ -387,7 +395,7 @@ declare namespace FSx {
      */
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
-     * A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.
+     * A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.
      */
     CopyTagsToBackups?: Flag;
   }
@@ -670,7 +678,7 @@ declare namespace FSx {
      */
     DNSName?: DNSName;
     /**
-     * The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for an Amazon FSx for Windows File Server file system. Amazon FSx for Lustre does not support KMS encryption. 
+     * The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for Amazon FSx for Windows File Server file systems and persistent Amazon FSx for Lustre file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The scratch Amazon FSx for Lustre file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see Encrypt in the AWS Key Management Service API Reference.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -743,13 +751,27 @@ declare namespace FSx {
      */
     NextToken?: NextToken;
   }
+  export type LustreDeploymentType = "SCRATCH_1"|"SCRATCH_2"|"PERSISTENT_1"|string;
   export interface LustreFileSystemConfiguration {
     /**
      * The UTC time that you want to begin your weekly maintenance window.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     DataRepositoryConfiguration?: DataRepositoryConfiguration;
+    /**
+     * The deployment type of the FSX for Lustre file system.
+     */
+    DeploymentType?: LustreDeploymentType;
+    /**
+     *  Per unit storage throughput represents the megabytes per second of read or write throughput per 1 tebibyte of storage provisioned. File system throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). This option is only valid for PERSISTENT_1 deployment types. Valid values are 50, 100, 200. 
+     */
+    PerUnitStorageThroughput?: PerUnitStorageThroughput;
+    /**
+     * You use the MountName value when mounting the file system. For the SCRATCH_1 deployment type, this value is always "fsx". For SCRATCH_2 and PERSISTENT_1 deployment types, this value is a string that is unique within an AWS Region. 
+     */
+    MountName?: LustreFileSystemMountName;
   }
+  export type LustreFileSystemMountName = string;
   export type MaxResults = number;
   export type Megabytes = number;
   export type MegabytesPerSecond = number;
@@ -757,6 +779,7 @@ declare namespace FSx {
   export type NetworkInterfaceIds = NetworkInterfaceId[];
   export type NextToken = string;
   export type OrganizationalUnitDistinguishedName = string;
+  export type PerUnitStorageThroughput = number;
   export type ProgressPercent = number;
   export type ReportFormat = "REPORT_CSV_20191124"|string;
   export type ReportScope = "FAILED_FILES_ONLY"|string;
@@ -959,7 +982,7 @@ declare namespace FSx {
      */
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
-     * A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it's set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn't specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.
+     * A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it's set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn't specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.
      */
     CopyTagsToBackups?: Flag;
   }

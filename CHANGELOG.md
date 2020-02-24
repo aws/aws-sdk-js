@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.624.0-->
+<!--LATEST=2.625.0-->
 <!--ENTRYINSERT-->
+
+## 2.625.0
+* bugfix: Access Point: Avoid mixing up S3 client config set by ManagedUpload with user-set client config
+* feature: CloudWatchEvents: This release allows you to create and manage tags for event buses.
+* feature: EventBridge: This release allows you to create and manage tags for event buses.
+* feature: FSx: Announcing persistent file systems for Amazon FSx for Lustre that are ideal for longer-term storage and workloads, and a new generation of scratch file systems that offer higher burst throughput for spiky workloads.
+* feature: Snowball: AWS Snowball adds a field for entering your GSTIN when creating AWS Snowball jobs in the Asia Pacific (Mumbai) region. 
 
 ## 2.624.0
 * feature: Imagebuilder: This release of EC2 Image Builder increases the maximum policy document size for Image Builder resource-based policy APIs.

@@ -630,7 +630,7 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p>"
+          "documentation": "<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
         },
         "CreationDate": {
           "shape": "Timestamp",
@@ -655,6 +655,10 @@
         "ForwardingAddressId": {
           "shape": "AddressId",
           "documentation": "<p>The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.</p>"
+        },
+        "TaxDocuments": {
+          "shape": "TaxDocuments",
+          "documentation": "<p>The tax documents required in your AWS Region.</p>"
         }
       },
       "documentation": "<p>Contains metadata about a specific cluster.</p>"
@@ -746,7 +750,7 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p>"
+          "documentation": "<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
         },
         "ShippingOption": {
           "shape": "ShippingOption",
@@ -759,6 +763,10 @@
         "ForwardingAddressId": {
           "shape": "AddressId",
           "documentation": "<p>The forwarding address ID for a cluster. This field is not supported in most regions.</p>"
+        },
+        "TaxDocuments": {
+          "shape": "TaxDocuments",
+          "documentation": "<p>The tax documents required in your AWS Region.</p>"
         }
       }
     },
@@ -816,11 +824,15 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p>"
+          "documentation": "<p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
         },
         "ForwardingAddressId": {
           "shape": "AddressId",
           "documentation": "<p>The forwarding address ID for a job. This field is not supported in most regions.</p>"
+        },
+        "TaxDocuments": {
+          "shape": "TaxDocuments",
+          "documentation": "<p>The tax documents required in your AWS Region.</p>"
         }
       }
     },
@@ -987,6 +999,10 @@
         "shape": "EventTriggerDefinition"
       }
     },
+    "GSTIN": {
+      "type": "string",
+      "pattern": "\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1}"
+    },
     "GetJobManifestRequest": {
       "type": "structure",
       "required": [
@@ -1066,6 +1082,16 @@
           "documentation": "<p>The Amazon S3 presigned URL for the update file associated with the specified <code>JobId</code> value. The software update will be available for 2 days after this request is made. To access an update after the 2 days have passed, you'll have to make another call to <code>GetSoftwareUpdates</code>.</p>"
         }
       }
+    },
+    "INDTaxDocuments": {
+      "type": "structure",
+      "members": {
+        "GSTIN": {
+          "shape": "GSTIN",
+          "documentation": "<p>The Goods and Services Tax (GST) documents required in AWS Regions in India.</p>"
+        }
+      },
+      "documentation": "<p>The tax documents required in AWS Regions in India.</p>"
     },
     "Integer": {
       "type": "integer"
@@ -1204,6 +1230,10 @@
         "ForwardingAddressId": {
           "shape": "AddressId",
           "documentation": "<p>The ID of the address that you want a job shipped to, after it will be shipped to its primary address. This field is not supported in most regions.</p>"
+        },
+        "TaxDocuments": {
+          "shape": "TaxDocuments",
+          "documentation": "<p>The metadata associated with the tax documents required in your AWS Region.</p>"
         }
       },
       "documentation": "<p>Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.</p>"
@@ -1537,6 +1567,16 @@
     "String": {
       "type": "string",
       "min": 1
+    },
+    "TaxDocuments": {
+      "type": "structure",
+      "members": {
+        "IND": {
+          "shape": "INDTaxDocuments",
+          "documentation": "<p>The tax documents required in AWS Regions in India.</p>"
+        }
+      },
+      "documentation": "<p>The tax documents required in your AWS Region.</p>"
     },
     "Timestamp": {
       "type": "timestamp"

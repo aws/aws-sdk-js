@@ -479,7 +479,7 @@
           "shape": "CertificateNotFoundFault"
         }
       ],
-      "documentation": "<p>Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the <code>filterName=engine,Values=docdb</code> filter parameter to return only Amazon DocumentDB clusters.</p>"
+      "documentation": "<p>Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.</p>"
     },
     "DescribeDBClusterParameterGroups": {
       "name": "DescribeDBClusterParameterGroups",
@@ -579,7 +579,7 @@
           "shape": "DBClusterNotFoundFault"
         }
       ],
-      "documentation": "<p>Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination.</p>"
+      "documentation": "<p>Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the <code>filterName=engine,Values=docdb</code> filter parameter to return only Amazon DocumentDB clusters.</p>"
     },
     "DescribeDBEngineVersions": {
       "name": "DescribeDBEngineVersions",
@@ -1534,7 +1534,7 @@
       "members": {
         "DBClusterParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>"
+          "documentation": "<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must not match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>"
         },
         "DBParameterGroupFamily": {
           "shape": "String",

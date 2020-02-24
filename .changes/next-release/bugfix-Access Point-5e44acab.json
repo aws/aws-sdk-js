@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Access Point",
-  "description": "Avoid mixing up S3 client config set by ManagedUpload with user-set client config"
-}
