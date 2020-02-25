@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.625.0-->
+<!--LATEST=2.626.0-->
 <!--ENTRYINSERT-->
+
+## 2.626.0
+* feature: Kafka: Amazon MSK has added support for Broker Log delivery to CloudWatch, S3, and Firehose.
+* feature: Outposts: This release adds DeleteSite and DeleteOutpost. 
+* feature: SecretsManager: This release increases the maximum allowed size of SecretString or SecretBinary from 10KB to 64KB in the CreateSecret, UpdateSecret, PutSecretValue and GetSecretValue APIs.
+* feature: StepFunctions: This release adds support for CloudWatch Logs for Standard Workflows.
 
 ## 2.625.0
 * bugfix: Access Point: Avoid mixing up S3 client config set by ManagedUpload with user-set client config

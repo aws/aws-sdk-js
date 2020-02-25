@@ -20,6 +20,22 @@ declare class Outposts extends Service {
    */
   createOutpost(callback?: (err: AWSError, data: Outposts.Types.CreateOutpostOutput) => void): Request<Outposts.Types.CreateOutpostOutput, AWSError>;
   /**
+   * Deletes the Outpost.
+   */
+  deleteOutpost(params: Outposts.Types.DeleteOutpostInput, callback?: (err: AWSError, data: Outposts.Types.DeleteOutpostOutput) => void): Request<Outposts.Types.DeleteOutpostOutput, AWSError>;
+  /**
+   * Deletes the Outpost.
+   */
+  deleteOutpost(callback?: (err: AWSError, data: Outposts.Types.DeleteOutpostOutput) => void): Request<Outposts.Types.DeleteOutpostOutput, AWSError>;
+  /**
+   * Deletes the site.
+   */
+  deleteSite(params: Outposts.Types.DeleteSiteInput, callback?: (err: AWSError, data: Outposts.Types.DeleteSiteOutput) => void): Request<Outposts.Types.DeleteSiteOutput, AWSError>;
+  /**
+   * Deletes the site.
+   */
+  deleteSite(callback?: (err: AWSError, data: Outposts.Types.DeleteSiteOutput) => void): Request<Outposts.Types.DeleteSiteOutput, AWSError>;
+  /**
    * Gets information about the specified Outpost.
    */
   getOutpost(params: Outposts.Types.GetOutpostInput, callback?: (err: AWSError, data: Outposts.Types.GetOutpostOutput) => void): Request<Outposts.Types.GetOutpostOutput, AWSError>;
@@ -65,6 +81,16 @@ declare namespace Outposts {
   }
   export interface CreateOutpostOutput {
     Outpost?: Outpost;
+  }
+  export interface DeleteOutpostInput {
+    OutpostId: OutpostId;
+  }
+  export interface DeleteOutpostOutput {
+  }
+  export interface DeleteSiteInput {
+    SiteId: SiteId;
+  }
+  export interface DeleteSiteOutput {
   }
   export interface GetOutpostInput {
     OutpostId: OutpostId;

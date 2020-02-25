@@ -280,6 +280,11 @@ declare namespace Kafka {
      */
     VolumeSizeGB: __integer;
   }
+  export interface BrokerLogs {
+    CloudWatchLogs?: CloudWatchLogs;
+    Firehose?: Firehose;
+    S3?: S3;
+  }
   export interface BrokerNodeGroupInfo {
     /**
      * 
@@ -381,6 +386,10 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     Tls?: Tls;
   }
   export type ClientBroker = "TLS"|"TLS_PLAINTEXT"|"PLAINTEXT"|string;
+  export interface CloudWatchLogs {
+    Enabled: __boolean;
+    LogGroup?: __string;
+  }
   export interface ClusterInfo {
     /**
      * 
@@ -448,6 +457,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     OpenMonitoring?: OpenMonitoring;
+    LoggingInfo?: LoggingInfo;
     /**
      * 
             The number of broker nodes in the cluster.
@@ -658,6 +668,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     KafkaVersion: __stringMin1Max128;
+    LoggingInfo?: LoggingInfo;
     /**
      * 
             The number of broker nodes in the cluster.
@@ -964,6 +975,10 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ErrorString?: __string;
   }
+  export interface Firehose {
+    DeliveryStream?: __string;
+    Enabled: __boolean;
+  }
   export interface GetBootstrapBrokersRequest {
     /**
      * 
@@ -1196,6 +1211,9 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     Tags?: __mapOf__string;
   }
   export type MaxResults = number;
+  export interface LoggingInfo {
+    BrokerLogs: BrokerLogs;
+  }
   export interface MutableClusterInfo {
     /**
      * 
@@ -1227,6 +1245,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     OpenMonitoring?: OpenMonitoring;
+    LoggingInfo?: LoggingInfo;
   }
   export interface NodeExporter {
     /**
@@ -1303,6 +1322,11 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     NodeExporter?: NodeExporterInfo;
+  }
+  export interface S3 {
+    Bucket?: __string;
+    Enabled: __boolean;
+    Prefix?: __string;
   }
   export interface NodeInfo {
     /**
@@ -1537,6 +1561,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     OpenMonitoring?: OpenMonitoringInfo;
+    LoggingInfo?: LoggingInfo;
   }
   export interface UpdateMonitoringResponse {
     /**

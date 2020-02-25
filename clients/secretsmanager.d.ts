@@ -330,6 +330,9 @@ declare namespace SecretsManager {
      * A list of all of the currently assigned VersionStage staging labels and the VersionId that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.  A version that does not have any staging labels attached is considered deprecated and subject to deletion. Such versions are not included in this list. 
      */
     VersionIdsToStages?: SecretVersionsToStagesMapType;
+    /**
+     * Returns the name of the service that created this secret.
+     */
     OwningService?: OwningServiceType;
   }
   export type DescriptionType = string;
@@ -649,7 +652,7 @@ declare namespace SecretsManager {
      */
     KmsKeyId?: KmsKeyIdType;
     /**
-     * Indicated whether automatic, scheduled rotation is enabled for this secret.
+     * Indicates whether automatic, scheduled rotation is enabled for this secret.
      */
     RotationEnabled?: RotationEnabledType;
     /**
@@ -684,6 +687,9 @@ declare namespace SecretsManager {
      * A list of all of the currently assigned SecretVersionStage staging labels and the SecretVersionId that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.  A version that does not have any SecretVersionStage is considered deprecated and subject to deletion. Such versions are not included in this list. 
      */
     SecretVersionsToStages?: SecretVersionsToStagesMapType;
+    /**
+     * Returns the name of the service that created the secret.
+     */
     OwningService?: OwningServiceType;
   }
   export type SecretListType = SecretListEntry[];
