@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Sha256",
+  "description": "fixed a bug in browser sha256 hasher. The function used to calculate wrong hash when content is larger than 512MB"
+}

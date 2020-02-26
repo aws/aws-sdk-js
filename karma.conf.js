@@ -21,7 +21,7 @@ module.exports = function(config) {
             },
     singleRun: true,
     browserDisconnectTolerance: 3,
-    browserNoActivityTimeout: 30000,
+    browserNoActivityTimeout: 90000,
     concurrency: 1
   })
 };

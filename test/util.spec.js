@@ -404,9 +404,20 @@
       });
     });
     describe('sha256', function() {
-      var input, result;
-      input = 'foo';
-      result = '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae';
+      var input = 'foo';
+      var result = '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae';
+      var originalTimeout;
+      beforeEach(function() {
+        if (AWS.util.isBrowser() && jasmine) {
+          originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+          jasmine.DEFAULT_TIMEOUT_INTERVAL = 90000;
+        }
+      });
+      afterEach(function() {
+        if (AWS.util.isBrowser() && jasmine && originalTimeout) {
+          jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+        }
+      });
       it('should return binary data hashed with sha256', function() {
         var expected;
         expected = util.sha256(input);
@@ -442,6 +453,24 @@
             return done();
           });
         });
+        it('handles large stream', function(done) {
+          var result = 'f64f0c6761baef28012637ac79851debbf212acfa3dd273e25213910e688287a';
+          var Transform = AWS.util.stream.Transform;
+          var tr = new Transform;
+          tr._transform = function(data, encoding, callback) {
+            return callback(null, data);
+          };
+          tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
+          tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
+          tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
+          tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
+          tr.push(AWS.util.buffer.toBuffer([1, 2, 3]));
+          tr.end();
+          return util.sha256(tr, 'hex', function(e, d) {
+            expect(d).to.equal(result);
+            return done();
+          });
+        });
       }
       if (AWS.util.isBrowser()) {
         it('handles Blobs (no phantomjs)', function(done) {
@@ -450,6 +479,18 @@
             expect(e).to.eql(null);
             expect(d).to.equal(result);
             return done();
+          });
+        });
+        it('handles large buffers', function(done) {
+          var result = 'f64f0c6761baef28012637ac79851debbf212acfa3dd273e25213910e688287a';
+          // 1 gigabyte
+          var buffer = AWS.util.buffer.alloc(1024 * 1024 * 1024 + 3, 0);
+          //set last 3 bytes to [1, 2, 3]
+          buffer.fill(Uint8Array.from([1,2,3]), buffer.length - 3);
+          util.sha256(new Blob([buffer]), 'hex', function(e, d) {
+            expect(e).to.eql(null);
+            expect(d).to.equal(result);
+            done();
           });
         });
         return it('handles Uint8Array objects directly', function(done) {
