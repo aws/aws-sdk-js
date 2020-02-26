@@ -69,7 +69,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Compliance Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>"
+      "documentation": "<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Security Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>"
     },
     "BatchEnableStandards": {
       "name": "BatchEnableStandards",
@@ -97,7 +97,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the ARN for a standard, use the <code> <a>DescribeStandards</a> </code> operation.</p> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Compliance Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>"
+      "documentation": "<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the ARN for a standard, use the <code> <a>DescribeStandards</a> </code> operation.</p> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Security Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>"
     },
     "BatchImportFindings": {
       "name": "BatchImportFindings",
@@ -507,7 +507,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Returns a list of compliance standards controls.</p> <p>For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.</p>"
+      "documentation": "<p>Returns a list of security standards controls.</p> <p>For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.</p>"
     },
     "DisableImportFindingsForProduct": {
       "name": "DisableImportFindingsForProduct",
@@ -1206,7 +1206,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Used to control whether an individual compliance standard control is enabled or disabled.</p>"
+      "documentation": "<p>Used to control whether an individual security standard control is enabled or disabled.</p>"
     }
   },
   "shapes": {
@@ -2235,7 +2235,7 @@
         },
         "CompatibleRuntimes": {
           "shape": "NonEmptyStringList",
-          "documentation": "<p>The layer's compatible runtimes. Maximum number of 5 items.</p> <p>Valid values: <code>nodejs8.10</code> | <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>"
+          "documentation": "<p>The layer's compatible runtimes. Maximum number of 5 items.</p> <p>Valid values: <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>"
         },
         "CreatedDate": {
           "shape": "NonEmptyString",
@@ -2520,7 +2520,7 @@
         },
         "Compliance": {
           "shape": "Compliance",
-          "documentation": "<p>This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.</p>"
+          "documentation": "<p>This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.</p>"
         },
         "VerificationState": {
           "shape": "VerificationState",
@@ -2543,7 +2543,7 @@
           "documentation": "<p>A user-defined note added to a finding.</p>"
         }
       },
-      "documentation": "<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and compliance checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and compliance checks.</p> </note>"
+      "documentation": "<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>"
     },
     "AwsSecurityFindingFilters": {
       "type": "structure",
@@ -2842,7 +2842,7 @@
         },
         "ComplianceStatus": {
           "shape": "StringFilterList",
-          "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.</p>"
+          "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.</p>"
         },
         "VerificationState": {
           "shape": "StringFilterList",
@@ -3040,7 +3040,7 @@
       "members": {
         "StandardsSubscriptionRequests": {
           "shape": "StandardsSubscriptionRequests",
-          "documentation": "<p>The list of standards compliance checks to enable.</p>"
+          "documentation": "<p>The list of standards checks to enable.</p>"
         }
       }
     },
@@ -3100,14 +3100,14 @@
       "members": {
         "Status": {
           "shape": "ComplianceStatus",
-          "documentation": "<p>The result of a compliance check.</p>"
+          "documentation": "<p>The result of a standards check.</p>"
         },
         "RelatedRequirements": {
           "shape": "RelatedRequirementsList",
           "documentation": "<p>List of requirements that are related to a standards control.</p>"
         }
       },
-      "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Compliance check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Compliance check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>"
+      "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Standards check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Standards check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>"
     },
     "ComplianceStatus": {
       "type": "string",
@@ -3499,7 +3499,7 @@
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of compliance standard controls to return.</p>",
+          "documentation": "<p>The maximum number of security standard controls to return.</p>",
           "location": "querystring",
           "locationName": "MaxResults"
         }
@@ -3510,7 +3510,7 @@
       "members": {
         "Controls": {
           "shape": "StandardsControls",
-          "documentation": "<p>A list of compliance standards controls.</p>"
+          "documentation": "<p>A list of security standards controls.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -3930,6 +3930,19 @@
     },
     "Integer": {
       "type": "integer"
+    },
+    "IntegrationType": {
+      "type": "string",
+      "enum": [
+        "SEND_FINDINGS_TO_SECURITY_HUB",
+        "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+      ]
+    },
+    "IntegrationTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "IntegrationType"
+      }
     },
     "Invitation": {
       "type": "structure",
@@ -4471,6 +4484,10 @@
           "shape": "CategoryList",
           "documentation": "<p>The categories assigned to the product.</p>"
         },
+        "IntegrationTypes": {
+          "shape": "IntegrationTypeList",
+          "documentation": "<p>The types of integration that the product supports. Available values are the following.</p> <ul> <li> <p> <code>SEND_FINDINGS_TO_SECURITY_HUB</code> - Indicates that the integration sends findings to Security Hub.</p> </li> <li> <p> <code>RECEIVE_FINDINGS_FROM_SECURITY_HUB</code> - Indicates that the integration receives findings from Security Hub.</p> </li> </ul>"
+        },
         "MarketplaceUrl": {
           "shape": "NonEmptyString",
           "documentation": "<p>The URL for the page that contains more information about the product.</p>"
@@ -4793,11 +4810,11 @@
       "members": {
         "StandardsControlArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ARN of the compliance standard control.</p>"
+          "documentation": "<p>The ARN of the security standard control.</p>"
         },
         "ControlStatus": {
           "shape": "ControlStatus",
-          "documentation": "<p>The current status of the compliance standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.</p>"
+          "documentation": "<p>The current status of the security standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.</p>"
         },
         "DisabledReason": {
           "shape": "NonEmptyString",
@@ -4805,19 +4822,19 @@
         },
         "ControlStatusUpdatedAt": {
           "shape": "Timestamp",
-          "documentation": "<p>The date and time that the status of the compliance standard control was most recently updated.</p>"
+          "documentation": "<p>The date and time that the status of the security standard control was most recently updated.</p>"
         },
         "ControlId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The identifier of the compliance standard control.</p>"
+          "documentation": "<p>The identifier of the security standard control.</p>"
         },
         "Title": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The title of the compliance standard control.</p>"
+          "documentation": "<p>The title of the security standard control.</p>"
         },
         "Description": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The longer description of the compliance standard control. Provides information about what the control is checking for.</p>"
+          "documentation": "<p>The longer description of the security standard control. Provides information about what the control is checking for.</p>"
         },
         "RemediationUrl": {
           "shape": "NonEmptyString",
@@ -4825,14 +4842,14 @@
         },
         "SeverityRating": {
           "shape": "SeverityRating",
-          "documentation": "<p>The severity of findings generated from this compliance standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.</p>"
+          "documentation": "<p>The severity of findings generated from this security standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the issue is detected.</p>"
         },
         "RelatedRequirements": {
           "shape": "RelatedRequirementsList",
           "documentation": "<p>The list of requirements that are related to this control.</p>"
         }
       },
-      "documentation": "<p>Details for an individual compliance standard control.</p>"
+      "documentation": "<p>Details for an individual security standard control.</p>"
     },
     "StandardsControls": {
       "type": "list",
@@ -5197,17 +5214,17 @@
       "members": {
         "StandardsControlArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ARN of the compliance standard control to enable or disable.</p>",
+          "documentation": "<p>The ARN of the security standard control to enable or disable.</p>",
           "location": "uri",
           "locationName": "StandardsControlArn"
         },
         "ControlStatus": {
           "shape": "ControlStatus",
-          "documentation": "<p>The updated status of the compliance standard control.</p>"
+          "documentation": "<p>The updated status of the security standard control.</p>"
         },
         "DisabledReason": {
           "shape": "NonEmptyString",
-          "documentation": "<p>A description of the reason why you are disabling a compliance standard control.</p>"
+          "documentation": "<p>A description of the reason why you are disabling a security standard control.</p>"
         }
       }
     },
@@ -5271,5 +5288,5 @@
       ]
     }
   },
-  "documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the compliance status of your environment based on controls from supported standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>"
+  "documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>"
 }

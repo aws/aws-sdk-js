@@ -52,11 +52,11 @@ declare class TranscribeService extends Service {
    */
   deleteVocabularyFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns information about a transcription job. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptionFileUri field.
+   * Returns information about a transcription job. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptFileUri field. If you enable content redaction, the redacted transcript appears in RedactedTranscriptFileUri.
    */
   getTranscriptionJob(params: TranscribeService.Types.GetTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetTranscriptionJobResponse, AWSError>;
   /**
-   * Returns information about a transcription job. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptionFileUri field.
+   * Returns information about a transcription job. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptFileUri field. If you enable content redaction, the redacted transcript appears in RedactedTranscriptFileUri.
    */
   getTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.GetTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetTranscriptionJobResponse, AWSError>;
   /**
@@ -126,6 +126,16 @@ declare class TranscribeService extends Service {
 }
 declare namespace TranscribeService {
   export type Boolean = boolean;
+  export interface ContentRedaction {
+    /**
+     * Request parameter that defines the entities to be redacted. The only accepted value is PII.
+     */
+    RedactionType: RedactionType;
+    /**
+     * Request parameter where you choose whether to output only the redacted transcript or generate an additional unredacted transcript. When you choose redacted Amazon Transcribe outputs a JSON file with only the redacted transcript and related information. When you choose redacted_and_unredacted Amazon Transcribe outputs a JSON file with the unredacted transcript and related information in addition to the JSON file with the redacted transcript.
+     */
+    RedactionOutput: RedactionOutput;
+  }
   export interface CreateVocabularyFilterRequest {
     /**
      * The vocabulary filter name. The name must be unique within the account that contains it.
@@ -392,7 +402,7 @@ declare namespace TranscribeService {
   export type MaxSpeakers = number;
   export interface Media {
     /**
-     * The S3 location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:   https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;   For example:  https://s3.us-east-1.amazonaws.com/examplebucket/example.mp4   https://s3.us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide.
+     * The S3 object location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:   s3://&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;   For example:  s3://examplebucket/example.mp4   s3://examplebucket/mediadocs/example.mp4  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide.
      */
     MediaFileUri?: Uri;
   }
@@ -403,6 +413,8 @@ declare namespace TranscribeService {
   export type OutputLocationType = "CUSTOMER_BUCKET"|"SERVICE_BUCKET"|string;
   export type Phrase = string;
   export type Phrases = Phrase[];
+  export type RedactionOutput = "redacted"|"redacted_and_unredacted"|string;
+  export type RedactionType = "PII"|string;
   export interface Settings {
     /**
      * The name of a vocabulary to use when processing the transcription job.
@@ -459,7 +471,7 @@ declare namespace TranscribeService {
      */
     Media: Media;
     /**
-     * The location where the transcription is stored. If you set the OutputBucketName, Amazon Transcribe puts the transcription in the specified S3 bucket. When you call the GetTranscriptionJob operation, the operation returns this location in the TranscriptFileUri field. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see Permissions Required for IAM User Roles. You can specify an AWS Key Management Service (KMS) key to encrypt the output of your transcription using the OutputEncryptionKMSKeyId parameter. If you don't specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket. If you don't set the OutputBucketName, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the TranscriptFileUri field. Use this URL to download the transcription.
+     * The location where the transcription is stored. If you set the OutputBucketName, Amazon Transcribe puts the transcript in the specified S3 bucket. When you call the GetTranscriptionJob operation, the operation returns this location in the TranscriptFileUri field. If you enable content redaction, the redacted transcript appears in RedactedTranscriptFileUri. If you enable content redaction and choose to output an unredacted transcript, that transcript's location still appears in the TranscriptFileUri. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see Permissions Required for IAM User Roles. You can specify an AWS Key Management Service (KMS) key to encrypt the output of your transcription using the OutputEncryptionKMSKeyId parameter. If you don't specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket. If you don't set the OutputBucketName, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the TranscriptFileUri field. Use this URL to download the transcription.
      */
     OutputBucketName?: OutputBucketName;
     /**
@@ -474,6 +486,10 @@ declare namespace TranscribeService {
      * Provides information about how a transcription job is executed. Use this field to indicate that the job can be queued for deferred execution if the concurrency limit is reached and there are no slots available to immediately run the job.
      */
     JobExecutionSettings?: JobExecutionSettings;
+    /**
+     * An object that contains the request parameters for content redaction.
+     */
+    ContentRedaction?: ContentRedaction;
   }
   export interface StartTranscriptionJobResponse {
     /**
@@ -483,9 +499,13 @@ declare namespace TranscribeService {
   }
   export interface Transcript {
     /**
-     * The location where the transcription is stored. Use this URI to access the transcription. If you specified an S3 bucket in the OutputBucketName field when you created the job, this is the URI of that bucket. If you chose to store the transcription in Amazon Transcribe, this is a shareable URL that provides secure access to that location.
+     * The S3 object location of the the transcript. Use this URI to access the transcript. If you specified an S3 bucket in the OutputBucketName field when you created the job, this is the URI of that bucket. If you chose to store the transcript in Amazon Transcribe, this is a shareable URL that provides secure access to that location.
      */
     TranscriptFileUri?: Uri;
+    /**
+     * The S3 object location of the redacted transcript. Use this URI to access the redacated transcript. If you specified an S3 bucket in the OutputBucketName field when you created the job, this is the URI of that bucket. If you chose to store the transcript in Amazon Transcribe, this is a shareable URL that provides secure access to that location.
+     */
+    RedactedTranscriptFileUri?: Uri;
   }
   export interface TranscriptionJob {
     /**
@@ -540,6 +560,10 @@ declare namespace TranscribeService {
      * Provides information about how a transcription job is executed.
      */
     JobExecutionSettings?: JobExecutionSettings;
+    /**
+     * An object that describes content redaction settings for the transcription job.
+     */
+    ContentRedaction?: ContentRedaction;
   }
   export type TranscriptionJobName = string;
   export type TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
@@ -577,6 +601,10 @@ declare namespace TranscribeService {
      * Indicates the location of the output of the transcription job. If the value is CUSTOMER_BUCKET then the location is the S3 bucket specified in the outputBucketName field when the transcription job was started with the StartTranscriptionJob operation. If the value is SERVICE_BUCKET then the output is stored by Amazon Transcribe and can be retrieved using the URI in the GetTranscriptionJob response's TranscriptFileUri field.
      */
     OutputLocationType?: OutputLocationType;
+    /**
+     * The content redaction settings of the transcription job.
+     */
+    ContentRedaction?: ContentRedaction;
   }
   export interface UpdateVocabularyFilterRequest {
     /**

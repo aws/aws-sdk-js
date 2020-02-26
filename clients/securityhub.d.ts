@@ -20,19 +20,19 @@ declare class SecurityHub extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Compliance Standards section of the AWS Security Hub User Guide.
+   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Security Standards section of the AWS Security Hub User Guide.
    */
   batchDisableStandards(params: SecurityHub.Types.BatchDisableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
   /**
-   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Compliance Standards section of the AWS Security Hub User Guide.
+   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Security Standards section of the AWS Security Hub User Guide.
    */
   batchDisableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
   /**
-   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the  DescribeStandards  operation. For more information, see the Compliance Standards section of the AWS Security Hub User Guide.
+   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the  DescribeStandards  operation. For more information, see the Security Standards section of the AWS Security Hub User Guide.
    */
   batchEnableStandards(params: SecurityHub.Types.BatchEnableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
-   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the  DescribeStandards  operation. For more information, see the Compliance Standards section of the AWS Security Hub User Guide.
+   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the  DescribeStandards  operation. For more information, see the Security Standards section of the AWS Security Hub User Guide.
    */
   batchEnableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class SecurityHub extends Service {
    */
   describeStandards(callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsResponse) => void): Request<SecurityHub.Types.DescribeStandardsResponse, AWSError>;
   /**
-   * Returns a list of compliance standards controls. For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.
+   * Returns a list of security standards controls. For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.
    */
   describeStandardsControls(params: SecurityHub.Types.DescribeStandardsControlsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsControlsResponse) => void): Request<SecurityHub.Types.DescribeStandardsControlsResponse, AWSError>;
   /**
-   * Returns a list of compliance standards controls. For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.
+   * Returns a list of security standards controls. For each control, the results include information about whether it is currently enabled, the severity, and a link to remediation information.
    */
   describeStandardsControls(callback?: (err: AWSError, data: SecurityHub.Types.DescribeStandardsControlsResponse) => void): Request<SecurityHub.Types.DescribeStandardsControlsResponse, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class SecurityHub extends Service {
    */
   updateInsight(callback?: (err: AWSError, data: SecurityHub.Types.UpdateInsightResponse) => void): Request<SecurityHub.Types.UpdateInsightResponse, AWSError>;
   /**
-   * Used to control whether an individual compliance standard control is enabled or disabled.
+   * Used to control whether an individual security standard control is enabled or disabled.
    */
   updateStandardsControl(params: SecurityHub.Types.UpdateStandardsControlRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateStandardsControlResponse) => void): Request<SecurityHub.Types.UpdateStandardsControlResponse, AWSError>;
   /**
-   * Used to control whether an individual compliance standard control is enabled or disabled.
+   * Used to control whether an individual security standard control is enabled or disabled.
    */
   updateStandardsControl(callback?: (err: AWSError, data: SecurityHub.Types.UpdateStandardsControlResponse) => void): Request<SecurityHub.Types.UpdateStandardsControlResponse, AWSError>;
 }
@@ -1113,7 +1113,7 @@ declare namespace SecurityHub {
      */
     Version?: AwsLambdaLayerVersionNumber;
     /**
-     * The layer's compatible runtimes. Maximum number of 5 items. Valid values: nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided 
+     * The layer's compatible runtimes. Maximum number of 5 items. Valid values: nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided 
      */
     CompatibleRuntimes?: NonEmptyStringList;
     /**
@@ -1348,7 +1348,7 @@ declare namespace SecurityHub {
      */
     Resources: ResourceList;
     /**
-     * This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.
+     * This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      */
     Compliance?: Compliance;
     /**
@@ -1666,7 +1666,7 @@ declare namespace SecurityHub {
      */
     ResourceDetailsOther?: MapFilterList;
     /**
-     * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains compliance-related finding details.
+     * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.
      */
     ComplianceStatus?: StringFilterList;
     /**
@@ -1813,7 +1813,7 @@ declare namespace SecurityHub {
   }
   export interface BatchEnableStandardsRequest {
     /**
-     * The list of standards compliance checks to enable.
+     * The list of standards checks to enable.
      */
     StandardsSubscriptionRequests: StandardsSubscriptionRequests;
   }
@@ -1847,7 +1847,7 @@ declare namespace SecurityHub {
   export type CategoryList = NonEmptyString[];
   export interface Compliance {
     /**
-     * The result of a compliance check.
+     * The result of a standards check.
      */
     Status?: ComplianceStatus;
     /**
@@ -2083,13 +2083,13 @@ declare namespace SecurityHub {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of compliance standard controls to return.
+     * The maximum number of security standard controls to return.
      */
     MaxResults?: MaxResults;
   }
   export interface DescribeStandardsControlsResponse {
     /**
-     * A list of compliance standards controls.
+     * A list of security standards controls.
      */
     Controls?: StandardsControls;
     /**
@@ -2343,6 +2343,8 @@ declare namespace SecurityHub {
     ResultValues: InsightResultValueList;
   }
   export type Integer = number;
+  export type IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"|"RECEIVE_FINDINGS_FROM_SECURITY_HUB"|string;
+  export type IntegrationTypeList = IntegrationType[];
   export interface Invitation {
     /**
      * The account ID of the Security Hub master account that the invitation was sent from.
@@ -2677,6 +2679,10 @@ declare namespace SecurityHub {
      */
     Categories?: CategoryList;
     /**
+     * The types of integration that the product supports. Available values are the following.    SEND_FINDINGS_TO_SECURITY_HUB - Indicates that the integration sends findings to Security Hub.    RECEIVE_FINDINGS_FROM_SECURITY_HUB - Indicates that the integration receives findings from Security Hub.  
+     */
+    IntegrationTypes?: IntegrationTypeList;
+    /**
      * The URL for the page that contains more information about the product.
      */
     MarketplaceUrl?: NonEmptyString;
@@ -2878,11 +2884,11 @@ declare namespace SecurityHub {
   export type Standards = Standard[];
   export interface StandardsControl {
     /**
-     * The ARN of the compliance standard control.
+     * The ARN of the security standard control.
      */
     StandardsControlArn?: NonEmptyString;
     /**
-     * The current status of the compliance standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.
+     * The current status of the security standard control. Indicates whether the control is enabled or disabled. Security Hub does not check against disabled controls.
      */
     ControlStatus?: ControlStatus;
     /**
@@ -2890,19 +2896,19 @@ declare namespace SecurityHub {
      */
     DisabledReason?: NonEmptyString;
     /**
-     * The date and time that the status of the compliance standard control was most recently updated.
+     * The date and time that the status of the security standard control was most recently updated.
      */
     ControlStatusUpdatedAt?: Timestamp;
     /**
-     * The identifier of the compliance standard control.
+     * The identifier of the security standard control.
      */
     ControlId?: NonEmptyString;
     /**
-     * The title of the compliance standard control.
+     * The title of the security standard control.
      */
     Title?: NonEmptyString;
     /**
-     * The longer description of the compliance standard control. Provides information about what the control is checking for.
+     * The longer description of the security standard control. Provides information about what the control is checking for.
      */
     Description?: NonEmptyString;
     /**
@@ -2910,7 +2916,7 @@ declare namespace SecurityHub {
      */
     RemediationUrl?: NonEmptyString;
     /**
-     * The severity of findings generated from this compliance standard control. The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the compliance issue is detected.
+     * The severity of findings generated from this security standard control. The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the issue is detected.
      */
     SeverityRating?: SeverityRating;
     /**
@@ -3078,15 +3084,15 @@ declare namespace SecurityHub {
   }
   export interface UpdateStandardsControlRequest {
     /**
-     * The ARN of the compliance standard control to enable or disable.
+     * The ARN of the security standard control to enable or disable.
      */
     StandardsControlArn: NonEmptyString;
     /**
-     * The updated status of the compliance standard control.
+     * The updated status of the security standard control.
      */
     ControlStatus?: ControlStatus;
     /**
-     * A description of the reason why you are disabling a compliance standard control.
+     * A description of the reason why you are disabling a security standard control.
      */
     DisabledReason?: NonEmptyString;
   }
