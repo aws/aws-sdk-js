@@ -470,7 +470,7 @@
             expect(d).to.equal(result);
             return done();
           });
-        });
+        }, 90000);
       }
       if (AWS.util.isBrowser()) {
         it('handles Blobs (no phantomjs)', function(done) {
