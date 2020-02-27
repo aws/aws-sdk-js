@@ -407,6 +407,9 @@
       var input = 'foo';
       var result = '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae';
       var originalTimeout;
+      if (typeof this.timeout === 'function') {
+        this.timeout(90000);
+      }
       beforeEach(function() {
         if (AWS.util.isBrowser() && jasmine) {
           originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -454,13 +457,13 @@
           });
         });
         it('handles large stream', function(done) {
-          var result = 'f64f0c6761baef28012637ac79851debbf212acfa3dd273e25213910e688287a';
+          var result = 'ada8eb6157edeb1eb10346f34c330d8e0ac9c7f889d077de5d0f8dcd97021628';
           var Transform = AWS.util.stream.Transform;
           var tr = new Transform;
           tr._transform = function(data, encoding, callback) {
             return callback(null, data);
           };
-          tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
+          // Send 0.75 GB data in chunk.
           tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
           tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
           tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
@@ -470,7 +473,7 @@
             expect(d).to.equal(result);
             return done();
           });
-        }, 90000);
+        });
       }
       if (AWS.util.isBrowser()) {
         it('handles Blobs (no phantomjs)', function(done) {
