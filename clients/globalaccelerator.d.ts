@@ -12,11 +12,19 @@ declare class GlobalAccelerator extends Service {
   constructor(options?: GlobalAccelerator.Types.ClientConfiguration)
   config: Config & GlobalAccelerator.Types.ClientConfiguration;
   /**
-   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.  You must specify the US-West-2 (Oregon) Region to create or update accelerators. 
+   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays. To see an AWS CLI example of advertising an address range, scroll down to Example. To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   */
+  advertiseByoipCidr(params: GlobalAccelerator.Types.AdvertiseByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.AdvertiseByoipCidrResponse) => void): Request<GlobalAccelerator.Types.AdvertiseByoipCidrResponse, AWSError>;
+  /**
+   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays. To see an AWS CLI example of advertising an address range, scroll down to Example. To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   */
+  advertiseByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.AdvertiseByoipCidrResponse) => void): Request<GlobalAccelerator.Types.AdvertiseByoipCidrResponse, AWSError>;
+  /**
+   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example. If you bring your own IP address ranges to AWS Global Accelerator (BYOIP), you can assign IP addresses from your own pool to your accelerator as the static IP address entry points. Only one IP address from each of your IP address ranges can be used for each accelerator.  You must specify the US West (Oregon) Region to create or update accelerators. 
    */
   createAccelerator(params: GlobalAccelerator.Types.CreateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
-   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.  You must specify the US-West-2 (Oregon) Region to create or update accelerators. 
+   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example. If you bring your own IP address ranges to AWS Global Accelerator (BYOIP), you can assign IP addresses from your own pool to your accelerator as the static IP address entry points. Only one IP address from each of your IP address ranges can be used for each accelerator.  You must specify the US West (Oregon) Region to create or update accelerators. 
    */
   createAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
@@ -36,11 +44,11 @@ declare class GlobalAccelerator extends Service {
    */
   createListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateListenerResponse) => void): Request<GlobalAccelerator.Types.CreateListenerResponse, AWSError>;
   /**
-   * Delete an accelerator. Note: before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups).
+   * Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
    */
   deleteAccelerator(params: GlobalAccelerator.Types.DeleteAcceleratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete an accelerator. Note: before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups).
+   * Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
    */
   deleteAccelerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -60,6 +68,14 @@ declare class GlobalAccelerator extends Service {
    */
   deleteListener(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. To see an AWS CLI example of deprovisioning an address range, scroll down to Example. Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   */
+  deprovisionByoipCidr(params: GlobalAccelerator.Types.DeprovisionByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DeprovisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.DeprovisionByoipCidrResponse, AWSError>;
+  /**
+   * Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. To see an AWS CLI example of deprovisioning an address range, scroll down to Example. Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   */
+  deprovisionByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.DeprovisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.DeprovisionByoipCidrResponse, AWSError>;
+  /**
    * Describe an accelerator. To see an AWS CLI example of describing an accelerator, scroll down to Example.
    */
   describeAccelerator(params: GlobalAccelerator.Types.DescribeAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorResponse, AWSError>;
@@ -68,11 +84,11 @@ declare class GlobalAccelerator extends Service {
    */
   describeAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorResponse, AWSError>;
   /**
-   * Describe the attributes of an accelerator.
+   * Describe the attributes of an accelerator. To see an AWS CLI example of describing the attributes of an accelerator, scroll down to Example.
    */
   describeAcceleratorAttributes(params: GlobalAccelerator.Types.DescribeAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
   /**
-   * Describe the attributes of an accelerator.
+   * Describe the attributes of an accelerator. To see an AWS CLI example of describing the attributes of an accelerator, scroll down to Example.
    */
   describeAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
   /**
@@ -84,43 +100,83 @@ declare class GlobalAccelerator extends Service {
    */
   describeEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeEndpointGroupResponse, AWSError>;
   /**
-   * Describe a listener.
+   * Describe a listener. To see an AWS CLI example of describing a listener, scroll down to Example.
    */
   describeListener(params: GlobalAccelerator.Types.DescribeListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeListenerResponse, AWSError>;
   /**
-   * Describe a listener.
+   * Describe a listener. To see an AWS CLI example of describing a listener, scroll down to Example.
    */
   describeListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeListenerResponse, AWSError>;
   /**
-   * List the accelerators for an AWS account.
+   * List the accelerators for an AWS account. To see an AWS CLI example of listing the accelerators for an AWS account, scroll down to Example.
    */
   listAccelerators(params: GlobalAccelerator.Types.ListAcceleratorsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
-   * List the accelerators for an AWS account.
+   * List the accelerators for an AWS account. To see an AWS CLI example of listing the accelerators for an AWS account, scroll down to Example.
    */
   listAccelerators(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
-   * List the endpoint groups that are associated with a listener.
+   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr. To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to Example.
+   */
+  listByoipCidrs(params: GlobalAccelerator.Types.ListByoipCidrsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListByoipCidrsResponse) => void): Request<GlobalAccelerator.Types.ListByoipCidrsResponse, AWSError>;
+  /**
+   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr. To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to Example.
+   */
+  listByoipCidrs(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListByoipCidrsResponse) => void): Request<GlobalAccelerator.Types.ListByoipCidrsResponse, AWSError>;
+  /**
+   * List the endpoint groups that are associated with a listener. To see an AWS CLI example of listing the endpoint groups for listener, scroll down to Example.
    */
   listEndpointGroups(params: GlobalAccelerator.Types.ListEndpointGroupsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListEndpointGroupsResponse, AWSError>;
   /**
-   * List the endpoint groups that are associated with a listener.
+   * List the endpoint groups that are associated with a listener. To see an AWS CLI example of listing the endpoint groups for listener, scroll down to Example.
    */
   listEndpointGroups(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListEndpointGroupsResponse, AWSError>;
   /**
-   * List the listeners for an accelerator.
+   * List the listeners for an accelerator. To see an AWS CLI example of listing the listeners for an accelerator, scroll down to Example.
    */
   listListeners(params: GlobalAccelerator.Types.ListListenersRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
   /**
-   * List the listeners for an accelerator.
+   * List the listeners for an accelerator. To see an AWS CLI example of listing the listeners for an accelerator, scroll down to Example.
    */
   listListeners(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
   /**
-   * Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to Example.  You must specify the US-West-2 (Oregon) Region to create or update accelerators. 
+   * List all tags for an accelerator. To see an AWS CLI example of listing tags for an accelerator, scroll down to Example. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   */
+  listTagsForResource(params: GlobalAccelerator.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListTagsForResourceResponse) => void): Request<GlobalAccelerator.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List all tags for an accelerator. To see an AWS CLI example of listing tags for an accelerator, scroll down to Example. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListTagsForResourceResponse) => void): Request<GlobalAccelerator.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. To see an AWS CLI example of provisioning an address range for BYOIP, scroll down to Example. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   */
+  provisionByoipCidr(params: GlobalAccelerator.Types.ProvisionByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ProvisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.ProvisionByoipCidrResponse, AWSError>;
+  /**
+   * Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. To see an AWS CLI example of provisioning an address range for BYOIP, scroll down to Example. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   */
+  provisionByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.ProvisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.ProvisionByoipCidrResponse, AWSError>;
+  /**
+   * Add tags to an accelerator resource. To see an AWS CLI example of adding tags to an accelerator, scroll down to Example. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   */
+  tagResource(params: GlobalAccelerator.Types.TagResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.TagResourceResponse) => void): Request<GlobalAccelerator.Types.TagResourceResponse, AWSError>;
+  /**
+   * Add tags to an accelerator resource. To see an AWS CLI example of adding tags to an accelerator, scroll down to Example. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   */
+  tagResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.TagResourceResponse) => void): Request<GlobalAccelerator.Types.TagResourceResponse, AWSError>;
+  /**
+   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. To see an AWS CLI example of removing tags from an accelerator, scroll down to Example. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+   */
+  untagResource(params: GlobalAccelerator.Types.UntagResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UntagResourceResponse) => void): Request<GlobalAccelerator.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. To see an AWS CLI example of removing tags from an accelerator, scroll down to Example. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+   */
+  untagResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.UntagResourceResponse) => void): Request<GlobalAccelerator.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to Example.  You must specify the US West (Oregon) Region to create or update accelerators. 
    */
   updateAccelerator(params: GlobalAccelerator.Types.UpdateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
-   * Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to Example.  You must specify the US-West-2 (Oregon) Region to create or update accelerators. 
+   * Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to Example.  You must specify the US West (Oregon) Region to create or update accelerators. 
    */
   updateAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
@@ -140,13 +196,21 @@ declare class GlobalAccelerator extends Service {
    */
   updateEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.UpdateEndpointGroupResponse, AWSError>;
   /**
-   * Update a listener.
+   * Update a listener. To see an AWS CLI example of updating listener, scroll down to Example.
    */
   updateListener(params: GlobalAccelerator.Types.UpdateListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateListenerResponse, AWSError>;
   /**
-   * Update a listener.
+   * Update a listener. To see an AWS CLI example of updating listener, scroll down to Example.
    */
   updateListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateListenerResponse, AWSError>;
+  /**
+   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. To see an AWS CLI example of withdrawing an address range for BYOIP so it will no longer be advertised by AWS, scroll down to Example. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   */
+  withdrawByoipCidr(params: GlobalAccelerator.Types.WithdrawByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.WithdrawByoipCidrResponse) => void): Request<GlobalAccelerator.Types.WithdrawByoipCidrResponse, AWSError>;
+  /**
+   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. To see an AWS CLI example of withdrawing an address range for BYOIP so it will no longer be advertised by AWS, scroll down to Example. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   */
+  withdrawByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.WithdrawByoipCidrResponse) => void): Request<GlobalAccelerator.Types.WithdrawByoipCidrResponse, AWSError>;
 }
 declare namespace GlobalAccelerator {
   export interface Accelerator {
@@ -171,7 +235,7 @@ declare namespace GlobalAccelerator {
      */
     IpSets?: IpSets;
     /**
-     * The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.  The naming convention for the DNS name is: a lower case letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. For more information about the default DNS name, see Support for DNS Addressing in Global Accelerator in the AWS Global Accelerator Developer Guide.
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.  The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. For more information about the default DNS name, see  Support for DNS Addressing in Global Accelerator in the AWS Global Accelerator Developer Guide.
      */
     DnsName?: GenericString;
     /**
@@ -197,12 +261,46 @@ declare namespace GlobalAccelerator {
      */
     FlowLogsS3Bucket?: GenericString;
     /**
-     * The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. If you don’t specify a prefix, the flow logs are stored in the root of the bucket.
+     * The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
      */
     FlowLogsS3Prefix?: GenericString;
   }
   export type AcceleratorStatus = "DEPLOYED"|"IN_PROGRESS"|string;
   export type Accelerators = Accelerator[];
+  export interface AdvertiseByoipCidrRequest {
+    /**
+     * The address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.
+     */
+    Cidr: GenericString;
+  }
+  export interface AdvertiseByoipCidrResponse {
+    /**
+     * Information about the address range.
+     */
+    ByoipCidr?: ByoipCidr;
+  }
+  export interface ByoipCidr {
+    /**
+     * The address range, in CIDR notation.
+     */
+    Cidr?: GenericString;
+    /**
+     * The state of the address pool.
+     */
+    State?: ByoipCidrState;
+  }
+  export type ByoipCidrState = "PENDING_PROVISIONING"|"READY"|"PENDING_ADVERTISING"|"ADVERTISING"|"PENDING_WITHDRAWING"|"PENDING_DEPROVISIONING"|"DEPROVISIONED"|"FAILED_PROVISION"|"FAILED_ADVERTISING"|"FAILED_WITHDRAW"|"FAILED_DEPROVISION"|string;
+  export type ByoipCidrs = ByoipCidr[];
+  export interface CidrAuthorizationContext {
+    /**
+     * The plain-text authorization message for the prefix and account.
+     */
+    Message: GenericString;
+    /**
+     * The signed authorization message for the prefix and account.
+     */
+    Signature: GenericString;
+  }
   export type ClientAffinity = "NONE"|"SOURCE_IP"|string;
   export interface CreateAcceleratorRequest {
     /**
@@ -214,6 +312,10 @@ declare namespace GlobalAccelerator {
      */
     IpAddressType?: IpAddressType;
     /**
+     * Optionally, if you've added your own IP address pool to Global Accelerator, you can choose IP addresses from your own pool to use for the accelerator's static IP addresses. You can specify one or two addresses, separated by a comma. Do not include the /32 suffix. If you specify only one IP address from your IP address range, Global Accelerator assigns a second static IP address for the accelerator from the AWS IP address pool. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+     */
+    IpAddresses?: IpAddresses;
+    /**
      * Indicates whether an accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, an accelerator cannot be deleted. If set to false, the accelerator can be deleted.
      */
     Enabled?: GenericBoolean;
@@ -221,6 +323,10 @@ declare namespace GlobalAccelerator {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of an accelerator.
      */
     IdempotencyToken: IdempotencyToken;
+    /**
+     * Create tags for an accelerator. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     */
+    Tags?: Tags;
   }
   export interface CreateAcceleratorResponse {
     /**
@@ -322,6 +428,18 @@ declare namespace GlobalAccelerator {
      */
     ListenerArn: GenericString;
   }
+  export interface DeprovisionByoipCidrRequest {
+    /**
+     * The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.
+     */
+    Cidr: GenericString;
+  }
+  export interface DeprovisionByoipCidrResponse {
+    /**
+     * Information about the address range.
+     */
+    ByoipCidr?: ByoipCidr;
+  }
   export interface DescribeAcceleratorAttributesRequest {
     /**
      * The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.
@@ -372,7 +490,7 @@ declare namespace GlobalAccelerator {
   }
   export interface EndpointConfiguration {
     /**
-     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
+     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID.  An Application Load Balancer can be either internal or internet-facing.
      */
     EndpointId?: GenericString;
     /**
@@ -387,7 +505,7 @@ declare namespace GlobalAccelerator {
   export type EndpointConfigurations = EndpointConfiguration[];
   export interface EndpointDescription {
     /**
-     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. An Application Load Balancer can be either internal or internet-facing.
+     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID.  An Application Load Balancer can be either internal or internet-facing.
      */
     EndpointId?: GenericString;
     /**
@@ -489,6 +607,26 @@ declare namespace GlobalAccelerator {
      */
     NextToken?: GenericString;
   }
+  export interface ListByoipCidrsRequest {
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListByoipCidrsResponse {
+    /**
+     * Information about your address ranges.
+     */
+    ByoipCidrs?: ByoipCidrs;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: GenericString;
+  }
   export interface ListEndpointGroupsRequest {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -537,6 +675,18 @@ declare namespace GlobalAccelerator {
      */
     NextToken?: GenericString;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the accelerator to list tags for. An ARN uniquely identifies an accelerator.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Root level tag for the Tags parameters.
+     */
+    Tags?: Tags;
+  }
   export interface Listener {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -570,9 +720,64 @@ declare namespace GlobalAccelerator {
   }
   export type PortRanges = PortRange[];
   export type Protocol = "TCP"|"UDP"|string;
+  export interface ProvisionByoipCidrRequest {
+    /**
+     * The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can specify is /24. The address range cannot overlap with another address range that you've brought to this or another Region.
+     */
+    Cidr: GenericString;
+    /**
+     * A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP. 
+     */
+    CidrAuthorizationContext: CidrAuthorizationContext;
+  }
+  export interface ProvisionByoipCidrResponse {
+    /**
+     * Information about the address range.
+     */
+    ByoipCidr?: ByoipCidr;
+  }
+  export type ResourceArn = string;
+  export interface Tag {
+    /**
+     * A string that contains a Tag key.
+     */
+    Key: TagKey;
+    /**
+     * A string that contains a Tag value.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Global Accelerator resource to add tags to. An ARN uniquely identifies a resource.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The tags to add to a resource. A tag consists of a key and a value that you define.
+     */
+    Tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type Tags = Tag[];
   export type ThresholdCount = number;
   export type Timestamp = Date;
   export type TrafficDialPercentage = number;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Global Accelerator resource to remove tags from. An ARN uniquely identifies a resource.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The tag key pairs that you want to remove from the specified resources.
+     */
+    TagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateAcceleratorAttributesRequest {
     /**
      * The Amazon Resource Name (ARN) of the accelerator that you want to update.
@@ -587,7 +792,7 @@ declare namespace GlobalAccelerator {
      */
     FlowLogsS3Bucket?: GenericString;
     /**
-     * Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. If you don’t specify a prefix, the flow logs are stored in the root of the bucket.
+     * Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true.  If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
      */
     FlowLogsS3Prefix?: GenericString;
   }
@@ -684,6 +889,18 @@ declare namespace GlobalAccelerator {
      * Information for the updated listener.
      */
     Listener?: Listener;
+  }
+  export interface WithdrawByoipCidrRequest {
+    /**
+     * The address range, in CIDR notation.
+     */
+    Cidr: GenericString;
+  }
+  export interface WithdrawByoipCidrResponse {
+    /**
+     * Information about the address pool.
+     */
+    ByoipCidr?: ByoipCidr;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

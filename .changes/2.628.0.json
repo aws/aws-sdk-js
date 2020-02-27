@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "This release adds support for adding tags to accelerators and bringing your own IP address to AWS Global Accelerator (BYOIP)."
+    },
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "Adds support to create notification contacts in Amazon Lightsail, and to create instance, database, and load balancer metric alarms that notify you based on the value of a metric relative to a threshold that you specify."
+    }
+]

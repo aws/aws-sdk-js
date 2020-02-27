@@ -36,11 +36,11 @@ declare class Lightsail extends Service {
    */
   attachInstancesToLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.AttachInstancesToLoadBalancerResult) => void): Request<Lightsail.Types.AttachInstancesToLoadBalancerResult, AWSError>;
   /**
-   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the attach load balancer tls certificate operation with the non-attached certificate, and it will replace the existing one and become the attached certificate. The attach load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate action with the non-attached certificate, and it will replace the existing one and become the attached certificate. The AttachLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   attachLoadBalancerTlsCertificate(params: Lightsail.Types.AttachLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.AttachLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the attach load balancer tls certificate operation with the non-attached certificate, and it will replace the existing one and become the attached certificate. The attach load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate action with the non-attached certificate, and it will replace the existing one and become the attached certificate. The AttachLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   attachLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.AttachLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.AttachLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -75,6 +75,14 @@ declare class Lightsail extends Service {
    * Creates an AWS CloudFormation stack, which creates a new Amazon EC2 instance from an exported Amazon Lightsail snapshot. This operation results in a CloudFormation stack record that can be used to track the AWS CloudFormation stack created. Use the get cloud formation stack records operation to get a list of the CloudFormation stacks created.  Wait until after your new Amazon EC2 instance is created before running the create cloud formation stack operation again with the same export snapshot record. 
    */
   createCloudFormationStack(callback?: (err: AWSError, data: Lightsail.Types.CreateCloudFormationStackResult) => void): Request<Lightsail.Types.CreateCloudFormationStackResult, AWSError>;
+  /**
+   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   */
+  createContactMethod(params: Lightsail.Types.CreateContactMethodRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContactMethodResult) => void): Request<Lightsail.Types.CreateContactMethodResult, AWSError>;
+  /**
+   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   */
+  createContactMethod(callback?: (err: AWSError, data: Lightsail.Types.CreateContactMethodResult) => void): Request<Lightsail.Types.CreateContactMethodResult, AWSError>;
   /**
    * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
    */
@@ -156,11 +164,11 @@ declare class Lightsail extends Service {
    */
   createLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerResult) => void): Request<Lightsail.Types.CreateLoadBalancerResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The create load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The CreateLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   createLoadBalancerTlsCertificate(params: Lightsail.Types.CreateLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.CreateLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The create load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The CreateLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   createLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.CreateLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -188,6 +196,14 @@ declare class Lightsail extends Service {
    */
   createRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseSnapshotResult, AWSError>;
   /**
+   * Deletes an alarm. An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see Alarms in Amazon Lightsail.
+   */
+  deleteAlarm(params: Lightsail.Types.DeleteAlarmRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteAlarmResult) => void): Request<Lightsail.Types.DeleteAlarmResult, AWSError>;
+  /**
+   * Deletes an alarm. An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see Alarms in Amazon Lightsail.
+   */
+  deleteAlarm(callback?: (err: AWSError, data: Lightsail.Types.DeleteAlarmResult) => void): Request<Lightsail.Types.DeleteAlarmResult, AWSError>;
+  /**
    * Deletes an automatic snapshot of an instance or disk. For more information, see the Lightsail Dev Guide.
    */
   deleteAutoSnapshot(params: Lightsail.Types.DeleteAutoSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
@@ -195,6 +211,14 @@ declare class Lightsail extends Service {
    * Deletes an automatic snapshot of an instance or disk. For more information, see the Lightsail Dev Guide.
    */
   deleteAutoSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
+  /**
+   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   */
+  deleteContactMethod(params: Lightsail.Types.DeleteContactMethodRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteContactMethodResult) => void): Request<Lightsail.Types.DeleteContactMethodResult, AWSError>;
+  /**
+   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   */
+  deleteContactMethod(callback?: (err: AWSError, data: Lightsail.Types.DeleteContactMethodResult) => void): Request<Lightsail.Types.DeleteContactMethodResult, AWSError>;
   /**
    * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
@@ -268,11 +292,11 @@ declare class Lightsail extends Service {
    */
   deleteLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerResult) => void): Request<Lightsail.Types.DeleteLoadBalancerResult, AWSError>;
   /**
-   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The delete load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The DeleteLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   deleteLoadBalancerTlsCertificate(params: Lightsail.Types.DeleteLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The delete load balancer tls certificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The DeleteLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
    */
   deleteLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -356,6 +380,14 @@ declare class Lightsail extends Service {
    */
   getActiveNames(callback?: (err: AWSError, data: Lightsail.Types.GetActiveNamesResult) => void): Request<Lightsail.Types.GetActiveNamesResult, AWSError>;
   /**
+   * Returns information about the configured alarms. Specify an alarm name in your request to return information about a specific alarm, or specify a monitored resource name to return information about all alarms for a specific resource. An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see Alarms in Amazon Lightsail.
+   */
+  getAlarms(params: Lightsail.Types.GetAlarmsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetAlarmsResult) => void): Request<Lightsail.Types.GetAlarmsResult, AWSError>;
+  /**
+   * Returns information about the configured alarms. Specify an alarm name in your request to return information about a specific alarm, or specify a monitored resource name to return information about all alarms for a specific resource. An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see Alarms in Amazon Lightsail.
+   */
+  getAlarms(callback?: (err: AWSError, data: Lightsail.Types.GetAlarmsResult) => void): Request<Lightsail.Types.GetAlarmsResult, AWSError>;
+  /**
    * Returns the available automatic snapshots for an instance or disk. For more information, see the Lightsail Dev Guide.
    */
   getAutoSnapshots(params: Lightsail.Types.GetAutoSnapshotsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetAutoSnapshotsResult) => void): Request<Lightsail.Types.GetAutoSnapshotsResult, AWSError>;
@@ -388,6 +420,14 @@ declare class Lightsail extends Service {
    */
   getCloudFormationStackRecords(callback?: (err: AWSError, data: Lightsail.Types.GetCloudFormationStackRecordsResult) => void): Request<Lightsail.Types.GetCloudFormationStackRecordsResult, AWSError>;
   /**
+   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   */
+  getContactMethods(params: Lightsail.Types.GetContactMethodsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContactMethodsResult) => void): Request<Lightsail.Types.GetContactMethodsResult, AWSError>;
+  /**
+   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   */
+  getContactMethods(callback?: (err: AWSError, data: Lightsail.Types.GetContactMethodsResult) => void): Request<Lightsail.Types.GetContactMethodsResult, AWSError>;
+  /**
    * Returns information about a specific block storage disk.
    */
   getDisk(params: Lightsail.Types.GetDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDiskResult) => void): Request<Lightsail.Types.GetDiskResult, AWSError>;
@@ -404,19 +444,19 @@ declare class Lightsail extends Service {
    */
   getDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.GetDiskSnapshotResult) => void): Request<Lightsail.Types.GetDiskSnapshotResult, AWSError>;
   /**
-   * Returns information about all block storage disk snapshots in your AWS account and region. If you are describing a long list of disk snapshots, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   * Returns information about all block storage disk snapshots in your AWS account and region.
    */
   getDiskSnapshots(params: Lightsail.Types.GetDiskSnapshotsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDiskSnapshotsResult) => void): Request<Lightsail.Types.GetDiskSnapshotsResult, AWSError>;
   /**
-   * Returns information about all block storage disk snapshots in your AWS account and region. If you are describing a long list of disk snapshots, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   * Returns information about all block storage disk snapshots in your AWS account and region.
    */
   getDiskSnapshots(callback?: (err: AWSError, data: Lightsail.Types.GetDiskSnapshotsResult) => void): Request<Lightsail.Types.GetDiskSnapshotsResult, AWSError>;
   /**
-   * Returns information about all block storage disks in your AWS account and region. If you are describing a long list of disks, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   * Returns information about all block storage disks in your AWS account and region.
    */
   getDisks(params: Lightsail.Types.GetDisksRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDisksResult) => void): Request<Lightsail.Types.GetDisksResult, AWSError>;
   /**
-   * Returns information about all block storage disks in your AWS account and region. If you are describing a long list of disks, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   * Returns information about all block storage disks in your AWS account and region.
    */
   getDisks(callback?: (err: AWSError, data: Lightsail.Types.GetDisksResult) => void): Request<Lightsail.Types.GetDisksResult, AWSError>;
   /**
@@ -548,11 +588,11 @@ declare class Lightsail extends Service {
    */
   getLoadBalancerTlsCertificates(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsCertificatesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsCertificatesResult, AWSError>;
   /**
-   * Returns information about all load balancers in an account. If you are describing a long list of load balancers, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   * Returns information about all load balancers in an account.
    */
   getLoadBalancers(params: Lightsail.Types.GetLoadBalancersRequest, callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancersResult) => void): Request<Lightsail.Types.GetLoadBalancersResult, AWSError>;
   /**
-   * Returns information about all load balancers in an account. If you are describing a long list of load balancers, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   * Returns information about all load balancers in an account.
    */
   getLoadBalancers(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancersResult) => void): Request<Lightsail.Types.GetLoadBalancersResult, AWSError>;
   /**
@@ -732,6 +772,14 @@ declare class Lightsail extends Service {
    */
   peerVpc(callback?: (err: AWSError, data: Lightsail.Types.PeerVpcResult) => void): Request<Lightsail.Types.PeerVpcResult, AWSError>;
   /**
+   * Creates or updates an alarm, and associates it with the specified metric. An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see Alarms in Amazon Lightsail. When this action creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. The alarm is then evaluated with the updated configuration.
+   */
+  putAlarm(params: Lightsail.Types.PutAlarmRequest, callback?: (err: AWSError, data: Lightsail.Types.PutAlarmResult) => void): Request<Lightsail.Types.PutAlarmResult, AWSError>;
+  /**
+   * Creates or updates an alarm, and associates it with the specified metric. An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see Alarms in Amazon Lightsail. When this action creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. The alarm is then evaluated with the updated configuration.
+   */
+  putAlarm(callback?: (err: AWSError, data: Lightsail.Types.PutAlarmResult) => void): Request<Lightsail.Types.PutAlarmResult, AWSError>;
+  /**
    * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request. The put instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
   putInstancePublicPorts(params: Lightsail.Types.PutInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
@@ -763,6 +811,14 @@ declare class Lightsail extends Service {
    * Deletes a specific static IP from your account.
    */
   releaseStaticIp(callback?: (err: AWSError, data: Lightsail.Types.ReleaseStaticIpResult) => void): Request<Lightsail.Types.ReleaseStaticIpResult, AWSError>;
+  /**
+   * Sends a verification request to an email contact method to ensure it’s owned by the requester. SMS contact methods don’t need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
+   */
+  sendContactMethodVerification(params: Lightsail.Types.SendContactMethodVerificationRequest, callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
+  /**
+   * Sends a verification request to an email contact method to ensure it’s owned by the requester. SMS contact methods don’t need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
+   */
+  sendContactMethodVerification(callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
   /**
    * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
    */
@@ -803,6 +859,14 @@ declare class Lightsail extends Service {
    * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Lightsail Dev Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
    */
   tagResource(callback?: (err: AWSError, data: Lightsail.Types.TagResourceResult) => void): Request<Lightsail.Types.TagResourceResult, AWSError>;
+  /**
+   * Tests an alarm by displaying a banner on the Amazon Lightsail console. If a notification trigger is configured for the specified alarm, the test also sends a notification to the notification protocol (Email and/or SMS) configured for the alarm. An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see Alarms in Amazon Lightsail.
+   */
+  testAlarm(params: Lightsail.Types.TestAlarmRequest, callback?: (err: AWSError, data: Lightsail.Types.TestAlarmResult) => void): Request<Lightsail.Types.TestAlarmResult, AWSError>;
+  /**
+   * Tests an alarm by displaying a banner on the Amazon Lightsail console. If a notification trigger is configured for the specified alarm, the test also sends a notification to the notification protocol (Email and/or SMS) configured for the alarm. An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see Alarms in Amazon Lightsail.
+   */
+  testAlarm(callback?: (err: AWSError, data: Lightsail.Types.TestAlarmResult) => void): Request<Lightsail.Types.TestAlarmResult, AWSError>;
   /**
    * Attempts to unpeer the Lightsail VPC from the user's default VPC.
    */
@@ -885,6 +949,90 @@ declare namespace Lightsail {
   }
   export type AddOnRequestList = AddOnRequest[];
   export type AddOnType = "AutoSnapshot"|string;
+  export interface Alarm {
+    /**
+     * The name of the alarm.
+     */
+    name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the alarm.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The timestamp when the alarm was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * An object that lists information about the location of the alarm.
+     */
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type (e.g., Alarm).
+     */
+    resourceType?: ResourceType;
+    /**
+     * The support code. Include this code in your email to support when you have questions about your Lightsail alarm. This code enables our support team to look up your Lightsail information more easily.
+     */
+    supportCode?: string;
+    /**
+     * An object that lists information about the resource monitored by the alarm.
+     */
+    monitoredResourceInfo?: MonitoredResourceInfo;
+    /**
+     * The arithmetic operation used when comparing the specified statistic and threshold.
+     */
+    comparisonOperator?: ComparisonOperator;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    evaluationPeriods?: integer;
+    /**
+     * The period, in seconds, over which the statistic is applied.
+     */
+    period?: MetricPeriod;
+    /**
+     * The value against which the specified statistic is compared.
+     */
+    threshold?: double;
+    /**
+     * The number of data points that must not within the specified threshold to trigger the alarm.
+     */
+    datapointsToAlarm?: integer;
+    /**
+     * Specifies how the alarm handles missing data points. An alarm can treat missing data in the following ways:    breaching — Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.    notBreaching — Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.    ignore — Ignore the missing data. Maintains the current alarm state.    missing — Missing data is treated as missing.  
+     */
+    treatMissingData?: TreatMissingData;
+    /**
+     * The statistic for the metric associated with the alarm. The following statistics are available:    Minimum — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount — The count, or number, of data points used for the statistical calculation.  
+     */
+    statistic?: MetricStatistic;
+    /**
+     * The name of the metric associated with the alarm.
+     */
+    metricName?: MetricName;
+    /**
+     * The current state of the alarm. An alarm has the following possible states:    ALARM — The metric is outside of the defined threshold.    INSUFFICIENT_DATA — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK — The metric is within the defined threshold.  
+     */
+    state?: AlarmState;
+    /**
+     * The unit of the metric associated with the alarm.
+     */
+    unit?: MetricUnit;
+    /**
+     * The contact protocols for the alarm, such as Email, SMS (text messaging), or both.
+     */
+    contactProtocols?: ContactProtocolsList;
+    /**
+     * The alarm states that trigger a notification.
+     */
+    notificationTriggers?: NotificationTriggerList;
+    /**
+     * Indicates whether the alarm is enabled.
+     */
+    notificationEnabled?: boolean;
+  }
+  export type AlarmState = "OK"|"ALARM"|"INSUFFICIENT_DATA"|string;
+  export type AlarmsList = Alarm[];
   export interface AllocateStaticIpRequest {
     /**
      * The name of the static IP address.
@@ -893,7 +1041,7 @@ declare namespace Lightsail {
   }
   export interface AllocateStaticIpResult {
     /**
-     * An array of key-value pairs containing information about the static IP address you allocated.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -913,7 +1061,7 @@ declare namespace Lightsail {
   }
   export interface AttachDiskResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -929,7 +1077,7 @@ declare namespace Lightsail {
   }
   export interface AttachInstancesToLoadBalancerResult {
     /**
-     * An object representing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -945,7 +1093,7 @@ declare namespace Lightsail {
   }
   export interface AttachLoadBalancerTlsCertificateResult {
     /**
-     * An object representing the API operations. These SSL/TLS certificates are only usable by Lightsail load balancers. You can't get the certificate and use it for another purpose.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request. These SSL/TLS certificates are only usable by Lightsail load balancers. You can't get the certificate and use it for another purpose.
      */
     operations?: OperationList;
   }
@@ -961,7 +1109,7 @@ declare namespace Lightsail {
   }
   export interface AttachStaticIpResult {
     /**
-     * An array of key-value pairs containing information about your API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1127,7 +1275,7 @@ declare namespace Lightsail {
   }
   export interface CloseInstancePublicPortsResult {
     /**
-     * An array of key-value pairs that contains information about the operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1182,6 +1330,47 @@ declare namespace Lightsail {
   }
   export type CloudFormationStackRecordSourceInfoList = CloudFormationStackRecordSourceInfo[];
   export type CloudFormationStackRecordSourceType = "ExportSnapshotRecord"|string;
+  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export interface ContactMethod {
+    /**
+     * The destination of the contact method, such as an email address or a mobile phone number.
+     */
+    contactEndpoint?: NonEmptyString;
+    /**
+     * The current status of the contact method. A contact method has the following possible status:    PendingVerification — The contact method has not yet been verified, and the verification has not yet expired.    Valid — The contact method has been verified.    InValid — An attempt was made to verify the contact method, but the verification has expired.  
+     */
+    status?: ContactMethodStatus;
+    /**
+     * The protocol of the contact method, such as email or SMS (text messaging).
+     */
+    protocol?: ContactProtocol;
+    /**
+     * The name of the contact method.
+     */
+    name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the contact method.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The timestamp when the contact method was created.
+     */
+    createdAt?: IsoDate;
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type (e.g., ContactMethod).
+     */
+    resourceType?: ResourceType;
+    /**
+     * The support code. Include this code in your email to support when you have questions about your Lightsail contact method. This code enables our support team to look up your Lightsail information more easily.
+     */
+    supportCode?: string;
+  }
+  export type ContactMethodStatus = "PendingVerification"|"Valid"|"Invalid"|string;
+  export type ContactMethodVerificationProtocol = "Email"|string;
+  export type ContactMethodsList = ContactMethod[];
+  export type ContactProtocol = "Email"|"SMS"|string;
+  export type ContactProtocolsList = ContactProtocol[];
   export interface CopySnapshotRequest {
     /**
      * The name of the source manual snapshot to copy. Constraint:   Define this parameter only when copying a manual snapshot as another manual snapshot.  
@@ -1210,7 +1399,7 @@ declare namespace Lightsail {
   }
   export interface CopySnapshotResult {
     /**
-     * A list of objects describing the API operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1222,7 +1411,23 @@ declare namespace Lightsail {
   }
   export interface CreateCloudFormationStackResult {
     /**
-     * A list of objects describing the API operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface CreateContactMethodRequest {
+    /**
+     * The protocol of the contact method, such as Email or SMS (text messaging). The SMS protocol is supported only in the following AWS Regions.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Europe (Ireland) (eu-west-1)   Asia Pacific (Tokyo) (ap-northeast-1)   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Sydney) (ap-southeast-2)   For a list of countries/regions where SMS text messages can be sent, and the latest AWS Regions where SMS text messaging is supported, see Supported Regions and Countries in the Amazon SNS Developer Guide. For more information about notifications in Amazon Lightsail, see Notifications in Amazon Lightsail.
+     */
+    protocol: ContactProtocol;
+    /**
+     * The destination of the contact method, such as an email address or a mobile phone number. Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the phone number structure used for international telecommunication. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character (+) and the country code. For example, a U.S. phone number in E.164 format would be specified as +1XXX5550100. For more information, see E.164 in Wikipedia.
+     */
+    contactEndpoint: StringMax256;
+  }
+  export interface CreateContactMethodResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1266,7 +1471,7 @@ declare namespace Lightsail {
   }
   export interface CreateDiskFromSnapshotResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1294,7 +1499,7 @@ declare namespace Lightsail {
   }
   export interface CreateDiskResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1318,7 +1523,7 @@ declare namespace Lightsail {
   }
   export interface CreateDiskSnapshotResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1334,7 +1539,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainEntryResult {
     /**
-     * An array of key-value pairs containing information about the operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1350,7 +1555,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainResult {
     /**
-     * An array of key-value pairs containing information about the domain resource you created.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1370,7 +1575,7 @@ declare namespace Lightsail {
   }
   export interface CreateInstanceSnapshotResult {
     /**
-     * An array of key-value pairs containing information about the results of your create instances snapshot request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1426,7 +1631,7 @@ declare namespace Lightsail {
   }
   export interface CreateInstancesFromSnapshotResult {
     /**
-     * An array of key-value pairs containing information about the results of your create instances from snapshot request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1470,7 +1675,7 @@ declare namespace Lightsail {
   }
   export interface CreateInstancesResult {
     /**
-     * An array of key-value pairs containing information about the results of your create instances request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1498,7 +1703,7 @@ declare namespace Lightsail {
      */
     privateKeyBase64?: Base64;
     /**
-     * An array of key-value pairs containing information about the results of your create key pair request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1534,7 +1739,7 @@ declare namespace Lightsail {
   }
   export interface CreateLoadBalancerResult {
     /**
-     * An object containing information about the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1562,7 +1767,7 @@ declare namespace Lightsail {
   }
   export interface CreateLoadBalancerTlsCertificateResult {
     /**
-     * An object containing information about the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1606,7 +1811,7 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseFromSnapshotResult {
     /**
-     * An object describing the result of your create relational database from snapshot request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1658,7 +1863,7 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseResult {
     /**
-     * An object describing the result of your create relational database request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1678,7 +1883,19 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseSnapshotResult {
     /**
-     * An object describing the result of your create relational database snapshot request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface DeleteAlarmRequest {
+    /**
+     * The name of the alarm to delete.
+     */
+    alarmName: ResourceName;
+  }
+  export interface DeleteAlarmResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1694,7 +1911,19 @@ declare namespace Lightsail {
   }
   export interface DeleteAutoSnapshotResult {
     /**
-     * An array of objects that describe the result of your request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface DeleteContactMethodRequest {
+    /**
+     * The protocol that will be deleted, such as Email or SMS (text messaging).  To delete an Email and an SMS contact method if you added both, you must run separate DeleteContactMethod actions to delete each protocol. 
+     */
+    protocol: ContactProtocol;
+  }
+  export interface DeleteContactMethodResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1710,7 +1939,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDiskResult {
     /**
-     * An array of objects that describe the result of your request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1722,7 +1951,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDiskSnapshotResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1738,7 +1967,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDomainEntryResult {
     /**
-     * An array of key-value pairs containing information about the results of your delete domain entry request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1750,7 +1979,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDomainResult {
     /**
-     * An array of key-value pairs containing information about the results of your delete domain request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1766,7 +1995,7 @@ declare namespace Lightsail {
   }
   export interface DeleteInstanceResult {
     /**
-     * An array of key-value pairs containing information about the results of your delete instance request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1778,7 +2007,7 @@ declare namespace Lightsail {
   }
   export interface DeleteInstanceSnapshotResult {
     /**
-     * An array of key-value pairs containing information about the results of your delete instance snapshot request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1790,7 +2019,7 @@ declare namespace Lightsail {
   }
   export interface DeleteKeyPairResult {
     /**
-     * An array of key-value pairs containing information about the results of your delete key pair request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1802,7 +2031,7 @@ declare namespace Lightsail {
   }
   export interface DeleteKnownHostKeysResult {
     /**
-     * A list of objects describing the API operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1814,7 +2043,7 @@ declare namespace Lightsail {
   }
   export interface DeleteLoadBalancerResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1834,7 +2063,7 @@ declare namespace Lightsail {
   }
   export interface DeleteLoadBalancerTlsCertificateResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1854,7 +2083,7 @@ declare namespace Lightsail {
   }
   export interface DeleteRelationalDatabaseResult {
     /**
-     * An object describing the result of your delete relational database request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1866,7 +2095,7 @@ declare namespace Lightsail {
   }
   export interface DeleteRelationalDatabaseSnapshotResult {
     /**
-     * An object describing the result of your delete relational database snapshot request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1888,7 +2117,7 @@ declare namespace Lightsail {
   }
   export interface DetachDiskResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1904,7 +2133,7 @@ declare namespace Lightsail {
   }
   export interface DetachInstancesFromLoadBalancerResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1916,7 +2145,7 @@ declare namespace Lightsail {
   }
   export interface DetachStaticIpResult {
     /**
-     * An array of key-value pairs containing information about the results of your detach static IP request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1932,7 +2161,7 @@ declare namespace Lightsail {
   }
   export interface DisableAddOnResult {
     /**
-     * An array of objects that describe the result of your request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2199,7 +2428,7 @@ declare namespace Lightsail {
   }
   export interface EnableAddOnResult {
     /**
-     * An array of objects that describe the result of your request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2281,13 +2510,13 @@ declare namespace Lightsail {
   }
   export interface ExportSnapshotResult {
     /**
-     * A list of objects describing the API operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
   export interface GetActiveNamesRequest {
     /**
-     * A token used for paginating results from your get active names request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetActiveNames request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2297,7 +2526,31 @@ declare namespace Lightsail {
      */
     activeNames?: StringList;
     /**
-     * A token used for advancing to the next page of results from your get active names request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetActiveNames request and specify the next page token using the pageToken parameter.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetAlarmsRequest {
+    /**
+     * The name of the alarm. Specify an alarm name to return information about a specific alarm.
+     */
+    alarmName?: ResourceName;
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetAlarms request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: string;
+    /**
+     * The name of the Lightsail resource being monitored by the alarm. Specify a monitored resource name to return information about all alarms for a specific resource.
+     */
+    monitoredResourceName?: ResourceName;
+  }
+  export interface GetAlarmsResult {
+    /**
+     * An array of objects that describe the alarms.
+     */
+    alarms?: AlarmsList;
+    /**
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetAlarms request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2327,7 +2580,7 @@ declare namespace Lightsail {
      */
     includeInactive?: boolean;
     /**
-     * A token used for advancing to the next page of results from your get blueprints request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetBlueprints request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2337,7 +2590,7 @@ declare namespace Lightsail {
      */
     blueprints?: BlueprintList;
     /**
-     * A token used for advancing to the next page of results from your get blueprints request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetBlueprints request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2347,7 +2600,7 @@ declare namespace Lightsail {
      */
     includeInactive?: boolean;
     /**
-     * A token used for advancing to the next page of results from your get bundles request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetBundles request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2357,13 +2610,13 @@ declare namespace Lightsail {
      */
     bundles?: BundleList;
     /**
-     * A token used for advancing to the next page of results from your get active names request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetBundles request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
   export interface GetCloudFormationStackRecordsRequest {
     /**
-     * A token used for advancing to a specific page of results for your get cloud formation stack records request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetClouFormationStackRecords request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2373,9 +2626,21 @@ declare namespace Lightsail {
      */
     cloudFormationStackRecords?: CloudFormationStackRecordList;
     /**
-     * A token used for advancing to the next page of results of your get relational database bundles request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetCloudFormationStackRecords request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
+  }
+  export interface GetContactMethodsRequest {
+    /**
+     * The protocols used to send notifications, such as Email, or SMS (text messaging). Specify a protocol in your request to return information about a specific contact method protocol.
+     */
+    protocols?: ContactProtocolsList;
+  }
+  export interface GetContactMethodsResult {
+    /**
+     * An array of objects that describe the contact methods.
+     */
+    contactMethods?: ContactMethodsList;
   }
   export interface GetDiskRequest {
     /**
@@ -2403,7 +2668,7 @@ declare namespace Lightsail {
   }
   export interface GetDiskSnapshotsRequest {
     /**
-     * A token used for advancing to the next page of results from your GetDiskSnapshots request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetDiskSnapshots request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2413,13 +2678,13 @@ declare namespace Lightsail {
      */
     diskSnapshots?: DiskSnapshotList;
     /**
-     * A token used for advancing to the next page of results from your GetDiskSnapshots request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDiskSnapshots request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
   export interface GetDisksRequest {
     /**
-     * A token used for advancing to the next page of results from your GetDisks request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetDisks request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2429,7 +2694,7 @@ declare namespace Lightsail {
      */
     disks?: DiskList;
     /**
-     * A token used for advancing to the next page of results from your GetDisks request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDisks request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2447,7 +2712,7 @@ declare namespace Lightsail {
   }
   export interface GetDomainsRequest {
     /**
-     * A token used for advancing to the next page of results from your get domains request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetDomains request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2457,13 +2722,13 @@ declare namespace Lightsail {
      */
     domains?: DomainList;
     /**
-     * A token used for advancing to the next page of results from your get active names request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDomains request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
   export interface GetExportSnapshotRecordsRequest {
     /**
-     * A token used for advancing to a specific page of results for your get export snapshot records request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetExportSnapshotRecords request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2473,7 +2738,7 @@ declare namespace Lightsail {
      */
     exportSnapshotRecords?: ExportSnapshotRecordList;
     /**
-     * A token used for advancing to the next page of results of your get relational database bundles request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetExportSnapshotRecords request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2499,11 +2764,11 @@ declare namespace Lightsail {
      */
     instanceName: ResourceName;
     /**
-     * The metric name to get data about. 
+     * The metric for which you want to return information. Valid instance metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     CPUUtilization  — The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     NetworkIn  — The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     NetworkOut  — The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     StatusCheckFailed  — Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_Instance  — Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_System  — Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.  
      */
     metricName: InstanceMetricName;
     /**
-     * The granularity, in seconds, of the returned data points.
+     * The granularity, in seconds, of the returned data points. The StatusCheckFailed, StatusCheckFailed_Instance, and StatusCheckFailed_System instance metric data is available in 1-minute (60 seconds) granularity. All other instance metric data is available in 5-minute (300 seconds) granularity.
      */
     period: MetricPeriod;
     /**
@@ -2515,11 +2780,11 @@ declare namespace Lightsail {
      */
     endTime: timestamp;
     /**
-     * The unit. The list of valid values is below.
+     * The unit for the metric data request. Valid units depend on the metric data being required. For the valid units with each available metric, see the metricName parameter.
      */
     unit: MetricUnit;
     /**
-     * The instance statistics. 
+     * The statistic for the metric. The following statistics are available:    Minimum — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount — The count, or number, of data points used for the statistical calculation.  
      */
     statistics: MetricStatisticList;
   }
@@ -2571,7 +2836,7 @@ declare namespace Lightsail {
   }
   export interface GetInstanceSnapshotsRequest {
     /**
-     * A token used for advancing to the next page of results from your get instance snapshots request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetInstanceSnapshots request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2581,7 +2846,7 @@ declare namespace Lightsail {
      */
     instanceSnapshots?: InstanceSnapshotList;
     /**
-     * A token used for advancing to the next page of results from your get instance snapshots request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetInstanceSnapshots request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2599,7 +2864,7 @@ declare namespace Lightsail {
   }
   export interface GetInstancesRequest {
     /**
-     * A token used for advancing to the next page of results from your get instances request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetInstances request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2609,7 +2874,7 @@ declare namespace Lightsail {
      */
     instances?: InstanceList;
     /**
-     * A token used for advancing to the next page of results from your get instances request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetInstances request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2627,7 +2892,7 @@ declare namespace Lightsail {
   }
   export interface GetKeyPairsRequest {
     /**
-     * A token used for advancing to the next page of results from your get key pairs request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetKeyPairs request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2637,7 +2902,7 @@ declare namespace Lightsail {
      */
     keyPairs?: KeyPairList;
     /**
-     * A token used for advancing to the next page of results from your get key pairs request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetKeyPairs request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2647,7 +2912,7 @@ declare namespace Lightsail {
      */
     loadBalancerName: ResourceName;
     /**
-     * The metric about which you want to return information. Valid values are listed below, along with the most useful statistics to include in your request.     ClientTLSNegotiationErrorCount  - The number of TLS connections initiated by the client that did not establish a session with the load balancer. Possible causes include a mismatch of ciphers or protocols.  Statistics: The most useful statistic is Sum.     HealthyHostCount  - The number of target instances that are considered healthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.     UnhealthyHostCount  - The number of target instances that are considered unhealthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.     HTTPCode_LB_4XX_Count  - The number of HTTP 4XX client error codes that originate from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests have not been received by the target instance. This count does not include any response codes generated by the target instances.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_LB_5XX_Count  - The number of HTTP 5XX server error codes that originate from the load balancer. This count does not include any response codes generated by the target instances.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_Instance_2XX_Count  - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_Instance_3XX_Count  - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.   Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_Instance_4XX_Count  - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     HTTPCode_Instance_5XX_Count  - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.     InstanceResponseTime  - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.  Statistics: The most useful statistic is Average.     RejectedConnectionCount  - The number of connections that were rejected because the load balancer had reached its maximum number of connections.  Statistics: The most useful statistic is Sum.     RequestCount  - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  
+     * The metric for which you want to return information. Valid load balancer metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     ClientTLSNegotiationErrorCount  — The number of TLS connections initiated by the client that did not establish a session with the load balancer due to a TLS error generated by the load balancer. Possible causes include a mismatch of ciphers or protocols.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     HealthyHostCount  — The number of target instances that are considered healthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.  Unit: The published unit is Count.     HTTPCode_Instance_2XX_Count  — The number of HTTP 2XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_3XX_Count  — The number of HTTP 3XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_4XX_Count  — The number of HTTP 4XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_5XX_Count  — The number of HTTP 5XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_LB_4XX_Count  — The number of HTTP 4XX client error codes that originated from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests were not received by the target instance. This count does not include response codes generated by the target instances.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_LB_5XX_Count  — The number of HTTP 5XX server error codes that originated from the load balancer. This does not include any response codes generated by the target instance. This metric is reported if there are no healthy instances attached to the load balancer, or if the request rate exceeds the capacity of the instances (spillover) or the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     InstanceResponseTime  — The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.  Statistics: The most useful statistic is Average.  Unit: The published unit is Seconds.     RejectedConnectionCount  — The number of connections that were rejected because the load balancer had reached its maximum number of connections.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     RequestCount  — The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     UnhealthyHostCount  — The number of target instances that are considered unhealthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.  Unit: The published unit is Count.  
      */
     metricName: LoadBalancerMetricName;
     /**
@@ -2663,11 +2928,11 @@ declare namespace Lightsail {
      */
     endTime: timestamp;
     /**
-     * The unit for the time period request. Valid values are listed below.
+     * The unit for the metric data request. Valid units depend on the metric data being required. For the valid units with each available metric, see the metricName parameter.
      */
     unit: MetricUnit;
     /**
-     * An array of statistics that you want to request metrics for. Valid values are listed below.     SampleCount  - The count (number) of data points used for the statistical calculation.     Average  - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum. This comparison helps you to know when to increase or decrease your resources as needed.     Sum  - All values submitted for the matching metric added together. This statistic can be useful for determining the total volume of a metric.     Minimum  - The lowest value observed during the specified period. You can use this value to determine low volumes of activity for your application.     Maximum  - The highest value observed during the specified period. You can use this value to determine high volumes of activity for your application.  
+     * The statistic for the metric. The following statistics are available:    Minimum — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount — The count, or number, of data points used for the statistical calculation.  
      */
     statistics: MetricStatisticList;
   }
@@ -2707,7 +2972,7 @@ declare namespace Lightsail {
   }
   export interface GetLoadBalancersRequest {
     /**
-     * A token used for paginating the results from your GetLoadBalancers request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetLoadBalancers request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2717,7 +2982,7 @@ declare namespace Lightsail {
      */
     loadBalancers?: LoadBalancerList;
     /**
-     * A token used for advancing to the next page of results from your GetLoadBalancers request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetLoadBalancers request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2729,7 +2994,7 @@ declare namespace Lightsail {
   }
   export interface GetOperationResult {
     /**
-     * An array of key-value pairs containing information about the results of your get operation request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -2739,13 +3004,13 @@ declare namespace Lightsail {
      */
     resourceName: ResourceName;
     /**
-     * A token used for advancing to the next page of results from your get operations for resource request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetOperationsForResource request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
   export interface GetOperationsForResourceResult {
     /**
-     * An array of key-value pairs containing information about the results of your get operations for resource request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
     /**
@@ -2753,23 +3018,23 @@ declare namespace Lightsail {
      */
     nextPageCount?: string;
     /**
-     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetOperationsForResource request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
   export interface GetOperationsRequest {
     /**
-     * A token used for advancing to the next page of results from your get operations request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetOperations request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
   export interface GetOperationsResult {
     /**
-     * An array of key-value pairs containing information about the results of your get operations request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
     /**
-     * A token used for advancing to the next page of results from your get operations request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetOperations request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2791,7 +3056,7 @@ declare namespace Lightsail {
   }
   export interface GetRelationalDatabaseBlueprintsRequest {
     /**
-     * A token used for advancing to a specific page of results for your get relational database blueprints request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabaseBlueprints request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2801,13 +3066,13 @@ declare namespace Lightsail {
      */
     blueprints?: RelationalDatabaseBlueprintList;
     /**
-     * A token used for advancing to the next page of results of your get relational database blueprints request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseBlueprints request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
   export interface GetRelationalDatabaseBundlesRequest {
     /**
-     * A token used for advancing to a specific page of results for your get relational database bundles request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabaseBundles request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2817,7 +3082,7 @@ declare namespace Lightsail {
      */
     bundles?: RelationalDatabaseBundleList;
     /**
-     * A token used for advancing to the next page of results of your get relational database bundles request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseBundles request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2831,7 +3096,7 @@ declare namespace Lightsail {
      */
     durationInMinutes?: integer;
     /**
-     * A token used for advancing to a specific page of results from for get relational database events request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabaseEvents request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2841,7 +3106,7 @@ declare namespace Lightsail {
      */
     relationalDatabaseEvents?: RelationalDatabaseEventList;
     /**
-     * A token used for advancing to the next page of results from your get relational database events request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseEvents request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -2867,7 +3132,7 @@ declare namespace Lightsail {
      */
     startFromHead?: boolean;
     /**
-     * A token used for advancing to a specific page of results for your get relational database log events request.
+     * The token to advance to the next or previous page of results from your request. To get a page token, perform an initial GetRelationalDatabaseLogEvents request. If your results are paginated, the response will return a next forward token and/or next backward token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2923,11 +3188,11 @@ declare namespace Lightsail {
      */
     relationalDatabaseName: ResourceName;
     /**
-     * The name of the metric data to return.
+     * The metric for which you want to return information. Valid relational database metric names are listed below, along with the most useful statistics to include in your request, and the published unit value. All relational database metric data is available in 1-minute (60 seconds) granularity.     CPUUtilization  — The percentage of CPU utilization currently in use on the database.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     DatabaseConnections  — The number of database connections in use.  Statistics: The most useful statistics are Maximum and Sum.  Unit: The published unit is Count.     DiskQueueDepth  — The number of outstanding IOs (read/write requests) that are waiting to access the disk.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     FreeStorageSpace  — The amount of available storage space.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     NetworkReceiveThroughput  — The incoming (Receive) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.  Statistics: The most useful statistic is Average.  Unit: The published unit is Bytes/Second.     NetworkTransmitThroughput  — The outgoing (Transmit) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.  Statistics: The most useful statistic is Average.  Unit: The published unit is Bytes/Second.  
      */
     metricName: RelationalDatabaseMetricName;
     /**
-     * The granularity, in seconds, of the returned data points.
+     * The granularity, in seconds, of the returned data points. All relational database metric data is available in 1-minute (60 seconds) granularity.
      */
     period: MetricPeriod;
     /**
@@ -2939,11 +3204,11 @@ declare namespace Lightsail {
      */
     endTime: IsoDate;
     /**
-     * The unit for the metric data request.
+     * The unit for the metric data request. Valid units depend on the metric data being required. For the valid units with each available metric, see the metricName parameter.
      */
     unit: MetricUnit;
     /**
-     * The array of statistics for your metric data request.
+     * The statistic for the metric. The following statistics are available:    Minimum — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount — The count, or number, of data points used for the statistical calculation.  
      */
     statistics: MetricStatisticList;
   }
@@ -2963,7 +3228,7 @@ declare namespace Lightsail {
      */
     relationalDatabaseName: ResourceName;
     /**
-     * A token used for advancing to a specific page of results for your get relational database parameters request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabaseParameters request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -2973,7 +3238,7 @@ declare namespace Lightsail {
      */
     parameters?: RelationalDatabaseParameterList;
     /**
-     * A token used for advancing to the next page of results from your get static IPs request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseParameters request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3003,7 +3268,7 @@ declare namespace Lightsail {
   }
   export interface GetRelationalDatabaseSnapshotsRequest {
     /**
-     * A token used for advancing to a specific page of results for your get relational database snapshots request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabaseSnapshots request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -3013,13 +3278,13 @@ declare namespace Lightsail {
      */
     relationalDatabaseSnapshots?: RelationalDatabaseSnapshotList;
     /**
-     * A token used for advancing to the next page of results from your get relational database snapshots request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabaseSnapshots request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
   export interface GetRelationalDatabasesRequest {
     /**
-     * A token used for advancing to a specific page of results for your get relational database request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabases request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -3029,7 +3294,7 @@ declare namespace Lightsail {
      */
     relationalDatabases?: RelationalDatabaseList;
     /**
-     * A token used for advancing to the next page of results from your get relational databases request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetRelationalDatabases request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3047,7 +3312,7 @@ declare namespace Lightsail {
   }
   export interface GetStaticIpsRequest {
     /**
-     * A token used for advancing to the next page of results from your get static IPs request.
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetStaticIps request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
   }
@@ -3057,7 +3322,7 @@ declare namespace Lightsail {
      */
     staticIps?: StaticIpList;
     /**
-     * A token used for advancing to the next page of results from your get static IPs request.
+     * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetStaticIps request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3104,7 +3369,7 @@ declare namespace Lightsail {
   }
   export interface ImportKeyPairResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -3766,10 +4031,25 @@ declare namespace Lightsail {
     unit?: MetricUnit;
   }
   export type MetricDatapointList = MetricDatapoint[];
+  export type MetricName = "CPUUtilization"|"NetworkIn"|"NetworkOut"|"StatusCheckFailed"|"StatusCheckFailed_Instance"|"StatusCheckFailed_System"|"ClientTLSNegotiationErrorCount"|"HealthyHostCount"|"UnhealthyHostCount"|"HTTPCode_LB_4XX_Count"|"HTTPCode_LB_5XX_Count"|"HTTPCode_Instance_2XX_Count"|"HTTPCode_Instance_3XX_Count"|"HTTPCode_Instance_4XX_Count"|"HTTPCode_Instance_5XX_Count"|"InstanceResponseTime"|"RejectedConnectionCount"|"RequestCount"|"DatabaseConnections"|"DiskQueueDepth"|"FreeStorageSpace"|"NetworkReceiveThroughput"|"NetworkTransmitThroughput"|string;
   export type MetricPeriod = number;
   export type MetricStatistic = "Minimum"|"Maximum"|"Sum"|"Average"|"SampleCount"|string;
   export type MetricStatisticList = MetricStatistic[];
   export type MetricUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
+  export interface MonitoredResourceInfo {
+    /**
+     * The Amazon Resource Name (ARN) of the resource being monitored.
+     */
+    arn?: ResourceArn;
+    /**
+     * The name of the Lightsail resource being monitored.
+     */
+    name?: ResourceName;
+    /**
+     * The Lightsail resource type of the resource being monitored. Instances, load balancers, and relational databases are the only Lightsail resources that can currently be monitored by alarms.
+     */
+    resourceType?: ResourceType;
+  }
   export interface MonthlyTransfer {
     /**
      * The amount allocated per month (in GB).
@@ -3778,6 +4058,7 @@ declare namespace Lightsail {
   }
   export type NetworkProtocol = "tcp"|"all"|"udp"|string;
   export type NonEmptyString = string;
+  export type NotificationTriggerList = AlarmState[];
   export interface OpenInstancePublicPortsRequest {
     /**
      * An array of key-value pairs containing information about the port mappings.
@@ -3790,7 +4071,7 @@ declare namespace Lightsail {
   }
   export interface OpenInstancePublicPortsResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -3846,7 +4127,7 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
-  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|string;
+  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|string;
   export interface PasswordData {
     /**
      * The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you use the default key pair (LightsailDefaultKeyPair), the decrypted password will be available in the password field. If you are using a custom key pair, you need to use your own means of decryption. If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
@@ -3861,7 +4142,7 @@ declare namespace Lightsail {
   }
   export interface PeerVpcResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -3914,6 +4195,58 @@ declare namespace Lightsail {
   export type PortInfoSourceType = "DEFAULT"|"INSTANCE"|"NONE"|"CLOSED"|string;
   export type PortList = Port[];
   export type PortState = "open"|"closed"|string;
+  export interface PutAlarmRequest {
+    /**
+     * The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.
+     */
+    alarmName: ResourceName;
+    /**
+     * The name of the metric to associate with the alarm. You can configure up to two alarms per metric. The following metrics are available for each resource type:    Instances: CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, and StatusCheckFailed_System.    Load balancers: ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, and RequestCount.    Relational databases: CPUUtilization, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, and NetworkTransmitThroughput.  
+     */
+    metricName: MetricName;
+    /**
+     * The name of the Lightsail resource that will be monitored. Instances, load balancers, and relational databases are the only Lightsail resources that can currently be monitored by alarms.
+     */
+    monitoredResourceName: ResourceName;
+    /**
+     * The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.
+     */
+    comparisonOperator: ComparisonOperator;
+    /**
+     * The value against which the specified statistic is compared.
+     */
+    threshold: double;
+    /**
+     * The number of most recent periods over which data is compared to the specified threshold. If you are setting an "M out of N" alarm, this value (evaluationPeriods) is the N. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies the rolling period of time in which data points are evaluated. Each evaluation period is five minutes long. For example, specify an evaluation period of 24 to evaluate a metric over a rolling period of two hours. You can specify a minimum valuation period of 1 (5 minutes), and a maximum evaluation period of 288 (24 hours).
+     */
+    evaluationPeriods: integer;
+    /**
+     * The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an "M out of N" alarm, this value (datapointsToAlarm) is the M.
+     */
+    datapointsToAlarm?: integer;
+    /**
+     * Sets how this alarm will handle missing data points. An alarm can treat missing data in the following ways:    breaching — Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.    notBreaching — Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.    ignore — Ignore the missing data. Maintains the current alarm state.    missing — Missing data is treated as missing.   If treatMissingData is not specified, the default behavior of missing is used.
+     */
+    treatMissingData?: TreatMissingData;
+    /**
+     * The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both. A notification is sent via the specified contact protocol if notifications are enabled for the alarm, and when the alarm is triggered. A notification is not sent if a contact protocol is not specified, if the specified contact protocol is not configured in the AWS Region, or if notifications are not enabled for the alarm using the notificationEnabled paramater. Use the CreateContactMethod action to configure a contact protocol in an AWS Region.
+     */
+    contactProtocols?: ContactProtocolsList;
+    /**
+     * The alarm states that trigger a notification. An alarm has the following possible states:    ALARM — The metric is outside of the defined threshold.    INSUFFICIENT_DATA — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK — The metric is within the defined threshold.   When you specify a notification trigger, the ALARM state must be specified. The INSUFFICIENT_DATA and OK states can be specified in addition to the ALARM state.   If you specify OK as an alarm trigger, a notification is sent when the alarm switches from an ALARM or INSUFFICIENT_DATA alarm state to an OK state. This can be thought of as an all clear alarm notification.   If you specify INSUFFICIENT_DATA as the alarm trigger, a notification is sent when the alarm switches from an OK or ALARM alarm state to an INSUFFICIENT_DATA state.   The notification trigger defaults to ALARM if you don't specify this parameter.
+     */
+    notificationTriggers?: NotificationTriggerList;
+    /**
+     * Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.
+     */
+    notificationEnabled?: boolean;
+  }
+  export interface PutAlarmResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
   export interface PutInstancePublicPortsRequest {
     /**
      * Specifies information about the public port(s).
@@ -3926,7 +4259,7 @@ declare namespace Lightsail {
   }
   export interface PutInstancePublicPortsResult {
     /**
-     * Describes metadata about the operation you just executed.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -3938,7 +4271,7 @@ declare namespace Lightsail {
   }
   export interface RebootInstanceResult {
     /**
-     * An array of key-value pairs containing information about the request operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -3950,7 +4283,7 @@ declare namespace Lightsail {
   }
   export interface RebootRelationalDatabaseResult {
     /**
-     * An object describing the result of your reboot relational database request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4308,7 +4641,7 @@ declare namespace Lightsail {
   }
   export interface ReleaseStaticIpResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4325,7 +4658,19 @@ declare namespace Lightsail {
   }
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
-  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|string;
+  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|string;
+  export interface SendContactMethodVerificationRequest {
+    /**
+     * The protocol to verify, such as Email or SMS (text messaging).
+     */
+    protocol: ContactMethodVerificationProtocol;
+  }
+  export interface SendContactMethodVerificationResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
   export type SensitiveString = string;
   export interface StartInstanceRequest {
     /**
@@ -4335,7 +4680,7 @@ declare namespace Lightsail {
   }
   export interface StartInstanceResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4347,7 +4692,7 @@ declare namespace Lightsail {
   }
   export interface StartRelationalDatabaseResult {
     /**
-     * An object describing the result of your start relational database request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4402,7 +4747,7 @@ declare namespace Lightsail {
   }
   export interface StopInstanceResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4418,7 +4763,7 @@ declare namespace Lightsail {
   }
   export interface StopRelationalDatabaseResult {
     /**
-     * An object describing the result of your stop relational database request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4453,17 +4798,34 @@ declare namespace Lightsail {
   }
   export interface TagResourceResult {
     /**
-     * A list of objects describing the API operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
   export type TagValue = string;
+  export interface TestAlarmRequest {
+    /**
+     * The name of the alarm to test.
+     */
+    alarmName: ResourceName;
+    /**
+     * The alarm state to test. An alarm has the following possible states that can be tested:    ALARM — The metric is outside of the defined threshold.    INSUFFICIENT_DATA — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK — The metric is within the defined threshold.  
+     */
+    state: AlarmState;
+  }
+  export interface TestAlarmResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
   export type TimeOfDay = string;
+  export type TreatMissingData = "breaching"|"notBreaching"|"ignore"|"missing"|string;
   export interface UnpeerVpcRequest {
   }
   export interface UnpeerVpcResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -4483,7 +4845,7 @@ declare namespace Lightsail {
   }
   export interface UntagResourceResult {
     /**
-     * A list of objects describing the API operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4499,7 +4861,7 @@ declare namespace Lightsail {
   }
   export interface UpdateDomainEntryResult {
     /**
-     * An array of key-value pairs containing information about the request operation.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4519,7 +4881,7 @@ declare namespace Lightsail {
   }
   export interface UpdateLoadBalancerAttributeResult {
     /**
-     * An object describing the API operations.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4535,7 +4897,7 @@ declare namespace Lightsail {
   }
   export interface UpdateRelationalDatabaseParametersResult {
     /**
-     * An object describing the result of your update relational database parameters request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4583,7 +4945,7 @@ declare namespace Lightsail {
   }
   export interface UpdateRelationalDatabaseResult {
     /**
-     * An object describing the result of your update relational database request.
+     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }

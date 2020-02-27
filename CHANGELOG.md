@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.627.0-->
+<!--LATEST=2.628.0-->
 <!--ENTRYINSERT-->
+
+## 2.628.0
+* feature: GlobalAccelerator: This release adds support for adding tags to accelerators and bringing your own IP address to AWS Global Accelerator (BYOIP).
+* feature: Lightsail: Adds support to create notification contacts in Amazon Lightsail, and to create instance, database, and load balancer metric alarms that notify you based on the value of a metric relative to a threshold that you specify.
 
 ## 2.627.0
 * feature: EC2: This release changes the RunInstances CLI and SDK's so that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
