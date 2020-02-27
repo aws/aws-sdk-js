@@ -19,7 +19,10 @@ sudo: false
 matrix:
   include:
   - node_js: "10"
-    env: TEST_SCRIPT=test
+    env: TEST_SCRIPT=browsertest
+
+cache:
+  npm: false
 
 addons:
   rake: 
