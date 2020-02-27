@@ -457,14 +457,13 @@
           });
         });
         it('handles large stream', function(done) {
-          var result = 'ada8eb6157edeb1eb10346f34c330d8e0ac9c7f889d077de5d0f8dcd97021628';
+          var result = '86c338dcc928fcc63ac180b5a1f6df6c59f5ac409edd966a146e65702a2b8c10';
           var Transform = AWS.util.stream.Transform;
           var tr = new Transform;
           tr._transform = function(data, encoding, callback) {
             return callback(null, data);
           };
-          // Send 0.75 GB data in chunk.
-          tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
+          // Send 0.5 GB data in chunk.
           tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
           tr.push(AWS.util.buffer.alloc(256 * 1024 * 1024, 0));
           tr.push(AWS.util.buffer.toBuffer([1, 2, 3]));
@@ -485,9 +484,9 @@
           });
         });
         it('handles large buffers', function(done) {
-          var result = 'f64f0c6761baef28012637ac79851debbf212acfa3dd273e25213910e688287a';
-          // 1 gigabyte
-          var buffer = AWS.util.buffer.alloc(1024 * 1024 * 1024 + 3, 0);
+          var result = '86c338dcc928fcc63ac180b5a1f6df6c59f5ac409edd966a146e65702a2b8c10';
+          // 0.5 GB
+          var buffer = AWS.util.buffer.alloc(512 * 1024 * 1024 + 3, 0);
           //set last 3 bytes to [1, 2, 3]
           buffer.fill(Uint8Array.from([1,2,3]), buffer.length - 3);
           util.sha256(new Blob([buffer]), 'hex', function(e, d) {
