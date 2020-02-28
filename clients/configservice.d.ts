@@ -576,6 +576,14 @@ declare class ConfigService extends Service {
    */
   putRetentionConfiguration(callback?: (err: AWSError, data: ConfigService.Types.PutRetentionConfigurationResponse) => void): Request<ConfigService.Types.PutRetentionConfigurationResponse, AWSError>;
   /**
+   * Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of AWS resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
+   */
+  selectAggregateResourceConfig(params: ConfigService.Types.SelectAggregateResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.SelectAggregateResourceConfigResponse) => void): Request<ConfigService.Types.SelectAggregateResourceConfigResponse, AWSError>;
+  /**
+   * Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of AWS resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
+   */
+  selectAggregateResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.SelectAggregateResourceConfigResponse) => void): Request<ConfigService.Types.SelectAggregateResourceConfigResponse, AWSError>;
+  /**
    * Accepts a structured query language (SQL) SELECT command, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
    */
   selectResourceConfig(params: ConfigService.Types.SelectResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.SelectResourceConfigResponse) => void): Request<ConfigService.Types.SelectResourceConfigResponse, AWSError>;
@@ -998,15 +1006,15 @@ declare namespace ConfigService {
     /**
      * The name that you assign to the AWS Config rule. The name is required if you are adding a new rule.
      */
-    ConfigRuleName?: StringWithCharLimit64;
+    ConfigRuleName?: ConfigRuleName;
     /**
      * The Amazon Resource Name (ARN) of the AWS Config rule.
      */
-    ConfigRuleArn?: String;
+    ConfigRuleArn?: StringWithCharLimit256;
     /**
      * The ID of the AWS Config rule.
      */
-    ConfigRuleId?: String;
+    ConfigRuleId?: StringWithCharLimit64;
     /**
      * The description that you provide for the AWS Config rule.
      */
@@ -1069,7 +1077,7 @@ declare namespace ConfigService {
     /**
      * The name of the AWS Config rule.
      */
-    ConfigRuleName?: StringWithCharLimit64;
+    ConfigRuleName?: ConfigRuleName;
     /**
      * The Amazon Resource Name (ARN) of the AWS Config rule.
      */
@@ -1098,6 +1106,7 @@ declare namespace ConfigService {
      * The time that you first activated the AWS Config rule.
      */
     FirstActivatedTime?: _Date;
+    LastDeactivatedTime?: _Date;
     /**
      * The error code that AWS Config returned when the rule last failed.
      */
@@ -1478,7 +1487,7 @@ declare namespace ConfigService {
     /**
      * The name of the AWS Config rule that you want to delete.
      */
-    ConfigRuleName: StringWithCharLimit64;
+    ConfigRuleName: ConfigRuleName;
   }
   export interface DeleteConfigurationAggregatorRequest {
     /**
@@ -1542,7 +1551,7 @@ declare namespace ConfigService {
     /**
      * The type of a resource.
      */
-    ResourceType?: String;
+    ResourceType?: StringWithCharLimit256;
   }
   export interface DeleteRemediationConfigurationResponse {
   }
@@ -2235,7 +2244,7 @@ declare namespace ConfigService {
     /**
      * The name of the AWS Config rule that was used in the evaluation.
      */
-    ConfigRuleName?: StringWithCharLimit64;
+    ConfigRuleName?: ConfigRuleName;
     /**
      * The type of AWS resource that was evaluated.
      */
@@ -3352,7 +3361,7 @@ declare namespace ConfigService {
      */
     resourceTypes?: ResourceTypeList;
   }
-  export type ReevaluateConfigRuleNames = StringWithCharLimit64[];
+  export type ReevaluateConfigRuleNames = ConfigRuleName[];
   export type RelatedEvent = string;
   export type RelatedEventList = RelatedEvent[];
   export interface Relationship {
@@ -3391,7 +3400,7 @@ declare namespace ConfigService {
     /**
      * Version of the target. For example, version of the SSM document.
      */
-    TargetVersion?: String;
+    TargetVersion?: StringWithCharLimit256;
     /**
      * An object of the RemediationParameterValue.
      */
@@ -3399,7 +3408,7 @@ declare namespace ConfigService {
     /**
      * The type of a resource. 
      */
-    ResourceType?: String;
+    ResourceType?: StringWithCharLimit256;
     /**
      * The remediation is triggered automatically.
      */
@@ -3597,7 +3606,7 @@ declare namespace ConfigService {
   }
   export type ResourceKeys = ResourceKey[];
   export type ResourceName = string;
-  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::NatGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::FlowLog"|"AWS::EC2::VPCPeeringConnection"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBParameterGroup"|"AWS::RDS::DBOptionGroup"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterParameterGroup"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::EventSubscription"|"AWS::S3::Bucket"|"AWS::S3::AccountPublicAccessBlock"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::SSM::ManagedInstanceInventory"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::DynamoDB::Table"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::Lambda::Alias"|"AWS::Lambda::Function"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::MobileHub::Project"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ResourceCompliance"|"AWS::LicenseManager::LicenseConfiguration"|"AWS::ApiGateway::DomainName"|"AWS::ApiGateway::Method"|"AWS::ApiGateway::Stage"|"AWS::ApiGateway::RestApi"|"AWS::ApiGatewayV2::DomainName"|"AWS::ApiGatewayV2::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::CodePipeline::Pipeline"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::Portfolio"|string;
+  export type ResourceType = "AWS::ACM::Certificate"|"AWS::ApiGateway::DomainName"|"AWS::ApiGateway::Method"|"AWS::ApiGateway::RestApi"|"AWS::ApiGateway::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::ApiGatewayV2::DomainName"|"AWS::ApiGatewayV2::Stage"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::CloudFormation::Stack"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::CloudTrail::Trail"|"AWS::CloudWatch::Alarm"|"AWS::CodeBuild::Project"|"AWS::CodePipeline::Pipeline"|"AWS::Config::ResourceCompliance"|"AWS::DynamoDB::Table"|"AWS::EC2::CustomerGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::EIP"|"AWS::EC2::FlowLog"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NatGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::VPCPeeringConnection"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::ECR::Repository"|"AWS::ECS::Cluster"|"AWS::ECS::PrimaryTaskSet"|"AWS::ECS::Service"|"AWS::ECS::TaskDefinition"|"AWS::ECS::TaskSet"|"AWS::EKS::Cluster"|"AWS::EKS::Nodegroup"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::Elasticsearch::Domain"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::Kinesis::Stream"|"AWS::Kinesis::StreamConsumer"|"AWS::KinesisAnalytics::Application"|"AWS::KinesisAnalytics::ApplicationOutput"|"AWS::KinesisAnalytics::ApplicationReferenceDataSource"|"AWS::KinesisAnalyticsV2::Application"|"AWS::KinesisAnalyticsV2::ApplicationCloudWatchLoggingOption"|"AWS::KinesisAnalyticsV2::ApplicationOutput"|"AWS::KinesisAnalyticsV2::ApplicationReferenceDataSource"|"AWS::KinesisFirehose::DeliveryStream"|"AWS::KMS::Key"|"AWS::Lambda::Alias"|"AWS::Lambda::Function"|"AWS::LicenseManager::LicenseConfiguration"|"AWS::MobileHub::Project"|"AWS::QLDB::Ledger"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterParameterGroup"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::DBInstance"|"AWS::RDS::DBOptionGroup"|"AWS::RDS::DBParameterGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::EventSubscription"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::S3::AccountPublicAccessBlock"|"AWS::S3::Bucket"|"AWS::SecretsManager::Secret"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::Portfolio"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::SNS::Topic"|"AWS::SQS::Queue"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::ManagedInstanceInventory"|"AWS::SSM::PatchCompliance"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::WAFv2::WebACL"|"AWS::WAFv2::RuleGroup"|"AWS::WAFv2::IPSet"|"AWS::WAFv2::RegexPatternSet"|"AWS::WAFv2::ManagedRuleSet"|"AWS::XRay::EncryptionConfig"|string;
   export type ResourceTypeList = ResourceType[];
   export type ResourceTypeString = string;
   export type ResourceTypes = StringWithCharLimit256[];
@@ -3643,6 +3652,36 @@ declare namespace ConfigService {
      * The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ComplianceResourceTypes.
      */
     ComplianceResourceId?: BaseResourceId;
+  }
+  export interface SelectAggregateResourceConfigRequest {
+    /**
+     * The SQL query SELECT command. 
+     */
+    Expression: Expression;
+    /**
+     * The name of the configuration aggregator.
+     */
+    ConfigurationAggregatorName: ConfigurationAggregatorName;
+    /**
+     * The maximum number of query results returned on each page. 
+     */
+    Limit?: Limit;
+    MaxResults?: Limit;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface SelectAggregateResourceConfigResponse {
+    /**
+     * Returns the results for the SQL query.
+     */
+    Results?: Results;
+    QueryInfo?: QueryInfo;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
   }
   export interface SelectResourceConfigRequest {
     /**

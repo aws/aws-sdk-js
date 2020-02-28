@@ -94,7 +94,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p>You can use the <code>prefix</code> parameter in your route specification for path-based\n         routing of requests. For example, if your virtual service name is\n            <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>\n         <p>If your route matches a request, you can distribute traffic to one or more target\n         virtual nodes with relative weighting.</p>",
+      "documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p>You can use the <code>prefix</code> parameter in your route specification for path-based\n         routing of requests. For example, if your virtual service name is\n            <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>\n         <p>If your route matches a request, you can distribute traffic to one or more target\n         virtual nodes with relative weighting.</p>\n         <p>For more information about routes, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/routes.html\">Routes</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualNode": {
@@ -136,7 +136,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group.</p>\n         <p>Any inbound traffic that your virtual node expects should be specified as a\n            <code>listener</code>. Any outbound traffic that your virtual node expects to reach\n         should be specified as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value (either the full ARN or the truncated\n         resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the\n            <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>",
+      "documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group.</p>\n         <p>Any inbound traffic that your virtual node expects should be specified as a\n            <code>listener</code>. Any outbound traffic that your virtual node expects to reach\n         should be specified as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value (either the full ARN or the truncated\n         resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the\n            <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_nodes.html\">Virtual Nodes</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualRouter": {
@@ -178,7 +178,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Any inbound traffic that your virtual router expects should be specified as a\n            <code>listener</code>. </p>\n         <p>Virtual routers handle traffic for one or more virtual services within your mesh. After\n         you create your virtual router, create and associate routes for your virtual router that\n         direct incoming requests to different virtual nodes.</p>",
+      "documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Any inbound traffic that your virtual router expects should be specified as a\n            <code>listener</code>. </p>\n         <p>Virtual routers handle traffic for one or more virtual services within your mesh. After\n         you create your virtual router, create and associate routes for your virtual router that\n         direct incoming requests to different virtual nodes.</p>\n         <p>For more information about virtual routers, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_routers.html\">Virtual Routers</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualService": {
@@ -220,7 +220,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a virtual node\n         directly or indirectly by means of a virtual router. Dependent services call your virtual\n         service by its <code>virtualServiceName</code>, and those requests are routed to the\n         virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>",
+      "documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a virtual node\n         directly or indirectly by means of a virtual router. Dependent services call your virtual\n         service by its <code>virtualServiceName</code>, and those requests are routed to the\n         virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>\n         <p>For more information about virtual services, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_services.html\">Virtual Services</a>.</p>",
       "idempotent": true
     },
     "DeleteMesh": {
@@ -1096,95 +1096,6 @@
       },
       "documentation": "<p>An object that represents a virtual router listener.</p>"
     },
-    "UpdateVirtualNodeInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "spec",
-        "virtualNodeName"
-      ],
-      "members": {
-        "clientToken": {
-          "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
-          "idempotencyToken": true
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "spec": {
-          "shape": "VirtualNodeSpec",
-          "documentation": "<p>The new virtual node specification to apply. This overwrites the existing data.</p>"
-        },
-        "virtualNodeName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual node to update.</p>",
-          "location": "uri",
-          "locationName": "virtualNodeName"
-        }
-      },
-      "documentation": ""
-    },
-    "DeleteMeshInput": {
-      "type": "structure",
-      "required": [
-        "meshName"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to delete.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        }
-      },
-      "documentation": ""
-    },
-    "TcpRetryPolicyEvents": {
-      "type": "list",
-      "member": {
-        "shape": "TcpRetryPolicyEvent"
-      },
-      "min": 1,
-      "max": 1
-    },
-    "CreateVirtualServiceInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "spec",
-        "virtualServiceName"
-      ],
-      "members": {
-        "clientToken": {
-          "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
-          "idempotencyToken": true
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to create the virtual service in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "spec": {
-          "shape": "VirtualServiceSpec",
-          "documentation": "<p>The virtual service specification to apply.</p>"
-        },
-        "tags": {
-          "shape": "TagList",
-          "documentation": "<p>Optional metadata that you can apply to the virtual service to assist with\n         categorization and organization. Each tag consists of a key and an optional value, both of\n         which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
-        },
-        "virtualServiceName": {
-          "shape": "ServiceName",
-          "documentation": "<p>The name to use for the virtual service.</p>"
-        }
-      },
-      "documentation": ""
-    },
     "VirtualRouterStatusCode": {
       "type": "string",
       "enum": [
@@ -1192,38 +1103,6 @@
         "DELETED",
         "INACTIVE"
       ]
-    },
-    "UpdateVirtualRouterInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "spec",
-        "virtualRouterName"
-      ],
-      "members": {
-        "clientToken": {
-          "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
-          "idempotencyToken": true
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "spec": {
-          "shape": "VirtualRouterSpec",
-          "documentation": "<p>The new virtual router specification to apply. This overwrites the existing data.</p>"
-        },
-        "virtualRouterName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router to update.</p>",
-          "location": "uri",
-          "locationName": "virtualRouterName"
-        }
-      },
-      "documentation": ""
     },
     "TagKeyList": {
       "type": "list",
@@ -1263,33 +1142,6 @@
       },
       "documentation": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>"
     },
-    "ListTagsForResourceInput": {
-      "type": "structure",
-      "required": [
-        "resourceArn"
-      ],
-      "members": {
-        "limit": {
-          "shape": "TagsLimit",
-          "documentation": "<p>The maximum number of tag results returned by <code>ListTagsForResource</code> in\n         paginated output. When this parameter is used, <code>ListTagsForResource</code> returns\n         only <code>limit</code> results in a single page along with a <code>nextToken</code>\n         response element. You can see the remaining results of the initial request by sending\n         another <code>ListTagsForResource</code> request with the returned <code>nextToken</code>\n         value. This value can be between 1 and 100. If you don't use\n         this parameter, <code>ListTagsForResource</code> returns up to 100\n         results and a <code>nextToken</code> value if applicable.</p>",
-          "location": "querystring",
-          "locationName": "limit"
-        },
-        "nextToken": {
-          "shape": "String",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListTagsForResource</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
-          "location": "querystring",
-          "locationName": "nextToken"
-        },
-        "resourceArn": {
-          "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource to list the tags for.</p>",
-          "location": "querystring",
-          "locationName": "resourceArn"
-        }
-      },
-      "documentation": ""
-    },
     "CreateVirtualNodeOutput": {
       "type": "structure",
       "required": [
@@ -1314,14 +1166,6 @@
       },
       "documentation": "<p>An object that represents the logging information for a virtual node.</p>"
     },
-    "GrpcRetryPolicyEvents": {
-      "type": "list",
-      "member": {
-        "shape": "GrpcRetryPolicyEvent"
-      },
-      "min": 1,
-      "max": 5
-    },
     "Long": {
       "type": "long",
       "box": true
@@ -1340,42 +1184,6 @@
       "documentation": "",
       "payload": "virtualRouter"
     },
-    "DescribeMeshOutput": {
-      "type": "structure",
-      "required": [
-        "mesh"
-      ],
-      "members": {
-        "mesh": {
-          "shape": "MeshData",
-          "documentation": "<p>The full description of your service mesh.</p>"
-        }
-      },
-      "documentation": "",
-      "payload": "mesh"
-    },
-    "DeleteVirtualRouterInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "virtualRouterName"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to delete the virtual router in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "virtualRouterName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router to delete.</p>",
-          "location": "uri",
-          "locationName": "virtualRouterName"
-        }
-      },
-      "documentation": ""
-    },
     "ListVirtualRoutersOutput": {
       "type": "structure",
       "required": [
@@ -1392,49 +1200,6 @@
         }
       },
       "documentation": ""
-    },
-    "DescribeRouteInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "routeName",
-        "virtualRouterName"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the route resides in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "routeName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the route to describe.</p>",
-          "location": "uri",
-          "locationName": "routeName"
-        },
-        "virtualRouterName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router that the route is associated with.</p>",
-          "location": "uri",
-          "locationName": "virtualRouterName"
-        }
-      },
-      "documentation": ""
-    },
-    "DeleteRouteOutput": {
-      "type": "structure",
-      "required": [
-        "route"
-      ],
-      "members": {
-        "route": {
-          "shape": "RouteData",
-          "documentation": "<p>The route that was deleted.</p>"
-        }
-      },
-      "documentation": "",
-      "payload": "route"
     },
     "ResourceMetadata": {
       "type": "structure",
@@ -1468,31 +1233,6 @@
         }
       },
       "documentation": "<p>An object that represents metadata for a resource.</p>"
-    },
-    "Listeners": {
-      "type": "list",
-      "member": {
-        "shape": "Listener"
-      },
-      "min": 0,
-      "max": 1
-    },
-    "Backends": {
-      "type": "list",
-      "member": {
-        "shape": "Backend"
-      },
-      "min": 0,
-      "max": 25
-    },
-    "PortProtocol": {
-      "type": "string",
-      "enum": [
-        "grpc",
-        "http",
-        "http2",
-        "tcp"
-      ]
     },
     "UpdateVirtualNodeOutput": {
       "type": "structure",
@@ -1531,79 +1271,16 @@
         "virtualServiceName"
       ],
       "members": {
+        "clientPolicy": {
+          "shape": "ClientPolicy",
+          "documentation": "<p>A reference to an object that represents the client policy for a backend.</p>"
+        },
         "virtualServiceName": {
           "shape": "ServiceName",
           "documentation": "<p>The name of the virtual service that is acting as a virtual node backend.</p>"
         }
       },
       "documentation": "<p>An object that represents a virtual service backend for a virtual node.</p>"
-    },
-    "VirtualNodeStatusCode": {
-      "type": "string",
-      "enum": [
-        "ACTIVE",
-        "DELETED",
-        "INACTIVE"
-      ]
-    },
-    "ServiceName": {
-      "type": "string"
-    },
-    "UpdateVirtualServiceInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "spec",
-        "virtualServiceName"
-      ],
-      "members": {
-        "clientToken": {
-          "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
-          "idempotencyToken": true
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "spec": {
-          "shape": "VirtualServiceSpec",
-          "documentation": "<p>The new virtual service specification to apply. This overwrites the existing\n         data.</p>"
-        },
-        "virtualServiceName": {
-          "shape": "ServiceName",
-          "documentation": "<p>The name of the virtual service to update.</p>",
-          "location": "uri",
-          "locationName": "virtualServiceName"
-        }
-      },
-      "documentation": ""
-    },
-    "HealthCheckThreshold": {
-      "type": "integer",
-      "min": 2,
-      "max": 10
-    },
-    "UpdateRouteOutput": {
-      "type": "structure",
-      "required": [
-        "route"
-      ],
-      "members": {
-        "route": {
-          "shape": "RouteData",
-          "documentation": "<p>A full description of the route that was updated.</p>"
-        }
-      },
-      "documentation": "",
-      "payload": "route"
-    },
-    "PercentInt": {
-      "type": "integer",
-      "min": 0,
-      "max": 100
     },
     "GrpcRouteMetadataList": {
       "type": "list",
@@ -1613,62 +1290,13 @@
       "min": 1,
       "max": 10
     },
-    "MethodName": {
+    "ListenerTlsMode": {
       "type": "string",
-      "min": 1,
-      "max": 50
-    },
-    "TagValue": {
-      "type": "string",
-      "min": 0,
-      "max": 256
-    },
-    "HttpRouteAction": {
-      "type": "structure",
-      "required": [
-        "weightedTargets"
-      ],
-      "members": {
-        "weightedTargets": {
-          "shape": "WeightedTargets",
-          "documentation": "<p>An object that represents the targets that traffic is routed to when a request matches the route.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
-    },
-    "ListRoutesInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "virtualRouterName"
-      ],
-      "members": {
-        "limit": {
-          "shape": "ListRoutesLimit",
-          "documentation": "<p>The maximum number of results returned by <code>ListRoutes</code> in paginated output.\n         When you use this parameter, <code>ListRoutes</code> returns only <code>limit</code>\n         results in a single page along with a <code>nextToken</code> response element. You can see\n         the remaining results of the initial request by sending another <code>ListRoutes</code>\n         request with the returned <code>nextToken</code> value. This value can be between\n         1 and 100. If you don't use this parameter,\n            <code>ListRoutes</code> returns up to 100 results and a\n            <code>nextToken</code> value if applicable.</p>",
-          "location": "querystring",
-          "locationName": "limit"
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to list routes in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "nextToken": {
-          "shape": "String",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListRoutes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>",
-          "location": "querystring",
-          "locationName": "nextToken"
-        },
-        "virtualRouterName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router to list routes in.</p>",
-          "location": "uri",
-          "locationName": "virtualRouterName"
-        }
-      },
-      "documentation": ""
+      "enum": [
+        "DISABLED",
+        "PERMISSIVE",
+        "STRICT"
+      ]
     },
     "HealthCheckPolicy": {
       "type": "structure",
@@ -1690,7 +1318,7 @@
         },
         "path": {
           "shape": "String",
-          "documentation": "<p>The destination path for the health check request. This is required only if the\n         specified protocol is HTTP. If the protocol is TCP, this parameter is ignored.</p>"
+          "documentation": "<p>The destination path for the health check request. This value is only used if the specified \n         protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.</p>"
         },
         "port": {
           "shape": "PortNumber",
@@ -1698,7 +1326,7 @@
         },
         "protocol": {
           "shape": "PortProtocol",
-          "documentation": "<p>The protocol for the health check request.</p>"
+          "documentation": "<p>The protocol for the health check request. If you specify <code>grpc</code>, then your service must conform to the <a href=\"https://github.com/grpc/grpc/blob/master/doc/health-checking.md\">GRPC Health Checking Protocol</a>.</p>"
         },
         "timeoutMillis": {
           "shape": "HealthCheckTimeoutMillis",
@@ -1710,29 +1338,6 @@
         }
       },
       "documentation": "<p>An object that represents the health check policy for a virtual node's listener.</p>"
-    },
-    "VirtualServiceRef": {
-      "type": "structure",
-      "required": [
-        "arn",
-        "meshName",
-        "virtualServiceName"
-      ],
-      "members": {
-        "arn": {
-          "shape": "Arn",
-          "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual service.</p>"
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>"
-        },
-        "virtualServiceName": {
-          "shape": "ServiceName",
-          "documentation": "<p>The name of the virtual service.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a virtual service returned by a list operation.</p>"
     },
     "EgressFilter": {
       "type": "structure",
@@ -1753,98 +1358,19 @@
         "shape": "VirtualServiceRef"
       }
     },
-    "VirtualNodeStatus": {
+    "ClientPolicy": {
       "type": "structure",
-      "required": [
-        "status"
-      ],
       "members": {
-        "status": {
-          "shape": "VirtualNodeStatusCode",
-          "documentation": "<p>The current status of the virtual node.</p>"
+        "tls": {
+          "shape": "ClientPolicyTls",
+          "documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) client policy.</p>"
         }
       },
-      "documentation": "<p>An object that represents the current status of the virtual node.</p>"
-    },
-    "VirtualRouterRef": {
-      "type": "structure",
-      "required": [
-        "arn",
-        "meshName",
-        "virtualRouterName"
-      ],
-      "members": {
-        "arn": {
-          "shape": "Arn",
-          "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual router.</p>"
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>"
-        },
-        "virtualRouterName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a virtual router returned by a list operation.</p>"
-    },
-    "VirtualServiceData": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "metadata",
-        "spec",
-        "status",
-        "virtualServiceName"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>"
-        },
-        "metadata": {
-          "shape": "ResourceMetadata"
-        },
-        "spec": {
-          "shape": "VirtualServiceSpec",
-          "documentation": "<p>The specifications of the virtual service.</p>"
-        },
-        "status": {
-          "shape": "VirtualServiceStatus",
-          "documentation": "<p>The current status of the virtual service.</p>"
-        },
-        "virtualServiceName": {
-          "shape": "ServiceName",
-          "documentation": "<p>The name of the virtual service.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a virtual service returned by a describe operation.</p>"
+      "documentation": "<p>An object that represents a client policy.</p>"
     },
     "Boolean": {
       "type": "boolean",
       "box": true
-    },
-    "HttpRouteHeader": {
-      "type": "structure",
-      "required": [
-        "name"
-      ],
-      "members": {
-        "invert": {
-          "shape": "Boolean",
-          "documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
-        },
-        "match": {
-          "shape": "HeaderMatchMethod",
-          "documentation": "<p>The <code>HeaderMatchMethod</code> object.</p>"
-        },
-        "name": {
-          "shape": "HeaderName",
-          "documentation": "<p>A name for the HTTP header in the client request that will be matched on.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the HTTP header in the request.</p>"
     },
     "HttpRetryPolicyEvent": {
       "type": "string",
@@ -1865,78 +1391,13 @@
       "documentation": "",
       "payload": "virtualService"
     },
-    "FilePath": {
-      "type": "string",
-      "min": 1,
-      "max": 255
-    },
-    "AwsCloudMapInstanceAttributes": {
+    "CertificateAuthorityArns": {
       "type": "list",
       "member": {
-        "shape": "AwsCloudMapInstanceAttribute"
-      }
-    },
-    "VirtualNodeRef": {
-      "type": "structure",
-      "required": [
-        "arn",
-        "meshName",
-        "virtualNodeName"
-      ],
-      "members": {
-        "arn": {
-          "shape": "Arn",
-          "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual node.</p>"
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>"
-        },
-        "virtualNodeName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual node.</p>"
-        }
+        "shape": "Arn"
       },
-      "documentation": "<p>An object that represents a virtual node returned by a list operation.</p>"
-    },
-    "CreateMeshInput": {
-      "type": "structure",
-      "required": [
-        "meshName"
-      ],
-      "members": {
-        "clientToken": {
-          "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
-          "idempotencyToken": true
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name to use for the service mesh.</p>"
-        },
-        "spec": {
-          "shape": "MeshSpec",
-          "documentation": "<p>The service mesh specification to apply.</p>"
-        },
-        "tags": {
-          "shape": "TagList",
-          "documentation": "<p>Optional metadata that you can apply to the service mesh to assist with categorization\n         and organization. Each tag consists of a key and an optional value, both of which you\n         define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
-        }
-      },
-      "documentation": ""
-    },
-    "GrpcRouteAction": {
-      "type": "structure",
-      "required": [
-        "weightedTargets"
-      ],
-      "members": {
-        "weightedTargets": {
-          "shape": "WeightedTargets",
-          "documentation": "<p>An object that represents the targets that traffic is routed to when a request matches the route.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
+      "min": 1,
+      "max": 3
     },
     "DescribeVirtualNodeOutput": {
       "type": "structure",
@@ -1958,19 +1419,6 @@
       "max": 1024,
       "pattern": "((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^.$)"
     },
-    "UpdateMeshOutput": {
-      "type": "structure",
-      "required": [
-        "mesh"
-      ],
-      "members": {
-        "mesh": {
-          "shape": "MeshData"
-        }
-      },
-      "documentation": "",
-      "payload": "mesh"
-    },
     "CreateRouteOutput": {
       "type": "structure",
       "required": [
@@ -1985,32 +1433,6 @@
       "documentation": "",
       "payload": "route"
     },
-    "GrpcRouteMetadataMatchMethod": {
-      "type": "structure",
-      "members": {
-        "exact": {
-          "shape": "HeaderMatch",
-          "documentation": "<p>The value sent by the client must match the specified value exactly.</p>"
-        },
-        "prefix": {
-          "shape": "HeaderMatch",
-          "documentation": "<p>The value sent by the client must begin with the specified characters.</p>"
-        },
-        "range": {
-          "shape": "MatchRange",
-          "documentation": "<p>An object that represents the range of values to match on.</p>"
-        },
-        "regex": {
-          "shape": "HeaderMatch",
-          "documentation": "<p>The value sent by the client must include the specified characters.</p>"
-        },
-        "suffix": {
-          "shape": "HeaderMatch",
-          "documentation": "<p>The value sent by the client must end with the specified characters.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the match method. Specify one of the match values.</p>"
-    },
     "DnsServiceDiscovery": {
       "type": "structure",
       "required": [
@@ -2023,34 +1445,6 @@
         }
       },
       "documentation": "<p>An object that represents the DNS service discovery information for your virtual\n         node.</p>"
-    },
-    "DescribeVirtualServiceInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "virtualServiceName"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "virtualServiceName": {
-          "shape": "ServiceName",
-          "documentation": "<p>The name of the virtual service to describe.</p>",
-          "location": "uri",
-          "locationName": "virtualServiceName"
-        }
-      },
-      "documentation": ""
-    },
-    "ListVirtualServicesLimit": {
-      "type": "integer",
-      "box": true,
-      "min": 1,
-      "max": 100
     },
     "DeleteRouteInput": {
       "type": "structure",
@@ -2119,39 +1513,11 @@
       "members": {},
       "documentation": ""
     },
-    "AwsCloudMapInstanceAttribute": {
-      "type": "structure",
-      "required": [
-        "key",
-        "value"
-      ],
-      "members": {
-        "key": {
-          "shape": "AwsCloudMapInstanceAttributeKey",
-          "documentation": "<p>The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service\n         instance that contains the specified key and value is returned.</p>"
-        },
-        "value": {
-          "shape": "AwsCloudMapInstanceAttributeValue",
-          "documentation": "<p>The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service\n         instance that contains the specified key and value is returned.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the AWS Cloud Map attribute information for your virtual\n         node.</p>"
-    },
     "TcpRetryPolicyEvent": {
       "type": "string",
       "enum": [
         "connection-error"
       ]
-    },
-    "VirtualServiceSpec": {
-      "type": "structure",
-      "members": {
-        "provider": {
-          "shape": "VirtualServiceProvider",
-          "documentation": "<p>The App Mesh object that is acting as the provider for a virtual service. You can specify\n         a single virtual node or virtual router.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the specification of a virtual service.</p>"
     },
     "Backend": {
       "type": "structure",
@@ -2162,42 +1528,6 @@
         }
       },
       "documentation": "<p>An object that represents the backends that a virtual node is expected to send outbound\n         traffic to. </p>"
-    },
-    "MatchRange": {
-      "type": "structure",
-      "required": [
-        "end",
-        "start"
-      ],
-      "members": {
-        "end": {
-          "shape": "Long",
-          "documentation": "<p>The end of the range.</p>"
-        },
-        "start": {
-          "shape": "Long",
-          "documentation": "<p>The start of the range.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.</p>"
-    },
-    "ListVirtualRoutersLimit": {
-      "type": "integer",
-      "box": true,
-      "min": 1,
-      "max": 100
-    },
-    "HealthCheckIntervalMillis": {
-      "type": "long",
-      "box": true,
-      "min": 5000,
-      "max": 300000
-    },
-    "VirtualRouterList": {
-      "type": "list",
-      "member": {
-        "shape": "VirtualRouterRef"
-      }
     },
     "ListMeshesInput": {
       "type": "structure",
@@ -2211,55 +1541,6 @@
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListMeshes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p> \n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
-          "location": "querystring",
-          "locationName": "nextToken"
-        }
-      },
-      "documentation": ""
-    },
-    "Arn": {
-      "type": "string"
-    },
-    "TcpRoute": {
-      "type": "structure",
-      "required": [
-        "action"
-      ],
-      "members": {
-        "action": {
-          "shape": "TcpRouteAction",
-          "documentation": "<p>The action to take if a match is determined.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a TCP route type.</p>"
-    },
-    "VirtualNodeList": {
-      "type": "list",
-      "member": {
-        "shape": "VirtualNodeRef"
-      }
-    },
-    "ListVirtualRoutersInput": {
-      "type": "structure",
-      "required": [
-        "meshName"
-      ],
-      "members": {
-        "limit": {
-          "shape": "ListVirtualRoutersLimit",
-          "documentation": "<p>The maximum number of results returned by <code>ListVirtualRouters</code> in paginated\n         output. When you use this parameter, <code>ListVirtualRouters</code> returns only\n            <code>limit</code> results in a single page along with a <code>nextToken</code> response\n         element. You can see the remaining results of the initial request by sending another\n            <code>ListVirtualRouters</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 100. If you don't use this\n         parameter, <code>ListVirtualRouters</code> returns up to 100 results and\n         a <code>nextToken</code> value if applicable.</p>",
-          "location": "querystring",
-          "locationName": "limit"
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to list virtual routers in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "nextToken": {
-          "shape": "String",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualRouters</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
           "location": "querystring",
           "locationName": "nextToken"
         }
@@ -2323,46 +1604,6 @@
       },
       "documentation": ""
     },
-    "DurationUnit": {
-      "type": "string",
-      "enum": [
-        "ms",
-        "s"
-      ]
-    },
-    "RoutePriority": {
-      "type": "integer",
-      "box": true,
-      "min": 0,
-      "max": 1000
-    },
-    "ListVirtualServicesInput": {
-      "type": "structure",
-      "required": [
-        "meshName"
-      ],
-      "members": {
-        "limit": {
-          "shape": "ListVirtualServicesLimit",
-          "documentation": "<p>The maximum number of results returned by <code>ListVirtualServices</code> in paginated\n         output. When you use this parameter, <code>ListVirtualServices</code> returns only\n            <code>limit</code> results in a single page along with a <code>nextToken</code> response\n         element. You can see the remaining results of the initial request by sending another\n            <code>ListVirtualServices</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 100. If you don't use this\n         parameter, <code>ListVirtualServices</code> returns up to 100 results and\n         a <code>nextToken</code> value if applicable.</p>",
-          "location": "querystring",
-          "locationName": "limit"
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to list virtual services in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "nextToken": {
-          "shape": "String",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualServices</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
-          "location": "querystring",
-          "locationName": "nextToken"
-        }
-      },
-      "documentation": ""
-    },
     "CreateVirtualRouterInput": {
       "type": "structure",
       "required": [
@@ -2388,48 +1629,14 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>Optional metadata that you can apply to the virtual router to assist with categorization\n         and organization. Each tag consists of a key and an optional value, both of which you\n         define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+          "documentation": "<p>Optional metadata that you can apply to the virtual router to assist with categorization\n         and organization. Each tag consists of a key and an optional value, both of which you\n         define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>",
+          "tags": [
+            "not-preview"
+          ]
         },
         "virtualRouterName": {
           "shape": "ResourceName",
           "documentation": "<p>The name to use for the virtual router.</p>"
-        }
-      },
-      "documentation": ""
-    },
-    "AccessLog": {
-      "type": "structure",
-      "members": {
-        "file": {
-          "shape": "FileAccessLog",
-          "documentation": "<p>The file object to send virtual node access logs to.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the access logging information for a virtual node.</p>"
-    },
-    "ListVirtualNodesInput": {
-      "type": "structure",
-      "required": [
-        "meshName"
-      ],
-      "members": {
-        "limit": {
-          "shape": "ListVirtualNodesLimit",
-          "documentation": "<p>The maximum number of results returned by <code>ListVirtualNodes</code> in paginated\n         output. When you use this parameter, <code>ListVirtualNodes</code> returns only\n            <code>limit</code> results in a single page along with a <code>nextToken</code> response\n         element. You can see the remaining results of the initial request by sending another\n            <code>ListVirtualNodes</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 100. If you don't use this\n         parameter, <code>ListVirtualNodes</code> returns up to 100 results and a\n            <code>nextToken</code> value if applicable.</p>",
-          "location": "querystring",
-          "locationName": "limit"
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to list virtual nodes in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "nextToken": {
-          "shape": "String",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualNodes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>",
-          "location": "querystring",
-          "locationName": "nextToken"
         }
       },
       "documentation": ""
@@ -2497,28 +1704,25 @@
       "min": 1,
       "max": 25
     },
-    "ListVirtualNodesLimit": {
-      "type": "integer",
-      "box": true,
-      "min": 1,
-      "max": 100
-    },
-    "HealthCheckTimeoutMillis": {
-      "type": "long",
-      "box": true,
-      "min": 2000,
-      "max": 60000
+    "ListenerTlsCertificate": {
+      "type": "structure",
+      "members": {
+        "acm": {
+          "shape": "ListenerTlsAcmCertificate",
+          "documentation": "<p>A reference to an object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+        },
+        "file": {
+          "shape": "ListenerTlsFileCertificate",
+          "documentation": "<p>A reference to an object that represents a local file certificate.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a listener's Transport Layer Security (TLS) certificate.</p>"
     },
     "ListMeshesLimit": {
       "type": "integer",
       "box": true,
       "min": 1,
       "max": 100
-    },
-    "ResourceName": {
-      "type": "string",
-      "min": 1,
-      "max": 255
     },
     "AwsCloudMapInstanceAttributeKey": {
       "type": "string",
@@ -2536,24 +1740,20 @@
       },
       "documentation": "<p>An object that represents the specification of a virtual router.</p>"
     },
-    "Timestamp": {
-      "type": "timestamp"
-    },
-    "HeaderMatch": {
-      "type": "string",
-      "min": 1,
-      "max": 255
-    },
     "VirtualNodeSpec": {
       "type": "structure",
       "members": {
+        "backendDefaults": {
+          "shape": "BackendDefaults",
+          "documentation": "<p>A reference to an object that represents the defaults for backends.</p>"
+        },
         "backends": {
           "shape": "Backends",
           "documentation": "<p>The backends that the virtual node is expected to send outbound traffic to.</p>"
         },
         "listeners": {
           "shape": "Listeners",
-          "documentation": "<p>The listeners that the virtual node is expected to receive inbound traffic from.\n         You can specify one listener.</p>"
+          "documentation": "<p>The listener that the virtual node is expected to receive inbound traffic from.\n         You can specify one listener.</p>"
         },
         "logging": {
           "shape": "Logging",
@@ -2561,7 +1761,7 @@
         },
         "serviceDiscovery": {
           "shape": "ServiceDiscovery",
-          "documentation": "<p>The service discovery information for the virtual node. If your virtual node does not\n         expect ingress traffic, you can omit this parameter.</p>"
+          "documentation": "<p>The service discovery information for the virtual node. If your virtual node does not\n         expect ingress traffic, you can omit this parameter. If you specify a <code>listener</code>,\n         then you must specify service discovery information.</p>"
         }
       },
       "documentation": "<p>An object that represents the specification of a virtual node.</p>"
@@ -2591,6 +1791,12 @@
       "min": 1,
       "max": 1
     },
+    "PortSet": {
+      "type": "list",
+      "member": {
+        "shape": "PortNumber"
+      }
+    },
     "HttpMethod": {
       "type": "string",
       "enum": [
@@ -2605,112 +1811,30 @@
         "TRACE"
       ]
     },
-    "Duration": {
-      "type": "structure",
-      "members": {
-        "unit": {
-          "shape": "DurationUnit",
-          "documentation": "<p>A unit of time.</p>"
-        },
-        "value": {
-          "shape": "DurationValue",
-          "documentation": "<p>A number of time units.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a duration of time.</p>"
-    },
-    "DescribeRouteOutput": {
-      "type": "structure",
-      "required": [
-        "route"
-      ],
-      "members": {
-        "route": {
-          "shape": "RouteData",
-          "documentation": "<p>The full description of your route.</p>"
-        }
-      },
-      "documentation": "",
-      "payload": "route"
-    },
-    "HttpRouteMatch": {
-      "type": "structure",
-      "required": [
-        "prefix"
-      ],
-      "members": {
-        "headers": {
-          "shape": "HttpRouteHeaders",
-          "documentation": "<p>An object that represents the client request headers to match on.</p>"
-        },
-        "method": {
-          "shape": "HttpMethod",
-          "documentation": "<p>The client request method to match on. Specify only one.</p>"
-        },
-        "prefix": {
-          "shape": "String",
-          "documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
-        },
-        "scheme": {
-          "shape": "HttpScheme",
-          "documentation": "<p>The client request scheme to match on. Specify only one.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the requirements for a route to match HTTP requests for a virtual\n         router.</p>"
-    },
     "MeshList": {
       "type": "list",
       "member": {
         "shape": "MeshRef"
       }
     },
-    "TagRef": {
-      "type": "structure",
-      "required": [
-        "key"
-      ],
-      "members": {
-        "key": {
-          "shape": "TagKey",
-          "documentation": "<p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label\n         that acts like a category for more specific tag values.</p>"
-        },
-        "value": {
-          "shape": "TagValue",
-          "documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a\n         descriptor within a tag category (key).</p>"
-        }
-      },
-      "documentation": "<p>Optional metadata that you apply to a resource to assist with categorization and\n         organization. Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
-    },
-    "MeshRef": {
-      "type": "structure",
-      "required": [
-        "arn",
-        "meshName"
-      ],
-      "members": {
-        "arn": {
-          "shape": "Arn",
-          "documentation": "<p>The full Amazon Resource Name (ARN) of the service mesh.</p>"
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a service mesh returned by a list operation.</p>"
-    },
     "MaxRetries": {
       "type": "long",
       "box": true,
       "min": 0
     },
-    "MeshStatusCode": {
-      "type": "string",
-      "enum": [
-        "ACTIVE",
-        "DELETED",
-        "INACTIVE"
-      ]
+    "TlsValidationContextTrust": {
+      "type": "structure",
+      "members": {
+        "acm": {
+          "shape": "TlsValidationContextAcmTrust",
+          "documentation": "<p>A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+        },
+        "file": {
+          "shape": "TlsValidationContextFileTrust",
+          "documentation": "<p>An object that represents a TLS validation context trust for a local file.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust.</p>"
     },
     "PortMapping": {
       "type": "structure",
@@ -2729,47 +1853,6 @@
         }
       },
       "documentation": "<p>An object that represents a port mapping.</p>"
-    },
-    "MeshData": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "metadata",
-        "spec",
-        "status"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh.</p>"
-        },
-        "metadata": {
-          "shape": "ResourceMetadata",
-          "documentation": "<p>The associated metadata for the service mesh.</p>"
-        },
-        "spec": {
-          "shape": "MeshSpec",
-          "documentation": "<p>The associated specification for the service mesh.</p>"
-        },
-        "status": {
-          "shape": "MeshStatus",
-          "documentation": "<p>The status of the service mesh.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a service mesh returned by a describe operation.</p>"
-    },
-    "VirtualRouterStatus": {
-      "type": "structure",
-      "required": [
-        "status"
-      ],
-      "members": {
-        "status": {
-          "shape": "VirtualRouterStatusCode",
-          "documentation": "<p>The current status of the virtual router.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the status of a virtual router. </p>"
     },
     "ListVirtualServicesOutput": {
       "type": "structure",
@@ -2812,54 +1895,6 @@
       },
       "documentation": "<p>An object that represents a target and its relative weight. Traffic is distributed across\n         targets according to their relative weight. For example, a weighted target with a relative\n         weight of 50 receives five times as much traffic as one with a relative weight of\n         10. The total weight for all targets combined must be less than or equal to 100.</p>"
     },
-    "TcpRouteAction": {
-      "type": "structure",
-      "required": [
-        "weightedTargets"
-      ],
-      "members": {
-        "weightedTargets": {
-          "shape": "WeightedTargets",
-          "documentation": "<p>An object that represents the targets that traffic is routed to when a request matches the route.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
-    },
-    "DescribeVirtualNodeInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "virtualNodeName"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "virtualNodeName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual node to describe.</p>",
-          "location": "uri",
-          "locationName": "virtualNodeName"
-        }
-      },
-      "documentation": ""
-    },
-    "RouteStatus": {
-      "type": "structure",
-      "required": [
-        "status"
-      ],
-      "members": {
-        "status": {
-          "shape": "RouteStatusCode",
-          "documentation": "<p>The current status for the route.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the current status of a route.</p>"
-    },
     "RouteRef": {
       "type": "structure",
       "required": [
@@ -2887,45 +1922,6 @@
         }
       },
       "documentation": "<p>An object that represents a route returned by a list operation.</p>"
-    },
-    "Listener": {
-      "type": "structure",
-      "required": [
-        "portMapping"
-      ],
-      "members": {
-        "healthCheck": {
-          "shape": "HealthCheckPolicy",
-          "documentation": "<p>The health check information for the listener.</p>"
-        },
-        "portMapping": {
-          "shape": "PortMapping",
-          "documentation": "<p>The port mapping information for the listener.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a listener for a virtual node.</p>"
-    },
-    "GrpcRoute": {
-      "type": "structure",
-      "required": [
-        "action",
-        "match"
-      ],
-      "members": {
-        "action": {
-          "shape": "GrpcRouteAction",
-          "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
-        },
-        "match": {
-          "shape": "GrpcRouteMatch",
-          "documentation": "<p>An object that represents the criteria for determining a request match.</p>"
-        },
-        "retryPolicy": {
-          "shape": "GrpcRetryPolicy",
-          "documentation": "<p>An object that represents a retry policy.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a GRPC route type.</p>"
     },
     "DeleteVirtualNodeInput": {
       "type": "structure",
@@ -2995,39 +1991,6 @@
         "INACTIVE"
       ]
     },
-    "ListRoutesLimit": {
-      "type": "integer",
-      "box": true,
-      "min": 1,
-      "max": 100
-    },
-    "DeleteVirtualServiceOutput": {
-      "type": "structure",
-      "required": [
-        "virtualService"
-      ],
-      "members": {
-        "virtualService": {
-          "shape": "VirtualServiceData",
-          "documentation": "<p>The virtual service that was deleted.</p>"
-        }
-      },
-      "documentation": "",
-      "payload": "virtualService"
-    },
-    "VirtualNodeServiceProvider": {
-      "type": "structure",
-      "required": [
-        "virtualNodeName"
-      ],
-      "members": {
-        "virtualNodeName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual node that is acting as a service provider.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents a virtual node service provider.</p>"
-    },
     "HeaderName": {
       "type": "string",
       "min": 1,
@@ -3051,64 +2014,18 @@
         "unavailable"
       ]
     },
-    "HttpRetryPolicy": {
+    "TlsValidationContextAcmTrust": {
       "type": "structure",
       "required": [
-        "maxRetries",
-        "perRetryTimeout"
+        "certificateAuthorityArns"
       ],
       "members": {
-        "httpRetryEvents": {
-          "shape": "HttpRetryPolicyEvents",
-          "documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
-        },
-        "maxRetries": {
-          "shape": "MaxRetries",
-          "documentation": "<p>The maximum number of retry attempts.</p>"
-        },
-        "perRetryTimeout": {
-          "shape": "Duration",
-          "documentation": "<p>An object that represents a duration of time.</p>"
-        },
-        "tcpRetryEvents": {
-          "shape": "TcpRetryPolicyEvents",
-          "documentation": "<p>Specify a valid value.</p>"
+        "certificateAuthorityArns": {
+          "shape": "CertificateAuthorityArns",
+          "documentation": "<p>One or more ACM Amazon Resource Name (ARN)s.</p>"
         }
       },
-      "documentation": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>"
-    },
-    "DescribeVirtualRouterInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "virtualRouterName"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "virtualRouterName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router to describe.</p>",
-          "location": "uri",
-          "locationName": "virtualRouterName"
-        }
-      },
-      "documentation": ""
-    },
-    "TagResourceOutput": {
-      "type": "structure",
-      "members": {},
-      "documentation": ""
-    },
-    "RouteList": {
-      "type": "list",
-      "member": {
-        "shape": "RouteRef"
-      }
+      "documentation": "<p>An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
     },
     "HeaderMatchMethod": {
       "type": "structure",
@@ -3165,11 +2082,6 @@
     "Hostname": {
       "type": "string"
     },
-    "PortNumber": {
-      "type": "integer",
-      "min": 1,
-      "max": 65535
-    },
     "TagResourceInput": {
       "type": "structure",
       "required": [
@@ -3189,84 +2101,6 @@
         }
       },
       "documentation": ""
-    },
-    "GrpcRouteMetadata": {
-      "type": "structure",
-      "required": [
-        "name"
-      ],
-      "members": {
-        "invert": {
-          "shape": "Boolean",
-          "documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
-        },
-        "match": {
-          "shape": "GrpcRouteMetadataMatchMethod",
-          "documentation": "<p>An object that represents the data to match from the request.</p>"
-        },
-        "name": {
-          "shape": "HeaderName",
-          "documentation": "<p>The name of the route.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the match metadata for the route.</p>"
-    },
-    "CreateRouteInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "routeName",
-        "spec",
-        "virtualRouterName"
-      ],
-      "members": {
-        "clientToken": {
-          "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
-          "idempotencyToken": true
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to create the route in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "routeName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name to use for the route.</p>"
-        },
-        "spec": {
-          "shape": "RouteSpec",
-          "documentation": "<p>The route specification to apply.</p>"
-        },
-        "tags": {
-          "shape": "TagList",
-          "documentation": "<p>Optional metadata that you can apply to the route to assist with categorization and\n         organization. Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
-        },
-        "virtualRouterName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router in which to create the route.</p>",
-          "location": "uri",
-          "locationName": "virtualRouterName"
-        }
-      },
-      "documentation": ""
-    },
-    "WeightedTargets": {
-      "type": "list",
-      "member": {
-        "shape": "WeightedTarget"
-      },
-      "min": 1,
-      "max": 10
-    },
-    "HttpRouteHeaders": {
-      "type": "list",
-      "member": {
-        "shape": "HttpRouteHeader"
-      },
-      "min": 1,
-      "max": 10
     },
     "VirtualServiceProvider": {
       "type": "structure",
@@ -3300,9 +2134,6 @@
       },
       "documentation": "<p>An object that represents the criteria for determining a request match.</p>"
     },
-    "String": {
-      "type": "string"
-    },
     "AwsCloudMapServiceDiscovery": {
       "type": "structure",
       "required": [
@@ -3325,13 +2156,6 @@
       },
       "documentation": "<p>An object that represents the AWS Cloud Map service discovery information for your virtual\n         node.</p>"
     },
-    "HttpScheme": {
-      "type": "string",
-      "enum": [
-        "http",
-        "https"
-      ]
-    },
     "UpdateVirtualServiceOutput": {
       "type": "structure",
       "required": [
@@ -3345,45 +2169,6 @@
       },
       "documentation": "",
       "payload": "virtualService"
-    },
-    "UpdateRouteInput": {
-      "type": "structure",
-      "required": [
-        "meshName",
-        "routeName",
-        "spec",
-        "virtualRouterName"
-      ],
-      "members": {
-        "clientToken": {
-          "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
-          "idempotencyToken": true
-        },
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh that the route resides in.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        },
-        "routeName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the route to update.</p>",
-          "location": "uri",
-          "locationName": "routeName"
-        },
-        "spec": {
-          "shape": "RouteSpec",
-          "documentation": "<p>The new route specification to apply. This overwrites the existing data.</p>"
-        },
-        "virtualRouterName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router that the route is associated with.</p>",
-          "location": "uri",
-          "locationName": "virtualRouterName"
-        }
-      },
-      "documentation": ""
     },
     "MeshStatus": {
       "type": "structure",
@@ -3420,7 +2205,10 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>Optional metadata that you can apply to the virtual node to assist with categorization\n         and organization. Each tag consists of a key and an optional value, both of which you\n         define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+          "documentation": "<p>Optional metadata that you can apply to the virtual node to assist with categorization\n         and organization. Each tag consists of a key and an optional value, both of which you\n         define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>",
+          "tags": [
+            "not-preview"
+          ]
         },
         "virtualNodeName": {
           "shape": "ResourceName",
@@ -3434,11 +2222,11 @@
       "members": {
         "grpcRoute": {
           "shape": "GrpcRoute",
-          "documentation": "<p>An object that represents the specification of a GRPC route.</p>"
+          "documentation": "<p>An object that represents the specification of a gRPC route.</p>"
         },
         "http2Route": {
           "shape": "HttpRoute",
-          "documentation": "<p>An object that represents the specification of an HTTP2 route.</p>"
+          "documentation": "<p>An object that represents the specification of an HTTP/2 route.</p>"
         },
         "httpRoute": {
           "shape": "HttpRoute",
@@ -3454,53 +2242,6 @@
         }
       },
       "documentation": "<p>An object that represents a route specification. Specify one route type.</p>"
-    },
-    "HttpRoute": {
-      "type": "structure",
-      "required": [
-        "action",
-        "match"
-      ],
-      "members": {
-        "action": {
-          "shape": "HttpRouteAction",
-          "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
-        },
-        "match": {
-          "shape": "HttpRouteMatch",
-          "documentation": "<p>An object that represents the criteria for determining a request match.</p>"
-        },
-        "retryPolicy": {
-          "shape": "HttpRetryPolicy",
-          "documentation": "<p>An object that represents a retry policy.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents an HTTP or HTTP2 route type.</p>"
-    },
-    "DescribeMeshInput": {
-      "type": "structure",
-      "required": [
-        "meshName"
-      ],
-      "members": {
-        "meshName": {
-          "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh to describe.</p>",
-          "location": "uri",
-          "locationName": "meshName"
-        }
-      },
-      "documentation": ""
-    },
-    "MeshSpec": {
-      "type": "structure",
-      "members": {
-        "egressFilter": {
-          "shape": "EgressFilter",
-          "documentation": "<p>The egress filter rules for the service mesh.</p>"
-        }
-      },
-      "documentation": "<p>An object that represents the specification of a service mesh.</p>"
     },
     "CreateVirtualServiceOutput": {
       "type": "structure",
@@ -3563,6 +2304,1491 @@
         }
       },
       "documentation": ""
+    },
+    "TlsValidationContext": {
+      "type": "structure",
+      "required": [
+        "trust"
+      ],
+      "members": {
+        "trust": {
+          "shape": "TlsValidationContextTrust",
+          "documentation": "<p>A reference to an object that represents a TLS validation context trust.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context.</p>"
+    },
+    "DeleteVirtualRouterOutput": {
+      "type": "structure",
+      "required": [
+        "virtualRouter"
+      ],
+      "members": {
+        "virtualRouter": {
+          "shape": "VirtualRouterData",
+          "documentation": "<p>The virtual router that was deleted.</p>"
+        }
+      },
+      "documentation": "",
+      "payload": "virtualRouter"
+    },
+    "TagsLimit": {
+      "type": "integer",
+      "box": true,
+      "min": 1,
+      "max": 50
+    },
+    "DeleteVirtualNodeOutput": {
+      "type": "structure",
+      "required": [
+        "virtualNode"
+      ],
+      "members": {
+        "virtualNode": {
+          "shape": "VirtualNodeData",
+          "documentation": "<p>The virtual node that was deleted.</p>"
+        }
+      },
+      "documentation": "",
+      "payload": "virtualNode"
+    },
+    "UpdateVirtualNodeInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "spec",
+        "virtualNodeName"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
+          "idempotencyToken": true
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "spec": {
+          "shape": "VirtualNodeSpec",
+          "documentation": "<p>The new virtual node specification to apply. This overwrites the existing data.</p>"
+        },
+        "virtualNodeName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual node to update.</p>",
+          "location": "uri",
+          "locationName": "virtualNodeName"
+        }
+      },
+      "documentation": ""
+    },
+    "ListenerTls": {
+      "type": "structure",
+      "required": [
+        "certificate",
+        "mode"
+      ],
+      "members": {
+        "certificate": {
+          "shape": "ListenerTlsCertificate",
+          "documentation": "<p>A reference to an object that represents a listener's TLS certificate.</p>"
+        },
+        "mode": {
+          "shape": "ListenerTlsMode",
+          "documentation": "<p>Specify one of the following modes.</p>\n         <ul>\n            <li>\n               <p>\n                  <b/>STRICT – Listener only accepts connections with TLS enabled. </p>\n            </li>\n            <li>\n               <p>\n                  <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <b/>DISABLED –  Listener only accepts connections without TLS. </p>\n            </li>\n         </ul>"
+        }
+      },
+      "documentation": "<p>An object that represents the Transport Layer Security (TLS) properties for a listener.</p>"
+    },
+    "DeleteMeshInput": {
+      "type": "structure",
+      "required": [
+        "meshName"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to delete.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        }
+      },
+      "documentation": ""
+    },
+    "TcpRetryPolicyEvents": {
+      "type": "list",
+      "member": {
+        "shape": "TcpRetryPolicyEvent"
+      },
+      "min": 1,
+      "max": 1
+    },
+    "CreateVirtualServiceInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "spec",
+        "virtualServiceName"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
+          "idempotencyToken": true
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to create the virtual service in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "spec": {
+          "shape": "VirtualServiceSpec",
+          "documentation": "<p>The virtual service specification to apply.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you can apply to the virtual service to assist with\n         categorization and organization. Each tag consists of a key and an optional value, both of\n         which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>",
+          "tags": [
+            "not-preview"
+          ]
+        },
+        "virtualServiceName": {
+          "shape": "ServiceName",
+          "documentation": "<p>The name to use for the virtual service.</p>"
+        }
+      },
+      "documentation": ""
+    },
+    "UpdateVirtualRouterInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "spec",
+        "virtualRouterName"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
+          "idempotencyToken": true
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "spec": {
+          "shape": "VirtualRouterSpec",
+          "documentation": "<p>The new virtual router specification to apply. This overwrites the existing data.</p>"
+        },
+        "virtualRouterName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual router to update.</p>",
+          "location": "uri",
+          "locationName": "virtualRouterName"
+        }
+      },
+      "documentation": ""
+    },
+    "ListTagsForResourceInput": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "limit": {
+          "shape": "TagsLimit",
+          "documentation": "<p>The maximum number of tag results returned by <code>ListTagsForResource</code> in\n         paginated output. When this parameter is used, <code>ListTagsForResource</code> returns\n         only <code>limit</code> results in a single page along with a <code>nextToken</code>\n         response element. You can see the remaining results of the initial request by sending\n         another <code>ListTagsForResource</code> request with the returned <code>nextToken</code>\n         value. This value can be between 1 and 100. If you don't use\n         this parameter, <code>ListTagsForResource</code> returns up to 100\n         results and a <code>nextToken</code> value if applicable.</p>",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListTagsForResource</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource to list the tags for.</p>",
+          "location": "querystring",
+          "locationName": "resourceArn"
+        }
+      },
+      "documentation": ""
+    },
+    "GrpcRetryPolicyEvents": {
+      "type": "list",
+      "member": {
+        "shape": "GrpcRetryPolicyEvent"
+      },
+      "min": 1,
+      "max": 5
+    },
+    "DescribeMeshOutput": {
+      "type": "structure",
+      "required": [
+        "mesh"
+      ],
+      "members": {
+        "mesh": {
+          "shape": "MeshData",
+          "documentation": "<p>The full description of your service mesh.</p>"
+        }
+      },
+      "documentation": "",
+      "payload": "mesh"
+    },
+    "DeleteVirtualRouterInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "virtualRouterName"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to delete the virtual router in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "virtualRouterName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual router to delete.</p>",
+          "location": "uri",
+          "locationName": "virtualRouterName"
+        }
+      },
+      "documentation": ""
+    },
+    "DescribeRouteInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "routeName",
+        "virtualRouterName"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the route resides in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "routeName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the route to describe.</p>",
+          "location": "uri",
+          "locationName": "routeName"
+        },
+        "virtualRouterName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual router that the route is associated with.</p>",
+          "location": "uri",
+          "locationName": "virtualRouterName"
+        }
+      },
+      "documentation": ""
+    },
+    "DeleteRouteOutput": {
+      "type": "structure",
+      "required": [
+        "route"
+      ],
+      "members": {
+        "route": {
+          "shape": "RouteData",
+          "documentation": "<p>The route that was deleted.</p>"
+        }
+      },
+      "documentation": "",
+      "payload": "route"
+    },
+    "Listeners": {
+      "type": "list",
+      "member": {
+        "shape": "Listener"
+      },
+      "min": 0,
+      "max": 1
+    },
+    "Backends": {
+      "type": "list",
+      "member": {
+        "shape": "Backend"
+      }
+    },
+    "PortProtocol": {
+      "type": "string",
+      "enum": [
+        "grpc",
+        "http",
+        "http2",
+        "tcp"
+      ]
+    },
+    "VirtualNodeStatusCode": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DELETED",
+        "INACTIVE"
+      ]
+    },
+    "ServiceName": {
+      "type": "string"
+    },
+    "UpdateVirtualServiceInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "spec",
+        "virtualServiceName"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
+          "idempotencyToken": true
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "spec": {
+          "shape": "VirtualServiceSpec",
+          "documentation": "<p>The new virtual service specification to apply. This overwrites the existing\n         data.</p>"
+        },
+        "virtualServiceName": {
+          "shape": "ServiceName",
+          "documentation": "<p>The name of the virtual service to update.</p>",
+          "location": "uri",
+          "locationName": "virtualServiceName"
+        }
+      },
+      "documentation": ""
+    },
+    "HealthCheckThreshold": {
+      "type": "integer",
+      "min": 2,
+      "max": 10
+    },
+    "UpdateRouteOutput": {
+      "type": "structure",
+      "required": [
+        "route"
+      ],
+      "members": {
+        "route": {
+          "shape": "RouteData",
+          "documentation": "<p>A full description of the route that was updated.</p>"
+        }
+      },
+      "documentation": "",
+      "payload": "route"
+    },
+    "PercentInt": {
+      "type": "integer",
+      "min": 0,
+      "max": 100
+    },
+    "MethodName": {
+      "type": "string",
+      "min": 1,
+      "max": 50
+    },
+    "TagValue": {
+      "type": "string",
+      "min": 0,
+      "max": 256
+    },
+    "HttpRouteAction": {
+      "type": "structure",
+      "required": [
+        "weightedTargets"
+      ],
+      "members": {
+        "weightedTargets": {
+          "shape": "WeightedTargets",
+          "documentation": "<p>An object that represents the targets that traffic is routed to when a request matches the route.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
+    },
+    "ListRoutesInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "virtualRouterName"
+      ],
+      "members": {
+        "limit": {
+          "shape": "ListRoutesLimit",
+          "documentation": "<p>The maximum number of results returned by <code>ListRoutes</code> in paginated output.\n         When you use this parameter, <code>ListRoutes</code> returns only <code>limit</code>\n         results in a single page along with a <code>nextToken</code> response element. You can see\n         the remaining results of the initial request by sending another <code>ListRoutes</code>\n         request with the returned <code>nextToken</code> value. This value can be between\n         1 and 100. If you don't use this parameter,\n            <code>ListRoutes</code> returns up to 100 results and a\n            <code>nextToken</code> value if applicable.</p>",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to list routes in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListRoutes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "virtualRouterName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual router to list routes in.</p>",
+          "location": "uri",
+          "locationName": "virtualRouterName"
+        }
+      },
+      "documentation": ""
+    },
+    "VirtualServiceRef": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "meshName",
+        "virtualServiceName"
+      ],
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual service.</p>"
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>"
+        },
+        "virtualServiceName": {
+          "shape": "ServiceName",
+          "documentation": "<p>The name of the virtual service.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a virtual service returned by a list operation.</p>"
+    },
+    "VirtualNodeStatus": {
+      "type": "structure",
+      "required": [
+        "status"
+      ],
+      "members": {
+        "status": {
+          "shape": "VirtualNodeStatusCode",
+          "documentation": "<p>The current status of the virtual node.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the current status of the virtual node.</p>"
+    },
+    "VirtualRouterRef": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "meshName",
+        "virtualRouterName"
+      ],
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual router.</p>"
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>"
+        },
+        "virtualRouterName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual router.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a virtual router returned by a list operation.</p>"
+    },
+    "VirtualServiceData": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "metadata",
+        "spec",
+        "status",
+        "virtualServiceName"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>"
+        },
+        "metadata": {
+          "shape": "ResourceMetadata"
+        },
+        "spec": {
+          "shape": "VirtualServiceSpec",
+          "documentation": "<p>The specifications of the virtual service.</p>"
+        },
+        "status": {
+          "shape": "VirtualServiceStatus",
+          "documentation": "<p>The current status of the virtual service.</p>"
+        },
+        "virtualServiceName": {
+          "shape": "ServiceName",
+          "documentation": "<p>The name of the virtual service.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a virtual service returned by a describe operation.</p>"
+    },
+    "HttpRouteHeader": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "invert": {
+          "shape": "Boolean",
+          "documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+        },
+        "match": {
+          "shape": "HeaderMatchMethod",
+          "documentation": "<p>The <code>HeaderMatchMethod</code> object.</p>"
+        },
+        "name": {
+          "shape": "HeaderName",
+          "documentation": "<p>A name for the HTTP header in the client request that will be matched on.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the HTTP header in the request.</p>"
+    },
+    "FilePath": {
+      "type": "string",
+      "min": 1,
+      "max": 255
+    },
+    "AwsCloudMapInstanceAttributes": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCloudMapInstanceAttribute"
+      }
+    },
+    "VirtualNodeRef": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "meshName",
+        "virtualNodeName"
+      ],
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual node.</p>"
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>"
+        },
+        "virtualNodeName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual node.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a virtual node returned by a list operation.</p>"
+    },
+    "CreateMeshInput": {
+      "type": "structure",
+      "required": [
+        "meshName"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
+          "idempotencyToken": true
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name to use for the service mesh.</p>"
+        },
+        "spec": {
+          "shape": "MeshSpec",
+          "documentation": "<p>The service mesh specification to apply.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you can apply to the service mesh to assist with categorization\n         and organization. Each tag consists of a key and an optional value, both of which you\n         define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>",
+          "tags": [
+            "not-preview"
+          ]
+        }
+      },
+      "documentation": ""
+    },
+    "GrpcRouteAction": {
+      "type": "structure",
+      "required": [
+        "weightedTargets"
+      ],
+      "members": {
+        "weightedTargets": {
+          "shape": "WeightedTargets",
+          "documentation": "<p>An object that represents the targets that traffic is routed to when a request matches the route.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
+    },
+    "UpdateMeshOutput": {
+      "type": "structure",
+      "required": [
+        "mesh"
+      ],
+      "members": {
+        "mesh": {
+          "shape": "MeshData"
+        }
+      },
+      "documentation": "",
+      "payload": "mesh"
+    },
+    "GrpcRouteMetadataMatchMethod": {
+      "type": "structure",
+      "members": {
+        "exact": {
+          "shape": "HeaderMatch",
+          "documentation": "<p>The value sent by the client must match the specified value exactly.</p>"
+        },
+        "prefix": {
+          "shape": "HeaderMatch",
+          "documentation": "<p>The value sent by the client must begin with the specified characters.</p>"
+        },
+        "range": {
+          "shape": "MatchRange",
+          "documentation": "<p>An object that represents the range of values to match on.</p>"
+        },
+        "regex": {
+          "shape": "HeaderMatch",
+          "documentation": "<p>The value sent by the client must include the specified characters.</p>"
+        },
+        "suffix": {
+          "shape": "HeaderMatch",
+          "documentation": "<p>The value sent by the client must end with the specified characters.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the match method. Specify one of the match values.</p>"
+    },
+    "DescribeVirtualServiceInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "virtualServiceName"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "virtualServiceName": {
+          "shape": "ServiceName",
+          "documentation": "<p>The name of the virtual service to describe.</p>",
+          "location": "uri",
+          "locationName": "virtualServiceName"
+        }
+      },
+      "documentation": ""
+    },
+    "ListVirtualServicesLimit": {
+      "type": "integer",
+      "box": true,
+      "min": 1,
+      "max": 100
+    },
+    "AwsCloudMapInstanceAttribute": {
+      "type": "structure",
+      "required": [
+        "key",
+        "value"
+      ],
+      "members": {
+        "key": {
+          "shape": "AwsCloudMapInstanceAttributeKey",
+          "documentation": "<p>The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service\n         instance that contains the specified key and value is returned.</p>"
+        },
+        "value": {
+          "shape": "AwsCloudMapInstanceAttributeValue",
+          "documentation": "<p>The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service\n         instance that contains the specified key and value is returned.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the AWS Cloud Map attribute information for your virtual\n         node.</p>"
+    },
+    "VirtualServiceSpec": {
+      "type": "structure",
+      "members": {
+        "provider": {
+          "shape": "VirtualServiceProvider",
+          "documentation": "<p>The App Mesh object that is acting as the provider for a virtual service. You can specify\n         a single virtual node or virtual router.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the specification of a virtual service.</p>"
+    },
+    "MatchRange": {
+      "type": "structure",
+      "required": [
+        "end",
+        "start"
+      ],
+      "members": {
+        "end": {
+          "shape": "Long",
+          "documentation": "<p>The end of the range.</p>"
+        },
+        "start": {
+          "shape": "Long",
+          "documentation": "<p>The start of the range.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.</p>"
+    },
+    "ListVirtualRoutersLimit": {
+      "type": "integer",
+      "box": true,
+      "min": 1,
+      "max": 100
+    },
+    "HealthCheckIntervalMillis": {
+      "type": "long",
+      "box": true,
+      "min": 5000,
+      "max": 300000
+    },
+    "VirtualRouterList": {
+      "type": "list",
+      "member": {
+        "shape": "VirtualRouterRef"
+      }
+    },
+    "Arn": {
+      "type": "string"
+    },
+    "TcpRoute": {
+      "type": "structure",
+      "required": [
+        "action"
+      ],
+      "members": {
+        "action": {
+          "shape": "TcpRouteAction",
+          "documentation": "<p>The action to take if a match is determined.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a TCP route type.</p>"
+    },
+    "VirtualNodeList": {
+      "type": "list",
+      "member": {
+        "shape": "VirtualNodeRef"
+      }
+    },
+    "ListVirtualRoutersInput": {
+      "type": "structure",
+      "required": [
+        "meshName"
+      ],
+      "members": {
+        "limit": {
+          "shape": "ListVirtualRoutersLimit",
+          "documentation": "<p>The maximum number of results returned by <code>ListVirtualRouters</code> in paginated\n         output. When you use this parameter, <code>ListVirtualRouters</code> returns only\n            <code>limit</code> results in a single page along with a <code>nextToken</code> response\n         element. You can see the remaining results of the initial request by sending another\n            <code>ListVirtualRouters</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 100. If you don't use this\n         parameter, <code>ListVirtualRouters</code> returns up to 100 results and\n         a <code>nextToken</code> value if applicable.</p>",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to list virtual routers in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualRouters</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": ""
+    },
+    "DurationUnit": {
+      "type": "string",
+      "enum": [
+        "ms",
+        "s"
+      ]
+    },
+    "RoutePriority": {
+      "type": "integer",
+      "box": true,
+      "min": 0,
+      "max": 1000
+    },
+    "ListVirtualServicesInput": {
+      "type": "structure",
+      "required": [
+        "meshName"
+      ],
+      "members": {
+        "limit": {
+          "shape": "ListVirtualServicesLimit",
+          "documentation": "<p>The maximum number of results returned by <code>ListVirtualServices</code> in paginated\n         output. When you use this parameter, <code>ListVirtualServices</code> returns only\n            <code>limit</code> results in a single page along with a <code>nextToken</code> response\n         element. You can see the remaining results of the initial request by sending another\n            <code>ListVirtualServices</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 100. If you don't use this\n         parameter, <code>ListVirtualServices</code> returns up to 100 results and\n         a <code>nextToken</code> value if applicable.</p>",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to list virtual services in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualServices</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": ""
+    },
+    "AccessLog": {
+      "type": "structure",
+      "members": {
+        "file": {
+          "shape": "FileAccessLog",
+          "documentation": "<p>The file object to send virtual node access logs to.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the access logging information for a virtual node.</p>"
+    },
+    "ListVirtualNodesInput": {
+      "type": "structure",
+      "required": [
+        "meshName"
+      ],
+      "members": {
+        "limit": {
+          "shape": "ListVirtualNodesLimit",
+          "documentation": "<p>The maximum number of results returned by <code>ListVirtualNodes</code> in paginated\n         output. When you use this parameter, <code>ListVirtualNodes</code> returns only\n            <code>limit</code> results in a single page along with a <code>nextToken</code> response\n         element. You can see the remaining results of the initial request by sending another\n            <code>ListVirtualNodes</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 100. If you don't use this\n         parameter, <code>ListVirtualNodes</code> returns up to 100 results and a\n            <code>nextToken</code> value if applicable.</p>",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to list virtual nodes in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualNodes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": ""
+    },
+    "ListVirtualNodesLimit": {
+      "type": "integer",
+      "box": true,
+      "min": 1,
+      "max": 100
+    },
+    "HealthCheckTimeoutMillis": {
+      "type": "long",
+      "box": true,
+      "min": 2000,
+      "max": 60000
+    },
+    "ResourceName": {
+      "type": "string",
+      "min": 1,
+      "max": 255
+    },
+    "Timestamp": {
+      "type": "timestamp"
+    },
+    "HeaderMatch": {
+      "type": "string",
+      "min": 1,
+      "max": 255
+    },
+    "Duration": {
+      "type": "structure",
+      "members": {
+        "unit": {
+          "shape": "DurationUnit",
+          "documentation": "<p>A unit of time.</p>"
+        },
+        "value": {
+          "shape": "DurationValue",
+          "documentation": "<p>A number of time units.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a duration of time.</p>"
+    },
+    "DescribeRouteOutput": {
+      "type": "structure",
+      "required": [
+        "route"
+      ],
+      "members": {
+        "route": {
+          "shape": "RouteData",
+          "documentation": "<p>The full description of your route.</p>"
+        }
+      },
+      "documentation": "",
+      "payload": "route"
+    },
+    "HttpRouteMatch": {
+      "type": "structure",
+      "required": [
+        "prefix"
+      ],
+      "members": {
+        "headers": {
+          "shape": "HttpRouteHeaders",
+          "documentation": "<p>An object that represents the client request headers to match on.</p>"
+        },
+        "method": {
+          "shape": "HttpMethod",
+          "documentation": "<p>The client request method to match on. Specify only one.</p>"
+        },
+        "prefix": {
+          "shape": "String",
+          "documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
+        },
+        "scheme": {
+          "shape": "HttpScheme",
+          "documentation": "<p>The client request scheme to match on. Specify only one.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the requirements for a route to match HTTP requests for a virtual\n         router.</p>"
+    },
+    "TagRef": {
+      "type": "structure",
+      "required": [
+        "key"
+      ],
+      "members": {
+        "key": {
+          "shape": "TagKey",
+          "documentation": "<p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label\n         that acts like a category for more specific tag values.</p>"
+        },
+        "value": {
+          "shape": "TagValue",
+          "documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a\n         descriptor within a tag category (key).</p>"
+        }
+      },
+      "documentation": "<p>Optional metadata that you apply to a resource to assist with categorization and\n         organization. Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+    },
+    "MeshRef": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "meshName"
+      ],
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The full Amazon Resource Name (ARN) of the service mesh.</p>"
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a service mesh returned by a list operation.</p>"
+    },
+    "MeshStatusCode": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DELETED",
+        "INACTIVE"
+      ]
+    },
+    "MeshData": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "metadata",
+        "spec",
+        "status"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh.</p>"
+        },
+        "metadata": {
+          "shape": "ResourceMetadata",
+          "documentation": "<p>The associated metadata for the service mesh.</p>"
+        },
+        "spec": {
+          "shape": "MeshSpec",
+          "documentation": "<p>The associated specification for the service mesh.</p>"
+        },
+        "status": {
+          "shape": "MeshStatus",
+          "documentation": "<p>The status of the service mesh.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a service mesh returned by a describe operation.</p>"
+    },
+    "VirtualRouterStatus": {
+      "type": "structure",
+      "required": [
+        "status"
+      ],
+      "members": {
+        "status": {
+          "shape": "VirtualRouterStatusCode",
+          "documentation": "<p>The current status of the virtual router.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the status of a virtual router. </p>"
+    },
+    "TcpRouteAction": {
+      "type": "structure",
+      "required": [
+        "weightedTargets"
+      ],
+      "members": {
+        "weightedTargets": {
+          "shape": "WeightedTargets",
+          "documentation": "<p>An object that represents the targets that traffic is routed to when a request matches the route.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
+    },
+    "DescribeVirtualNodeInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "virtualNodeName"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "virtualNodeName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual node to describe.</p>",
+          "location": "uri",
+          "locationName": "virtualNodeName"
+        }
+      },
+      "documentation": ""
+    },
+    "RouteStatus": {
+      "type": "structure",
+      "required": [
+        "status"
+      ],
+      "members": {
+        "status": {
+          "shape": "RouteStatusCode",
+          "documentation": "<p>The current status for the route.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the current status of a route.</p>"
+    },
+    "Listener": {
+      "type": "structure",
+      "required": [
+        "portMapping"
+      ],
+      "members": {
+        "healthCheck": {
+          "shape": "HealthCheckPolicy",
+          "documentation": "<p>The health check information for the listener.</p>"
+        },
+        "portMapping": {
+          "shape": "PortMapping",
+          "documentation": "<p>The port mapping information for the listener.</p>"
+        },
+        "tls": {
+          "shape": "ListenerTls",
+          "documentation": "<p>A reference to an object that represents the Transport Layer Security (TLS) properties for a listener.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a listener for a virtual node.</p>"
+    },
+    "GrpcRoute": {
+      "type": "structure",
+      "required": [
+        "action",
+        "match"
+      ],
+      "members": {
+        "action": {
+          "shape": "GrpcRouteAction",
+          "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
+        },
+        "match": {
+          "shape": "GrpcRouteMatch",
+          "documentation": "<p>An object that represents the criteria for determining a request match.</p>"
+        },
+        "retryPolicy": {
+          "shape": "GrpcRetryPolicy",
+          "documentation": "<p>An object that represents a retry policy.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a gRPC route type.</p>"
+    },
+    "ListRoutesLimit": {
+      "type": "integer",
+      "box": true,
+      "min": 1,
+      "max": 100
+    },
+    "ClientPolicyTls": {
+      "type": "structure",
+      "required": [
+        "validation"
+      ],
+      "members": {
+        "enforce": {
+          "shape": "Boolean",
+          "box": true,
+          "documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't specified.</p>"
+        },
+        "ports": {
+          "shape": "PortSet",
+          "documentation": "<p>The range of ports that the policy is enforced for.</p>"
+        },
+        "validation": {
+          "shape": "TlsValidationContext",
+          "documentation": "<p>A reference to an object that represents a TLS validation context.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a Transport Layer Security (TLS) client policy.</p>"
+    },
+    "DeleteVirtualServiceOutput": {
+      "type": "structure",
+      "required": [
+        "virtualService"
+      ],
+      "members": {
+        "virtualService": {
+          "shape": "VirtualServiceData",
+          "documentation": "<p>The virtual service that was deleted.</p>"
+        }
+      },
+      "documentation": "",
+      "payload": "virtualService"
+    },
+    "VirtualNodeServiceProvider": {
+      "type": "structure",
+      "required": [
+        "virtualNodeName"
+      ],
+      "members": {
+        "virtualNodeName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual node that is acting as a service provider.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a virtual node service provider.</p>"
+    },
+    "BackendDefaults": {
+      "type": "structure",
+      "members": {
+        "clientPolicy": {
+          "shape": "ClientPolicy",
+          "documentation": "<p>A reference to an object that represents a client policy.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the default properties for a backend.</p>"
+    },
+    "ListenerTlsFileCertificate": {
+      "type": "structure",
+      "required": [
+        "certificateChain",
+        "privateKey"
+      ],
+      "members": {
+        "certificateChain": {
+          "shape": "FilePath",
+          "documentation": "<p>The certificate chain for the certificate.</p>"
+        },
+        "privateKey": {
+          "shape": "FilePath",
+          "documentation": "<p>The private key for a certificate stored on the file system of the virtual node that the proxy is running on.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites\">TLS Encryption</a>.</p>"
+    },
+    "HttpRetryPolicy": {
+      "type": "structure",
+      "required": [
+        "maxRetries",
+        "perRetryTimeout"
+      ],
+      "members": {
+        "httpRetryEvents": {
+          "shape": "HttpRetryPolicyEvents",
+          "documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
+        },
+        "maxRetries": {
+          "shape": "MaxRetries",
+          "documentation": "<p>The maximum number of retry attempts.</p>"
+        },
+        "perRetryTimeout": {
+          "shape": "Duration",
+          "documentation": "<p>An object that represents a duration of time.</p>"
+        },
+        "tcpRetryEvents": {
+          "shape": "TcpRetryPolicyEvents",
+          "documentation": "<p>Specify a valid value.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>"
+    },
+    "DescribeVirtualRouterInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "virtualRouterName"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "virtualRouterName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual router to describe.</p>",
+          "location": "uri",
+          "locationName": "virtualRouterName"
+        }
+      },
+      "documentation": ""
+    },
+    "TagResourceOutput": {
+      "type": "structure",
+      "members": {},
+      "documentation": ""
+    },
+    "RouteList": {
+      "type": "list",
+      "member": {
+        "shape": "RouteRef"
+      }
+    },
+    "PortNumber": {
+      "type": "integer",
+      "min": 1,
+      "max": 65535
+    },
+    "TlsValidationContextFileTrust": {
+      "type": "structure",
+      "required": [
+        "certificateChain"
+      ],
+      "members": {
+        "certificateChain": {
+          "shape": "FilePath",
+          "documentation": "<p>The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
+    },
+    "GrpcRouteMetadata": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "invert": {
+          "shape": "Boolean",
+          "documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+        },
+        "match": {
+          "shape": "GrpcRouteMetadataMatchMethod",
+          "documentation": "<p>An object that represents the data to match from the request.</p>"
+        },
+        "name": {
+          "shape": "HeaderName",
+          "documentation": "<p>The name of the route.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the match metadata for the route.</p>"
+    },
+    "CreateRouteInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "routeName",
+        "spec",
+        "virtualRouterName"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
+          "idempotencyToken": true
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to create the route in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "routeName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name to use for the route.</p>"
+        },
+        "spec": {
+          "shape": "RouteSpec",
+          "documentation": "<p>The route specification to apply.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you can apply to the route to assist with categorization and\n         organization. Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>",
+          "tags": [
+            "not-preview"
+          ]
+        },
+        "virtualRouterName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual router in which to create the route.</p>",
+          "location": "uri",
+          "locationName": "virtualRouterName"
+        }
+      },
+      "documentation": ""
+    },
+    "WeightedTargets": {
+      "type": "list",
+      "member": {
+        "shape": "WeightedTarget"
+      },
+      "min": 1,
+      "max": 10
+    },
+    "HttpRouteHeaders": {
+      "type": "list",
+      "member": {
+        "shape": "HttpRouteHeader"
+      },
+      "min": 1,
+      "max": 10
+    },
+    "String": {
+      "type": "string"
+    },
+    "HttpScheme": {
+      "type": "string",
+      "enum": [
+        "http",
+        "https"
+      ]
+    },
+    "UpdateRouteInput": {
+      "type": "structure",
+      "required": [
+        "meshName",
+        "routeName",
+        "spec",
+        "virtualRouterName"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
+          "idempotencyToken": true
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh that the route resides in.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "routeName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the route to update.</p>",
+          "location": "uri",
+          "locationName": "routeName"
+        },
+        "spec": {
+          "shape": "RouteSpec",
+          "documentation": "<p>The new route specification to apply. This overwrites the existing data.</p>"
+        },
+        "virtualRouterName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the virtual router that the route is associated with.</p>",
+          "location": "uri",
+          "locationName": "virtualRouterName"
+        }
+      },
+      "documentation": ""
+    },
+    "HttpRoute": {
+      "type": "structure",
+      "required": [
+        "action",
+        "match"
+      ],
+      "members": {
+        "action": {
+          "shape": "HttpRouteAction",
+          "documentation": "<p>An object that represents the action to take if a match is determined.</p>"
+        },
+        "match": {
+          "shape": "HttpRouteMatch",
+          "documentation": "<p>An object that represents the criteria for determining a request match.</p>"
+        },
+        "retryPolicy": {
+          "shape": "HttpRetryPolicy",
+          "documentation": "<p>An object that represents a retry policy.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents an HTTP or HTTP/2 route type.</p>"
+    },
+    "DescribeMeshInput": {
+      "type": "structure",
+      "required": [
+        "meshName"
+      ],
+      "members": {
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to describe.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        }
+      },
+      "documentation": ""
+    },
+    "MeshSpec": {
+      "type": "structure",
+      "members": {
+        "egressFilter": {
+          "shape": "EgressFilter",
+          "documentation": "<p>The egress filter rules for the service mesh.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the specification of a service mesh.</p>"
     },
     "ListTagsForResourceOutput": {
       "type": "structure",
@@ -3632,25 +3858,18 @@
       },
       "documentation": ""
     },
-    "DeleteVirtualRouterOutput": {
+    "ListenerTlsAcmCertificate": {
       "type": "structure",
       "required": [
-        "virtualRouter"
+        "certificateArn"
       ],
       "members": {
-        "virtualRouter": {
-          "shape": "VirtualRouterData",
-          "documentation": "<p>The virtual router that was deleted.</p>"
+        "certificateArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites\">TLS Encryption</a>.</p>"
         }
       },
-      "documentation": "",
-      "payload": "virtualRouter"
-    },
-    "TagsLimit": {
-      "type": "integer",
-      "box": true,
-      "min": 1,
-      "max": 50
+      "documentation": "<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -3664,20 +3883,6 @@
         "DELETED",
         "INACTIVE"
       ]
-    },
-    "DeleteVirtualNodeOutput": {
-      "type": "structure",
-      "required": [
-        "virtualNode"
-      ],
-      "members": {
-        "virtualNode": {
-          "shape": "VirtualNodeData",
-          "documentation": "<p>The virtual node that was deleted.</p>"
-        }
-      },
-      "documentation": "",
-      "payload": "virtualNode"
     }
   }
 }

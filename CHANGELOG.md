@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.628.0-->
+<!--LATEST=2.629.0-->
 <!--ENTRYINSERT-->
+
+## 2.629.0
+* feature: AccessAnalyzer: This release includes improvements and fixes bugs for the IAM Access Analyzer feature.
+* feature: AppMesh: App Mesh now supports Transport Layer Security (TLS) between Virtual Nodes in a Mesh. Customers can use managed certificates from an AWS Certificate Manager Private Certificate Authority or bring their own certificates from the local file system to encrypt traffic between their workloads. See https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html for details.
+* feature: AugmentedAIRuntime: This release updates Amazon Augmented AI ListHumanLoops API, DescribeHumanLoop response, StartHumanLoop response and type names of SDK fields. 
+* feature: ConfigService: Accepts a structured query language (SQL) SELECT command and an aggregator name, performs the corresponding search on resources aggregated by the aggregator, and returns resource configurations matching the properties.
+* feature: Glue: AWS Glue adds resource tagging support for Machine Learning Transforms and adds a new API, ListMLTransforms to support tag filtering.  With this feature, customers can use tags in AWS Glue to organize and control access to Machine Learning Transforms. 
+* feature: QuickSight: Added SearchDashboards API that allows listing of dashboards that a specific user has access to.
 
 ## 2.628.0
 * feature: GlobalAccelerator: This release adds support for adding tags to accelerators and bringing your own IP address to AWS Global Accelerator (BYOIP).

@@ -2522,6 +2522,34 @@
       ],
       "documentation": "<p>Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>"
     },
+    "ListMLTransforms": {
+      "name": "ListMLTransforms",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMLTransformsRequest"
+      },
+      "output": {
+        "shape": "ListMLTransformsResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p> Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional <code>Tags</code> field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. </p>"
+    },
     "ListTriggers": {
       "name": "ListTriggers",
       "http": {
@@ -5335,6 +5363,10 @@
         "MaxRetries": {
           "shape": "NullableInteger",
           "documentation": "<p>The maximum number of times to retry a task for this transform after a task run fails.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
         }
       }
     },
@@ -8628,6 +8660,47 @@
         }
       }
     },
+    "ListMLTransformsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>A continuation token, if this is a continuation request.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum size of a list to return.</p>"
+        },
+        "Filter": {
+          "shape": "TransformFilterCriteria",
+          "documentation": "<p>A <code>TransformFilterCriteria</code> used to filter the machine learning transforms.</p>"
+        },
+        "Sort": {
+          "shape": "TransformSortCriteria",
+          "documentation": "<p>A <code>TransformSortCriteria</code> used to sort the machine learning transforms.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Specifies to return only these tagged resources.</p>"
+        }
+      }
+    },
+    "ListMLTransformsResponse": {
+      "type": "structure",
+      "required": [
+        "TransformIds"
+      ],
+      "members": {
+        "TransformIds": {
+          "shape": "TransformIdList",
+          "documentation": "<p>The identifiers of all the machine learning transforms in the account, or the machine learning transforms with the specified tags.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>A continuation token, if the returned list does not contain the last metric available.</p>"
+        }
+      }
+    },
     "ListTriggersRequest": {
       "type": "structure",
       "members": {
@@ -10546,6 +10619,12 @@
         }
       },
       "documentation": "<p>The criteria used to filter the machine learning transforms.</p>"
+    },
+    "TransformIdList": {
+      "type": "list",
+      "member": {
+        "shape": "HashString"
+      }
     },
     "TransformList": {
       "type": "list",

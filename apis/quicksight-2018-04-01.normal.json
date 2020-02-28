@@ -1768,6 +1768,40 @@
       ],
       "documentation": "<p>Creates an Amazon QuickSight user, whose identity is associated with the AWS Identity and Access Management (IAM) identity or role specified in the request. </p>"
     },
+    "SearchDashboards": {
+      "name": "SearchDashboards",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}/search/dashboards"
+      },
+      "input": {
+        "shape": "SearchDashboardsRequest"
+      },
+      "output": {
+        "shape": "SearchDashboardsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Searchs for dashboards that belong to a user. </p>"
+    },
     "TagResource": {
       "name": "TagResource",
       "http": {
@@ -3419,6 +3453,12 @@
         "COLUMN_REPLACEMENT_MISSING"
       ]
     },
+    "DashboardFilterAttribute": {
+      "type": "string",
+      "enum": [
+        "QUICKSIGHT_USER"
+      ]
+    },
     "DashboardName": {
       "type": "string",
       "max": 2048,
@@ -3442,6 +3482,34 @@
         }
       },
       "documentation": "<p>Dashboard publish options.</p>"
+    },
+    "DashboardSearchFilter": {
+      "type": "structure",
+      "required": [
+        "Operator"
+      ],
+      "members": {
+        "Operator": {
+          "shape": "FilterOperator",
+          "documentation": "<p>The comparison operator that you want to use as a filter. For example, <code>\"Operator\": \"StringEquals\"</code>.</p>"
+        },
+        "Name": {
+          "shape": "DashboardFilterAttribute",
+          "documentation": "<p>The name of the value that you want to use as a filter. For example, <code>\"Name\": \"QUICKSIGHT_USER\"</code>. </p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want to use as a filter. For example, <code>\"Value\": \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>. </p>"
+        }
+      },
+      "documentation": "<p>A filter that you apply when searching for dashboards. </p>"
+    },
+    "DashboardSearchFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "DashboardSearchFilter"
+      },
+      "max": 1
     },
     "DashboardSourceEntity": {
       "type": "structure",
@@ -5140,6 +5208,12 @@
         }
       },
       "documentation": "<p>A transform operation that filters rows based on a condition.</p>"
+    },
+    "FilterOperator": {
+      "type": "string",
+      "enum": [
+        "StringEquals"
+      ]
     },
     "GeoSpatialColumnGroup": {
       "type": "structure",
@@ -7128,6 +7202,55 @@
         }
       },
       "documentation": "<p>A physical table type for as S3 data source.</p>"
+    },
+    "SearchDashboardsRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "Filters"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account that contains the user whose dashboards you're searching for. </p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Filters": {
+          "shape": "DashboardSearchFilterList",
+          "documentation": "<p>The filters to apply to the search. Currently, you can search only by user name. For example, <code>\"Filters\": [ { \"Name\": \"QUICKSIGHT_USER\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\" } ]</code> </p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>"
+        }
+      }
+    },
+    "SearchDashboardsResponse": {
+      "type": "structure",
+      "members": {
+        "DashboardSummaryList": {
+          "shape": "DashboardSummaryList",
+          "documentation": "<p>The list of dashboards owned by the user specified in <code>Filters</code> in your request.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        }
+      }
     },
     "ServiceNowParameters": {
       "type": "structure",

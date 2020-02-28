@@ -262,6 +262,9 @@
         },
         {
           "shape": "RemediationInProgressException"
+        },
+        {
+          "shape": "InsufficientPermissionsException"
         }
       ],
       "documentation": "<p>Deletes the remediation configuration.</p>"
@@ -1730,6 +1733,34 @@
       ],
       "documentation": "<p>Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the <code>RetentionConfiguration</code> object and names the object as <b>default</b>. When you have a <code>RetentionConfiguration</code> object named <b>default</b>, calling the API modifies the default object. </p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>"
     },
+    "SelectAggregateResourceConfig": {
+      "name": "SelectAggregateResourceConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SelectAggregateResourceConfigRequest"
+      },
+      "output": {
+        "shape": "SelectAggregateResourceConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidExpressionException"
+        },
+        {
+          "shape": "NoSuchConfigurationAggregatorException"
+        },
+        {
+          "shape": "InvalidLimitException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ],
+      "documentation": "<p>Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of AWS resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties.</p> <p>For more information about query components, see the <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/query-components.html\"> <b>Query Components</b> </a> section in the AWS Config Developer Guide.</p>"
+    },
     "SelectResourceConfig": {
       "name": "SelectResourceConfig",
       "http": {
@@ -2151,7 +2182,7 @@
     },
     "AmazonResourceName": {
       "type": "string",
-      "max": 256,
+      "max": 1000,
       "min": 1
     },
     "Annotation": {
@@ -2494,15 +2525,15 @@
       ],
       "members": {
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "ConfigRuleName",
           "documentation": "<p>The name that you assign to the AWS Config rule. The name is required if you are adding a new rule.</p>"
         },
         "ConfigRuleArn": {
-          "shape": "String",
+          "shape": "StringWithCharLimit256",
           "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Config rule.</p>"
         },
         "ConfigRuleId": {
-          "shape": "String",
+          "shape": "StringWithCharLimit64",
           "documentation": "<p>The ID of the AWS Config rule.</p>"
         },
         "Description": {
@@ -2583,7 +2614,7 @@
       "type": "structure",
       "members": {
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "ConfigRuleName",
           "documentation": "<p>The name of the AWS Config rule.</p>"
         },
         "ConfigRuleArn": {
@@ -2613,6 +2644,9 @@
         "FirstActivatedTime": {
           "shape": "Date",
           "documentation": "<p>The time that you first activated the AWS Config rule.</p>"
+        },
+        "LastDeactivatedTime": {
+          "shape": "Date"
         },
         "LastErrorCode": {
           "shape": "String",
@@ -3287,7 +3321,7 @@
       ],
       "members": {
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "ConfigRuleName",
           "documentation": "<p>The name of the AWS Config rule that you want to delete.</p>"
         }
       },
@@ -3413,7 +3447,7 @@
           "documentation": "<p>The name of the AWS Config rule for which you want to delete remediation configuration.</p>"
         },
         "ResourceType": {
-          "shape": "String",
+          "shape": "StringWithCharLimit256",
           "documentation": "<p>The type of a resource.</p>"
         }
       }
@@ -4402,7 +4436,7 @@
       "type": "structure",
       "members": {
         "ConfigRuleName": {
-          "shape": "StringWithCharLimit64",
+          "shape": "ConfigRuleName",
           "documentation": "<p>The name of the AWS Config rule that was used in the evaluation.</p>"
         },
         "ResourceType": {
@@ -6180,7 +6214,7 @@
     "ReevaluateConfigRuleNames": {
       "type": "list",
       "member": {
-        "shape": "StringWithCharLimit64"
+        "shape": "ConfigRuleName"
       },
       "max": 25,
       "min": 1
@@ -6246,7 +6280,7 @@
           "documentation": "<p>Target ID is the name of the public document.</p>"
         },
         "TargetVersion": {
-          "shape": "String",
+          "shape": "StringWithCharLimit256",
           "documentation": "<p>Version of the target. For example, version of the SSM document.</p>"
         },
         "Parameters": {
@@ -6254,7 +6288,7 @@
           "documentation": "<p>An object of the RemediationParameterValue.</p>"
         },
         "ResourceType": {
-          "shape": "String",
+          "shape": "StringWithCharLimit256",
           "documentation": "<p>The type of a resource. </p>"
         },
         "Automatic": {
@@ -6617,62 +6651,111 @@
     "ResourceType": {
       "type": "string",
       "enum": [
-        "AWS::EC2::CustomerGateway",
-        "AWS::EC2::EIP",
-        "AWS::EC2::Host",
-        "AWS::EC2::Instance",
-        "AWS::EC2::InternetGateway",
-        "AWS::EC2::NetworkAcl",
-        "AWS::EC2::NetworkInterface",
-        "AWS::EC2::RouteTable",
-        "AWS::EC2::SecurityGroup",
-        "AWS::EC2::Subnet",
-        "AWS::CloudTrail::Trail",
-        "AWS::EC2::Volume",
-        "AWS::EC2::VPC",
-        "AWS::EC2::VPNConnection",
-        "AWS::EC2::VPNGateway",
-        "AWS::EC2::RegisteredHAInstance",
-        "AWS::EC2::NatGateway",
-        "AWS::EC2::EgressOnlyInternetGateway",
-        "AWS::EC2::VPCEndpoint",
-        "AWS::EC2::VPCEndpointService",
-        "AWS::EC2::FlowLog",
-        "AWS::EC2::VPCPeeringConnection",
-        "AWS::IAM::Group",
-        "AWS::IAM::Policy",
-        "AWS::IAM::Role",
-        "AWS::IAM::User",
-        "AWS::ElasticLoadBalancingV2::LoadBalancer",
         "AWS::ACM::Certificate",
-        "AWS::RDS::DBInstance",
-        "AWS::RDS::DBParameterGroup",
-        "AWS::RDS::DBOptionGroup",
-        "AWS::RDS::DBSubnetGroup",
-        "AWS::RDS::DBSecurityGroup",
-        "AWS::RDS::DBSnapshot",
-        "AWS::RDS::DBCluster",
-        "AWS::RDS::DBClusterParameterGroup",
-        "AWS::RDS::DBClusterSnapshot",
-        "AWS::RDS::EventSubscription",
-        "AWS::S3::Bucket",
-        "AWS::S3::AccountPublicAccessBlock",
-        "AWS::Redshift::Cluster",
-        "AWS::Redshift::ClusterSnapshot",
-        "AWS::Redshift::ClusterParameterGroup",
-        "AWS::Redshift::ClusterSecurityGroup",
-        "AWS::Redshift::ClusterSubnetGroup",
-        "AWS::Redshift::EventSubscription",
-        "AWS::SSM::ManagedInstanceInventory",
-        "AWS::CloudWatch::Alarm",
-        "AWS::CloudFormation::Stack",
-        "AWS::ElasticLoadBalancing::LoadBalancer",
+        "AWS::ApiGateway::DomainName",
+        "AWS::ApiGateway::Method",
+        "AWS::ApiGateway::RestApi",
+        "AWS::ApiGateway::Stage",
+        "AWS::ApiGatewayV2::Api",
+        "AWS::ApiGatewayV2::DomainName",
+        "AWS::ApiGatewayV2::Stage",
         "AWS::AutoScaling::AutoScalingGroup",
         "AWS::AutoScaling::LaunchConfiguration",
         "AWS::AutoScaling::ScalingPolicy",
         "AWS::AutoScaling::ScheduledAction",
-        "AWS::DynamoDB::Table",
+        "AWS::CloudFormation::Stack",
+        "AWS::CloudFront::Distribution",
+        "AWS::CloudFront::StreamingDistribution",
+        "AWS::CloudTrail::Trail",
+        "AWS::CloudWatch::Alarm",
         "AWS::CodeBuild::Project",
+        "AWS::CodePipeline::Pipeline",
+        "AWS::Config::ResourceCompliance",
+        "AWS::DynamoDB::Table",
+        "AWS::EC2::CustomerGateway",
+        "AWS::EC2::EgressOnlyInternetGateway",
+        "AWS::EC2::EIP",
+        "AWS::EC2::FlowLog",
+        "AWS::EC2::Host",
+        "AWS::EC2::Instance",
+        "AWS::EC2::InternetGateway",
+        "AWS::EC2::NatGateway",
+        "AWS::EC2::NetworkAcl",
+        "AWS::EC2::NetworkInterface",
+        "AWS::EC2::RegisteredHAInstance",
+        "AWS::EC2::RouteTable",
+        "AWS::EC2::SecurityGroup",
+        "AWS::EC2::Subnet",
+        "AWS::EC2::Volume",
+        "AWS::EC2::VPC",
+        "AWS::EC2::VPCEndpoint",
+        "AWS::EC2::VPCEndpointService",
+        "AWS::EC2::VPCPeeringConnection",
+        "AWS::EC2::VPNConnection",
+        "AWS::EC2::VPNGateway",
+        "AWS::ECR::Repository",
+        "AWS::ECS::Cluster",
+        "AWS::ECS::PrimaryTaskSet",
+        "AWS::ECS::Service",
+        "AWS::ECS::TaskDefinition",
+        "AWS::ECS::TaskSet",
+        "AWS::EKS::Cluster",
+        "AWS::EKS::Nodegroup",
+        "AWS::ElasticBeanstalk::Application",
+        "AWS::ElasticBeanstalk::ApplicationVersion",
+        "AWS::ElasticBeanstalk::Environment",
+        "AWS::ElasticLoadBalancing::LoadBalancer",
+        "AWS::ElasticLoadBalancingV2::LoadBalancer",
+        "AWS::Elasticsearch::Domain",
+        "AWS::IAM::Group",
+        "AWS::IAM::Policy",
+        "AWS::IAM::Role",
+        "AWS::IAM::User",
+        "AWS::Kinesis::Stream",
+        "AWS::Kinesis::StreamConsumer",
+        "AWS::KinesisAnalytics::Application",
+        "AWS::KinesisAnalytics::ApplicationOutput",
+        "AWS::KinesisAnalytics::ApplicationReferenceDataSource",
+        "AWS::KinesisAnalyticsV2::Application",
+        "AWS::KinesisAnalyticsV2::ApplicationCloudWatchLoggingOption",
+        "AWS::KinesisAnalyticsV2::ApplicationOutput",
+        "AWS::KinesisAnalyticsV2::ApplicationReferenceDataSource",
+        "AWS::KinesisFirehose::DeliveryStream",
+        "AWS::KMS::Key",
+        "AWS::Lambda::Alias",
+        "AWS::Lambda::Function",
+        "AWS::LicenseManager::LicenseConfiguration",
+        "AWS::MobileHub::Project",
+        "AWS::QLDB::Ledger",
+        "AWS::RDS::DBCluster",
+        "AWS::RDS::DBClusterParameterGroup",
+        "AWS::RDS::DBClusterSnapshot",
+        "AWS::RDS::DBInstance",
+        "AWS::RDS::DBOptionGroup",
+        "AWS::RDS::DBParameterGroup",
+        "AWS::RDS::DBSecurityGroup",
+        "AWS::RDS::DBSnapshot",
+        "AWS::RDS::DBSubnetGroup",
+        "AWS::RDS::EventSubscription",
+        "AWS::Redshift::Cluster",
+        "AWS::Redshift::ClusterParameterGroup",
+        "AWS::Redshift::ClusterSecurityGroup",
+        "AWS::Redshift::ClusterSnapshot",
+        "AWS::Redshift::ClusterSubnetGroup",
+        "AWS::Redshift::EventSubscription",
+        "AWS::S3::AccountPublicAccessBlock",
+        "AWS::S3::Bucket",
+        "AWS::SecretsManager::Secret",
+        "AWS::ServiceCatalog::CloudFormationProduct",
+        "AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+        "AWS::ServiceCatalog::Portfolio",
+        "AWS::Shield::Protection",
+        "AWS::ShieldRegional::Protection",
+        "AWS::SNS::Topic",
+        "AWS::SQS::Queue",
+        "AWS::SSM::AssociationCompliance",
+        "AWS::SSM::ManagedInstanceInventory",
+        "AWS::SSM::PatchCompliance",
         "AWS::WAF::RateBasedRule",
         "AWS::WAF::Rule",
         "AWS::WAF::RuleGroup",
@@ -6681,32 +6764,12 @@
         "AWS::WAFRegional::Rule",
         "AWS::WAFRegional::RuleGroup",
         "AWS::WAFRegional::WebACL",
-        "AWS::CloudFront::Distribution",
-        "AWS::CloudFront::StreamingDistribution",
-        "AWS::Lambda::Alias",
-        "AWS::Lambda::Function",
-        "AWS::ElasticBeanstalk::Application",
-        "AWS::ElasticBeanstalk::ApplicationVersion",
-        "AWS::ElasticBeanstalk::Environment",
-        "AWS::MobileHub::Project",
-        "AWS::XRay::EncryptionConfig",
-        "AWS::SSM::AssociationCompliance",
-        "AWS::SSM::PatchCompliance",
-        "AWS::Shield::Protection",
-        "AWS::ShieldRegional::Protection",
-        "AWS::Config::ResourceCompliance",
-        "AWS::LicenseManager::LicenseConfiguration",
-        "AWS::ApiGateway::DomainName",
-        "AWS::ApiGateway::Method",
-        "AWS::ApiGateway::Stage",
-        "AWS::ApiGateway::RestApi",
-        "AWS::ApiGatewayV2::DomainName",
-        "AWS::ApiGatewayV2::Stage",
-        "AWS::ApiGatewayV2::Api",
-        "AWS::CodePipeline::Pipeline",
-        "AWS::ServiceCatalog::CloudFormationProvisionedProduct",
-        "AWS::ServiceCatalog::CloudFormationProduct",
-        "AWS::ServiceCatalog::Portfolio"
+        "AWS::WAFv2::WebACL",
+        "AWS::WAFv2::RuleGroup",
+        "AWS::WAFv2::IPSet",
+        "AWS::WAFv2::RegexPatternSet",
+        "AWS::WAFv2::ManagedRuleSet",
+        "AWS::XRay::EncryptionConfig"
       ]
     },
     "ResourceTypeList": {
@@ -6836,6 +6899,50 @@
         }
       },
       "documentation": "<p>Defines which resources trigger an evaluation for an AWS Config rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one resource ID. Specify a scope to constrain which resources trigger an evaluation for a rule. Otherwise, evaluations for the rule are triggered when any resource in your recording group changes in configuration.</p>"
+    },
+    "SelectAggregateResourceConfigRequest": {
+      "type": "structure",
+      "required": [
+        "Expression",
+        "ConfigurationAggregatorName"
+      ],
+      "members": {
+        "Expression": {
+          "shape": "Expression",
+          "documentation": "<p>The SQL query SELECT command. </p>"
+        },
+        "ConfigurationAggregatorName": {
+          "shape": "ConfigurationAggregatorName",
+          "documentation": "<p>The name of the configuration aggregator.</p>"
+        },
+        "Limit": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of query results returned on each page. </p>"
+        },
+        "MaxResults": {
+          "shape": "Limit"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. </p>"
+        }
+      }
+    },
+    "SelectAggregateResourceConfigResponse": {
+      "type": "structure",
+      "members": {
+        "Results": {
+          "shape": "Results",
+          "documentation": "<p>Returns the results for the SQL query.</p>"
+        },
+        "QueryInfo": {
+          "shape": "QueryInfo"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. </p>"
+        }
+      }
     },
     "SelectResourceConfigRequest": {
       "type": "structure",

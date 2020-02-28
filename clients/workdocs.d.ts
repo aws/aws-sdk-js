@@ -228,11 +228,11 @@ declare class WorkDocs extends Service {
    */
   describeUsers(callback?: (err: AWSError, data: WorkDocs.Types.DescribeUsersResponse) => void): Request<WorkDocs.Types.DescribeUsersResponse, AWSError>;
   /**
-   * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
+   * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients. This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see Authentication and Access Control for User Applications in the Amazon WorkDocs Developer Guide.
    */
   getCurrentUser(params: WorkDocs.Types.GetCurrentUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetCurrentUserResponse) => void): Request<WorkDocs.Types.GetCurrentUserResponse, AWSError>;
   /**
-   * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
+   * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients. This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see Authentication and Access Control for User Applications in the Amazon WorkDocs Developer Guide.
    */
   getCurrentUser(callback?: (err: AWSError, data: WorkDocs.Types.GetCurrentUserResponse) => void): Request<WorkDocs.Types.GetCurrentUserResponse, AWSError>;
   /**
@@ -343,7 +343,7 @@ declare class WorkDocs extends Service {
 declare namespace WorkDocs {
   export interface AbortDocumentVersionUploadRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -361,7 +361,7 @@ declare namespace WorkDocs {
      */
     UserId: IdType;
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
   }
@@ -413,7 +413,7 @@ declare namespace WorkDocs {
   export type ActivityType = "DOCUMENT_CHECKED_IN"|"DOCUMENT_CHECKED_OUT"|"DOCUMENT_RENAMED"|"DOCUMENT_VERSION_UPLOADED"|"DOCUMENT_VERSION_DELETED"|"DOCUMENT_VERSION_VIEWED"|"DOCUMENT_VERSION_DOWNLOADED"|"DOCUMENT_RECYCLED"|"DOCUMENT_RESTORED"|"DOCUMENT_REVERTED"|"DOCUMENT_SHARED"|"DOCUMENT_UNSHARED"|"DOCUMENT_SHARE_PERMISSION_CHANGED"|"DOCUMENT_SHAREABLE_LINK_CREATED"|"DOCUMENT_SHAREABLE_LINK_REMOVED"|"DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"|"DOCUMENT_MOVED"|"DOCUMENT_COMMENT_ADDED"|"DOCUMENT_COMMENT_DELETED"|"DOCUMENT_ANNOTATION_ADDED"|"DOCUMENT_ANNOTATION_DELETED"|"FOLDER_CREATED"|"FOLDER_DELETED"|"FOLDER_RENAMED"|"FOLDER_RECYCLED"|"FOLDER_RESTORED"|"FOLDER_SHARED"|"FOLDER_UNSHARED"|"FOLDER_SHARE_PERMISSION_CHANGED"|"FOLDER_SHAREABLE_LINK_CREATED"|"FOLDER_SHAREABLE_LINK_REMOVED"|"FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"|"FOLDER_MOVED"|string;
   export interface AddResourcePermissionsRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -505,7 +505,7 @@ declare namespace WorkDocs {
   export type CommentVisibilityType = "PUBLIC"|"PRIVATE"|string;
   export interface CreateCommentRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -545,7 +545,7 @@ declare namespace WorkDocs {
   }
   export interface CreateCustomMetadataRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -565,7 +565,7 @@ declare namespace WorkDocs {
   }
   export interface CreateFolderRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -593,7 +593,7 @@ declare namespace WorkDocs {
      */
     Labels: SharedLabels;
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
   }
@@ -657,7 +657,7 @@ declare namespace WorkDocs {
      */
     StorageRule?: StorageRuleType;
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
   }
@@ -677,13 +677,13 @@ declare namespace WorkDocs {
      */
     UserId: IdType;
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
   }
   export interface DeleteCommentRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -701,7 +701,7 @@ declare namespace WorkDocs {
   }
   export interface DeleteCustomMetadataRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -725,7 +725,7 @@ declare namespace WorkDocs {
   }
   export interface DeleteDocumentRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -735,7 +735,7 @@ declare namespace WorkDocs {
   }
   export interface DeleteFolderContentsRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -745,7 +745,7 @@ declare namespace WorkDocs {
   }
   export interface DeleteFolderRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -759,7 +759,7 @@ declare namespace WorkDocs {
      */
     ResourceId: ResourceIdType;
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -795,7 +795,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeActivitiesRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -847,7 +847,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeCommentsRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -879,7 +879,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeDocumentVersionsRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -915,7 +915,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeFolderContentsRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -963,7 +963,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeGroupsRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1019,7 +1019,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeResourcePermissionsRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1051,7 +1051,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeRootFoldersRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token.
      */
     AuthenticationToken: AuthenticationHeaderType;
     /**
@@ -1075,7 +1075,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeUsersRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1279,7 +1279,7 @@ declare namespace WorkDocs {
   export type FolderMetadataList = FolderMetadata[];
   export interface GetCurrentUserRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token.
      */
     AuthenticationToken: AuthenticationHeaderType;
   }
@@ -1291,7 +1291,7 @@ declare namespace WorkDocs {
   }
   export interface GetDocumentPathRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1319,7 +1319,7 @@ declare namespace WorkDocs {
   }
   export interface GetDocumentRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1343,7 +1343,7 @@ declare namespace WorkDocs {
   }
   export interface GetDocumentVersionRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1375,7 +1375,7 @@ declare namespace WorkDocs {
   }
   export interface GetFolderPathRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1403,7 +1403,7 @@ declare namespace WorkDocs {
   }
   export interface GetFolderRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1427,7 +1427,7 @@ declare namespace WorkDocs {
   }
   export interface GetResourcesRequest {
     /**
-     * The Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API operation using AWS credentials.
+     * The Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1479,7 +1479,7 @@ declare namespace WorkDocs {
   export type IdType = string;
   export interface InitiateDocumentVersionUploadRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1580,7 +1580,7 @@ declare namespace WorkDocs {
   export type PrincipalType = "USER"|"GROUP"|"INVITE"|"ANONYMOUS"|"ORGANIZATION"|string;
   export interface RemoveAllResourcePermissionsRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1590,7 +1590,7 @@ declare namespace WorkDocs {
   }
   export interface RemoveResourcePermissionRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1742,7 +1742,7 @@ declare namespace WorkDocs {
   export type TimestampType = Date;
   export interface UpdateDocumentRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1764,7 +1764,7 @@ declare namespace WorkDocs {
   }
   export interface UpdateDocumentVersionRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1782,7 +1782,7 @@ declare namespace WorkDocs {
   }
   export interface UpdateFolderRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1804,7 +1804,7 @@ declare namespace WorkDocs {
   }
   export interface UpdateUserRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**

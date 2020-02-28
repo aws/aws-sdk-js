@@ -91,7 +91,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Returns information about human loops, given the specified parameters.</p>"
+      "documentation": "<p>Returns information about human loops, given the specified parameters. If a human loop was deleted, it will not be included.</p>"
     },
     "StartHumanLoop": {
       "name": "StartHumanLoop",
@@ -117,6 +117,9 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Starts a human loop, provided that at least one activation condition is met.</p>"
@@ -151,9 +154,6 @@
     }
   },
   "shapes": {
-    "Boolean": {
-      "type": "boolean"
-    },
     "ContentClassifier": {
       "type": "string",
       "enum": [
@@ -194,7 +194,7 @@
       "members": {
         "HumanLoopName": {
           "shape": "HumanLoopName",
-          "documentation": "<p>The name of the human loop.</p>",
+          "documentation": "<p>The unique name of the human loop.</p>",
           "location": "uri",
           "locationName": "HumanLoopName"
         }
@@ -203,17 +203,16 @@
     "DescribeHumanLoopResponse": {
       "type": "structure",
       "required": [
-        "CreationTimestamp",
+        "CreationTime",
         "HumanLoopStatus",
         "HumanLoopName",
         "HumanLoopArn",
-        "FlowDefinitionArn",
-        "HumanLoopInput"
+        "FlowDefinitionArn"
       ],
       "members": {
-        "CreationTimestamp": {
+        "CreationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The timestamp when Amazon Augmented AI created the human loop.</p>"
+          "documentation": "<p>The creation time when Amazon Augmented AI created the human loop.</p>"
         },
         "FailureReason": {
           "shape": "String",
@@ -239,12 +238,8 @@
           "shape": "FlowDefinitionArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the flow definition.</p>"
         },
-        "HumanLoopInput": {
-          "shape": "HumanLoopInputContent",
-          "documentation": "<p>An object containing information about the human loop input.</p>"
-        },
         "HumanLoopOutput": {
-          "shape": "HumanLoopOutputContent",
+          "shape": "HumanLoopOutput",
           "documentation": "<p>An object containing information about the output of the human loop.</p>"
         }
       }
@@ -258,36 +253,25 @@
       "max": 1024,
       "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:flow-definition/.*"
     },
-    "HumanLoopActivationReason": {
-      "type": "structure",
-      "members": {
-        "ConditionsMatched": {
-          "shape": "Boolean",
-          "documentation": "<p>True if the specified conditions were matched to trigger the human loop.</p>"
-        }
-      },
-      "documentation": "<p>Contains information about why a human loop was triggered. If at least one activation reason is evaluated to be true, the human loop is activated.</p>"
-    },
-    "HumanLoopActivationResults": {
-      "type": "structure",
-      "members": {
-        "HumanLoopActivationReason": {
-          "shape": "HumanLoopActivationReason",
-          "documentation": "<p>An object containing information about why a human loop was triggered.</p>"
-        },
-        "HumanLoopActivationConditionsEvaluationResults": {
-          "shape": "String",
-          "documentation": "<p>A copy of the human loop activation conditions of the flow definition, augmented with the results of evaluating those conditions on the input provided to the <code>StartHumanLoop</code> operation.</p>"
-        }
-      },
-      "documentation": "<p>Information about the corresponding flow definition's human loop activation condition evaluation. Null if <code>StartHumanLoop</code> was invoked directly.</p>"
-    },
     "HumanLoopArn": {
       "type": "string",
       "max": 1024,
       "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:human-loop/.*"
     },
-    "HumanLoopInputContent": {
+    "HumanLoopDataAttributes": {
+      "type": "structure",
+      "required": [
+        "ContentClassifiers"
+      ],
+      "members": {
+        "ContentClassifiers": {
+          "shape": "ContentClassifiers",
+          "documentation": "<p>Declares that your content is free of personally identifiable information or adult content.</p> <p>Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can view your task based on this information.</p>"
+        }
+      },
+      "documentation": "<p>Attributes of the data specified by the customer. Use these to describe the data to be labeled.</p>"
+    },
+    "HumanLoopInput": {
       "type": "structure",
       "required": [
         "InputContent"
@@ -295,10 +279,10 @@
       "members": {
         "InputContent": {
           "shape": "InputContent",
-          "documentation": "<p>Serialized input from the human loop.</p>"
+          "documentation": "<p>Serialized input from the human loop. The input must be a string representation of a file in JSON format.</p>"
         }
       },
-      "documentation": "<p>An object containing the input.</p>"
+      "documentation": "<p>An object containing the human loop input in JSON format.</p>"
     },
     "HumanLoopName": {
       "type": "string",
@@ -306,7 +290,7 @@
       "min": 1,
       "pattern": "^[a-z0-9](-*[a-z0-9])*$"
     },
-    "HumanLoopOutputContent": {
+    "HumanLoopOutput": {
       "type": "structure",
       "required": [
         "OutputS3Uri"
@@ -314,7 +298,7 @@
       "members": {
         "OutputS3Uri": {
           "shape": "String",
-          "documentation": "<p>The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output. The output is stored at the following location: <code>s3://S3OutputPath/HumanLoopName/CreationTime/output.json</code>.</p>"
+          "documentation": "<p>The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output.</p>"
         }
       },
       "documentation": "<p>Information about where the human output will be stored.</p>"
@@ -361,37 +345,33 @@
       },
       "documentation": "<p>Summary information about the human loop.</p>"
     },
-    "HumanReviewDataAttributes": {
-      "type": "structure",
-      "required": [
-        "ContentClassifiers"
-      ],
-      "members": {
-        "ContentClassifiers": {
-          "shape": "ContentClassifiers",
-          "documentation": "<p>Declares that your content is free of personally identifiable information or adult content. Amazon SageMaker may restrict the Amazon Mechanical Turk workers that can view your task based on this information.</p>"
-        }
-      },
-      "documentation": "<p>Attributes of the data specified by the customer. Use these to describe the data to be labeled.</p>"
-    },
     "InputContent": {
       "type": "string",
       "max": 4194304
     },
     "ListHumanLoopsRequest": {
       "type": "structure",
+      "required": [
+        "FlowDefinitionArn"
+      ],
       "members": {
         "CreationTimeAfter": {
           "shape": "Timestamp",
-          "documentation": "<p>(Optional) The timestamp of the date when you want the human loops to begin. For example, <code>1551000000</code>.</p>",
+          "documentation": "<p>(Optional) The timestamp of the date when you want the human loops to begin in ISO 8601 format. For example, <code>2020-02-24</code>.</p>",
           "location": "querystring",
           "locationName": "CreationTimeAfter"
         },
         "CreationTimeBefore": {
           "shape": "Timestamp",
-          "documentation": "<p>(Optional) The timestamp of the date before which you want the human loops to begin. For example, <code>1550000000</code>.</p>",
+          "documentation": "<p>(Optional) The timestamp of the date before which you want the human loops to begin in ISO 8601 format. For example, <code>2020-02-24</code>.</p>",
           "location": "querystring",
           "locationName": "CreationTimeBefore"
+        },
+        "FlowDefinitionArn": {
+          "shape": "FlowDefinitionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a flow definition.</p>",
+          "location": "querystring",
+          "locationName": "FlowDefinitionArn"
         },
         "SortOrder": {
           "shape": "SortOrder",
@@ -464,11 +444,11 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of the flow definition.</p>"
         },
         "HumanLoopInput": {
-          "shape": "HumanLoopInputContent",
+          "shape": "HumanLoopInput",
           "documentation": "<p>An object containing information about the human loop.</p>"
         },
         "DataAttributes": {
-          "shape": "HumanReviewDataAttributes",
+          "shape": "HumanLoopDataAttributes",
           "documentation": "<p>Attributes of the data specified by the customer.</p>"
         }
       }
@@ -479,10 +459,6 @@
         "HumanLoopArn": {
           "shape": "HumanLoopArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the human loop.</p>"
-        },
-        "HumanLoopActivationResults": {
-          "shape": "HumanLoopActivationResults",
-          "documentation": "<p>An object containing information about the human loop activation.</p>"
         }
       }
     },
@@ -509,5 +485,5 @@
       "type": "timestamp"
     }
   },
-  "documentation": "<p>Amazon Augmented AI (Augmented AI) (Preview) is a service that adds human judgment to any machine learning application. Human reviewers can take over when an AI application can't evaluate data with a high degree of confidence.</p> <p>From fraudulent bank transaction identification to document processing to image analysis, machine learning models can be trained to make decisions as well as or better than a human. Nevertheless, some decisions require contextual interpretation, such as when you need to decide whether an image is appropriate for a given audience. Content moderation guidelines are nuanced and highly dependent on context, and they vary between countries. When trying to apply AI in these situations, you can be forced to choose between \"ML only\" systems with unacceptably high error rates or \"human only\" systems that are expensive and difficult to scale, and that slow down decision making.</p> <p>This API reference includes information about API actions and data types you can use to interact with Augmented AI programmatically. </p> <p>You can create a flow definition against the Augmented AI API. Provide the Amazon Resource Name (ARN) of a flow definition to integrate AI service APIs, such as <code>Textract.AnalyzeDocument</code> and <code>Rekognition.DetectModerationLabels</code>. These AI services, in turn, invoke the <a>StartHumanLoop</a> API, which evaluates conditions under which humans will be invoked. If humans are required, Augmented AI creates a human loop. Results of human work are available asynchronously in Amazon Simple Storage Service (Amazon S3). You can use Amazon CloudWatch Events to detect human work results.</p> <p>You can find additional Augmented AI API documentation in the following reference guides: <a href=\"https://aws.amazon.com/rekognition/latest/dg/API_Reference.html\">Amazon Rekognition</a>, <a href=\"https://aws.amazon.com/sagemaker/latest/dg/API_Reference.html\">Amazon SageMaker</a>, and <a href=\"https://aws.amazon.com/textract/latest/dg/API_Reference.html\">Amazon Textract</a>.</p>"
+  "documentation": "<p>Amazon Augmented AI (Augmented AI) (Preview) is a service that adds human judgment to any machine learning application. Human reviewers can take over when an AI application can't evaluate data with a high degree of confidence.</p> <p>From fraudulent bank transaction identification to document processing to image analysis, machine learning models can be trained to make decisions as well as or better than a human. Nevertheless, some decisions require contextual interpretation, such as when you need to decide whether an image is appropriate for a given audience. Content moderation guidelines are nuanced and highly dependent on context, and they vary between countries. When trying to apply AI in these situations, you can be forced to choose between \"ML only\" systems with unacceptably high error rates or \"human only\" systems that are expensive and difficult to scale, and that slow down decision making.</p> <p>This API reference includes information about API actions and data types you can use to interact with Augmented AI programmatically. </p> <p>You can create a flow definition against the Augmented AI API. Provide the Amazon Resource Name (ARN) of a flow definition to integrate AI service APIs, such as <code>Textract.AnalyzeDocument</code> and <code>Rekognition.DetectModerationLabels</code>. These AI services, in turn, invoke the <a>StartHumanLoop</a> API, which evaluates conditions under which humans will be invoked. If humans are required, Augmented AI creates a human loop. Results of human work are available asynchronously in Amazon Simple Storage Service (Amazon S3). You can use Amazon CloudWatch Events to detect human work results.</p> <p>You can find additional Augmented AI API documentation in the following reference guides: <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/API_Reference.html\">Amazon Rekognition</a>, <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/API_Reference.html\">Amazon SageMaker</a>, and <a href=\"https://docs.aws.amazon.com/textract/latest/dg/API_Reference.html\">Amazon Textract</a>.</p>"
 }

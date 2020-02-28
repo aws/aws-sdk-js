@@ -724,6 +724,14 @@ declare class Glue extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
   /**
+   *  Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional Tags field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. 
+   */
+  listMLTransforms(params: Glue.Types.ListMLTransformsRequest, callback?: (err: AWSError, data: Glue.Types.ListMLTransformsResponse) => void): Request<Glue.Types.ListMLTransformsResponse, AWSError>;
+  /**
+   *  Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional Tags field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. 
+   */
+  listMLTransforms(callback?: (err: AWSError, data: Glue.Types.ListMLTransformsResponse) => void): Request<Glue.Types.ListMLTransformsResponse, AWSError>;
+  /**
    * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listTriggers(params: Glue.Types.ListTriggersRequest, callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
@@ -2186,6 +2194,10 @@ declare namespace Glue {
      * The maximum number of times to retry a task for this transform after a task run fails.
      */
     MaxRetries?: NullableInteger;
+    /**
+     * The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateMLTransformResponse {
     /**
@@ -4463,6 +4475,38 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
   }
+  export interface ListMLTransformsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A TransformFilterCriteria used to filter the machine learning transforms.
+     */
+    Filter?: TransformFilterCriteria;
+    /**
+     * A TransformSortCriteria used to sort the machine learning transforms.
+     */
+    Sort?: TransformSortCriteria;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListMLTransformsResponse {
+    /**
+     * The identifiers of all the machine learning transforms in the account, or the machine learning transforms with the specified tags.
+     */
+    TransformIds: TransformIdList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListTriggersRequest {
     /**
      * A continuation token, if this is a continuation request.
@@ -5631,6 +5675,7 @@ declare namespace Glue {
      */
     Schema?: TransformSchema;
   }
+  export type TransformIdList = HashString[];
   export type TransformList = MLTransform[];
   export interface TransformParameters {
     /**

@@ -12,43 +12,43 @@ declare class CodeGuruProfiler extends Service {
   constructor(options?: CodeGuruProfiler.Types.ClientConfiguration)
   config: Config & CodeGuruProfiler.Types.ClientConfiguration;
   /**
-   * Provides the configuration to use for an agent of the profiling group.
+   * 
    */
   configureAgent(params: CodeGuruProfiler.Types.ConfigureAgentRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.ConfigureAgentResponse) => void): Request<CodeGuruProfiler.Types.ConfigureAgentResponse, AWSError>;
   /**
-   * Provides the configuration to use for an agent of the profiling group.
+   * 
    */
   configureAgent(callback?: (err: AWSError, data: CodeGuruProfiler.Types.ConfigureAgentResponse) => void): Request<CodeGuruProfiler.Types.ConfigureAgentResponse, AWSError>;
   /**
-   * Create a profiling group.
+   * Creates a profiling group.
    */
   createProfilingGroup(params: CodeGuruProfiler.Types.CreateProfilingGroupRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.CreateProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.CreateProfilingGroupResponse, AWSError>;
   /**
-   * Create a profiling group.
+   * Creates a profiling group.
    */
   createProfilingGroup(callback?: (err: AWSError, data: CodeGuruProfiler.Types.CreateProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.CreateProfilingGroupResponse, AWSError>;
   /**
-   * Delete a profiling group.
+   * Deletes a profiling group.
    */
   deleteProfilingGroup(params: CodeGuruProfiler.Types.DeleteProfilingGroupRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.DeleteProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.DeleteProfilingGroupResponse, AWSError>;
   /**
-   * Delete a profiling group.
+   * Deletes a profiling group.
    */
   deleteProfilingGroup(callback?: (err: AWSError, data: CodeGuruProfiler.Types.DeleteProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.DeleteProfilingGroupResponse, AWSError>;
   /**
-   * Describe a profiling group.
+   * Describes a profiling group.
    */
   describeProfilingGroup(params: CodeGuruProfiler.Types.DescribeProfilingGroupRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.DescribeProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.DescribeProfilingGroupResponse, AWSError>;
   /**
-   * Describe a profiling group.
+   * Describes a profiling group.
    */
   describeProfilingGroup(callback?: (err: AWSError, data: CodeGuruProfiler.Types.DescribeProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.DescribeProfilingGroupResponse, AWSError>;
   /**
-   * Get the aggregated profile of a profiling group for the specified time range. If the requested time range does not align with the available aggregated profiles, it will be expanded to attain alignment. If aggregated profiles are available only for part of the period requested, the profile is returned from the earliest available to the latest within the requested time range. For instance, if the requested time range is from 00:00 to 00:20 and the available profiles are from 00:15 to 00:25, then the returned profile will be from 00:15 to 00:20.
+   * Gets the aggregated profile of a profiling group for the specified time range. If the requested time range does not align with the available aggregated profiles, it is expanded to attain alignment. If aggregated profiles are available only for part of the period requested, the profile is returned from the earliest available to the latest within the requested time range.  For example, if the requested time range is from 00:00 to 00:20 and the available profiles are from 00:15 to 00:25, the returned profile will be from 00:15 to 00:20.  You must specify exactly two of the following parameters: startTime, period, and endTime. 
    */
   getProfile(params: CodeGuruProfiler.Types.GetProfileRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.GetProfileResponse) => void): Request<CodeGuruProfiler.Types.GetProfileResponse, AWSError>;
   /**
-   * Get the aggregated profile of a profiling group for the specified time range. If the requested time range does not align with the available aggregated profiles, it will be expanded to attain alignment. If aggregated profiles are available only for part of the period requested, the profile is returned from the earliest available to the latest within the requested time range. For instance, if the requested time range is from 00:00 to 00:20 and the available profiles are from 00:15 to 00:25, then the returned profile will be from 00:15 to 00:20.
+   * Gets the aggregated profile of a profiling group for the specified time range. If the requested time range does not align with the available aggregated profiles, it is expanded to attain alignment. If aggregated profiles are available only for part of the period requested, the profile is returned from the earliest available to the latest within the requested time range.  For example, if the requested time range is from 00:00 to 00:20 and the available profiles are from 00:15 to 00:25, the returned profile will be from 00:15 to 00:20.  You must specify exactly two of the following parameters: startTime, period, and endTime. 
    */
   getProfile(callback?: (err: AWSError, data: CodeGuruProfiler.Types.GetProfileResponse) => void): Request<CodeGuruProfiler.Types.GetProfileResponse, AWSError>;
   /**
@@ -60,44 +60,44 @@ declare class CodeGuruProfiler extends Service {
    */
   listProfileTimes(callback?: (err: AWSError, data: CodeGuruProfiler.Types.ListProfileTimesResponse) => void): Request<CodeGuruProfiler.Types.ListProfileTimesResponse, AWSError>;
   /**
-   * List profiling groups in the account.
+   * Lists profiling groups.
    */
   listProfilingGroups(params: CodeGuruProfiler.Types.ListProfilingGroupsRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.ListProfilingGroupsResponse) => void): Request<CodeGuruProfiler.Types.ListProfilingGroupsResponse, AWSError>;
   /**
-   * List profiling groups in the account.
+   * Lists profiling groups.
    */
   listProfilingGroups(callback?: (err: AWSError, data: CodeGuruProfiler.Types.ListProfilingGroupsResponse) => void): Request<CodeGuruProfiler.Types.ListProfilingGroupsResponse, AWSError>;
   /**
-   * Submit profile collected by an agent belonging to a profiling group for aggregation.
+   * 
    */
   postAgentProfile(params: CodeGuruProfiler.Types.PostAgentProfileRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.PostAgentProfileResponse) => void): Request<CodeGuruProfiler.Types.PostAgentProfileResponse, AWSError>;
   /**
-   * Submit profile collected by an agent belonging to a profiling group for aggregation.
+   * 
    */
   postAgentProfile(callback?: (err: AWSError, data: CodeGuruProfiler.Types.PostAgentProfileResponse) => void): Request<CodeGuruProfiler.Types.PostAgentProfileResponse, AWSError>;
   /**
-   * Update a profiling group.
+   * Updates a profiling group.
    */
   updateProfilingGroup(params: CodeGuruProfiler.Types.UpdateProfilingGroupRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.UpdateProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.UpdateProfilingGroupResponse, AWSError>;
   /**
-   * Update a profiling group.
+   * Updates a profiling group.
    */
   updateProfilingGroup(callback?: (err: AWSError, data: CodeGuruProfiler.Types.UpdateProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.UpdateProfilingGroupResponse, AWSError>;
 }
 declare namespace CodeGuruProfiler {
   export interface AgentConfiguration {
     /**
-     * Specifies the period to follow the configuration (to profile or not) and call back to get a new configuration.
+     * 
      */
     periodInSeconds: Integer;
     /**
-     * Specifies if the profiling should be enabled by the agent.
+     * 
      */
     shouldProfile: Boolean;
   }
   export interface AgentOrchestrationConfig {
     /**
-     * If the agents should be enabled to create and report profiles.
+     * 
      */
     profilingEnabled: Boolean;
   }
@@ -105,11 +105,11 @@ declare namespace CodeGuruProfiler {
   export type AggregatedProfile = Buffer|Uint8Array|Blob|string;
   export interface AggregatedProfileTime {
     /**
-     * The aggregation period of the aggregated profile.
+     * The time period.
      */
     period?: AggregationPeriod;
     /**
-     * The start time of the aggregated profile.
+     * The start time.
      */
     start?: Timestamp;
   }
@@ -117,106 +117,169 @@ declare namespace CodeGuruProfiler {
   export type Boolean = boolean;
   export type ClientToken = string;
   export interface ConfigureAgentRequest {
+    /**
+     * 
+     */
     fleetInstanceId?: FleetInstanceId;
+    /**
+     * 
+     */
     profilingGroupName: ProfilingGroupName;
   }
   export interface ConfigureAgentResponse {
     /**
-     * The configuration for the agent to use.
+     * 
      */
     configuration: AgentConfiguration;
   }
   export interface CreateProfilingGroupRequest {
+    /**
+     * The agent orchestration configuration.
+     */
     agentOrchestrationConfig?: AgentOrchestrationConfig;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This parameter specifies a unique identifier for the new profiling group that helps ensure idempotency.
+     */
     clientToken: ClientToken;
+    /**
+     * The name of the profiling group.
+     */
     profilingGroupName: ProfilingGroupName;
   }
   export interface CreateProfilingGroupResponse {
+    /**
+     * Information about the new profiling group
+     */
     profilingGroup: ProfilingGroupDescription;
   }
   export interface DeleteProfilingGroupRequest {
+    /**
+     * The profiling group name to delete.
+     */
     profilingGroupName: ProfilingGroupName;
   }
   export interface DeleteProfilingGroupResponse {
   }
   export interface DescribeProfilingGroupRequest {
+    /**
+     * The profiling group name.
+     */
     profilingGroupName: ProfilingGroupName;
   }
   export interface DescribeProfilingGroupResponse {
+    /**
+     * Information about a profiling group.
+     */
     profilingGroup: ProfilingGroupDescription;
   }
   export type FleetInstanceId = string;
   export interface GetProfileRequest {
     /**
-     * The format of the profile to return. Supports application/json or application/x-amzn-ion. Defaults to application/x-amzn-ion.
+     * The format of the profile to return. You can choose application/json or the default application/x-amzn-ion. 
      */
     accept?: String;
     /**
-     * The end time of the profile to get. Either period or endTime must be specified. Must be greater than start and the overall time range to be in the past and not larger than a week.
+     *  You must specify exactly two of the following parameters: startTime, period, and endTime. 
      */
     endTime?: Timestamp;
+    /**
+     * The maximum depth of the graph.
+     */
     maxDepth?: MaxDepth;
     /**
-     * The period of the profile to get. Exactly two of startTime, period and endTime must be specified. Must be positive and the overall time range to be in the past and not larger than a week.
+     * The period of the profile to get. The time range must be in the past and not longer than one week.  You must specify exactly two of the following parameters: startTime, period, and endTime. 
      */
     period?: Period;
+    /**
+     * The name of the profiling group to get.
+     */
     profilingGroupName: ProfilingGroupName;
     /**
-     * The start time of the profile to get.
+     * The start time of the profile to get. You must specify exactly two of the following parameters: startTime, period, and endTime. 
      */
     startTime?: Timestamp;
   }
   export interface GetProfileResponse {
     /**
-     * The content encoding of the profile in the payload.
+     * The content encoding of the profile.
      */
     contentEncoding?: String;
     /**
-     * The content type of the profile in the payload. Will be application/json or application/x-amzn-ion based on Accept header in the request.
+     * The content type of the profile in the payload. It is either application/json or the default application/x-amzn-ion.
      */
     contentType: String;
+    /**
+     * Information about the profile.
+     */
     profile: AggregatedProfile;
   }
   export type Integer = number;
   export interface ListProfileTimesRequest {
     /**
-     * The end time of the time range to list profiles until.
+     * The end time of the time range from which to list the profiles.
      */
     endTime: Timestamp;
+    /**
+     * The maximum number of profile time results returned by ListProfileTimes in paginated output. When this parameter is used, ListProfileTimes only returns maxResults results in a single page with a nextToken response element. The remaining results of the initial request can be seen by sending another ListProfileTimes request with the returned nextToken value. 
+     */
     maxResults?: MaxResults;
+    /**
+     * The nextToken value returned from a previous paginated ListProfileTimes request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     */
     nextToken?: PaginationToken;
     /**
-     * The order (ascending or descending by start time of the profile) to list the profiles by. Defaults to TIMESTAMP_DESCENDING.
+     * The order (ascending or descending by start time of the profile) to use when listing profiles. Defaults to TIMESTAMP_DESCENDING. 
      */
     orderBy?: OrderBy;
     /**
-     * The aggregation period to list the profiles for.
+     * The aggregation period.
      */
     period: AggregationPeriod;
+    /**
+     * The name of the profiling group.
+     */
     profilingGroupName: ProfilingGroupName;
     /**
-     * The start time of the time range to list the profiles from.
+     * The start time of the time range from which to list the profiles.
      */
     startTime: Timestamp;
   }
   export interface ListProfileTimesResponse {
+    /**
+     * The nextToken value to include in a future ListProfileTimes request. When the results of a ListProfileTimes request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
     nextToken?: PaginationToken;
     /**
-     * List of start times of the available profiles for the aggregation period in the specified time range.
+     * The list of start times of the available profiles for the aggregation period in the specified time range. 
      */
     profileTimes: ProfileTimes;
   }
   export interface ListProfilingGroupsRequest {
     /**
-     * If set to true, returns the full description of the profiling groups instead of the names. Defaults to false.
+     * A Boolean value indicating whether to include a description.
      */
     includeDescription?: Boolean;
+    /**
+     * The maximum number of profiling groups results returned by ListProfilingGroups in paginated output. When this parameter is used, ListProfilingGroups only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListProfilingGroups request with the returned nextToken value. 
+     */
     maxResults?: MaxResults;
+    /**
+     * The nextToken value returned from a previous paginated ListProfilingGroups request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     */
     nextToken?: PaginationToken;
   }
   export interface ListProfilingGroupsResponse {
+    /**
+     * The nextToken value to include in a future ListProfilingGroups request. When the results of a ListProfilingGroups request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
     nextToken?: PaginationToken;
+    /**
+     * Information about profiling group names.
+     */
     profilingGroupNames: ProfilingGroupNames;
+    /**
+     * Information about profiling groups.
+     */
     profilingGroups?: ProfilingGroupDescriptions;
   }
   export type MaxDepth = number;
@@ -225,15 +288,21 @@ declare namespace CodeGuruProfiler {
   export type PaginationToken = string;
   export type Period = string;
   export interface PostAgentProfileRequest {
+    /**
+     * 
+     */
     agentProfile: AgentProfile;
     /**
-     * The content type of the agent profile in the payload. Recommended to send the profile gzipped with content-type application/octet-stream. Other accepted values are application/x-amzn-ion and application/json for unzipped Ion and JSON respectively.
+     * 
      */
     contentType: String;
     /**
-     * Client generated token to deduplicate the agent profile during aggregation.
+     * 
      */
     profileToken?: ClientToken;
+    /**
+     * 
+     */
     profilingGroupName: ProfilingGroupName;
   }
   export interface PostAgentProfileResponse {
@@ -247,16 +316,28 @@ declare namespace CodeGuruProfiler {
   export type ProfileTimes = ProfileTime[];
   export type ProfilingGroupArn = string;
   export interface ProfilingGroupDescription {
+    /**
+     * 
+     */
     agentOrchestrationConfig?: AgentOrchestrationConfig;
+    /**
+     * The Amazon Resource Name (ARN) identifying the profiling group.
+     */
     arn?: ProfilingGroupArn;
     /**
-     * The timestamp of when the profiling group was created.
+     * The time, in milliseconds since the epoch, when the profiling group was created.
      */
     createdAt?: Timestamp;
+    /**
+     * The name of the profiling group.
+     */
     name?: ProfilingGroupName;
+    /**
+     * The status of the profiling group.
+     */
     profilingStatus?: ProfilingStatus;
     /**
-     * The timestamp of when the profiling group was last updated.
+     * The time, in milliseconds since the epoch, when the profiling group was last updated.
      */
     updatedAt?: Timestamp;
   }
@@ -265,15 +346,15 @@ declare namespace CodeGuruProfiler {
   export type ProfilingGroupNames = ProfilingGroupName[];
   export interface ProfilingStatus {
     /**
-     * Timestamp of when the last interaction of the agent with configureAgent API for orchestration.
+     * The time, in milliseconds since the epoch, when the latest agent was orchestrated.
      */
     latestAgentOrchestratedAt?: Timestamp;
     /**
-     * Timestamp of when the latest agent profile was successfully reported.
+     * The time, in milliseconds since the epoch, when the latest agent was reported..
      */
     latestAgentProfileReportedAt?: Timestamp;
     /**
-     * The time range of latest aggregated profile available.
+     * The latest aggregated profile
      */
     latestAggregatedProfile?: AggregatedProfileTime;
   }
@@ -281,12 +362,18 @@ declare namespace CodeGuruProfiler {
   export type Timestamp = Date;
   export interface UpdateProfilingGroupRequest {
     /**
-     * Remote configuration to configure the agents of the profiling group.
+     * 
      */
     agentOrchestrationConfig: AgentOrchestrationConfig;
+    /**
+     * The name of the profiling group to update.
+     */
     profilingGroupName: ProfilingGroupName;
   }
   export interface UpdateProfilingGroupResponse {
+    /**
+     * Updated information about the profiling group.
+     */
     profilingGroup: ProfilingGroupDescription;
   }
   /**

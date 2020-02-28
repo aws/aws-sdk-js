@@ -28,11 +28,11 @@ declare class AugmentedAIRuntime extends Service {
    */
   describeHumanLoop(callback?: (err: AWSError, data: AugmentedAIRuntime.Types.DescribeHumanLoopResponse) => void): Request<AugmentedAIRuntime.Types.DescribeHumanLoopResponse, AWSError>;
   /**
-   * Returns information about human loops, given the specified parameters.
+   * Returns information about human loops, given the specified parameters. If a human loop was deleted, it will not be included.
    */
   listHumanLoops(params: AugmentedAIRuntime.Types.ListHumanLoopsRequest, callback?: (err: AWSError, data: AugmentedAIRuntime.Types.ListHumanLoopsResponse) => void): Request<AugmentedAIRuntime.Types.ListHumanLoopsResponse, AWSError>;
   /**
-   * Returns information about human loops, given the specified parameters.
+   * Returns information about human loops, given the specified parameters. If a human loop was deleted, it will not be included.
    */
   listHumanLoops(callback?: (err: AWSError, data: AugmentedAIRuntime.Types.ListHumanLoopsResponse) => void): Request<AugmentedAIRuntime.Types.ListHumanLoopsResponse, AWSError>;
   /**
@@ -53,7 +53,6 @@ declare class AugmentedAIRuntime extends Service {
   stopHumanLoop(callback?: (err: AWSError, data: AugmentedAIRuntime.Types.StopHumanLoopResponse) => void): Request<AugmentedAIRuntime.Types.StopHumanLoopResponse, AWSError>;
 }
 declare namespace AugmentedAIRuntime {
-  export type Boolean = boolean;
   export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
   export type ContentClassifiers = ContentClassifier[];
   export interface DeleteHumanLoopRequest {
@@ -66,15 +65,15 @@ declare namespace AugmentedAIRuntime {
   }
   export interface DescribeHumanLoopRequest {
     /**
-     * The name of the human loop.
+     * The unique name of the human loop.
      */
     HumanLoopName: HumanLoopName;
   }
   export interface DescribeHumanLoopResponse {
     /**
-     * The timestamp when Amazon Augmented AI created the human loop.
+     * The creation time when Amazon Augmented AI created the human loop.
      */
-    CreationTimestamp: Timestamp;
+    CreationTime: Timestamp;
     /**
      * The reason why a human loop has failed. The failure reason is returned when the human loop status is Failed.
      */
@@ -100,43 +99,29 @@ declare namespace AugmentedAIRuntime {
      */
     FlowDefinitionArn: FlowDefinitionArn;
     /**
-     * An object containing information about the human loop input.
-     */
-    HumanLoopInput: HumanLoopInputContent;
-    /**
      * An object containing information about the output of the human loop.
      */
-    HumanLoopOutput?: HumanLoopOutputContent;
+    HumanLoopOutput?: HumanLoopOutput;
   }
   export type FailureReason = string;
   export type FlowDefinitionArn = string;
-  export interface HumanLoopActivationReason {
-    /**
-     * True if the specified conditions were matched to trigger the human loop.
-     */
-    ConditionsMatched?: Boolean;
-  }
-  export interface HumanLoopActivationResults {
-    /**
-     * An object containing information about why a human loop was triggered.
-     */
-    HumanLoopActivationReason?: HumanLoopActivationReason;
-    /**
-     * A copy of the human loop activation conditions of the flow definition, augmented with the results of evaluating those conditions on the input provided to the StartHumanLoop operation.
-     */
-    HumanLoopActivationConditionsEvaluationResults?: String;
-  }
   export type HumanLoopArn = string;
-  export interface HumanLoopInputContent {
+  export interface HumanLoopDataAttributes {
     /**
-     * Serialized input from the human loop.
+     * Declares that your content is free of personally identifiable information or adult content. Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can view your task based on this information.
+     */
+    ContentClassifiers: ContentClassifiers;
+  }
+  export interface HumanLoopInput {
+    /**
+     * Serialized input from the human loop. The input must be a string representation of a file in JSON format.
      */
     InputContent: InputContent;
   }
   export type HumanLoopName = string;
-  export interface HumanLoopOutputContent {
+  export interface HumanLoopOutput {
     /**
-     * The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output. The output is stored at the following location: s3://S3OutputPath/HumanLoopName/CreationTime/output.json.
+     * The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output.
      */
     OutputS3Uri: String;
   }
@@ -164,22 +149,20 @@ declare namespace AugmentedAIRuntime {
      */
     FlowDefinitionArn?: FlowDefinitionArn;
   }
-  export interface HumanReviewDataAttributes {
-    /**
-     * Declares that your content is free of personally identifiable information or adult content. Amazon SageMaker may restrict the Amazon Mechanical Turk workers that can view your task based on this information.
-     */
-    ContentClassifiers: ContentClassifiers;
-  }
   export type InputContent = string;
   export interface ListHumanLoopsRequest {
     /**
-     * (Optional) The timestamp of the date when you want the human loops to begin. For example, 1551000000.
+     * (Optional) The timestamp of the date when you want the human loops to begin in ISO 8601 format. For example, 2020-02-24.
      */
     CreationTimeAfter?: Timestamp;
     /**
-     * (Optional) The timestamp of the date before which you want the human loops to begin. For example, 1550000000.
+     * (Optional) The timestamp of the date before which you want the human loops to begin in ISO 8601 format. For example, 2020-02-24.
      */
     CreationTimeBefore?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of a flow definition.
+     */
+    FlowDefinitionArn: FlowDefinitionArn;
     /**
      * An optional value that specifies whether you want the results sorted in Ascending or Descending order.
      */
@@ -218,21 +201,17 @@ declare namespace AugmentedAIRuntime {
     /**
      * An object containing information about the human loop.
      */
-    HumanLoopInput: HumanLoopInputContent;
+    HumanLoopInput: HumanLoopInput;
     /**
      * Attributes of the data specified by the customer.
      */
-    DataAttributes?: HumanReviewDataAttributes;
+    DataAttributes?: HumanLoopDataAttributes;
   }
   export interface StartHumanLoopResponse {
     /**
      * The Amazon Resource Name (ARN) of the human loop.
      */
     HumanLoopArn?: HumanLoopArn;
-    /**
-     * An object containing information about the human loop activation.
-     */
-    HumanLoopActivationResults?: HumanLoopActivationResults;
   }
   export interface StopHumanLoopRequest {
     /**

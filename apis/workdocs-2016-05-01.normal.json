@@ -941,7 +941,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.</p>"
+      "documentation": "<p>Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.</p> <p>This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html\">Authentication and Access Control for User Applications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>"
     },
     "GetDocument": {
       "name": "GetDocument",
@@ -1433,7 +1433,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1465,7 +1465,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -1575,7 +1575,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1734,7 +1734,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1790,7 +1790,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1824,7 +1824,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1866,7 +1866,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -1957,7 +1957,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -2016,7 +2016,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -2032,7 +2032,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2064,7 +2064,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2106,7 +2106,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2126,7 +2126,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2146,7 +2146,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2172,7 +2172,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2240,7 +2240,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2322,7 +2322,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2373,7 +2373,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2430,7 +2430,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2503,7 +2503,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2593,7 +2593,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2644,7 +2644,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2680,7 +2680,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3007,7 +3007,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -3030,7 +3030,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3077,7 +3077,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3117,7 +3117,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3168,7 +3168,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3215,7 +3215,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3251,7 +3251,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>The Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API operation using AWS credentials.</p>",
+          "documentation": "<p>The Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3352,7 +3352,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3555,7 +3555,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3576,7 +3576,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3904,7 +3904,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3937,7 +3937,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3967,7 +3967,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3999,7 +3999,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },

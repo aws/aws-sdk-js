@@ -412,6 +412,14 @@ declare class QuickSight extends Service {
    */
   registerUser(callback?: (err: AWSError, data: QuickSight.Types.RegisterUserResponse) => void): Request<QuickSight.Types.RegisterUserResponse, AWSError>;
   /**
+   * Searchs for dashboards that belong to a user. 
+   */
+  searchDashboards(params: QuickSight.Types.SearchDashboardsRequest, callback?: (err: AWSError, data: QuickSight.Types.SearchDashboardsResponse) => void): Request<QuickSight.Types.SearchDashboardsResponse, AWSError>;
+  /**
+   * Searchs for dashboards that belong to a user. 
+   */
+  searchDashboards(callback?: (err: AWSError, data: QuickSight.Types.SearchDashboardsResponse) => void): Request<QuickSight.Types.SearchDashboardsResponse, AWSError>;
+  /**
    * Assigns one or more tags (key-value pairs) to the specified QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for QuickSight works in a similar way to tagging for other AWS services, except for the following:   You can't use tags to track AWS costs for QuickSight. This restriction is because QuickSight costs are based on users and SPICE capacity, which aren't taggable resources.   QuickSight doesn't currently support the Tag Editor for AWS Resource Groups.  
    */
   tagResource(params: QuickSight.Types.TagResourceRequest, callback?: (err: AWSError, data: QuickSight.Types.TagResourceResponse) => void): Request<QuickSight.Types.TagResourceResponse, AWSError>;
@@ -1235,6 +1243,7 @@ declare namespace QuickSight {
   }
   export type DashboardErrorList = DashboardError[];
   export type DashboardErrorType = "DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string;
+  export type DashboardFilterAttribute = "QUICKSIGHT_USER"|string;
   export type DashboardName = string;
   export interface DashboardPublishOptions {
     /**
@@ -1250,6 +1259,21 @@ declare namespace QuickSight {
      */
     SheetControlsOption?: SheetControlsOption;
   }
+  export interface DashboardSearchFilter {
+    /**
+     * The comparison operator that you want to use as a filter. For example, "Operator": "StringEquals".
+     */
+    Operator: FilterOperator;
+    /**
+     * The name of the value that you want to use as a filter. For example, "Name": "QUICKSIGHT_USER". 
+     */
+    Name?: DashboardFilterAttribute;
+    /**
+     * The value of the named item, in this case QUICKSIGHT_USER, that you want to use as a filter. For example, "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1". 
+     */
+    Value?: String;
+  }
+  export type DashboardSearchFilterList = DashboardSearchFilter[];
   export interface DashboardSourceEntity {
     /**
      * Source template.
@@ -2325,6 +2349,7 @@ declare namespace QuickSight {
      */
     ConditionExpression: Expression;
   }
+  export type FilterOperator = "StringEquals"|string;
   export interface GeoSpatialColumnGroup {
     /**
      * A display name for the hierarchy.
@@ -3416,6 +3441,42 @@ declare namespace QuickSight {
      * A physical table type for as S3 data source.
      */
     InputColumns: InputColumnList;
+  }
+  export interface SearchDashboardsRequest {
+    /**
+     * The ID of the AWS account that contains the user whose dashboards you're searching for. 
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The filters to apply to the search. Currently, you can search only by user name. For example, "Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ] 
+     */
+    Filters: DashboardSearchFilterList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface SearchDashboardsResponse {
+    /**
+     * The list of dashboards owned by the user specified in Filters in your request.
+     */
+    DashboardSummaryList?: DashboardSummaryList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
   }
   export interface ServiceNowParameters {
     /**

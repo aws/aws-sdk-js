@@ -36,6 +36,7 @@ declare class AppMesh extends Service {
          /metrics.
          If your route matches a request, you can distribute traffic to one or more target
          virtual nodes with relative weighting.
+         For more information about routes, see Routes.
    */
   createRoute(params: AppMesh.Types.CreateRouteInput, callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
   /**
@@ -47,6 +48,7 @@ declare class AppMesh extends Service {
          /metrics.
          If your route matches a request, you can distribute traffic to one or more target
          virtual nodes with relative weighting.
+         For more information about routes, see Routes.
    */
   createRoute(callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
   /**
@@ -69,6 +71,7 @@ declare class AppMesh extends Service {
                APPMESH_VIRTUAL_NODE_NAME with the
                APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
          
+         For more information about virtual nodes, see Virtual Nodes.
    */
   createVirtualNode(params: AppMesh.Types.CreateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
@@ -91,6 +94,7 @@ declare class AppMesh extends Service {
                APPMESH_VIRTUAL_NODE_NAME with the
                APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
          
+         For more information about virtual nodes, see Virtual Nodes.
    */
   createVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
@@ -100,6 +104,7 @@ declare class AppMesh extends Service {
          Virtual routers handle traffic for one or more virtual services within your mesh. After
          you create your virtual router, create and associate routes for your virtual router that
          direct incoming requests to different virtual nodes.
+         For more information about virtual routers, see Virtual Routers.
    */
   createVirtualRouter(params: AppMesh.Types.CreateVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
@@ -109,6 +114,7 @@ declare class AppMesh extends Service {
          Virtual routers handle traffic for one or more virtual services within your mesh. After
          you create your virtual router, create and associate routes for your virtual router that
          direct incoming requests to different virtual nodes.
+         For more information about virtual routers, see Virtual Routers.
    */
   createVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
@@ -118,6 +124,7 @@ declare class AppMesh extends Service {
          service by its virtualServiceName, and those requests are routed to the
          virtual node or virtual router that is specified as the provider for the virtual
          service.
+         For more information about virtual services, see Virtual Services.
    */
   createVirtualService(params: AppMesh.Types.CreateVirtualServiceInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
   /**
@@ -127,6 +134,7 @@ declare class AppMesh extends Service {
          service by its virtualServiceName, and those requests are routed to the
          virtual node or virtual router that is specified as the provider for the virtual
          service.
+         For more information about virtual services, see Virtual Services.
    */
   createVirtualService(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
   /**
@@ -336,78 +344,7 @@ declare namespace AppMesh {
   export interface VirtualRouterListener {
     portMapping: PortMapping;
   }
-  export interface UpdateVirtualNodeInput {
-    /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-     */
-    clientToken?: String;
-    /**
-     * The name of the service mesh that the virtual node resides in.
-     */
-    meshName: ResourceName;
-    /**
-     * The new virtual node specification to apply. This overwrites the existing data.
-     */
-    spec: VirtualNodeSpec;
-    /**
-     * The name of the virtual node to update.
-     */
-    virtualNodeName: ResourceName;
-  }
-  export interface DeleteMeshInput {
-    /**
-     * The name of the service mesh to delete.
-     */
-    meshName: ResourceName;
-  }
-  export type TcpRetryPolicyEvents = TcpRetryPolicyEvent[];
-  export interface CreateVirtualServiceInput {
-    /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-     */
-    clientToken?: String;
-    /**
-     * The name of the service mesh to create the virtual service in.
-     */
-    meshName: ResourceName;
-    /**
-     * The virtual service specification to apply.
-     */
-    spec: VirtualServiceSpec;
-    /**
-     * Optional metadata that you can apply to the virtual service to assist with
-         categorization and organization. Each tag consists of a key and an optional value, both of
-         which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have
-            a maximum length of 256 characters.
-     */
-    tags?: TagList;
-    /**
-     * The name to use for the virtual service.
-     */
-    virtualServiceName: ServiceName;
-  }
   export type VirtualRouterStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
-  export interface UpdateVirtualRouterInput {
-    /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-     */
-    clientToken?: String;
-    /**
-     * The name of the service mesh that the virtual router resides in.
-     */
-    meshName: ResourceName;
-    /**
-     * The new virtual router specification to apply. This overwrites the existing data.
-     */
-    spec: VirtualRouterSpec;
-    /**
-     * The name of the virtual router to update.
-     */
-    virtualRouterName: ResourceName;
-  }
   export type TagKeyList = TagKey[];
   export interface GrpcRetryPolicy {
     /**
@@ -452,30 +389,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     tcpRetryEvents?: TcpRetryPolicyEvents;
   }
-  export interface ListTagsForResourceInput {
-    /**
-     * The maximum number of tag results returned by ListTagsForResource in
-         paginated output. When this parameter is used, ListTagsForResource returns
-         only limit results in a single page along with a nextToken
-         response element. You can see the remaining results of the initial request by sending
-         another ListTagsForResource request with the returned nextToken
-         value. This value can be between 1 and 100. If you don't use
-         this parameter, ListTagsForResource returns up to 100
-         results and a nextToken value if applicable.
-     */
-    limit?: TagsLimit;
-    /**
-     * The nextToken value returned from a previous paginated
-            ListTagsForResource request where limit was used and the
-         results exceeded the value of that parameter. Pagination continues from the end of the
-         previous results that returned the nextToken value.
-     */
-    nextToken?: String;
-    /**
-     * The Amazon Resource Name (ARN) that identifies the resource to list the tags for.
-     */
-    resourceArn: Arn;
-  }
   export interface CreateVirtualNodeOutput {
     /**
      * The full description of your virtual node following the create call.
@@ -488,29 +401,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     accessLog?: AccessLog;
   }
-  export type GrpcRetryPolicyEvents = GrpcRetryPolicyEvent[];
   export type Long = number;
   export interface UpdateVirtualRouterOutput {
     /**
      * A full description of the virtual router that was updated.
      */
     virtualRouter: VirtualRouterData;
-  }
-  export interface DescribeMeshOutput {
-    /**
-     * The full description of your service mesh.
-     */
-    mesh: MeshData;
-  }
-  export interface DeleteVirtualRouterInput {
-    /**
-     * The name of the service mesh to delete the virtual router in.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the virtual router to delete.
-     */
-    virtualRouterName: ResourceName;
   }
   export interface ListVirtualRoutersOutput {
     /**
@@ -524,26 +420,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The list of existing virtual routers for the specified service mesh.
      */
     virtualRouters: VirtualRouterList;
-  }
-  export interface DescribeRouteInput {
-    /**
-     * The name of the service mesh that the route resides in.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the route to describe.
-     */
-    routeName: ResourceName;
-    /**
-     * The name of the virtual router that the route is associated with.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export interface DeleteRouteOutput {
-    /**
-     * The route that was deleted.
-     */
-    route: RouteData;
   }
   export interface ResourceMetadata {
     /**
@@ -568,9 +444,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     version: Long;
   }
-  export type Listeners = Listener[];
-  export type Backends = Backend[];
-  export type PortProtocol = "grpc"|"http"|"http2"|"tcp"|string;
   export interface UpdateVirtualNodeOutput {
     /**
      * A full description of the virtual node that was updated.
@@ -592,10 +465,781 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export interface VirtualServiceBackend {
     /**
+     * A reference to an object that represents the client policy for a backend.
+     */
+    clientPolicy?: ClientPolicy;
+    /**
      * The name of the virtual service that is acting as a virtual node backend.
      */
     virtualServiceName: ServiceName;
   }
+  export type GrpcRouteMetadataList = GrpcRouteMetadata[];
+  export type ListenerTlsMode = "DISABLED"|"PERMISSIVE"|"STRICT"|string;
+  export interface HealthCheckPolicy {
+    /**
+     * The number of consecutive successful health checks that must occur before declaring
+         listener healthy.
+     */
+    healthyThreshold: HealthCheckThreshold;
+    /**
+     * The time period in milliseconds between each health check execution.
+     */
+    intervalMillis: HealthCheckIntervalMillis;
+    /**
+     * The destination path for the health check request. This value is only used if the specified 
+         protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.
+     */
+    path?: String;
+    /**
+     * The destination port for the health check request. This port must match the port defined
+         in the PortMapping for the listener.
+     */
+    port?: PortNumber;
+    /**
+     * The protocol for the health check request. If you specify grpc, then your service must conform to the GRPC Health Checking Protocol.
+     */
+    protocol: PortProtocol;
+    /**
+     * The amount of time to wait when receiving a response from the health check, in
+         milliseconds.
+     */
+    timeoutMillis: HealthCheckTimeoutMillis;
+    /**
+     * The number of consecutive failed health checks that must occur before declaring a
+         virtual node unhealthy. 
+     */
+    unhealthyThreshold: HealthCheckThreshold;
+  }
+  export interface EgressFilter {
+    /**
+     * The egress filter type. By default, the type is DROP_ALL, which allows
+         egress only from virtual nodes to other defined resources in the service mesh (and any
+         traffic to *.amazonaws.com for AWS API calls). You can set the egress filter
+         type to ALLOW_ALL to allow egress to any endpoint inside or outside of the
+         service mesh.
+     */
+    type: EgressFilterType;
+  }
+  export type VirtualServiceList = VirtualServiceRef[];
+  export interface ClientPolicy {
+    /**
+     * A reference to an object that represents a Transport Layer Security (TLS) client policy.
+     */
+    tls?: ClientPolicyTls;
+  }
+  export type Boolean = boolean;
+  export type HttpRetryPolicyEvent = string;
+  export interface DescribeVirtualServiceOutput {
+    /**
+     * The full description of your virtual service.
+     */
+    virtualService: VirtualServiceData;
+  }
+  export type CertificateAuthorityArns = Arn[];
+  export interface DescribeVirtualNodeOutput {
+    /**
+     * The full description of your virtual node.
+     */
+    virtualNode: VirtualNodeData;
+  }
+  export type AwsCloudMapName = string;
+  export interface CreateRouteOutput {
+    /**
+     * The full description of your mesh following the create call.
+     */
+    route: RouteData;
+  }
+  export interface DnsServiceDiscovery {
+    /**
+     * Specifies the DNS service discovery hostname for the virtual node. 
+     */
+    hostname: Hostname;
+  }
+  export interface DeleteRouteInput {
+    /**
+     * The name of the service mesh to delete the route in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the route to delete.
+     */
+    routeName: ResourceName;
+    /**
+     * The name of the virtual router to delete the route in.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface VirtualNodeData {
+    /**
+     * The name of the service mesh that the virtual node resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The associated metadata for the virtual node.
+     */
+    metadata: ResourceMetadata;
+    /**
+     * The specifications of the virtual node.
+     */
+    spec: VirtualNodeSpec;
+    /**
+     * The current status for the virtual node.
+     */
+    status: VirtualNodeStatus;
+    /**
+     * The name of the virtual node.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface UntagResourceOutput {
+  }
+  export type TcpRetryPolicyEvent = "connection-error"|string;
+  export interface Backend {
+    /**
+     * Specifies a virtual service to use as a backend for a virtual node. 
+     */
+    virtualService?: VirtualServiceBackend;
+  }
+  export interface ListMeshesInput {
+    /**
+     * The maximum number of results returned by ListMeshes in paginated output.
+         When you use this parameter, ListMeshes returns only limit
+         results in a single page along with a nextToken response element. You can see
+         the remaining results of the initial request by sending another ListMeshes
+         request with the returned nextToken value. This value can be between
+         1 and 100. If you don't use this parameter,
+            ListMeshes returns up to 100 results and a
+            nextToken value if applicable.
+     */
+    limit?: ListMeshesLimit;
+    /**
+     * The nextToken value returned from a previous paginated
+            ListMeshes request where limit was used and the results
+         exceeded the value of that parameter. Pagination continues from the end of the previous
+         results that returned the nextToken value. 
+         
+            This token should be treated as an opaque identifier that is used only to
+                retrieve the next items in a list and not for other programmatic purposes.
+        
+     */
+    nextToken?: String;
+  }
+  export interface VirtualRouterData {
+    /**
+     * The name of the service mesh that the virtual router resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The associated metadata for the virtual router.
+     */
+    metadata: ResourceMetadata;
+    /**
+     * The specifications of the virtual router.
+     */
+    spec: VirtualRouterSpec;
+    /**
+     * The current status of the virtual router.
+     */
+    status: VirtualRouterStatus;
+    /**
+     * The name of the virtual router.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface UpdateMeshInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh to update.
+     */
+    meshName: ResourceName;
+    /**
+     * The service mesh specification to apply.
+     */
+    spec?: MeshSpec;
+  }
+  export interface CreateVirtualRouterInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh to create the virtual router in.
+     */
+    meshName: ResourceName;
+    /**
+     * The virtual router specification to apply.
+     */
+    spec: VirtualRouterSpec;
+    /**
+     * Optional metadata that you can apply to the virtual router to assist with categorization
+         and organization. Each tag consists of a key and an optional value, both of which you
+         define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
+    /**
+     * The name to use for the virtual router.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface DescribeVirtualRouterOutput {
+    /**
+     * The full description of your virtual router.
+     */
+    virtualRouter: VirtualRouterData;
+  }
+  export interface CreateMeshOutput {
+    /**
+     * The full description of your service mesh following the create call.
+     */
+    mesh: MeshData;
+  }
+  export interface CreateVirtualRouterOutput {
+    /**
+     * The full description of your virtual router following the create call.
+     */
+    virtualRouter: VirtualRouterData;
+  }
+  export interface VirtualServiceStatus {
+    /**
+     * The current status of the virtual service.
+     */
+    status: VirtualServiceStatusCode;
+  }
+  export type HttpRetryPolicyEvents = HttpRetryPolicyEvent[];
+  export interface ListenerTlsCertificate {
+    /**
+     * A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
+     */
+    acm?: ListenerTlsAcmCertificate;
+    /**
+     * A reference to an object that represents a local file certificate.
+     */
+    file?: ListenerTlsFileCertificate;
+  }
+  export type ListMeshesLimit = number;
+  export type AwsCloudMapInstanceAttributeKey = string;
+  export interface VirtualRouterSpec {
+    /**
+     * The listeners that the virtual router is expected to receive inbound traffic from.
+         You can specify one listener.
+     */
+    listeners?: VirtualRouterListeners;
+  }
+  export interface VirtualNodeSpec {
+    /**
+     * A reference to an object that represents the defaults for backends.
+     */
+    backendDefaults?: BackendDefaults;
+    /**
+     * The backends that the virtual node is expected to send outbound traffic to.
+     */
+    backends?: Backends;
+    /**
+     * The listener that the virtual node is expected to receive inbound traffic from.
+         You can specify one listener.
+     */
+    listeners?: Listeners;
+    /**
+     * The inbound and outbound access logging information for the virtual node.
+     */
+    logging?: Logging;
+    /**
+     * The service discovery information for the virtual node. If your virtual node does not
+         expect ingress traffic, you can omit this parameter. If you specify a listener,
+         then you must specify service discovery information.
+     */
+    serviceDiscovery?: ServiceDiscovery;
+  }
+  export interface ListMeshesOutput {
+    /**
+     * The list of existing service meshes.
+     */
+    meshes: MeshList;
+    /**
+     * The nextToken value to include in a future ListMeshes request.
+         When the results of a ListMeshes request exceed limit, you can
+         use this value to retrieve the next page of results. This value is null when
+         there are no more results to return.
+     */
+    nextToken?: String;
+  }
+  export type VirtualRouterListeners = VirtualRouterListener[];
+  export type PortSet = PortNumber[];
+  export type HttpMethod = "CONNECT"|"DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT"|"TRACE"|string;
+  export type MeshList = MeshRef[];
+  export type MaxRetries = number;
+  export interface TlsValidationContextTrust {
+    /**
+     * A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+     */
+    acm?: TlsValidationContextAcmTrust;
+    /**
+     * An object that represents a TLS validation context trust for a local file.
+     */
+    file?: TlsValidationContextFileTrust;
+  }
+  export interface PortMapping {
+    /**
+     * The port used for the port mapping.
+     */
+    port: PortNumber;
+    /**
+     * The protocol used for the port mapping. Specify one protocol.
+     */
+    protocol: PortProtocol;
+  }
+  export interface ListVirtualServicesOutput {
+    /**
+     * The nextToken value to include in a future ListVirtualServices
+         request. When the results of a ListVirtualServices request exceed
+            limit, you can use this value to retrieve the next page of results. This
+         value is null when there are no more results to return.
+     */
+    nextToken?: String;
+    /**
+     * The list of existing virtual services for the specified service mesh.
+     */
+    virtualServices: VirtualServiceList;
+  }
+  export type AwsCloudMapInstanceAttributeValue = string;
+  export interface WeightedTarget {
+    /**
+     * The virtual node to associate with the weighted target.
+     */
+    virtualNode: ResourceName;
+    /**
+     * The relative weight of the weighted target.
+     */
+    weight: PercentInt;
+  }
+  export interface RouteRef {
+    /**
+     * The full Amazon Resource Name (ARN) for the route.
+     */
+    arn: Arn;
+    /**
+     * The name of the service mesh that the route resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the route.
+     */
+    routeName: ResourceName;
+    /**
+     * The virtual router that the route is associated with.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface DeleteVirtualNodeInput {
+    /**
+     * The name of the service mesh to delete the virtual node in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual node to delete.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface RouteData {
+    /**
+     * The name of the service mesh that the route resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The associated metadata for the route.
+     */
+    metadata: ResourceMetadata;
+    /**
+     * The name of the route.
+     */
+    routeName: ResourceName;
+    /**
+     * The specifications of the route.
+     */
+    spec: RouteSpec;
+    /**
+     * The status of the route.
+     */
+    status: RouteStatus;
+    /**
+     * The virtual router that the route is associated with.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export type RouteStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
+  export type HeaderName = string;
+  export type TagList = TagRef[];
+  export type GrpcRetryPolicyEvent = "cancelled"|"deadline-exceeded"|"internal"|"resource-exhausted"|"unavailable"|string;
+  export interface TlsValidationContextAcmTrust {
+    /**
+     * One or more ACM Amazon Resource Name (ARN)s.
+     */
+    certificateAuthorityArns: CertificateAuthorityArns;
+  }
+  export interface HeaderMatchMethod {
+    /**
+     * The value sent by the client must match the specified value exactly.
+     */
+    exact?: HeaderMatch;
+    /**
+     * The value sent by the client must begin with the specified characters.
+     */
+    prefix?: HeaderMatch;
+    /**
+     * An object that represents the range of values to match on.
+     */
+    range?: MatchRange;
+    /**
+     * The value sent by the client must include the specified characters.
+     */
+    regex?: HeaderMatch;
+    /**
+     * The value sent by the client must end with the specified characters.
+     */
+    suffix?: HeaderMatch;
+  }
+  export interface DeleteMeshOutput {
+    /**
+     * The service mesh that was deleted.
+     */
+    mesh: MeshData;
+  }
+  export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string;
+  export type DurationValue = number;
+  export type Hostname = string;
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to add tags to.
+     */
+    resourceArn: Arn;
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs.
+         Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags: TagList;
+  }
+  export interface VirtualServiceProvider {
+    /**
+     * The virtual node associated with a virtual service.
+     */
+    virtualNode?: VirtualNodeServiceProvider;
+    /**
+     * The virtual router associated with a virtual service.
+     */
+    virtualRouter?: VirtualRouterServiceProvider;
+  }
+  export interface GrpcRouteMatch {
+    /**
+     * An object that represents the data to match from the request.
+     */
+    metadata?: GrpcRouteMetadataList;
+    /**
+     * The method name to match from the request. If you specify a name, you must also specify a serviceName.
+     */
+    methodName?: MethodName;
+    /**
+     * The fully qualified domain name for the service to match from the request.
+     */
+    serviceName?: ServiceName;
+  }
+  export interface AwsCloudMapServiceDiscovery {
+    /**
+     * A string map that contains attributes with values that you can use to filter instances
+         by any custom attribute that you specified when you registered the instance. Only instances
+         that match all of the specified key/value pairs will be returned.
+     */
+    attributes?: AwsCloudMapInstanceAttributes;
+    /**
+     * The name of the AWS Cloud Map namespace to use.
+     */
+    namespaceName: AwsCloudMapName;
+    /**
+     * The name of the AWS Cloud Map service to use.
+     */
+    serviceName: AwsCloudMapName;
+  }
+  export interface UpdateVirtualServiceOutput {
+    /**
+     * A full description of the virtual service that was updated.
+     */
+    virtualService: VirtualServiceData;
+  }
+  export interface MeshStatus {
+    /**
+     * The current mesh status.
+     */
+    status?: MeshStatusCode;
+  }
+  export interface CreateVirtualNodeInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh to create the virtual node in.
+     */
+    meshName: ResourceName;
+    /**
+     * The virtual node specification to apply.
+     */
+    spec: VirtualNodeSpec;
+    /**
+     * Optional metadata that you can apply to the virtual node to assist with categorization
+         and organization. Each tag consists of a key and an optional value, both of which you
+         define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
+    /**
+     * The name to use for the virtual node.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface RouteSpec {
+    /**
+     * An object that represents the specification of a gRPC route.
+     */
+    grpcRoute?: GrpcRoute;
+    /**
+     * An object that represents the specification of an HTTP/2 route.
+     */
+    http2Route?: HttpRoute;
+    /**
+     * An object that represents the specification of an HTTP route.
+     */
+    httpRoute?: HttpRoute;
+    /**
+     * The priority for the route. Routes are matched based on the specified value, where 0 is
+         the highest priority.
+     */
+    priority?: RoutePriority;
+    /**
+     * An object that represents the specification of a TCP route.
+     */
+    tcpRoute?: TcpRoute;
+  }
+  export interface CreateVirtualServiceOutput {
+    /**
+     * The full description of your virtual service following the create call.
+     */
+    virtualService: VirtualServiceData;
+  }
+  export interface FileAccessLog {
+    /**
+     * The file path to write access logs to. You can use /dev/stdout to send
+         access logs to standard out and configure your Envoy container to use a log driver, such as
+            awslogs, to export the access logs to a log storage service such as Amazon
+         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write
+         the files to disk.
+         
+            The Envoy process must have write permissions to the path that you specify here.
+            Otherwise, Envoy fails to bootstrap properly.
+         
+     */
+    path: FilePath;
+  }
+  export interface VirtualRouterServiceProvider {
+    /**
+     * The name of the virtual router that is acting as a service provider.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface DeleteVirtualServiceInput {
+    /**
+     * The name of the service mesh to delete the virtual service in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual service to delete.
+     */
+    virtualServiceName: ServiceName;
+  }
+  export interface TlsValidationContext {
+    /**
+     * A reference to an object that represents a TLS validation context trust.
+     */
+    trust: TlsValidationContextTrust;
+  }
+  export interface DeleteVirtualRouterOutput {
+    /**
+     * The virtual router that was deleted.
+     */
+    virtualRouter: VirtualRouterData;
+  }
+  export type TagsLimit = number;
+  export interface DeleteVirtualNodeOutput {
+    /**
+     * The virtual node that was deleted.
+     */
+    virtualNode: VirtualNodeData;
+  }
+  export interface UpdateVirtualNodeInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh that the virtual node resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The new virtual node specification to apply. This overwrites the existing data.
+     */
+    spec: VirtualNodeSpec;
+    /**
+     * The name of the virtual node to update.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface ListenerTls {
+    /**
+     * A reference to an object that represents a listener's TLS certificate.
+     */
+    certificate: ListenerTlsCertificate;
+    /**
+     * Specify one of the following modes.
+         
+            
+               
+                  STRICT – Listener only accepts connections with TLS enabled. 
+            
+            
+               
+                  PERMISSIVE – Listener accepts connections with or without TLS enabled.
+            
+            
+               
+                  DISABLED –  Listener only accepts connections without TLS. 
+            
+         
+     */
+    mode: ListenerTlsMode;
+  }
+  export interface DeleteMeshInput {
+    /**
+     * The name of the service mesh to delete.
+     */
+    meshName: ResourceName;
+  }
+  export type TcpRetryPolicyEvents = TcpRetryPolicyEvent[];
+  export interface CreateVirtualServiceInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh to create the virtual service in.
+     */
+    meshName: ResourceName;
+    /**
+     * The virtual service specification to apply.
+     */
+    spec: VirtualServiceSpec;
+    /**
+     * Optional metadata that you can apply to the virtual service to assist with
+         categorization and organization. Each tag consists of a key and an optional value, both of
+         which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
+    /**
+     * The name to use for the virtual service.
+     */
+    virtualServiceName: ServiceName;
+  }
+  export interface UpdateVirtualRouterInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh that the virtual router resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The new virtual router specification to apply. This overwrites the existing data.
+     */
+    spec: VirtualRouterSpec;
+    /**
+     * The name of the virtual router to update.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface ListTagsForResourceInput {
+    /**
+     * The maximum number of tag results returned by ListTagsForResource in
+         paginated output. When this parameter is used, ListTagsForResource returns
+         only limit results in a single page along with a nextToken
+         response element. You can see the remaining results of the initial request by sending
+         another ListTagsForResource request with the returned nextToken
+         value. This value can be between 1 and 100. If you don't use
+         this parameter, ListTagsForResource returns up to 100
+         results and a nextToken value if applicable.
+     */
+    limit?: TagsLimit;
+    /**
+     * The nextToken value returned from a previous paginated
+            ListTagsForResource request where limit was used and the
+         results exceeded the value of that parameter. Pagination continues from the end of the
+         previous results that returned the nextToken value.
+     */
+    nextToken?: String;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource to list the tags for.
+     */
+    resourceArn: Arn;
+  }
+  export type GrpcRetryPolicyEvents = GrpcRetryPolicyEvent[];
+  export interface DescribeMeshOutput {
+    /**
+     * The full description of your service mesh.
+     */
+    mesh: MeshData;
+  }
+  export interface DeleteVirtualRouterInput {
+    /**
+     * The name of the service mesh to delete the virtual router in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual router to delete.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface DescribeRouteInput {
+    /**
+     * The name of the service mesh that the route resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the route to describe.
+     */
+    routeName: ResourceName;
+    /**
+     * The name of the virtual router that the route is associated with.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface DeleteRouteOutput {
+    /**
+     * The route that was deleted.
+     */
+    route: RouteData;
+  }
+  export type Listeners = Listener[];
+  export type Backends = Backend[];
+  export type PortProtocol = "grpc"|"http"|"http2"|"tcp"|string;
   export type VirtualNodeStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export type ServiceName = string;
   export interface UpdateVirtualServiceInput {
@@ -626,7 +1270,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     route: RouteData;
   }
   export type PercentInt = number;
-  export type GrpcRouteMetadataList = GrpcRouteMetadata[];
   export type MethodName = string;
   export type TagValue = string;
   export interface HttpRouteAction {
@@ -663,41 +1306,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
-  export interface HealthCheckPolicy {
-    /**
-     * The number of consecutive successful health checks that must occur before declaring
-         listener healthy.
-     */
-    healthyThreshold: HealthCheckThreshold;
-    /**
-     * The time period in milliseconds between each health check execution.
-     */
-    intervalMillis: HealthCheckIntervalMillis;
-    /**
-     * The destination path for the health check request. This is required only if the
-         specified protocol is HTTP. If the protocol is TCP, this parameter is ignored.
-     */
-    path?: String;
-    /**
-     * The destination port for the health check request. This port must match the port defined
-         in the PortMapping for the listener.
-     */
-    port?: PortNumber;
-    /**
-     * The protocol for the health check request.
-     */
-    protocol: PortProtocol;
-    /**
-     * The amount of time to wait when receiving a response from the health check, in
-         milliseconds.
-     */
-    timeoutMillis: HealthCheckTimeoutMillis;
-    /**
-     * The number of consecutive failed health checks that must occur before declaring a
-         virtual node unhealthy. 
-     */
-    unhealthyThreshold: HealthCheckThreshold;
-  }
   export interface VirtualServiceRef {
     /**
      * The full Amazon Resource Name (ARN) for the virtual service.
@@ -712,17 +1320,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualServiceName: ServiceName;
   }
-  export interface EgressFilter {
-    /**
-     * The egress filter type. By default, the type is DROP_ALL, which allows
-         egress only from virtual nodes to other defined resources in the service mesh (and any
-         traffic to *.amazonaws.com for AWS API calls). You can set the egress filter
-         type to ALLOW_ALL to allow egress to any endpoint inside or outside of the
-         service mesh.
-     */
-    type: EgressFilterType;
-  }
-  export type VirtualServiceList = VirtualServiceRef[];
   export interface VirtualNodeStatus {
     /**
      * The current status of the virtual node.
@@ -762,7 +1359,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualServiceName: ServiceName;
   }
-  export type Boolean = boolean;
   export interface HttpRouteHeader {
     /**
      * Specify True to match anything except the match criteria. The default value is False.
@@ -776,13 +1372,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * A name for the HTTP header in the client request that will be matched on.
      */
     name: HeaderName;
-  }
-  export type HttpRetryPolicyEvent = string;
-  export interface DescribeVirtualServiceOutput {
-    /**
-     * The full description of your virtual service.
-     */
-    virtualService: VirtualServiceData;
   }
   export type FilePath = string;
   export type AwsCloudMapInstanceAttributes = AwsCloudMapInstanceAttribute[];
@@ -828,21 +1417,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     weightedTargets: WeightedTargets;
   }
-  export interface DescribeVirtualNodeOutput {
-    /**
-     * The full description of your virtual node.
-     */
-    virtualNode: VirtualNodeData;
-  }
-  export type AwsCloudMapName = string;
   export interface UpdateMeshOutput {
     mesh: MeshData;
-  }
-  export interface CreateRouteOutput {
-    /**
-     * The full description of your mesh following the create call.
-     */
-    route: RouteData;
   }
   export interface GrpcRouteMetadataMatchMethod {
     /**
@@ -866,12 +1442,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     suffix?: HeaderMatch;
   }
-  export interface DnsServiceDiscovery {
-    /**
-     * Specifies the DNS service discovery hostname for the virtual node. 
-     */
-    hostname: Hostname;
-  }
   export interface DescribeVirtualServiceInput {
     /**
      * The name of the service mesh that the virtual service resides in.
@@ -883,44 +1453,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     virtualServiceName: ServiceName;
   }
   export type ListVirtualServicesLimit = number;
-  export interface DeleteRouteInput {
-    /**
-     * The name of the service mesh to delete the route in.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the route to delete.
-     */
-    routeName: ResourceName;
-    /**
-     * The name of the virtual router to delete the route in.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export interface VirtualNodeData {
-    /**
-     * The name of the service mesh that the virtual node resides in.
-     */
-    meshName: ResourceName;
-    /**
-     * The associated metadata for the virtual node.
-     */
-    metadata: ResourceMetadata;
-    /**
-     * The specifications of the virtual node.
-     */
-    spec: VirtualNodeSpec;
-    /**
-     * The current status for the virtual node.
-     */
-    status: VirtualNodeStatus;
-    /**
-     * The name of the virtual node.
-     */
-    virtualNodeName: ResourceName;
-  }
-  export interface UntagResourceOutput {
-  }
   export interface AwsCloudMapInstanceAttribute {
     /**
      * The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
@@ -933,19 +1465,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     value: AwsCloudMapInstanceAttributeValue;
   }
-  export type TcpRetryPolicyEvent = "connection-error"|string;
   export interface VirtualServiceSpec {
     /**
      * The App Mesh object that is acting as the provider for a virtual service. You can specify
          a single virtual node or virtual router.
      */
     provider?: VirtualServiceProvider;
-  }
-  export interface Backend {
-    /**
-     * Specifies a virtual service to use as a backend for a virtual node. 
-     */
-    virtualService?: VirtualServiceBackend;
   }
   export interface MatchRange {
     /**
@@ -960,30 +1485,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type ListVirtualRoutersLimit = number;
   export type HealthCheckIntervalMillis = number;
   export type VirtualRouterList = VirtualRouterRef[];
-  export interface ListMeshesInput {
-    /**
-     * The maximum number of results returned by ListMeshes in paginated output.
-         When you use this parameter, ListMeshes returns only limit
-         results in a single page along with a nextToken response element. You can see
-         the remaining results of the initial request by sending another ListMeshes
-         request with the returned nextToken value. This value can be between
-         1 and 100. If you don't use this parameter,
-            ListMeshes returns up to 100 results and a
-            nextToken value if applicable.
-     */
-    limit?: ListMeshesLimit;
-    /**
-     * The nextToken value returned from a previous paginated
-            ListMeshes request where limit was used and the results
-         exceeded the value of that parameter. Pagination continues from the end of the previous
-         results that returned the nextToken value. 
-         
-            This token should be treated as an opaque identifier that is used only to
-                retrieve the next items in a list and not for other programmatic purposes.
-        
-     */
-    nextToken?: String;
-  }
   export type Arn = string;
   export interface TcpRoute {
     /**
@@ -1016,43 +1517,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     nextToken?: String;
   }
-  export interface VirtualRouterData {
-    /**
-     * The name of the service mesh that the virtual router resides in.
-     */
-    meshName: ResourceName;
-    /**
-     * The associated metadata for the virtual router.
-     */
-    metadata: ResourceMetadata;
-    /**
-     * The specifications of the virtual router.
-     */
-    spec: VirtualRouterSpec;
-    /**
-     * The current status of the virtual router.
-     */
-    status: VirtualRouterStatus;
-    /**
-     * The name of the virtual router.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export interface UpdateMeshInput {
-    /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-     */
-    clientToken?: String;
-    /**
-     * The name of the service mesh to update.
-     */
-    meshName: ResourceName;
-    /**
-     * The service mesh specification to apply.
-     */
-    spec?: MeshSpec;
-  }
   export type DurationUnit = "ms"|"s"|string;
   export type RoutePriority = number;
   export interface ListVirtualServicesInput {
@@ -1078,32 +1542,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
          previous results that returned the nextToken value.
      */
     nextToken?: String;
-  }
-  export interface CreateVirtualRouterInput {
-    /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-     */
-    clientToken?: String;
-    /**
-     * The name of the service mesh to create the virtual router in.
-     */
-    meshName: ResourceName;
-    /**
-     * The virtual router specification to apply.
-     */
-    spec: VirtualRouterSpec;
-    /**
-     * Optional metadata that you can apply to the virtual router to assist with categorization
-         and organization. Each tag consists of a key and an optional value, both of which you
-         define. Tag keys can have a maximum character length of 128 characters, and tag values can have
-            a maximum length of 256 characters.
-     */
-    tags?: TagList;
-    /**
-     * The name to use for the virtual router.
-     */
-    virtualRouterName: ResourceName;
   }
   export interface AccessLog {
     /**
@@ -1135,80 +1573,11 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     nextToken?: String;
   }
-  export interface DescribeVirtualRouterOutput {
-    /**
-     * The full description of your virtual router.
-     */
-    virtualRouter: VirtualRouterData;
-  }
-  export interface CreateMeshOutput {
-    /**
-     * The full description of your service mesh following the create call.
-     */
-    mesh: MeshData;
-  }
-  export interface CreateVirtualRouterOutput {
-    /**
-     * The full description of your virtual router following the create call.
-     */
-    virtualRouter: VirtualRouterData;
-  }
-  export interface VirtualServiceStatus {
-    /**
-     * The current status of the virtual service.
-     */
-    status: VirtualServiceStatusCode;
-  }
-  export type HttpRetryPolicyEvents = HttpRetryPolicyEvent[];
   export type ListVirtualNodesLimit = number;
   export type HealthCheckTimeoutMillis = number;
-  export type ListMeshesLimit = number;
   export type ResourceName = string;
-  export type AwsCloudMapInstanceAttributeKey = string;
-  export interface VirtualRouterSpec {
-    /**
-     * The listeners that the virtual router is expected to receive inbound traffic from.
-         You can specify one listener.
-     */
-    listeners?: VirtualRouterListeners;
-  }
   export type Timestamp = Date;
   export type HeaderMatch = string;
-  export interface VirtualNodeSpec {
-    /**
-     * The backends that the virtual node is expected to send outbound traffic to.
-     */
-    backends?: Backends;
-    /**
-     * The listeners that the virtual node is expected to receive inbound traffic from.
-         You can specify one listener.
-     */
-    listeners?: Listeners;
-    /**
-     * The inbound and outbound access logging information for the virtual node.
-     */
-    logging?: Logging;
-    /**
-     * The service discovery information for the virtual node. If your virtual node does not
-         expect ingress traffic, you can omit this parameter.
-     */
-    serviceDiscovery?: ServiceDiscovery;
-  }
-  export interface ListMeshesOutput {
-    /**
-     * The list of existing service meshes.
-     */
-    meshes: MeshList;
-    /**
-     * The nextToken value to include in a future ListMeshes request.
-         When the results of a ListMeshes request exceed limit, you can
-         use this value to retrieve the next page of results. This value is null when
-         there are no more results to return.
-     */
-    nextToken?: String;
-  }
-  export type VirtualRouterListeners = VirtualRouterListener[];
-  export type HttpMethod = "CONNECT"|"DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT"|"TRACE"|string;
   export interface Duration {
     /**
      * A unit of time.
@@ -1248,7 +1617,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     scheme?: HttpScheme;
   }
-  export type MeshList = MeshRef[];
   export interface TagRef {
     /**
      * One part of a key-value pair that make up a tag. A key is a general label
@@ -1271,18 +1639,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     meshName: ResourceName;
   }
-  export type MaxRetries = number;
   export type MeshStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
-  export interface PortMapping {
-    /**
-     * The port used for the port mapping.
-     */
-    port: PortNumber;
-    /**
-     * The protocol used for the port mapping. Specify one protocol.
-     */
-    protocol: PortProtocol;
-  }
   export interface MeshData {
     /**
      * The name of the service mesh.
@@ -1307,30 +1664,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     status: VirtualRouterStatusCode;
   }
-  export interface ListVirtualServicesOutput {
-    /**
-     * The nextToken value to include in a future ListVirtualServices
-         request. When the results of a ListVirtualServices request exceed
-            limit, you can use this value to retrieve the next page of results. This
-         value is null when there are no more results to return.
-     */
-    nextToken?: String;
-    /**
-     * The list of existing virtual services for the specified service mesh.
-     */
-    virtualServices: VirtualServiceList;
-  }
-  export type AwsCloudMapInstanceAttributeValue = string;
-  export interface WeightedTarget {
-    /**
-     * The virtual node to associate with the weighted target.
-     */
-    virtualNode: ResourceName;
-    /**
-     * The relative weight of the weighted target.
-     */
-    weight: PercentInt;
-  }
   export interface TcpRouteAction {
     /**
      * An object that represents the targets that traffic is routed to when a request matches the route.
@@ -1353,24 +1686,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     status: RouteStatusCode;
   }
-  export interface RouteRef {
-    /**
-     * The full Amazon Resource Name (ARN) for the route.
-     */
-    arn: Arn;
-    /**
-     * The name of the service mesh that the route resides in.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the route.
-     */
-    routeName: ResourceName;
-    /**
-     * The virtual router that the route is associated with.
-     */
-    virtualRouterName: ResourceName;
-  }
   export interface Listener {
     /**
      * The health check information for the listener.
@@ -1380,6 +1695,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The port mapping information for the listener.
      */
     portMapping: PortMapping;
+    /**
+     * A reference to an object that represents the Transport Layer Security (TLS) properties for a listener.
+     */
+    tls?: ListenerTls;
   }
   export interface GrpcRoute {
     /**
@@ -1395,44 +1714,21 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     retryPolicy?: GrpcRetryPolicy;
   }
-  export interface DeleteVirtualNodeInput {
-    /**
-     * The name of the service mesh to delete the virtual node in.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the virtual node to delete.
-     */
-    virtualNodeName: ResourceName;
-  }
-  export interface RouteData {
-    /**
-     * The name of the service mesh that the route resides in.
-     */
-    meshName: ResourceName;
-    /**
-     * The associated metadata for the route.
-     */
-    metadata: ResourceMetadata;
-    /**
-     * The name of the route.
-     */
-    routeName: ResourceName;
-    /**
-     * The specifications of the route.
-     */
-    spec: RouteSpec;
-    /**
-     * The status of the route.
-     */
-    status: RouteStatus;
-    /**
-     * The virtual router that the route is associated with.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export type RouteStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export type ListRoutesLimit = number;
+  export interface ClientPolicyTls {
+    /**
+     * Whether the policy is enforced. The default is True, if a value isn't specified.
+     */
+    enforce?: Boolean;
+    /**
+     * The range of ports that the policy is enforced for.
+     */
+    ports?: PortSet;
+    /**
+     * A reference to an object that represents a TLS validation context.
+     */
+    validation: TlsValidationContext;
+  }
   export interface DeleteVirtualServiceOutput {
     /**
      * The virtual service that was deleted.
@@ -1445,9 +1741,22 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualNodeName: ResourceName;
   }
-  export type HeaderName = string;
-  export type TagList = TagRef[];
-  export type GrpcRetryPolicyEvent = "cancelled"|"deadline-exceeded"|"internal"|"resource-exhausted"|"unavailable"|string;
+  export interface BackendDefaults {
+    /**
+     * A reference to an object that represents a client policy.
+     */
+    clientPolicy?: ClientPolicy;
+  }
+  export interface ListenerTlsFileCertificate {
+    /**
+     * The certificate chain for the certificate.
+     */
+    certificateChain: FilePath;
+    /**
+     * The private key for a certificate stored on the file system of the virtual node that the proxy is running on.
+     */
+    privateKey: FilePath;
+  }
   export interface HttpRetryPolicy {
     /**
      * Specify at least one of the following values.
@@ -1500,49 +1809,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export interface TagResourceOutput {
   }
   export type RouteList = RouteRef[];
-  export interface HeaderMatchMethod {
-    /**
-     * The value sent by the client must match the specified value exactly.
-     */
-    exact?: HeaderMatch;
-    /**
-     * The value sent by the client must begin with the specified characters.
-     */
-    prefix?: HeaderMatch;
-    /**
-     * An object that represents the range of values to match on.
-     */
-    range?: MatchRange;
-    /**
-     * The value sent by the client must include the specified characters.
-     */
-    regex?: HeaderMatch;
-    /**
-     * The value sent by the client must end with the specified characters.
-     */
-    suffix?: HeaderMatch;
-  }
-  export interface DeleteMeshOutput {
-    /**
-     * The service mesh that was deleted.
-     */
-    mesh: MeshData;
-  }
-  export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string;
-  export type DurationValue = number;
-  export type Hostname = string;
   export type PortNumber = number;
-  export interface TagResourceInput {
+  export interface TlsValidationContextFileTrust {
     /**
-     * The Amazon Resource Name (ARN) of the resource to add tags to.
+     * The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.
      */
-    resourceArn: Arn;
-    /**
-     * The tags to add to the resource. A tag is an array of key-value pairs.
-         Tag keys can have a maximum character length of 128 characters, and tag values can have
-            a maximum length of 256 characters.
-     */
-    tags: TagList;
+    certificateChain: FilePath;
   }
   export interface GrpcRouteMetadata {
     /**
@@ -1590,54 +1862,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   }
   export type WeightedTargets = WeightedTarget[];
   export type HttpRouteHeaders = HttpRouteHeader[];
-  export interface VirtualServiceProvider {
-    /**
-     * The virtual node associated with a virtual service.
-     */
-    virtualNode?: VirtualNodeServiceProvider;
-    /**
-     * The virtual router associated with a virtual service.
-     */
-    virtualRouter?: VirtualRouterServiceProvider;
-  }
-  export interface GrpcRouteMatch {
-    /**
-     * An object that represents the data to match from the request.
-     */
-    metadata?: GrpcRouteMetadataList;
-    /**
-     * The method name to match from the request. If you specify a name, you must also specify a serviceName.
-     */
-    methodName?: MethodName;
-    /**
-     * The fully qualified domain name for the service to match from the request.
-     */
-    serviceName?: ServiceName;
-  }
   export type String = string;
-  export interface AwsCloudMapServiceDiscovery {
-    /**
-     * A string map that contains attributes with values that you can use to filter instances
-         by any custom attribute that you specified when you registered the instance. Only instances
-         that match all of the specified key/value pairs will be returned.
-     */
-    attributes?: AwsCloudMapInstanceAttributes;
-    /**
-     * The name of the AWS Cloud Map namespace to use.
-     */
-    namespaceName: AwsCloudMapName;
-    /**
-     * The name of the AWS Cloud Map service to use.
-     */
-    serviceName: AwsCloudMapName;
-  }
   export type HttpScheme = "http"|"https"|string;
-  export interface UpdateVirtualServiceOutput {
-    /**
-     * A full description of the virtual service that was updated.
-     */
-    virtualService: VirtualServiceData;
-  }
   export interface UpdateRouteInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -1660,61 +1886,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The name of the virtual router that the route is associated with.
      */
     virtualRouterName: ResourceName;
-  }
-  export interface MeshStatus {
-    /**
-     * The current mesh status.
-     */
-    status?: MeshStatusCode;
-  }
-  export interface CreateVirtualNodeInput {
-    /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-     */
-    clientToken?: String;
-    /**
-     * The name of the service mesh to create the virtual node in.
-     */
-    meshName: ResourceName;
-    /**
-     * The virtual node specification to apply.
-     */
-    spec: VirtualNodeSpec;
-    /**
-     * Optional metadata that you can apply to the virtual node to assist with categorization
-         and organization. Each tag consists of a key and an optional value, both of which you
-         define. Tag keys can have a maximum character length of 128 characters, and tag values can have
-            a maximum length of 256 characters.
-     */
-    tags?: TagList;
-    /**
-     * The name to use for the virtual node.
-     */
-    virtualNodeName: ResourceName;
-  }
-  export interface RouteSpec {
-    /**
-     * An object that represents the specification of a GRPC route.
-     */
-    grpcRoute?: GrpcRoute;
-    /**
-     * An object that represents the specification of an HTTP2 route.
-     */
-    http2Route?: HttpRoute;
-    /**
-     * An object that represents the specification of an HTTP route.
-     */
-    httpRoute?: HttpRoute;
-    /**
-     * The priority for the route. Routes are matched based on the specified value, where 0 is
-         the highest priority.
-     */
-    priority?: RoutePriority;
-    /**
-     * An object that represents the specification of a TCP route.
-     */
-    tcpRoute?: TcpRoute;
   }
   export interface HttpRoute {
     /**
@@ -1741,42 +1912,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The egress filter rules for the service mesh.
      */
     egressFilter?: EgressFilter;
-  }
-  export interface CreateVirtualServiceOutput {
-    /**
-     * The full description of your virtual service following the create call.
-     */
-    virtualService: VirtualServiceData;
-  }
-  export interface FileAccessLog {
-    /**
-     * The file path to write access logs to. You can use /dev/stdout to send
-         access logs to standard out and configure your Envoy container to use a log driver, such as
-            awslogs, to export the access logs to a log storage service such as Amazon
-         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write
-         the files to disk.
-         
-            The Envoy process must have write permissions to the path that you specify here.
-            Otherwise, Envoy fails to bootstrap properly.
-         
-     */
-    path: FilePath;
-  }
-  export interface VirtualRouterServiceProvider {
-    /**
-     * The name of the virtual router that is acting as a service provider.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export interface DeleteVirtualServiceInput {
-    /**
-     * The name of the service mesh to delete the virtual service in.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the virtual service to delete.
-     */
-    virtualServiceName: ServiceName;
   }
   export interface ListTagsForResourceOutput {
     /**
@@ -1824,21 +1959,14 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     tagKeys: TagKeyList;
   }
-  export interface DeleteVirtualRouterOutput {
+  export interface ListenerTlsAcmCertificate {
     /**
-     * The virtual router that was deleted.
+     * The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see TLS Encryption.
      */
-    virtualRouter: VirtualRouterData;
+    certificateArn: Arn;
   }
-  export type TagsLimit = number;
   export type TagKey = string;
   export type VirtualServiceStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
-  export interface DeleteVirtualNodeOutput {
-    /**
-     * The virtual node that was deleted.
-     */
-    virtualNode: VirtualNodeData;
-  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
