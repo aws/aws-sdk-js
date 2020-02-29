@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.629.0-->
+<!--LATEST=2.630.0-->
 <!--ENTRYINSERT-->
+
+## 2.630.0
+* feature: ConfigService: Correcting list of supported resource types.
 
 ## 2.629.0
 * feature: AccessAnalyzer: This release includes improvements and fixes bugs for the IAM Access Analyzer feature.
