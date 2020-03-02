@@ -138,7 +138,7 @@
           "shape": "TextSizeLimitExceededException"
         }
       ],
-      "documentation": "<p>Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information.</p> <p>The <code>DetectEntitiesV2</code> operation replaces the <a>DetectEntities</a> operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the <code>DetectEntitiesV2</code> operation in all new applications.</p> <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and <code>Direction</code> entities as attributes instead of types. </p>"
+      "documentation": "<p>Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information. Amazon Comprehend Medical only detects medical entities in English language texts.</p> <p>The <code>DetectEntitiesV2</code> operation replaces the <a>DetectEntities</a> operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the <code>DetectEntitiesV2</code> operation in all new applications.</p> <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and <code>Direction</code> entities as attributes instead of types. </p>"
     },
     "DetectPHI": {
       "name": "DetectPHI",
@@ -172,7 +172,7 @@
           "shape": "TextSizeLimitExceededException"
         }
       ],
-      "documentation": "<p> Inspects the clinical text for protected health information (PHI) entities and entity category, location, and confidence score on that information.</p>"
+      "documentation": "<p> Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.</p>"
     },
     "InferICD10CM": {
       "name": "InferICD10CM",
@@ -206,7 +206,7 @@
           "shape": "TextSizeLimitExceededException"
         }
       ],
-      "documentation": "<p>InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control.</p>"
+      "documentation": "<p>InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.</p>"
     },
     "InferRxNorm": {
       "name": "InferRxNorm",
@@ -240,7 +240,7 @@
           "shape": "TextSizeLimitExceededException"
         }
       ],
-      "documentation": "<p>InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine.</p>"
+      "documentation": "<p>InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.</p>"
     },
     "ListEntitiesDetectionV2Jobs": {
       "name": "ListEntitiesDetectionV2Jobs",
@@ -424,6 +424,10 @@
           "shape": "Float",
           "documentation": "<p> The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. </p>"
         },
+        "RelationshipType": {
+          "shape": "RelationshipType",
+          "documentation": "<p>The type of relationship between the entity and attribute. Type for the relationship is <code>OVERLAP</code>, indicating that the entity occurred at the same time as the <code>Date_Expression</code>. </p>"
+        },
         "Id": {
           "shape": "Integer",
           "documentation": "<p> The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. </p>"
@@ -439,6 +443,10 @@
         "Text": {
           "shape": "String",
           "documentation": "<p> The segment of input text extracted as this attribute.</p>"
+        },
+        "Category": {
+          "shape": "EntityType",
+          "documentation": "<p> The category of attribute. </p>"
         },
         "Traits": {
           "shape": "TraitList",
@@ -790,7 +798,13 @@
         "SYSTEM_ORGAN_SITE",
         "DIRECTION",
         "QUALITY",
-        "QUANTITY"
+        "QUANTITY",
+        "TIME_EXPRESSION",
+        "TIME_TO_MEDICATION_NAME",
+        "TIME_TO_DX_NAME",
+        "TIME_TO_TEST_NAME",
+        "TIME_TO_PROCEDURE_NAME",
+        "TIME_TO_TREATMENT_NAME"
       ]
     },
     "EntityType": {
@@ -800,7 +814,8 @@
         "MEDICAL_CONDITION",
         "PROTECTED_HEALTH_INFORMATION",
         "TEST_TREATMENT_PROCEDURE",
-        "ANATOMY"
+        "ANATOMY",
+        "TIME_EXPRESSION"
       ]
     },
     "Float": {
@@ -1062,7 +1077,7 @@
           "documentation": "<p>The path to the input data files in the S3 bucket.</p>"
         }
       },
-      "documentation": "<p>The input properties for an entities detection job</p>"
+      "documentation": "<p>The input properties for an entities detection job.</p>"
     },
     "Integer": {
       "type": "integer"
@@ -1197,6 +1212,28 @@
         }
       },
       "documentation": "<p>The output properties for a detection job.</p>"
+    },
+    "RelationshipType": {
+      "type": "string",
+      "enum": [
+        "EVERY",
+        "WITH_DOSAGE",
+        "ADMINISTERED_VIA",
+        "FOR",
+        "NEGATIVE",
+        "OVERLAP",
+        "DOSAGE",
+        "ROUTE_OR_MODE",
+        "FORM",
+        "FREQUENCY",
+        "DURATION",
+        "STRENGTH",
+        "RATE",
+        "ACUITY",
+        "TEST_VALUE",
+        "TEST_UNITS",
+        "DIRECTION"
+      ]
     },
     "RxNormAttribute": {
       "type": "structure",

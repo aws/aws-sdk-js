@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Introducing Amazon CloudWatch Composite Alarms"
+    },
+    {
+        "type": "feature",
+        "category": "ComprehendMedical",
+        "description": "New Time Expression feature, part of DetectEntitiesV2 API will provide temporal relations to existing NERe entities such as Medication, Test, Treatment, Procedure and Medical conditions. "
+    }
+]

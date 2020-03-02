@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.630.0-->
+<!--LATEST=2.631.0-->
 <!--ENTRYINSERT-->
+
+## 2.631.0
+* feature: CloudWatch: Introducing Amazon CloudWatch Composite Alarms
+* feature: ComprehendMedical: New Time Expression feature, part of DetectEntitiesV2 API will provide temporal relations to existing NERe entities such as Medication, Test, Treatment, Procedure and Medical conditions. 
 
 ## 2.630.0
 * feature: ConfigService: Correcting list of supported resource types.
