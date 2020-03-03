@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.631.0-->
+<!--LATEST=2.632.0-->
 <!--ENTRYINSERT-->
+
+## 2.632.0
+* feature: EC2: Amazon VPC Flow Logs adds support for tags and tagging on resource creation.
 
 ## 2.631.0
 * feature: CloudWatch: Introducing Amazon CloudWatch Composite Alarms
