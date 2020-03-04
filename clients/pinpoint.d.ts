@@ -68,6 +68,14 @@ declare class Pinpoint extends Service {
    */
   createPushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreatePushTemplateResponse) => void): Request<Pinpoint.Types.CreatePushTemplateResponse, AWSError>;
   /**
+   * Creates an Amazon Pinpoint configuration for a recommender model.
+   */
+  createRecommenderConfiguration(params: Pinpoint.Types.CreateRecommenderConfigurationRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateRecommenderConfigurationResponse) => void): Request<Pinpoint.Types.CreateRecommenderConfigurationResponse, AWSError>;
+  /**
+   * Creates an Amazon Pinpoint configuration for a recommender model.
+   */
+  createRecommenderConfiguration(callback?: (err: AWSError, data: Pinpoint.Types.CreateRecommenderConfigurationResponse) => void): Request<Pinpoint.Types.CreateRecommenderConfigurationResponse, AWSError>;
+  /**
    * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
   createSegment(params: Pinpoint.Types.CreateSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateSegmentResponse) => void): Request<Pinpoint.Types.CreateSegmentResponse, AWSError>;
@@ -211,6 +219,14 @@ declare class Pinpoint extends Service {
    * Deletes a message template for messages that were sent through a push notification channel.
    */
   deletePushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeletePushTemplateResponse) => void): Request<Pinpoint.Types.DeletePushTemplateResponse, AWSError>;
+  /**
+   * Deletes an Amazon Pinpoint configuration for a recommender model.
+   */
+  deleteRecommenderConfiguration(params: Pinpoint.Types.DeleteRecommenderConfigurationRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteRecommenderConfigurationResponse) => void): Request<Pinpoint.Types.DeleteRecommenderConfigurationResponse, AWSError>;
+  /**
+   * Deletes an Amazon Pinpoint configuration for a recommender model.
+   */
+  deleteRecommenderConfiguration(callback?: (err: AWSError, data: Pinpoint.Types.DeleteRecommenderConfigurationResponse) => void): Request<Pinpoint.Types.DeleteRecommenderConfigurationResponse, AWSError>;
   /**
    * Deletes a segment from an application.
    */
@@ -508,6 +524,22 @@ declare class Pinpoint extends Service {
    */
   getPushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetPushTemplateResponse) => void): Request<Pinpoint.Types.GetPushTemplateResponse, AWSError>;
   /**
+   * Retrieves information about an Amazon Pinpoint configuration for a recommender model.
+   */
+  getRecommenderConfiguration(params: Pinpoint.Types.GetRecommenderConfigurationRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetRecommenderConfigurationResponse) => void): Request<Pinpoint.Types.GetRecommenderConfigurationResponse, AWSError>;
+  /**
+   * Retrieves information about an Amazon Pinpoint configuration for a recommender model.
+   */
+  getRecommenderConfiguration(callback?: (err: AWSError, data: Pinpoint.Types.GetRecommenderConfigurationResponse) => void): Request<Pinpoint.Types.GetRecommenderConfigurationResponse, AWSError>;
+  /**
+   * Retrieves information about all the recommender model configurations that are associated with your Amazon Pinpoint account.
+   */
+  getRecommenderConfigurations(params: Pinpoint.Types.GetRecommenderConfigurationsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetRecommenderConfigurationsResponse) => void): Request<Pinpoint.Types.GetRecommenderConfigurationsResponse, AWSError>;
+  /**
+   * Retrieves information about all the recommender model configurations that are associated with your Amazon Pinpoint account.
+   */
+  getRecommenderConfigurations(callback?: (err: AWSError, data: Pinpoint.Types.GetRecommenderConfigurationsResponse) => void): Request<Pinpoint.Types.GetRecommenderConfigurationsResponse, AWSError>;
+  /**
    * Retrieves information about the configuration, dimension, and other settings for a specific segment that's associated with an application.
    */
   getSegment(params: Pinpoint.Types.GetSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentResponse) => void): Request<Pinpoint.Types.GetSegmentResponse, AWSError>;
@@ -604,11 +636,11 @@ declare class Pinpoint extends Service {
    */
   listJourneys(callback?: (err: AWSError, data: Pinpoint.Types.ListJourneysResponse) => void): Request<Pinpoint.Types.ListJourneysResponse, AWSError>;
   /**
-   * Retrieves all the tags (keys and values) that are associated with an application, campaign, journey, message template, or segment.
+   * Retrieves all the tags (keys and values) that are associated with an application, campaign, message template, or segment.
    */
   listTagsForResource(params: Pinpoint.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves all the tags (keys and values) that are associated with an application, campaign, journey, message template, or segment.
+   * Retrieves all the tags (keys and values) that are associated with an application, campaign, message template, or segment.
    */
   listTagsForResource(callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -676,19 +708,19 @@ declare class Pinpoint extends Service {
    */
   sendUsersMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
-   * Adds one or more tags (keys and values) to an application, campaign, journey, message template, or segment.
+   * Adds one or more tags (keys and values) to an application, campaign, message template, or segment.
    */
   tagResource(params: Pinpoint.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more tags (keys and values) to an application, campaign, journey, message template, or segment.
+   * Adds one or more tags (keys and values) to an application, campaign, message template, or segment.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes one or more tags (keys and values) from an application, campaign, journey, message template, or segment.
+   * Removes one or more tags (keys and values) from an application, campaign, message template, or segment.
    */
   untagResource(params: Pinpoint.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes one or more tags (keys and values) from an application, campaign, journey, message template, or segment.
+   * Removes one or more tags (keys and values) from an application, campaign, message template, or segment.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -819,6 +851,14 @@ declare class Pinpoint extends Service {
    * Updates an existing message template for messages that are sent through a push notification channel.
    */
   updatePushTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdatePushTemplateResponse) => void): Request<Pinpoint.Types.UpdatePushTemplateResponse, AWSError>;
+  /**
+   * Updates an Amazon Pinpoint configuration for a recommender model.
+   */
+  updateRecommenderConfiguration(params: Pinpoint.Types.UpdateRecommenderConfigurationRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateRecommenderConfigurationResponse) => void): Request<Pinpoint.Types.UpdateRecommenderConfigurationResponse, AWSError>;
+  /**
+   * Updates an Amazon Pinpoint configuration for a recommender model.
+   */
+  updateRecommenderConfiguration(callback?: (err: AWSError, data: Pinpoint.Types.UpdateRecommenderConfigurationResponse) => void): Request<Pinpoint.Types.UpdateRecommenderConfigurationResponse, AWSError>;
   /**
    * Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
    */
@@ -1536,7 +1576,7 @@ declare namespace Pinpoint {
      */
     ChannelType?: ChannelType;
     /**
-     * An object that maps custom attributes to attributes for the address and is attached to the message. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.
+     * An object that maps custom attributes to attributes for the address and is attached to the message. Attribute names are case sensitive. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.
      */
     Context?: MapOf__string;
     /**
@@ -1586,7 +1626,7 @@ declare namespace Pinpoint {
      */
     Title?: __string;
     /**
-     * The URL to open in a recipient's default mobile browser, if a recipient taps a a push notification that's based on the message template and the value of the Action property is URL.
+     * The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the Action property is URL.
      */
     Url?: __string;
   }
@@ -2179,6 +2219,50 @@ declare namespace Pinpoint {
   export interface CreatePushTemplateResponse {
     CreateTemplateMessageBody: CreateTemplateMessageBody;
   }
+  export interface CreateRecommenderConfiguration {
+    /**
+     * A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names: An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique. An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don't include this object in your request.
+     */
+    Attributes?: MapOf__string;
+    /**
+     * A custom description of the configuration for the recommender model. The description can contain up to 128 characters.
+     */
+    Description?: __string;
+    /**
+     * A custom name of the configuration for the recommender model. The name must start with a letter or number and it can contain up to 128 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).
+     */
+    Name?: __string;
+    /**
+     * The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are: PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value. PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.
+     */
+    RecommendationProviderIdType?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data from the recommender model.
+     */
+    RecommendationProviderRoleArn: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the recommender model to retrieve recommendation data from. This value must match the ARN of an Amazon Personalize campaign.
+     */
+    RecommendationProviderUri: __string;
+    /**
+     * The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke for additional processing of recommendation data that's retrieved from the recommender model.
+     */
+    RecommendationTransformerUri?: __string;
+    /**
+     * A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data. This name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.
+     */
+    RecommendationsDisplayName?: __string;
+    /**
+     * The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5. To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.
+     */
+    RecommendationsPerMessage?: __integer;
+  }
+  export interface CreateRecommenderConfigurationRequest {
+    CreateRecommenderConfiguration: CreateRecommenderConfiguration;
+  }
+  export interface CreateRecommenderConfigurationResponse {
+    RecommenderConfigurationResponse: RecommenderConfigurationResponse;
+  }
   export interface CreateSegmentRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -2376,7 +2460,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
@@ -2433,12 +2517,21 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
   export interface DeletePushTemplateResponse {
     MessageBody: MessageBody;
+  }
+  export interface DeleteRecommenderConfigurationRequest {
+    /**
+     * The unique identifier for the recommender model configuration. This identifier is displayed as the Recommender ID on the Amazon Pinpoint console.
+     */
+    RecommenderId: __string;
+  }
+  export interface DeleteRecommenderConfigurationResponse {
+    RecommenderConfigurationResponse: RecommenderConfigurationResponse;
   }
   export interface DeleteSegmentRequest {
     /**
@@ -2468,7 +2561,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
@@ -2503,7 +2596,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
@@ -2693,6 +2786,10 @@ declare namespace Pinpoint {
      */
     HtmlPart?: __string;
     /**
+     * The unique identifier for the recommender model to use for the message template. Amazon Pinpoint uses this value to determine how to retrieve and process data from a recommender model when it sends messages that use the template, if the template contains message variables for recommendation data.
+     */
+    RecommenderId?: __string;
+    /**
      * The subject line, or title, to use in email messages that are based on the message template.
      */
     Subject?: __string;
@@ -2731,6 +2828,10 @@ declare namespace Pinpoint {
      */
     LastModifiedDate: __string;
     /**
+     * The unique identifier for the recommender model that's used by the message template.
+     */
+    RecommenderId?: __string;
+    /**
      * The subject line, or title, that's used in email messages that are based on the message template.
      */
     Subject?: __string;
@@ -2765,7 +2866,7 @@ declare namespace Pinpoint {
      */
     Address?: __string;
     /**
-     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["science", "music", "travel"]. You can use these attributes as filter criteria when you create segments. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This limitation doesn't apply to attribute values.
+     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["Science", "Music", "Travel"]. You can use these attributes as filter criteria when you create segments. Attribute names are case sensitive. An attribute name can contain up to 50 characters. An attribute value can contain up to 100 characters. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This restriction doesn't apply to attribute values.
      */
     Attributes?: MapOfListOf__string;
     /**
@@ -2805,7 +2906,7 @@ declare namespace Pinpoint {
      */
     RequestId?: __string;
     /**
-     * One or more custom user attributes that your app reports to Amazon Pinpoint for the user who's associated with the endpoint.
+     * One or more custom user attributes that describe the user who's associated with the endpoint.
      */
     User?: EndpointUser;
   }
@@ -2891,7 +2992,7 @@ declare namespace Pinpoint {
      */
     Address?: __string;
     /**
-     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again. OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.    SUCCESSFUL - The message was successfully delivered to the endpoint. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint. TIMEOUT - The message couldn't be sent within the timeout period. UNKNOWN_FAILURE - An unknown error occurred.
+     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again. OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.    SUCCESSFUL - The message was successfully delivered to the endpoint. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint. TIMEOUT - The message couldn't be sent within the timeout period. UNKNOWN_FAILURE - An unknown error occurred.
      */
     DeliveryStatus: DeliveryStatus;
     /**
@@ -2917,7 +3018,7 @@ declare namespace Pinpoint {
      */
     Address?: __string;
     /**
-     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["science", "music", "travel"]. You can use these attributes as filter criteria when you create segments. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This limitation doesn't apply to attribute values.
+     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["Science", "Music", "Travel"]. You can use these attributes as filter criteria when you create segments. Attribute names are case sensitive. An attribute name can contain up to 50 characters. An attribute value can contain up to 100 characters. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This restriction doesn't apply to attribute values.
      */
     Attributes?: MapOfListOf__string;
     /**
@@ -2967,7 +3068,7 @@ declare namespace Pinpoint {
      */
     ApplicationId?: __string;
     /**
-     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["science", "music", "travel"]. You can use these attributes as filter criteria when you create segments.
+     * One or more custom attributes that describe the endpoint by associating a name with an array of values. For example, the value of a custom attribute named Interests might be: ["Science", "Music", "Travel"]. You can use these attributes as filter criteria when you create segments.
      */
     Attributes?: MapOfListOf__string;
     /**
@@ -3025,7 +3126,7 @@ declare namespace Pinpoint {
      */
     BodyOverride?: __string;
     /**
-     * A map of custom attributes to attach to the message for the address. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.
+     * A map of custom attributes to attach to the message for the address. Attribute names are case sensitive. For a push notification, this payload is added to the data.pinpoint object. For an email or text message, this payload is added to email/SMS delivery receipt event attributes.
      */
     Context?: MapOf__string;
     /**
@@ -3043,7 +3144,7 @@ declare namespace Pinpoint {
   }
   export interface EndpointUser {
     /**
-     * One or more custom attributes that describe the user by associating a name with an array of values. For example, the value of an attribute named Interests might be: ["science", "music", "travel"]. You can use these attributes as filter criteria when you create segments. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This limitation doesn't apply to attribute values.
+     * One or more custom attributes that describe the user by associating a name with an array of values. For example, the value of an attribute named Interests might be: ["Science", "Music", "Travel"]. You can use these attributes as filter criteria when you create segments. Attribute names are case sensitive. An attribute name can contain up to 50 characters. An attribute value can contain up to 100 characters. When you define the name of a custom attribute, avoid using the following characters: number sign (#), colon (:), question mark (?), backslash (\), and slash (/). The Amazon Pinpoint console can't display attribute names that contain these characters. This restriction doesn't apply to attribute values.
      */
     UserAttributes?: MapOfListOf__string;
     /**
@@ -3115,7 +3216,7 @@ declare namespace Pinpoint {
      */
     Attributes?: MapOfAttributeDimension;
     /**
-     * The name of the event that causes the campaign to be sent or the journey activity to be performed. This can be a standard type of event that Amazon Pinpoint generates, such as _email.delivered, or a custom event that's specific to your application.
+     * The name of the event that causes the campaign to be sent or the journey activity to be performed. This can be a standard event that Amazon Pinpoint generates, such as _email.delivered. For campaigns, this can also be a custom event that's specific to your application. For information about standard events, see Streaming Amazon Pinpoint Events in the Amazon Pinpoint Developer Guide.
      */
     EventType?: SetDimension;
     /**
@@ -3692,7 +3793,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
@@ -3796,7 +3897,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.
+     * The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.
      */
     EndTime?: __timestampIso8601;
     /**
@@ -3816,7 +3917,7 @@ declare namespace Pinpoint {
      */
     PageSize?: __string;
     /**
-     * The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.
+     * The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.
      */
     StartTime?: __timestampIso8601;
   }
@@ -3888,12 +3989,34 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
   export interface GetPushTemplateResponse {
     PushNotificationTemplateResponse: PushNotificationTemplateResponse;
+  }
+  export interface GetRecommenderConfigurationRequest {
+    /**
+     * The unique identifier for the recommender model configuration. This identifier is displayed as the Recommender ID on the Amazon Pinpoint console.
+     */
+    RecommenderId: __string;
+  }
+  export interface GetRecommenderConfigurationResponse {
+    RecommenderConfigurationResponse: RecommenderConfigurationResponse;
+  }
+  export interface GetRecommenderConfigurationsRequest {
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     */
+    PageSize?: __string;
+    /**
+     * The NextToken string that specifies which page of results to return in a paginated response.
+     */
+    Token?: __string;
+  }
+  export interface GetRecommenderConfigurationsResponse {
+    ListRecommenderConfigurationsResponse: ListRecommenderConfigurationsResponse;
   }
   export interface GetSegmentExportJobsRequest {
     /**
@@ -4020,7 +4143,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
@@ -4055,7 +4178,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
@@ -4102,7 +4225,7 @@ declare namespace Pinpoint {
      */
     SegmentId?: __string;
     /**
-     * The custom name for the segment that's created by the import job, if the value of the DefineSegment property is true.
+     * A custom name for the segment that's created by the import job, if the value of the DefineSegment property is true.
      */
     SegmentName?: __string;
   }
@@ -4368,7 +4491,7 @@ declare namespace Pinpoint {
      */
     State?: State;
     /**
-     * A string-to-string map of key-value pairs that identifies the tags that are associated with the journey. Each tag consists of a required tag key and an associated tag value.
+     * This object is not used or supported.
      */
     tags?: MapOf__string;
   }
@@ -4423,6 +4546,16 @@ declare namespace Pinpoint {
   }
   export interface ListJourneysResponse {
     JourneysResponse: JourneysResponse;
+  }
+  export interface ListRecommenderConfigurationsResponse {
+    /**
+     * An array of responses, one for each recommender model configuration that's associated with your Amazon Pinpoint account.
+     */
+    Item: ListOfRecommenderConfigurationResponse;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    NextToken?: __string;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -4611,7 +4744,7 @@ declare namespace Pinpoint {
   }
   export interface MessageResult {
     /**
-     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.   OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.   SUCCESSFUL - The message was successfully delivered to the endpoint address. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint will attempt to deliver the message again later. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address. TIMEOUT - The message couldn't be sent within the timeout period. UNKNOWN_FAILURE - An unknown error occurred.
+     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.   OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.   SUCCESSFUL - The message was successfully delivered to the endpoint address. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address. TIMEOUT - The message couldn't be sent within the timeout period. UNKNOWN_FAILURE - An unknown error occurred.
      */
     DeliveryStatus: DeliveryStatus;
     /**
@@ -4815,6 +4948,10 @@ declare namespace Pinpoint {
      */
     GCM?: AndroidPushNotificationTemplate;
     /**
+     * The unique identifier for the recommender model to use for the message template. Amazon Pinpoint uses this value to determine how to retrieve and process data from a recommender model when it sends messages that use the template, if the template contains message variables for recommendation data.
+     */
+    RecommenderId?: __string;
+    /**
      * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
@@ -4860,6 +4997,10 @@ declare namespace Pinpoint {
      * The date, in ISO 8601 format, when the message template was last modified.
      */
     LastModifiedDate: __string;
+    /**
+     * The unique identifier for the recommender model that's used by the message template.
+     */
+    RecommenderId?: __string;
     /**
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
      */
@@ -4945,6 +5086,56 @@ declare namespace Pinpoint {
     RecencyType: RecencyType;
   }
   export type RecencyType = "ACTIVE"|"INACTIVE"|string;
+  export interface RecommenderConfigurationResponse {
+    /**
+     * A map that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. This value is null if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.
+     */
+    Attributes?: MapOf__string;
+    /**
+     * The date, in extended ISO 8601 format, when the configuration was created for the recommender model.
+     */
+    CreationDate: __string;
+    /**
+     * The custom description of the configuration for the recommender model.
+     */
+    Description?: __string;
+    /**
+     * The unique identifier for the recommender model configuration.
+     */
+    Id: __string;
+    /**
+     * The date, in extended ISO 8601 format, when the configuration for the recommender model was last modified.
+     */
+    LastModifiedDate: __string;
+    /**
+     * The custom name of the configuration for the recommender model.
+     */
+    Name?: __string;
+    /**
+     * The type of Amazon Pinpoint ID that's associated with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Possible values are: PINPOINT_ENDPOINT_ID - Each user in the model is associated with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value. PINPOINT_USER_ID - Each user in the model is associated with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If this value is specified, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.
+     */
+    RecommendationProviderIdType?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data from the recommender model.
+     */
+    RecommendationProviderRoleArn: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the recommender model that Amazon Pinpoint retrieves the recommendation data from. This value is the ARN of an Amazon Personalize campaign.
+     */
+    RecommendationProviderUri: __string;
+    /**
+     * The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to perform additional processing of recommendation data that it retrieves from the recommender model.
+     */
+    RecommendationTransformerUri?: __string;
+    /**
+     * The custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. This value is null if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.
+     */
+    RecommendationsDisplayName?: __string;
+    /**
+     * The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates.
+     */
+    RecommendationsPerMessage?: __integer;
+  }
   export interface RemoveAttributesRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -5091,6 +5282,10 @@ declare namespace Pinpoint {
      */
     DefaultSubstitutions?: __string;
     /**
+     * The unique identifier for the recommender model to use for the message template. Amazon Pinpoint uses this value to determine how to retrieve and process data from a recommender model when it sends messages that use the template, if the template contains message variables for recommendation data.
+     */
+    RecommenderId?: __string;
+    /**
      * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
@@ -5120,6 +5315,10 @@ declare namespace Pinpoint {
      * The date, in ISO 8601 format, when the message template was last modified.
      */
     LastModifiedDate: __string;
+    /**
+     * The unique identifier for the recommender model that's used by the message template.
+     */
+    RecommenderId?: __string;
     /**
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
      */
@@ -5163,7 +5362,7 @@ declare namespace Pinpoint {
      */
     QuietTime?: QuietTime;
     /**
-     * The scheduled time, in ISO 8601 format, when the campaign began or will begin.
+     * The scheduled time when the campaign began or will begin. Valid values are: IMMEDIATE, to start the campaign immediately; or, a specific time in ISO 8601 format.
      */
     StartTime: __string;
     /**
@@ -5516,7 +5715,7 @@ declare namespace Pinpoint {
   }
   export interface TagsModel {
     /**
-     * A string-to-string map of key-value pairs that defines the tags for an application, campaign, journey, message template, or segment. Each of these resources can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     * A string-to-string map of key-value pairs that defines the tags for an application, campaign, message template, or segment. Each of these resources can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
     tags: MapOf__string;
   }
@@ -5532,7 +5731,7 @@ declare namespace Pinpoint {
   }
   export interface TemplateActiveVersionRequest {
     /**
-     * The unique identifier for the version of the message template to use as the active version of the template. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource.
+     * The version of the message template to use as the active version of the template. Valid values are: latest, for the most recent version of the template; or, the unique identifier for any existing version of the template. If you specify an identifier, the value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource.
      */
     Version?: __string;
   }
@@ -5550,13 +5749,13 @@ declare namespace Pinpoint {
      */
     SMSTemplate?: Template;
     /**
-     * The voice template to use for the message.
+     * The voice template to use for the message. This object isn't supported for campaigns.
      */
     VoiceTemplate?: Template;
   }
   export interface TemplateResponse {
     /**
-     * The Amazon Resource Name (ARN) of the message template.
+     * The Amazon Resource Name (ARN) of the message template. This value isn't included in a TemplateResponse object. To retrieve the ARN of a template, use the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate operation, depending on the type of template that you want to retrieve the ARN for.
      */
     Arn?: __string;
     /**
@@ -5564,7 +5763,7 @@ declare namespace Pinpoint {
      */
     CreationDate: __string;
     /**
-     * The JSON object that specifies the default values that are used for message variables in the message template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the default value for that variable.
+     * The JSON object that specifies the default values that are used for message variables in the message template. This object isn't included in a TemplateResponse object. To retrieve this object for a template, use the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate operation, depending on the type of template that you want to retrieve the object for.
      */
     DefaultSubstitutions?: __string;
     /**
@@ -5572,11 +5771,11 @@ declare namespace Pinpoint {
      */
     LastModifiedDate: __string;
     /**
-     * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
+     * A map of key-value pairs that identifies the tags that are associated with the message template. This object isn't included in a TemplateResponse object. To retrieve this object for a template, use the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate operation, depending on the type of template that you want to retrieve the object for.
      */
     tags?: MapOf__string;
     /**
-     * The custom description of the message template.
+     * The custom description of the message template. This value isn't included in a TemplateResponse object. To retrieve the description of a template, use the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate operation, depending on the type of template that you want to retrieve the description for.
      */
     TemplateDescription?: __string;
     /**
@@ -5798,7 +5997,7 @@ declare namespace Pinpoint {
   }
   export interface UpdateEmailTemplateRequest {
     /**
-     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
      */
     CreateNewVersion?: __boolean;
     EmailTemplateRequest: EmailTemplateRequest;
@@ -5807,7 +6006,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
@@ -5878,7 +6077,7 @@ declare namespace Pinpoint {
   }
   export interface UpdatePushTemplateRequest {
     /**
-     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
      */
     CreateNewVersion?: __boolean;
     PushNotificationTemplateRequest: PushNotificationTemplateRequest;
@@ -5887,12 +6086,60 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
   export interface UpdatePushTemplateResponse {
     MessageBody: MessageBody;
+  }
+  export interface UpdateRecommenderConfiguration {
+    /**
+     * A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names: An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique. An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don't include this object in your request.
+     */
+    Attributes?: MapOf__string;
+    /**
+     * A custom description of the configuration for the recommender model. The description can contain up to 128 characters.
+     */
+    Description?: __string;
+    /**
+     * A custom name of the configuration for the recommender model. The name must start with a letter or number and it can contain up to 128 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).
+     */
+    Name?: __string;
+    /**
+     * The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are: PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value. PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.
+     */
+    RecommendationProviderIdType?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data from the recommender model.
+     */
+    RecommendationProviderRoleArn: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the recommender model to retrieve recommendation data from. This value must match the ARN of an Amazon Personalize campaign.
+     */
+    RecommendationProviderUri: __string;
+    /**
+     * The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke for additional processing of recommendation data that's retrieved from the recommender model.
+     */
+    RecommendationTransformerUri?: __string;
+    /**
+     * A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data. This name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.
+     */
+    RecommendationsDisplayName?: __string;
+    /**
+     * The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5. To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.
+     */
+    RecommendationsPerMessage?: __integer;
+  }
+  export interface UpdateRecommenderConfigurationRequest {
+    /**
+     * The unique identifier for the recommender model configuration. This identifier is displayed as the Recommender ID on the Amazon Pinpoint console.
+     */
+    RecommenderId: __string;
+    UpdateRecommenderConfiguration: UpdateRecommenderConfiguration;
+  }
+  export interface UpdateRecommenderConfigurationResponse {
+    RecommenderConfigurationResponse: RecommenderConfigurationResponse;
   }
   export interface UpdateSegmentRequest {
     /**
@@ -5920,7 +6167,7 @@ declare namespace Pinpoint {
   }
   export interface UpdateSmsTemplateRequest {
     /**
-     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
      */
     CreateNewVersion?: __boolean;
     SMSTemplateRequest: SMSTemplateRequest;
@@ -5929,7 +6176,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
   }
@@ -5962,7 +6209,7 @@ declare namespace Pinpoint {
   }
   export interface UpdateVoiceTemplateRequest {
     /**
-     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
      */
     CreateNewVersion?: __boolean;
     /**
@@ -5970,7 +6217,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
      */
     Version?: __string;
     VoiceTemplateRequest: VoiceTemplateRequest;
@@ -6192,7 +6439,7 @@ declare namespace Pinpoint {
      */
     MessageConfiguration?: MessageConfiguration;
     /**
-     * The custom name of the campaign.
+     * A custom name for the campaign.
      */
     Name?: __string;
     /**
@@ -6220,7 +6467,7 @@ declare namespace Pinpoint {
      */
     TreatmentDescription?: __string;
     /**
-     * The custom name of a variation of the campaign to use for A/B testing.
+     * A custom name for a variation of the campaign to use for A/B testing.
      */
     TreatmentName?: __string;
   }
@@ -6238,7 +6485,7 @@ declare namespace Pinpoint {
   }
   export interface WriteJourneyRequest {
     /**
-     * A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.
+     * A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity. An activity identifier can contain a maximum of 100 characters. The characters must be alphanumeric characters.
      */
     Activities?: MapOfActivity;
     /**
@@ -6274,7 +6521,7 @@ declare namespace Pinpoint {
      */
     Schedule?: JourneySchedule;
     /**
-     * The unique identifier for the first activity in the journey. An activity identifier can contain a maximum of 128 characters. The characters must be alphanumeric characters.
+     * The unique identifier for the first activity in the journey. The identifier for this activity can contain a maximum of 128 characters. The characters must be alphanumeric characters.
      */
     StartActivity?: __string;
     /**
@@ -6326,7 +6573,7 @@ declare namespace Pinpoint {
      */
     TreatmentDescription?: __string;
     /**
-     * The custom name of the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
+     * A custom name for the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
      */
     TreatmentName?: __string;
   }
@@ -6343,6 +6590,7 @@ declare namespace Pinpoint {
   export type ListOfJourneyResponse = JourneyResponse[];
   export type ListOfMultiConditionalBranch = MultiConditionalBranch[];
   export type ListOfRandomSplitEntry = RandomSplitEntry[];
+  export type ListOfRecommenderConfigurationResponse = RecommenderConfigurationResponse[];
   export type ListOfResultRow = ResultRow[];
   export type ListOfResultRowValue = ResultRowValue[];
   export type ListOfSegmentDimensions = SegmentDimensions[];

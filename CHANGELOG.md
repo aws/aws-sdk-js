@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.632.0-->
+<!--LATEST=2.633.0-->
 <!--ENTRYINSERT-->
+
+## 2.633.0
+* feature: Pinpoint: This release of the Amazon Pinpoint API introduces support for integrating recommender models with email, push notification, and SMS message templates. You can now use these types of templates to connect to recommender models and add personalized recommendations to messages that you send from campaigns and journeys.
 
 ## 2.632.0
 * feature: EC2: Amazon VPC Flow Logs adds support for tags and tagging on resource creation.
