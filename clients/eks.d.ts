@@ -289,6 +289,10 @@ declare namespace EKS {
      * The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. 
      */
     tags?: TagMap;
+    /**
+     * The encryption configuration for the cluster.
+     */
+    encryptionConfig?: EncryptionConfigList;
   }
   export type ClusterName = string;
   export type ClusterStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|string;
@@ -321,6 +325,10 @@ declare namespace EKS {
      * The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.
      */
     tags?: TagMap;
+    /**
+     * The encryption configuration for the cluster.
+     */
+    encryptionConfig?: EncryptionConfigList;
   }
   export interface CreateClusterResponse {
     /**
@@ -536,6 +544,17 @@ declare namespace EKS {
      */
     update?: Update;
   }
+  export interface EncryptionConfig {
+    /**
+     * Specifies the resources to be encrypted. The only supported value is "secrets".
+     */
+    resources?: StringList;
+    /**
+     * AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN or the alias can be used.
+     */
+    provider?: Provider;
+  }
+  export type EncryptionConfigList = EncryptionConfig[];
   export type ErrorCode = "SubnetNotFound"|"SecurityGroupNotFound"|"EniLimitReached"|"IpNotAvailable"|"AccessDenied"|"OperationNotPermitted"|"VpcIdNotFound"|"Unknown"|"NodeCreationFailure"|"PodEvictionFailure"|"InsufficientFreeAddresses"|string;
   export interface ErrorDetail {
     /**
@@ -870,6 +889,12 @@ declare namespace EKS {
      * The issuer URL for the OpenID Connect identity provider.
      */
     issuer?: String;
+  }
+  export interface Provider {
+    /**
+     * Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
+     */
+    keyArn?: String;
   }
   export interface RemoteAccessConfig {
     /**

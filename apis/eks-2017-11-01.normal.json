@@ -755,6 +755,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. </p>"
+        },
+        "encryptionConfig": {
+          "shape": "EncryptionConfigList",
+          "documentation": "<p>The encryption configuration for the cluster.</p>"
         }
       },
       "documentation": "<p>An object representing an Amazon EKS cluster.</p>"
@@ -811,6 +815,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define.</p>"
+        },
+        "encryptionConfig": {
+          "shape": "EncryptionConfigList",
+          "documentation": "<p>The encryption configuration for the cluster.</p>"
         }
       }
     },
@@ -1153,6 +1161,27 @@
           "documentation": "<p>The full description of the specified update.</p>"
         }
       }
+    },
+    "EncryptionConfig": {
+      "type": "structure",
+      "members": {
+        "resources": {
+          "shape": "StringList",
+          "documentation": "<p>Specifies the resources to be encrypted. The only supported value is \"secrets\".</p>"
+        },
+        "provider": {
+          "shape": "Provider",
+          "documentation": "<p>AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN or the alias can be used.</p>"
+        }
+      },
+      "documentation": "<p>The encryption configuration for the cluster.</p>"
+    },
+    "EncryptionConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "EncryptionConfig"
+      },
+      "max": 1
     },
     "ErrorCode": {
       "type": "string",
@@ -1719,6 +1748,16 @@
         }
       },
       "documentation": "<p>An object representing the <a href=\"https://openid.net/connect/\">OpenID Connect</a> identity provider information for the cluster.</p>"
+    },
+    "Provider": {
+      "type": "structure",
+      "members": {
+        "keyArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing Users in Other Accounts to Use a CMK</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Identifies the AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the secrets.</p>"
     },
     "RemoteAccessConfig": {
       "type": "structure",

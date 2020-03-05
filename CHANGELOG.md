@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.633.0-->
+<!--LATEST=2.634.0-->
 <!--ENTRYINSERT-->
+
+## 2.634.0
+* feature: EC2: You can now create AWS Client VPN Endpoints with a specified VPC and Security Group. Additionally, you can modify these attributes when modifying the endpoint. 
+* feature: EKS: Amazon EKS now supports adding a KMS key to your cluster for envelope encryption of Kubernetes secrets.
+* feature: GuardDuty: Add a new finding field for EC2 findings indicating the instance's local IP address involved in the threat.
+* feature: OpsWorksCM: Updated the Tag regex pattern to align with AWS tagging APIs.
 
 ## 2.633.0
 * feature: Pinpoint: This release of the Amazon Pinpoint API introduces support for integrating recommender models with email, push notification, and SMS message templates. You can now use these types of templates to connect to recommender models and add personalized recommendations to messages that you send from campaigns and journeys.

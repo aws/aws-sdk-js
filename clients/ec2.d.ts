@@ -109,11 +109,11 @@ declare class EC2 extends Service {
    */
   associateAddress(callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
-   * Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.
+   * Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy. If you specified a VPC when you created the Client VPN endpoint or if you have previous subnet associations, the specified subnet must be in the same VPC. To specify a subnet that's in a different VPC, you must first modify the Client VPN endpoint (ModifyClientVpnEndpoint) and change the VPC that's associated with it.
    */
   associateClientVpnTargetNetwork(params: EC2.Types.AssociateClientVpnTargetNetworkRequest, callback?: (err: AWSError, data: EC2.Types.AssociateClientVpnTargetNetworkResult) => void): Request<EC2.Types.AssociateClientVpnTargetNetworkResult, AWSError>;
   /**
-   * Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.
+   * Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy. If you specified a VPC when you created the Client VPN endpoint or if you have previous subnet associations, the specified subnet must be in the same VPC. To specify a subnet that's in a different VPC, you must first modify the Client VPN endpoint (ModifyClientVpnEndpoint) and change the VPC that's associated with it.
    */
   associateClientVpnTargetNetwork(callback?: (err: AWSError, data: EC2.Types.AssociateClientVpnTargetNetworkResult) => void): Request<EC2.Types.AssociateClientVpnTargetNetworkResult, AWSError>;
   /**
@@ -1133,11 +1133,11 @@ declare class EC2 extends Service {
    */
   deleteVpnConnectionRoute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified virtual private gateway. We recommend that before you delete a virtual private gateway, you detach it from the VPC and delete the VPN connection. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.
+   * Deletes the specified virtual private gateway. You must first detach the virtual private gateway from the VPC. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.
    */
   deleteVpnGateway(params: EC2.Types.DeleteVpnGatewayRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified virtual private gateway. We recommend that before you delete a virtual private gateway, you detach it from the VPC and delete the VPN connection. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.
+   * Deletes the specified virtual private gateway. You must first detach the virtual private gateway from the VPC. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.
    */
   deleteVpnGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2493,11 +2493,11 @@ declare class EC2 extends Service {
    */
   modifyCapacityReservation(callback?: (err: AWSError, data: EC2.Types.ModifyCapacityReservationResult) => void): Request<EC2.Types.ModifyCapacityReservationResult, AWSError>;
   /**
-   * Modifies the specified Client VPN endpoint. You can only modify an endpoint's server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.
+   * Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.
    */
   modifyClientVpnEndpoint(params: EC2.Types.ModifyClientVpnEndpointRequest, callback?: (err: AWSError, data: EC2.Types.ModifyClientVpnEndpointResult) => void): Request<EC2.Types.ModifyClientVpnEndpointResult, AWSError>;
   /**
-   * Modifies the specified Client VPN endpoint. You can only modify an endpoint's server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.
+   * Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.
    */
   modifyClientVpnEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyClientVpnEndpointResult) => void): Request<EC2.Types.ModifyClientVpnEndpointResult, AWSError>;
   /**
@@ -2765,11 +2765,11 @@ declare class EC2 extends Service {
    */
   modifyVpcTenancy(callback?: (err: AWSError, data: EC2.Types.ModifyVpcTenancyResult) => void): Request<EC2.Types.ModifyVpcTenancyResult, AWSError>;
   /**
-   * Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints 
+   * Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.
    */
   modifyVpnConnection(params: EC2.Types.ModifyVpnConnectionRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
   /**
-   * Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your s2slong; connection will be temporarily unavailable for approximately 10 minutes while we provision the new endpoints 
+   * Modifies the target gateway of an AWS Site-to-Site VPN connection. The following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.
    */
   modifyVpnConnection(callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
   /**
@@ -5126,6 +5126,14 @@ declare namespace EC2 {
      * Any tags assigned to the Client VPN endpoint.
      */
     Tags?: TagList;
+    /**
+     * The IDs of the security groups for the target network.
+     */
+    SecurityGroupIds?: ClientVpnSecurityGroupIdSet;
+    /**
+     * The ID of the VPC.
+     */
+    VpcId?: VpcId;
   }
   export type ClientVpnEndpointId = string;
   export type ClientVpnEndpointIdList = ClientVpnEndpointId[];
@@ -5600,6 +5608,14 @@ declare namespace EC2 {
      * The tags to apply to the Client VPN endpoint during creation.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The IDs of one or more security groups to apply to the target network. You must also specify the ID of the VPC that contains the security groups.
+     */
+    SecurityGroupIds?: ClientVpnSecurityGroupIdSet;
+    /**
+     * The ID of the VPC to associate with the Client VPN endpoint. If no security group IDs are specified in the request, the default security group for the VPC is applied.
+     */
+    VpcId?: VpcId;
   }
   export interface CreateClientVpnEndpointResult {
     /**
@@ -10833,7 +10849,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The filters.    key - The tag key.    resource-id - The ID of the resource.    resource-type - The resource type (customer-gateway | dedicated-host | dhcp-options | elastic-ip | fleet | fpga-image | image | instance | host-reservation | internet-gateway | launch-template | natgateway | network-acl | network-interface | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-peering-connection | vpn-connection | vpn-gateway).    tag:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".    value - The tag value.  
+     * The filters.    key - The tag key.    resource-id - The ID of the resource.    resource-type - The resource type (customer-gateway | dedicated-host | dhcp-options | elastic-ip | fleet | fpga-image | image | instance | host-reservation | internet-gateway | launch-template | natgateway | network-acl | network-interface | placement-group | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-peering-connection | vpn-connection | vpn-gateway).    tag:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".    value - The tag value.  
      */
     Filters?: FilterList;
     /**
@@ -11913,6 +11929,9 @@ declare namespace EC2 {
      * The ID of the route table.
      */
     RouteTableId: RouteTableId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
     DryRun?: Boolean;
   }
   export interface DisableVpcClassicLinkDnsSupportRequest {
@@ -12523,6 +12542,9 @@ declare namespace EC2 {
      * The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. 
      */
     RouteTableId: RouteTableId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
     DryRun?: Boolean;
   }
   export interface EnableVolumeIORequest {
@@ -16883,6 +16905,14 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The IDs of one or more security groups to apply to the target network.
+     */
+    SecurityGroupIds?: ClientVpnSecurityGroupIdSet;
+    /**
+     * The ID of the VPC to associate with the Client VPN endpoint.
+     */
+    VpcId?: VpcId;
   }
   export interface ModifyClientVpnEndpointResult {
     /**
@@ -22488,7 +22518,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | fleet | fpga-image | instance | key-pair | launch-template | placement-group | snapshot | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | volume. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | fleet | fpga-image | instance | key-pair | launch-template | spot-fleet-request | placement-group | snapshot | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | vpc-endpoint (for interface VPC endpoints)| vpc-endpoint-service (for gateway VPC endpoints) | volume | vpc-flow-log. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**
