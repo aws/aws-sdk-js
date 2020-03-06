@@ -2083,10 +2083,12 @@
         "RobotDeploymentNoResponse",
         "RobotAgentConnectionTimeout",
         "GreengrassDeploymentFailed",
+        "InvalidGreengrassGroup",
         "MissingRobotArchitecture",
         "MissingRobotApplicationArchitecture",
         "MissingRobotDeploymentResource",
         "GreengrassGroupVersionDoesNotExist",
+        "LambdaDeleted",
         "ExtractingBundleFailure",
         "PreLaunchFileFailure",
         "PostLaunchFileFailure",
@@ -2755,7 +2757,10 @@
       "type": "integer"
     },
     "GenericString": {
-      "type": "string"
+      "type": "string",
+      "max": 1024,
+      "min": 0,
+      "pattern": ".*"
     },
     "IamRole": {
       "type": "string",
@@ -2803,6 +2808,10 @@
         "portForwardingConfig": {
           "shape": "PortForwardingConfig",
           "documentation": "<p>The port forwarding configuration.</p>"
+        },
+        "streamUI": {
+          "shape": "Boolean",
+          "documentation": "<p>Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and luanch the component. It must have a graphical user interface. </p>"
         }
       },
       "documentation": "<p>Information about a launch configuration.</p>"
@@ -3097,7 +3106,8 @@
     "NonEmptyString": {
       "type": "string",
       "max": 255,
-      "min": 1
+      "min": 1,
+      "pattern": ".+"
     },
     "NonSystemPort": {
       "type": "integer",
@@ -3259,6 +3269,8 @@
     },
     "RenderingEngineVersionType": {
       "type": "string",
+      "max": 4,
+      "min": 1,
       "pattern": "1.x"
     },
     "RestartSimulationJobRequest": {
@@ -3957,6 +3969,8 @@
     },
     "SimulationSoftwareSuiteVersionType": {
       "type": "string",
+      "max": 1024,
+      "min": 0,
       "pattern": "7|9|Kinetic|Melodic|Dashing"
     },
     "SimulationTimeMillis": {
@@ -4022,7 +4036,8 @@
       "members": {
         "clientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
         },
         "batchPolicy": {
           "shape": "BatchPolicy",
@@ -4413,6 +4428,8 @@
     },
     "VersionQualifier": {
       "type": "string",
+      "max": 255,
+      "min": 1,
       "pattern": "ALL"
     }
   },

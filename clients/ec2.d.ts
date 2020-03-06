@@ -2485,6 +2485,14 @@ declare class EC2 extends Service {
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
+   * Enables or disables a Zone Group for your account. To use Local Zones, you must first enable the Zone Group.
+   */
+  modifyAvailabilityZoneGroup(params: EC2.Types.ModifyAvailabilityZoneGroupRequest, callback?: (err: AWSError, data: EC2.Types.ModifyAvailabilityZoneGroupResult) => void): Request<EC2.Types.ModifyAvailabilityZoneGroupResult, AWSError>;
+  /**
+   * Enables or disables a Zone Group for your account. To use Local Zones, you must first enable the Zone Group.
+   */
+  modifyAvailabilityZoneGroup(callback?: (err: AWSError, data: EC2.Types.ModifyAvailabilityZoneGroupResult) => void): Request<EC2.Types.ModifyAvailabilityZoneGroupResult, AWSError>;
+  /**
    * Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.
    */
   modifyCapacityReservation(params: EC2.Types.ModifyCapacityReservationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyCapacityReservationResult) => void): Request<EC2.Types.ModifyCapacityReservationResult, AWSError>;
@@ -16844,6 +16852,27 @@ declare namespace EC2 {
   }
   export type MemorySize = number;
   export type MillisecondDateTime = Date;
+  export interface ModifyAvailabilityZoneGroupRequest {
+    /**
+     * The names of the Zone Group.
+     */
+    GroupName: String;
+    /**
+     * Indicates whether to enable or disable Zone Group membership. The valid values are opted-in.
+     */
+    OptInStatus: ModifyAvailabilityZoneOptInStatus;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyAvailabilityZoneGroupResult {
+    /**
+     * Is true if the request succeeds, and an error otherwise.
+     */
+    Return?: Boolean;
+  }
+  export type ModifyAvailabilityZoneOptInStatus = "opted-in"|"not-opted-in"|string;
   export interface ModifyCapacityReservationRequest {
     /**
      * The ID of the Capacity Reservation.

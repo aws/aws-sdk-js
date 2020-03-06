@@ -307,7 +307,7 @@
           "shape": "NotFoundException"
         }
       ],
-      "documentation": "<p>Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the signing profile using its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.</p>"
+      "documentation": "<p>Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. To specify the signing profile, use its Amazon Resource Name (ARN). To specify the tag, use a key-value pair.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -332,7 +332,7 @@
           "shape": "NotFoundException"
         }
       ],
-      "documentation": "<p>Remove one or more tags from a signing profile. Specify a list of tag keys to remove the tags.</p>"
+      "documentation": "<p>Removes one or more tags from a signing profile. To remove the tags, specify a list of tag keys.</p>"
     }
   },
   "shapes": {
@@ -401,7 +401,7 @@
         },
         "signingMaterial": {
           "shape": "SigningMaterial",
-          "documentation": "<p>Amazon Resource Name (ARN) of your code signing certificate.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of your code signing certificate.</p>"
         },
         "platformId": {
           "shape": "PlatformId",
@@ -625,7 +625,9 @@
     "ImageFormat": {
       "type": "string",
       "enum": [
-        "JSON"
+        "JSON",
+        "JSONEmbedded",
+        "JSONDetached"
       ]
     },
     "ImageFormats": {
@@ -815,7 +817,7 @@
     },
     "ProfileName": {
       "type": "string",
-      "max": 20,
+      "max": 64,
       "min": 2,
       "pattern": "^[a-zA-Z0-9_]{2,}"
     },
@@ -839,7 +841,7 @@
         },
         "platformId": {
           "shape": "PlatformId",
-          "documentation": "<p>The ID of the signing profile to be created.</p>"
+          "documentation": "<p>The ID of the signing platform to be created.</p>"
         },
         "overrides": {
           "shape": "SigningPlatformOverrides",
@@ -851,7 +853,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>Tags to be associated with the signing profile being created.</p>"
+          "documentation": "<p>Tags to be associated with the signing profile that is being created.</p>"
         }
       }
     },
@@ -941,7 +943,7 @@
         },
         "hashAlgorithmOptions": {
           "shape": "HashAlgorithmOptions",
-          "documentation": "<p>The hash algorithm options that are available for a a code signing job.</p>"
+          "documentation": "<p>The hash algorithm options that are available for a code signing job.</p>"
         }
       },
       "documentation": "<p>The configuration of a code signing operation.</p>"
@@ -969,11 +971,11 @@
       "members": {
         "supportedFormats": {
           "shape": "ImageFormats",
-          "documentation": "<p>The supported formats of a code signing signing image.</p>"
+          "documentation": "<p>The supported formats of a code signing image.</p>"
         },
         "defaultFormat": {
           "shape": "ImageFormat",
-          "documentation": "<p>The default format of a code signing signing image.</p>"
+          "documentation": "<p>The default format of a code signing image.</p>"
         }
       },
       "documentation": "<p>The image format of a code signing platform or profile.</p>"
@@ -1077,7 +1079,7 @@
           "documentation": "<p>The maximum size (in MB) of code that can be signed by a code signing platform.</p>"
         }
       },
-      "documentation": "<p>Contains information about the signing configurations and parameters that is used to perform a code signing job.</p>"
+      "documentation": "<p>Contains information about the signing configurations and parameters that are used to perform a code signing job.</p>"
     },
     "SigningPlatformOverrides": {
       "type": "structure",
@@ -1085,6 +1087,10 @@
         "signingConfiguration": {
           "shape": "SigningConfigurationOverrides",
           "documentation": "<p>A signing configuration that overrides the default encryption or hash algorithm of a signing job.</p>"
+        },
+        "signingImageFormat": {
+          "shape": "ImageFormat",
+          "documentation": "<p>A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, <code>JSONEmbedded</code> or <code>JSONDetached</code>. (A third format value, <code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the signing image has the payload embedded in it. With <code>JSONDetached</code>, the payload is not be embedded in the signing image.</p>"
         }
       },
       "documentation": "<p>Any overrides that are applied to the signing configuration of a code signing platform.</p>"
@@ -1120,7 +1126,7 @@
         },
         "arn": {
           "shape": "string",
-          "documentation": "<p>Amazon Resource Name (ARN) for the signing profile.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -1236,7 +1242,7 @@
       "members": {
         "resourceArn": {
           "shape": "String",
-          "documentation": "<p>Amazon Resource Name (ARN) for the signing profile.</p>",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
           "location": "uri",
           "locationName": "resourceArn"
         },
@@ -1263,13 +1269,13 @@
       "members": {
         "resourceArn": {
           "shape": "String",
-          "documentation": "<p>Amazon Resource Name (ARN) for the signing profile .</p>",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the signing profile.</p>",
           "location": "uri",
           "locationName": "resourceArn"
         },
         "tagKeys": {
           "shape": "TagKeyList",
-          "documentation": "<p>A list of tag keys to be removed from the signing profile .</p>",
+          "documentation": "<p>A list of tag keys to be removed from the signing profile.</p>",
           "location": "querystring",
           "locationName": "tagKeys"
         }

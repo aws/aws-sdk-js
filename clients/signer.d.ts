@@ -93,19 +93,19 @@ declare class Signer extends Service {
    */
   startSigningJob(callback?: (err: AWSError, data: Signer.Types.StartSigningJobResponse) => void): Request<Signer.Types.StartSigningJobResponse, AWSError>;
   /**
-   * Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the signing profile using its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.
+   * Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. To specify the signing profile, use its Amazon Resource Name (ARN). To specify the tag, use a key-value pair.
    */
   tagResource(params: Signer.Types.TagResourceRequest, callback?: (err: AWSError, data: Signer.Types.TagResourceResponse) => void): Request<Signer.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. You specify the signing profile using its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.
+   * Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. To specify the signing profile, use its Amazon Resource Name (ARN). To specify the tag, use a key-value pair.
    */
   tagResource(callback?: (err: AWSError, data: Signer.Types.TagResourceResponse) => void): Request<Signer.Types.TagResourceResponse, AWSError>;
   /**
-   * Remove one or more tags from a signing profile. Specify a list of tag keys to remove the tags.
+   * Removes one or more tags from a signing profile. To remove the tags, specify a list of tag keys.
    */
   untagResource(params: Signer.Types.UntagResourceRequest, callback?: (err: AWSError, data: Signer.Types.UntagResourceResponse) => void): Request<Signer.Types.UntagResourceResponse, AWSError>;
   /**
-   * Remove one or more tags from a signing profile. Specify a list of tag keys to remove the tags.
+   * Removes one or more tags from a signing profile. To remove the tags, specify a list of tag keys.
    */
   untagResource(callback?: (err: AWSError, data: Signer.Types.UntagResourceResponse) => void): Request<Signer.Types.UntagResourceResponse, AWSError>;
   /**
@@ -147,7 +147,7 @@ declare namespace Signer {
      */
     source?: Source;
     /**
-     * Amazon Resource Name (ARN) of your code signing certificate.
+     * The Amazon Resource Name (ARN) of your code signing certificate.
      */
     signingMaterial?: SigningMaterial;
     /**
@@ -302,7 +302,7 @@ declare namespace Signer {
     defaultValue: HashAlgorithm;
   }
   export type HashAlgorithms = HashAlgorithm[];
-  export type ImageFormat = "JSON"|string;
+  export type ImageFormat = "JSON"|"JSONEmbedded"|"JSONDetached"|string;
   export type ImageFormats = ImageFormat[];
   export type JobId = string;
   export type Key = string;
@@ -422,7 +422,7 @@ declare namespace Signer {
      */
     signingMaterial: SigningMaterial;
     /**
-     * The ID of the signing profile to be created.
+     * The ID of the signing platform to be created.
      */
     platformId: PlatformId;
     /**
@@ -434,7 +434,7 @@ declare namespace Signer {
      */
     signingParameters?: SigningParameters;
     /**
-     * Tags to be associated with the signing profile being created.
+     * Tags to be associated with the signing profile that is being created.
      */
     tags?: TagMap;
   }
@@ -491,7 +491,7 @@ declare namespace Signer {
      */
     encryptionAlgorithmOptions: EncryptionAlgorithmOptions;
     /**
-     * The hash algorithm options that are available for a a code signing job.
+     * The hash algorithm options that are available for a code signing job.
      */
     hashAlgorithmOptions: HashAlgorithmOptions;
   }
@@ -507,11 +507,11 @@ declare namespace Signer {
   }
   export interface SigningImageFormat {
     /**
-     * The supported formats of a code signing signing image.
+     * The supported formats of a code signing image.
      */
     supportedFormats: ImageFormats;
     /**
-     * The default format of a code signing signing image.
+     * The default format of a code signing image.
      */
     defaultFormat: ImageFormat;
   }
@@ -587,6 +587,10 @@ declare namespace Signer {
      * A signing configuration that overrides the default encryption or hash algorithm of a signing job.
      */
     signingConfiguration?: SigningConfigurationOverrides;
+    /**
+     * A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, JSONEmbedded or JSONDetached. (A third format value, JSON, is reserved for future use.) With JSONEmbedded, the signing image has the payload embedded in it. With JSONDetached, the payload is not be embedded in the signing image.
+     */
+    signingImageFormat?: ImageFormat;
   }
   export type SigningPlatforms = SigningPlatform[];
   export interface SigningProfile {
@@ -611,7 +615,7 @@ declare namespace Signer {
      */
     status?: SigningProfileStatus;
     /**
-     * Amazon Resource Name (ARN) for the signing profile.
+     * The Amazon Resource Name (ARN) for the signing profile.
      */
     arn?: string;
     /**
@@ -659,7 +663,7 @@ declare namespace Signer {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     * Amazon Resource Name (ARN) for the signing profile.
+     * The Amazon Resource Name (ARN) for the signing profile.
      */
     resourceArn: String;
     /**
@@ -672,11 +676,11 @@ declare namespace Signer {
   export type TagValue = string;
   export interface UntagResourceRequest {
     /**
-     * Amazon Resource Name (ARN) for the signing profile .
+     * The Amazon Resource Name (ARN) for the signing profile.
      */
     resourceArn: String;
     /**
-     * A list of tag keys to be removed from the signing profile .
+     * A list of tag keys to be removed from the signing profile.
      */
     tagKeys: TagKeyList;
   }

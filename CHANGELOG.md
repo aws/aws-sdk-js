@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.634.0-->
+<!--LATEST=2.635.0-->
 <!--ENTRYINSERT-->
+
+## 2.635.0
+* feature: AppMesh: App Mesh now supports sharing a Mesh with other AWS accounts. Customers can use AWS Resource Access Manager to share their Mesh with other accounts in their organization to connection applications within a single service mesh. See https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html for details.
+* feature: EC2: This release provides customers with a self-service option to enable Local Zones.
+* feature: GuardDuty: Amazon GuardDuty findings now include the OutpostArn if the finding is generated for an AWS Outposts EC2 host.
+* feature: RoboMaker: Added support for streaming a GUI from robot and simulation applications
+* feature: Signer: This release enables signing image format override in PutSigningProfile requests, adding two more enum fields, JSONEmbedded and JSONDetached. This release also extends the length limit of SigningProfile name from 20 to 64.
 
 ## 2.634.0
 * feature: EC2: You can now create AWS Client VPN Endpoints with a specified VPC and Security Group. Additionally, you can modify these attributes when modifying the endpoint. 

@@ -94,7 +94,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p>You can use the <code>prefix</code> parameter in your route specification for path-based\n         routing of requests. For example, if your virtual service name is\n            <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>\n         <p>If your route matches a request, you can distribute traffic to one or more target\n         virtual nodes with relative weighting.</p>\n         <p>For more information about routes, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/routes.html\">Routes</a>.</p>",
+      "documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p>You can use the <code>prefix</code> parameter in your route specification for path-based\n         routing of requests. For example, if your virtual service name is\n            <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>\n         <p>If your route matches a request, you can distribute traffic to one or more target\n         virtual nodes with relative weighting.</p>\n         <p>For more information about routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html\">Routes</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualNode": {
@@ -136,7 +136,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group.</p>\n         <p>Any inbound traffic that your virtual node expects should be specified as a\n            <code>listener</code>. Any outbound traffic that your virtual node expects to reach\n         should be specified as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value (either the full ARN or the truncated\n         resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the\n            <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_nodes.html\">Virtual Nodes</a>.</p>",
+      "documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group.</p>\n         <p>Any inbound traffic that your virtual node expects should be specified as a\n            <code>listener</code>. Any outbound traffic that your virtual node expects to reach\n         should be specified as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value (either the full ARN or the truncated\n         resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the\n            <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual Nodes</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualRouter": {
@@ -178,7 +178,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Any inbound traffic that your virtual router expects should be specified as a\n            <code>listener</code>. </p>\n         <p>Virtual routers handle traffic for one or more virtual services within your mesh. After\n         you create your virtual router, create and associate routes for your virtual router that\n         direct incoming requests to different virtual nodes.</p>\n         <p>For more information about virtual routers, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_routers.html\">Virtual Routers</a>.</p>",
+      "documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Any inbound traffic that your virtual router expects should be specified as a\n            <code>listener</code>. </p>\n         <p>Virtual routers handle traffic for one or more virtual services within your mesh. After\n         you create your virtual router, create and associate routes for your virtual router that\n         direct incoming requests to different virtual nodes.</p>\n         <p>For more information about virtual routers, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html\">Virtual Routers</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualService": {
@@ -220,7 +220,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a virtual node\n         directly or indirectly by means of a virtual router. Dependent services call your virtual\n         service by its <code>virtualServiceName</code>, and those requests are routed to the\n         virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>\n         <p>For more information about virtual services, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_services.html\">Virtual Services</a>.</p>",
+      "documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a virtual node\n         directly or indirectly by means of a virtual router. Dependent services call your virtual\n         service by its <code>virtualServiceName</code>, and those requests are routed to the\n         virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>\n         <p>For more information about virtual services, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html\">Virtual Services</a>.</p>",
       "idempotent": true
     },
     "DeleteMesh": {
@@ -1207,6 +1207,8 @@
         "arn",
         "createdAt",
         "lastUpdatedAt",
+        "meshOwner",
+        "resourceOwner",
         "uid",
         "version"
       ],
@@ -1222,6 +1224,14 @@
         "lastUpdatedAt": {
           "shape": "Timestamp",
           "documentation": "<p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
         },
         "uid": {
           "shape": "String",
@@ -1460,6 +1470,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "routeName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the route to delete.</p>",
@@ -1622,6 +1638,12 @@
           "documentation": "<p>The name of the service mesh to create the virtual router in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         },
         "spec": {
           "shape": "VirtualRouterSpec",
@@ -1900,6 +1922,8 @@
       "required": [
         "arn",
         "meshName",
+        "meshOwner",
+        "resourceOwner",
         "routeName",
         "virtualRouterName"
       ],
@@ -1911,6 +1935,14 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh that the route resides in.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
         },
         "routeName": {
           "shape": "ResourceName",
@@ -1935,6 +1967,12 @@
           "documentation": "<p>The name of the service mesh to delete the virtual node in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         },
         "virtualNodeName": {
           "shape": "ResourceName",
@@ -2199,6 +2237,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "spec": {
           "shape": "VirtualNodeSpec",
           "documentation": "<p>The virtual node specification to apply.</p>"
@@ -2296,6 +2340,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "virtualServiceName": {
           "shape": "ServiceName",
           "documentation": "<p>The name of the virtual service to delete.</p>",
@@ -2371,6 +2421,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "spec": {
           "shape": "VirtualNodeSpec",
           "documentation": "<p>The new virtual node specification to apply. This overwrites the existing data.</p>"
@@ -2444,6 +2500,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "spec": {
           "shape": "VirtualServiceSpec",
           "documentation": "<p>The virtual service specification to apply.</p>"
@@ -2480,6 +2542,12 @@
           "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         },
         "spec": {
           "shape": "VirtualRouterSpec",
@@ -2556,6 +2624,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "virtualRouterName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the virtual router to delete.</p>",
@@ -2578,6 +2652,12 @@
           "documentation": "<p>The name of the service mesh that the route resides in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         },
         "routeName": {
           "shape": "ResourceName",
@@ -2661,6 +2741,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "spec": {
           "shape": "VirtualServiceSpec",
           "documentation": "<p>The new virtual service specification to apply. This overwrites the existing\n         data.</p>"
@@ -2740,6 +2826,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListRoutes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>",
@@ -2760,6 +2852,8 @@
       "required": [
         "arn",
         "meshName",
+        "meshOwner",
+        "resourceOwner",
         "virtualServiceName"
       ],
       "members": {
@@ -2770,6 +2864,14 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
         },
         "virtualServiceName": {
           "shape": "ServiceName",
@@ -2796,6 +2898,8 @@
       "required": [
         "arn",
         "meshName",
+        "meshOwner",
+        "resourceOwner",
         "virtualRouterName"
       ],
       "members": {
@@ -2806,6 +2910,14 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
         },
         "virtualRouterName": {
           "shape": "ResourceName",
@@ -2883,6 +2995,8 @@
       "required": [
         "arn",
         "meshName",
+        "meshOwner",
+        "resourceOwner",
         "virtualNodeName"
       ],
       "members": {
@@ -2893,6 +3007,14 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
         },
         "virtualNodeName": {
           "shape": "ResourceName",
@@ -2994,6 +3116,12 @@
           "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         },
         "virtualServiceName": {
           "shape": "ServiceName",
@@ -3114,6 +3242,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualRouters</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
@@ -3154,6 +3288,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualServices</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
@@ -3191,6 +3331,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualNodes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>",
@@ -3224,6 +3370,11 @@
       "type": "string",
       "min": 1,
       "max": 255
+    },
+    "AccountId": {
+      "type": "string",
+      "min": 12,
+      "max": 12
     },
     "Duration": {
       "type": "structure",
@@ -3299,7 +3450,9 @@
       "type": "structure",
       "required": [
         "arn",
-        "meshName"
+        "meshName",
+        "meshOwner",
+        "resourceOwner"
       ],
       "members": {
         "arn": {
@@ -3309,6 +3462,14 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
         }
       },
       "documentation": "<p>An object that represents a service mesh returned by a list operation.</p>"
@@ -3387,6 +3548,12 @@
           "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         },
         "virtualNodeName": {
           "shape": "ResourceName",
@@ -3534,7 +3701,7 @@
           "documentation": "<p>The private key for a certificate stored on the file system of the virtual node that the proxy is running on.</p>"
         }
       },
-      "documentation": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites\">TLS Encryption</a>.</p>"
+      "documentation": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
     },
     "HttpRetryPolicy": {
       "type": "structure",
@@ -3574,6 +3741,12 @@
           "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         },
         "virtualRouterName": {
           "shape": "ResourceName",
@@ -3654,6 +3827,12 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
+        },
         "routeName": {
           "shape": "ResourceName",
           "documentation": "<p>The name to use for the route.</p>"
@@ -3671,7 +3850,7 @@
         },
         "virtualRouterName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router in which to create the route.</p>",
+          "documentation": "<p>The name of the virtual router in which to create the route. If the virtual router is in a shared mesh,\n         then you must be the owner of the virtual router resource.</p>",
           "location": "uri",
           "locationName": "virtualRouterName"
         }
@@ -3723,6 +3902,12 @@
           "documentation": "<p>The name of the service mesh that the route resides in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         },
         "routeName": {
           "shape": "ResourceName",
@@ -3776,6 +3961,12 @@
           "documentation": "<p>The name of the service mesh to describe.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>",
+          "location": "querystring",
+          "locationName": "meshOwner"
         }
       },
       "documentation": ""
@@ -3866,7 +4057,7 @@
       "members": {
         "certificateArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites\">TLS Encryption</a>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
         }
       },
       "documentation": "<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>"

@@ -4221,6 +4221,20 @@
       },
       "documentation": "<p>Creates an import volume task using metadata from the specified disk image.For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html\">Importing Disks to Amazon EBS</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
     },
+    "ModifyAvailabilityZoneGroup": {
+      "name": "ModifyAvailabilityZoneGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyAvailabilityZoneGroupRequest"
+      },
+      "output": {
+        "shape": "ModifyAvailabilityZoneGroupResult"
+      },
+      "documentation": "<p>Enables or disables a Zone Group for your account. To use Local Zones, you must first enable the Zone Group.</p>"
+    },
     "ModifyCapacityReservation": {
       "name": "ModifyCapacityReservation",
       "http": {
@@ -26861,6 +26875,44 @@
     },
     "MillisecondDateTime": {
       "type": "timestamp"
+    },
+    "ModifyAvailabilityZoneGroupRequest": {
+      "type": "structure",
+      "required": [
+        "GroupName",
+        "OptInStatus"
+      ],
+      "members": {
+        "GroupName": {
+          "shape": "String",
+          "documentation": "<p>The names of the Zone Group.</p>"
+        },
+        "OptInStatus": {
+          "shape": "ModifyAvailabilityZoneOptInStatus",
+          "documentation": "<p>Indicates whether to enable or disable Zone Group membership. The valid values are <code>opted-in</code>.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyAvailabilityZoneGroupResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
+          "locationName": "return"
+        }
+      }
+    },
+    "ModifyAvailabilityZoneOptInStatus": {
+      "type": "string",
+      "enum": [
+        "opted-in",
+        "not-opted-in"
+      ]
     },
     "ModifyCapacityReservationRequest": {
       "type": "structure",
