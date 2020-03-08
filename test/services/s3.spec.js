@@ -2415,10 +2415,10 @@ describe('AWS.S3', function() {
       helpers.mockHttpResponse(200, {}, '');
       s3.createBucket(params, function() {
         expect(params.CreateBucketConfiguration).to.not.exist;
-        expect(loc).to.be.a.string
+        expect(loc).to.be.a.string;
         done();
       });
-    })
+    });
   });
 
   describe('deleteBucket', function() {
