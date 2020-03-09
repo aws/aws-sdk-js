@@ -8644,6 +8644,11 @@
     "MultiplexProgramSettings": {
       "type": "structure",
       "members": {
+        "PreferredChannelPipeline": {
+          "shape": "PreferredChannelPipeline",
+          "locationName": "preferredChannelPipeline",
+          "documentation": "Indicates which pipeline is preferred by the multiplex for program ingest."
+        },
         "ProgramNumber": {
           "shape": "__integerMin0Max65535",
           "locationName": "programNumber",
@@ -9195,6 +9200,15 @@
       "documentation": "Settings for pausing a pipeline.",
       "required": [
         "PipelineId"
+      ]
+    },
+    "PreferredChannelPipeline": {
+      "type": "string",
+      "documentation": "Indicates which pipeline is preferred by the multiplex for program ingest.\nIf set to \\\"PIPELINE_0\\\" or \\\"PIPELINE_1\\\" and an unhealthy ingest causes the multiplex to switch to the non-preferred pipeline,\nit will switch back once that ingest is healthy again. If set to \\\"CURRENTLY_ACTIVE\\\",\nit will not switch back to the other pipeline based on it recovering to a healthy state,\nit will only switch if the active pipeline becomes unhealthy.\n",
+      "enum": [
+        "CURRENTLY_ACTIVE",
+        "PIPELINE_0",
+        "PIPELINE_1"
       ]
     },
     "PurchaseOfferingRequest": {

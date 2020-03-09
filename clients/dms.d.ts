@@ -505,7 +505,7 @@ declare namespace DMS {
   export type AuthTypeValue = "no"|"password"|string;
   export interface AvailabilityZone {
     /**
-     * The name of the availability zone.
+     * The name of the Availability Zone.
      */
     Name?: String;
   }
@@ -514,7 +514,7 @@ declare namespace DMS {
   export type BooleanOptional = boolean;
   export interface Certificate {
     /**
-     * A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      */
     CertificateIdentifier?: String;
     /**
@@ -559,11 +559,11 @@ declare namespace DMS {
   export type CompressionTypeValue = "none"|"gzip"|string;
   export interface Connection {
     /**
-     * The Amazon Resource Name (ARN) of the replication instance.
+     * The ARN of the replication instance.
      */
     ReplicationInstanceArn?: String;
     /**
-     * The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+     * The ARN string that uniquely identifies the endpoint.
      */
     EndpointArn?: String;
     /**
@@ -575,7 +575,7 @@ declare namespace DMS {
      */
     LastFailureMessage?: String;
     /**
-     * The identifier of the endpoint. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * The identifier of the endpoint. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      */
     EndpointIdentifier?: String;
     /**
@@ -586,7 +586,7 @@ declare namespace DMS {
   export type ConnectionList = Connection[];
   export interface CreateEndpointMessage {
     /**
-     * The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      */
     EndpointIdentifier: String;
     /**
@@ -594,7 +594,7 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
+     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", and "sqlserver".
      */
     EngineName: String;
     /**
@@ -646,7 +646,7 @@ declare namespace DMS {
      */
     ExternalTableDefinition?: String;
     /**
-     * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see Using Object Mapping to Migrate Data to DynamoDB in the AWS Database Migration Service User Guide. 
+     * Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other available settings, see Using Object Mapping to Migrate Data to DynamoDB in the AWS Database Migration Service User Guide. 
      */
     DynamoDbSettings?: DynamoDbSettings;
     /**
@@ -658,13 +658,17 @@ declare namespace DMS {
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
-     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in  Using MongoDB as a Target for AWS Database Migration Service in the AWS Database Migration Service User Guide. 
+     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in Using MongoDB as a Target for AWS Database Migration Service in the AWS Database Migration Service User Guide. 
      */
     MongoDbSettings?: MongoDbSettings;
     /**
-     * Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see Using Object Mapping to Migrate Data to a Kinesis Data Stream in the AWS Database Migration User Guide. 
+     * Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For information about other available settings, see Using Object Mapping to Migrate Data to a Kinesis Data Stream in the AWS Database Migration User Guide. 
      */
     KinesisSettings?: KinesisSettings;
+    /**
+     * Settings in JSON format for the target Apache Kafka endpoint. For information about other available settings, see Using Object Mapping to Migrate Data to Apache Kafka in the AWS Database Migration User Guide. 
+     */
+    KafkaSettings?: KafkaSettings;
     /**
      * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS in the AWS Database Migration User Guide. 
      */
@@ -687,7 +691,7 @@ declare namespace DMS {
      */
     SnsTopicArn: String;
     /**
-     *  The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to replication-instance. If this value is not specified, all events are returned.  Valid values: replication-instance | replication-task 
+     *  The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to replication-instance. If this value isn't specified, all events are returned.  Valid values: replication-instance | replication-task 
      */
     SourceType?: String;
     /**
@@ -715,7 +719,7 @@ declare namespace DMS {
   }
   export interface CreateReplicationInstanceMessage {
     /**
-     * The replication instance identifier. This parameter is stored as a lowercase string. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: myrepinstance 
+     * The replication instance identifier. This parameter is stored as a lowercase string. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: myrepinstance 
      */
     ReplicationInstanceIdentifier: String;
     /**
@@ -731,7 +735,7 @@ declare namespace DMS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The AWS Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's AWS Region, for example: us-east-1d 
+     * The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's AWS Region, for example: us-east-1d 
      */
     AvailabilityZone?: String;
     /**
@@ -743,7 +747,7 @@ declare namespace DMS {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     *  Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
+     *  Specifies whether the replication instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
      */
     MultiAZ?: BooleanOptional;
     /**
@@ -751,7 +755,7 @@ declare namespace DMS {
      */
     EngineVersion?: String;
     /**
-     * Indicates whether minor engine upgrades will be applied automatically to the replication instance during the maintenance window. This parameter defaults to true. Default: true 
+     * A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window. This parameter defaults to true. Default: true 
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
@@ -960,7 +964,7 @@ declare namespace DMS {
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the vlue specified by MaxRecords. 
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
      */
     Marker?: String;
   }
@@ -1276,7 +1280,7 @@ declare namespace DMS {
   }
   export interface DescribeReplicationTaskAssessmentResultsMessage {
     /**
-     * - The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified the API will return only one result and ignore the values of the max-records and marker parameters. 
+     * The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified, the API returns only one result and ignore the values of the MaxRecords and Marker parameters. 
      */
     ReplicationTaskArn?: String;
     /**
@@ -1417,7 +1421,7 @@ declare namespace DMS {
      */
     FullLoadErrorPercentage?: IntegerOptional;
     /**
-     * The maximum number of seconds that DMS retries failed API requests to the Elasticsearch cluster.
+     * The maximum number of seconds for which DMS retries failed API requests to the Elasticsearch cluster.
      */
     ErrorRetryDuration?: IntegerOptional;
   }
@@ -1425,7 +1429,7 @@ declare namespace DMS {
   export type EncryptionModeValue = "sse-s3"|"sse-kms"|string;
   export interface Endpoint {
     /**
-     * The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      */
     EndpointIdentifier?: String;
     /**
@@ -1433,7 +1437,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
+     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", and "sqlserver".
      */
     EngineName?: String;
     /**
@@ -1509,9 +1513,13 @@ declare namespace DMS {
      */
     MongoDbSettings?: MongoDbSettings;
     /**
-     * The settings for the Amazon Kinesis source endpoint. For more information, see the KinesisSettings structure.
+     * The settings for the Amazon Kinesis target endpoint. For more information, see the KinesisSettings structure.
      */
     KinesisSettings?: KinesisSettings;
+    /**
+     * The settings for the Apache Kafka target endpoint. For more information, see the KafkaSettings structure.
+     */
+    KafkaSettings?: KafkaSettings;
     /**
      * The settings for the Elasticsearch source endpoint. For more information, see the ElasticsearchSettings structure.
      */
@@ -1610,7 +1618,7 @@ declare namespace DMS {
   export type FilterValueList = String[];
   export interface ImportCertificateMessage {
     /**
-     * A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      */
     CertificateIdentifier: String;
     /**
@@ -1634,6 +1642,16 @@ declare namespace DMS {
   }
   export type Integer = number;
   export type IntegerOptional = number;
+  export interface KafkaSettings {
+    /**
+     * The broker location and port of the Kafka broker that hosts your Kafka instance. Specify the broker in the form  broker-hostname-or-ip:port . For example, "ec2-12-345-678-901.compute-1.amazonaws.com:2345".
+     */
+    Broker?: String;
+    /**
+     * The topic to which you migrate the data. If you don't specify a topic, AWS DMS specifies "kafka-default-topic" as the migration topic.
+     */
+    Topic?: String;
+  }
   export type KeyList = String[];
   export interface KinesisSettings {
     /**
@@ -1641,13 +1659,33 @@ declare namespace DMS {
      */
     StreamArn?: String;
     /**
-     * The output format for the records created on the endpoint. The message format is JSON.
+     * The output format for the records created on the endpoint. The message format is JSON (default) or JSON_UNFORMATTED (a single line with no tab).
      */
     MessageFormat?: MessageFormatValue;
     /**
-     * The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Amazon Kinesis data stream.
+     * The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role that AWS DMS uses to write to the Kinesis data stream.
      */
     ServiceAccessRoleArn?: String;
+    /**
+     * Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is False.
+     */
+    IncludeTransactionDetails?: BooleanOptional;
+    /**
+     * Shows the partition value within the Kinesis message output, unless the partition type is schema-table-type. The default is False.
+     */
+    IncludePartitionValue?: BooleanOptional;
+    /**
+     * Prefixes schema and table names to partition values, when the partition type is primary-key-type. Doing this increases data distribution among Kinesis shards. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same shard, which causes throttling. The default is False.
+     */
+    PartitionIncludeSchemaTable?: BooleanOptional;
+    /**
+     * Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is False.
+     */
+    IncludeTableAlterOperations?: BooleanOptional;
+    /**
+     * Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is False.
+     */
+    IncludeControlDetails?: BooleanOptional;
   }
   export interface ListTagsForResourceMessage {
     /**
@@ -1662,7 +1700,7 @@ declare namespace DMS {
     TagList?: TagList;
   }
   export type Long = number;
-  export type MessageFormatValue = "json"|string;
+  export type MessageFormatValue = "json"|"json-unformatted"|string;
   export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string;
   export interface ModifyEndpointMessage {
     /**
@@ -1670,7 +1708,7 @@ declare namespace DMS {
      */
     EndpointArn: String;
     /**
-     * The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+     * The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
      */
     EndpointIdentifier?: String;
     /**
@@ -1678,7 +1716,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
+     * The type of engine for the endpoint. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", and "sqlserver".
      */
     EngineName?: String;
     /**
@@ -1722,7 +1760,7 @@ declare namespace DMS {
      */
     ExternalTableDefinition?: String;
     /**
-     * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see Using Object Mapping to Migrate Data to DynamoDB in the AWS Database Migration Service User Guide. 
+     * Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other available settings, see Using Object Mapping to Migrate Data to DynamoDB in the AWS Database Migration Service User Guide. 
      */
     DynamoDbSettings?: DynamoDbSettings;
     /**
@@ -1730,7 +1768,7 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     * The settings in JSON format for the DMS transfer type of source endpoint.  Attributes include the following:   serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.   BucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.   Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON syntax:  { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } 
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Attributes include the following:   serviceAccessRoleArn - The AWS Identity and Access Management (IAM) role that has permission to access the Amazon S3 bucket.   BucketName - The name of the S3 bucket to use.   compressionType - An optional parameter to use GZIP to compress the target files. Either set this parameter to NONE (the default) or don't use it to leave the files uncompressed.   Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string  JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" }  
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
@@ -1738,9 +1776,13 @@ declare namespace DMS {
      */
     MongoDbSettings?: MongoDbSettings;
     /**
-     * Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see Using Object Mapping to Migrate Data to a Kinesis Data Stream in the AWS Database Migration User Guide. 
+     * Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For information about other available settings, see Using Object Mapping to Migrate Data to a Kinesis Data Stream in the AWS Database Migration User Guide. 
      */
     KinesisSettings?: KinesisSettings;
+    /**
+     * Settings in JSON format for the target Apache Kafka endpoint. For information about other available settings, see Using Object Mapping to Migrate Data to Apache Kafka in the AWS Database Migration User Guide. 
+     */
+    KafkaSettings?: KafkaSettings;
     /**
      * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS in the AWS Database Migration User Guide. 
      */
@@ -1807,7 +1849,7 @@ declare namespace DMS {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     *  Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
+     *  Specifies whether the replication instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
      */
     MultiAZ?: BooleanOptional;
     /**
@@ -1819,7 +1861,7 @@ declare namespace DMS {
      */
     AllowMajorVersionUpgrade?: Boolean;
     /**
-     *  Indicates that minor version upgrades will be applied automatically to the replication instance during the maintenance window. Changing this parameter does not result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to true during the maintenance window, and a newer minor version is available, and AWS DMS has enabled auto patching for that engine version. 
+     * A value that indicates that minor version upgrades are applied automatically to the replication instance during the maintenance window. Changing this parameter doesn't result in an outage, except in the case dsecribed following. The change is asynchronously applied as soon as possible.  An outage does result if these factors apply:    This parameter is set to true during the maintenance window.   A newer minor version is available.    AWS DMS has enabled automatic patching for the given engine version.   
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
@@ -1919,7 +1961,7 @@ declare namespace DMS {
      */
     AuthType?: AuthTypeValue;
     /**
-     *  The authentication mechanism you use to access the MongoDB source endpoint. Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1  DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This setting is not used when authType=No.
+     *  The authentication mechanism you use to access the MongoDB source endpoint. Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1  DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This setting isn't used when authType=No.
      */
     AuthMechanism?: AuthMechanismValue;
     /**
@@ -1935,7 +1977,7 @@ declare namespace DMS {
      */
     DocsToInvestigate?: String;
     /**
-     *  The MongoDB database name. This setting is not used when authType=NO.  The default is admin.
+     *  The MongoDB database name. This setting isn't used when authType=NO.  The default is admin.
      */
     AuthSource?: String;
     /**
@@ -1990,19 +2032,19 @@ declare namespace DMS {
      */
     Action?: String;
     /**
-     * The date of the maintenance window when the action will be applied. The maintenance action will be applied to the resource during its first maintenance window after this date. If this date is specified, any next-maintenance opt-in requests are ignored.
+     * The date of the maintenance window when the action is to be applied. The maintenance action is applied to the resource during its first maintenance window after this date. If this date is specified, any next-maintenance opt-in requests are ignored.
      */
     AutoAppliedAfterDate?: TStamp;
     /**
-     * The date when the maintenance action will be automatically applied. The maintenance action will be applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any immediate opt-in requests are ignored.
+     * The date when the maintenance action will be automatically applied. The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any immediate opt-in requests are ignored.
      */
     ForcedApplyDate?: TStamp;
     /**
-     * Indicates the type of opt-in request that has been received for the resource.
+     * The type of opt-in request that has been received for the resource.
      */
     OptInStatus?: String;
     /**
-     * The effective date when the pending maintenance action will be applied to the resource. This date takes into account opt-in requests received from the ApplyPendingMaintenanceAction API, the AutoAppliedAfterDate, and the ForcedApplyDate. This value is blank if an opt-in request has not been received and nothing has been specified as AutoAppliedAfterDate or ForcedApplyDate.
+     * The effective date when the pending maintenance action will be applied to the resource. This date takes into account opt-in requests received from the ApplyPendingMaintenanceAction API operation, and also the AutoAppliedAfterDate and ForcedApplyDate parameter values. This value is blank if an opt-in request has not been received and nothing has been specified for AutoAppliedAfterDate or ForcedApplyDate.
      */
     CurrentApplyDate?: TStamp;
     /**
@@ -2246,7 +2288,7 @@ declare namespace DMS {
      */
     PendingModifiedValues?: ReplicationPendingModifiedValues;
     /**
-     *  Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
+     *  Specifies whether the replication instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
      */
     MultiAZ?: Boolean;
     /**
@@ -2286,7 +2328,7 @@ declare namespace DMS {
      */
     PubliclyAccessible?: Boolean;
     /**
-     * The availability zone of the standby replication instance in a Multi-AZ deployment.
+     * The Availability Zone of the standby replication instance in a Multi-AZ deployment.
      */
     SecondaryAvailabilityZone?: String;
     /**
@@ -2326,7 +2368,7 @@ declare namespace DMS {
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     *  Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
+     *  Specifies whether the replication instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the Multi-AZ parameter is set to true. 
      */
     MultiAZ?: BooleanOptional;
     /**
@@ -2497,7 +2539,7 @@ declare namespace DMS {
      */
     StopDate?: TStamp;
     /**
-     * The date the the replication task full load was started.
+     * The date the replication task full load was started.
      */
     FullLoadStartDate?: TStamp;
     /**
@@ -2533,7 +2575,7 @@ declare namespace DMS {
      */
     CsvDelimiter?: String;
     /**
-     *  An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path  bucketFolder/schema_name/table_name/. If this parameter is not specified, then the path used is  schema_name/table_name/. 
+     *  An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path  bucketFolder/schema_name/table_name/. If this parameter isn't specified, then the path used is  schema_name/table_name/. 
      */
     BucketFolder?: String;
     /**
@@ -2541,7 +2583,7 @@ declare namespace DMS {
      */
     BucketName?: String;
     /**
-     *  An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. Applies to both .csv and .parquet file formats. 
+     * An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Either set this parameter to NONE (the default) or don't use it to leave the files uncompressed. This parameter applies to both .csv and .parquet file formats. 
      */
     CompressionType?: CompressionTypeValue;
     /**
@@ -2581,11 +2623,11 @@ declare namespace DMS {
      */
     EnableStatistics?: BooleanOptional;
     /**
-     * A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.  AWS DMS supports the IncludeOpForFullLoad parameter in versions 3.1.4 and later.  For full load, records can only be inserted. By default (the false setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If IncludeOpForFullLoad is set to true or y, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.  This setting works together with the CdcInsertsOnly parameter for output to .csv files only. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide.. 
+     * A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.  AWS DMS supports the IncludeOpForFullLoad parameter in versions 3.1.4 and later.  For full load, records can only be inserted. By default (the false setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If IncludeOpForFullLoad is set to true or y, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.  This setting works together with the CdcInsertsOnly and the CdcInsertsAndUpdates parameters for output to .csv files only. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide.. 
      */
     IncludeOpForFullLoad?: BooleanOptional;
     /**
-     * A value that enables a change data capture (CDC) load to write only INSERT operations to .csv or columnar storage (.parquet) output files. By default (the false setting), the first field in a .csv or .parquet record contains the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was inserted, updated, or deleted at the source database for a CDC load to the target. If CdcInsertsOnly is set to true or y, only INSERTs from the source database are migrated to the .csv or .parquet file. For .csv format only, how these INSERTs are recorded depends on the value of IncludeOpForFullLoad. If IncludeOpForFullLoad is set to true, the first field of every CDC record is set to I to indicate the INSERT operation at the source. If IncludeOpForFullLoad is set to false, every CDC record is written without a first field to indicate the INSERT operation at the source. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide..  AWS DMS supports this interaction between the CdcInsertsOnly and IncludeOpForFullLoad parameters in versions 3.1.4 and later.  
+     * A value that enables a change data capture (CDC) load to write only INSERT operations to .csv or columnar storage (.parquet) output files. By default (the false setting), the first field in a .csv or .parquet record contains the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was inserted, updated, or deleted at the source database for a CDC load to the target. If CdcInsertsOnly is set to true or y, only INSERTs from the source database are migrated to the .csv or .parquet file. For .csv format only, how these INSERTs are recorded depends on the value of IncludeOpForFullLoad. If IncludeOpForFullLoad is set to true, the first field of every CDC record is set to I to indicate the INSERT operation at the source. If IncludeOpForFullLoad is set to false, every CDC record is written without a first field to indicate the INSERT operation at the source. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide..  AWS DMS supports the interaction described preceding between the CdcInsertsOnly and IncludeOpForFullLoad parameters in versions 3.1.4 and later.   CdcInsertsOnly and CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set either CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but not both. 
      */
     CdcInsertsOnly?: BooleanOptional;
     /**
@@ -2596,6 +2638,10 @@ declare namespace DMS {
      * A value that specifies the precision of any TIMESTAMP column values that are written to an Amazon S3 object file in .parquet format.  AWS DMS supports the ParquetTimestampInMillisecond parameter in versions 3.1.4 and later.  When ParquetTimestampInMillisecond is set to true or y, AWS DMS writes all TIMESTAMP columns in a .parquet formatted file with millisecond precision. Otherwise, DMS writes them with microsecond precision. Currently, Amazon Athena and AWS Glue can handle only millisecond precision for TIMESTAMP values. Set this parameter to true for S3 endpoint object files that are .parquet formatted only if you plan to query or process the data with Athena or AWS Glue.  AWS DMS writes any TIMESTAMP column values written to an S3 file in .csv format with microsecond precision. Setting ParquetTimestampInMillisecond has no effect on the string format of the timestamp column value that is inserted by setting the TimestampColumnName parameter. 
      */
     ParquetTimestampInMillisecond?: BooleanOptional;
+    /**
+     * A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is false, but when CdcInsertsAndUpdates is set to trueor y, INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file.  For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the IncludeOpForFullLoad parameter. If IncludeOpForFullLoad is set to true, the first field of every CDC record is set to either I or U to indicate INSERT and UPDATE operations at the source. But if IncludeOpForFullLoad is set to false, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide..  AWS DMS supports the use of the CdcInsertsAndUpdates parameter in versions 3.3.1 and later.  CdcInsertsOnly and CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set either CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but not both. 
+     */
+    CdcInsertsAndUpdates?: BooleanOptional;
   }
   export type SchemaList = String[];
   export type SecretString = string;
@@ -2673,7 +2719,7 @@ declare namespace DMS {
   export type SubnetList = Subnet[];
   export interface SupportedEndpointType {
     /**
-     * The database engine name. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
+     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", and "sqlserver".
      */
     EngineName?: String;
     /**
@@ -2714,23 +2760,35 @@ declare namespace DMS {
      */
     Updates?: Long;
     /**
-     * The Data Definition Language (DDL) used to build and modify the structure of your tables.
+     * The data definition language (DDL) used to build and modify the structure of your tables.
      */
     Ddls?: Long;
     /**
-     * The number of rows added during the Full Load operation.
+     * The number of rows added during the full load operation.
      */
     FullLoadRows?: Long;
     /**
-     * The number of rows that failed conditional checks during the Full Load operation (valid only for DynamoDB as a target migrations).
+     * The number of rows that failed conditional checks during the full load operation (valid only for migrations where DynamoDB is the target).
      */
     FullLoadCondtnlChkFailedRows?: Long;
     /**
-     * The number of rows that failed to load during the Full Load operation (valid only for DynamoDB as a target migrations).
+     * The number of rows that failed to load during the full load operation (valid only for migrations where DynamoDB is the target).
      */
     FullLoadErrorRows?: Long;
     /**
-     * The last time the table was updated.
+     * The time when the full load operation started.
+     */
+    FullLoadStartTime?: TStamp;
+    /**
+     * The time when the full load operation completed.
+     */
+    FullLoadEndTime?: TStamp;
+    /**
+     * A value that indicates if the table was reloaded (true) or loaded as part of a new full load operation (false).
+     */
+    FullLoadReloaded?: BooleanOptional;
+    /**
+     * The last time a table was updated.
      */
     LastUpdateTime?: TStamp;
     /**
@@ -2746,11 +2804,11 @@ declare namespace DMS {
      */
     ValidationFailedRecords?: Long;
     /**
-     * The number of records that could not be validated.
+     * The number of records that couldn't be validated.
      */
     ValidationSuspendedRecords?: Long;
     /**
-     * The validation state of the table. The parameter can have the following values   Not enabled—Validation is not enabled for the table in the migration task.   Pending records—Some records in the table are waiting for validation.   Mismatched records—Some records in the table do not match between the source and target.   Suspended records—Some records in the table could not be validated.   No primary key—The table could not be validated because it had no primary key.   Table error—The table was not validated because it was in an error state and some data was not migrated.   Validated—All rows in the table were validated. If the table is updated, the status can change from Validated.   Error—The table could not be validated because of an unexpected error.  
+     * The validation state of the table. This parameter can have the following values:   Not enabled - Validation isn't enabled for the table in the migration task.   Pending records - Some records in the table are waiting for validation.   Mismatched records - Some records in the table don't match between the source and target.   Suspended records - Some records in the table couldn't be validated.   No primary key - The table couldn't be validated because it has no primary key.   Table error - The table wasn't validated because it's in an error state and some data wasn't migrated.   Validated - All rows in the table are validated. If the table is updated, the status can change from Validated.   Error - The table couldn't be validated because of an unexpected error.  
      */
     ValidationState?: String;
     /**
@@ -2771,11 +2829,11 @@ declare namespace DMS {
   }
   export interface Tag {
     /**
-     * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+     * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
      */
     Key?: String;
     /**
-     * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+     * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
      */
     Value?: String;
   }

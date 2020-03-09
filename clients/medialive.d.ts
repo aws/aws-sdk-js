@@ -4007,6 +4007,10 @@ The Multiplex must be in the same region as the Channel.
   }
   export interface MultiplexProgramSettings {
     /**
+     * Indicates which pipeline is preferred by the multiplex for program ingest.
+     */
+    PreferredChannelPipeline?: PreferredChannelPipeline;
+    /**
      * Unique program number.
      */
     ProgramNumber: __integerMin0Max65535;
@@ -4302,6 +4306,7 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     PipelineId: PipelineId;
   }
+  export type PreferredChannelPipeline = "CURRENTLY_ACTIVE"|"PIPELINE_0"|"PIPELINE_1"|string;
   export interface PurchaseOfferingRequest {
     /**
      * Number of resources

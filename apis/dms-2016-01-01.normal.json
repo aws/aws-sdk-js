@@ -1237,10 +1237,10 @@
       "members": {
         "Name": {
           "shape": "String",
-          "documentation": "<p>The name of the availability zone.</p>"
+          "documentation": "<p>The name of the Availability Zone.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>The name of the Availability Zone for use during database migration.</p>"
     },
     "AvailabilityZonesList": {
       "type": "list",
@@ -1259,7 +1259,7 @@
       "members": {
         "CertificateIdentifier": {
           "shape": "String",
-          "documentation": "<p>A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.</p>"
+          "documentation": "<p>A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>"
         },
         "CertificateCreationDate": {
           "shape": "TStamp",
@@ -1321,11 +1321,11 @@
       "members": {
         "ReplicationInstanceArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the replication instance.</p>"
+          "documentation": "<p>The ARN of the replication instance.</p>"
         },
         "EndpointArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>"
+          "documentation": "<p>The ARN string that uniquely identifies the endpoint.</p>"
         },
         "Status": {
           "shape": "String",
@@ -1337,14 +1337,14 @@
         },
         "EndpointIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the endpoint. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.</p>"
+          "documentation": "<p>The identifier of the endpoint. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>"
         },
         "ReplicationInstanceIdentifier": {
           "shape": "String",
           "documentation": "<p>The replication instance identifier. This parameter is stored as a lowercase string.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Status of the connection between an endpoint and a replication instance, including Amazon Resource Names (ARNs) and the last error message issued.</p>"
     },
     "ConnectionList": {
       "type": "list",
@@ -1362,7 +1362,7 @@
       "members": {
         "EndpointIdentifier": {
           "shape": "String",
-          "documentation": "<p>The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.</p>"
+          "documentation": "<p>The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>"
         },
         "EndpointType": {
           "shape": "ReplicationEndpointTypeValue",
@@ -1370,7 +1370,7 @@
         },
         "EngineName": {
           "shape": "String",
-          "documentation": "<p>The type of engine for the endpoint. Valid values, depending on the <code>EndpointType</code> value, include <code>mysql</code>, <code>oracle</code>, <code>postgres</code>, <code>mariadb</code>, <code>aurora</code>, <code>aurora-postgresql</code>, <code>redshift</code>, <code>s3</code>, <code>db2</code>, <code>azuredb</code>, <code>sybase</code>, <code>dynamodb</code>, <code>mongodb</code>, and <code>sqlserver</code>.</p>"
+          "documentation": "<p>The type of engine for the endpoint. Valid values, depending on the <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, and <code>\"sqlserver\"</code>.</p>"
         },
         "Username": {
           "shape": "String",
@@ -1422,7 +1422,7 @@
         },
         "DynamoDbSettings": {
           "shape": "DynamoDbSettings",
-          "documentation": "<p>Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html\">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html\">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         },
         "S3Settings": {
           "shape": "S3Settings",
@@ -1434,11 +1434,15 @@
         },
         "MongoDbSettings": {
           "shape": "MongoDbSettings",
-          "documentation": "<p>Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html\"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html\">Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         },
         "KinesisSettings": {
           "shape": "KinesisSettings",
-          "documentation": "<p>Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping\">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping\">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> </p>"
+        },
+        "KafkaSettings": {
+          "shape": "KafkaSettings",
+          "documentation": "<p>Settings in JSON format for the target Apache Kafka endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping\">Using Object Mapping to Migrate Data to Apache Kafka</a> in the <i>AWS Database Migration User Guide.</i> </p>"
         },
         "ElasticsearchSettings": {
           "shape": "ElasticsearchSettings",
@@ -1477,7 +1481,7 @@
         },
         "SourceType": {
           "shape": "String",
-          "documentation": "<p> The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to <code>replication-instance</code>. If this value is not specified, all events are returned. </p> <p>Valid values: <code>replication-instance</code> | <code>replication-task</code> </p>"
+          "documentation": "<p> The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to <code>replication-instance</code>. If this value isn't specified, all events are returned. </p> <p>Valid values: <code>replication-instance</code> | <code>replication-task</code> </p>"
         },
         "EventCategories": {
           "shape": "EventCategoriesList",
@@ -1517,7 +1521,7 @@
       "members": {
         "ReplicationInstanceIdentifier": {
           "shape": "String",
-          "documentation": "<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>"
+          "documentation": "<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>"
         },
         "AllocatedStorage": {
           "shape": "IntegerOptional",
@@ -1533,7 +1537,7 @@
         },
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p>The AWS Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's AWS Region, for example: <code>us-east-1d</code> </p>"
+          "documentation": "<p>The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's AWS Region, for example: <code>us-east-1d</code> </p>"
         },
         "ReplicationSubnetGroupIdentifier": {
           "shape": "String",
@@ -1545,7 +1549,7 @@
         },
         "MultiAZ": {
           "shape": "BooleanOptional",
-          "documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
+          "documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
         },
         "EngineVersion": {
           "shape": "String",
@@ -1553,7 +1557,7 @@
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates whether minor engine upgrades will be applied automatically to the replication instance during the maintenance window. This parameter defaults to <code>true</code>.</p> <p>Default: <code>true</code> </p>"
+          "documentation": "<p>A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window. This parameter defaults to <code>true</code>.</p> <p>Default: <code>true</code> </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1887,7 +1891,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the vlue specified by <code>MaxRecords</code>. </p>"
+          "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
         }
       }
     },
@@ -2309,7 +2313,7 @@
       "members": {
         "ReplicationTaskArn": {
           "shape": "String",
-          "documentation": "<p>- The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified the API will return only one result and ignore the values of the max-records and marker parameters. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified, the API returns only one result and ignore the values of the <code>MaxRecords</code> and <code>Marker</code> parameters. </p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -2488,7 +2492,7 @@
           "documentation": "<p> The Amazon Resource Name (ARN) used by the service access IAM role. </p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides the Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role used to define an Amazon DynamoDB target endpoint.</p>"
     },
     "ElasticsearchSettings": {
       "type": "structure",
@@ -2511,10 +2515,10 @@
         },
         "ErrorRetryDuration": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum number of seconds that DMS retries failed API requests to the Elasticsearch cluster.</p>"
+          "documentation": "<p>The maximum number of seconds for which DMS retries failed API requests to the Elasticsearch cluster.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information that defines an Elasticsearch endpoint.</p>"
     },
     "EncodingTypeValue": {
       "type": "string",
@@ -2536,7 +2540,7 @@
       "members": {
         "EndpointIdentifier": {
           "shape": "String",
-          "documentation": "<p>The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.</p>"
+          "documentation": "<p>The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>"
         },
         "EndpointType": {
           "shape": "ReplicationEndpointTypeValue",
@@ -2544,7 +2548,7 @@
         },
         "EngineName": {
           "shape": "String",
-          "documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.</p>"
+          "documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, and <code>\"sqlserver\"</code>.</p>"
         },
         "EngineDisplayName": {
           "shape": "String",
@@ -2620,7 +2624,11 @@
         },
         "KinesisSettings": {
           "shape": "KinesisSettings",
-          "documentation": "<p>The settings for the Amazon Kinesis source endpoint. For more information, see the <code>KinesisSettings</code> structure.</p>"
+          "documentation": "<p>The settings for the Amazon Kinesis target endpoint. For more information, see the <code>KinesisSettings</code> structure.</p>"
+        },
+        "KafkaSettings": {
+          "shape": "KafkaSettings",
+          "documentation": "<p>The settings for the Apache Kafka target endpoint. For more information, see the <code>KafkaSettings</code> structure.</p>"
         },
         "ElasticsearchSettings": {
           "shape": "ElasticsearchSettings",
@@ -2631,7 +2639,7 @@
           "documentation": "<p>Settings for the Amazon Redshift endpoint.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Describes an endpoint of a database instance in response to operations such as the following:</p> <ul> <li> <p> <code>CreateEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpointTypes</code> </p> </li> <li> <p> <code>ModifyEndpoint</code> </p> </li> </ul>"
     },
     "EndpointList": {
       "type": "list",
@@ -2663,7 +2671,7 @@
           "documentation": "<p>The date of the event.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Describes an identifiable significant activity that affects a replication instance or task. This object can provide the message, the available event categories, the date and source of the event, and the AWS DMS resource type.</p>"
     },
     "EventCategoriesList": {
       "type": "list",
@@ -2683,7 +2691,7 @@
           "documentation": "<p> A list of event categories from a source type that you've chosen.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Lists categories of events subscribed to, and generated by, the applicable AWS DMS resource type.</p>"
     },
     "EventCategoryGroupList": {
       "type": "list",
@@ -2737,7 +2745,7 @@
           "documentation": "<p>Boolean value that indicates if the event subscription is enabled.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Describes an event notification subscription created by the <code>CreateEventSubscription</code> operation.</p>"
     },
     "EventSubscriptionsList": {
       "type": "list",
@@ -2761,7 +2769,7 @@
           "documentation": "<p>The filter value.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Identifies the name and value of a source filter object used to limit the number and type of records transferred from your source to your target.</p>"
     },
     "FilterList": {
       "type": "list",
@@ -2783,7 +2791,7 @@
       "members": {
         "CertificateIdentifier": {
           "shape": "String",
-          "documentation": "<p>A customer-assigned name for the certificate. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.</p>"
+          "documentation": "<p>A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>"
         },
         "CertificatePem": {
           "shape": "String",
@@ -2814,6 +2822,20 @@
     "IntegerOptional": {
       "type": "integer"
     },
+    "KafkaSettings": {
+      "type": "structure",
+      "members": {
+        "Broker": {
+          "shape": "String",
+          "documentation": "<p>The broker location and port of the Kafka broker that hosts your Kafka instance. Specify the broker in the form <code> <i>broker-hostname-or-ip</i>:<i>port</i> </code>. For example, <code>\"ec2-12-345-678-901.compute-1.amazonaws.com:2345\"</code>.</p>"
+        },
+        "Topic": {
+          "shape": "String",
+          "documentation": "<p>The topic to which you migrate the data. If you don't specify a topic, AWS DMS specifies <code>\"kafka-default-topic\"</code> as the migration topic.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.</p>"
+    },
     "KeyList": {
       "type": "list",
       "member": {
@@ -2829,14 +2851,34 @@
         },
         "MessageFormat": {
           "shape": "MessageFormatValue",
-          "documentation": "<p>The output format for the records created on the endpoint. The message format is <code>JSON</code>.</p>"
+          "documentation": "<p>The output format for the records created on the endpoint. The message format is <code>JSON</code> (default) or <code>JSON_UNFORMATTED</code> (a single line with no tab).</p>"
         },
         "ServiceAccessRoleArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Amazon Kinesis data stream.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role that AWS DMS uses to write to the Kinesis data stream.</p>"
+        },
+        "IncludeTransactionDetails": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for <code>transaction_id</code>, previous <code>transaction_id</code>, and <code>transaction_record_id</code> (the record offset within a transaction). The default is <code>False</code>.</p>"
+        },
+        "IncludePartitionValue": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Shows the partition value within the Kinesis message output, unless the partition type is <code>schema-table-type</code>. The default is <code>False</code>.</p>"
+        },
+        "PartitionIncludeSchemaTable": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Prefixes schema and table names to partition values, when the partition type is <code>primary-key-type</code>. Doing this increases data distribution among Kinesis shards. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same shard, which causes throttling. The default is <code>False</code>.</p>"
+        },
+        "IncludeTableAlterOperations": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Includes any data definition language (DDL) operations that change the table in the control data, such as <code>rename-table</code>, <code>drop-table</code>, <code>add-column</code>, <code>drop-column</code>, and <code>rename-column</code>. The default is <code>False</code>.</p>"
+        },
+        "IncludeControlDetails": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is <code>False</code>.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information that describes an Amazon Kinesis Data Stream endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.</p>"
     },
     "ListTagsForResourceMessage": {
       "type": "structure",
@@ -2867,7 +2909,8 @@
     "MessageFormatValue": {
       "type": "string",
       "enum": [
-        "json"
+        "json",
+        "json-unformatted"
       ]
     },
     "MigrationTypeValue": {
@@ -2890,7 +2933,7 @@
         },
         "EndpointIdentifier": {
           "shape": "String",
-          "documentation": "<p>The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.</p>"
+          "documentation": "<p>The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>"
         },
         "EndpointType": {
           "shape": "ReplicationEndpointTypeValue",
@@ -2898,7 +2941,7 @@
         },
         "EngineName": {
           "shape": "String",
-          "documentation": "<p>The type of engine for the endpoint. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.</p>"
+          "documentation": "<p>The type of engine for the endpoint. Valid values, depending on the EndpointType, include <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, and <code>\"sqlserver\"</code>.</p>"
         },
         "Username": {
           "shape": "String",
@@ -2942,7 +2985,7 @@
         },
         "DynamoDbSettings": {
           "shape": "DynamoDbSettings",
-          "documentation": "<p>Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html\">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html\">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         },
         "S3Settings": {
           "shape": "S3Settings",
@@ -2950,7 +2993,7 @@
         },
         "DmsTransferSettings": {
           "shape": "DmsTransferSettings",
-          "documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Attributes include the following:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { \"ServiceAccessRoleArn\": \"string\", \"BucketName\": \"string\", \"CompressionType\": \"none\"|\"gzip\" } </p>"
+          "documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Attributes include the following:</p> <ul> <li> <p>serviceAccessRoleArn - The AWS Identity and Access Management (IAM) role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Either set this parameter to NONE (the default) or don't use it to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\": \"string\", \"BucketName\": \"string\", \"CompressionType\": \"none\"|\"gzip\" } </code> </p>"
         },
         "MongoDbSettings": {
           "shape": "MongoDbSettings",
@@ -2958,7 +3001,11 @@
         },
         "KinesisSettings": {
           "shape": "KinesisSettings",
-          "documentation": "<p>Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping\">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping\">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> </p>"
+        },
+        "KafkaSettings": {
+          "shape": "KafkaSettings",
+          "documentation": "<p>Settings in JSON format for the target Apache Kafka endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping\">Using Object Mapping to Migrate Data to Apache Kafka</a> in the <i>AWS Database Migration User Guide.</i> </p>"
         },
         "ElasticsearchSettings": {
           "shape": "ElasticsearchSettings",
@@ -3051,7 +3098,7 @@
         },
         "MultiAZ": {
           "shape": "BooleanOptional",
-          "documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
+          "documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
         },
         "EngineVersion": {
           "shape": "String",
@@ -3063,7 +3110,7 @@
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p> Indicates that minor version upgrades will be applied automatically to the replication instance during the maintenance window. Changing this parameter does not result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to <code>true</code> during the maintenance window, and a newer minor version is available, and AWS DMS has enabled auto patching for that engine version. </p>"
+          "documentation": "<p>A value that indicates that minor version upgrades are applied automatically to the replication instance during the maintenance window. Changing this parameter doesn't result in an outage, except in the case dsecribed following. The change is asynchronously applied as soon as possible. </p> <p>An outage does result if these factors apply: </p> <ul> <li> <p>This parameter is set to <code>true</code> during the maintenance window.</p> </li> <li> <p>A newer minor version is available. </p> </li> <li> <p>AWS DMS has enabled automatic patching for the given engine version. </p> </li> </ul>"
         },
         "ReplicationInstanceIdentifier": {
           "shape": "String",
@@ -3194,7 +3241,7 @@
         },
         "AuthMechanism": {
           "shape": "AuthMechanismValue",
-          "documentation": "<p> The authentication mechanism you use to access the MongoDB source endpoint.</p> <p>Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1 </p> <p>DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This setting is not used when authType=No.</p>"
+          "documentation": "<p> The authentication mechanism you use to access the MongoDB source endpoint.</p> <p>Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1 </p> <p>DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This setting isn't used when authType=No.</p>"
         },
         "NestingLevel": {
           "shape": "NestingLevelValue",
@@ -3210,14 +3257,14 @@
         },
         "AuthSource": {
           "shape": "String",
-          "documentation": "<p> The MongoDB database name. This setting is not used when <code>authType=NO</code>. </p> <p>The default is admin.</p>"
+          "documentation": "<p> The MongoDB database name. This setting isn't used when <code>authType=NO</code>. </p> <p>The default is admin.</p>"
         },
         "KmsKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information that defines a MongoDB endpoint.</p>"
     },
     "NestingLevelValue": {
       "type": "string",
@@ -3266,7 +3313,7 @@
           "documentation": "<p>The value returned when the specified <code>EngineVersion</code> of the replication instance is in Beta or test mode. This indicates some features might not work as expected.</p> <note> <p>AWS DMS supports the <code>ReleaseStatus</code> parameter in versions 3.1.4 and later.</p> </note>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>In response to the <code>DescribeOrderableReplicationInstances</code> operation, this object describes an available replication instance. This description includes the replication instance's type, engine version, and allocated storage.</p>"
     },
     "OrderableReplicationInstanceList": {
       "type": "list",
@@ -3290,26 +3337,26 @@
         },
         "AutoAppliedAfterDate": {
           "shape": "TStamp",
-          "documentation": "<p>The date of the maintenance window when the action will be applied. The maintenance action will be applied to the resource during its first maintenance window after this date. If this date is specified, any <code>next-maintenance</code> opt-in requests are ignored.</p>"
+          "documentation": "<p>The date of the maintenance window when the action is to be applied. The maintenance action is applied to the resource during its first maintenance window after this date. If this date is specified, any <code>next-maintenance</code> opt-in requests are ignored.</p>"
         },
         "ForcedApplyDate": {
           "shape": "TStamp",
-          "documentation": "<p>The date when the maintenance action will be automatically applied. The maintenance action will be applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any <code>immediate</code> opt-in requests are ignored.</p>"
+          "documentation": "<p>The date when the maintenance action will be automatically applied. The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any <code>immediate</code> opt-in requests are ignored.</p>"
         },
         "OptInStatus": {
           "shape": "String",
-          "documentation": "<p>Indicates the type of opt-in request that has been received for the resource.</p>"
+          "documentation": "<p>The type of opt-in request that has been received for the resource.</p>"
         },
         "CurrentApplyDate": {
           "shape": "TStamp",
-          "documentation": "<p>The effective date when the pending maintenance action will be applied to the resource. This date takes into account opt-in requests received from the <code>ApplyPendingMaintenanceAction</code> API, the <code>AutoAppliedAfterDate</code>, and the <code>ForcedApplyDate</code>. This value is blank if an opt-in request has not been received and nothing has been specified as <code>AutoAppliedAfterDate</code> or <code>ForcedApplyDate</code>.</p>"
+          "documentation": "<p>The effective date when the pending maintenance action will be applied to the resource. This date takes into account opt-in requests received from the <code>ApplyPendingMaintenanceAction</code> API operation, and also the <code>AutoAppliedAfterDate</code> and <code>ForcedApplyDate</code> parameter values. This value is blank if an opt-in request has not been received and nothing has been specified for <code>AutoAppliedAfterDate</code> or <code>ForcedApplyDate</code>.</p>"
         },
         "Description": {
           "shape": "String",
           "documentation": "<p>A description providing more detail about the maintenance action.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Describes a maintenance action pending for an AWS DMS resource, including when and how it will be applied. This data type is a response element to the <code>DescribePendingMaintenanceActions</code> operation.</p>"
     },
     "PendingMaintenanceActionDetails": {
       "type": "list",
@@ -3452,7 +3499,7 @@
           "documentation": "<p>The size of the write buffer to use in rows. Valid values range from 1 through 2,048. The default is 1,024. Use this setting to tune performance. </p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information that defines an Amazon Redshift endpoint.</p>"
     },
     "RefreshSchemasMessage": {
       "type": "structure",
@@ -3506,7 +3553,7 @@
           "documentation": "<p>The last failure message for the schema.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information that describes status of a schema at an endpoint specified by the <code>DescribeRefreshSchemaStatus</code> operation.</p>"
     },
     "RefreshSchemasStatusTypeValue": {
       "type": "string",
@@ -3634,7 +3681,7 @@
         },
         "MultiAZ": {
           "shape": "Boolean",
-          "documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
+          "documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
         },
         "EngineVersion": {
           "shape": "String",
@@ -3676,7 +3723,7 @@
         },
         "SecondaryAvailabilityZone": {
           "shape": "String",
-          "documentation": "<p>The availability zone of the standby replication instance in a Multi-AZ deployment.</p>"
+          "documentation": "<p>The Availability Zone of the standby replication instance in a Multi-AZ deployment.</p>"
         },
         "FreeUntil": {
           "shape": "TStamp",
@@ -3687,7 +3734,7 @@
           "documentation": "<p>The DNS name servers for the replication instance.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information that defines a replication instance.</p>"
     },
     "ReplicationInstanceList": {
       "type": "list",
@@ -3744,14 +3791,14 @@
         },
         "MultiAZ": {
           "shape": "BooleanOptional",
-          "documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
+          "documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
         },
         "EngineVersion": {
           "shape": "String",
           "documentation": "<p>The engine version number of the replication instance.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information about the values of pending modifications to a replication instance. This data type is an object of the <code>ReplicationInstance</code> user-defined data type. </p>"
     },
     "ReplicationSubnetGroup": {
       "type": "structure",
@@ -3777,7 +3824,7 @@
           "documentation": "<p>The subnets that are in the subnet group.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Describes a subnet group in response to a request by the <code>DescribeReplicationSubnetGroup</code> operation.</p>"
     },
     "ReplicationSubnetGroups": {
       "type": "list",
@@ -3857,7 +3904,7 @@
           "documentation": "<p>The statistics for the task, including elapsed time, tables loaded, and table errors.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information that describes a replication task created by the <code>CreateReplicationTask</code> operation.</p>"
     },
     "ReplicationTaskAssessmentResult": {
       "type": "structure",
@@ -3946,14 +3993,14 @@
         },
         "FullLoadStartDate": {
           "shape": "TStamp",
-          "documentation": "<p>The date the the replication task full load was started.</p>"
+          "documentation": "<p>The date the replication task full load was started.</p>"
         },
         "FullLoadFinishDate": {
           "shape": "TStamp",
           "documentation": "<p>The date the replication task full load was completed.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>In response to a request by the <code>DescribeReplicationTasks</code> operation, this object provides a collection of statistics about a replication task.</p>"
     },
     "ResourcePendingMaintenanceActions": {
       "type": "structure",
@@ -3967,7 +4014,7 @@
           "documentation": "<p>Detailed information about the pending maintenance action.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Identifies an AWS DMS resource and any pending actions for it.</p>"
     },
     "S3Settings": {
       "type": "structure",
@@ -3990,7 +4037,7 @@
         },
         "BucketFolder": {
           "shape": "String",
-          "documentation": "<p> An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path <code> <i>bucketFolder</i>/<i>schema_name</i>/<i>table_name</i>/</code>. If this parameter is not specified, then the path used is <code> <i>schema_name</i>/<i>table_name</i>/</code>. </p>"
+          "documentation": "<p> An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path <code> <i>bucketFolder</i>/<i>schema_name</i>/<i>table_name</i>/</code>. If this parameter isn't specified, then the path used is <code> <i>schema_name</i>/<i>table_name</i>/</code>. </p>"
         },
         "BucketName": {
           "shape": "String",
@@ -3998,7 +4045,7 @@
         },
         "CompressionType": {
           "shape": "CompressionTypeValue",
-          "documentation": "<p> An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. Applies to both .csv and .parquet file formats. </p>"
+          "documentation": "<p>An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Either set this parameter to NONE (the default) or don't use it to leave the files uncompressed. This parameter applies to both .csv and .parquet file formats. </p>"
         },
         "EncryptionMode": {
           "shape": "EncryptionModeValue",
@@ -4038,11 +4085,11 @@
         },
         "IncludeOpForFullLoad": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.</p> <note> <p>AWS DMS supports the <code>IncludeOpForFullLoad</code> parameter in versions 3.1.4 and later.</p> </note> <p>For full load, records can only be inserted. By default (the <code>false</code> setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If <code>IncludeOpForFullLoad</code> is set to <code>true</code> or <code>y</code>, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.</p> <note> <p>This setting works together with the <code>CdcInsertsOnly</code> parameter for output to .csv files only. For more information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS Database Migration Service User Guide.</i>.</p> </note>"
+          "documentation": "<p>A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.</p> <note> <p>AWS DMS supports the <code>IncludeOpForFullLoad</code> parameter in versions 3.1.4 and later.</p> </note> <p>For full load, records can only be inserted. By default (the <code>false</code> setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If <code>IncludeOpForFullLoad</code> is set to <code>true</code> or <code>y</code>, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.</p> <note> <p>This setting works together with the <code>CdcInsertsOnly</code> and the <code>CdcInsertsAndUpdates</code> parameters for output to .csv files only. For more information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS Database Migration Service User Guide.</i>.</p> </note>"
         },
         "CdcInsertsOnly": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that enables a change data capture (CDC) load to write only INSERT operations to .csv or columnar storage (.parquet) output files. By default (the <code>false</code> setting), the first field in a .csv or .parquet record contains the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was inserted, updated, or deleted at the source database for a CDC load to the target.</p> <p>If <code>CdcInsertsOnly</code> is set to <code>true</code> or <code>y</code>, only INSERTs from the source database are migrated to the .csv or .parquet file. For .csv format only, how these INSERTs are recorded depends on the value of <code>IncludeOpForFullLoad</code>. If <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every CDC record is set to I to indicate the INSERT operation at the source. If <code>IncludeOpForFullLoad</code> is set to <code>false</code>, every CDC record is written without a first field to indicate the INSERT operation at the source. For more information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS Database Migration Service User Guide.</i>.</p> <note> <p>AWS DMS supports this interaction between the <code>CdcInsertsOnly</code> and <code>IncludeOpForFullLoad</code> parameters in versions 3.1.4 and later. </p> </note>"
+          "documentation": "<p>A value that enables a change data capture (CDC) load to write only INSERT operations to .csv or columnar storage (.parquet) output files. By default (the <code>false</code> setting), the first field in a .csv or .parquet record contains the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was inserted, updated, or deleted at the source database for a CDC load to the target.</p> <p>If <code>CdcInsertsOnly</code> is set to <code>true</code> or <code>y</code>, only INSERTs from the source database are migrated to the .csv or .parquet file. For .csv format only, how these INSERTs are recorded depends on the value of <code>IncludeOpForFullLoad</code>. If <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every CDC record is set to I to indicate the INSERT operation at the source. If <code>IncludeOpForFullLoad</code> is set to <code>false</code>, every CDC record is written without a first field to indicate the INSERT operation at the source. For more information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS Database Migration Service User Guide.</i>.</p> <note> <p>AWS DMS supports the interaction described preceding between the <code>CdcInsertsOnly</code> and <code>IncludeOpForFullLoad</code> parameters in versions 3.1.4 and later. </p> <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can't both be set to <code>true</code> for the same endpoint. Set either <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code> for the same endpoint, but not both.</p> </note>"
         },
         "TimestampColumnName": {
           "shape": "String",
@@ -4051,6 +4098,10 @@
         "ParquetTimestampInMillisecond": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that specifies the precision of any <code>TIMESTAMP</code> column values that are written to an Amazon S3 object file in .parquet format.</p> <note> <p>AWS DMS supports the <code>ParquetTimestampInMillisecond</code> parameter in versions 3.1.4 and later.</p> </note> <p>When <code>ParquetTimestampInMillisecond</code> is set to <code>true</code> or <code>y</code>, AWS DMS writes all <code>TIMESTAMP</code> columns in a .parquet formatted file with millisecond precision. Otherwise, DMS writes them with microsecond precision.</p> <p>Currently, Amazon Athena and AWS Glue can handle only millisecond precision for <code>TIMESTAMP</code> values. Set this parameter to <code>true</code> for S3 endpoint object files that are .parquet formatted only if you plan to query or process the data with Athena or AWS Glue.</p> <note> <p>AWS DMS writes any <code>TIMESTAMP</code> column values written to an S3 file in .csv format with microsecond precision.</p> <p>Setting <code>ParquetTimestampInMillisecond</code> has no effect on the string format of the timestamp column value that is inserted by setting the <code>TimestampColumnName</code> parameter.</p> </note>"
+        },
+        "CdcInsertsAndUpdates": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is <code>false</code>, but when <code>CdcInsertsAndUpdates</code> is set to <code>true</code>or <code>y</code>, INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file. </p> <p>For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the <code>IncludeOpForFullLoad</code> parameter. If <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every CDC record is set to either <code>I</code> or <code>U</code> to indicate INSERT and UPDATE operations at the source. But if <code>IncludeOpForFullLoad</code> is set to <code>false</code>, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS Database Migration Service User Guide.</i>.</p> <note> <p>AWS DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in versions 3.3.1 and later.</p> <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can't both be set to <code>true</code> for the same endpoint. Set either <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code> for the same endpoint, but not both.</p> </note>"
         }
       },
       "documentation": "<p>Settings for exporting data to Amazon S3. </p>"
@@ -4190,7 +4241,7 @@
           "documentation": "<p>The status of the subnet.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>In response to a request by the <code>DescribeReplicationSubnetGroup</code> operation, this object identifies a subnet by its given Availability Zone, subnet identifier, and status.</p>"
     },
     "SubnetIdentifierList": {
       "type": "list",
@@ -4209,7 +4260,7 @@
       "members": {
         "EngineName": {
           "shape": "String",
-          "documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.</p>"
+          "documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, and <code>\"sqlserver\"</code>.</p>"
         },
         "SupportsCDC": {
           "shape": "Boolean",
@@ -4224,7 +4275,7 @@
           "documentation": "<p>The expanded name for the engine name. For example, if the <code>EngineName</code> parameter is \"aurora,\" this value would be \"Amazon Aurora MySQL.\"</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides information about types of supported endpoints in response to a request by the <code>DescribeEndpointTypes</code> operation. This information includes the type of endpoint, the database engine name, and whether change data capture (CDC) is supported.</p>"
     },
     "SupportedEndpointTypeList": {
       "type": "list",
@@ -4266,23 +4317,35 @@
         },
         "Ddls": {
           "shape": "Long",
-          "documentation": "<p>The Data Definition Language (DDL) used to build and modify the structure of your tables.</p>"
+          "documentation": "<p>The data definition language (DDL) used to build and modify the structure of your tables.</p>"
         },
         "FullLoadRows": {
           "shape": "Long",
-          "documentation": "<p>The number of rows added during the Full Load operation.</p>"
+          "documentation": "<p>The number of rows added during the full load operation.</p>"
         },
         "FullLoadCondtnlChkFailedRows": {
           "shape": "Long",
-          "documentation": "<p>The number of rows that failed conditional checks during the Full Load operation (valid only for DynamoDB as a target migrations).</p>"
+          "documentation": "<p>The number of rows that failed conditional checks during the full load operation (valid only for migrations where DynamoDB is the target).</p>"
         },
         "FullLoadErrorRows": {
           "shape": "Long",
-          "documentation": "<p>The number of rows that failed to load during the Full Load operation (valid only for DynamoDB as a target migrations).</p>"
+          "documentation": "<p>The number of rows that failed to load during the full load operation (valid only for migrations where DynamoDB is the target).</p>"
+        },
+        "FullLoadStartTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The time when the full load operation started.</p>"
+        },
+        "FullLoadEndTime": {
+          "shape": "TStamp",
+          "documentation": "<p>The time when the full load operation completed.</p>"
+        },
+        "FullLoadReloaded": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that indicates if the table was reloaded (<code>true</code>) or loaded as part of a new full load operation (<code>false</code>).</p>"
         },
         "LastUpdateTime": {
           "shape": "TStamp",
-          "documentation": "<p>The last time the table was updated.</p>"
+          "documentation": "<p>The last time a table was updated.</p>"
         },
         "TableState": {
           "shape": "String",
@@ -4298,18 +4361,18 @@
         },
         "ValidationSuspendedRecords": {
           "shape": "Long",
-          "documentation": "<p>The number of records that could not be validated.</p>"
+          "documentation": "<p>The number of records that couldn't be validated.</p>"
         },
         "ValidationState": {
           "shape": "String",
-          "documentation": "<p>The validation state of the table.</p> <p>The parameter can have the following values</p> <ul> <li> <p>Not enabled—Validation is not enabled for the table in the migration task.</p> </li> <li> <p>Pending records—Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records—Some records in the table do not match between the source and target.</p> </li> <li> <p>Suspended records—Some records in the table could not be validated.</p> </li> <li> <p>No primary key—The table could not be validated because it had no primary key.</p> </li> <li> <p>Table error—The table was not validated because it was in an error state and some data was not migrated.</p> </li> <li> <p>Validated—All rows in the table were validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error—The table could not be validated because of an unexpected error.</p> </li> </ul>"
+          "documentation": "<p>The validation state of the table.</p> <p>This parameter can have the following values:</p> <ul> <li> <p>Not enabled - Validation isn't enabled for the table in the migration task.</p> </li> <li> <p>Pending records - Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records - Some records in the table don't match between the source and target.</p> </li> <li> <p>Suspended records - Some records in the table couldn't be validated.</p> </li> <li> <p>No primary key - The table couldn't be validated because it has no primary key.</p> </li> <li> <p>Table error - The table wasn't validated because it's in an error state and some data wasn't migrated.</p> </li> <li> <p>Validated - All rows in the table are validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error - The table couldn't be validated because of an unexpected error.</p> </li> </ul>"
         },
         "ValidationStateDetails": {
           "shape": "String",
           "documentation": "<p>Additional details about the state of validation.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides a collection of table statistics in response to a request by the <code>DescribeTableStatistics</code> operation.</p>"
     },
     "TableStatisticsList": {
       "type": "list",
@@ -4329,21 +4392,21 @@
           "documentation": "<p>The table name of the table to be reloaded.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Provides the name of the schema and table to be reloaded.</p>"
     },
     "Tag": {
       "type": "structure",
       "members": {
         "Key": {
           "shape": "String",
-          "documentation": "<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with \"aws:\" or \"dms:\". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+          "documentation": "<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with \"aws:\" or \"dms:\". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
         },
         "Value": {
           "shape": "String",
-          "documentation": "<p>A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with \"aws:\" or \"dms:\". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+          "documentation": "<p>A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with \"aws:\" or \"dms:\". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>A user-defined key-value pair that describes metadata added to an AWS DMS resource and that is used by operations such as the following:</p> <ul> <li> <p> <code>AddTagsToResource</code> </p> </li> <li> <p> <code>ListTagsForResource</code> </p> </li> <li> <p> <code>RemoveTagsFromResource</code> </p> </li> </ul>"
     },
     "TagList": {
       "type": "list",
@@ -4397,7 +4460,7 @@
           "documentation": "<p>The status of the VPC security group.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Describes status of a security group associated with the virtual private cloud hosting your replication and DB instances.</p>"
     },
     "VpcSecurityGroupMembershipList": {
       "type": "list",

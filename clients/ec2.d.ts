@@ -6185,9 +6185,17 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
      * The subnet in which to create the NAT gateway.
      */
     SubnetId: SubnetId;
+    /**
+     * The tags to assign to the NAT gateway.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateNatGatewayResult {
     /**
@@ -7623,6 +7631,10 @@ declare namespace EC2 {
     LocalGatewayRouteTableVpcAssociation?: LocalGatewayRouteTableVpcAssociation;
   }
   export interface DeleteNatGatewayRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
     /**
      * The ID of the NAT gateway.
      */
@@ -9912,6 +9924,10 @@ declare namespace EC2 {
   }
   export type DescribeNatGatewaysMaxResults = number;
   export interface DescribeNatGatewaysRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
     /**
      * One or more filters.    nat-gateway-id - The ID of the NAT gateway.    state - The state of the NAT gateway (pending | failed | available | deleting | deleted).    subnet-id - The ID of the subnet in which the NAT gateway resides.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC in which the NAT gateway resides.  
      */
