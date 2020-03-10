@@ -459,6 +459,40 @@
       ],
       "documentation": "<p>Sets the permission policy for an application. For the list of actions supported for this operation, see\n <a href=\"https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions\">Application \n Permissions</a>\n .</p>"
     },
+    "UnshareApplication": {
+      "name": "UnshareApplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/applications/{applicationId}/unshare",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UnshareApplicationRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource (for example, an access policy statement) specified in the request doesn't exist.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>One of the parameters in the request is invalid.</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The client is not authenticated.</p>"
+        }
+      ],
+      "documentation": "<p>Unshares an application from an AWS Organization.</p><p>This operation can be called only from the organization's master account.</p>"
+    },
     "UpdateApplication": {
       "name": "UpdateApplication",
       "http": {
@@ -530,6 +564,11 @@
           "shape": "__listOf__string",
           "locationName": "actions",
           "documentation": "<p>For the list of actions supported for this operation, see <a href=\"https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions\">Application \n Permissions</a>.</p>"
+        },
+        "PrincipalOrgIDs": {
+          "shape": "__listOf__string",
+          "locationName": "principalOrgIDs",
+          "documentation": "<p>An array of PrinciplalOrgIDs, which corresponds to AWS IAM <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id\">aws:PrincipalOrgID</a> global condition key.</p>"
         },
         "Principals": {
           "shape": "__listOf__string",
@@ -1516,6 +1555,26 @@
       "required": [
         "Value",
         "Key"
+      ]
+    },
+    "UnshareApplicationRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "applicationId",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the application.</p>"
+        },
+        "OrganizationId": {
+          "shape": "__string",
+          "locationName": "organizationId",
+          "documentation": "<p>The AWS Organization ID to unshare the application from.</p>"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "OrganizationId"
       ]
     },
     "UpdateApplicationRequest": {

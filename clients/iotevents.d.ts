@@ -708,9 +708,13 @@ declare namespace IoTEvents {
      */
     timerName: TimerName;
     /**
-     * The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds. 
+     * The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.
      */
-    seconds: Seconds;
+    seconds?: Seconds;
+    /**
+     * The duration of the timer, in seconds. You can use a string expression that includes numbers, variables ($variable.&lt;variable-name&gt;), and input values ($input.&lt;input-name&gt;.&lt;path-to-datum&gt;) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number. 
+     */
+    durationExpression?: VariableValue;
   }
   export interface SetVariableAction {
     /**
@@ -728,7 +732,7 @@ declare namespace IoTEvents {
      */
     queueUrl: QueueUrl;
     /**
-     * Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.
+     * Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue.
      */
     useBase64?: UseBase64;
   }

@@ -1474,7 +1474,7 @@
           "documentation": "<p>The name of the timer to reset.</p>"
         }
       },
-      "documentation": "<p>Information needed to reset the timer.</p>"
+      "documentation": "<p>Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. </p>"
     },
     "SNSTopicPublishAction": {
       "type": "structure",
@@ -1490,13 +1490,14 @@
       "documentation": "<p>Information required to publish the Amazon SNS message.</p>"
     },
     "Seconds": {
-      "type": "integer"
+      "type": "integer",
+      "max": 31622400,
+      "min": 1
     },
     "SetTimerAction": {
       "type": "structure",
       "required": [
-        "timerName",
-        "seconds"
+        "timerName"
       ],
       "members": {
         "timerName": {
@@ -1505,7 +1506,13 @@
         },
         "seconds": {
           "shape": "Seconds",
-          "documentation": "<p>The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds. </p>"
+          "documentation": "<p>The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "seconds is deprecated. You can use durationExpression for SetTimerAction. The value of seconds can be used as a string expression for durationExpression."
+        },
+        "durationExpression": {
+          "shape": "VariableValue",
+          "documentation": "<p>The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (<code>$variable.&lt;variable-name&gt;</code>), and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number. </p>"
         }
       },
       "documentation": "<p>Information needed to set the timer.</p>"
@@ -1540,7 +1547,7 @@
         },
         "useBase64": {
           "shape": "UseBase64",
-          "documentation": "<p>Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.</p>"
+          "documentation": "<p>Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue.</p>"
         }
       },
       "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.</p>"

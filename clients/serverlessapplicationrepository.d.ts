@@ -114,6 +114,14 @@ declare class ServerlessApplicationRepository extends Service {
    */
   putApplicationPolicy(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.PutApplicationPolicyResponse) => void): Request<ServerlessApplicationRepository.Types.PutApplicationPolicyResponse, AWSError>;
   /**
+   * Unshares an application from an AWS Organization.This operation can be called only from the organization's master account.
+   */
+  unshareApplication(params: ServerlessApplicationRepository.Types.UnshareApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Unshares an application from an AWS Organization.This operation can be called only from the organization's master account.
+   */
+  unshareApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates the specified application.
    */
   updateApplication(params: ServerlessApplicationRepository.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.UpdateApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.UpdateApplicationResponse, AWSError>;
@@ -139,6 +147,10 @@ declare namespace ServerlessApplicationRepository {
  Permissions.
      */
     Actions: __listOf__string;
+    /**
+     * An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID global condition key.
+     */
+    PrincipalOrgIDs?: __listOf__string;
     /**
      * An array of AWS account IDs, or * to make the application public.
      */
@@ -882,6 +894,16 @@ declare namespace ServerlessApplicationRepository {
  Data Type.
      */
     Value: __string;
+  }
+  export interface UnshareApplicationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationId: __string;
+    /**
+     * The AWS Organization ID to unshare the application from.
+     */
+    OrganizationId: __string;
   }
   export interface UpdateApplicationRequest {
     /**

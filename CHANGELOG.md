@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.636.0-->
+<!--LATEST=2.637.0-->
 <!--ENTRYINSERT-->
+
+## 2.637.0
+* feature: EC2: Documentation updates for EC2
+* feature: IoTEvents: API update that adds a new parameter, durationExpression, to SetTimerAction, and deprecates seconds
+* feature: MarketplaceCommerceAnalytics: Change the disbursement data set to look past 31 days instead until the beginning of the month.
+* feature: ServerlessApplicationRepository: AWS Serverless Application Repository now supports sharing applications privately with AWS Organizations.
+* feature: TranscribeService: Amazon Transcribe's Automatic Content Redaction feature enables you to automatically redact sensitive personally identifiable information (PII) from transcription results. It replaces each instance of an identified PII utterance with a [PII] tag in the transcript.
 
 ## 2.636.0
 * feature: DMS: Added new settings for Kinesis target to include detailed transaction info; to capture table DDL details; to use single-line unformatted json, which can be directly queried by AWS Athena if data is streamed into S3 through AWS Kinesis Firehose. Added CdcInsertsAndUpdates in S3 target settings to allow capture ongoing insertions and updates only.
