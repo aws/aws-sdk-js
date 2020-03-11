@@ -625,6 +625,14 @@ declare class Redshift extends Service {
    */
   modifySnapshotSchedule(callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
   /**
+   * Pauses a cluster.
+   */
+  pauseCluster(params: Redshift.Types.PauseClusterMessage, callback?: (err: AWSError, data: Redshift.Types.PauseClusterResult) => void): Request<Redshift.Types.PauseClusterResult, AWSError>;
+  /**
+   * Pauses a cluster.
+   */
+  pauseCluster(callback?: (err: AWSError, data: Redshift.Types.PauseClusterResult) => void): Request<Redshift.Types.PauseClusterResult, AWSError>;
+  /**
    * Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the DescribeReservedNodeOfferings API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
   purchaseReservedNodeOffering(params: Redshift.Types.PurchaseReservedNodeOfferingMessage, callback?: (err: AWSError, data: Redshift.Types.PurchaseReservedNodeOfferingResult) => void): Request<Redshift.Types.PurchaseReservedNodeOfferingResult, AWSError>;
@@ -672,6 +680,14 @@ declare class Redshift extends Service {
    * Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from. You cannot use RestoreTableFromClusterSnapshot to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call RestoreTableFromClusterSnapshot. When you have renamed your original table, then you can pass the original name of the table as the NewTableName parameter value in the call to RestoreTableFromClusterSnapshot. This way, you can replace the original table with the table created from the snapshot.
    */
   restoreTableFromClusterSnapshot(callback?: (err: AWSError, data: Redshift.Types.RestoreTableFromClusterSnapshotResult) => void): Request<Redshift.Types.RestoreTableFromClusterSnapshotResult, AWSError>;
+  /**
+   * Resumes a paused cluster.
+   */
+  resumeCluster(params: Redshift.Types.ResumeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResumeClusterResult) => void): Request<Redshift.Types.ResumeClusterResult, AWSError>;
+  /**
+   * Resumes a paused cluster.
+   */
+  resumeCluster(callback?: (err: AWSError, data: Redshift.Types.ResumeClusterResult) => void): Request<Redshift.Types.ResumeClusterResult, AWSError>;
   /**
    * Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see AuthorizeClusterSecurityGroupIngress. For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide. 
    */
@@ -893,7 +909,7 @@ declare namespace Redshift {
      */
     NodeType?: String;
     /**
-     *  The current state of the cluster. Possible values are the following:    available     available, prep-for-resize     available, resize-cleanup     cancelling-resize     creating     deleting     final-snapshot     hardware-failure     incompatible-hsm     incompatible-network     incompatible-parameters     incompatible-restore     modifying     rebooting     renaming     resizing     rotating-keys     storage-full     updating-hsm   
+     *  The current state of the cluster. Possible values are the following:    available     available, prep-for-resize     available, resize-cleanup     cancelling-resize     creating     deleting     final-snapshot     hardware-failure     incompatible-hsm     incompatible-network     incompatible-parameters     incompatible-restore     modifying     paused     rebooting     renaming     resizing     rotating-keys     storage-full     updating-hsm   
      */
     ClusterStatus?: String;
     /**
@@ -3311,6 +3327,15 @@ declare namespace Redshift {
   export type ParameterApplyType = "static"|"dynamic"|string;
   export type ParameterGroupList = ClusterParameterGroup[];
   export type ParametersList = Parameter[];
+  export interface PauseClusterMessage {
+    /**
+     * The identifier of the cluster to be paused.
+     */
+    ClusterIdentifier: String;
+  }
+  export interface PauseClusterResult {
+    Cluster?: Cluster;
+  }
   export type PendingActionsList = String[];
   export interface PendingModifiedValues {
     /**
@@ -3794,6 +3819,15 @@ declare namespace Redshift {
   export interface RestoreTableFromClusterSnapshotResult {
     TableRestoreStatus?: TableRestoreStatus;
   }
+  export interface ResumeClusterMessage {
+    /**
+     * The identifier of the cluster to be resumed.
+     */
+    ClusterIdentifier: String;
+  }
+  export interface ResumeClusterResult {
+    Cluster?: Cluster;
+  }
   export interface RevisionTarget {
     /**
      * A unique string that identifies the version to update the cluster to. You can use this value in ModifyClusterDbRevision.
@@ -3916,8 +3950,16 @@ declare namespace Redshift {
      * An action that runs a ResizeCluster API operation. 
      */
     ResizeCluster?: ResizeClusterMessage;
+    /**
+     * An action that runs a PauseCluster API operation. 
+     */
+    PauseCluster?: PauseClusterMessage;
+    /**
+     * An action that runs a ResumeCluster API operation. 
+     */
+    ResumeCluster?: ResumeClusterMessage;
   }
-  export type ScheduledActionTypeValues = "ResizeCluster"|string;
+  export type ScheduledActionTypeValues = "ResizeCluster"|"PauseCluster"|"ResumeCluster"|string;
   export interface ScheduledActionsMessage {
     /**
      * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 

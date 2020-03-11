@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.637.0-->
+<!--LATEST=2.638.0-->
 <!--ENTRYINSERT-->
+
+## 2.638.0
+* feature: Redshift: Amazon Redshift now supports operations to pause and resume a cluster on demand or on a schedule.
 
 ## 2.637.0
 * feature: EC2: Documentation updates for EC2
