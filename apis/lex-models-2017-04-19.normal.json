@@ -932,6 +932,35 @@
       ],
       "documentation": "<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance \"I want flowers\" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <p>Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version.</p> <p>If you set <code>childDirected</code> field to true when you created your bot, or if you opted out of participating in improving Amazon Lex, utterances are not available.</p> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Gets a list of tags associated with the specified resource. Only bots, bot aliases, and bot channels can have tags associated with them.</p>"
+    },
     "PutBot": {
       "name": "PutBot",
       "http": {
@@ -1085,6 +1114,70 @@
         }
       ],
       "documentation": "<p>Starts a job to import a resource to Amazon Lex.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Removes tags from a bot, bot alias or bot channel.</p>"
     }
   },
   "shapes": {
@@ -1099,6 +1192,11 @@
       "max": 100,
       "min": 1,
       "pattern": "^(-|^([A-Za-z]_?)+$)$"
+    },
+    "AmazonResourceName": {
+      "type": "string",
+      "max": 1011,
+      "min": 1
     },
     "Blob": {
       "type": "blob"
@@ -2989,6 +3087,29 @@
         "shape": "UtteranceData"
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to get a list of tags for.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags associated with a resource.</p>"
+        }
+      }
+    },
     "ListsOfUtterances": {
       "type": "list",
       "member": {
@@ -3225,6 +3346,10 @@
         "conversationLogs": {
           "shape": "ConversationLogsRequest",
           "documentation": "<p>Settings for conversation logs for the alias.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags to add to the bot alias. You can only add tags when you create an alias, you can't use the <code>PutBotAlias</code> operation to update the tags on a bot alias. To update tags, use the <code>TagResource</code> operation.</p>"
         }
       }
     },
@@ -3262,6 +3387,10 @@
         "conversationLogs": {
           "shape": "ConversationLogsResponse",
           "documentation": "<p>The settings that determine how Amazon Lex uses conversation logs for the alias.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags associated with a bot.</p>"
         }
       }
     },
@@ -3326,6 +3455,10 @@
         "createVersion": {
           "shape": "Boolean",
           "documentation": "<p>When set to <code>true</code> a new numbered version of the bot is created. This is the same as calling the <code>CreateBotVersion</code> operation. If you don't specify <code>createVersion</code>, the default is <code>false</code>.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags to add to the bot. You can only add tags when you create a bot, you can't use the <code>PutBot</code> operation to update the tags on a bot. To update tags, use the <code>TagResource</code> operation.</p>"
         }
       }
     },
@@ -3399,6 +3532,10 @@
         "detectSentiment": {
           "shape": "Boolean",
           "documentation": "<p> <code>true</code> if the bot is configured to send user utterances to Amazon Comprehend for sentiment analysis. If the <code>detectSentiment</code> field was not specified in the request, the <code>detectSentiment</code> field is <code>false</code> in the response.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags associated with the bot.</p>"
         }
       }
     },
@@ -3831,6 +3968,10 @@
         "mergeStrategy": {
           "shape": "MergeStrategy",
           "documentation": "<p>Specifies the action that the <code>StartImport</code> operation should take when there is an existing resource with the same name.</p> <ul> <li> <p>FAIL_ON_CONFLICT - The import operation is stopped on the first conflict between a resource in the import file and an existing resource. The name of the resource causing the conflict is in the <code>failureReason</code> field of the response to the <code>GetImport</code> operation.</p> <p>OVERWRITE_LATEST - The import operation proceeds even if there is a conflict with an existing resource. The $LASTEST version of the existing resource is overwritten with the data from the import file.</p> </li> </ul>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags to add to the imported bot. You can only add tags when you import a bot, you can't add tags to an intent or slot type.</p>"
         }
       }
     },
@@ -3856,6 +3997,10 @@
         "importStatus": {
           "shape": "ImportStatus",
           "documentation": "<p>The status of the import job. If the status is <code>FAILED</code>, you can get the reason for the failure using the <code>GetImport</code> operation.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags added to the imported bot.</p>"
         },
         "createdDate": {
           "shape": "Timestamp",
@@ -3912,8 +4057,100 @@
         "shape": "Value"
       }
     },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "key",
+        "value"
+      ],
+      "members": {
+        "key": {
+          "shape": "TagKey",
+          "documentation": "<p>The key for the tag. Keys are not case-sensitive and must be unique.</p>"
+        },
+        "value": {
+          "shape": "TagValue",
+          "documentation": "<p>The value associated with a key. The value may be an empty string but it can't be null.</p>"
+        }
+      },
+      "documentation": "<p>A list of key/value pairs that identify a bot, bot alias, or bot channel. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @. </p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tag keys to add to the resource. If a tag key already exists, the existing value is replaced with the new value.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove the tags from.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>A list of tag keys to remove from the resource. If a tag key does not exist on the resource, it is ignored.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UserId": {
       "type": "string",

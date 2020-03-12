@@ -100,6 +100,22 @@ declare class ApiGatewayV2 extends Service {
    */
   createStage(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateStageResponse) => void): Request<ApiGatewayV2.Types.CreateStageResponse, AWSError>;
   /**
+   * Creates a VPC link.
+   */
+  createVpcLink(params: ApiGatewayV2.Types.CreateVpcLinkRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateVpcLinkResponse) => void): Request<ApiGatewayV2.Types.CreateVpcLinkResponse, AWSError>;
+  /**
+   * Creates a VPC link.
+   */
+  createVpcLink(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateVpcLinkResponse) => void): Request<ApiGatewayV2.Types.CreateVpcLinkResponse, AWSError>;
+  /**
+   * Deletes the AccessLogSettings for a Stage. To disable access logging for a Stage, delete its AccessLogSettings.
+   */
+  deleteAccessLogSettings(params: ApiGatewayV2.Types.DeleteAccessLogSettingsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the AccessLogSettings for a Stage. To disable access logging for a Stage, delete its AccessLogSettings.
+   */
+  deleteAccessLogSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes an Api resource.
    */
   deleteApi(params: ApiGatewayV2.Types.DeleteApiRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -180,6 +196,14 @@ declare class ApiGatewayV2 extends Service {
    */
   deleteRoute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a route request parameter.
+   */
+  deleteRouteRequestParameter(params: ApiGatewayV2.Types.DeleteRouteRequestParameterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a route request parameter.
+   */
+  deleteRouteRequestParameter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a RouteResponse.
    */
   deleteRouteResponse(params: ApiGatewayV2.Types.DeleteRouteResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -203,6 +227,14 @@ declare class ApiGatewayV2 extends Service {
    * Deletes a Stage.
    */
   deleteStage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a VPC link.
+   */
+  deleteVpcLink(params: ApiGatewayV2.Types.DeleteVpcLinkRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.DeleteVpcLinkResponse) => void): Request<ApiGatewayV2.Types.DeleteVpcLinkResponse, AWSError>;
+  /**
+   * Deletes a VPC link.
+   */
+  deleteVpcLink(callback?: (err: AWSError, data: ApiGatewayV2.Types.DeleteVpcLinkResponse) => void): Request<ApiGatewayV2.Types.DeleteVpcLinkResponse, AWSError>;
   /**
    * Gets an Api resource.
    */
@@ -396,6 +428,22 @@ declare class ApiGatewayV2 extends Service {
    */
   getTags(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetTagsResponse) => void): Request<ApiGatewayV2.Types.GetTagsResponse, AWSError>;
   /**
+   * Gets a VPC link.
+   */
+  getVpcLink(params: ApiGatewayV2.Types.GetVpcLinkRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetVpcLinkResponse) => void): Request<ApiGatewayV2.Types.GetVpcLinkResponse, AWSError>;
+  /**
+   * Gets a VPC link.
+   */
+  getVpcLink(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetVpcLinkResponse) => void): Request<ApiGatewayV2.Types.GetVpcLinkResponse, AWSError>;
+  /**
+   * Gets a collection of VPC links.
+   */
+  getVpcLinks(params: ApiGatewayV2.Types.GetVpcLinksRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetVpcLinksResponse) => void): Request<ApiGatewayV2.Types.GetVpcLinksResponse, AWSError>;
+  /**
+   * Gets a collection of VPC links.
+   */
+  getVpcLinks(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetVpcLinksResponse) => void): Request<ApiGatewayV2.Types.GetVpcLinksResponse, AWSError>;
+  /**
    * Imports an API.
    */
   importApi(params: ApiGatewayV2.Types.ImportApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.ImportApiResponse) => void): Request<ApiGatewayV2.Types.ImportApiResponse, AWSError>;
@@ -515,6 +563,14 @@ declare class ApiGatewayV2 extends Service {
    * Updates a Stage.
    */
   updateStage(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateStageResponse) => void): Request<ApiGatewayV2.Types.UpdateStageResponse, AWSError>;
+  /**
+   * Updates a VPC link.
+   */
+  updateVpcLink(params: ApiGatewayV2.Types.UpdateVpcLinkRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateVpcLinkResponse) => void): Request<ApiGatewayV2.Types.UpdateVpcLinkResponse, AWSError>;
+  /**
+   * Updates a VPC link.
+   */
+  updateVpcLink(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateVpcLinkResponse) => void): Request<ApiGatewayV2.Types.UpdateVpcLinkResponse, AWSError>;
 }
 declare namespace ApiGatewayV2 {
   export interface AccessLogSettings {
@@ -977,11 +1033,11 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * The connection ID.
+     * The ID of the VPC link for a private integration. Supported only for HTTP APIs.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.
+     * The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -1001,11 +1057,11 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationMethod?: StringWithLengthBetween1And64;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
+     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. For HTTP API private integrations, use an HTTP_PROXY integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
      */
     IntegrationType: IntegrationType;
     /**
-     * For a Lambda proxy integration, this is the URI of the Lambda function.
+     * For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see DiscoverInstances. For private integrations, all resources must be owned by the same AWS account.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
@@ -1013,7 +1069,7 @@ declare namespace ApiGatewayV2 {
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.
+     * Specifies the format of the payload sent to an integration. Required for HTTP APIs.
      */
     PayloadFormatVersion?: StringWithLengthBetween1And64;
     /**
@@ -1037,6 +1093,10 @@ declare namespace ApiGatewayV2 {
      * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    /**
+     * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
+     */
+    TlsConfig?: TlsConfigInput;
   }
   export interface CreateIntegrationResult {
     /**
@@ -1044,11 +1104,11 @@ declare namespace ApiGatewayV2 {
      */
     ApiGatewayManaged?: __boolean;
     /**
-     * The connection ID.
+     * The ID of the VPC link for a private integration. Supported only for HTTP APIs.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.
+     * The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -1076,11 +1136,11 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseSelectionExpression?: SelectionExpression;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
+     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
      */
     IntegrationType?: IntegrationType;
     /**
-     * For a Lambda proxy integration, this is the URI of the Lambda function.
+     * For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see DiscoverInstances. For private integrations, all resources must be owned by the same AWS account.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
@@ -1088,7 +1148,7 @@ declare namespace ApiGatewayV2 {
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.
+     * Specifies the format of the payload sent to an integration. Required for HTTP APIs.
      */
     PayloadFormatVersion?: StringWithLengthBetween1And64;
     /**
@@ -1112,6 +1172,10 @@ declare namespace ApiGatewayV2 {
      * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    /**
+     * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
+     */
+    TlsConfig?: TlsConfig;
   }
   export interface CreateIntegrationResponseRequest {
     /**
@@ -1403,7 +1467,7 @@ declare namespace ApiGatewayV2 {
      */
     StageName: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.
+     * A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     StageVariables?: StageVariablesMap;
     /**
@@ -1461,13 +1525,79 @@ declare namespace ApiGatewayV2 {
      */
     StageName?: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.
+     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     StageVariables?: StageVariablesMap;
     /**
      * The collection of tags. Each tag element is associated with a given resource.
      */
     Tags?: Tags;
+  }
+  export interface CreateVpcLinkRequest {
+    /**
+     * The name of the VPC link.
+     */
+    Name: StringWithLengthBetween1And128;
+    /**
+     * A list of security group IDs for the VPC link.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * A list of subnet IDs to include in the VPC link.
+     */
+    SubnetIds: SubnetIdList;
+    /**
+     * A list of tags.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateVpcLinkResponse {
+    /**
+     * The timestamp when the VPC link was created.
+     */
+    CreatedDate?: __timestampIso8601;
+    /**
+     * The name of the VPC link.
+     */
+    Name?: StringWithLengthBetween1And128;
+    /**
+     * A list of security group IDs for the VPC link.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * A list of subnet IDs to include in the VPC link.
+     */
+    SubnetIds?: SubnetIdList;
+    /**
+     * Tags for the VPC link.
+     */
+    Tags?: Tags;
+    /**
+     * The ID of the VPC link.
+     */
+    VpcLinkId?: Id;
+    /**
+     * The status of the VPC link.
+     */
+    VpcLinkStatus?: VpcLinkStatus;
+    /**
+     * A message summarizing the cause of the status of the VPC link.
+     */
+    VpcLinkStatusMessage?: StringWithLengthBetween0And1024;
+    /**
+     * The version of the VPC link.
+     */
+    VpcLinkVersion?: VpcLinkVersion;
+  }
+  export interface DeleteAccessLogSettingsRequest {
+    /**
+     * The API identifier.
+     */
+    ApiId: __string;
+    /**
+     * The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.
+     */
+    StageName: __string;
   }
   export interface DeleteApiMappingRequest {
     /**
@@ -1561,6 +1691,20 @@ declare namespace ApiGatewayV2 {
      */
     RouteId: __string;
   }
+  export interface DeleteRouteRequestParameterRequest {
+    /**
+     * The API identifier.
+     */
+    ApiId: __string;
+    /**
+     * The route request parameter key.
+     */
+    RequestParameterKey: __string;
+    /**
+     * The route ID.
+     */
+    RouteId: __string;
+  }
   export interface DeleteRouteResponseRequest {
     /**
      * The API identifier.
@@ -1598,6 +1742,14 @@ declare namespace ApiGatewayV2 {
      * The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.
      */
     StageName: __string;
+  }
+  export interface DeleteVpcLinkRequest {
+    /**
+     * The ID of the VPC link.
+     */
+    VpcLinkId: __string;
+  }
+  export interface DeleteVpcLinkResponse {
   }
   export interface Deployment {
     /**
@@ -2014,11 +2166,11 @@ declare namespace ApiGatewayV2 {
      */
     ApiGatewayManaged?: __boolean;
     /**
-     * The connection ID.
+     * The ID of the VPC link for a private integration. Supported only for HTTP APIs.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.
+     * The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -2046,11 +2198,11 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseSelectionExpression?: SelectionExpression;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
+     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
      */
     IntegrationType?: IntegrationType;
     /**
-     * For a Lambda proxy integration, this is the URI of the Lambda function.
+     * For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see DiscoverInstances. For private integrations, all resources must be owned by the same AWS account.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
@@ -2058,7 +2210,7 @@ declare namespace ApiGatewayV2 {
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.
+     * Specifies the format of the payload sent to an integration. Required for HTTP APIs.
      */
     PayloadFormatVersion?: StringWithLengthBetween1And64;
     /**
@@ -2082,6 +2234,10 @@ declare namespace ApiGatewayV2 {
      * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    /**
+     * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
+     */
+    TlsConfig?: TlsConfig;
   }
   export interface GetIntegrationResponseRequest {
     /**
@@ -2459,7 +2615,7 @@ declare namespace ApiGatewayV2 {
      */
     StageName?: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.
+     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     StageVariables?: StageVariablesMap;
     /**
@@ -2498,13 +2654,77 @@ declare namespace ApiGatewayV2 {
     ResourceArn: __string;
   }
   export interface GetTagsResponse {
-    Tags: Tags;
+    Tags?: Tags;
+  }
+  export interface GetVpcLinkRequest {
+    /**
+     * The ID of the VPC link.
+     */
+    VpcLinkId: __string;
+  }
+  export interface GetVpcLinkResponse {
+    /**
+     * The timestamp when the VPC link was created.
+     */
+    CreatedDate?: __timestampIso8601;
+    /**
+     * The name of the VPC link.
+     */
+    Name?: StringWithLengthBetween1And128;
+    /**
+     * A list of security group IDs for the VPC link.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * A list of subnet IDs to include in the VPC link.
+     */
+    SubnetIds?: SubnetIdList;
+    /**
+     * Tags for the VPC link.
+     */
+    Tags?: Tags;
+    /**
+     * The ID of the VPC link.
+     */
+    VpcLinkId?: Id;
+    /**
+     * The status of the VPC link.
+     */
+    VpcLinkStatus?: VpcLinkStatus;
+    /**
+     * A message summarizing the cause of the status of the VPC link.
+     */
+    VpcLinkStatusMessage?: StringWithLengthBetween0And1024;
+    /**
+     * The version of the VPC link.
+     */
+    VpcLinkVersion?: VpcLinkVersion;
+  }
+  export interface GetVpcLinksRequest {
+    /**
+     * The maximum number of elements to be returned for this resource.
+     */
+    MaxResults?: __string;
+    /**
+     * The next page of elements from this collection. Not valid for the last element of the collection.
+     */
+    NextToken?: __string;
+  }
+  export interface GetVpcLinksResponse {
+    /**
+     * A collection of VPC links.
+     */
+    Items?: __listOfVpcLink;
+    /**
+     * The next page of elements from this collection. Not valid for the last element of the collection.
+     */
+    NextToken?: NextToken;
   }
   export type Id = string;
   export type IdentitySourceList = __string[];
   export interface ImportApiRequest {
     /**
-     * Represents the base path of the imported API. Supported only for HTTP APIs.
+     * Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see Set the OpenAPI basePath Property. Supported only for HTTP APIs.
      */
     Basepath?: __string;
     /**
@@ -2583,11 +2803,11 @@ declare namespace ApiGatewayV2 {
      */
     ApiGatewayManaged?: __boolean;
     /**
-     * The connection ID.
+     * The ID of the VPC link for a private integration. Supported only for HTTP APIs.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.
+     * The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -2615,11 +2835,11 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseSelectionExpression?: SelectionExpression;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
+     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
      */
     IntegrationType?: IntegrationType;
     /**
-     * For a Lambda proxy integration, this is the URI of the Lambda function.
+     * For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see DiscoverInstances. For private integrations, all resources must be owned by the same AWS account.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
@@ -2627,7 +2847,7 @@ declare namespace ApiGatewayV2 {
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.
+     * Specifies the format of the payload sent to an integration. Required for HTTP APIs.
      */
     PayloadFormatVersion?: StringWithLengthBetween1And64;
     /**
@@ -2651,6 +2871,10 @@ declare namespace ApiGatewayV2 {
      * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    /**
+     * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
+     */
+    TlsConfig?: TlsConfig;
   }
   export type IntegrationParameters = {[key: string]: StringWithLengthBetween1And512};
   export interface IntegrationResponse {
@@ -2691,7 +2915,7 @@ declare namespace ApiGatewayV2 {
      */
     Issuer?: UriWithLengthBetween1And2048;
   }
-  export type LoggingLevel = "ERROR"|"INFO"|"false"|string;
+  export type LoggingLevel = "ERROR"|"INFO"|"OFF"|string;
   export interface Model {
     /**
      * The content-type for the model, for example, "application/json".
@@ -2729,7 +2953,7 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * Represents the base path of the imported API. Supported only for HTTP APIs.
+     * Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see Set the OpenAPI basePath Property. Supported only for HTTP APIs.
      */
     Basepath?: __string;
     /**
@@ -2891,15 +3115,16 @@ declare namespace ApiGatewayV2 {
      */
     LoggingLevel?: LoggingLevel;
     /**
-     * Specifies the throttling burst limit. Supported only for WebSocket APIs.
+     * Specifies the throttling burst limit.
      */
     ThrottlingBurstLimit?: __integer;
     /**
-     * Specifies the throttling rate limit. Supported only for WebSocket APIs.
+     * Specifies the throttling rate limit.
      */
     ThrottlingRateLimit?: __double;
   }
   export type RouteSettingsMap = {[key: string]: RouteSettings};
+  export type SecurityGroupIdList = __string[];
   export type SecurityPolicy = "TLS_1_0"|"TLS_1_2"|string;
   export type SelectionExpression = string;
   export type SelectionKey = string;
@@ -2953,7 +3178,7 @@ declare namespace ApiGatewayV2 {
      */
     StageName: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.
+     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     StageVariables?: StageVariablesMap;
     /**
@@ -2971,6 +3196,7 @@ declare namespace ApiGatewayV2 {
   export type StringWithLengthBetween1And256 = string;
   export type StringWithLengthBetween1And512 = string;
   export type StringWithLengthBetween1And64 = string;
+  export type SubnetIdList = __string[];
   export interface TagResourceRequest {
     /**
      * The resource ARN for the tag.
@@ -2985,15 +3211,25 @@ declare namespace ApiGatewayV2 {
   }
   export type Tags = {[key: string]: StringWithLengthBetween1And1600};
   export type TemplateMap = {[key: string]: StringWithLengthBetween0And32K};
+  export interface TlsConfig {
+    /**
+     * If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.
+     */
+    ServerNameToVerify?: StringWithLengthBetween1And512;
+  }
+  export interface TlsConfigInput {
+    /**
+     * If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.
+     */
+    ServerNameToVerify?: StringWithLengthBetween1And512;
+  }
   export interface UntagResourceRequest {
     /**
      * The resource ARN for the tag.
      */
     ResourceArn: __string;
     /**
-     * 
-            The Tag keys to delete.
-         
+     * The Tag keys to delete
      */
     TagKeys: __listOf__string;
   }
@@ -3297,11 +3533,11 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * The connection ID.
+     * The ID of the VPC link for a private integration. Supported only for HTTP APIs.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.
+     * The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -3325,11 +3561,11 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationMethod?: StringWithLengthBetween1And64;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
+     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. For HTTP API private integrations, use an HTTP_PROXY integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
      */
     IntegrationType?: IntegrationType;
     /**
-     * For a Lambda proxy integration, this is the URI of the Lambda function.
+     * For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see DiscoverInstances. For private integrations, all resources must be owned by the same AWS account.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
@@ -3337,7 +3573,7 @@ declare namespace ApiGatewayV2 {
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.
+     * Specifies the format of the payload sent to an integration. Required for HTTP APIs.
      */
     PayloadFormatVersion?: StringWithLengthBetween1And64;
     /**
@@ -3361,6 +3597,10 @@ declare namespace ApiGatewayV2 {
      * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    /**
+     * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
+     */
+    TlsConfig?: TlsConfigInput;
   }
   export interface UpdateIntegrationResult {
     /**
@@ -3368,11 +3608,11 @@ declare namespace ApiGatewayV2 {
      */
     ApiGatewayManaged?: __boolean;
     /**
-     * The connection ID.
+     * The ID of the VPC link for a private integration. Supported only for HTTP APIs.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.
+     * The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -3400,11 +3640,11 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseSelectionExpression?: SelectionExpression;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
+     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.
      */
     IntegrationType?: IntegrationType;
     /**
-     * For a Lambda proxy integration, this is the URI of the Lambda function.
+     * For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see DiscoverInstances. For private integrations, all resources must be owned by the same AWS account.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
@@ -3412,7 +3652,7 @@ declare namespace ApiGatewayV2 {
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.
+     * Specifies the format of the payload sent to an integration. Required for HTTP APIs.
      */
     PayloadFormatVersion?: StringWithLengthBetween1And64;
     /**
@@ -3436,6 +3676,10 @@ declare namespace ApiGatewayV2 {
      * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    /**
+     * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
+     */
+    TlsConfig?: TlsConfig;
   }
   export interface UpdateIntegrationResponseRequest {
     /**
@@ -3750,7 +3994,7 @@ declare namespace ApiGatewayV2 {
      */
     StageName: __string;
     /**
-     * A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.
+     * A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     StageVariables?: StageVariablesMap;
   }
@@ -3804,7 +4048,7 @@ declare namespace ApiGatewayV2 {
      */
     StageName?: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.
+     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     StageVariables?: StageVariablesMap;
     /**
@@ -3812,7 +4056,95 @@ declare namespace ApiGatewayV2 {
      */
     Tags?: Tags;
   }
+  export interface UpdateVpcLinkRequest {
+    /**
+     * The name of the VPC link.
+     */
+    Name?: StringWithLengthBetween1And128;
+    /**
+     * The ID of the VPC link.
+     */
+    VpcLinkId: __string;
+  }
+  export interface UpdateVpcLinkResponse {
+    /**
+     * The timestamp when the VPC link was created.
+     */
+    CreatedDate?: __timestampIso8601;
+    /**
+     * The name of the VPC link.
+     */
+    Name?: StringWithLengthBetween1And128;
+    /**
+     * A list of security group IDs for the VPC link.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * A list of subnet IDs to include in the VPC link.
+     */
+    SubnetIds?: SubnetIdList;
+    /**
+     * Tags for the VPC link.
+     */
+    Tags?: Tags;
+    /**
+     * The ID of the VPC link.
+     */
+    VpcLinkId?: Id;
+    /**
+     * The status of the VPC link.
+     */
+    VpcLinkStatus?: VpcLinkStatus;
+    /**
+     * A message summarizing the cause of the status of the VPC link.
+     */
+    VpcLinkStatusMessage?: StringWithLengthBetween0And1024;
+    /**
+     * The version of the VPC link.
+     */
+    VpcLinkVersion?: VpcLinkVersion;
+  }
   export type UriWithLengthBetween1And2048 = string;
+  export interface VpcLink {
+    /**
+     * The timestamp when the VPC link was created.
+     */
+    CreatedDate?: __timestampIso8601;
+    /**
+     * The name of the VPC link.
+     */
+    Name: StringWithLengthBetween1And128;
+    /**
+     * A list of security group IDs for the VPC link.
+     */
+    SecurityGroupIds: SecurityGroupIdList;
+    /**
+     * A list of subnet IDs to include in the VPC link.
+     */
+    SubnetIds: SubnetIdList;
+    /**
+     * Tags for the VPC link.
+     */
+    Tags?: Tags;
+    /**
+     * The ID of the VPC link.
+     */
+    VpcLinkId: Id;
+    /**
+     * The status of the VPC link.
+     */
+    VpcLinkStatus?: VpcLinkStatus;
+    /**
+     * A message summarizing the cause of the status of the VPC link.
+     */
+    VpcLinkStatusMessage?: StringWithLengthBetween0And1024;
+    /**
+     * The version of the VPC link.
+     */
+    VpcLinkVersion?: VpcLinkVersion;
+  }
+  export type VpcLinkStatus = "PENDING"|"AVAILABLE"|"DELETING"|"FAILED"|"INACTIVE"|string;
+  export type VpcLinkVersion = "V2"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
@@ -3827,6 +4159,7 @@ declare namespace ApiGatewayV2 {
   export type __listOfRoute = Route[];
   export type __listOfRouteResponse = RouteResponse[];
   export type __listOfStage = Stage[];
+  export type __listOfVpcLink = VpcLink[];
   export type __listOf__string = __string[];
   export type __string = string;
   export type __timestampIso8601 = Date;

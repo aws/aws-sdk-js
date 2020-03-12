@@ -1705,6 +1705,10 @@ declare namespace Iot {
      */
     cloudwatchAlarm?: CloudwatchAlarmAction;
     /**
+     * Send data to CloudWatch logs.
+     */
+    cloudwatchLogs?: CloudwatchLogsAction;
+    /**
      * Write data to an Amazon Elasticsearch Service domain.
      */
     elasticsearch?: ElasticsearchAction;
@@ -2621,6 +2625,16 @@ declare namespace Iot {
      * The value of the alarm state. Acceptable values are: OK, ALARM, INSUFFICIENT_DATA.
      */
     stateValue: StateValue;
+  }
+  export interface CloudwatchLogsAction {
+    /**
+     * The IAM role that allows access to the CloudWatch log.
+     */
+    roleArn: AwsArn;
+    /**
+     * The CloudWatch log group to which the action sends data.
+     */
+    logGroupName: LogGroupName;
   }
   export interface CloudwatchMetricAction {
     /**
@@ -3983,7 +3997,7 @@ declare namespace Iot {
   }
   export interface DescribeEndpointRequest {
     /**
-     * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an AWS IoT credentials provider API endpoint.      iot:Jobs - Returns an AWS IoT device management Jobs API endpoint.  
+     * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an AWS IoT credentials provider API endpoint.      iot:Jobs - Returns an AWS IoT device management Jobs API endpoint.   We strongly recommend that customers use the newer iot:Data-ATS endpoint type to avoid issues related to the widespread distrust of Symantec certificate authorities.
      */
     endpointType?: EndpointType;
   }
@@ -6673,6 +6687,7 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export type LogGroupName = string;
   export type LogLevel = "DEBUG"|"INFO"|"ERROR"|"WARN"|"DISABLED"|string;
   export interface LogTarget {
     /**
@@ -7225,7 +7240,7 @@ declare namespace Iot {
   }
   export interface RegisterThingRequest {
     /**
-     * The provisioning template. See Programmatic Provisioning for more information.
+     * The provisioning template. See Provisioning Devices That Have Device Certificates for more information.
      */
     templateBody: TemplateBody;
     /**
@@ -8647,7 +8662,7 @@ declare namespace Iot {
      */
     certificateId: CertificateId;
     /**
-     * The new status.  Note: Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.  Note: The status value REGISTER_INACTIVE is deprecated and should not be used.
+     * The new status.  Note: Setting the status to PENDING_TRANSFER or PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by AWS IoT. They are not intended for developer use.  Note: The status value REGISTER_INACTIVE is deprecated and should not be used.
      */
     newStatus: CertificateStatus;
   }

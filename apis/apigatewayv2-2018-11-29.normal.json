@@ -179,7 +179,8 @@
           "documentation": "<p>The resource already exists.</p>"
         },
         {
-          "shape": "AccessDeniedException"
+          "shape": "AccessDeniedException",
+          "documentation": "<p>403 response</p>"
         }
       ],
       "documentation": "<p>Creates a domain name.</p>"
@@ -196,7 +197,7 @@
       },
       "output": {
         "shape": "CreateIntegrationResult",
-        "documentation": "\n            <p>The request has succeeded and has resulted in the creation of a resource.</p>\n         "
+        "documentation": "<p>The request has succeeded and has resulted in the creation of a resource.</p>"
       },
       "errors": [
         {
@@ -298,7 +299,7 @@
       },
       "output": {
         "shape": "CreateRouteResult",
-        "documentation": "\n            <p>The request has succeeded and has resulted in the creation of a resource.</p>\n         "
+        "documentation": "<p>The request has succeeded and has resulted in the creation of a resource.</p>"
       },
       "errors": [
         {
@@ -387,6 +388,54 @@
         }
       ],
       "documentation": "<p>Creates a Stage for an API.</p>"
+    },
+    "CreateVpcLink": {
+      "name": "CreateVpcLink",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/vpclinks",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateVpcLinkRequest"
+      },
+      "output": {
+        "shape": "CreateVpcLinkResponse",
+        "documentation": "<p>The request has succeeded and has resulted in the creation of a resource.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>One of the parameters in the request is invalid.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        }
+      ],
+      "documentation": "<p>Creates a VPC link.</p>"
+    },
+    "DeleteAccessLogSettings": {
+      "name": "DeleteAccessLogSettings",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v2/apis/{apiId}/stages/{stageName}/accesslogsettings",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteAccessLogSettingsRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        }
+      ],
+      "documentation": "<p>Deletes the AccessLogSettings for a Stage. To disable access logging for a Stage, delete its AccessLogSettings.</p>"
     },
     "DeleteApi": {
       "name": "DeleteApi",
@@ -612,6 +661,28 @@
       ],
       "documentation": "<p>Deletes a Route.</p>"
     },
+    "DeleteRouteRequestParameter": {
+      "name": "DeleteRouteRequestParameter",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v2/apis/{apiId}/routes/{routeId}/requestparameters/{requestParameterKey}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteRouteRequestParameterRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        }
+      ],
+      "documentation": "<p>Deletes a route request parameter.</p>"
+    },
     "DeleteRouteResponse": {
       "name": "DeleteRouteResponse",
       "http": {
@@ -677,6 +748,32 @@
         }
       ],
       "documentation": "<p>Deletes a Stage.</p>"
+    },
+    "DeleteVpcLink": {
+      "name": "DeleteVpcLink",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v2/vpclinks/{vpcLinkId}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeleteVpcLinkRequest"
+      },
+      "output": {
+        "shape": "DeleteVpcLinkResponse",
+        "documentation": "<p>202 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        }
+      ],
+      "documentation": "<p>Deletes a VPC link.</p>"
     },
     "GetApi": {
       "name": "GetApi",
@@ -974,7 +1071,7 @@
       },
       "output": {
         "shape": "GetIntegrationResult",
-        "documentation": "\n            <p>Success</p>\n         "
+        "documentation": "<p>Success</p>"
       },
       "errors": [
         {
@@ -1168,7 +1265,7 @@
       },
       "output": {
         "shape": "GetRouteResult",
-        "documentation": "\n            <p>Success</p>\n         "
+        "documentation": "<p>Success</p>"
       },
       "errors": [
         {
@@ -1357,6 +1454,58 @@
         }
       ],
       "documentation": "<p>Gets a collection of Tag resources.</p>"
+    },
+    "GetVpcLink": {
+      "name": "GetVpcLink",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/vpclinks/{vpcLinkId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetVpcLinkRequest"
+      },
+      "output": {
+        "shape": "GetVpcLinkResponse",
+        "documentation": "<p>Success</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        }
+      ],
+      "documentation": "<p>Gets a VPC link.</p>"
+    },
+    "GetVpcLinks": {
+      "name": "GetVpcLinks",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/vpclinks",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetVpcLinksRequest"
+      },
+      "output": {
+        "shape": "GetVpcLinksResponse",
+        "documentation": "<p>Success</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>One of the parameters in the request is invalid.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        }
+      ],
+      "documentation": "<p>Gets a collection of VPC links.</p>"
     },
     "ImportApi": {
       "name": "ImportApi",
@@ -1672,7 +1821,7 @@
       },
       "output": {
         "shape": "UpdateIntegrationResult",
-        "documentation": "\n            <p>Success</p>\n         "
+        "documentation": "<p>Success</p>"
       },
       "errors": [
         {
@@ -1774,7 +1923,7 @@
       },
       "output": {
         "shape": "UpdateRouteResult",
-        "documentation": "\n            <p>Success</p>\n         "
+        "documentation": "<p>Success</p>"
       },
       "errors": [
         {
@@ -1863,6 +2012,36 @@
         }
       ],
       "documentation": "<p>Updates a Stage.</p>"
+    },
+    "UpdateVpcLink": {
+      "name": "UpdateVpcLink",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/v2/vpclinks/{vpcLinkId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateVpcLinkRequest"
+      },
+      "output": {
+        "shape": "UpdateVpcLinkResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>One of the parameters in the request is invalid.</p>"
+        }
+      ],
+      "documentation": "<p>Updates a VPC link.</p>"
     }
   },
   "shapes": {
@@ -2580,12 +2759,12 @@
         "ConnectionId": {
           "shape": "StringWithLengthBetween1And1024",
           "locationName": "connectionId",
-          "documentation": "<p>The connection ID.</p>"
+          "documentation": "<p>The ID of the VPC link for a private integration. Supported only for HTTP APIs.</p>"
         },
         "ConnectionType": {
           "shape": "ConnectionType",
           "locationName": "connectionType",
-          "documentation": "<p>The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.</p>"
+          "documentation": "<p>The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.</p>"
         },
         "ContentHandlingStrategy": {
           "shape": "ContentHandlingStrategy",
@@ -2610,12 +2789,12 @@
         "IntegrationType": {
           "shape": "IntegrationType",
           "locationName": "integrationType",
-          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. For HTTP API private integrations, use an HTTP_PROXY integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
         },
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda proxy integration, this is the URI of the Lambda function.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -2625,7 +2804,7 @@
         "PayloadFormatVersion": {
           "shape": "StringWithLengthBetween1And64",
           "locationName": "payloadFormatVersion",
-          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.</p>"
+          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>"
         },
         "RequestParameters": {
           "shape": "IntegrationParameters",
@@ -2646,6 +2825,11 @@
           "shape": "IntegerWithLengthBetween50And29000",
           "locationName": "timeoutInMillis",
           "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+        },
+        "TlsConfig": {
+          "shape": "TlsConfigInput",
+          "locationName": "tlsConfig",
+          "documentation": "<p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>"
         }
       },
       "documentation": "<p>Creates a new Integration resource to represent an integration.</p>",
@@ -2665,12 +2849,12 @@
         "ConnectionId": {
           "shape": "StringWithLengthBetween1And1024",
           "locationName": "connectionId",
-          "documentation": "<p>The connection ID.</p>"
+          "documentation": "<p>The ID of the VPC link for a private integration. Supported only for HTTP APIs.</p>"
         },
         "ConnectionType": {
           "shape": "ConnectionType",
           "locationName": "connectionType",
-          "documentation": "<p>The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.</p>"
+          "documentation": "<p>The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.</p>"
         },
         "ContentHandlingStrategy": {
           "shape": "ContentHandlingStrategy",
@@ -2705,12 +2889,12 @@
         "IntegrationType": {
           "shape": "IntegrationType",
           "locationName": "integrationType",
-          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
         },
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda proxy integration, this is the URI of the Lambda function.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -2720,7 +2904,7 @@
         "PayloadFormatVersion": {
           "shape": "StringWithLengthBetween1And64",
           "locationName": "payloadFormatVersion",
-          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.</p>"
+          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>"
         },
         "RequestParameters": {
           "shape": "IntegrationParameters",
@@ -2741,6 +2925,11 @@
           "shape": "IntegerWithLengthBetween50And29000",
           "locationName": "timeoutInMillis",
           "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+        },
+        "TlsConfig": {
+          "shape": "TlsConfig",
+          "locationName": "tlsConfig",
+          "documentation": "<p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>"
         }
       }
     },
@@ -3160,7 +3349,7 @@
         "StageVariables": {
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
-          "documentation": "<p>A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -3240,7 +3429,7 @@
         "StageVariables": {
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
-          "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -3248,6 +3437,107 @@
           "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
         }
       }
+    },
+    "CreateVpcLinkRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "StringWithLengthBetween1And128",
+          "locationName": "name",
+          "documentation": "<p>The name of the VPC link.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "SecurityGroupIdList",
+          "locationName": "securityGroupIds",
+          "documentation": "<p>A list of security group IDs for the VPC link.</p>"
+        },
+        "SubnetIds": {
+          "shape": "SubnetIdList",
+          "locationName": "subnetIds",
+          "documentation": "<p>A list of subnet IDs to include in the VPC link.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>A list of tags.</p>"
+        }
+      },
+      "documentation": "<p>Creates a VPC link</p>",
+      "required": [
+        "SubnetIds",
+        "Name"
+      ]
+    },
+    "CreateVpcLinkResponse": {
+      "type": "structure",
+      "members": {
+        "CreatedDate": {
+          "shape": "__timestampIso8601",
+          "locationName": "createdDate",
+          "documentation": "<p>The timestamp when the VPC link was created.</p>"
+        },
+        "Name": {
+          "shape": "StringWithLengthBetween1And128",
+          "locationName": "name",
+          "documentation": "<p>The name of the VPC link.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "SecurityGroupIdList",
+          "locationName": "securityGroupIds",
+          "documentation": "<p>A list of security group IDs for the VPC link.</p>"
+        },
+        "SubnetIds": {
+          "shape": "SubnetIdList",
+          "locationName": "subnetIds",
+          "documentation": "<p>A list of subnet IDs to include in the VPC link.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags for the VPC link.</p>"
+        },
+        "VpcLinkId": {
+          "shape": "Id",
+          "locationName": "vpcLinkId",
+          "documentation": "<p>The ID of the VPC link.</p>"
+        },
+        "VpcLinkStatus": {
+          "shape": "VpcLinkStatus",
+          "locationName": "vpcLinkStatus",
+          "documentation": "<p>The status of the VPC link.</p>"
+        },
+        "VpcLinkStatusMessage": {
+          "shape": "StringWithLengthBetween0And1024",
+          "locationName": "vpcLinkStatusMessage",
+          "documentation": "<p>A message summarizing the cause of the status of the VPC link.</p>"
+        },
+        "VpcLinkVersion": {
+          "shape": "VpcLinkVersion",
+          "locationName": "vpcLinkVersion",
+          "documentation": "<p>The version of the VPC link.</p>"
+        }
+      }
+    },
+    "DeleteAccessLogSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "ApiId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "apiId",
+          "documentation": "<p>The API identifier.</p>"
+        },
+        "StageName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "stageName",
+          "documentation": "<p>The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.</p>"
+        }
+      },
+      "required": [
+        "StageName",
+        "ApiId"
+      ]
     },
     "DeleteApiMappingRequest": {
       "type": "structure",
@@ -3445,6 +3735,34 @@
         "RouteId"
       ]
     },
+    "DeleteRouteRequestParameterRequest": {
+      "type": "structure",
+      "members": {
+        "ApiId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "apiId",
+          "documentation": "<p>The API identifier.</p>"
+        },
+        "RequestParameterKey": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "requestParameterKey",
+          "documentation": "<p>The route request parameter key.</p>"
+        },
+        "RouteId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "routeId",
+          "documentation": "<p>The route ID.</p>"
+        }
+      },
+      "required": [
+        "RequestParameterKey",
+        "ApiId",
+        "RouteId"
+      ]
+    },
     "DeleteRouteResponseRequest": {
       "type": "structure",
       "members": {
@@ -3521,6 +3839,24 @@
         "StageName",
         "ApiId"
       ]
+    },
+    "DeleteVpcLinkRequest": {
+      "type": "structure",
+      "members": {
+        "VpcLinkId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "vpcLinkId",
+          "documentation": "<p>The ID of the VPC link.</p>"
+        }
+      },
+      "required": [
+        "VpcLinkId"
+      ]
+    },
+    "DeleteVpcLinkResponse": {
+      "type": "structure",
+      "members": {}
     },
     "Deployment": {
       "type": "structure",
@@ -4190,12 +4526,12 @@
         "ConnectionId": {
           "shape": "StringWithLengthBetween1And1024",
           "locationName": "connectionId",
-          "documentation": "<p>The connection ID.</p>"
+          "documentation": "<p>The ID of the VPC link for a private integration. Supported only for HTTP APIs.</p>"
         },
         "ConnectionType": {
           "shape": "ConnectionType",
           "locationName": "connectionType",
-          "documentation": "<p>The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.</p>"
+          "documentation": "<p>The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.</p>"
         },
         "ContentHandlingStrategy": {
           "shape": "ContentHandlingStrategy",
@@ -4230,12 +4566,12 @@
         "IntegrationType": {
           "shape": "IntegrationType",
           "locationName": "integrationType",
-          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
         },
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda proxy integration, this is the URI of the Lambda function.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -4245,7 +4581,7 @@
         "PayloadFormatVersion": {
           "shape": "StringWithLengthBetween1And64",
           "locationName": "payloadFormatVersion",
-          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.</p>"
+          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>"
         },
         "RequestParameters": {
           "shape": "IntegrationParameters",
@@ -4266,6 +4602,11 @@
           "shape": "IntegerWithLengthBetween50And29000",
           "locationName": "timeoutInMillis",
           "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+        },
+        "TlsConfig": {
+          "shape": "TlsConfig",
+          "locationName": "tlsConfig",
+          "documentation": "<p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>"
         }
       }
     },
@@ -4869,7 +5210,7 @@
         "StageVariables": {
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
-          "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -4940,10 +5281,103 @@
           "shape": "Tags",
           "locationName": "tags"
         }
+      }
+    },
+    "GetVpcLinkRequest": {
+      "type": "structure",
+      "members": {
+        "VpcLinkId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "vpcLinkId",
+          "documentation": "<p>The ID of the VPC link.</p>"
+        }
       },
       "required": [
-        "Tags"
+        "VpcLinkId"
       ]
+    },
+    "GetVpcLinkResponse": {
+      "type": "structure",
+      "members": {
+        "CreatedDate": {
+          "shape": "__timestampIso8601",
+          "locationName": "createdDate",
+          "documentation": "<p>The timestamp when the VPC link was created.</p>"
+        },
+        "Name": {
+          "shape": "StringWithLengthBetween1And128",
+          "locationName": "name",
+          "documentation": "<p>The name of the VPC link.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "SecurityGroupIdList",
+          "locationName": "securityGroupIds",
+          "documentation": "<p>A list of security group IDs for the VPC link.</p>"
+        },
+        "SubnetIds": {
+          "shape": "SubnetIdList",
+          "locationName": "subnetIds",
+          "documentation": "<p>A list of subnet IDs to include in the VPC link.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags for the VPC link.</p>"
+        },
+        "VpcLinkId": {
+          "shape": "Id",
+          "locationName": "vpcLinkId",
+          "documentation": "<p>The ID of the VPC link.</p>"
+        },
+        "VpcLinkStatus": {
+          "shape": "VpcLinkStatus",
+          "locationName": "vpcLinkStatus",
+          "documentation": "<p>The status of the VPC link.</p>"
+        },
+        "VpcLinkStatusMessage": {
+          "shape": "StringWithLengthBetween0And1024",
+          "locationName": "vpcLinkStatusMessage",
+          "documentation": "<p>A message summarizing the cause of the status of the VPC link.</p>"
+        },
+        "VpcLinkVersion": {
+          "shape": "VpcLinkVersion",
+          "locationName": "vpcLinkVersion",
+          "documentation": "<p>The version of the VPC link.</p>"
+        }
+      }
+    },
+    "GetVpcLinksRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "<p>The maximum number of elements to be returned for this resource.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>"
+        }
+      }
+    },
+    "GetVpcLinksResponse": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "__listOfVpcLink",
+          "locationName": "items",
+          "documentation": "<p>A collection of VPC links.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "locationName": "nextToken",
+          "documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>"
+        }
+      }
     },
     "Id": {
       "type": "string",
@@ -4963,7 +5397,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "basepath",
-          "documentation": "<p>Represents the base path of the imported API. Supported only for HTTP APIs.</p>"
+          "documentation": "<p>Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html\">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.</p>"
         },
         "Body": {
           "shape": "__string",
@@ -5059,19 +5493,19 @@
     },
     "IntegerWithLengthBetween0And3600": {
       "type": "integer",
-      "documentation": "\n            <p>An integer with a value between [0-3600].</p>\n         ",
+      "documentation": "<p>An integer with a value between [0-3600].</p>",
       "min": 0,
       "max": 3600
     },
     "IntegerWithLengthBetween50And29000": {
       "type": "integer",
-      "documentation": "\n            <p>An integer with a value between [50-29000].</p>\n         ",
+      "documentation": "<p>An integer with a value between [50-29000].</p>",
       "min": 50,
       "max": 29000
     },
     "IntegerWithLengthBetweenMinus1And86400": {
       "type": "integer",
-      "documentation": "\n            <p>An integer with a value between [-1-86400].</p>\n         ",
+      "documentation": "<p>An integer with a value between -1 and 86400. Supported only for HTTP APIs.</p>",
       "min": -1,
       "max": 86400
     },
@@ -5086,12 +5520,12 @@
         "ConnectionId": {
           "shape": "StringWithLengthBetween1And1024",
           "locationName": "connectionId",
-          "documentation": "<p>The connection ID.</p>"
+          "documentation": "<p>The ID of the VPC link for a private integration. Supported only for HTTP APIs.</p>"
         },
         "ConnectionType": {
           "shape": "ConnectionType",
           "locationName": "connectionType",
-          "documentation": "<p>The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.</p>"
+          "documentation": "<p>The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.</p>"
         },
         "ContentHandlingStrategy": {
           "shape": "ContentHandlingStrategy",
@@ -5126,12 +5560,12 @@
         "IntegrationType": {
           "shape": "IntegrationType",
           "locationName": "integrationType",
-          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
         },
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda proxy integration, this is the URI of the Lambda function.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -5141,7 +5575,7 @@
         "PayloadFormatVersion": {
           "shape": "StringWithLengthBetween1And64",
           "locationName": "payloadFormatVersion",
-          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.</p>"
+          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>"
         },
         "RequestParameters": {
           "shape": "IntegrationParameters",
@@ -5162,6 +5596,11 @@
           "shape": "IntegerWithLengthBetween50And29000",
           "locationName": "timeoutInMillis",
           "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+        },
+        "TlsConfig": {
+          "shape": "TlsConfig",
+          "locationName": "tlsConfig",
+          "documentation": "<p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>"
         }
       },
       "documentation": "<p>Represents an integration.</p>"
@@ -5248,7 +5687,7 @@
       "enum": [
         "ERROR",
         "INFO",
-        "false"
+        "OFF"
       ]
     },
     "Model": {
@@ -5330,7 +5769,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "basepath",
-          "documentation": "<p>Represents the base path of the imported API. Supported only for HTTP APIs.</p>"
+          "documentation": "<p>Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html\">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.</p>"
         },
         "Body": {
           "shape": "__string",
@@ -5574,12 +6013,12 @@
         "ThrottlingBurstLimit": {
           "shape": "__integer",
           "locationName": "throttlingBurstLimit",
-          "documentation": "<p>Specifies the throttling burst limit. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>Specifies the throttling burst limit.</p>"
         },
         "ThrottlingRateLimit": {
           "shape": "__double",
           "locationName": "throttlingRateLimit",
-          "documentation": "<p>Specifies the throttling rate limit. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>Specifies the throttling rate limit.</p>"
         }
       },
       "documentation": "<p>Represents a collection of route settings.</p>"
@@ -5592,6 +6031,13 @@
       },
       "value": {
         "shape": "RouteSettings"
+      }
+    },
+    "SecurityGroupIdList": {
+      "type": "list",
+      "documentation": "<p>A list of security group IDs for the VPC link.</p>",
+      "member": {
+        "shape": "__string"
       }
     },
     "SecurityPolicy": {
@@ -5676,7 +6122,7 @@
         "StageVariables": {
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
-          "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -5735,6 +6181,13 @@
       "type": "string",
       "documentation": "<p>A string with a length between [1-64].</p>"
     },
+    "SubnetIdList": {
+      "type": "list",
+      "documentation": "<p>A list of subnet IDs to include in the VPC link.</p>",
+      "member": {
+        "shape": "__string"
+      }
+    },
     "TagResourceRequest": {
       "type": "structure",
       "members": {
@@ -5779,6 +6232,28 @@
         "shape": "StringWithLengthBetween0And32K"
       }
     },
+    "TlsConfig": {
+      "type": "structure",
+      "members": {
+        "ServerNameToVerify": {
+          "shape": "StringWithLengthBetween1And512",
+          "locationName": "serverNameToVerify",
+          "documentation": "<p>If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.</p>"
+        }
+      },
+      "documentation": "<p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>"
+    },
+    "TlsConfigInput": {
+      "type": "structure",
+      "members": {
+        "ServerNameToVerify": {
+          "shape": "StringWithLengthBetween1And512",
+          "locationName": "serverNameToVerify",
+          "documentation": "<p>If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.</p>"
+        }
+      },
+      "documentation": "<p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>"
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "members": {
@@ -5792,7 +6267,7 @@
           "shape": "__listOf__string",
           "location": "querystring",
           "locationName": "tagKeys",
-          "documentation": "\n            <p>The Tag keys to delete.</p>\n         "
+          "documentation": "<p>The Tag keys to delete</p>"
         }
       },
       "required": [
@@ -6234,12 +6709,12 @@
         "ConnectionId": {
           "shape": "StringWithLengthBetween1And1024",
           "locationName": "connectionId",
-          "documentation": "<p>The connection ID.</p>"
+          "documentation": "<p>The ID of the VPC link for a private integration. Supported only for HTTP APIs.</p>"
         },
         "ConnectionType": {
           "shape": "ConnectionType",
           "locationName": "connectionType",
-          "documentation": "<p>The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.</p>"
+          "documentation": "<p>The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.</p>"
         },
         "ContentHandlingStrategy": {
           "shape": "ContentHandlingStrategy",
@@ -6270,12 +6745,12 @@
         "IntegrationType": {
           "shape": "IntegrationType",
           "locationName": "integrationType",
-          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. For HTTP API private integrations, use an HTTP_PROXY integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
         },
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda proxy integration, this is the URI of the Lambda function.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -6285,7 +6760,7 @@
         "PayloadFormatVersion": {
           "shape": "StringWithLengthBetween1And64",
           "locationName": "payloadFormatVersion",
-          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.</p>"
+          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>"
         },
         "RequestParameters": {
           "shape": "IntegrationParameters",
@@ -6306,6 +6781,11 @@
           "shape": "IntegerWithLengthBetween50And29000",
           "locationName": "timeoutInMillis",
           "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+        },
+        "TlsConfig": {
+          "shape": "TlsConfigInput",
+          "locationName": "tlsConfig",
+          "documentation": "<p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>"
         }
       },
       "documentation": "<p>Updates an Integration.</p>",
@@ -6325,12 +6805,12 @@
         "ConnectionId": {
           "shape": "StringWithLengthBetween1And1024",
           "locationName": "connectionId",
-          "documentation": "<p>The connection ID.</p>"
+          "documentation": "<p>The ID of the VPC link for a private integration. Supported only for HTTP APIs.</p>"
         },
         "ConnectionType": {
           "shape": "ConnectionType",
           "locationName": "connectionType",
-          "documentation": "<p>The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.</p>"
+          "documentation": "<p>The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.</p>"
         },
         "ContentHandlingStrategy": {
           "shape": "ContentHandlingStrategy",
@@ -6365,12 +6845,12 @@
         "IntegrationType": {
           "shape": "IntegrationType",
           "locationName": "integrationType",
-          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>"
         },
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda proxy integration, this is the URI of the Lambda function.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -6380,7 +6860,7 @@
         "PayloadFormatVersion": {
           "shape": "StringWithLengthBetween1And64",
           "locationName": "payloadFormatVersion",
-          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.</p>"
+          "documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>"
         },
         "RequestParameters": {
           "shape": "IntegrationParameters",
@@ -6401,6 +6881,11 @@
           "shape": "IntegerWithLengthBetween50And29000",
           "locationName": "timeoutInMillis",
           "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+        },
+        "TlsConfig": {
+          "shape": "TlsConfig",
+          "locationName": "tlsConfig",
+          "documentation": "<p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>"
         }
       }
     },
@@ -6844,7 +7329,7 @@
         "StageVariables": {
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
-          "documentation": "<p>A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.</p>"
         }
       },
       "documentation": "<p>Updates a Stage.</p>",
@@ -6919,7 +7404,7 @@
         "StageVariables": {
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
-          "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.</p>"
+          "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -6928,9 +7413,154 @@
         }
       }
     },
+    "UpdateVpcLinkRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "StringWithLengthBetween1And128",
+          "locationName": "name",
+          "documentation": "<p>The name of the VPC link.</p>"
+        },
+        "VpcLinkId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "vpcLinkId",
+          "documentation": "<p>The ID of the VPC link.</p>"
+        }
+      },
+      "documentation": "<p>Updates a VPC link.</p>",
+      "required": [
+        "VpcLinkId"
+      ]
+    },
+    "UpdateVpcLinkResponse": {
+      "type": "structure",
+      "members": {
+        "CreatedDate": {
+          "shape": "__timestampIso8601",
+          "locationName": "createdDate",
+          "documentation": "<p>The timestamp when the VPC link was created.</p>"
+        },
+        "Name": {
+          "shape": "StringWithLengthBetween1And128",
+          "locationName": "name",
+          "documentation": "<p>The name of the VPC link.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "SecurityGroupIdList",
+          "locationName": "securityGroupIds",
+          "documentation": "<p>A list of security group IDs for the VPC link.</p>"
+        },
+        "SubnetIds": {
+          "shape": "SubnetIdList",
+          "locationName": "subnetIds",
+          "documentation": "<p>A list of subnet IDs to include in the VPC link.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags for the VPC link.</p>"
+        },
+        "VpcLinkId": {
+          "shape": "Id",
+          "locationName": "vpcLinkId",
+          "documentation": "<p>The ID of the VPC link.</p>"
+        },
+        "VpcLinkStatus": {
+          "shape": "VpcLinkStatus",
+          "locationName": "vpcLinkStatus",
+          "documentation": "<p>The status of the VPC link.</p>"
+        },
+        "VpcLinkStatusMessage": {
+          "shape": "StringWithLengthBetween0And1024",
+          "locationName": "vpcLinkStatusMessage",
+          "documentation": "<p>A message summarizing the cause of the status of the VPC link.</p>"
+        },
+        "VpcLinkVersion": {
+          "shape": "VpcLinkVersion",
+          "locationName": "vpcLinkVersion",
+          "documentation": "<p>The version of the VPC link.</p>"
+        }
+      }
+    },
     "UriWithLengthBetween1And2048": {
       "type": "string",
       "documentation": "<p>A string representation of a URI with a length between [1-2048].</p>"
+    },
+    "VpcLink": {
+      "type": "structure",
+      "members": {
+        "CreatedDate": {
+          "shape": "__timestampIso8601",
+          "locationName": "createdDate",
+          "documentation": "<p>The timestamp when the VPC link was created.</p>"
+        },
+        "Name": {
+          "shape": "StringWithLengthBetween1And128",
+          "locationName": "name",
+          "documentation": "<p>The name of the VPC link.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "SecurityGroupIdList",
+          "locationName": "securityGroupIds",
+          "documentation": "<p>A list of security group IDs for the VPC link.</p>"
+        },
+        "SubnetIds": {
+          "shape": "SubnetIdList",
+          "locationName": "subnetIds",
+          "documentation": "<p>A list of subnet IDs to include in the VPC link.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>Tags for the VPC link.</p>"
+        },
+        "VpcLinkId": {
+          "shape": "Id",
+          "locationName": "vpcLinkId",
+          "documentation": "<p>The ID of the VPC link.</p>"
+        },
+        "VpcLinkStatus": {
+          "shape": "VpcLinkStatus",
+          "locationName": "vpcLinkStatus",
+          "documentation": "<p>The status of the VPC link.</p>"
+        },
+        "VpcLinkStatusMessage": {
+          "shape": "StringWithLengthBetween0And1024",
+          "locationName": "vpcLinkStatusMessage",
+          "documentation": "<p>A message summarizing the cause of the status of the VPC link.</p>"
+        },
+        "VpcLinkVersion": {
+          "shape": "VpcLinkVersion",
+          "locationName": "vpcLinkVersion",
+          "documentation": "<p>The version of the VPC link.</p>"
+        }
+      },
+      "documentation": "<p>Represents a VPC link.</p>",
+      "required": [
+        "VpcLinkId",
+        "SecurityGroupIds",
+        "SubnetIds",
+        "Name"
+      ]
+    },
+    "VpcLinkStatus": {
+      "type": "string",
+      "documentation": "<p>The status of the VPC link.</p>",
+      "enum": [
+        "PENDING",
+        "AVAILABLE",
+        "DELETING",
+        "FAILED",
+        "INACTIVE"
+      ]
+    },
+    "VpcLinkVersion": {
+      "type": "string",
+      "documentation": "<p>The version of the VPC link.</p>",
+      "enum": [
+        "V2"
+      ]
     },
     "__boolean": {
       "type": "boolean"
@@ -7007,6 +7637,12 @@
         "shape": "Stage"
       }
     },
+    "__listOfVpcLink": {
+      "type": "list",
+      "member": {
+        "shape": "VpcLink"
+      }
+    },
     "__listOf__string": {
       "type": "list",
       "member": {
@@ -7019,16 +7655,6 @@
     "__timestampIso8601": {
       "type": "timestamp",
       "timestampFormat": "iso8601"
-    }
-  },
-  "authorizers": {
-    "authorization_strategy": {
-      "name": "authorization_strategy",
-      "type": "provided",
-      "placement": {
-        "location": "header",
-        "name": "Authorization"
-      }
     }
   },
   "documentation": "<p>Amazon API Gateway V2</p>"

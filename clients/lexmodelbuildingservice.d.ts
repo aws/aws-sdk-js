@@ -260,6 +260,14 @@ declare class LexModelBuildingService extends Service {
    */
   getUtterancesView(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
+   * Gets a list of tags associated with the specified resource. Only bots, bot aliases, and bot channels can have tags associated with them.
+   */
+  listTagsForResource(params: LexModelBuildingService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.ListTagsForResourceResponse) => void): Request<LexModelBuildingService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Gets a list of tags associated with the specified resource. Only bots, bot aliases, and bot channels can have tags associated with them.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: LexModelBuildingService.Types.ListTagsForResourceResponse) => void): Request<LexModelBuildingService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name, a locale, and whether the bot is directed toward children under age 13. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with the minimum information, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see security-iam.
    */
   putBot(params: LexModelBuildingService.Types.PutBotRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotResponse) => void): Request<LexModelBuildingService.Types.PutBotResponse, AWSError>;
@@ -299,10 +307,27 @@ declare class LexModelBuildingService extends Service {
    * Starts a job to import a resource to Amazon Lex.
    */
   startImport(callback?: (err: AWSError, data: LexModelBuildingService.Types.StartImportResponse) => void): Request<LexModelBuildingService.Types.StartImportResponse, AWSError>;
+  /**
+   * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
+   */
+  tagResource(params: LexModelBuildingService.Types.TagResourceRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.TagResourceResponse) => void): Request<LexModelBuildingService.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
+   */
+  tagResource(callback?: (err: AWSError, data: LexModelBuildingService.Types.TagResourceResponse) => void): Request<LexModelBuildingService.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a bot, bot alias or bot channel.
+   */
+  untagResource(params: LexModelBuildingService.Types.UntagResourceRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.UntagResourceResponse) => void): Request<LexModelBuildingService.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a bot, bot alias or bot channel.
+   */
+  untagResource(callback?: (err: AWSError, data: LexModelBuildingService.Types.UntagResourceResponse) => void): Request<LexModelBuildingService.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace LexModelBuildingService {
   export type AliasName = string;
   export type AliasNameOrListAll = string;
+  export type AmazonResourceName = string;
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
   export interface BotAliasMetadata {
@@ -1521,6 +1546,18 @@ declare namespace LexModelBuildingService {
   export type KmsKeyArn = string;
   export type LambdaARN = string;
   export type ListOfUtterance = UtteranceData[];
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to get a list of tags for.
+     */
+    resourceArn: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags associated with a resource.
+     */
+    tags?: TagList;
+  }
   export type ListsOfUtterances = UtteranceList[];
   export type Locale = "en-US"|"en-GB"|"de-DE"|string;
   export type LocaleList = Locale[];
@@ -1631,6 +1668,10 @@ declare namespace LexModelBuildingService {
      * Settings for conversation logs for the alias.
      */
     conversationLogs?: ConversationLogsRequest;
+    /**
+     * A list of tags to add to the bot alias. You can only add tags when you create an alias, you can't use the PutBotAlias operation to update the tags on a bot alias. To update tags, use the TagResource operation.
+     */
+    tags?: TagList;
   }
   export interface PutBotAliasResponse {
     /**
@@ -1665,6 +1706,10 @@ declare namespace LexModelBuildingService {
      * The settings that determine how Amazon Lex uses conversation logs for the alias.
      */
     conversationLogs?: ConversationLogsResponse;
+    /**
+     * A list of tags associated with a bot.
+     */
+    tags?: TagList;
   }
   export interface PutBotRequest {
     /**
@@ -1719,6 +1764,10 @@ declare namespace LexModelBuildingService {
      * When set to true a new numbered version of the bot is created. This is the same as calling the CreateBotVersion operation. If you don't specify createVersion, the default is false.
      */
     createVersion?: Boolean;
+    /**
+     * A list of tags to add to the bot. You can only add tags when you create a bot, you can't use the PutBot operation to update the tags on a bot. To update tags, use the TagResource operation.
+     */
+    tags?: TagList;
   }
   export interface PutBotResponse {
     /**
@@ -1789,6 +1838,10 @@ declare namespace LexModelBuildingService {
      *  true if the bot is configured to send user utterances to Amazon Comprehend for sentiment analysis. If the detectSentiment field was not specified in the request, the detectSentiment field is false in the response.
      */
     detectSentiment?: Boolean;
+    /**
+     * A list of tags associated with the bot.
+     */
+    tags?: TagList;
   }
   export interface PutIntentRequest {
     /**
@@ -2093,6 +2146,10 @@ declare namespace LexModelBuildingService {
      * Specifies the action that the StartImport operation should take when there is an existing resource with the same name.   FAIL_ON_CONFLICT - The import operation is stopped on the first conflict between a resource in the import file and an existing resource. The name of the resource causing the conflict is in the failureReason field of the response to the GetImport operation. OVERWRITE_LATEST - The import operation proceeds even if there is a conflict with an existing resource. The $LASTEST version of the existing resource is overwritten with the data from the import file.  
      */
     mergeStrategy: MergeStrategy;
+    /**
+     * A list of tags to add to the imported bot. You can only add tags when you import a bot, you can't add tags to an intent or slot type.
+     */
+    tags?: TagList;
   }
   export interface StartImportResponse {
     /**
@@ -2116,6 +2173,10 @@ declare namespace LexModelBuildingService {
      */
     importStatus?: ImportStatus;
     /**
+     * A list of tags added to the imported bot.
+     */
+    tags?: TagList;
+    /**
      * A timestamp for the date and time that the import job was requested.
      */
     createdDate?: Timestamp;
@@ -2135,7 +2196,45 @@ declare namespace LexModelBuildingService {
   export type String = string;
   export type StringList = String[];
   export type SynonymList = Value[];
+  export interface Tag {
+    /**
+     * The key for the tag. Keys are not case-sensitive and must be unique.
+     */
+    key: TagKey;
+    /**
+     * The value associated with a key. The value may be an empty string but it can't be null.
+     */
+    value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * A list of tag keys to add to the resource. If a tag key already exists, the existing value is replaced with the new value.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to remove the tags from.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * A list of tag keys to remove from the resource. If a tag key does not exist on the resource, it is ignored.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UserId = string;
   export type Utterance = string;
   export interface UtteranceData {
