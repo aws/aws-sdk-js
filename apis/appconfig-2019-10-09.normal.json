@@ -60,7 +60,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Information that enables AppConfig to access the configuration source. Valid configuration sources include Systems Manager (SSM) documents and SSM Parameter Store parameters. A configuration profile includes the following information.</p> <ul> <li> <p>The Uri location of the configuration data.</p> </li> <li> <p>The AWS Identity and Access Management (IAM) role that provides access to the configuration data.</p> </li> <li> <p>A validator for the configuration data. Available validators include either a JSON Schema or an AWS Lambda function.</p> </li> </ul>"
+      "documentation": "<p>Information that enables AppConfig to access the configuration source. Valid configuration sources include Systems Manager (SSM) documents, SSM Parameter Store parameters, and Amazon S3 objects. A configuration profile includes the following information.</p> <ul> <li> <p>The Uri location of the configuration data.</p> </li> <li> <p>The AWS Identity and Access Management (IAM) role that provides access to the configuration data.</p> </li> <li> <p>A validator for the configuration data. Available validators include either a JSON Schema or an AWS Lambda function.</p> </li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-creating-configuration-and-profile.html\">Create a Configuration and a Configuration Profile</a> in the <i>AWS AppConfig User Guide</i>.</p>"
     },
     "CreateDeploymentStrategy": {
       "name": "CreateDeploymentStrategy",
@@ -938,7 +938,7 @@
         },
         "LocationUri": {
           "shape": "Uri",
-          "documentation": "<p>A URI to locate the configuration. You can specify either a Systems Manager (SSM) document or an SSM Parameter Store parameter. For an SSM document, specify either the document name in the format <code>ssm-document://&lt;Document name&gt;</code> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format <code>ssm-parameter://&lt;Parameter name&gt;</code> or the ARN.</p>"
+          "documentation": "<p>A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the document name in the format <code>ssm-document://&lt;Document_name&gt;</code> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format <code>ssm-parameter://&lt;Parameter_name&gt;</code> or the ARN. For an Amazon S3 object, specify the URI in the following format: <code>s3://&lt;bucket&gt;/&lt;objectKey&gt; </code>. Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json</p>"
         },
         "RetrievalRoleArn": {
           "shape": "Arn",
@@ -1421,19 +1421,19 @@
       "members": {
         "Application": {
           "shape": "StringWithLengthBetween1And64",
-          "documentation": "<p>The application to get.</p>",
+          "documentation": "<p>The application to get. Specify either the application name or the application ID.</p>",
           "location": "uri",
           "locationName": "Application"
         },
         "Environment": {
           "shape": "StringWithLengthBetween1And64",
-          "documentation": "<p>The environment to get.</p>",
+          "documentation": "<p>The environment to get. Specify either the environment name or the environment ID.</p>",
           "location": "uri",
           "locationName": "Environment"
         },
         "Configuration": {
           "shape": "StringWithLengthBetween1And64",
-          "documentation": "<p>The configuration to get.</p>",
+          "documentation": "<p>The configuration to get. Specify either the configuration name or the configuration ID.</p>",
           "location": "uri",
           "locationName": "Configuration"
         },
