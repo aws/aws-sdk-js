@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.639.0',
+	  VERSION: '2.640.0',
 
 	  /**
 	   * @api private
@@ -6506,7 +6506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      req.service.config.getCredentials(function(err) {
 	        if (err) {
 	          req.response.error = AWS.util.error(err,
-	            {code: 'CredentialsError', message: 'Missing credentials in config'});
+	            {code: 'CredentialsError', message: 'Missing credentials in config, if using AWS_CONFIG_FILE, set AWS_SDK_LOAD_CONFIG=1'});
 	        }
 	        done();
 	      });

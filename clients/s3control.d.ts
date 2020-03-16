@@ -45,6 +45,14 @@ declare class S3Control extends Service {
    */
   deleteAccessPointPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Delete the tags on a Amazon S3 batch operations job, if any.
+   */
+  deleteJobTagging(params: S3Control.Types.DeleteJobTaggingRequest, callback?: (err: AWSError, data: S3Control.Types.DeleteJobTaggingResult) => void): Request<S3Control.Types.DeleteJobTaggingResult, AWSError>;
+  /**
+   * Delete the tags on a Amazon S3 batch operations job, if any.
+   */
+  deleteJobTagging(callback?: (err: AWSError, data: S3Control.Types.DeleteJobTaggingResult) => void): Request<S3Control.Types.DeleteJobTaggingResult, AWSError>;
+  /**
    * Removes the PublicAccessBlock configuration for an Amazon Web Services account.
    */
   deletePublicAccessBlock(params: S3Control.Types.DeletePublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -85,6 +93,14 @@ declare class S3Control extends Service {
    */
   getAccessPointPolicyStatus(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyStatusResult) => void): Request<S3Control.Types.GetAccessPointPolicyStatusResult, AWSError>;
   /**
+   * Retrieve the tags on a Amazon S3 batch operations job.
+   */
+  getJobTagging(params: S3Control.Types.GetJobTaggingRequest, callback?: (err: AWSError, data: S3Control.Types.GetJobTaggingResult) => void): Request<S3Control.Types.GetJobTaggingResult, AWSError>;
+  /**
+   * Retrieve the tags on a Amazon S3 batch operations job.
+   */
+  getJobTagging(callback?: (err: AWSError, data: S3Control.Types.GetJobTaggingResult) => void): Request<S3Control.Types.GetJobTaggingResult, AWSError>;
+  /**
    * Retrieves the PublicAccessBlock configuration for an Amazon Web Services account.
    */
   getPublicAccessBlock(params: S3Control.Types.GetPublicAccessBlockRequest, callback?: (err: AWSError, data: S3Control.Types.GetPublicAccessBlockOutput) => void): Request<S3Control.Types.GetPublicAccessBlockOutput, AWSError>;
@@ -116,6 +132,14 @@ declare class S3Control extends Service {
    * Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.
    */
   putAccessPointPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Replace the set of tags on a Amazon S3 batch operations job.
+   */
+  putJobTagging(params: S3Control.Types.PutJobTaggingRequest, callback?: (err: AWSError, data: S3Control.Types.PutJobTaggingResult) => void): Request<S3Control.Types.PutJobTaggingResult, AWSError>;
+  /**
+   * Replace the set of tags on a Amazon S3 batch operations job.
+   */
+  putJobTagging(callback?: (err: AWSError, data: S3Control.Types.PutJobTaggingResult) => void): Request<S3Control.Types.PutJobTaggingResult, AWSError>;
   /**
    * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account.
    */
@@ -222,6 +246,10 @@ declare namespace S3Control {
      * The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest.
      */
     RoleArn: IAMRoleArn;
+    /**
+     * An optional set of tags to associate with the job when it is created.
+     */
+    Tags?: S3TagSet;
   }
   export interface CreateJobResult {
     /**
@@ -249,6 +277,18 @@ declare namespace S3Control {
      * The name of the access point you want to delete.
      */
     Name: AccessPointName;
+  }
+  export interface DeleteJobTaggingRequest {
+    /**
+     * The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to remove tags from.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID for the job whose tags you want to delete.
+     */
+    JobId: JobId;
+  }
+  export interface DeleteJobTaggingResult {
   }
   export interface DeletePublicAccessBlockRequest {
     /**
@@ -336,6 +376,22 @@ declare namespace S3Control {
      * The date and time when the specified access point was created.
      */
     CreationDate?: CreationDate;
+  }
+  export interface GetJobTaggingRequest {
+    /**
+     * The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to retrieve tags for.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID for the job whose tags you want to retrieve.
+     */
+    JobId: JobId;
+  }
+  export interface GetJobTaggingResult {
+    /**
+     * The set of tags associated with the job.
+     */
+    Tags?: S3TagSet;
   }
   export interface GetPublicAccessBlockOutput {
     /**
@@ -686,6 +742,22 @@ declare namespace S3Control {
      * The policy that you want to apply to the specified access point. For more information about access point policies, see Managing Data Access with Amazon S3 Access Points in the Amazon Simple Storage Service Developer Guide.
      */
     Policy: Policy;
+  }
+  export interface PutJobTaggingRequest {
+    /**
+     * The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to replace tags on.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID for the job whose tags you want to replace.
+     */
+    JobId: JobId;
+    /**
+     * The set of tags to associate with the job.
+     */
+    Tags: S3TagSet;
+  }
+  export interface PutJobTaggingResult {
   }
   export interface PutPublicAccessBlockRequest {
     /**

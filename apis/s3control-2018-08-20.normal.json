@@ -80,6 +80,31 @@
       },
       "documentation": "<p>Deletes the access point policy for the specified access point.</p>"
     },
+    "DeleteJobTagging": {
+      "name": "DeleteJobTagging",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v20180820/jobs/{id}/tagging"
+      },
+      "input": {
+        "shape": "DeleteJobTaggingRequest"
+      },
+      "output": {
+        "shape": "DeleteJobTaggingResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Delete the tags on a Amazon S3 batch operations job, if any.</p>"
+    },
     "DeletePublicAccessBlock": {
       "name": "DeletePublicAccessBlock",
       "http": {
@@ -161,6 +186,31 @@
       },
       "documentation": "<p>Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html\">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
     },
+    "GetJobTagging": {
+      "name": "GetJobTagging",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/jobs/{id}/tagging"
+      },
+      "input": {
+        "shape": "GetJobTaggingRequest"
+      },
+      "output": {
+        "shape": "GetJobTaggingResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieve the tags on a Amazon S3 batch operations job.</p>"
+    },
     "GetPublicAccessBlock": {
       "name": "GetPublicAccessBlock",
       "http": {
@@ -233,6 +283,38 @@
         }
       },
       "documentation": "<p>Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.</p>"
+    },
+    "PutJobTagging": {
+      "name": "PutJobTagging",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20180820/jobs/{id}/tagging"
+      },
+      "input": {
+        "shape": "PutJobTaggingRequest",
+        "locationName": "PutJobTaggingRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "output": {
+        "shape": "PutJobTaggingResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        }
+      ],
+      "documentation": "<p>Replace the set of tags on a Amazon S3 batch operations job.</p>"
     },
     "PutPublicAccessBlock": {
       "name": "PutPublicAccessBlock",
@@ -445,6 +527,10 @@
         "RoleArn": {
           "shape": "IAMRoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest.</p>"
+        },
+        "Tags": {
+          "shape": "S3TagSet",
+          "documentation": "<p>An optional set of tags to associate with the job when it is created.</p>"
         }
       }
     },
@@ -501,6 +587,31 @@
           "locationName": "name"
         }
       }
+    },
+    "DeleteJobTaggingRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "JobId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to remove tags from.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The ID for the job whose tags you want to delete.</p>",
+          "location": "uri",
+          "locationName": "id"
+        }
+      }
+    },
+    "DeleteJobTaggingResult": {
+      "type": "structure",
+      "members": {}
     },
     "DeletePublicAccessBlockRequest": {
       "type": "structure",
@@ -652,6 +763,36 @@
         "CreationDate": {
           "shape": "CreationDate",
           "documentation": "<p>The date and time when the specified access point was created.</p>"
+        }
+      }
+    },
+    "GetJobTaggingRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "JobId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to retrieve tags for.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The ID for the job whose tags you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "id"
+        }
+      }
+    },
+    "GetJobTaggingResult": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "S3TagSet",
+          "documentation": "<p>The set of tags associated with the job.</p>"
         }
       }
     },
@@ -1306,6 +1447,36 @@
           "documentation": "<p>The policy that you want to apply to the specified access point. For more information about access point policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html\">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
         }
       }
+    },
+    "PutJobTaggingRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "JobId",
+        "Tags"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to replace tags on.</p>",
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The ID for the job whose tags you want to replace.</p>",
+          "location": "uri",
+          "locationName": "id"
+        },
+        "Tags": {
+          "shape": "S3TagSet",
+          "documentation": "<p>The set of tags to associate with the job.</p>"
+        }
+      }
+    },
+    "PutJobTaggingResult": {
+      "type": "structure",
+      "members": {}
     },
     "PutPublicAccessBlockRequest": {
       "type": "structure",

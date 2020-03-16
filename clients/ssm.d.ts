@@ -3416,7 +3416,7 @@ declare namespace SSM {
      */
     Parameters?: ParameterMetadataList;
     /**
-     * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     * The token to use when requesting the next set of items.
      */
     NextToken?: NextToken;
   }
@@ -6763,9 +6763,9 @@ declare namespace SSM {
      */
     ApproveAfterDays?: ApproveAfterDays;
     /**
-     * The cutoff date for auto approval of released patches. Any patches released on or before this date will be installed automatically
+     * Example API
      */
-    ApproveUntilDate?: PatchStringDate;
+    ApproveUntilDate?: PatchStringDateTime;
     /**
      * For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is 'false'. Applies to Linux instances only.
      */
@@ -6813,7 +6813,7 @@ declare namespace SSM {
      */
     ApprovalDate?: DateTime;
   }
-  export type PatchStringDate = string;
+  export type PatchStringDateTime = string;
   export type PatchTitle = string;
   export type PatchUnreportedNotApplicableCount = number;
   export type PatchVendor = string;
@@ -7172,6 +7172,13 @@ declare namespace SSM {
     OrganizationalUnits?: ResourceDataSyncOrganizationalUnitList;
   }
   export type ResourceDataSyncCreatedTime = Date;
+  export interface ResourceDataSyncDestinationDataSharing {
+    /**
+     * The sharing data type. Only Organization is supported.
+     */
+    DestinationDataSharingType?: ResourceDataSyncDestinationDataSharingType;
+  }
+  export type ResourceDataSyncDestinationDataSharingType = string;
   export type ResourceDataSyncIncludeFutureRegions = boolean;
   export interface ResourceDataSyncItem {
     /**
@@ -7249,6 +7256,10 @@ declare namespace SSM {
      * The ARN of an encryption key for a destination in Amazon S3. Must belong to the same Region as the destination Amazon S3 bucket.
      */
     AWSKMSKeyARN?: ResourceDataSyncAWSKMSKeyARN;
+    /**
+     * Enables destination data sharing. By default, this field is null.
+     */
+    DestinationDataSharing?: ResourceDataSyncDestinationDataSharing;
   }
   export type ResourceDataSyncS3Format = "JsonSerDe"|string;
   export type ResourceDataSyncS3Prefix = string;

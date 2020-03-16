@@ -6969,7 +6969,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+          "documentation": "<p>The token to use when requesting the next set of items.</p>"
         }
       }
     },
@@ -12483,8 +12483,8 @@
           "box": true
         },
         "ApproveUntilDate": {
-          "shape": "PatchStringDate",
-          "documentation": "<p>The cutoff date for auto approval of released patches. Any patches released on or before this date will be installed automatically</p>",
+          "shape": "PatchStringDateTime",
+          "documentation": "<p>Example API</p>",
           "box": true
         },
         "EnableNonSecurity": {
@@ -12598,11 +12598,10 @@
       },
       "documentation": "<p>Information about the approval status of a patch.</p>"
     },
-    "PatchStringDate": {
+    "PatchStringDateTime": {
       "type": "string",
       "max": 10,
-      "min": 1,
-      "pattern": "^(\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$"
+      "min": 1
     },
     "PatchTitle": {
       "type": "string"
@@ -13164,6 +13163,21 @@
     "ResourceDataSyncCreatedTime": {
       "type": "timestamp"
     },
+    "ResourceDataSyncDestinationDataSharing": {
+      "type": "structure",
+      "members": {
+        "DestinationDataSharingType": {
+          "shape": "ResourceDataSyncDestinationDataSharingType",
+          "documentation": "<p>The sharing data type. Only <code>Organization</code> is supported.</p>"
+        }
+      },
+      "documentation": "<p>Synchronize Systems Manager Inventory data from multiple AWS accounts defined in AWS Organizations to a centralized Amazon S3 bucket. Data is synchronized to individual key prefixes in the central bucket. Each key prefix represents a different AWS account ID.</p>"
+    },
+    "ResourceDataSyncDestinationDataSharingType": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
     "ResourceDataSyncIncludeFutureRegions": {
       "type": "boolean"
     },
@@ -13288,6 +13302,10 @@
         "AWSKMSKeyARN": {
           "shape": "ResourceDataSyncAWSKMSKeyARN",
           "documentation": "<p>The ARN of an encryption key for a destination in Amazon S3. Must belong to the same Region as the destination Amazon S3 bucket.</p>"
+        },
+        "DestinationDataSharing": {
+          "shape": "ResourceDataSyncDestinationDataSharing",
+          "documentation": "<p>Enables destination data sharing. By default, this field is <code>null</code>.</p>"
         }
       },
       "documentation": "<p>Information about the target Amazon S3 bucket for the Resource Data Sync.</p>"

@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.639.0-->
+<!--LATEST=2.640.0-->
 <!--ENTRYINSERT-->
+
+## 2.640.0
+* bugfix: AWS.EventListeners.Core: add error message
+* feature: CognitoIdentityServiceProvider: Additional response field "CompromisedCredentialsDetected" added to AdminListUserAuthEvents.
+* feature: ECS: This release adds the ability to update the task placement strategy and constraints for Amazon ECS services.
+* feature: ElastiCache: Amazon ElastiCache now supports Global Datastore for Redis. Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. You can create, modify and describe a Global Datastore, as well as add or remove regions from your Global Datastore and promote a region as primary in Global Datastore.
+* feature: S3Control: Amazon S3 now supports Batch Operations job tagging.
+* feature: SSM: Resource data sync for AWS Systems Manager Inventory now includes destination data sharing. This feature enables you to synchronize inventory data from multiple AWS accounts into a central Amazon S3 bucket. To use this feature, all AWS accounts must be listed in AWS Organizations.
 
 ## 2.639.0
 * feature: ApiGatewayV2: Amazon API Gateway HTTP APIs is now generally available. HTTP APIs offer the core functionality of REST API at up to 71% lower price compared to REST API, 60% lower p99 latency, and is significantly easier to use. As part of general availability, we added new features to route requests to private backends such as private ALBs, NLBs, and IP/ports. We also brought over a set of features from REST API such as Stage Variables, and Stage/Route level throttling. Custom domain names can also now be used with both REST And HTTP APIs.
