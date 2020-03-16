@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "CI",
+  "description": "add buildspec.yml from CodeBuild job"
+}
