@@ -18,7 +18,6 @@ phases:
     commands:
       - echo Install npm dependencies
       - npm install
-      - gem install rake
   build:
     commands:
       - echo Running Test
