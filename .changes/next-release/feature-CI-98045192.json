@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "CI",
+  "description": "Disable TravisCI in favor of CodeBuild"
+}
