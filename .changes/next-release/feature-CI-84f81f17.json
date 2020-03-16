@@ -1,5 +1,5 @@
 {
   "type": "feature",
   "category": "CI",
-  "description": "copy buildspec.yml from CodeBuild job"
+  "description": "add buildspec.yml from CodeBuild job"
 }
