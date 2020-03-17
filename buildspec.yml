@@ -3,16 +3,14 @@ version: 0.2
 env:
   variables:
     AWS_REGION: "us-west-2"
-    NODE_PATH: "/root/.nvm/v8.11.3/lib/node_modules"
-    PATH: "/root/.nvm/versions/node/v8.11.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    CHROME_BIN: "/usr/bin/chromium-browser"
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 12
   pre_build:
     commands:
-      - echo use node 8.11.3
-      - export NVM_DIR=~/.nvm && source ~/.nvm/nvm.sh && nvm install 8.11.3
-      - echo use npm 3.10.10
-      - npm install -g npm@3.10.10
       - echo Install npm dependencies
       - npm install
       - gem install rake
@@ -20,3 +18,6 @@ phases:
     commands:
       - echo Running Test
       - npm run test
+  post_build:
+    commands:
+      - ./node_modules/.bin/codecov -f coverage/*.json
