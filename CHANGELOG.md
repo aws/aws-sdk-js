@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.640.0-->
+<!--LATEST=2.641.0-->
 <!--ENTRYINSERT-->
+
+## 2.641.0
+* feature: CI: add buildspec.yml from CodeBuild job
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for: AV1 encoding in File Group MP4, DASH and CMAF DASH outputs; PCM/WAV audio output in MPEG2-TS containers; and Opus audio in Webm inputs.
 
 ## 2.640.0
 * bugfix: AWS.EventListeners.Core: add error message

@@ -509,6 +509,71 @@ declare namespace MediaConvert {
   }
   export type AudioSelectorType = "PID"|"TRACK"|"LANGUAGE_CODE"|string;
   export type AudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export type Av1AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|string;
+  export type Av1FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
+  export type Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|string;
+  export interface Av1QvbrSettings {
+    /**
+     * Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within av1Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+     */
+    QvbrQualityLevel?: __integerMin1Max10;
+    /**
+     * Optional. Specify a value here to set the QVBR quality to a level that is between whole numbers. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33. MediaConvert rounds your QVBR quality level to the nearest third of a whole number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
+     */
+    QvbrQualityLevelFineTune?: __doubleMin0Max1;
+  }
+  export type Av1RateControlMode = "QVBR"|string;
+  export interface Av1Settings {
+    /**
+     * Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+     */
+    AdaptiveQuantization?: Av1AdaptiveQuantization;
+    /**
+     * If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.
+     */
+    FramerateControl?: Av1FramerateControl;
+    /**
+     * When set to INTERPOLATE, produces smoother motion during frame rate conversion.
+     */
+    FramerateConversionAlgorithm?: Av1FramerateConversionAlgorithm;
+    /**
+     * When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.
+     */
+    FramerateDenominator?: __integerMin1Max2147483647;
+    /**
+     * When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.
+     */
+    FramerateNumerator?: __integerMin1Max2147483647;
+    /**
+     * Specify the GOP length (keyframe interval) in frames. With AV1, MediaConvert doesn't support GOP length in seconds. This value must be greater than zero and preferably equal to 1 + ((numberBFrames + 1) * x), where x is an integer value.
+     */
+    GopSize?: __doubleMin0;
+    /**
+     * Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.
+     */
+    MaxBitrate?: __integerMin1000Max1152000000;
+    /**
+     * Specify the number of B-frames. With AV1, MediaConvert supports only 7 or 15.
+     */
+    NumberBFramesBetweenReferenceFrames?: __integerMin7Max15;
+    /**
+     * Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
+     */
+    QvbrSettings?: Av1QvbrSettings;
+    /**
+     * 'With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined variable bitrate (QVBR). You can''t use CBR or VBR.'
+     */
+    RateControlMode?: Av1RateControlMode;
+    /**
+     * Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16, or 32. For progressive pictures, this value must be less than or equal to the number of macroblock rows. For interlaced pictures, this value must be less than or equal to half the number of macroblock rows.
+     */
+    Slices?: __integerMin1Max32;
+    /**
+     * Adjust quantization within each frame based on spatial variation of content complexity.
+     */
+    SpatialAdaptiveQuantization?: Av1SpatialAdaptiveQuantization;
+  }
+  export type Av1SpatialAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
   export interface AvailBlanking {
     /**
      * Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
@@ -875,7 +940,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     Brightness?: __integerMin1Max100;
     /**
-     * Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, and from SDR to HDR. The service doesn't support conversion from HDR to SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output.
+     * Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, from SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output. HDR to SDR conversion uses Elemental tone mapping technology to approximate the outcome of manually regrading from HDR to SDR.
      */
     ColorSpaceConversion?: ColorSpaceConversion;
     /**
@@ -4297,8 +4362,12 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Queue?: Queue;
   }
-  export type VideoCodec = "FRAME_CAPTURE"|"H_264"|"H_265"|"MPEG2"|"PRORES"|string;
+  export type VideoCodec = "FRAME_CAPTURE"|"AV1"|"H_264"|"H_265"|"MPEG2"|"PRORES"|string;
   export interface VideoCodecSettings {
+    /**
+     * Required when you set Codec, under VideoDescription>CodecSettings to the value AV1.
+     */
+    Av1Settings?: Av1Settings;
     /**
      * Specifies the video codec. This must be equal to one of the enum values defined by the object  VideoCodec.
      */
@@ -4334,7 +4403,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     AntiAlias?: AntiAlias;
     /**
-     * Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings
+     * Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings
      */
     CodecSettings?: VideoCodecSettings;
     /**
@@ -4543,6 +4612,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin48000Max48000 = number;
   export type __integerMin6000Max1024000 = number;
   export type __integerMin64000Max640000 = number;
+  export type __integerMin7Max15 = number;
   export type __integerMin8000Max192000 = number;
   export type __integerMin8000Max96000 = number;
   export type __integerMin96Max600 = number;
