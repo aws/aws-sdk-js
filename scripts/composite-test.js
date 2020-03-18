@@ -8,7 +8,7 @@ async function run() {
   const scripts = [
     { execute: 'executeLongProcess', command: ['npm', 'run', 'helper-test'], retryCount: 1 },
     { execute: 'executeLongProcess', command: ['npm', 'run', 'lint']},
-    { execute: 'executeLongProcess', command: ['npm', 'run', 'unit'] },
+    { execute: 'executeLongProcess', command: ['npm', 'run', 'coverage'] },
     { execute: 'executeLongProcess', command: ['npm', 'run', 'buildertest'] },
     { execute: 'executeLongProcess', command: ['npm', 'run', 'tstest'] },
     { execute: 'executeLongProcess', command: ['npm', 'run', 'region-check'] },
