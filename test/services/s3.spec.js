@@ -2391,6 +2391,34 @@ describe('AWS.S3', function() {
         done();
       });
     });
+
+    it('appends CreateBucketConfiguration key to copy of params, not original, when endpoint is configured', function(done) {
+      var loc = null;
+      var params = {
+        Bucket: 'name'
+      };
+
+      s3 = new AWS.S3({
+        region: 'eu-west-1',
+        Bucket: 'name',
+        endpoint: 'https://foo.bar.baz:555/prefix'
+      });
+
+      s3.makeRequest = function(op, copiedParams, cb) {
+        expect(copiedParams).to['be'].a('object');
+        loc = copiedParams.CreateBucketConfiguration.LocationConstraint;
+        if (typeof cb === 'function') {
+          return cb();
+        }
+      };
+
+      helpers.mockHttpResponse(200, {}, '');
+      s3.createBucket(params, function() {
+        expect(params.CreateBucketConfiguration).to.not.exist;
+        expect(loc).to.be.a.string;
+        done();
+      });
+    });
   });
 
   describe('deleteBucket', function() {
