@@ -480,6 +480,10 @@ declare namespace Personalize {
      * If the batch inference job failed, the reason for the failure.
      */
     failureReason?: FailureReason;
+    /**
+     * The ARN of the solution version used by the batch inference job.
+     */
+    solutionVersionArn?: Arn;
   }
   export type BatchInferenceJobs = BatchInferenceJobSummary[];
   export type Boolean = boolean;
@@ -1413,7 +1417,7 @@ declare namespace Personalize {
   }
   export interface HPOObjective {
     /**
-     * The data type of the metric.
+     * The type of the metric. Valid values are Maximize and Minimize.
      */
     type?: HPOObjectiveType;
     /**
@@ -1931,6 +1935,10 @@ declare namespace Personalize {
      */
     trainingMode?: TrainingMode;
     /**
+     * If hyperparameter optimization was performed, contains the hyperparameter values of the best performing model.
+     */
+    tunedHPOParams?: TunedHPOParams;
+    /**
      * The status of the solution version. A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED  
      */
     status?: Status;
@@ -1978,6 +1986,12 @@ declare namespace Personalize {
   export type TrainingMode = "FULL"|"UPDATE"|string;
   export type TransactionsPerSecond = number;
   export type Tunable = boolean;
+  export interface TunedHPOParams {
+    /**
+     * A list of the hyperparameter values of the best performing model.
+     */
+    algorithmHyperParameters?: HyperParameters;
+  }
   export interface UpdateCampaignRequest {
     /**
      * The Amazon Resource Name (ARN) of the campaign.

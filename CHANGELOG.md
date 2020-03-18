@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.641.0-->
+<!--LATEST=2.642.0-->
 <!--ENTRYINSERT-->
+
+## 2.642.0
+* bugfix: Credentials: Fix types for callback argument in get & refresh methods for Credentials to accept error optionally
+* bugfix: s3: createBucket mutates params argument when endpoint is configured by appending CreateBucketConfigurationon key, this side effect is now fixed
+* feature: MediaConnect: Feature adds the ability for a flow to have multiple redundant sources that provides resiliency to a source failing. The new APIs added to enable the feature are, AddFlowSources, RemoveFlowSource and UpdateFlow.
+* feature: Personalize: [Personalize] Adds support for returning hyperparameter values of the best performing model in a HPO job.
+* feature: RDS: Updated the MaxRecords type in DescribeExportTasks to Integer.
 
 ## 2.641.0
 * feature: CI: add buildspec.yml from CodeBuild job

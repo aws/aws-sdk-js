@@ -12,19 +12,27 @@ declare class MediaConnect extends Service {
   constructor(options?: MediaConnect.Types.ClientConfiguration)
   config: Config & MediaConnect.Types.ClientConfiguration;
   /**
-   * Adds outputs to an existing flow. You can create up to 20 outputs per flow.
+   * Adds outputs to an existing flow. You can create up to 50 outputs per flow.
    */
   addFlowOutputs(params: MediaConnect.Types.AddFlowOutputsRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowOutputsResponse) => void): Request<MediaConnect.Types.AddFlowOutputsResponse, AWSError>;
   /**
-   * Adds outputs to an existing flow. You can create up to 20 outputs per flow.
+   * Adds outputs to an existing flow. You can create up to 50 outputs per flow.
    */
   addFlowOutputs(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowOutputsResponse) => void): Request<MediaConnect.Types.AddFlowOutputsResponse, AWSError>;
   /**
-   * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
+   * Adds Sources to flow
+   */
+  addFlowSources(params: MediaConnect.Types.AddFlowSourcesRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowSourcesResponse) => void): Request<MediaConnect.Types.AddFlowSourcesResponse, AWSError>;
+  /**
+   * Adds Sources to flow
+   */
+  addFlowSources(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowSourcesResponse) => void): Request<MediaConnect.Types.AddFlowSourcesResponse, AWSError>;
+  /**
+   * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
    */
   createFlow(params: MediaConnect.Types.CreateFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
   /**
-   * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
+   * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
    */
   createFlow(callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
   /**
@@ -84,6 +92,14 @@ declare class MediaConnect extends Service {
    */
   removeFlowOutput(callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowOutputResponse) => void): Request<MediaConnect.Types.RemoveFlowOutputResponse, AWSError>;
   /**
+   * Removes a source from an existing flow. This request can be made only if there is more than one source on the flow.
+   */
+  removeFlowSource(params: MediaConnect.Types.RemoveFlowSourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowSourceResponse) => void): Request<MediaConnect.Types.RemoveFlowSourceResponse, AWSError>;
+  /**
+   * Removes a source from an existing flow. This request can be made only if there is more than one source on the flow.
+   */
+  removeFlowSource(callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowSourceResponse) => void): Request<MediaConnect.Types.RemoveFlowSourceResponse, AWSError>;
+  /**
    * Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
    */
   revokeFlowEntitlement(params: MediaConnect.Types.RevokeFlowEntitlementRequest, callback?: (err: AWSError, data: MediaConnect.Types.RevokeFlowEntitlementResponse) => void): Request<MediaConnect.Types.RevokeFlowEntitlementResponse, AWSError>;
@@ -123,6 +139,14 @@ declare class MediaConnect extends Service {
    * Deletes specified tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates flow
+   */
+  updateFlow(params: MediaConnect.Types.UpdateFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowResponse) => void): Request<MediaConnect.Types.UpdateFlowResponse, AWSError>;
+  /**
+   * Updates flow
+   */
+  updateFlow(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowResponse) => void): Request<MediaConnect.Types.UpdateFlowResponse, AWSError>;
   /**
    * You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
    */
@@ -168,6 +192,26 @@ declare namespace MediaConnect {
      * The details of the newly added outputs.
      */
     Outputs?: __listOfOutput;
+  }
+  export interface AddFlowSourcesRequest {
+    /**
+     * The flow that you want to mutate.
+     */
+    FlowArn: __string;
+    /**
+     * A list of sources that you want to add.
+     */
+    Sources: __listOfSetSourceRequest;
+  }
+  export interface AddFlowSourcesResponse {
+    /**
+     * The ARN of the flow that these sources were added to.
+     */
+    FlowArn?: __string;
+    /**
+     * The details of the newly added sources.
+     */
+    Sources?: __listOfSource;
   }
   export interface AddOutputRequest {
     /**
@@ -233,7 +277,9 @@ declare namespace MediaConnect {
      * The outputs that you want to add to this flow.
      */
     Outputs?: __listOfAddOutputRequest;
-    Source: SetSourceRequest;
+    Source?: SetSourceRequest;
+    SourceFailoverConfig?: FailoverConfig;
+    Sources?: __listOfSetSourceRequest;
   }
   export interface CreateFlowResponse {
     Flow?: Flow;
@@ -328,6 +374,13 @@ declare namespace MediaConnect {
      */
     Subscribers: __listOf__string;
   }
+  export interface FailoverConfig {
+    /**
+     * Search window time to look for dash-7 packets
+     */
+    RecoveryWindow?: __integer;
+    State?: State;
+  }
   export interface Flow {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
@@ -358,6 +411,8 @@ declare namespace MediaConnect {
      */
     Outputs: __listOfOutput;
     Source: Source;
+    SourceFailoverConfig?: FailoverConfig;
+    Sources?: __listOfSource;
     /**
      * The current status of the flow.
      */
@@ -568,6 +623,26 @@ declare namespace MediaConnect {
      */
     OutputArn?: __string;
   }
+  export interface RemoveFlowSourceRequest {
+    /**
+     * The flow that you want to remove a source from.
+     */
+    FlowArn: __string;
+    /**
+     * The ARN of the source that you want to remove.
+     */
+    SourceArn: __string;
+  }
+  export interface RemoveFlowSourceResponse {
+    /**
+     * The ARN of the flow that is associated with the source you removed.
+     */
+    FlowArn?: __string;
+    /**
+     * The ARN of the source that was removed.
+     */
+    SourceArn?: __string;
+  }
   export interface RevokeFlowEntitlementRequest {
     /**
      * The ARN of the entitlement that you want to revoke.
@@ -689,6 +764,7 @@ declare namespace MediaConnect {
      */
     Status?: Status;
   }
+  export type State = "ENABLED"|"DISABLED"|string;
   export type Status = "STANDBY"|"ACTIVE"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"ERROR"|string;
   export interface StopFlowRequest {
     /**
@@ -794,6 +870,13 @@ declare namespace MediaConnect {
      */
     Url?: __string;
   }
+  export interface UpdateFailoverConfig {
+    /**
+     * Recovery window time to look for dash-7 packets
+     */
+    RecoveryWindow?: __integer;
+    State?: State;
+  }
   export interface UpdateFlowEntitlementRequest {
     /**
      * A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
@@ -880,6 +963,16 @@ declare namespace MediaConnect {
     FlowArn?: __string;
     Output?: Output;
   }
+  export interface UpdateFlowRequest {
+    /**
+     * The flow that you want to update.
+     */
+    FlowArn: __string;
+    SourceFailoverConfig?: UpdateFailoverConfig;
+  }
+  export interface UpdateFlowResponse {
+    Flow?: Flow;
+  }
   export interface UpdateFlowSourceRequest {
     /**
      * The type of encryption used on the content ingested from this source.
@@ -943,6 +1036,8 @@ declare namespace MediaConnect {
   export type __listOfListedEntitlement = ListedEntitlement[];
   export type __listOfListedFlow = ListedFlow[];
   export type __listOfOutput = Output[];
+  export type __listOfSetSourceRequest = SetSourceRequest[];
+  export type __listOfSource = Source[];
   export type __listOf__string = __string[];
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;

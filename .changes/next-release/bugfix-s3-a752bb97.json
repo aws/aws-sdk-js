@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "s3",
-  "description": "createBucket mutates params argument when endpoint is configured by appending CreateBucketConfigurationon key, this side effect is now fixed"
-}
