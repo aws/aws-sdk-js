@@ -26,7 +26,7 @@ Gemfile.lock
 features
 karma.conf.js
 Rakefile
-scripts/lib/*spec.js
+scripts
 SERVICES.md
 test
 testem.json
