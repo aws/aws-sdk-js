@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.642.0-->
+<!--LATEST=2.643.0-->
 <!--ENTRYINSERT-->
+
+## 2.643.0
+* feature: ServiceCatalog: Added "productId" and "portfolioId" to responses from CreateConstraint, UpdateConstraint, ListConstraintsForPortfolio, and DescribeConstraint APIs
 
 ## 2.642.0
 * bugfix: Credentials: Fix types for callback argument in get & refresh methods for Credentials to accept error optionally
