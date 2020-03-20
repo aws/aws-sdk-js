@@ -866,6 +866,14 @@ declare namespace ServiceCatalog {
      * The owner of the constraint.
      */
     Owner?: AccountId;
+    /**
+     * The identifier of the product the constraint applies to. Note that a constraint applies to a specific instance of a product within a certain portfolio.
+     */
+    ProductId?: Id;
+    /**
+     * The identifier of the portfolio the product resides in. The constraint applies only to the instance of the product that lives within this portfolio.
+     */
+    PortfolioId?: Id;
   }
   export type ConstraintDetails = ConstraintDetail[];
   export type ConstraintParameters = string;

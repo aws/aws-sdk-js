@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Credentials",
+        "description": "Fix types for callback argument in get & refresh methods for Credentials to accept error optionally"
+    },
+    {
+        "type": "bugfix",
+        "category": "s3",
+        "description": "createBucket mutates params argument when endpoint is configured by appending CreateBucketConfigurationon key, this side effect is now fixed"
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "Feature adds the ability for a flow to have multiple redundant sources that provides resiliency to a source failing. The new APIs added to enable the feature are, AddFlowSources, RemoveFlowSource and UpdateFlow."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "[Personalize] Adds support for returning hyperparameter values of the best performing model in a HPO job."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Updated the MaxRecords type in DescribeExportTasks to Integer."
+    }
+]

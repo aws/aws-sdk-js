@@ -216,14 +216,14 @@
     },
     "AvailabilityZone": {
       "type": "string",
-      "documentation": "<p>The Availability Zone.</p>",
+      "documentation": "<p>The Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>",
       "max": 1000,
       "min": 1,
       "pattern": "[a-z\\d-]+"
     },
     "AvailabilityZoneId": {
       "type": "string",
-      "documentation": "<p>The ID of the Availability Zone.</p>",
+      "documentation": "<p>The ID of the Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>",
       "max": 255,
       "min": 1,
       "pattern": "[a-z]+[0-9]+-az[0-9]+"

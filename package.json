@@ -1,11 +1,14 @@
 {
   "name": "aws-sdk",
   "description": "AWS SDK for JavaScript",
-  "version": "2.641.0",
+  "version": "2.643.0",
   "author": {
     "name": "Amazon Web Services",
     "email": "",
     "url": "https://aws.amazon.com/"
+  },
+  "config": {
+    "test_args": "test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream"
   },
   "homepage": "https://github.com/aws/aws-sdk-js",
   "contributors": [
@@ -121,8 +124,8 @@
   ],
   "scripts": {
     "test": "node ./scripts/composite-test.js",
-    "unit": "mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream",
+    "unit": "mocha -- $npm_package_config_test_args",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- $npm_package_config_test_args",
     "browsertest": "rake browser:test && karma start",
     "buildertest": "mocha --require coffeescript/register -s 1000 -t 10000 dist-tools/test/*.coffee",
     "integration": "cucumber.js",

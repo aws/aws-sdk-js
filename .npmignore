@@ -18,6 +18,7 @@ configuration
 configuration.sample
 codecov.yml
 coverage
+dist-tools
 doc
 doc-src
 eslint-rules
