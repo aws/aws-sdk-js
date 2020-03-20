@@ -532,6 +532,10 @@
           code: 'TransactionInProgressException',
           statusCode: 400
         }, true);
+        retryableError({
+          code: 'EC2ThrottledException',
+          statusCode: 400
+        }, true);
       });
       it('should retry on expired credentials error', function() {
         return retryableError({
