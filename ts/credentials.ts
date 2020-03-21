@@ -15,7 +15,7 @@ creds.getPromise().then(
 );
 
 if (creds.needsRefresh()) {
-    creds.refresh(err => {
+    creds.refresh((err = undefined) => {
 
     });
 
