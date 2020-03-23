@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.643.0-->
+<!--LATEST=2.644.0-->
 <!--ENTRYINSERT-->
+
+## 2.644.0
+* feature: ApiGatewayV2: Documentation updates to reflect that the default timeout for integrations is now 30 seconds for HTTP APIs.
+* feature: EC2: Add EC2ThrottledException to throttledError
+* feature: EKS: Adding new error code IamLimitExceeded for Nodegroups in EKS
 
 ## 2.643.0
 * feature: ServiceCatalog: Added "productId" and "portfolioId" to responses from CreateConstraint, UpdateConstraint, ListConstraintsForPortfolio, and DescribeConstraint APIs
