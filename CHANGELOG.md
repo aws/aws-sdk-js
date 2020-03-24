@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.644.0-->
+<!--LATEST=2.645.0-->
 <!--ENTRYINSERT-->
+
+## 2.645.0
+* feature: EKS: Adding new error codes: Ec2SubnetInvalidConfiguration and NodeCreationFailure for Nodegroups in EKS
+* feature: Organizations: Introduces actions for giving a member account administrative Organizations permissions for an AWS service. You can run this action only for AWS services that support this feature.
 
 ## 2.644.0
 * feature: ApiGatewayV2: Documentation updates to reflect that the default timeout for integrations is now 30 seconds for HTTP APIs.
