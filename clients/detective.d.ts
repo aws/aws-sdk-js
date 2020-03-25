@@ -20,7 +20,7 @@ declare class Detective extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Amazon Detective is currently in preview. Creates a new behavior graph for the calling account, and sets that account as the master account. This operation is called by the account that is enabling Detective. The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the master account for one behavior graph within a Region. If the same account calls CreateGraph with the same master account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
+   * Amazon Detective is currently in preview. Creates a new behavior graph for the calling account, and sets that account as the master account. This operation is called by the account that is enabling Detective. Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective.  The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the master account for one behavior graph within a Region. If the same account calls CreateGraph with the same master account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
    */
   createGraph(callback?: (err: AWSError, data: Detective.Types.CreateGraphResponse) => void): Request<Detective.Types.CreateGraphResponse, AWSError>;
   /**
@@ -95,6 +95,14 @@ declare class Detective extends Service {
    * Amazon Detective is currently in preview. Rejects an invitation to contribute the account data to a behavior graph. This operation must be called by a member account that has the INVITED status.
    */
   rejectInvitation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sends a request to enable data ingest for a member account that has a status of ACCEPTED_BUT_DISABLED. For valid member accounts, the status is updated as follows.   If Detective enabled the member account, then the new status is ENABLED.   If Detective cannot enable the member account, the status remains ACCEPTED_BUT_DISABLED.   
+   */
+  startMonitoringMember(params: Detective.Types.StartMonitoringMemberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sends a request to enable data ingest for a member account that has a status of ACCEPTED_BUT_DISABLED. For valid member accounts, the status is updated as follows.   If Detective enabled the member account, then the new status is ENABLED.   If Detective cannot enable the member account, the status remains ACCEPTED_BUT_DISABLED.   
+   */
+  startMonitoringMember(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace Detective {
   export interface AcceptInvitationRequest {
@@ -294,9 +302,13 @@ declare namespace Detective {
      */
     MasterId?: AccountId;
     /**
-     * The current membership status of the member account. The status can have one of the following values:    INVITED - Indicates that the member was sent an invitation but has not yet responded.    VERIFICATION_IN_PROGRESS - Indicates that Detective is verifying that the account identifier and email address provided for the member account match. If they do match, then Detective sends the invitation. If the email address and account identifier don't match, then the member cannot be added to the behavior graph.    VERIFICATION_FAILED - Indicates that the account and email address provided for the member account do not match, and Detective did not send an invitation to the account.    ENABLED - Indicates that the member account accepted the invitation to contribute to the behavior graph.   Member accounts that declined an invitation or that were removed from the behavior graph are not included.
+     * The current membership status of the member account. The status can have one of the following values:    INVITED - Indicates that the member was sent an invitation but has not yet responded.    VERIFICATION_IN_PROGRESS - Indicates that Detective is verifying that the account identifier and email address provided for the member account match. If they do match, then Detective sends the invitation. If the email address and account identifier don't match, then the member cannot be added to the behavior graph.    VERIFICATION_FAILED - Indicates that the account and email address provided for the member account do not match, and Detective did not send an invitation to the account.    ENABLED - Indicates that the member account accepted the invitation to contribute to the behavior graph.    ACCEPTED_BUT_DISABLED - Indicates that the member account accepted the invitation, but is blocked from contributing data to the behavior graph. DisabledReason provides the reason why the member account is blocked.   Member accounts that declined an invitation or that were removed from the behavior graph are not included.
      */
     Status?: MemberStatus;
+    /**
+     * For member accounts with a status of ACCEPTED_BUT_DISABLED, the reason that the member account is blocked. The reason can have one of the following values:    VOLUME_TOO_HIGH - Indicates that adding the member account would cause the data rate for the behavior graph to be too high.    VOLUME_UNKNOWN - Indicates that Detective is unable to verify the data rate for the member account. This is usually because the member account is not enrolled in Amazon GuardDuty.   
+     */
+    DisabledReason?: MemberDisabledReason;
     /**
      * The date and time that Detective sent the invitation to the member account. The value is in milliseconds since the epoch.
      */
@@ -305,16 +317,36 @@ declare namespace Detective {
      * The date and time that the member account was last updated. The value is in milliseconds since the epoch.
      */
     UpdatedTime?: Timestamp;
+    /**
+     * The member account data volume as a percentage of the maximum allowed data volume. 0 indicates 0 percent, and 100 indicates 100 percent. Note that this is not the percentage of the behavior graph data volume. For example, the data volume for the behavior graph is 80 GB per day. The maximum data volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then PercentOfGraphUtilization is 25. It represents 25% of the maximum allowed data volume. 
+     */
+    PercentOfGraphUtilization?: Percentage;
+    /**
+     * The date and time when the graph utilization percentage was last updated.
+     */
+    PercentOfGraphUtilizationUpdatedTime?: Timestamp;
   }
   export type MemberDetailList = MemberDetail[];
+  export type MemberDisabledReason = "VOLUME_TOO_HIGH"|"VOLUME_UNKNOWN"|string;
   export type MemberResultsLimit = number;
-  export type MemberStatus = "INVITED"|"VERIFICATION_IN_PROGRESS"|"VERIFICATION_FAILED"|"ENABLED"|string;
+  export type MemberStatus = "INVITED"|"VERIFICATION_IN_PROGRESS"|"VERIFICATION_FAILED"|"ENABLED"|"ACCEPTED_BUT_DISABLED"|string;
   export type PaginationToken = string;
+  export type Percentage = number;
   export interface RejectInvitationRequest {
     /**
      * The ARN of the behavior graph to reject the invitation to. The member account's current member status in the behavior graph must be INVITED.
      */
     GraphArn: GraphArn;
+  }
+  export interface StartMonitoringMemberRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * The account ID of the member account to try to enable. The account must be an invited member account with a status of ACCEPTED_BUT_DISABLED. 
+     */
+    AccountId: AccountId;
   }
   export type Timestamp = Date;
   export interface UnprocessedAccount {

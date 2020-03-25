@@ -108,11 +108,11 @@ declare class CostExplorer extends Service {
    */
   getSavingsPlansCoverage(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
   /**
-   * Retrieves your request parameters, Savings Plan Recommendations Summary and Details.
+   * Retrieves your request parameters, Savings Plan Recommendations Summary and Details. 
    */
   getSavingsPlansPurchaseRecommendation(params: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse, AWSError>;
   /**
-   * Retrieves your request parameters, Savings Plan Recommendations Summary and Details.
+   * Retrieves your request parameters, Savings Plan Recommendations Summary and Details. 
    */
   getSavingsPlansPurchaseRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse, AWSError>;
   /**
@@ -813,7 +813,7 @@ declare namespace CostExplorer {
      */
     Service: GenericString;
     /**
-     * The account scope that you want recommendations for. PAYER means that AWS includes the master account and any member accounts when it calculates its recommendations. LINKED means that AWS includes only member accounts when it calculates its recommendations. Valid values are PAYER and LINKED.
+     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the payer account and linked accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual linked accounts only.
      */
     AccountScope?: AccountScope;
     /**
@@ -978,6 +978,10 @@ declare namespace CostExplorer {
      */
     PaymentOption: PaymentOption;
     /**
+     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the payer account and linked accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual linked accounts only.
+     */
+    AccountScope?: AccountScope;
+    /**
      * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
@@ -989,6 +993,10 @@ declare namespace CostExplorer {
      * The lookback period used to generate the recommendation.
      */
     LookbackPeriodInDays: LookbackPeriodInDays;
+    /**
+     * You can filter your recommendations by Account ID with the LINKED_ACCOUNT dimension. To filter your recommendations by Account ID, specify Key as LINKED_ACCOUNT and Value as the comma-separated Acount ID(s) for which you want to see Savings Plans purchase recommendations. For GetSavingsPlansPurchaseRecommendation, the Filter does not include CostCategories or Tags. It only includes Dimensions. With Dimensions, Key must be LINKED_ACCOUNT and Value can be a single Account ID or multiple comma-separated Account IDs for which you want to see Savings Plans Purchase Recommendations. AND and OR operators are not supported.
+     */
+    Filter?: Expression;
   }
   export interface GetSavingsPlansPurchaseRecommendationResponse {
     /**
@@ -1668,6 +1676,10 @@ declare namespace CostExplorer {
     OfferingId?: GenericString;
   }
   export interface SavingsPlansPurchaseRecommendation {
+    /**
+     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the payer account and linked accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual linked accounts only.
+     */
+    AccountScope?: AccountScope;
     /**
      * The requested Savings Plans recommendation type.
      */

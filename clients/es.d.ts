@@ -20,6 +20,14 @@ declare class ES extends Service {
    */
   addTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associates a package with an Amazon ES domain.
+   */
+  associatePackage(params: ES.Types.AssociatePackageRequest, callback?: (err: AWSError, data: ES.Types.AssociatePackageResponse) => void): Request<ES.Types.AssociatePackageResponse, AWSError>;
+  /**
+   * Associates a package with an Amazon ES domain.
+   */
+  associatePackage(callback?: (err: AWSError, data: ES.Types.AssociatePackageResponse) => void): Request<ES.Types.AssociatePackageResponse, AWSError>;
+  /**
    * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
    */
   cancelElasticsearchServiceSoftwareUpdate(params: ES.Types.CancelElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
@@ -36,6 +44,14 @@ declare class ES extends Service {
    */
   createElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.CreateElasticsearchDomainResponse) => void): Request<ES.Types.CreateElasticsearchDomainResponse, AWSError>;
   /**
+   * Create a package for use with Amazon ES domains.
+   */
+  createPackage(params: ES.Types.CreatePackageRequest, callback?: (err: AWSError, data: ES.Types.CreatePackageResponse) => void): Request<ES.Types.CreatePackageResponse, AWSError>;
+  /**
+   * Create a package for use with Amazon ES domains.
+   */
+  createPackage(callback?: (err: AWSError, data: ES.Types.CreatePackageResponse) => void): Request<ES.Types.CreatePackageResponse, AWSError>;
+  /**
    * Permanently deletes the specified Elasticsearch domain and all of its data. Once a domain is deleted, it cannot be recovered.
    */
   deleteElasticsearchDomain(params: ES.Types.DeleteElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.DeleteElasticsearchDomainResponse) => void): Request<ES.Types.DeleteElasticsearchDomainResponse, AWSError>;
@@ -47,6 +63,14 @@ declare class ES extends Service {
    * Deletes the service-linked role that Elasticsearch Service uses to manage and maintain VPC domains. Role deletion will fail if any existing VPC domains use the role. You must delete any such Elasticsearch domains before deleting the role. See Deleting Elasticsearch Service Role in VPC Endpoints for Amazon Elasticsearch Service Domains.
    */
   deleteElasticsearchServiceRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete the package.
+   */
+  deletePackage(params: ES.Types.DeletePackageRequest, callback?: (err: AWSError, data: ES.Types.DeletePackageResponse) => void): Request<ES.Types.DeletePackageResponse, AWSError>;
+  /**
+   * Delete the package.
+   */
+  deletePackage(callback?: (err: AWSError, data: ES.Types.DeletePackageResponse) => void): Request<ES.Types.DeletePackageResponse, AWSError>;
   /**
    * Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.
    */
@@ -80,6 +104,14 @@ declare class ES extends Service {
    */
   describeElasticsearchInstanceTypeLimits(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
   /**
+   * Describes all packages available to Amazon ES. Includes options for filtering, limiting the number of results, and pagination.
+   */
+  describePackages(params: ES.Types.DescribePackagesRequest, callback?: (err: AWSError, data: ES.Types.DescribePackagesResponse) => void): Request<ES.Types.DescribePackagesResponse, AWSError>;
+  /**
+   * Describes all packages available to Amazon ES. Includes options for filtering, limiting the number of results, and pagination.
+   */
+  describePackages(callback?: (err: AWSError, data: ES.Types.DescribePackagesResponse) => void): Request<ES.Types.DescribePackagesResponse, AWSError>;
+  /**
    * Lists available reserved Elasticsearch instance offerings.
    */
   describeReservedElasticsearchInstanceOfferings(params: ES.Types.DescribeReservedElasticsearchInstanceOfferingsRequest, callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse, AWSError>;
@@ -95,6 +127,14 @@ declare class ES extends Service {
    * Returns information about reserved Elasticsearch instances for this account.
    */
   describeReservedElasticsearchInstances(callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstancesResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstancesResponse, AWSError>;
+  /**
+   * Dissociates a package from the Amazon ES domain.
+   */
+  dissociatePackage(params: ES.Types.DissociatePackageRequest, callback?: (err: AWSError, data: ES.Types.DissociatePackageResponse) => void): Request<ES.Types.DissociatePackageResponse, AWSError>;
+  /**
+   * Dissociates a package from the Amazon ES domain.
+   */
+  dissociatePackage(callback?: (err: AWSError, data: ES.Types.DissociatePackageResponse) => void): Request<ES.Types.DissociatePackageResponse, AWSError>;
   /**
    *  Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a  DomainName  to get all upgrade compatible Elasticsearch versions for that specific domain. 
    */
@@ -124,6 +164,14 @@ declare class ES extends Service {
    */
   listDomainNames(callback?: (err: AWSError, data: ES.Types.ListDomainNamesResponse) => void): Request<ES.Types.ListDomainNamesResponse, AWSError>;
   /**
+   * Lists all Amazon ES domains associated with the package.
+   */
+  listDomainsForPackage(params: ES.Types.ListDomainsForPackageRequest, callback?: (err: AWSError, data: ES.Types.ListDomainsForPackageResponse) => void): Request<ES.Types.ListDomainsForPackageResponse, AWSError>;
+  /**
+   * Lists all Amazon ES domains associated with the package.
+   */
+  listDomainsForPackage(callback?: (err: AWSError, data: ES.Types.ListDomainsForPackageResponse) => void): Request<ES.Types.ListDomainsForPackageResponse, AWSError>;
+  /**
    * List all Elasticsearch instance types that are supported for given ElasticsearchVersion
    */
   listElasticsearchInstanceTypes(params: ES.Types.ListElasticsearchInstanceTypesRequest, callback?: (err: AWSError, data: ES.Types.ListElasticsearchInstanceTypesResponse) => void): Request<ES.Types.ListElasticsearchInstanceTypesResponse, AWSError>;
@@ -139,6 +187,14 @@ declare class ES extends Service {
    * List all supported Elasticsearch versions
    */
   listElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.ListElasticsearchVersionsResponse) => void): Request<ES.Types.ListElasticsearchVersionsResponse, AWSError>;
+  /**
+   * Lists all packages associated with the Amazon ES domain.
+   */
+  listPackagesForDomain(params: ES.Types.ListPackagesForDomainRequest, callback?: (err: AWSError, data: ES.Types.ListPackagesForDomainResponse) => void): Request<ES.Types.ListPackagesForDomainResponse, AWSError>;
+  /**
+   * Lists all packages associated with the Amazon ES domain.
+   */
+  listPackagesForDomain(callback?: (err: AWSError, data: ES.Types.ListPackagesForDomainResponse) => void): Request<ES.Types.ListPackagesForDomainResponse, AWSError>;
   /**
    * Returns all tags for the given Elasticsearch domain.
    */
@@ -266,6 +322,22 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export interface AssociatePackageRequest {
+    /**
+     * Internal ID of the package that you want to associate with a domain. Use DescribePackages to find this value.
+     */
+    PackageID: PackageID;
+    /**
+     * Name of the domain that you want to associate the package with.
+     */
+    DomainName: DomainName;
+  }
+  export interface AssociatePackageResponse {
+    /**
+     * DomainPackageDetails
+     */
+    DomainPackageDetails?: DomainPackageDetails;
+  }
   export type Boolean = boolean;
   export interface CancelElasticsearchServiceSoftwareUpdateRequest {
     /**
@@ -380,6 +452,31 @@ declare namespace ES {
      */
     DomainStatus?: ElasticsearchDomainStatus;
   }
+  export interface CreatePackageRequest {
+    /**
+     * Unique identifier for the package.
+     */
+    PackageName: PackageName;
+    /**
+     * Type of package. Currently supports only TXT-DICTIONARY.
+     */
+    PackageType: PackageType;
+    /**
+     * Description of the package.
+     */
+    PackageDescription?: PackageDescription;
+    /**
+     * The customer S3 location PackageSource for importing the package.
+     */
+    PackageSource: PackageSource;
+  }
+  export interface CreatePackageResponse {
+    /**
+     * Information about the package PackageDetails.
+     */
+    PackageDetails?: PackageDetails;
+  }
+  export type CreatedAt = Date;
   export interface DeleteElasticsearchDomainRequest {
     /**
      * The name of the Elasticsearch domain that you want to permanently delete.
@@ -391,6 +488,18 @@ declare namespace ES {
      * The status of the Elasticsearch domain being deleted.
      */
     DomainStatus?: ElasticsearchDomainStatus;
+  }
+  export interface DeletePackageRequest {
+    /**
+     * Internal ID of the package that you want to delete. Use DescribePackages to find this value.
+     */
+    PackageID: PackageID;
+  }
+  export interface DeletePackageResponse {
+    /**
+     * PackageDetails
+     */
+    PackageDetails?: PackageDetails;
   }
   export type DeploymentCloseDateTimeStamp = Date;
   export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
@@ -447,6 +556,41 @@ declare namespace ES {
   export interface DescribeElasticsearchInstanceTypeLimitsResponse {
     LimitsByRole?: LimitsByRole;
   }
+  export interface DescribePackagesFilter {
+    /**
+     * Any field from PackageDetails.
+     */
+    Name?: DescribePackagesFilterName;
+    /**
+     * A list of values for the specified field.
+     */
+    Value?: DescribePackagesFilterValues;
+  }
+  export type DescribePackagesFilterList = DescribePackagesFilter[];
+  export type DescribePackagesFilterName = "PackageID"|"PackageName"|"PackageStatus"|string;
+  export type DescribePackagesFilterValue = string;
+  export type DescribePackagesFilterValues = DescribePackagesFilterValue[];
+  export interface DescribePackagesRequest {
+    /**
+     * Only returns packages that match the DescribePackagesFilterList values.
+     */
+    Filters?: DescribePackagesFilterList;
+    /**
+     * Limits results to a maximum number of packages.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribePackagesResponse {
+    /**
+     * List of PackageDetails objects.
+     */
+    PackageDetailsList?: PackageDetailsList;
+    NextToken?: String;
+  }
   export interface DescribeReservedElasticsearchInstanceOfferingsRequest {
     /**
      * The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier.
@@ -495,6 +639,22 @@ declare namespace ES {
      */
     ReservedElasticsearchInstances?: ReservedElasticsearchInstanceList;
   }
+  export interface DissociatePackageRequest {
+    /**
+     * Internal ID of the package that you want to associate with a domain. Use DescribePackages to find this value.
+     */
+    PackageID: PackageID;
+    /**
+     * Name of the domain that you want to associate the package with.
+     */
+    DomainName: DomainName;
+  }
+  export interface DissociatePackageResponse {
+    /**
+     * DomainPackageDetails
+     */
+    DomainPackageDetails?: DomainPackageDetails;
+  }
   export interface DomainEndpointOptions {
     /**
      * Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
@@ -525,6 +685,42 @@ declare namespace ES {
   export type DomainInfoList = DomainInfo[];
   export type DomainName = string;
   export type DomainNameList = DomainName[];
+  export interface DomainPackageDetails {
+    /**
+     * Internal ID of the package.
+     */
+    PackageID?: PackageID;
+    /**
+     * User specified name of the package.
+     */
+    PackageName?: PackageName;
+    /**
+     * Currently supports only TXT-DICTIONARY.
+     */
+    PackageType?: PackageType;
+    /**
+     * Timestamp of the most-recent update to the association status.
+     */
+    LastUpdated?: LastUpdated;
+    /**
+     * Name of the domain you've associated a package with.
+     */
+    DomainName?: DomainName;
+    /**
+     * State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
+     */
+    DomainPackageStatus?: DomainPackageStatus;
+    /**
+     * The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.
+     */
+    ReferencePath?: ReferencePath;
+    /**
+     * Additional information if the package is in an error state. Null otherwise.
+     */
+    ErrorDetails?: ErrorDetails;
+  }
+  export type DomainPackageDetailsList = DomainPackageDetails[];
+  export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
   export type Double = number;
   export interface EBSOptions {
     /**
@@ -788,6 +984,12 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
+  export interface ErrorDetails {
+    ErrorType?: ErrorType;
+    ErrorMessage?: ErrorMessage;
+  }
+  export type ErrorMessage = string;
+  export type ErrorType = string;
   export type GUID = string;
   export interface GetCompatibleElasticsearchVersionsRequest {
     DomainName?: DomainName;
@@ -845,6 +1047,7 @@ declare namespace ES {
   export type Issue = string;
   export type Issues = Issue[];
   export type KmsKeyId = string;
+  export type LastUpdated = Date;
   export type LimitName = string;
   export type LimitValue = string;
   export type LimitValueList = LimitValue[];
@@ -865,6 +1068,27 @@ declare namespace ES {
      * List of Elasticsearch domain names.
      */
     DomainNames?: DomainInfoList;
+  }
+  export interface ListDomainsForPackageRequest {
+    /**
+     * The package for which to list domains.
+     */
+    PackageID: PackageID;
+    /**
+     * Limits results to a maximum number of domains.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListDomainsForPackageResponse {
+    /**
+     * List of DomainPackageDetails objects.
+     */
+    DomainPackageDetailsList?: DomainPackageDetailsList;
+    NextToken?: String;
   }
   export interface ListElasticsearchInstanceTypesRequest {
     /**
@@ -904,6 +1128,30 @@ declare namespace ES {
   export interface ListElasticsearchVersionsResponse {
     ElasticsearchVersions?: ElasticsearchVersionList;
     NextToken?: NextToken;
+  }
+  export interface ListPackagesForDomainRequest {
+    /**
+     * The name of the domain for which you want to list associated packages.
+     */
+    DomainName: DomainName;
+    /**
+     * Limits results to a maximum number of packages.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPackagesForDomainResponse {
+    /**
+     * List of DomainPackageDetails objects.
+     */
+    DomainPackageDetailsList?: DomainPackageDetailsList;
+    /**
+     * Pagination token that needs to be supplied to the next call to get the next page of results.
+     */
+    NextToken?: String;
   }
   export interface ListTagsRequest {
     /**
@@ -993,6 +1241,52 @@ declare namespace ES {
      */
     PendingDeletion?: Boolean;
   }
+  export type PackageDescription = string;
+  export interface PackageDetails {
+    /**
+     * Internal ID of the package.
+     */
+    PackageID?: PackageID;
+    /**
+     * User specified name of the package.
+     */
+    PackageName?: PackageName;
+    /**
+     * Currently supports only TXT-DICTIONARY.
+     */
+    PackageType?: PackageType;
+    /**
+     * User-specified description of the package.
+     */
+    PackageDescription?: PackageDescription;
+    /**
+     * Current state of the package. Values are COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED
+     */
+    PackageStatus?: PackageStatus;
+    /**
+     * Timestamp which tells creation date of the package.
+     */
+    CreatedAt?: CreatedAt;
+    /**
+     * Additional information if the package is in an error state. Null otherwise.
+     */
+    ErrorDetails?: ErrorDetails;
+  }
+  export type PackageDetailsList = PackageDetails[];
+  export type PackageID = string;
+  export type PackageName = string;
+  export interface PackageSource {
+    /**
+     * Name of the bucket containing the package.
+     */
+    S3BucketName?: S3BucketName;
+    /**
+     * Key (file name) of the package.
+     */
+    S3Key?: S3Key;
+  }
+  export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
+  export type PackageType = "TXT-DICTIONARY"|string;
   export type Password = string;
   export type PolicyDocument = string;
   export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
@@ -1030,6 +1324,7 @@ declare namespace ES {
     RecurringChargeFrequency?: String;
   }
   export type RecurringChargeList = RecurringCharge[];
+  export type ReferencePath = string;
   export interface RemoveTagsRequest {
     /**
      * Specifies the ARN for the Elasticsearch domain from which you want to delete the specified tags.
@@ -1133,6 +1428,8 @@ declare namespace ES {
   export type ReservedElasticsearchInstanceOfferingList = ReservedElasticsearchInstanceOffering[];
   export type ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
   export type RoleArn = string;
+  export type S3BucketName = string;
+  export type S3Key = string;
   export interface ServiceSoftwareOptions {
     /**
      * The current service software version that is present on the domain.

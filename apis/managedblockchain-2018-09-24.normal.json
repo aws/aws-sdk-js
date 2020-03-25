@@ -564,6 +564,68 @@
       ],
       "documentation": "<p>Rejects an invitation to join a network. This action can be called by a principal in an AWS account that has received an invitation to create a member and join a network.</p>"
     },
+    "UpdateMember": {
+      "name": "UpdateMember",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/networks/{networkId}/members/{memberId}"
+      },
+      "input": {
+        "shape": "UpdateMemberInput"
+      },
+      "output": {
+        "shape": "UpdateMemberOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        }
+      ],
+      "documentation": "<p>Updates a member configuration with new parameters.</p>"
+    },
+    "UpdateNode": {
+      "name": "UpdateNode",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/networks/{networkId}/members/{memberId}/nodes/{nodeId}"
+      },
+      "input": {
+        "shape": "UpdateNodeInput"
+      },
+      "output": {
+        "shape": "UpdateNodeOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        }
+      ],
+      "documentation": "<p>Updates a node configuration with new parameters.</p>"
+    },
     "VoteOnProposal": {
       "name": "VoteOnProposal",
       "http": {
@@ -875,6 +937,10 @@
         "STARTER",
         "STANDARD"
       ]
+    },
+    "Enabled": {
+      "type": "boolean",
+      "box": true
     },
     "Framework": {
       "type": "string",
@@ -1346,6 +1412,26 @@
         }
       }
     },
+    "LogConfiguration": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Enabled",
+          "documentation": "<p>Indicates whether logging is enabled.</p>"
+        }
+      },
+      "documentation": "<p>A configuration for logging events.</p>"
+    },
+    "LogConfigurations": {
+      "type": "structure",
+      "members": {
+        "Cloudwatch": {
+          "shape": "LogConfiguration",
+          "documentation": "<p>Parameters for publishing logs to Amazon CloudWatch Logs.</p>"
+        }
+      },
+      "documentation": "<p>A collection of log configurations.</p>"
+    },
     "Member": {
       "type": "structure",
       "members": {
@@ -1368,6 +1454,10 @@
         "FrameworkAttributes": {
           "shape": "MemberFrameworkAttributes",
           "documentation": "<p>Attributes relevant to a member for the blockchain framework that the Managed Blockchain network uses.</p>"
+        },
+        "LogPublishingConfiguration": {
+          "shape": "MemberLogPublishingConfiguration",
+          "documentation": "<p>Configuration properties for logging events associated with a member.</p>"
         },
         "Status": {
           "shape": "MemberStatus",
@@ -1398,6 +1488,10 @@
         "FrameworkConfiguration": {
           "shape": "MemberFrameworkConfiguration",
           "documentation": "<p>Configuration properties of the blockchain framework relevant to the member.</p>"
+        },
+        "LogPublishingConfiguration": {
+          "shape": "MemberLogPublishingConfiguration",
+          "documentation": "<p/>"
         }
       },
       "documentation": "<p>Configuration properties of the member.</p>"
@@ -1434,6 +1528,16 @@
       },
       "documentation": "<p>Configuration properties for Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.</p>"
     },
+    "MemberFabricLogPublishingConfiguration": {
+      "type": "structure",
+      "members": {
+        "CaLogs": {
+          "shape": "LogConfigurations",
+          "documentation": "<p>Configuration properties for logging events associated with a member's Certificate Authority (CA). CA logs help you determine when a member in your account joins the network, or when new peers register with a member CA.</p>"
+        }
+      },
+      "documentation": "<p>Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.</p>"
+    },
     "MemberFrameworkAttributes": {
       "type": "structure",
       "members": {
@@ -1460,12 +1564,23 @@
       "max": 20,
       "min": 1
     },
+    "MemberLogPublishingConfiguration": {
+      "type": "structure",
+      "members": {
+        "Fabric": {
+          "shape": "MemberFabricLogPublishingConfiguration",
+          "documentation": "<p>Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.</p>"
+        }
+      },
+      "documentation": "<p>Configuration properties for logging events associated with a member of a Managed Blockchain network.</p>"
+    },
     "MemberStatus": {
       "type": "string",
       "enum": [
         "CREATING",
         "AVAILABLE",
         "CREATE_FAILED",
+        "UPDATING",
         "DELETING",
         "DELETED"
       ]
@@ -1567,7 +1682,7 @@
         },
         "Edition": {
           "shape": "Edition",
-          "documentation": "<p>The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For more information, see <a href=\"https://aws.amazon.com/managed-blockchain/pricing/\">Amazon Managed Blockchain Pricing</a>.</p>"
+          "documentation": "<p>The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For more information, see <a href=\"http://aws.amazon.com/managed-blockchain/pricing/\">Amazon Managed Blockchain Pricing</a>.</p>"
         }
       },
       "documentation": "<p>Attributes of Hyperledger Fabric for a network.</p>"
@@ -1580,7 +1695,7 @@
       "members": {
         "Edition": {
           "shape": "Edition",
-          "documentation": "<p>The edition of Amazon Managed Blockchain that the network uses. For more information, see <a href=\"https://aws.amazon.com/managed-blockchain/pricing/\">Amazon Managed Blockchain Pricing</a>.</p>"
+          "documentation": "<p>The edition of Amazon Managed Blockchain that the network uses. For more information, see <a href=\"http://aws.amazon.com/managed-blockchain/pricing/\">Amazon Managed Blockchain Pricing</a>.</p>"
         }
       },
       "documentation": "<p>Hyperledger Fabric configuration properties for the network.</p>"
@@ -1694,6 +1809,10 @@
           "shape": "NodeFrameworkAttributes",
           "documentation": "<p>Attributes of the blockchain framework being used.</p>"
         },
+        "LogPublishingConfiguration": {
+          "shape": "NodeLogPublishingConfiguration",
+          "documentation": "<p/>"
+        },
         "Status": {
           "shape": "NodeStatus",
           "documentation": "<p>The status of the node.</p>"
@@ -1719,6 +1838,10 @@
         "AvailabilityZone": {
           "shape": "AvailabilityZoneString",
           "documentation": "<p>The Availability Zone in which the node exists.</p>"
+        },
+        "LogPublishingConfiguration": {
+          "shape": "NodeLogPublishingConfiguration",
+          "documentation": "<p/>"
         }
       },
       "documentation": "<p>Configuration properties of a peer node.</p>"
@@ -1737,6 +1860,20 @@
       },
       "documentation": "<p>Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.</p>"
     },
+    "NodeFabricLogPublishingConfiguration": {
+      "type": "structure",
+      "members": {
+        "ChaincodeLogs": {
+          "shape": "LogConfigurations",
+          "documentation": "<p>Configuration properties for logging events associated with chaincode execution on a peer node. Chaincode logs contain the results of instantiating, invoking, and querying the chaincode. A peer can run multiple instances of chaincode. When enabled, a log stream is created for all chaincodes, with an individual log stream for each chaincode.</p>"
+        },
+        "PeerLogs": {
+          "shape": "LogConfigurations",
+          "documentation": "<p>Configuration properties for a peer node log. Peer node logs contain messages generated when your client submits transaction proposals to peer nodes, requests to join channels, enrolls an admin peer, and lists the chaincode instances on a peer node. </p>"
+        }
+      },
+      "documentation": "<p>Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.</p>"
+    },
     "NodeFrameworkAttributes": {
       "type": "structure",
       "members": {
@@ -1753,12 +1890,23 @@
       "max": 20,
       "min": 1
     },
+    "NodeLogPublishingConfiguration": {
+      "type": "structure",
+      "members": {
+        "Fabric": {
+          "shape": "NodeFabricLogPublishingConfiguration",
+          "documentation": "<p>Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.</p>"
+        }
+      },
+      "documentation": "<p>Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.</p>"
+    },
     "NodeStatus": {
       "type": "string",
       "enum": [
         "CREATING",
         "AVAILABLE",
         "CREATE_FAILED",
+        "UPDATING",
         "DELETING",
         "DELETED",
         "FAILED"
@@ -1839,7 +1987,7 @@
         },
         "Status": {
           "shape": "ProposalStatus",
-          "documentation": "<p>The status of the proposal. Values are as follows:</p> <ul> <li> <p> <code>IN_PROGRESS</code> - The proposal is active and open for member voting.</p> </li> <li> <p> <code>APPROVED</code> - The proposal was approved with sufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified proposal actions are carried out.</p> </li> <li> <p> <code>REJECTED</code> - The proposal was rejected with insufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>EXPIRED</code> - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>ACTION_FAILED</code> - One or more of the specified <code>ProposalActions</code> in a proposal that was approved could not be completed because of an error.</p> </li> </ul>"
+          "documentation": "<p>The status of the proposal. Values are as follows:</p> <ul> <li> <p> <code>IN_PROGRESS</code> - The proposal is active and open for member voting.</p> </li> <li> <p> <code>APPROVED</code> - The proposal was approved with sufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified proposal actions are carried out.</p> </li> <li> <p> <code>REJECTED</code> - The proposal was rejected with insufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>EXPIRED</code> - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>ACTION_FAILED</code> - One or more of the specified <code>ProposalActions</code> in a proposal that was approved could not be completed because of an error. The <code>ACTION_FAILED</code> status occurs even if only one ProposalAction fails and other actions are successful.</p> </li> </ul>"
         },
         "CreationDate": {
           "shape": "Timestamp",
@@ -2007,6 +2155,71 @@
     "Timestamp": {
       "type": "timestamp",
       "timestampFormat": "iso8601"
+    },
+    "UpdateMemberInput": {
+      "type": "structure",
+      "required": [
+        "NetworkId",
+        "MemberId"
+      ],
+      "members": {
+        "NetworkId": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The unique ID of the Managed Blockchain network to which the member belongs.</p>",
+          "location": "uri",
+          "locationName": "networkId"
+        },
+        "MemberId": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The unique ID of the member.</p>",
+          "location": "uri",
+          "locationName": "memberId"
+        },
+        "LogPublishingConfiguration": {
+          "shape": "MemberLogPublishingConfiguration",
+          "documentation": "<p>Configuration properties for publishing to Amazon CloudWatch Logs.</p>"
+        }
+      }
+    },
+    "UpdateMemberOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateNodeInput": {
+      "type": "structure",
+      "required": [
+        "NetworkId",
+        "MemberId",
+        "NodeId"
+      ],
+      "members": {
+        "NetworkId": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The unique ID of the Managed Blockchain network to which the node belongs.</p>",
+          "location": "uri",
+          "locationName": "networkId"
+        },
+        "MemberId": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The unique ID of the member that owns the node.</p>",
+          "location": "uri",
+          "locationName": "memberId"
+        },
+        "NodeId": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The unique ID of the node.</p>",
+          "location": "uri",
+          "locationName": "nodeId"
+        },
+        "LogPublishingConfiguration": {
+          "shape": "NodeLogPublishingConfiguration",
+          "documentation": "<p>Configuration properties for publishing to Amazon CloudWatch Logs.</p>"
+        }
+      }
+    },
+    "UpdateNodeOutput": {
+      "type": "structure",
+      "members": {}
     },
     "UsernameString": {
       "type": "string",

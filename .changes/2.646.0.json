@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationInsights",
+        "description": "Amazon CloudWatch Application Insights for .NET and SQL Server now integrates with Amazon CloudWatch Events (AWS CodeDeploy, AWS Health and Amazon EC2 state changes). This feature enables customers to view events related to problems detected by CloudWatch Application Insights, and reduce mean-time-to-resolution (MTTR)."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Customers can now receive Savings Plans recommendations at the member (linked) account level."
+    },
+    {
+        "type": "feature",
+        "category": "Detective",
+        "description": "The new ACCEPTED_BUT_DISABLED member account status indicates that a member account that accepted the invitation is blocked from contributing data to the behavior graph. The reason is provided in the new DISABLED_REASON property. The new StartMonitoringMember operation enables a blocked member account."
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Adding support for customer packages (dictionary files) to Amazon Elasticsearch Service"
+    },
+    {
+        "type": "feature",
+        "category": "ManagedBlockchain",
+        "description": "Amazon Managed Blockchain now has support to publish Hyperledger Fabric peer node, chaincode, and certificate authority (CA) logs to Amazon CloudWatch Logs."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "GetTraceSummaries - Now provides additional root cause attribute ClientImpacting which indicates whether root cause impacted trace client."
+    }
+]

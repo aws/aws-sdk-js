@@ -52,9 +52,12 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Amazon Detective is currently in preview.</p> <p>Creates a new behavior graph for the calling account, and sets that account as the master account. This operation is called by the account that is enabling Detective.</p> <p>The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.</p> <p> <code>CreateGraph</code> triggers a process to create the corresponding data tables for the new behavior graph.</p> <p>An account can only be the master account for one behavior graph within a Region. If the same account calls <code>CreateGraph</code> with the same master account, it always returns the same behavior graph ARN. It does not create a new behavior graph.</p>"
+      "documentation": "<p>Amazon Detective is currently in preview.</p> <p>Creates a new behavior graph for the calling account, and sets that account as the master account. This operation is called by the account that is enabling Detective.</p> <p>Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective. </p> <p>The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.</p> <p> <code>CreateGraph</code> triggers a process to create the corresponding data tables for the new behavior graph.</p> <p>An account can only be the master account for one behavior graph within a Region. If the same account calls <code>CreateGraph</code> with the same master account, it always returns the same behavior graph ARN. It does not create a new behavior graph.</p>"
     },
     "CreateMembers": {
       "name": "CreateMembers",
@@ -277,6 +280,34 @@
         }
       ],
       "documentation": "<p>Amazon Detective is currently in preview.</p> <p>Rejects an invitation to contribute the account data to a behavior graph. This operation must be called by a member account that has the <code>INVITED</code> status.</p>"
+    },
+    "StartMonitoringMember": {
+      "name": "StartMonitoringMember",
+      "http": {
+        "method": "POST",
+        "requestUri": "/graph/member/monitoringstate"
+      },
+      "input": {
+        "shape": "StartMonitoringMemberRequest"
+      },
+      "errors": [
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Sends a request to enable data ingest for a member account that has a status of <code>ACCEPTED_BUT_DISABLED</code>.</p> <p>For valid member accounts, the status is updated as follows.</p> <ul> <li> <p>If Detective enabled the member account, then the new status is <code>ENABLED</code>.</p> </li> <li> <p>If Detective cannot enable the member account, the status remains <code>ACCEPTED_BUT_DISABLED</code>. </p> </li> </ul>"
     }
   },
   "shapes": {
@@ -600,7 +631,11 @@
         },
         "Status": {
           "shape": "MemberStatus",
-          "documentation": "<p>The current membership status of the member account. The status can have one of the following values:</p> <ul> <li> <p> <code>INVITED</code> - Indicates that the member was sent an invitation but has not yet responded.</p> </li> <li> <p> <code>VERIFICATION_IN_PROGRESS</code> - Indicates that Detective is verifying that the account identifier and email address provided for the member account match. If they do match, then Detective sends the invitation. If the email address and account identifier don't match, then the member cannot be added to the behavior graph.</p> </li> <li> <p> <code>VERIFICATION_FAILED</code> - Indicates that the account and email address provided for the member account do not match, and Detective did not send an invitation to the account.</p> </li> <li> <p> <code>ENABLED</code> - Indicates that the member account accepted the invitation to contribute to the behavior graph.</p> </li> </ul> <p>Member accounts that declined an invitation or that were removed from the behavior graph are not included.</p>"
+          "documentation": "<p>The current membership status of the member account. The status can have one of the following values:</p> <ul> <li> <p> <code>INVITED</code> - Indicates that the member was sent an invitation but has not yet responded.</p> </li> <li> <p> <code>VERIFICATION_IN_PROGRESS</code> - Indicates that Detective is verifying that the account identifier and email address provided for the member account match. If they do match, then Detective sends the invitation. If the email address and account identifier don't match, then the member cannot be added to the behavior graph.</p> </li> <li> <p> <code>VERIFICATION_FAILED</code> - Indicates that the account and email address provided for the member account do not match, and Detective did not send an invitation to the account.</p> </li> <li> <p> <code>ENABLED</code> - Indicates that the member account accepted the invitation to contribute to the behavior graph.</p> </li> <li> <p> <code>ACCEPTED_BUT_DISABLED</code> - Indicates that the member account accepted the invitation, but is blocked from contributing data to the behavior graph. <code>DisabledReason</code> provides the reason why the member account is blocked.</p> </li> </ul> <p>Member accounts that declined an invitation or that were removed from the behavior graph are not included.</p>"
+        },
+        "DisabledReason": {
+          "shape": "MemberDisabledReason",
+          "documentation": "<p>For member accounts with a status of <code>ACCEPTED_BUT_DISABLED</code>, the reason that the member account is blocked.</p> <p>The reason can have one of the following values:</p> <ul> <li> <p> <code>VOLUME_TOO_HIGH</code> - Indicates that adding the member account would cause the data rate for the behavior graph to be too high.</p> </li> <li> <p> <code>VOLUME_UNKNOWN</code> - Indicates that Detective is unable to verify the data rate for the member account. This is usually because the member account is not enrolled in Amazon GuardDuty. </p> </li> </ul>"
         },
         "InvitedTime": {
           "shape": "Timestamp",
@@ -609,6 +644,14 @@
         "UpdatedTime": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time that the member account was last updated. The value is in milliseconds since the epoch.</p>"
+        },
+        "PercentOfGraphUtilization": {
+          "shape": "Percentage",
+          "documentation": "<p>The member account data volume as a percentage of the maximum allowed data volume. 0 indicates 0 percent, and 100 indicates 100 percent.</p> <p>Note that this is not the percentage of the behavior graph data volume.</p> <p>For example, the data volume for the behavior graph is 80 GB per day. The maximum data volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then <code>PercentOfGraphUtilization</code> is 25. It represents 25% of the maximum allowed data volume. </p>"
+        },
+        "PercentOfGraphUtilizationUpdatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time when the graph utilization percentage was last updated.</p>"
         }
       },
       "documentation": "<p>Amazon Detective is currently in preview.</p> <p>Details about a member account that was invited to contribute to a behavior graph.</p>"
@@ -618,6 +661,13 @@
       "member": {
         "shape": "MemberDetail"
       }
+    },
+    "MemberDisabledReason": {
+      "type": "string",
+      "enum": [
+        "VOLUME_TOO_HIGH",
+        "VOLUME_UNKNOWN"
+      ]
     },
     "MemberResultsLimit": {
       "type": "integer",
@@ -631,13 +681,17 @@
         "INVITED",
         "VERIFICATION_IN_PROGRESS",
         "VERIFICATION_FAILED",
-        "ENABLED"
+        "ENABLED",
+        "ACCEPTED_BUT_DISABLED"
       ]
     },
     "PaginationToken": {
       "type": "string",
       "max": 1024,
       "min": 1
+    },
+    "Percentage": {
+      "type": "double"
     },
     "RejectInvitationRequest": {
       "type": "structure",
@@ -648,6 +702,23 @@
         "GraphArn": {
           "shape": "GraphArn",
           "documentation": "<p>The ARN of the behavior graph to reject the invitation to.</p> <p>The member account's current member status in the behavior graph must be <code>INVITED</code>.</p>"
+        }
+      }
+    },
+    "StartMonitoringMemberRequest": {
+      "type": "structure",
+      "required": [
+        "GraphArn",
+        "AccountId"
+      ],
+      "members": {
+        "GraphArn": {
+          "shape": "GraphArn",
+          "documentation": "<p>The ARN of the behavior graph.</p>"
+        },
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID of the member account to try to enable.</p> <p>The account must be an invited member account with a status of <code>ACCEPTED_BUT_DISABLED</code>. </p>"
         }
       }
     },

@@ -268,11 +268,24 @@ declare namespace ApplicationInsights {
      */
     OpsCenterEnabled?: OpsCenterEnabled;
     /**
+     *  Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others. 
+     */
+    CWEMonitorEnabled?: CWEMonitorEnabled;
+    /**
      * The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:   “Configuring application, detected 1 Errors, 3 Warnings”   “Configuring application, detected 1 Unconfigured Components”  
      */
     Remarks?: Remarks;
   }
   export type ApplicationInfoList = ApplicationInfo[];
+  export type CWEMonitorEnabled = boolean;
+  export type CloudWatchEventDetailType = string;
+  export type CloudWatchEventId = string;
+  export type CloudWatchEventSource = "EC2"|"CODE_DEPLOY"|"HEALTH"|string;
+  export type CodeDeployApplication = string;
+  export type CodeDeployDeploymentGroup = string;
+  export type CodeDeployDeploymentId = string;
+  export type CodeDeployInstanceGroupId = string;
+  export type CodeDeployState = string;
   export type ComponentConfiguration = string;
   export type ComponentName = string;
   export interface ConfigurationEvent {
@@ -317,6 +330,10 @@ declare namespace ApplicationInsights {
      *  When set to true, creates opsItems for any problems detected on an application. 
      */
     OpsCenterEnabled?: OpsCenterEnabled;
+    /**
+     *  Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others. 
+     */
+    CWEMonitorEnabled?: CWEMonitorEnabled;
     /**
      *  The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. 
      */
@@ -549,10 +566,16 @@ declare namespace ApplicationInsights {
      */
     Problem?: Problem;
   }
+  export type Ec2State = string;
   export type EndTime = Date;
   export type Feedback = {[key: string]: FeedbackValue};
   export type FeedbackKey = "INSIGHTS_FEEDBACK"|string;
   export type FeedbackValue = "NOT_SPECIFIED"|"USEFUL"|"NOT_USEFUL"|string;
+  export type HealthEventArn = string;
+  export type HealthEventDescription = string;
+  export type HealthEventTypeCategory = string;
+  export type HealthEventTypeCode = string;
+  export type HealthService = string;
   export type Insights = string;
   export type LifeCycle = string;
   export type LineTime = Date;
@@ -825,6 +848,90 @@ declare namespace ApplicationInsights {
      * The value of the source observation metric.
      */
     Value?: Value;
+    /**
+     *  The ID of the CloudWatch Event-based observation related to the detected problem. 
+     */
+    CloudWatchEventId?: CloudWatchEventId;
+    /**
+     *  The source of the CloudWatch Event. 
+     */
+    CloudWatchEventSource?: CloudWatchEventSource;
+    /**
+     *  The detail type of the CloudWatch Event-based observation, for example, EC2 Instance State-change Notification. 
+     */
+    CloudWatchEventDetailType?: CloudWatchEventDetailType;
+    /**
+     *  The Amazon Resource Name (ARN) of the AWS Health Event-based observation.
+     */
+    HealthEventArn?: HealthEventArn;
+    /**
+     *  The service to which the AWS Health Event belongs, such as EC2. 
+     */
+    HealthService?: HealthService;
+    /**
+     *  The type of the AWS Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE. 
+     */
+    HealthEventTypeCode?: HealthEventTypeCode;
+    /**
+     *  The category of the AWS Health event, such as issue. 
+     */
+    HealthEventTypeCategory?: HealthEventTypeCategory;
+    /**
+     *  The description of the AWS Health event provided by the service, such as Amazon EC2. 
+     */
+    HealthEventDescription?: HealthEventDescription;
+    /**
+     *  The deployment ID of the CodeDeploy-based observation related to the detected problem. 
+     */
+    CodeDeployDeploymentId?: CodeDeployDeploymentId;
+    /**
+     *  The deployment group to which the CodeDeploy deployment belongs. 
+     */
+    CodeDeployDeploymentGroup?: CodeDeployDeploymentGroup;
+    /**
+     *  The status of the CodeDeploy deployment, for example SUCCESS or  FAILURE. 
+     */
+    CodeDeployState?: CodeDeployState;
+    /**
+     *  The CodeDeploy application to which the deployment belongs. 
+     */
+    CodeDeployApplication?: CodeDeployApplication;
+    /**
+     *  The instance group to which the CodeDeploy instance belongs. 
+     */
+    CodeDeployInstanceGroupId?: CodeDeployInstanceGroupId;
+    /**
+     *  The state of the instance, such as STOPPING or TERMINATING. 
+     */
+    Ec2State?: Ec2State;
+    /**
+     *  The X-Ray request fault percentage for this node. 
+     */
+    XRayFaultPercent?: XRayFaultPercent;
+    /**
+     *  The X-Ray request throttle percentage for this node. 
+     */
+    XRayThrottlePercent?: XRayThrottlePercent;
+    /**
+     *  The X-Ray request error percentage for this node. 
+     */
+    XRayErrorPercent?: XRayErrorPercent;
+    /**
+     *  The X-Ray request count for this node. 
+     */
+    XRayRequestCount?: XRayRequestCount;
+    /**
+     *  The X-Ray node request average latency for this node. 
+     */
+    XRayRequestAverageLatency?: XRayRequestAverageLatency;
+    /**
+     *  The name of the X-Ray node. 
+     */
+    XRayNodeName?: XRayNodeName;
+    /**
+     *  The type of the X-Ray node. 
+     */
+    XRayNodeType?: XRayNodeType;
   }
   export type ObservationId = string;
   export type ObservationList = Observation[];
@@ -943,6 +1050,10 @@ declare namespace ApplicationInsights {
      */
     OpsCenterEnabled?: OpsCenterEnabled;
     /**
+     *  Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others. 
+     */
+    CWEMonitorEnabled?: CWEMonitorEnabled;
+    /**
      *  The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem.
      */
     OpsItemSNSTopicArn?: OpsItemSNSTopicArn;
@@ -1034,6 +1145,13 @@ declare namespace ApplicationInsights {
     LogPattern?: LogPattern;
   }
   export type Value = number;
+  export type XRayErrorPercent = number;
+  export type XRayFaultPercent = number;
+  export type XRayNodeName = string;
+  export type XRayNodeType = string;
+  export type XRayRequestAverageLatency = number;
+  export type XRayRequestCount = number;
+  export type XRayThrottlePercent = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

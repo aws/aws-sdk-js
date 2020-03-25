@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.645.0-->
+<!--LATEST=2.646.0-->
 <!--ENTRYINSERT-->
+
+## 2.646.0
+* feature: ApplicationInsights: Amazon CloudWatch Application Insights for .NET and SQL Server now integrates with Amazon CloudWatch Events (AWS CodeDeploy, AWS Health and Amazon EC2 state changes). This feature enables customers to view events related to problems detected by CloudWatch Application Insights, and reduce mean-time-to-resolution (MTTR).
+* feature: CostExplorer: Customers can now receive Savings Plans recommendations at the member (linked) account level.
+* feature: Detective: The new ACCEPTED_BUT_DISABLED member account status indicates that a member account that accepted the invitation is blocked from contributing data to the behavior graph. The reason is provided in the new DISABLED_REASON property. The new StartMonitoringMember operation enables a blocked member account.
+* feature: ES: Adding support for customer packages (dictionary files) to Amazon Elasticsearch Service
+* feature: ManagedBlockchain: Amazon Managed Blockchain now has support to publish Hyperledger Fabric peer node, chaincode, and certificate authority (CA) logs to Amazon CloudWatch Logs.
+* feature: XRay: GetTraceSummaries - Now provides additional root cause attribute ClientImpacting which indicates whether root cause impacted trace client.
 
 ## 2.645.0
 * feature: EKS: Adding new error codes: Ec2SubnetInvalidConfiguration and NodeCreationFailure for Nodegroups in EKS

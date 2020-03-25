@@ -148,6 +148,22 @@ declare class ManagedBlockchain extends Service {
    */
   rejectInvitation(callback?: (err: AWSError, data: ManagedBlockchain.Types.RejectInvitationOutput) => void): Request<ManagedBlockchain.Types.RejectInvitationOutput, AWSError>;
   /**
+   * Updates a member configuration with new parameters.
+   */
+  updateMember(params: ManagedBlockchain.Types.UpdateMemberInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.UpdateMemberOutput) => void): Request<ManagedBlockchain.Types.UpdateMemberOutput, AWSError>;
+  /**
+   * Updates a member configuration with new parameters.
+   */
+  updateMember(callback?: (err: AWSError, data: ManagedBlockchain.Types.UpdateMemberOutput) => void): Request<ManagedBlockchain.Types.UpdateMemberOutput, AWSError>;
+  /**
+   * Updates a node configuration with new parameters.
+   */
+  updateNode(params: ManagedBlockchain.Types.UpdateNodeInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.UpdateNodeOutput) => void): Request<ManagedBlockchain.Types.UpdateNodeOutput, AWSError>;
+  /**
+   * Updates a node configuration with new parameters.
+   */
+  updateNode(callback?: (err: AWSError, data: ManagedBlockchain.Types.UpdateNodeOutput) => void): Request<ManagedBlockchain.Types.UpdateNodeOutput, AWSError>;
+  /**
    * Casts a vote for a specified ProposalId on behalf of a member. The member to vote as, specified by VoterMemberId, must be in the same AWS account as the principal that calls the action.
    */
   voteOnProposal(params: ManagedBlockchain.Types.VoteOnProposalInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.VoteOnProposalOutput) => void): Request<ManagedBlockchain.Types.VoteOnProposalOutput, AWSError>;
@@ -323,6 +339,7 @@ declare namespace ManagedBlockchain {
   }
   export type DescriptionString = string;
   export type Edition = "STARTER"|"STANDARD"|string;
+  export type Enabled = boolean;
   export type Framework = "HYPERLEDGER_FABRIC"|string;
   export type FrameworkVersionString = string;
   export interface GetMemberInput {
@@ -591,6 +608,18 @@ declare namespace ManagedBlockchain {
      */
     NextToken?: PaginationToken;
   }
+  export interface LogConfiguration {
+    /**
+     * Indicates whether logging is enabled.
+     */
+    Enabled?: Enabled;
+  }
+  export interface LogConfigurations {
+    /**
+     * Parameters for publishing logs to Amazon CloudWatch Logs.
+     */
+    Cloudwatch?: LogConfiguration;
+  }
   export interface Member {
     /**
      * The unique identifier of the network to which the member belongs.
@@ -613,6 +642,10 @@ declare namespace ManagedBlockchain {
      */
     FrameworkAttributes?: MemberFrameworkAttributes;
     /**
+     * Configuration properties for logging events associated with a member.
+     */
+    LogPublishingConfiguration?: MemberLogPublishingConfiguration;
+    /**
      * The status of a member.    CREATING - The AWS account is in the process of creating a member.    AVAILABLE - The member has been created and can participate in the network.    CREATE_FAILED - The AWS account attempted to create a member and creation failed.    DELETING - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.    DELETED - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.  
      */
     Status?: MemberStatus;
@@ -634,6 +667,10 @@ declare namespace ManagedBlockchain {
      * Configuration properties of the blockchain framework relevant to the member.
      */
     FrameworkConfiguration: MemberFrameworkConfiguration;
+    /**
+     * 
+     */
+    LogPublishingConfiguration?: MemberLogPublishingConfiguration;
   }
   export interface MemberFabricAttributes {
     /**
@@ -655,6 +692,12 @@ declare namespace ManagedBlockchain {
      */
     AdminPassword: PasswordString;
   }
+  export interface MemberFabricLogPublishingConfiguration {
+    /**
+     * Configuration properties for logging events associated with a member's Certificate Authority (CA). CA logs help you determine when a member in your account joins the network, or when new peers register with a member CA.
+     */
+    CaLogs?: LogConfigurations;
+  }
   export interface MemberFrameworkAttributes {
     /**
      * Attributes of Hyperledger Fabric relevant to a member on a Managed Blockchain network that uses Hyperledger Fabric.
@@ -668,7 +711,13 @@ declare namespace ManagedBlockchain {
     Fabric?: MemberFabricConfiguration;
   }
   export type MemberListMaxResults = number;
-  export type MemberStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"DELETING"|"DELETED"|string;
+  export interface MemberLogPublishingConfiguration {
+    /**
+     * Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.
+     */
+    Fabric?: MemberFabricLogPublishingConfiguration;
+  }
+  export type MemberStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|string;
   export interface MemberSummary {
     /**
      * The unique identifier of the member.
@@ -827,6 +876,10 @@ declare namespace ManagedBlockchain {
      */
     FrameworkAttributes?: NodeFrameworkAttributes;
     /**
+     * 
+     */
+    LogPublishingConfiguration?: NodeLogPublishingConfiguration;
+    /**
      * The status of the node.
      */
     Status?: NodeStatus;
@@ -844,6 +897,10 @@ declare namespace ManagedBlockchain {
      * The Availability Zone in which the node exists.
      */
     AvailabilityZone: AvailabilityZoneString;
+    /**
+     * 
+     */
+    LogPublishingConfiguration?: NodeLogPublishingConfiguration;
   }
   export interface NodeFabricAttributes {
     /**
@@ -855,6 +912,16 @@ declare namespace ManagedBlockchain {
      */
     PeerEventEndpoint?: String;
   }
+  export interface NodeFabricLogPublishingConfiguration {
+    /**
+     * Configuration properties for logging events associated with chaincode execution on a peer node. Chaincode logs contain the results of instantiating, invoking, and querying the chaincode. A peer can run multiple instances of chaincode. When enabled, a log stream is created for all chaincodes, with an individual log stream for each chaincode.
+     */
+    ChaincodeLogs?: LogConfigurations;
+    /**
+     * Configuration properties for a peer node log. Peer node logs contain messages generated when your client submits transaction proposals to peer nodes, requests to join channels, enrolls an admin peer, and lists the chaincode instances on a peer node. 
+     */
+    PeerLogs?: LogConfigurations;
+  }
   export interface NodeFrameworkAttributes {
     /**
      * Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.
@@ -862,7 +929,13 @@ declare namespace ManagedBlockchain {
     Fabric?: NodeFabricAttributes;
   }
   export type NodeListMaxResults = number;
-  export type NodeStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"DELETING"|"DELETED"|"FAILED"|string;
+  export interface NodeLogPublishingConfiguration {
+    /**
+     * Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.
+     */
+    Fabric?: NodeFabricLogPublishingConfiguration;
+  }
+  export type NodeStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|"FAILED"|string;
   export interface NodeSummary {
     /**
      * The unique identifier of the node.
@@ -915,7 +988,7 @@ declare namespace ManagedBlockchain {
      */
     ProposedByMemberName?: NetworkMemberNameString;
     /**
-     * The status of the proposal. Values are as follows:    IN_PROGRESS - The proposal is active and open for member voting.    APPROVED - The proposal was approved with sufficient YES votes among members according to the VotingPolicy specified for the Network. The specified proposal actions are carried out.    REJECTED - The proposal was rejected with insufficient YES votes among members according to the VotingPolicy specified for the Network. The specified ProposalActions are not carried out.    EXPIRED - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified ProposalActions are not carried out.    ACTION_FAILED - One or more of the specified ProposalActions in a proposal that was approved could not be completed because of an error.  
+     * The status of the proposal. Values are as follows:    IN_PROGRESS - The proposal is active and open for member voting.    APPROVED - The proposal was approved with sufficient YES votes among members according to the VotingPolicy specified for the Network. The specified proposal actions are carried out.    REJECTED - The proposal was rejected with insufficient YES votes among members according to the VotingPolicy specified for the Network. The specified ProposalActions are not carried out.    EXPIRED - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified ProposalActions are not carried out.    ACTION_FAILED - One or more of the specified ProposalActions in a proposal that was approved could not be completed because of an error. The ACTION_FAILED status occurs even if only one ProposalAction fails and other actions are successful.  
      */
     Status?: ProposalStatus;
     /**
@@ -1004,6 +1077,42 @@ declare namespace ManagedBlockchain {
   export type ThresholdComparator = "GREATER_THAN"|"GREATER_THAN_OR_EQUAL_TO"|string;
   export type ThresholdPercentageInt = number;
   export type Timestamp = Date;
+  export interface UpdateMemberInput {
+    /**
+     * The unique ID of the Managed Blockchain network to which the member belongs.
+     */
+    NetworkId: ResourceIdString;
+    /**
+     * The unique ID of the member.
+     */
+    MemberId: ResourceIdString;
+    /**
+     * Configuration properties for publishing to Amazon CloudWatch Logs.
+     */
+    LogPublishingConfiguration?: MemberLogPublishingConfiguration;
+  }
+  export interface UpdateMemberOutput {
+  }
+  export interface UpdateNodeInput {
+    /**
+     * The unique ID of the Managed Blockchain network to which the node belongs.
+     */
+    NetworkId: ResourceIdString;
+    /**
+     * The unique ID of the member that owns the node.
+     */
+    MemberId: ResourceIdString;
+    /**
+     * The unique ID of the node.
+     */
+    NodeId: ResourceIdString;
+    /**
+     * Configuration properties for publishing to Amazon CloudWatch Logs.
+     */
+    LogPublishingConfiguration?: NodeLogPublishingConfiguration;
+  }
+  export interface UpdateNodeOutput {
+  }
   export type UsernameString = string;
   export type VoteCount = number;
   export interface VoteOnProposalInput {
