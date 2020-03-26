@@ -8,6 +8,7 @@
     "serviceFullName": "Amazon FSx",
     "serviceId": "FSx",
     "signatureVersion": "v4",
+    "signingName": "fsx",
     "targetPrefix": "AWSSimbaAPIService_v20180301",
     "uid": "fsx-2018-03-01"
   },
@@ -117,7 +118,7 @@
           "shape": "DataRepositoryTaskExecuting"
         }
       ],
-      "documentation": "<p>Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repository. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to its linked data repository. A <code>CreateDataRepositoryTask</code> operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html\">Using Data Repository Tasks</a>. To learn more about linking a data repository to your file system, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/getting-started-step1.html\">Step 1: Create Your Amazon FSx for Lustre File System</a>.</p>",
+      "documentation": "<p>Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repository. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to its linked data repository. A <code>CreateDataRepositoryTask</code> operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html\">Using Data Repository Tasks</a>. To learn more about linking a data repository to your file system, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix\">Setting the Export Prefix</a>.</p>",
       "idempotent": true
     },
     "CreateFileSystem": {
@@ -735,14 +736,14 @@
         },
         "Paths": {
           "shape": "DataRepositoryTaskPaths",
-          "documentation": "<p>(Optional) The path or paths on the Amazon FSx file system to use when the data repository task is processed. The default path is the file system root directory.</p>"
+          "documentation": "<p>(Optional) The path or paths on the Amazon FSx file system to use when the data repository task is processed. The default path is the file system root directory. The paths you provide need to be relative to the mount point of the file system. If the mount point is <code>/mnt/fsx</code> and <code>/mnt/fsx/path1</code> is a directory or file on the file system you want to export, then the path to provide is <code>path1</code>. If a path that you provide isn't valid, the task fails.</p>"
         },
         "FileSystemId": {
           "shape": "FileSystemId"
         },
         "Report": {
           "shape": "CompletionReport",
-          "documentation": "<p>Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. A CompletionReport provides a detailed report on the files that Amazon FSx processed that meet the criteria specified by the <code>Scope</code> parameter. </p>"
+          "documentation": "<p>Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. A CompletionReport provides a detailed report on the files that Amazon FSx processed that meet the criteria specified by the <code>Scope</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html\">Working with Task Completion Reports</a>.</p>"
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
@@ -779,11 +780,11 @@
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>A list of IDs for the subnets that the file system will be accessible from. Currently, you can specify only one subnet. The file server is also launched in that subnet's Availability Zone.</p>"
+          "documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.</p>"
         },
         "SecurityGroupIds": {
           "shape": "SecurityGroupIds",
-          "documentation": "<p>A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups apply to all network interfaces. This value isn't returned in later describe requests.</p>"
+          "documentation": "<p>A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups apply to all network interfaces. This value isn't returned in later DescribeFileSystem requests.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -792,6 +793,10 @@
         "WindowsConfiguration": {
           "shape": "CreateFileSystemWindowsConfiguration",
           "documentation": "<p>The configuration for this Microsoft Windows file system.</p>"
+        },
+        "StorageType": {
+          "shape": "StorageType",
+          "documentation": "<p>Sets the storage type for the Windows file system you're creating from a backup. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. Supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. Supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. </p> <note> <p>HDD and SSD storage types have different minimum storage capacity requirements. A restored file system's storage capacity is tied to the file system that was backed up. You can create a file system that uses HDD storage from a backup of a file system that used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB. </p> </note>"
         }
       },
       "documentation": "<p>The request object for the <code>CreateFileSystemFromBackup</code> operation.</p>"
@@ -831,10 +836,10 @@
         },
         "PerUnitStorageThroughput": {
           "shape": "PerUnitStorageThroughput",
-          "documentation": "<p> (Optional) For the <code>PERSISTENT_1</code> deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 120 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision. (Default = 200 MB/s/TiB) </p> <p>Valid values are 50, 100, 200.</p>"
+          "documentation": "<p> Required for the <code>PERSISTENT_1</code> deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision. </p> <p>Valid values are 50, 100, 200.</p>"
         }
       },
-      "documentation": "<p>The Lustre configuration for the file system being created. This value is required if <code>FileSystemType</code> is set to <code>LUSTRE</code>.</p>"
+      "documentation": "<p>The Lustre configuration for the file system being created. </p>"
     },
     "CreateFileSystemRequest": {
       "type": "structure",
@@ -855,11 +860,15 @@
         },
         "StorageCapacity": {
           "shape": "StorageCapacity",
-          "documentation": "<p>The storage capacity of the file system being created.</p> <p>For Windows file systems, valid values are 32 GiB - 65,536 GiB.</p> <p>For <code>SCRATCH_1</code> Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing in increments of 3600 GiB. For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> file systems, valid values are 1200, 2400, then continuing in increments of 2400 GiB.</p>"
+          "documentation": "<p>Sets the storage capacity of the file system that you're creating.</p> <p>For Lustre file systems:</p> <ul> <li> <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types, valid values are 1.2, 2.4, and increments of 2.4 TiB.</p> </li> <li> <p>For <code>SCRATCH_1</code> deployment type, valid values are 1.2, 2.4, and increments of 3.6 TiB.</p> </li> </ul> <p>For Windows file systems:</p> <ul> <li> <p>If <code>StorageType=SSD</code>, valid values are 32 GiB - 65,536 GiB (64 TiB).</p> </li> <li> <p>If <code>StorageType=HDD</code>, valid values are 2000 GiB - 65,536 GiB (64 TiB).</p> </li> </ul>"
+        },
+        "StorageType": {
+          "shape": "StorageType",
+          "documentation": "<p>Sets the storage type for the Amazon FSx for Windows file system you're creating. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-tco.html#saz-maz-storage-type\"> Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i>. </p>"
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.</p>"
+          "documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.</p>"
         },
         "SecurityGroupIds": {
           "shape": "SecurityGroupIds",
@@ -874,7 +883,7 @@
         },
         "WindowsConfiguration": {
           "shape": "CreateFileSystemWindowsConfiguration",
-          "documentation": "<p>The Microsoft Windows configuration for the file system being created. This value is required if <code>FileSystemType</code> is set to <code>WINDOWS</code>.</p>"
+          "documentation": "<p>The Microsoft Windows configuration for the file system being created. </p>"
         },
         "LustreConfiguration": {
           "shape": "CreateFileSystemLustreConfiguration"
@@ -907,7 +916,7 @@
         },
         "DeploymentType": {
           "shape": "WindowsDeploymentType",
-          "documentation": "<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p>MULTI_AZ_1 - Deploys a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of three Availability Zones.</p> </li> <li> <p>SINGLE_AZ_1 - (Default) Choose to deploy a file system that is configured for single AZ redundancy.</p> </li> </ul> <p>To learn more about high availability Multi-AZ file systems, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\"> High Availability for Amazon FSx for Windows File Server</a>.</p>"
+          "documentation": "<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Deploys a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of three Availability Zones. Also supports HDD storage type</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Choose to deploy a file system that is configured for single AZ redundancy.</p> </li> <li> <p> <code>SINGLE_AZ_2</code> - The latest generation Single AZ file system. Specifies a file system that is configured for single AZ redundancy and supports HDD storage type.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\"> Availability and Durability: Single-AZ and Multi-AZ File Systems</a>.</p>"
         },
         "PreferredSubnetId": {
           "shape": "SubnetId",
@@ -1407,13 +1416,17 @@
           "shape": "StorageCapacity",
           "documentation": "<p>The storage capacity of the file system in gigabytes (GB).</p>"
         },
+        "StorageType": {
+          "shape": "StorageType",
+          "documentation": "<p>The storage type of the file system. Valid values are <code>SSD</code> and <code>HDD</code>. If set to <code>SSD</code>, the file system uses solid state drive storage. If set to <code>HDD</code>, the file system uses hard disk drive storage. </p>"
+        },
         "VpcId": {
           "shape": "VpcId",
           "documentation": "<p>The ID of the primary VPC for the file system.</p>"
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>The ID of the subnet to contain the endpoint for the file system. One and only one is supported. The file system is launched in the Availability Zone associated with this subnet.</p>"
+          "documentation": "<p>Specifies the IDs of the subnets that the file system is accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment type, there are two subnet IDs, one for the preferred file server and one for the standby file server. The preferred file server subnet identified in the <code>PreferredSubnetID</code> property. All other file systems have only one subnet ID.</p> <p>For Lustre file systems, and Single-AZ Windows file systems, this is the ID of the subnet that contains the endpoint for the file system. For <code>MULTI_AZ_1</code> Windows file systems, the endpoint for the file system is available in the <code>PreferredSubnetID</code>.</p>"
         },
         "NetworkInterfaceIds": {
           "shape": "NetworkInterfaceIds",
@@ -1579,7 +1592,7 @@
       "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for Amazon FSx for Windows File Server file systems and Amazon FSx for Lustre <code>PERSISTENT_1</code> file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre <code>SCRATCH_1</code> and <code>SCRATCH_2</code> file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html\">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.</p>",
       "max": 2048,
       "min": 1,
-      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}|arn:aws[a-z-]{0,7}:kms:[a-z]{2}-[a-z-]{4,}-\\d+:\\d{12}:(key|alias)\\/([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}|[a-zA-Z0-9:\\/_-]+)|alias\\/[a-zA-Z0-9:\\/_-]+$"
+      "pattern": "^.{1,2048}$"
     },
     "LastUpdatedTime": {
       "type": "timestamp"
@@ -1730,7 +1743,7 @@
       "documentation": "<p>The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS resources. We require an ARN when you need to specify a resource unambiguously across all of AWS. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
       "max": 512,
       "min": 8,
-      "pattern": "^arn:aws[a-z-]{0,7}:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$"
+      "pattern": "^arn:(?=[^:]+:fsx:[^:]+:\\d{12}:)((|(?=[a-z0-9-.]{1,63})(?!\\d{1,3}(\\.\\d{1,3}){3})(?![^:]*-{2})(?![^:]*-\\.)(?![^:]*\\.-)[a-z0-9].*(?<!-)):){4}(?!/).{0,1024}$"
     },
     "SecurityGroupId": {
       "type": "string",
@@ -1834,6 +1847,14 @@
       "type": "integer",
       "documentation": "<p>The storage capacity for your Amazon FSx file system, in gibibytes.</p>",
       "min": 0
+    },
+    "StorageType": {
+      "type": "string",
+      "documentation": "<p>The storage type for your Amazon FSx file system.</p>",
+      "enum": [
+        "SSD",
+        "HDD"
+      ]
     },
     "SubnetId": {
       "type": "string",
@@ -2045,7 +2066,8 @@
       "type": "string",
       "enum": [
         "MULTI_AZ_1",
-        "SINGLE_AZ_1"
+        "SINGLE_AZ_1",
+        "SINGLE_AZ_2"
       ]
     },
     "WindowsFileSystemConfiguration": {
@@ -2060,19 +2082,19 @@
         },
         "DeploymentType": {
           "shape": "WindowsDeploymentType",
-          "documentation": "<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Specifies a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Specifies a file system that is configured for single AZ redundancy.</p> </li> </ul>"
+          "documentation": "<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Specifies a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability, and supports SSD and HDD storage.</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Specifies a file system that is configured for single AZ redundancy, only supports SSD storage.</p> </li> <li> <p> <code>SINGLE_AZ_2</code> - Latest generation Single AZ file system. Specifies a file system that is configured for single AZ redundancy and supports SSD and HDD storage.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\">Single-AZ and Multi-AZ File Systems</a>.</p>"
         },
         "RemoteAdministrationEndpoint": {
           "shape": "DNSName",
-          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell.</p> <p>For <code>SINGLE_AZ_1</code> deployment types, this is the DNS name of the file system.</p> <p>This endpoint is temporarily unavailable when the file system is undergoing maintenance.</p>"
+          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this is the DNS name of the file system.</p> <p>This endpoint is temporarily unavailable when the file system is undergoing maintenance.</p>"
         },
         "PreferredSubnetId": {
           "shape": "SubnetId",
-          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> deployment types, this value is the same as that for <code>SubnetIDs</code>.</p>"
+          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources\">Availability and Durability: Single-AZ and Multi-AZ File Systems</a> </p>"
         },
         "PreferredFileServerIp": {
           "shape": "IpAddress",
-          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, the IP address of the primary, or preferred, file server.</p> <p>Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients that are not joined to a Microsoft Active Directory. Applicable for both <code>SINGLE_AZ_1</code> and <code>MULTI_AZ_1</code> deployment types. This IP address is temporarily unavailable when the file system is undergoing maintenance. For Linux and Windows SMB clients that are joined to an Active Directory, use the file system's DNSName instead. For more information and instruction on mapping and mounting file shares, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html\">https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html</a>.</p>"
+          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, the IP address of the primary, or preferred, file server.</p> <p>Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients that are not joined to a Microsoft Active Directory. Applicable for all Windows file system deployment types. This IP address is temporarily unavailable when the file system is undergoing maintenance. For Linux and Windows SMB clients that are joined to an Active Directory, use the file system's DNSName instead. For more information on mapping and mounting file shares, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html\">Accessing File Shares</a>.</p>"
         },
         "ThroughputCapacity": {
           "shape": "MegabytesPerSecond",

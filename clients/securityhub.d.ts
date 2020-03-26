@@ -188,11 +188,11 @@ declare class SecurityHub extends Service {
    */
   enableImportFindingsForProduct(callback?: (err: AWSError, data: SecurityHub.Types.EnableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.EnableImportFindingsForProductResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To not enable the CIS AWS Foundations standard, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(params: SecurityHub.Types.EnableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To not enable the CIS AWS Foundations standard, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
@@ -1970,7 +1970,7 @@ declare namespace SecurityHub {
      */
     Filters: AwsSecurityFindingFilters;
     /**
-     * The attribute used as the aggregator to group related findings for the insight.
+     * The attribute used to group the findings for the insight. The grouping attribute identifies the type of item that the insight applies to. For example, if an insight is grouped by resource identifier, then the insight produces a list of resource identifiers.
      */
     GroupByAttribute: NonEmptyString;
   }
@@ -2224,6 +2224,10 @@ declare namespace SecurityHub {
      * The tags to add to the Hub resource when you enable Security Hub.
      */
     Tags?: TagMap;
+    /**
+     * Whether to enable the security standards that Security Hub has designated as automatically enabled. If you do not provide a value for EnableDefaultStandards, it is set to true. To not enable the automatically enabled standards, set EnableDefaultStandards to false.
+     */
+    EnableDefaultStandards?: Boolean;
   }
   export interface EnableSecurityHubResponse {
   }
@@ -2350,15 +2354,15 @@ declare namespace SecurityHub {
   }
   export interface ImportFindingsError {
     /**
-     * The ID of the error made during the BatchImportFindings operation.
+     * The identifier of the finding that could not be updated.
      */
     Id: NonEmptyString;
     /**
-     * The code of the error made during the BatchImportFindings operation.
+     * The code of the error returned by the BatchImportFindings operation.
      */
     ErrorCode: NonEmptyString;
     /**
-     * The message of the error made during the BatchImportFindings operation.
+     * The message of the error returned by the BatchImportFindings operation.
      */
     ErrorMessage: NonEmptyString;
   }
@@ -2377,7 +2381,7 @@ declare namespace SecurityHub {
      */
     Filters: AwsSecurityFindingFilters;
     /**
-     * The attribute that the insight's findings are grouped by. This attribute is used as a findings aggregator for the purposes of viewing and managing multiple related findings under a single operand.
+     * The grouping attribute for the insight's findings. Indicates how to group the matching findings, and identifies the type of item that the insight applies to. For example, if an insight is grouped by resource identifier, then the insight produces a list of resource identifiers.
      */
     GroupByAttribute: NonEmptyString;
   }
@@ -2954,6 +2958,10 @@ declare namespace SecurityHub {
      * A description of the standard.
      */
     Description?: NonEmptyString;
+    /**
+     * Whether the standard is enabled by default. When Security Hub is enabled from the console, if a standard is enabled by default, the check box for that standard is selected by default. When Security Hub is enabled using the EnableSecurityHub API operation, the standard is enabled by default unless EnableDefaultStandards is set to false.
+     */
+    EnabledByDefault?: Boolean;
   }
   export type Standards = Standard[];
   export interface StandardsControl {
