@@ -191,6 +191,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "InternalServerException"
         }
       ],
@@ -781,7 +784,7 @@
           "documentation": "<p>Performs a less than or equals operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.</p>"
         }
       },
-      "documentation": "<p>Provides filtering the query results based on document attributes.</p>"
+      "documentation": "<p>Provides filtering the query results based on document attributes.</p> <p>When you use the <code>AndAllFilters</code> or <code>OrAllFilters</code>, filters you can use a total of 3 layers. For example, you can use:</p> <ol> <li> <p> <code>&lt;AndAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;OrAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;EqualTo&gt;</code> </p> </li> </ol>"
     },
     "AttributeFilterList": {
       "type": "list",
@@ -934,6 +937,11 @@
       "member": {
         "shape": "ClickFeedback"
       }
+    },
+    "ClientTokenName": {
+      "type": "string",
+      "max": 100,
+      "min": 1
     },
     "ColumnConfiguration": {
       "type": "structure",
@@ -1129,6 +1137,11 @@
         "Description": {
           "shape": "Description",
           "documentation": "<p>A description for the index.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenName",
+          "documentation": "<p>A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.”</p>",
+          "idempotencyToken": true
         }
       }
     },
@@ -1168,7 +1181,7 @@
       "type": "string",
       "max": 100,
       "min": 1,
-      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_.]*$"
     },
     "DataSourceId": {
       "type": "string",
@@ -1187,8 +1200,7 @@
     "DataSourceInclusionsExclusionsStringsMember": {
       "type": "string",
       "max": 50,
-      "min": 1,
-      "pattern": "^\\P{C}*$"
+      "min": 1
     },
     "DataSourceName": {
       "type": "string",
@@ -1647,7 +1659,7 @@
         },
         "Blob": {
           "shape": "Blob",
-          "documentation": "<p>The contents of the document as a base-64 encoded string.</p>"
+          "documentation": "<p>The contents of the document. </p> <p>Documents passed to the <code>Blob</code> parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an AWS SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.</p>"
         },
         "S3Path": {
           "shape": "S3Path"
@@ -1718,8 +1730,7 @@
     "DocumentAttributeStringValue": {
       "type": "string",
       "max": 2048,
-      "min": 1,
-      "pattern": "^\\P{C}*$"
+      "min": 1
     },
     "DocumentAttributeValue": {
       "type": "structure",
@@ -2554,8 +2565,7 @@
     "S3ObjectKey": {
       "type": "string",
       "max": 1024,
-      "min": 1,
-      "pattern": ".*"
+      "min": 1
     },
     "S3Path": {
       "type": "structure",
@@ -2643,6 +2653,18 @@
         "CrawlAttachments": {
           "shape": "Boolean",
           "documentation": "<p> <code>TRUE</code> to include attachments to documents stored in your Microsoft SharePoint site in the index; otherwise, <code>FALSE</code>.</p>"
+        },
+        "UseChangeLog": {
+          "shape": "Boolean",
+          "documentation": "<p>Set to <code>TRUE</code> to use the Microsoft SharePoint change log to determine the documents that need to be updated in the index. Depending on the size of the SharePoint change log, it may take longer for Amazon Kendra to use the change log than it takes it to determine the changed documents using the Amazon Kendra document crawler.</p>"
+        },
+        "InclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>"
+        },
+        "ExclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>"
         },
         "VpcConfiguration": {
           "shape": "DataSourceVpcConfiguration"

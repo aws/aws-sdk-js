@@ -330,6 +330,7 @@ declare namespace Kendra {
     ClickTime: Timestamp;
   }
   export type ClickFeedbackList = ClickFeedback[];
+  export type ClientTokenName = string;
   export interface ColumnConfiguration {
     /**
      * The column that provides the document's unique identifier.
@@ -457,6 +458,10 @@ declare namespace Kendra {
      * A description for the index.
      */
     Description?: Description;
+    /**
+     * A token that you provide to identify the request to create an index. Multiple calls to the CreateIndex operation with the same client token will create only one index.”
+     */
+    ClientToken?: ClientTokenName;
   }
   export interface CreateIndexResponse {
     /**
@@ -781,7 +786,7 @@ declare namespace Kendra {
      */
     Title?: Title;
     /**
-     * The contents of the document as a base-64 encoded string.
+     * The contents of the document.  Documents passed to the Blob parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an AWS SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.
      */
     Blob?: _Blob;
     S3Path?: S3Path;
@@ -1309,6 +1314,18 @@ declare namespace Kendra {
      *  TRUE to include attachments to documents stored in your Microsoft SharePoint site in the index; otherwise, FALSE.
      */
     CrawlAttachments?: Boolean;
+    /**
+     * Set to TRUE to use the Microsoft SharePoint change log to determine the documents that need to be updated in the index. Depending on the size of the SharePoint change log, it may take longer for Amazon Kendra to use the change log than it takes it to determine the changed documents using the Amazon Kendra document crawler.
+     */
+    UseChangeLog?: Boolean;
+    /**
+     * A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index. The regex is applied to the display URL of the SharePoint document.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the display URL of the SharePoint document.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     VpcConfiguration?: DataSourceVpcConfiguration;
     /**
      * A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see Mapping Data Source Fields.
