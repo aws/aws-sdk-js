@@ -10,7 +10,7 @@ export class ConfigBase extends ConfigurationOptions{
     /**
      * Loads credentials from the configuration object.
      */
-    getCredentials(callback: (err: AWSError) => void): void;
+    getCredentials(callback: (err: AWSError | null) => void): void;
     /**
      * Loads configuration data from a JSON file into this config object.
      * Loading configuration willr eset all existing configuration on the object.

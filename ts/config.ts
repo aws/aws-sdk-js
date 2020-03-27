@@ -80,7 +80,7 @@ AWS.config.update({
 });
 
 //test config methods
-AWS.config.getCredentials(function(err) {});
+AWS.config.getCredentials(function(err) { err = null; });
 // make sure we can get the Promise constructor
 var Promise = AWS.config.getPromisesDependency();
 if (Promise) {

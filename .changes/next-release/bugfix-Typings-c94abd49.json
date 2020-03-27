@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Typings",
+  "description": "getCredentials now specify that the callback can be called with a null value. Relevant for TypeScript users with strict mode turned"
+}
