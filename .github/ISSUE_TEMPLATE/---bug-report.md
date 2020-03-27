@@ -29,7 +29,7 @@ Example: v2.466.0
 * For Node.js, get SDK version by
   * running command `npm list aws-sdk` from your root directory
   * printing the output of `console.log(AWS.VERSION)` in your code where `AWS = require("aws-sdk");`
-  * if running on Lambda, Lambda runtimes can be found [here](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) 
+  * if running on Lambda and using SDK provided by Lambda runtime, you can find the SDK versions [here](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) 
 
 **To Reproduce (observed behavior)**
 Steps to reproduce the behavior (please share code or minimal repo)
