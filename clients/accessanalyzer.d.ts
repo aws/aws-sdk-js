@@ -184,6 +184,10 @@ declare namespace AccessAnalyzer {
      */
     resourceArn: ResourceArn;
     /**
+     * The AWS account ID that owns the resource.
+     */
+    resourceOwnerAccount: String;
+    /**
      * The type of the resource that was analyzed.
      */
     resourceType: ResourceType;
@@ -206,12 +210,17 @@ declare namespace AccessAnalyzer {
      */
     resourceArn: ResourceArn;
     /**
+     * The AWS account ID that owns the resource.
+     */
+    resourceOwnerAccount: String;
+    /**
      * The type of resource that was analyzed.
      */
     resourceType: ResourceType;
   }
   export type AnalyzedResourcesList = AnalyzedResourceSummary[];
   export type AnalyzerArn = string;
+  export type AnalyzerStatus = "ACTIVE"|"CREATING"|"DISABLED"|"FAILED"|string;
   export interface AnalyzerSummary {
     /**
      * The ARN of the analyzer.
@@ -233,6 +242,14 @@ declare namespace AccessAnalyzer {
      * The name of the analyzer.
      */
     name: Name;
+    /**
+     * The status of the analyzer. An Active analyzer successfully monitors supported resources and generates new findings. The analyzer is Disabled when a user action, such as removing trusted access for IAM Access Analyzer from AWS Organizations, causes the analyzer to stop generating new findings. The status is Creating when the analyzer creation is in progress and Failed when the analyzer creation has failed. 
+     */
+    status: AnalyzerStatus;
+    /**
+     * The statusReason provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a Failed status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.
+     */
+    statusReason?: StatusReason;
     /**
      * The tags added to the analyzer.
      */
@@ -391,6 +408,10 @@ declare namespace AccessAnalyzer {
      */
     resource?: String;
     /**
+     * The AWS account ID that owns the resource.
+     */
+    resourceOwnerAccount: String;
+    /**
      * The type of the resource reported in the finding.
      */
     resourceType: ResourceType;
@@ -444,6 +465,10 @@ declare namespace AccessAnalyzer {
      * The resource that the external principal has access to.
      */
     resource?: String;
+    /**
+     * The AWS account ID that owns the resource.
+     */
+    resourceOwnerAccount: String;
     /**
      * The type of the resource that the external principal has access to.
      */
@@ -650,6 +675,7 @@ declare namespace AccessAnalyzer {
   export type Name = string;
   export type OrderBy = "ASC"|"DESC"|string;
   export type PrincipalMap = {[key: string]: String};
+  export type ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"|"DELEGATED_ADMINISTRATOR_DEREGISTERED"|"ORGANIZATION_DELETED"|"SERVICE_LINKED_ROLE_CREATION_FAILED"|string;
   export type ResourceArn = string;
   export type ResourceType = "AWS::IAM::Role"|"AWS::KMS::Key"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::S3::Bucket"|"AWS::SQS::Queue"|string;
   export type SharedViaList = String[];
@@ -673,6 +699,12 @@ declare namespace AccessAnalyzer {
      */
     resourceArn: ResourceArn;
   }
+  export interface StatusReason {
+    /**
+     * The reason code for the current status of the analyzer.
+     */
+    code: ReasonCode;
+  }
   export type String = string;
   export type TagKeys = String[];
   export interface TagResourceRequest {
@@ -690,7 +722,7 @@ declare namespace AccessAnalyzer {
   export type TagsMap = {[key: string]: String};
   export type Timestamp = Date;
   export type Token = string;
-  export type Type = "ACCOUNT"|string;
+  export type Type = "ACCOUNT"|"ORGANIZATION"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource to remove the tag from.

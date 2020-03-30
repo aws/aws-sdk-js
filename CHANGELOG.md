@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.648.0-->
+<!--LATEST=2.649.0-->
 <!--ENTRYINSERT-->
+
+## 2.649.0
+* feature: AccessAnalyzer: This release adds support for the creation and management of IAM Access Analyzer analyzers with type organization. An analyzer with type organization continuously monitors all supported resources within the AWS organization and reports findings when they allow access from outside the organization.
 
 ## 2.648.0
 * feature: GlobalAccelerator: This update adds an event history to the ListByoipCidr API call. This enables you to see the changes that you've made for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
