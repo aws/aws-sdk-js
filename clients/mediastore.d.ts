@@ -52,6 +52,14 @@ declare class MediaStore extends Service {
    */
   deleteLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteLifecyclePolicyOutput) => void): Request<MediaStore.Types.DeleteLifecyclePolicyOutput, AWSError>;
   /**
+   * Deletes the metric policy that is associated with the specified container. If there is no metric policy associated with the container, MediaStore doesn't send metrics to CloudWatch.
+   */
+  deleteMetricPolicy(params: MediaStore.Types.DeleteMetricPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteMetricPolicyOutput) => void): Request<MediaStore.Types.DeleteMetricPolicyOutput, AWSError>;
+  /**
+   * Deletes the metric policy that is associated with the specified container. If there is no metric policy associated with the container, MediaStore doesn't send metrics to CloudWatch.
+   */
+  deleteMetricPolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteMetricPolicyOutput) => void): Request<MediaStore.Types.DeleteMetricPolicyOutput, AWSError>;
+  /**
    * Retrieves the properties of the requested container. This request is commonly used to retrieve the endpoint of a container. An endpoint is a value assigned by the service when a new container is created. A container's endpoint does not change after it has been assigned. The DescribeContainer request returns a single Container object based on ContainerName. To return all Container objects that are associated with a specified AWS account, use ListContainers.
    */
   describeContainer(params: MediaStore.Types.DescribeContainerInput, callback?: (err: AWSError, data: MediaStore.Types.DescribeContainerOutput) => void): Request<MediaStore.Types.DescribeContainerOutput, AWSError>;
@@ -83,6 +91,14 @@ declare class MediaStore extends Service {
    * Retrieves the object lifecycle policy that is assigned to a container.
    */
   getLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.GetLifecyclePolicyOutput) => void): Request<MediaStore.Types.GetLifecyclePolicyOutput, AWSError>;
+  /**
+   * Returns the metric policy for the specified container. 
+   */
+  getMetricPolicy(params: MediaStore.Types.GetMetricPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.GetMetricPolicyOutput) => void): Request<MediaStore.Types.GetMetricPolicyOutput, AWSError>;
+  /**
+   * Returns the metric policy for the specified container. 
+   */
+  getMetricPolicy(callback?: (err: AWSError, data: MediaStore.Types.GetMetricPolicyOutput) => void): Request<MediaStore.Types.GetMetricPolicyOutput, AWSError>;
   /**
    * Lists the properties of all containers in AWS Elemental MediaStore.  You can query to receive all the containers in one response. Or you can include the MaxResults parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the NextToken parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive.  See also DescribeContainer, which gets the properties of one container. 
    */
@@ -123,6 +139,14 @@ declare class MediaStore extends Service {
    * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect. For information about how to construct an object lifecycle policy, see Components of an Object Lifecycle Policy.
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.PutLifecyclePolicyOutput) => void): Request<MediaStore.Types.PutLifecyclePolicyOutput, AWSError>;
+  /**
+   * The metric policy that you want to add to the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. It takes up to 20 minutes for the new policy to take effect.
+   */
+  putMetricPolicy(params: MediaStore.Types.PutMetricPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutMetricPolicyOutput) => void): Request<MediaStore.Types.PutMetricPolicyOutput, AWSError>;
+  /**
+   * The metric policy that you want to add to the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. It takes up to 20 minutes for the new policy to take effect.
+   */
+  putMetricPolicy(callback?: (err: AWSError, data: MediaStore.Types.PutMetricPolicyOutput) => void): Request<MediaStore.Types.PutMetricPolicyOutput, AWSError>;
   /**
    * Starts access logging on the specified container. When you enable access logging on a container, MediaStore delivers access logs for objects stored in that container to Amazon CloudWatch Logs.
    */
@@ -188,6 +212,7 @@ declare namespace MediaStore {
   }
   export type ContainerARN = string;
   export type ContainerAccessLoggingEnabled = boolean;
+  export type ContainerLevelMetrics = "ENABLED"|"DISABLED"|string;
   export type ContainerList = Container[];
   export type ContainerListLimit = number;
   export type ContainerName = string;
@@ -264,6 +289,14 @@ declare namespace MediaStore {
   }
   export interface DeleteLifecyclePolicyOutput {
   }
+  export interface DeleteMetricPolicyInput {
+    /**
+     * The name of the container that is associated with the metric policy that you want to delete.
+     */
+    ContainerName: ContainerName;
+  }
+  export interface DeleteMetricPolicyOutput {
+  }
   export interface DescribeContainerInput {
     /**
      * The name of the container to query.
@@ -314,6 +347,18 @@ declare namespace MediaStore {
      */
     LifecyclePolicy: LifecyclePolicy;
   }
+  export interface GetMetricPolicyInput {
+    /**
+     * The name of the container that is associated with the metric policy.
+     */
+    ContainerName: ContainerName;
+  }
+  export interface GetMetricPolicyOutput {
+    /**
+     * The metric policy that is associated with the specific container.
+     */
+    MetricPolicy: MetricPolicy;
+  }
   export type Header = string;
   export type LifecyclePolicy = string;
   export interface ListContainersInput {
@@ -350,6 +395,29 @@ declare namespace MediaStore {
   }
   export type MaxAgeSeconds = number;
   export type MethodName = "PUT"|"GET"|"DELETE"|"HEAD"|string;
+  export interface MetricPolicy {
+    /**
+     * A setting to enable or disable metrics at the container level.
+     */
+    ContainerLevelMetrics: ContainerLevelMetrics;
+    /**
+     * A parameter that holds an array of rules that enable metrics at the object level. This parameter is optional, but if you choose to include it, you must also include at least one rule. By default, you can include up to five rules. You can also request a quota increase to allow up to 300 rules per policy.
+     */
+    MetricPolicyRules?: MetricPolicyRules;
+  }
+  export interface MetricPolicyRule {
+    /**
+     * A path or file name that defines which objects to include in the group. Wildcards (*) are acceptable.
+     */
+    ObjectGroup: ObjectGroup;
+    /**
+     * A name that allows you to refer to the object group.
+     */
+    ObjectGroupName: ObjectGroupName;
+  }
+  export type MetricPolicyRules = MetricPolicyRule[];
+  export type ObjectGroup = string;
+  export type ObjectGroupName = string;
   export type Origin = string;
   export type PaginationToken = string;
   export interface PutContainerPolicyInput {
@@ -387,6 +455,18 @@ declare namespace MediaStore {
     LifecyclePolicy: LifecyclePolicy;
   }
   export interface PutLifecyclePolicyOutput {
+  }
+  export interface PutMetricPolicyInput {
+    /**
+     * The name of the container that you want to add the metric policy to.
+     */
+    ContainerName: ContainerName;
+    /**
+     * The metric policy that you want to associate with the container. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include up to five rules to define groups of objects that you want MediaStore to send object-level metrics for. If you include rules in the policy, construct each rule with both of the following:   An object group that defines which objects to include in the group. The definition can be a path or a file name, but it can't have more than 900 characters. Valid characters are: a-z, A-Z, 0-9, _ (underscore), = (equal), : (colon), . (period), - (hyphen), ~ (tilde), / (forward slash), and * (asterisk). Wildcards (*) are acceptable.   An object group name that allows you to refer to the object group. The name can't have more than 30 characters. Valid characters are: a-z, A-Z, 0-9, and _ (underscore).  
+     */
+    MetricPolicy: MetricPolicy;
+  }
+  export interface PutMetricPolicyOutput {
   }
   export interface StartAccessLoggingInput {
     /**

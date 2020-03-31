@@ -12,11 +12,11 @@ declare class WAFV2 extends Service {
   constructor(options?: WAFV2.Types.ClientConfiguration)
   config: Config & WAFV2.Types.ClientConfiguration;
   /**
-   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Associates a Web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  For AWS CloudFront, you can associate the Web ACL by providing the ARN of the WebACL to the CloudFront API call UpdateDistribution. For information, see UpdateDistribution.
+   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Associates a Web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  For AWS CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To associate a Web ACL, in the CloudFront call UpdateDistribution, set the web ACL ID to the Amazon Resource Name (ARN) of the Web ACL. For information, see UpdateDistribution.
    */
   associateWebACL(params: WAFV2.Types.AssociateWebACLRequest, callback?: (err: AWSError, data: WAFV2.Types.AssociateWebACLResponse) => void): Request<WAFV2.Types.AssociateWebACLResponse, AWSError>;
   /**
-   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Associates a Web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  For AWS CloudFront, you can associate the Web ACL by providing the ARN of the WebACL to the CloudFront API call UpdateDistribution. For information, see UpdateDistribution.
+   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Associates a Web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  For AWS CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To associate a Web ACL, in the CloudFront call UpdateDistribution, set the web ACL ID to the Amazon Resource Name (ARN) of the Web ACL. For information, see UpdateDistribution.
    */
   associateWebACL(callback?: (err: AWSError, data: WAFV2.Types.AssociateWebACLResponse) => void): Request<WAFV2.Types.AssociateWebACLResponse, AWSError>;
   /**
@@ -60,6 +60,14 @@ declare class WAFV2 extends Service {
    */
   createWebACL(callback?: (err: AWSError, data: WAFV2.Types.CreateWebACLResponse) => void): Request<WAFV2.Types.CreateWebACLResponse, AWSError>;
   /**
+   * Deletes all rule groups that are managed by AWS Firewall Manager for the specified web ACL.  You can only use this if ManagedByFirewallManager is false in the specified WebACL. 
+   */
+  deleteFirewallManagerRuleGroups(params: WAFV2.Types.DeleteFirewallManagerRuleGroupsRequest, callback?: (err: AWSError, data: WAFV2.Types.DeleteFirewallManagerRuleGroupsResponse) => void): Request<WAFV2.Types.DeleteFirewallManagerRuleGroupsResponse, AWSError>;
+  /**
+   * Deletes all rule groups that are managed by AWS Firewall Manager for the specified web ACL.  You can only use this if ManagedByFirewallManager is false in the specified WebACL. 
+   */
+  deleteFirewallManagerRuleGroups(callback?: (err: AWSError, data: WAFV2.Types.DeleteFirewallManagerRuleGroupsResponse) => void): Request<WAFV2.Types.DeleteFirewallManagerRuleGroupsResponse, AWSError>;
+  /**
    *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Deletes the specified IPSet. 
    */
   deleteIPSet(params: WAFV2.Types.DeleteIPSetRequest, callback?: (err: AWSError, data: WAFV2.Types.DeleteIPSetResponse) => void): Request<WAFV2.Types.DeleteIPSetResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class WAFV2 extends Service {
    *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Deletes the LoggingConfiguration from the specified web ACL.
    */
   deleteLoggingConfiguration(callback?: (err: AWSError, data: WAFV2.Types.DeleteLoggingConfigurationResponse) => void): Request<WAFV2.Types.DeleteLoggingConfigurationResponse, AWSError>;
+  /**
+   * Permanently deletes an IAM policy from the specified rule group. You must be the owner of the rule group to perform this operation.
+   */
+  deletePermissionPolicy(params: WAFV2.Types.DeletePermissionPolicyRequest, callback?: (err: AWSError, data: WAFV2.Types.DeletePermissionPolicyResponse) => void): Request<WAFV2.Types.DeletePermissionPolicyResponse, AWSError>;
+  /**
+   * Permanently deletes an IAM policy from the specified rule group. You must be the owner of the rule group to perform this operation.
+   */
+  deletePermissionPolicy(callback?: (err: AWSError, data: WAFV2.Types.DeletePermissionPolicyResponse) => void): Request<WAFV2.Types.DeletePermissionPolicyResponse, AWSError>;
   /**
    *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Deletes the specified RegexPatternSet.
    */
@@ -92,11 +108,11 @@ declare class WAFV2 extends Service {
    */
   deleteRuleGroup(callback?: (err: AWSError, data: WAFV2.Types.DeleteRuleGroupResponse) => void): Request<WAFV2.Types.DeleteRuleGroupResponse, AWSError>;
   /**
-   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Deletes the specified WebACL.
+   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Deletes the specified WebACL. You can only use this if ManagedByFirewallManager is false in the specified WebACL. 
    */
   deleteWebACL(params: WAFV2.Types.DeleteWebACLRequest, callback?: (err: AWSError, data: WAFV2.Types.DeleteWebACLResponse) => void): Request<WAFV2.Types.DeleteWebACLResponse, AWSError>;
   /**
-   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Deletes the specified WebACL.
+   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Deletes the specified WebACL. You can only use this if ManagedByFirewallManager is false in the specified WebACL. 
    */
   deleteWebACL(callback?: (err: AWSError, data: WAFV2.Types.DeleteWebACLResponse) => void): Request<WAFV2.Types.DeleteWebACLResponse, AWSError>;
   /**
@@ -108,11 +124,11 @@ declare class WAFV2 extends Service {
    */
   describeManagedRuleGroup(callback?: (err: AWSError, data: WAFV2.Types.DescribeManagedRuleGroupResponse) => void): Request<WAFV2.Types.DescribeManagedRuleGroupResponse, AWSError>;
   /**
-   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Disassociates a Web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  For AWS CloudFront, you can disassociate the Web ACL by providing an empty web ACL ARN in the CloudFront API call UpdateDistribution. For information, see UpdateDistribution.
+   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Disassociates a Web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  For AWS CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To disassociate a Web ACL, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For information, see UpdateDistribution.
    */
   disassociateWebACL(params: WAFV2.Types.DisassociateWebACLRequest, callback?: (err: AWSError, data: WAFV2.Types.DisassociateWebACLResponse) => void): Request<WAFV2.Types.DisassociateWebACLResponse, AWSError>;
   /**
-   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Disassociates a Web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  For AWS CloudFront, you can disassociate the Web ACL by providing an empty web ACL ARN in the CloudFront API call UpdateDistribution. For information, see UpdateDistribution.
+   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Disassociates a Web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  For AWS CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To disassociate a Web ACL, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For information, see UpdateDistribution.
    */
   disassociateWebACL(callback?: (err: AWSError, data: WAFV2.Types.DisassociateWebACLResponse) => void): Request<WAFV2.Types.DisassociateWebACLResponse, AWSError>;
   /**
@@ -131,6 +147,14 @@ declare class WAFV2 extends Service {
    *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Returns the LoggingConfiguration for the specified web ACL.
    */
   getLoggingConfiguration(callback?: (err: AWSError, data: WAFV2.Types.GetLoggingConfigurationResponse) => void): Request<WAFV2.Types.GetLoggingConfigurationResponse, AWSError>;
+  /**
+   * Returns the IAM policy that is attached to the specified rule group. You must be the owner of the rule group to perform this operation.
+   */
+  getPermissionPolicy(params: WAFV2.Types.GetPermissionPolicyRequest, callback?: (err: AWSError, data: WAFV2.Types.GetPermissionPolicyResponse) => void): Request<WAFV2.Types.GetPermissionPolicyResponse, AWSError>;
+  /**
+   * Returns the IAM policy that is attached to the specified rule group. You must be the owner of the rule group to perform this operation.
+   */
+  getPermissionPolicy(callback?: (err: AWSError, data: WAFV2.Types.GetPermissionPolicyResponse) => void): Request<WAFV2.Types.GetPermissionPolicyResponse, AWSError>;
   /**
    *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Retrieves the keys that are currently blocked by a rate-based rule. The maximum number of managed keys that can be blocked for a single rate-based rule is 10,000. If more than 10,000 addresses exceed the rate limit, those with the highest rates are blocked.
    */
@@ -244,13 +268,21 @@ declare class WAFV2 extends Service {
    */
   listWebACLs(callback?: (err: AWSError, data: WAFV2.Types.ListWebACLsResponse) => void): Request<WAFV2.Types.ListWebACLsResponse, AWSError>;
   /**
-   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Enables the specified LoggingConfiguration, to start logging from a web ACL, according to the configuration provided. You can access information about all traffic that AWS WAF inspects using the following steps:   Create an Amazon Kinesis Data Firehose.  Create the data firehose with a PUT source and in the region that you are operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia).   Do not create the data firehose using a Kinesis stream as your source.    Associate that firehose to your web ACL using a PutLoggingConfiguration request.   When you successfully enable logging using a PutLoggingConfiguration request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see Logging Web ACL Traffic Information in the AWS WAF Developer Guide.
+   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Enables the specified LoggingConfiguration, to start logging from a web ACL, according to the configuration provided. You can access information about all traffic that AWS WAF inspects using the following steps:   Create an Amazon Kinesis Data Firehose.  Create the data firehose with a PUT source and in the Region that you are operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia).   Do not create the data firehose using a Kinesis stream as your source.    Associate that firehose to your web ACL using a PutLoggingConfiguration request.   When you successfully enable logging using a PutLoggingConfiguration request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see Logging Web ACL Traffic Information in the AWS WAF Developer Guide.
    */
   putLoggingConfiguration(params: WAFV2.Types.PutLoggingConfigurationRequest, callback?: (err: AWSError, data: WAFV2.Types.PutLoggingConfigurationResponse) => void): Request<WAFV2.Types.PutLoggingConfigurationResponse, AWSError>;
   /**
-   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Enables the specified LoggingConfiguration, to start logging from a web ACL, according to the configuration provided. You can access information about all traffic that AWS WAF inspects using the following steps:   Create an Amazon Kinesis Data Firehose.  Create the data firehose with a PUT source and in the region that you are operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia).   Do not create the data firehose using a Kinesis stream as your source.    Associate that firehose to your web ACL using a PutLoggingConfiguration request.   When you successfully enable logging using a PutLoggingConfiguration request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see Logging Web ACL Traffic Information in the AWS WAF Developer Guide.
+   *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Enables the specified LoggingConfiguration, to start logging from a web ACL, according to the configuration provided. You can access information about all traffic that AWS WAF inspects using the following steps:   Create an Amazon Kinesis Data Firehose.  Create the data firehose with a PUT source and in the Region that you are operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia).   Do not create the data firehose using a Kinesis stream as your source.    Associate that firehose to your web ACL using a PutLoggingConfiguration request.   When you successfully enable logging using a PutLoggingConfiguration request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see Logging Web ACL Traffic Information in the AWS WAF Developer Guide.
    */
   putLoggingConfiguration(callback?: (err: AWSError, data: WAFV2.Types.PutLoggingConfigurationResponse) => void): Request<WAFV2.Types.PutLoggingConfigurationResponse, AWSError>;
+  /**
+   * Attaches an IAM policy to the specified resource. Use this to share a rule group across accounts. You must be the owner of the rule group to perform this operation. This action is subject to the following restrictions:   You can attach only one policy with each PutPermissionPolicy request.   The ARN in the request must be a valid WAF RuleGroup ARN and the rule group must exist in the same region.   The user making the request must be the owner of the rule group.  
+   */
+  putPermissionPolicy(params: WAFV2.Types.PutPermissionPolicyRequest, callback?: (err: AWSError, data: WAFV2.Types.PutPermissionPolicyResponse) => void): Request<WAFV2.Types.PutPermissionPolicyResponse, AWSError>;
+  /**
+   * Attaches an IAM policy to the specified resource. Use this to share a rule group across accounts. You must be the owner of the rule group to perform this operation. This action is subject to the following restrictions:   You can attach only one policy with each PutPermissionPolicy request.   The ARN in the request must be a valid WAF RuleGroup ARN and the rule group must exist in the same region.   The user making the request must be the owner of the rule group.  
+   */
+  putPermissionPolicy(callback?: (err: AWSError, data: WAFV2.Types.PutPermissionPolicyResponse) => void): Request<WAFV2.Types.PutPermissionPolicyResponse, AWSError>;
   /**
    *  This is the latest version of AWS WAF, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the AWS WAF Developer Guide.   Associates tags with the specified AWS resource. Tags are key:value pairs that you can associate with AWS resources. For example, the tag key might be "customer" and the tag value might be "companyA." You can specify one or more tags to add to each container. You can add up to 50 tags to each AWS resource.
    */
@@ -331,7 +363,7 @@ declare namespace WAFV2 {
   export type Boolean = boolean;
   export interface ByteMatchStatement {
     /**
-     * A string value that you want AWS WAF to search for. AWS WAF searches only in the part of web requests that you designate for inspection in FieldToMatch. The maximum length of the value is 50 bytes. Valid values depend on the areas that you specify for inspection in FieldToMatch:    Method: The HTTP method that you want AWS WAF to search for. This indicates the type of operation specified in the request.     UriPath: The value that you want AWS WAF to search for in the URI path, for example, /images/daily-ad.jpg.    If SearchString includes alphabetic characters A-Z and a-z, note that the value is case sensitive.  If you're using the AWS WAF API  Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 50 bytes. For example, suppose the value of Type is HEADER and the value of Data is User-Agent. If you want to search the User-Agent header for the value BadBot, you base64-encode BadBot using MIME base64-encoding and include the resulting value, QmFkQm90, in the value of SearchString.  If you're using the AWS CLI or one of the AWS SDKs  The value that you want AWS WAF to search for. The SDK automatically base64 encodes the value.
+     * A string value that you want AWS WAF to search for. AWS WAF searches only in the part of web requests that you designate for inspection in FieldToMatch. The maximum length of the value is 50 bytes. Valid values depend on the component that you specify for inspection in FieldToMatch:    Method: The HTTP method that you want AWS WAF to search for. This indicates the type of operation specified in the request.     UriPath: The value that you want AWS WAF to search for in the URI path, for example, /images/daily-ad.jpg.    If SearchString includes alphabetic characters A-Z and a-z, note that the value is case sensitive.  If you're using the AWS WAF API  Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 50 bytes. For example, suppose the value of Type is HEADER and the value of Data is User-Agent. If you want to search the User-Agent header for the value BadBot, you base64-encode BadBot using MIME base64-encoding and include the resulting value, QmFkQm90, in the value of SearchString.  If you're using the AWS CLI or one of the AWS SDKs  The value that you want AWS WAF to search for. The SDK automatically base64 encodes the value.
      */
     SearchString: SearchString;
     /**
@@ -339,7 +371,7 @@ declare namespace WAFV2 {
      */
     FieldToMatch: FieldToMatch;
     /**
-     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
+     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
      */
     TextTransformations: TextTransformations;
     /**
@@ -350,7 +382,7 @@ declare namespace WAFV2 {
   export type CapacityUnit = number;
   export interface CheckCapacityRequest {
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -373,15 +405,15 @@ declare namespace WAFV2 {
   export type CountryCodes = CountryCode[];
   export interface CreateIPSetRequest {
     /**
-     * A friendly name of the IP set. You cannot change the name of an IPSet after you create it.
+     * The name of the IP set. You cannot change the name of an IPSet after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
-     * A friendly description of the IP set. You cannot change the description of an IP set after you create it.
+     * A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -405,15 +437,15 @@ declare namespace WAFV2 {
   }
   export interface CreateRegexPatternSetRequest {
     /**
-     * A friendly name of the set. You cannot change the name after you create the set.
+     * The name of the set. You cannot change the name after you create the set.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
-     * A friendly description of the set. You cannot change the description of a set after you create it.
+     * A description of the set that helps with identification. You cannot change the description of a set after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -433,11 +465,11 @@ declare namespace WAFV2 {
   }
   export interface CreateRuleGroupRequest {
     /**
-     * A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+     * The name of the rule group. You cannot change the name of a rule group after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -445,7 +477,7 @@ declare namespace WAFV2 {
      */
     Capacity: CapacityUnit;
     /**
-     * A friendly description of the rule group. You cannot change the description of a rule group after you create it.
+     * A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -469,11 +501,11 @@ declare namespace WAFV2 {
   }
   export interface CreateWebACLRequest {
     /**
-     * A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+     * The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -481,7 +513,7 @@ declare namespace WAFV2 {
      */
     DefaultAction: DefaultAction;
     /**
-     * A friendly description of the Web ACL. You cannot change the description of a Web ACL after you create it.
+     * A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -513,13 +545,29 @@ declare namespace WAFV2 {
      */
     Allow?: AllowAction;
   }
+  export interface DeleteFirewallManagerRuleGroupsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the web ACL.
+     */
+    WebACLArn: ResourceArn;
+    /**
+     * A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
+     */
+    WebACLLockToken: LockToken;
+  }
+  export interface DeleteFirewallManagerRuleGroupsResponse {
+    /**
+     * A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
+     */
+    NextWebACLLockToken?: LockToken;
+  }
   export interface DeleteIPSetRequest {
     /**
-     * A friendly name of the IP set. You cannot change the name of an IPSet after you create it.
+     * The name of the IP set. You cannot change the name of an IPSet after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -541,13 +589,21 @@ declare namespace WAFV2 {
   }
   export interface DeleteLoggingConfigurationResponse {
   }
+  export interface DeletePermissionPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the rule group from which you want to delete the policy. You must be the owner of the rule group to perform this operation.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface DeletePermissionPolicyResponse {
+  }
   export interface DeleteRegexPatternSetRequest {
     /**
-     * A friendly name of the set. You cannot change the name after you create the set.
+     * The name of the set. You cannot change the name after you create the set.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -563,11 +619,11 @@ declare namespace WAFV2 {
   }
   export interface DeleteRuleGroupRequest {
     /**
-     * A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+     * The name of the rule group. You cannot change the name of a rule group after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -583,11 +639,11 @@ declare namespace WAFV2 {
   }
   export interface DeleteWebACLRequest {
     /**
-     * A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+     * The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -611,7 +667,7 @@ declare namespace WAFV2 {
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
   }
@@ -674,6 +730,27 @@ declare namespace WAFV2 {
     Method?: Method;
   }
   export type FieldToMatchData = string;
+  export interface FirewallManagerRuleGroup {
+    /**
+     * The name of the rule group. You cannot change the name of a rule group after you create it.
+     */
+    Name: EntityName;
+    /**
+     * If you define more than one rule group in the first or last Firewall Manager rule groups, AWS WAF evaluates each request against the rule groups in order, starting from the lowest priority setting. The priorities don't need to be consecutive, but they must all be different.
+     */
+    Priority: RulePriority;
+    /**
+     * The processing guidance for an AWS Firewall Manager rule. This is like a regular rule Statement, but it can only contain a rule group reference.
+     */
+    FirewallManagerStatement: FirewallManagerStatement;
+    OverrideAction: OverrideAction;
+    VisibilityConfig: VisibilityConfig;
+  }
+  export type FirewallManagerRuleGroups = FirewallManagerRuleGroup[];
+  export interface FirewallManagerStatement {
+    ManagedRuleGroupStatement?: ManagedRuleGroupStatement;
+    RuleGroupReferenceStatement?: RuleGroupReferenceStatement;
+  }
   export interface GeoMatchStatement {
     /**
      * An array of two-character country codes, for example, [ "US", "CN" ], from the alpha-2 country ISO codes of the ISO 3166 international standard. 
@@ -682,11 +759,11 @@ declare namespace WAFV2 {
   }
   export interface GetIPSetRequest {
     /**
-     * A friendly name of the IP set. You cannot change the name of an IPSet after you create it.
+     * The name of the IP set. You cannot change the name of an IPSet after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -716,13 +793,25 @@ declare namespace WAFV2 {
      */
     LoggingConfiguration?: LoggingConfiguration;
   }
+  export interface GetPermissionPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the rule group for which you want to get the policy.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface GetPermissionPolicyResponse {
+    /**
+     * The IAM policy that is attached to the specified rule group.
+     */
+    Policy?: PolicyString;
+  }
   export interface GetRateBasedStatementManagedKeysRequest {
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
-     * A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+     * The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
      */
     WebACLName: EntityName;
     /**
@@ -746,11 +835,11 @@ declare namespace WAFV2 {
   }
   export interface GetRegexPatternSetRequest {
     /**
-     * A friendly name of the set. You cannot change the name after you create the set.
+     * The name of the set. You cannot change the name after you create the set.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -770,11 +859,11 @@ declare namespace WAFV2 {
   }
   export interface GetRuleGroupRequest {
     /**
-     * A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+     * The name of the rule group. You cannot change the name of a rule group after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -802,7 +891,7 @@ declare namespace WAFV2 {
      */
     RuleMetricName: MetricName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -842,11 +931,11 @@ declare namespace WAFV2 {
   }
   export interface GetWebACLRequest {
     /**
-     * A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+     * The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -910,7 +999,7 @@ declare namespace WAFV2 {
   export type IPAddresses = IPAddress[];
   export interface IPSet {
     /**
-     * A friendly name of the IP set. You cannot change the name of an IPSet after you create it.
+     * The name of the IP set. You cannot change the name of an IPSet after you create it.
      */
     Name: EntityName;
     /**
@@ -922,7 +1011,7 @@ declare namespace WAFV2 {
      */
     ARN: ResourceArn;
     /**
-     * A friendly description of the IP set. You cannot change the description of an IP set after you create it.
+     * A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -943,7 +1032,7 @@ declare namespace WAFV2 {
   export type IPSetSummaries = IPSetSummary[];
   export interface IPSetSummary {
     /**
-     * A friendly name of the IP set. You cannot change the name of an IPSet after you create it.
+     * The name of the IP set. You cannot change the name of an IPSet after you create it.
      */
     Name?: EntityName;
     /**
@@ -951,7 +1040,7 @@ declare namespace WAFV2 {
      */
     Id?: EntityId;
     /**
-     * A friendly description of the IP set. You cannot change the description of an IP set after you create it.
+     * A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -966,7 +1055,7 @@ declare namespace WAFV2 {
   export type IPString = string;
   export interface ListAvailableManagedRuleGroupsRequest {
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -990,7 +1079,7 @@ declare namespace WAFV2 {
   }
   export interface ListIPSetsRequest {
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -1014,7 +1103,7 @@ declare namespace WAFV2 {
   }
   export interface ListLoggingConfigurationsRequest {
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope?: Scope;
     /**
@@ -1039,7 +1128,7 @@ declare namespace WAFV2 {
   export type ListMaxItems = number;
   export interface ListRegexPatternSetsRequest {
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -1079,7 +1168,7 @@ declare namespace WAFV2 {
   }
   export interface ListRuleGroupsRequest {
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -1127,7 +1216,7 @@ declare namespace WAFV2 {
   }
   export interface ListWebACLsRequest {
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -1224,6 +1313,7 @@ declare namespace WAFV2 {
     None?: NoneAction;
   }
   export type PaginationLimit = number;
+  export type PolicyString = string;
   export type PopulationSize = number;
   export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD"|string;
   export interface PutLoggingConfigurationRequest {
@@ -1237,6 +1327,18 @@ declare namespace WAFV2 {
      * 
      */
     LoggingConfiguration?: LoggingConfiguration;
+  }
+  export interface PutPermissionPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the RuleGroup to which you want to attach the policy.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The policy to attach to the specified rule group.  The policy specifications must conform to the following:   The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.   The policy must include specifications for Effect, Action, and Principal.    Effect must specify Allow.    Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups. AWS WAF rejects any extra actions or wildcard actions in the policy.   The policy must not include a Resource parameter.   For more information, see IAM Policies. 
+     */
+    Policy: PolicyString;
+  }
+  export interface PutPermissionPolicyResponse {
   }
   export interface QueryString {
   }
@@ -1272,7 +1374,7 @@ declare namespace WAFV2 {
   }
   export interface RegexPatternSet {
     /**
-     * A friendly name of the set. You cannot change the name after you create the set.
+     * The name of the set. You cannot change the name after you create the set.
      */
     Name?: EntityName;
     /**
@@ -1284,7 +1386,7 @@ declare namespace WAFV2 {
      */
     ARN?: ResourceArn;
     /**
-     * A friendly description of the set. You cannot change the description of a set after you create it.
+     * A description of the set that helps with identification. You cannot change the description of a set after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1302,14 +1404,14 @@ declare namespace WAFV2 {
      */
     FieldToMatch: FieldToMatch;
     /**
-     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
+     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
      */
     TextTransformations: TextTransformations;
   }
   export type RegexPatternSetSummaries = RegexPatternSetSummary[];
   export interface RegexPatternSetSummary {
     /**
-     * A friendly name of the data type instance. You cannot change the name after you create the instance.
+     * The name of the data type instance. You cannot change the name after you create the instance.
      */
     Name?: EntityName;
     /**
@@ -1317,7 +1419,7 @@ declare namespace WAFV2 {
      */
     Id?: EntityId;
     /**
-     * A friendly description of the set. You cannot change the description of a set after you create it.
+     * A description of the set that helps with identification. You cannot change the description of a set after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1336,7 +1438,7 @@ declare namespace WAFV2 {
   export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|string;
   export interface Rule {
     /**
-     * A friendly name of the rule. You can't change the name of a Rule after you create it. 
+     * The name of the rule. You can't change the name of a Rule after you create it. 
      */
     Name: EntityName;
     /**
@@ -1348,11 +1450,11 @@ declare namespace WAFV2 {
      */
     Statement: Statement;
     /**
-     * The action that AWS WAF should take on a web request when it matches the rule's statement. Settings at the web ACL level can override the rule action setting. 
+     * The action that AWS WAF should take on a web request when it matches the rule statement. Settings at the web ACL level can override the rule action setting.  This is used only for rules whose statements do not reference a rule group. Rule statements that reference a rule group include RuleGroupReferenceStatement and ManagedRuleGroupStatement.  You must specify either this Action setting or the rule OverrideAction setting, but not both:   If the rule statement does not reference a rule group, use this rule action setting and not the rule override action setting.    If the rule statement references a rule group, use the override action setting and not this action setting.   
      */
     Action?: RuleAction;
     /**
-     * The action to use to override the rule's Action setting. You can use no override action, in which case the rule action is in effect, or count action, in which case, if the rule matches a web request, it only counts the match.
+     * The override action to apply to the rules in a rule group. Used only for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.  Set the override action to none to leave the rule actions in effect. Set it to count to only count matches, regardless of the rule action settings.  In a Rule, you must specify either this OverrideAction setting or the rule Action setting, but not both:   If the rule statement references a rule group, use this override action setting and not the action setting.    If the rule statement does not reference a rule group, use the rule action setting and not this rule override action setting.   
      */
     OverrideAction?: OverrideAction;
     /**
@@ -1376,7 +1478,7 @@ declare namespace WAFV2 {
   }
   export interface RuleGroup {
     /**
-     * A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+     * The name of the rule group. You cannot change the name of a rule group after you create it.
      */
     Name: EntityName;
     /**
@@ -1392,7 +1494,7 @@ declare namespace WAFV2 {
      */
     ARN: ResourceArn;
     /**
-     * A friendly description of the rule group. You cannot change the description of a rule group after you create it.
+     * A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1417,7 +1519,7 @@ declare namespace WAFV2 {
   export type RuleGroupSummaries = RuleGroupSummary[];
   export interface RuleGroupSummary {
     /**
-     * A friendly name of the data type instance. You cannot change the name after you create the instance.
+     * The name of the data type instance. You cannot change the name after you create the instance.
      */
     Name?: EntityName;
     /**
@@ -1425,7 +1527,7 @@ declare namespace WAFV2 {
      */
     Id?: EntityId;
     /**
-     * A friendly description of the rule group. You cannot change the description of a rule group after you create it.
+     * A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1500,7 +1602,7 @@ declare namespace WAFV2 {
      */
     Size: Size;
     /**
-     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
+     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
      */
     TextTransformations: TextTransformations;
   }
@@ -1510,7 +1612,7 @@ declare namespace WAFV2 {
      */
     FieldToMatch: FieldToMatch;
     /**
-     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
+     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
      */
     TextTransformations: TextTransformations;
   }
@@ -1644,11 +1746,11 @@ declare namespace WAFV2 {
   }
   export interface UpdateIPSetRequest {
     /**
-     * A friendly name of the IP set. You cannot change the name of an IPSet after you create it.
+     * The name of the IP set. You cannot change the name of an IPSet after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -1656,7 +1758,7 @@ declare namespace WAFV2 {
      */
     Id: EntityId;
     /**
-     * A friendly description of the IP set. You cannot change the description of an IP set after you create it.
+     * A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1676,11 +1778,11 @@ declare namespace WAFV2 {
   }
   export interface UpdateRegexPatternSetRequest {
     /**
-     * A friendly name of the set. You cannot change the name after you create the set.
+     * The name of the set. You cannot change the name after you create the set.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -1688,7 +1790,7 @@ declare namespace WAFV2 {
      */
     Id: EntityId;
     /**
-     * A friendly description of the set. You cannot change the description of a set after you create it.
+     * A description of the set that helps with identification. You cannot change the description of a set after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1708,11 +1810,11 @@ declare namespace WAFV2 {
   }
   export interface UpdateRuleGroupRequest {
     /**
-     * A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+     * The name of the rule group. You cannot change the name of a rule group after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -1720,7 +1822,7 @@ declare namespace WAFV2 {
      */
     Id: EntityId;
     /**
-     * A friendly description of the rule group. You cannot change the description of a rule group after you create it.
+     * A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1744,11 +1846,11 @@ declare namespace WAFV2 {
   }
   export interface UpdateWebACLRequest {
     /**
-     * A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+     * The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
      */
     Name: EntityName;
     /**
-     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
     /**
@@ -1760,7 +1862,7 @@ declare namespace WAFV2 {
      */
     DefaultAction: DefaultAction;
     /**
-     * A friendly description of the Web ACL. You cannot change the description of a Web ACL after you create it.
+     * A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1795,13 +1897,13 @@ declare namespace WAFV2 {
      */
     CloudWatchMetricsEnabled: Boolean;
     /**
-     * A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example "All" and "Default_Action." You can't change a MetricName after you create a VisibilityConfig.
+     * A name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example "All" and "Default_Action." You can't change a MetricName after you create a VisibilityConfig.
      */
     MetricName: MetricName;
   }
   export interface WebACL {
     /**
-     * A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+     * The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
      */
     Name: EntityName;
     /**
@@ -1817,7 +1919,7 @@ declare namespace WAFV2 {
      */
     DefaultAction: DefaultAction;
     /**
-     * A friendly description of the Web ACL. You cannot change the description of a Web ACL after you create it.
+     * A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1832,11 +1934,23 @@ declare namespace WAFV2 {
      * The web ACL capacity units (WCUs) currently being used by this web ACL.  AWS WAF uses WCUs to calculate and control the operating resources that are used to run your rules, rule groups, and web ACLs. AWS WAF calculates capacity differently for each rule type, to reflect the relative cost of each rule. Simple rules that cost little to run use fewer WCUs than more complex rules that use more processing power. Rule group capacity is fixed at creation, which helps users plan their web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500. 
      */
     Capacity?: ConsumedCapacity;
+    /**
+     * The first set of rules for AWS WAF to process in the web ACL. This is defined in an AWS Firewall Manager WAF policy and contains only rule group references. You can't alter these. Any rules and rule groups that you define for the web ACL are prioritized after these.  In the Firewall Manager WAF policy, the Firewall Manager administrator can define a set of rule groups to run first in the web ACL and a set of rule groups to run last. Within each set, the administrator prioritizes the rule groups, to determine their relative processing order.
+     */
+    PreProcessFirewallManagerRuleGroups?: FirewallManagerRuleGroups;
+    /**
+     * The last set of rules for AWS WAF to process in the web ACL. This is defined in an AWS Firewall Manager WAF policy and contains only rule group references. You can't alter these. Any rules and rule groups that you define for the web ACL are prioritized before these.  In the Firewall Manager WAF policy, the Firewall Manager administrator can define a set of rule groups to run first in the web ACL and a set of rule groups to run last. Within each set, the administrator prioritizes the rule groups, to determine their relative processing order.
+     */
+    PostProcessFirewallManagerRuleGroups?: FirewallManagerRuleGroups;
+    /**
+     * Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then only AWS Firewall Manager can delete the web ACL or any Firewall Manager rule groups in the web ACL. 
+     */
+    ManagedByFirewallManager?: Boolean;
   }
   export type WebACLSummaries = WebACLSummary[];
   export interface WebACLSummary {
     /**
-     * A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+     * The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
      */
     Name?: EntityName;
     /**
@@ -1844,7 +1958,7 @@ declare namespace WAFV2 {
      */
     Id?: EntityId;
     /**
-     * A friendly description of the Web ACL. You cannot change the description of a Web ACL after you create it.
+     * A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.
      */
     Description?: EntityDescription;
     /**
@@ -1862,7 +1976,7 @@ declare namespace WAFV2 {
      */
     FieldToMatch: FieldToMatch;
     /**
-     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
+     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
      */
     TextTransformations: TextTransformations;
   }

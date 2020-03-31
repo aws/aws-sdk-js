@@ -22,11 +22,11 @@ declare class Lambda extends Service {
    */
   addLayerVersionPermission(callback?: (err: AWSError, data: Lambda.Types.AddLayerVersionPermissionResponse) => void): Request<Lambda.Types.AddLayerVersionPermissionResponse, AWSError>;
   /**
-   * Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function. To grant permission to another account, specify the account ID as the Principal. For AWS services, the principal is a domain-style identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com. For AWS services, you can also specify the ARN or owning account of the associated resource as the SourceArn or SourceAccount. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function. This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see Lambda Function Policies. 
+   * Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function. To grant permission to another account, specify the account ID as the Principal. For AWS services, the principal is a domain-style identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com. For AWS services, you can also specify the ARN of the associated resource as the SourceArn. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function. This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see Lambda Function Policies. 
    */
   addPermission(params: Lambda.Types.AddPermissionRequest, callback?: (err: AWSError, data: Lambda.Types.AddPermissionResponse) => void): Request<Lambda.Types.AddPermissionResponse, AWSError>;
   /**
-   * Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function. To grant permission to another account, specify the account ID as the Principal. For AWS services, the principal is a domain-style identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com. For AWS services, you can also specify the ARN or owning account of the associated resource as the SourceArn or SourceAccount. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function. This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see Lambda Function Policies. 
+   * Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function. To grant permission to another account, specify the account ID as the Principal. For AWS services, the principal is a domain-style identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com. For AWS services, you can also specify the ARN of the associated resource as the SourceArn. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function. This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see Lambda Function Policies. 
    */
   addPermission(callback?: (err: AWSError, data: Lambda.Types.AddPermissionResponse) => void): Request<Lambda.Types.AddPermissionResponse, AWSError>;
   /**
@@ -526,7 +526,7 @@ declare namespace Lambda {
      */
     SourceArn?: Arn;
     /**
-     * For AWS services, the ID of the account that owns the resource. Use this instead of SourceArn to grant permission to resources that are owned by another account (for example, all of an account's Amazon S3 buckets). Or use it together with SourceArn to ensure that the resource is owned by the specified account. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account.
+     * For Amazon S3, the ID of the account that owns the resource. Use this together with SourceArn to ensure that the resource is owned by the specified account. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.
      */
     SourceAccount?: SourceOwner;
     /**
@@ -637,7 +637,7 @@ declare namespace Lambda {
      */
     BatchSize?: BatchSize;
     /**
-     * The maximum amount of time to gather records before invoking the function, in seconds.
+     * (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
@@ -856,7 +856,7 @@ declare namespace Lambda {
      */
     BatchSize?: BatchSize;
     /**
-     * The maximum amount of time to gather records before invoking the function, in seconds.
+     * (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
@@ -1918,7 +1918,7 @@ declare namespace Lambda {
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"java8"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"java8"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -2017,7 +2017,7 @@ declare namespace Lambda {
      */
     BatchSize?: BatchSize;
     /**
-     * The maximum amount of time to gather records before invoking the function, in seconds.
+     * (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**

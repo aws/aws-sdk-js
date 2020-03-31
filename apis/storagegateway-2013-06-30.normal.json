@@ -1913,6 +1913,10 @@
       },
       "documentation": "<p>AttachVolumeOutput</p>"
     },
+    "AuditDestinationARN": {
+      "type": "string",
+      "max": 1024
+    },
     "Authentication": {
       "type": "string",
       "documentation": "<p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>",
@@ -2264,7 +2268,7 @@
         },
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the file gateway on which you want to create a file share.</p>"
+          "documentation": "<p>The ARN of the file gateway on which you want to create a file share.</p>"
         },
         "KMSEncrypted": {
           "shape": "Boolean",
@@ -2317,6 +2321,10 @@
         "InvalidUserList": {
           "shape": "FileShareUserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
+        },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
         },
         "Authentication": {
           "shape": "Authentication",
@@ -4576,6 +4584,10 @@
           "shape": "FileShareUserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+        },
         "Authentication": {
           "shape": "Authentication"
         },
@@ -5363,6 +5375,10 @@
         "InvalidUserList": {
           "shape": "FileShareUserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
+        },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
         }
       },
       "documentation": "<p>UpdateSMBFileShareInput</p>"

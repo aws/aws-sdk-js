@@ -5256,6 +5256,10 @@ declare namespace Pinpoint {
      */
     Keyword?: __string;
     /**
+     * The URL of an image or video to display in the SMS message.
+     */
+    MediaUrl?: __string;
+    /**
      * The SMS message type. Valid values are: TRANSACTIONAL, the message is critical or time-sensitive, such as a one-time password that supports a customer transaction; and, PROMOTIONAL, the message is not critical or time-sensitive, such as a marketing message.
      */
     MessageType?: MessageType;

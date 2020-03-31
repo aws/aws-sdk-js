@@ -268,6 +268,80 @@
       ],
       "documentation": "<p>Deletes faces from a collection. You specify a collection ID and an array of face IDs to remove from the collection.</p> <p>This operation requires permissions to perform the <code>rekognition:DeleteFaces</code> action.</p>"
     },
+    "DeleteProject": {
+      "name": "DeleteProject",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteProjectRequest"
+      },
+      "output": {
+        "shape": "DeleteProjectResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        }
+      ],
+      "documentation": "<p>Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all versions of the model associated with the project. To delete a version of a model, see <a>DeleteProjectVersion</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:DeleteProject</code> action. </p>"
+    },
+    "DeleteProjectVersion": {
+      "name": "DeleteProjectVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteProjectVersionRequest"
+      },
+      "output": {
+        "shape": "DeleteProjectVersionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        }
+      ],
+      "documentation": "<p>Deletes a version of a model. </p> <p>You must first stop the model before you can delete it. To check if a model is running, use the <code>Status</code> field returned from <a>DescribeProjectVersions</a>. To stop a running model call <a>StopProjectVersion</a>. </p> <p>This operation requires permissions to perform the <code>rekognition:DeleteProjectVersion</code> action. </p>"
+    },
     "DeleteStreamProcessor": {
       "name": "DeleteStreamProcessor",
       "http": {
@@ -2253,6 +2327,48 @@
         "DeletedFaces": {
           "shape": "FaceIdList",
           "documentation": "<p>An array of strings (face IDs) of the faces that were deleted.</p>"
+        }
+      }
+    },
+    "DeleteProjectRequest": {
+      "type": "structure",
+      "required": [
+        "ProjectArn"
+      ],
+      "members": {
+        "ProjectArn": {
+          "shape": "ProjectArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the project that you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteProjectResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ProjectStatus",
+          "documentation": "<p>The current status of the delete project operation.</p>"
+        }
+      }
+    },
+    "DeleteProjectVersionRequest": {
+      "type": "structure",
+      "required": [
+        "ProjectVersionArn"
+      ],
+      "members": {
+        "ProjectVersionArn": {
+          "shape": "ProjectVersionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the model version that you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteProjectVersionResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ProjectVersionStatus",
+          "documentation": "<p>The status of the deletion operation.</p>"
         }
       }
     },

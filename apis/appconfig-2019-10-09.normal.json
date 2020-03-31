@@ -1159,6 +1159,10 @@
           "shape": "DeploymentState",
           "documentation": "<p>The state of the deployment.</p>"
         },
+        "EventLog": {
+          "shape": "DeploymentEvents",
+          "documentation": "<p>A list containing all events related to a deployment. The most recent events are displayed first.</p>"
+        },
         "PercentageComplete": {
           "shape": "Percentage",
           "documentation": "<p>The percentage of targets for which the deployment is available.</p>"
@@ -1171,6 +1175,45 @@
           "shape": "Iso8601DateTime",
           "documentation": "<p>The time the deployment completed. </p>"
         }
+      }
+    },
+    "DeploymentEvent": {
+      "type": "structure",
+      "members": {
+        "EventType": {
+          "shape": "DeploymentEventType",
+          "documentation": "<p>The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.</p>"
+        },
+        "TriggeredBy": {
+          "shape": "TriggeredBy",
+          "documentation": "<p>The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.</p>"
+        },
+        "OccurredAt": {
+          "shape": "Iso8601DateTime",
+          "documentation": "<p>The date and time the event occurred.</p>"
+        }
+      },
+      "documentation": "<p>An object that describes a deployment event.</p>"
+    },
+    "DeploymentEventType": {
+      "type": "string",
+      "enum": [
+        "PERCENTAGE_UPDATED",
+        "ROLLBACK_STARTED",
+        "ROLLBACK_COMPLETED",
+        "BAKE_TIME_STARTED",
+        "DEPLOYMENT_STARTED",
+        "DEPLOYMENT_COMPLETED"
+      ]
+    },
+    "DeploymentEvents": {
+      "type": "list",
+      "member": {
+        "shape": "DeploymentEvent"
       }
     },
     "DeploymentList": {
@@ -1871,6 +1914,15 @@
     "TagValue": {
       "type": "string",
       "max": 256
+    },
+    "TriggeredBy": {
+      "type": "string",
+      "enum": [
+        "USER",
+        "APPCONFIG",
+        "CLOUDWATCH_ALARM",
+        "INTERNAL_ERROR"
+      ]
     },
     "UntagResourceRequest": {
       "type": "structure",

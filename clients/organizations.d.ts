@@ -104,11 +104,11 @@ declare class Organizations extends Service {
    */
   deletePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified member AWS account as a delegated administrator for the specified AWS service. You can run this action only for AWS services that support this feature. For a current list of services that support it, see AWS Services That Support Using Delegated Administrators in the AWS Organizations User Guide.  This operation can be called only from the organization's master account.
+   * Removes the specified member AWS account as a delegated administrator for the specified AWS service. You can run this action only for AWS services that support this feature. For a current list of services that support it, see the column Supports Delegated Administrator in the table at AWS Services that you can use with AWS Organizations in the AWS Organizations User Guide.  This operation can be called only from the organization's master account.
    */
   deregisterDelegatedAdministrator(params: Organizations.Types.DeregisterDelegatedAdministratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified member AWS account as a delegated administrator for the specified AWS service. You can run this action only for AWS services that support this feature. For a current list of services that support it, see AWS Services That Support Using Delegated Administrators in the AWS Organizations User Guide.  This operation can be called only from the organization's master account.
+   * Removes the specified member AWS account as a delegated administrator for the specified AWS service. You can run this action only for AWS services that support this feature. For a current list of services that support it, see the column Supports Delegated Administrator in the table at AWS Services that you can use with AWS Organizations in the AWS Organizations User Guide.  This operation can be called only from the organization's master account.
    */
   deregisterDelegatedAdministrator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -360,11 +360,11 @@ declare class Organizations extends Service {
    */
   moveAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables the specified member account to administer the Organizations features of the specified AWS service. It grants read-only access to AWS Organizations service data. The account still requires IAM permissions to access and administer the AWS service. You can run this action only for AWS services that support this feature. For a current list of services that support it, see AWS Services That Support Using Delegated Administrators in the AWS Organizations User Guide.  This operation can be called only from the organization's master account.
+   * Enables the specified member account to administer the Organizations features of the specified AWS service. It grants read-only access to AWS Organizations service data. The account still requires IAM permissions to access and administer the AWS service. You can run this action only for AWS services that support this feature. For a current list of services that support it, see the column Supports Delegated Administrator in the table at AWS Services that you can use with AWS Organizations in the AWS Organizations User Guide.  This operation can be called only from the organization's master account.
    */
   registerDelegatedAdministrator(params: Organizations.Types.RegisterDelegatedAdministratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables the specified member account to administer the Organizations features of the specified AWS service. It grants read-only access to AWS Organizations service data. The account still requires IAM permissions to access and administer the AWS service. You can run this action only for AWS services that support this feature. For a current list of services that support it, see AWS Services That Support Using Delegated Administrators in the AWS Organizations User Guide.  This operation can be called only from the organization's master account.
+   * Enables the specified member account to administer the Organizations features of the specified AWS service. It grants read-only access to AWS Organizations service data. The account still requires IAM permissions to access and administer the AWS service. You can run this action only for AWS services that support this feature. For a current list of services that support it, see the column Supports Delegated Administrator in the table at AWS Services that you can use with AWS Organizations in the AWS Organizations User Guide.  This operation can be called only from the organization's master account.
    */
   registerDelegatedAdministrator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**

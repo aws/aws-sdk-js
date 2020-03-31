@@ -746,6 +746,7 @@ declare namespace StorageGateway {
      */
     TargetARN?: TargetARN;
   }
+  export type AuditDestinationARN = string;
   export type Authentication = string;
   export type AvailabilityMonitorTestStatus = "COMPLETE"|"FAILED"|"PENDING"|string;
   export type BandwidthDownloadRateLimit = number;
@@ -975,7 +976,7 @@ declare namespace StorageGateway {
      */
     ClientToken: ClientToken;
     /**
-     * The Amazon Resource Name (ARN) of the file gateway on which you want to create a file share.
+     * The ARN of the file gateway on which you want to create a file share.
      */
     GatewayARN: GatewayARN;
     /**
@@ -1030,6 +1031,10 @@ declare namespace StorageGateway {
      * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     InvalidUserList?: FileShareUserList;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
     /**
      * The authentication method that users use to access the file share. Valid values are ActiveDirectory or GuestAccess. The default is ActiveDirectory.
      */
@@ -2282,6 +2287,10 @@ declare namespace StorageGateway {
      * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     InvalidUserList?: FileShareUserList;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
     Authentication?: Authentication;
     /**
      * A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
@@ -2740,6 +2749,10 @@ declare namespace StorageGateway {
      * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     InvalidUserList?: FileShareUserList;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
   }
   export interface UpdateSMBFileShareOutput {
     /**

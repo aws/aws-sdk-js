@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.649.0-->
+<!--LATEST=2.650.0-->
 <!--ENTRYINSERT-->
+
+## 2.650.0
+* feature: AppConfig: This release adds an event log to deployments. In the case of a deployment rollback, the event log details the rollback reason.
+* feature: ElasticInference: This release includes improvements for the Amazon Elastic Inference service.
+* feature: FMS: This release contains FMS wafv2 support.
+* feature: Glue: Add two enums for MongoDB connection: Added "CONNECTION_URL" to "ConnectionPropertyKey" and added "MONGODB" to "ConnectionType"
+* feature: Lambda: AWS Lambda now supports .NET Core 3.1
+* feature: MediaStore: This release adds support for CloudWatch Metrics. You can now set a policy on your container to dictate which metrics MediaStore sends to CloudWatch.
+* feature: Pinpoint: This release of the Amazon Pinpoint API introduces MMS support for SMS messages.
+* feature: Rekognition: This release adds DeleteProject and DeleteProjectVersion APIs to Amazon Rekognition Custom Labels.
+* feature: StorageGateway: Adding audit logging support for SMB File Shares
+* feature: WAFV2: Added support for AWS Firewall Manager for WAFv2 and PermissionPolicy APIs for WAFv2.
 
 ## 2.649.0
 * feature: AccessAnalyzer: This release adds support for the creation and management of IAM Access Analyzer analyzers with type organization. An analyzer with type organization continuously monitors all supported resources within the AWS organization and reports findings when they allow access from outside the organization.
