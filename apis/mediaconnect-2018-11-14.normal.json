@@ -99,6 +99,48 @@
       ],
       "documentation": "Adds Sources to flow"
     },
+    "AddFlowVpcInterfaces": {
+      "name": "AddFlowVpcInterfaces",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/flows/{flowArn}/vpcInterfaces",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "AddFlowVpcInterfacesRequest"
+      },
+      "output": {
+        "shape": "AddFlowVpcInterfacesResponse",
+        "documentation": "The following VPC interface was added to the Flow configuration."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Adds VPC interfaces to flow"
+    },
     "CreateFlow": {
       "name": "CreateFlow",
       "http": {
@@ -452,6 +494,48 @@
         }
       ],
       "documentation": "Removes a source from an existing flow. This request can be made only if there is more than one source on the flow."
+    },
+    "RemoveFlowVpcInterface": {
+      "name": "RemoveFlowVpcInterface",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/flows/{flowArn}/vpcInterfaces/{vpcInterfaceName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RemoveFlowVpcInterfaceRequest"
+      },
+      "output": {
+        "shape": "RemoveFlowVpcInterfaceResponse",
+        "documentation": "VPC interface successfully removed from flow configuration."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Removes a VPC Interface from an existing flow. This request can be made only on a VPC interface that does not have a Source or Output associated with it. If the VPC interface is referenced by a Source or Output, you must first delete or update the Source or Output to no longer reference the VPC interface."
     },
     "RevokeFlowEntitlement": {
       "name": "RevokeFlowEntitlement",
@@ -873,6 +957,42 @@
         }
       }
     },
+    "AddFlowVpcInterfacesRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The flow that you want to mutate."
+        },
+        "VpcInterfaces": {
+          "shape": "__listOfVpcInterfaceRequest",
+          "locationName": "vpcInterfaces",
+          "documentation": "A list of VPC interfaces that you want to add."
+        }
+      },
+      "documentation": "A request to add VPC interfaces to the flow.",
+      "required": [
+        "FlowArn",
+        "VpcInterfaces"
+      ]
+    },
+    "AddFlowVpcInterfacesResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the flow that these VPC interfaces were added to."
+        },
+        "VpcInterfaces": {
+          "shape": "__listOfVpcInterface",
+          "locationName": "vpcInterfaces",
+          "documentation": "The details of the newly added VPC interfaces."
+        }
+      }
+    },
     "AddOutputRequest": {
       "type": "structure",
       "members": {
@@ -979,6 +1099,11 @@
         "Sources": {
           "shape": "__listOfSetSourceRequest",
           "locationName": "sources"
+        },
+        "VpcInterfaces": {
+          "shape": "__listOfVpcInterfaceRequest",
+          "locationName": "vpcInterfaces",
+          "documentation": "The VPC interfaces you want on the flow."
         }
       },
       "documentation": "Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).",
@@ -1216,6 +1341,11 @@
           "shape": "Status",
           "locationName": "status",
           "documentation": "The current status of the flow."
+        },
+        "VpcInterfaces": {
+          "shape": "__listOfVpcInterface",
+          "locationName": "vpcInterfaces",
+          "documentation": "The VPC Interfaces for this flow."
         }
       },
       "documentation": "The settings for a flow, including its source, outputs, and entitlements.",
@@ -1624,6 +1754,47 @@
         }
       }
     },
+    "RemoveFlowVpcInterfaceRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The flow that you want to remove a VPC interface from."
+        },
+        "VpcInterfaceName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "vpcInterfaceName",
+          "documentation": "The name of the VPC interface that you want to remove."
+        }
+      },
+      "required": [
+        "FlowArn",
+        "VpcInterfaceName"
+      ]
+    },
+    "RemoveFlowVpcInterfaceResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the flow that is associated with the VPC interface you removed."
+        },
+        "NonDeletedNetworkInterfaceIds": {
+          "shape": "__listOf__string",
+          "locationName": "nonDeletedNetworkInterfaceIds",
+          "documentation": "IDs of network interfaces associated with the removed VPC interface that Media Connect was unable to remove."
+        },
+        "VpcInterfaceName": {
+          "shape": "__string",
+          "locationName": "vpcInterfaceName",
+          "documentation": "The name of the VPC interface that was removed."
+        }
+      }
+    },
     "RevokeFlowEntitlementRequest": {
       "type": "structure",
       "members": {
@@ -1708,6 +1879,11 @@
           "locationName": "streamId",
           "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
         },
+        "VpcInterfaceName": {
+          "shape": "__string",
+          "locationName": "vpcInterfaceName",
+          "documentation": "The name of the VPC interface to use for this source."
+        },
         "WhitelistCidr": {
           "shape": "__string",
           "locationName": "whitelistCidr",
@@ -1763,6 +1939,11 @@
           "shape": "Transport",
           "locationName": "transport",
           "documentation": "Attributes related to the transport stream that are used in the source."
+        },
+        "VpcInterfaceName": {
+          "shape": "__string",
+          "locationName": "vpcInterfaceName",
+          "documentation": "The name of the VPC Interface this Source is configured with."
         },
         "WhitelistCidr": {
           "shape": "__string",
@@ -2232,6 +2413,11 @@
           "locationName": "streamId",
           "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
         },
+        "VpcInterfaceName": {
+          "shape": "__string",
+          "locationName": "vpcInterfaceName",
+          "documentation": "The name of the VPC Interface to configure this Source with."
+        },
         "WhitelistCidr": {
           "shape": "__string",
           "locationName": "whitelistCidr",
@@ -2258,6 +2444,76 @@
           "documentation": "The settings for the source of the flow."
         }
       }
+    },
+    "VpcInterface": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "Immutable and has to be a unique against other VpcInterfaces in this Flow"
+        },
+        "NetworkInterfaceIds": {
+          "shape": "__listOf__string",
+          "locationName": "networkInterfaceIds",
+          "documentation": "IDs of the network interfaces created in customer's account by MediaConnect."
+        },
+        "RoleArn": {
+          "shape": "__string",
+          "locationName": "roleArn",
+          "documentation": "Role Arn MediaConnect can assumes to create ENIs in customer's account"
+        },
+        "SecurityGroupIds": {
+          "shape": "__listOf__string",
+          "locationName": "securityGroupIds",
+          "documentation": "Security Group IDs to be used on ENI."
+        },
+        "SubnetId": {
+          "shape": "__string",
+          "locationName": "subnetId",
+          "documentation": "Subnet must be in the AZ of the Flow"
+        }
+      },
+      "documentation": "The settings for a VPC Source.",
+      "required": [
+        "NetworkInterfaceIds",
+        "SubnetId",
+        "SecurityGroupIds",
+        "RoleArn",
+        "Name"
+      ]
+    },
+    "VpcInterfaceRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the VPC Interface. This value must be unique within the current flow."
+        },
+        "RoleArn": {
+          "shape": "__string",
+          "locationName": "roleArn",
+          "documentation": "Role Arn MediaConnect can assumes to create ENIs in customer's account"
+        },
+        "SecurityGroupIds": {
+          "shape": "__listOf__string",
+          "locationName": "securityGroupIds",
+          "documentation": "Security Group IDs to be used on ENI."
+        },
+        "SubnetId": {
+          "shape": "__string",
+          "locationName": "subnetId",
+          "documentation": "Subnet must be in the AZ of the Flow"
+        }
+      },
+      "documentation": "Desired VPC Interface for a Flow",
+      "required": [
+        "SubnetId",
+        "SecurityGroupIds",
+        "RoleArn",
+        "Name"
+      ]
     },
     "__integer": {
       "type": "integer"
@@ -2308,6 +2564,18 @@
       "type": "list",
       "member": {
         "shape": "Source"
+      }
+    },
+    "__listOfVpcInterface": {
+      "type": "list",
+      "member": {
+        "shape": "VpcInterface"
+      }
+    },
+    "__listOfVpcInterfaceRequest": {
+      "type": "list",
+      "member": {
+        "shape": "VpcInterfaceRequest"
       }
     },
     "__listOf__string": {

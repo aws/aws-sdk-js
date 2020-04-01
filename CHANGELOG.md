@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.650.0-->
+<!--LATEST=2.651.0-->
 <!--ENTRYINSERT-->
+
+## 2.651.0
+* feature: Iot: This release introduces Dimensions for AWS IoT Device Defender. Dimensions can be used in Security Profiles to collect and monitor fine-grained metrics.
+* feature: MediaConnect: You can now send content from your virtual private cloud (VPC) to your MediaConnect flow without going over the public internet.
 
 ## 2.650.0
 * feature: AppConfig: This release adds an event log to deployments. In the case of a deployment rollback, the event log details the rollback reason.
