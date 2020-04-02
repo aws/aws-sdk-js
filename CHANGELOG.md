@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.651.0-->
+<!--LATEST=2.652.0-->
 <!--ENTRYINSERT-->
+
+## 2.652.0
+* feature: CloudWatch: Amazon CloudWatch Contributor Insights adds support for tags and tagging on resource creation. 
+* feature: GameLift: Public preview of GameLift FleetIQ as a standalone feature. GameLift FleetIQ makes it possible to use low-cost Spot instances by limiting the chance of interruptions affecting game sessions. FleetIQ is a feature of the managed GameLift service, and can now be used with game hosting in EC2 Auto Scaling groups that you manage in your own account.
+* feature: MediaLive: AWS Elemental MediaLive now supports Automatic Input Failover. This feature provides resiliency upstream of the channel, before ingest starts.
 
 ## 2.651.0
 * feature: Iot: This release introduces Dimensions for AWS IoT Device Defender. Dimensions can be used in Security Profiles to collect and monitor fine-grained metrics.

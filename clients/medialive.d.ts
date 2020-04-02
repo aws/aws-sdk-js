@@ -373,19 +373,19 @@ declare class MediaLive extends Service {
    */
   waitFor(state: "channelRunning", callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Waits for the channelStopped state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 28 times). Wait until a channel has is stopped
+   * Waits for the channelStopped state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 60 times). Wait until a channel has is stopped
    */
   waitFor(state: "channelStopped", params: MediaLive.Types.DescribeChannelRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Waits for the channelStopped state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 28 times). Wait until a channel has is stopped
+   * Waits for the channelStopped state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 60 times). Wait until a channel has is stopped
    */
   waitFor(state: "channelStopped", callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Waits for the channelDeleted state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 20 times). Wait until a channel has been deleted
+   * Waits for the channelDeleted state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 84 times). Wait until a channel has been deleted
    */
   waitFor(state: "channelDeleted", params: MediaLive.Types.DescribeChannelRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Waits for the channelDeleted state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 20 times). Wait until a channel has been deleted
+   * Waits for the channelDeleted state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 84 times). Wait until a channel has been deleted
    */
   waitFor(state: "channelDeleted", callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
   /**
@@ -683,6 +683,16 @@ Alternate rendition that the client will not try to play back by default. Repres
   }
   export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string;
   export type AuthenticationScheme = "AKAMAI"|"COMMON"|string;
+  export interface AutomaticInputFailoverSettings {
+    /**
+     * Input preference when deciding which input to make active when a previously failed input has recovered.
+     */
+    InputPreference?: InputPreference;
+    /**
+     * The input ID of the secondary input in the automatic input failover pair.
+     */
+    SecondaryInputId: __string;
+  }
   export interface AvailBlanking {
     /**
      * Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
@@ -2215,6 +2225,7 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
   }
   export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
   export type H264FlickerAq = "DISABLED"|"ENABLED"|string;
+  export type H264ForceFieldPictures = "DISABLED"|"ENABLED"|string;
   export type H264FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H264GopBReference = "DISABLED"|"ENABLED"|string;
   export type H264GopSizeUnits = "FRAMES"|"SECONDS"|string;
@@ -2266,6 +2277,12 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
      * If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
      */
     FlickerAq?: H264FlickerAq;
+    /**
+     * This setting applies only when scan type is "interlaced." It controls whether coding is on a field basis or a frame basis. (When the video is progressive, the coding is always on a frame basis.)
+enabled: Always code on a field basis, so that odd and even sets of fields are coded separately.
+disabled: Code the two sets of fields separately (on a field basis) or together (on a frame basis, using PAFF or MBAFF), depending on what is most appropriate for the content.
+     */
+    ForceFieldPictures?: H264ForceFieldPictures;
     /**
      * This field indicates how the output video frame rate is specified.  If "specified" is selected then the output video frame rate is determined by framerateNumerator and framerateDenominator, else if "initializeFromSource" is selected then the output video frame rate will be set equal to the input video frame rate of the first input.
      */
@@ -2988,6 +3005,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
   }
   export interface InputAttachment {
     /**
+     * User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input.
+     */
+    AutomaticInputFailoverSettings?: AutomaticInputFailoverSettings;
+    /**
      * User-specified name for the attachment. This is required if the user wants to use this input in an input switch action.
      */
     InputAttachmentName?: __string;
@@ -3110,6 +3131,7 @@ to.
   }
   export type InputLossImageType = "COLOR"|"SLATE"|string;
   export type InputMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
+  export type InputPreference = "EQUAL_INPUT_PREFERENCE"|"PRIMARY_INPUT_PREFERRED"|string;
   export type InputResolution = "SD"|"HD"|"UHD"|string;
   export interface InputSecurityGroup {
     /**

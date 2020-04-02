@@ -2560,6 +2560,25 @@
         "COMMON"
       ]
     },
+    "AutomaticInputFailoverSettings": {
+      "type": "structure",
+      "members": {
+        "InputPreference": {
+          "shape": "InputPreference",
+          "locationName": "inputPreference",
+          "documentation": "Input preference when deciding which input to make active when a previously failed input has recovered."
+        },
+        "SecondaryInputId": {
+          "shape": "__string",
+          "locationName": "secondaryInputId",
+          "documentation": "The input ID of the secondary input in the automatic input failover pair."
+        }
+      },
+      "documentation": "The settings for Automatic Input Failover.",
+      "required": [
+        "SecondaryInputId"
+      ]
+    },
     "AvailBlanking": {
       "type": "structure",
       "members": {
@@ -5369,6 +5388,14 @@
         "ENABLED"
       ]
     },
+    "H264ForceFieldPictures": {
+      "type": "string",
+      "documentation": "H264 Force Field Pictures",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
     "H264FramerateControl": {
       "type": "string",
       "documentation": "H264 Framerate Control",
@@ -5523,6 +5550,11 @@
           "shape": "H264FlickerAq",
           "locationName": "flickerAq",
           "documentation": "If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames."
+        },
+        "ForceFieldPictures": {
+          "shape": "H264ForceFieldPictures",
+          "locationName": "forceFieldPictures",
+          "documentation": "This setting applies only when scan type is \"interlaced.\" It controls whether coding is on a field basis or a frame basis. (When the video is progressive, the coding is always on a frame basis.)\nenabled: Always code on a field basis, so that odd and even sets of fields are coded separately.\ndisabled: Code the two sets of fields separately (on a field basis) or together (on a frame basis, using PAFF or MBAFF), depending on what is most appropriate for the content."
         },
         "FramerateControl": {
           "shape": "H264FramerateControl",
@@ -6753,6 +6785,11 @@
     "InputAttachment": {
       "type": "structure",
       "members": {
+        "AutomaticInputFailoverSettings": {
+          "shape": "AutomaticInputFailoverSettings",
+          "locationName": "automaticInputFailoverSettings",
+          "documentation": "User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input."
+        },
         "InputAttachmentName": {
           "shape": "__string",
           "locationName": "inputAttachmentName",
@@ -7012,6 +7049,14 @@
         "MAX_10_MBPS",
         "MAX_20_MBPS",
         "MAX_50_MBPS"
+      ]
+    },
+    "InputPreference": {
+      "type": "string",
+      "documentation": "Input preference when deciding which input to make active when a previously failed input has recovered.\nIf \\\"EQUAL_INPUT_PREFERENCE\\\", then the active input will stay active as long as it is healthy.\nIf \\\"PRIMARY_INPUT_PREFERRED\\\", then always switch back to the primary input when it is healthy.\n",
+      "enum": [
+        "EQUAL_INPUT_PREFERENCE",
+        "PRIMARY_INPUT_PREFERRED"
       ]
     },
     "InputResolution": {
