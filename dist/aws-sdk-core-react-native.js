@@ -4626,6 +4626,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      apiCallEvent.Latency = latency >= 0 ? latency : 0;
 	      var response = request.response;
 	      if (
+	        response.error &&
+	        response.error.retryable &&
 	        typeof response.retryCount === 'number' &&
 	        typeof response.maxRetries === 'number' &&
 	        (response.retryCount >= response.maxRetries)
