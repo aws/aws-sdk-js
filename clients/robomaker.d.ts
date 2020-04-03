@@ -391,6 +391,18 @@ declare namespace RoboMaker {
   }
   export type ClientRequestToken = string;
   export type Command = string;
+  export interface Compute {
+    /**
+     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. 
+     */
+    simulationUnitLimit?: SimulationUnit;
+  }
+  export interface ComputeResponse {
+    /**
+     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. 
+     */
+    simulationUnitLimit?: SimulationUnit;
+  }
   export interface CreateDeploymentJobRequest {
     /**
      * The requested deployment configuration.
@@ -776,6 +788,10 @@ declare namespace RoboMaker {
      * If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. 
      */
     vpcConfig?: VPCConfig;
+    /**
+     * Compute information for the simulation job.
+     */
+    compute?: Compute;
   }
   export type CreateSimulationJobRequests = SimulationJobRequest[];
   export interface CreateSimulationJobResponse {
@@ -847,6 +863,10 @@ declare namespace RoboMaker {
      * Information about the vpc configuration.
      */
     vpcConfig?: VPCConfigResponse;
+    /**
+     * Compute information for the simulation job.
+     */
+    compute?: ComputeResponse;
   }
   export type CreatedAt = Date;
   export interface DataSource {
@@ -1409,6 +1429,10 @@ declare namespace RoboMaker {
      * The network interface information for the simulation job.
      */
     networkInterface?: NetworkInterface;
+    /**
+     * Compute information for the simulation job.
+     */
+    compute?: ComputeResponse;
   }
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
@@ -2088,6 +2112,10 @@ declare namespace RoboMaker {
      * Information about a network interface.
      */
     networkInterface?: NetworkInterface;
+    /**
+     * Compute information for the simulation job
+     */
+    compute?: ComputeResponse;
   }
   export type SimulationJobBatchErrorCode = "InternalServiceError"|string;
   export type SimulationJobBatchStatus = "Pending"|"InProgress"|"Failed"|"Completed"|"Canceled"|"Canceling"|"Completing"|"TimingOut"|"TimedOut"|string;
@@ -2156,6 +2184,10 @@ declare namespace RoboMaker {
     dataSources?: DataSourceConfigs;
     vpcConfig?: VPCConfig;
     /**
+     * Compute information for the simulation job
+     */
+    compute?: Compute;
+    /**
      * A map that contains tag keys and tag values that are attached to the simulation job request.
      */
     tags?: TagMap;
@@ -2206,6 +2238,7 @@ declare namespace RoboMaker {
   export type SimulationSoftwareSuiteType = "Gazebo"|"RosbagPlay"|string;
   export type SimulationSoftwareSuiteVersionType = string;
   export type SimulationTimeMillis = number;
+  export type SimulationUnit = number;
   export interface Source {
     /**
      * The s3 bucket name.

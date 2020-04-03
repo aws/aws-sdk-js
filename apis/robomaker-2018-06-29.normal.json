@@ -1298,6 +1298,26 @@
       "min": 1,
       "pattern": "[a-zA-Z0-9_.\\-]*"
     },
+    "Compute": {
+      "type": "structure",
+      "members": {
+        "simulationUnitLimit": {
+          "shape": "SimulationUnit",
+          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. </p>"
+        }
+      },
+      "documentation": "<p>Compute information for the simulation job.</p>"
+    },
+    "ComputeResponse": {
+      "type": "structure",
+      "members": {
+        "simulationUnitLimit": {
+          "shape": "SimulationUnit",
+          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. </p>"
+        }
+      },
+      "documentation": "<p>Compute information for the simulation job</p>"
+    },
     "CreateDeploymentJobRequest": {
       "type": "structure",
       "required": [
@@ -1762,6 +1782,10 @@
         "vpcConfig": {
           "shape": "VPCConfig",
           "documentation": "<p>If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. </p>"
+        },
+        "compute": {
+          "shape": "Compute",
+          "documentation": "<p>Compute information for the simulation job.</p>"
         }
       }
     },
@@ -1842,6 +1866,10 @@
         "vpcConfig": {
           "shape": "VPCConfigResponse",
           "documentation": "<p>Information about the vpc configuration.</p>"
+        },
+        "compute": {
+          "shape": "ComputeResponse",
+          "documentation": "<p>Compute information for the simulation job.</p>"
         }
       }
     },
@@ -2621,6 +2649,10 @@
         "networkInterface": {
           "shape": "NetworkInterface",
           "documentation": "<p>The network interface information for the simulation job.</p>"
+        },
+        "compute": {
+          "shape": "ComputeResponse",
+          "documentation": "<p>Compute information for the simulation job.</p>"
         }
       }
     },
@@ -3737,6 +3769,10 @@
         "networkInterface": {
           "shape": "NetworkInterface",
           "documentation": "<p>Information about a network interface.</p>"
+        },
+        "compute": {
+          "shape": "ComputeResponse",
+          "documentation": "<p>Compute information for the simulation job</p>"
         }
       },
       "documentation": "<p>Information about a simulation job.</p>"
@@ -3876,6 +3912,10 @@
         "vpcConfig": {
           "shape": "VPCConfig"
         },
+        "compute": {
+          "shape": "Compute",
+          "documentation": "<p>Compute information for the simulation job</p>"
+        },
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the simulation job request.</p>"
@@ -3975,6 +4015,11 @@
     },
     "SimulationTimeMillis": {
       "type": "long"
+    },
+    "SimulationUnit": {
+      "type": "integer",
+      "max": 15,
+      "min": 1
     },
     "Source": {
       "type": "structure",

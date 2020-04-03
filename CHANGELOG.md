@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.652.0-->
+<!--LATEST=2.653.0-->
 <!--ENTRYINSERT-->
+
+## 2.653.0
+* feature: PersonalizeRuntime: Amazon Personalize: Add new response field "score" to each item returned by GetRecommendations and GetPersonalizedRanking (HRNN-based recipes only)
+* feature: RoboMaker: Added support for limiting simulation unit usage, giving more predictable control over simulation cost
 
 ## 2.652.0
 * feature: CloudWatch: Amazon CloudWatch Contributor Insights adds support for tags and tagging on resource creation. 

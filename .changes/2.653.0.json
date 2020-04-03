@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "PersonalizeRuntime",
+        "description": "Amazon Personalize: Add new response field \"score\" to each item returned by GetRecommendations and GetPersonalizedRanking (HRNN-based recipes only)"
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "Added support for limiting simulation unit usage, giving more predictable control over simulation cost"
+    }
+]
