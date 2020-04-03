@@ -2215,7 +2215,7 @@ describe('AWS.S3', function() {
       s3.copyObject(function(error, data) {
         expect(error).to.be.instanceOf(Error);
         expect(error.code).to.equal('InternalError');
-        expect(error.message).to.equal('S3 aborts request');
+        expect(error.message).to.equal('S3 aborted request');
         expect(error.statusCode).to.equal(200);
         expect(error.retryable).to.equal(true);
         expect(data).to.equal(null);
